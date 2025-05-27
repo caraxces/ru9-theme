@@ -1,0 +1,229 @@
+<div class="pf-carrers-slider section-pf-reviews">
+  <div data-section-id="{{ section.id }}" data-section-type="pf-reviews">
+    {% if section.settings.title != blank %}
+      <div class="section-header text-center">
+        <h3 class="primary-color">{{ section.settings.title | escape }}</h3>
+      </div>
+    {% endif %} 
+    {% if section.blocks.size > 0 %}
+      <div class="reviews-wrapper">
+        <div class="reviews-slider" id="Reviews-{{ section.id }}" data-count="{{ section.blocks.size }}">
+          {% for block in section.blocks %}
+            <div class="reviews-slide--{{ block.id }} review-item" {{ block.shopify_attributes }}>
+            <div class="reiew-item-wrap-content">
+              <div class="review-item__top">
+                 {% if block.settings.comment != blank %}
+                  <div class="review-content text-center">{{block.settings.comment}}</div>
+                {% endif %}
+                
+                </div>
+                <div class="review-item__bottom">
+               {% if block.settings.author_image != blank %}
+                <div class="review-slider__image">
+                  <img src="{{block.settings.author_image | img_url: '480x480'}}"
+                       loading="lazy"
+                       width="{{block.settings.author_image.width}}"
+                       height="{{block.settings.author_image.height}}"
+                       alt="{{block.settings.author_image.alt}}"
+                       />
+                  </div>
+                {% endif %}
+                {% if block.settings.author != blank %}
+                <div class="review-slider__author">
+                  <strong class="primary-color">{{ block.settings.author }}</strong>
+                  </div>
+                {% endif %}
+                {% if block.settings.date != blank %}
+                <div class="review-slider__date">
+                  <span>{{ block.settings.date}}</span>
+                  </div>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+    {% endif %}
+  {%if section.settings.link_title != blank %}
+    <div class="text-center" style="margin-top: 50px;">
+      <a href="{{section.settings.url}}" class="link-icon">{{section.settings.link_title}}</a>
+    </div>
+  {% endif %}
+    {% if section.blocks.size == 0 %}
+      {% include 'no-blocks' %}
+    {% endif %}
+  </div>
+  </div>
+  <style>
+  .section-pf-reviews {
+    {%if section.settings.background != blank %}
+      background-color: {{ section.settings.background }};
+    {%endif%}
+    padding: 100px 0px 0px;
+  }
+  .reviews-slider .reiew-item-wrap-content {
+    background: transparent;
+        
+  }
+  .reviews-slider .review-slider__image {
+    margin: 50px 0 20px;
+  }
+  .reviews-slider .slick-dots {
+    margin-top: 0;
+  }
+  .review-item__bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  .review-item__top .review-content{
+    max-width: 500px;
+    margin: auto;
+    font-size: 22px
+  }
+  .reviews-slider .review-item__top {
+    margin: 0;
+  }
+  .reviews-slider .review-slider__image {
+    margin-top: 0;
+  }
+  .pf-carrers-slider .reviews-slider .review-slider__image {
+      width: 70px;
+      height: 70px;
+      margin-right: 0px;
+      margin-top: 50px!important;
+  }
+  @media(max-width: 767px) {
+    .section-pf-reviews {
+      padding: 50px 0;
+    }
+    .review-item__top .review-content{
+      font-size: 18px
+    }
+  }
+  </style>
+  <script type="lazyload2" >
+  $(document).ready(function() {
+  $('.pf-carrers-slider .reviews-slider').slick({
+    centerMode: true,
+    centerPadding: '360px',
+    slidesToShow: 1,
+    autoplay: false,
+    autoplaySpeed: 4000,
+    dots: true,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: '40px',
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: '40px',
+          slidesToShow: 1
+        }
+      }
+    ]
+  });
+  })
+  
+  </script>
+  {% schema %}
+  {
+    "name": "PF Reviews Slide",
+    "max_blocks": 15,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "View All"
+      },
+      {
+        "type": "text",
+        "id": "link_title",
+        "label": "Link Title",
+        "default": "Testimonials"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "Link"
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background Color",
+        "default": "#E1F1EF"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "reviews",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "author_image",
+            "label": "Customer image"
+          },
+          {
+            "type": "text",
+            "id": "author",
+            "label": "Customer",
+            "default": "Customer's name"
+          },
+          {
+            "type": "text",
+            "id": "date",
+            "label": "Date",
+            "default": "25 tháng 6, 2020"
+          },
+          {
+            "type": "richtext",
+            "id": "comment",
+            "label": "Review Content",
+            "default": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "PF Reviews",
+        "category": "PageFly",
+        "blocks": [
+          {
+            "type": "reviews"
+          },
+          {
+            "type": "reviews"
+          },
+          {
+            "type": "reviews"
+          },
+          {
+            "type": "reviews"
+          },
+          {
+            "type": "reviews"
+          },
+          {
+            "type": "reviews"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
+  

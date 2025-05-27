@@ -1,0 +1,74 @@
+<div class="section-{{section.id}}">
+  
+  <div class="container container-small">
+    <div class="row">
+        <div class="col-12 text-center">
+        <h1 class="page-heading primary-color">{{section.settings.header}}</h1>
+        <a href="{{section.settings.link}}" class="btn btn-primary" style="background:white">{{section.settings.button_label}}</a>
+        </div>
+    </div>
+    </div>
+  
+</div>
+<style>
+.section-{{section.id}} {
+  padding: 115px 0px;
+  background-color: {{section.settings.background}};
+  {%if section.settings.background_image != blank%}
+  background-image: url('{{section.settings.background_image | img_url: 'master'}}');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  {%endif%}
+}
+html {
+  scroll-behavior: smooth;
+}
+.page-heading{
+    margin-bottom: 50px;
+}
+@media(max-width: 767px) {
+  .section-pf-carrers-banner .btn-primary{
+     font-size: 14px;
+  }
+  h1.page-heading {
+    font-size: 24px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Careers Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header",
+      "label": "Heading",
+      "default": "Image list"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background Color",
+      "default": "#EFEFEF"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Các vị trí đang tuyển dụng",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ]
+}
+{% endschema %}

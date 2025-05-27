@@ -1,0 +1,90 @@
+{{ 'page-customer-reviews.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+#shopify-section-{{ section.id }} {
+  background-color: {{ section.settings.background }};
+  padding-top: clamp(34px, 8vw, 88px);
+  padding-bottom: clamp(34px, 8vw, 88px);
+  margin-bottom: clamp(50px, 16vw, 160px);
+}
+{%- endstyle -%}
+
+<div id='news-{{ section.id }}' class="page-width text-center news-reviews">
+  <div class='news-reviews__slider swiper'>
+    <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+      <div class='swiper-slide'>    
+        {{ block.settings.content }}
+      </div>
+        {%- endfor -%}
+    </div>
+    <div class="swiper-button-next">
+      <svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
+    </div>
+    <div class="swiper-button-prev">
+      <svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg>
+    </div>
+    <div class='swiper-pagination'></div>
+  </div>
+  <div thumbsSlider="" class="swiper news-reviews__thumb">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+      <div class='swiper-slide'>    
+        <img loading="lazy" src="{{ block.settings.image | img_url: '180x' }}" />
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  const news = ".news-reviews__slider"
+  const newsThumb = ".news-reviews__thumb"
+  var swiperNewsThumb = new Swiper(newsThumb, {
+    spaceBetween: 10,
+    slidesPerView: 4,
+    watchSlidesProgress: true,
+  })
+  var swiperNews = new Swiper(news, {
+    navigation: {
+      nextEl: news + " .swiper-button-next",
+      prevEl: news + " .swiper-button-prev",
+    },
+    thumbs: {
+      swiper: swiperNewsThumb,
+    },
+  });
+
+</script>
+
+{% schema %}
+  {
+    "name": "News Reviews",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Màu nền",
+        "default": "rgba(225, 240, 241, 1)"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "news",
+        "name": "News",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Hình ảnh"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Nội dung"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

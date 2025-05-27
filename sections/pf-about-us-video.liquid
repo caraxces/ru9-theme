@@ -1,0 +1,52 @@
+<div class="section-{{section.id}}">
+    <div class="pf-section-video-wraper">
+        <div class="pf-section-bg-video">
+        {%if section.settings.video_source != blank%}
+            <video autoplay muted loop id="myVideo">
+                <source src="{{section.settings.video_source}}" type="video/mp4">
+            </video>
+        {%else%}    
+        {{ 'image'  | placeholder_svg_tag: 'placeholder-svg' }}
+        {%endif%}
+        </div>
+    </div>
+</div>
+<style>
+@media(min-width: 1024px) {
+.section-{{section.id}} {
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+}
+
+video {
+  position: absolute;
+  top: 50%;
+  left: 0;
+transform: translateY(-50%);
+}
+}
+video {
+  width: 100%;
+  height: auto;
+}
+</style>
+
+{% schema %}
+{
+  "name": "About Custom Video",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_source",
+      "label": "Video URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background Image"
+    }
+  ]
+}
+{% endschema %}

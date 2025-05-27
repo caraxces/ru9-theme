@@ -1,0 +1,55 @@
+{{ 'page-customer-reviews.css' | asset_url | stylesheet_tag }}
+<div class="page-width text-center customer-reviews__section socials-review">
+  <div class="header_section">
+    <h3 class="reviews_title">{{ section.settings.heading }}</h3>
+  </div>
+  <div class='socials-review__items'>
+    {%- for block in section.blocks -%}
+    <a href='{{ block.settings.link }}' class='socials-review__item'>
+      <img src='{{ block.settings.icon | img_url: "42x42" }}' />
+      <span>{{ block.settings.title }}</span>
+    </a>
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Social reviews",
+    "settings": [
+      {
+        "type": "text",
+        "label": "Tiêu đề",
+        "id": "heading"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "review",
+        "name": "Review",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Nội dung"
+          },
+          {
+            "type": "text",
+            "id": "link",
+            "label": "Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

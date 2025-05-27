@@ -1,0 +1,34 @@
+<div id="pagefly-rich-text-{{section.id}}" class="pagefly-coporate-banner" data-section-id="{{ section.id }}" data-section-type="pf-rich-text">
+<div class="container container-small">
+  <div class="pf-block">
+    <div class="pf-grid__item {{ section.settings.alignment}}">
+      {% if section.settings.section_title != blank %}
+        <div class="collection-banner__heading text-center">
+          <h1 class="page-heading primary-color">{{ section.settings.section_title }}</h1>
+        </div>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <div class="primary-color text-center">{{ section.settings.text }}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</div>
+
+<style>
+#pagefly-rich-text-{{section.id}} {
+  {%- if section.settings.image_background != blank -%}
+		background-image: url({{section.settings.image_background | img_url: 'master'}}) !important;
+    background-size: contain;
+    background-position: left center;
+    background-repeat: no-repeat;
+		{%- endif -%}
+    background-color: {{section.settings.background_color}};
+    padding: 137px 0px;
+    display: flex;
+    align-items: center;
+}
+h1 {
+    font-size: 65px;
+}
+</style>

@@ -1,0 +1,510 @@
+{% if section.settings.enabled -%}
+  <style>
+    #WelcomePopup {
+      background: #000000cc;
+      z-index: 9999999999;
+      height: 100vh;
+      width: 100vw;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      transform: unset;
+      transition: all 0.3s ease-out;
+    }
+    #WelcomePopup .modal__inner {
+      max-width: 800px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #WelcomePopup .modal__centered {
+      background: #fff;
+      border-radius: 32px;
+      overflow: hidden;
+    }
+    #WelcomePopup .col-md-6 {
+      padding: 0;
+      color: #3960a8;
+    }
+    #WelcomePopup .row {
+      height: 100%;
+      margin: 0;
+    }
+    .popup-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .popup-right .popup-logo {
+      width: 47px;
+      margin: auto;
+      margin-bottom: 55px;
+      object-fit: contain;
+    }
+    .popup-right h2 {
+      font-size: 15px;
+      color: #495679;
+    }
+    .popup-right h2 b {
+      font-weight: 800;
+    }
+    .ega-form__control {
+      border: 0;
+      border-radius: 0;
+      border-bottom: 1px solid;
+      font-size: 14px;
+      text-align: center;
+      color: #495679;
+      width: 100%;
+    }
+    #WelcomePopup .popup-right {
+      padding: 15px 69px;
+    }
+    #WelcomePopup {
+      width: 100%;
+    }
+    #WelcomePopup .popup-left img {
+      height: 100%;
+      object-fit: cover;
+    }
+    .popup-right .submit-button {
+      margin-top: 58px;
+      border-radius: 9999px;
+      line-height: 1;
+      font-size: 15px;
+      text-transform: none;
+      background: linear-gradient(60deg, #375eab, #1c2c58);
+      font-weight: 600;
+    }
+    .ega-form__control,
+    .popup-right h2 {
+      color: #3960a8;
+    }
+    #WelcomePopup .modal__close {
+      right: 21px;
+      top: 15px;
+      background: #eee;
+      border-radius: 100%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      z-index: 4;
+      color: var(--colorTextBody);
+    }
+    #WelcomePopup .modal__close .icon {
+      width: 10px;
+    }
+
+    #WelcomePopup .ega-form__mess {
+      font-size: 10px;
+      margin-top: 10px;
+      color: red;
+    }
+    .success-message {
+      display: none;
+    }
+    .ega-form__mess,
+    #welcome-form.success {
+      display: none;
+    }
+    #welcome-form {
+      width: 100%;
+    }
+    #welcome-form.success {
+      font-size: 14px;
+      padding: 15px;
+    }
+    .ega-form__error .ega-form__mess,
+    #welcome-form.success + .success-message {
+      display: block;
+    }
+    #WelcomePopup .modal-body {
+      display: flex;
+      align-items: center;
+    }
+    @media (max-width: 767px) {
+      .modal__inner {
+        transform: none;
+      }
+      #WelcomePopup .modal__centered {
+        min-height: 100vh;
+        max-height: 100vh;
+        border-radius: 32px 32px 0 0;
+        overflow: auto;
+      }
+      .popup-right .popup-logo {
+        margin-top: 26px;
+        display: none;
+      }
+      .popup-right .submit-button {
+        margin-top: 28px;
+      }
+      .popup-right h2 {
+        margin-top: 28px;
+        margin-bottom: 28px;
+      }
+    }
+    #welcome-form input:focus::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: transparent;
+      opacity: 1; /* Firefox */
+    }
+
+    #welcome-form input:focus:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: transparent;
+    }
+
+    #welcome-form input:focus::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: transparent;
+    }
+    .ega-form__group {
+      width: 100%;
+      margin: auto;
+    }
+    .ega-form__group + .ega-form__group {
+      margin-top: 15px;
+    }
+    #WelcomePopup .row {
+      flex-wrap: wrap;
+    }
+    #WelcomePopup .col-md-6 {
+      position: relative;
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+    @media (max-width: 767px) {
+      #WelcomePopup .col-md-6 {
+        width: 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+  <div
+    id="WelcomePopup"
+    class="modal "
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="password-modal-heading"
+    tabindex="-1"
+  >
+    <div class="modal-body" style="height:100%">
+      <div class="modal__inner">
+        <div class="modal__centered">
+          <button type="button" class="modal__close js-modal-close text-link">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 40 40">
+              <path d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z" class="layer"></path>
+            </svg>
+            <span class="icon__fallback-text">"Close"</span>
+          </button>
+          <div class="row flex ai-center">
+            <div class="col-md-6 popup-left">
+              <picture>
+                {% if section.settings.mobile_banner -%}
+                  <source media="(max-width: 767px)" srcset="{{section.settings.mobile_banner | img_url: 'master'}}">
+                {% endif -%}
+                <img
+                  class=""
+                  src="{{section.settings.desktop_banner | img_url: 'master'}}"
+                  width="{{section.settings.desktop_banner.width}}"
+                  height="{{section.settings.desktop_banner.height}}"
+                  alt="popup banner"
+                >
+              </picture>
+            </div>
+            <div class="col-md-6 popup-right show">
+              <form
+                id="welcome-form"
+                class="form"
+                action="https://docs.google.com/forms/d/e/{{section.settings.google_form_id}}/formResponse"
+                method="post"
+                target="hidden_iframe"
+              >
+                <img
+                  class="popup-logo"
+                  alt="logo"
+                  src="{{section.settings.logo | img_url: '47x'}}"
+                  loading="lazy"
+                  width="{{section.settings.logo.width}}"
+                  height="{{section.settings.logo.height}}"
+                >
+
+                <p style="font-weight: bold; font-size: 16px;">
+                  {{ section.settings.title }}
+                </p>
+
+                {% for block in section.blocks -%}
+                  <div class="ega-form__group">
+                    <input
+                      type="{{ block.settings.type }}"
+                      placeholder="{{ block.settings.label }}"
+                      class="ega-form__control {%if block.settings.required %}ega-required {% endif %} {{ block.settings.type }}"
+                      name="{{ block.settings.name }}"
+                    >
+                    <div class="ega-form__mess" style=""></div>
+                  </div>
+                {% endfor -%}
+
+                <button class="btn submit-button">{{ section.settings.cta_title }}</button>
+              </form>
+              <div class="success-message">
+                {{ section.settings.success_message }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% assign requireErr = 'Bạn chưa nhập thông tin này!' -%}
+  {% assign emailErr = 'Email không đúng định dạng!' -%}
+  {% assign phoneErr = 'Số điện thoại không đúng!' -%}
+  {% assign delay = section.settings.delay_time | default: 0 %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('welcome-form');
+    const url = form.getAttribute('action');
+    const modal = document.getElementById('WelcomePopup');
+    const enabledSession = {{section.settings.enabled_session | default : false}};
+    const delay = {{delay}} * 1000;
+
+    // Kiểm tra sự kiện trên trường nhập số điện thoại
+    document.querySelector('input[type="tel"]').addEventListener("keypress", function (evt) {
+        if (evt.which < 48 || evt.which > 57) {
+            evt.preventDefault();
+        }
+    });
+
+    function checkSession() {
+        let boolModalBanner = sessionStorage.getItem("ega-modal-banner");
+        if (boolModalBanner == null || boolModalBanner == "false") {
+            setTimeout(() => {
+                if (enabledSession) {
+                    sessionStorage.setItem("ega-modal-banner", true);
+                }
+                showPopup();
+            }, delay);
+        }
+    }
+
+    function showPopup() {
+        modal.style.display = "block";
+        modal.classList.add('modal--is-open');
+        document.body.classList.add('modal--is-open');
+    }
+
+    function closePopup() {
+        modal.style.display = "none";
+        modal.classList.remove('modal--is-open');
+        document.body.classList.remove('modal--is-open');
+    }
+
+    document.querySelector('#WelcomePopup .modal__close').addEventListener("click", closePopup);
+
+    function validateEmail(email) {
+        let re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
+    function validateForm(input) {
+        const value = input.value.trim();
+        let isValid = true;
+        let errMsg = '';
+
+        if (!value) {
+            errMsg = '{{requireErr}}';
+            isValid = false;
+        }
+
+        if (isValid && input.classList.contains('tel')) {
+            const pattern = /^\d+$/;
+            errMsg = '{{phoneErr}}';
+            isValid = pattern.test(value);
+        }
+
+        if (isValid && input.classList.contains('email')) {
+            errMsg = '{{emailErr}}';
+            isValid = validateEmail(value);
+        }
+
+        input.nextElementSibling.textContent = errMsg;
+        if (!isValid) {
+            input.parentElement.classList.add('ega-form__error');
+        } else {
+            input.parentElement.classList.remove('ega-form__error');
+        }
+        return isValid;
+    }
+
+    document.querySelectorAll('.ega-required').forEach(input => {
+        input.addEventListener('input', function () {
+            validateForm(input);
+        });
+    });
+
+    function submitForm(e) {
+        e.preventDefault();
+
+        let flag = true;
+
+        document.querySelectorAll('#welcome-form .ega-required').forEach(input => {
+            flag = validateForm(input) && flag;
+        });
+
+        if (flag) {
+            let phone = document.querySelector('#WelcomePopup .tel').value;
+
+            fetch(url, {
+                method: 'POST',
+                body: new FormData(form)
+            }).then(response => {
+                if (response.ok) {
+                    console.log("Gửi dữ liệu thành công!");
+                } else {
+                    console.error("Lỗi! Không thể gửi dữ liệu đến Google Forms.");
+                }
+            }).catch(error => console.error("Lỗi! Không thể gửi dữ liệu đến Google Forms.", error));
+
+            document.querySelector('.popup-left picture').innerHTML = '<img src="https://cdn.shopify.com/s/files/1/0428/4219/4071/files/Banner_Cam_n_Web.jpg?v=1731551918?v=1731334414" alt="Thank You" style="height:100%; object-fit: cover;">';
+
+            let successMessage = `<p>Cảm ơn bạn đã để lại số điện thoại ${phone}.</p><p> Ru9 tặng bạn mã ưu đãi giảm 5% tối đa 100,000đ cho mọi đơn hàng, áp dụng chung với các chương trình khuyến mãi khác.*</p>
+            <p>Chúc bạn có trải nghiệm mua sắm tuyệt vời và luôn ngủ thật ngon cùng Ru9.</p>
+           <p style="font-style: italic; font-weight: lighter;">*Mã chỉ sử dụng tại bước thanh toán trên website.</p>`;
+
+            document.querySelector('.popup-right').innerHTML = successMessage;
+            form.classList.add('success');
+        }
+    }
+
+    form.addEventListener("submit", submitForm);
+    checkSession();
+
+    document.querySelector('#WelcomePopup .modal-body').addEventListener('click', function (event) {
+        if (!event.target.closest(".modal__inner")) {
+            closePopup();
+        }
+    });
+});
+  </script>
+{% endif -%}
+{% schema %}
+{
+  "name": "Welcome popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable"
+    },
+    {
+      "type": "checkbox",
+      "id": "enabled_session",
+      "label": "Show Popup Modal Only Once Per Session"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "google_form_id",
+      "label": "Google form id"
+    },
+    {
+      "type": "number",
+      "id": "delay_time",
+      "label": "Delay time (s)",
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Cta Title"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success Message "
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_banner",
+      "label": "Desktop Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_banner",
+      "label": "Mobile Banner"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "form_input",
+      "name": "Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Require"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Type",
+          "options": [
+            {
+              "value": "tel",
+              "label": "Phone"
+            },
+            {
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "value": "text",
+              "label": "Text"
+            }
+          ],
+          "default": "text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Welcome Popup",
+      "category": "Advanced layout",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

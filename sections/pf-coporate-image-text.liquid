@@ -1,0 +1,159 @@
+<div class="section-{{section.id}}">
+<div class="container">
+  {% if section.settings.title != blank %}
+    <div class="section-header text-center">
+      <h2 class="h3 primary-color">{{ section.settings.title }}</h2>
+       <p>{{ section.settings.sub_title }}</p>
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size > 0 %}
+    <div class="row logo-bar{% if section.settings.title_enable %} logo-bar--large{% endif %}">
+      {% for block in section.blocks %}
+        <div class="col-sm-4 col-6 logo-bar__item{% if section.settings.title_enable %} logo-bar__item--large{% endif %}" {{ block.shopify_attributes }}>
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" class="logo-bar__link">
+          {% endif %}
+          {% if block.settings.image != blank %}
+          <div class="image-wrap" style="background:transparent">
+            	<img loading="lazy" class="lazyload"   src="{{ block.settings.image | img_url: 'master', scale: 1  }}"  style="opacity: 1"
+                 alt="logo-bar__image" loading="lazy" decoding="async" 
+                width="80" height="80" 
+                 />
+              </div>
+          {% else %}
+            {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+          {% if block.settings.link != blank %}
+            </a>
+          {% endif %}
+          {% if block.settings.title != blank %}
+          <p class="primary-color">{{block.settings.title}}</p>
+          {% endif %}
+          {% if block.settings.logo_content != blank %}
+          <p class="">{{block.settings.logo_content}}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size == 0 %}
+    {% include 'no-blocks' %}
+  {% endif %}
+</div>
+</div>
+<style>
+.section-{{section.id}} {
+  padding: 100px 0px 50px 0px;
+  background-color: {{section.settings.background_color}};
+}
+#pagefly-rich-text-pf-mattress-rich-text{
+background-color: {{section.settings.background_color}};
+}
+
+.logo-bar__item{
+  vertical-align: top;
+  margin: 0!important;
+}
+.logo-bar__item .image-wrap {
+  height: 180px;
+}
+.logo-bar__ite{
+  margin : 0!important;
+}
+@media (max-width: 768px){
+  .logo-bar{
+    text-align: left;
+    align-items: normal;
+    justify-content: normal;
+  }
+}
+@media(min-width: 992px) {
+ 
+  .section-{{section.id}} .logo-bar {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    align-items: flex-start
+  }
+  .section-{{section.id}} .logo-bar .logo-bar__item{
+    width: 100%;
+    max-width: 100%;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Image with Text",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image list"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title",
+      "default": "Êm ái, thoải mái như ngủ trên những tầng mây."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#E1F1EF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo_image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "logo_content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo list",
+      "category": "PageFly Image",
+      "blocks": [
+        {
+          "type": "logo_image"
+        },
+        {
+          "type": "logo_image"
+        },
+        {
+          "type": "logo_image"
+        },
+        {
+          "type": "logo_image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

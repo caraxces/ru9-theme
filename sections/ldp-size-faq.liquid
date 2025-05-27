@@ -1,0 +1,244 @@
+{%if section.settings.enable -%}
+
+{{ 'faqs.js' | asset_url | stylesheet_tag: preload: true }}
+
+<div class="section-faq-accordion" style="background-color: {{section.settings.bg_color}}">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-12">
+        {% if section.settings.title != blank %}
+            <div class="section-header text-center">
+            <h2 class="text-xl primary-color">{{ section.settings.title }}</h2>
+            {% if section.settings.sub_title!= blank %}
+            <p>{{ section.settings.sub_title }}</p>
+            {% endif %}
+            </div>
+        {% endif %}
+    </div>
+        {% if section.blocks.size > 0 %}
+        <div class="col-sm-12 col-12">
+            <div class="pf-accordion-style-2 pf-accordion-contain pf-accordion-width-half ">
+                <div class="pf-accordion">
+                    {% for block in section.blocks %}
+                        <div class="pf-accordion__item">
+                            <div class="pf-accordion-header accordion-toggle">{{block.settings.accordion_heading}}</div>
+                            <div class="pf-inner accordion-content">
+                            {{block.settings.accordion_content}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if section.settings.link != blank or section.settings.link_title != blank%}
+        <div class="text-center" style="width: 100%; margin-top: 40px;">
+         <a href="{{section.settings.link}}" class="link-icon">{{section.settings.link_title}}</a>
+        </div>
+        {% endif %}
+  </div>
+  
+</div>
+</div>
+{% if section.blocks.size > 0 %}
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in section.blocks -%}
+          {%- if block.settings.accordion_heading != blank and block.settings.accordion_content != blank -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.accordion_heading | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ block.settings.accordion_content | json }}
+              }
+            }{%- if forloop.last == false -%},{%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+</script>
+{% endif %}
+<style>
+ 
+  .section-faq-accordion h2{
+  	margin-bottom: 45px;
+  }
+.pf-accordion .pf-accordion-header {
+  position: relative;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pf-accordion .pf-accordion-header:after {
+  font-family: FontAwesome;
+  font-size: 14px;
+  content: "\f067";
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: normal;
+}
+
+.pf-accordion .pf-accordion-header.active:after {
+  content: "\f068";
+}
+
+.pf-accordion .accordion-content {
+  padding: 15px;
+  display: none;
+}
+
+.pf-accordion-style-1 .pf-accordion__item {
+  margin-bottom: 25px;
+}
+
+.pf-accordion-style-1 .pf-accordion-header:after {
+  right: 15px;
+}
+
+.pf-accordion-style-2 {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pf-accordion-style-2 .pf-accordion {
+  border-top: 1px solid #727272;
+}
+
+.pf-accordion-style-2 .pf-accordion__item {
+  padding: 40px;
+  border-bottom: 1px solid #727272;
+}
+
+.pf-accordion-style-2 .pf-accordion-header:after {
+  left: -15px;
+}
+.pf-inner {
+    display: none;
+}
+  @media(max-width: 767px){
+  .pf-accordion-style-2 .pf-accordion__item {
+    padding: 30px;
+  }
+      .section-faq-accordion{
+  	padding:60px 0
+  }
+  }
+   @media(min-width: 768px){
+  .section-faq-accordion{
+  	padding:100px 0
+  }
+  }
+</style>
+<script>
+  $('.accordion-toggle').click(function(e) {
+      e.preventDefault();
+      var $this = $(this);
+      if ($this.next().hasClass('pf-show')) {
+        $this.removeClass('active');
+        $this.next().removeClass('pf-show');
+        $this.next().slideUp(350);
+      } else {
+        $this.next().toggleClass('pf-show');
+        $this.toggleClass('active');
+        $this.next().slideToggle(350);
+      }
+    });
+</script>
+{%endif-%}
+{% schema %}
+{
+  "name": "Accordion",
+  "class": "product-faq-accordion",
+  "max_blocks": 20,
+  "settings": [
+{
+		 "type": "checkbox",
+      	"id": "enable",
+		"label": "Enable"
+		},
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image list"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title",
+      "default": "Êm ái, thoải mái như ngủ trên những tầng mây."
+    },
+{
+
+ 		"type": "text",
+      	"id": "title_width_desktop",
+		"label": "Title Width (desktop)"
+		},
+		{
+ 		"type": "text",
+      	"id": "title_width_mobile",
+		"label": "Title Width (mobile)"
+		},
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_title",
+      "label": "Link Title",
+      "default": "Xem những câu hỏi khác"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "accordion_heading",
+          "label": "Accordion Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "accordion_content",
+          "label": "Accordion Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Detail Accordion",
+      "category": "PageFly Accordion",
+      "blocks": [
+        {
+          "type": "accordion"
+        },
+        {
+          "type": "accordion"
+        },
+        {
+          "type": "accordion"
+        },
+        {
+          "type": "accordion"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

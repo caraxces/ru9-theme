@@ -1,0 +1,79 @@
+<div class="section-{{ section.id }}">
+    <div class="container">
+        {% if section.settings.title != blank %}
+        <div class="section-header text-center">
+            <h3 h3 class="h3 primary-color">{{ section.settings.title }}</h3>
+            <p>{{ section.settings.sub_title }}</p>
+        </div>
+        {% endif %} {% if section.blocks.size > 0 %}
+        <div class="row">
+            {% for block in section.blocks %}
+            <div class="col-12">
+                {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}" class="logo-bar__link">
+                    {% endif %}
+                    <div class="block-item">
+                        {% if block.settings.title != blank %}
+                        <div class="content-left">
+                            <span class="primary-color">{{ block.settings.title }}</span>
+                        </div>
+                        {% endif %} {% if block.settings.logo_content != blank %}
+                        <div class="content-right">
+                            <span class="">{{ block.settings.logo_content }}</span>
+                            <img loading="lazy" class="arrow-icon" src={{'arrow-right.png' | asset_url}}" 
+                                 width="30"
+                                 height="14"
+                                 alt>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if block.settings.link != blank %}
+                </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %} 
+        {% if section.blocks.size == 0 %} 
+        {% include 'no-blocks' %} 
+        {%endif %}
+    </div>
+</div>
+<style>
+.section-{{section.id}} {
+    padding: 60px 0px 50px 0px;
+}
+.section-header h3 {
+    margin-bottom: 50px;
+}
+
+.block-item{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    margin-bottom: 50px;
+    border: 1px solid #DBDBDC;
+}
+
+.block-item > div {
+    flex-basis: 50%;
+    text-align: left;
+    padding: 0px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #727272;
+}
+.content-left {
+    font-weight: bold;
+}
+@media(max-width: 767px) {
+    .block-item{
+        padding: 20px;
+        flex-direction: column;
+    }
+    .block-item > div{
+        padding: 0
+    }
+}
+</style>

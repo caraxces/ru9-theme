@@ -1,0 +1,95 @@
+
+<style>
+  .zoom{
+  --lading-page-background: {{section.settings.background_color}};
+--lading-page-color: {{section.settings.color}};
+    padding-bottom: 50px;
+    padding-top: 50px;
+  }
+</style>
+            <div class="container ">
+              <div class="zoom__title">
+                <h2 class="text-xl">{{section.settings.title}}</h2>
+              </div>
+              <img class="zoom__bg" src="{{section.settings.background | img_url: 'master'}}" alt="">
+              <div class="zoom__marker">
+      
+              </div>
+              <div class="zoom__content text-md">
+             {{section.settings.description}}
+              </div>
+             
+            </div>
+<div class="zoom-slide-wrapper swiper-container">
+                  <div class="zoom-slide swiper-wrapper">
+                             {% for block in section.blocks %}
+                      <div class="text-md swiper-slide">
+                        <div class="zoom-item ">
+                        <span>
+                   			{{block.settings.content}}
+                        </span>
+                        <img loading="lazy" width="{{block.settings.image.width}}" height="{{block.settings.image.height}}" src="{{block.settings.image | img_url: 'master'}}" width="{{block.settings.image.width}}" height="{{block.settings.image.height}}" alt="">
+                      </div>
+                    </div>
+                     {%endfor -%}
+                    </div>
+              </div>
+
+{% schema %}
+  {
+	"name": "Landing page about ",
+	"class": "section-animate zoom section2",
+	"settings": [
+{
+		 "type": "color",
+      	"id": "color",
+		"label": "Color"
+		},
+{
+		 "type": "color",
+      	"id": "background_color",
+		"label": "Background Color"
+		},
+	{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		}, {
+			"type": "text",
+			"id": "description",
+			"label": "Description"
+		},
+		{
+			"type": "image_picker",
+			"id": "background",
+			"label": "Background"
+		}
+
+	],
+	"blocks": [{
+			"type": "content",
+			"name": "content",
+			"settings": [{
+					"type": "text",
+					"id": "content",
+					"label": "Content"
+				},
+				{
+					"type": "image_picker",
+					"id": "image",
+					"label": "Image"
+				}
+			]
+
+		}
+
+	]
+
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

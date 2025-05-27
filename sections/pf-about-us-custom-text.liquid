@@ -1,0 +1,126 @@
+<div class="section-{{section.id}}">
+    {% if section.blocks.size > 0 %}
+    <div class="container container-small">
+      <div class="row number-bar">
+        {% for block in section.blocks %}
+          <div class="col-md-4 col-sm-6 col-12 number-bar__item text-center">
+            {% if block.settings.number != blank %}
+            <span class="number">{{block.settings.number}}</span>
+            {% endif %}
+            {% if block.settings.content != blank %}
+            <span class="content">{{block.settings.content}}</span>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      </div>
+    {% endif %}
+  </div>
+  <style>
+  .section-{{section.id}} {
+    padding: 85px 0px;
+    {%if section.settings.background != blank %}
+     background-image: url('{{ section.settings.background | img_url: '2048x' }}');
+     background-size: cover;
+     background-position: center;
+    {%endif%}
+    position: relative;
+  }
+  {%if section.settings.overlay_color%}
+  .section-{{section.id}}:before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: {{section.settings.overlay_color}};
+      pointer-events: none;
+      opacity: 0.7;
+  }
+  {%endif%}
+  
+  .number-bar__item {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px 0px;
+  }
+  .number {
+      font-size: 65px;
+      font-weight: bold;
+      -webkit-font-smoothing: initial;
+  }
+  </style>
+  
+  {% schema %}
+  {
+    "name": "About Custom",
+    "class": "index-section",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image list"
+      },
+      {
+        "type": "image_picker",
+        "id": "background",
+        "label": "Background Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_overlay",
+        "default": true,
+        "label": "Enable Overlay"
+      },
+      {
+        "type": "color",
+        "id": "overlay_color",
+        "label": "Overlay Color"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "number",
+        "name": "Number",
+        "settings": [
+          {
+            "type": "text",
+            "id": "number",
+            "label": "Number"
+          },
+          {
+            "type": "text",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "About Custom",
+        "category": "PageFly About",
+        "blocks": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
+  

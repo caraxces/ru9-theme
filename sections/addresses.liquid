@@ -1,0 +1,466 @@
+{{ 'login.css' | asset_url | stylesheet_tag: preload: true }}
+{%- paginate customer.addresses by 5 -%}
+  <div class="page-width spacing-base page-width--account" style="--page-width: 1360px;">
+    <div class="grid grid__account customer--addresses">
+      <div class="grid__item grid__item-left">
+        <div class="account-side">
+          <h1 class="section-header__title m-0">{{ 'customer.account.title' | t }}</h1>
+          <nav class="account-side__nav">
+            <ul class="account-side__list inline-list flex-col">
+              <li>
+                <a href="{{ routes.account_url }}/#information">
+                  {{ 'customer.account.information' | t }}
+                </a>
+              </li>
+              <li class="is-active f-smb">
+                <a href="{{ routes.account_addresses_url }}" class="text-link i-flex jc-between ai-center">
+                  <span class="txt">{{- 'customer.account.view_addresses' | t }}</span>
+                  <span class="addr-count text-xs f-medium">{{ customer.addresses_count }}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="{{ routes.account_url }}/#orders"
+                >
+                  {{- 'customer.orders.title' | t -}}
+                </a>
+              </li>
+              <li>
+                <a href="{{ routes.account_logout_url }}" class="link-text">
+                  <span class="txt">
+                    {{- 'layout.customer.log_out' | t -}}
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div class="grid__item grid__item-right medium-up--one-third">
+        <div class="content-inner">
+          <h3 class="section-header__title m-0">{{ 'customer.addresses.title' | t }}</h3>
+          <button type="button" class="btn btn--full section-header__link address-new-toggle">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              role="presentation"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path d="M12 5V12M12 12V19M12 12H19M12 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            {{ 'customer.addresses.add_new' | t }}
+          </button>
+          <div id="AddressNewForm" class="form-vertical js-address-form text-left fixed inset-0 hide">
+            <div id="AddressNewFormOverlay" class="show absolute inset-0"></div>
+
+            {%- form 'customer_address', customer.new_address -%}
+              <h2 class="text-xl">{{ 'customer.addresses.add_new' | t }}</h2>
+              <p class="f-smb">{{ 'customer.addresses.recipient_information' | t }}</p>
+              <div class="grid grid--small">
+                <div class="grid__item one-half small--one-whole">
+                  <label for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
+                  <input
+                    type="text"
+                    id="AddressFirstNameNew"
+                    class="input-full"
+                    name="address[first_name]"
+                    value="{{form.first_name}}"
+                    autocapitalize="words"
+                    placeholder="{{ 'customer.addresses.first_name' | t }}"
+                  >
+                </div>
+
+                <div class="grid__item one-half small--one-whole">
+                  <label for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
+                  <input
+                    type="text"
+                    id="AddressLastNameNew"
+                    class="input-full"
+                    name="address[last_name]"
+                    value="{{form.last_name}}"
+                    autocapitalize="words"
+                    placeholder="{{ 'customer.addresses.last_name' | t }}"
+                  >
+                </div>
+              </div>
+
+              <label for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
+              <input
+                type="tel"
+                id="AddressPhoneNew"
+                class="input-full"
+                name="address[phone]"
+                value="{{form.phone}}"
+                placeholder="{{ 'customer.addresses.phone' | t }}"
+              >
+
+              <p class="f-smb">{{ 'customer.addresses.delivery_address' | t }}</p>
+              <label for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
+              <input
+                type="text"
+                id="AddressCompanyNew"
+                class="input-full"
+                name="address[company]"
+                value="{{form.company}}"
+                autocapitalize="words"
+                placeholder="{{ 'customer.addresses.company' | t }}"
+              >
+
+              <label for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+              <input
+                type="text"
+                id="AddressAddress1New"
+                class="input-full"
+                name="address[address1]"
+                value="{{form.address1}}"
+                autocapitalize="words"
+                placeholder="{{ 'customer.addresses.address1' | t }}"
+              >
+
+              <label for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+              <input
+                type="text"
+                id="AddressAddress2New"
+                class="input-full"
+                name="address[address2]"
+                value="{{form.address2}}"
+                autocapitalize="words"
+                placeholder="{{ 'customer.addresses.address2' | t }}"
+              >
+
+              <div class="grid grid--small grid--no-gutters">
+                <div class="grid__item">
+                  <label for="AddressCityNew">{{ 'customer.addresses.city' | t }}</label>
+                  <input
+                    type="text"
+                    id="AddressCityNew"
+                    class="input-full"
+                    name="address[city]"
+                    value="{{form.city}}"
+                    autocapitalize="words"
+                    placeholder="{{ 'customer.addresses.city' | t }}"
+                  >
+                </div>
+
+                <div
+                  class="grid__item js-address-country"
+                  data-country-id="AddressCountryNew"
+                  data-province-container-id="AddressProvinceContainerNew"
+                  data-province-id="AddressProvinceNew"
+                >
+                  <label for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
+                  <select
+                    id="AddressCountryNew"
+                    class="input-full"
+                    name="address[country]"
+                    data-default="{{form.country}}"
+                  >
+                    {{ country_option_tags }}
+                  </select>
+                </div>
+
+                <div class="grid__item" id="AddressProvinceContainerNew" style="display: none;">
+                  <label for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+                  <select
+                    id="AddressProvinceNew"
+                    class="input-full"
+                    name="address[province]"
+                    data-default="{{form.province}}"
+                  ></select>
+                </div>
+
+                <div class="grid__item">
+                  <label for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+                  <input
+                    type="text"
+                    id="AddressZipNew"
+                    class="input-full"
+                    name="address[zip]"
+                    value="{{form.zip}}"
+                    autocapitalize="characters"
+                    placeholder="{{ 'customer.addresses.zip' | t }}"
+                  >
+                </div>
+              </div>
+
+              <div>
+                {{ form.set_as_default_checkbox }}
+                <label for="address_default_address_new" class="inline f-medium text-sm leading-none">
+                  {{- 'customer.addresses.set_default' | t -}}
+                </label>
+              </div>
+
+              <div class="flex ai-center gap-x-sm">
+                <div class="submit-button-wrap">
+                  <label for="addresses-add-submit" class="hidden-label">{{ 'customer.addresses.add' | t }}</label>
+                  <button type="submit" id="addresses-add-submit" class="btn">
+                    {{ 'customer.addresses.add' | t }}
+                  </button>
+                </div>
+                <div>
+                  <label for="addresses-cancel-submit" class="hidden-label">
+                    {{- 'customer.addresses.cancel' | t -}}
+                  </label>
+                  <button type="button" id="addresses-cancel-submit" class="btn text-link address-new-toggle">
+                    <span class="text">
+                      {{ 'customer.addresses.cancel' | t }}
+                    </span>
+                    <span class="icon-wrap ">
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        role="presentation"
+                        width="18"
+                        height="17"
+                        viewBox="0 0 18 17"
+                        fill="none"
+                      >
+                        <path d="M9.00047 6.61514L15.6005 0.0151367L17.4858 1.90047L10.8858 8.50047L17.4858 15.1005L15.6005 16.9858L9.00047 10.3858L2.40047 16.9858L0.515137 15.1005L7.11514 8.50047L0.515137 1.90047L2.40047 0.0151367L9.00047 6.61514Z" fill="#1C2C58"/>
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            {%- endform -%}
+          </div>
+
+          {%- for address in customer.addresses -%}
+            {% liquid
+              assign summary = address.address1 | append: ', ' | append: address.city | append: ', ' | append: address.province | append: address.country
+            %}
+
+            <div class="default-field rounded-sm-large">
+              <div class="field-head flex ai-center jc-between">
+                <div class="info-default">
+                  <span class="name text-lg f-smb">{{ address.name }}</span>
+                  {%- if address == customer.default_address -%}
+                    <span class="default">| {{ 'customer.addresses.default' | t }}</span>
+                  {%- endif -%}
+                </div>
+                <div class="edit-buttons flex ai-center gap-x-xs">
+                  <button
+                    type="button"
+                    class="address-edit-toggle"
+                    data-form-id="{{ address.id }}"
+                  >
+                    {% comment %} {{ 'customer.addresses.edit' | t }} {% endcomment %}
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      role="presentation"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path d="M15.7618 18.9188C15.7618 18.9614 15.7458 19.0022 15.7173 19.0322C15.6887 19.0623 15.65 19.0792 15.6096 19.0792H4.97535C4.93498 19.0792 4.89626 19.0623 4.86771 19.0322C4.83916 19.0022 4.82312 18.9614 4.82312 18.9188V7.71491C4.82312 7.67237 4.83916 7.63157 4.86771 7.6015C4.89626 7.57142 4.93498 7.55452 4.97535 7.55452H11.5167L13.3398 5.63374H4.97535C4.4516 5.63425 3.94945 5.85368 3.5791 6.24386C3.20875 6.63404 3.00048 7.1631 3 7.71491V18.9188C3.00048 19.4706 3.20875 19.9997 3.5791 20.3899C3.94945 20.7801 4.4516 20.9995 4.97535 21H15.6096C16.1334 20.9995 16.6355 20.7801 17.0059 20.3899C17.3762 19.9997 17.5845 19.4706 17.585 18.9188V12.0271L15.7618 13.9478V18.9188Z" fill="#1C2C58"/>
+                      <path d="M20.1957 3.84357C19.6828 3.30343 18.9874 3 18.2623 3C17.5371 3 16.8417 3.30343 16.3288 3.84357L9.23781 11.3135C9.11071 11.4476 9.02412 11.6184 8.98895 11.8043L8.34448 15.2002C8.31744 15.3397 8.3202 15.4839 8.35256 15.6222C8.38493 15.7605 8.44608 15.8894 8.53159 15.9998C8.6171 16.1101 8.72483 16.199 8.84697 16.26C8.96912 16.321 9.10262 16.3527 9.23781 16.3527C9.29898 16.3525 9.36 16.3463 9.42012 16.3344L12.6425 15.6554C12.819 15.6181 12.9811 15.5265 13.1083 15.3923L20.1984 7.92235C20.4528 7.65454 20.6545 7.33651 20.792 6.98646C20.9296 6.63641 21.0003 6.26122 21 5.88236C20.9997 5.5035 20.9286 5.12842 20.7906 4.77857C20.6525 4.42873 20.4504 4.111 20.1957 3.84357ZM18.9067 5.20156C18.9915 5.29076 19.0587 5.39668 19.1046 5.51327C19.1505 5.62986 19.1741 5.75483 19.1741 5.88104C19.1741 6.00725 19.1505 6.13222 19.1046 6.24881C19.0587 6.3654 18.9915 6.47132 18.9067 6.56052L18.4181 7.07433L17.1292 5.71633L17.6178 5.20156C17.7887 5.02152 18.0205 4.92037 18.2623 4.92037C18.504 4.92037 18.7358 5.02152 18.9067 5.20156ZM12.0117 13.8249L10.4 14.1649L10.7227 12.466L15.8402 7.07433L17.1292 8.43232L12.0117 13.8249Z" fill="#1C2C58"/>
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    class="address-delete"
+                    data-form-id="{{ address.id }}"
+                    data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}"
+                  >
+                    {% comment %} {{ 'customer.addresses.delete' | t }} {% endcomment %}
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      role="presentation"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path d="M20 6.21053H16V4.10526C16 3.54691 15.7893 3.01143 15.4142 2.61662C15.0391 2.2218 14.5304 2 14 2H10C9.46957 2 8.96086 2.2218 8.58579 2.61662C8.21071 3.01143 8 3.54691 8 4.10526V6.21053H4C3.73478 6.21053 3.48043 6.32143 3.29289 6.51884C3.10536 6.71624 3 6.98398 3 7.26316C3 7.54233 3.10536 7.81007 3.29289 8.00748C3.48043 8.20489 3.73478 8.31579 4 8.31579H5V19.8947C5 20.4531 5.21071 20.9886 5.58579 21.3834C5.96086 21.7782 6.46957 22 7 22H17C17.5304 22 18.0391 21.7782 18.4142 21.3834C18.7893 20.9886 19 20.4531 19 19.8947V8.31579H20C20.2652 8.31579 20.5196 8.20489 20.7071 8.00748C20.8946 7.81007 21 7.54233 21 7.26316C21 6.98398 20.8946 6.71624 20.7071 6.51884C20.5196 6.32143 20.2652 6.21053 20 6.21053ZM10 4.10526H14V6.21053H10V4.10526ZM17 19.8947H7V8.31579H17V19.8947Z" fill="#1C2C58"/>
+                      <path d="M10 9.36842C9.73478 9.36842 9.48043 9.47932 9.29289 9.67673C9.10536 9.87414 9 10.1419 9 10.4211V17.7895C9 18.0686 9.10536 18.3364 9.29289 18.5338C9.48043 18.7312 9.73478 18.8421 10 18.8421C10.2652 18.8421 10.5196 18.7312 10.7071 18.5338C10.8946 18.3364 11 18.0686 11 17.7895V10.4211C11 10.1419 10.8946 9.87414 10.7071 9.67673C10.5196 9.47932 10.2652 9.36842 10 9.36842Z" fill="#1C2C58"/>
+                      <path d="M14 9.36842C13.7348 9.36842 13.4804 9.47932 13.2929 9.67673C13.1054 9.87414 13 10.1419 13 10.4211V17.7895C13 18.0686 13.1054 18.3364 13.2929 18.5338C13.4804 18.7312 13.7348 18.8421 14 18.8421C14.2652 18.8421 14.5196 18.7312 14.7071 18.5338C14.8946 18.3364 15 18.0686 15 17.7895V10.4211C15 10.1419 14.8946 9.87414 14.7071 9.67673C14.5196 9.47932 14.2652 9.36842 14 9.36842Z" fill="#1C2C58"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="field flex ai-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0002 1.6665C8.23263 1.66832 6.53803 2.34634 5.2882 3.55179C4.03837 4.75724 3.33539 6.39166 3.33351 8.09642C3.33081 9.47173 3.79019 10.8109 4.64284 11.9132C4.65895 11.9403 4.67676 11.9663 4.69617 11.9912L9.28905 17.9856C9.3717 18.0934 9.47941 18.181 9.60353 18.2414C9.72765 18.3017 9.86471 18.3332 10.0037 18.3332C10.1427 18.3332 10.2798 18.3017 10.4039 18.2414C10.528 18.181 10.6357 18.0934 10.7184 17.9856L15.3077 11.9912C15.3271 11.9666 15.3449 11.9408 15.361 11.9141C16.2124 10.811 16.6705 9.4716 16.6668 8.09642C16.6649 6.39166 15.9619 4.75724 14.7121 3.55179C13.4623 2.34634 11.7677 1.66832 10.0002 1.6665ZM13.8766 10.9599C13.8521 10.991 13.8299 11.0236 13.8099 11.0576L10.0002 16.0301L6.19128 11.0576C6.17074 11.0235 6.14818 10.9906 6.12372 10.959C5.46615 10.1397 5.10996 9.13256 5.11128 8.09642C5.11128 6.84585 5.62636 5.64651 6.5432 4.76222C7.46004 3.87794 8.70355 3.38115 10.0002 3.38115C11.2968 3.38115 12.5403 3.87794 13.4571 4.76222C14.374 5.64651 14.889 6.84585 14.889 8.09642C14.8906 9.13285 14.5344 10.1403 13.8766 10.9599Z" fill="currentColor"/>
+                  <path d="M10.0002 4.77173C9.29694 4.77173 8.60951 4.97285 8.0248 5.34967C7.4401 5.72648 6.98437 6.26206 6.71526 6.88868C6.44615 7.5153 6.37574 8.20482 6.51293 8.87004C6.65012 9.53525 6.98875 10.1463 7.48601 10.6259C7.98326 11.1055 8.6168 11.4321 9.30651 11.5644C9.99621 11.6967 10.7111 11.6288 11.3608 11.3693C12.0105 11.1097 12.5658 10.6702 12.9565 10.1062C13.3472 9.54228 13.5557 8.87926 13.5557 8.20102C13.5545 7.29186 13.1795 6.42027 12.513 5.77739C11.8465 5.13452 10.9428 4.77286 10.0002 4.77173ZM10.0002 9.91566C9.64855 9.91566 9.30483 9.8151 9.01248 9.62669C8.72013 9.43828 8.49226 9.17049 8.35771 8.85718C8.22315 8.54387 8.18795 8.19911 8.25654 7.8665C8.32514 7.5339 8.49446 7.22838 8.74308 6.98858C8.99171 6.74878 9.30848 6.58548 9.65333 6.51932C9.99819 6.45316 10.3556 6.48711 10.6805 6.61689C11.0053 6.74667 11.283 6.96644 11.4783 7.24841C11.6737 7.53038 11.7779 7.86189 11.7779 8.20102C11.7779 8.65577 11.5906 9.09189 11.2572 9.41345C10.9238 9.73501 10.4717 9.91566 10.0002 9.91566Z" fill="currentColor"/>
+                </svg>
+                <p class="m-0">{{ summary }}</p>
+              </div>
+
+              <div class="field flex ai-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.4381 17.5C11.9971 17.4982 11.5577 17.4485 11.1275 17.3517C9.11119 16.7831 7.29656 15.657 5.89248 14.1031C4.33703 12.6999 3.2099 10.8862 2.64093 8.87078C2.41461 7.86502 2.46155 6.81709 2.77687 5.83556C3.09219 4.85404 3.66443 3.97464 4.43428 3.28849C4.66927 3.03087 4.95725 2.82712 5.27847 2.69121C5.59968 2.5553 5.94652 2.49046 6.29517 2.50113C6.92611 2.54688 7.51681 2.82791 7.95012 3.28849L9.11735 4.45493C9.58274 4.9213 9.84408 5.55306 9.84408 6.21169C9.84408 6.87032 9.58274 7.50208 9.11735 7.96845L8.53374 8.55167C8.38054 8.70533 8.29452 8.9134 8.29452 9.13031C8.29452 9.34722 8.38054 9.55529 8.53374 9.70895L10.2846 11.4586C10.4386 11.6116 10.6469 11.6974 10.864 11.6974C11.0811 11.6974 11.2894 11.6116 11.4435 11.4586L12.0271 10.8754C12.4938 10.4101 13.1261 10.1487 13.7854 10.1487C14.4447 10.1487 15.077 10.4101 15.5437 10.8754L16.711 12.0419C17.1718 12.4746 17.453 13.0646 17.4988 13.6949C17.5096 14.0434 17.4448 14.3902 17.3088 14.7114C17.1728 15.0325 16.9689 15.3204 16.711 15.5554C16.1677 16.1519 15.5089 16.6319 14.7744 16.9662C14.0398 17.3005 13.245 17.4821 12.4381 17.5ZM6.18512 4.16916C5.96125 4.18978 5.75468 4.29823 5.61068 4.47077C5.04354 4.96138 4.61968 5.5961 4.38398 6.30774C4.14827 7.01938 4.10948 7.78147 4.2717 8.51334C4.77636 10.2172 5.74681 11.7465 7.07387 12.9292C8.2573 14.2554 9.78764 15.2252 11.4926 15.7295C12.2256 15.8909 12.9886 15.8515 13.701 15.6156C14.4135 15.3796 15.049 14.9558 15.5404 14.3889C15.6294 14.3157 15.7021 14.2248 15.7539 14.1219C15.8057 14.0191 15.8355 13.9065 15.8414 13.7915C15.8116 13.5748 15.7048 13.3761 15.5404 13.2316L14.3732 12.0652C14.2192 11.9122 14.0109 11.8264 13.7937 11.8264C13.5766 11.8264 13.3683 11.9122 13.2143 12.0652L12.6307 12.6484C12.1638 13.1133 11.5315 13.3744 10.8723 13.3744C10.2132 13.3744 9.58094 13.1133 9.11401 12.6484L7.36318 10.8987C6.89794 10.4321 6.63672 9.80026 6.63672 9.14156C6.63672 8.48286 6.89794 7.851 7.36318 7.38439L7.94679 6.80116C8.09993 6.64764 8.18593 6.43971 8.18593 6.22294C8.18593 6.00617 8.09993 5.79823 7.94679 5.64471L6.77957 4.47826C6.63482 4.31412 6.43609 4.20714 6.2193 4.17665L6.18512 4.16916Z" fill="currentcolor"/>
+                </svg>
+                <p class="m-0">{{ address.phone }}</p>
+              </div>
+            </div>
+
+            <div id="EditAddress_{{ address.id }}" class="form-vertical js-address-form text-left hide">
+              {%- form 'customer_address', address -%}
+                <hr class="hr--large">
+                <h2>{{ 'customer.addresses.edit_address' | t }}</h2>
+
+                <div class="grid grid--small">
+                  <div class="grid__item one-half small--one-whole">
+                    <label for="AddressFirstName_{{form.id}}">{{ 'customer.addresses.first_name' | t }}</label>
+                    <input
+                      type="text"
+                      id="AddressFirstName_{{form.id}}"
+                      class="input-full"
+                      name="address[first_name]"
+                      value="{{form.first_name}}"
+                      autocapitalize="words"
+                    >
+                  </div>
+
+                  <div class="grid__item one-half small--one-whole">
+                    <label for="AddressLastName_{{form.id}}">{{ 'customer.addresses.last_name' | t }}</label>
+                    <input
+                      type="text"
+                      id="AddressLastName_{{form.id}}"
+                      class="input-full"
+                      name="address[last_name]"
+                      value="{{form.last_name}}"
+                      autocapitalize="words"
+                    >
+                  </div>
+                </div>
+
+                <label for="AddressCompany_{{form.id}}">{{ 'customer.addresses.company' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressCompany_{{form.id}}"
+                  class="input-full"
+                  name="address[company]"
+                  value="{{form.company}}"
+                  autocapitalize="words"
+                >
+
+                <label for="AddressAddress1_{{form.id}}">{{ 'customer.addresses.address1' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressAddress1_{{form.id}}"
+                  class="input-full"
+                  name="address[address1]"
+                  value="{{form.address1}}"
+                  autocapitalize="words"
+                >
+
+                <label for="AddressAddress2_{{form.id}}">{{ 'customer.addresses.address2' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressAddress2_{{form.id}}"
+                  class="input-full"
+                  name="address[address2]"
+                  value="{{form.address2}}"
+                  autocapitalize="words"
+                >
+
+                <label for="AddressCity_{{form.id}}">{{ 'customer.addresses.city' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressCity_{{form.id}}"
+                  class="input-full"
+                  name="address[city]"
+                  value="{{form.city}}"
+                  autocapitalize="words"
+                >
+
+                <div
+                  class="js-address-country"
+                  data-country-id="AddressCountry_{{form.id}}"
+                  data-province-container-id="AddressProvinceContainer_{{form.id}}"
+                  data-province-id="AddressProvince_{{form.id}}"
+                >
+                  <label for="AddressCountry_{{form.id}}">{{ 'customer.addresses.country' | t }}</label>
+                  <select
+                    id="AddressCountry_{{form.id}}"
+                    class="input-full"
+                    name="address[country]"
+                    data-default="{{form.country}}"
+                  >
+                    {{ country_option_tags }}
+                  </select>
+                </div>
+
+                <div id="AddressProvinceContainer_{{form.id}}" style="display: none;">
+                  <label for="AddressProvince_{{form.id}}">{{ 'customer.addresses.province' | t }}</label>
+                  <select
+                    id="AddressProvince_{{form.id}}"
+                    class="input-full"
+                    name="address[province]"
+                    data-default="{{form.province}}"
+                  ></select>
+                </div>
+
+                <div class="grid grid--small">
+                  <div class="grid__item one-half small--one-whole">
+                    <label for="AddressZip_{{form.id}}">{{ 'customer.addresses.zip' | t }}</label>
+                    <input
+                      type="text"
+                      id="AddressZip_{{form.id}}"
+                      class="input-full"
+                      name="address[zip]"
+                      value="{{form.zip}}"
+                      autocapitalize="characters"
+                    >
+                  </div>
+
+                  <div class="grid__item one-half small--one-whole">
+                    <label for="AddressPhone_{{form.id}}">{{ 'customer.addresses.phone' | t }}</label>
+                    <input
+                      type="tel"
+                      id="AddressPhone_{{form.id}}"
+                      class="input-full"
+                      name="address[phone]"
+                      value="{{form.phone}}"
+                    >
+                  </div>
+                </div>
+
+                <p>
+                  {{ form.set_as_default_checkbox }}
+                  <label for="address_default_address_{{form.id}}" class="inline">
+                    {{- 'customer.addresses.set_default' | t -}}
+                  </label>
+                </p>
+                <div class="flex ai-center gap-x-sm">
+                  <p>
+                    <label for="addresses-update-submit-{{ forloop.index }}" class="hidden-label">
+                      {{- 'customer.addresses.update' | t -}}
+                    </label>
+                    <button type="submit" id="addresses-update-submit-{{ forloop.index }}" class="btn">
+                      {{ 'customer.addresses.update' | t }}
+                    </button>
+                  </p>
+                  <p>
+                    <label for="address-edit-toggle" class="hidden-label">{{ 'customer.addresses.cancel' | t }}</label>
+                    <button
+                      type="button"
+                      id="address-edit-toggle"
+                      class="btn text-link address-edit-toggle"
+                      data-form-id="{{ form.id }}"
+                    >
+                      {{ 'customer.addresses.cancel' | t }}
+                    </button>
+                  </p>
+                </div>
+              {%- endform -%}
+            </div>
+            <hr class="hr--medium">
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}

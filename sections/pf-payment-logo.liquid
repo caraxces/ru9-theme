@@ -1,0 +1,179 @@
+<div class="section-{{section.id}}">
+  <div class="container container-medium">
+    <div class="row">
+      <div class="col-12">
+        <div class="heading">
+            {% if section.settings.title != blank %}
+              <div class="section-header">
+                <h1 class="page-heading primary-color">{{ section.settings.title }}</h1>
+              </div>
+            {% endif %}
+            {% if section.settings.sub_title!= blank %}
+              <p class="primary-color">{{ section.settings.sub_title }}</p>
+            {% endif %}
+            
+        </div>
+            {% if section.blocks.size > 0 %}
+            
+            <div class="pf-payment-wrap">
+            {% if section.settings.primary_title != blank %}
+              <h3 class="h3 primary-color">{{ section.settings.primary_title }}</h3>
+            {% endif %}
+                <div class="pf-payment-logo">
+                        {% for block in section.blocks %}
+                            <div class="pf-logo__item">
+                                <img src="{{ block.settings.bank_logo | img_url: 'master'}}">
+                            </div>
+                        {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+      </div>
+    </div>
+
+    <div class="row">
+    <div class="payment-second col-12">
+      {% if section.settings.second_title != blank %}
+        <div class="section-header">
+          <h3 class="h3 primary-color">{{ section.settings.second_title }}</h3>
+        </div>
+      {% endif %}
+       <div class="pf-payment-logo">
+         <div class="pf-logo__item">
+          <img src="{{section.settings.bank_logo_1 | img_url: 'master'}}">
+        </div>
+         <div class="pf-logo__item">
+          <img src="{{section.settings.bank_logo_2 | img_url: 'master'}}">
+        </div>
+         <div class="pf-logo__item">
+          <img src="{{section.settings.bank_logo_3 | img_url: 'master'}}">
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+
+.heading {
+  margin-bottom: 50px;
+}
+
+.pf-payment-logo {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  align-items: center;
+  text-align: center;
+      grid-gap: 30px;
+}
+.pf-payment-logo img {
+  max-height: 50px;
+}
+]
+.payment-second {
+  padding-top: 100px;
+}
+.payment-second .pf-logo__item img {
+  max-height: 50px;
+}
+.payment-second .section-header  {
+  margin-top: 50px;
+  margin-bottom: 35px;
+}
+.main-logo img {
+  max-height: 100px;
+}
+@media(max-width: 767px) {
+  .pf-payment-logo {
+        grid-template-columns: repeat(3,1fr);
+    padding: 0px 15px;
+    grid-gap: 20px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Payment",
+  "class": "mb-60",
+  "max_blocks": 30,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image list"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title",
+      "default": "Êm ái, thoải mái như ngủ trên những tầng mây."
+    },
+    {
+      "type": "text",
+      "id": "primary_title",
+      "label": "Heading",
+      "default": "Đối với THẺ ATM VÀ TÀI KHOẢN NGÂN HÀNG"
+    },
+    {
+      "type": "header",
+      "content": "Second section content"
+    },
+      {
+      "type": "text",
+      "id": "second_title",
+      "label": "Heading",
+      "default": "Đối với THẺ thanh toán quốc tế"
+    },
+    {
+      "type": "image_picker",
+      "id": "bank_logo_1",
+      "label": "Bank Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "bank_logo_2",
+      "label": "Bank Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "bank_logo_3",
+      "label": "Bank Logo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "payment_logo",
+      "name": "Logo Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "bank_logo",
+          "label": "Bank Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PageFly Payment",
+      "category": "PageFly Payment",
+      "blocks": [
+        {
+          "type": "payment_logo"
+        },
+        {
+          "type": "payment_logo"
+        },
+        {
+          "type": "payment_logo"
+        },
+        {
+          "type": "payment_logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

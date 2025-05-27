@@ -1,0 +1,47 @@
+{%include 'vieclam-banner'%}
+{% schema %}
+{
+  "name": "PF Coprate Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Bạn đang có câu hỏi?"
+    },
+    {
+      "type": "html",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "id": "alignment",
+      "type": "select",
+      "label": "Content alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image_background",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#e1f1f1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "PF Rich text",
+      "category": "PageFly"
+    }
+  ]
+}
+{% endschema %}

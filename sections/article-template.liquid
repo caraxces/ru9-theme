@@ -1,0 +1,598 @@
+{%- liquid
+  assign number_of_comments = article.comments_count
+  if comment.status == 'pending'
+    assign number_of_comments = article.comments_count | plus: 1
+  endif
+
+  for tag in article.tags
+    assign tag = tag | handle
+  endfor
+-%}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.27.4/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.27.4/tocbot.css">
+
+<style>
+  #shopify-section-{{ section.id }} .article__footer .social-sharing .icon rect {
+    fill: #2960AD;
+  }
+  #shopify-section-{{ section.id }} .article__footer .social-sharing .icon path {
+    fill: white;
+  }
+  .collection-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    height: 500px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .collection-hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  .collection-hero__content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .collection-hero__content .page-width {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .collection-hero__content .section-header {
+    width: 100%;
+    text-align: center;
+  }
+
+  .collection-hero .section-header__title {
+    color: white;
+    font-size: 52px;
+    opacity: 1 !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .collection-hero .section-header__title {
+      font-size: 26px;
+    }
+    .collection-hero {
+      height: auto;
+      max-width: 100%;
+    }
+  }
+
+  .collection-hero .article__date,
+  .collection-hero .article__author {
+    color: white;
+    font-size: 22px;
+  }
+
+  .collection-hero .article__date a,
+  .collection-hero .article__date {
+    color: white;
+  }
+
+  .collection-hero .date-author-wrap {
+    color: white;
+  }
+
+  .article-breadcrumbs {
+    margin-bottom: 20px;
+  }
+
+  .article-breadcrumbs ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .article-breadcrumbs li {
+    font-size: 15px;
+    text-overflow: ellipsis; /* Hiển thị dấu "..." nếu quá dài */
+    overflow: hidden;
+    white-space: nowrap;
+    color: #2D3748;
+  }
+
+  .article-breadcrumbs li:not(:last-child):after {
+    content: '';
+    margin: 0 10px;
+    display: inline-block;
+    width: 6px;
+    height: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='10' viewBox='0 0 6 10' fill='none'%3E%3Cpath d='M1 9L5 5L1 1' stroke='%232D3748' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+  }
+
+  .article-breadcrumbs a {
+    color: #2D3748;
+    text-decoration: none;
+  }
+
+  .article-breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+
+  .article-section {
+    position: relative;
+    background-color: #FFFFFF;
+    padding: 40px 0;
+  }
+
+  .article-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    background-color: #FFFFFF;
+    z-index: -1;
+  }
+
+  .is-collapsed {
+    max-height: initial;
+  }
+</style>
+
+<div class="article-section relative section-padding">
+  <div class="page-width" style="--page-width: 1104px;">
+    <div class="article-breadcrumbs">
+      <ul>
+        <li><a href="{{ routes.root_url }}">Home</a></li>
+        <li><a href="{{ blog.url }}">{{ blog.title }}</a></li>
+        <li>{{ article.title }}</li>
+      </ul>
+    </div>
+
+    {%- if section.settings.image_hero and article.image -%}
+      <div class="collection-hero relative">
+        {%- render 'image-element', 
+          img: article.image, 
+          classes: 'collection-hero__image image-fit' 
+        -%}
+        
+        <div class="collection-hero__content absolute inset-0">
+          <div class="page-width h-full flex items-center justify-center">
+            <header class="section-header section-header--hero text-center">
+              <div class="section-header__shadow">
+                {%- render 'article-category', article: article -%}
+                {%- assign categories = section.settings.category_tag | split: ',' -%}
+                {%- assign title = '' -%}
+                {%- for cate in categories -%}
+                  {%- if cate != blank -%}
+                    {% assign handle = cate | split: '_' | first %}
+                    {% assign category_title = cate | split: '_' | last %}
+                    {%- if article.tags contains handle -%}  {# Kiểm tra xem tag có trong bài viết không #}
+                      {%- assign title = category_title -%}  {# Gán giá trị title #}
+                      {%- break -%}  {# Thoát khỏi vòng lặp khi tìm thấy #}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                <h1 class="section-header__title text-3xl">{{ article.title }}</h1>
+
+                <div class="date-author-wrap flex-center">
+                  {%- if section.settings.blog_show_date or article.tags.size > 0 or articles.comments_count > 0 -%}
+                    <div class="article__date">
+                      {%- if section.settings.blog_show_tags and article.tags.size > 0 -%}
+                        {%- for tag in article.tags -%}
+                          {% if tag contains '_' %}
+                            {%- assign tag_starts_with = tag | slice: 0 -%}
+                            {% if tag_starts_with == '_' -%}
+                              {%- if tag_count %}{%- assign tag_count = tag_count | minus: 1 | at_least: 0 -%}{% endif -%}
+                              {%- continue -%}
+                            {%- endif -%}
+                          {%- endif %}
+                          <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a> &middot;
+                        {%- endfor -%}
+                      {%- endif -%}
+                      {%- if section.settings.blog_show_comments and article.comments_count > 0 -%}
+                        <a href="#comments">
+                          {{ 'blogs.comments.with_count' | t: count: number_of_comments }}
+                        </a>
+                        &middot;
+                      {%- endif -%}
+                      {%- if section.settings.blog_show_date -%}
+                        {{ article.published_at | time_tag: '%m %d, %Y' |  prepend: 'Thg ' }}
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if section.settings.blog_show_author -%}
+                    <div class="article__author">{{ article.author }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </header>
+          </div>
+        </div>
+      </div>
+    {%- else -%}
+      <header class="section-header">
+        <div class="section-header__shadow">
+          {%- render 'article-category', article: article -%}
+          <h1 class="section-header__title text-3xl">{{ article.title }}</h1>
+
+          <div class="date-author-wrap flex-center">
+            {%- if section.settings.blog_show_date or article.tags.size > 0 or articles.comments_count > 0 -%}
+              <div class="article__date">
+                {%- if section.settings.blog_show_tags and article.tags.size > 0 -%}
+                  {%- for tag in article.tags -%}
+                    {% if tag contains '_' %}
+                      {%- assign tag_starts_with = tag | slice: 0 -%}
+                      {% if tag_starts_with == '_' -%}
+                        {%- if tag_count %}{%- assign tag_count = tag_count | minus: 1 | at_least: 0 -%}{% endif -%}
+                        {%- continue -%}
+                      {%- endif -%}
+                    {%- endif %}
+                    <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a> &middot;
+                  {%- endfor -%}
+                {%- endif -%}
+                {%- if section.settings.blog_show_comments and article.comments_count > 0 -%}
+                  <a href="#comments">
+                    {{ 'blogs.comments.with_count' | t: count: number_of_comments }}
+                  </a>
+                  &middot;
+                {%- endif -%}
+                {%- if section.settings.blog_show_date -%}
+                  {{ article.published_at | time_tag: '%m %d, %Y' |  prepend: 'Thg ' }}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.blog_show_author -%}
+              <div class="article__author">{{ article.author }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      </header>
+    {%- endif -%}
+
+    {% if section.settings.table_of_contents_heading != blank %}
+      <div class="blog-articles" data-tab-of-contents="{{ section.settings.table_of_contents_heading | escape }}">
+    {% endif %}
+    {% if section.settings.table_of_contents_heading != blank %}
+      <div class="blog__table blog-toc">
+        <div class="toc-toggle flex ai-center m-0">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            role="presentation"
+            width="24"
+            height="25"
+            viewBox="0 0 24 25"
+            fill="none"
+          >
+            <path d="M3 4.30005H21V6.30005H3V4.30005ZM3 11.3H21V13.3H3V11.3ZM3 18.3H21V20.3H3V18.3Z" fill="#2D3748"/>
+          </svg>
+
+          <span class="f-bold text-lg">Mục lục</span>
+        </div>
+        <nav class="auto-toc"></nav>
+      </div>
+    {% endif %}
+
+    <div class="article__body js-toc-content rte">
+      {{ article.content }}
+    </div>
+
+    <div class="article__related">
+      {%- if section.settings.show_related_articles and settings.category_tag and settings.category_tag != '' -%}
+        <p class="related-articles-title">{{ section.settings.related_articles_heading }}</p>
+        {%- assign categories = settings.category_tag | split: ',' -%}
+        {%- render 'article-related-articles',
+          heading: section.settings.related_articles_heading,
+          image_size: section.settings.related_articles_image_size,
+          limit: section.settings.related_articles_limit,
+          categories: categories
+        -%}
+      {%- endif -%}
+    </div>
+
+    <div class="article__footer small--flex-col flex">
+      <div class="one-whole medium-up--one-half article__footer-item">
+        <span class="article__footer-label">Tác giả</span>
+        <div class="article__footer-author flex ai-center f-smb">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            role="presentation"
+            width="30"
+            height="30"
+            viewBox="0 0 30 31"
+            fill="none"
+          >
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.5785 1.18776C10.0346 1.53401 6.73779 3.15939 4.3037 5.76038C1.8696 8.36138 0.464649 11.7601 0.351198 15.3219C0.237747 18.8838 1.42355 22.3652 3.68718 25.116C5.95081 27.8669 9.1375 29.6991 12.6521 30.2706C16.1668 30.842 19.7692 30.1136 22.7865 28.2214C25.8038 26.3292 28.0298 23.4026 29.0488 19.9879C30.0678 16.5733 29.8102 12.9043 28.324 9.6659C26.8378 6.42748 24.2246 3.8412 20.9725 2.38996C18.6394 1.40317 16.1038 0.990897 13.5785 1.18776ZM16.1488 5.70089C17.2002 5.95534 18.135 6.55749 18.8019 7.40987C19.4687 8.26224 19.8287 9.3149 19.8233 10.3975C19.8179 11.4801 19.4476 12.5291 18.7723 13.3749C18.0971 14.2206 17.1564 14.8134 16.1025 15.0574C15.0487 15.3015 13.9433 15.1824 12.9655 14.7193C11.9877 14.2564 11.1947 13.4766 10.7148 12.5064C10.235 11.5362 10.0963 10.4323 10.3214 9.3734C10.5464 8.31454 11.122 7.36266 11.9549 6.67193C12.5295 6.19432 13.2078 5.85778 13.9355 5.68918C14.6632 5.52058 15.4202 5.52459 16.1461 5.70089H16.1488ZM18.6607 17.6772C21.9427 18.2101 23.947 22.4087 21.7554 24.1586C19.8597 25.6941 17.4976 26.5371 15.0588 26.5483C12.62 26.5596 10.2503 25.7385 8.34052 24.2205C7.92243 23.9359 7.60661 23.5246 7.4397 23.047C7.27273 22.5694 7.26345 22.0507 7.41325 21.5674C7.60832 20.6066 8.08252 19.7248 8.77641 19.0328C9.47036 18.3407 10.353 17.8691 11.3137 17.6772C11.7502 17.604 18.2149 17.602 18.6607 17.6772Z" fill="#2960AD"/>
+          </svg>
+
+          {{ article.author }}
+        </div>
+      </div>
+      <div class="one-whole medium-up--one-half article__footer-item">
+        <span class="article__footer-label">Chia sẻ bài viết</span>
+        <div class="article__footer-social">
+          {%- if section.settings.social_sharing_blog -%}
+            {%- render 'social-sharing',
+              share_title: article.title,
+              share_permalink: article.url,
+              share_image: article.image,
+              is_article: true
+            -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    {% if section.settings.table_of_contents_heading != blank %}</div>{% endif %}
+
+    <hr class="hr--large">
+
+    <div id="fixed-toc" class="blog-toc fixed-toc">
+      <button class="toc-toggle-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path d="M24 56c0-13.3 10.7-24 24-24H80c13.3 0 24 10.7 24 24V176h16c13.3 0 24 10.7 24 24s-10.7 24-24 24H40c-13.3 0-24-10.7-24-24s10.7-24 24-24H56V80H48C34.7 80 24 69.3 24 56zM86.7 341.2c-6.5-7.4-18.3-6.9-24 1.2L51.5 357.9c-7.7 10.8-22.7 13.3-33.5 5.6s-13.3-22.7-5.6-33.5l11.1-15.6c23.7-33.2 72.3-35.6 99.2-4.9c21.3 24.4 20.8 60.9-1.1 84.7L86.8 432H120c13.3 0 24 10.7 24 24s-10.7 24-24 24H32c-9.5 0-18.2-5.6-22-14.4s-2.1-18.9 4.3-25.9l72-78c5.3-5.8 5.4-14.6 .3-20.5zM224 64H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 160H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 160H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/>
+        </svg>
+      </button>
+      <div class="fixed-toc-content">
+        <h3 class="active"><span>Mục lục</span><strong class="toc-toggle-btn">×</strong></h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "@id": {{ shop.url | append: article.url | append: "#blog" | json }},
+    "articleBody": {{ article.content | strip_html | json }},
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ shop.url | append: article.url | append: "#webpage" | json }}
+    },
+    "headline": {{ article.title | json }},
+    {% if article.excerpt != blank %}
+      "description": {{ article.excerpt | strip_html | json }},
+    {% endif %}
+    {% if article.image %}
+      {% assign image_size = article.image.width | append: 'x' %}
+      "image": [
+        {{ article | img_url: image_size | prepend: "https:" | json }}
+      ],
+    {% endif %}
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "author": {
+      "@type": "Person",
+      "name": {{ article.author | json }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      {% if page_image %}
+        {% assign image_size = page_image.width | append: 'x' %}
+        "logo": {
+          "@type": "ImageObject",
+          "height": {{ page_image.height | json }},
+          "url": {{ page_image | img_url: image_size | prepend: "https:" | json }},
+          "width": {{ page_image.width | json }}
+        },
+      {% endif %}
+      "name": {{ shop.name | json }}
+    }
+  }
+</script>
+
+{% if section.settings.table_of_contents_heading != blank %}
+  <script>
+    const heading = document.querySelector('.blog-articles').getAttribute('data-tab-of-contents');
+    const tocHeading = document.querySelectorAll('.blog__table .toc-toggle');
+
+    function toSlug(string) {
+      return string
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/-$/, '')
+        .replace(/^-/, '');
+    }
+    const contentHeadings = document.querySelectorAll(
+      '.js-toc-content h1, .js-toc-content h2, .js-toc-content h3, .js-toc-content h4, .js-toc-content h5, .js-toc-content h6'
+    );
+
+    if (contentHeadings && contentHeadings.length) {
+      contentHeadings.forEach((item, index) => {
+        item.id = toSlug(item.innerText);
+      });
+    }
+
+    tocbot.init({
+      headingsOffset: 70,
+      scrollSmoothOffset: -70,
+      // Where to render the table of contents.
+      tocSelector: '.blog__table .auto-toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: '.js-toc-content',
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: heading,
+      // For headings inside relative or absolute positioned containers within content.
+      hasInnerContainers: true,
+    });
+
+    const box = document.querySelector('.blog__table .auto-toc');
+    const fixedToc = document.querySelector('.fixed-toc');
+
+    // Fixed TOC
+    if (fixedToc && box.childNodes.length) {
+      const boxClone = box.cloneNode(true);
+      document.querySelector('.fixed-toc .fixed-toc-content').appendChild(boxClone);
+      let observer = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              fixedToc.classList.remove('open');
+              fixedToc.classList.add('hidden');
+            } else {
+              fixedToc.classList.remove('hidden');
+            }
+          });
+        },
+        {
+          threshold: 0,
+        }
+      );
+      document.querySelectorAll('.blog__table').forEach((div) => {
+        observer.observe(div);
+      });
+      const toggleBtn = document.querySelectorAll('.toc-toggle-btn');
+      toggleBtn.forEach((item) => {
+        item.addEventListener('click', function () {
+          fixedToc.classList.toggle('open');
+        });
+      });
+    }
+
+    if (tocHeading && tocHeading.length) {
+      tocHeading.forEach((heading) => {
+        heading.addEventListener('click', function () {
+          this.classList.toggle('active');
+        });
+      });
+    }
+
+    if (box.childNodes.length === 0) {
+      box.closest('.blog__table').classList.add('hidden');
+      if (fixedToc) {
+        fixedToc.classList.add('hidden');
+      }
+    }
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.article-template.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "image_hero",
+      "label": "t:sections.article-template.settings.image_hero.label",
+      "info": "t:sections.article-template.settings.image_hero.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_tags",
+      "label": "t:sections.article-template.settings.blog_show_tags.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": "t:sections.article-template.settings.blog_show_date.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_comments",
+      "label": "t:sections.article-template.settings.blog_show_comments.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_author",
+      "label": "t:sections.article-template.settings.blog_show_author.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "social_sharing_blog",
+      "label": "t:sections.article-template.settings.social_sharing_blog.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Table of contents"
+    },
+    {
+      "type": "text",
+      "id": "table_of_contents_heading",
+      "label": "Heading List"
+    },
+    {
+      "type": "header",
+      "content": "Related article"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_related_articles",
+      "label": "Show related article",
+      "default": true
+    },
+    {
+      "type": "text",
+      "label": "Related Article Title",
+      "id": "related_articles_heading"
+    },
+    {
+      "type": "range",
+      "label": "Number of Article",
+      "id": "related_articles_limit",
+      "default": 3,
+      "min": 1,
+      "max": 6,
+      "step": 1
+    },
+    {
+      "type": "select",
+      "id": "related_articles_image_size",
+      "label": "t:sections.blog-template.settings.blog_image_size.label",
+      "default": "wide",
+      "options": [
+        {
+          "value": "natural",
+          "label": "t:sections.blog-template.settings.blog_image_size.options.natural.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.blog-template.settings.blog_image_size.options.square.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.blog-template.settings.blog_image_size.options.landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.blog-template.settings.blog_image_size.options.portrait.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.blog-template.settings.blog_image_size.options.wide.label"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  }
+}
+{% endschema %}

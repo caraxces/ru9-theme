@@ -1,0 +1,189 @@
+<div class="section-{{section.id}}">
+    <div class="container">
+        {% if section.settings.heading != blank %}
+        <div class="section-header text-center">
+            <h3 class="h3 primary-color">{{ section.settings.heading }}</h3>
+            <p>{{ section.settings.sub_heading }}</p>
+        </div>
+        {% endif %}
+        {% case section.settings.grid %}
+        {% when 2 %}
+        {%- assign grid_item_width = 'col-sm-6 col-12' -%}
+        {% when 3 %}
+        {%- assign grid_item_width = 'col-sm-4 col-12' -%}
+        {% when 4 %}
+        {%- assign grid_item_width = 'col-sm-3 col-12' -%}
+        {% endcase %}
+        {% if section.blocks.size > 0 %}
+        <div class="row logo-bar{% if section.settings.title_enable %} logo-bar--large{% endif %}">
+            {% for block in section.blocks %}
+            <div class="{{ grid_item_width }}">
+                <div class="logo-bar__item">
+                    {% if block.settings.link != blank %}
+                    <a href="{{ block.settings.link }}" class="logo-bar__link">
+                        {% endif %}
+                        {% if block.settings.image != blank %}
+                        <div class="image-item">
+                            <img src="{{ block.settings.image | img_url: '470x470' }}" 
+                                 width="{{block.settings.image.width}}"
+                                 height="{{block.settings.image.height}}"
+                                 alt="">
+                        </div>
+                        {% else %}
+                        <div class="place-holder"></div>
+                        {% endif %}
+                        {% if block.settings.title != blank %}
+                        <div class="block-title flex">
+                        <h3 class="h5 primary-color" style="color: {{block.settings.title_color}};">{{block.settings.title}}</h3>
+                        {%include 'arrow.svg.liquid'%}
+                        </div>
+                        {% endif %}
+                        {% if block.settings.link != blank %}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {%if section.settings.custom_text != blank%}
+        <div class="section-custom-content text-center">
+            {{section.settings.custom_text}}
+        </div>
+        {%endif%}
+        {% if section.blocks.size == 0 %}
+        {% include 'no-blocks' %}
+        {% endif %}
+    </div>
+</div>
+<style>
+.section-{{section.id}} {
+  padding: 50px 0px;
+  background-color: {{section.settings.background_color}};
+}
+.section-{{section.id}} .section-header h3 {
+    font-size: 34px;
+}
+.logo-bar__item {
+  margin-bottom: 50px;
+  background: #EFEFEF;
+  display: block;
+    position: relative;
+  }
+ .image-item img{
+          display: block;
+  }
+.logo-bar__item h3 {
+    font-size: 22px;
+    margin: 0;
+    font-weight: normal;
+    text-align: left;
+  }
+  .block-title {
+    justify-content: space-between;
+    align-item: center;
+    padding: 30px;
+        position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+
+.place-holder {
+    min-height: 300px;
+}
+.block-title svg {
+    width: 30px;
+    fill: #fff;
+}
+</style>
+
+{% schema %}
+{
+    "name":"Logo list",
+    "max_blocks":6,
+    "settings":[
+        {
+            "type":"text",
+            "id":"heading",
+            "label":"Heading",
+            "default":"Logo list"
+        },
+        {
+            "type":"color",
+            "id":"background_color",
+            "label":"Background color",
+            "default":"#FDF3E5"
+        },
+        {
+            "type":"textarea",
+            "id":"sub_heading",
+            "label":"Sub Heading",
+            "default":"Mọi chiếc nệm từ Ru9 đều được làm từ chất liệu có chất lượng cao nhất. Ngon giấc hơn với trải nghiệm dịch vụ vượt trội."
+        },
+        {
+            "type":"text",
+            "id":"custom_text",
+            "label":"Custom Text"
+        },
+        {
+            "type":"range",
+            "id":"grid",
+            "label":"Products per row",
+            "min":2,
+            "max":4,
+            "step":1,
+            "default":3
+        }
+    ],
+    "blocks":[
+        {
+            "type":"logo_image",
+            "name":"Logo",
+            "settings":[
+                {
+                    "type":"image_picker",
+                    "id":"image",
+                    "label":"Image"
+                },
+                {
+                    "type":"url",
+                    "id":"link",
+                    "label":"Link",
+                    "info":"Optional"
+                },
+                {
+                    "type":"text",
+                    "id":"title",
+                    "label":"Title"
+                },
+                {
+                    "type":"color",
+                    "id": "title_color",
+                    "label": "Title Color",
+                    "default": "#003349"
+                }
+            ]
+        }
+    ],
+    "presets":[
+        {
+            "name":"Logo list",
+            "category":"PageFly",
+            "blocks":[
+                {
+                    "type":"logo_image"
+                },
+                {
+                    "type":"logo_image"
+                },
+                {
+                    "type":"logo_image"
+                },
+                {
+                    "type":"logo_image"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

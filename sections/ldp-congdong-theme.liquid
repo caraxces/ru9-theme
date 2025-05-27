@@ -1,0 +1,93 @@
+<style>
+
+    .site-nav a ,.site-header__icon,.site-nav a:hover,
+  .site-nav .site-nav--active > a, .site-nav .site-nav--active > a:hover{
+      color: {{section.settings.menu_color -}}
+
+  }
+  #StickyBar{
+    background-color: {%if  section.settings.menu_background and section.settings.menu_background != blank %} {{section.settings.menu_background -}}{%else%} transparent{%endif%};
+
+  }
+  /**#StickyBar,.site-nav .overlay,
+  .site-nav__childlist,
+  .site-nav__dropdown{
+      background-color: {{section.settings.menu_background -}};
+
+  }*/
+  .site-nav .site-nav__dropdown a{
+   color: #727272
+  }
+  .a {
+    fill: {{section.settings.menu_color -}};
+    stroke:{{section.settings.menu_color -}};
+}
+  {%if section.settings.use_light_logo -%}
+  .site-header__logo img, .site-header__icon img{
+    filter: brightness(0) invert(1)
+  }
+  {%endif -%}
+  .site-footer,
+  .site-footer p, .site-footer__linklist-item a, .site-footer__rte a, .site-footer h4, .site-footer small, .site-footer__copyright-content a, .site-footer__newsletter-error, .site-footer__social-icons .social-icons__link{
+  	color:  {{section.settings.footer_color -}}!important
+  
+  }
+  .site-footer{
+    background: {{section.settings.footer_background -}}!important;
+  }
+  footer.site-footer:before{
+  	content : none!important
+  }
+  .ldp-loading{
+    background: {{section.settings.menu_background}};
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Landing page color",
+    "settings": [
+	{
+
+		"type": "checkbox",
+			"id": "use_light_logo",
+		"label": "White logo ?"	
+		},
+		{
+		 "type": "color",
+      	"id": "menu_color",
+		"label": "Menu Color"
+		},
+		{
+		 "type": "color",
+      	"id": "menu_background",
+		"label": "Menu Background"
+		},
+	
+		{
+		 "type": "color",
+      	"id": "footer_color",
+		"label": "Footer Color"
+		},
+		{
+		 "type": "color",
+      	"id": "footer_background",
+		"label": "Footer Background"
+		}
+
+
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

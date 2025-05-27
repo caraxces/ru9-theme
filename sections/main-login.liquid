@@ -1,0 +1,144 @@
+{{ 'login.css' | asset_url | stylesheet_tag: preload: true }}
+<div class="main-login main-account">
+  <div class="container flex">
+    <div class="main-account__form main-login__form flex flex-col">
+      <div class="content-wrap">
+        <header class="section-header text-left">
+          <h1 class="section-header__title text-3xl m-0">
+            {%- if section.settings.title != blank -%}
+              {{ section.settings.title }}
+            {%- else -%}
+              {{ 'customer.login.title' | t }}
+            {%- endif -%}
+          </h1>
+          {%- if section.settings.subtitle != blank -%}
+            <div class="rte text-sm">{{ section.settings.subtitle }}</div>
+          {%- endif -%}
+        </header>
+
+        <div class="note note--success hide" id="ResetSuccess">
+          {{ 'customer.recover_password.success' | t }}
+        </div>
+
+        <div id="CustomerLoginForm" class="form-vertical">
+          {%- form 'customer_login' -%}
+            {{ form.errors | default_errors }}
+
+            <label for="CustomerEmail" class="text-sm f-medium">{{ 'customer.login.email' | t }}</label>
+            <input
+              type="email"
+              name="customer[email]"
+              id="CustomerEmail"
+              class="input-full text-sm{% if form.errors contains 'email' %} error{% endif %}"
+              autocorrect="off"
+              autocapitalize="off"
+              autofocus
+              placeholder="{{ 'customer.login.email_placeholder' | t }}"
+            >
+
+            {%- if form.password_needed -%}
+              <label for="CustomerPassword" class="text-sm f-medium">{{ 'customer.login.password' | t }}</label>
+              <input
+                type="password"
+                value=""
+                name="customer[password]"
+                id="CustomerPassword"
+                class="input-full text-sm{% if form.errors contains 'password' %} error{% endif %}"
+                placeholder="{{ 'customer.login.password_placeholder' | t }}"
+              >
+              <small class="label-info text-sm">
+                <a href="#recover" id="RecoverPassword">
+                  {{ 'customer.login.forgot_password' | t }}
+                </a>
+              </small>
+            {%- endif -%}
+
+            <p>
+              <button type="submit" class="btn">{{ 'customer.login.sign_in' | t }}</button>
+            </p>
+            <p>
+              {{ 'layout.customer.new_member' | t }}
+              {{ 'layout.customer.create_account_now' | t | customer_register_link }}
+            </p>
+          {%- endform -%}
+        </div>
+
+        <div id="RecoverPasswordForm" class="hide">
+          <div class="form-vertical">
+            <h2>{{ 'customer.recover_password.title' | t }}</h2>
+            <p>{{ 'customer.recover_password.subtext' | t }}</p>
+
+            {%- form 'recover_customer_password' -%}
+              {{ form.errors | default_errors }}
+
+              {%- if form.posted_successfully? -%}
+                <span class="hide reset-password-success"></span>
+              {%- endif -%}
+
+              <label for="RecoverEmail">{{ 'customer.recover_password.email' | t }}</label>
+              <input
+                type="email"
+                value=""
+                name="email"
+                id="RecoverEmail"
+                class="input-full"
+                autocorrect="off"
+                autocapitalize="off"
+              >
+
+              <p>
+                <button type="submit" class="btn">
+                  {{ 'customer.recover_password.submit' | t }}
+                </button>
+              </p>
+              <button type="button" id="HideRecoverPasswordLink">{{ 'customer.recover_password.cancel' | t }}</button>
+            {%- endform -%}
+          </div>
+        </div>
+
+        {%- if shop.checkout.guest_login -%}
+          <hr class="hr--clear">
+
+          <h1>{{ 'customer.login.guest_title' | t }}</h1>
+          <hr class="hr--small">
+
+          {%- form 'guest_login' -%}
+            <button type="submit" class="btn">
+              {{ 'customer.login.guest_continue' | t }}
+            </button>
+          {%- endform -%}
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="main-account__banner main-login__banner">
+      {%- if section.settings.banner != blank -%}
+        {%- render 'image-element', img: section.settings.banner, classes: 'image-fit' -%}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main login",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner",
+      "label": "Banner"
+    }
+  ]
+}
+{% endschema %}

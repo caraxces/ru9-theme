@@ -1,0 +1,459 @@
+{%- liquid
+  assign product_form_id = product_form_id | append: '-duplicate'
+-%}
+
+<sticky-add-to-cart
+  class="product__sticky flex ai-center fixed z-index-10 pointer-none no-js-hidden"
+  id="product-sticky-{{ section.id }}-{{ product.id }}"
+  data-section="{{ section.id }}"
+>
+  <nav class="product__sticky-navigation shrink-0">
+    <div class="sticky-navigation__links flex ai-center gap-x"></div>
+  </nav>
+  <div class="product__stick-product-wrap flex ai-center jc-between gap-x-sm flex-1">
+    {%- liquid
+      assign product_media = product.media | where: 'media_type', 'image'
+      assign media_count = product_media | size
+      if media_count > 0
+        if product.selected_or_first_available_variant.image
+          assign image = product.selected_or_first_available_variant.image
+        else
+          assign image = product.featured_image.src
+        endif
+      endif
+
+      assign Buybuttons = section.blocks | where: 'type', 'buy_buttons'
+    -%}
+    <div
+      class="product__sticky-product border-none flex ai-center relative p-0 bg-transparent"
+      type="button"
+      aria-label="{{ product.title | escape }}"
+      data-toggle
+    >
+      {%- if media_count > 0 -%}
+        <div class="product__sticky-image w-full shrink-0">
+          <div
+            class="relative ovh grid__image-ratio rounded-sm ovh"
+            style="--padding-bottom: 100%;"
+          >
+            <img
+              srcset="{{ image | img_url: '110x' }}"
+              src="{{ image | img_url: '110x' }}"
+              alt="{{ image.alt | default: product.title | escape }}"
+              sizes="110"
+              loading="lazy"
+              width="110"
+              height="110"
+            >
+          </div>
+        </div>
+      {%- endif -%}
+      <div class="product__sticky-content">
+        <h3 class="product__sticky-title fw-bold">{{ product.title }}</h3>
+        <div class="product__sticky-price">{{ current_variant.price | money }}</div>
+        <div class="product__sticky-variants">
+          {%- for option in product.options_with_values -%}
+            <div class="label-select text-xs">
+              <span data-header-option>{{ option.selected_value }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="product__sticky-toggle pos-absolute pos-absolute-c-r d-block hidden">&nbsp;</div>
+    </div>
+    <div class="product__sticky-inner o-h">
+      <div class="product__sticky-wrapper">
+        {%- if Buybuttons.size > 0 -%}
+          {%- if product != blank -%}
+            {%- form 'product', product, id: product_form_id, class: 'product-single__sticky-form' -%}
+              {%- liquid
+                assign gift_card_recipient_feature_active = false
+                if block.settings.show_gift_card_recipient and product.gift_card?
+                  assign gift_card_recipient_feature_active = true
+                endif
+              -%}
+
+              {%- if gift_card_recipient_feature_active -%}
+                {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
+              {%- endif -%}
+
+              {%- liquid
+                assign default_text = 'products.product.add_to_cart' | t
+                assign button_text = 'products.product.add_to_cart' | t
+                if template contains 'preorder'
+                  assign default_text = 'products.product.preorder' | t
+                  assign button_text = 'products.product.preorder' | t
+                endif
+                unless current_variant.available
+                  assign button_text = 'products.product.sold_out' | t
+                endunless
+              -%}
+
+              <div class="sticky-buttons-wrapper flex gap-x-sm">
+                <button
+                  {% if product.empty? %}
+                    type="button"
+                  {% else %}
+                    type="submit"
+                  {% endif %}
+                  name="add"
+                  data-add-to-cart-sticky
+                  id="ProductSubmitButtonSticky-{{ block.id }}-{{ product.id }}"
+                  class="btn btn--full btn--secondary add-to-cart custom-add-to-cart-btn{% if enable_dynamic_buttons and product.selling_plan_groups == empty %} btn--secondary{% endif %}"
+                  {% unless current_variant.available %}
+                    disabled="disabled"
+                  {% endunless %}
+                >
+                  <span class="icon-cart">{% render 'icon-cart-2' %}</span>
+                  <span data-add-to-cart-text-sticky data-default-text="{{ default_text }}" class="desktop-cart-text">
+                    {{ button_text }}
+                  </span>
+                  <span class="mobile-cart-text">Thêm</span>
+                </button>
+                
+                <button
+                  type="button"
+                  class="btn btn--full btn--primary buy-now-btn mobile-only"
+                  data-buy-now-sticky
+                >
+                  <span class="mobile-buy-now-text">Mua Ngay</span>
+                </button>
+              </div>
+
+              <select name="id" data-product-select-sticky class="product-single__variants no-js">
+                {%- for variant in product.variants -%}
+                  {%- if variant.available -%}
+                    <option
+                      {% if variant == product.selected_or_first_available_variant %}
+                        selected="selected"
+                      {% endif %}
+                      value="{{ variant.id }}"
+                    >
+                      {{ variant.title }} - {{ variant.price | money_with_currency }}
+                    </option>
+                  {%- else -%}
+                    <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+                  {%- endif -%}
+                {%- endfor -%}
+              </select>
+            {%- endform -%}
+
+          {%- else -%}
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</sticky-add-to-cart>
+
+<style>
+  .product__sticky-content {
+    margin-left: 15px;
+  }
+  
+  .product__sticky-title {
+    font-size: 14px;
+    margin: 0 !important;
+    padding: 0;
+    line-height: 1.2;
+  }
+  
+  .product__sticky-price {
+    display: none;
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  
+  /* Custom button styles */
+  .custom-add-to-cart-btn {
+    background-color: #f97046 !important;
+    border-color: #f97046 !important;
+    color: #ffffff !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .custom-add-to-cart-btn:hover,
+  .custom-add-to-cart-btn:focus {
+    background-color: #273d7e !important;
+    border-color: #273d7e !important;
+  }
+  
+  /* Mobile/Desktop text toggle */
+  .mobile-cart-text {
+    display: none;
+  }
+  
+  /* Buy Now Button Styles */
+  .buy-now-btn {
+    background-color: #273d7e !important;
+    border-color: #273d7e !important;
+    color: #ffffff !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .buy-now-btn:hover,
+  .buy-now-btn:focus {
+    background-color: #1e2f5f !important;
+    border-color: #1e2f5f !important;
+  }
+  
+  /* Mobile Only Elements */
+  .mobile-only {
+    display: none;
+  }
+  
+  /* Sticky Buttons Wrapper */
+  .sticky-buttons-wrapper {
+    width: 100%;
+  }
+  
+  /* Hide payment buttons on mobile when setting is enabled */
+  .hide-payment-mobile .payment-buttons {
+    display: block;
+  }
+  
+  /* Mobile styles */
+  @media screen and (max-width: 749px) {
+    /* Always show sticky cart on mobile */
+    .product__sticky {
+      display: flex !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      position: fixed !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      z-index: 1000 !important;
+      background: white !important;
+      border-top: 1px solid #e0e0e0 !important;
+      padding: 10px 15px !important;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
+    }
+    
+    .product__sticky.active {
+      transform: translateY(0) !important;
+    }
+    
+    .product__sticky-price {
+      display: block;
+    }
+    
+    .product__sticky-variants {
+      display: none;
+    }
+    
+    .mobile-cart-text {
+      display: inline-block;
+    }
+    
+    .desktop-cart-text {
+      display: none;
+    }
+    
+    .mobile-only {
+      display: block;
+    }
+    
+    .sticky-buttons-wrapper {
+      flex: 1;
+    }
+    
+    .sticky-buttons-wrapper .btn {
+      flex: 1;
+    }
+    
+    /* Hide payment buttons on mobile when setting is enabled */
+    .hide-payment-mobile .payment-buttons {
+      display: none !important;
+    }
+    
+    /* Hide entire buy buttons form on mobile when setting is enabled */
+    .hide-buy-buttons-mobile {
+      display: none !important;
+    }
+  }
+  
+  /* Desktop styles */
+  @media screen and (min-width: 750px) {
+    .product__sticky-variants {
+      display: block;
+    }
+    
+    .mobile-cart-text {
+      display: none;
+    }
+    
+    .desktop-cart-text {
+      display: inline-block;
+    }
+    
+    .mobile-only {
+      display: none;
+    }
+    
+    .sticky-buttons-wrapper .btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  class StickyAddToCart extends HTMLElement {
+    constructor() {
+      super();
+      this.anchor =
+        this.closest('[id^=ProductSection-]').querySelector('[id^=ProductSubmitButton-]') ||
+        this.closest('[id^=ProductSection-]');
+      this.mark = document.querySelector('footer');
+      this.inner = this.querySelector('.product__sticky-inner');
+      this.toogle = this.querySelector('button[data-toggle]');
+      this.buyNowBtn = this.querySelector('[data-buy-now-sticky]');
+      
+      this.toogle?.addEventListener('click', this.toggleEvent.bind(this));
+      this.buyNowBtn?.addEventListener('click', this.buyNowEvent.bind(this));
+    }
+
+    connectedCallback() {
+      setTimeout(() => {
+        this.renderAnchorLink();
+      }, 500);
+
+      // Always show on mobile
+      if (window.matchMedia('(max-width: 749px)').matches) {
+        this.show();
+      }
+
+      this.onScrollHandler = this.onScroll.bind(this);
+      window.addEventListener('scroll', this.onScrollHandler, false);
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('scroll', this.onScrollHandler);
+    }
+
+    renderAnchorLink() {
+      const divs = document.querySelectorAll('div[data-anchor-link="true"]');
+      const linksWrap = this.querySelector('.sticky-navigation__links');
+
+      divs.forEach((div) => {
+        const text = div.getAttribute('data-anchor-link-text');
+        if (text) {
+          const href = text.toLowerCase().replace(/\s+/g, '-');
+          const a = document.createElement('a');
+
+          a.href = '#' + href;
+          a.textContent = text;
+
+          linksWrap.appendChild(a);
+        }
+      });
+    }
+
+    onScroll() {
+      // Always show on mobile
+      if (window.matchMedia('(max-width: 749px)').matches) {
+        requestAnimationFrame(this.show.bind(this));
+        this.style.top = 'auto';
+        return;
+      }
+      
+      // Desktop behavior
+      if (this.anchor && this.check(this.anchor, 100)) {
+        requestAnimationFrame(this.show.bind(this));
+
+        setTimeout(() => {
+          if (document.body.classList.contains('scroll-up')) {
+            let height = document.querySelector('sticky-header').offsetHeight;
+            if (document.querySelector('sticky-header').classList.contains('header-sticky__none')) {
+              this.style.top = 0;
+            } else {
+              this.style.top = `${height}px`;
+            }
+          } else if (document.body.classList.contains('scroll-down')) {
+            let height = document.querySelector('sticky-header').offsetHeight;
+            if (document.querySelector('sticky-header').classList.contains('header-sticky__always')) {
+              this.style.top = `${height}px`;
+            } else {
+              this.style.top = 0;
+            }
+          }
+        });
+      } else {
+        requestAnimationFrame(this.hide.bind(this));
+      }
+    }
+
+    check(element, threshold) {
+      let rect = element.getBoundingClientRect().y;
+      threshold = threshold ? threshold : 0;
+
+      return rect + threshold < 0;
+    }
+
+    hide() {
+      // Don't hide on mobile
+      if (window.matchMedia('(max-width: 749px)').matches) {
+        return;
+      }
+      
+      this.classList.remove('active', 'full');
+      document.body.classList.remove('sticky-atc-is-active')
+
+      if (this.inner.style.maxHeight) this.inner.style.maxHeight = null;
+    }
+
+    show() {
+      this.classList.add('active');
+      document.body.classList.add('sticky-atc-is-active')
+      
+      window.matchMedia('(max-width: 749px)').matches &&
+        document.body.style.setProperty('--p-b-xs', `${Math.floor(this.offsetHeight)}px`);
+    }
+
+    toggleEvent(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (this.inner.style.maxHeight) {
+        this.inner.style.maxHeight = null;
+      } else {
+        this.inner.style.maxHeight = `${this.inner.scrollHeight}px`;
+      }
+
+      this.classList.toggle('full');
+    }
+
+    buyNowEvent(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      // Get the current variant ID
+      const variantSelect = this.querySelector('[data-product-select-sticky]');
+      const variantId = variantSelect ? variantSelect.value : null;
+      
+      if (variantId) {
+        // Create a form to submit for buy now
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/cart/add';
+        
+        const variantInput = document.createElement('input');
+        variantInput.type = 'hidden';
+        variantInput.name = 'id';
+        variantInput.value = variantId;
+        
+        const returnToInput = document.createElement('input');
+        returnToInput.type = 'hidden';
+        returnToInput.name = 'return_to';
+        returnToInput.value = '/checkout';
+        
+        form.appendChild(variantInput);
+        form.appendChild(returnToInput);
+        document.body.appendChild(form);
+        form.submit();
+      }
+    }
+  }
+
+  customElements.define('sticky-add-to-cart', StickyAddToCart);
+</script>

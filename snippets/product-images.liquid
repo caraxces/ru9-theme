@@ -1,0 +1,495 @@
+{% comment %}
+  Parameters
+  context - used to determine whether on the featured product or main product template
+  sizes
+  sizeVariable
+  fallback
+  mobile_layout
+{% endcomment %}
+
+<style>
+  .overlay-image {
+     display: none;
+   }
+
+   @media screen and (min-width: 960px) {
+     .overlay-image {
+       z-index: 2;
+       background-color: #00000080;
+       color: #fff;
+       font-size: calc(var(--typeHeaderSize)* calc(4 / 3));
+       font-weight: bold;
+       cursor: pointer;
+       display: flex;
+       border-radius: calc(var(--radiusBase)* .75);
+     }
+
+     .product__thumb-item--hide {
+       display: none !important;
+     }
+
+     .product__thumbs--scroller.show-all-image .product__thumb-item--hide {
+       display: block !important;
+     }
+
+     .product__thumbs--scroller.show-all-image .overlay-image {
+       display: none;
+     }
+   }
+</style>
+
+{%- liquid
+  assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+  assign first_3d_model = product.media | where: 'media_type', 'model' | first
+  assign limit_product_carousel = section.settings.limit_product_carousel
+
+  # Product images and thumbnails on the main product template should load early
+  if context == 'main-product'
+    assign loading = 'eager'
+  endif
+
+  assign handle_metafields = product.metafields.custom.product_bundle
+-%}
+
+{%- unless product.empty? -%}
+  <div
+    class="sticky"
+    data-product-images
+    data-zoom="{{ product_zoom_enable }}"
+    data-has-slideshow="{% if product.media.size > 1 %}true{% else %}false{% endif %}"
+  >
+    <div class="product__photos{% if product_carousel_enable == false %} product__photos--stack{% endif %} product__photos-{{ section_id }} product__photos--{{ thumbnail_position }}">
+      <div class="product__main-photos" data-aos data-product-single-media-group>
+        <div
+          data-product-photos
+          data-zoom="{{ product_zoom_enable }}"
+          class="product-slideshow{% if product_carousel_enable == false %} prevent-slider{% endif %}"
+          id="ProductPhotos-{{ section_id }}"
+        >
+          {%- if check_block_combo -%}
+            {%- render 'media',
+              section_id: section_id,
+              media: product.media[0],
+              featured_media: featured_media,
+              loopIndex0: 0,
+              loopIndex: 0,
+              product_zoom_enable: product_zoom_enable,
+              product_zoom_size: product_zoom_size,
+              product_image_size: product_image_size,
+              isModal: isModal,
+              video_looping: video_looping,
+              video_style: video_style,
+              sizes: sizes,
+              sizeVariable: sizeVariable,
+              fallback: fallback,
+              loading: loading,
+              mobile_layout: mobile_layout
+            -%}
+            {%- for bundle in handle_metafields.value -%}
+              {%-
+                render 'media',
+                section_id: section_id,
+                media: bundle.media[0],
+                featured_media: featured_media,
+                loopIndex0: forloop.index0 | plus: 1,
+                loopIndex: forloop.index | plus: 1,
+                product_zoom_enable: product_zoom_enable,
+                product_zoom_size: product_zoom_size,
+                product_image_size: product_image_size,
+                isModal: isModal,
+                video_looping: video_looping,
+                video_style: video_style,
+                sizes: sizes,
+                sizeVariable: sizeVariable,
+                fallback: fallback,
+                loading: loading,
+                mobile_layout: mobile_layout
+              -%}
+            {%- endfor -%}
+
+          {%- else -%}
+            {%- for media in product.media -%}
+              {%- render 'media',
+                section_id: section_id,
+                media: media,
+                featured_media: featured_media,
+                loopIndex0: forloop.index0,
+                loopIndex: forloop.index,
+                product_zoom_enable: product_zoom_enable,
+                product_zoom_size: product_zoom_size,
+                product_image_size: product_image_size,
+                isModal: isModal,
+                video_looping: video_looping,
+                video_style: video_style,
+                sizes: sizes,
+                sizeVariable: sizeVariable,
+                fallback: fallback,
+                loading: loading,
+                mobile_layout: mobile_layout
+              -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+
+        {%- if first_3d_model -%}
+          <button
+            aria-label="{{ 'products.product.view_in_space_label' | t }}"
+            class="product-single__view-in-space"
+            data-shopify-xr
+            data-shopify-model3d-id="{{ first_3d_model.id }}"
+            data-shopify-title="{{ product.title }}"
+            data-shopify-xr-hidden
+          >
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              role="presentation"
+              class="icon icon-3d"
+              viewBox="18.24 17.35 24.52 28.3"
+            >
+              <path fill="#3A3A3A" d="m30.5 17.35-12.26 7.07v14.16l12.26 7.07 12.26-7.08V24.42L30.5 17.35zM20.24 37.42V25.58l10.26-5.93 10.13 5.85-10.13 5.88v12l-10.26-5.96z"/>
+            </svg>
+            <span class="product-single__view-in-space-text">
+              {{ 'products.product.view_in_space' | t }}
+            </span>
+          </button>
+        {%- endif -%}
+      </div>
+
+      <div
+        data-product-thumbs
+        class="product__thumbs product__thumbs--{{ thumbnail_position }} product__thumbs-placement--{{ image_position }}{%  unless check_block_combo %}{% if product.media.size == 1 %} medium-up--hide{% endif %}{% endunless %} %}"
+        data-position="{{ thumbnail_position }}"
+        {% if thumbnail_position == 'below' %}
+          data-position-tablet="beside"
+        {% endif %}
+        data-arrows="{{ thumbnail_arrows }}"
+        data-aos
+      >
+        {%- if thumbnail_arrows -%}
+          <button type="button" class="product__thumb-arrow product__thumb-arrow--prev hide">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              role="presentation"
+              class="icon icon-chevron-left"
+              viewBox="0 0 284.49 498.98"
+            >
+              <path d="M249.49 0a35 35 0 0 1 24.75 59.75L84.49 249.49l189.75 189.74a35.002 35.002 0 1 1-49.5 49.5L10.25 274.24a35 35 0 0 1 0-49.5L224.74 10.25A34.89 34.89 0 0 1 249.49 0Z"/>
+            </svg>
+          </button>
+        {%- endif -%}
+
+        <div class="huan-{{ section.settings.limit_product_carousel }} product__thumbs--scroller">
+          {%- if check_block_combo -%}
+            {%- liquid
+              assign image_set = false
+              assign image_set_group = ''
+              if product.media[0].alt contains '#'
+                assign image_set_full = product.media[0].alt | split: '#' | last
+                if image_set_full contains '_'
+                  assign image_set = true
+                  assign image_set_group = image_set_full | split: '_' | first
+                endif
+              endif
+            -%}
+            <div
+              class="product__thumb-item{% if product_carousel_enable == false %} large-up--hide{% endif %}"
+              data-index="0"
+              {% if image_set %}
+                data-set-name="{{image_set_group}}"
+                data-group="{{image_set_full}}"
+              {% endif %}
+            >
+              <a
+                href="{{ product.media[0].preview_image | img_url: product_zoom_size }}"
+                data-product-thumb
+                class="product__thumb"
+                data-index="0"
+                data-id="{{ product.media[0].id }}"
+              >
+                <div
+                  class="image-wrap image-wrap__thumbnail"
+                  style="height: 0; padding-bottom: {{ 100 | divided_by: product.media[0].preview_image.aspect_ratio }}%;"
+                >
+                  {%- if product.media[0].media_type == 'video' or product.media[0].media_type == 'external_video' -%}
+                    <span class="product__thumb-icon">
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        role="presentation"
+                        class="icon icon-play"
+                        viewBox="18.24 17.35 24.52 28.3"
+                      >
+                        <path fill="#323232" d="M22.1 19.151v25.5l20.4-13.489-20.4-12.011z"/>
+                      </svg>
+                    </span>
+                  {%- endif -%}
+                  {%- if product.media[0].media_type == 'model' -%}
+                    <span class="product__thumb-icon">
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        role="presentation"
+                        class="icon icon-3d"
+                        viewBox="18.24 17.35 24.52 28.3"
+                      >
+                        <path fill="#3A3A3A" d="m30.5 17.35-12.26 7.07v14.16l12.26 7.07 12.26-7.08V24.42L30.5 17.35zM20.24 37.42V25.58l10.26-5.93 10.13 5.85-10.13 5.88v12l-10.26-5.96z"/>
+                      </svg>
+                    </span>
+                  {%- endif -%}
+
+                  {%- capture image_classes -%}
+                  appear-delay-{{ 0 | times: 3 }}
+                {%- endcapture -%}
+                  {%-
+                    render 'image-element',
+                    img: product.media[0].preview_image,
+                    alt: product.media[0].alt | escape | split: '#' | first,
+                    widths: '540, 720',
+                    sizeVariable: '80px',
+                    loading: loading,
+                  -%}
+                </div>
+              </a>
+            </div>
+            {%- for bundle in handle_metafields.value -%}
+              {%- liquid
+                assign image_set = false
+                assign image_set_group = ''
+                if bundle.media[0].alt contains '#'
+                  assign image_set_full = bundle.media[0].alt | split: '#' | last
+                  if image_set_full contains '_'
+                    assign image_set = true
+                    assign image_set_group = image_set_full | split: '_' | first
+                  endif
+                endif
+              -%}
+              <div
+                class="product__thumb-item"
+                data-index="{{ forloop.index0 | plus: 1 }}"
+                {% if image_set %}
+                  data-set-name="{{image_set_group}}"
+                  data-group="{{image_set_full}}"
+                {% endif %}
+              >
+                <a
+                  href="{{ bundle.media[0].preview_image | img_url: product_zoom_size }}"
+                  data-product-thumb
+                  class="product__thumb"
+                  data-index="{{ forloop.index0 | plus: 1 }}"
+                  data-id="{{ bundle.media[0].id }}"
+                >
+                  <div
+                    class="image-wrap image-wrap__thumbnail"
+                    style="height: 0; padding-bottom: {{ 100 | divided_by: bundle.media[0].preview_image.aspect_ratio }}%;"
+                  >
+                    {%- if bundle.media[0].media_type == 'video' or bundle.media[0].media_type == 'external_video' -%}
+                      <span class="product__thumb-icon">
+                        <svg
+                          aria-hidden="true"
+                          focusable="false"
+                          role="presentation"
+                          class="icon icon-play"
+                          viewBox="18.24 17.35 24.52 28.3"
+                        >
+                          <path fill="#323232" d="M22.1 19.151v25.5l20.4-13.489-20.4-12.011z"/>
+                        </svg>
+                      </span>
+                    {%- endif -%}
+                    {%- if bundle.media[0].media_type == 'model' -%}
+                      <span class="product__thumb-icon">
+                        <svg
+                          aria-hidden="true"
+                          focusable="false"
+                          role="presentation"
+                          class="icon icon-3d"
+                          viewBox="18.24 17.35 24.52 28.3"
+                        >
+                          <path fill="#3A3A3A" d="m30.5 17.35-12.26 7.07v14.16l12.26 7.07 12.26-7.08V24.42L30.5 17.35zM20.24 37.42V25.58l10.26-5.93 10.13 5.85-10.13 5.88v12l-10.26-5.96z"/>
+                        </svg>
+                      </span>
+                    {%- endif -%}
+
+                    {%- capture image_classes -%}
+                    appear-delay-{{ forloop.index | plus: 1 | times: 3 }}
+                  {%- endcapture -%}
+                    {%-
+                      render 'image-element',
+                      img: bundle.media[0].preview_image,
+                      alt: bundle.media[0].alt | escape | split: '#' | first,
+                      widths: '540, 720',
+                      sizeVariable: '80px',
+                      loading: loading,
+                    -%}
+                  </div>
+                </a>
+              </div>
+            {%- endfor -%}
+
+          {%- else -%}
+            {%- if product.media.size > 1 -%}
+              {%- for media in product.media -%}
+                {%- liquid
+                  assign image_set = false
+                  assign image_set_group = ''
+                  if media.alt contains '#'
+                    assign image_set_full = media.alt | split: '#' | last
+                    if image_set_full contains '_'
+                      assign image_set = true
+                      assign image_set_group = image_set_full | split: '_' | first
+                    endif
+                  endif
+
+                  assign item_count = forloop.index
+                  assign has_hide_thumb = false
+                  if limit_product_carousel == true
+                    if item_count > 5
+                      assign has_hide_thumb = true
+                      assign hide_item_class = 'product__thumb-item--hide'
+                    endif
+                  endif
+                -%}
+                <div
+                  class="product__thumb-item {% if limit_product_carousel == true %} relative {% endif %} {{ hide_item_class }} {% if product_carousel_enable == false and forloop.first %} large-up--hide{% endif %}"
+                  data-index="{{ forloop.index0 }}"
+                  {% if image_set %}
+                    data-set-name="{{image_set_group}}"
+                    data-group="{{image_set_full}}"
+                  {% endif %}
+                >
+                  <a
+                    href="{{ media.preview_image | img_url: product_zoom_size }}"
+                    data-product-thumb
+                    class="product__thumb"
+                    data-index="{{ forloop.index0 }}"
+                    data-id="{{ media.id }}"
+                  >
+                    <div
+                      class="image-wrap image-wrap__thumbnail"
+                      style="height: 0; padding-bottom: {{ 100 | divided_by: media.preview_image.aspect_ratio }}%;"
+                    >
+                      {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                        <span class="product__thumb-icon">
+                          <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            role="presentation"
+                            class="icon icon-play"
+                            viewBox="18.24 17.35 24.52 28.3"
+                          >
+                            <path fill="#323232" d="M22.1 19.151v25.5l20.4-13.489-20.4-12.011z"/>
+                          </svg>
+                        </span>
+                      {%- endif -%}
+                      {%- if media.media_type == 'model' -%}
+                        <span class="product__thumb-icon">
+                          <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            role="presentation"
+                            class="icon icon-3d"
+                            viewBox="18.24 17.35 24.52 28.3"
+                          >
+                            <path fill="#3A3A3A" d="m30.5 17.35-12.26 7.07v14.16l12.26 7.07 12.26-7.08V24.42L30.5 17.35zM20.24 37.42V25.58l10.26-5.93 10.13 5.85-10.13 5.88v12l-10.26-5.96z"/>
+                          </svg>
+                        </span>
+                      {%- endif -%}
+
+                      {%- capture image_classes -%}
+                        appear-delay-{{ forloop.index | times: 3 }}
+                      {%- endcapture -%}
+                      {%-
+                        render 'image-element',
+                        img: media.preview_image,
+                        alt: media.alt | escape | split: '#' | first,
+                        widths: '540, 720',
+                        sizeVariable: '80px',
+                        loading: loading,
+                      -%}
+                    </div>
+                  </a>
+                  {% if limit_product_carousel == true %}
+                    {%- if forloop.index == 5 -%}
+                      <overlay-image class="overlay-image block absolute top-0 left-0 w-full h-full flex ai-center jc-center">
+                        +{{ product.media.size | minus: 5 }}
+                      </overlay-image>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+
+        {%- if thumbnail_arrows -%}
+          <button type="button" class="product__thumb-arrow product__thumb-arrow--next">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              role="presentation"
+              class="icon icon-chevron-right"
+              viewBox="0 0 284.49 498.98"
+            >
+              <title>icon-chevron</title><path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98Z"/>
+            </svg>
+          </button>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {% if thumbnail_height == 'fixed' %}
+    {% style %}
+      .product__photos-{{ section_id }} .product__thumbs:not(.product__thumbs--below) {
+        min-height: 400px;
+        max-height: 400px;
+      }
+
+      @media screen and (max-width: 798px) {
+        .product__photos-{{ section_id }} .product__thumbs:not(.product__thumbs--below) {
+          min-height: 300px;
+          max-height: 300px;
+        }
+      }
+    {% endstyle %}
+  {% endif %}
+
+  <script type="application/json" id="ModelJson-{{ section_id }}">
+    {{ product.media | where: 'media_type', 'model' | json }}
+  </script>
+{%- else -%}
+  <div class="product__photos product__photos-{{ section_id }}">
+    <div class="product__main-photos" style="width: 100%">
+      <div data-product-photos class="{% if product_carousel_enable == false %} prevent-slider{% endif %}">
+        <div class="product-main-slide" data-index="{{ forloop.index0 }}">
+          <a href="#">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endunless -%}
+
+<script>
+  class OverlayImage extends HTMLElement {
+    constructor() {
+      super();
+
+      if(window.innerWidth >= 960) {
+        this.addEventListener('click', ()=> {
+          this.closest('.product__thumbs--scroller').classList.add('show-all-image');
+          const parent = this.closest('.product__thumbs--scroller');
+          if (parent) {
+              const children = parent.querySelectorAll('.product__thumb-item');
+              children.forEach(child => {
+              child.classList.remove('relative');
+              });
+        }
+        })
+      }
+    }
+  }
+  customElements.define('overlay-image', OverlayImage);
+</script>

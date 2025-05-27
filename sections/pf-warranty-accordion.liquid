@@ -1,0 +1,188 @@
+<div class="section-{{section.id}}" style="background-color: {{section.settings.bg_color}}">
+    <div class="container container-medium">
+      <div class="row">
+      {% if section.settings.title != blank %}
+        <div class="col-sm-12 col-12">
+                <div class="section-header">
+                <h1 class="h1 primary-color">{{ section.settings.title }}</h1>
+                {% if section.settings.sub_title!= blank %}
+                <p>{{ section.settings.sub_title }}</p>
+                {% endif %}
+                </div>
+        </div>
+        {% endif %}
+            {% if section.blocks.size > 0 %}
+            <div class="col-sm-12 col-12">
+                <div class="pf-accordion-style-3 pf-accordion-contain pf-accordion-width-half ">
+                    <div class="pf-accordion primary-color">
+                        {% for block in section.blocks %}
+                            <div class="pf-accordion__item">
+                                <div class="pf-accordion-header accordion-toggle primary-color">{{block.settings.accordion_heading}}</div>
+                                <div class="pf-inner accordion-content accordion__item-child">
+                                  
+                                      {%include 'accordion-children'%}
+                                    
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if section.settings.link != blank or section.settings.link_title != blank%}
+            <div class="text-center" style="width: 100%; margin-top: 40px;">
+             <a href="{{section.settings.link}}" class="link-icon">{{section.settings.link_title}}</a>
+            </div>
+            {% endif %}
+      </div>
+      
+    </div>
+    </div>
+    <style>
+    .pf-inner {
+        display: none;
+    }
+    
+    </style>
+    
+    {% schema %}
+    {
+      "name": "Accordion",
+      "max_blocks": 10,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Image list"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "Sub Title",
+          "default": "Êm ái, thoải mái như ngủ trên những tầng mây."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_title",
+          "label": "Link Title",
+          "default": "Xem những câu hỏi khác"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "accordion",
+          "name": "Accordion Item",
+          "settings": [
+            {
+              "type": "text",
+              "id": "accordion_heading",
+              "label": "Accordion Heading"
+            },
+            {
+              "type": "header",
+              "content": "Accordion #1"
+            },
+            {
+              "type": "text",
+              "id": "accordion_heading_1",
+              "label": "Accordion Heading"
+            },
+            {
+              "type": "richtext",
+              "id": "accordion_content_1",
+              "label": "Accordion Content"
+            },
+            {
+              "type": "header",
+              "content": "Accordion #2"
+            },
+            {
+              "type": "text",
+              "id": "accordion_heading_2",
+              "label": "Accordion Heading"
+            },
+            {
+              "type": "richtext",
+              "id": "accordion_content_2",
+              "label": "Accordion Content"
+            },
+            {
+              "type": "header",
+              "content": "Accordion #3"
+            },
+            {
+              "type": "text",
+              "id": "accordion_heading_3",
+              "label": "Accordion Heading"
+            },
+            {
+              "type": "richtext",
+              "id": "accordion_content_3",
+              "label": "Accordion Content"
+            },
+            {
+              "type": "header",
+              "content": "Accordion #4"
+            },
+            {
+              "type": "text",
+              "id": "accordion_heading_4",
+              "label": "Accordion Heading"
+            },
+            {
+              "type": "richtext",
+              "id": "accordion_content_4",
+              "label": "Accordion Content"
+            },
+            {
+              "type": "header",
+              "content": "Accordion #5"
+            },
+            {
+              "type": "text",
+              "id": "accordion_heading_5",
+              "label": "Accordion Heading"
+            },
+            {
+              "type": "richtext",
+              "id": "accordion_content_5",
+              "label": "Accordion Content"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Product Detail Accordion",
+          "category": "PageFly Accordion",
+          "blocks": [
+            {
+              "type": "accordion"
+            },
+            {
+              "type": "accordion"
+            },
+            {
+              "type": "accordion"
+            },
+            {
+              "type": "accordion"
+            }
+          ]
+        }
+      ]
+    }
+    {% endschema %}
+    

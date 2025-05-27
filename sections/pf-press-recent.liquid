@@ -1,0 +1,127 @@
+<div class="section-{{ section.id }} press-recent">
+    <div class="container">
+        {% if section.settings.section_heading != blank %}
+        <div class="section-header under-line">
+            <h2 class="h3 primary-color">{{section.settings.section_heading}}</h2>
+        </div>
+        {% endif %}
+        {% if section.blocks.size > 0 %}
+        <div class="row">
+            {% for block in section.blocks %}
+            <div class="col-12">
+                    <div class="block-item">
+                        <div class="content-left">
+                        {% if block.settings.title != blank %}
+                            <span class="primary-color content-title">{{ block.settings.title }}</span>
+                        {%endif%}                
+                            {% if block.settings.description != blank %}
+                            <span class="primary-color content-description">{{ block.settings.description }}</span>
+                            {%endif%}
+                        </div>
+                        <div class="content-right">
+                             {% if block.settings.link != blank %}
+                            <a href="{{ block.settings.link }}" class="logo-bar__link">
+                                {{block.settings.readmore}}
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %} 
+        {%if section.settings.copyright != blank%}
+        <div class="row">
+            <div class="col-12 text-center subcrible-content">
+                <h3>{{section.settings.copyright}}</h3>
+                <span>{{section.settings.subcribe}}</span>
+            </div>
+        </div>
+        {%endif%}
+        {% if section.blocks.size == 0 %} 
+        {% include 'no-blocks' %} 
+        {%endif %}
+    </div>
+</div>
+<style>
+.section-{{section.id}} {
+    padding: 50px 0px;
+}
+
+</style>
+
+{% schema %}
+{
+    "name": "Image with Text",
+    "max_blocks": 15,
+    "settings": [
+        {
+            "type": "text",
+            "id": "section_heading",
+            "label": "Heading",
+            "default": "Gần đây"
+        },
+        {
+            "type": "text",
+            "id": "copyright",
+            "label": "Sub Content",
+            "default": "Tài liệu truyền thông"
+        },
+        {
+            "type": "text",
+            "id": "subcribe",
+            "label": "Sub Title",
+            "default": "Liên hệ thêm với Ru9 qua email comm@ru9.vn"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "logo_image",
+            "name": "Image",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "text",
+                    "id": "description",
+                    "label": "Content"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "Link"
+                },
+                {
+                    "type": "text",
+                    "id": "readmore",
+                    "label": "Readmore"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Logo list",
+            "category": "PageFly Image",
+            "blocks": [
+                {
+                    "type": "logo_image"
+                },
+                {
+                    "type": "logo_image"
+                },
+                {
+                    "type": "logo_image"
+                },
+                {
+                    "type": "logo_image"
+                }
+            ]
+        }
+    ]
+}
+
+{%endschema %}

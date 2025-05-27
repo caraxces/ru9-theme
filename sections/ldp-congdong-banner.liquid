@@ -1,0 +1,174 @@
+<style>
+  .banner{
+    --lading-page-background: {{section.settings.background_color}};
+--lading-page-color: {{section.settings.color}};
+          flex-direction: column;
+    justify-content: flex-center;
+    padding-bottom: 50px;
+      {%unless section.settings.title != blank and section.settings.sub_title != blank %}
+      display: flex;
+      {%endunless%}
+  }
+     {%if section.settings.video_source  and section.settings.use_video -%}
+    .banner:after{
+    content: '';
+    background: linear-gradient( 
+360deg
+      , var(--lading-page-background) 13%  , transparent);
+      
+      }
+          {%endif-%}
+
+    .video-desktop  {
+    	width: 100%;
+       min-height: calc(100vh - 60px);
+      object-fit: cover;
+    }
+    .video-mobile{
+      width: 100%;
+      object-fit: cover;
+    }
+    .video-mobile{
+    	display: none
+    }
+    {%if section.settings.background_color == blank or section.settings.background_color == 'rgba(0,0,0,0)'  -%}
+    .banner{
+    	  min-height: calc(100vh - 60px);
+    }
+    .banner:after{
+    	content: none
+    }
+    {%endif-%}
+     @media (max-width: 767px) {
+       .banner{
+       padding-top: calc(120 * 100vh / 800);
+          /* min-height: calc( 100vw * 1250 /767 -  60px); */
+         min-height: 100vh;
+       }
+    .video-desktop{
+    	display:none
+    }
+    .video-mobile{
+    	display: block!important
+    }
+       
+     }
+</style>
+ 
+
+            <div class="container banner__inner">
+              <div class="banner__title text-lg">
+                <h1>
+                {{section.settings.title | replace: '<p>','' | replace : '</p>',''}}
+                </h1>
+                <span class="banner__subtitle text-md">
+                  {{section.settings.sub_title | replace: '<p>','' | replace : '</p>',''}}
+                </span>
+                <a class="banner__arrow">
+                	{% include 'icon-chevron-down' %}
+                </a>
+              </div>
+                <div class="banner__images">
+                  {%if section.settings.video_source  and section.settings.use_video -%}
+                      <video  {%if section.settings.video_source_mb != blank%} class="video-desktop img-bg" {%endif-%} autoplay muted loop playsinline id="myVideo" {%if  section.settings.background != blank %}  {%endif%}>
+                          <source src="{{section.settings.video_source}}" type="video/mp4">
+                      </video>
+                      {%if section.settings.video_source_mb != blank%}
+                     <video id="video-banner-mobile"  class="video-mobile img-bg" preload  autoplay loop muted playsinline webkit-playsinline  {%if  section.settings.background != blank %}  {%endif%}>
+                        <source src="{{section.settings.video_source_mb}}" type="video/mp4">
+                    </video>
+                       {%endif -%}
+                    {%else%}
+                  {% if request.locale.iso_code != 'vi' %}
+                  <picture>
+                    <source srcset="{{section.settings.background_mobile_en | img_url: 'master'}}"  media="(max-width: 767px)"/>
+                  <img class="img-bg" src="{{section.settings.background_desktop_en | img_url: 'master'}}" alt="">
+                </picture>
+                  {%else%}
+                     <picture>
+                    <source srcset="{{section.settings.background_mobile | img_url: 'master'}}"  media="(max-width: 767px)"/>
+                  <img class="img-bg" src="{{section.settings.background_desktop | img_url: 'master'}}" alt="">
+                </picture>
+                  {%endif%}
+                  {%endif -%}
+                    </div>
+             
+        
+            </div>
+
+
+{% schema %}
+  {
+    "name": "Landing page banner",
+	"class":"section-animate banner section1",
+    "settings":  [
+{
+		 "type": "color",
+      	"id": "color",
+		"label": "Color"
+		},
+{
+		 "type": "color",
+      	"id": "background_color",
+		"label": "Background Color"
+		},
+
+	 {
+      "type": "richtext",
+      "id": "title",
+		"label": "Title"
+	  }, {
+      "type": "richtext",
+      "id": "sub_title",
+		"label": "Sub Title"
+	  },
+		{
+	   "type": "image_picker",
+        "id": "background_desktop",
+		"label": "Background desktop"
+		},
+		{
+	    "type": "image_picker",
+      	"id": "background_mobile",
+		"label": "Background mobile"
+		},
+{
+	   "type": "image_picker",
+        "id": "background_desktop_en",
+		"label": "Background desktop EN"
+		},
+		{
+	    "type": "image_picker",
+      	"id": "background_mobile_en",
+		"label": "Background mobile EN"
+		},
+		{
+		 "type": "text",
+      	"id": "description",
+		"label": "Description"
+		},
+	{
+		 "type": "checkbox",
+      	"id": "use_video",
+		"label": "Video"
+		},
+	{
+		 "type": "text",
+      	"id": "video_source",
+		"label": "Video Link"
+		},
+		{
+		 "type": "text",
+      	"id": "video_source_mb",
+		"label": "Video Mobile Link"
+		}
+
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

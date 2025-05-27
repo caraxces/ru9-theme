@@ -1,0 +1,594 @@
+{% liquid
+  if section.settings.section_width != 'page-width'
+    if section.settings.section_width == 'full-width'
+      assign page_width = '100%'
+    endif
+    if section.settings.section_width == 'customize_width'
+      assign page_width = section.settings.customize_width | plus: 80 | append: 'px'
+    endif
+  endif
+%}
+
+<div
+  class="compare-products section-padding section--divider"
+  data-section-id="{{ section.id }}"
+  data-section-type="compare-products"
+  id="CompareProduct"
+>
+  <div
+    class="page-width"
+    style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
+  >
+    <div class="section-header text-center">
+      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+      <div class="rte text-lg">{{ section.settings.description }}</div>
+    </div>
+
+    <!-- Desktop Comparison Table -->
+    <div class="mattress-comparison-table desktop-table small--hide">
+      <table>
+        <!-- Header Row -->
+        <tr class="header-row">
+          <th class="first-column"></th>
+          {%- for block in section.blocks -%}
+            <th class="product-column">{{ block.settings.product_title }}</th>
+          {%- endfor -%}
+        </tr>
+        
+        <!-- Image Row -->
+        <tr class="image-row">
+          <td class="first-column"></td>
+          {%- for block in section.blocks -%}
+            <td class="product-column">
+              {%- if block.settings.product_image -%}
+                <img 
+                  src="{{ block.settings.product_image | img_url: '300x300', crop: 'center' }}" 
+                  alt="{{ block.settings.product_title }}"
+                  width="150"
+                  height="150"
+                  style="margin: 0 auto; display: block;"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </td>
+          {%- endfor -%}
+        </tr>
+        
+        <!-- Features Row -->
+        <tr class="features-row">
+          <td class="first-column">Đặc tính sản phẩm</td>
+          {%- for block in section.blocks -%}
+            <td class="product-column">
+              {{ block.settings.product_features | newline_to_br }}
+            </td>
+          {%- endfor -%}
+        </tr>
+        
+        <!-- Comfort Row -->
+        <tr class="comfort-row">
+          <td class="first-column">Độ êm ái</td>
+          {%- for block in section.blocks -%}
+            <td class="product-column">
+              {%- if block.settings.comfort_layer_1_image -%}
+                <img 
+                  src="{{ block.settings.comfort_layer_1_image | img_url: '150x150', crop: 'center' }}" 
+                  alt="Layer 1"
+                  width="80"
+                  height="30"
+                  style="margin: 0 auto; display: block;"
+                  loading="lazy"
+                >
+              {%- endif -%}
+              {%- if block.settings.comfort_layer_2_image -%}
+                <img 
+                  src="{{ block.settings.comfort_layer_2_image | img_url: '150x150', crop: 'center' }}" 
+                  alt="Layer 2"
+                  width="80"
+                  height="30"
+                  style="margin: 0 auto; display: block;"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </td>
+          {%- endfor -%}
+        </tr>
+        
+        <!-- Height Row -->
+        <tr class="height-row">
+          <td class="first-column">Độ cao sản phẩm</td>
+          {%- for block in section.blocks -%}
+            <td class="product-column">{{ block.settings.product_thickness }}</td>
+          {%- endfor -%}
+        </tr>
+        
+        <!-- Target Users Row -->
+        <tr class="target-users-row">
+          <td class="first-column">Đối tượng sử dụng</td>
+          {%- for block in section.blocks -%}
+            <td class="product-column">
+              {{ block.settings.suitable_for | newline_to_br }}
+            </td>
+          {%- endfor -%}
+        </tr>
+        
+        <!-- Price Row -->
+        <tr class="price-row">
+          <td class="first-column">Giá sản phẩm</td>
+          {%- for block in section.blocks -%}
+            <td class="product-column">{{ block.settings.product_price }}</td>
+          {%- endfor -%}
+        </tr>
+        
+        <!-- Buy Button Row -->
+        <tr class="button-row">
+          <td class="first-column"></td>
+          {%- for block in section.blocks -%}
+            <td class="product-column">
+              <a href="{{ block.settings.product_url }}" class="buy-button">MUA NGAY</a>
+            </td>
+          {%- endfor -%}
+        </tr>
+      </table>
+    </div>
+    
+    <!-- Mobile Comparison Table -->
+    <div class="mattress-comparison-mobile medium-up--hide">
+      <div class="mobile-comparison-table">
+        <table>
+          <!-- Header Row -->
+          <tr class="header-row">
+            <th class="first-column"></th>
+            {%- for block in section.blocks -%}
+              <th class="product-column">{{ block.settings.product_title }}</th>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Image Row -->
+          <tr class="image-row">
+            <td class="first-column"></td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">
+                {%- if block.settings.product_image -%}
+                  <img 
+                    src="{{ block.settings.product_image | img_url: '300x300', crop: 'center' }}" 
+                    alt="{{ block.settings.product_title }}"
+                    width="150"
+                    height="150"
+                    style="margin: 0 auto; display: block;"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+              </td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Features Row -->
+          <tr class="features-row">
+            <td class="first-column">Đặc tính sản phẩm</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">
+                {{ block.settings.product_features | newline_to_br }}
+              </td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Comfort Row -->
+          <tr class="comfort-row">
+            <td class="first-column">Độ êm ái</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">
+                {%- if block.settings.comfort_layer_1_image -%}
+                  <img 
+                    src="{{ block.settings.comfort_layer_1_image | img_url: '150x150', crop: 'center' }}" 
+                    alt="Layer 1"
+                    width="80"
+                    height="30"
+                    style="margin: 0 auto; display: block;"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+                {%- if block.settings.comfort_layer_2_image -%}
+                  <img 
+                    src="{{ block.settings.comfort_layer_2_image | img_url: '150x150', crop: 'center' }}" 
+                    alt="Layer 2"
+                    width="80"
+                    height="30"
+                    style="margin: 0 auto; display: block;"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+              </td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Height Row -->
+          <tr class="height-row">
+            <td class="first-column">Độ cao sản phẩm</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">{{ block.settings.product_thickness }}</td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Target Users Row -->
+          <tr class="target-users-row">
+            <td class="first-column">Đối tượng sử dụng</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">
+                {{ block.settings.suitable_for | newline_to_br }}
+              </td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Price Row -->
+          <tr class="price-row">
+            <td class="first-column">Giá sản phẩm</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">{{ block.settings.product_price }}</td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Buy Button Row -->
+          <tr class="button-row">
+            <td class="first-column"></td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">
+                <a href="{{ block.settings.product_url }}" class="buy-button">MUA NGAY</a>
+              </td>
+            {%- endfor -%}
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Desktop Table Styles */
+  .mattress-comparison-table {
+    width: 100%;
+    margin-top: 30px;
+  }
+  
+  .mattress-comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Critical for equal column widths */
+    border: 1px solid #e0e0e0;
+  }
+  
+  .mattress-comparison-table th,
+  .mattress-comparison-table td {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    vertical-align: top;
+    word-wrap: break-word;
+  }
+  
+  /* Column Widths */
+  .first-column {
+    width: 15%;
+    background-color: #f9f9f9;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .product-column {
+    width: calc(85% / {{ section.blocks.size }}); /* Distribute remaining width evenly */
+    text-align: left;
+  }
+  
+  /* Header Row */
+  .header-row th {
+    background-color: #f9f9f9;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  /* Image Row */
+  .image-row td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 20px 15px;
+  }
+  
+  .image-row img {
+    max-width: 100%;
+    height: auto;
+    max-height: 150px;
+    object-fit: contain;
+  }
+  
+  /* Features Row */
+  .features-row td {
+    vertical-align: top;
+    min-height: 150px; /* Ensure minimum height */
+  }
+  
+  /* Comfort Row */
+  .comfort-row td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  /* Height Row */
+  .height-row td {
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Target Users Row */
+  .target-users-row td {
+    vertical-align: top;
+  }
+  
+  /* Price Row */
+  .price-row td {
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Button Row */
+  .button-row td {
+    text-align: center;
+    padding: 20px 15px;
+  }
+  
+  .buy-button {
+    display: inline-block;
+    background-color: #000;
+    color: white;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 0;
+    transition: background-color 0.3s;
+  }
+  
+  .buy-button:hover {
+    background-color: #333;
+    color: white;
+  }
+  
+  /* Mobile Styles */
+  .mattress-comparison-mobile {
+    display: none;
+    margin-top: 30px;
+  }
+  
+  @media (max-width: 768px) {
+    .mattress-comparison-mobile {
+      display: block;
+    }
+  }
+  
+  .mobile-comparison-table {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .mobile-comparison-table::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .mobile-comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .mobile-comparison-table th,
+  .mobile-comparison-table td {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    vertical-align: top;
+  }
+  
+  /* Mobile Column Styles */
+  .mobile-comparison-table .first-column {
+    width: 120px;
+    min-width: 120px;
+    background-color: #f9f9f9;
+    font-weight: bold;
+    text-align: left;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .mobile-comparison-table .product-column {
+    width: 200px;
+    min-width: 200px;
+    text-align: left;
+  }
+  
+  /* Section Header Styles */
+  .section-header {
+    margin-bottom: 30px;
+  }
+  
+  .section-header__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to match row heights in mobile table
+    function matchRowHeights() {
+      if (window.innerWidth <= 768) {
+        const rows = document.querySelectorAll('.mobile-comparison-table tr');
+        
+        rows.forEach(row => {
+          // Reset heights first
+          const cells = row.querySelectorAll('td, th');
+          cells.forEach(cell => {
+            cell.style.height = 'auto';
+          });
+          
+          // Get the tallest cell
+          let maxHeight = 0;
+          cells.forEach(cell => {
+            const height = cell.offsetHeight;
+            if (height > maxHeight) {
+              maxHeight = height;
+            }
+          });
+          
+          // Set all cells to the tallest height
+          cells.forEach(cell => {
+            cell.style.height = maxHeight + 'px';
+          });
+        });
+      }
+    }
+    
+    // Run on load and resize
+    window.addEventListener('resize', matchRowHeights);
+    window.addEventListener('load', matchRowHeights);
+    
+    // Run after a short delay to ensure all content is loaded
+    setTimeout(matchRowHeights, 500);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "So sánh sản phẩm",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "Toàn màn hình"
+        },
+        {
+          "value": "page-width",
+          "label": "Chiều rộng trang"
+        },
+        {
+          "value": "customize_width",
+          "label": "Tùy chỉnh chiều rộng"
+        }
+      ],
+      "default": "page-width",
+      "label": "Chiều rộng phần"
+    },
+    {
+      "type": "range",
+      "id": "customize_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 10,
+      "default": 1200,
+      "unit": "px",
+      "label": "Tùy chỉnh chiều rộng"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Tiêu đề",
+      "default": "LỰA CHỌN CHIẾC NỆM LÝ TƯỞNG DÀNH CHO BẠN"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Mô tả",
+      "default": "<p>So sánh các loại nệm để tìm ra sản phẩm phù hợp nhất với nhu cầu của bạn.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Sản phẩm",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Tên sản phẩm",
+          "default": "NỆM ORIGINAL PRO"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Hình ảnh sản phẩm"
+        },
+        {
+          "type": "textarea",
+          "id": "product_features",
+          "label": "Đặc tính sản phẩm",
+          "default": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
+        },
+        {
+          "type": "image_picker",
+          "id": "comfort_layer_1_image",
+          "label": "Hình ảnh lớp 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "comfort_layer_2_image",
+          "label": "Hình ảnh lớp 2"
+        },
+        {
+          "type": "text",
+          "id": "product_thickness",
+          "label": "Độ cao sản phẩm",
+          "default": "25 cm"
+        },
+        {
+          "type": "textarea",
+          "id": "suitable_for",
+          "label": "Đối tượng sử dụng",
+          "default": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
+        },
+        {
+          "type": "text",
+          "id": "product_price",
+          "label": "Giá sản phẩm",
+          "default": "Từ 12.990.000 VNĐ"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Liên kết sản phẩm"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "So sánh sản phẩm",
+      "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

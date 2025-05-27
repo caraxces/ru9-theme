@@ -1,0 +1,63 @@
+<div class="customer_reviews">
+  <div class="reviews_container is-show-less{% if index != 0 %} hidden{% endif %}"
+    id="CustomerReviews-{{ collection_handle }}">
+    <div class="po_relative">
+      <div class="reviews swiper">
+        <div class="swiper-wrapper" role="list">
+        {%- for i in (1..50) -%}
+        {%- capture name -%}review_name_{{i}}{%- endcapture -%}
+        {%- capture avatar -%}review_avatar_{{i}}{%- endcapture -%}
+        {%- capture date -%}review_date_{{i}}{%- endcapture -%}
+        {%- capture text -%}review_text_{{i}}{%- endcapture -%}
+        {%- capture star -%}review_star_{{i}}{%- endcapture -%}
+        {%- capture image -%}review_image_{{i}}{%- endcapture -%}
+
+        {%- liquid
+          assign review_name = collections[collection_handle].metafields.custom[name].value
+          assign review_avatar = collections[collection_handle].metafields.custom[avatar].value
+          assign review_date = collections[collection_handle].metafields.custom[date].value
+          assign review_text = collections[collection_handle].metafields.custom[text].value
+          assign review_star = collections[collection_handle].metafields.custom[star].value
+          assign review_image = collections[collection_handle].metafields.custom[image].value
+          -%}
+        {%- if review_name -%}
+          <div class="review swiper-slide">
+            <div class="review_top">
+              <div class="review_author">
+                <img loading="lazy" data-src="{{ review_avatar | img_url:'100x' }}" class="lazyload" />
+                <div class="review_name">
+                  <span> {{ review_name }}</span>
+                </div>
+              </div>
+              <div class="review_date">
+                {{ review_date }}
+              </div>
+            </div>
+            <div class="review_image">
+              <img loading="lazy" data-src="{{ review_image | img_url: '1200x'}}" 
+                src="{{ review_image | img_url: '350x'}}"
+                class="lazyload" alt="{{ review_text }}" />
+            </div>
+            <div class="review_start">
+              {%- render 'review-start', review_star: review_star -%}
+            </div>
+            <div class="review_text">
+              {{ review_text }}
+            </div>
+          </div>
+        {%- endif -%}
+        {%- endfor -%}
+        </div>
+        <div class='swiper-pagination'></div>
+      </div>
+      <div class='btn-group text-center'>
+        <a class='btn js-see-more hidden'>
+          Xem thêm
+        </a>
+        <a class='btn js-see-less hidden'>
+          Thu gọn
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

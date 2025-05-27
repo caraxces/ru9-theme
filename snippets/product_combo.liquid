@@ -1,0 +1,427 @@
+{% liquid
+  assign block_variant = section.blocks | where: 'type', 'variant_picker'
+  for block in block_variant
+    assign block_inner = block
+    assign color_swatches = block.settings.color_swatches
+    assign picker_type = block.settings.picker_type
+    assign variant_labels = block.settings.variant_labels
+  endfor
+
+  assign handle_metafields = product.metafields.custom.product_bundle
+%}
+<div class="product-combo">
+  <div class="product-combo__list">
+    <div class="product-combo__item">
+      <button
+        type="button"
+        class="collapsible-trigger collapsible-trigger--inline collapsible--auto-height w-full text-lg f-smb text-left is-open"
+        aria-controls="Combo-content-{{ block.id }}-0"
+      >
+        <span>1. {{ 'products.product.combo.collapsible_title' | t: product_title: product.title }}</span>
+        <span class="icon-collapsible absolute right-0"></span>
+      </button>
+      <div
+        id="Combo-content-{{ block.id }}-0"
+        class="collapsible-content collapsible-content--all is-open"
+      >
+        <div class="collapsible-content__inner rte">
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              {%- liquid
+                if color_swatches
+                  assign is_color = false
+                  assign color_option_index = 0
+                  assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase
+                  assign color_option_index = forloop.index0
+                  assign downcased_option = option.name | downcase
+                  if downcased_option contains swatch_trigger
+                    assign is_color = true
+                  elsif swatch_trigger == 'color' and downcased_option contains 'colour'
+                    assign is_color = true
+                  endif
+                endif
+              -%}
+              {%- if picker_type == 'button' -%}
+                {%- render 'variant-button',
+                  block: block_inner,
+                  product: product,
+                  form_id: form_id,
+                  section_id: section_id,
+                  option: option,
+                  forloop: forloop,
+                  variant_labels: variant_labels,
+                  is_color: is_color,
+                  color_option_index: color_option_index,
+                  connect_to_sizechart: connect_to_sizechart,
+                  sizechart_index: sizechart_index
+                -%}
+              {%- else -%}
+                {%- render 'variant-dropdown',
+                  product: product,
+                  form_id: form_id,
+                  section_id: section_id,
+                  option: option,
+                  forloop: forloop,
+                  variant_labels: variant_labels
+                -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endunless -%}
+        </div>
+      </div>
+    </div>
+
+    {%- for bundle in handle_metafields.value -%}
+      <div class="product-combo__item">
+        <button
+          type="button"
+          class="collapsible-trigger collapsible-trigger--inline collapsible--auto-height w-full text-lg f-smb text-left"
+          aria-controls="Combo-content-{{ block.id }}-{{ forloop.index | plus: 1 }}"
+        >
+          <span>
+            {{- forloop.index | plus: 1 }}.
+            {{ 'products.product.combo.collapsible_title' | t: product_title: bundle.title -}}
+          </span>
+          <span class="icon-collapsible absolute right-0"></span>
+        </button>
+        <div
+          id="Combo-content-{{ block.id }}-{{ forloop.index | plus: 1 }}"
+          class="collapsible-content collapsible-content--all"
+        >
+          <div class="collapsible-content__inner rte">
+            <product-combo data-id="{{ bundle.id }}">
+              <div class="item--other">
+                {%- for option in product.options_with_values -%}
+                {% endfor -%}
+                {%- for option in bundle.options_with_values -%}
+                  {%- liquid
+                    assign is_size = false
+                    assign size_trigger = 'products.general.size_trigger' | t | downcase
+                    assign downcased_option = option.name | downcase
+
+                    if downcased_option contains size_trigger
+                      assign is_size = true
+                    endif
+                  -%}
+
+                  {% if is_size %}
+                    {% assign current_size = option.selected_value %}
+                  {% endif %}
+
+                  {%- liquid
+                    if color_swatches
+                      assign is_color = false
+                      assign color_option_index = 0
+                      assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase
+                      assign color_option_index = forloop.index0
+                      assign downcased_option = option.name | downcase
+                      if downcased_option contains swatch_trigger
+                        assign is_color = true
+                      elsif swatch_trigger == 'color' and downcased_option contains 'colour'
+                        assign is_color = true
+                      endif
+                    endif
+                  -%}
+
+                  {%- render 'variant--button',
+                    block: block_inner,
+                    product: bundle,
+                    form_id: form_id,
+                    section_id: section_id,
+                    option: option,
+                    forloop: forloop,
+                    variant_labels: variant_labels,
+                    is_color: is_color,
+                    is_product_combo: true,
+                    color_option_index: color_option_index
+                  -%}
+                {% else %}
+                  {%- render 'variant--dropdown',
+                    block: block_inner,
+                    product: bundle,
+                    form_id: form_id,
+                    section_id: section_id,
+                    option: option,
+                    forloop: forloop,
+                    variant_labels: variant_labels,
+                    is_color: is_color,
+                    color_option_index: color_option_index,
+                    current_size: current_size
+                  -%}
+                {%- endfor -%}
+                <script type="application/json">
+                  {{ bundle.variants | json }}
+                </script>
+              </div>
+            </product-combo>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+<script>
+  window.cartBox = [];
+  window.cartBoxTotal = 0;
+  window.cartBoxTotalItem = 0;
+  const currentSizeCombo = '{{current_size-}}';
+  const currentProductCombo = '{{ product.handle }}';
+  class ProductCombo extends HTMLElement {
+    constructor() {
+      super();
+      this.discountPrice = 0;
+      this.productId = this.getAttribute('data-id');
+      this.addEventListener('change', this.onVariantChange);
+      this.onVariantChange();
+      //   this.querySelector('.add-item-btn').addEventListener('click', this.addItem.bind(this));
+      // this.addItem();
+      Array.from(this.querySelectorAll('input[checked]')).forEach((radio) => {
+        radio.checked = radio.checked || true;
+      });
+    }
+
+    addItem() {
+      // window.cartBox.push({ proId: this.productId, id: this.currentVariant.id, quantity: 1 });
+      const index = window.cartBox.findIndex((item) => item.proId === this.productId);
+      if (index !== -1) {
+        window.cartBox.splice(index, 1);
+        window.cartBox.push({
+          proId: this.productId,
+          price: this.currentVariant.price,
+          id: this.currentVariant.id,
+          quantity: 1,
+        });
+      } else {
+        window.cartBox.push({
+          proId: this.productId,
+          price: this.currentVariant.price,
+          id: this.currentVariant.id,
+          quantity: 1,
+        });
+      }
+
+      // let added = window.cartBox.find((item) => item.proId == this.productId);
+      // if (!added) {
+      // } else {
+      //     window.cartBox = window.cartBox.filter((item) => item.proId != this.productId);
+      // }
+
+      //   if (addButton.classList.contains('added')) {
+      //     window.cartBox = [];
+      //     window.cartBox.filter((item) => item == this.currentVariant.id);
+      //     // addButton.classList.remove('added');
+      //   } else {
+      //     let added = window.cartBox.find((item) => item.proId == this.productId);
+      //     if (!added) {
+      //       addButton.classList.add('added');
+      //       window.cartBox.push({ proId: this.productId, id: this.currentVariant.id, quantity: 1 });
+      //     } else {
+      //       window.cartBox = window.cartBox.filter((item) => item.proId != this.productId);
+      //       addButton.classList.remove('added');
+      //     }
+    }
+
+    onVariantChange() {
+      this.updateOptions();
+      this.updateMasterId();
+      this.toggleAddButton(true, '', false);
+      if (!this.currentVariant) {
+        this.toggleAddButton(true, '', true);
+      } else {
+        this.toggleAddButton(false, '', true);
+        this.renderProductInfo();
+        this.addItem();
+        this.updatePrice();
+      }
+    }
+    updatePrice() {
+      const productSection = this.closest('.product-section');
+
+      if (productSection) {
+        const price_cb_result = productSection.querySelector('.money-combo-result');
+        const price_cb_percent = productSection.querySelector('.money-combo-percent');
+        const price_cb_compare = productSection.querySelector('.money-combo-compare');
+        const mainVariantPrice = productSection.querySelector('[data-product-price]');
+        const percent = price_cb_result.getAttribute('data-product-combo-discount');
+
+        const totalPriceCombo = window.cartBox.reduce((total, item) => total + item.price, 0);
+        const variantPrice = Number(mainVariantPrice.getAttribute('data-product-price-base'));
+
+        const resultPrice = totalPriceCombo + variantPrice;
+        const savingsCombo = Math.round(resultPrice / Number(percent));
+
+        price_cb_percent.innerHTML = formatMoney(savingsCombo, theme.settings.moneyFormat);
+        price_cb_compare.innerHTML = formatMoney(resultPrice, theme.settings.moneyFormat);
+        price_cb_result.innerHTML = formatMoney(resultPrice - savingsCombo, theme.settings.moneyFormat);
+      }
+    }
+    updateSize(currentSizeCombo) {
+      let sizes = this.querySelectorAll('.size-dropdown');
+      sizes.forEach((size) => {
+        let options = size.querySelectorAll('option');
+        options.forEach((option) => {
+          if (option && option.value.split('-')[0] == currentSizeCombo) {
+            option.selected = true;
+            size.value = option.value;
+            this.onVariantChange();
+          }
+        });
+      });
+    }
+    updateOptions() {
+      const fieldsets = Array.from(this.querySelectorAll('fieldset'));
+      const radioOption = fieldsets.map((fieldset) => {
+        if (Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked)) {
+          return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
+        }
+      });
+      const selectOption = Array.from(this.querySelectorAll('select'), (select) => select.value);
+      this.options = [...selectOption, ...radioOption];
+      if (radioOption.length && typeof initGalery == 'function') {
+        // initGalery()
+      }
+    }
+    updateMasterId() {
+      this.currentVariant = this.getVariantData().find((variant) => {
+        return !variant.options
+          .map((option, index) => {
+            return this.options[index] === option;
+          })
+          .includes(false);
+      });
+    }
+    getVariantData() {
+      this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
+      return this.variantData;
+    }
+    toggleAddButton(disable = true, text, modifyClass = true) {
+      const addButton = this.querySelector('.add-item-btn');
+      if (!addButton) return;
+
+      if (disable) {
+        addButton.setAttribute('disabled', 'disabled');
+
+        // if (text) addButtonText.textContent = text;
+      } else {
+        addButton.removeAttribute('disabled');
+
+        // addButtonText.textContent = window.variantStrings.addToCart;
+      }
+      if (!modifyClass) return;
+    }
+    renderProductInfo() {
+      let available = this.currentVariant && this.currentVariant.available;
+
+      if (!this.currentVariant) return;
+
+      let price = this.currentVariant.price
+      let comparePrice = this.currentVariant.compare_at_price;
+      let format = `{{shop.money_format}}`;
+      if (this.discount) {
+        comparePrice = price;
+        if (this.discount.DiscountCodeType == 'percentage') {
+          price = price - Math.ceil((price * this.discount.Percentage) / 100);
+        } else {
+          // price = price -  this.discount
+        }
+      }
+    }
+  }
+
+  customElements.define('product-combo', ProductCombo);
+
+  //   document.addEventListener('limoniapps:discountninja:promotions:loaded', function (event) {
+  //     let promotions = event.detail.data;
+  //     if (promotions && promotions.length > 0) {
+  //       promotions = promotions.find((promo) => {
+  //         return promo;
+  //       });
+
+  //       const activePromotion = promotions.find((promo) => {
+  //         return promo.Prerequisite.PrerequisiteProducts == currentProduct;
+  //       });
+  //       if (activePromotion) {
+  //         // activePromotion
+  //         const discountProduct = activePromotion.Entitlement.EntitledProductHandles;
+  //         document.querySelectorAll('product-bundle').forEach(function (pro) {
+  //           if (activePromotion.DiscountCodeType == 'percentage') {
+  //             pro.discount = {
+  //               DiscountCodeType: activePromotion.DiscountCodeType,
+  //               Percentage: activePromotion.Tiers[0].Entitlement.Percentage,
+  //             };
+  //           }
+  //           pro.renderProductInfo();
+  //         });
+  //       }
+  //     }
+  //   });
+
+  function defaultTo(value, defaultValue) {
+    return value == null || value !== value ? defaultValue : value;
+  }
+
+  function formatMoney(cents, format) {
+    var moneyFormat = '${{amount}}';
+    var superScript = theme && theme.settings && theme.settings.superScriptPrice;
+
+    if (!format) {
+      format = theme.settings.moneyFormat;
+    }
+
+    if (typeof cents === 'string') {
+      cents = cents.replace('.', '');
+    }
+    var value = '';
+    var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+    var formatString = format || moneyFormat;
+
+    function formatWithDelimiters(number, precision, thousands, decimal) {
+      precision = defaultTo(precision, 2);
+      thousands = defaultTo(thousands, ',');
+      decimal = defaultTo(decimal, '.');
+
+      if (isNaN(number) || number == null) {
+        return 0;
+      }
+
+      number = (number / 100.0).toFixed(precision);
+
+      var parts = number.split('.');
+      var dollarsAmount = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands);
+      var centsAmount = parts[1] ? decimal + parts[1] : '';
+
+      return dollarsAmount + centsAmount;
+    }
+
+    switch (formatString.match(placeholderRegex)[1]) {
+      case 'amount':
+        value = formatWithDelimiters(cents, 2);
+
+        if (superScript && value && value.includes('.')) {
+          value = value.replace('.', '<sup>') + '</sup>';
+        }
+
+        break;
+      case 'amount_no_decimals':
+        value = formatWithDelimiters(cents, 0);
+        break;
+      case 'amount_with_comma_separator':
+        value = formatWithDelimiters(cents, 2, '.', ',');
+
+        if (superScript && value && value.includes(',')) {
+          value = value.replace(',', '<sup>') + '</sup>';
+        }
+
+        break;
+      case 'amount_no_decimals_with_comma_separator':
+        value = formatWithDelimiters(cents, 0, '.', ',');
+        break;
+      case 'amount_no_decimals_with_space_separator':
+        value = formatWithDelimiters(cents, 0, ' ');
+        break;
+    }
+
+    return formatString.replace(placeholderRegex, value);
+  }
+</script>

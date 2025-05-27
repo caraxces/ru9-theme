@@ -1,0 +1,94 @@
+{%- comment -%} Tạo file snippets/countdown-flash-sale.liquid {%- endcomment -%}
+
+<div class="information-block__flash-sale">
+  <div class="flash-sale-countdown">
+    <div class="countdown-item">
+      <span class="countdown-number" id="days">00</span>
+      <span class="countdown-label">NGÀY</span>
+    </div>
+    <div class="countdown-item">
+      <span class="countdown-number" id="hours">00</span>
+      <span class="countdown-label">GIỜ</span>
+    </div>
+    <div class="countdown-item">
+      <span class="countdown-number" id="minutes">00</span>
+      <span class="countdown-label">PHÚT</span>
+    </div>
+    <div class="countdown-item">
+      <span class="countdown-number" id="seconds">00</span>
+      <span class="countdown-label">GIÂY</span>
+    </div>
+  </div>
+</div>
+
+<style>
+.information-block__flash-sale {
+  background: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.flash-sale-countdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff0000;
+  min-width: 40px;
+  text-align: center;
+}
+
+.countdown-label {
+  font-size: 12px;
+  color: #666;
+}
+</style>
+
+<script>
+function updateCountdown() {
+  // Đặt thời gian kết thúc (ví dụ: 7 ngày từ hiện tại)
+  const endDate = new Date();
+  endDate.setDate(endDate.getDate() + 7);
+  
+  function calculate() {
+    const now = new Date();
+    const diff = endDate - now;
+    
+    if (diff <= 0) {
+      // Hết thời gian
+      document.getElementById('days').textContent = '00';
+      document.getElementById('hours').textContent = '00';
+      document.getElementById('minutes').textContent = '00';
+      document.getElementById('seconds').textContent = '00';
+      return;
+    }
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+  }
+  
+  // Cập nhật mỗi giây
+  calculate();
+  setInterval(calculate, 1000);
+}
+
+document.addEventListener('DOMContentLoaded', updateCountdown);
+</script>

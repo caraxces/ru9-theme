@@ -1,0 +1,73 @@
+{{ 'login.css' | asset_url | stylesheet_tag: preload: true }}
+<div class="main-account main-register-success">
+  <div class="container flex">
+    <div class="main-account__form main-login__form flex flex-col">
+      <div class="content-wrap">
+        <header class="section-header text-left">
+          {%- if section.settings.title != blank -%}
+            <h1 class="section-header__title text-3xl m-0">
+              {{ section.settings.title }}
+            </h1>
+          {%- endif -%}
+        </header>
+        <div class="content-inner">
+          <div class="icon-wrap">
+            {{ section.settings.svg_text }}
+          </div>
+          {%- if section.settings.subtitle != blank -%}
+            <div class="rte text-sm">{{ section.settings.subtitle }}</div>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ routes.account_login_url }}" class="btn">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="main-account__banner main-login__banner">
+      {%- if section.settings.banner != blank -%}
+        {%- render 'image-element', img: section.settings.banner, classes: 'image-fit' -%}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main register success",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "svg_text",
+      "label": "SVG icon"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner",
+      "label": "Banner"
+    }
+  ]
+}
+{% endschema %}

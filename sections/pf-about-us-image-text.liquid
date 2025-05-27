@@ -1,0 +1,62 @@
+<div class="section-{{section.id}}">
+    <div class="container container-medium">
+        <div class="row">
+            <div class="col-sm-6 col-12">
+                {%if section.settings.title %}
+                <h2 class="h3 primary-color">{{section.settings.title}}</h2>
+                {%endif%}
+            </div>
+            <div class="col-sm-6 col-12 flex flex-column">
+                <div class="content">
+                    {%if section.settings.content %}
+                        {{section.settings.content}}
+                    {%endif%}
+                </div>
+                <div class="image">
+                    {%if section.settings.image != blank %}
+                        <img loading="lazy" src="{{section.settings.image | img_url: '600x'}}" alt=""
+                             width="{{section.settings.image.width}}"
+                             height="{{section.settings.image.height}}"
+                             >
+                    {%else%}
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+
+.flex-column {
+    flex-direction: column;
+}
+.image {
+    margin-top: 30px;
+}
+</style>
+
+{% schema %}
+{
+    "name": "Image with Text",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Image list"
+        },
+        {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        }
+    ]
+    
+}
+{% endschema %}

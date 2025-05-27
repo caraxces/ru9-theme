@@ -1,0 +1,177 @@
+{%capture style -%}
+
+{%endcapture -%}    
+<style>
+  .slideup{
+  --lading-page-background: {{section.settings.background_color}};
+--lading-page-color: {{section.settings.color}};
+    {%if section.settings.background_gradient_color != blank %}
+    background: {{section.settings.background_gradient_color}}
+      {%else -%}
+          background: {{section.settings.background_color}}
+
+     {%endif%}
+  }
+    .slideup-video-mobile{
+    	display:none!important
+    }
+    @media(max-width: 767px){
+    .slideup-video-mobile{
+    	display:block!important
+    }
+      .slideup-video-desktop{
+    	display:none!important
+    }
+    }
+</style>
+  <div class="slideup-wrapper" data-bg="{{section.settings.background_color}}">
+            <div class="container">
+               
+              <div class="row" style="justify-content: space-between">
+                <div class="col-md-5 col-9">
+                 <h2 class="slideup__title text-xl">
+                    <b>{{section.settings.title}}</b>
+                    <span>{{section.settings.sub_title}}</span>
+                    
+                  </h2>
+                  <p class="slideup__content text-md">
+                     {{section.settings.description}}
+                  </p>
+                </div>
+                <div class="col-md-7 col-12">
+                  <div class="slide-vertical-wrapper swiper-container">
+                      <div class="slide-vertical swiper-wrapper">
+                         {% for block in section.blocks -%}
+
+                          <div class="item swiper-slide">
+                             <div class="item-body" >
+                                <h3 class="text-lg">
+                                 {{block.settings.title}}
+                                  </h3>
+                                  <p class="text-md">
+                                  {{block.settings.content}}
+
+                                  </p>
+                            </div>
+                            <div class="img">
+                              {%if block.settings.use_video and block.settings.video != blank -%}
+                            <video class="slideup-video-desktop"  autoplay muted loop playsinline >
+                              <source src="{{block.settings.video}}" type="video/mp4">
+                          </video>
+                          <video class="slideup-video-mobile"  autoplay muted loop playsinline >
+                            <source src="{{block.settings.video_mobile}}" type="video/mp4">
+                        </video>
+                              {%else%}
+                              <picture>
+                                 <source srcset="{{block.settings.image_mobile | img_url: 'master'}}" media="(max-width: 767px)">
+                                <img src=" {{block.settings.image | img_url: 'master'}}" 
+                                     loading="lazy"
+                                     width="{{block.settings.image.width}}"
+                                     height="{{block.settings.image.height}}"
+                                     alt="">
+                                </picture>
+                              {%endif-%}
+                              <div class="mask">
+                              </div>
+                            </div>
+                            
+                           
+                         
+                          </div>
+                                                    {%endfor -%}
+
+                        </div>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+<div class="slideup-overlay"></div>
+{% schema %}
+   {
+	"name": "Landing page features ",
+	"class":"section-animate slideup",
+	"settings": [
+	  {
+		 "type": "color",
+      	"id": "color",
+		"label": "Color"
+		},
+		{
+		 "type": "color",
+      	"id": "background_color",
+		"label": "Background Color"
+		},
+{
+		 "type": "text",
+      	"id": "background_gradient_color",
+		"label": "Background Gradient"
+		},
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		}, {
+			"type": "text",
+			"id": "sub_title",
+			"label": "Sub title"
+		},{
+			"type": "text",
+			"id": "description",
+			"label": "Description"
+		}
+	],
+	"blocks": [{
+			"type": "features",
+			"name": "features",
+			"settings": [
+			{
+					"type": "text",
+					"id": "title",
+					"label": "Title"
+				},
+				{
+					"type": "richtext",
+					"id": "content",
+					"label": "Content"
+				},
+				{
+					"type": "image_picker",
+					"id": "image",
+					"label": "Image desktop"
+				},
+				{
+					"type": "image_picker",
+					"id": "image_mobile",
+					"label": "Image Mobile"
+				},
+				{
+					"type": "checkbox",
+					"id": "use_video",
+					"label": "Use video"
+				},
+{
+					"type": "text",
+					"id": "video",
+					"label": "Video desktop"
+				},
+				{
+					"type": "text",
+					"id": "video_mobile",
+					"label": "Video Mobile"
+				}
+			]
+
+		}
+
+	]
+
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

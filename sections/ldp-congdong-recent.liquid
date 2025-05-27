@@ -1,0 +1,285 @@
+<div class="section-{{ section.id }} press-recent">
+    <div class="container">
+        {% if section.settings.section_heading != blank %}
+        <div class="section-header under-line text-left">
+            <h2 class="h3 primary-color">{{section.settings.section_heading}}</h2>
+        </div>
+        {% endif %}
+        {% if section.blocks.size > 0 %}
+        <div class="row">
+            {% for block in section.blocks %}
+            <div class="col-12">
+                    <div class="block-item">
+                        <div class="content-left">
+                        {% if block.settings.title != blank %}
+                            <span class="primary-color content-title">{{ block.settings.title }}</span>
+                        {%endif%}                
+                            {% if block.settings.description != blank %}
+                            <span class="primary-color content-description">{{ block.settings.description }}</span>
+                            {%endif%}
+                        </div>
+                        <div class="content-right">
+                             {% if block.settings.link != blank %}
+                            <a href="{{ block.settings.link }}" class="logo-bar__link">
+                                {{block.settings.readmore}}
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %} 
+        {%if section.settings.copyright != blank%}
+        <div class="row">
+            <div class="col-12 text-center subcrible-content">
+                <h3>{{section.settings.copyright}}</h3>
+                <span>{{section.settings.subcribe}}</span>
+            </div>
+        </div>
+        {%endif%}
+        {% if section.blocks.size == 0 %} 
+        {% include 'no-blocks' %} 
+        {%endif %}
+    </div>
+</div>
+<style>
+
+/** section pf press recent **/
+  
+   .section-header.under-line{
+    position: relative;
+    display: inline-block;
+  }
+  .section-header.under-line:after{
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #003349;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+
+  .section-header {
+    margin-bottom: 50px;
+  }
+  .section-header.page-heading {
+    margin-bottom: 0;
+  }
+
+  h3,.rte {
+    color: #003349;
+  }
+
+  #pagefly-rich-text-pf-mattress-rich-text .pf-rich-text--content.border:before {
+    background-color: #E1F1EF;
+  }
+
+  #pagefly-rich-text-footer-top, body {
+    background-color: #FFFFFF;
+  }
+
+  #pagefly-rich-text-pf-mattress-rich-text {
+    padding: 0;
+  }
+
+  #pagefly-rich-text-pf-mattress-rich-text .pf-rich-text--content > div, #pagefly-rich-text-pf-mattress-rich-text .item-left {
+    display: none;
+  }
+
+  #pagefly-rich-text-pf-mattress-rich-text .pf-rich-text--content > div.pf-rich-text--image {
+    display: block;
+  }
+  /*=============Press Page==============*/
+  .press-recent .block-item {
+    padding: 30px 0;
+    border-bottom: 1px solid #DBDBDC;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    align-items: center; }
+  .press-recent .block-item > div {
+    display: grid;
+    color: #727272; }
+  .press-recent .content-right {
+    text-align: right; }
+  .press-recent .content-left {
+    font-weight: bold; }
+  .press-recent .content-description {
+    font-weight: normal;
+    font-size: 22px;
+    margin-top: 20px; }
+  .press-recent .subcrible-content {
+    margin-top: 100px; }
+
+  .press-hightlight .press-items {
+    background-size: 100%;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 70px; }
+  .press-hightlight .press-items:last-child {
+    margin-bottom: 0; }
+  .press-hightlight .press-content {
+    padding: 30px 70px; }
+  .press-hightlight .press-items.content-right .press-content {
+    grid-column: 2;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; }
+  .press-hightlight .press-content__image {
+    max-width: 200px; }
+  .press-hightlight .press-content__title {
+    margin-bottom: 115px;
+    margin-top: 25px;
+    font-size: 22px; }
+  .press-hightlight .press-content__title a:hover,
+  .press-hightlight .press-content__title a {
+    color: inherit;
+    cursor: pointer; }
+  /*=========Comments Slider=====*/
+  .comment-wrapper * {
+    outline: none !important; }
+
+  .comment-wrapper .slick-list.draggable {
+    max-width: 770px;
+    margin: auto; }
+
+  .comment-slider .slick-dots {
+    margin-top: 15px; }
+
+  .comment-slider__author {
+    font-size: 15px;
+    margin: 10px 0; }
+
+  .comment-slider__date {
+    font-size: 13px; }
+
+  .comment-slider__image img {
+    display: inline-block;
+    max-width: 200px; }
+  .comment-slider__image.img_small img {
+    max-width: 70px;
+    border-radius: 100%; }
+
+  .section-pf-comment a.link-icon {
+    margin-top: 30px; }
+
+  .comment-content {
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto; }
+  .comment-content p {
+    font-size: var(--main-font-size);
+      font-family: "iCiel Domaine Text";
+      font-weight: 900; }
+  @media (max-width: 767px) {
+    .press-hightlight .press-items {
+      min-height: 100vw; }
+    .press-hightlight .press-content__title {
+      margin-bottom: 25px; }
+    .press-hightlight .press-content__image img {
+      max-width: 100px; } 
+    .comment-content {
+      margin-bottom: 30px; }
+
+    .comment-slider .slick-dots {
+      margin-top: 10px; }
+  }
+  .ldp-recent{
+    background: {{section.settings.background_color}};
+    color: {{section.settings.color}}
+  }
+  .section-{{section.id}} {
+    padding: 50px 0px;
+}
+</style>
+
+{% schema %}
+{
+    "name": "Image with Text",
+    "max_blocks": 21,
+	"class": "ldp-recent",
+    "settings": [
+ {
+            "type": "color",
+            "id": "color",
+            "label": "Color"
+        },
+ {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background color"
+        },
+        {
+            "type": "text",
+            "id": "section_heading",
+            "label": "Heading",
+            "default": "Gần đây"
+        },
+        {
+            "type": "text",
+            "id": "copyright",
+            "label": "Sub Content",
+            "default": "Tài liệu truyền thông"
+        },
+        {
+            "type": "text",
+            "id": "subcribe",
+            "label": "Sub Title",
+            "default": "Liên hệ thêm với Ru9 qua email comm@ru9.vn"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "logo_image",
+            "name": "Image",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "text",
+                    "id": "description",
+                    "label": "Content"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "Link"
+                },
+                {
+                    "type": "text",
+                    "id": "readmore",
+                    "label": "Readmore"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Logo list",
+            "category": "PageFly Image",
+            "blocks": [
+                {
+                    "type": "logo_image"
+                },
+                {
+                    "type": "logo_image"
+                },
+                {
+                    "type": "logo_image"
+                },
+                {
+                    "type": "logo_image"
+                }
+            ]
+        }
+    ]
+}
+
+{%endschema %}

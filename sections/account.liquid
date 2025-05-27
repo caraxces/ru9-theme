@@ -1,0 +1,230 @@
+{{ 'login.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- paginate customer.orders by 20 -%}
+  <div class="page-width page-width--account spacing-base" style="--page-width: 1360px;">
+    <div class="grid grid__account customer--account">
+      {% comment %}
+        <div class="grid__item medium-up--two-thirds">
+          <h2>{{ 'customer.orders.title' | t }}</h2>
+
+          {%- if customer.orders.size != 0 -%}
+            <table class="table--responsive table--small-text">
+              <thead>
+                <tr>
+                  <th>{{ 'customer.orders.order_number' | t }}</th>
+                  <th>{{ 'customer.orders.date' | t }}</th>
+                  <th>{{ 'customer.orders.payment_status' | t }}</th>
+                  <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                  <th>{{ 'customer.orders.total' | t }}</th>
+                  <th>{{ 'customer.orders.total' | t }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr class="table__section">
+                    <td data-label="{{ 'customer.orders.order_number' | t }}">
+                      {{ order.name | link_to: order.customer_url }}
+                    </td>
+                    <td data-label="{{ 'customer.orders.date' | t }}">
+                      {{ order.created_at | time_tag: format: 'date' }}
+                    </td>
+                    <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                    <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">
+                      {{ order.fulfillment_status_label }}
+                    </td>
+                    <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+
+            <hr class="hr--clear">
+
+          {%- else -%}
+            <p>{{ 'customer.orders.none' | t }}</p>
+          {%- endif -%}
+        </div>
+      {% endcomment %}
+      <div class="grid__item grid__item-left">
+        <div class="account-side">
+          <h1 class="section-header__title m-0 text-3xl">{{ 'customer.account.title' | t }}</h1>
+          <nav class="account-side__nav">
+            <ul class="account-side__list inline-list flex-col">
+              <li class="is-active f-smb detail-link">
+                <a href="#information" onClick="showInfo()">
+                  {{ 'customer.account.information' | t }}
+                </a>
+              </li>
+              <li>
+                <a href="{{ routes.account_addresses_url }}" class="text-link i-flex jc-between ai-center">
+                  <span class="txt">{{- 'customer.account.view_addresses' | t }}</span>
+                  <span class="addr-count text-xs f-medium">{{ customer.addresses_count }}</span>
+                </a>
+              </li>
+              <li class="order-link">
+                <a
+                  href="#orders"
+                  onClick="showOrders()"
+                >
+                  {{- 'customer.orders.title' | t -}}
+                </a>
+              </li>
+              <li>
+                <a href="{{ routes.account_logout_url }}" class="link-text">
+                  <span class="txt">
+                    {{- 'layout.customer.log_out' | t -}}
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div class="grid__item grid__item-right">
+        <div class="content-inner">
+          <div class="customer__information" id="customer-detail">
+            {% assign name_parts = customer.name | split: ' ' %}
+            {% assign first_letter = name_parts.first | slice: 0, 1 %}
+            {% assign last_letter = name_parts.last | slice: 0, 1 %}
+            {% assign short_name = last_letter | append: first_letter | upcase %}
+
+            <h3 class="text-xl">{{ 'customer.account.details' | t }}</h3>
+
+            <div class="short-name text-3xl f-medium leading-1">{{ short_name }}</div>
+
+            <div class="form-vertical">
+              <label class="text-sm f-medium" for="FullName">{{ 'customer.account.full_name' | t }} </label>
+              <input
+                type="text"
+                name="customer[FullName]"
+                id="FullName"
+                class="input-full text-sm"
+                value="{{ customer.default_address.name }}"
+                readonly
+              >
+
+              <label class="text-sm f-medium" for="Phone">{{ 'customer.account.phone' | t }} </label>
+              <div class="input-wrap relative">
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  role="presentation"
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M5.08496 11.4473L5.06785 11.4283L5.0489 11.4113C3.87787 10.3548 3.0284 8.99025 2.59765 7.47391C2.43949 6.76031 2.47392 6.01745 2.69754 5.32138C2.92251 4.6211 3.33078 3.99365 3.88011 3.50405L3.89941 3.48685L3.91683 3.46775C4.05621 3.31495 4.22703 3.19408 4.4176 3.11345C4.60498 3.03417 4.80707 2.99564 5.01043 3.00039C5.38626 3.03025 5.73761 3.19882 5.99593 3.4734L6.00121 3.47901L6.00666 3.48446L6.93995 4.41713C6.94 4.41718 6.94005 4.41723 6.9401 4.41728C7.21881 4.69666 7.37526 5.07499 7.37526 5.46935C7.37526 5.86373 7.2188 6.24208 6.94007 6.52146C6.94003 6.5215 6.93999 6.52154 6.93995 6.52157L6.47355 6.98766L6.4729 6.98832C6.25694 7.20494 6.13562 7.49833 6.13562 7.80425C6.13562 8.11017 6.25694 8.40356 6.4729 8.62018L6.47355 8.62083L7.87422 10.0206L7.87534 10.0217C8.09225 10.2371 8.38556 10.3579 8.69121 10.3579C8.99686 10.3579 9.29017 10.2371 9.50708 10.0217L9.5082 10.0206L9.97468 9.5544C9.97471 9.55437 9.97474 9.55434 9.97477 9.55431C10.2544 9.27558 10.6332 9.11899 11.0283 9.11899C11.4234 9.11899 11.8023 9.27558 12.0819 9.55431C12.0819 9.55434 12.0819 9.55437 12.082 9.5544L13.0153 10.4872L13.0208 10.4927L13.0265 10.498C13.3012 10.7559 13.4697 11.1067 13.4996 11.4818C13.5044 11.6849 13.4659 11.8869 13.3866 12.0741C13.306 12.2645 13.185 12.4353 13.0321 12.5747L13.0148 12.5904L12.9991 12.6076C12.6101 13.0348 12.1383 13.3785 11.6124 13.6179C11.0884 13.8563 10.5215 13.9863 9.94592 14C9.63602 13.9983 9.32718 13.9636 9.02466 13.8964C7.50742 13.4659 6.14207 12.6172 5.08496 11.4473ZM5.05523 3.34694L4.97947 3.33032L4.90223 3.33743C4.60636 3.36468 4.33218 3.50247 4.13399 3.72243C3.62586 4.17052 3.24565 4.74557 3.03254 5.38898C2.81561 6.04393 2.77991 6.74531 2.92921 7.41888L2.93299 7.43593L2.93795 7.45267C3.36541 8.8959 4.18492 10.1922 5.30512 11.1976C6.31117 12.3171 7.60826 13.136 9.05231 13.5631L9.0693 13.5681L9.0866 13.5719C9.76083 13.7204 10.4627 13.6842 11.118 13.4671C11.7615 13.254 12.3367 12.8743 12.7853 12.367C12.8942 12.2699 12.9839 12.1531 13.0497 12.0225C13.1224 11.8781 13.1643 11.7201 13.1725 11.5586L13.1748 11.5117L13.1685 11.4651C13.1291 11.1787 12.9899 10.9155 12.7759 10.7218L11.852 9.79847L11.8509 9.79736C11.634 9.58196 11.3406 9.46112 11.035 9.46112C10.7293 9.46112 10.436 9.58196 10.2191 9.79736L10.218 9.79847L9.75176 10.2644C9.75163 10.2645 9.75151 10.2647 9.75138 10.2648C9.47162 10.5432 9.09283 10.6995 8.69788 10.6995C8.30288 10.6995 7.92404 10.5431 7.64426 10.2647C7.64418 10.2646 7.64409 10.2645 7.644 10.2644L6.24462 8.86596C6.24454 8.86588 6.24446 8.8658 6.24439 8.86572C5.96576 8.58614 5.80937 8.2077 5.80937 7.81325C5.80937 7.4188 5.96576 7.04035 6.24439 6.76077C6.24446 6.7607 6.24454 6.76062 6.24462 6.76054L6.71087 6.2946L6.71142 6.29405C6.9274 6.07753 7.04874 5.78421 7.04874 5.47835C7.04874 5.17249 6.9274 4.87917 6.71142 4.66265L6.71087 4.6621L5.7868 3.73865C5.59796 3.53062 5.34375 3.39333 5.06635 3.34938L5.05523 3.34694Z" fill="#6B7280" stroke="#6B7280"/>
+                </svg>
+                <input
+                  type="text"
+                  name="customer[Phone]"
+                  id="Phone"
+                  class="input-full text-sm"
+                  value="{{ customer.default_address.phone }}"
+                  readonly
+                >
+              </div>
+            </div>
+          </div>
+          <div class="customer__orders-history" id="orders-content" style="display: none;">
+            <h2>{{ 'customer.orders.title' | t }}</h2>
+
+            {%- if customer.orders.size != 0 -%}
+              <table class="table--responsive table--small-text">
+                <thead>
+                  <tr>
+                    <th>{{ 'customer.orders.order_number' | t }}</th>
+                    <th>{{ 'customer.orders.date' | t }}</th>
+                    <th>{{ 'customer.orders.payment_status' | t }}</th>
+                    <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                    <th>{{ 'customer.orders.total' | t }}</th>
+                    <th>{{ 'customer.orders.total' | t }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%- for order in customer.orders -%}
+                    <tr class="table__section">
+                      <td data-label="{{ 'customer.orders.order_number' | t }}">
+                        {{ order.name | link_to: order.customer_url }}
+                      </td>
+                      <td data-label="{{ 'customer.orders.date' | t }}">
+                        {{ order.created_at | time_tag: format: 'date' }}
+                      </td>
+                      <td data-label="{{ 'customer.orders.payment_status' | t }}">
+                        {{ order.financial_status_label }}
+                      </td>
+                      <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">
+                        {{ order.fulfillment_status_label }}
+                      </td>
+                      <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                    </tr>
+                  {%- endfor -%}
+                </tbody>
+              </table>
+
+              <hr class="hr--clear">
+
+            {%- else -%}
+              <p>{{ 'customer.orders.none' | t }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}
+
+<script>
+  const urlHash = window.location.hash;
+  const customerDetail = document.getElementById('customer-detail');
+  const customerOrders = document.getElementById('orders-content');
+  const customerNav = document.querySelectorAll('.account-side__nav li');
+
+  function showInfo() {
+    if (customerOrders) {
+      customerOrders.style.display = 'none';
+      customerDetail.style.display = 'block';
+    }
+    if (customerNav && customerNav.length) {
+      customerNav.forEach((nav, index) => {
+        nav.classList.remove('is-active', 'f-smb');
+
+        if (nav.classList.contains('detail-link')) {
+          nav.classList.add('is-active', 'f-smb');
+        }
+      });
+    }
+  }
+
+  function showOrders() {
+    if (customerDetail) {
+      customerDetail.style.display = 'none';
+      customerOrders.style.display = 'block';
+    }
+
+    if (customerNav && customerNav.length) {
+      customerNav.forEach((nav, index) => {
+        nav.classList.remove('is-active', 'f-smb');
+
+        if (nav.classList.contains('order-link')) {
+          nav.classList.add('is-active', 'f-smb');
+        }
+      });
+    }
+  }
+
+  if (urlHash === '#orders') {
+    showOrders();
+  }
+
+  if (urlHash === '#information') {
+    showInfo();
+  }
+</script>

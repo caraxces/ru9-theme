@@ -1,0 +1,87 @@
+<div class="site-nav">
+  <div class="site-nav__icons">
+    {%- if shop.customer_accounts_enabled -%}
+      <{%  unless customer %}span{% else %}a{% endunless %}
+        class="site-nav__link site-nav__link--icon js-account-header relative{% if customer %} is-customer i-flex ai-center jc-center{% endif %}"
+        {%  if customer %}href="{{ routes.account_url }}"{% endif %}
+      >
+        {%- if customer -%}
+          {% assign name_parts = customer.name | split: ' ' %}
+          {% assign first_letter = name_parts.first | slice: 0, 1 %}
+          {% assign last_letter = name_parts.last | slice: 0, 1 %}
+          {% assign short_name = last_letter | append: first_letter | upcase %}
+          <span class="short-name text-xs leading-none f-medium">{{ short_name }}</span>
+        {%- else -%}
+          <button
+            type="button"
+            class="collapsible-trigger collapsible-trigger--inline collapsible--auto-height w-full text-lg f-bold text-left"
+            aria-controls="DropdownAccount-content-{{ section.id }}"
+          >
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-user" viewBox="0 0 28 28">
+              <path d="M14.0007 25.6668C7.55715 25.6668 2.33398 20.4437 2.33398 14.0002C2.33398 7.55666 7.55715 2.3335 14.0007 2.3335C20.4442 2.3335 25.6673 7.55666 25.6673 14.0002C25.6673 20.4437 20.4442 25.6668 14.0007 25.6668ZM8.18248 21.2988C9.83396 22.6191 11.8863 23.3369 14.0007 23.3335C16.299 23.3335 18.4025 22.5028 20.0288 21.1262C19.269 20.3465 18.3605 19.7272 17.3572 19.3048C16.3538 18.8823 15.276 18.6654 14.1873 18.6668C13.0587 18.6655 11.9421 18.8988 10.9084 19.3519C9.87465 19.805 8.9464 20.468 8.18248 21.2988ZM6.55265 19.6235C7.53318 18.5829 8.71643 17.7542 10.0295 17.1883C11.3425 16.6225 12.7575 16.3316 14.1873 16.3335C15.5659 16.3317 16.9313 16.6023 18.205 17.1296C19.4788 17.657 20.6358 18.4307 21.6097 19.4065C22.6084 18.0008 23.1982 16.3459 23.3136 14.6254C23.4291 12.9049 23.0656 11.186 22.2636 9.65953C21.4615 8.13303 20.2523 6.85856 18.7699 5.97752C17.2876 5.09647 15.5902 4.64331 13.866 4.66829C12.1418 4.69327 10.4583 5.19543 9.00209 6.11905C7.54593 7.04266 6.3741 8.35163 5.61662 9.90073C4.85915 11.4498 4.54563 13.1785 4.71085 14.8949C4.87608 16.6114 5.51359 18.2485 6.55265 19.6247V19.6235ZM14.0007 15.1668C12.763 15.1668 11.576 14.6752 10.7008 13.8C9.82565 12.9248 9.33398 11.7378 9.33398 10.5002C9.33398 9.26249 9.82565 8.0755 10.7008 7.20033C11.576 6.32516 12.763 5.8335 14.0007 5.8335C15.2383 5.8335 16.4253 6.32516 17.3005 7.20033C18.1757 8.0755 18.6673 9.26249 18.6673 10.5002C18.6673 11.7378 18.1757 12.9248 17.3005 13.8C16.4253 14.6752 15.2383 15.1668 14.0007 15.1668ZM14.0007 12.8335C14.6195 12.8335 15.213 12.5877 15.6506 12.1501C16.0882 11.7125 16.334 11.119 16.334 10.5002C16.334 9.88132 16.0882 9.28783 15.6506 8.85025C15.213 8.41266 14.6195 8.16683 14.0007 8.16683C13.3818 8.16683 12.7883 8.41266 12.3507 8.85025C11.9132 9.28783 11.6673 9.88132 11.6673 10.5002C11.6673 11.119 11.9132 11.7125 12.3507 12.1501C12.7883 12.5877 13.3818 12.8335 14.0007 12.8335Z" fill="#1C2C58"/>
+            </svg>
+            <span class="icon__fallback-text">
+              {{ 'layout.customer.log_in' | t }}
+            </span>
+          </button>
+
+          <div class="dropdown-list collapsible-content absolute right-0" id="DropdownAccount-content-{{ section.id }}">
+            <div class="collapsible-content__inner t-center">
+              <a href="{{ routes.account_login_url }}" class="show btn btn--login" rel="nofollow">{{ 'layout.customer.log_in' | t }}</a>
+              <a href="{{ routes.account_register_url }}" class="show btn--register" rel="nofollow">{{ 'layout.customer.create_account' | t }}</a>
+            </div>
+          </div>
+        {%- endif -%}
+      </{%  unless customer %}span{% else %}a{% endunless %}>
+    {%- endif -%}
+
+    {%- if settings.search_enable -%}
+      <a
+        href="{{ routes.search_url }}"
+        class="site-nav__link site-nav__link--icon js-search-header medium-up--hide"
+        rel="nofollow"
+      >
+        {% render 'icon-search' %}
+        <span class="icon__text visually-hidden">{{ 'general.search.title' | t }}</span>
+      </a>
+    {%- endif -%}
+
+    <a
+      href="{{ routes.cart_url }}"
+      class="site-nav__link site-nav__link--icon js-drawer-open-cart"
+      aria-controls="CartDrawer"
+      data-icon="{{ settings.cart_icon }}"
+      rel="nofollow"
+    >
+      <span class="cart-link">
+        {%- if settings.cart_icon == 'cart' -%}
+          {% comment %} <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cart" viewBox="0 0 64 64">
+            <path style="stroke-miterlimit:10" d="M14 17.44h46.79l-7.94 25.61H20.96l-9.65-35.1H3"/><circle cx="27" cy="53" r="2"/><circle cx="47" cy="53" r="2"/>
+          </svg> {% endcomment %}
+          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cart" viewBox="0 0 24 24">
+            <path d="M19.9809 14.3313C20.248 14.3313 20.5078 14.2487 20.721 14.0959C20.9342 13.943 21.0891 13.7284 21.1623 13.4844L23.6184 5.31872C23.6704 5.14512 23.6794 4.96241 23.6445 4.78497C23.6096 4.60753 23.5319 4.44019 23.4173 4.29614C23.3028 4.15209 23.1547 4.03524 22.9846 3.9548C22.8145 3.87436 22.627 3.83252 22.437 3.83257H6.18984L5.45915 1.20207C5.39 0.952989 5.236 0.732659 5.02118 0.575449C4.80636 0.41824 4.5428 0.332993 4.27162 0.333008H1.56008C1.23438 0.333008 0.922024 0.455909 0.69172 0.674674C0.461415 0.893439 0.332031 1.19015 0.332031 1.49953C0.332031 1.80891 0.461415 2.10562 0.69172 2.32438C0.922024 2.54315 1.23438 2.66605 1.56008 2.66605H3.32602L4.06286 5.29655V5.30822V5.31872L6.51896 13.4844L7.43509 16.9676C6.8286 17.223 6.30597 17.6293 5.9224 18.1435C5.53883 18.6577 5.30855 19.2607 5.25587 19.8889C5.2032 20.5171 5.33008 21.1472 5.62313 21.7126C5.91617 22.278 6.36451 22.7577 6.92078 23.1011C7.47706 23.4445 8.12064 23.6389 8.78357 23.6636C9.44649 23.6884 10.1042 23.5427 10.6871 23.2418C11.2701 22.941 11.7567 22.4962 12.0956 21.9545C12.4345 21.4127 12.6131 20.7941 12.6126 20.1639C12.6085 19.7656 12.532 19.3709 12.3866 18.9973H15.2946C15.1492 19.3709 15.0727 19.7656 15.0687 20.1639C15.0687 20.856 15.2847 21.5326 15.6896 22.1081C16.0944 22.6836 16.6698 23.1322 17.343 23.397C18.0161 23.6619 18.7569 23.7312 19.4716 23.5962C20.1862 23.4611 20.8427 23.1278 21.3579 22.6384C21.8732 22.149 22.224 21.5254 22.3662 20.8466C22.5083 20.1677 22.4354 19.4641 22.1565 18.8246C21.8777 18.1852 21.4055 17.6386 20.7996 17.2541C20.1938 16.8695 19.4815 16.6643 18.7528 16.6643H9.88628L9.27225 14.3313H19.9809ZM20.8086 6.16561L19.0549 11.9982H8.6263L6.87264 6.16561H20.8086ZM10.1565 20.1639C10.1565 20.3946 10.0844 20.6201 9.94949 20.8119C9.81455 21.0038 9.62275 21.1533 9.39836 21.2416C9.17396 21.3299 8.92704 21.353 8.68882 21.308C8.4506 21.263 8.23178 21.1519 8.06004 20.9887C7.88829 20.8256 7.77133 20.6177 7.72394 20.3914C7.67656 20.1652 7.70088 19.9306 7.79383 19.7174C7.88678 19.5043 8.04418 19.3221 8.24613 19.1939C8.44808 19.0657 8.68551 18.9973 8.9284 18.9973C9.2541 18.9973 9.56646 19.1202 9.79676 19.339C10.0271 19.5578 10.1565 19.8545 10.1565 20.1639ZM18.7528 21.3304C18.5099 21.3304 18.2725 21.262 18.0706 21.1338C17.8686 21.0056 17.7112 20.8234 17.6182 20.6103C17.5253 20.3971 17.501 20.1626 17.5484 19.9363C17.5958 19.71 17.7127 19.5021 17.8845 19.339C18.0562 19.1759 18.275 19.0648 18.5132 19.0197C18.7515 18.9747 18.9984 18.9978 19.2228 19.0861C19.4472 19.1744 19.639 19.3239 19.7739 19.5158C19.9089 19.7076 19.9809 19.9331 19.9809 20.1639C19.9809 20.4732 19.8515 20.7699 19.6212 20.9887C19.3909 21.2075 19.0785 21.3304 18.7528 21.3304Z" fill="#1C2C58"/>
+          </svg>
+
+        {%- elsif settings.cart_icon == 'bag-minimal' -%}
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            role="presentation"
+            class="icon icon-bag-minimal"
+            viewBox="0 0 64 64"
+          >
+            <title>icon-bag-minimal</title><path stroke="null" fill-opacity="null" stroke-opacity="null" fill="null" d="M11.375 17.863h41.25v36.75h-41.25z"/><path stroke="null" d="M22.25 18c0-7.105 4.35-9 9.75-9s9.75 1.895 9.75 9"/>
+          </svg>
+        {%- else -%}
+          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-bag" viewBox="0 0 64 64">
+            <g fill="none" stroke="#000" stroke-width="2"><path d="M25 26c0-15.79 3.57-20 8-20s8 4.21 8 20"/><path d="M14.74 18h36.51l3.59 36.73h-43.7z"/></g>
+          </svg>
+        {%- endif -%}
+        <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
+        <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}">
+          <span class="cart-link__bubble-num"></span>
+        </span>
+      </span>
+    </a>
+  </div>
+</div>

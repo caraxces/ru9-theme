@@ -1,0 +1,99 @@
+<div class="section-{{section.id}}"">
+    <div class="container container-medium">
+        <div class="row">
+          {%if section.settings.title != blank%}
+            <div class="col-12">
+                <div class="section-header ">
+                    <h1 class="primary-color">{{ section.settings.title }}</h1>
+                </div>
+            </div>  
+          {%endif%}
+          {% if section.blocks.size > 0 %}
+          <div class="col-12">
+              <div class="pf-about-image-wrap ">
+                {% for block in section.blocks %}
+                    <div class="about-image-item text-center">
+                      {% if block.settings.image_item != blank %}
+                        <img loading="lazy" src="{{block.settings.image_item | img_url: 'master'}}"
+                            loading="lazy"
+                            width="{{block.settings.image_item.width}}"
+                            height="{{block.settings.image_item.height}}"                                            
+                            alt="">
+                      {%else%}
+                        {{ 'image'  | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%endif%}
+                    </div>
+                {% endfor %}
+              </div>
+          </div>
+          {% endif %}
+    </div>
+  </div>
+</div>
+<style>
+
+
+.pf-inner {
+    display: none;
+}
+</style>
+
+{% schema %}
+{
+  "name": "About Us Image",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image list"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title",
+      "default": "Êm ái, thoải mái như ngủ trên những tầng mây."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FDF3E5"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_item",
+          "label": "Image Item"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PF About Image",
+      "category": "PageFly Image",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

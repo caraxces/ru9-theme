@@ -1,0 +1,48 @@
+{{ 'page-customer-reviews.css' | asset_url | stylesheet_tag }}
+<div class="page-width text-center customer-reviews__section customer-review-fb">
+  <div class="header_section">
+    <h3 class="reviews_title">{{ section.settings.heading }}</h3>
+  </div>
+  <div class='customer-reviews-fb__content'>
+    <img loading="lazy" src="{{ section.settings.image | img_url: '942x' }}" />
+    <p>{{ section.settings.caption }}</p>
+    <a href='{{ section.settings.button_link }}' class='btn'>
+       {{ section.settings.button_content }}
+    </a>
+  </div>
+</div>
+{%- schema -%}
+{
+  "name": "Customer Review Facebook",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Tên section",
+      "default": "Đánh giá của khách hàng về Ru9 trên Facebook"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hình ảnh"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Thông tin ảnh",
+      "default": "Bạn đã sẵn sàng để chọn một giấc ngủ ngon cho riêng mình chưa"
+    },
+    {
+      "type": "text",
+      "id": "button_content",
+      "label": "Nội dung nút",
+      "default": "Mua nệm"
+    },
+    {
+      "type": "text",
+      "id": "button_link",
+      "label": "Link"
+    }
+  ]
+}
+{%- endschema -%}

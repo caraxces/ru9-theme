@@ -1,0 +1,714 @@
+  {%- style -%}
+      .wheel-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 1000px;
+        height: 500px;
+        background: white;
+        border-radius: 10px;
+        z-index: 1000;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        background-image: url('{{ section.settings.wheel_background | img_url: 'master' }}');
+        background-size: cover;
+        background-position: center;
+      }
+    
+      .popup-content {
+        display: flex;
+        height: 100%;
+      }
+    
+      .wheel-side {
+        width: 50%;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid #eee;
+      }
+    
+      .form-side {
+        width: 50%;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    
+      .form-container {
+        text-align: center;
+      }
+    
+      .form-container input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+    
+      .form-container button {
+        width: 100%;
+        padding: 12px;
+        background: #D62828;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background 0.3s;  
+      }
+    
+      .form-container button:hover {
+        background: #b22222;
+      }
+    
+      /* Result popup styles */
+      .result-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        z-index: 1001;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      }
+    
+      .result-image {
+        max-width: 200px;
+        margin: 20px auto;
+      }
+    
+      .result-message {
+        margin: 15px 0;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+    
+      /* Wheel styles */
+      .wheel-container {
+        position: relative;
+        /* width: 400px;
+        height: 400px; */
+        margin: 0 auto;
+      }
+    
+      .wheel-center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+    
+      .wheel-center img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    
+      .pointer {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 30px;
+        background: #FFD700;
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        z-index: 20;
+      }
+    
+      #wheelCanvas {
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      }
+    
+      /* Close button */
+      .close-popup {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #f5f5f5;
+        transition: background 0.3s;
+      }
+    
+      .close-popup:hover {
+        background: #e0e0e0;
+      }
+    
+      .close-popup::before,
+      .close-popup::after {
+        content: '';
+        position: absolute;
+        width: 15px;
+        height: 2px;
+        background: #333;
+      }
+    
+      .close-popup::before {
+        transform: rotate(45deg);
+      }
+    
+      .close-popup::after {
+        transform: rotate(-45deg);
+      }
+    
+      /* Trigger button */
+      .wheel-trigger {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #D62828;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    
+      @media screen and (max-width: 768px) {
+        .wheel-popup {
+          width: 90%;
+          height: auto;
+          max-height: 90vh;
+          overflow-y: auto;
+        }
+    
+        .popup-content {
+          flex-direction: column;
+        }
+    
+        .wheel-side,
+        .form-side {
+          width: 100%;
+          border-right: none;
+          padding: 15px;
+        }
+    
+        .wheel-side {
+          border-bottom: 1px solid #eee;
+        }
+    
+        .wheel-container {
+          transform: scale(0.8);
+          margin: 0 auto;
+        }
+    
+        #wheelCanvas {
+          max-width: 100%;
+          height: auto;
+        }
+    
+        .form-container input,
+        .form-container button {
+          font-size: 14px;
+          padding: 10px;
+        }
+    
+        .result-popup {
+          width: 90%;
+          padding: 20px;
+        }
+      }
+    
+      @media screen and (max-width: 480px) {
+        .wheel-container {
+          transform: scale(0.7);
+        }
+      }
+  {%- endstyle -%}
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- Wheel popup -->
+    <div class="wheel-popup" id="wheelPopup">
+      <span class="close-popup" onclick="closeWheelPopup()"></span>
+      <div class="popup-content">
+        <div class="wheel-side">
+          <div class="wheel-container">
+            <canvas id="wheelCanvas" width="350" height="350"></canvas>
+            <div class="wheel-center" style="background: #722800;">
+              <!-- <img src="{{ section.settings.center_image | img_url: 'master' }}" alt="Wheel center"> -->
+              <img
+                src="https://a.omappapi.com/users/23b188735794/images/e8112311bc011735898724-fireworks-13.png?width=140&height=140"
+                alt="Wheel center"
+              >
+            </div>
+            <div class="pointer"></div>
+          </div>
+        </div>
+    
+        <div class="form-side">
+          <h3>{{ section.settings.form_title }}</h3>
+          <p>{{ section.settings.form_description }}</p>
+          <div id="wheelForm" class="form-container">
+            <input type="text" id="name" placeholder="Họ và tên" required>
+            <input type="tel" id="phone" placeholder="Số điện thoại" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <button onclick="validateAndSubmit()">Xác nhận</button>
+          </div>
+        </div>
+      </div>  
+    </div>
+    
+    <!-- Result popup -->
+    <div class="result-popup" id="resultPopup">
+      <h3>Chúc mừng bạn!</h3>
+      <img id="resultImage" class="result-image" src="" alt="Prize image">
+      <p id="resultText" class="result-message"></p>
+      <p class="custom-message">{{ section.settings.congratulation_text }}</p>
+      <button onclick="closeResultPopup()">Đóng</button>
+    </div>
+    
+    <script>
+      // Show popup on first visit
+      document.addEventListener('DOMContentLoaded', function() {
+        if (!localStorage.getItem('wheelPopupShown')) {
+          setTimeout(() => {
+            document.getElementById('wheelPopup').style.display = 'block';
+          }, 2000);
+        }
+      });
+    
+      function getRandomPrizeIndex() {
+        // Mảng trọng số cho các giải thưởng
+        const weightedPrizes = [
+          0, 1, 1, 1, 2, 3, 3, 4, 5, 6, 7, 8, 8, 9, 10, 11, 12, 12, 13, 13
+        ];
+    
+        // Chọn ngẫu nhiên một giải thưởng từ mảng trọng số
+        const randomIndex = Math.floor(Math.random() * weightedPrizes.length);
+        return weightedPrizes[randomIndex];
+      }
+    
+      async function validateAndSubmit() {
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+    
+        // Kiểm tra nếu người dùng đã nhập
+        if (localStorage.getItem('formSubmitted')) {
+          alert('Bạn chỉ được nhập một lần.');
+          return;
+        }
+    
+        // Kiểm tra form
+        if (!name || !phone || !email) {
+          alert('Vui lòng nhập đầy đủ thông tin');
+          return;
+        }
+    
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert('Email không hợp lệ');
+          return;
+        }
+    
+        // Validate phone format (Vietnam phone number)
+        const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+        if (!phoneRegex.test(phone)) {
+          alert('Số điện thoại không hợp lệ');
+          return;
+        }
+    
+        try {
+          // Tính toán kết quả quay số ngẫu nhiên
+          const prizeIndex = getRandomPrizeIndex();
+          const result = prizes[prizeIndex];
+    
+          const LARK_WEBHOOK = "https://ru9sleep.larksuite.com/base/automation/webhook/event/UiEfaE9fOwtoBJhPMo9u65oEsdf";
+          
+          const response = await fetch(LARK_WEBHOOK, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: email,
+              name: name,
+              phone: phone,
+              result: result
+            }),
+            mode: 'no-cors'
+          });
+    
+          // Đánh dấu là đã nhập
+          localStorage.setItem('formSubmitted', 'true');
+    
+          // Bắt đầu quay với kết quả đã được xác định
+          spinWheel(prizeIndex);
+    
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Có lỗi xảy ra, vui lòng thử lại sau');
+        }
+      }
+    
+      function showResult(winningIndex) {
+        const prize = prizes[winningIndex];
+        const resultPopup = document.getElementById('resultPopup');
+        const resultText = document.getElementById('resultText');
+        const resultImage = document.getElementById('resultImage');
+        
+        resultText.textContent = `Bạn đã trúng: ${prize}`;
+        
+        // Get image URL from section settings
+        const imageId = `prize_image_${winningIndex + 1}`;
+        const imageUrl = {{ section.settings | json }}[imageId];
+        if (imageUrl) {
+          resultImage.src = imageUrl;
+          resultImage.style.display = 'block';
+        }
+        
+        // Ẩn popup quay số
+        document.getElementById('wheelPopup').style.display = 'none';
+        
+        // Hiển thị popup kết quả
+        resultPopup.style.display = 'block';
+        
+        // Mark as shown
+        localStorage.setItem('wheelPopupShown', 'true');
+      }
+    
+      // Lấy danh sách giải thưởng từ section settings
+      const prizes = [
+        {% for i in (1..section.settings.number_of_prizes) %}
+          {% assign prize_text = 'prize_text_' | append: i %}
+          "{{ section.settings[prize_text] }}"{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ];
+    
+      const canvas = document.getElementById('wheelCanvas');
+      const ctx = canvas.getContext('2d');
+      let currentRotation = 0;
+      let isSpinning = false;
+    
+      function drawWheel() {
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = canvas.width / 2 - 10;
+        const totalSections = {{ section.settings.number_of_prizes }};
+        const arcAngle = (2 * Math.PI) / totalSections;
+    
+        // Xóa canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+        // Vẽ viền ngoài
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+        ctx.strokeStyle = '#FFD700';
+        ctx.lineWidth = 8;
+        ctx.stroke();
+    
+        // Vẽ từng section
+        for (let i = 0; i < totalSections; i++) {
+          ctx.save();
+          ctx.translate(centerX, centerY);
+          ctx.rotate(currentRotation + i * arcAngle);
+    
+          // Vẽ section
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.arc(0, 0, radius - 4, 0, arcAngle);
+          ctx.lineTo(0, 0);
+          ctx.fillStyle = i % 2 === 0 ? '#D62828' : '#FFF5E6';
+          ctx.fill();
+          ctx.restore();
+    
+          // Vẽ text
+          ctx.save();
+          ctx.translate(centerX, centerY);
+          ctx.rotate(currentRotation + i * arcAngle + arcAngle / 2);
+          // ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillStyle = i % 2 === 0 ? '#FFF' : '#000';
+          ctx.font = 'bold 12px Arial';
+          const textRadius = radius * 0.75;
+          ctx.fillText(prizes[i], textRadius * 0.5, 0);
+          ctx.restore();
+        }
+      }
+    
+      function spinWheel(winningIndex) {
+        if (isSpinning) return;
+        
+        isSpinning = true;
+        const totalRotation = Math.random() * 360 + 1440; // Ít nhất 4 vòng
+        const duration = 5000; // 5 giây
+        const startRotation = currentRotation;
+        const startTime = performance.now();
+    
+        function animate(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          
+          currentRotation = startRotation + (totalRotation * Math.PI / 180) * easeOut;
+          drawWheel();
+    
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            isSpinning = false;
+            showResult(winningIndex);
+          }
+        }
+    
+        requestAnimationFrame(animate);
+      }
+    
+      // Vẽ vòng quay ban đầu
+      drawWheel();
+    
+      // Thêm sự kiện click cho nút quay
+      document.querySelector('.wheel-center').addEventListener('click', () => spinWheel(Math.floor(Math.random() * prizes.length)));
+    
+      // Close popup when clicking overlay
+      document.getElementById('wheelOverlay').addEventListener('click', closeWheelPopup);
+    
+      // Thêm hàm đóng popup
+      function closeWheelPopup() {
+        document.getElementById('wheelPopup').style.display = 'none';
+      }
+    
+      function closeResultPopup() {
+        document.getElementById('resultPopup').style.display = 'none';
+      }
+    
+      // Tự động gọi validateAndSubmit khi người dùng nhập đủ thông tin
+      document.getElementById('name').addEventListener('input', validateAndSubmit);
+      document.getElementById('phone').addEventListener('input', validateAndSubmit);
+      document.getElementById('email').addEventListener('input', validateAndSubmit);
+    </script>
+    
+    {% schema %}
+    {
+      "name": "Lucky Wheel Popup",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "wheel_background",
+          "label": "Wheel Background Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "center_image",
+          "label": "Center Wheel Image",
+          "info": "Recommended size: 80x80px"
+        },
+        {
+          "type": "text",
+          "id": "form_title",
+          "label": "Form Title",
+          "default": "Nhập thông tin của bạn"
+        },
+        {
+          "type": "textarea",
+          "id": "form_description",
+          "label": "Form Description",
+          "default": "Hãy điền thông tin để nhận quà may mắn"
+        },
+        {
+          "type": "textarea",
+          "id": "congratulation_text",
+          "label": "Congratulation Message",
+          "default": "Cảm ơn bạn đã tham gia!"
+        },
+        {
+          "type": "number",
+          "id": "number_of_prizes",
+          "label": "Number of Prizes",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Prize Settings"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_1",
+          "label": "Prize 1 Text",
+          "default": "Giảm 100K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_2",
+          "label": "Prize 2 Text",
+          "default": "Giảm 200K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_3",
+          "label": "Prize 3 Text",
+          "default": "Giảm 300K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_4",
+          "label": "Prize 4 Text",
+          "default": "Giảm 400K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_5",
+          "label": "Prize 5 Text",
+          "default": "Giảm 500K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_6",
+          "label": "Prize 6 Text",
+          "default": "Giảm 600K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_7",
+          "label": "Prize 7 Text",
+          "default": "Giảm 700K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_8",
+          "label": "Prize 8 Text",
+          "default": "Giảm 800K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_9",
+          "label": "Prize 9 Text",
+          "default": "Giảm 900K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_10",
+          "label": "Prize 10 Text",
+          "default": "Giảm 1000K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_11",
+          "label": "Prize 11 Text",
+          "default": "Giảm 1100K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_12",
+          "label": "Prize 12 Text",
+          "default": "May mắn lần sau"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_13",
+          "label": "Prize 13 Text",
+          "default": "Giảm 1300K"
+        },
+        {
+          "type": "text",
+          "id": "prize_text_14",
+          "label": "Prize 14 Text",
+          "default": "Giảm 1400K"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_1",
+          "label": "Prize 1 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_2",
+          "label": "Prize 2 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_3",
+          "label": "Prize 3 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_4",
+          "label": "Prize 4 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_5",
+          "label": "Prize 5 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_6",
+          "label": "Prize 6 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_7",
+          "label": "Prize 7 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_8",
+          "label": "Prize 8 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_9",
+          "label": "Prize 9 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_10",
+          "label": "Prize 10 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_11",
+          "label": "Prize 11 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_12",
+          "label": "Prize 12 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_13",
+          "label": "Prize 13 Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "prize_image_14",
+          "label": "Prize 14 Image"
+        }
+      ],
+      "presets": [
+        {
+          "name": "Lucky Wheel Popup",
+          "category": "Promotional"
+        }
+      ]
+    }
+    {% endschema %}
+    

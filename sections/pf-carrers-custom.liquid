@@ -1,0 +1,83 @@
+<div class="section-{{section.id}}">
+  
+  <div class="container container-medium">
+    <div class="row">
+        <div class="col-12 text-center">
+        {%if section.settings.image != blank%}
+         <img src="{{section.settings.image | img_url:'master'}}" 
+              width="{{section.settings.image.width}}"
+              height="{{section.settings.image.height}}"
+              alt="">
+         {%else%}
+         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%endif%}
+        <div> 
+          <p class="primary-color">{{section.settings.content}}</p>
+        </div>
+        </div>
+    </div>
+    </div>
+  <div class="section-parallax">
+  </div>
+</div>
+<style>
+.section-{{section.id}} {
+  padding: 80px 0px 0px;
+  background-color: {{section.settings.background}};
+  font-size: 22px;
+}
+.page-heading{
+    margin-bottom: 50px;
+}
+.section-parallax {
+      margin-top: 50px;
+  height: 900px;
+  background-image: url({{section.settings.background_image | img_url:'master'}});
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+}
+@media(max-width: 767px) {
+  .section-{{section.id}} {
+    font-size: 18px;
+  }
+  .section-parallax {
+    height: 400px;
+    background-attachment: scroll;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Careers Custom",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "image"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background Color",
+      "default": "#fff"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "default": "Các vị trí đang tuyển dụng",
+      "label": "content"
+    },
+    {
+      "type": "header",
+      "content": "Section image settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    }
+  ]
+}
+{% endschema %}

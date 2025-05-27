@@ -1,0 +1,141 @@
+{{ 'login.css' | asset_url | stylesheet_tag: preload: true }}
+
+<div class="main-account main-register">
+  <div class="container flex">
+    <div class="main-account__form main-login__form flex flex-col">
+      <div class="content-wrap">
+        <header class="section-header text-left">
+          <h1 class="section-header__title text-3xl m-0">
+            {%- if section.settings.title != blank -%}
+              {{ section.settings.title }}
+            {%- else -%}
+              {{ 'customer.register.title' | t }}
+            {%- endif -%}
+          </h1>
+          {%- if section.settings.subtitle != blank -%}
+            <div class="rte text-sm">{{ section.settings.subtitle }}</div>
+          {%- endif -%}
+        </header>
+
+        <div class="form-vertical">
+          {%- form 'create_customer', novalidate: 'novalidate' -%}
+            {{ form.errors | default_errors }}
+            {% comment %} <input type="hidden" name="checkout_url" value="/pages/register-success"> {% endcomment %}
+            {% comment %} <div id="birthday" class="">
+              <label for="birthday" class="label">Birthday</label>
+              <input type="date" name="customer[birthday]" id="birthday" placeholder="YYYY-MM-DD">
+            </div> {% endcomment %}
+
+            <label class="text-sm f-medium" for="FirstName">{{ 'customer.register.first_name' | t }}</label>
+            <input
+              type="text"
+              name="customer[first_name]"
+              id="FirstName"
+              class="input-full text-sm"
+              {% if form.first_name %}
+                value="{{ form.first_name }}"
+              {% endif %}
+              autocapitalize="words"
+              autofocus
+              placeholder="{{ 'customer.register.first_name_placeholder' | t }}"
+            >
+
+            <label class="text-sm f-medium" for="LastName">{{ 'customer.register.last_name' | t }}</label>
+            <input
+              type="text"
+              name="customer[last_name]"
+              id="LastName"
+              class="input-full text-sm"
+              {% if form.last_name %}
+                value="{{ form.last_name }}"
+              {% endif %}
+              autocapitalize="words"
+              placeholder="{{ 'customer.register.last_name_placeholder' | t }}"
+            >
+
+            <label class="text-sm f-medium" for="Email">{{ 'customer.register.email' | t }}</label>
+            <input
+              type="email"
+              name="customer[email]"
+              id="Email"
+              required
+              class="input-full text-sm{% if form.errors contains 'email' %} error{% endif %}"
+              {% if form.email %}
+                value="{{ form.email }}"
+              {% endif %}
+              spellcheck="false"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              aria-required="true"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="RegisterForm-email-error"
+              {% endif %}
+              placeholder="{{ 'customer.register.email_placeholder' | t }}"
+            >
+            {%- if form.errors contains 'email' -%}
+              <span id="RegisterForm-email-error" class="form__message d-flex a-i-center l-h-1 m-b subrte">
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}.
+              </span>
+            {%- endif -%}
+            <label class="text-sm f-medium" for="CreatePassword">{{ 'customer.register.password' | t }}</label>
+            <input
+              type="password"
+              name="customer[password]"
+              id="CreatePassword"
+              required
+              placeholder="{{ 'customer.register.password_placeholder' | t }}"
+              class="input-full text-sm{% if form.errors contains 'password' %} error{% endif %}"
+            >
+
+            <p class="m-0">
+              <label for="register-submit" class="hidden-label">{{ 'customer.register.submit' | t }}</label>
+              <input
+                type="submit"
+                id="register-submit"
+                value="{{ 'customer.register.submit' | t }}"
+                class="btn"
+              >
+            </p>
+            <p>
+              {{ 'layout.customer.already_registered' | t }}
+              {{ 'layout.customer.log_in_now' | t | customer_login_link }}
+            </p>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+    <div class="main-account__banner main-login__banner">
+      {%- if section.settings.banner != blank -%}
+        {%- render 'image-element', img: section.settings.banner, classes: 'image-fit' -%}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main register",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner",
+      "label": "Banner"
+    }
+  ]
+}
+{% endschema %}

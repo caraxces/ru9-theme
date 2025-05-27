@@ -1,0 +1,147 @@
+{{ 'customer-reviews.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'page-customer-reviews.css' | asset_url | stylesheet_tag }}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+{%- assign limit = 9 -%}
+
+<style>
+  @media screen and (min-width: 768px) {
+    .reviews_container.is-show-less .review:nth-child({{ limit }}) ~ .review,
+    .reviews_container.is-show-less .js-see-less,
+    .reviews_container:not(.is-show-less) .js-see-more {
+      display: none;
+    }
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+    display: none;
+  }
+</style>
+<div class="page-width">
+  <header class="section-header text-center">
+    <h1 class="section-header__title">{{ page.title }}</h1>
+    {%- render 'review-start', review_star: 5 -%}
+  </header>
+  <div class='swiper reviews__collections'>
+    <div class='swiper-wrapper'>
+      {%- assign first_collection_has_reviews = '' -%}
+      {%- for block in section.blocks -%}
+        <div class='swiper-slide' data-handle='{{ block.settings.collection.handle }}'>
+          <img src='{{ block.settings.collection.image | img_url: '165x' }}' />
+          <span>{{ block.settings.collection.title }}</span>
+        </div>
+        {%- if block.settings.collection.metafields.custom.review_name_1.value and first_collection_has_reviews == '' -%}
+          {%- assign first_collection_has_reviews = block.settings.collection.handle -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="swiper-button-next">
+      <svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
+    </div>
+    <div class="swiper-button-prev">
+      <svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg>
+    </div>
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- assign collection_handle = block.settings.collection.handle -%}
+    {%- render 'page-customer-review-reviews', index: forloop.index0, collection_handle: collection_handle -%}
+  {%- endfor -%}
+</div>
+
+<script>
+  const reviewsCollection = ".reviews__collections"
+  var swiperReviewsCollection = new Swiper(reviewsCollection, {
+    spaceBetween: 40,
+    slidesPerView: 3,
+    centeredSlides: true,
+    loop: true,
+    navigation: {
+      nextEl: reviewsCollection + " .swiper-button-next",
+      prevEl: reviewsCollection + " .swiper-button-prev",
+    },
+    breakpoints: {
+      768: {
+        spaceBetween: 50,
+        slidesPerView: 5
+      }
+    }
+  })
+
+  const reviewContainer = document.querySelectorAll('.reviews_container')
+  if (window.matchMedia('(min-width: 768px)').matches) {
+    const limit = {{ limit | default: 9 }};
+    reviewContainer.forEach(container => {
+      const reviewItems = container.querySelectorAll('.review')
+      if (reviewItems && reviewItems.length > limit) {
+        const seeMoreBtn = container.querySelector('.reviews_container .js-see-more')
+        const seeLessBtn = container.querySelector('.reviews_container .js-see-less')
+        
+        seeMoreBtn.classList.remove('hidden')
+        seeLessBtn.classList.remove('hidden')
+
+        seeMoreBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          container.classList.remove('is-show-less')
+        })
+        seeLessBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          container.classList.add('is-show-less')
+        })
+      }
+    })
+  }
+
+  swiperReviewsCollection.on('click', function (swiper) {
+    const { clickedIndex, clickedSlide, slides } = swiper
+
+    swiperReviewsCollection.slideTo(clickedIndex)
+    
+    const handle = clickedSlide.dataset.handle
+
+    reviewContainer.forEach(container => {
+      container.classList.add('hidden')
+    })
+    document.querySelector(`.reviews_container#CustomerReviews-${handle}`).classList.remove('hidden')
+  })
+
+
+  if (window.matchMedia('(max-width: 767px)').matches) {
+    const Reviews = ".customer_reviews .reviews"
+    var swiperReviews = new Swiper(Reviews, {
+      spaceBetween: 0,
+      centeredSlides: true,
+      slidesPerView: 1,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      },
+      autoplay: false
+    });
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "Collection Review",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Chọn collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,607 @@
+gsap.registerPlugin(ScrollTrigger);
+let duration = 10
+function initBanner(){
+    $('.banner__arrow').click(()=>{
+      let next =  $('.banner').next()
+      $('html, body').animate({
+        scrollTop: next.offset().top
+    }, 2000);
+    })
+}
+function initZoom() {
+    const container = $('.zoom')
+    const title = $('.zoom__title')
+    const image = $('.zoom__bg')
+    const content = $('.zoom__content')
+    const tl = gsap.timeline(
+        {
+            defaults: {
+                duration: duration / 3,
+                ease: 'power2.out'
+            },
+            scrollTrigger: {
+                trigger: '.zoom',
+                start: 'top 80%',
+                end: 'center center',
+                toggleActions: 'restart end end restart',
+                scrub: 6,
+                markers: false
+            }
+        }
+    ).yoyo(true)
+    tl.fromTo([title, image, content], {
+        y: 400
+    }, {
+        y: 0,
+        stagger: 0.5
+    })
+    
+
+
+}
+function initStructure() {
+    const container = $('.structure')
+    const title = $('.structure__title')
+    const content = $('.structure__content')
+    const slide = $('.structure__slide')
+    const items = $('.structure-item ')
+    const overlay = $('.structure__overlay')
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.structure',
+            start: 'top+=100 bottom',
+            end: 'top 90%',
+            scrub: 2,
+            toggleActions: 'restart none none none'
+        }
+    })
+    tl
+    .fromTo([title, slide], {
+        y: 200
+    }, {
+        y: 0,
+        zIndex: 1
+    })
+    gsap.set([title,content],{
+      paddingTop:  $('.structure-item ').eq(0).height() / 4
+    })
+    const tl2 = gsap.timeline({
+        defaults: {
+            duration: 3
+        },
+        scrollTrigger: {
+            trigger: '.structure',
+            start: 'top  top',
+            end: '100% top',
+            pin: '.structure',
+            scrub: 3,
+            toggleActions: 'restart none none none',
+        }
+    })
+
+    items.each(function (i) {
+        let content = $(this).find('.structure-item_content')
+        tl2.to(content.find('.content_1'), {
+            duration: 3,
+            autoAlpha: 0
+        }, 0)
+        tl2.to(content, {
+            duration: 3,
+            yPercent: -100,
+        }, 0).addLabel('content_1')
+
+        tl2.to(content.find('.content_2'), {
+            duration: 4,
+            autoAlpha: 1
+
+        },1 )
+    })
+
+    tl2.to('.structure-item_content', {
+        duration: 3,
+        yPercent: -200,
+    })
+    tl2.fromTo(slide, {
+        autoAlpha: 1
+    }, {
+        delay: 1,
+        duration: 3,
+        autoAlpha: 0
+    },'content_1').addLabel('hideSlide')
+    .to(content, {
+        top: 0,
+        autoAlpha: 1,
+        duration: 2,
+    }, 'hideSlide-=0.5')
+    .to(overlay, {
+        autoAlpha: 1,
+        zIndex: 0
+    }, 'hideSlide-=1')
+    .to(container, {
+        color: container.find('.container').data('color')
+    }, 'hideSlide-=3')
+    .to(container.parent().next(),{
+        marginTop: -30
+    })
+
+}
+function initSlideUp() {
+    if (!$('.slideup').length) return
+    let container = $('.slideup')
+    let overlay = $('.slideup-overlay')
+    let wrapper = $('.slideup-wrapper')
+    let title = $('.slideup__title')
+    let content = $('.slideup__content')
+    let slideWrapper = $('.slide-vertical-wrapper')
+    let slide = $('.slide-vertical')
+    let items = $('.slide-vertical .item')
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.slideup',
+            start: 'top 80%',
+            end: 'top 90%',
+            scrub: 2,
+            toggleActions: 'restart none none none'
+
+        },
+    })
+    const tl1 = gsap.timeline({
+        defaults: {
+            duration: 2
+        },
+        scrollTrigger: {
+            trigger: '.slideup-wrapper',
+            start: () => 'top top',
+            end: () => {
+                return `300% top`;
+            },
+            toggleActions: 'restart reversed none none',
+            pin: '.slideup',
+            scrub: 1,
+            markers: false,
+        },
+
+
+    })
+    
+    gsap.set(items.eq(0), {
+        autoAlpha: 1,
+        scale: 1
+    })
+    let heights = items.map(function () {
+        return $(this).height();
+    }).get();
+
+    let maxHeight = Math.max.apply(null, heights);
+    gsap.set(slideWrapper, {
+        height: window.innerHeight
+    })
+    gsap.set(items, {
+        height: maxHeight
+    })
+    gsap.set(title, {
+        y: 300
+    })
+    gsap.set(content, {
+        y: 300
+    })
+    tl.to(container.parent(),{
+        duration: 0,
+        marginTop: -30
+    }).to([title,content], {
+        duration: 1,
+        autoAlpha: 1,
+        y: 0
+    }, 0) .fromTo(slideWrapper, {
+        autoAlpha: 0,
+        y: 50
+    }, {
+        autoAlpha: 1,
+        y: 0,
+    })
+    tl1.to(content,{
+            autoAlpha: 0,
+        }, 0)
+       
+
+    items.each(function (i) {
+        if (i < items.length - 1) {
+            let item = $(this)
+            let next = items.eq(i + 1)
+            let title = item.find('h3')
+            let content = item.find('p')
+            let mask = item.find('.mask')
+            let titleNext = next.find('h3')
+            let contentNext = next.find('p')
+            let maskNext = next.find('.mask')
+            if(i == 0){
+                tl1
+                .to(slide, {
+                    y: () => -item.height() * (i + 1) - 60*(i+1)
+                },0).addLabel(`transform-${i}`).to(next, {
+                    autoAlpha: 1,
+                    scale: 1,
+                    transformOrigin: 'bottom'
+
+                }, `transform-${i}-=1.5`)
+            }else{
+                tl1
+                .to(slide, {
+                    y: () => -item.height() * (i + 1) - 60*(i+1)
+                }).addLabel(`transform-${i}`).to(next, {
+                    autoAlpha: 1,
+                    scale: 1,
+                    transformOrigin: 'bottom'
+
+                }, `transform-${i}-=1.5`)
+            }
+          
+
+        }
+    })
+    gsap.set(container.parent(),{
+        backgroundColor: '#f0f7f6'
+    })
+}
+
+function initProducts(){
+    const container = $('.pf-comparison-product')
+    gsap.set(container, {
+        y: 300
+    })
+    gsap.to(container,{
+        y: 0,
+        scrollTrigger: {
+            trigger: '.section-compare-product',
+            start: 'top 80%',
+            end: 'center bottom',
+            toggleActions: 'restart end end restart',
+            scrub: 6,
+            markers: false
+        }
+    })
+}
+function initZoomMb() {
+    const container = $('.zoom')
+    const title = $('.zoom__title')
+    const image = $('.zoom__bg')
+    const content = $('.zoom__content')
+    const tl = gsap.timeline(
+        {
+            defaults: {
+                duration: duration / 3,
+                ease: 'power2.out'
+            },
+            scrollTrigger: {
+                trigger: '.zoom',
+                start: 'top-=50% bottom',
+                end: 'center center',
+                toggleActions: 'restart end end restart',
+                scrub: 6,
+                markers: false
+            }
+        }
+    ).yoyo(true)
+    tl.fromTo([title, image, content], {
+        y: 400
+    }, {
+        y: 0,
+        stagger: 0.5
+    })
+    
+
+
+}
+function initStructureMb(){
+    const container = $('.structure')
+    const title = $('.structure__title')
+    const content = $('.structure__content')
+    const slide = $('.structure__slide')
+    const items = $('.structure-item ')
+    const overlay = $('.structure__overlay')
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.structure',
+            start: 'top+=100 bottom',
+            end: 'top 90%',
+            scrub: 2,
+            toggleActions: 'restart none none none'
+        }
+    })
+    tl
+    .fromTo([title, slide], {
+        y: 200
+    }, {
+        y: 0,
+        zIndex: 1
+    })
+    gsap.set([title,content],{
+      paddingTop:  $('.structure-item ').eq(0).height() / 4
+    })
+    const tl2 = gsap.timeline({
+        defaults: {
+            duration: 3
+        },
+        scrollTrigger: {
+            trigger: '.structure',
+            start: 'top  top',
+            end: '100% top',
+            pin: '.structure',
+            scrub: 3,
+            toggleActions: 'restart none none none',
+        }
+    })
+
+    items.each(function (i) {
+        let content = $(this).find('.structure-item_content')
+        tl2.to(content.find('.content_1'), {
+            duration: 2,
+            autoAlpha: 0
+        }, 0)
+        tl2.to(content, {
+            duration: 2,
+            yPercent: -100,
+        }, 0).addLabel('content_1')
+
+        tl2.to(content.find('.content_2'), {
+            duration: 3,
+            autoAlpha: 1
+
+        },1 )
+    })
+
+    tl2.to('.structure-item_content', {
+        duration: 3,
+        yPercent: -140,
+    })
+    tl2.fromTo(slide, {
+        autoAlpha: 1
+    }, {
+        duration: 0.5,
+        autoAlpha: 0
+    },'content_1').addLabel('hideSlide')
+    .to(overlay, {
+        autoAlpha: 1,
+        zIndex: 0,
+        duration: 1
+    }, 'hideSlide-=2')
+    .to(content, {
+        top: 0,
+        autoAlpha: 1,
+        duration: 2,
+    }, 'hideSlide-=2')
+  
+    .to(container, {
+        color: container.find('.container').data('color')
+    }, 'hideSlide-=3')
+   .to(container.parent().next(),{
+        marginTop: -$(window).height()*0.3,
+        onComplete: ()=>{
+            ScrollTrigger.refresh()
+        }
+    })
+}
+function initSlideupMb() {
+    if (!$('.slideup').length) return
+
+    let container = $('.slideup')
+    let overlay = $('.slideup-overlay')
+    let wrapper = $('.slideup-wrapper')
+    let title = $('.slideup__title')
+    let content = $('.slideup__content')
+    let slideWrapper = $('.slide-vertical-wrapper')
+    let slide = $('.slide-vertical')
+    let items = $('.slide-vertical .item')
+    const nextTop = container.next().offset().top
+
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 4
+        }
+    },{
+        scrollTrigger: {
+            trigger: '.slideup',
+            start: '10% bottom',
+            end: () => 'top 50%',
+
+            toggleActions: 'restart none none none',
+
+            scrub: true,
+
+        }
+    })
+    // tl
+    //   .fromTo(slideWrapper, {
+    //         autoAlpha: 0,
+    //         y: 50,
+    //     }, {
+    //         autoAlpha: 1,
+    //         y: 0,
+    //     }, 0)
+  
+    // tl
+    // .fromTo(slideWrapper, {
+    //       autoAlpha: 0,
+    //       y: 50,
+    //   }, {
+    //       autoAlpha: 1,
+    //       y: 0,
+    //   }, 0)
+let tlTitile = gsap.timeline({
+    scrollTrigger: {
+        trigger: '.slideup',
+        start: '10% bottom',
+        toggleActions: 'restart none reset reset',
+        endTrigger: '.slideup__title',
+		scrub: true,
+    }
+})
+
+let tlContent = gsap.timeline({
+    scrollTrigger: {
+              trigger: '.slideup',
+        start: '10% bottom',
+        end: 'top 30%',
+        endTrigger: '.slide-vertical-wrapper',
+        toggleActions: 'restart none reverse reverse',
+		scrub: true,
+    }
+})
+tlContent.fromTo(title,{
+    y: 100
+},{
+    duration: 3,
+    y: 0,
+   
+}).fromTo(content,{
+    y: 100,
+    autoAlpha: 0
+
+},{
+	duration: 1,
+    autoAlpha: 1,
+    y: 0,
+}, ).fromTo(slideWrapper, {
+    autoAlpha: 0,
+    y: 50,
+}, {
+    autoAlpha: 1,
+    y: 0,
+})
+
+    items.each(function (i) {
+        let item = $(this)
+        let img = item.find('.img')
+        let text = item.find('.item-body')
+        let mask = item.find('.mask')
+
+        let next = items.eq(i - 1)
+        const itemTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: item,
+                start: () => i == 0? 'top 20%':'top 50%',
+                end: () =>  `bottom 50%`,
+                toggleActions: 'restart reverse restart reverse',
+                markers: false,
+                scrub: false
+            }
+        })
+        if (i > 0) {
+
+            itemTl.to(item, {
+                autoAlpha: 1,
+
+            }, 0).addLabel('show')
+                .to(img, {
+                    scale: 1
+                }, 0)
+        } else {
+            gsap.to(item, {
+                autoAlpha: 1
+            })
+            itemTl
+
+                .to(mask, {
+                    autoAlpha: 0
+                }, '0.3').to(img, {
+                    scale: 1
+                }, 0)
+                .to(item, {
+                    autoAlpha: 1,
+
+                }, 0).addLabel('show')
+        }
+        itemTl.fromTo(text, {
+            // yPercent: 10,
+            autoAlpha: 0.3,
+
+        }, {
+            autoAlpha: 1,
+            // yPercent: 0,
+        }, 'show-=0.5').to(item, {
+            autoAlpha: 1,
+            //   y: -10,
+        })
+
+    })
+}
+function initProductsMb(){
+    const container = $('.pf-comparison-product')
+    gsap.set(container, {
+        y: 200
+    })
+    gsap.to(container,{
+        y: 0,
+        scrollTrigger: {
+            trigger: '.section-compare-product',
+            start: 'top 80%',
+            end: 'center 80%',
+            toggleActions: 'restart end end restart',
+            scrub: 6,
+            markers: false
+        }
+    })
+}
+function initContent() {
+    initBanner()
+    initZoom()
+    initStructure()
+    initSlideUp()
+    initProducts()
+}
+
+function initContentMb() {
+    initBanner()
+    initZoomMb()
+    initStructureMb()
+    initSlideupMb()
+    initProductsMb()
+}
+
+$(document).ready(() => {
+    let isDesktop = window.matchMedia('(min-width: 768px)').matches
+
+    isDesktop ? initContent() : initContentMb()
+    setTimeout(() => {
+        $('#viewport').addClass('loaded')
+        $('.ldp-loading').remove()
+        $("html, body").animate({ scrollTop: 0 }, 0);
+    }, isDesktop ? 400 : 400)
+  $(document).one('mousemove touchstart',()=>{
+	$('img').removeAttr('loading')
+})
+    if ($('video').length) {
+        Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
+            get: function () {
+                return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
+            }
+        });
+        const videos = document.querySelectorAll('video');
+        videos.forEach(videoElement => {
+            if (videoElement.playing) {
+                // video is already playing so do nothing
+            }
+            else {
+                // video is not playing
+                // so play video now
+                videoElement.play();
+            }
+        })
+        $('body').on('click touchstart', function () {
+            const videos = document.querySelectorAll('video');
+            videos.forEach(videoElement => {
+                if (videoElement.playing) {
+                    // video is already playing so do nothing
+                }
+                else {
+                    // video is not playing
+                    // so play video now
+                    videoElement.play();
+                }
+            })
+
+        });
+
+    }
+})

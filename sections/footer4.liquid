@@ -1,0 +1,286 @@
+<footer class="footer">
+  <div class="bubbles">
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+    <div class="bubble bubble-4"></div>
+    <div class="bubble bubble-5"></div>
+  </div>
+  
+  <div class="content">
+    <div class="footer-content">
+      {% if section.settings.contact_title != blank %}
+        <h3>{{ section.settings.contact_title }}</h3>
+      {% endif %}
+      
+      {% if section.settings.email != blank %}
+        <p>Email: {{ section.settings.email }}</p>
+      {% endif %}
+      
+      {% if section.settings.phone != blank %}
+        <p>Phone: {{ section.settings.phone }}</p>
+      {% endif %}
+    </div>
+
+    <div class="footer-content">
+      {% if section.settings.social_title != blank %}
+        <h3>{{ section.settings.social_title }}</h3>
+      {% endif %}
+      
+      {% if section.settings.show_social %}
+        {% if settings.social_facebook_link != blank %}
+          <p><a href="{{ settings.social_facebook_link }}" target="_blank">Facebook</a></p>
+        {% endif %}
+        
+        {% if settings.social_twitter_link != blank %}
+          <p><a href="{{ settings.social_twitter_link }}" target="_blank">Twitter</a></p>
+        {% endif %}
+        
+        {% if settings.social_instagram_link != blank %}
+          <p><a href="{{ settings.social_instagram_link }}" target="_blank">Instagram</a></p>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="waves-container">
+    <img src="{{ 'wave.svg' | asset_url }}" class="waves" alt="Wave animation">
+  </div>
+</footer>
+
+<svg style="position: fixed; top: 100vh">
+  <defs>
+    <filter id="blob">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="blob"></feColorMatrix>
+    </filter>
+  </defs>
+</svg>
+
+<style>
+:root {
+  --footer-background: {{ section.settings.footer_background }};
+}
+
+.footer {
+  z-index: 1;
+  display: grid;
+  position: relative;
+  grid-area: footer;
+  min-height: 12rem;
+  overflow: hidden;
+}
+
+.footer .bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: var(--footer-background);
+  filter: url("#blob");
+}
+
+.footer .content {
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 4rem;
+  padding: 2rem;
+  background: var(--footer-background);
+  color: #fff;
+}
+
+.footer .bubble {
+  position: absolute;
+  left: var(--position, 50%);
+  background: var(--footer-background);
+  border-radius: 100%;
+  opacity: 0.7;
+  animation: 
+    bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
+    bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+  transform: translate(-50%, 100%);
+  will-change: transform, width, height;
+}
+
+@keyframes bubble-size {
+  0%, 75% {
+    width: var(--size, 4rem);
+    height: var(--size, 4rem);
+  }
+  100% {
+    width: 0;
+    height: 0;
+  }
+}
+
+@keyframes bubble-move {
+  0% {
+    bottom: -4rem;
+  }
+  100% {
+    bottom: var(--distance, 10rem);
+  }
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.footer a:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+  .footer .content {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+  }
+}
+
+.bubble-1 {
+  --size: 3.2245rem;
+  --distance: 6.325rem;
+  --position: 49.1542%;
+  --time: 2.2s;
+  --delay: -2.3s;
+}
+
+.bubble-2 {
+  --size: 3.1254rem;
+  --distance: 7.534rem;
+  --position: 25.6842%;
+  --time: 2.8s;
+  --delay: -2.5s;
+}
+
+.bubble-3 {
+  --size: 2.9546rem;
+  --distance: 8.124rem;
+  --position: 65.3248%;
+  --time: 2.5s;
+  --delay: -2.8s;
+}
+
+.bubble-4 {
+  --size: 4.1532rem;
+  --distance: 9.673rem;
+  --position: 85.7425%;
+  --time: 3.2s;
+  --delay: -3.1s;
+}
+
+.bubble-5 {
+  --size: 3.7845rem;
+  --distance: 7.845rem;
+  --position: 12.4368%;
+  --time: 2.9s;
+  --delay: -3.4s;
+}
+
+.waves-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  min-height: 40px;
+}
+
+.waves {
+  width: 100%;
+  height: 100%;
+}
+
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px,0,0);
+  }
+  100% {
+    transform: translate3d(85px,0,0);
+  }
+}
+
+@media (max-width: 768px) {
+  .waves {
+    height: 40px;
+    min-height: 40px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Animated Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Contact Title",
+      "default": "Contact Us"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email Address",
+      "default": "contact@example.com"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone Number",
+      "default": "(123) 456-7890"
+    },
+    {
+      "type": "text",
+      "id": "social_title", 
+      "label": "Social Media Title",
+      "default": "Follow Us"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show Social Media Links",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "footer_background",
+      "label": "Footer Background Color",
+      "default": "#ED5565"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Animated Footer",
+      "category": "Footer"
+    }
+  ]
+}
+{% endschema %}

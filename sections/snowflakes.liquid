@@ -1,0 +1,34 @@
+{{ 'snowflakes.css' | asset_url | stylesheet_tag }}
+
+<div class="snowflakes" aria-hidden="true">
+  <div class="snowflake">❅💖</div>
+  <div class="snowflake">❆❤️</div>
+  <div class="snowflake">❅💕</div>
+  <div class="snowflake">❆💗</div>
+  <div class="snowflake">❅💓</div>
+  <div class="snowflake">❆💝</div>
+  <div class="snowflake">❅💝</div>
+  <div class="snowflake">❆💝</div>
+  <div class="snowflake">❅💝</div>
+  <div class="snowflake">❆💝</div>
+</div>
+
+{% schema %}
+{
+  "name": "Snow Effect",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_snow",
+      "label": "Enable Snow Effect",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Snow Effect",
+      "category": "Interactive"
+    }
+  ]
+}
+{% endschema %}

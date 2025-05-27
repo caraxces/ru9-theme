@@ -1,0 +1,180 @@
+.product__sticky {
+  bottom: 43px;
+  left: 50%;
+  transform: translate(-50%, 70px);
+  min-width: 991px;
+  max-width: max-content;
+  width: calc(100% - 45px);
+  background-color: #fff;
+  padding: 17px;
+  border-radius: calc(var(--radiusBase) * 1.05);
+  transition: all 0.5s var(--cubic-smooth);
+  opacity: 0;
+  visibility: hidden;
+  filter: drop-shadow(0px 14px 21px rgba(0, 0, 0, 0.1));
+  z-index: 20;
+  font-weight: 400;
+}
+
+.product__sticky .add-to-cart.btn--secondary {
+  border-radius: calc(var(--buttonRadius) * 3.5);
+}
+
+/* Buy Now Button Styles */
+.buy-now-btn {
+  background-color: #273d7e !important;
+  border-color: #273d7e !important;
+  color: #ffffff !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  border-radius: calc(var(--buttonRadius) * 3.5);
+}
+
+.buy-now-btn:hover,
+.buy-now-btn:focus {
+  background-color: #1e2f5f !important;
+  border-color: #1e2f5f !important;
+}
+
+/* Mobile Only Elements */
+.mobile-only {
+  display: none;
+}
+
+/* Sticky Buttons Wrapper */
+.sticky-buttons-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+/* Hide payment buttons on mobile when setting is enabled */
+.hide-payment-mobile .payment-buttons {
+  display: block;
+}
+
+/* Hide entire buy buttons form on mobile when setting is enabled */
+@media screen and (max-width: 768px) {
+  .hide-buy-buttons-mobile {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* Always show sticky cart on mobile */
+  .product__sticky {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    min-width: initial;
+    max-width: 100%;
+    width: 100% !important;
+    padding: 10px 15px !important;
+    border-radius: 0 !important;
+    filter: drop-shadow(0px -2px 10px rgba(0, 0, 0, 0.1));
+    background: white !important;
+    border-top: 1px solid #e0e0e0 !important;
+    z-index: 1000 !important;
+  }
+
+  .product__sticky.active {
+    transform: none !important;
+  }
+
+  .product__sticky-image {
+    width: 48px;
+  }
+
+  .product__sticky-content {
+    margin-left: 16px;
+  }
+
+  .product__sticky-navigation,
+  .product__sticky .add-to-cart .icon-cart {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  .sticky-buttons-wrapper {
+    flex: 1;
+  }
+
+  .sticky-buttons-wrapper .btn {
+    flex: 1;
+  }
+
+  /* Hide payment buttons on mobile when setting is enabled */
+  .hide-payment-mobile .payment-buttons {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .mobile-only {
+    display: none;
+  }
+
+  .sticky-buttons-wrapper .btn {
+    width: 100%;
+  }
+}
+
+.product__sticky.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+  transform: translate(-50%, 0);
+}
+
+@media screen and (max-width: 768px) {
+  .product__sticky.active {
+    transform: none !important;
+  }
+}
+
+.sticky-navigation__links {
+  margin-right: 22px;
+  padding-right: 22px;
+  border-right: 1.4px solid var(--colorBorder);
+}
+
+.product__sticky .product-form__input--pill input[type="radio"],
+.product__sticky .product-form__input--pill input[type="radio"] + label {
+  display: none;
+}
+
+.product__stick-product-wrap {
+  column-gap: calc(var(--grid-desktop-vertical-spacing) * (0.47));
+}
+
+.product__sticky-image {
+  width: 67px;
+}
+
+.product__sticky-content {
+  margin-left: 17px;
+}
+
+.product__sticky .variant-input-wrap {
+  margin: 0;
+}
+
+.product__sticky
+  :is(.product-form__input--pill, .product-form__input--swatch)
+  .form__label {
+  font-size: calc(var(--typeBaseSize) * 0.613);
+  color: #374151;
+  max-width: 63px;
+  margin: 0;
+}
+
+.product__sticky .product-form__submit svg {
+  margin-right: 17px;
+}

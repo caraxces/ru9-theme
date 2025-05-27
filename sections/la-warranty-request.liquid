@@ -1,0 +1,372 @@
+<div class="warranty-result-section">
+  <div class="container">
+    <div class="warranty-search">
+      <h2 class="section-title">Tra cứu bảo hành</h2>
+      <div class="search-container">
+        <input type="text" id="warrantyCode" placeholder="Nhập số điện thoại mua hàng" class="warranty-input">
+        <button onclick="searchWarranty()" class="search-btn">Tra cứu</button>
+      </div>
+    </div>
+    
+    <div id="warrantyResult" class="warranty-result" style="display: none;">
+      <div class="result-status">
+        <div class="status-indicator"></div>
+        <p id="statusMessage" class="status-message"></p>
+      </div>
+      <!-- Container cho tất cả thông tin khách hàng -->
+      <div id="customerDetails" class="customer-details"></div>
+    </div>
+    
+    <!-- Hiển thị khi đang tìm kiếm -->
+    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+      <div class="loading-spinner"></div>
+      <p>Đang tìm kiếm thông tin...</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .warranty-result-section {
+    padding: 40px 0;
+    background: #f8f9fa;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  .warranty-search {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+  
+  .search-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .warranty-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .search-btn {
+    padding: 12px 24px;
+    background: #d5581f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .search-btn:hover {
+    background: #b44816;
+  }
+  
+  .warranty-result {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .result-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffc107;
+  }
+  
+  .status-message {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .customer-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .detail-item {
+    margin-bottom: 15px;
+  }
+  
+  .detail-label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .detail-value {
+    color: #333;
+    padding: 8px;
+    background: #f9f9f9;
+    border-radius: 4px;
+    min-height: 20px;
+  }
+  
+  .loading-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #d5581f;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .customer-details {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Style cho các trường thời gian */
+  .detail-item.time-highlight {
+    border: 2px solid #d5581f;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #fff9f6;
+  }
+  
+  .detail-item.time-highlight .detail-label {
+    color: #d5581f;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+  
+  .detail-item.time-highlight .detail-value {
+    font-weight: bold;
+    color: #d5581f;
+    font-size: 1.2em;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .detail-item.time-highlight {
+      margin: 10px 0;
+    }
+  }
+</style>
+
+<script src="{{ 'lark-api.js' | asset_url }}" defer></script>
+<script>
+  // Đảm bảo script LarkAPI đã tải xong
+  window.addEventListener('DOMContentLoaded', function() {
+    if (typeof window.LarkAPI === 'undefined') {
+      console.error('LarkAPI is not loaded properly');
+      return;
+    }
+    
+    // Thêm event listener cho nút search và input field (enter)
+    document.querySelector('.search-btn').addEventListener('click', searchWarranty);
+    document.getElementById('warrantyCode').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchWarranty();
+      }
+    });
+  });
+
+  async function searchWarranty() {
+    const warrantyCode = document.getElementById('warrantyCode').value.trim();
+    if (!warrantyCode) {
+      alert('Vui lòng nhập số điện thoại mua hàng');
+      return;
+    }
+    
+    const resultDiv = document.getElementById('warrantyResult');
+    const statusMessage = document.getElementById('statusMessage');
+    const statusIndicator = document.querySelector('.status-indicator');
+    const customerDetails = document.getElementById('customerDetails');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    
+    try {
+      // Hiển thị loading
+      resultDiv.style.display = 'none';
+      loadingIndicator.style.display = 'flex';
+      
+      // Gọi API để lấy dữ liệu
+      const data = await LarkAPI.getBitableRecords(warrantyCode);
+      console.log('Received data:', data); // Log để debug
+      
+      // Ẩn loading
+      loadingIndicator.style.display = 'none';
+      
+      // Reset các phần tử
+      resultDiv.style.display = 'block';
+      customerDetails.innerHTML = '';
+      
+      if (!data) {
+        statusIndicator.style.background = '#dc3545'; // Red
+        statusMessage.textContent = 'Không tìm thấy thông tin bảo hành cho số điện thoại này';
+        return;
+      }
+
+      // Cập nhật trạng thái bảo hành
+      updateWarrantyStatus(data, statusIndicator, statusMessage);
+      
+      // Hiển thị tất cả thông tin khách hàng
+      displayCustomerDetails(data, customerDetails);
+      
+    } catch (error) {
+      loadingIndicator.style.display = 'none';
+      resultDiv.style.display = 'block';
+      statusIndicator.style.background = '#dc3545'; // Red
+      statusMessage.textContent = 'Có lỗi xảy ra, vui lòng thử lại sau';
+      console.error('Error:', error);
+    }
+  }
+  
+  // Hàm cập nhật trạng thái bảo hành
+  function updateWarrantyStatus(data, statusIndicator, statusMessage) {
+    const progressSteps = document.querySelectorAll('.progress-step');
+    let progress = 0;
+    
+    // Reset all steps
+    progressSteps.forEach(step => step.classList.remove('active'));
+    
+    // Bước 1: Luôn active khi có data
+    progressSteps[0].classList.add('active');
+    progress = 20;
+    
+    // Bước 2: Active khi đang xử lý
+    if (data) {
+      progressSteps[1].classList.add('active');
+      progress = 40;
+    }
+    
+    // Bước 3: Có thời gian thu hồi
+    if (data['Thời gian thu hồi']) {
+      progressSteps[2].classList.add('active');
+      progressSteps[2].querySelector('.step-date').textContent = data['Thời gian thu hồi'];
+      progress = 60;
+      statusMessage.textContent = `Chúng tôi sẽ tới thu hồi sản phẩm bảo hành vào ngày ${data['Thời gian thu hồi']}`;
+    }
+    
+    // Bước 4: Đang bảo hành
+    if (data['Thời gian thu hồi'] && !data['Thời gian trả hàng']) {
+      progressSteps[3].classList.add('active');
+      progress = 80;
+      statusMessage.textContent = 'Chúng tôi đang tiến hành bảo hành cho sản phẩm của bạn';
+    }
+    
+    // Bước 5: Có thời gian trả hàng
+    if (data['Thời gian trả hàng']) {
+      progressSteps[4].classList.add('active');
+      progressSteps[4].querySelector('.step-date').textContent = data['Thời gian trả hàng'];
+      statusMessage.textContent = `Sản phẩm đã bảo hành sẽ được gửi tới quý khách vào ngày ${data['Thời gian trả hàng']}`;
+      progress = 90;
+    }
+    
+    // Bước 6: Hoàn thành
+    if (data['Thời gian trả hàng']) {
+      progressSteps[5].classList.add('active');
+      progress = 100;
+      statusMessage.textContent = 'Hoàn thành! Chúc quý khách an giấc cùng Ru9';
+    }
+    
+    // Cập nhật thanh progress
+    document.querySelector('.progress-container').style.setProperty('--progress', `${progress}%`);
+    
+    // Cập nhật màu status indicator
+    if (progress <= 20) {
+      statusIndicator.style.background = '#ffc107'; // Yellow
+    } else if (progress <= 60) {
+      statusIndicator.style.background = '#17a2b8'; // Blue
+    } else {
+      statusIndicator.style.background = '#28a745'; // Green
+    }
+  }
+  
+  // Hàm hiển thị tất cả thông tin khách hàng
+  function displayCustomerDetails(data, container) {
+    // Thứ tự hiển thị các trường quan trọng trước
+    const priorityFields = [
+      'Họ và Tên', 
+      'SĐT', 
+      'Số điện thoại mua hàng',
+      'Địa chỉ',
+      'Tên sản phẩm',
+      'Kích thước',
+      'Vấn đề',
+      'Thời gian thu hồi',
+      'Thời gian trả hàng'
+    ];
+    
+    // Hiển thị các trường ưu tiên trước
+    priorityFields.forEach(field => {
+      if (data[field] !== undefined && data[field] !== null && data[field] !== '') {
+        addDetailItem(container, field, data[field]);
+      }
+    });
+    
+    // Hiển thị các trường còn lại
+    for (const [key, value] of Object.entries(data)) {
+      if (!priorityFields.includes(key) && value !== undefined && value !== null && value !== '') {
+        addDetailItem(container, key, value);
+      }
+    }
+  }
+  
+  // Thêm một mục thông tin chi tiết
+  function addDetailItem(container, label, value) {
+    const detailItem = document.createElement('div');
+    detailItem.className = 'detail-item';
+    
+    const detailLabel = document.createElement('div');
+    detailLabel.className = 'detail-label';
+    detailLabel.textContent = label;
+    
+    const detailValue = document.createElement('div');
+    detailValue.className = 'detail-value';
+    detailValue.textContent = value;
+    
+    detailItem.appendChild(detailLabel);
+    detailItem.appendChild(detailValue);
+    container.appendChild(detailItem);
+  }
+</script>

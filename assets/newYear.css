@@ -1,0 +1,162 @@
+.newYears-background {
+    background: no-repeat 50%;
+    background-size: cover;
+    bottom: 0;
+    left: 50%;
+    overflow: hidden;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    transform: translate(-50%);
+    width: 100%;
+    z-index: 0;
+}
+.newYears-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+.newYears-effects {
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    transform: none;
+    width: 100%;
+    z-index: 99999;
+}
+
+.newYear {
+    --size: 20px;
+    background: url(https://cdn.shopify.com/s/files/1/0428/4219/4071/files/pngtree-pink-petal-decorative-pattern-image_1145733.jpg?v=1735668367) no-repeat;
+    background-size: contain;
+    border-radius: 50%;
+    height: var(--size);
+    width: var(--size);
+    position: absolute;
+    top: -50px;
+    animation: snowfall 10s linear infinite;
+    opacity: 0.8;
+    z-index: 9999;
+}
+
+.newYear:nth-of-type(2n) {
+    background: url(https://cdn.shopify.com/s/files/1/0428/4219/4071/files/pngtree-yellow-apricot-blossom-png-image_4276542.png?v=1735668368) no-repeat;
+    background-size: contain;
+}
+
+.newYear:nth-of-type(3n) {
+    background: url(https://cdn.shopify.com/s/files/1/0428/4219/4071/files/pngtree-yellow-apricot-flower-illustration-hand-draw-png-image_2969025.png?v=1735668368) no-repeat;
+    background-size: contain;
+}
+
+.newYear:nth-of-type(4n) {
+    background: url(https://cdn.shopify.com/s/files/1/0428/4219/4071/files/83058PICpFKeA5bU8Y37H_PIC2018.png_860.png?v=1735668369) no-repeat;
+    background-size: contain;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate3d(var(--left-ini), 50vh, 0) rotate(180deg);
+    }
+    100% {
+        transform: translate3d(var(--left-end), 100vh, 0) rotate(360deg);
+    }
+}
+
+/* Định nghĩa vị trí và animation cho từng phần tử */
+.newYear:nth-of-type(1) {
+    --size: 25px;
+    --left-ini: -2vw;
+    --left-end: -7vw;
+    left: 1vw;
+    animation-delay: -1s;
+}
+
+.newYear:nth-of-type(2) {
+    --size: 28px;
+    --left-ini: 2vw;
+    --left-end: 5vw;
+    left: 85vw;
+    animation-delay: -2s;
+}
+
+.newYear:nth-of-type(3) {
+    --size: 23px;
+    --left-ini: 0vw;
+    --left-end: -3vw;
+    left: 89vw;
+    animation-delay: -3s;
+}
+
+.newYear:nth-of-type(4) {
+    --size: 17px;
+    --left-ini: -5vw;
+    --left-end: 5vw;
+    left: 59vw;
+    animation-delay: -2s;
+}
+
+.newYear:nth-of-type(5) {
+    --size: 23px;
+    --left-ini: -9vw;
+    --left-end: 7vw;
+    left: 56vw;
+    animation-delay: -4s;
+}
+
+.newYear:nth-of-type(6) {
+    --size: 16px;
+    --left-ini: -5vw;
+    --left-end: 5vw;
+    left: 33vw;
+    animation-delay: -2s;
+}
+
+.newYear:nth-of-type(7) {
+    --size: 26px;
+    --left-ini: -6vw;
+    --left-end: 5vw;
+    left: 42vw;
+    animation-delay: -4s;
+}
+
+.newYear:nth-of-type(8) {
+    --size: 25px;
+    --left-ini: -8vw;
+    --left-end: -2vw;
+    left: 88vw;
+    animation-delay: -10s;
+}
+
+.newYear:nth-of-type(9) {
+    --size: 30px;
+    --left-ini: 5vw;
+    --left-end: 2vw;
+    left: 22vw;
+    animation-delay: -9s;
+}
+
+.newYear:nth-of-type(10) {
+    --size: 27px;
+    --left-ini: -6vw;
+    --left-end: -5vw;
+    left: 35vw;
+    animation-delay: -1s;
+}
+
+.newYears.has-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

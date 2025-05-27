@@ -1,0 +1,78 @@
+{{ 'page-customer-reviews.css' | asset_url | stylesheet_tag }}
+<div class="page-width text-center customer-reviews__section customer-experience">
+  <div class="header_section">
+    <h3 class="reviews_title">{{ section.settings.heading }}</h3>
+  </div>
+  <div class='customer-experience__reviews swiper'>
+    <div class="swiper-wrapper">
+    {%- for block in section.blocks -%}
+      <div class='swiper-slide customer-experience__item' style='--section-background: {{ block.settings.bg_color }}'>
+        <div class='customer-experience__image'>
+          <img loading="lazy" src='{{ block.settings.image | img_url: "master" }}'/>
+        </div>
+        <div class='customer-experience__content'>
+          <h4>{{ block.settings.title}}</h4>
+          <p>{{ block.settings.content }}</p>
+        </div>
+      </div>
+    {%- endfor -%}
+    </div>
+    <div class='swiper-pagination'></div>
+  </div>
+</div>
+
+<script >
+  if (window.matchMedia('(max-width: 767px)').matches) {
+    const experience = ".customer-experience__reviews"
+    var swiperExperience = new Swiper(experience, {
+      spaceBetween: 0,
+      slidesPerView: 1,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      }
+    });
+  }
+</script>
+
+{%- schema -%}
+{
+  "name": "Customer Experience",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Tên section",
+      "default": "Đánh giá của khách hàng về Ru9 trên Facebook"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Hình ảnh",
+          "id": "image"
+        },
+        {
+          "type": "color",
+          "label": "Màu nền",
+          "id": "bg_color"
+        },
+        {
+          "type": "text",
+          "label": "Tên",
+          "id": "title"
+        },
+        {
+          "type": "textarea",
+          "label": "Nội dung",
+          "id": "content"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema -%}

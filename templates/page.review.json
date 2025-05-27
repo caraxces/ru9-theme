@@ -1,0 +1,238 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page-customer-review",
+      "blocks": {
+        "b5005efa-1972-475e-8850-2c3d1ecefeb9": {
+          "type": "collection",
+          "settings": {
+            "collection": "nem-foam"
+          }
+        },
+        "54b04d2f-001e-4f6f-bdce-49addf505e7d": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi"
+          }
+        },
+        "9251f49a-42ba-4e9b-99b1-fa6135d9d8e9": {
+          "type": "collection",
+          "settings": {
+            "collection": "bedding"
+          }
+        },
+        "a1e6f88e-ff85-4631-a92b-5a4f3935f753": {
+          "type": "collection",
+          "settings": {
+            "collection": "phu-kien"
+          }
+        },
+        "536282a1-60ae-4f16-ab4d-df050054ee8b": {
+          "type": "collection",
+          "settings": {
+            "collection": "bo-phong-ngu"
+          }
+        }
+      },
+      "block_order": [
+        "b5005efa-1972-475e-8850-2c3d1ecefeb9",
+        "54b04d2f-001e-4f6f-bdce-49addf505e7d",
+        "9251f49a-42ba-4e9b-99b1-fa6135d9d8e9",
+        "a1e6f88e-ff85-4631-a92b-5a4f3935f753",
+        "536282a1-60ae-4f16-ab4d-df050054ee8b"
+      ],
+      "settings": {
+      }
+    },
+    "f84f1b0f-acf2-4d8a-94df-0dceacfeb326": {
+      "type": "blog-video",
+      "blocks": {
+        "7f4b990f-7ff3-4caa-b9b9-ccbd0949740e": {
+          "type": "blog",
+          "settings": {
+            "image": "shopify://shop_images/review-bedding_tencel-trang-doan.png",
+            "link": "https://cdn.shopify.com/videos/c/o/v/c537458c4c774234a1a083f5365c469c.mp4"
+          }
+        },
+        "fa51d6b2-2066-4b50-b411-c7817625de52": {
+          "type": "blog",
+          "settings": {
+            "image": "shopify://shop_images/review-bedding_thu-le.png",
+            "link": "https://cdn.shopify.com/videos/c/o/v/95f144cdb60844bcb1291ef118def9bf.mp4"
+          }
+        },
+        "652b6601-c9fd-46b4-b648-2010af8a60f6": {
+          "type": "blog",
+          "settings": {
+            "image": "shopify://shop_images/image-review-tencel-bedding-hoang-thuy-ngo.jpg",
+            "link": "https://cdn.shopify.com/videos/c/o/v/d51b1a1f9d23466092f27d6d226e38c0.mp4"
+          }
+        },
+        "d76383a7-b06a-4ca8-b268-e8054ca4c853": {
+          "type": "blog",
+          "settings": {
+            "image": "shopify://shop_images/image-review-bedding_tencel-tra-thom.png",
+            "link": "https://cdn.shopify.com/videos/c/o/v/2ff7e1bf43964d6e85bb3f2700ae66d8.mp4"
+          }
+        },
+        "552fe9e4-1ff6-49f2-af48-22a81651f2a5": {
+          "type": "blog",
+          "settings": {
+            "image": "shopify://shop_images/bo-ngu-ngon-bd_4631e480-d952-430a-9537-eaca9806662b.jpg",
+            "link": "https://cdn.shopify.com/videos/c/o/v/7787e0028c9a4106a103d6836e794403.mp4"
+          }
+        },
+        "4a54dbb9-007d-40b1-8f6d-b1604af501cf": {
+          "type": "blog",
+          "settings": {
+            "image": "shopify://shop_images/Niu.jpg",
+            "link": "https://cdn.shopify.com/videos/c/o/v/79123e642b344d838174247941526e25.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "7f4b990f-7ff3-4caa-b9b9-ccbd0949740e",
+        "fa51d6b2-2066-4b50-b411-c7817625de52",
+        "652b6601-c9fd-46b4-b648-2010af8a60f6",
+        "d76383a7-b06a-4ca8-b268-e8054ca4c853",
+        "552fe9e4-1ff6-49f2-af48-22a81651f2a5",
+        "4a54dbb9-007d-40b1-8f6d-b1604af501cf"
+      ],
+      "settings": {
+        "video_all_title": "Videos",
+        "video_all_link": "https://www.youtube.com/@Ru9vn",
+        "video_all_content": "Xem thêm"
+      }
+    },
+    "customer-reviews-fb": {
+      "type": "customer-reviews-fb",
+      "settings": {
+        "heading": "Đánh giá của khách hàng về Ru9 trên Facebook",
+        "image": "shopify://shop_images/review_1_1.jpg",
+        "caption": "Bạn đã sẵn sàng để chọn một giấc ngủ ngon cho riêng mình chưa",
+        "button_content": "Mua nệm",
+        "button_link": "https://ru9.vn/pages/nem"
+      }
+    },
+    "customer-experience": {
+      "type": "customer-experience",
+      "blocks": {
+        "9cc85a2e-93b2-43d3-9ac7-5804cf197d59": {
+          "type": "review",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Quoc_Nghiep_Pic_97c6efc4-a9d9-405a-ad8b-ce9e77a256d5.jpg",
+            "bg_color": "#e1f0ef",
+            "title": "Quốc Nghiệp - Ngọc Mai",
+            "content": "“Sau một thời gian nằm nệm Ru9, cả Quốc Nghiệp và Ngọc Mai đều cảm thấy tinh thần phấn chấn hơn hẳn khi thức dậy mỗi sáng.”"
+          }
+        },
+        "b76f4951-8b85-4dd9-8df1-35e75e4cac2b": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Joyce_Pic_1.jpg",
+            "bg_color": "#fde6de",
+            "title": "Joyce Nguyễn",
+            "content": "“Dù là một người rất kỹ tính trong việc chọn lựa các sản phẩm hỗ trợ giấc ngủ, nệm foam Ru9 đã hoàn toàn thuyết phục mình!”"
+          }
+        },
+        "a3573c57-827d-42f9-9bbd-2ae6ad0f1cce": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/pic.jpg",
+            "bg_color": "#fff8ed",
+            "title": "Thiện Nguyễn",
+            "content": "“Từ khi mua chiếc nệm này về sử dụng, sáng ngủ dậy thấy không còn đau lưng, người khỏe mạnh và không còn uể oải nữa. Còn mọi người thì sao, không một lần thử đi để xem nó “đã” như thế nào!”"
+          }
+        }
+      },
+      "block_order": [
+        "9cc85a2e-93b2-43d3-9ac7-5804cf197d59",
+        "b76f4951-8b85-4dd9-8df1-35e75e4cac2b",
+        "a3573c57-827d-42f9-9bbd-2ae6ad0f1cce"
+      ],
+      "settings": {
+        "heading": "Đánh giá của khách hàng về Ru9 trên Facebook"
+      }
+    },
+    "news-reviews": {
+      "type": "news-reviews",
+      "blocks": {
+        "853a75fd-3ae5-4fb5-807b-aaf7dbf0d9fb": {
+          "type": "news",
+          "settings": {
+            "image": "shopify://shop_images/TNO_logo2.png",
+            "content": "“Ru9 không chỉ đơn thuần là tạo ra chiếc nệm, họ đang thay đổi chất lượng cuộc sống của người Việt.”"
+          }
+        },
+        "daf303ab-d0ee-4437-a7eb-3e3b4d1a51bb": {
+          "type": "news",
+          "settings": {
+            "image": "shopify://shop_images/Vietcetera_45926d0b-9f3f-40a5-a74d-a5b3ff8b773e.png",
+            "content": "“Ru9 không chỉ đơn thuần là tạo ra chiếc nệm, họ đang thay đổi chất lượng cuộc sống của người Việt.”"
+          }
+        },
+        "e3110b72-1604-408c-99ec-8e709a1446d3": {
+          "type": "news",
+          "settings": {
+            "image": "shopify://shop_images/logo_54b20f05-14f2-4ac3-af60-3fd1a7156e40.png",
+            "content": "“Ru9 không chỉ đơn thuần là tạo ra chiếc nệm, họ đang thay đổi chất lượng cuộc sống của người Việt.”"
+          }
+        }
+      },
+      "block_order": [
+        "853a75fd-3ae5-4fb5-807b-aaf7dbf0d9fb",
+        "daf303ab-d0ee-4437-a7eb-3e3b4d1a51bb",
+        "e3110b72-1604-408c-99ec-8e709a1446d3"
+      ],
+      "settings": {
+        "background": "#e1f0f1"
+      }
+    },
+    "socials-reviews": {
+      "type": "socials-reviews",
+      "blocks": {
+        "e7306c79-fae0-4132-b1af-18b509e80b29": {
+          "type": "review",
+          "settings": {
+            "icon": "shopify://shop_images/Google_2x_1382d11a-f33e-4f09-99a.png",
+            "title": "Đánh giá qua Google",
+            "link": "https://www.google.com/maps/place/Ru9+-+The+Sleep+Company/@10.7882851,106.6913013,17z/data=!3m1!4b1!4m5!3m4!1s0x31752795ed4b09a3:0x1e7ee98350bfabc1!8m2!3d10.7882851!4d106.6913013"
+          }
+        },
+        "0de93742-c676-43ba-84c5-d9cc9daa04b3": {
+          "type": "review",
+          "settings": {
+            "icon": "shopify://shop_images/f-03_160x160_2_42x42_037517a0-9ffe-4f3d-ad01-51f2b23ea63d.png",
+            "title": "Đánh giá qua Facebook",
+            "link": "https://www.facebook.com/ru9vn/reviews/?ref=page_internal"
+          }
+        }
+      },
+      "block_order": [
+        "e7306c79-fae0-4132-b1af-18b509e80b29",
+        "0de93742-c676-43ba-84c5-d9cc9daa04b3"
+      ],
+      "settings": {
+        "heading": "Đừng quên viết cho chúng tôi đánh giá về trải nghiệm của bạn nhé!"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "f84f1b0f-acf2-4d8a-94df-0dceacfeb326",
+    "customer-reviews-fb",
+    "customer-experience",
+    "news-reviews",
+    "socials-reviews"
+  ]
+}

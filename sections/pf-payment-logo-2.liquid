@@ -1,0 +1,150 @@
+<div class="section-{{section.id}} section-pf-payment-logo">
+  <div class="container container-medium">
+    <div class="row"> 
+      <div class="col-sm-12 col-12">
+        {% if section.settings.title != blank %}
+          <div class="section-header">
+            <h3 class="h3 primary-color">{{ section.settings.title }}</h3>
+          </div>
+        {% endif %}
+      </div>
+      <div class="pf-section-content col-12">
+        <div class="pf-payment-info pf-grid align-center">
+          {% if section.blocks.size > 0 %}
+          <div class="pf-payment-wrap">
+          {% if section.settings.sub_title!= blank %}
+            <div class="sub-title primary-color"><span>{{ section.settings.sub_title }}</span>
+              {% if section.settings.bank_logo != blank %}
+                <img class="visible-xs" src="{{section.settings.bank_logo | img_url: 'master'}}">
+              {%endif%}
+            </div>
+          {% endif %}
+            {% for block in section.blocks %}
+                <div class="pf-payment-info__item pf-grid">
+                <span class="label">{{block.settings.first_label}}</span>
+                <span class="content primary-color">{{block.settings.first_content}}</span>
+                </div>
+            {% endfor %}
+    
+          </div>
+          {% endif %}
+          <div class="main-logo hidden-xs">
+            {% if section.settings.bank_logo != blank %}
+              <img src="{{section.settings.bank_logo | img_url: 'master'}}">
+            {%else%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%endif%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+.section-{{section.id}} {
+      padding: 50px 0 0;
+}
+.pf-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+.sub-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+.pf-payment-info__item {
+  margin: 30px 0;
+}
+@media(max-width: 767px) {
+  .pf-payment-info.pf-grid {
+    grid-template-columns: 1fr;
+  }
+  .pf-payment-info .main-logo {
+    grid-row: 1;
+  }
+  .pf-payment-wrap .sub-title{    
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    font-size: 16px;
+    img {
+      max-width: 100px;
+      object-fit: contain;
+    }
+
+  }
+  .pf-payment-wrap .sub-title img {
+      max-width: 100px;
+      object-fit: contain;
+    }
+    .pf-payment-info__item {
+      margin: 15px 0;
+    }
+
+}
+</style>
+
+{% schema %}
+{
+  "name": "Payment",
+    "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Chuyển khoản trực tiếp"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title",
+      "default": "Ngân hàng Vietcombank"
+    },
+     {
+      "type": "image_picker",
+      "id": "bank_logo",
+      "label": "Logo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "payment_content",
+      "name": "Content",
+      "settings": [
+    {
+      "type": "text",
+      "id": "first_label",
+      "label": "Text",
+      "default": "Số tài khoản:"
+    },
+      {
+      "type": "text",
+      "id": "first_content",
+      "label": "Text",
+      "default": "0071001234692"
+    }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PageFly Payment",
+      "category": "PageFly Payment",
+      "blocks": [
+        {
+          "type": "payment_content"
+        },
+        {
+          "type": "payment_content"
+        },
+        {
+          "type": "payment_content"
+        }
+      ]
+    }
+  ]
+  
+  
+}
+{% endschema %}

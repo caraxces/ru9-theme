@@ -1,0 +1,121 @@
+{% capture description %}
+  {%- if product.empty? -%}
+    {{ 'home_page.onboarding.product_description' | t }}
+  {%- else -%}
+    {{ product.description }}
+  {%- endif -%}
+{% endcapture %}
+{%- if is_tab -%}
+  {% assign title = 'products.product.description' | t %}
+  {%- render 'tab', id: id, title: title, content: description -%}
+{%- else -%}
+  {%- if is_collapse_content -%}
+    <collapse-content class="block relative">
+      <style>
+        collapse-content .rte {
+          /* display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: max-height 0.5s ease;
+          max-height: 3em; */
+        }
+
+        collapse-content .button-readmore {
+          background: #fff;
+          padding: 0;
+          color: #2960ad;
+        }
+
+        collapse-content.is_expanded .rte {
+          display: block;
+          max-height: 100rem;
+        }
+
+        collapse-content.is_expanded .button-readmore {
+          display: none;
+        }
+
+        collapse-content .description-short + strong {
+          font-weight: 400;
+        }
+
+        @media screen and (max-width: 768px) {
+          collapse-content {
+            font-size: calc(var(--typeBaseSize) * 0.875);
+          }
+          collapse-content .description-short {
+            display: none !important;
+          }
+          collapse-content .description-full {
+            display: block !important;
+          }
+          collapse-content .description-full .inline {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-word;
+          }
+          collapse-content .description-full #readless-button {
+            display: none;
+          }
+        }
+      </style>
+  {%- endif -%}
+  {%- if description != blank -%}
+    <span class="rte">
+      {%- if is_collapse_content and description.size > 120 -%}
+        <collapse-content>
+          <div class="description-short">
+            <span class="inline">
+              {{ description | truncate: 100 }}
+            </span>
+            <button id="readmore-button" class="button-readmore readmore f-smb">
+              {{ 'general.button.read_more' | t }}
+            </button>
+          </div>
+          <div class="description-full" style="display:none;">
+            <span class="inline">{{ description }}</span>
+            <button id="readless-button" class="button-readmore readless f-smb">
+              {{ 'general.button.read_less' | t }}
+            </button>
+          </div>
+        </collapse-content>
+      {%- else -%}
+        {{ description }}
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+{%- endif -%}
+{%- if description != blank -%}
+  <script>
+    class CollapseContent extends HTMLElement {
+      constructor() {
+        super();
+        this.descriptionFull = this.querySelector('.description-full');
+        this.descriptionShort = this.querySelector('.description-short');
+        this.readmore = this.querySelector('.readmore');
+        this.readless = this.querySelector('.readless');
+
+        this.readmore.addEventListener('click', this.show.bind(this));
+        this.readless.addEventListener('click', this.hide.bind(this));
+      }
+
+      show() {
+        event.preventDefault();
+        this.descriptionFull.style.display = 'block';
+        this.descriptionShort.style.display = 'none';
+      }
+
+      hide() {
+        event.preventDefault();
+        this.descriptionFull.style.display = 'none';
+        this.descriptionShort.style.display = 'block';
+      }
+    }
+    customElements.define('collapse-content', CollapseContent);
+  </script>
+{%- endif -%}

@@ -1,0 +1,276 @@
+<!doctype html>
+  <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction }}">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta name="theme-color" content="{{ settings.color_button }}">
+      {% unless content_for_header contains '<meta name="robots"' %}
+      {% if canonical_url contains '/search' %}
+        <meta name="robots" content="noindex,nofollow">
+      {% elsif canonical_url contains '/collections/all' %}
+        <meta name="robots" content="noindex,nofollow">
+      {% elsif canonical_url == 'https://ru9.vn/collections' %}
+        <meta name="robots" content="noindex,nofollow">  
+      {% else %}
+        <meta name="robots" content="index,follow">
+      {% endif %}
+      {% endunless %}
+      {%assign collection_url  = '/collections/nem,/collections/nem-foam,/collections/g%E1%BB%91i,/pages/bo-phong-ngu,/collections/bo-phong-ngu'%}
+      {%if canonical_url contains '/collections/nem' or  canonical_url contains '/collections/nem-foam' -%}
+      <link rel="canonical" href="{{ canonical_url | replace: 'collections', 'collections'}}">
+      {%elsif canonical_url contains '/collections/g%E1%BB%91i'%}
+      <link rel="canonical" href="{{ canonical_url | replace: 'g%E1%BB%91i', 'goi'}}">
+      {%elsif canonical_url contains '/pages/bo-phong-ngu'%}
+      <link rel="canonical" href="{{ canonical_url | replace: 'pages', 'collections'}}">
+      {%elsif canonical_url contains '/products/g%E1%BB%91i-m%C3%A2y%}
+      <link rel="canonical" href="{{ canonical_url | replace: 'g%E1%BB%91i-m%C3%A2y%', 'goi-may'}}">
+      {%elsif canonical_url contains '/products/g%E1%BB%91i-may}
+      <link rel="canonical" href="{{ canonical_url | replace: 'g%E1%BB%91i-may', 'goi-may'}}">
+      {%elsif canonical_url contains '/search'%}
+      <link rel="canonical" href="https://ru9.vn/search">
+      {% elsif canonical_url contains '/blogs/' and canonical_url contains '?page=' %}
+      <link rel="canonical" href="{{ canonical_url | split: '?' | first }}">
+      {% elsif canonical_url contains '/tags/' and canonical_url contains '?page=' %}
+      <link rel="canonical" href="{{ canonical_url | split: '?' | first }}">
+      {%else-%}
+      <link rel="canonical" href="{{ canonical_url }}">
+      {%endif -%}
+      {%if canonical_url contains '?'%}
+      <!-- <link rel="canonical" href="{{ canonical_url | replace: '?'}}"> -->
+      {% endif %}
+      <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+      <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
+      <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+      <link rel="dns-prefetch" href="https://maps.googleapis.com">
+      <link rel="dns-prefetch" href="https://maps.gstatic.com">
+  
+      {%- if settings.favicon != blank -%}
+        <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+      {%- endif -%}
+  
+      {%- render 'seo-title' -%}
+  
+      {%- if page_description -%}
+        <meta name="description" content="{{ page_description | escape }}">
+      {%- endif -%}
+  
+      {%- render 'social-meta-tags' -%}
+  
+      {%- render 'font-face' -%}
+      {{ content_for_header }}
+      {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+      {%- render 'css-variables' -%}
+  
+      <script>
+        document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  
+        window.theme = window.theme || {};
+        theme.routes = {
+          home: "{{ routes.root_url }}",
+          cart: "{{ routes.cart_url | append: '.js' }}",
+          cartPage: "{{ routes.cart_url }}",
+          cartAdd: "{{ routes.cart_add_url | append: '.js' }}",
+          cartChange: "{{ routes.cart_change_url | append: '.js' }}",
+          search: "{{ routes.search_url }}",
+          predictiveSearch: "{{ routes.predictive_search_url }}"
+        };
+        theme.strings = {
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }},
+          inStockLabel: {{ 'products.product.in_stock_label' | t | json }},
+          oneStockLabel: {{ 'products.product.stock_label.one' | t: count: '[count]' | json }},
+          otherStockLabel: {{ 'products.product.stock_label.other' | t: count: '[count]' | json }},
+          willNotShipUntil: {{ 'products.product.will_not_ship_until' | t: date: '[date]' | json }},
+          willBeInStockAfter: {{ 'products.product.will_be_in_stock_after' | t: date: '[date]' | json }},
+          waitingForStock: {{ 'products.product.waiting_for_stock' | t | json }},
+          savePrice: {{ 'products.general.save_html' | t: saved_amount: '[saved_amount]' | json }},
+          cartEmpty: {{ 'cart.general.empty' | t | json }},
+          cartTermsConfirmation: {{ 'cart.general.terms_confirm' | t | json }},
+          searchCollections: {{ 'general.search.collections' | t | json }},
+          searchPages: {{ 'general.search.pages' | t | json }},
+          searchArticles: {{ 'general.search.articles' | t | json }},
+          productFrom: {{ 'products.general.from_text_html' | t: price: '' | json }},
+          maxQuantity: {{ 'cart.general.max_quantity' | t: quantity: '[quantity]', title: '[title]' | json }}
+        };
+        theme.settings = {
+          cartType: {{ settings.cart_type | json }},
+          isCustomerTemplate: {% if request.page_type contains 'customers/' %}true{% else %}false{% endif %},
+          moneyFormat: {{ shop.money_format | json }},
+          saveType: {{ settings.product_save_type | json }},
+          productImageSize: {{ settings.product_grid_image_size | json }},
+          productImageCover: {{ settings.product_grid_image_fill }},
+          predictiveSearch: {{ settings.predictive_search_enabled }},
+          predictiveSearchType: {{ settings.search_type | json }},
+          predictiveSearchVendor: {{ settings.predictive_search_show_vendor | json }},
+          predictiveSearchPrice: {{ settings.predictive_search_show_price | json }},
+          quickView: {{ settings.quick_shop_enable }},
+          themeName: 'Impulse',
+          themeVersion: "7.5.1"
+        };
+      </script>
+        <script type="application/ld+json">{"@context":"https://schema.org", "@type":"Store", "image":"https://ru9.vn/cdn/shop/files/footer-header.png?v=1730790510", "paymentAccepted": [ "http://purl.org/goodrelations/v1#Cash", "http://purl.org/goodrelations/v1#ByBankTransferInAdvance"], "currenciesAccepted":"VND", "founder":{"@type":"Person", "@id":"https://ru9.vn/#person", "name":"Đặng Thùy Trang", "sameAs":["https://vn.linkedin.com/in/dangthuytrang", "https://www.instagram.com/alxdang/", "https://www.facebook.com/trangdangru9", "https://startup.vnexpress.net/tin-tuc/hanh-trinh-khoi-nghiep/giac-mo-lam-nem-cua-doi-ban-viet-kieu-3797107.html"], "knowsLanguage": [ "Vietnamese", "English"], "description":"Trước khi thành lập Ru9, tôi cũng như các bạn, là một người tiêu dùng thông thường và mệt mỏi khi cảm thấy quá trình tìm kiếm cho mình một chiếc nệm chất lượng với giá thành hợp lý thật sự quá khó khăn.", "jobTitle":"Founder", "gender":"https://schema.org/Female", "image":"https://ru9.vn/cdn/shop/files/Ru9_Trang_Dang_Founder_600x.png?v=1613188302"}, "employee":{"@id":"https://ru9.vn/#person"}, "publicAccess":"true", "latitude":10.7882851, "longitude":106.6913013, "openingHoursSpecification":[{"@type": "OpeningHoursSpecification", "opens": "09:00:00", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Monday"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Tuesday", "opens": "09:00:00"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Wednesday", "opens": "09:00:00"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Thursday", "opens": "09:00:00"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Friday", "opens": "09:00:00"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Saturday", "opens": "09:00:00"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Sunday", "opens": "09:00:00"}], "sameAs": [ "https://www.google.com/search?q=Ru9&kgmid=/g/11g1dxj62j", "https://www.facebook.com/ru9vn", "https://www.instagram.com/ru9vn/", "https://www.youtube.com/channel/UC2FZVIyQDjV-eoc4Wf6fMzw"], "url":"https://ru9.vn", "@id":"https://ru9.vn/#organization", "potentialAction":{"result":{"@type":"Reservation", "name":"Thanh toán"}, "@type":"ConsumeAction", "target": [{"@type":"EntryPoint", "inLanguage":"vn", "actionPlatform": [ "http://schema.org/DesktopWebPlatform", "http://schema.org/IOSPlatform", "http://schema.org/AndroidPlatform"], "urlTemplate":"https://ru9.vn/cart"}]}, "name":"Ru9 - The Sleep Company", "alternatename":"Ru9", "description":"Ru9 chuyên cung cấp sản phẩm chăn ga gối nệm (đệm) chất lượng với giá tốt nhất nhằm mang tới giấc ngủ ngon và đảm bảo sức khoẻ cho mọi người.", "disambiguatingdescription":"Ru9 chuyên cung cấp sản phẩm chăn ga gối nệm (đệm) chất lượng với giá tốt nhất nhằm mang tới giấc ngủ ngon và đảm bảo sức khoẻ cho mọi người.", "logo":"https://ru9.vn/cdn/shop/files/footer-header.png?v=1730790510", "slogan":"The Sleep Company", "priceRange":"100000VN - 30000000VNĐ", "hasMap": ["https://www.google.com/maps?cid=2197450418408106945"], "mainEntityOfPage":"https://ru9.vn/", "email":"cs@ru9.vn", "contactPoint":{"@type":"ContactPoint", "telephone":"0964777910", "contactType":"Customer support", "email":"cs@ru9.vn"}, "telephone":"0964777910", "address":{"@type":"PostalAddress", "addressCountry":"VNM", "addressLocality":"Quận 3", "addressRegion":"Thành phố Hồ Chí Minh", "streetAddress":"283A Hai Bà Trưng, Phường 8", "postalCode":"700000"}, "foundingLocation":{"@type":"Place", "name":"Hồ Chí Minh", "url":" https://en.wikipedia.org/wiki/Ho_Chi_Minh_City", "address":"Việt Nam"}, "geo":{"@type":"GeoCoordinates", "latitude":10.7882851, "longitude":106.6913013}, "legalName":"Công ty TNHH Ru9", "foundingDate":"2017-08-30", "numberOfEmployees":"100", "hasOfferCatalog":{"@type":"OfferCatalog", "itemListElement":[{"@type":"Offer", "name":"Nệm", "itemOffered":"https://ru9.vn/collections/nem", "url":"https://ru9.vn/collections/nem"},{"@type":"Offer", "name":"Nệm Foam", "itemOffered":"https://ru9.vn/collections/nem-foam", "url":"https://ru9.vn/collections/nem-foam"},{"@type":"Offer", "name":"Topper", "itemOffered":"https://ru9.vn/collections/topper", "url":"https://ru9.vn/collections/topper"},{"@type":"Offer", "name":"Gối Niu", "itemOffered":"https://ru9.vn/products/goi-foam-niu", "url":"https://ru9.vn/products/goi-foam-niu"},{"@type":"Offer", "name":"Gối Ôm", "itemOffered":"https://ru9.vn/products/goi-om", "url":"https://ru9.vn/products/goi-om"},{"@type":"Offer", "name":"Chăn Bạch Đàn", "itemOffered":"https://ru9.vn/products/chan-bach-dan", "url":"https://ru9.vn/products/chan-bach-dan"},{"@type":"Offer", "name":"Ga Trải Giường", "itemOffered":"https://ru9.vn/collections/bedding", "url":"https://ru9.vn/collections/bedding"},{"@type":"Offer", "name":"Giải Nhiệt", "itemOffered":"https://ru9.vn/products/giai-nhiet-iceguard", "url":"https://ru9.vn/products/giai-nhiet-iceguard"},{"@type":"Offer", "name":"Tấm lót nệm", "itemOffered":"https://ru9.vn/products/tam-bao-ve-nem", "url":"https://ru9.vn/products/tam-bao-ve-nem"},{"@type":"Offer", "name":"Phụ Kiện", "itemOffered":"https://ru9.vn/collections/phu-kien", "url":"https://ru9.vn/collections/phu-kien"}]}, "areaServed":{"@type":"Country", "url":"https://www.wikidata.org/wiki/Q881", "name":"Việt Nam"}, "alumni":[{"@id":"https://ru9.vn/#person"}], "sponsor":[{"@id":"https://ru9.vn/#person"}], "brand":{"@type":"Organization", "name":"Ru9", "url":"https://ru9.vn/", "logo":"https://ru9.vn/cdn/shop/files/footer-header.png?v=1730790510", "contactPoint":{"@type" :"ContactPoint", "telephone" :"0964777910", "contactType":"Customer Service", "email":"cs@ru9.vn", "areaServed":"Vietnam"}, "location":{"@type": "PostalAddress", "addressCountry": "Việt Nam", "name": "Ru9 - The Sleep Company", "addressLocality": "Quận 3", "addressRegion": "Thành phố Hồ Chí Minh", "streetAddress": "283A Hai Bà Trưng, Phường 8", "postalCode": "700000"}}}</script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KEGTG3HLDG"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-KEGTG3HLDG');
+        </script>
+      <script src="{{ 'vendor-scripts-v11.js' | asset_url | split: '?' | first }}" defer="defer"></script>
+      <script src="{{ 'vendor-jquery.js' | asset_url }}" defer="defer"></script>
+  
+      {%- if shop.enabled_currencies.size > 1 -%}
+        <link rel="stylesheet" href="{{ 'country-flags.css' | asset_url | split: '?' | first }}">
+      {%- endif -%}
+  
+      <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
+  
+  
+      <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  
+      {%- if request.page_type contains 'customers/' -%}
+        <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+      {%- endif -%}
+  
+      {% if request.design_mode %}
+        <script>
+          theme.settings.email = {{ shop.email | json }}
+        </script>
+        <script src="https://api.archetypethemes.co/design-mode.js" defer="defer"></script>
+      {% endif %}
+    {% include 'pagefly-app-header' %}</head>
+  
+    <body
+      class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challange{% endif %}"
+      data-center-text="{{ settings.type_body_align_text }}"
+      data-button_style="{{ settings.button_style }}"
+      data-type_header_capitalize="{{ settings.type_header_capitalize }}"
+      data-type_headers_align_text="{{ settings.type_headers_align_text }}"
+      data-type_product_capitalize="{{ settings.type_product_capitalize }}"
+      data-swatch_style="{{ settings.swatch_style }}"
+      {% if settings.disable_animations %}
+        data-disable-animations="true"
+      {% endif %}
+    >
+      {% comment %} <a class="in-page-link visually-hidden skip-link" href="#MainContent">
+        {{- 'general.accessibility.skip_to_content' | t -}}
+      </a> {% endcomment %}
+  
+      <div id="PageContainer" class="page-container">
+        <div class="transition-body">
+          {%- sections 'header-group' -%}
+          {%- sections 'popup-group' -%}
+  
+          <main class="main-content" id="MainContent">
+            {{ content_for_layout }}
+          </main>
+  
+          {%- sections 'footer-group' -%}
+        </div>
+      </div>
+  
+      {%- liquid
+        render 'video-modal'
+        render 'photoswipe-template'
+        render 'tool-tip'
+      -%}
+  
+      {% comment %} Image markup used when building product grid item via JS {% endcomment %}
+      <template id="naturalImageMarkup">
+        <div class="image-wrap" style="height: 0;">
+          <image-element data-aos="image-fade-in" data-aos-offset="150">
+            <img class="grid-product__image image-element" width height src srcset loading="lazy" alt>
+          </image-element>
+        </div>
+      </template>
+      <template id="fixedRatioImageMarkup">
+        <div class="grid__image-ratio">
+          <image-element data-aos="image-fade-in" data-aos-offset="150">
+            <img class="image-element" width height src srcset loading="lazy" alt>
+          </image-element>
+        </div>
+      </template>
+      <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL hiện tại
+            var currentURL = window.location.href;
+            
+            // Chỉ xử lý nếu không phải homepage
+            if (currentURL !== 'https://ru9.vn/') {
+                // Các query parameter cần loại bỏ
+                var excludedParams = ['/wpm@'];
+                
+                // Xử lý URL
+                function cleanURL(url) {
+                    // Loại bỏ các dấu "/" ở cuối
+                    var newURL = url.replace(/\/+$/, '');
+                    
+                    // Xử lý query parameters
+                    var urlParts = newURL.split('?');
+                    if (urlParts.length > 1) {
+                        var baseUrl = urlParts[0];
+                        var queryParameters = urlParts[1].split('&').filter(function(param) {
+                            return !excludedParams.some(function(excludedParam) {
+                                return param.startsWith(excludedParam + '=');
+                            });
+                        });
+                        
+                        if (queryParameters.length > 0) {
+                            newURL = baseUrl + '?' + queryParameters.join('&');
+                        } else {
+                            newURL = baseUrl;
+                        }
+                    }
+                    
+                    // Xử lý chuyển hướng đặc biệt
+                    if (newURL.includes('/products/g%E1%BB%91i-may')) {
+                        newURL = newURL.replace('/products/g%E1%BB%91i-may', '/products/goi-may');
+                    } else if (newURL.includes('/products/gối-mây')) {
+                        newURL = newURL.replace('/products/gối-mây', '/products/goi-may');
+                    }
+                    
+                    return newURL;
+                }
+                
+                // Kiểm tra và thực hiện chuyển hướng
+                var cleanedURL = cleanURL(currentURL);
+                if (cleanedURL !== currentURL) {
+                    // Sử dụng window.location.replace() để thực hiện chuyển hướng 301
+                    window.location.replace(cleanedURL);
+                }
+            }
+        });
+      </script> -->
+       <!-- Google Tag Manager -->
+        <script type="lazyload2">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NRPQ9Q6');
+        </script>
+         <!-- End Google Tag Manager -->
+          
+          
+        <!-- Popup ladipage -->
+           <!-- <script src="https://w.ladicdn.com/popupx/sdk.js" id="637730a00851530020bf719f" async></script> -->
+           <!-- End Popup ladipage -->
+         <!-- heat map   -->
+         <!-- <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "n64k1pc0tu");
+        </script> -->
+         <!-- end heat map -->
+          <!-- Google Tag Manager (noscript) -->
+         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRPQ9Q6"
+           height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+           <!-- End Google Tag Manager (noscript)-->
+    </body>
+  </html>
+  

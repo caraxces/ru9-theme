@@ -1,0 +1,142 @@
+<div class="section-pf-comment">
+    <div class="container container-medium" data-section-id="{{ section.id }}" data-section-type="pf-comment">
+      {% if section.settings.title != blank %}
+        <div class="section-header text-center">
+          <h2>{{ section.settings.title | escape }}</h2>
+        </div>
+      {% endif %}
+      {% if section.blocks.size > 0 %}
+        <div class="comment-wrapper">
+          <div class="comment-slider" id="Comment-{{ section.id }}" data-count="{{ section.blocks.size }}">
+            {% for block in section.blocks %}
+              <div class="comment-slide--{{ block.id }}" {{ block.shopify_attributes }}>
+                <div class="comment-slider__text text-center">
+                  {% if block.settings.comment != blank %}
+                    <div class="comment-content">{{block.settings.comment}}</div>
+                  {% endif %}
+                  {% if block.settings.author_image != blank %}
+                  <div class="comment-slider__image {%if block.settings.image_size == 'small' %} img_small {%endif%}">
+                    <img
+                        class="comment_image lazyload"
+                        src="{{ block.settings.author_image | img_url: '480x480' }}"
+                        width="{{block.settings.author_image.width}}"
+                         height="{{block.settings.author_image.height}}"
+                         alt="{{ block.settings.author_image.alt | escape }}"
+                    />
+                    </div>
+                  {% endif %}
+                  {% if block.settings.author != blank %}
+                  <div class="comment-slider__author">
+                    <strong>{{ block.settings.author }}</strong>
+                    </div>
+                  {% endif %}
+                  {% if block.settings.date != blank %}
+                  <div class="comment-slider__date">
+                    <span>{{ block.settings.date}}</span>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {%if section.settings.link_title != blank %}
+      <div class="text-center">
+        <a href="{{section.settings.url}}" class="link-icon">{{section.settings.link_title}}</a>
+      </div>
+    {% endif %}
+      {% if section.blocks.size == 0 %}
+        {% include 'no-blocks' %}
+      {% endif %}
+    </div>
+    </div>
+    
+    {% schema %}
+    {
+      "name": "PFComment",
+      "class": "index-section",
+      "max_blocks": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "View All"
+        },
+        {
+          "type": "text",
+          "id": "link_title",
+          "label": "Link Title",
+          "default": "Testimonials"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "comments",
+          "name": "Testimonial",
+          "settings": [
+            {
+              "type": "richtext",
+              "id": "comment",
+              "label": "Text",
+              "default": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
+            },
+            {
+              "type": "image_picker",
+              "id": "author_image",
+              "label": "Author image"
+            },
+            {
+              "type": "select",
+              "id": "image_size",
+              "label": "Image width",
+              "default": "small",
+              "options": [
+                { "value": "small", "label": "Small" },
+                {
+                  "value": "big",
+                  "label": "Big"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "author",
+              "label": "Author",
+              "default": "Author's name"
+            },
+            {
+              "type": "text",
+              "id": "date",
+              "label": "Date",
+              "default": "25 tháng 6, 2020"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "PF Comments",
+          "category": "PageFly",
+          "blocks": [
+            {
+              "type": "comments"
+            },
+            {
+              "type": "comments"
+            },
+            {
+              "type": "comments"
+            }
+          ]
+        }
+      ]
+    }
+    {% endschema %}
+    

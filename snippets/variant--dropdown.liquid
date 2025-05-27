@@ -1,0 +1,59 @@
+{%- liquid
+  if option.values.size < 1
+    assign is_size = true
+  endif
+-%}
+{% assign current_size = current_size | downcase | remove: ' ' | split: '-' | first %}
+<div class="variant-wrapper">
+  <label
+    class="variant__label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}{% unless variant_labels %} hidden-label{% endunless %}"
+    for="SingleOptionSelector-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}"
+  >
+    {{ option.name }}
+  </label>
+  <div class="variant-input-wrapss" data-index="option{{ forloop.index }}" data-handle="{{ option.name | handleize }}">
+    <select
+      form="{{ form_id }}"
+      data-variant-input-size
+      id="SingleOptionSelector-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}"
+      {% if is_size %}
+        class="size-dropdowns"
+        style="pointer-events: none;"
+      {% else %}
+        class="size-dropdown"
+      {% endif %}
+      data-index="option{{ forloop.index }}"
+    >
+      {%- for value in option.values -%}
+        {%- liquid
+          assign variant_label_state = true
+          if product.options.size == 1
+            unless product.variants[forloop.index0].available
+              assign variant_label_state = false
+            endunless
+          endif
+        -%}
+        <option
+          value="{{ value | escape }}"
+          {% assign donwcase_value = value | downcase | remove: ' ' | split: '-' | first %}
+          {{ donwcase_value }}
+          {{ current_size }}
+          {% if current_size == donwcase_value -%}
+            selected="selected"
+          {% elsif option.selected_value == value %}
+            selected="selected"
+          {% endif %}
+
+          {% unless variant_label_state %}
+            disabled="disabled"
+          {% endunless %}
+          name="{{ option.name }}-{{product.id}}"
+          class="variant-inputs"
+          data-index="option{{ forloop.index }}"
+        >
+          {{ value }}
+        </option>
+      {%- endfor -%}
+    </select>
+  </div>
+</div>

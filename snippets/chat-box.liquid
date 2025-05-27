@@ -1,0 +1,420 @@
+
+<style>
+    .ot-fb-flex{display:flex}.ot-fb-hide{display:none}.ot-fb-show{display:block!important}.fb-email-form input:focus-visible,.fb-email-form textarea:focus-visible{outline:0;box-shadow:none}.fb-email-form h3,.fb-email-form__email,.fb-email-form__subject{margin:10px 0 0}.fb-email-form__email,.fb-email-form__email input,.fb-email-form__subject,.fb-email-form__subject input,.fb-email-form__textarea,.fb-email-form__textarea textarea{width:100%!important}.fb-email-form__textarea{margin:10px 0 20px;display:flex;flex-direction:column;text-align:left}.fb-email-form__submit{color:#fff}.fb-email-form button,.fb-mess-widget button{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:3.6rem;min-width:3.6rem;margin:0;padding:.7rem 1.6rem;border:.1rem solid #c4cdd5;box-shadow:0 1px 0 0 rgba(22,29,37,.05);border-radius:3px;text-align:center;cursor:pointer}.fb-mess-widget__btn-text{margin-left:8px;color:#fff}.fb-mess__close{width:1rem;height:1rem;position:absolute;top:0;right:10px;cursor:pointer}.fb_dialog .fb_dialog_content iframe{right:auto!important;margin:0!important}.fb_dialog .fb_dialog_content iframe:hover .ot-fb-logo.facebook-chat-button{box-shadow:3px 9pt 7pt rgba(0,0,0,.1)}.fb_dialog .fb_dialog_content #_no-clickjacking-0{opacity:.002!important}#fb-root.fb_reset .fb_dialog{overflow:unset}#fb-root .fb_iframe_widget iframe{position:fixed!important;margin:0!important}#fb-root .fb_iframe_widget iframe.fb_customer_chat_bounce_in_v2{animation-duration:.3s!important;min-height:auto!important}#fb-root .fb_iframe_widget iframe.fb_customer_chat_bounce_in_v2.omg-fb-set-height{max-height:500px!important;min-height:450px!important}#fb-root .fb_iframe_widget iframe.fb_customer_chat_bounce_out_v2{min-height:0!important;max-height:0!important}.ot-fb-logo{z-index:900}.ot-fb-logo div svg g,.ot-fb-logo svg{fill:unset}.ot-fb-logo.facebook-chat-button{display:flex;justify-content:center;align-items:center;cursor:pointer;-webkit-transition:border-color .3s;transition:border-color .3s;height:auto;position:fixed;right:auto}.ot-fb-logo.facebook-chat-button.one_box{box-shadow:0 3pt 12pt rgba(0,0,0,.15);border-radius:50px}.ot-fb-logo.facebook-chat-button.one_box.has_text{padding:10px 15px}.ot-fb-logo.facebook-chat-button.one_box.has_text .icon-text-content,.ot-fb-logo.facebook-chat-button.one_box.has_text .ot-fb-icon{box-shadow:none;padding:0;border:0}.ot-fb-logo.facebook-chat-button.one_box:hover{box-shadow:3px 9pt 7pt rgba(0,0,0,.1)}.ot-fb-logo.facebook-chat-button.none_text .icon-text-content{padding:0}.ot-fb-logo.facebook-chat-button.none_text .icon-text-content.icon-text-content-left,.ot-fb-logo.facebook-chat-button.none_text .icon-text-content.icon-text-content-right{margin:0}.ot-fb-logo.facebook-chat-button:hover .icon-text-content-left,.ot-fb-logo.facebook-chat-button:hover .icon-text-content-right,.ot-fb-logo.facebook-chat-button:hover .ot-fb-icon{box-shadow:3px 9pt 7pt rgba(0,0,0,.1)}.ot-fb-icon{background-color:#fff;fill:#0084ff;box-shadow:0 3pt 12pt rgba(0,0,0,.15);display:inline-flex;margin:0;padding:15px;border-radius:50%}.facebook-chat-button.large svg{width:40px;height:40px}.facebook-chat-button.large span{font-size:20px}.facebook-chat-button.medium svg{width:32px;height:32px}.facebook-chat-button.medium span{font-size:16px}.facebook-chat-button.small svg{width:24px;height:24px}.facebook-chat-button.small span{font-size:14px}.icon-text-content,.two_box .icon-text-content{background-color:#fff;color:#0084ff;box-shadow:0 3pt 12pt rgba(0,0,0,.15);padding:0 5px;border-radius:5px;width:max-content;font-family:inherit;direction:ltr}.icon-text-content.icon-text-content-right{margin-left:10px}.icon-text-content.icon-text-content-left{margin-right:10px!important}.otFacbookChat>[class*=" icon-"],.otFacbookChat>[class^=icon-]{font-family:unset!important}.otFacbookChat .facebook-chat-button-custom{position:fixed;display:block;width:60px;height:60px;z-index:900;cursor:pointer}@media screen and (min-width:1023px){.otFacbookChat.hide-desktop{display:none}}@media screen and (max-width:1025px){.otFacbookChat.hide-mobile{display:none}.facebook-chat-button-custom,.ot-fb-logo{z-index:900}.fb_dialog,.fb_dialog.fb_dialog_mobile{z-index:2147483644}.fb_dialog .fb_dialog_content div{display:none!important}.fb_iframe_widget iframe{right:0!important;min-height:0!important;width:255px}.fb_iframe_widget.fb_iframe_widget_fluid iframe.fb_customer_chat_bounce_in_v2_mobile_chat_started{right:0!important}.icon-text-content.icon-text-content-left,.icon-text-content.icon-text-content-right{margin:0}}.fb-email-form,.fb-mess-widget{background-color:#fff;box-shadow:0 3pt 12pt rgba(0,0,0,.15);flex-direction:column;align-items:center;-webkit-transition:border-color .3s;transition:border-color .3s;padding:15px;width:auto;min-width:375px;position:fixed;z-index:900}
+    .facebook-chat-button-custom, .ot-fb-logo.facebook-chat-button, .fb_dialog .fb_dialog_content iframe{
+      left: auto!important;
+      right: 15px!important
+    }
+    .chat-icon{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all .3s ease-out, bottom .5s var(--cubic-smooth);
+      position: fixed;
+      right: 15px;
+      width: 54px;
+      height: 54px;
+      bottom: 25px !important;
+      z-index: 900;
+      visibility: hidden
+    }
+    .backtop-show .chat-icon {
+      bottom: 90px !important;
+
+    }
+    
+    /* @media(min-width: 768px){
+    .chat-icon.loading{
+      opacity: 0.5;
+      cursor: not-allowed
+    }
+    } */
+    #zalo-chat-box{
+      padding: 0px;
+      position: fixed;
+      z-index: 2147483646;
+      border-radius: 16px;
+      top: auto;
+      width: 375px;
+      background: none;
+      right: 13px;
+      margin-right: 12px;
+      height: 500px;
+      visibility: visible;
+      min-height: 0px;
+      bottom: 89px !important;
+      position: fixed!important;
+      margin: 0!important;
+      overflow: hidden;
+      background: #fff;
+      border-radius: 18px;
+      transition: all .5s cubic-bezier(.47,1.64,.41,.8); 
+      transform-origin: right bottom;
+      transform :scale( 0.3) ;
+      opacity: 0;
+      visibility: hidden;
+  
+    }
+    .backtop-show #zalo-chat-box{
+      bottom: 150px !important;
+
+
+    }
+    #zalo-chat-box.active{
+      max-height: initial;
+      overflow: visible;
+      height: auto;
+      padding: 20px 25px;
+      box-shadow: 0 4px 12px 0 #00000026;
+      opacity: 1;
+      visibility: visible;
+  
+      transform :scale( 1) ;
+  
+  
+    }
+    .zalo-header {
+      display: grid;
+      grid-template-columns: 60px auto 30px;
+      grid-gap: 14px;
+    }
+  
+    .zalo-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--primary-color);
+        }
+  
+    .zalo-desc li {
+      list-style: initial;
+    }
+    .zalo-desc li + li{
+        margin-top: 15px
+    }
+    .zalo-body {
+      color: var(--primary-color);
+        padding-left: 70px;
+        }
+  
+    .zalo-desc {
+      margin-top: 26px;
+      margin-bottom: 20px;
+      font-size: 12px
+    }
+  
+    .zalo-greeting.text-center {
+      color: #0080FF;
+      font-weight : bold;
+      font-size: 14px;
+      text-align: center;
+    }
+    .zalo-dismiss img{
+      width: 14px;
+      display: block;
+      margin: auto;
+      cursor: pointer
+    }
+   .tooltip-text {
+    position: absolute;
+      top: 0;
+      right: 70px;
+      z-index: 9;
+      line-height: 26px;
+      padding: 8px 15px;
+      width: auto;
+      border-radius: 5px;
+      font-size: 14px;
+      color: #fff;
+      /* text-align: center; */
+      cursor: pointer;
+      background-color: #3cbefd;
+      visibility: hidden;
+      opacity: 0;
+      -ms-transition: all 200ms linear;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+      width: 208px;
+      display: flex;
+      align-items: center;
+     line-height: 1.5
+   }
+    .tooltip-icon {
+    padding: 6px;
+      border: 1px solid #fff;
+      border-radius: 100%;
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+      flex: 0 0 32px;
+    }
+   .tooltip-text:after{
+          content: "";
+      width: 0;
+      height: 0;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent transparent #3cbefd;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      -ms-transition: all 200ms linear;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+     box-shadow: 0 2px 5px 0 #0000001c
+   }
+  .chat-icon:hover .tooltip-text{visibility: visible;opacity: 1;}
+    div#fb-customer-chat {
+      /* display: none!important; */
+  }
+    .icon-text-content.icon-text-content-left,
+    .ot-fb-icon {
+        filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.25));
+      box-shadow: none
+    }
+
+  @media screen and (max-width: 1060px){
+    body.sticky-atc-is-active .chat-icon, 
+    body.sticky-atc-is-active .facebook-chat-button-custom, 
+    body.sticky-atc-is-active .ot-fb-logo.facebook-chat-button, 
+    body.sticky-atc-is-active .fb_dialog .fb_dialog_content iframe{
+      bottom: 220px !important;
+    }
+    
+    .ot-fb-logo.facebook-chat-button {
+      transition: border-color .3s, bottom .5s var(--cubic-smooth);
+    }
+  }
+
+   
+  </style>
+  <!-- Messenger Plugin chat Code -->
+  
+  <div id="fb-root"></div>
+  
+  
+  <div class="otFacbookChat">
+  
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat fb_invisible_flow fb_iframe_widget" 
+         attribution="setup_tool" 
+         greeting_dialog_display="fade" greeting_dialog_delay="10"
+         
+         page_id="125749924795745" themecolor="#5589fa" 
+         attribution="biz_inbox"
+         logged_in_greeting="Mình có thể giúp bạn ngủ ngon hơn. Chat với mình nhé!"
+         logged_out_greeting="Mình có thể giúp bạn ngủ ngon hơn. Chat với mình nhé!"
+         rel="https://ru9.vn//" greeting_dialog_display="hide">
+    </div>
+    <a id="zalo-chat" class="chat-icon" href="{{settings.social_zalo_link}}">
+  
+      <img src="{{'stick_zalo.png'|asset_url}}" loading="lazy" width="54" height="54"/>
+      <span class="tooltip-text">
+       <span class="tooltip-icon"> 
+          <img src="{{'icon_ex.png' | asset_url}}" loading="lazy" width="32" height="32" />
+        </span>
+               {{section.settings.zalo_tooltip}}
+  
+      </span>
+    </a>
+    <a id="facebook-chat" class="chat-icon"  href="https://m.me/ru9vn">
+  
+      <img src="{{'messenger.png' | asset_url}}" loading="lazy" width="53" height="53"/>
+      <span class="tooltip-text">
+        <span class="tooltip-icon"> 
+          <img src="{{'icon_ex.png' | asset_url}}" loading="lazy" width="32" height="32" />
+        </span>
+            {{section.settings.facebook_tooltip}}
+      </span>
+    </a>
+    <div class="ot-fb-logo  facebook-chat-button small undefined has_text" style="">
+      <div class="ot-fb-icon" style="background-color: #006AFF; fill: #fff;">
+        <svg width="25" height="25" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 75.333 75.333" xml:space="preserve"><g><path d="M37.666,75.318l-9.413-16.303H17c-9.374,0-17-7.626-17-17v-25c0-9.374,7.626-17,17-17h41.333c9.374,0,17,7.626,17,17v25 c0,9.374-7.626,17-17,17H47.078L37.666,75.318z M17,4.016c-7.168,0-13,5.832-13,13v25c0,7.168,5.832,13,13,13h13.563l7.103,12.302 l7.104-12.303h13.563c7.168,0,13-5.832,13-13v-25c0-7.168-5.832-13-13-13L17,4.016L17,4.016z"></path><circle cx="54.822" cy="31.128" r="4.206"></circle><circle cx="37.667" cy="31.128" r="4.206"></circle><circle cx="20.511" cy="31.128" r="4.206"></circle></g></svg>
+      </div>
+      <span style="color: #fff; background-color: #006AFF ; line-height: 28px;" class="ml-1 icon-text-content icon-text-content-left">
+               {{section.settings.chatbox_tooltip}}
+  </span>
+    </div>
+    <div id="zalo-chat-box">
+      <div class="zalo-header">
+        <img src="{{section.settings.zalo_logo | img_url: 'master'  }}"  width="60" height="60" alt="ru9-logo"/>
+        <div class="zalo-title">
+          {{section.settings.zalo_title}}
+        </div>
+        <div class="zalo-dismiss">
+          <img src="{{'ico-select.svg'| asset_url}}" alt="arrow-down" width="14" height="14" />
+        </div>
+      </div>
+      <div class="zalo-body">
+        <div class="zalo-desc">
+          {{section.settings.zalo_desc}}
+        </div>
+        <div class="zalo-qr-code ">
+          <img src="{{section.settings.zalo_qr_code | img_url: 'master'  }}" loading="lazy" width="168" height="167" alt="ru9-qrcode"/>
+        </div>
+       
+      </div>
+       <div class="zalo-greeting text-center">
+          <a href="{{settings.social_zalo_link}}" target=_blank""> {{section.settings.zalo_greeting}}</a>
+        </div>
+    </div>
+  
+  
+  
+    <style class="OMG-style-button" type="text/css">
+      .fb_iframe_widget iframe {
+        bottom: 80px !important;
+      }
+  
+      .otFacbookChat .available-work-container {
+        left: 1282.5px !important;;
+        bottom: 86px !important;
+      }
+  
+      .fb_dialog .fb_dialog_content {
+        opacity: 0.002!important;
+      }
+  
+      .facebook-chat-button-custom,
+      .ot-fb-logo.facebook-chat-button,
+      .fb_dialog .fb_dialog_content iframe {
+        bottom: 25px !important;
+      }
+      .backtop-show .facebook-chat-button-custom,
+      .backtop-show  .ot-fb-logo.facebook-chat-button,
+      .backtop-show   .fb_dialog .fb_dialog_content iframe {
+        bottom: 90px !important;
+  
+      }
+      .ot-fb-logo.facebook-chat-button {
+        direction: rtl;
+      }
+      .otFacbookChat.active #facebook-chat{
+        transform: translateY(var(--size));
+          visibility: visible
+  
+          }
+      .otFacbookChat.active #zalo-chat{
+        transform: translateY(calc(var(--size) * 2));
+          visibility: visible
+  
+          }
+      .otFacbookChat.active{
+        --size: -70px;
+        }
+  
+          @media screen and (max-width: 1025px) {
+            .fb_iframe_widget iframe {
+              left: auto !important;
+              bottom: 75px !important;
+  
+            }
+  
+            .fb_dialog .fb_dialog_content iframe,
+            .fb_dialog .fb_dialog_content #_no-clickjacking-0,
+            .fb_dialog .fb_dialog_content #_no-clickjacking-1 {
+  
+            }
+  
+            .fb_dialog.fb_dialog_mobile  {
+              bottom: 25px!important;
+            }
+          }
+  
+   @media(max-width: 767px){
+     {%if section.settings.hotline_enable -%}
+       .chat-icon,
+      .facebook-chat-button-custom, .ot-fb-logo.facebook-chat-button, .fb_dialog .fb_dialog_content iframe{
+          bottom: 100px!important;
+      
+      }
+      .icon-text-content.icon-text-content-left{
+          display:none
+      }
+     {%endif-%}
+    div#fb-customer-chat {
+      display: none!important;
+  }
+     .fb_dialog, .fb_dialog.fb_dialog_mobile{
+         display:none!important
+     }
+     .backtop-show .phonering-alo-phone{
+      bottom: 90px!important
+     }
+     .backtop-show .chat-icon ,
+     .backtop-show .facebook-chat-button-custom, .backtop-show .ot-fb-logo.facebook-chat-button, .backtop-show .fb_dialog .fb_dialog_content iframe{
+
+      bottom: 160px !important;
+     }
+    }
+    </style></div>
+  
+  
+  
+  <script>
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    const page_id = "125749924795745";
+    if (page_id && window.innerWidth > 600) {
+        window.addEventListener('mousemove', initChatbox, { once: true });
+        window.addEventListener('touchstart', initChatbox, { once: true });
+        window.addEventListener('scroll', initChatbox, { once: true });
+
+        function initChatbox() {
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", page_id);
+            chatbox.setAttribute("attribution", "biz_inbox");
+
+            window.fbAsyncInit = function() {
+                FB.init({
+                    xfbml: true,
+                    version: 'v12.0'
+                });
+            };
+
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            document.getElementById('facebook-chat').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('https://m.me/ru9vn', '_blank');
+            });
+
+            document.getElementById('zalo-chat').addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                document.getElementById('zalo-chat-box').classList.add('active');
+            });
+
+            document.querySelector('.zalo-dismiss').addEventListener('click', function() {
+                document.getElementById('zalo-chat-box').classList.remove('active');
+            });
+
+            var checkMessenger = setInterval(function() {
+                if (window.FB && window.FB.CustomerChat && document.querySelector('.fb_iframe_widget.fb_invisible_flow') && !document.getElementById('fb-customer-chat')) {
+                    // document.getElementById('facebook-chat').classList.remove('loading');
+                    window.FB.CustomerChat.hide();
+                    clearInterval(checkMessenger);
+                } else {
+                    // document.getElementById('facebook-chat').classList.add('loading');
+                }
+            }, 1000);
+        }
+    }
+
+    document.querySelector('.ot-fb-logo').addEventListener('click', function() {
+        document.querySelector('.otFacbookChat').classList.toggle('active');
+        if (window.FB) window.FB.CustomerChat.hide();
+        document.getElementById('zalo-chat-box').classList.remove('active');
+    });
+});
+
+  </script>

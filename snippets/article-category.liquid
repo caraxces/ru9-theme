@@ -1,0 +1,18 @@
+{%- for tag in article.tags -%}
+    {%- assign temptTag = tag | handle -%}
+    {%- assign categories = settings.category_tag | handle -%}
+    {%- if categories contains temptTag -%}
+        {%- if current_tags or paginate.current_page > 1 -%}
+            {%- # Nếu đang ở trang tag hoặc pagination, canonical về blog gốc -%}
+            <a href="{{ blog.url }}" class="tag-item i-block {{ tag | handle }}" rel="canonical">{{ tag }}</a>
+        {%- else -%}
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="tag-item i-block {{ tag | handle }}">{{ tag }}</a>
+        {%- endif -%}
+        {%- break -%}
+    {%- endif -%}
+{%- endfor -%}
+
+{%- if current_tags or paginate.current_page > 1 -%}
+    <link rel="canonical" href="{{ blog.url }}">
+{%- endif -%}
+  

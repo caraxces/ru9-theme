@@ -1,0 +1,317 @@
+{%- assign blog = blogs[section.settings.blog] -%}
+
+{% liquid
+  if section.settings.section_width != 'page-width'
+    if section.settings.section_width == 'full-width'
+      assign page_width = '100%'
+    endif
+    if section.settings.section_width == 'customize_width'
+      assign page_width = section.settings.customize_width | plus: 80 | append: 'px'
+    endif
+  endif
+
+  if template == 'blog'
+    assign page_width = '1104px'
+  endif
+%}
+
+<style>
+  {%- if template == 'blog' -%}
+    #shopify-section-{{ section.id }} {
+      margin-block: 24px;
+    }
+    #shopify-section-{{ section.id }} .section--divider:not(.section-padding) {
+        padding-top: 24px;
+    }
+    @media screen and (min-width: 768px){
+      #shopify-section-{{ section.id }} {
+        margin-block: 32px;
+      }
+      #shopify-section-{{ section.id }} .section--divider:not(.section-padding) {
+        padding-top: 32px;
+      }
+    }
+    @media screen and (min-width: 960px){
+      #shopify-section-{{ section.id }} {
+        margin-block: 40px;
+      }
+
+      #shopify-section-{{ section.id }} .section--divider:not(.section-padding) {
+        padding-top: 40px;
+      }
+    }
+  {%- endif -%}
+</style>
+
+<div class="ovh" data-section-id="{{ section.id }}" data-section-type="blogposts-section">
+  <div
+    class="page-width"
+    style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
+  >
+    {%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <header class="section-header text-{{ section.settings.heading_alignment }}{% if section.settings.view_all %}{% unless settings.type_headers_align_text %} section-header--with-link{% endunless %}{% endif %}">
+        <h2 class="section-header__title m-0">
+          {{ section.settings.title | escape }}
+        </h2>
+        {%- if section.settings.view_all -%}
+          <a href="{{ blog.url }}" class="text-link link--style-line no-underline section-header__link">
+            <span class="link-style">
+              {%- if section.settings.view_all_text != blank -%}
+                {{ section.settings.view_all_text }}
+              {%- else -%}
+                {{ 'blogs.article.view_all' | t }}
+              {%- endif -%}
+              {% render 'icon-caret' %}
+            </span>
+          </a>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    {%- unless blog.empty? -%}
+      <div class="blog-post-grid grid">
+        <div class="blog-post-grid__left large-up--one-half">
+          {%- if section.settings.article_1 != blank -%}
+            {%- assign article = articles[section.settings.article_1] -%}
+            {%- render 'article-grid-item',
+              blog: blog,
+              article: article,
+              grid_item_width: 'w-full',
+              per_row: '3',
+              large_item: true,
+              image_size: section.settings.blog_image_size,
+              animate_loop: '1'
+            -%}
+          {%- else -%}
+            <div class="placeholder-article">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              <p>{{ 'homepage.onboarding.blog_title' | t }}</p>
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="blog-post-grid__right large-up--one-half" id="Blogpost-Slider-{{ section.id }}">
+          {%- for i in (2..4) -%}
+            {%- capture article_setting -%}article_{{ i }}{%- endcapture -%}
+            {%- if section.settings[article_setting] != blank -%}
+              {%- assign article = articles[section.settings[article_setting]] -%}
+              {%-
+                render 'article-grid-item',
+                blog: blog,
+                article: article,
+                grid_item_width: 'w-full',
+                per_row: '3',
+                image_size: section.settings.blog_image_size,
+                animate_loop: forloop.index | plus: 1
+              -%}
+            {%- else -%}
+              <div class="placeholder-article">
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                <p>{{ 'homepage.onboarding.blog_title' | t }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- else -%}
+      <div class="grid grid--uniform">
+        {%- for i in (1..4) -%}
+          <div class="grid__item medium-up--one-third" data-aos="row-of-3">
+            <div class="grid">
+              <div class="grid__item small--one-third">
+                <a href="#" class="article__grid-image">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </a>
+              </div>
+              <div class="grid__item small--two-thirds">
+                <div class="article__grid-meta">
+                  {%- if section.settings.blog_show_date or article.tags.size > 0 or articles.comments_count > 0 -%}
+                    <div class="article__date">
+                      {%- if section.settings.blog_show_comments and article.comments_count > 0 -%}
+                        <a href="#">3 comments</a> &middot;
+                      {%- endif -%}
+                      {%- if section.settings.blog_show_date -%}
+                        Jul 17, {{ 'now' | date: '%Y' }}
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+
+                  <a href="#" class="article__title">Example blog post</a>
+
+                  {%- if section.settings.blog_show_author -%}
+                    <div class="article__author">by Archetype Themes</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endunless -%}
+    {%- if section.settings.divider -%}</div>{%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.blog-posts.name",
+  "class": "index-section section-blogposts",
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "t:sections.all.section_width.options__1"
+        },
+        {
+          "value": "page-width",
+          "label": "t:sections.all.section_width.options__2"
+        },
+        {
+          "value": "customize_width",
+          "label": "t:sections.all.section_width.options__3"
+        }
+      ],
+      "default": "page-width",
+      "label": "t:sections.all.section_width.label",
+      "info": "Don't work on the Blog page"
+    },
+    {
+      "type": "range",
+      "id": "customize_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 10,
+      "default": 1800,
+      "unit": "px",
+      "label": "t:sections.all.customize_width.label",
+      "info": "Don't work on the Blog page"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.blog-posts.settings.title.label",
+      "default": "Blog posts"
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_alignment",
+      "default": "center",
+      "label": "t:common.text_alignment.label__1"
+    },
+    {
+      "id": "blog",
+      "type": "blog",
+      "label": "t:sections.blog-posts.settings.blog.label"
+    },
+    {
+      "type": "article",
+      "id": "article_1",
+      "label": "Featured article (large)",
+      "info": "Select the first article to display"
+    },
+    {
+      "type": "article",
+      "id": "article_2",
+      "label": "Second article",
+      "info": "Select the second article to display"
+    },
+    {
+      "type": "article",
+      "id": "article_3",
+      "label": "Third article",
+      "info": "Select the third article to display"
+    },
+    {
+      "type": "article",
+      "id": "article_4",
+      "label": "Fourth article",
+      "info": "Select the fourth article to display"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_tags",
+      "label": "t:sections.blog-posts.settings.blog_show_tags.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": "t:sections.blog-posts.settings.blog_show_date.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_comments",
+      "label": "t:sections.blog-posts.settings.blog_show_comments.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_excerpt",
+      "label": "t:sections.blog-template.settings.blog_show_excerpt.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_author",
+      "label": "t:sections.blog-posts.settings.blog_show_author.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "view_all",
+      "label": "t:sections.blog-posts.settings.view_all.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "t:sections.blog-posts.settings.view_all.label__1"
+    },
+    {
+      "type": "select",
+      "id": "blog_image_size",
+      "label": "t:sections.blog-posts.settings.blog_image_size.label",
+      "default": "wide",
+      "options": [
+        {
+          "value": "natural",
+          "label": "t:sections.blog-posts.settings.blog_image_size.options.natural.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.blog-posts.settings.blog_image_size.options.square.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.blog-posts.settings.blog_image_size.options.landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.blog-posts.settings.blog_image_size.options.portrait.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.blog-posts.settings.blog_image_size.options.wide.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.blog-posts.settings.divider.label",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.blog-posts.presets.blog_posts.name",
+      "settings": {
+        "blog": "News"
+      }
+    }
+  ],
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  }
+}
+{% endschema %}

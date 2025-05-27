@@ -1,0 +1,268 @@
+<div class="product-grid" data-section-id="{{ section.id }}" data-section-type="pf-video-section">
+    <div class="container-fluid container-full-width">
+        <div class="row no-gutters">
+            <div class="col-md-7">
+                <div class="pf-section-video-wraper">
+                    <div class="pf-section-bg-video">
+                    {%if section.settings.video_source != blank%}
+                        <video  {%if section.settings.video_source_mb != blank%} class="video-desktop" {%endif-%} autoplay muted loop playsinline id="myVideo" {%if  section.settings.background != blank %} poster="{{section.settings.background | img_url: 'master'}}" {%endif%}>
+                            <source src="{{section.settings.video_source}}" type="video/mp4">
+                        </video>
+                          {%if section.settings.video_source_mb != blank%}
+                         <video preload="none"  class="video-mobile"  autoplay muted loop playsinline  {%if  section.settings.background != blank %} poster="{{section.settings.background | img_url: 'master'}}" {%endif%}>
+                            <source src="{{section.settings.video_source_mb}}" type="video/mp4">
+                        </video>
+                      {%endif -%}
+                    {%else%}    
+                    {{ 'image'  | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%endif%}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="video-section-right section-backgroud">
+                  	{%if section.settings.background_image and  section.settings.background_image != blank -%}
+                  <img loading="lazy" src="{{ section.settings.background_image  | img_url: 'master'}}" 
+                       alt="{{section.settings.title}}"
+                       width="{{section.settings.background_image.width}}"
+                       height="{{section.settings.background_image.height}}"
+                       />
+                  {%endif-%}
+                    <h3 class="h3 primary-color">{{section.settings.title}}</h3>
+                    <div class="section-content">{{section.settings.content}}</div>
+              	
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%assign background_color = '#003349' -%}
+{%assign color = '#fff' -%}
+
+{%if section.settings.background_color != blank -%}
+{%assign background_color = section.settings.background_color -%}
+{%endif-%}
+{%if section.settings.color != blank -%}
+{%assign color = section.settings.color -%}
+
+{%endif-%}
+	{%if section.settings.background_image and  section.settings.background_image != blank -%}
+{%assign background_color = 'transparent' -%}
+
+{%endif-%}
+<style>
+    video {
+        width: 100%;
+        height: auto;
+    }
+    .container-full-width {
+        margin: 0 auto;
+       /* padding: 0; */
+      /*  max-width: 100%; */
+                  background: {{background_color}};
+
+    }
+    .video-section-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+            background: {{background_color}};
+        height: calc(100% - 8px);
+        padding: 30px 100px;
+    }
+ 
+    .video-section-right h3 {
+      color:{{color}}!important;
+        font-size: 28px;
+        line-height: 34px;
+    }
+    .video-section-right .section-content p {
+      color:{{color}};
+        font-size: 17px;
+        line-height: 22px;
+    }
+  	.video-mobile{
+      	display: none;
+      aspect-ratio: 1/1
+      }
+   @media (min-width: 768px) {
+  .pf-section-video-wraper,.pf-section-bg-video{
+  	width: 100%;
+    height: 100%;
+  }
+  .pf-section-bg-video video{
+      width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+   }
+    @media (max-width: 1279px) {
+        .video-section-right {
+            padding: 30px;
+        }
+    }
+    @media (max-width: 767px) {
+        .video-section-right {
+                padding: 30px 15px;
+        }
+      .video-section-right:before{
+      	content: none
+      }
+    }
+  .video-section-right{
+  	position: relative
+  }
+  {%unless  section.settings.background_image or  section.settings.background_image != blank -%}
+   .video-section-right.section-backgroud:before{
+  	content: '';
+     position: absolute;
+     right: calc(100% - 1px);
+     top: 0;
+     width: 50%;
+     height: calc( 100%  + 15px);
+     background: transparent linear-gradient(91deg, rgba(0,0,0,0) 0%, {{background_color}} 100%) 0% 0% no-repeat padding-box;
+  }
+  {%endunless%}
+  .video-section-right img{
+  	position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    z-index: 0;
+     width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .video-section-right  > *{
+  	z-index: 1;
+  }
+    @media (max-width: 475px) {
+        .pf-section-bg-video video {
+            display: block;
+            height: 100%;
+        }
+     .pf-section-bg-video  .video-desktop{
+      	display: none
+      }
+      
+        .video-section-right {
+            padding: 50px 30px;
+        }
+        .video-section-right .section-content p {
+            font-size: 16px;
+        }
+    }
+  .product-video-section{
+  	padding: 0px;
+  	}
+    
+</style>
+<script type="lazyload2" >
+    $(document).ready(function(){
+     
+        $('.pf-section-bg-video #myVideo').load(()=>{
+              var window_width = $(window).width();
+            var video_height = $('.pf-section-bg-video #myVideo').height();
+            if(window_width > 767) {
+                $('.video-section-right').css({'height': video_height});
+                $(window).resize(function() {
+                    var video_height = $('.pf-section-bg-video #myVideo').height();
+                    $('.video-section-right').css({'height': video_height});
+                }) 
+            }                                      
+        })
+    })
+</script>
+{% if section.settings.video_source != blank and section.settings.title != blank and section.settings.content != blank %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ section.settings.title | json }},
+  "description": {{section.settings.content | strip_html | json }},
+  "thumbnailUrl": "{% if section.settings.thumbnail != blank %}{{section.settings.thumbnail | img_url: 'master'}}{% else %}{{ 'logo.svg' | asset_url }}{%endif%}",
+  "contentUrl": "{{ section.settings.video_source }}",
+  "uploadDate": {% if section.settings.upload_date != blank %}{{ section.settings.upload_date | json }}{% else %}"2021-05-24T08:00:00+07:00"{% endif %}
+}
+</script>
+{% endif %}
+
+{% schema %}
+{
+	"name": "Product Video",
+	"class": "product-video-section index-section",
+	"settings": [
+		{
+			"type": "text",
+			"id": "video_source",
+			"label": "Video URL",
+			"default": "https://cdn.shopify.com/s/files/1/0428/4219/4071/files/Manufacture_15s_16x9_3431c9b3-63d4-4db6-b96e-a54a9ae16d64.mp4?v=1598876652"
+		},
+{
+			"type": "text",
+			"id": "video_source_mb",
+			"label": "Video URL mobile"
+		},
+		{
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Text for Heading"
+		},
+		{
+            "type": "richtext",
+            "id": "content",
+            "label": "Content",
+            "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+        },
+	{
+            "type": "image_picker",
+            "id": "background",
+            "label": "Background"
+
+		},
+{
+            "type": "color",
+            "id": "background_color",
+            "label": "Background color",
+			"default" : "#003349"
+
+		},
+		{
+            "type": "color",
+            "id": "color",
+            "label": "Color",
+			"default" : "#fff"
+
+		},
+	{
+            "type": "image_picker",
+            "id": "background_image",
+            "label": "Background image"
+
+		},
+		{
+            "type": "image_picker",
+            "id": "thumbnail",
+            "label": "Thumbnail image",
+			"info": "For SEO only. If this field is blank, default assets/logo.svg will be use."
+
+		},
+		{
+            "type": "text",
+            "id": "upload_date",
+            "label": "Upload date",
+            "default": "2021-05-24T08:00:00+07:00",
+			"info": "For SEO only. If this field is blank, default date will be use."
+		}
+	],
+	"presets": [
+		{
+			"name": "Products Video",
+			"category": "Video" 
+		}
+	]
+}
+{% endschema %}
