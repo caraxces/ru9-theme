@@ -25,6 +25,7 @@
   background-color: #273d7e !important;
   border-color: #273d7e !important;
   color: #ffffff !important;
+  font-size: 10.5px !important;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   border-radius: calc(var(--buttonRadius) * 3.5);
 }
@@ -44,7 +45,7 @@
 .sticky-buttons-wrapper {
   width: 100%;
   display: flex;
-  gap: 10px;
+  gap: 0;
 }
 
 /* Hide payment buttons on mobile when setting is enabled */
@@ -108,6 +109,18 @@
 
   .sticky-buttons-wrapper .btn {
     flex: 1;
+    border-radius: 0;
+  }
+  
+  .sticky-buttons-wrapper .btn:first-child {
+    border-top-left-radius: calc(var(--buttonRadius) * 3.5);
+    border-bottom-left-radius: calc(var(--buttonRadius) * 3.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .sticky-buttons-wrapper .btn:last-child {
+    border-top-right-radius: calc(var(--buttonRadius) * 3.5);
+    border-bottom-right-radius: calc(var(--buttonRadius) * 3.5);
   }
 
   /* Hide payment buttons on mobile when setting is enabled */
