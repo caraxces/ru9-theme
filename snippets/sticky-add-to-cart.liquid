@@ -7,7 +7,7 @@
   id="product-sticky-{{ section.id }}-{{ product.id }}"
   data-section="{{ section.id }}"
 >
-  <nav class="product__sticky-navigation shrink-0">
+  <nav class="product__sticky-navigation shrink-0 mobile-hidden">
     <div class="sticky-navigation__links flex ai-center gap-x"></div>
   </nav>
   <div class="product__stick-product-wrap flex ai-center jc-between gap-x-sm flex-1">
@@ -24,12 +24,7 @@
 
       assign Buybuttons = section.blocks | where: 'type', 'buy_buttons'
     -%}
-    <div
-      class="product__sticky-product border-none flex ai-center relative p-0 bg-transparent"
-      type="button"
-      aria-label="{{ product.title | escape }}"
-      data-toggle
-    >
+    <div class="product__sticky-product mobile-hidden">
       {%- if media_count > 0 -%}
         <div class="product__sticky-image w-full shrink-0">
           <div
@@ -59,7 +54,6 @@
           {%- endfor -%}
         </div>
       </div>
-      <div class="product__sticky-toggle pos-absolute pos-absolute-c-r d-block hidden">&nbsp;</div>
     </div>
     <div class="product__sticky-inner o-h">
       <div class="product__sticky-wrapper">
@@ -108,7 +102,7 @@
                   <span data-add-to-cart-text-sticky data-default-text="{{ default_text }}" class="desktop-cart-text">
                     {{ button_text }}
                   </span>
-                  <span class="mobile-cart-text">Thêm</span>
+                  <span class="mobile-cart-text"> Thêm vào giỏ hàng </span>
                 </button>
                 
                 <button
@@ -116,7 +110,7 @@
                   class="btn btn--full btn--primary buy-now-btn mobile-only"
                   data-buy-now-sticky
                 >
-                  <span class="mobile-buy-now-text">Mua Ngay</span>
+                  <span class="mobile-buy-now-text">Mua Ngay - {{ current_variant.price | money }}</span>
                 </button>
               </div>
 
@@ -203,11 +197,16 @@
     display: none;
   }
   
-  /* Sticky Buttons Wrapper */
+  /* Mobile Hidden Elements */
+  .mobile-hidden {
+    display: block;
+  }
+  
+  /* Sticky Buttons Wrapper - Desktop */
   .sticky-buttons-wrapper {
     width: 100%;
     display: flex;
-    gap: 0;
+    gap: 10px;
   }
   
   /* Hide payment buttons on mobile when setting is enabled */
@@ -227,10 +226,31 @@
       left: 0 !important;
       right: 0 !important;
       z-index: 1000 !important;
-      background: white !important;
-      border-top: 1px solid #e0e0e0 !important;
-      padding: 10px 15px !important;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+    
+    /* Hide product info on mobile */
+    .mobile-hidden {
+      display: none !important;
+    }
+    
+    .product__stick-product-wrap {
+      width: 100% !important;
+    }
+    
+    .product__sticky-inner {
+      width: 100% !important;
+    }
+    
+    .product__sticky-wrapper {
+      width: 100% !important;
+    }
+    
+    .product-single__sticky-form {
+      width: 100% !important;
     }
     
     .product__sticky.active {
@@ -258,25 +278,40 @@
     }
     
     .sticky-buttons-wrapper {
-      flex: 1;
+      width: 100vw !important;
       display: flex;
       gap: 0;
+      padding: 0;
+      margin: 0;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
     }
     
     .sticky-buttons-wrapper .btn {
-      flex: 1;
       border-radius: 0;
+      height: 50px;
+      font-size: 14px !important;
+      font-weight: 600;
     }
     
     .sticky-buttons-wrapper .btn:first-child {
-      border-top-left-radius: calc(var(--buttonRadius) * 3.5);
-      border-bottom-left-radius: calc(var(--buttonRadius) * 3.5);
+      flex: 1;
+    }
+    
+    .sticky-buttons-wrapper .btn:last-child {
+      flex: 1;
+    }
+    
+    .sticky-buttons-wrapper .btn:first-child {
+      border-radius: 0;
       border-right: 1px solid rgba(255, 255, 255, 0.3);
     }
     
     .sticky-buttons-wrapper .btn:last-child {
-      border-top-right-radius: calc(var(--buttonRadius) * 3.5);
-      border-bottom-right-radius: calc(var(--buttonRadius) * 3.5);
+      border-radius: 0;
     }
     
     /* Hide payment buttons on mobile when setting is enabled */
@@ -308,8 +343,25 @@
       display: none;
     }
     
+    .sticky-buttons-wrapper {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      position: static;
+      left: auto;
+      right: auto;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    
     .sticky-buttons-wrapper .btn {
       width: 100%;
+      border-radius: calc(var(--buttonRadius) * 3.5);
+      height: auto;
+      font-size: inherit;
+      font-weight: inherit;
     }
   }
 </style>
