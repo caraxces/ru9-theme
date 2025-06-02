@@ -1,0 +1,538 @@
+<div class="warranty-result-section">
+  <div class="container">
+    <div class="warranty-search">
+      <h2 class="section-title">Tra cứu bảo hành</h2>
+      <div class="search-container">
+        <input type="text" id="warrantyCode" placeholder="Nhập số điện thoại mua hàng" class="warranty-input">
+        <button onclick="searchWarranty()" class="search-btn">Tra cứu</button>
+      </div>
+    </div>
+    
+    <div id="warrantyResult" class="warranty-result" style="display: none;">
+      <div class="warranty-timeline">
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+              <path d="M480-40q-112 0-206-51T120-227v107H40v-240h240v80h-99q48 72 126.5 116T480-120q75 0 140.5-28.5t114-77q48.5-48.5 77-114T840-480h80q0 91-34.5 171T791-169q-60 60-140 94.5T480-40ZM40-480q0-91 34.5-171T169-791q60-60 140-94.5T480-920q112 0 206 51t154 136v-107h80v240H680v-80h99q-48-72-126.5-116T480-840q-75 0-140.5 28.5t-114 77q-48.5 48.5-77 114T120-480H40Zm440 240q21 0 35.5-14.5T530-290q0-21-14.5-36T480-341q-21 0-35.5 14.5T430-291q0 21 14.5 36t35.5 15Zm-36-152h73q0-36 8.5-54t34.5-44q35-35 46.5-56.5T618-598q0-56-40-89t-98-33q-50 0-86 26t-52 74l66 28q7-26 26.5-43t45.5-17q27 0 45.5 15.5T544-595q0 17-8 34t-34 40q-33 29-45.5 56.5T444-392Z"/>
+            </svg>
+          </div>
+          <div class="timeline-text">Yêu cầu bảo hành</div>
+          <div class="timeline-date"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 4V20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="timeline-text">Xử lý yêu cầu</div>
+          <div class="timeline-date"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+              <path d="M280-160q-50 0-85-35t-35-85H60l18-80h113q17-19 40-29.5t49-10.5q26 0 49 10.5t40 29.5h167l84-360H182l4-17q6-28 27.5-45.5T264-800h456l-37 160h117l120 160-40 200h-80q0 50-35 85t-85 35q-50 0-85-35t-35-85H400q0 50-35 85t-85 35Zm357-280h193l4-21-74-99h-95l-28 120Zm-19-273 2-7-84 360 2-7 34-146 46-200ZM20-427l20-80h220l-20 80H20Zm80-146 20-80h260l-20 80H100Zm180 333q17 0 28.5-11.5T320-280q0-17-11.5-28.5T280-320q-17 0-28.5 11.5T240-280q0 17 11.5 28.5T280-240Zm400 0q17 0 28.5-11.5T720-280q0-17-11.5-28.5T680-320q-17 0-28.5 11.5T640-280q0 17 11.5 28.5T680-240Z"/>
+            </svg>
+          </div>
+          <div class="timeline-text">Lấy sản phẩm</div>
+          <div class="timeline-date"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 8V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="timeline-text">Đang bảo hành</div>
+          <div class="timeline-date"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+              <path d="M280-160q-50 0-85-35t-35-85H60l18-80h113q17-19 40-29.5t49-10.5q26 0 49 10.5t40 29.5h167l84-360H262l17-80h441l-37 160h117l120 160-40 200h-80q0 50-35 85t-85 35q-50 0-85-35t-35-85H400q0 50-35 85t-85 35Zm357-280h193l4-21-74-99h-95l-28 120Zm-17-280-84 360 2-7 82-353ZM140-440v-120H40l140-200v120h100L140-440Zm140 200q17 0 28.5-11.5T320-280q0-17-11.5-28.5T280-320q-17 0-28.5 11.5T240-280q0 17 11.5 28.5T280-240Zm400 0q17 0 28.5-11.5T720-280q0-17-11.5-28.5T680-320q-17 0-28.5 11.5T640-280q0 17 11.5 28.5T680-240Z"/>
+            </svg>
+          </div>
+          <div class="timeline-text">Gửi trả sản phẩm</div>
+          <div class="timeline-date"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="timeline-text">Hoàn thành</div>
+          <div class="timeline-date"></div>
+        </div>
+      </div>
+      <div class="result-status">
+        <div class="status-indicator"></div>
+        <p id="statusMessage" class="status-message"></p>
+      </div>
+      <!-- Container cho tất cả thông tin khách hàng -->
+      <div id="customerDetails" class="customer-details"></div>
+    </div>
+    
+    <!-- Hiển thị khi đang tìm kiếm -->
+    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+      <div class="loading-spinner"></div>
+      <p>Đang tìm kiếm thông tin...</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .warranty-result-section {
+    padding: 40px 0;
+    background: #f8f9fa;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  .warranty-search {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+  
+  .search-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .warranty-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .search-btn {
+    padding: 12px 24px;
+    background: #d5581f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .search-btn:hover {
+    background: #b44816;
+  }
+  
+  .warranty-result {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .result-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffc107;
+  }
+  
+  .status-message {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .customer-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .detail-item {
+    margin-bottom: 15px;
+  }
+  
+  .detail-label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .detail-value {
+    color: #333;
+    padding: 8px;
+    background: #f9f9f9;
+    border-radius: 4px;
+    min-height: 20px;
+  }
+  
+  .loading-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #d5581f;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .customer-details {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Style cho các trường thời gian */
+  .detail-item.time-highlight {
+    border: 2px solid #d5581f;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #fff9f6;
+  }
+  
+  .detail-item.time-highlight .detail-label {
+    color: #d5581f;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+  
+  .detail-item.time-highlight .detail-value {
+    font-weight: bold;
+    color: #d5581f;
+    font-size: 1.2em;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .detail-item.time-highlight {
+      margin: 10px 0;
+    }
+  }
+  
+  /* Thêm CSS cho timeline */
+  .warranty-timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+    padding: 20px 0;
+  }
+
+  .warranty-timeline::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ddd;
+    z-index: 1;
+  }
+
+  .timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+  }
+
+  .timeline-icon {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    color: #999;
+  }
+
+  .timeline-text {
+    font-size: 12px;
+    text-align: center;
+    color: #666;
+    max-width: 100px;
+  }
+
+  .timeline-date {
+    font-size: 11px;
+    color: #d5581f;
+    margin-top: 4px;
+    min-height: 15px;
+    display: block;
+  }
+
+  .timeline-date.empty-date {
+    color: transparent;
+    user-select: none; /* Ngăn người dùng select text */
+  }
+
+  .timeline-item.active .timeline-icon {
+    background: #d5581f;
+    border-color: #d5581f;
+    color: white;
+  }
+
+  .timeline-item.active .timeline-text {
+    color: #d5581f;
+    font-weight: bold;
+  }
+
+  .timeline-item.completed .timeline-icon {
+    background: #2960ad;
+    border-color: #2960ad;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .warranty-timeline {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .warranty-timeline::before {
+      width: 2px;
+      height: 100%;
+      left: 19px;
+      top: 0;
+    }
+
+    .timeline-item {
+      width: 100%;
+      flex-direction: row;
+      gap: 15px;
+    }
+
+    .timeline-text {
+      text-align: left;
+      margin-bottom: 0;
+    }
+  }
+</style>
+
+<script src="{{ 'lark-api.js' | asset_url }}" defer></script>
+<script>
+  // Đảm bảo script LarkAPI đã tải xong
+  window.addEventListener('DOMContentLoaded', function() {
+    if (typeof window.LarkAPI === 'undefined') {
+      console.error('LarkAPI is not loaded properly');
+      return;
+    }
+    
+    // Thêm event listener cho nút search và input field (enter)
+    document.querySelector('.search-btn').addEventListener('click', searchWarranty);
+    document.getElementById('warrantyCode').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchWarranty();
+      }
+    });
+  });
+
+  async function searchWarranty() {
+    const warrantyCode = document.getElementById('warrantyCode').value.trim();
+    if (!warrantyCode) {
+      alert('Vui lòng nhập số điện thoại mua hàng');
+      return;
+    }
+    
+    const resultDiv = document.getElementById('warrantyResult');
+    const statusMessage = document.getElementById('statusMessage');
+    const statusIndicator = document.querySelector('.status-indicator');
+    const customerDetails = document.getElementById('customerDetails');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    
+    try {
+      // Hiển thị loading
+      resultDiv.style.display = 'none';
+      loadingIndicator.style.display = 'flex';
+      
+      // Gọi API để lấy dữ liệu
+      const data = await LarkAPI.getBitableRecords(warrantyCode);
+      console.log('Received data:', data); // Log để debug
+      
+      // Ẩn loading
+      loadingIndicator.style.display = 'none';
+      
+      // Reset các phần tử
+      resultDiv.style.display = 'block';
+      customerDetails.innerHTML = '';
+      
+      if (!data) {
+        statusIndicator.style.background = '#dc3545'; // Red
+        statusMessage.textContent = 'Không tìm thấy thông tin bảo hành cho số điện thoại này';
+        return;
+      }
+
+      // Cập nhật trạng thái bảo hành
+      updateWarrantyStatus(data, statusIndicator, statusMessage);
+      
+      // Hiển thị tất cả thông tin khách hàng
+      displayCustomerDetails(data, customerDetails);
+      
+    } catch (error) {
+      loadingIndicator.style.display = 'none';
+      resultDiv.style.display = 'block';
+      statusIndicator.style.background = '#dc3545'; // Red
+      statusMessage.textContent = 'Có lỗi xảy ra, vui lòng thử lại sau';
+      console.error('Error:', error);
+    }
+  }
+  
+  // Cập nhật hàm updateWarrantyStatus để thêm xử lý timeline
+  function updateWarrantyStatus(data, statusIndicator, statusMessage) {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    // Reset all items
+    timelineItems.forEach(item => {
+      item.classList.remove('active', 'completed');
+      // Thêm "null" trong suốt cho tất cả timeline-date
+      const dateElement = item.querySelector('.timeline-date');
+      if (dateElement) {
+        dateElement.textContent = 'null';
+        dateElement.classList.add('empty-date');
+      }
+    });
+
+    // Cập nhật timeline dates
+    if (data['Thời gian thu hồi']) {
+      const pickupDate = document.querySelector('.timeline-item:nth-child(3) .timeline-date');
+      pickupDate.textContent = data['Thời gian thu hồi'];
+      pickupDate.classList.remove('empty-date');
+    }
+    if (data['Thời gian trả hàng']) {
+      const returnDate = document.querySelector('.timeline-item:nth-child(5) .timeline-date');
+      returnDate.textContent = data['Thời gian trả hàng'];
+      returnDate.classList.remove('empty-date');
+    }
+
+    let currentStep = 0;
+    
+    if (!data['Thời gian thu hồi']) {
+      currentStep = 1; // Đang xử lý
+    } else if (data['Thời gian thu hồi'] && !data['Thời gian trả hàng']) {
+      currentStep = 2; // Sẽ tới lấy sản phẩm
+    } else if (data['Thời gian thu hồi'] && data['Thời gian trả hàng'] === null) {
+      currentStep = 3; // Đang bảo hành
+    } else if (data['Thời gian trả hàng']) {
+      currentStep = 4; // Sẽ gửi trả
+    }
+
+    // Đánh dấu các bước đã hoàn thành và bước hiện tại
+    timelineItems.forEach((item, index) => {
+      if (index < currentStep) {
+        item.classList.add('completed');
+      } else if (index === currentStep) {
+        item.classList.add('active');
+      }
+    });
+
+    // Giữ nguyên logic cũ
+    if (!data['Thời gian thu hồi']) {
+      statusIndicator.style.background = '#ffc107';
+      statusMessage.textContent = 'Đang xử lý thông tin bảo hành';
+    } else if (data['Thời gian thu hồi'] && !data['Thời gian trả hàng']) {
+      statusIndicator.style.background = '#17a2b8';
+      statusMessage.textContent = `Chúng tôi sẽ tới thu hồi sản phẩm bảo hành vào ngày ${data['Thời gian thu hồi']}`;
+    } else if (data['Thời gian thu hồi'] && data['Thời gian trả hàng'] === null) {
+      statusIndicator.style.background = '#28a745';
+      statusMessage.textContent = 'Chúng tôi đang tiến hành bảo hành cho sản phẩm của bạn';
+    } else if (data['Thời gian trả hàng']) {
+      statusIndicator.style.background = '#28a745';
+      statusMessage.textContent = `Hàng của bạn sẽ sẵn sàng vào ngày ${data['Thời gian trả hàng']}`;
+    }
+  }
+  
+  // Hàm hiển thị tất cả thông tin khách hàng
+  function displayCustomerDetails(data, container) {
+    // Thứ tự hiển thị các trường quan trọng trước
+    const priorityFields = [
+      'Họ và Tên', 
+      'SĐT', 
+      'Số điện thoại mua hàng',
+      'Địa chỉ',
+      'Tên sản phẩm',
+      'Kích thước',
+      'Vấn đề',
+      'Thời gian thu hồi',
+      'Thời gian trả hàng'
+    ];
+    
+    // Hiển thị các trường ưu tiên trước
+    priorityFields.forEach(field => {
+      if (data[field] !== undefined && data[field] !== null && data[field] !== '') {
+        addDetailItem(container, field, data[field]);
+      }
+    });
+    
+    // Hiển thị các trường còn lại
+    for (const [key, value] of Object.entries(data)) {
+      if (!priorityFields.includes(key) && value !== undefined && value !== null && value !== '') {
+        addDetailItem(container, key, value);
+      }
+    }
+  }
+  
+  // Thêm một mục thông tin chi tiết
+  function addDetailItem(container, label, value) {
+    const detailItem = document.createElement('div');
+    detailItem.className = 'detail-item';
+    
+    const detailLabel = document.createElement('div');
+    detailLabel.className = 'detail-label';
+    detailLabel.textContent = label;
+    
+    const detailValue = document.createElement('div');
+    detailValue.className = 'detail-value';
+    detailValue.textContent = value;
+    
+    detailItem.appendChild(detailLabel);
+    detailItem.appendChild(detailValue);
+    container.appendChild(detailItem);
+  }
+</script>

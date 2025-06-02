@@ -8939,7 +8939,7 @@ tool-tip[data-tool-tip-open="true"] .tool-tip__inner {
 .site-nav__details:hover .site-nav__dropdown {
   opacity: 1;
   visibility: visible;
-  transform: translate3d(0, 10px, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .site-nav__details:hover .site-nav__dropdown .appear-animation {

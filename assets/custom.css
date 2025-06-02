@@ -852,14 +852,3 @@ header .ru9_icon {
 .show-more-btn:hover {
   opacity: 0.9;
 }
-
-/* Hide buy buttons on mobile when setting is enabled */
-@media screen and (max-width: 768px) {
-  .hide-buy-buttons-mobile {
-    display: none !important;
-  }
-  
-  .hide-payment-mobile .payment-buttons {
-    display: none !important;
-  }
-}

@@ -61,7 +61,7 @@
     id="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}"
   >
     <label class="color_title{% if is_product_combo %} hide{% endif %}">{{ option.name }}</label>
-    <div class="color_list variant-buttons-grid">
+    <div class="color_list flex ai-center gap-md flex-wrap">
       {%- for value in option.values -%}
         {%- liquid
           assign product_available = true
@@ -70,7 +70,7 @@
           endif
         -%}
         <div
-          class="variant-input variant-button-wrapper {% if is_color %}vcolor-{{ value | handle }}{% endif %}{% if is_product_combo %} t-center{% endif %}"
+          class="variant-input {% if is_color %}vcolor-{{ value | handle }}{% endif %}{% if is_product_combo %} t-center{% endif %}"
           data-index="option{{ option_index }}"
           data-value="{{ value | escape }}"
         >
@@ -151,40 +151,3 @@
     </style>
   {% endif %}
 {% endfor %}
-
-<style>
-  .variant-buttons-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    width: 100%;
-  }
-  
-  .variant-button-wrapper {
-    width: 100%;
-  }
-  
-  .variant__button-label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 45px;
-    border: 1px solid #e8e8e1;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 400;
-  }
-  
-  input[type="radio"]:checked + .variant__button-label {
-    border-color: #000;
-    background-color: #f7f7f7;
-    font-weight: 700;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .variant-buttons-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-</style>

@@ -1,372 +1,582 @@
-<div class="warranty-result-section">
-  <div class="container">
-    <div class="warranty-search">
-      <h2 class="section-title">Tra cứu bảo hành</h2>
-      <div class="search-container">
-        <input type="text" id="warrantyCode" placeholder="Nhập số điện thoại mua hàng" class="warranty-input">
-        <button onclick="searchWarranty()" class="search-btn">Tra cứu</button>
-      </div>
-    </div>
-    
-    <div id="warrantyResult" class="warranty-result" style="display: none;">
-      <div class="result-status">
-        <div class="status-indicator"></div>
-        <p id="statusMessage" class="status-message"></p>
-      </div>
-      <!-- Container cho tất cả thông tin khách hàng -->
-      <div id="customerDetails" class="customer-details"></div>
-    </div>
-    
-    <!-- Hiển thị khi đang tìm kiếm -->
-    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
-      <div class="loading-spinner"></div>
-      <p>Đang tìm kiếm thông tin...</p>
-    </div>
-  </div>
+<div class="warranty-page">
+    <section class="warranty-container">
+        <h2 class="warranty-title">Yêu Cầu Bảo Hành</h2>
+        
+        <form class="warranty-form" method="POST" action="/contact" enctype="multipart/form-data" onsubmit="return handleSubmit(event);">
+        <!-- Two Columns Layout -->
+        <div class="two-columns">
+            <!-- Khách hàng -->
+            <fieldset class="warranty-fieldset customer-fieldset">
+            <legend>Khách Hàng</legend>
+            <div class="form-stack">
+                {% assign customer_fields = "Họ và Tên:text:user_name,SĐT:tel:user_phone,Địa chỉ (Cần phải trùng với địa chỉ nhận hàng):text:user_address,Email:email:user_email" | split: "," %}
+                {% for field in customer_fields %}
+
+                {% assign field_parts = field | split: ":" %}
+                <div class="form-group">
+                    <label for="{{ field_parts[2] }}">{{ field_parts[0] }}</label>
+                    <input type="{{ field_parts[1] }}" id="{{ field_parts[2] }}" name="{{ field_parts[2] }}" required>
+                </div>
+                {% endfor %}
+            </div>
+            </fieldset>
+
+            <!-- Sản phẩm -->
+            <fieldset class="warranty-fieldset product-fieldset">
+            <legend>Sản Phẩm</legend>
+            <div class="form-stack">
+                {% assign product_fields = "Tên sản phẩm:product_name,Kích thước:product_size,Số điện thoại mua hàng:tel:purchase_phone" | split: "," %}
+                {% for field in product_fields %}
+                {% assign field_parts = field | split: ":" %}
+                <div class="form-group">
+                    <label for="{{ field_parts[1] }}">{{ field_parts[0] }}</label>
+                    <input type="{% if field_parts[2] %}{{ field_parts[2] }}{% else %}text{% endif %}" id="{{ field_parts[1] }}" name="{{ field_parts[1] }}" required>
+                </div>
+                {% endfor %}
+
+                <!-- Thêm trường Nơi mua hàng -->
+                <div class="form-group">
+                    <label for="purchase_location">Nơi mua hàng</label>
+                    <select id="purchase_location" name="purchase_location" required>
+                        {% assign purchase_locations = "Website;Showroom Hà Nội;Showroom Hồ Chí Minh;Sàn thương mại điện tử;Các kênh social (Facebook, Instagram,...)" | split: ";" %}
+                        {% for location in purchase_locations %}
+                            <option value="{{ location }}">{{ location }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            </fieldset>
+        </div>
+
+        <!-- Vấn đề gặp phải -->
+        <fieldset class="warranty-fieldset">
+            <legend>Bạn đang gặp vấn đề gì với sản phẩm của mình? *</legend>
+            <div class="form-group">
+                <label for="issues">Chọn vấn đề:</label>
+                <select id="issues" name="issues" required>
+                    {% assign issues = "Bị võng (quá 10%) hoặc Xẹp lún,Foam bị tách lớp,Lỗi sản xuất khác" | split: "," %}
+                    {% for issue in issues %}
+                        <option value="{{ issue }}">{{ issue }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Vui lòng giải thích thêm bất kỳ chi tiết nào về các vấn đề bạn đang gặp phải với sản phẩm của mình.</label>
+                <textarea name="issue_details" rows="4" required></textarea>
+            </div>
+        </fieldset>
+
+        <!-- Câu hỏi -->
+        <fieldset class="warranty-fieldset questions-fieldset">
+            <legend>Câu Hỏi</legend>
+            <div class="questions-container two-columns">
+                {% comment %} <!-- Vấn đề cần Bảo hành -->
+                <div class="question-group">
+                    <p>Vấn đề cần Bảo hành</p>
+                    <div class="form-group">
+                        <label for="warranty_issue">Diễn giải chi tiết về vấn đề cần Bảo hành</label>
+                        <textarea id="warranty_issue" name="warranty_issue" rows="4" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Lỗi nhà sản phẩm -->
+                <div class="question-group">
+                    <p>Lỗi nhà sản phẩm</p>
+                    <div class="form-group">
+                        <label for="product_fault">Chọn lỗi:</label>
+                        <select id="product_fault" name="product_fault" required>
+                            <option value="Bị võng (Quá 10%) hoặc Xẹp lún">Bị võng (Quá 10%) hoặc Xẹp lún</option>
+                            <option value="Xẹp lún toàn bộ, thước đo vật lý ... cm">Xẹp lún toàn bộ, thước đo vật lý ... cm</option>
+                            <option value="Xẹp lún một số vị trí">Xẹp lún một số vị trí</option>
+                        </select>
+                    </div>
+                </div> {% endcomment %}
+
+                <!-- Lần bảo hành đầu tiên -->
+                <div class="question-group">
+                    <p>Đây có phải là lần bảo hành đầu tiên của bạn hay không?</p>
+                    <div class="form-group">
+                        <label for="first_warranty">Chọn câu trả lời:</label>
+                        <select id="first_warranty" name="first_warranty" required>
+                            <option value="Có">Có</option>
+                            <option value="Không">Không</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Nệm có được mặc áo nệm hay không -->
+                <div class="question-group">
+                    <p>Nệm có được mặc áo nệm hay không?</p>
+                    <div class="form-group">
+                        <label for="mattress_cover">Chọn câu trả lời:</label>
+                        <select id="mattress_cover" name="mattress_cover" required>
+                            <option value="Có">Có</option>
+                            <option value="Không">Không</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Vị trí đặt Nệm -->
+                <div class="question-group">
+                    <p>Vị trí đặt Nệm?</p>
+                    <div class="form-group">
+                        <label for="mattress_position">Chọn vị trí:</label>
+                        <select id="mattress_position" name="mattress_position" required>
+                            <option value="Trên sàn">Trên sàn</option>
+                            <option value="Giường">Giường</option>
+                            <option value="Xếp gọn (Không sử dụng)">Xếp gọn (Không sử dụng)</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Nệm có tiếp xúc với chất lỏng hay không -->
+                <div class="question-group">
+                    <p>Nệm có tiếp xúc với chất lỏng hay không? Cụ thể?</p>
+                    <div class="form-group">
+                        <textarea name="liquid_contact" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- Bạn có thường xuyên xoay đầu Nệm -->
+                <div class="question-group">
+                    <p>Bạn có thường xuyên xoay đầu Nệm?</p>
+                    <div class="form-group">
+                        <label for="mattress_rotation">Chọn tần suất:</label>
+                        <select id="mattress_rotation" name="mattress_rotation" required>
+                            <option value="1 Tháng 1 Lần">1 Tháng 1 Lần</option>
+                            <option value="3 Tháng 1 Lần">3 Tháng 1 Lần</option>
+                            <option value="1 Năm 1 Lần">1 Năm 1 Lần</option>
+                            <option value="Chưa bao giờ">Chưa bao giờ</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Hình ảnh -->
+        {% comment %}
+        <fieldset class="warranty-fieldset images-fieldset">
+            <legend>Hình Ảnh</legend>
+            <label>Vui lòng chuẩn bị hình ảnh trước để yêu cầu bảo hành của khách được tiến hành nhanh và đầy đủ hơn.</label>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="{{ section.settings.image1 | img_url: 'master' }}" alt="Bước 1">
+                    <p>Bước 1: Chụp rõ phần tag sản phẩm</p>
+                </div>
+                <div class="image-item">
+                    <img src="{{ section.settings.image2 | img_url: 'master' }}" alt="Bước 2">
+                    <p>Bước 2: Chụp toàn bộ tấm nệm gồm nệm và giường/chân đế</p>
+                </div>
+                <div class="image-item">
+                    <img src="{{ section.settings.image3 | img_url: 'master' }}" alt="Bước 3">
+                    <p>Bước 3: Chụp rõ tổng thể 2 bề mặt nệm (2 hình)</p>
+                </div>
+            </div>
+
+            <div class="centered-images">
+                <div class="image-item">
+                    <img src="{{ section.settings.image4 | img_url: 'master' }}" alt="Bước 4">
+                    <p>Bước 4: Chụp rõ phần bị lỗi đã gỡ bỏ áo nệm</p>
+                </div>
+                <div class="image-item">
+                    <img src="{{ section.settings.image5 | img_url: 'master' }}" alt="Bước 5">
+                    <p>Bước 5: Quay video tổng thể chiếc nệm đã gỡ bỏ áo nệm</p>
+                </div>
+            </div>
+
+            <div class="upload-section">
+                <p class="upload-instruction">Vui lòng tải lên hình ảnh của bạn:</p>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="upload-container">
+                        <input type="file" id="imageUpload" name="image" accept="image/*" required>
+                        <button type="submit" class="upload-button">Gửi yêu cầu</button>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+        {% endcomment %}
+
+        <button type="submit" class="submit-button" onclick="submitForm()">Gửi yêu cầu</button>
+
+        <div class="support-links">
+          Bạn cần hỗ trợ? Hãy liên hệ qua <a href="https://m.me/ru9vn">facebook</a> hoặc gọi điện qua số hotline: <a href="tel:1900636321">1900 636321</a>
+        </div>
+
+        </form>
+    </section>
+</div>
+
+<!-- Fieldset hiển thị sau khi gửi thành công -->
+<div class="success-message" style="display: none; margin-top: 20px;">
+  <legend>Cảm ơn quý khách đã sử dụng dịch vụ tại Ru9</legend>
+  <p>Yêu cầu của quý khách đã được gửi đi, Chúng tôi sẽ liên hệ lại với quý khách sớm nhất khoảng sau 24h hoặc trong vòng 2 ngày làm việc không tính T7 CN và ngày lễ, chúc quý khách những đêm an giấc êm ái cùng Ru9.</p>
+  <button
+    type="button"
+    class="btn btn--full btn--secondary"
+    onclick="window.location.href='ru9.vn'"
+  >
+    Về Trang Chủ
+  </button>
 </div>
 
 <style>
-  .warranty-result-section {
-    padding: 40px 0;
-    background: #f8f9fa;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-  
-  .section-title {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 28px;
-    color: #333;
-  }
-  
-  .warranty-search {
-    max-width: 600px;
-    margin: 0 auto;
-    margin-bottom: 30px;
-  }
-  
-  .search-container {
+.two-columns {
     display: flex;
-    gap: 10px;
-  }
-  
-  .warranty-input {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.warranty-fieldset {
+    margin-bottom: 20px;
+    width: 100%; /* Đảm bảo tất cả các fieldset chiếm 100% chiều rộng */
+}
+
+.two-columns .warranty-fieldset {
+    width: 48%; /* Chỉ áp dụng cho fieldset trong two-columns */
+}
+
+@media (max-width: 768px) {
+    .two-columns {
+        flex-direction: column; /* Xếp dọc các phần tử */
+    }
+    .two-columns .warranty-fieldset {
+        width: 100%; /* Chiếm 100% trên màn hình nhỏ */
+    }
+}
+
+.form-group label,
+.form-group input {
+    width: 100%; /* Đảm bảo label và input có cùng chiều rộng */
+    box-sizing: border-box; /* Đảm bảo padding và border không ảnh hưởng đến chiều rộng */
+}
+
+.images-fieldset .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-items: center;
+    width: 90%; /* Chiếm 90% chiều rộng màn hình */
+    margin: 0 auto; /* Căn giữa */
+}
+
+.image-item:nth-child(4),
+.image-item:nth-child(5) {
+    grid-column: span 1; /* Đảm bảo mỗi phần tử chiếm 1 cột */
+}
+
+.image-item:nth-child(4) {
+    grid-column-start: 2; /* Bắt đầu từ cột thứ 2 để căn giữa */
+}
+
+.image-item {
+    text-align: center;
+}
+
+.image-item img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .image-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .centered-images {
+        flex-direction: column;
+        width: 100%; /* Chiếm toàn bộ chiều rộng trên màn hình nhỏ */
+    }
+
+    .centered-images .image-item {
+        width: 98%;
+        margin: 0 auto;
+    }
+}
+
+.centered-paragraph {
+    text-align: center;
     font-size: 16px;
-  }
-  
-  .search-btn {
-    padding: 12px 24px;
-    background: #d5581f;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .search-btn:hover {
-    background: #b44816;
-  }
-  
-  .warranty-result {
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  .result-status {
+    margin-top: 10px; /* Khoảng cách trên với form-group */
+}
+
+.warranty-title {
+    text-align: center; /* Căn giữa tiêu đề */
+    font-size: 36px; /* Kích thước font cho tiêu đề */
+}
+
+body, p, label, input, legend {
+    font-size: 16px; /* Kích thước font cho các đoạn văn bản khác */
+}
+
+textarea[name="issue_details"],
+textarea[name="liquid_contact"],
+textarea[name="warranty_issue"] {
+    width: 98%; /* Chiều rộng 98% của section */
+    box-sizing: border-box; /* Đảm bảo padding và border không ảnh hưởng đến chiều rộng */
+}
+
+.radio-item {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .status-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #ffc107;
-  }
-  
-  .status-message {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-  }
-  
-  .customer-details {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 10px; /* Khoảng cách giữa các radio items */
+}
+
+.radio-item input[type="radio"] {
+    margin-right: 5px; /* Khoảng cách giữa radio và label */
+}
+
+.warranty-container {
+    padding: 32px; /* Thêm padding 32px xung quanh section */
+}
+
+legend {
+    font-weight: bold; /* In đậm */
+    font-size: 24px; /* Kích thước font 24px */
+}
+
+/* CSS cho nút submit */
+.submit-button {
+    background-color: #d5581f; /* Màu nền */
+    color: #fff; /* Màu chữ */
+    padding: 12px 24px; /* Padding */
+    border: none; /* Không viền */
+    border-radius: 16px; /* Bo góc 16px */
+    cursor: pointer; /* Con trỏ chuột */
+    font-size: 16px; /* Kích thước chữ */
+    text-align: center; /* Căn giữa chữ */
+    display: flex; /* Sử dụng flexbox */
+    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+    align-items: center; /* Căn giữa nội dung theo chiều dọc */
+    width: 92%; /* Chiều rộng 92% của section */
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease; /* Hiệu ứng chuyển màu nền, màu chữ và viền */
+    margin: 0 auto; /* Căn giữa nút trong section */
+}
+
+.submit-button:hover {
+    background-color: #fff; /* Màu nền khi hover */
+    color: #d5581f; /* Màu chữ khi hover */
+    border: 2px solid #d5581f; /* Đường viền khi hover */
+}
+
+.questions-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+}
+
+.question-group {
+    flex: 1 1 48%; /* Đảm bảo mỗi phần tử chiếm 48% chiều rộng để có 2 phần tử trên mỗi hàng */
+    box-sizing: border-box;
+}
+
+.form-group select {
+    width: 98%; /* Chiều rộng 98% của form-group */
+    box-sizing: border-box; /* Đảm bảo padding và border không ảnh hưởng đến chiều rộng */
+}
+
+.success-message {
+    display: none; /* Ẩn mặc định */
+    margin: 20px 30px; /* Cách lề trái và phải 30px */
+    padding: 20px; /* Thêm khoảng cách bên trong */
+    border: 2px solid #d5581f; /* Đường viền màu cam */
+    border-radius: 10px; /* Bo góc */
+    text-align: center; /* Căn giữa nội dung */
+    background-color: #f9f9f9; /* Màu nền nhạt */
+}
+
+.success-message legend {
+    font-size: 24px; /* Kích thước chữ cho tiêu đề */
+    font-weight: bold; /* In đậm tiêu đề */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+.success-message p {
+    font-size: 16px; /* Kích thước chữ cho đoạn văn */
+    margin: 0; /* Loại bỏ khoảng cách mặc định */
+}
+
+.centered-images {
+    display: flex;
+    justify-content: center;
     gap: 20px;
-  }
-  
-  .detail-item {
+    margin-top: 20px;
+    width: 60%; /* Chiếm 60% chiều rộng màn hình */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centered-images .image-item {
+    text-align: center;
+}
+
+.warranty-page {
+    width: 1600px; /* Chiều rộng cố định cho PC */
+    margin: 0 auto; /* Căn giữa trên màn hình */
+}
+
+@media (max-width: 1024px) {
+    .warranty-page {
+        width: 700px; /* Chiều rộng cố định cho tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .warranty-page {
+        width: 100%; /* Chiều rộng 100% cho mobile */
+        padding: 0 10px; /* Thêm padding để tránh sát lề */
+    }
+}
+
+.upload-section {
+    margin-top: 30px;
+    text-align: center;
+    width: 100%;
+}
+
+.upload-instruction {
+    font-size: 16px;
     margin-bottom: 15px;
-  }
-  
-  .detail-label {
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 5px;
-  }
-  
-  .detail-value {
     color: #333;
-    padding: 8px;
-    background: #f9f9f9;
-    border-radius: 4px;
-    min-height: 20px;
-  }
-  
-  .loading-indicator {
+}
+
+.upload-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 30px 0;
-  }
-  
-  .loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #d5581f;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 15px;
-  }
-  
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-  
-  /* Mobile responsive */
-  @media (max-width: 768px) {
-    .customer-details {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  /* Style cho các trường thời gian */
-  .detail-item.time-highlight {
+    gap: 15px;
+    padding: 20px;
+    border: 2px dashed #d5581f;
+    border-radius: 8px;
+    background-color: #fff;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.upload-button {
+    background-color: #d5581f;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.upload-button:hover {
+    background-color: #fff;
+    color: #d5581f;
     border: 2px solid #d5581f;
-    border-radius: 6px;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #fff9f6;
-  }
-  
-  .detail-item.time-highlight .detail-label {
-    color: #d5581f;
-    font-size: 1.1em;
-    margin-bottom: 8px;
-  }
-  
-  .detail-item.time-highlight .detail-value {
-    font-weight: bold;
-    color: #d5581f;
-    font-size: 1.2em;
-    text-align: center;
-    background-color: white;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .detail-item.time-highlight {
-      margin: 10px 0;
+}
+
+#imageUpload {
+    width: 100%;
+    max-width: 300px;
+}
+
+@media (max-width: 768px) {
+    .upload-container {
+        width: 90%;
+        padding: 15px;
     }
-  }
+}
+
+.support-links {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.support-links a {
+    color: #d5581f;
+    text-decoration: underline;
+}
+
+.support-links a:hover {
+    color: #b44816;
+}
 </style>
 
-<script src="{{ 'lark-api.js' | asset_url }}" defer></script>
+{% schema %}
+{
+  "name": "Yêu Cầu Bảo Hành",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image1",
+      "label": "Hình ảnh 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image2",
+      "label": "Hình ảnh 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image3",
+      "label": "Hình ảnh 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image4",
+      "label": "Hình ảnh 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image5",
+      "label": "Hình ảnh 5"
+    }
+  ]
+}
+{% endschema %}
+
 <script>
-  // Đảm bảo script LarkAPI đã tải xong
-  window.addEventListener('DOMContentLoaded', function() {
-    if (typeof window.LarkAPI === 'undefined') {
-      console.error('LarkAPI is not loaded properly');
-      return;
-    }
-    
-    // Thêm event listener cho nút search và input field (enter)
-    document.querySelector('.search-btn').addEventListener('click', searchWarranty);
-    document.getElementById('warrantyCode').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        searchWarranty();
-      }
-    });
-  });
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-  async function searchWarranty() {
-    const warrantyCode = document.getElementById('warrantyCode').value.trim();
-    if (!warrantyCode) {
-      alert('Vui lòng nhập số điện thoại mua hàng');
-      return;
-    }
-    
-    const resultDiv = document.getElementById('warrantyResult');
-    const statusMessage = document.getElementById('statusMessage');
-    const statusIndicator = document.querySelector('.status-indicator');
-    const customerDetails = document.getElementById('customerDetails');
-    const loadingIndicator = document.getElementById('loadingIndicator');
-    
+    const data = {
+      user_name: document.getElementById('user_name')?.value.trim() || '',
+      user_phone: document.getElementById('user_phone')?.value.trim() || '',
+      user_address: document.getElementById('user_address')?.value.trim() || '',
+      user_email: document.getElementById('user_email')?.value.trim() || '',
+      product_name: document.getElementById('product_name')?.value.trim() || '',
+      product_size: document.getElementById('product_size')?.value.trim() || '',
+      purchase_phone: document.getElementById('purchase_phone')?.value.trim() || '',
+      purchase_location: document.getElementById('purchase_location')?.value || '',
+      warranty_issue: document.getElementById('warranty_issue')?.value.trim() || '',
+      issue_details: document.querySelector('textarea[name="issue_details"]')?.value.trim() || '',
+      product_fault: document.getElementById('product_fault')?.value || '',
+      first_warranty: document.getElementById('first_warranty')?.value || '',
+      mattress_cover: document.getElementById('mattress_cover')?.value || '',
+      mattress_position: document.getElementById('mattress_position')?.value || '',
+      liquid_contact: document.querySelector('textarea[name="liquid_contact"]')?.value.trim() || '',
+      mattress_rotation: document.getElementById('mattress_rotation')?.value || ''
+    };
+
+    console.log(data);
+
     try {
-      // Hiển thị loading
-      resultDiv.style.display = 'none';
-      loadingIndicator.style.display = 'flex';
-      
-      // Gọi API để lấy dữ liệu
-      const data = await LarkAPI.getBitableRecords(warrantyCode);
-      console.log('Received data:', data); // Log để debug
-      
-      // Ẩn loading
-      loadingIndicator.style.display = 'none';
-      
-      // Reset các phần tử
-      resultDiv.style.display = 'block';
-      customerDetails.innerHTML = '';
-      
-      if (!data) {
-        statusIndicator.style.background = '#dc3545'; // Red
-        statusMessage.textContent = 'Không tìm thấy thông tin bảo hành cho số điện thoại này';
-        return;
-      }
+      const response = await fetch('https://ru9sleep.larksuite.com/base/automation/webhook/event/NSfaa7L3swVzKthwp7euBvMzsFa', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        mode: 'no-cors'
+      });
 
-      // Cập nhật trạng thái bảo hành
-      updateWarrantyStatus(data, statusIndicator, statusMessage);
-      
-      // Hiển thị tất cả thông tin khách hàng
-      displayCustomerDetails(data, customerDetails);
-      
+      // Ẩn toàn bộ warranty-page
+      document.querySelector('.warranty-page').style.display = 'none';
+      // Hiển thị thông báo thành công
+      document.querySelector('.success-message').style.display = 'block';
+
     } catch (error) {
-      loadingIndicator.style.display = 'none';
-      resultDiv.style.display = 'block';
-      statusIndicator.style.background = '#dc3545'; // Red
-      statusMessage.textContent = 'Có lỗi xảy ra, vui lòng thử lại sau';
       console.error('Error:', error);
+      // Ẩn toàn bộ warranty-page và hiển thị thông báo thành công ngay cả khi có lỗi
+      document.querySelector('.warranty-page').style.display = 'none';
+      document.querySelector('.success-message').style.display = 'block';
     }
-  }
-  
-  // Hàm cập nhật trạng thái bảo hành
-  function updateWarrantyStatus(data, statusIndicator, statusMessage) {
-    const progressSteps = document.querySelectorAll('.progress-step');
-    let progress = 0;
-    
-    // Reset all steps
-    progressSteps.forEach(step => step.classList.remove('active'));
-    
-    // Bước 1: Luôn active khi có data
-    progressSteps[0].classList.add('active');
-    progress = 20;
-    
-    // Bước 2: Active khi đang xử lý
-    if (data) {
-      progressSteps[1].classList.add('active');
-      progress = 40;
-    }
-    
-    // Bước 3: Có thời gian thu hồi
-    if (data['Thời gian thu hồi']) {
-      progressSteps[2].classList.add('active');
-      progressSteps[2].querySelector('.step-date').textContent = data['Thời gian thu hồi'];
-      progress = 60;
-      statusMessage.textContent = `Chúng tôi sẽ tới thu hồi sản phẩm bảo hành vào ngày ${data['Thời gian thu hồi']}`;
-    }
-    
-    // Bước 4: Đang bảo hành
-    if (data['Thời gian thu hồi'] && !data['Thời gian trả hàng']) {
-      progressSteps[3].classList.add('active');
-      progress = 80;
-      statusMessage.textContent = 'Chúng tôi đang tiến hành bảo hành cho sản phẩm của bạn';
-    }
-    
-    // Bước 5: Có thời gian trả hàng
-    if (data['Thời gian trả hàng']) {
-      progressSteps[4].classList.add('active');
-      progressSteps[4].querySelector('.step-date').textContent = data['Thời gian trả hàng'];
-      statusMessage.textContent = `Sản phẩm đã bảo hành sẽ được gửi tới quý khách vào ngày ${data['Thời gian trả hàng']}`;
-      progress = 90;
-    }
-    
-    // Bước 6: Hoàn thành
-    if (data['Thời gian trả hàng']) {
-      progressSteps[5].classList.add('active');
-      progress = 100;
-      statusMessage.textContent = 'Hoàn thành! Chúc quý khách an giấc cùng Ru9';
-    }
-    
-    // Cập nhật thanh progress
-    document.querySelector('.progress-container').style.setProperty('--progress', `${progress}%`);
-    
-    // Cập nhật màu status indicator
-    if (progress <= 20) {
-      statusIndicator.style.background = '#ffc107'; // Yellow
-    } else if (progress <= 60) {
-      statusIndicator.style.background = '#17a2b8'; // Blue
-    } else {
-      statusIndicator.style.background = '#28a745'; // Green
-    }
-  }
-  
-  // Hàm hiển thị tất cả thông tin khách hàng
-  function displayCustomerDetails(data, container) {
-    // Thứ tự hiển thị các trường quan trọng trước
-    const priorityFields = [
-      'Họ và Tên', 
-      'SĐT', 
-      'Số điện thoại mua hàng',
-      'Địa chỉ',
-      'Tên sản phẩm',
-      'Kích thước',
-      'Vấn đề',
-      'Thời gian thu hồi',
-      'Thời gian trả hàng'
-    ];
-    
-    // Hiển thị các trường ưu tiên trước
-    priorityFields.forEach(field => {
-      if (data[field] !== undefined && data[field] !== null && data[field] !== '') {
-        addDetailItem(container, field, data[field]);
-      }
-    });
-    
-    // Hiển thị các trường còn lại
-    for (const [key, value] of Object.entries(data)) {
-      if (!priorityFields.includes(key) && value !== undefined && value !== null && value !== '') {
-        addDetailItem(container, key, value);
-      }
-    }
-  }
-  
-  // Thêm một mục thông tin chi tiết
-  function addDetailItem(container, label, value) {
-    const detailItem = document.createElement('div');
-    detailItem.className = 'detail-item';
-    
-    const detailLabel = document.createElement('div');
-    detailLabel.className = 'detail-label';
-    detailLabel.textContent = label;
-    
-    const detailValue = document.createElement('div');
-    detailValue.className = 'detail-value';
-    detailValue.textContent = value;
-    
-    detailItem.appendChild(detailLabel);
-    detailItem.appendChild(detailValue);
-    container.appendChild(detailItem);
   }
 </script>
+
