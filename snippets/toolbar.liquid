@@ -21,73 +21,122 @@
     class="page-width"
     style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
   >
-    <div class="toolbar__content flex ai-center jc-end gap-x">
-      {%- if section.settings.toolbar_menu != blank -%}
-        <div class="toolbar__item toolbar__item--menu">
-          <ul class="inline-list toolbar__menu small--jc-center flex-wrap">
-            {%- for link in toolbar_menu.links -%}
-              <li>
-                <a href="{{ link.url }}">{{ link.title }}</a>
-              </li>
-            {%- endfor -%}
-          </ul>
-        </div>
-      {%- endif -%}
-
-      {%- if settings.search_enable -%}
-        <div class="toolbar__search small--hide">
-          <a
-            href="{{ routes.search_url }}"
-            class="toolbar__search-link toolbar__search-link--icon js-search-header flex gap-x-xs"
-          >
-            {% render 'icon-search' %}
-            <span class="icon__text">{{ 'general.search.title' | t }}</span>
-          </a>
-        </div>
-      {%- endif -%}
-
-      {% if section.settings.show_lang %}
-        <div class="toolbar__lang small--hide">
-          {%- render 'multi-selectors', locale_selector: section.settings.show_lang, location: 'toolbar' -%}
-        </div>
-        {% comment %}
-          <div class="lang-switcher flex ai-center f-smb small--hide">
-            {% render 'icon-global' %}
-            <span
-              data-ly-code="vi"
-              {% if request.locale.iso_code == 'vi' %}
-                class="active"
-              {% endif %}
-              >VN</span
-            >
-            /
-            <span
-              {% if request.locale.iso_code != 'vi' %}
-                class="active"
-              {% endif %}
-              data-ly-code="en"
-              >EN</span
-            >
+    <div class="toolbar__content flex ai-center jc-between gap-x">
+      <!-- Left side: Menu -->
+      <div class="toolbar__left flex ai-center">
+        <!-- Toolbar Menu 1 (About) -->
+        {%- if section.settings.toolbar_menu_1 != blank -%}
+          <div class="toolbar__item toolbar__item--menu toolbar__item--about">
+            <div class="toolbar__menu-wrapper" style="position: relative;">
+              <a href="#" class="toolbar__menu-trigger" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                <span>About</span>
+                <svg class="toolbar-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" style="margin-left: 4px; transition: transform 0.3s ease;">
+                  <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <div class="toolbar__dropdown" style="position: absolute; top: 100%; left: 0; background: white; border: 1px solid #e5e5e5; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 200px; z-index: 1000; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease;">
+                <ul style="list-style: none; margin: 0; padding: 8px 0;">
+                  {%- for link in toolbar_menu_1.links -%}
+                    <li style="margin: 0;">
+                      <a href="{{ link.url }}" style="display: block; padding: 8px 16px; text-decoration: none; color: #333; transition: background-color 0.2s ease;">{{ link.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
           </div>
-        {% endcomment %}
-      {% endif %}
+        {%- endif -%}
 
-      {%- if section.settings.toolbar_social -%}
-        <div class="toolbar__item">
-          {% render 'social-icons', additional_classes: 'inline-list toolbar__social' %}
-        </div>
-      {%- endif -%}
+        <!-- Toolbar Menu 2 -->
+        {%- if section.settings.toolbar_menu_2 != blank -%}
+          <div class="toolbar__item toolbar__item--menu">
+            <ul class="inline-list toolbar__menu small--jc-center flex-wrap">
+              {%- for link in toolbar_menu_2.links -%}
+                <li>
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </div>
 
-      {%- if show_selectors -%}
-        <div class="toolbar__item">
-          {%- render 'multi-selectors',
-            locale_selector: locale_selector,
-            currency_selector: currency_selector,
-            show_currency_flags: section.settings.show_currency_flags,
-            location: 'toolbar'
-          -%}
-        </div>
-      {%- endif -%}
+      <!-- Center: Announcement Message -->
+      <div class="toolbar__center flex ai-center jc-center" style="height: 100%; margin: 0; padding: 0;">
+        {%- if section.settings.announcement_message_1 != blank or section.settings.announcement_message_2 != blank -%}
+          <div class="announcement-bar__message" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; margin: 0; padding: 0; min-height: 24px; overflow: hidden;">
+            {%- if section.settings.announcement_message_1 != blank and section.settings.announcement_message_2 != blank -%}
+              <!-- Two messages with switching animation -->
+              <p class="announcement-bar__text announcement-text-1" style="margin: 0; padding: 0; text-align: center; line-height: 1; display: flex; align-items: center; justify-content: center; border: none; outline: none; animation: switchMessages 6s ease-in-out infinite;">{{ section.settings.announcement_message_1 }}</p>
+              <p class="announcement-bar__text announcement-text-2" style="margin: 0; padding: 0; text-align: center; line-height: 1; display: flex; align-items: center; justify-content: center; border: none; outline: none; animation: switchMessages 6s ease-in-out infinite; animation-delay: 3s; opacity: 0; position: absolute;">{{ section.settings.announcement_message_2 }}</p>
+            {%- elsif section.settings.announcement_message_1 != blank -%}
+              <!-- Only first message -->
+              <p class="announcement-bar__text" style="margin: 0; padding: 0; text-align: center; line-height: 1; display: flex; align-items: center; justify-content: center; border: none; outline: none; animation: slideUp 3s ease-in-out infinite;">{{ section.settings.announcement_message_1 }}</p>
+            {%- elsif section.settings.announcement_message_2 != blank -%}
+              <!-- Only second message -->
+              <p class="announcement-bar__text" style="margin: 0; padding: 0; text-align: center; line-height: 1; display: flex; align-items: center; justify-content: center; border: none; outline: none; animation: slideUp 3s ease-in-out infinite;">{{ section.settings.announcement_message_2 }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Right side: Search, Language, Social, Selectors -->
+      <div class="toolbar__right flex ai-center jc-end gap-x">
+        {%- if settings.search_enable -%}
+          <div class="toolbar__search small--hide">
+            <a
+              href="{{ routes.search_url }}"
+              class="toolbar__search-link toolbar__search-link--icon js-search-header flex gap-x-xs"
+            >
+              {% render 'icon-search' %}
+              <span class="icon__text">{{ 'general.search.title' | t }}</span>
+            </a>
+          </div>
+        {%- endif -%}
+
+        {% if section.settings.show_lang %}
+          <div class="toolbar__lang small--hide">
+            {%- render 'multi-selectors', locale_selector: section.settings.show_lang, location: 'toolbar' -%}
+          </div>
+          {% comment %}
+            <div class="lang-switcher flex ai-center f-smb small--hide">
+              {% render 'icon-global' %}
+              <span
+                data-ly-code="vi"
+                {% if request.locale.iso_code == 'vi' %}
+                  class="active"
+                {% endif %}
+                >VN</span
+              >
+              /
+              <span
+                {% if request.locale.iso_code != 'vi' %}
+                  class="active"
+                {% endif %}
+                data-ly-code="en"
+                >EN</span
+              >
+            </div>
+          {% endcomment %}
+        {% endif %}
+
+        {%- if section.settings.toolbar_social -%}
+          <div class="toolbar__item">
+            {% render 'social-icons', additional_classes: 'inline-list toolbar__social' %}
+          </div>
+        {%- endif -%}
+
+        {%- if show_selectors -%}
+          <div class="toolbar__item">
+            {%- render 'multi-selectors',
+              locale_selector: locale_selector,
+              currency_selector: currency_selector,
+              show_currency_flags: section.settings.show_currency_flags,
+              location: 'toolbar'
+            -%}
+          </div>
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </div>

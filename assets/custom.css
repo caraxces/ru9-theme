@@ -836,8 +836,7 @@ header .ru9_icon {
 }
 
 .grandchild-header {
-  padding: 0 5px;
-  margin-bottom: 10px;
+  --clr-on-label: var(--color-body-text);
 }
 
 .show-more-btn {
@@ -851,4 +850,730 @@ header .ru9_icon {
 
 .show-more-btn:hover {
   opacity: 0.9;
+}
+
+/* === Custom styles for product form buttons START === */
+.product-single__form .payment-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: flex-end; /* Make buttons same height */
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* Style for "Add to cart" button */
+.product-single__form .payment-buttons .add-to-cart {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 286px; /* Do not grow or shrink, base width 286px */
+  height: 48px;
+  padding: 0 20px !important; /* Set explicit padding */
+
+  background: #FFFFFF;
+  border: 1px solid #6B7280;
+  border-radius: 30px;
+  color: #1C2C58;
+  font-family: 'Proxima Nova', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+  cursor: pointer;
+  order: 1; /* "Add to cart" on the left */
+}
+
+.product-single__form .payment-buttons .add-to-cart:hover {
+    background-color: #f0f0f0;
+}
+
+.product-single__form .payment-buttons .add-to-cart .icon-cart {
+  width: 24px; /* Adjusted from spec for better visuals */
+  height: 24px;
+}
+
+.product-single__form .payment-buttons .add-to-cart .icon-cart svg {
+    fill: #1C2C58;
+}
+
+.product-single__form .payment-buttons .add-to-cart[disabled] {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.product-single__form .payment-buttons .add-to-cart[disabled] .icon-cart svg {
+    fill: #6c757d;
+}
+
+/* Container for the dynamic checkout button */
+.product-single__form .shopify-payment-button {
+  flex: 0 0 197px; /* Do not grow or shrink, base width 197px */
+  order: 2; /* "Buy now" on the right */
+}
+
+/* Style for Shopify's dynamic "Buy now" button */
+.product-single__form .shopify-payment-button .shopify-payment-button__button {
+  display: flex !important; /* Important to override Shopify's inline styles */
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 48px !important;
+  background: #FF7F41 !important;
+  border-radius: 30px !important;
+  color: #FFFFFF !important;
+  font-family: 'Proxima Nova', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 26px !important;
+  padding: 0 20px !important; /* Set explicit padding to match */
+  gap: 8px !important; /* Add gap for the icon */
+}
+
+/* Add icon to "Buy now" button */
+.product-single__form .shopify-payment-button .shopify-payment-button__button::before {
+  content: '';
+  flex-shrink: 0; /* Prevent icon from shrinking */
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  background-image: url('buynow.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Ensure our container doesn't get messed up on mobile */
+@media (max-width: 768px) {
+  .product-single__form .payment-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .product-single__form .payment-buttons .add-to-cart,
+  .product-single__form .shopify-payment-button {
+      width: 100%;
+      flex: 1 1 auto; /* Allow buttons to take full-width on mobile */
+  }
+}
+/* === Custom styles for product form buttons END === */
+
+/* === Custom styles for showroom dropdown START === */
+.product-single__meta .showroom-section {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.product-single__meta .showroom-toggle {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* Align items to edges */
+  align-items: center;
+  padding: 0 20px; /* Add some horizontal padding */
+  gap: 12px;
+  width: 100%;
+  height: 48px;
+  background: #FFFFFF;
+  border: 1px solid #6B7280;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Proxima Nova', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #1C2C58;
+  transition: background-color 0.3s ease;
+}
+
+.product-single__meta .showroom-toggle:hover {
+  background-color: #f8f9fa;
+}
+
+.product-single__meta .showroom-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.product-single__meta .showroom-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.product-single__meta .arrow-icon {
+  transition: transform 0.3s ease;
+  display: flex; /* Ensure SVG is aligned */
+  align-items: center;
+}
+
+.product-single__meta .arrow-icon.rotate {
+  transform: rotate(180deg);
+}
+
+.product-single__meta .showroom-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, margin-top 0.5s ease-out;
+  margin-top: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.product-single__meta .showroom-list.show {
+  max-height: 500px; /* Adjust as needed */
+  margin-top: 15px;
+}
+
+.product-single__meta .showroom-list .showroom-item {
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  border-left: 4px solid #FF7F41;
+  background-color: #f8f9fa;
+  border-radius: 0 6px 6px 0;
+}
+
+.product-single__meta .showroom-list .showroom-item a {
+  display: block;
+  text-decoration: none;
+  font-size: 15px;
+  margin: 3px 0;
+  color: #333;
+  font-family: 'Proxima Nova', sans-serif;
+  font-weight: 400;
+}
+
+.product-single__meta .showroom-list .showroom-item a.phone-link {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.product-single__meta .showroom-list .showroom-item a:hover {
+  text-decoration: underline;
+}
+
+/* Showroom address truncation styles */
+.product-single__meta .showroom-address-more {
+  display: none;
+}
+
+.product-single__meta .showroom-address-toggle {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.product-single__meta .showroom-address-toggle:hover {
+  text-decoration: underline;
+}
+/* === Custom styles for showroom dropdown END === */
+
+/* === Product Recommendations Slider Custom Styles === */
+.product-recommendations-slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-recommendations-slider .product-slide {
+  min-width: 280px;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: 769px) {
+  .product-recommendations-slider .product-slide {
+    min-width: calc(100% / 3 - 20px);
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .product-recommendations-slider .product-slide {
+    min-width: calc(100% / 4 - 20px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .product-recommendations-slider .product-slide {
+    min-width: calc(100% / 5 - 20px);
+  }
+}
+
+/* Flickity slider specific styles for product recommendations */
+product-recommendations .flickity-viewport {
+  width: 100%;
+  overflow: visible; /* Cho phép infinite scroll */
+}
+
+/* Infinite carousel optimizations */
+product-recommendations .custom-slider-enhanced .flickity-slider {
+  transform-style: preserve-3d;
+}
+
+product-recommendations .custom-slider-enhanced .product-slide {
+  backface-visibility: hidden;
+}
+
+/* Đảm bảo wrap around smooth */
+product-recommendations .custom-slider-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+product-recommendations .flickity-slider {
+  display: flex;
+  align-items: flex-start;
+}
+
+product-recommendations .flickity-prev-next-button {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #333;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+product-recommendations .flickity-prev-next-button:hover {
+  background: #333;
+  border-color: #333;
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+product-recommendations .flickity-prev-next-button:hover svg {
+  fill: #fff;
+}
+
+product-recommendations .flickity-prev-next-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: #f5f5f5;
+  border-color: #e1e1e1;
+}
+
+product-recommendations .flickity-previous {
+  left: -25px;
+}
+
+product-recommendations .flickity-next {
+  right: -25px;
+}
+
+/* Responsive arrows */
+@media screen and (max-width: 1200px) {
+  product-recommendations .flickity-previous {
+    left: -20px;
+  }
+  
+  product-recommendations .flickity-next {
+    right: -20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  product-recommendations .flickity-prev-next-button {
+    display: none;
+  }
+}
+
+/* Mobile-only dots class để handle responsive manually */
+product-recommendations .mobile-only-dots .flickity-prev-next-button {
+  display: none !important;
+}
+
+product-recommendations .mobile-only-dots .flickity-page-dots {
+  display: block !important;
+}
+
+/* Page dots styling */
+product-recommendations .flickity-page-dots {
+  bottom: -40px;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+
+product-recommendations .flickity-page-dots .dot {
+  width: 10px;
+  height: 10px;
+  margin: 0 8px; /* Tăng khoảng cách */
+  background: #e1e1e1;
+  border-radius: 50%;
+  opacity: 1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Desktop - dots to lớn hơn và cách xa nhau hơn */
+@media screen and (min-width: 769px) {
+  product-recommendations .flickity-page-dots .dot {
+    width: 12px;
+    height: 12px;
+    margin: 0 12px; /* Desktop cách xa hơn */
+  }
+}
+
+product-recommendations .flickity-page-dots .dot.is-selected {
+  background: #333;
+  transform: scale(1.2);
+}
+
+product-recommendations .flickity-page-dots .dot:hover {
+  background: #999;
+  transform: scale(1.1);
+}
+
+/* Ensure grid items work well in slider */
+product-recommendations .product-slide .grid__item {
+  width: 100%;
+  margin-bottom: 0;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+/* Hide overflow on mobile for better UX */
+@media screen and (max-width: 768px) {
+  product-recommendations .grid-overflow-wrapper {
+    padding: 0 20px;
+  }
+  
+  product-recommendations .flickity-slider .product-slide {
+    min-width: 240px;
+    margin-right: 15px;
+  }
+}
+
+/* Ensure slider doesn't break product grid styling */
+product-recommendations[data-intent="related"] .product-recommendations-slider .grid__item {
+  flex: none;
+  width: 100%;
+}
+
+product-recommendations[data-intent="related"] .product-slide {
+  display: block;
+}
+/* === Product Recommendations Slider Custom Styles END === */
+
+/* === Enhanced Product Recommendations Styling === */
+/* Override styles để tạo hiệu ứng đẹp mà giữ nguyên data liquid */
+
+.product-recommendations-slider .product-slide .grid-product__image-mask::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.product-recommendations-slider .product-slide:hover .grid-product__image-mask::after {
+  opacity: 1;
+  animation: shimmer 0.6s ease-out;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Enhanced shadows for 3D effect */
+.product-recommendations-slider .product-slide {
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+}
+
+.product-recommendations-slider .product-slide:hover {
+  filter: drop-shadow(0 15px 35px rgba(0,0,0,0.2));
+}
+
+/* Price styling enhancement */
+.product-recommendations-slider .product-slide .price__regular {
+  font-size: 1.1em;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.product-recommendations-slider .product-slide:hover .price__regular {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.product-recommendations-slider .product-slide .price__sale {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.product-recommendations-slider .product-slide:hover .price__sale {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Mobile touch indicators */
+@media (hover: none) and (pointer: coarse) {
+  .product-recommendations-slider::after {
+    content: "◀ Vuốt để xem thêm sản phẩm ▶";
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    z-index: 10;
+    animation: fadeInOut 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Focus states for accessibility */
+.product-recommendations-slider .product-slide:focus,
+.product-recommendations-slider .product-slide a:focus {
+  outline: 3px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for all interactive elements */
+.product-recommendations-slider .product-slide * {
+  transition: all 0.3s ease;
+}
+
+/* === Enhanced Product Recommendations Styling END === */
+
+/* New Product Recommendations Slider Styles */
+.new-rec-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.new-rec-product-list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px; /* Reduced gap for better fit */
+  width: 100%;
+}
+
+.new-rec-product-list-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.new-rec-product-list {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; /* Use stretch to make cards same height */
+  padding: 0;
+  gap: 24px;
+  scroll-behavior: smooth;
+  /* Remove scrollbar */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.new-rec-product-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+
+.new-rec-nav-button-container {
+  display: none; /* Hide by default, show on larger screens */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .new-rec-nav-button-container {
+    display: flex;
+    align-self: center;
+    height: 100%;
+    padding-bottom: 100px; /* As per spec */
+  }
+}
+
+.new-rec-nav-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background: #9CA3AF;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.3s;
+}
+
+.new-rec-nav-button:hover {
+    background: #6B7280;
+}
+
+.new-rec-nav-button:disabled {
+    background: #E5E7EB;
+    cursor: not-allowed;
+}
+
+.new-rec-nav-button.prev .arrow-svg {
+  transform: scaleX(-1);
+}
+
+.new-rec-nav-button .arrow-svg {
+  width: 15px;
+  height: 15px;
+  fill: #FFFFFF;
+}
+
+.new-rec-product-slide {
+  flex-shrink: 0;
+  /* The width will be based on the products_per_row setting via an inline style */
+}
+/* The design shows 3 products in a 1150px container.
+   Width of container for products is 1002px. (1002 - 48 (gaps)) / 3 = 318px */
+@media (min-width: 960px) {
+    .new-rec-product-slide {
+        width: calc((100% - 48px) / 3);
+    }
+
+    .new-rec-product-slide[data-per-row="2"] {
+        width: calc((100% - 24px) / 2);
+    }
+    .new-rec-product-slide[data-per-row="3"] {
+        width: calc((100% - 48px) / 3);
+    }
+    .new-rec-product-slide[data-per-row="4"] {
+        width: calc((100% - 72px) / 4);
+    }
+    .new-rec-product-slide[data-per-row="5"] {
+        width: calc((100% - 96px) / 5);
+    }
+}
+@media (max-width: 959px) and (min-width: 768px) {
+    .new-rec-product-slide {
+        width: calc((100% - 24px) / 2);
+    }
+}
+@media (max-width: 767px) {
+    .new-rec-product-slide {
+        width: 65%; /* Show 1 and a bit */
+    }
+}
+
+/* This targets the existing product card structure to apply new styles */
+.new-rec-product-slide .grid-product__content {
+    text-align: center;
+}
+
+.new-rec-product-slide .grid-product__title {
+  font-family: 'Proxima Nova', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 130%;
+  color: #1C2C58;
+}
+
+.new-rec-product-slide .grid-product__price {
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.new-rec-product-slide .price--on-sale .price-item--regular {
+  opacity: 0.4;
+  color: #1C2C58;
+}
+
+.new-rec-product-slide .price-item--sale {
+    color: #234085;
+}
+
+.new-rec-product-slide .grid-product__image-mask {
+    border-radius: 16px;
+}
+
+/* Override default grid item width inside our new slider */
+.new-rec-product-list .grid__item {
+    width: auto !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* -- Aligns product recommendation cards and prices -- */
+.new-rec-product-list .grid__item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.new-rec-product-slide .grid-product__content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-top: 10px;
+}
+
+.new-rec-product-slide .grid-product__price {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.short-address-tooltip {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+.short-address-tooltip .tooltip-content {
+  visibility: hidden;
+  opacity: 0;
+  min-width: 260px;
+  max-width: 90vw;
+  background: rgba(30, 30, 30, 0.95);
+  color: #fff;
+  text-align: center;
+  border-radius: 22px;
+  padding: 14px 22px;
+  position: absolute;
+  left: 50%;
+  top: 120%;
+  transform: translateX(-50%) scale(0.98);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+  z-index: 100;
+  font-size: 16px;
+  font-family: 'San Francisco', 'Arial', sans-serif;
+  transition: opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+  white-space: pre-line;
+}
+.short-address-tooltip:hover .tooltip-content,
+.short-address-tooltip:focus .tooltip-content {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  pointer-events: auto;
 }

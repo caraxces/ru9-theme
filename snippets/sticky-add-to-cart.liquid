@@ -1,5 +1,6 @@
 {%- liquid
   assign product_form_id = product_form_id | append: '-duplicate'
+  assign current_variant = product.selected_or_first_available_variant
 -%}
 
 <sticky-add-to-cart
@@ -241,7 +242,7 @@
     color: #ffffff !important;
     border-radius: calc(var(--buttonRadius) * 0.5) !important;
     padding: 11px 20px !important;
-    font-size: var(--f-size-button) !important;
+    font-size: calc(var(--f-size-button) - 3px) !important;
     font-weight: 500 !important;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     font-family: inherit !important;
@@ -253,6 +254,11 @@
     background-color: #e85a2b !important;
     border-color: #e85a2b !important;
     color: #ffffff !important;
+  }
+  
+  .desktop-buy-now-btn.btn--loading {
+    opacity: 0.7;
+    pointer-events: none;
   }
   
   /* Mobile Button Styles */
@@ -287,6 +293,11 @@
     background-color: #e85a2b !important;
     border-color: #e85a2b !important;
     color: #ffffff !important;
+  }
+  
+  .mobile-buttons .buy-now-btn.btn--loading {
+    opacity: 0.7;
+    pointer-events: none;
   }
   
   /* Desktop Sticky Buttons Wrapper */
@@ -383,6 +394,10 @@
       font-family: inherit !important;
       font-variant-numeric: normal !important;
       flex: 1;
+    }
+    
+    .mobile-buttons .buy-now-btn {
+      font-size: 11px !important;
     }
     
     .mobile-buttons .btn:first-child {
@@ -486,6 +501,15 @@
       padding: 11px 20px;
     }
     
+    .desktop-buttons .desktop-buy-now-btn {
+      font-size: calc(var(--f-size-button) - 3px) !important;
+    }
+    
+    .desktop-buy-now-text,
+    .mobile-buy-now-text {
+      font-size: inherit;
+    }
+    
     /* Ensure both desktop buttons have equal width */
     .desktop-buttons .custom-add-to-cart-btn,
     .desktop-buttons .desktop-buy-now-btn {
@@ -505,11 +529,16 @@
       this.mark = document.querySelector('footer');
       this.inner = this.querySelector('.product__sticky-inner');
       this.toogle = this.querySelector('button[data-toggle]');
-      this.buyNowBtn = this.querySelector('[data-buy-now-sticky]');
+      this.buyNowBtns = this.querySelectorAll('[data-buy-now-sticky]');
       this.variantSelect = this.querySelector('[data-product-select-sticky]');
       
       this.toogle?.addEventListener('click', this.toggleEvent.bind(this));
-      this.buyNowBtn?.addEventListener('click', this.buyNowEvent.bind(this));
+      
+      // Add event listeners to all buy now buttons (desktop and mobile)
+      this.buyNowBtns.forEach(btn => {
+        btn.addEventListener('click', this.buyNowEvent.bind(this));
+      });
+      
       this.variantSelect?.addEventListener('change', this.onVariantChange.bind(this));
     }
 
@@ -517,6 +546,9 @@
       setTimeout(() => {
         this.renderAnchorLink();
       }, 500);
+
+      // Reset all buy now buttons in case user came back to page
+      this.resetBuyNowButtons();
 
       // Always show on mobile
       if (window.matchMedia('(max-width: 749px)').matches) {
@@ -543,6 +575,13 @@
       const buyNowPriceElements = this.querySelectorAll('[data-buy-now-price]');
       buyNowPriceElements.forEach(element => {
         element.textContent = `Mua Ngay - ${price}`;
+      });
+    }
+
+    resetBuyNowButtons() {
+      this.buyNowBtns.forEach(btn => {
+        btn.classList.remove('btn--loading');
+        btn.disabled = false;
       });
     }
 
@@ -642,31 +681,64 @@
       event.preventDefault();
       event.stopPropagation();
       
+      console.log('Buy Now clicked!', event.target); // Debug log
+      
       // Get the current variant ID
       const variantSelect = this.querySelector('[data-product-select-sticky]');
       const variantId = variantSelect ? variantSelect.value : null;
       
-      if (variantId) {
-        // Create a form to submit for buy now
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = '/cart/add';
-        
-        const variantInput = document.createElement('input');
-        variantInput.type = 'hidden';
-        variantInput.name = 'id';
-        variantInput.value = variantId;
-        
-        const returnToInput = document.createElement('input');
-        returnToInput.type = 'hidden';
-        returnToInput.name = 'return_to';
-        returnToInput.value = '/checkout';
-        
-        form.appendChild(variantInput);
-        form.appendChild(returnToInput);
-        document.body.appendChild(form);
-        form.submit();
+      console.log('Variant ID:', variantId); // Debug log
+      
+      if (!variantId) {
+        console.log('No variant ID found!'); // Debug log
+        return;
       }
+
+      // Add loading state to the clicked buy now button
+      const buyNowBtn = event.target.closest('[data-buy-now-sticky]');
+      if (buyNowBtn) {
+        buyNowBtn.classList.add('btn--loading');
+        buyNowBtn.disabled = true;
+        
+        // Reset button state after 3 seconds in case user comes back
+        setTimeout(() => {
+          buyNowBtn.classList.remove('btn--loading');
+          buyNowBtn.disabled = false;
+        }, 3000);
+      }
+
+      // Create a hidden form and submit it just like Shopify payment button does
+      // This is exactly how {{ form | payment_button }} works internally
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = '/cart/add';
+      
+      // Add variant ID
+      const variantInput = document.createElement('input');
+      variantInput.type = 'hidden';
+      variantInput.name = 'id';
+      variantInput.value = variantId;
+      
+      // Add quantity 
+      const quantityInput = document.createElement('input');
+      quantityInput.type = 'hidden';
+      quantityInput.name = 'quantity';
+      quantityInput.value = '1';
+      
+      // Add return_to parameter - this is the key to making it work like payment button
+      const returnToInput = document.createElement('input');
+      returnToInput.type = 'hidden';
+      returnToInput.name = 'return_to';
+      returnToInput.value = '/checkout';
+      
+      // Append inputs to form
+      form.appendChild(variantInput);
+      form.appendChild(quantityInput);
+      form.appendChild(returnToInput);
+      
+      // Append form to body and submit
+      document.body.appendChild(form);
+      form.submit();
     }
   }
 

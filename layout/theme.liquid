@@ -1,6 +1,13 @@
 <!doctype html>
   <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction }}">
     <head>
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-NRPQ9Q6');</script>
+      <!-- End Google Tag Manager -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -41,10 +48,13 @@
       {% endif %}
       <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+      <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
       <link rel="dns-prefetch" href="https://ajax.googleapis.com">
       <link rel="dns-prefetch" href="https://maps.googleapis.com">
       <link rel="dns-prefetch" href="https://maps.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   
       {%- if settings.favicon != blank -%}
         <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
@@ -194,7 +204,7 @@
           </image-element>
         </div>
       </template>
-      <script>
+      {% comment %} <script>
         document.addEventListener('DOMContentLoaded', function() {
             // URL hiện tại
             var currentURL = window.location.href;
@@ -251,7 +261,7 @@
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-NRPQ9Q6');
-        </script>
+        </script> {% endcomment %}
          <!-- End Google Tag Manager -->
           
           
@@ -268,9 +278,9 @@
         </script>
          <!-- end heat map -->
           <!-- Google Tag Manager (noscript) -->
-         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRPQ9Q6"
-           height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-           <!-- End Google Tag Manager (noscript)-->
+          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRPQ9Q6"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+          <!-- End Google Tag Manager (noscript) -->
     </body>
   </html>
   

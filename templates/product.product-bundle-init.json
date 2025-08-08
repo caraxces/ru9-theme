@@ -59,6 +59,78 @@
         "lazyload_images": true
       }
     },
+    "main_product_bundle_HQfEDh": {
+      "type": "main-product-bundle",
+      "blocks": {
+        "variant_picker_iRefKW": {
+          "type": "variant_picker",
+          "settings": {
+            "variant_labels": true,
+            "picker_type": "button",
+            "product_dynamic_variants_enable": true,
+            "color_swatches": false
+          }
+        },
+        "quantity_selector_DaHLRz": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "price_HWqQYV": {
+          "type": "price",
+          "settings": {}
+        },
+        "description_Yf4rBG": {
+          "type": "description",
+          "settings": {
+            "is_tab": false,
+            "collapse_content": false
+          }
+        },
+        "icon_with_text_fMyUNV": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon_1_heading": "100 đêm ngủ thử",
+            "icon_2_heading": "Miễn phí vận chuyển *",
+            "icon_3_heading": "Bảo hành dài lâu",
+            "icon_4_heading": "Chất liệu Foam cao cấp",
+            "icon_size": 25,
+            "icon_alignment": "center",
+            "grid_columns": "2",
+            "show_icon_4": true
+          }
+        }
+      },
+      "block_order": [
+        "variant_picker_iRefKW",
+        "quantity_selector_DaHLRz",
+        "price_HWqQYV",
+        "description_Yf4rBG",
+        "icon_with_text_fMyUNV"
+      ],
+      "name": "Product Bundle",
+      "settings": {
+        "discount_percentage": 20,
+        "bundle_products": [
+          "foam-original",
+          "tam-bao-ve-nem",
+          "vo-ga-dem-cotton-sateen",
+          "bo-vo-goi-cotton-sateen"
+        ],
+        "sku_enable": true,
+        "image_position": "right",
+        "product_zoom_enable": true,
+        "product_carousel_enable": false,
+        "thumbnail_position": "beside",
+        "thumbnail_height": 100,
+        "thumbnail_arrows": false,
+        "mobile_layout": "partial",
+        "enable_video_looping": false,
+        "product_video_style": "muted",
+        "enable_sticky_add_to_cart": false,
+        "hide_payment_button_mobile": false,
+        "image_size": "medium"
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -102,10 +174,6 @@
         },
         "quantity_selector_WMfLWY": {
           "type": "quantity_selector",
-          "settings": {}
-        },
-        "showroom_dropdown_nTzTtH": {
-          "type": "showroom_dropdown",
           "settings": {}
         },
         "buy_buttons": {
@@ -159,12 +227,12 @@
         "price",
         "variant_picker",
         "quantity_selector_WMfLWY",
-        "showroom_dropdown_nTzTtH",
         "buy_buttons",
         "productbundle_GcbRad",
         "icon_with_text_b6k6a4",
         "carousel_modal_B8Mr9e"
       ],
+      "disabled": true,
       "settings": {
         "section_width": "page-width",
         "customize_width": 1800,
@@ -904,22 +972,6 @@
         "space_around": true
       }
     },
-    "featured_collection_mGwJt3": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.featured_collection.name",
-      "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
-        "title": "Gợi ý các sản phẩm",
-        "home_featured_products": "chan",
-        "per_row": 4,
-        "rows": 1,
-        "mobile_scrollable": false,
-        "view_all": false,
-        "divider": false,
-        "hide_price": false
-      }
-    },
     "sub": {
       "type": "product-full-width",
       "disabled": true,
@@ -951,6 +1003,7 @@
   },
   "order": [
     "countdown_Gwp9bc",
+    "main_product_bundle_HQfEDh",
     "main",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",
@@ -964,7 +1017,6 @@
     "dynamic_faq_Whrn47",
     "certification_VUqyB6",
     "1730878240cfbec46e",
-    "featured_collection_mGwJt3",
     "sub",
     "product-recommendations",
     "recently-viewed",

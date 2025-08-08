@@ -1,6 +1,7 @@
 {%- liquid
   assign main_menu = linklists[section.settings.main_menu_link_list]
-  assign toolbar_menu = linklists[section.settings.toolbar_menu]
+  assign toolbar_menu_1 = linklists[section.settings.toolbar_menu_1]
+  assign toolbar_menu_2 = linklists[section.settings.toolbar_menu_2]
 
   assign logo_alignment = 'left'
   if section.settings.main_menu_alignment == 'center-left' or section.settings.main_menu_alignment == 'center-split' or section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-drawer'
@@ -39,8 +40,10 @@
 {%- render 'drawer-menu',
   section: section,
   main_menu: main_menu,
-  toolbar_menu: toolbar_menu,
+  toolbar_menu_1: toolbar_menu_1,
+  toolbar_menu_2: toolbar_menu_2,
   enable_dropdown_mobile: section.settings.enable_dropdown_mobile,
+  enable_slide_mobile: section.settings.enable_slide_mobile,
   logo_alignment: logo_alignment
 -%}
 
@@ -74,16 +77,6 @@
     }
   {% endunless %}
 
-  /* SVG for baby menu item */
-  .baby-icon-svg {
-    display: inline-block;
-    vertical-align: middle;
-    height: 22px;
-    width: auto;
-    margin: 0;
-    padding: 0;
-  }
-  
   {%- if settings.color_header == settings.color_body_bg or settings.color_body_bg contains settings.color_header -%}
     .site-header {
       box-shadow: 0 0 1px rgba(0,0,0,0.4);
@@ -93,6 +86,52 @@
       border-top: 0;
     }
   {%- endif -%}
+
+  /* Navigation arrow hover effect */
+  .site-nav__link:hover .nav-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Announcement message slide up animation */
+  @keyframes slideUp {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+
+  /* Switch between two announcement messages */
+  @keyframes switchMessages {
+    0%, 45% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    50%, 95% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Toolbar dropdown hover effects */
+  .toolbar__menu-wrapper:hover .toolbar__dropdown {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+  }
+
+  .toolbar__menu-wrapper:hover .toolbar-arrow {
+    transform: rotate(180deg);
+  }
+
+  .toolbar__dropdown a:hover {
+    background-color: #f5f5f5 !important;
+  }
 </style>
 
 <div class="relative" data-section-id="{{ section.id }}" data-section-type="header">
@@ -100,12 +139,16 @@
     {%- if section.settings.show_locale_selector
       or section.settings.show_currency_selector
       or section.settings.toolbar_social
-      or section.settings.toolbar_menu != blank
+      or section.settings.toolbar_menu_1 != blank
+      or section.settings.toolbar_menu_2 != blank
+      or section.settings.announcement_message_1 != blank
+      or section.settings.announcement_message_2 != blank
     -%}
       {%- render 'toolbar',
         page_width: page_width,
         section: section,
-        toolbar_menu: toolbar_menu,
+        toolbar_menu_1: toolbar_menu_1,
+        toolbar_menu_2: toolbar_menu_2,
         overlay_header: overlay_header
       -%}
     {%- endif -%}
@@ -117,9 +160,12 @@
         {%- if section.settings.show_locale_selector
           or section.settings.show_currency_selector
           or section.settings.toolbar_social
-          or section.settings.toolbar_menu != blank
+          or section.settings.toolbar_menu_1 != blank
+          or section.settings.toolbar_menu_2 != blank
+          or section.settings.announcement_message_1 != blank
+          or section.settings.announcement_message_2 != blank
         -%}
-          {%- render 'toolbar', section: section, toolbar_menu: toolbar_menu, overlay_header: overlay_header -%}
+          {%- render 'toolbar', section: section, toolbar_menu_1: toolbar_menu_1, toolbar_menu_2: toolbar_menu_2, overlay_header: overlay_header -%}
         {%- endif -%}
       {%- endif -%}
       <header
@@ -384,14 +430,32 @@
     },
     {
       "type": "link_list",
-      "id": "toolbar_menu",
-      "label": "t:sections.header.settings.toolbar_menu.label",
-      "info": "t:sections.header.settings.toolbar_menu.info"
+      "id": "toolbar_menu_1",
+      "label": "Toolbar Menu 1 (About)",
+      "info": "First toolbar menu - will display as 'About' with dropdown"
+    },
+    {
+      "type": "link_list",
+      "id": "toolbar_menu_2",
+      "label": "Toolbar Menu 2",
+      "info": "Second toolbar menu"
     },
     {
       "type": "checkbox",
       "id": "toolbar_social",
       "label": "t:sections.header.settings.toolbar_social.label"
+    },
+    {
+      "type": "text",
+      "id": "announcement_message_1",
+      "label": "Announcement Message 1",
+      "info": "First message to display in the center of the toolbar"
+    },
+    {
+      "type": "text",
+      "id": "announcement_message_2",
+      "label": "Announcement Message 2", 
+      "info": "Second message to display in the center of the toolbar"
     },
     {
       "type": "header",
@@ -424,6 +488,12 @@
     {
       "type": "header",
       "content": "t:sections.header.settings.mobile_layout.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_slide_mobile",
+      "label": "Enable slide on mobile",
+      "default": false
     },
     {
       "type": "checkbox",

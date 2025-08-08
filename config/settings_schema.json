@@ -1220,6 +1220,16 @@
         "type": "checkbox",
         "id": "disable_animations",
         "label": "t:settings_schema.extras.settings.disable_animations.label"
+      },
+      {
+        "type": "range",
+        "id": "discount_percentage",
+        "min": 0,
+        "max": 50,
+        "step": 5,
+        "unit": "%",
+        "label": "Bundle Discount Percentage",
+        "default": 10
       }
     ]
   },

@@ -1,0 +1,168 @@
+/* Independent Popup Styles */
+.independent-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+
+.independent-popup-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
+.independent-popup-container {
+  position: relative;
+  width: 95vw;
+  /* Make popup smaller */
+  max-width: 360px; 
+  background-color: transparent;
+  border-radius: 15px; /* Adjust border radius proportionally */
+  overflow: hidden;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+  /* aspect-ratio will be set by JS based on image */
+}
+
+.independent-popup-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.independent-popup-bg-placeholder {
+    width: 100%;
+    height: 100%;
+    /* Make background transparent as requested */
+    background: transparent; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+}
+
+.independent-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 1;
+  color: #000;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.independent-popup-form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.independent-popup-field-wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    /* The wrapper no longer controls the size of the elements */
+}
+
+.independent-popup-field-wrapper input,
+.independent-popup-field-wrapper button {
+    /* Adjust size to be smaller and more proportional */
+    width: 220px;
+    height: 33px;
+    padding: 10px 15px;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: #FFFFFF;
+    color: #333;
+    text-align: left;
+}
+
+.independent-popup-field-wrapper input::placeholder {
+    color: #BDBDBD;
+}
+
+
+.independent-popup-field-wrapper button.independent-popup-submit {
+    background-color: #FF7A00; /* Orange CTA */
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    display: flex; /* To center content perfectly */
+    align-items: center;
+    justify-content: center;
+}
+.independent-popup-field-wrapper button.independent-popup-submit:hover {
+    background-color: #E56E00; /* Darker orange on hover */
+}
+.independent-popup-field-wrapper button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#independent-popup-success-message {
+    /* This will be replaced by the new container class */
+    display: none;
+}
+
+.independent-popup-success-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* Initially hidden */
+    align-items: center;
+    justify-content: center;
+    /* Make background transparent */
+    background-color: transparent;
+    text-align: center;
+}
+
+#independent-popup-success-message p {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+}
+
+
+/* Responsive Styles - Removing old rules as new base is small enough */
+@media (max-width: 768px) {
+  /* This block can be removed or left empty as base styles are now smaller */
+  .independent-popup-field-wrapper input,
+  .independent-popup-field-wrapper button {
+      width: 220px;
+      height: 33px;
+      font-size: 13px;
+  }
+} 

@@ -19,6 +19,60 @@
     background-color: #000;
     transform: translateY(-50%) rotate(-45deg);
   }
+
+  .price-container-wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px; /* Add some space between items */
+  }
+
+  /* Responsive font sizes for price container */
+  @media (min-width: 420px) {
+    .price-container-wrapper .product__price {
+      font-size: 22px;
+    }
+    .price-container-wrapper .product__price--compare {
+      font-size: 20px;
+    }
+    .price-container-wrapper .product__discount-badge {
+      font-size: 14px;
+      height: 22px;
+      width: 55px;
+      border-radius: 6px;
+    }
+  }
+
+  @media (max-width: 410px) {
+    .price-container-wrapper .product__price {
+      font-size: 19px;
+    }
+    .price-container-wrapper .product__price--compare {
+      font-size: 17px;
+    }
+    .price-container-wrapper .product__discount-badge {
+      font-size: 12px;
+      height: 20px;
+      width: 50px;
+    }
+  }
+
+  .product__discount-badge {
+    width: 63px;
+    height: 25px;
+    background: #FF7F41;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Proxima Nova', sans-serif; /* You may need to import this font */
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 25px;
+    color: #FFFFFF;
+    text-align: center;
+  }
 </style>
 
 {%- liquid
@@ -169,6 +223,54 @@
                 {%- case block.type -%}
                   {%- when '@app' -%}
                     {% render block %}
+                  {%- when 'showroom_dropdown' -%}
+                    <div class="product-block" {{ block.shopify_attributes }}>
+                      <div class="showroom-section">
+                        <div class="showroom-toggle" onclick="toggleShowroomDropdown(this)">
+                          <span class="showroom-title">
+                            <img src="{{ 'showroom.png' | asset_url }}" alt="Hệ thống cửa hàng" class="showroom-icon" />
+                            <span>Hệ thống cửa hàng</span>
+                          </span>
+                          <span class="arrow-icon">
+                            <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </span>
+                        </div>
+                      
+                       <div class="showroom-list">
+                          <div class="showroom-item">
+                            <a href="https://maps.google.com/?q=Shop%2009,%20B2%20Sarimi,%20K%C4%90T%20Sala,%2072%20Nguy%E1%BB%85n%20C%C6%A1%20Th%E1%BA%A1ch,%20P.%20An%20L%E1%BB%A3i%20%C4%90%C3%B4ng,%20Q.2,%20TP.%20HCM" target="_blank" rel="noopener">
+                              <strong>Q.2, TP.HCM:</strong>
+                              <span>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông</span>
+                            </a>
+                            <a class="phone-link" href="tel:0964777960"><i class="fas fa-phone"></i> 0964777960</a>
+                          </div>
+                          <div class="showroom-item">
+                            <a href="https://maps.google.com/?q=283A%20Hai%20B%C3%A0%20Tr%C6%B0ng,%20Ph%C6%B0%E1%BB%9Dng%20Xu%C3%A2n%20Ho%C3%A0,%20Q.3,%20TP.HCM" target="_blank" rel="noopener">
+                              <strong>Q.3, TP.HCM:</strong> 283A Hai Bà Trưng, Phường Xuân Hoà
+                            </a>
+                            <a class="phone-link" href="tel:0964777910"><i class="fas fa-phone"></i> 0964777910</a>
+                          </div>
+                          <div class="showroom-item">
+                            <a href="https://maps.google.com/?q=228%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20Q.%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20HN" target="_blank" rel="noopener">
+                              <strong>Q. Cầu Giấy, HN:</strong> 228 Cầu Giấy, Quan Hoa
+                            </a>
+                            <a class="phone-link" href="tel:0964777940"><i class="fas fa-phone"></i> 0964777940</a>
+                          </div>
+                        </div>
+                                          
+                        <script>
+                          function toggleShowroomDropdown(element) {
+                            const showroomSection = element.closest('.showroom-section');
+                            const dropdown = showroomSection.querySelector('.showroom-list');
+                            const arrow = showroomSection.querySelector('.arrow-icon');
+                            dropdown.classList.toggle('show');
+                            arrow.classList.toggle('rotate');
+                          }
+                        </script>
+                      </div>
+                    </div>
                   {%- when 'separator' -%}
                     <div class="product-block" {{ block.shopify_attributes }}><hr></div>
                   {%- when 'text' -%}
@@ -216,60 +318,67 @@
                     </div>
                   {%- when 'price' -%}
                     <div class="product-block product-block--price" {{ block.shopify_attributes }}>
-                      {%- assign hide_sale_price = true -%}
-                      {%- if product.compare_at_price_max > product.price -%}
-                        {%- if current_variant.compare_at_price > current_variant.price -%}
-                          {%- assign hide_sale_price = false -%}
-                        {%- endif -%}
-                        <span
-                          data-a11y-price
-                          class="visually-hidden"
-                          aria-hidden="{{ hide_sale_price }}"
-                        >
-                          {{ 'products.general.regular_price' | t }}
-                        </span>
-                        <span
-                          data-product-price
-                          data-product-price-base="{{ current_variant.price }}"
-                          class="product__price text-2xl f-smb{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
-                        >
-                          {%- unless product.empty? -%}
-                            {{ current_variant.price | money }}
-                          {%- else -%}
-                            {{ 1999 | money }}
-                          {%- endunless -%}
-                        </span>
-
-                        <span data-product-price-wrap>
+                      <div class="price-container-wrapper">
+                        {%- assign hide_sale_price = true -%}
+                        {%- if product.compare_at_price_max > product.price -%}
+                          {%- if current_variant.compare_at_price > current_variant.price -%}
+                            {%- assign hide_sale_price = false -%}
+                          {%- endif -%}
                           <span
-                            data-compare-price
-                            class="product__price product__price--compare text-xl"
+                            data-a11y-price
+                            class="visually-hidden"
+                            aria-hidden="{{ hide_sale_price }}"
                           >
-                            {%- if current_variant.compare_at_price > current_variant.price -%}
-                              {{ current_variant.compare_at_price | money }}
-                            {%- endif -%}
+                            {{ 'products.general.regular_price' | t }}
                           </span>
-                        </span>
-                        <span data-compare-price-a11y class="visually-hidden">
-                          {{- 'products.general.sale_price' | t -}}
-                        </span>
-
-                      {%- else -%}
-                        <span
-                          data-product-price
-                          data-product-price-base="{{ current_variant.price }}"
-                          class="product__price text-2xl f-smb{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
-                        >
-                          {%- unless product.empty? -%}
-                            {{ current_variant.price | money }}
-                          {%- else -%}
-                            {{ 1999 | money }}
-                          {%- endunless -%}
-                        </span>
-                        <span data-a11y-price class="visually-hidden">
-                          {{- 'products.general.regular_price' | t -}}
-                        </span>
-                      {%- endif -%}
+                          <span
+                            data-product-price
+                            data-product-price-base="{{ current_variant.price }}"
+                            class="product__price text-2xl f-smb{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
+                          >
+                            {%- unless product.empty? -%}
+                              {{ current_variant.price | money }}
+                            {%- else -%}
+                              {{ 1999 | money }}
+                            {%- endunless -%}
+                          </span>
+  
+                          <span data-product-price-wrap>
+                            <span
+                              data-compare-price
+                              class="product__price product__price--compare text-xl"
+                            >
+                              {%- if current_variant.compare_at_price > current_variant.price -%}
+                                {{ current_variant.compare_at_price | money }}
+                              {%- endif -%}
+                            </span>
+                          </span>
+                          <span data-compare-price-a11y class="visually-hidden">
+                            {{- 'products.general.sale_price' | t -}}
+                          </span>
+  
+                        {%- else -%}
+                          <span
+                            data-product-price
+                            data-product-price-base="{{ current_variant.price }}"
+                            class="product__price text-2xl f-smb{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
+                          >
+                            {%- unless product.empty? -%}
+                              {{ current_variant.price | money }}
+                            {%- else -%}
+                              {{ 1999 | money }}
+                            {%- endunless -%}
+                          </span>
+                          <span data-a11y-price class="visually-hidden">
+                            {{- 'products.general.regular_price' | t -}}
+                          </span>
+                        {%- endif -%}
+  
+                        {%- if current_variant.compare_at_price > current_variant.price -%}
+                          {%- capture discount_percentage -%}{{ current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round }}{%- endcapture -%}
+                          <div class="product__discount-badge">-{{ discount_percentage }}%</div>
+                        {%- endif -%}
+                      </div>
 
                       {%- if settings.product_save_amount -%}
                         {%- if settings.product_save_type == 'dollar' -%}
@@ -306,7 +415,7 @@
                         {{- unit_price_base_unit }}
                       </div>
 
-                      {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+                      {% comment %} {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
                         <div class="product__policies rte">
                           {%- if shop.taxes_included -%}
                             {{ 'products.product.include_taxes' | t }}
@@ -315,7 +424,7 @@
                             {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
                           {%- endif -%}
                         </div>
-                      {%- endif -%}
+                      {%- endif -%} {% endcomment %}
                       <div class="product-installment flex ai-center">
                         {% comment %}
                           Caculate installment price in here
@@ -344,7 +453,7 @@
                   {%- when 'size_chart' -%}
                     {% if connect_to_sizechart == false %}
                       {%- capture size_chart_title -%}
-                        {{ 'products.general.size_chart' | t }}<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-size-chart" viewBox="0 0 64 64"><path d="M22.39 33.53c-7.46 0-13.5-3.9-13.5-8.72s6-8.72 13.5-8.72 13.5 3.9 13.5 8.72a12 12 0 0 1-.22 1.73"/><ellipse cx="22.39" cy="24.81" rx="3.28" ry="2.12"/><path d="M8.89 24.81V38.5c0 7.9 6.4 9.41 14.3 9.41h31.92V33.53H22.39m24.39 0v7.44m-8.13-7.44v7.44m-8.13-7.44v7.44m-8.13-7.44v7.44"/></svg>
+                        {{ 'products.general.size_chart' | t }}<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-size-chart" viewBox="0 0 64 64"><path d="M22.39 33.53c-7.46 0-13.5-3.9-13.5-8.72s6-8.72 13.5-8.72 13.5 3.9 13.5 8.72a12 12 0 0 1-.22 1.73"/><ellipse cx="22.39" cy="24.81" rx="3.28" ry="2.12"/><path d="M8.89 24.81V38.5c0 7.9 6.4 9.41 14.3 9.41h31.92V33.53H22.39m24.39 0v7.44m-8.13-7.44v7.44m-8.13-7.44v7.44"/></svg>
                       {%- endcapture -%}
 
                       <div class="size-chart__standalone" {{ block.shopify_attributes }}>
@@ -803,3 +912,34 @@
       </modal-dialog>
   {%- endcase -%}
 {%- endfor -%}
+<script>
+function showFullQ2Address() {
+  document.getElementById('q2-address-short').style.display = 'none';
+  document.getElementById('q2-address-full').style.display = 'inline';
+}
+</script>
+
+<style>
+.short-address-tooltip {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.short-address-tooltip .tooltip-content {
+  visibility: hidden;
+  opacity: 0;
+  min-width: 260px;
+  max-width: 90vw;
+  background: rgba(30, 30, 30, 0.95);
+  color: #fff;
+  text-align: center;
+  border-radius: 22px;
+  padding: 14px 22px;
+  position: absolute;
+  left: 50%;
+  top: 120%;
+  transform: translateX(-50%) scale(0.98);
+  box-shadow: 0
+</style>
+

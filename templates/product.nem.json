@@ -59,6 +59,30 @@
         "lazyload_images": true
       }
     },
+    "independent_webhook_popup_iRNBRa": {
+      "type": "independent-webhook-popup",
+      "name": "Independent Webhook Popup",
+      "settings": {
+        "enable_popup": true,
+        "popup_delay": 5,
+        "background_image": "shopify://shop_images/POP_UP_1.png",
+        "name_placeholder": "Họ và tên",
+        "name_x": 50,
+        "name_y": 65,
+        "phone_placeholder": "Số điện thoại",
+        "phone_x": 50,
+        "phone_y": 75,
+        "button_text": "Nhận mã ưu đãi ngay >",
+        "button_x": 50,
+        "button_y": 92,
+        "success_image": "shopify://shop_images/POP_UP_2.png",
+        "success_message": "Cảm ơn bạn đã đăng ký! Mã của bạn là RU9250.",
+        "coupon_code_to_copy": "RU9250",
+        "copy_button_text": "SAO CHÉP MÃ    >>>",
+        "copy_button_x": 50,
+        "copy_button_y": 92
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -100,11 +124,17 @@
             "color_swatches": true
           }
         },
+        "custom_fxKh9p": {
+          "type": "custom",
+          "settings": {
+            "code": "<div class=\"size-guide-text-dropdown-container\">\n  <style>\n    .size-guide-text-dropdown-container {\n      margin: 20px 0;\n    }\n\n    .size-guide-text-trigger {\n      /* Reset style của button để trông như một dòng chữ */\n      background: none;\n      border: none;\n      padding: 0;\n      \n      /* Style cho chữ và layout */\n      font-family: 'Proxima Nova', sans-serif;\n      font-weight: 400;\n      font-size: 16px;\n      line-height: 22px;\n      color: #1C2C58;\n      text-decoration: underline;\n      cursor: pointer;\n      \n      /* Dùng flex để căn chỉnh chữ và icon mũi tên */\n      display: inline-flex;\n      align-items: center;\n      gap: 8px; /* Khoảng cách giữa chữ và mũi tên */\n    }\n\n    .size-guide-text-trigger .arrow-icon {\n      transition: transform 0.3s ease-out;\n    }\n\n    .size-guide-text-trigger.is-active .arrow-icon {\n      transform: rotate(180deg);\n    }\n\n    .size-guide-content {\n      max-height: 0;\n      overflow: hidden;\n      transition: max-height 0.4s ease-out, margin-top 0.4s ease-out;\n      margin-top: 0;\n    }\n\n    .size-guide-content.is-active {\n      max-height: 1000px; /* Điều chỉnh nếu ảnh của bạn rất cao */\n      margin-top: 10px; /* Khoảng cách giữa link và ảnh */\n    }\n\n    .size-guide-content img {\n      display: block;\n      width: 100%;\n      height: auto;\n      border-radius: 4px; /* Tùy chọn: bo góc nhẹ cho ảnh */\n    }\n  </style>\n\n  <!-- Nút kích hoạt dropdown (đã được style lại) -->\n  <button class=\"size-guide-text-trigger\">\n    <span>Hướng dẫn chọn kích thước</span>\n    <span class=\"arrow-icon\">\n      <svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n        <path d=\"M1 1L7 7L13 1\" stroke=\"#1C2C58\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n      </svg>\n    </span>\n  </button>\n\n  <!-- Nội dung dropdown -->\n  <div class=\"size-guide-content\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0428/4219/4071/files/size-guide.png?v=1752400514\" alt=\"Hướng dẫn chọn kích thước\">\n  </div>\n\n  <script>\n    (function() {\n      const container = document.currentScript.parentElement;\n      const trigger = container.querySelector('.size-guide-text-trigger');\n      const content = container.querySelector('.size-guide-content');\n\n      if (trigger && content) {\n        trigger.addEventListener('click', function() {\n          this.classList.toggle('is-active');\n          content.classList.toggle('is-active');\n        });\n      }\n    })();\n  </script>\n</div>"
+          }
+        },
         "quantity_selector_WMfLWY": {
           "type": "quantity_selector",
           "settings": {}
         },
-        "showroom_dropdown_nTzTtH": {
+        "showroom_dropdown_JdqRw8": {
           "type": "showroom_dropdown",
           "settings": {}
         },
@@ -133,8 +163,8 @@
           "type": "icon_with_text",
           "settings": {
             "icon_1": "chat",
-            "image_icon_1": "shopify://shop_images/text-w-icon-6.png",
-            "title_1": "Chất liệu Foam cao cấp",
+            "image_icon_1": "shopify://shop_images/text-w-icon-4.png",
+            "title_1": "100 đêm ngủ thử",
             "icon_2": "chat",
             "image_icon_2": "shopify://shop_images/text-w-icon-5.png",
             "title_2": "Miễn phí vận chuyển *",
@@ -142,7 +172,8 @@
             "image_icon_3": "shopify://shop_images/text-w-icon-6.png",
             "title_3": "Bảo hành dài lâu",
             "icon_4": "chat",
-            "title_4": ""
+            "image_icon_4": "shopify://shop_images/text-w-icon-6.png",
+            "title_4": "Chất liệu Foam cao cấp"
           }
         },
         "carousel_modal_B8Mr9e": {
@@ -158,8 +189,9 @@
         "description",
         "price",
         "variant_picker",
+        "custom_fxKh9p",
         "quantity_selector_WMfLWY",
-        "showroom_dropdown_nTzTtH",
+        "showroom_dropdown_JdqRw8",
         "buy_buttons",
         "productbundle_GcbRad",
         "icon_with_text_b6k6a4",
@@ -174,7 +206,7 @@
         "image_position": "left",
         "image_size": "large",
         "product_zoom_enable": true,
-        "product_carousel_enable": false,
+        "product_carousel_enable": true,
         "limit_product_carousel": true,
         "thumbnail_position": "below",
         "thumbnail_height": "flexible",
@@ -886,6 +918,15 @@
         "description": ""
       }
     },
+    "172802814088f5e025": {
+      "type": "apps",
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Reviews",
+        "full_width": false,
+        "space_around": true
+      }
+    },
     "1730878240cfbec46e": {
       "type": "apps",
       "blocks": {
@@ -904,14 +945,14 @@
         "space_around": true
       }
     },
-    "featured_collection_mGwJt3": {
+    "featured_collection_EtQgJU": {
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.featured_collection.name",
       "settings": {
         "section_width": "page-width",
         "customize_width": 1800,
         "title": "Gợi ý các sản phẩm",
-        "home_featured_products": "chan",
+        "home_featured_products": "nem",
         "per_row": 4,
         "rows": 1,
         "mobile_scrollable": false,
@@ -951,6 +992,7 @@
   },
   "order": [
     "countdown_Gwp9bc",
+    "independent_webhook_popup_iRNBRa",
     "main",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",
@@ -963,8 +1005,9 @@
     "best_seller_DWCAYP",
     "dynamic_faq_Whrn47",
     "certification_VUqyB6",
+    "172802814088f5e025",
     "1730878240cfbec46e",
-    "featured_collection_mGwJt3",
+    "featured_collection_EtQgJU",
     "sub",
     "product-recommendations",
     "recently-viewed",

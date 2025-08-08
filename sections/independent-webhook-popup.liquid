@@ -1,0 +1,221 @@
+{% comment %}
+  Section: Independent Webhook Popup
+  - Shows a popup with a background image and a form.
+  - Form data is sent to a specified webhook.
+  - Position of form fields is configurable.
+{% endcomment %}
+
+{{ 'independent-popup.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.enable_popup -%}
+<div id="independent-popup-overlay" class="independent-popup-overlay" style="display: none;" data-popup-delay="{{ section.settings.popup_delay | default: 5 }}">
+  <div class="independent-popup-container">
+    <button type="button" class="independent-popup-close">&times;</button>
+    {%- if section.settings.background_image != blank -%}
+      <img src="{{ section.settings.background_image | image_url: width: section.settings.background_image.width }}" alt="{{ section.settings.background_image.alt | escape }}" class="independent-popup-bg" loading="lazy">
+    {%- else -%}
+      <div class="independent-popup-bg-placeholder"></div>
+    {%- endif -%}
+
+    <form id="independent-popup-form" class="independent-popup-form" action="javascript:void(0);">
+      <div class="independent-popup-field-wrapper" style="left: {{ section.settings.name_x }}%; top: {{ section.settings.name_y }}%;">
+        <input type="text" name="name" id="independent-popup-name" placeholder="{{ section.settings.name_placeholder | escape }}" required>
+      </div>
+      <div class="independent-popup-field-wrapper" style="left: {{ section.settings.phone_x }}%; top: {{ section.settings.phone_y }}%;">
+        <input type="tel" name="phone" id="independent-popup-phone" placeholder="{{ section.settings.phone_placeholder | escape }}" required>
+      </div>
+      <div class="independent-popup-field-wrapper" style="left: {{ section.settings.button_x }}%; top: {{ section.settings.button_y }}%;">
+        <button type="submit" class="independent-popup-submit">{{ section.settings.button_text | escape }}</button>
+      </div>
+    </form>
+    <div id="independent-popup-success-message" class="independent-popup-success-container" style="display: none;">
+      {%- if section.settings.success_image != blank -%}
+        <img src="{{ section.settings.success_image | image_url: width: section.settings.success_image.width }}" alt="{{ section.settings.success_image.alt | escape }}" class="independent-popup-bg" loading="lazy">
+        <div class="independent-popup-field-wrapper" style="left: {{ section.settings.copy_button_x }}%; top: {{ section.settings.copy_button_y }}%;">
+            <button type="button" id="independent-popup-copy-button" class="independent-popup-submit" data-copy-value="{{ section.settings.coupon_code_to_copy | escape }}">
+                {{ section.settings.copy_button_text | escape }}
+            </button>
+        </div>
+      {%- else -%}
+        <div class="independent-popup-bg-placeholder">
+            <p>{{ section.settings.success_message }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+<script>
+  // Pass webhook URL to JS
+  window.independentPopupWebhook = 'https://ru9sleep.sg.larksuite.com/base/automation/webhook/event/COXlaueuPwJSUYhxNjKlsElDgGb';
+</script>
+<script src="{{ 'independent-popup.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Independent Webhook Popup",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Cài đặt chung"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_popup",
+      "label": "Bật/Tắt Popup",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "popup_delay",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "label": "Thời gian hiển thị popup sau khi tải trang",
+      "default": 5
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Ảnh nền Popup (PNG)"
+    },
+    {
+      "type": "header",
+      "content": "Cài đặt Form"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Placeholder cho ô Họ & Tên",
+      "default": "Họ và tên"
+    },
+    {
+      "type": "range",
+      "id": "name_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vị trí ngang (X) của ô Họ & Tên",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "name_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vị trí dọc (Y) của ô Họ & Tên",
+      "default": 30
+    },
+    {
+      "type": "text",
+      "id": "phone_placeholder",
+      "label": "Placeholder cho ô Số Điện Thoại",
+      "default": "Số điện thoại"
+    },
+    {
+      "type": "range",
+      "id": "phone_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vị trí ngang (X) của ô Số Điện Thoại",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "phone_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vị trí dọc (Y) của ô Số Điện Thoại",
+      "default": 50
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Nút đăng ký",
+        "default": "Đăng ký"
+      },
+    {
+      "type": "range",
+      "id": "button_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vị trí ngang (X) của nút gửi",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "button_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vị trí dọc (Y) của nút gửi",
+      "default": 85
+    },
+    {
+      "type": "header",
+      "content": "Cài đặt màn hình thành công"
+    },
+    {
+      "type": "image_picker",
+      "id": "success_image",
+      "label": "Ảnh nền cho màn hình thành công"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Thông báo thành công (dự phòng)",
+      "default": "Cảm ơn bạn đã đăng ký! Mã của bạn là RU9250.",
+      "info": "Chỉ hiển thị khi không có ảnh nền thành công."
+    },
+    {
+      "type": "text",
+      "id": "coupon_code_to_copy",
+      "label": "Mã ưu đãi để sao chép",
+      "default": "RU9250"
+    },
+    {
+      "type": "text",
+      "id": "copy_button_text",
+      "label": "Chữ trên nút 'Sao chép'",
+      "default": "SAO CHÉP MÃ"
+    },
+    {
+      "type": "range",
+      "id": "copy_button_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vị trí ngang (X) của nút 'Sao chép'",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "copy_button_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vị trí dọc (Y) của nút 'Sao chép'",
+      "default": 85
+    }
+  ],
+  "presets": [
+    {
+      "name": "Independent Webhook Popup"
+    }
+  ]
+}
+{% endschema %} 

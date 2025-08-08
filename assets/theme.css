@@ -1,4 +1,25 @@
 @charset "UTF-8";
+/* Journey of Ru9 */
+.journey-ru9 { display: flex; justify-content: center; position: relative; z-index: 1; isolation: isolate; padding: 48px 0; background: var(--colorBody); }
+.journey-ru9__container { max-width: 1196px; width: 100%; height: auto; flex-shrink: 0; margin: 0 auto; }
+.journey-ru9__title { color: #1C2C58; font-family: "Tinos", var(--typeHeaderFallback); font-size: 38px; font-weight: 400; line-height: 120%; text-transform: capitalize; text-align: center; margin: 0 0 12px; }
+.journey-ru9__subtitle { display: flex; max-width: 837px; width: 100%; height: auto; flex-direction: column; align-items: flex-start; gap: 7px; flex-shrink: 0; margin: 0 auto 24px; color: #1C2C58; opacity: 0.8; text-align: center; }
+.journey-ru9__grid { width: 100%; max-width: 1196px; height: auto; flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; align-items: end; }
+
+.journey-card { display: inline-flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 8px; }
+.journey-card--2 { display: flex; width: 263px; flex-direction: column; justify-content: flex-end; align-items: center; margin-inline: auto; }
+.journey-card--2 .journey-card__media { margin-bottom: 92px; }
+.journey-card--4 .journey-card__media { margin-bottom: 92px; }
+.journey-card__label { color: #1C2C58; font-weight: 600; margin-bottom: 6px; text-align: center; }
+.journey-card__media { width: 263px; height: 350px; border-radius: 16px; overflow: hidden; background: #eef2f7; display: flex; align-items: center; justify-content: center; }
+.journey-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.journey-card__placeholder { width: 100%; height: 100%; background: #eef2f7; border-radius: 16px; }
+.journey-card__caption { color: #1C2C58; text-align: center; font-family: "Be Vietnam Pro", var(--typeBaseFallback); font-size: 14px; line-height: 24px; width: 100%; }
+
+@media (max-width: 1280px) {
+  .journey-ru9__container { width: 100%; height: auto; padding: 0 16px; }
+  .journey-ru9__grid { width: 100%; grid-template-columns: repeat(2, 1fr); height: auto; }
+}
 
 :root {
   --animation-fade-in: fadeIn 0.6s cubic-bezier(0, 0, 0.3, 1) forwards;
@@ -6968,7 +6989,7 @@ svg.icon-caret {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: #fff;
+  background-color: var(--colorBody);
   border-radius: calc(var(--radiusBase) * 0.75);
 }
 
@@ -8473,22 +8494,169 @@ tool-tip[data-tool-tip-open="true"] .tool-tip__inner {
 }
 
 .toolbar {
-  background: #e1effe;
-  color: var(--colorNavText);
+  background: #1C2C58;
+  color: #fff;
   font-size: calc(var(--typeBaseSize) * 0.875);
   padding: 8px 0 9px;
 }
 
 @media only screen and (max-width: 480px) {
   .toolbar__content {
-    justify-content: flex-start;
-  }
+  justify-content: space-between;
+}
 
-  .toolbar__menu {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+/* Toolbar Layout with 3 columns */
+.toolbar__left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.toolbar__center {
+  flex: 1;
+  display: flex;
+  align-items: center; /* Vertical alignment middle */
+  justify-content: center; /* Horizontal alignment center */
+  text-align: center;
+  /* Perfect center alignment like inline-list toolbar__menu */
+  position: relative;
+  min-height: 24px; /* Ensure minimum height for proper centering even when empty */
+  /* Ensure proper vertical centering */
+  height: 100%;
+  /* Remove any potential margin/padding issues */
+  margin: 0;
+  padding: 0;
+}
+
+.toolbar__right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Announcement bar message styles */
+.announcement-bar__message {
+  max-width: 100%;
+  overflow: hidden;
+  /* Perfect vertical alignment middle, horizontal alignment center */
+  display: flex;
+  align-items: center; /* Vertical alignment middle */
+  justify-content: center; /* Horizontal alignment center */
+  width: 100%;
+  height: 100%;
+  /* Ensure proper height for centering */
+  min-height: 24px; /* Match toolbar center height */
+  /* Remove any potential margin/padding issues */
+  margin: 0;
+  padding: 0;
+}
+
+.announcement-bar__text {
+  margin: 0;
+  font-size: var(--typeBaseSize);
+  font-weight: 500;
+  color: var(--colorNavText);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Perfect vertical alignment middle, horizontal alignment center */
+  text-align: center;
+  line-height: 1; /* Reset line-height for perfect centering */
+  display: flex;
+  align-items: center; /* Vertical alignment middle */
+  justify-content: center; /* Horizontal alignment center */
+  /* Remove any potential margin/padding issues */
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 768px) {
+  .toolbar__content {
+    flex-direction: column;
+    gap: 8px;
   }
+  
+  .toolbar__left,
+  .toolbar__center,
+  .toolbar__right {
+    flex: none;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .toolbar__center {
+    order: -1; /* Move announcement to top on mobile */
+    /* Vertical alignment middle, horizontal alignment center on mobile */
+    display: flex;
+    align-items: center; /* Vertical alignment middle */
+    justify-content: center; /* Horizontal alignment center */
+  }
+  
+  .announcement-bar__message {
+    /* Vertical alignment middle, horizontal alignment center on mobile */
+    display: flex;
+    align-items: center; /* Vertical alignment middle */
+    justify-content: center; /* Horizontal alignment center */
+    width: 100%;
+    min-height: 20px; /* Ensure minimum height for proper centering */
+  }
+  
+  .announcement-bar__text {
+    font-size: var(--typeBaseSize);
+    /* Perfect vertical alignment middle, horizontal alignment center on mobile */
+    text-align: center;
+    line-height: 1; /* Reset line-height for perfect centering */
+    display: flex;
+    align-items: center; /* Vertical alignment middle */
+    justify-content: center; /* Horizontal alignment center */
+    /* Remove any potential margin/padding issues */
+    padding: 0;
+    margin: 0;
+  }
+}
+
+/* Small mobile responsive */
+@media only screen and (max-width: 480px) {
+  .toolbar__content {
+    gap: 6px;
+  }
+  
+  .announcement-bar__message {
+    /* Vertical alignment middle, horizontal alignment center on small mobile */
+    display: flex;
+    align-items: center; /* Vertical alignment middle */
+    justify-content: center; /* Horizontal alignment center */
+    width: 100%;
+    min-height: 18px; /* Slightly smaller minimum height for small mobile */
+  }
+  
+  .announcement-bar__text {
+    font-size: var(--typeBaseSize);
+    /* Perfect vertical alignment middle, horizontal alignment center on small mobile */
+    text-align: center;
+    line-height: 1; /* Reset line-height for perfect centering */
+    display: flex;
+    align-items: center; /* Vertical alignment middle */
+    justify-content: center; /* Horizontal alignment center */
+    /* Remove any potential margin/padding issues */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .toolbar__menu {
+    justify-content: center;
+  }
+}
+
+.toolbar__menu {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
 
   .toolbar__menu li {
     flex-shrink: 0;
@@ -8500,7 +8668,7 @@ tool-tip[data-tool-tip-open="true"] .tool-tip__inner {
 }
 
 .toolbar a {
-  color: var(--colorNavText);
+  color: #fff;
 }
 .mobile-lang .disclosure,
 .toolbar__lang .disclosure {
@@ -8543,7 +8711,7 @@ tool-tip[data-tool-tip-open="true"] .tool-tip__inner {
 
 .mobile-lang .disclosure-list__item--current .disclosure-list__label,
 .toolbar__lang .disclosure-list__item--current .disclosure-list__label {
-  color: #1b2a57;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -12242,6 +12410,73 @@ input[type="image"] {
   white-space: initial;
 }
 
+/* Override: Megamenu full-width & single column */
+.site-nav__dropdown.megamenu > .page-width {
+  max-width: none !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  display: block !important; /* cancel grid 2 columns (1fr 307px) */
+  grid-template-columns: none !important;
+}
+.site-nav__dropdown.megamenu .megamenu__content { width: 100%; }
+
+/* Flatten legacy inner grid in megamenu so each group stacks vertically */
+.site-nav__dropdown.megamenu .megamenu__content > .grid { display: block !important; }
+.site-nav__dropdown.megamenu .megamenu__content > .grid > .grid__item { width: 100% !important; }
+.site-nav__dropdown.megamenu .megamenu__content > .grid > .grid__item + .grid__item { margin-top: 32px; }
+.site-nav__dropdown.megamenu .megamenu__content .f-bold { margin: 12px 24px 8px; }
+.site-nav__dropdown.megamenu .megamenu__content .f-bold a { color: #1C2C58; font-family: "Be Vietnam Pro", var(--typeBaseFallback); font-weight: 600; font-size: 24px; text-decoration: none; }
+
+/* Cards in megamenu */
+.mega-heading {
+  color: #1C2C58;
+  font-family: "Be Vietnam Pro", var(--typeBaseFallback);
+  font-size: 24px;
+  font-weight: 600;
+  margin: 24px 40px;
+}
+.mega-cards {
+  display: grid;
+  grid-template-columns: repeat(6, 200px);
+  gap: 24px 28px;
+  padding: 0 24px 24px;
+  justify-content: start;
+}
+@media (max-width: 1440px) {
+  .mega-cards { grid-template-columns: repeat(5, 200px); }
+}
+@media (max-width: 1280px) {
+  .mega-cards { grid-template-columns: repeat(4, 200px); }
+}
+@media (max-width: 1024px) {
+  .mega-cards { grid-template-columns: repeat(3, 200px); }
+}
+.mega-card__link { text-decoration: none; display: flex; flex-direction: column; align-items: center; }
+.mega-card__image { width: 200px; height: 148px; border-radius: 12px; overflow: hidden; background: #f3f4f6; }
+.mega-card__image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mega-card__image--placeholder { width: 200px; height: 148px; background: #f3f4f6; border-radius: 12px; }
+.mega-card__title {
+  color: #1C2C58;
+  text-align: left;
+  font-family: "Be Vietnam Pro", var(--typeBaseFallback);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  margin-top: 8px;
+}
+.mega-card__tagline {
+  width: 200px;
+  height: 24px;
+  flex-shrink: 0;
+  text-align: left;
+  color: #1C2C58;
+  font-family: "Be Vietnam Pro", var(--typeBaseFallback);
+  font-size: 14px;
+  line-height: 24px;
+  opacity: 0.8;
+}
 .megamenu .site-nav__dropdown-link .aspect-ratio {
   width: 80px;
 }
@@ -13185,7 +13420,6 @@ a.color-swatch:hover {
 }
 
 .collection-item:not(.collection-item--below):after {
-  background-color: var(--colorGridOverlay);
   bottom: 0;
   content: "";
   left: 0;
@@ -16112,15 +16346,10 @@ html[dir="rtl"] .product-single__meta .rte {
 
 .product__price {
   color: var(--colorPrice);
-  margin-right: 5px;
 }
 
 .product__price:not([class*="text-"]) {
   font-size: calc(var(--typeBaseSize) + 2px);
-}
-
-.product__price.on-sale {
-  padding-right: 7px;
 }
 
 .product__unit-price {

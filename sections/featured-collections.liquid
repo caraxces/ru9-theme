@@ -1,181 +1,593 @@
-{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
-
-<div class="page-width">
-  {%- if section.settings.title != blank -%}
-    <div class="section-header">
-      <h2 class="section-header__title">{{ section.settings.title }}</h2>
-    </div>
-  {%- endif -%}
-
-  <div class="grid grid--uniform{% unless section.settings.enable_gutter %} grid--no-gutters{% endunless %}">
-    {%- liquid
-      assign isEmpty = true
-      if section.blocks.size > 0
-        assign isEmpty = false
-      endif
-    -%}
-
-    {%- for block in section.blocks -%}
-      {%- liquid
-        assign collection = collections[block.settings.collection]
-        assign background_position = block.settings.focal_point
-
-        capture gridView
-          if section.blocks.size < section.settings.per_row
-            assign products_per_row = section.blocks.size
-          else
-            assign products_per_row = section.settings.per_row
-          endif
-          render 'products_per_row', products_per_row: products_per_row, style: 'fractions'
-        endcapture
-      -%}
-
-      {%- render 'collection-grid-item',
-        collection: collection,
-        block: block,
-        gridView: gridView,
-        background_position: background_position,
-        per_row: section.settings.per_row,
-        sizeVariable: gridView,
-        fallback: 'variable'
-      -%}
-    {%- endfor -%}
-
-    {%- if isEmpty -%}
-      <div class="page-width">
-        <div class="grid">
-          <div class="grid__item">
-            <div class="rte">
-              {{ 'home_page.onboarding.no_content' | t }}
-            </div>
-          </div>
+<div data-section-id="{{ section.id }}" data-section-type="featured-collections">
+  <div class="featured-collections-section" style="width: 100%; max-width: 2280px; min-height: 603.83px; margin: 0 auto 60px auto;">
+    
+    <!-- Header Section -->
+    <div class="section-header" style="padding: 40px 5% 30px 5%; display: flex; justify-content: space-between; align-items: flex-start;">
+      
+      <!-- Left side - Title and Description -->
+      <div class="header-left" style="flex: 1; text-align: left;">
+        <h2 class="section-title" style="font-family: 'Tinos', serif; font-size: 48px; font-weight: 700; line-height: 120%; color: #1A1A1A; margin: 0 0 16px 0; text-align: left;">
+          {{ section.settings.title | default: 'Sản Phẩm Bán Chạy' }}
+        </h2>
+        <div class="section-description" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 400; line-height: 150%; color: #666; margin: 0; text-align: left;">
+          {{ section.settings.description | default: 'Chiếc nệm foam êm ái cho giấc ngủ thoải mái nhất' }}
         </div>
       </div>
-    {%- endif -%}
-
+      
+      <!-- Center - Category Tabs -->
+      <div class="header-center" style="flex: 1; display: flex; justify-content: center; align-items: center; padding-top: 25px;">
+        <div class="category-tabs" style="display: flex; gap: 32px; align-items: center;">
+          {%- for block in section.blocks -%}
+            <button 
+              class="category-tab{% if forloop.index == 1 %} active{% endif %}" 
+              data-tab="Tab-{{ block.id }}"
+              style="padding: 0; border: none; background: transparent; font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; {% if forloop.index == 1 %}color: #2960AD;{% else %}color: #1A1A1A;{% endif %}; position: relative; display: flex; align-items: center;"
+            >
+              {{ block.settings.tab_name | default: 'Nệm' }}
+              {%- if forloop.index == 1 -%}
+                <div class="active-indicator" style="position: absolute; bottom: -8px; left: 0; width: 100%; height: 2px; background: #2960AD; border-radius: 1px;"></div>
+              {%- endif -%}
+            </button>
+          {%- endfor -%}
+        </div>
+      </div>
+      
+      <!-- Right side - View All Button and Navigation -->
+      <div class="header-right" style="flex: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+        
+        <!-- View All Button -->
+        <button class="view-all-btn" style="display: flex; width: 145px; height: 40px; justify-content: center; align-items: center; gap: 10px; flex-shrink: 0; border-radius: 30px; border: 2px solid #609EE9; background: transparent; color: #609EE9; font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+          Xem tất cả
+        </button>
+        
+        <!-- Navigation Arrows -->
+        <div class="carousel-nav" style="display: flex; gap: 6px;">
+          <button class="nav-btn nav-prev" style="width: 40px; height: 40px; border: 1px solid #E5E5E5; border-radius: 50%; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; margin-right: 50px;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.5 9L4.5 6L7.5 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="nav-btn nav-next" style="width: 40px; height: 40px; border: 1px solid #E5E5E5; border-radius: 50%; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.5 9L7.5 6L4.5 3" stroke="#609EE9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Product Carousel Section -->
+    <div class="product-carousel-section" style="padding: 0 5% 40px 5%;">
+      <div class="product-carousel" style="position: relative; overflow: hidden;">
+        
+        <!-- Product Cards Container -->
+        <div class="product-cards-container" style="display: flex; gap: 2%; transition: transform 0.3s ease;">
+          {%- for block in section.blocks -%}
+            <div class="tab-content{% if forloop.index == 1 %} active{% endif %}" id="Tab-content-{{ block.id }}" style="display: {% if forloop.index == 1 %}flex{% else %}none{% endif %}; gap: 2%; width: 100%;">
+              
+              {%- assign collection = block.settings.collection -%}
+              {%- if collection != blank -%}
+                {%- for product in collection.products limit: 3 -%}
+                                     <a href="{{ product.url }}" class="product-card" style="min-width: 280px; flex-shrink: 0; border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; display: block;">
+                     
+                     <!-- Product Image Container -->
+                     <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}" style="position: relative; width: 425px; height: 281px; flex-shrink: 0; aspect-ratio: 121/80; background: #F8F9FA; border-radius: 16px 16px 16px 16px; overflow: hidden; cursor: pointer;">
+                      
+                      <!-- Product Label Badge -->
+                      {%- if block.settings.product_label != blank -%}
+                        <div class="product-label" style="position: absolute; top: 20px; left: 20px; padding: 8px 16px; border-radius: 8px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; font-weight: 600; color: {{ block.settings.label_color | default: '#fff' }}; background: {{ block.settings.label_bg | default: '#609EE9' }}; z-index: 2; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                          {{ block.settings.product_label }}
+                        </div>
+                      {%- endif -%}
+                      
+                      <!-- Product Image Primary -->
+                      {%- if product.featured_image -%}
+                        <img 
+                          class="product-image-primary"
+                          src="{{ product.featured_image | img_url: '400x320', crop: 'center' }}" 
+                          alt="{{ product.title }}"
+                          width="400" height="320"
+                          style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px 16px 16px 16px; transition: opacity 0.3s ease;"
+                        >
+                        <!-- Product Image Secondary (Hover) -->
+                        {%- if product.media.size > 1 -%}
+                          {%- for media in product.media offset: 1 limit: 1 -%}
+                            {%- assign second_image = media.preview_image -%}
+                            {%- if second_image != blank -%}
+                              <img 
+                                class="product-image-secondary"
+                                src="{{ second_image | img_url: '400x320', crop: 'center' }}" 
+                                alt="{{ product.title }}"
+                                width="400" height="320"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px 16px 16px 16px; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s ease;"
+                              >
+                            {%- endif -%}
+                          {%- endfor -%}
+                        {%- endif -%}
+                      {%- else -%}
+                        <div style="width: 100%; height: 100%; background: #E9ECEF; display: flex; align-items: center; justify-content: center; color: #6C757D; border-radius: 16px 16px 0 0;">
+                          No Image
+                        </div>
+                      {%- endif -%}
+                    </div>
+                    
+                    <!-- Product Info -->
+                    <div class="product-info" style="padding: 24px; margin: 0;">
+                      
+                      <!-- Rating -->
+                      <div class="product-rating" style="display: flex; align-items: center; gap: 6px; margin-bottom: 10px;">
+                        <span style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #000; font-weight: 500;">5.0/5</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
+                          <path d="M5.91709 0.406727C6.10057 -0.135581 6.89945 -0.135571 7.08293 0.406727L8.19718 3.70012C8.27924 3.94264 8.51457 4.10685 8.78007 4.10685H12.3859C12.9797 4.10685 13.2265 4.83651 12.7462 5.17168L9.82898 7.2071C9.61415 7.35699 9.52436 7.62267 9.60639 7.8652L10.7206 11.1586C10.9041 11.7009 10.2578 12.1519 9.77739 11.8167L6.86027 9.78127C6.64545 9.63137 6.35456 9.63137 6.13974 9.78127L3.22258 11.8167C2.74223 12.1519 2.09591 11.7009 2.27939 11.1586L3.39365 7.8652C3.47571 7.62267 3.38581 7.35699 3.17099 7.2071L0.253832 5.17167C-0.226523 4.83651 0.0203404 4.10685 0.614096 4.10685H4.21991C4.48544 4.10685 4.72077 3.94264 4.80283 3.70012L5.91709 0.406727Z" fill="#609EE9"/>
+                        </svg>
+                        <span style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #666; font-weight: 400;">(600)</span>
+                      </div>
+                      
+                      <!-- Product Name -->
+                      <h3 class="product-name" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 27px; font-weight: 700; color: #000; margin: 0 0 0px 0; line-height: 130%;">
+                        {{ product.title }}
+                      </h3>
+                      
+                      <!-- Price Information -->
+                      <div class="product-price" style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                        <span class="price" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 24px; font-weight: 700; color: #9F332C;">
+                          {{ product.price | money }}
+                        </span>
+                        {%- if product.compare_at_price > product.price -%}
+                          <span style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; color: #666; text-decoration: line-through; margin-left: 4px;">
+                            {{ product.compare_at_price | money }}
+                          </span>
+                          <span class="discount-badge" style="padding: 6px 12px; background: #F0F7FF; color: #3373BD; border-radius: 8px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 600; margin-left: 8px;">
+                            -{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%
+                          </span>
+                        {%- endif -%}
+                      </div>
+                      
+                      <!-- Sold Count -->
+                      <div class="sold-count" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #9CA3AF; margin-top: 8px;">
+                        Đã bán: 1005
+                      </div>
+                    </div>
+                  </a>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-{%- if section.settings.divider -%}</div>{%- endif -%}
+<style>
+  .featured-collections-section {
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+  
+  .category-tab:hover {
+    color: #2960AD !important;
+  }
+  
+  .category-tab.active {
+    color: #2960AD !important;
+  }
+  
+  .view-all-btn:hover {
+    background: #609EE9 !important;
+    color: #fff !important;
+  }
+  
+  .nav-btn:hover {
+    background: #E5E5E5 !important;
+  }
+  
+  .product-image-container.has-secondary-image:hover .product-image-primary {
+    opacity: 0 !important;
+  }
+  
+  .product-image-container.has-secondary-image:hover .product-image-secondary {
+    opacity: 1 !important;
+  }
+  
+  /* Fallback for older browsers */
+  .product-image-container:hover .product-image-primary {
+    opacity: 0 !important;
+  }
+  
+  .product-image-container:hover .product-image-secondary {
+    opacity: 1 !important;
+  }
+  
+  @media (max-width: 1200px) {
+    .section-header {
+      padding: 30px 4% 20px 4% !important;
+    }
+    
+    .product-carousel-section {
+      padding: 0 4% 30px 4% !important;
+    }
+    
+    .product-card {
+      width: calc(50% - 1%) !important;
+      min-width: 250px;
+    }
+    
+    .product-image-container {
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 121/80 !important;
+    }
+    
+    .product-name {
+      font-size: 24px !important;
+    }
+    
+    .product-info {
+      padding: 20px !important;
+    }
+    
+    .section-title {
+      font-size: 36px !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .section-header {
+      flex-direction: column !important;
+      gap: 20px !important;
+      padding: 20px 4% !important;
+    }
+    
+    .header-center {
+      order: 2;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+    
+    .header-right {
+      order: 3;
+      align-items: center !important;
+      width: 100%;
+    }
+    
+    .category-tabs {
+      flex-wrap: wrap;
+      width: 100%;
+      gap: 16px !important;
+      justify-content: center;
+      padding-top: 25px;
+    }
+    
+    .product-carousel-section {
+      padding: 0 4% 20px 4% !important;
+    }
+    
+    .product-cards-container {
+      gap: 4% !important;
+    }
+    
+    .tab-content {
+      gap: 4% !important;
+    }
+    
+    .product-card {
+      width: calc(100% - 2%) !important;
+      min-width: auto;
+    }
+    
+    .product-image-container {
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 121/80 !important;
+    }
+    
+    .product-name {
+      font-size: 22px !important;
+    }
+    
+    .product-info {
+      padding: 16px !important;
+    }
+    
+    .section-title {
+      font-size: 28px !important;
+    }
+    
+    .section-description {
+      font-size: 16px !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .section-header {
+      padding: 15px 3% !important;
+    }
+    
+    .product-carousel-section {
+      padding: 0 3% 15px 3% !important;
+    }
+    
+    .product-image-container {
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 121/80 !important;
+    }
+    
+    .product-name {
+      font-size: 20px !important;
+    }
+    
+    .product-info {
+      padding: 12px !important;
+    }
+    
+    .section-title {
+      font-size: 24px !important;
+    }
+    
+    .section-description {
+      font-size: 14px !important;
+    }
+    
+    .category-tab {
+      font-size: 16px !important;
+    }
+    
+    .view-all-btn {
+      width: 90px !important;
+      height: 28px !important;
+      padding: 6px 16px !important;
+      font-size: 12px !important;
+    }
+    
+    .nav-btn {
+      width: 24px !important;
+      height: 24px !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('.category-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    // Tab switching functionality
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const tabId = this.getAttribute('data-tab');
+        const targetContent = document.getElementById('Tab-content-' + tabId.split('-')[1]);
+        
+        // Update active tab button
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.style.color = '#1A1A1A';
+          const indicator = btn.querySelector('.active-indicator');
+          if (indicator) indicator.remove();
+        });
+        this.classList.add('active');
+        this.style.color = '#2960AD';
+        
+        // Add active indicator
+        const indicator = document.createElement('div');
+        indicator.className = 'active-indicator';
+        indicator.style.cssText = 'position: absolute; bottom: -8px; left: 0; width: 100%; height: 2px; background: #2960AD; border-radius: 1px;';
+        this.appendChild(indicator);
+        
+        // Update active content
+        tabContents.forEach(content => {
+          content.classList.remove('active');
+          content.style.display = 'none';
+        });
+        targetContent.classList.add('active');
+        targetContent.style.display = 'flex';
+        
+        // Reset carousel position
+        currentSlide = 0;
+        updateCarousel();
+      });
+    });
+    
+    // Carousel navigation
+    let currentSlide = 0;
+    
+    function updateCarousel() {
+      const activeContent = document.querySelector('.tab-content.active');
+      if (activeContent) {
+        const cards = activeContent.querySelectorAll('.product-card');
+        const container = activeContent.parentElement;
+        const containerWidth = container.offsetWidth;
+        
+        // Calculate how many cards can fit
+        let cardsPerView = 3;
+        if (containerWidth < 768) {
+          cardsPerView = 1;
+        } else if (containerWidth < 1200) {
+          cardsPerView = 2;
+        }
+        
+        const maxSlides = Math.max(0, cards.length - cardsPerView);
+        currentSlide = Math.max(0, Math.min(currentSlide, maxSlides));
+        
+        // Calculate card width and gap
+        const cardWidth = cards[0] ? cards[0].offsetWidth : 400;
+        const gap = 24; // 2% gap
+        const translateX = -currentSlide * (cardWidth + gap);
+        activeContent.style.transform = `translateX(${translateX}px)`;
+        
+        // Update button states
+        const prevBtn = document.querySelector('.nav-prev');
+        const nextBtn = document.querySelector('.nav-next');
+        if (prevBtn) prevBtn.disabled = currentSlide === 0;
+        if (nextBtn) nextBtn.disabled = currentSlide >= maxSlides;
+      }
+    }
+    
+    // Navigation button event listeners
+    const prevBtn = document.querySelector('.nav-prev');
+    const nextBtn = document.querySelector('.nav-next');
+    
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateCarousel();
+        }
+      });
+    }
+    
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function() {
+        const activeContent = document.querySelector('.tab-content.active');
+        if (activeContent) {
+          const cards = activeContent.querySelectorAll('.product-card');
+          const container = activeContent.parentElement;
+          const containerWidth = container.offsetWidth;
+          
+          let cardsPerView = 3;
+          if (containerWidth < 768) {
+            cardsPerView = 1;
+          } else if (containerWidth < 1200) {
+            cardsPerView = 2;
+          }
+          
+          const maxSlides = Math.max(0, cards.length - cardsPerView);
+          if (currentSlide < maxSlides) {
+            currentSlide++;
+            updateCarousel();
+          }
+        }
+      });
+    }
+    
+    // Initialize carousel
+    updateCarousel();
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      currentSlide = 0; // Reset to first slide
+      updateCarousel();
+    });
+    
+    // Enhanced hover effect for product images
+    const productImageContainers = document.querySelectorAll('.product-image-container');
+    console.log('Found', productImageContainers.length, 'product image containers');
+    
+    productImageContainers.forEach((container, index) => {
+      const primaryImage = container.querySelector('.product-image-primary');
+      const secondaryImage = container.querySelector('.product-image-secondary');
+      
+      console.log(`Container ${index + 1}:`, {
+        hasPrimary: !!primaryImage,
+        hasSecondary: !!secondaryImage,
+        hasSecondaryClass: container.classList.contains('has-secondary-image')
+      });
+      
+      if (primaryImage && secondaryImage) {
+        container.addEventListener('mouseenter', function() {
+          console.log('Mouse enter on container', index + 1);
+          primaryImage.style.opacity = '0';
+          secondaryImage.style.opacity = '1';
+        });
+        
+        container.addEventListener('mouseleave', function() {
+          console.log('Mouse leave on container', index + 1);
+          primaryImage.style.opacity = '1';
+          secondaryImage.style.opacity = '0';
+        });
+      }
+    });
+  });
+</script>
 
 {% schema %}
 {
-  "name": "t:sections.featured-collections.name",
+  "name": "Featured Collections",
   "class": "index-section",
-  "max_blocks": 15,
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  },
   "settings": [
     {
       "type": "text",
       "id": "title",
-      "label": "t:sections.featured-collections.settings.title.label",
-      "default": "Collection list"
+      "label": "Section Title",
+      "default": "Sản Phẩm Bán Chạy"
     },
     {
-      "type": "checkbox",
-      "id": "divider",
-      "label": "t:sections.featured-collections.settings.divider.label",
-      "default": false
+      "type": "text",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Chiếc nệm foam êm ái cho giấc ngủ thoải mái nhất"
     },
     {
-      "type": "range",
-      "id": "per_row",
-      "label": "t:sections.featured-collections.settings.per_row.label",
-      "default": 4,
-      "min": 2,
-      "max": 5,
-      "step": 1
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary Color",
+      "default": "#2960AD"
     },
     {
-      "type": "checkbox",
-      "id": "enable_gutter",
-      "label": "t:sections.featured-collections.settings.enable_gutter.label",
-      "default": true
-    }
-  ],
-  "presets": [
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1A1A1A"
+    },
     {
-      "name": "t:sections.featured-collections.presets.collection_list.name",
-      "blocks": [
-        {
-          "type": "collection"
-        },
-        {
-          "type": "collection"
-        },
-        {
-          "type": "collection"
-        },
-        {
-          "type": "collection"
-        }
-      ]
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#666"
     }
   ],
   "blocks": [
     {
-      "type": "collection",
-      "name": "t:sections.featured-collections.blocks.collection.name",
+      "type": "collection_tab",
+      "name": "Collection Tab",
+      "limit": 4,
       "settings": [
         {
-          "id": "collection",
+          "type": "text",
+          "id": "tab_name",
+          "default": "Nệm",
+          "label": "Tab Name"
+        },
+        {
           "type": "collection",
-          "label": "t:sections.featured-collections.blocks.collection.settings.collection.label"
+          "id": "collection",
+          "label": "Collection",
+          "info": "Select collection to display products"
         },
         {
           "type": "text",
-          "id": "title",
-          "label": "t:sections.featured-collections.blocks.collection.settings.title.label"
+          "id": "product_label",
+          "label": "Product Label",
+          "info": "e.g., 'Mới', 'Bán chạy', 'Top rated'"
         },
         {
-          "type": "select",
-          "id": "focal_point",
-          "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.label",
-          "info": "t:sections.featured-collections.blocks.collection.settings.focal_point.info",
-          "default": "center center",
-          "options": [
-            {
-              "value": "20% 0",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.20_0.label"
-            },
-            {
-              "value": "top center",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.top_center.label"
-            },
-            {
-              "value": "80% 0",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.80_0.label"
-            },
-            {
-              "value": "20% 50%",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.20_50.label"
-            },
-            {
-              "value": "center center",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.center_center.label"
-            },
-            {
-              "value": "80% 50%",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.80_50.label"
-            },
-            {
-              "value": "20% 100%",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.20_100.label"
-            },
-            {
-              "value": "bottom center",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.bottom_center.label"
-            },
-            {
-              "value": "80% 100%",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.80_100.label"
-            }
-          ]
+          "type": "color",
+          "id": "label_color",
+          "label": "Label Text Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "label_bg",
+          "label": "Label Background",
+          "default": "#609EE9"
         }
       ]
     }
   ],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  }
+  "presets": [
+    {
+      "name": "Featured Collections",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "collection_tab"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

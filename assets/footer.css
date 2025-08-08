@@ -101,10 +101,10 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
-  .footer-newsletter__info,
+  /* .footer-newsletter__info,
   .footer__newsletter {
     margin-top: 24px;
-  }
+  } */
   @media (min-width: 769px) {
     .footer-top .footer-navigate {
       padding: 0;

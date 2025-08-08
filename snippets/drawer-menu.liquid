@@ -730,3 +730,41 @@
     </div>
   </div>
 </div>
+
+<style>
+/* Ensure NavDrawer is always on top layer, above sticky-add-to-cart */
+#NavDrawer {
+  z-index: 9999 !important;
+}
+
+#NavDrawer.drawer {
+  z-index: 9999 !important;
+}
+
+/* Make sure drawer overlay is also high priority */
+.drawer-page-overlay {
+  z-index: 9998 !important;
+}
+
+/* Specifically for mobile - ensure drawer is above sticky cart */
+@media screen and (max-width: 749px) {
+  #NavDrawer {
+    z-index: 9999 !important;
+    position: fixed !important;
+  }
+  
+  #NavDrawer.drawer {
+    z-index: 9999 !important;
+  }
+  
+  .drawer-page-overlay {
+    z-index: 9998 !important;
+  }
+  
+  /* Ensure drawer content is also properly layered */
+  #NavDrawer .drawer__contents {
+    z-index: 9999 !important;
+    position: relative;
+  }
+}
+</style>

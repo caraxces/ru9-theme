@@ -1,1 +1,1021 @@
-{"sections":{"slideshow":{"type":"slideshow","blocks":{"image_igEmmB":{"type":"image","disabled":true,"settings":{"top_subheading":"","title":"","title_size":80,"subheading":"","link":"https:\/\/ru9.vn\/collections\/nem","link_text":"","link_2":"","link_text_2":"","color_accent":"rgba(0,0,0,0)","text_align":"vertical-center horizontal-center","image":"shopify:\/\/shop_images\/resize_1950x750_643c5d9f-112c-4f0d-b1ce-618d766f4583.jpg","image_mobile":"shopify:\/\/shop_images\/resize_430x500_dc6f16b2-d364-4893-940e-b7364087aa27.jpg","overlay_opacity":0}},"slideshow-0":{"type":"image","settings":{"top_subheading":"","title":"","title_size":80,"subheading":"","link":"shopify:\/\/collections\/nem","link_text":"","link_2":"","link_text_2":"","color_accent":"#000000","text_align":"vertical-center horizontal-center","image":"shopify:\/\/shop_images\/Home_banner_9381bbd5-09c9-4ba2-ae7a-8d2fdc56b2f6.png","image_mobile":"shopify:\/\/shop_images\/Mobile_93295df0-f21e-44cb-a137-133b4bc45a03.png","overlay_opacity":0}},"image_JR4ARU":{"type":"image","settings":{"top_subheading":"","title":"","title_size":80,"subheading":"","link":"shopify:\/\/products\/nem-hybrid","link_text":"","link_2":"","link_text_2":"","color_accent":"#000000","text_align":"vertical-center horizontal-center","image":"shopify:\/\/shop_images\/Banner_Web-01.png","image_mobile":"shopify:\/\/shop_images\/Banner_Di_n_Tho_i-07.png","overlay_opacity":0}},"image_y8pK9p":{"type":"image","settings":{"top_subheading":"","title":"","title_size":80,"subheading":"","link":"shopify:\/\/products\/goi-co-giam-am","link_text":"","link_2":"","link_text_2":"","color_accent":"#000000","text_align":"vertical-center horizontal-center","image":"shopify:\/\/shop_images\/Better_posture_better_life_Homepage_Banner_desktop_ENG_1_-min.jpg","image_mobile":"shopify:\/\/shop_images\/Better_posture_better_life_Homepage_Banner_mobile_ENG_-min.jpg","overlay_opacity":0}},"image_N6Y66j":{"type":"image","settings":{"top_subheading":"","title":"","title_size":80,"subheading":"","link":"https:\/\/rubaby.vn","link_text":"","link_2":"","link_text_2":"","color_accent":"rgba(0,0,0,0)","text_align":"vertical-center horizontal-center","image":"shopify:\/\/shop_images\/banner-desktop-rubaby_1944x_29f9b5af-244c-44c6-8b40-eb496d94b11b.webp","image_mobile":"shopify:\/\/shop_images\/banner-mobile-rubaby_430x_1.png","overlay_opacity":0}}},"block_order":["image_igEmmB","slideshow-0","image_JR4ARU","image_y8pK9p","image_N6Y66j"],"settings":{"section_height":"natural","mobile_height":"500px","style":"dots","autoplay":true,"autoplay_speed":7,"lazyload_images":true}},"countdown_xAQXpY":{"type":"countdown","blocks":{"content_ffhmHa":{"type":"content","settings":{"heading":"Chỉ còn","heading_size":"h2","text":"<p>Cách <\/p>","content_alignment":"left"}},"timer_whF3xp":{"type":"timer","settings":{"year":"2025","month":"01","day":"1","hour":"03","minute":"00","hide_timer":false,"text":""}},"button_tFx4Ga":{"type":"button","settings":{"button_link":"shopify:\/\/collections\/nem","button":"Săn ngay","button_style":"solid"}}},"block_order":["content_ffhmHa","timer_whF3xp","button_tFx4Ga"],"disabled":true,"settings":{"layout":"banner","full_width":false,"text_color":"#0f0f0f","background_color":"#ffffff","background_image":"shopify:\/\/shop_images\/Catepage_web_-_DESKTOP-02.jpg","overlay_color":"#000000","overlay_opacity":0,"mobile_image":"shopify:\/\/shop_images\/Nest_Thumb-1.png","lazyload_images":true}},"masonry_C7y3G9":{"type":"masonry","blocks":{"image_PY6h6j":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Ori_Thumb-Website-5_5cb977e2-8a9d-4bda-8b14-47fb84092234.png","image_mobile":"shopify:\/\/shop_images\/Ori_Thumb-Website-5_5cb977e2-8a9d-4bda-8b14-47fb84092234.png","btn_text":"Nệm","btn_link":"shopify:\/\/collections\/nem"}},"image_9mN4km":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Hompage_Desktop_G_i_13a5e439-2535-4e7c-8d95-fa3fa29696d0.png","image_mobile":"shopify:\/\/shop_images\/Hompage_Mobile_G_i_8312563a-21aa-40d0-a1df-686773ea05e1.png","btn_text":"Gối","btn_link":"shopify:\/\/collections\/goi"}},"image_njPkCC":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Cate_Chan_Thumb_19e2b439-ca38-4b0e-8bb9-e431ae9388fc.png","image_mobile":"shopify:\/\/shop_images\/Cate_Chan_Thumb_19e2b439-ca38-4b0e-8bb9-e431ae9388fc.png","btn_text":"Chăn","btn_link":"shopify:\/\/collections\/chan"}},"image_VUjiQA":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Cate_Ga_Desktop_17b10937-e4ad-41be-98c0-f554464c2b82.png","image_mobile":"shopify:\/\/shop_images\/Cate_Ga_Desktop_17b10937-e4ad-41be-98c0-f554464c2b82.png","btn_text":"Ga trải giường","btn_link":"shopify:\/\/collections\/bedding"}}},"block_order":["image_PY6h6j","image_9mN4km","image_njPkCC","image_VUjiQA"],"settings":{"section_width":"customize_width","customize_width":1130,"title":"Ngủ ngon hơn cùng sản phẩm giấc ngủ đến từ Ru9","description":"","description_html":"<div class=\"counter-container\">\n  <span id=\"counter\">0<\/span> giờ nghiên cứu để bạn chẳng cần phải nghĩ suy về đêm ngon giấc\n<\/div>\n\n<script>\n  \/\/ Hàm đếm số\n  function animateCounter() {\n    const counter = document.getElementById('counter');\n    const target = 3240;\n    const duration = 3000; \/\/ 3 giây\n    const frameRate = 30; \/\/ số lần cập nhật mỗi giây\n    const totalFrames = duration \/ 1000 * frameRate;\n    const increment = target \/ totalFrames;\n    \n    let current = 0;\n    let frame = 0;\n    \n    const animation = setInterval(() => {\n      frame++;\n      current += increment;\n      \n      if (frame >= totalFrames) {\n        clearInterval(animation);\n        current = target;\n      }\n      \n      counter.textContent = Math.floor(current).toLocaleString('vi-VN');\n    }, 1000 \/ frameRate);\n  }\n  \n  \/\/ Chạy animation khi trang được tải\n  document.addEventListener('DOMContentLoaded', animateCounter);\n<\/script>\n\n<style>\n  #counter {\n    font-weight: bold;\n  }\n<\/style>","odd_row_height":"375","even_row_height":"225","button_color":"#1b2a57","button_background":"#ffffff","carousel_mobile":true}},"featured_collection_tab_bxaQPt":{"type":"featured-collection-tab","blocks":{"tab_RhcnVP":{"type":"tab","settings":{"tab_name":"Nệm","tab_label":"","product_1":"nem-original-pro","label_left_1":"Bán chạy","color_label_left_1":"#ffffff","background_label_left_1":"#ab2328","label_right_1":"","color_label_right_1":"#ffffff","background_label_right_1":"#ff7f41","product_2":"foam-original","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"#ffffff","background_label_right_2":"#f97046","product_3":"foam-nest","label_left_3":"Bán chạy","color_label_left_3":"#f8f6f4","background_label_left_3":"#ab2328","label_right_3":"","color_label_right_3":"#ffffff","background_label_right_3":"#f97046","product_4":"nem-hybrid","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"#ffffff","background_label_right_4":"#f97046"}},"tab_TtabNP":{"type":"tab","settings":{"tab_name":"Topper","tab_label":"","product_1":"nem-cuon-foam-topper","label_left_1":"Mới","color_label_left_1":"#ffffff","background_label_left_1":"#ab2328","label_right_1":"","color_label_right_1":"#ffffff","background_label_right_1":"#ff7f41","product_2":"","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"","background_label_right_2":"","product_3":"","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"","background_label_right_3":"","product_4":"","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}},"tab_PKXPNe":{"type":"tab","settings":{"tab_name":"Gối","tab_label":"","product_1":"goi-foam-niu","label_left_1":"","color_label_left_1":"#ffffff","background_label_left_1":"#ab2328","label_right_1":"","color_label_right_1":"#ffffff","background_label_right_1":"#ff7f41","product_2":"goi-may","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"#ffffff","background_label_right_2":"#f97046","product_3":"goi-om","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"","background_label_right_3":"","product_4":"","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}},"tab_DBLE3R":{"type":"tab","settings":{"tab_name":"Chăn","tab_label":"","product_1":"chan-bach-dan","label_left_1":"","color_label_left_1":"#ffffff","background_label_left_1":"#ab2328","label_right_1":"","color_label_right_1":"#ffffff","background_label_right_1":"#ff7f41","product_2":"chan-microfiber","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"","background_label_right_2":"","product_3":"chan-may-dong","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"","background_label_right_3":"","product_4":"chan-lanh","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}}},"block_order":["tab_RhcnVP","tab_TtabNP","tab_PKXPNe","tab_DBLE3R"],"settings":{"section_width":"customize_width","customize_width":1095,"title":"SẢN PHẨM BÁN CHẠY","description":"<p>Chiếc nệm êm ái cho giấc ngủ thoải mái nhất<\/p>","color_tab_name":"#ffffff","background_tab_name":"#2960ad","background_tab_name_inactive":"#ddebfc"}},"banner_with_content_NiwahU":{"type":"banner-with-content","settings":{"section_width":"customize_width","customize_width":1010,"image":"shopify:\/\/shop_images\/20250528-140101.png","image_mobile":"shopify:\/\/shop_images\/20250528-135154.png","title":"Đâu là chiếc nệm phù hợp cho bạn?","text":"<p>Cùng Ru9 khám phá và chọn ra chiếc nệm dành riêng cho bạn.<\/p>","btn_text":"Xem thêm","btn_link":"shopify:\/\/collections\/nem"}},"text_and_image_JezEQt":{"type":"text-and-image","settings":{"section_width":"full-width","customize_width":1800,"image":"shopify:\/\/shop_images\/Hompage_Desktop_Chuy_n_c_a_Ru9_44beec8b-6b19-4316-916e-a1212fc06dbf.png","image_mobile":"shopify:\/\/shop_images\/Hompage_Mobile_Chuy_n_c_a_Ru9_ce21ca1d-5393-4035-a3ab-849df34e6688.png","image_mask":"none","subtitle":"","title":"Chuyện của Ru9","text":"<p>Hành trình của Ru9 bắt đầu với niềm tin rằng, ai cũng xứng đáng có được giấc ngủ ngon thật dễ dàng. Chúng mình hướng về mục tiêu đơn giản: đặt chất lượng lên trên hết....<\/p>","button_label":"Xem chi tiết","button_link":"shopify:\/\/pages\/about","align_text":"left","align_text_mobile":"center","image_width":"50","layout":"left","divider":false,"top_padding":true,"bottom_padding":true,"lazyload_images":true}},"featured_collection_tab_MDJC8T":{"type":"featured-collection-tab","blocks":{"tab_x7kJHw":{"type":"tab","settings":{"tab_name":"Gối Ngủ","tab_label":"","product_1":"goi-foam-niu","label_left_1":"Mới","color_label_left_1":"#ffffff","background_label_left_1":"#ab2328","label_right_1":"","color_label_right_1":"#ffffff","background_label_right_1":"#ff7f41","product_2":"goi-om","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"#ffffff","background_label_right_2":"#f97046","product_3":"goi-may","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"#ffffff","background_label_right_3":"#f97046","product_4":"bo-om-niu-ru9","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}},"tab_h4ActP":{"type":"tab","settings":{"tab_name":"Ngủ Mát","tab_label":"Mới","product_1":"vo-goi-icefiber","label_left_1":"Mới","color_label_left_1":"#ffffff","background_label_left_1":"#ab2328","label_right_1":"","color_label_right_1":"#ffffff","background_label_right_1":"#ff7f41","product_2":"chan-lanh","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"","background_label_right_2":"","product_3":"giai-nhiet-iceguard","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"","background_label_right_3":"","product_4":"vo-goi-om-icefiber","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}},"tab_hqdjqG":{"type":"tab","settings":{"tab_name":"Chống thấm","tab_label":"Mới","product_1":"tam-bao-ve-nem","label_left_1":"Mới","color_label_left_1":"#ffffff","background_label_left_1":"#ab2328","label_right_1":"","color_label_right_1":"#ffffff","background_label_right_1":"#ff7f41","product_2":"giai-nhiet-iceguard","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"","background_label_right_2":"","product_3":"","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"","background_label_right_3":"","product_4":"","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}},"tab_fqaMza":{"type":"tab","settings":{"tab_name":"Gối du lịch","tab_label":"","product_1":"goi-co-giam-am","label_left_1":"","color_label_left_1":"","background_label_left_1":"","label_right_1":"","color_label_right_1":"","background_label_right_1":"","product_2":"goi-didi","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"","background_label_right_2":"","product_3":"","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"","background_label_right_3":"","product_4":"","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}}},"block_order":["tab_x7kJHw","tab_h4ActP","tab_hqdjqG","tab_fqaMza"],"disabled":true,"settings":{"section_width":"customize_width","customize_width":1095,"title":"Sản phẩm bán chạy","description":"<p>Các sản phẩm chất lượng cao để chăm sóc giấc ngủ của bạn<\/p>","color_tab_name":"#ffffff","background_tab_name":"#2d9f9f","background_tab_name_inactive":"#d3f4f1"}},"banner_with_collection_KVT4Dz":{"type":"banner-with-collection","disabled":true,"settings":{"section_width":"full-width","customize_width":1800,"image":"shopify:\/\/shop_images\/Hompage_Desktop_Bundle_e3c4effe-353b-4e3a-80ed-868102bfc063.png","image_mobile":"shopify:\/\/shop_images\/Hompage_Mobile_Bundle_cb596441-3699-4ec6-b57e-929adc4b8694.png","image_min_height":458,"collection":"bo-phong-ngu","products_to_show":5}},"featured-collection":{"type":"featured-collection","disabled":true,"settings":{"section_width":"page-width","customize_width":1800,"title":"Phụ kiện khác","home_featured_products":"","per_row":4,"rows":1,"mobile_scrollable":true,"view_all":true,"divider":false,"hide_price":true}},"feature_collection_manual_erDEat":{"type":"feature-collection-manual","blocks":{"collection_8zcBbd":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/N_m_Em_Be.png","block_title":"Nệm em bé","block_url":"https:\/\/www.rubaby.vn\/products\/nem-foam-em-be"}},"collection_FW8gtz":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/G_i_Em_Be.png","block_title":"Gối em bé","block_url":"https:\/\/www.rubaby.vn\/collections\/goi"}},"collection_KVEbyG":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/S_n_ph_m_v_i.png","block_title":"Sản phẩm vải","block_url":"https:\/\/www.rubaby.vn\/collections\/phu-kien"}},"collection_CxRqc7":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Xem_them.png","block_title":"Xem thêm","block_url":"https:\/\/www.rubaby.vn\/"}}},"block_order":["collection_8zcBbd","collection_FW8gtz","collection_KVEbyG","collection_CxRqc7"],"custom_css":[".section-header__icon {width: 150px; height: 50px;}",".section-header__icon .baby-icon-svg {width: 100%; height: 100%;}"],"settings":{"section_width":"page-width","customize_width":1800,"title":"- Sản phẩm ngủ cho bé","title_icon":"<svg class=\"baby-icon-svg\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"120\" height=\"40\" viewbox=\"0 0 606.000000 200.000000\" preserveaspectratio=\"xMidYMid meet\">\n  <g transform=\"translate(0.000000,200.000000) scale(0.100000,-0.100000)\" fill=\"currentColor\" stroke=\"none\">\n    <path d=\"M4095 1983 c-123 -65 -130 -167 -34 -509 45 -161 58 -279 59 -511 0 -216 29 -301 117 -344 40 -20 67 -24 169 -27 336 -10 529 112 564 357 20 140 -22 290 -103 369 -80 78 -189 112 -359 112 -92 0 -101 2 -123 25 -14 13 -25 32 -26 42 0 10 -4 101 -8 203 -7 211 -16 237 -87 277 -47 27 -124 30 -169 6z m515 -843 c48 -24 70 -56 76 -107 9 -73 -60 -153 -131 -153 -66 0 -135 75 -135 146 0 41 37 95 80 116 45 23 62 23 110 -2z\"><\/path>\n    <path d=\"M2225 1976 c-38 -16 -84 -70 -87 -99 -2 -12 -3 -186 -3 -387 0 -409 4 -381 -81 -576 -24 -56 -44 -112 -44 -125 0 -52 85 -138 189 -190 160 -80 390 -79 543 3 75 40 150 121 180 196 19 48 23 76 23 172 0 109 -2 119 -32 182 -66 139 -179 213 -349 227 -143 12 -152 30 -114 206 33 150 43 229 36 268 -8 45 -58 105 -103 123 -41 18 -119 17 -158 0z m365 -891 c94 -48 103 -181 15 -235 -113 -70 -251 53 -190 169 37 72 110 99 175 66z\"><\/path>\n    <path d=\"M535 1790 c-73 -11 -100 -24 -153 -74 l-48 -45 -53 26 c-69 35 -131 35 -167 2 -59 -55 -69 -124 -48 -314 28 -247 9 -555 -46 -752 -11 -40 -20 -100 -20 -134 0 -105 44 -149 159 -156 76 -5 117 14 151 69 33 54 40 95 49 284 9 178 24 254 51 254 20 0 65 -58 113 -144 178 -320 418 -492 661 -473 216 16 353 150 274 267 -39 57 -98 80 -234 90 -170 12 -248 43 -335 132 -39 40 -119 166 -119 186 0 6 24 31 53 57 157 141 204 312 137 490 -31 82 -132 183 -210 212 -66 24 -147 33 -215 23z m143 -288 c63 -41 73 -140 19 -198 -28 -31 -42 -37 -84 -41 -68 -7 -117 22 -145 84 -16 36 -17 50 -8 77 28 87 143 128 218 78z\"><\/path>\n    <path d=\"M1775 1616 c-16 -8 -43 -27 -59 -44 -37 -39 -43 -93 -22 -194 31 -151 -21 -256 -144 -289 -65 -17 -126 -5 -227 47 -72 37 -96 44 -143 44 -73 0 -119 -29 -139 -85 -21 -61 -2 -115 62 -180 225 -224 695 -132 848 166 95 188 43 486 -94 538 -36 14 -45 13 -82 -3z\"><\/path>\n    <path d=\"M5195 1473 c-65 -34 -105 -88 -105 -141 0 -16 9 -64 20 -107 11 -43 20 -108 20 -144 0 -103 19 -240 39 -285 40 -91 105 -137 222 -155 34 -6 67 -15 72 -20 14 -14 -25 -72 -79 -120 -66 -58 -115 -71 -298 -82 -88 -5 -182 -15 -210 -23 -85 -25 -126 -83 -126 -177 0 -87 39 -152 115 -192 56 -29 223 -36 315 -12 145 38 287 122 396 236 196 206 475 772 477 969 2 176 -150 242 -262 114 -38 -42 -47 -63 -72 -164 -37 -142 -91 -229 -155 -250 -47 -16 -101 -5 -116 23 -6 12 -15 91 -19 177 -8 165 -27 251 -68 309 -42 58 -107 76 -166 44z\"><\/path>\n    <path d=\"M3360 1367 c-98 -28 -181 -105 -233 -215 -30 -64 -32 -73 -32 -188 0 -119 0 -121 38 -197 25 -51 52 -88 81 -111 119 -98 305 -128 441 -72 49 21 60 20 96 -6 25 -19 44 -23 99 -23 59 0 72 3 94 24 22 21 26 33 26 85 0 33 -5 98 -10 145 -6 47 -14 170 -19 273 -7 167 -11 192 -32 234 -37 74 -78 78 -171 18 -25 -17 -28 -17 -89 11 -51 23 -81 29 -154 31 -54 3 -108 -1 -135 -9z m206 -263 c68 -33 96 -128 58 -196 -12 -20 -38 -42 -66 -56 -40 -20 -51 -22 -87 -12 -74 20 -124 96 -107 164 9 35 55 86 91 102 40 18 70 17 111 -2z\"><\/path>\n  <\/g>\n<\/svg>","per_row":4,"rows":1,"mobile_scrollable":true,"view_all":true,"view_all_number":"","divider":false}},"testimonials_rWjfF6":{"type":"testimonials","blocks":{"testimonial_kcjnCL":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Sau nhiều lần đắn đo, mình quyết định mua <a href=\"https:\/\/ru9.vn\/collections\/nem-foam\" target=\"_blank\" title=\"Đệm Foam\">Nệm Foam<\/a> Original, và thật sự đây là một khoản đầu tư xứng đáng. Từ ngày dùng, mình không còn thức dậy với cảm giác đau lưng hay mỏi vai gáy nữa. Chất lượng giấc ngủ được cải thiện rõ rệt.<\/p>","image":"shopify:\/\/shop_images\/Chi_Kien.png","author":"Lê Trần Chí Kiên","author_info":"Nệm Original","date":"2022-10-13"}},"testimonial_3DEdMH":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Mỗi lần đi công tác hay du lịch xa, gối cổ Didi luôn là vật dụng không thể thiếu trong hành lý của tôi. Đặc biệt, phần vỏ gối dễ dàng tháo ra và giặt, rất tiện lợi và sạch sẽ.<\/p>","image":"shopify:\/\/shop_images\/Qu_nh_Anh.png","author":"Quỳnh Anh","author_info":"Gối Cổ Du Lịch Didi","date":"10 tháng 10, 2024"}},"testimonial_RQm86j":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p><a href=\"\/products\/tam-bao-ve-nem\" target=\"_blank\" title=\"Tấm bảo vệ nệm\">Tấm lót nệm<\/a> rất vừa, êm, vải mịn và màu giống với mô tả. Nếu biết có tấm phủ bảo vệ nệm thì mình đã không vất vả với mỗi lần giặt nệm rồi <\/p>","image":"shopify:\/\/shop_images\/Ph_ng_Vy.png","author":"Phương Vy Phạm Ngọc","author_info":"Tấm Bảo Vệ","date":"2023-10-12"}},"testimonial_Wh6xdk":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Nệm Ru9 nằm rất đã, mình mua liền 3 cái nệm Nest cho mình, ba và em trai luôn. Điều mình hài lòng hơn là dịch vụ chăm sóc khách hàng rất tốt, dễ thương của Ru, đặc biệt là mùa dịch khó khăn như thế này <\/p>","image":"shopify:\/\/shop_images\/Phuc_Khang.png","author":"Phúc Khang","author_info":"Nệm Nest","date":"10 tháng 10, 2024"}},"testimonial_QicEh7":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Mình đã dùng nệm Original được hơn 6 tháng và hoàn toàn hài lòng với sự khác biệt. Nệm hỗ trợ cơ thể cực tốt, nhất là vùng lưng và cổ, giúp mình không còn đau nhức khi thức dậy. Mỗi đêm nằm lên là cảm giác như được thư giãn toàn bộ cơ thể.<\/p>","image":"shopify:\/\/shop_images\/Ng_c_Lan.png","author":"Ngọc Lan","author_info":"Nệm Original","date":"2022-12-13"}},"testimonial_WtTJkw":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Ru9 luôn làm mình hài lòng, và gối Niu cũng không ngoại lệ. Chất lượng tuyệt vời, cảm giác như được nâng niu từng giấc ngủ.<\/p>","image":"shopify:\/\/shop_images\/Th_Lam.png","author":"Trần Thư Lâm","author_info":"Gối Niu","date":"3 tháng 12, 2024"}},"testimonial_YXXj8t":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Chăn này mình dùng mát cực nhé, nhưng cũng không bị quá lạnh khi nằm quạt hay máy lạnh. Nói chúng 100đ, không có gì để chê luôn<\/p>","image":"shopify:\/\/shop_images\/M_Thanh.png","author":"Mỹ Thanh","author_info":"Chăn Lạnh","date":"10 tháng 10, 2024"}},"testimonial_nAPqMH":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Lúc đầu mình cũng hơi lấn cấn không biết nên mua hay không tại thấy nhìn thiết kế hơi xấu. Nhưng mà mua xứng đáng lắm nhé, tại mình hay đi máy bay đeo cái nàu vào tai đỡ bị đau vì tiếng ồn, phần cổ cũng được giữ và không bị mỏi<\/p>","image":"shopify:\/\/shop_images\/Hoang_Anh.png","author":"Hoàng Anh","author_info":"Hoàng Anh","date":"10 tháng 10, 2024"}},"testimonial_nEBVqz":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Sản phẩm rất tốt, kê chân rất ok. Mình có thói quen phải có gối ôm khi ngủ mà bụng mình to nên gối của Ru9 có thiết kế thông minh nên bụng không còn bị cấn khi nằm nữa<\/p>","image":"shopify:\/\/shop_images\/Untitled_design_1.png","author":"Tuấn Minh","author_info":"Gối Ôm","date":"9 tháng 7, 2022"}}},"block_order":["testimonial_kcjnCL","testimonial_3DEdMH","testimonial_RQm86j","testimonial_Wh6xdk","testimonial_QicEh7","testimonial_WtTJkw","testimonial_YXXj8t","testimonial_nAPqMH","testimonial_nEBVqz"],"settings":{"section_width":"page-width","customize_width":1520,"title":"Chia sẻ từ khách hàng lựa chọn ngủ ngon cùng Ru9","align_text":"center","round_images":false,"color_background":"#f8f6f4"}},"certification_VUqyB6":{"type":"certification","blocks":{"slide_63THmd":{"type":"slide","settings":{"banner":"shopify:\/\/shop_images\/20250527-175317.png","banner_mobile":"shopify:\/\/shop_images\/20250527-175317.png","title":"<p>An toàn cho làn da<br\/>Bảo vệ sức khỏe<\/p>","description":"<p> Chất liệu vải của Ru9 đã được chứng nhận an toàn với sức khỏe người sử dụng, đáp ứng bộ tiêu chí của STANDARD 100 OEKO-TEX® - do đội ngũ chuyên gia đầu ngành kết hợp quy định với các tiêu chuẩn quốc tế.<\/p>"}},"slide_zqGeDK":{"type":"slide","settings":{"banner":"shopify:\/\/shop_images\/20250527-175358.png","banner_mobile":"shopify:\/\/shop_images\/20250527-175358.png","title":"<p>An toàn cho làn da<br\/>Bảo vệ sức khoẻ<\/p>","description":"<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế CertiPUR-US<\/p><ul><li>Không chứa các chất độc hại như formaldehyde, phthalates hoặc các hợp chất hữu cơ bay hơi (VOCs) gây hại cho sức khỏe.<\/li><li>Sản phẩm thường không chứa các chất gây ô nhiễm hay gây hại cho hệ sinh thái.<\/li><li>Đáp ứng các tiêu chuẩn nghiêm ngặt về độ bền, đàn hồi và thoải mái cho một giấc ngủ êm đềm.<\/li><\/ul>"}}},"block_order":["slide_63THmd","slide_zqGeDK"],"settings":{"section_width":"customize_width","customize_width":1250,"bg":"#f0f7fe","title":"","description":""}},"text_with_icons_9yd9VT":{"type":"text-with-icons","blocks":{"text_block_KiEpc6":{"type":"text_block","settings":{"icon":"chat","image_icon":"shopify:\/\/shop_images\/text-w-icon-1.png","title":"100 đêm ngủ thử không rủi ro","text":"<p>Nếu bạn không hài lòng, chúng tôi sẽ nhận lại nệm và hoàn tiền.<\/p>"}},"text_block_cLLCJf":{"type":"text_block","settings":{"icon":"chat","image_icon":"shopify:\/\/shop_images\/text-w-icon-2.png","title":"Miễn phí vận chuyển từ 1.500.000đ","text":"<p>Bạn chẳng cần lo lắng đến việc nhét lại nệm vào thùng đâu.<\/p>"}},"text_block_4AREAP":{"type":"text_block","settings":{"icon":"chat","image_icon":"shopify:\/\/shop_images\/text-w-icon-3.png","title":"Bảo hành dài lâu","text":"<p>Nệm của Ru9 luôn êm ái và bền bỉ với thời gian.<\/p>"}},"text_block_HzecPY":{"type":"text_block","settings":{"icon":"chat","image_icon":"shopify:\/\/shop_images\/payment-icon.png","title":"Thanh toán linh hoạt","text":"<p>Mua sắm dễ dàng với đa dạng hình thức thanh toán. <br\/><br\/><\/p>"}}},"block_order":["text_block_KiEpc6","text_block_cLLCJf","text_block_4AREAP","text_block_HzecPY"],"settings":{"section_width":"customize_width","customize_width":1000,"bg":"","title":"An tâm hơn với dịch vụ vượt trội","align_text":"center","desktop_columns_per_row":4,"icon_color":"#000000","button_label":"","button_link":"","divider":false,"space_around":false}},"blog_post2_kBtjM7":{"type":"blog-post2","settings":{"section_width":"page-width","customize_width":1800,"title":"Blog posts","heading_alignment":"center","blog":"san-pham","article_1":"magazine\/memory-foam-la-gi","article_2":"magazine\/nem-foam-la-gi-co-tot-khong","article_3":"magazine\/chat-lieu-foam-la-gi-nhung-dieu-can-biet","article_4":"magazine\/nem-foam-co-tot-cho-tre-so-sinh","blog_show_tags":false,"blog_show_date":true,"blog_show_comments":false,"blog_show_excerpt":false,"blog_show_author":false,"view_all":true,"view_all_text":"","blog_image_size":"wide","divider":false}},"blog-posts":{"type":"blog-posts","disabled":true,"settings":{"section_width":"customize_width","customize_width":1170,"title":"Ru9 Blog","heading_alignment":"center","blog":"magazine","post_limit":4,"blog_show_tags":false,"blog_show_date":false,"blog_show_comments":false,"blog_show_excerpt":true,"blog_show_author":false,"view_all":true,"view_all_text":"Đọc những bài viết mới nhất","blog_image_size":"landscape","divider":true}},"faq_A7dpqH":{"type":"faq","blocks":{"question_re4fUV":{"type":"question","settings":{"title":"100 đêm ngủ thử là gì?","text":"<p>Ru9 hiểu rằng, chỉ 20 – 30 phút tại cửa hàng không thể cho bạn cảm nhận trọn vẹn về một sản phẩm sẽ gắn bó với bạn suốt nhiều năm. Vì vậy, chính sách 100 đêm ngủ thử của Ru9 sẽ cho phép khách hàng được ngủ thử và trải nghiệm sản phẩm của Ru9 ngay tại phòng ngủ nhà mình. Và nếu không ưng ý, bạn có thể trả lại sản phẩm và nhận số tiền hoàn = tiền đã thanh toán - phí thu hồi.<\/p>"}},"question_fYyR84":{"type":"question","settings":{"title":"Chi phí vận chuyển của Ru9 là bao nhiêu?","text":"<p>Tuỳ thuộc vào địa chỉ vận chuyển, Ru9 sẽ có chi phí áp dụng riêng. Chi tiết về chi phí tới các tỉnh \/ thành phố, khách hàng vui lòng tham khảo <a href=\"\/pages\/chinh-sach-van-chuyen\" title=\"Chính sách vận chuyển\"> <span style=\"text-decoration:underline\">tại đây<\/span><\/a><\/p>"}},"question_HKy3rr":{"type":"question","settings":{"title":"Chính sách giao hàng tiêu chuẩn của Ru9?","text":"<ul><li>Giao hàng tại Hà Nội và TPHCM: 2-3 ngày<\/li><li>Giao hàng ở tỉnh: 4-6 ngày<\/li><li>Giao hàng ở khu vực cận HN và TPHCM: 2-3 ngày <\/li><\/ul><p><em>*Khu vực cận HN và TPHCM bao gồm: <\/em><\/p><p>(Gồm các tỉnh sau: Vũng Tàu, Bình Dương, Bình Phước, Đồng Nai, Tây Ninh, Long An, Bến Tre, Tiền Giang, Hà Nam, Nam Định, Bắc Ninh, Hưng Yên, Hải Dương, Ninh Bình, Hòa Bình, Phú Thọ, Vĩnh Phúc, Bắc Giang, Thái Nguyên)<\/p>"}}},"block_order":["question_re4fUV","question_fYyR84","question_HKy3rr"],"settings":{"section_width":"customize_width","customize_width":800,"title":"Các câu hỏi thường gặp"}},"17478834669e75c67d":{"type":"_blocks","blocks":{"ai_gen_block_7114f46_f9PRnU":{"type":"ai_gen_block_7114f46","settings":{"text":"Ru9 chăn mây đông","text_alignment":"center","font_size":150,"font_size_mobile":100,"font_weight":"800","image":"shopify:\/\/shop_images\/Artboard_1_3aa9b378-639a-4f98-8578-2413eee15be1.jpg","image_scale":70,"fallback_color_1":"#3b82f6","fallback_color_2":"#8b5cf6","padding":30,"background_color":"#f8f6f4"},"blocks":{}}},"block_order":["ai_gen_block_7114f46_f9PRnU"],"disabled":true,"settings":{}}},"order":["slideshow","countdown_xAQXpY","masonry_C7y3G9","featured_collection_tab_bxaQPt","banner_with_content_NiwahU","text_and_image_JezEQt","featured_collection_tab_MDJC8T","banner_with_collection_KVT4Dz","featured-collection","feature_collection_manual_erDEat","testimonials_rWjfF6","certification_VUqyB6","text_with_icons_9yd9VT","blog_post2_kBtjM7","blog-posts","faq_A7dpqH","17478834669e75c67d"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "image_igEmmB": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/Banner_Deal_SHR_HN-100.jpg",
+            "image_mobile": "shopify://shop_images/Banner_Deal_SHR_HN_Mobile_2x_58d0932f-1052-460c-bc2b-695f2ecd56b8.png",
+            "overlay_opacity": 0
+          }
+        },
+        "image_JR4ARU": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "#000000",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/Banner_Khai_Tr_ng_SHR_HN-100.jpg",
+            "image_mobile": "shopify://shop_images/Banner_Khai_Tr_ng_SHR_HN_Mobile_2x_79279cde-81fa-465b-b8aa-ef8bb0cba7e5.png",
+            "overlay_opacity": 0
+          }
+        },
+        "slideshow-0": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "shopify://collections/nem",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "#000000",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/Banner_Web-02_47f09800-5294-4c4a-80e0-53b4f0c1daf8.png",
+            "image_mobile": "shopify://shop_images/Banner_Di_n_Tho_i-08_c7644850-b45c-4f03-a971-b82f125f106e.png",
+            "overlay_opacity": 0
+          }
+        },
+        "image_y8pK9p": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "shopify://products/goi-co-giam-am",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "#000000",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/Better_posture_better_life_Homepage_Banner_desktop_ENG_1_-min.jpg",
+            "image_mobile": "shopify://shop_images/Better_posture_better_life_Homepage_Banner_mobile_ENG_-min.jpg",
+            "overlay_opacity": 0
+          }
+        },
+        "image_N6Y66j": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "https://rubaby.vn",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/banner-desktop-rubaby_1944x_29f9b5af-244c-44c6-8b40-eb496d94b11b.webp",
+            "image_mobile": "shopify://shop_images/banner-mobile-rubaby_430x_1.png",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_igEmmB",
+        "image_JR4ARU",
+        "slideshow-0",
+        "image_y8pK9p",
+        "image_N6Y66j"
+      ],
+      "settings": {
+        "section_height": "natural",
+        "mobile_height": "500px",
+        "style": "dots",
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "lazyload_images": true
+      }
+    },
+    "countdown_xAQXpY": {
+      "type": "countdown",
+      "blocks": {
+        "content_ffhmHa": {
+          "type": "content",
+          "settings": {
+            "heading": "Chỉ còn",
+            "heading_size": "h2",
+            "text": "<p>Cách </p>",
+            "content_alignment": "left"
+          }
+        },
+        "timer_whF3xp": {
+          "type": "timer",
+          "settings": {
+            "year": "2025",
+            "month": "01",
+            "day": "1",
+            "hour": "03",
+            "minute": "00",
+            "hide_timer": false,
+            "text": ""
+          }
+        },
+        "button_tFx4Ga": {
+          "type": "button",
+          "settings": {
+            "button_link": "shopify://collections/nem",
+            "button": "Săn ngay",
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "content_ffhmHa",
+        "timer_whF3xp",
+        "button_tFx4Ga"
+      ],
+      "disabled": true,
+      "settings": {
+        "layout": "banner",
+        "full_width": false,
+        "text_color": "#0f0f0f",
+        "background_color": "#ffffff",
+        "background_image": "shopify://shop_images/Catepage_web_-_DESKTOP-02.jpg",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "mobile_image": "shopify://shop_images/Nest_Thumb-1.png",
+        "lazyload_images": true
+      }
+    },
+    "masonry_C7y3G9": {
+      "type": "masonry",
+      "blocks": {
+        "image_PY6h6j": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Ori_Thumb-Website-5_5cb977e2-8a9d-4bda-8b14-47fb84092234.png",
+            "image_mobile": "shopify://shop_images/Ori_Thumb-Website-5_5cb977e2-8a9d-4bda-8b14-47fb84092234.png",
+            "btn_text": "Nệm",
+            "btn_link": "shopify://collections/nem"
+          }
+        },
+        "image_9mN4km": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Hompage_Desktop_G_i_13a5e439-2535-4e7c-8d95-fa3fa29696d0.png",
+            "image_mobile": "shopify://shop_images/Hompage_Mobile_G_i_8312563a-21aa-40d0-a1df-686773ea05e1.png",
+            "btn_text": "Gối",
+            "btn_link": "shopify://collections/goi"
+          }
+        },
+        "image_njPkCC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Cate_Chan_Thumb_19e2b439-ca38-4b0e-8bb9-e431ae9388fc.png",
+            "image_mobile": "shopify://shop_images/Cate_Chan_Thumb_19e2b439-ca38-4b0e-8bb9-e431ae9388fc.png",
+            "btn_text": "Chăn",
+            "btn_link": "shopify://collections/chan"
+          }
+        },
+        "image_VUjiQA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Cate_Ga_Desktop_17b10937-e4ad-41be-98c0-f554464c2b82.png",
+            "image_mobile": "shopify://shop_images/Cate_Ga_Desktop_17b10937-e4ad-41be-98c0-f554464c2b82.png",
+            "btn_text": "Ga trải giường",
+            "btn_link": "shopify://collections/bedding"
+          }
+        }
+      },
+      "block_order": [
+        "image_PY6h6j",
+        "image_9mN4km",
+        "image_njPkCC",
+        "image_VUjiQA"
+      ],
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1130,
+        "title": "Ngủ ngon hơn cùng sản phẩm giấc ngủ đến từ Ru9",
+        "description": "",
+        "description_html": "<div class=\"counter-container\">\n  <span id=\"counter\">0</span> giờ nghiên cứu để bạn chẳng cần phải nghĩ suy về đêm ngon giấc\n</div>\n\n<script>\n  // Hàm đếm số\n  function animateCounter() {\n    const counter = document.getElementById('counter');\n    const target = 3240;\n    const duration = 3000; // 3 giây\n    const frameRate = 30; // số lần cập nhật mỗi giây\n    const totalFrames = duration / 1000 * frameRate;\n    const increment = target / totalFrames;\n    \n    let current = 0;\n    let frame = 0;\n    \n    const animation = setInterval(() => {\n      frame++;\n      current += increment;\n      \n      if (frame >= totalFrames) {\n        clearInterval(animation);\n        current = target;\n      }\n      \n      counter.textContent = Math.floor(current).toLocaleString('vi-VN');\n    }, 1000 / frameRate);\n  }\n  \n  // Chạy animation khi trang được tải\n  document.addEventListener('DOMContentLoaded', animateCounter);\n</script>\n\n<style>\n  #counter {\n    font-weight: bold;\n  }\n</style>",
+        "odd_row_height": "375",
+        "even_row_height": "225",
+        "button_color": "#1b2a57",
+        "button_background": "#ffffff",
+        "carousel_mobile": true
+      }
+    },
+    "featured_collection_tab_bxaQPt": {
+      "type": "featured-collection-tab",
+      "blocks": {
+        "tab_RhcnVP": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Nệm",
+            "tab_label": "",
+            "product_1": "nem-original-pro",
+            "label_left_1": "Bán chạy",
+            "color_label_left_1": "#ffffff",
+            "background_label_left_1": "#ab2328",
+            "label_right_1": "",
+            "color_label_right_1": "#ffffff",
+            "background_label_right_1": "#ff7f41",
+            "product_2": "foam-original",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "#ffffff",
+            "background_label_right_2": "#f97046",
+            "product_3": "foam-nest",
+            "label_left_3": "Bán chạy",
+            "color_label_left_3": "#f8f6f4",
+            "background_label_left_3": "#ab2328",
+            "label_right_3": "",
+            "color_label_right_3": "#ffffff",
+            "background_label_right_3": "#f97046",
+            "product_4": "nem-hybrid",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "#ffffff",
+            "background_label_right_4": "#f97046"
+          }
+        },
+        "tab_TtabNP": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Topper",
+            "tab_label": "",
+            "product_1": "nem-cuon-foam-topper",
+            "label_left_1": "Mới",
+            "color_label_left_1": "#ffffff",
+            "background_label_left_1": "#ab2328",
+            "label_right_1": "",
+            "color_label_right_1": "#ffffff",
+            "background_label_right_1": "#ff7f41",
+            "product_2": "",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "",
+            "background_label_right_2": "",
+            "product_3": "",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "",
+            "background_label_right_3": "",
+            "product_4": "",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        },
+        "tab_PKXPNe": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Gối",
+            "tab_label": "",
+            "product_1": "goi-foam-niu",
+            "label_left_1": "",
+            "color_label_left_1": "#ffffff",
+            "background_label_left_1": "#ab2328",
+            "label_right_1": "",
+            "color_label_right_1": "#ffffff",
+            "background_label_right_1": "#ff7f41",
+            "product_2": "goi-may",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "#ffffff",
+            "background_label_right_2": "#f97046",
+            "product_3": "goi-om",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "",
+            "background_label_right_3": "",
+            "product_4": "",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        },
+        "tab_DBLE3R": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Chăn",
+            "tab_label": "",
+            "product_1": "chan-bach-dan",
+            "label_left_1": "",
+            "color_label_left_1": "#ffffff",
+            "background_label_left_1": "#ab2328",
+            "label_right_1": "",
+            "color_label_right_1": "#ffffff",
+            "background_label_right_1": "#ff7f41",
+            "product_2": "chan-microfiber",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "",
+            "background_label_right_2": "",
+            "product_3": "chan-may-dong",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "",
+            "background_label_right_3": "",
+            "product_4": "chan-lanh",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_RhcnVP",
+        "tab_TtabNP",
+        "tab_PKXPNe",
+        "tab_DBLE3R"
+      ],
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1095,
+        "title": "SẢN PHẨM BÁN CHẠY",
+        "description": "<p>Chiếc <a href=\"/collections/nem-foam\" target=\"_blank\" title=\"Nệm Foam\">nệm foam</a> êm ái cho giấc ngủ thoải mái nhất</p>",
+        "color_tab_name": "#ffffff",
+        "background_tab_name": "#2960ad",
+        "background_tab_name_inactive": "#ddebfc"
+      }
+    },
+    "banner_with_content_NiwahU": {
+      "type": "banner-with-content",
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1010,
+        "image": "shopify://shop_images/20250528-140101.png",
+        "image_mobile": "shopify://shop_images/20250528-135154.png",
+        "title": "Đâu là chiếc nệm phù hợp cho bạn?",
+        "text": "<p>Cùng Ru9 khám phá và chọn ra chiếc nệm dành riêng cho bạn.</p>",
+        "btn_text": "Xem thêm",
+        "btn_link": "shopify://collections/nem"
+      }
+    },
+    "text_and_image_JezEQt": {
+      "type": "text-and-image",
+      "settings": {
+        "section_width": "full-width",
+        "customize_width": 1800,
+        "image": "shopify://shop_images/Hompage_Desktop_Chuy_n_c_a_Ru9_44beec8b-6b19-4316-916e-a1212fc06dbf.png",
+        "image_mobile": "shopify://shop_images/Hompage_Mobile_Chuy_n_c_a_Ru9_ce21ca1d-5393-4035-a3ab-849df34e6688.png",
+        "image_mask": "none",
+        "subtitle": "",
+        "title": "Chuyện của Ru9",
+        "text": "<p>Hành trình của Ru9 bắt đầu với niềm tin rằng, ai cũng xứng đáng có được giấc ngủ ngon thật dễ dàng. Chúng mình hướng về mục tiêu đơn giản: đặt chất lượng lên trên hết....</p>",
+        "button_label": "Xem chi tiết",
+        "button_link": "shopify://pages/about",
+        "align_text": "left",
+        "align_text_mobile": "center",
+        "image_width": "50",
+        "layout": "left",
+        "divider": false,
+        "top_padding": true,
+        "bottom_padding": true,
+        "lazyload_images": true
+      }
+    },
+    "featured_collection_tab_MDJC8T": {
+      "type": "featured-collection-tab",
+      "blocks": {
+        "tab_x7kJHw": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Gối Ngủ",
+            "tab_label": "",
+            "product_1": "goi-foam-niu",
+            "label_left_1": "Mới",
+            "color_label_left_1": "#ffffff",
+            "background_label_left_1": "#ab2328",
+            "label_right_1": "",
+            "color_label_right_1": "#ffffff",
+            "background_label_right_1": "#ff7f41",
+            "product_2": "goi-om",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "#ffffff",
+            "background_label_right_2": "#f97046",
+            "product_3": "goi-may",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "#ffffff",
+            "background_label_right_3": "#f97046",
+            "product_4": "bo-om-niu-ru9",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        },
+        "tab_h4ActP": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Ngủ Mát",
+            "tab_label": "Mới",
+            "product_1": "vo-goi-icefiber",
+            "label_left_1": "Mới",
+            "color_label_left_1": "#ffffff",
+            "background_label_left_1": "#ab2328",
+            "label_right_1": "",
+            "color_label_right_1": "#ffffff",
+            "background_label_right_1": "#ff7f41",
+            "product_2": "chan-lanh",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "",
+            "background_label_right_2": "",
+            "product_3": "giai-nhiet-iceguard",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "",
+            "background_label_right_3": "",
+            "product_4": "vo-goi-om-icefiber",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        },
+        "tab_hqdjqG": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Chống thấm",
+            "tab_label": "Mới",
+            "product_1": "tam-bao-ve-nem",
+            "label_left_1": "Mới",
+            "color_label_left_1": "#ffffff",
+            "background_label_left_1": "#ab2328",
+            "label_right_1": "",
+            "color_label_right_1": "#ffffff",
+            "background_label_right_1": "#ff7f41",
+            "product_2": "giai-nhiet-iceguard",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "",
+            "background_label_right_2": "",
+            "product_3": "",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "",
+            "background_label_right_3": "",
+            "product_4": "",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        },
+        "tab_fqaMza": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Gối du lịch",
+            "tab_label": "",
+            "product_1": "goi-co-giam-am",
+            "label_left_1": "",
+            "color_label_left_1": "",
+            "background_label_left_1": "",
+            "label_right_1": "",
+            "color_label_right_1": "",
+            "background_label_right_1": "",
+            "product_2": "goi-didi",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "",
+            "background_label_right_2": "",
+            "product_3": "",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "",
+            "background_label_right_3": "",
+            "product_4": "",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_x7kJHw",
+        "tab_h4ActP",
+        "tab_hqdjqG",
+        "tab_fqaMza"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1095,
+        "title": "Sản phẩm bán chạy",
+        "description": "<p>Các sản phẩm chất lượng cao để chăm sóc giấc ngủ của bạn</p>",
+        "color_tab_name": "#ffffff",
+        "background_tab_name": "#2d9f9f",
+        "background_tab_name_inactive": "#d3f4f1"
+      }
+    },
+    "banner_with_collection_KVT4Dz": {
+      "type": "banner-with-collection",
+      "disabled": true,
+      "settings": {
+        "section_width": "full-width",
+        "customize_width": 1800,
+        "image": "shopify://shop_images/Hompage_Desktop_Bundle_e3c4effe-353b-4e3a-80ed-868102bfc063.png",
+        "image_mobile": "shopify://shop_images/Hompage_Mobile_Bundle_cb596441-3699-4ec6-b57e-929adc4b8694.png",
+        "image_min_height": 458,
+        "collection": "bo-phong-ngu",
+        "products_to_show": 5
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "Phụ kiện khác",
+        "home_featured_products": "",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "divider": false,
+        "hide_price": true
+      }
+    },
+    "feature_collection_manual_erDEat": {
+      "type": "feature-collection-manual",
+      "blocks": {
+        "collection_8zcBbd": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/N_m_Em_Be.png",
+            "block_title": "Nệm em bé",
+            "block_url": "https://www.rubaby.vn/products/nem-foam-em-be"
+          }
+        },
+        "collection_FW8gtz": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/G_i_Em_Be.png",
+            "block_title": "Gối em bé",
+            "block_url": "https://www.rubaby.vn/collections/goi"
+          }
+        },
+        "collection_KVEbyG": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/S_n_ph_m_v_i.png",
+            "block_title": "Sản phẩm vải",
+            "block_url": "https://www.rubaby.vn/collections/phu-kien"
+          }
+        },
+        "collection_CxRqc7": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Xem_them.png",
+            "block_title": "Xem thêm",
+            "block_url": "https://www.rubaby.vn/"
+          }
+        }
+      },
+      "block_order": [
+        "collection_8zcBbd",
+        "collection_FW8gtz",
+        "collection_KVEbyG",
+        "collection_CxRqc7"
+      ],
+      "custom_css": [
+        ".section-header__icon {width: 150px; height: 50px;}",
+        ".section-header__icon .baby-icon-svg {width: 100%; height: 100%;}"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "- Sản phẩm ngủ cho bé",
+        "title_icon": "<svg class=\"baby-icon-svg\" xmlns=\"http://www.w3.org/2000/svg\" width=\"120\" height=\"40\" viewbox=\"0 0 606.000000 200.000000\" preserveaspectratio=\"xMidYMid meet\">\n  <g transform=\"translate(0.000000,200.000000) scale(0.100000,-0.100000)\" fill=\"currentColor\" stroke=\"none\">\n    <path d=\"M4095 1983 c-123 -65 -130 -167 -34 -509 45 -161 58 -279 59 -511 0 -216 29 -301 117 -344 40 -20 67 -24 169 -27 336 -10 529 112 564 357 20 140 -22 290 -103 369 -80 78 -189 112 -359 112 -92 0 -101 2 -123 25 -14 13 -25 32 -26 42 0 10 -4 101 -8 203 -7 211 -16 237 -87 277 -47 27 -124 30 -169 6z m515 -843 c48 -24 70 -56 76 -107 9 -73 -60 -153 -131 -153 -66 0 -135 75 -135 146 0 41 37 95 80 116 45 23 62 23 110 -2z\"></path>\n    <path d=\"M2225 1976 c-38 -16 -84 -70 -87 -99 -2 -12 -3 -186 -3 -387 0 -409 4 -381 -81 -576 -24 -56 -44 -112 -44 -125 0 -52 85 -138 189 -190 160 -80 390 -79 543 3 75 40 150 121 180 196 19 48 23 76 23 172 0 109 -2 119 -32 182 -66 139 -179 213 -349 227 -143 12 -152 30 -114 206 33 150 43 229 36 268 -8 45 -58 105 -103 123 -41 18 -119 17 -158 0z m365 -891 c94 -48 103 -181 15 -235 -113 -70 -251 53 -190 169 37 72 110 99 175 66z\"></path>\n    <path d=\"M535 1790 c-73 -11 -100 -24 -153 -74 l-48 -45 -53 26 c-69 35 -131 35 -167 2 -59 -55 -69 -124 -48 -314 28 -247 9 -555 -46 -752 -11 -40 -20 -100 -20 -134 0 -105 44 -149 159 -156 76 -5 117 14 151 69 33 54 40 95 49 284 9 178 24 254 51 254 20 0 65 -58 113 -144 178 -320 418 -492 661 -473 216 16 353 150 274 267 -39 57 -98 80 -234 90 -170 12 -248 43 -335 132 -39 40 -119 166 -119 186 0 6 24 31 53 57 157 141 204 312 137 490 -31 82 -132 183 -210 212 -66 24 -147 33 -215 23z m143 -288 c63 -41 73 -140 19 -198 -28 -31 -42 -37 -84 -41 -68 -7 -117 22 -145 84 -16 36 -17 50 -8 77 28 87 143 128 218 78z\"></path>\n    <path d=\"M1775 1616 c-16 -8 -43 -27 -59 -44 -37 -39 -43 -93 -22 -194 31 -151 -21 -256 -144 -289 -65 -17 -126 -5 -227 47 -72 37 -96 44 -143 44 -73 0 -119 -29 -139 -85 -21 -61 -2 -115 62 -180 225 -224 695 -132 848 166 95 188 43 486 -94 538 -36 14 -45 13 -82 -3z\"></path>\n    <path d=\"M5195 1473 c-65 -34 -105 -88 -105 -141 0 -16 9 -64 20 -107 11 -43 20 -108 20 -144 0 -103 19 -240 39 -285 40 -91 105 -137 222 -155 34 -6 67 -15 72 -20 14 -14 -25 -72 -79 -120 -66 -58 -115 -71 -298 -82 -88 -5 -182 -15 -210 -23 -85 -25 -126 -83 -126 -177 0 -87 39 -152 115 -192 56 -29 223 -36 315 -12 145 38 287 122 396 236 196 206 475 772 477 969 2 176 -150 242 -262 114 -38 -42 -47 -63 -72 -164 -37 -142 -91 -229 -155 -250 -47 -16 -101 -5 -116 23 -6 12 -15 91 -19 177 -8 165 -27 251 -68 309 -42 58 -107 76 -166 44z\"></path>\n    <path d=\"M3360 1367 c-98 -28 -181 -105 -233 -215 -30 -64 -32 -73 -32 -188 0 -119 0 -121 38 -197 25 -51 52 -88 81 -111 119 -98 305 -128 441 -72 49 21 60 20 96 -6 25 -19 44 -23 99 -23 59 0 72 3 94 24 22 21 26 33 26 85 0 33 -5 98 -10 145 -6 47 -14 170 -19 273 -7 167 -11 192 -32 234 -37 74 -78 78 -171 18 -25 -17 -28 -17 -89 11 -51 23 -81 29 -154 31 -54 3 -108 -1 -135 -9z m206 -263 c68 -33 96 -128 58 -196 -12 -20 -38 -42 -66 -56 -40 -20 -51 -22 -87 -12 -74 20 -124 96 -107 164 9 35 55 86 91 102 40 18 70 17 111 -2z\"></path>\n  </g>\n</svg>",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "view_all_number": "",
+        "divider": false
+      }
+    },
+    "testimonials_rWjfF6": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_kcjnCL": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Sau nhiều lần đắn đo, mình quyết định mua <a href=\"https://ru9.vn/collections/nem-foam\" target=\"_blank\" title=\"Đệm Foam\">Nệm Foam</a> Original, và thật sự đây là một khoản đầu tư xứng đáng. Từ ngày dùng, mình không còn thức dậy với cảm giác đau lưng hay mỏi vai gáy nữa. Chất lượng giấc ngủ được cải thiện rõ rệt.</p>",
+            "image": "shopify://shop_images/Chi_Kien.png",
+            "author": "Lê Trần Chí Kiên",
+            "author_info": "Nệm Original",
+            "date": "2022-10-13"
+          }
+        },
+        "testimonial_3DEdMH": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Mỗi lần đi công tác hay du lịch xa, gối cổ Didi luôn là vật dụng không thể thiếu trong hành lý của tôi. Đặc biệt, phần vỏ gối dễ dàng tháo ra và giặt, rất tiện lợi và sạch sẽ.</p>",
+            "image": "shopify://shop_images/Qu_nh_Anh.png",
+            "author": "Quỳnh Anh",
+            "author_info": "Gối Cổ Du Lịch Didi",
+            "date": "10 tháng 10, 2024"
+          }
+        },
+        "testimonial_RQm86j": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p><a href=\"/products/tam-bao-ve-nem\" target=\"_blank\" title=\"Tấm bảo vệ nệm\">Tấm lót nệm</a> rất vừa, êm, vải mịn và màu giống với mô tả. Nếu biết có tấm phủ bảo vệ nệm thì mình đã không vất vả với mỗi lần giặt nệm rồi </p>",
+            "image": "shopify://shop_images/Ph_ng_Vy.png",
+            "author": "Phương Vy Phạm Ngọc",
+            "author_info": "Tấm Bảo Vệ",
+            "date": "2023-10-12"
+          }
+        },
+        "testimonial_Wh6xdk": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Nệm Ru9 nằm rất đã, mình mua liền 3 cái nệm Nest cho mình, ba và em trai luôn. Điều mình hài lòng hơn là dịch vụ chăm sóc khách hàng rất tốt, dễ thương của Ru, đặc biệt là mùa dịch khó khăn như thế này </p>",
+            "image": "shopify://shop_images/Phuc_Khang.png",
+            "author": "Phúc Khang",
+            "author_info": "Nệm Nest",
+            "date": "10 tháng 10, 2024"
+          }
+        },
+        "testimonial_QicEh7": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Mình đã dùng nệm Original được hơn 6 tháng và hoàn toàn hài lòng với sự khác biệt. Nệm hỗ trợ cơ thể cực tốt, nhất là vùng lưng và cổ, giúp mình không còn đau nhức khi thức dậy. Mỗi đêm nằm lên là cảm giác như được thư giãn toàn bộ cơ thể.</p>",
+            "image": "shopify://shop_images/Ng_c_Lan.png",
+            "author": "Ngọc Lan",
+            "author_info": "Nệm Original",
+            "date": "2022-12-13"
+          }
+        },
+        "testimonial_WtTJkw": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Ru9 luôn làm mình hài lòng, và gối Niu cũng không ngoại lệ. Chất lượng tuyệt vời, cảm giác như được nâng niu từng giấc ngủ.</p>",
+            "image": "shopify://shop_images/Th_Lam.png",
+            "author": "Trần Thư Lâm",
+            "author_info": "Gối Niu",
+            "date": "3 tháng 12, 2024"
+          }
+        },
+        "testimonial_YXXj8t": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Chăn này mình dùng mát cực nhé, nhưng cũng không bị quá lạnh khi nằm quạt hay máy lạnh. Nói chúng 100đ, không có gì để chê luôn</p>",
+            "image": "shopify://shop_images/M_Thanh.png",
+            "author": "Mỹ Thanh",
+            "author_info": "Chăn Lạnh",
+            "date": "10 tháng 10, 2024"
+          }
+        },
+        "testimonial_nAPqMH": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Lúc đầu mình cũng hơi lấn cấn không biết nên mua hay không tại thấy nhìn thiết kế hơi xấu. Nhưng mà mua xứng đáng lắm nhé, tại mình hay đi máy bay đeo cái nàu vào tai đỡ bị đau vì tiếng ồn, phần cổ cũng được giữ và không bị mỏi</p>",
+            "image": "shopify://shop_images/Hoang_Anh.png",
+            "author": "Hoàng Anh",
+            "author_info": "Hoàng Anh",
+            "date": "10 tháng 10, 2024"
+          }
+        },
+        "testimonial_nEBVqz": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Sản phẩm rất tốt, kê chân rất ok. Mình có thói quen phải có gối ôm khi ngủ mà bụng mình to nên gối của Ru9 có thiết kế thông minh nên bụng không còn bị cấn khi nằm nữa</p>",
+            "image": "shopify://shop_images/Untitled_design_1.png",
+            "author": "Tuấn Minh",
+            "author_info": "Gối Ôm",
+            "date": "9 tháng 7, 2022"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_kcjnCL",
+        "testimonial_3DEdMH",
+        "testimonial_RQm86j",
+        "testimonial_Wh6xdk",
+        "testimonial_QicEh7",
+        "testimonial_WtTJkw",
+        "testimonial_YXXj8t",
+        "testimonial_nAPqMH",
+        "testimonial_nEBVqz"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1520,
+        "title": "Chia sẻ từ khách hàng lựa chọn ngủ ngon cùng Ru9",
+        "align_text": "center",
+        "round_images": false,
+        "color_background": "#f8f6f4"
+      }
+    },
+    "certification_VUqyB6": {
+      "type": "certification",
+      "blocks": {
+        "slide_63THmd": {
+          "type": "slide",
+          "settings": {
+            "banner": "shopify://shop_images/20250527-175317.png",
+            "banner_mobile": "shopify://shop_images/20250527-175317.png",
+            "title": "<p>An toàn cho làn da<br/>Bảo vệ sức khỏe</p>",
+            "description": "<p> Chất liệu vải của Ru9 đã được chứng nhận an toàn với sức khỏe người sử dụng, đáp ứng bộ tiêu chí của STANDARD 100 OEKO-TEX® - do đội ngũ chuyên gia đầu ngành kết hợp quy định với các tiêu chuẩn quốc tế.</p>"
+          }
+        },
+        "slide_zqGeDK": {
+          "type": "slide",
+          "settings": {
+            "banner": "shopify://shop_images/20250527-175358.png",
+            "banner_mobile": "shopify://shop_images/20250527-175358.png",
+            "title": "<p>An toàn cho làn da<br/>Bảo vệ sức khoẻ</p>",
+            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế CertiPUR-US</p><ul><li>Không chứa các chất độc hại như formaldehyde, phthalates hoặc các hợp chất hữu cơ bay hơi (VOCs) gây hại cho sức khỏe.</li><li>Sản phẩm thường không chứa các chất gây ô nhiễm hay gây hại cho hệ sinh thái.</li><li>Đáp ứng các tiêu chuẩn nghiêm ngặt về độ bền, đàn hồi và thoải mái cho một giấc ngủ êm đềm.</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "slide_63THmd",
+        "slide_zqGeDK"
+      ],
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1250,
+        "bg": "#f0f7fe",
+        "title": "",
+        "description": ""
+      }
+    },
+    "text_with_icons_9yd9VT": {
+      "type": "text-with-icons",
+      "blocks": {
+        "text_block_KiEpc6": {
+          "type": "text_block",
+          "settings": {
+            "icon": "chat",
+            "image_icon": "shopify://shop_images/text-w-icon-1.png",
+            "title": "100 đêm ngủ thử không rủi ro",
+            "text": "<p>Nếu bạn không hài lòng, chúng tôi sẽ nhận lại nệm và hoàn tiền.</p>"
+          }
+        },
+        "text_block_cLLCJf": {
+          "type": "text_block",
+          "settings": {
+            "icon": "chat",
+            "image_icon": "shopify://shop_images/text-w-icon-2.png",
+            "title": "Miễn phí vận chuyển từ 1.500.000đ",
+            "text": "<p>Ru9 miễn phí vận chuyển từ 1.500.000đ nên bạn chỉ cần chọn sản phẩm mình thích!</p>"
+          }
+        },
+        "text_block_4AREAP": {
+          "type": "text_block",
+          "settings": {
+            "icon": "chat",
+            "image_icon": "shopify://shop_images/text-w-icon-3.png",
+            "title": "Bảo hành dài lâu",
+            "text": "<p>Nệm của Ru9 luôn êm ái và bền bỉ với thời gian.</p>"
+          }
+        },
+        "text_block_HzecPY": {
+          "type": "text_block",
+          "settings": {
+            "icon": "chat",
+            "image_icon": "shopify://shop_images/payment-icon.png",
+            "title": "Thanh toán linh hoạt",
+            "text": "<p>Mua sắm dễ dàng với đa dạng hình thức thanh toán. <br/><br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_block_KiEpc6",
+        "text_block_cLLCJf",
+        "text_block_4AREAP",
+        "text_block_HzecPY"
+      ],
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1000,
+        "bg": "",
+        "title": "An tâm hơn với dịch vụ vượt trội",
+        "align_text": "center",
+        "desktop_columns_per_row": 4,
+        "icon_color": "#000000",
+        "button_label": "",
+        "button_link": "",
+        "divider": false,
+        "space_around": false
+      }
+    },
+    "blog_post2_kBtjM7": {
+      "type": "blog-post2",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "Blog posts",
+        "heading_alignment": "center",
+        "blog": "san-pham",
+        "article_1": "magazine/memory-foam-la-gi",
+        "article_2": "magazine/nem-foam-la-gi-co-tot-khong",
+        "article_3": "magazine/chat-lieu-foam-la-gi-nhung-dieu-can-biet",
+        "article_4": "magazine/nem-foam-co-tot-cho-tre-so-sinh",
+        "blog_show_tags": false,
+        "blog_show_date": true,
+        "blog_show_comments": false,
+        "blog_show_excerpt": false,
+        "blog_show_author": false,
+        "view_all": true,
+        "view_all_text": "",
+        "blog_image_size": "wide",
+        "divider": false
+      }
+    },
+    "blog-posts": {
+      "type": "blog-posts",
+      "disabled": true,
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1170,
+        "title": "Ru9 Blog",
+        "heading_alignment": "center",
+        "blog": "magazine",
+        "post_limit": 4,
+        "blog_show_tags": false,
+        "blog_show_date": false,
+        "blog_show_comments": false,
+        "blog_show_excerpt": true,
+        "blog_show_author": false,
+        "view_all": true,
+        "view_all_text": "Đọc những bài viết mới nhất",
+        "blog_image_size": "landscape",
+        "divider": true
+      }
+    },
+    "faq_A7dpqH": {
+      "type": "faq",
+      "blocks": {
+        "question_re4fUV": {
+          "type": "question",
+          "settings": {
+            "title": "100 đêm ngủ thử là gì?",
+            "text": "<p>Ru9 hiểu rằng, chỉ 20 – 30 phút tại cửa hàng không thể cho bạn cảm nhận trọn vẹn về một sản phẩm sẽ gắn bó với bạn suốt nhiều năm. Vì vậy, chính sách 100 đêm ngủ thử của Ru9 sẽ cho phép khách hàng được ngủ thử và trải nghiệm sản phẩm của Ru9 ngay tại phòng ngủ nhà mình. Và nếu không ưng ý, bạn có thể trả lại sản phẩm và nhận số tiền hoàn = tiền đã thanh toán - phí thu hồi.</p>"
+          }
+        },
+        "question_fYyR84": {
+          "type": "question",
+          "settings": {
+            "title": "Chi phí vận chuyển của Ru9 là bao nhiêu?",
+            "text": "<p>Tuỳ thuộc vào địa chỉ vận chuyển, Ru9 sẽ có chi phí áp dụng riêng. Chi tiết về chi phí tới các tỉnh / thành phố, khách hàng vui lòng tham khảo <a href=\"/pages/chinh-sach-van-chuyen\" title=\"Chính sách vận chuyển\"> <span style=\"text-decoration:underline\">tại đây</span></a></p>"
+          }
+        },
+        "question_HKy3rr": {
+          "type": "question",
+          "settings": {
+            "title": "Chính sách giao hàng tiêu chuẩn của Ru9?",
+            "text": "<ul><li>Giao hàng tại Hà Nội và TPHCM: 2-3 ngày</li><li>Giao hàng ở tỉnh: 4-6 ngày</li><li>Giao hàng ở khu vực cận HN và TPHCM: 2-3 ngày </li></ul><p><em>*Khu vực cận HN và TPHCM bao gồm: </em></p><p>(Gồm các tỉnh sau: Vũng Tàu, Bình Dương, Bình Phước, Đồng Nai, Tây Ninh, Long An, Bến Tre, Tiền Giang, Hà Nam, Nam Định, Bắc Ninh, Hưng Yên, Hải Dương, Ninh Bình, Hòa Bình, Phú Thọ, Vĩnh Phúc, Bắc Giang, Thái Nguyên)</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_re4fUV",
+        "question_fYyR84",
+        "question_HKy3rr"
+      ],
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 800,
+        "title": "Các câu hỏi thường gặp"
+      }
+    },
+    "17478834669e75c67d": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_7114f46_f9PRnU": {
+          "type": "ai_gen_block_7114f46",
+          "settings": {
+            "text": "Ru9 chăn mây đông",
+            "text_alignment": "center",
+            "font_size": 150,
+            "font_size_mobile": 100,
+            "font_weight": "800",
+            "image": "shopify://shop_images/Artboard_1_3aa9b378-639a-4f98-8578-2413eee15be1.jpg",
+            "image_scale": 70,
+            "fallback_color_1": "#3b82f6",
+            "fallback_color_2": "#8b5cf6",
+            "padding": 30,
+            "background_color": "#f8f6f4"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_7114f46_f9PRnU"
+      ],
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "slideshow",
+    "countdown_xAQXpY",
+    "masonry_C7y3G9",
+    "featured_collection_tab_bxaQPt",
+    "banner_with_content_NiwahU",
+    "text_and_image_JezEQt",
+    "featured_collection_tab_MDJC8T",
+    "banner_with_collection_KVT4Dz",
+    "featured-collection",
+    "feature_collection_manual_erDEat",
+    "testimonials_rWjfF6",
+    "certification_VUqyB6",
+    "text_with_icons_9yd9VT",
+    "blog_post2_kBtjM7",
+    "blog-posts",
+    "faq_A7dpqH",
+    "17478834669e75c67d"
+  ]
+}

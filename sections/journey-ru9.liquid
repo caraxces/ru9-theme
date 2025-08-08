@@ -1,0 +1,92 @@
+{%- comment -%}
+  Section: Hành trình của Ru9
+  Homepage content block with title, subtitle and 4 zig-zag image cards
+{%- endcomment -%}
+
+<section class="journey-ru9" id="journey-ru9-{{ section.id }}">
+  <div class="journey-ru9__container">
+    {%- if section.settings.title != blank -%}
+      <h2 class="journey-ru9__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <div class="journey-ru9__subtitle rte">{{ section.settings.subtitle }}</div>
+    {%- endif -%}
+
+    <div class="journey-ru9__grid">
+      {%- for i in (1..4) -%}
+        {%- assign img_key = 'image_' | append: i -%}
+        {%- assign label_key = 'label_' | append: i -%}
+        {%- assign caption_key = 'caption_' | append: i -%}
+        {%- assign img = section.settings[img_key] -%}
+        {%- assign label = section.settings[label_key] -%}
+        {%- assign caption = section.settings[caption_key] -%}
+
+        <div class="journey-card journey-card--{{ i }}">
+          {%- if label != blank -%}
+            <div class="journey-card__label">{{ label }}</div>
+          {%- endif -%}
+
+          <div class="journey-card__media">
+            {%- if img != blank -%}
+              <img
+                src="{{ img | image_url: width: 600, height: 444, crop: 'center' }}"
+                width="300"
+                height="222"
+                alt="{{ label | default: section.settings.title | escape }}"
+                loading="lazy"
+              >
+            {%- else -%}
+              <div class="journey-card__placeholder" aria-hidden="true"></div>
+            {%- endif -%}
+          </div>
+
+          {%- if caption != blank -%}
+            <div class="journey-card__caption">{{ caption }}</div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hành trình của Ru9",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Tiêu đề",
+      "default": "Hành Trình Của Ru9"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Mô tả ngắn (subtitle)",
+      "default": "<p>Ru9 bắt đầu với niềm tin rằng, ai cũng xứng đáng có được giấc ngủ ngon thật dễ dàng. Chúng mình hướng về mục tiêu đơn giản: đặt chất lượng lên trên hết.</p>"
+    },
+    { "type": "header", "content": "Nhóm thẻ hình ảnh" },
+    { "type": "text", "id": "label_1", "label": "Nhãn trên ảnh 1", "default": "Giấc ngủ trọn vẹn" },
+    { "type": "image_picker", "id": "image_1", "label": "Ảnh 1" },
+    { "type": "text", "id": "caption_1", "label": "Chú thích 1", "default": "7 năm đồng hành cùng triệu giấc ngủ Việt" },
+
+    { "type": "text", "id": "label_2", "label": "Nhãn trên ảnh 2", "default": "Giấc ngủ trọn vẹn" },
+    { "type": "image_picker", "id": "image_2", "label": "Ảnh 2" },
+    { "type": "text", "id": "caption_2", "label": "Chú thích 2", "default": "Lắng nghe và thấu hiểu" },
+
+    { "type": "text", "id": "label_3", "label": "Nhãn trên ảnh 3", "default": "Lắng nghe và thấu hiểu" },
+    { "type": "image_picker", "id": "image_3", "label": "Ảnh 3" },
+    { "type": "text", "id": "caption_3", "label": "Chú thích 3", "default": "Mang giá trị thật đến cộng đồng" },
+
+    { "type": "text", "id": "label_4", "label": "Nhãn trên ảnh 4", "default": "Mang giá trị thật đến cộng đồng" },
+    { "type": "image_picker", "id": "image_4", "label": "Ảnh 4" },
+    { "type": "text", "id": "caption_4", "label": "Chú thích 4", "default": "Giấc ngủ trọn vẹn" }
+  ],
+  "presets": [
+    { "name": "Hành trình của Ru9" }
+  ]
+}
+{% endschema %}
+
+

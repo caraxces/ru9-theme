@@ -1,0 +1,205 @@
+{%- liquid
+  assign current_filter_size = 0
+  for filter in collection.filters
+    assign current_filter_size = current_filter_size | plus: filter.active_values.size
+  endfor
+
+  if section.settings.section_width != 'page-width'
+    if section.settings.section_width == 'full-width'
+      assign page_width = '100%'
+    endif
+    if section.settings.section_width == 'customize_width'
+      assign page_width = section.settings.customize_width | plus: 80 | append: 'px'
+    endif
+  endif
+-%}
+
+<div
+  class="collection-content collection-content--custom{% if section.settings.enable_sidebar %} enable-sidebar{% endif %}{% if section.settings.enable_sort %} enable-sort{% endif %}"
+  data-section-id="{{ section.id }}"
+>
+  <div id="CollectionAjaxContent">
+    <div
+      class="page-width"
+      style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
+    >
+      <div class="grid">
+        <div class="grid__item grid__item--sidebar">
+          {%- render 'collection-grid-filters',
+            collection: collection,
+            enable_sidebar: section.settings.enable_sidebar,
+            filter_style: section.settings.filter_style,
+            collapsed: section.settings.collapsed,
+            enable_sort: section.settings.enable_sort,
+            enable_collection_count: section.settings.enable_collection_count,
+            enable_color_swatches: section.settings.enable_color_swatches,
+            enable_swatch_labels: section.settings.enable_swatch_labels
+          -%}
+        </div>
+        <div class="grid__item grid__item--content" id="ProductGridContainer" data-id="{{ section.id }}">
+          {%- assign paginate_by = section.settings.per_row | times: section.settings.rows_per_page -%}
+          {%- paginate collection.products by paginate_by -%}
+
+          <div class="cc-grid">
+            {%- for product in collection.products -%}
+              {%- assign featured_image = product.featured_image | default: product.images.first -%}
+              <div class="cc-card">
+                <a class="cc-image" href="{{ product.url }}" aria-label="{{ product.title }}">
+                  {%- if featured_image -%}
+                    <img
+                      src="{{ featured_image | image_url: width: 736, height: 550, crop: 'center' }}"
+                      srcset="{{ featured_image | image_url: width: 736, height: 550, crop: 'center' }} 2x, {{ featured_image | image_url: width: 368, height: 275, crop: 'center' }} 1x"
+                      width="368" height="275" loading="lazy" alt="{{ featured_image.alt | escape }}"
+                    >
+                  {%- endif -%}
+                </a>
+                <div class="cc-content">
+                  <a class="cc-title" href="{{ product.url }}">{{ product.title }}</a>
+                  <div class="cc-price-row">
+                    <div class="cc-price">
+                      {%- if product.compare_at_price > product.price -%}
+                        <span class="cc-price__current">{{ product.price | money }}</span>
+                        <span class="cc-price__compare">{{ product.compare_at_price | money }}</span>
+                      {%- else -%}
+                        <span class="cc-price__current">{{ product.price | money }}</span>
+                      {%- endif -%}
+                    </div>
+                    {%- if product.compare_at_price > product.price -%}
+                      {%- assign saving = product.compare_at_price | minus: product.price -%}
+                      {%- assign percent = saving | times: 100 | divided_by: product.compare_at_price -%}
+                      <div class="cc-sale-tag">-{{ percent | round: 0 }}%</div>
+                    {%- endif -%}
+                  </div>
+                  {%- comment -%} Sold count per-product from metafields {%- endcomment -%}
+                  {%- liquid
+                    assign sold_count = ''
+                    if product.metafields.custom.sold_count != blank
+                      assign sold_count = product.metafields.custom.sold_count.value | default: product.metafields.custom.sold_count
+                    endif
+                    if sold_count == '' and product.metafields.custom.sold != blank
+                      assign sold_count = product.metafields.custom.sold.value | default: product.metafields.custom.sold
+                    endif
+                    if sold_count == '' and product.metafields.global.sold_count != blank
+                      assign sold_count = product.metafields.global.sold_count.value | default: product.metafields.global.sold_count
+                    endif
+                    if sold_count == '' and product.metafields.ru9.sold != blank
+                      assign sold_count = product.metafields.ru9.sold.value | default: product.metafields.ru9.sold
+                    endif
+                    if sold_count == '' and product.metafields.my_fields.sold_count != blank
+                      assign sold_count = product.metafields.my_fields.sold_count.value | default: product.metafields.my_fields.sold_count
+                    endif
+                    if sold_count == '' and section.settings.default_sold_count != blank
+                      assign sold_count = section.settings.default_sold_count | plus: 0
+                    endif
+                  -%}
+                  {%- if sold_count != '' -%}
+                    <div class="cc-sold">Đã bán: {{ sold_count }}</div>
+                  {%- endif -%}
+                  <div class="cc-actions">
+                    <button class="cc-buy-now" type="button" onclick="window.location.href='{{ product.url }}'">Mua ngay</button>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            {%- render 'pagination', paginate: paginate -%}
+          {%- endif -%}
+
+          {%- endpaginate -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- if section.settings.enable_sidebar == false
+  or section.settings.filter_style == 'drawer'
+  or collection.filters.size == 0
+-%}
+  {% style %}
+    .collection-content--custom .grid__item--sidebar { width: 0; padding: 0; }
+    .collection-content--custom .grid__item--content { width: 100%; }
+    .collection-content--custom .grid__item--sidebar { position: static; overflow: hidden; }
+  {% endstyle %}
+{%- endif -%}
+
+<style>
+  .cc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(368px, 1fr));
+    gap: 32px 24px;
+  }
+  .cc-card { width: 368px; justify-self: center; }
+  .cc-image { display: block; width: 368px; height: 275px; flex-shrink: 0; overflow: hidden; border-radius: 12px; }
+  .cc-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cc-content { width: 368px; height: 128px; flex-shrink: 0; padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .cc-title { display: block; width: 213px; color: var(--Typography-Text-1, #212121); font-family: "Be Vietnam Pro", sans-serif; font-size: 25px; font-style: normal; font-weight: 700; line-height: 120%; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0 0 0 0; }
+  .cc-price-row { display: flex; width: 368px; height: 21px; align-items: center; gap: 10px; flex-shrink: 0; margin-top: 2px; }
+  .cc-price { display: inline-flex; align-items: center; gap: 8px; }
+  .cc-price__current { color: #9F332C; font-family: "Be Vietnam Pro", sans-serif; font-size: 18px; font-style: normal; font-weight: 700; line-height: 150%; }
+  .cc-price__compare { color: #8A8A8A; text-decoration: line-through; }
+  .cc-sale-tag { display: inline-flex; padding: 0 8px 0 7px; justify-content: center; align-items: center; border-radius: 8px; border: 1px solid #9F332C; background: #FFF; color: #9F332C; height: 21px; font-weight: 700; font-size: 12px; line-height: 21px; }
+  .cc-sold { color: var(--Typography-Text-1, #212121); font-family: "Be Vietnam Pro", sans-serif; font-size: 16px; font-style: normal; font-weight: 300; line-height: 140%; margin-top: 6px; }
+  .cc-actions { margin-top: 0px; }
+  .cc-buy-now { display: flex; width: 146px; height: 40px; padding: 12px 35px; justify-content: center; align-items: center; gap: 10px; flex-shrink: 0; border-radius: 30px; background: #9F332C; color: #fff; border: 0; cursor: pointer; font-family: "Be Vietnam Pro", sans-serif; font-weight: 700; }
+
+  @media (max-width: 768px) {
+    .cc-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+    .cc-card, .cc-image, .cc-content, .cc-price-row { width: 320px; }
+    .cc-image { height: 238px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Coll custom",
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "options": [
+        { "value": "full-width", "label": "Full width" },
+        { "value": "page-width", "label": "Page width" },
+        { "value": "customize_width", "label": "Custom width" }
+      ],
+      "default": "page-width",
+      "label": "Section width"
+    },
+    {
+      "type": "range",
+      "id": "customize_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 10,
+      "default": 1800,
+      "unit": "px",
+      "label": "Custom width"
+    },
+    { "type": "header", "content": "Filtering & sorting" },
+    { "type": "checkbox", "id": "enable_sidebar", "label": "Enable sidebar filters", "default": true },
+    { "type": "checkbox", "id": "collapsed", "label": "Collapse filter groups", "default": true },
+    { "type": "select", "id": "filter_style", "label": "Filter style", "default": "sidebar", "options": [ { "value": "sidebar", "label": "Sidebar" }, { "value": "drawer", "label": "Drawer" } ] },
+    { "type": "checkbox", "id": "enable_color_swatches", "label": "Enable color swatches" },
+    { "type": "checkbox", "id": "enable_swatch_labels", "label": "Show swatch labels", "default": true },
+    { "type": "checkbox", "id": "enable_sort", "label": "Enable sort", "default": true },
+    { "type": "checkbox", "id": "enable_collection_count", "label": "Show collection count", "default": true },
+
+    { "type": "header", "content": "Grid" },
+    { "type": "range", "id": "per_row", "label": "Products per row (desktop)", "default": 3, "min": 2, "max": 5, "step": 1 },
+    { "type": "range", "id": "rows_per_page", "label": "Rows per page", "default": 2, "min": 1, "max": 10, "step": 1 },
+    { "type": "header", "content": "Defaults" },
+    { "type": "range", "id": "default_sold_count", "label": "Default sold count (fallback)", "min": 0, "max": 1000, "step": 10, "default": 0 }
+  ],
+  "blocks": [],
+  "presets": [
+    { "name": "Coll custom", "category": "Collection" }
+  ],
+  "enabled_on": {
+    "templates": ["collection"]
+  }
+}
+{% endschema %}
+
+

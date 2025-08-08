@@ -1,1 +1,674 @@
-{"sections":{"main":{"type":"main-product","blocks":{"judge_me_reviews_preview_badge_MD8JNY":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","disabled":true,"settings":{}},"trust_badge_crGyDj":{"type":"trust_badge","disabled":true,"settings":{"trust_image":"shopify:\/\/shop_images\/Ru9_-_brief_40_-_Giang_sinh_r_n_rang_1940_x_750.png"}},"custom_m49fr6":{"type":"custom","settings":{"code":"<style>\n.flash-sale-container {\n  display: none; \/* Hidden by default, will be shown with JS if in valid time *\/\n  align-items: center;\n  background: #ff6b6b;\n  padding: 15px;\n  border-radius: 8px;\n  margin: 10px 0;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n} \n\n.flash-sale-status {\n  display: flex;\n  align-items: center;\n  margin-right: 20px;\n}\n\n.status-icon {\n  font-size: 24px;\n  color: #fff;\n  margin-right: 10px;\n  animation: pulse 1s infinite;\n}\n\n.status-text {\n  font-size: 16px;\n  font-weight: bold;\n  color: #fff;\n}\n\n.countdown-wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.countdown-block {\n  background: #fff;\n  padding: 8px 12px;\n  border-radius: 6px;\n  text-align: center;\n  min-width: 60px;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.05);\n}\n\n.countdown-block span {\n  font-size: 20px;\n  font-weight: bold;\n  color: #ff6b6b;\n  display: block;\n}\n\n.countdown-block label {\n  font-size: 12px;\n  color: #666;\n  margin-top: 4px;\n  display: block;\n}\n\n@keyframes pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.1); }\n  100% { transform: scale(1); }\n}\n\n.inactive .status-icon {\n  color: #fff;\n  animation: none;\n}\n\n.inactive .status-text {\n  color: #fff;\n}\n\n.inactive .countdown-block span {\n  color: #666;\n}\n<\/style>\n\n<div class=\"flash-sale-container\" id=\"flashSaleContainer\">\n  <div class=\"flash-sale-status\">\n    <div class=\"status-icon\" id=\"statusIcon\">⚡<\/div>\n    <div class=\"status-text\" id=\"statusText\">Flash Sale đang diễn ra!<\/div>\n  <\/div>\n  <div class=\"countdown-wrapper\">\n    <div class=\"countdown-block\">\n      <span id=\"hours\">00<\/span>\n      <label>Giờ<\/label>\n    <\/div>\n    <div class=\"countdown-block\">\n      <span id=\"minutes\">00<\/span>\n      <label>Phút<\/label>\n    <\/div>\n    <div class=\"countdown-block\">\n      <span id=\"seconds\">00<\/span>\n      <label>Giây<\/label>\n    <\/div>\n  <\/div>\n<\/div>\n\n<script>\nclass FlashSaleTimer {\n  constructor() {\n    this.statusText = document.getElementById('statusText');\n    this.statusIcon = document.getElementById('statusIcon');\n    this.container = document.getElementById('flashSaleContainer');\n    this.hoursElement = document.getElementById('hours');\n    this.minutesElement = document.getElementById('minutes');\n    this.secondsElement = document.getElementById('seconds');\n    \n    this.flashSaleStartHour = 23; \/\/ 11 PM\n    this.flashSaleEndHour = 8;    \/\/ 8 AM\n    \n    \/\/ Check if we should show the flash sale based on GMT+7 time\n    if (this.isWithinGMTPlus7TimeRange()) {\n      this.container.style.display = \"flex\"; \/\/ Show the container\n      this.updateTimer();\n      setInterval(() => this.updateTimer(), 1000);\n    }\n  }\n\n  \/\/ Get current time in GMT+7\n  getCurrentGMTPlus7Time() {\n    const now = new Date();\n    \/\/ Convert to GMT+7\n    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);\n    return new Date(utcTime + (7 * 60 * 60 * 1000));\n  }\n\n  \/\/ Check if current GMT+7 time is within flash sale hours (11 PM - 8 AM)\n  isWithinGMTPlus7TimeRange() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  isFlashSaleActive() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  getNextFlashSaleTime() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    let nextFlashSale = new Date(gmtPlus7Time);\n    \n    if (gmtPlus7Time.getHours() >= this.flashSaleEndHour && gmtPlus7Time.getHours() < this.flashSaleStartHour) {\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    } else {\n      nextFlashSale.setDate(nextFlashSale.getDate() + 1);\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    }\n    \n    return nextFlashSale;\n  }\n\n  getTimeRemaining(endTime) {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const total = endTime - gmtPlus7Time;\n    const seconds = Math.floor((total \/ 1000) % 60);\n    const minutes = Math.floor((total \/ 1000 \/ 60) % 60);\n    const hours = Math.floor((total \/ (1000 * 60 * 60)) % 24);\n    \n    return {\n      total,\n      hours,\n      minutes,\n      seconds\n    };\n  }\n\n  updateTimer() {\n    const isActive = this.isFlashSaleActive();\n    let timeRemaining;\n    \n    if (isActive) {\n      \/\/ Calculate end time (8 AM in GMT+7)\n      const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n      const endTime = new Date(gmtPlus7Time);\n      endTime.setHours(this.flashSaleEndHour, 0, 0, 0);\n      if (endTime < gmtPlus7Time) {\n        endTime.setDate(endTime.getDate() + 1);\n      }\n      timeRemaining = this.getTimeRemaining(endTime);\n      \n      this.statusText.textContent = 'Flash Sale đang diễn ra!';\n      this.container.classList.remove('inactive');\n    } else {\n      timeRemaining = this.getTimeRemaining(this.getNextFlashSaleTime());\n      \n      this.statusText.textContent = 'Flash Sale sắp diễn ra';\n      this.container.classList.add('inactive');\n    }\n\n    this.hoursElement.textContent = timeRemaining.hours.toString().padStart(2, '0');\n    this.minutesElement.textContent = timeRemaining.minutes.toString().padStart(2, '0');\n    this.secondsElement.textContent = timeRemaining.seconds.toString().padStart(2, '0');\n  }\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  new FlashSaleTimer();\n});\n<\/script>"}},"description":{"type":"description","settings":{"is_tab":false,"collapse_content":false}},"price":{"type":"price","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"variant_labels":true,"picker_type":"button","product_dynamic_variants_enable":true,"color_swatches":true}},"quantity_selector_WMfLWY":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":true,"surface_pickup_enable":false,"show_gift_card_recipient":false}},"productbundle_GcbRad":{"type":"productbundle","disabled":true,"settings":{"product_list":["ru9-eye-mask"],"cross_sell_title":"Quà tặng cho quý khách mua nệm","cross_sell_label":"Miễn phí"}},"icon_with_text_b6k6a4":{"type":"icon_with_text","settings":{"icon_1":"chat","image_icon_1":"shopify:\/\/shop_images\/text-w-icon-4.png","title_1":"100 đêm ngủ thử","icon_2":"chat","image_icon_2":"shopify:\/\/shop_images\/text-w-icon-5.png","title_2":"Miễn phí vận chuyển *","icon_3":"chat","image_icon_3":"shopify:\/\/shop_images\/text-w-icon-6.png","title_3":"Bảo hành dài lâu","icon_4":"chat","image_icon_4":"shopify:\/\/shop_images\/text-w-icon-6.png","title_4":"Chất liệu Foam cao cấp"}},"carousel_modal_B8Mr9e":{"type":"carousel_modal","settings":{}}},"block_order":["judge_me_reviews_preview_badge_MD8JNY","trust_badge_crGyDj","custom_m49fr6","description","price","variant_picker","quantity_selector_WMfLWY","buy_buttons","productbundle_GcbRad","icon_with_text_b6k6a4","carousel_modal_B8Mr9e"],"settings":{"section_width":"page-width","customize_width":1800,"enable_sticky_add_to_cart":true,"sku_enable":false,"image_position":"left","image_size":"large","product_zoom_enable":true,"product_carousel_enable":false,"limit_product_carousel":true,"thumbnail_position":"below","thumbnail_height":"flexible","thumbnail_arrows":false,"mobile_layout":"partial","enable_video_looping":true,"product_video_style":"muted"}},"product_hotspot_XzDEYy":{"type":"product-hotspot","blocks":{"product_8BYAFb":{"type":"product","settings":{"hotspot_title":"Vỏ bọc dệt kim","hotspot_sub_title":"Mềm mại, thông thoáng và sang trọng","direction":"vertical","content_position":"right","space":"250","left":"25%","top":"30%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}},"product_63wJz9":{"type":"product","settings":{"hotspot_title":"Comfort Top: Medium\/ Firm","hotspot_sub_title":"Lựa chọn độ êm ái hoặc nâng đỡ","direction":"vertical","content_position":"right","space":"460","left":"30%","top":"45%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}},"product_YTgbw6":{"type":"product","settings":{"hotspot_title":"3-zoned Ru9 Contour layer","hotspot_sub_title":"Thiết kế 3 vùng nâng đỡ khác biệt cho từng vị trí  đầu - thân - chân","direction":"vertical","content_position":"right","space":"530","left":"40%","top":"50%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}},"product_tpYcCf":{"type":"product","settings":{"hotspot_title":"Cooling Graphene Memory Foam layer","hotspot_sub_title":"Giải toả lực ép và tản nhiệt","direction":"vertical","content_position":"right","space":"600","left":"50%","top":"55%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}},"product_9jEeQa":{"type":"product","settings":{"hotspot_title":"Core layer PU Foam","hotspot_sub_title":"Khả năng ngăn cách chuyển động","direction":"vertical","content_position":"right","space":"650","left":"60%","top":"60%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}}},"block_order":["product_8BYAFb","product_63wJz9","product_YTgbw6","product_tpYcCf","product_9jEeQa"],"disabled":true,"settings":{"enable_anchor_link":true,"anchor_link_text":"Chi tiết sản phẩm","productHandle":"{{ product.metafields.custom.hotspot_handle.value }}","heading":"{{ product.metafields.custom.hotspot_title.value }}","content":"","banner_image":"{{ product.metafields.custom.hotspot_banner.value }}","banner_mobile":"{{ product.metafields.custom.hotspot_banner_mobile.value }}","margin-top":"0px","margin-bottom":"0px"}},"product_hotspot_pnDmHC":{"type":"product-hotspot","blocks":{"product_wUNCcK":{"type":"product","settings":{"hotspot_title":"Vải bọc cao cấp","hotspot_sub_title":"Thoáng mát và thấm hút tốt","direction":"vertical","content_position":"right","space":"250","left":"30%","top":"25%","space_mb":"110","left_mobile":"30%","top_mobile":"25%"}},"product_rH68dY":{"type":"product","settings":{"hotspot_title":"Soft PU Foam","hotspot_sub_title":"Mềm mại ôm sát cơ thể","direction":"vertical","content_position":"right","space":"250","left":"45%","top":"30%","space_mb":"110","left_mobile":"50%","top_mobile":"30%"}},"product_yNaXxB":{"type":"product","settings":{"hotspot_title":"Gòn kháng cháy","hotspot_sub_title":"Làm chậm cháy, an toàn hơn","direction":"vertical","content_position":"right","space":"250","left":"57%","top":"35%","space_mb":"110","left_mobile":"60%","top_mobile":"35%"}},"product_gwd6Ji":{"type":"product","settings":{"hotspot_title":"Medium hoặc firm PU Foam","hotspot_sub_title":"Các lựa chọn độ êm để nâng đỡ phù hợp","direction":"vertical","content_position":"right","space":"250","left":"70%","top":"40%","space_mb":"110","left_mobile":"70%","top_mobile":"40%"}}},"block_order":["product_wUNCcK","product_rH68dY","product_yNaXxB","product_gwd6Ji"],"settings":{"enable_anchor_link":true,"anchor_link_text":"Chi tiết sản phẩm","productHandle":"nem-hybrid","heading":"{{ product.metafields.custom.hotspot_title.value }}","content":"","banner_image":"{{ product.metafields.custom.hotspot_banner.value }}","banner_mobile":"{{ product.metafields.custom.hotspot_banner.value }}","margin-top":"0px","margin-bottom":"0px"}},"product_hotspot_grhP6h":{"type":"product-hotspot","blocks":{"product_WTiPTx":{"type":"product","settings":{"hotspot_title":"Vải bọc cao cấp","hotspot_sub_title":"Bảo vệ nệm","direction":"vertical","content_position":"right","space":"250","left":"30%","top":"10%","space_mb":"110","left_mobile":"25%","top_mobile":"10%"}},"product_dVcwdF":{"type":"product","settings":{"hotspot_title":"Soft PU Foam","hotspot_sub_title":"Phân tán lực tác động từ lò xo","direction":"vertical","content_position":"right","space":"250","left":"35%","top":"20%","space_mb":"110","left_mobile":"30%","top_mobile":"20%"}},"product_TewmCY":{"type":"product","settings":{"hotspot_title":"Gòn kháng cháy","hotspot_sub_title":"Làm chậm cháy, an toàn hơn","direction":"vertical","content_position":"right","space":"250","left":"40%","top":"28%","space_mb":"110","left_mobile":"41%","top_mobile":"30%"}},"product_RhFKmf":{"type":"product","settings":{"hotspot_title":"Firm PU Foam","hotspot_sub_title":"Phân tán lực tác động từ lò xo","direction":"vertical","content_position":"right","space":"250","left":"45%","top":"37%","space_mb":"110","left_mobile":"47%","top_mobile":"38%"}},"product_g6ynpU":{"type":"product","settings":{"hotspot_title":"Hàng trăm lò xo túi cao cấp 16cm","hotspot_sub_title":"Nẩy và đàn hồi","direction":"vertical","content_position":"right","space":"250","left":"50%","top":"47%","space_mb":"110","left_mobile":"55%","top_mobile":"50%"}}},"block_order":["product_WTiPTx","product_dVcwdF","product_TewmCY","product_RhFKmf","product_g6ynpU"],"settings":{"enable_anchor_link":false,"anchor_link_text":"","productHandle":"nem-hybrid","heading":"","content":"","banner_image":"shopify:\/\/shop_images\/3D_Hybrid_Mattress_website_1.png","banner_mobile":"shopify:\/\/shop_images\/3D_Hybrid_Mattress_website_1.png","margin-top":"0px","margin-bottom":"0px"}},"dynamic_text_with_image_L4VkFB":{"type":"dynamic-text-with-image","blocks":{"image_with_text_aTnYky":{"type":"image-with-text","settings":{"image":"{{ product.metafields.custom.image_3_hinh_3.value }}","title":"{{ product.metafields.custom.heading_3_hinh_3.value }}","text":"<p>{{ product.metafields.custom.text_block_3_hinh_3 | metafield_tag }}<\/p>","align_text":"left","layout":"right"}},"image_with_text_NFMQyg":{"type":"image-with-text","settings":{"image":"{{ product.metafields.custom.image_3_hinh_2.value }}","title":"{{ product.metafields.custom.heading_3_hinh_2.value }}","text":"<p>{{ product.metafields.custom.text_block_3_hinh_2 | metafield_tag }}<\/p>","align_text":"left","layout":"left"}},"image_with_text_WAkepD":{"type":"image-with-text","settings":{"image":"{{ product.metafields.custom.image_3_hinh_1.value }}","title":"{{ product.metafields.custom.heading_3_hinh_1.value }}","text":"<p>{{ product.metafields.custom.text_block_3_hinh_1 | metafield_tag }}<\/p>","align_text":"left","layout":"right"}}},"block_order":["image_with_text_aTnYky","image_with_text_NFMQyg","image_with_text_WAkepD"],"settings":{"section_width":"page-width","customize_width":1800,"mg":"50px,,20px,","pd":"","mg_mb":"","pd_mb":"","title":"{{ product.metafields.custom.heading_3_hinh.value }}","description":"","divider":false}},"best_seller_DWCAYP":{"type":"best-seller","settings":{"mg":"54px,,40px,","pd":"","mg_mb":"","pd_mb":"","layout":"left","title":"{{ product.metafields.custom.video_button_label.value }}","text":"<p>{{ product.metafields.custom.video_text_block | metafield_tag }}<\/p>","linkvideo":"shopify:\/\/files\/videos\/ru9-hybrid-tvc-website.mp4","poster":"{{ product.metafields.custom.video_cover_image.value }}"}},"dynamic_faq_Whrn47":{"type":"dynamic-faq","blocks":{"question_d3nb6H":{"type":"question","settings":{"title":"Frequently asked question","text":"<p>Use this text to answer questions in as much detail as possible for your customers.<\/p>"}},"question_wQaBbp":{"type":"question","settings":{"title":"Frequently asked question","text":"<p>Use this text to answer questions in as much detail as possible for your customers.<\/p>"}}},"block_order":["question_d3nb6H","question_wQaBbp"],"settings":{"enable_anchor_link":true,"anchor_link_text":"FAQs","mg":"24px,,20px,","pd":"40px,,,","mg_mb":"","pd_mb":"","title":"Các câu hỏi thường gặp","link":"shopify:\/\/pages\/faqs","link_text":"Xem những câu hỏi khác","text_alignment":"left","use_metafield":true,"metafield_limit":"5","divider":true}},"certification_VUqyB6":{"type":"certification","blocks":{"slide_63THmd":{"type":"slide","settings":{"banner":"shopify:\/\/shop_images\/certification-image-1.jpg","banner_mobile":"shopify:\/\/shop_images\/certification-image-1-mobile.jpg","title":"<p>An toàn cho sức khoẻ.<br\/>Bảo vệ cho làn da.<\/p>","description":"<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®<\/p>","image":"shopify:\/\/shop_images\/logo-certification-1.png"}},"slide_zqGeDK":{"type":"slide","settings":{"banner":"shopify:\/\/shop_images\/Screenshot_2024-11-09_095809.png","banner_mobile":"shopify:\/\/shop_images\/Screenshot_2024-11-09_095809.png","title":"<p>An toàn cho sức khoẻ.<br\/>Bảo vệ cho làn da.<\/p>","description":"<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®<\/p>","image":"shopify:\/\/shop_images\/logo-certification-1.png"}}},"block_order":["slide_63THmd","slide_zqGeDK"],"settings":{"section_width":"customize_width","customize_width":1250,"bg":"#f0f7fe","title":"","description":""}},"172802814088f5e025":{"type":"apps","settings":{"enable_anchor_link":true,"anchor_link_text":"Reviews","full_width":false,"space_around":true}},"1730878240cfbec46e":{"type":"apps","blocks":{"judge_me_reviews_review_widget_LGBKUn":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}}},"block_order":["judge_me_reviews_review_widget_LGBKUn"],"settings":{"enable_anchor_link":false,"anchor_link_text":"","full_width":false,"space_around":true}},"sub":{"type":"product-full-width","disabled":true,"settings":{"max_width":true}},"product-recommendations":{"type":"product-recommendations","disabled":true,"settings":{"product_recommendations_heading":"You may also like","related_count":6,"products_per_row":3}},"recently-viewed":{"type":"recently-viewed","disabled":true,"settings":{"recent_count":5}},"collection-return":{"type":"collection-return","disabled":true,"settings":{}}},"order":["main","product_hotspot_XzDEYy","product_hotspot_pnDmHC","product_hotspot_grhP6h","dynamic_text_with_image_L4VkFB","best_seller_DWCAYP","dynamic_faq_Whrn47","certification_VUqyB6","172802814088f5e025","1730878240cfbec46e","sub","product-recommendations","recently-viewed","collection-return"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "judge_me_reviews_preview_badge_MD8JNY": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        },
+        "trust_badge_crGyDj": {
+          "type": "trust_badge",
+          "disabled": true,
+          "settings": {
+            "trust_image": "shopify://shop_images/Ru9_-_brief_40_-_Giang_sinh_r_n_rang_1940_x_750.png"
+          }
+        },
+        "custom_m49fr6": {
+          "type": "custom",
+          "settings": {
+            "code": "<style>\n.flash-sale-container {\n  display: none; /* Hidden by default, will be shown with JS if in valid time */\n  align-items: center;\n  background: #ff6b6b;\n  padding: 15px;\n  border-radius: 8px;\n  margin: 10px 0;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n} \n\n.flash-sale-status {\n  display: flex;\n  align-items: center;\n  margin-right: 20px;\n}\n\n.status-icon {\n  font-size: 24px;\n  color: #fff;\n  margin-right: 10px;\n  animation: pulse 1s infinite;\n}\n\n.status-text {\n  font-size: 16px;\n  font-weight: bold;\n  color: #fff;\n}\n\n.countdown-wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.countdown-block {\n  background: #fff;\n  padding: 8px 12px;\n  border-radius: 6px;\n  text-align: center;\n  min-width: 60px;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.05);\n}\n\n.countdown-block span {\n  font-size: 20px;\n  font-weight: bold;\n  color: #ff6b6b;\n  display: block;\n}\n\n.countdown-block label {\n  font-size: 12px;\n  color: #666;\n  margin-top: 4px;\n  display: block;\n}\n\n@keyframes pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.1); }\n  100% { transform: scale(1); }\n}\n\n.inactive .status-icon {\n  color: #fff;\n  animation: none;\n}\n\n.inactive .status-text {\n  color: #fff;\n}\n\n.inactive .countdown-block span {\n  color: #666;\n}\n</style>\n\n<div class=\"flash-sale-container\" id=\"flashSaleContainer\">\n  <div class=\"flash-sale-status\">\n    <div class=\"status-icon\" id=\"statusIcon\">⚡</div>\n    <div class=\"status-text\" id=\"statusText\">Flash Sale đang diễn ra!</div>\n  </div>\n  <div class=\"countdown-wrapper\">\n    <div class=\"countdown-block\">\n      <span id=\"hours\">00</span>\n      <label>Giờ</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"minutes\">00</span>\n      <label>Phút</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"seconds\">00</span>\n      <label>Giây</label>\n    </div>\n  </div>\n</div>\n\n<script>\nclass FlashSaleTimer {\n  constructor() {\n    this.statusText = document.getElementById('statusText');\n    this.statusIcon = document.getElementById('statusIcon');\n    this.container = document.getElementById('flashSaleContainer');\n    this.hoursElement = document.getElementById('hours');\n    this.minutesElement = document.getElementById('minutes');\n    this.secondsElement = document.getElementById('seconds');\n    \n    this.flashSaleStartHour = 23; // 11 PM\n    this.flashSaleEndHour = 8;    // 8 AM\n    \n    // Check if we should show the flash sale based on GMT+7 time\n    if (this.isWithinGMTPlus7TimeRange()) {\n      this.container.style.display = \"flex\"; // Show the container\n      this.updateTimer();\n      setInterval(() => this.updateTimer(), 1000);\n    }\n  }\n\n  // Get current time in GMT+7\n  getCurrentGMTPlus7Time() {\n    const now = new Date();\n    // Convert to GMT+7\n    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);\n    return new Date(utcTime + (7 * 60 * 60 * 1000));\n  }\n\n  // Check if current GMT+7 time is within flash sale hours (11 PM - 8 AM)\n  isWithinGMTPlus7TimeRange() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  isFlashSaleActive() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  getNextFlashSaleTime() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    let nextFlashSale = new Date(gmtPlus7Time);\n    \n    if (gmtPlus7Time.getHours() >= this.flashSaleEndHour && gmtPlus7Time.getHours() < this.flashSaleStartHour) {\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    } else {\n      nextFlashSale.setDate(nextFlashSale.getDate() + 1);\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    }\n    \n    return nextFlashSale;\n  }\n\n  getTimeRemaining(endTime) {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const total = endTime - gmtPlus7Time;\n    const seconds = Math.floor((total / 1000) % 60);\n    const minutes = Math.floor((total / 1000 / 60) % 60);\n    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);\n    \n    return {\n      total,\n      hours,\n      minutes,\n      seconds\n    };\n  }\n\n  updateTimer() {\n    const isActive = this.isFlashSaleActive();\n    let timeRemaining;\n    \n    if (isActive) {\n      // Calculate end time (8 AM in GMT+7)\n      const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n      const endTime = new Date(gmtPlus7Time);\n      endTime.setHours(this.flashSaleEndHour, 0, 0, 0);\n      if (endTime < gmtPlus7Time) {\n        endTime.setDate(endTime.getDate() + 1);\n      }\n      timeRemaining = this.getTimeRemaining(endTime);\n      \n      this.statusText.textContent = 'Flash Sale đang diễn ra!';\n      this.container.classList.remove('inactive');\n    } else {\n      timeRemaining = this.getTimeRemaining(this.getNextFlashSaleTime());\n      \n      this.statusText.textContent = 'Flash Sale sắp diễn ra';\n      this.container.classList.add('inactive');\n    }\n\n    this.hoursElement.textContent = timeRemaining.hours.toString().padStart(2, '0');\n    this.minutesElement.textContent = timeRemaining.minutes.toString().padStart(2, '0');\n    this.secondsElement.textContent = timeRemaining.seconds.toString().padStart(2, '0');\n  }\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  new FlashSaleTimer();\n});\n</script>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "is_tab": false,
+            "collapse_content": false
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "variant_labels": true,
+            "picker_type": "button",
+            "product_dynamic_variants_enable": true,
+            "color_swatches": true
+          }
+        },
+        "custom_cxnctX": {
+          "type": "custom",
+          "settings": {
+            "code": "<div class=\"size-guide-text-dropdown-container\">\n  <style>\n    .size-guide-text-dropdown-container {\n      margin: 20px 0;\n    }\n\n    .size-guide-text-trigger {\n      /* Reset style của button để trông như một dòng chữ */\n      background: none;\n      border: none;\n      padding: 0;\n      \n      /* Style cho chữ và layout */\n      font-family: 'Proxima Nova', sans-serif;\n      font-weight: 400;\n      font-size: 16px;\n      line-height: 22px;\n      color: #1C2C58;\n      text-decoration: underline;\n      cursor: pointer;\n      \n      /* Dùng flex để căn chỉnh chữ và icon mũi tên */\n      display: inline-flex;\n      align-items: center;\n      gap: 8px; /* Khoảng cách giữa chữ và mũi tên */\n    }\n\n    .size-guide-text-trigger .arrow-icon {\n      transition: transform 0.3s ease-out;\n    }\n\n    .size-guide-text-trigger.is-active .arrow-icon {\n      transform: rotate(180deg);\n    }\n\n    .size-guide-content {\n      max-height: 0;\n      overflow: hidden;\n      transition: max-height 0.4s ease-out, margin-top 0.4s ease-out;\n      margin-top: 0;\n    }\n\n    .size-guide-content.is-active {\n      max-height: 1000px; /* Điều chỉnh nếu ảnh của bạn rất cao */\n      margin-top: 10px; /* Khoảng cách giữa link và ảnh */\n    }\n\n    .size-guide-content img {\n      display: block;\n      width: 100%;\n      height: auto;\n      border-radius: 4px; /* Tùy chọn: bo góc nhẹ cho ảnh */\n    }\n  </style>\n\n  <!-- Nút kích hoạt dropdown (đã được style lại) -->\n  <button class=\"size-guide-text-trigger\">\n    <span>Hướng dẫn chọn kích thước</span>\n    <span class=\"arrow-icon\">\n      <svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n        <path d=\"M1 1L7 7L13 1\" stroke=\"#1C2C58\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n      </svg>\n    </span>\n  </button>\n\n  <!-- Nội dung dropdown -->\n  <div class=\"size-guide-content\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0428/4219/4071/files/size-guide.png?v=1752400514\" alt=\"Hướng dẫn chọn kích thước\">\n  </div>\n\n  <script>\n    (function() {\n      const container = document.currentScript.parentElement;\n      const trigger = container.querySelector('.size-guide-text-trigger');\n      const content = container.querySelector('.size-guide-content');\n\n      if (trigger && content) {\n        trigger.addEventListener('click', function() {\n          this.classList.toggle('is-active');\n          content.classList.toggle('is-active');\n        });\n      }\n    })();\n  </script>\n</div>"
+          }
+        },
+        "quantity_selector_WMfLWY": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "showroom_dropdown_MfUCtB": {
+          "type": "showroom_dropdown",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "surface_pickup_enable": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "productbundle_GcbRad": {
+          "type": "productbundle",
+          "disabled": true,
+          "settings": {
+            "product_list": [
+              "ru9-eye-mask"
+            ],
+            "cross_sell_title": "Quà tặng cho quý khách mua nệm",
+            "cross_sell_label": "Miễn phí"
+          }
+        },
+        "icon_with_text_b6k6a4": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon_1": "chat",
+            "image_icon_1": "shopify://shop_images/text-w-icon-4.png",
+            "title_1": "100 đêm ngủ thử",
+            "icon_2": "chat",
+            "image_icon_2": "shopify://shop_images/text-w-icon-5.png",
+            "title_2": "Miễn phí vận chuyển *",
+            "icon_3": "chat",
+            "image_icon_3": "shopify://shop_images/text-w-icon-6.png",
+            "title_3": "Bảo hành dài lâu",
+            "icon_4": "chat",
+            "image_icon_4": "shopify://shop_images/text-w-icon-6.png",
+            "title_4": "Chất liệu Foam cao cấp"
+          }
+        },
+        "carousel_modal_B8Mr9e": {
+          "type": "carousel_modal",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_preview_badge_MD8JNY",
+        "trust_badge_crGyDj",
+        "custom_m49fr6",
+        "description",
+        "price",
+        "variant_picker",
+        "custom_cxnctX",
+        "quantity_selector_WMfLWY",
+        "showroom_dropdown_MfUCtB",
+        "buy_buttons",
+        "productbundle_GcbRad",
+        "icon_with_text_b6k6a4",
+        "carousel_modal_B8Mr9e"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "enable_sticky_add_to_cart": true,
+        "hide_payment_button_mobile": false,
+        "sku_enable": false,
+        "image_position": "left",
+        "image_size": "large",
+        "product_zoom_enable": true,
+        "product_carousel_enable": false,
+        "limit_product_carousel": true,
+        "thumbnail_position": "below",
+        "thumbnail_height": "flexible",
+        "thumbnail_arrows": false,
+        "mobile_layout": "partial",
+        "enable_video_looping": true,
+        "product_video_style": "muted"
+      }
+    },
+    "independent_webhook_popup_XnyFiV": {
+      "type": "independent-webhook-popup",
+      "name": "Independent Webhook Popup",
+      "settings": {
+        "enable_popup": true,
+        "popup_delay": 5,
+        "background_image": "shopify://shop_images/POP_UP_1.png",
+        "name_placeholder": "Họ và tên",
+        "name_x": 50,
+        "name_y": 65,
+        "phone_placeholder": "Số điện thoại",
+        "phone_x": 50,
+        "phone_y": 75,
+        "button_text": "Nhận mã ưu đãi ngay >",
+        "button_x": 50,
+        "button_y": 92,
+        "success_image": "shopify://shop_images/POP_UP_2.png",
+        "success_message": "Cảm ơn bạn đã đăng ký! Mã của bạn là RU9250.",
+        "coupon_code_to_copy": "RU9250",
+        "copy_button_text": "SAO CHÉP MÃ    >>>",
+        "copy_button_x": 50,
+        "copy_button_y": 92
+      }
+    },
+    "product_hotspot_XzDEYy": {
+      "type": "product-hotspot",
+      "blocks": {
+        "product_8BYAFb": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Vỏ bọc dệt kim",
+            "hotspot_sub_title": "Mềm mại, thông thoáng và sang trọng",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "25%",
+            "top": "30%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_63wJz9": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Comfort Top: Medium/ Firm",
+            "hotspot_sub_title": "Lựa chọn độ êm ái hoặc nâng đỡ",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "460",
+            "left": "30%",
+            "top": "45%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_YTgbw6": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "3-zoned Ru9 Contour layer",
+            "hotspot_sub_title": "Thiết kế 3 vùng nâng đỡ khác biệt cho từng vị trí  đầu - thân - chân",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "530",
+            "left": "40%",
+            "top": "50%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_tpYcCf": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Cooling Graphene Memory Foam layer",
+            "hotspot_sub_title": "Giải toả lực ép và tản nhiệt",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "600",
+            "left": "50%",
+            "top": "55%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_9jEeQa": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Core layer PU Foam",
+            "hotspot_sub_title": "Khả năng ngăn cách chuyển động",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "650",
+            "left": "60%",
+            "top": "60%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        }
+      },
+      "block_order": [
+        "product_8BYAFb",
+        "product_63wJz9",
+        "product_YTgbw6",
+        "product_tpYcCf",
+        "product_9jEeQa"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Chi tiết sản phẩm",
+        "productHandle": "{{ product.metafields.custom.hotspot_handle.value }}",
+        "heading": "{{ product.metafields.custom.hotspot_title.value }}",
+        "content": "",
+        "banner_image": "{{ product.metafields.custom.hotspot_banner.value }}",
+        "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
+        "margin-top": "0px",
+        "margin-bottom": "0px"
+      }
+    },
+    "product_hotspot_pnDmHC": {
+      "type": "product-hotspot",
+      "blocks": {
+        "product_wUNCcK": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Vải bọc cao cấp",
+            "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "30%",
+            "top": "25%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "25%"
+          }
+        },
+        "product_rH68dY": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Soft PU Foam",
+            "hotspot_sub_title": "Mềm mại ôm sát cơ thể",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "45%",
+            "top": "30%",
+            "space_mb": "110",
+            "left_mobile": "50%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_yNaXxB": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Gòn kháng cháy",
+            "hotspot_sub_title": "Làm chậm cháy, an toàn hơn",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "57%",
+            "top": "35%",
+            "space_mb": "110",
+            "left_mobile": "60%",
+            "top_mobile": "35%"
+          }
+        },
+        "product_gwd6Ji": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Medium hoặc firm PU Foam",
+            "hotspot_sub_title": "Các lựa chọn độ êm để nâng đỡ phù hợp",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "70%",
+            "top": "40%",
+            "space_mb": "110",
+            "left_mobile": "70%",
+            "top_mobile": "40%"
+          }
+        }
+      },
+      "block_order": [
+        "product_wUNCcK",
+        "product_rH68dY",
+        "product_yNaXxB",
+        "product_gwd6Ji"
+      ],
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Chi tiết sản phẩm",
+        "productHandle": "nem-hybrid",
+        "heading": "{{ product.metafields.custom.hotspot_title.value }}",
+        "content": "",
+        "banner_image": "{{ product.metafields.custom.hotspot_banner.value }}",
+        "banner_mobile": "{{ product.metafields.custom.hotspot_banner.value }}",
+        "margin-top": "0px",
+        "margin-bottom": "0px"
+      }
+    },
+    "product_hotspot_grhP6h": {
+      "type": "product-hotspot",
+      "blocks": {
+        "product_WTiPTx": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Vải bọc cao cấp",
+            "hotspot_sub_title": "Bảo vệ nệm",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "30%",
+            "top": "10%",
+            "space_mb": "110",
+            "left_mobile": "25%",
+            "top_mobile": "10%"
+          }
+        },
+        "product_dVcwdF": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Soft PU Foam",
+            "hotspot_sub_title": "Phân tán lực tác động từ lò xo",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "35%",
+            "top": "20%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "20%"
+          }
+        },
+        "product_TewmCY": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Gòn kháng cháy",
+            "hotspot_sub_title": "Làm chậm cháy, an toàn hơn",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "40%",
+            "top": "28%",
+            "space_mb": "110",
+            "left_mobile": "41%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_RhFKmf": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Firm PU Foam",
+            "hotspot_sub_title": "Phân tán lực tác động từ lò xo",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "45%",
+            "top": "37%",
+            "space_mb": "110",
+            "left_mobile": "47%",
+            "top_mobile": "38%"
+          }
+        },
+        "product_g6ynpU": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Hàng trăm lò xo túi cao cấp 16cm",
+            "hotspot_sub_title": "Nẩy và đàn hồi",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "50%",
+            "top": "47%",
+            "space_mb": "110",
+            "left_mobile": "55%",
+            "top_mobile": "50%"
+          }
+        }
+      },
+      "block_order": [
+        "product_WTiPTx",
+        "product_dVcwdF",
+        "product_TewmCY",
+        "product_RhFKmf",
+        "product_g6ynpU"
+      ],
+      "settings": {
+        "enable_anchor_link": false,
+        "anchor_link_text": "",
+        "productHandle": "nem-hybrid",
+        "heading": "",
+        "content": "",
+        "banner_image": "shopify://shop_images/3D_Hybrid_Mattress_website_1.png",
+        "banner_mobile": "shopify://shop_images/3D_Hybrid_Mattress_website_1.png",
+        "margin-top": "0px",
+        "margin-bottom": "0px"
+      }
+    },
+    "dynamic_text_with_image_L4VkFB": {
+      "type": "dynamic-text-with-image",
+      "blocks": {
+        "image_with_text_aTnYky": {
+          "type": "image-with-text",
+          "settings": {
+            "image": "{{ product.metafields.custom.image_3_hinh_3.value }}",
+            "title": "{{ product.metafields.custom.heading_3_hinh_3.value }}",
+            "text": "<p>{{ product.metafields.custom.text_block_3_hinh_3 | metafield_tag }}</p>",
+            "align_text": "left",
+            "layout": "right"
+          }
+        },
+        "image_with_text_NFMQyg": {
+          "type": "image-with-text",
+          "settings": {
+            "image": "{{ product.metafields.custom.image_3_hinh_2.value }}",
+            "title": "{{ product.metafields.custom.heading_3_hinh_2.value }}",
+            "text": "<p>{{ product.metafields.custom.text_block_3_hinh_2 | metafield_tag }}</p>",
+            "align_text": "left",
+            "layout": "left"
+          }
+        },
+        "image_with_text_WAkepD": {
+          "type": "image-with-text",
+          "settings": {
+            "image": "{{ product.metafields.custom.image_3_hinh_1.value }}",
+            "title": "{{ product.metafields.custom.heading_3_hinh_1.value }}",
+            "text": "<p>{{ product.metafields.custom.text_block_3_hinh_1 | metafield_tag }}</p>",
+            "align_text": "left",
+            "layout": "right"
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_aTnYky",
+        "image_with_text_NFMQyg",
+        "image_with_text_WAkepD"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "mg": "50px,,20px,",
+        "pd": "",
+        "mg_mb": "",
+        "pd_mb": "",
+        "title": "{{ product.metafields.custom.heading_3_hinh.value }}",
+        "description": "",
+        "divider": false
+      }
+    },
+    "best_seller_DWCAYP": {
+      "type": "best-seller",
+      "settings": {
+        "mg": "54px,,40px,",
+        "pd": "",
+        "mg_mb": "",
+        "pd_mb": "",
+        "layout": "left",
+        "title": "{{ product.metafields.custom.video_button_label.value }}",
+        "text": "<p>{{ product.metafields.custom.video_text_block | metafield_tag }}</p>",
+        "linkvideo": "shopify://files/videos/ru9-hybrid-tvc-website.mp4",
+        "poster": "{{ product.metafields.custom.video_cover_image.value }}"
+      }
+    },
+    "dynamic_faq_Whrn47": {
+      "type": "dynamic-faq",
+      "blocks": {
+        "question_d3nb6H": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>"
+          }
+        },
+        "question_wQaBbp": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_d3nb6H",
+        "question_wQaBbp"
+      ],
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "FAQs",
+        "mg": "24px,,20px,",
+        "pd": "40px,,,",
+        "mg_mb": "",
+        "pd_mb": "",
+        "title": "Các câu hỏi thường gặp",
+        "link": "shopify://pages/faqs",
+        "link_text": "Xem những câu hỏi khác",
+        "text_alignment": "left",
+        "use_metafield": true,
+        "metafield_limit": "5",
+        "divider": true
+      }
+    },
+    "certification_VUqyB6": {
+      "type": "certification",
+      "blocks": {
+        "slide_63THmd": {
+          "type": "slide",
+          "settings": {
+            "banner": "shopify://shop_images/certification-image-1.jpg",
+            "banner_mobile": "shopify://shop_images/certification-image-1-mobile.jpg",
+            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
+            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
+            "image": "shopify://shop_images/logo-certification-1.png"
+          }
+        },
+        "slide_zqGeDK": {
+          "type": "slide",
+          "settings": {
+            "banner": "shopify://shop_images/Screenshot_2024-11-09_095809.png",
+            "banner_mobile": "shopify://shop_images/Screenshot_2024-11-09_095809.png",
+            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
+            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
+            "image": "shopify://shop_images/logo-certification-1.png"
+          }
+        }
+      },
+      "block_order": [
+        "slide_63THmd",
+        "slide_zqGeDK"
+      ],
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1250,
+        "bg": "#f0f7fe",
+        "title": "",
+        "description": ""
+      }
+    },
+    "172802814088f5e025": {
+      "type": "apps",
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Reviews",
+        "full_width": false,
+        "space_around": true
+      }
+    },
+    "1730878240cfbec46e": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_LGBKUn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_LGBKUn"
+      ],
+      "settings": {
+        "enable_anchor_link": false,
+        "anchor_link_text": "",
+        "full_width": false,
+        "space_around": true
+      }
+    },
+    "featured_collection_8jqPyP": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.featured_collection.name",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "Gợi ý các sản phẩm",
+        "home_featured_products": "nem",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": false,
+        "view_all": false,
+        "divider": false,
+        "hide_price": false
+      }
+    },
+    "sub": {
+      "type": "product-full-width",
+      "disabled": true,
+      "settings": {
+        "max_width": true
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "product_recommendations_heading": "You may also like",
+        "related_count": 6,
+        "products_per_row": 3
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {
+        "recent_count": 5
+      }
+    },
+    "collection-return": {
+      "type": "collection-return",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "independent_webhook_popup_XnyFiV",
+    "product_hotspot_XzDEYy",
+    "product_hotspot_pnDmHC",
+    "product_hotspot_grhP6h",
+    "dynamic_text_with_image_L4VkFB",
+    "best_seller_DWCAYP",
+    "dynamic_faq_Whrn47",
+    "certification_VUqyB6",
+    "172802814088f5e025",
+    "1730878240cfbec46e",
+    "featured_collection_8jqPyP",
+    "sub",
+    "product-recommendations",
+    "recently-viewed",
+    "collection-return"
+  ]
+}

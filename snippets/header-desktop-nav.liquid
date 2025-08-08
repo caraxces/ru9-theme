@@ -77,6 +77,11 @@
             {% else %}
               {{ link.title }}
             {% endif %}
+            {% if has_dropdown %}
+              <svg class="nav-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" style="margin-left: 4px; transition: transform 0.3s ease;">
+                <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            {% endif %}
           </a>
       {% else %}
         <a
@@ -98,23 +103,19 @@
           {% else %}
             {{ link.title }}
           {% endif %}
+          {% if has_dropdown %}
+            <svg class="nav-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" style="margin-left: 4px; transition: transform 0.3s ease;">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          {% endif %}
         </a>
       {% endif %}
       {%- if is_megamenu -%}
         {%- assign previous_column_type = '' -%}
         {%- assign animation_column = 1 -%}
-        {%- liquid
-          assign check_banner = false
-          for block in section.blocks
-            assign position = block.settings.position | plus: 0
-            if block.type == 'menu_banner' and position == index
-              assign check_banner = true
-            endif
-          endfor
-        -%}
 
         <div class="site-nav__dropdown megamenu text-left">
-          <div class="page-width gap{%  unless check_banner %}  no-banner{% endunless %}">
+          <div class="page-width gap">
             <div class="megamenu__content">
               <div class="grid">
                 <div class="grid__item medium-up--two-sixths appear-animation appear-delay-{{ animation_column }}">
@@ -205,99 +206,44 @@
                       endif
                     -%}
 
-                    {%- for grandchildlink in childlink.links -%}
-                      {% assign grandchildtitle = grandchildlink.title
-                        | escape
-                        | downcase | strip
-                      %}
-                      <div>
-                        <a
-                          href="{{ grandchildlink.url }}"
-                          class="site-nav__dropdown-link flex ai-center gap-x{% if active_sale_lv3 contains grandchildtitle %} is-sale{% endif %}"
-                          style="{% if active_sale_lv3 contains grandchildtitle %}--active-sale-clr: {{ section.settings.color_active_sale.rgb }};{% endif %}"
-                        >
-                          {%- if grandchildlink.object.featured_media and section.settings.mega_menu_images -%}
-                            <div class="aspect-ratio shrink-0" style="--width:1;--height:1">
-                              {%- render 'image-element',
-                                img: grandchildlink.object.featured_media,
-                                sizeVariable: '80px',
-                                alt: grandchildlink.title,
-                                classes: 'megamenu__collection-image block'
-                              -%}
+                    {%- if childlink.links != blank -%}
+                      <div class="mega-cards">
+                        {%- for grandchildlink in childlink.links -%}
+                          {% assign grandchildtitle = grandchildlink.title | escape | downcase | strip %}
+                          {% assign tagline_text = '' %}
+                          {% if grandchildlink.url contains '/collections/' %}
+                            {% assign _coll = collections[grandchildlink.object.handle] %}
+                            {% if _coll and _coll.metafields and _coll.metafields.custom and _coll.metafields.custom.tagline != blank %}
+                              {% assign tagline_text = _coll.metafields.custom.tagline %}
+                            {% endif %}
+                          {% elsif grandchildlink.url contains '/products/' %}
+                            {% if grandchildlink.object and grandchildlink.object.metafields and grandchildlink.object.metafields.custom and grandchildlink.object.metafields.custom.tagline != blank %}
+                              {% assign tagline_text = grandchildlink.object.metafields.custom.tagline %}
+                            {% endif %}
+                          {% endif %}
+                          <a href="{{ grandchildlink.url }}" class="mega-card__link{% if active_sale_lv3 contains grandchildtitle %} is-sale{% endif %}" style="{% if active_sale_lv3 contains grandchildtitle %}--active-sale-clr: {{ section.settings.color_active_sale.rgb }};{% endif %}">
+                            <div class="mega-card__image">
+                              {% if grandchildlink.object and grandchildlink.object.featured_media %}
+                                <img src="{{ grandchildlink.object.featured_media | image_url: width: 400, height: 296, crop: 'center' }}" alt="{{ grandchildlink.title | escape }}" width="200" height="148" loading="lazy">
+                              {% elsif _coll and _coll.image %}
+                                <img src="{{ _coll.image | image_url: width: 400, height: 296, crop: 'center' }}" alt="{{ grandchildlink.title | escape }}" width="200" height="148" loading="lazy">
+                              {% else %}
+                                <div class="mega-card__image--placeholder"></div>
+                              {% endif %}
                             </div>
-                          {%- endif -%}
-                          <span class="txt" style="font-size: 18px;">{{ grandchildlink.title }}</span>
-                          {% for title in select_title_first_lv3 %}
-                            {%- assign title_cv = title | strip -%}
-                            {%- if title_cv == grandchildtitle -%}
-                              <span
-                              class="badge-label text-xs leading-none"
-                              style="--clr-on-label: {{ section.settings.color_label_1.rgb }}; --bg-on-label: {{ section.settings.background_label_1 }};"
-                            >
-                              {{- text_on_label_1 -}}
-                            </span>
-                            {%- endif -%}
-                          {% endfor %}
-                          {% for title in select_title_second_lv3 %}
-                            {%- assign title_cv = title | strip -%}
-                            {%- if title_cv == grandchildtitle -%}
-                            <span
-                              class="badge-label text-xs leading-none"
-                              style="--clr-on-label: {{ section.settings.color_label_2.rgb }}; --bg-on-label: {{ section.settings.background_label_2 }};"
-                            >
-                              {{- text_on_label_2 -}}
-                            </span>
-                            {%- endif -%}
-                          {% endfor %}
-                          {% for title in select_title_thrid_lv3 %}
-                            {%- assign title_cv = title | strip -%}
-                            {%- if title_cv == grandchildtitle -%}
-                              <span
-                              class="badge-label text-xs leading-none"
-                              style="--clr-on-label: {{ section.settings.color_label_3.rgb }}; --bg-on-label: {{ section.settings.background_label_3 }};"
-                            >
-                              {{- text_on_label_3 -}}
-                            </span>
-                            {%- endif -%}
-                          {% endfor %}
-                          {% for title in select_title_fourth_lv3 %}
-                            {%- assign title_cv = title | strip -%}
-                            {%- if title_cv == grandchildtitle -%}
-                            <span
-                              class="badge-label text-xs leading-none"
-                              style="--clr-on-label: {{ section.settings.color_label_4.rgb }}; --bg-on-label: {{ section.settings.background_label_4 }};"
-                            >
-                              {{- text_on_label_4 -}}
-                            </span>
-                            {%- endif -%}
-                          {% endfor %}
-                        </a>
+                            <div class="mega-card__title">{{ grandchildlink.title }}</div>
+                            {% if tagline_text != blank %}
+                              <div class="mega-card__tagline">{{ tagline_text }}</div>
+                            {% endif %}
+                          </a>
+                        {%- endfor -%}
                       </div>
-                    {%- endfor -%}
+                    {%- endif -%}
                   {%- endfor -%}
                 </div>
               </div>
             </div>
-            {% assign index = forloop.index %}
-            {% for block in section.blocks %}
-              {% assign position = block.settings.position | plus: 0 %}
-              {% if block.type == 'menu_banner' and position == index %}
-                <div class="megamenu__banner appear-animation appear-delay-{{ animation_column }}">
-                  <a href="{{block.settings.url}}">
-                    <div class="aspect-ratio">
-                      <img
-                        src="{{ block.settings.image | img_url: 'master'}}"
-                        loading="lazy"
-                        alt="{{block.settings.image.alt }}"
-                        width="100"
-                        height="100"
-                      >
-                    </div>
-                    {{ block.settings.title }}
-                  </a>
-                </div>
-              {% endif %}
-            {% endfor %}
+            
           </div>
           <div class="megamenu__bottom">
             <div class="page-width">

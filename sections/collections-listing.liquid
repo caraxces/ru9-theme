@@ -1,0 +1,249 @@
+{%- if section.settings.title != blank -%}
+  <div class="collections-listing-section" style="width: 100%; margin: 0 auto 60px auto; padding: 0 5%;">
+    
+    <!-- Section Title -->
+    <div class="section-header" style="text-align: left; margin-bottom: 50px;">
+      <h2 class="section-title" style="color: #1C2C58; font-family: 'Tinos', serif; font-size: 38px; font-style: normal; font-weight: 400; line-height: 120%; text-transform: capitalize; margin: 0;">
+        {{ section.settings.title }}
+      </h2>
+    </div>
+    
+    <!-- Collections Carousel -->
+    <div class="collections-carousel-container" style="position: relative; overflow: hidden;">
+      <div class="collections-carousel" style="display: flex; gap: 30px; transition: transform 0.3s ease; cursor: grab;">
+      
+      {%- for block in section.blocks -%}
+        {%- assign collection = block.settings.collection -%}
+        {%- if collection != blank -%}
+          
+          <div class="collection-item" style="width: 416px; flex-shrink: 0;">
+            
+            <!-- Collection Image -->
+            <div class="collection-image-container" style="width: 416px; height: 275px; flex-shrink: 0; aspect-ratio: 59/39; border-radius: 12px; overflow: hidden; margin-bottom: 20px; background: #F8F9FA;">
+              
+              {%- if collection.image -%}
+                <img 
+                  src="{{ collection.image | img_url: '416x275', crop: 'center' }}" 
+                  alt="{{ collection.title }}"
+                  width="416" height="275"
+                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease;"
+                >
+              {%- else -%}
+                <div style="width: 100%; height: 100%; background: #E9ECEF; display: flex; align-items: center; justify-content: center; color: #6C757D; border-radius: 12px;">
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {%- endif -%}
+              
+            </div>
+            
+            <!-- Collection Title -->
+            <div class="collection-info" style="text-align: left;">
+              <h3 class="collection-title" style="color: #212121; font-family: 'Be Vietnam Pro', sans-serif; font-size: 20px; font-style: normal; font-weight: 400; line-height: 140%; margin: 0;">
+                <a href="{{ collection.url }}" style="text-decoration: none; color: inherit; display: block;">
+                  {{ collection.title }}
+                </a>
+              </h3>
+            </div>
+            
+          </div>
+          
+        {%- endif -%}
+      {%- endfor -%}
+      
+      </div>
+    </div>
+    
+  </div>
+{%- endif -%}
+
+<style>
+  .collections-listing-section {
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+  
+  .collections-carousel {
+    user-select: none;
+  }
+  
+  .collections-carousel:active {
+    cursor: grabbing;
+  }
+  
+  .collection-image-container:hover img {
+    transform: scale(1.05);
+  }
+  
+  .collection-title a:hover {
+    color: #609EE9 !important;
+    transition: color 0.3s ease;
+  }
+  
+  @media (max-width: 1200px) {
+    .collection-item {
+      width: 350px;
+    }
+    
+    .collection-image-container {
+      width: 350px;
+      height: 231px;
+    }
+    
+    .section-title {
+      font-size: 32px !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .collection-item {
+      width: 280px;
+    }
+    
+    .collection-image-container {
+      width: 280px;
+      height: 185px;
+    }
+    
+    .section-title {
+      font-size: 28px !important;
+    }
+    
+    .collection-title {
+      font-size: 18px !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .collection-item {
+      width: 250px;
+    }
+    
+    .collection-image-container {
+      width: 250px;
+      height: 165px;
+    }
+    
+    .section-title {
+      font-size: 24px !important;
+    }
+    
+    .collection-title {
+      font-size: 16px !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.collections-carousel');
+    if (!carousel) return;
+    
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    carousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      carousel.style.cursor = 'grabbing';
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+      isDown = false;
+      carousel.style.cursor = 'grab';
+    });
+    
+    carousel.addEventListener('mouseup', () => {
+      isDown = false;
+      carousel.style.cursor = 'grab';
+    });
+    
+    carousel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 2;
+      carousel.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Touch events for mobile
+    carousel.addEventListener('touchstart', (e) => {
+      isDown = true;
+      startX = e.touches[0].pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+    });
+    
+    carousel.addEventListener('touchend', () => {
+      isDown = false;
+    });
+    
+    carousel.addEventListener('touchmove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.touches[0].pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 2;
+      carousel.scrollLeft = scrollLeft - walk;
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collections Listing",
+  "class": "index-section",
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Our Collections"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1C2C58"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#212121"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Select collection to display"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections Listing",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

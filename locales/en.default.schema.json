@@ -1099,6 +1099,10 @@
         "toolbar_social": {
           "label": "Show social icons"
         },
+        "announcement_message": {
+          "label": "Announcement Message",
+          "info": "Message to display in the center of the toolbar"
+        },
         "header_language_selector": "To add a language, go to your [language settings.](/admin/settings/languages)",
         "show_locale_selector": {
           "label": "Show language selector"
