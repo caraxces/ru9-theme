@@ -1,16 +1,28 @@
 {%- if section.settings.title != blank -%}
-  <div class="collections-listing-section" style="width: 100%; margin: 0 auto 60px auto; padding: 0 5%;">
+  <div class="collections-listing-section" data-section-id="{{ section.id }}" style="width: 100%; margin: 0 auto 60px auto; padding: 0 5%;">
     
     <!-- Section Title -->
-    <div class="section-header" style="text-align: left; margin-bottom: 50px;">
+    <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px;">
       <h2 class="section-title" style="color: #1C2C58; font-family: 'Tinos', serif; font-size: 38px; font-style: normal; font-weight: 400; line-height: 120%; text-transform: capitalize; margin: 0;">
         {{ section.settings.title }}
       </h2>
+      <div class="carousel-nav" style="display: flex; gap: 6px;">
+        <button class="nav-btn nav-prev">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.5 9L4.5 6L7.5 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="nav-btn nav-next">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.5 3L7.5 6L4.5 9" stroke="#609EE9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
     </div>
     
     <!-- Collections Carousel -->
     <div class="collections-carousel-container" style="position: relative; overflow: hidden;">
-      <div class="collections-carousel" style="display: flex; gap: 30px; transition: transform 0.3s ease; cursor: grab;">
+      <div class="collections-carousel" style="display: flex; gap: 30px; transition: transform 0.4s ease;">
       
       {%- for block in section.blocks -%}
         {%- assign collection = block.settings.collection -%}
@@ -78,6 +90,28 @@
     transition: color 0.3s ease;
   }
   
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #E5E5E5;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .nav-btn:hover {
+    background-color: #f0f0f0;
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   @media (max-width: 1200px) {
     .collection-item {
       width: 350px;
@@ -134,56 +168,89 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.querySelector('.collections-carousel');
-    if (!carousel) return;
+    const sectionContainer = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!sectionContainer) return;
+
+    const carousel = sectionContainer.querySelector('.collections-carousel');
+    const prevBtn = sectionContainer.querySelector('.nav-prev');
+    const nextBtn = sectionContainer.querySelector('.nav-next');
     
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    
-    carousel.addEventListener('mousedown', (e) => {
-      isDown = true;
-      carousel.style.cursor = 'grabbing';
-      startX = e.pageX - carousel.offsetLeft;
-      scrollLeft = carousel.scrollLeft;
+    if (!carousel || !prevBtn || !nextBtn) return;
+
+    const collectionItems = carousel.querySelectorAll('.collection-item');
+    if (collectionItems.length === 0) {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      return;
+    }
+
+    let currentIndex = 0;
+
+    function getItemsPerView() {
+      const containerWidth = carousel.parentElement.offsetWidth;
+      const itemWidth = collectionItems[0] ? collectionItems[0].offsetWidth : 416; // Fallback width
+      const gap = 30;
+      if (itemWidth === 0) return 1; // Avoid division by zero
+      // Calculate how many full items fit
+      const items = Math.floor(containerWidth / (itemWidth + gap));
+      // Check if there is space for another partial item, if so, we can scroll one more time.
+      const remainingSpace = containerWidth - items * (itemWidth + gap);
+      if (remainingSpace >= itemWidth) {
+          return items + 1;
+      }
+      return items > 0 ? items : 1;
+    }
+
+    function updateCarousel(isResize = false) {
+      if (isResize) {
+        carousel.style.transition = 'none'; // Disable transition during resize
+        currentIndex = 0;
+      } else {
+        carousel.style.transition = 'transform 0.4s ease';
+      }
+
+      const itemsPerView = getItemsPerView();
+      const maxIndex = Math.max(0, collectionItems.length - itemsPerView);
+      
+      currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+
+      const itemWidth = collectionItems[0].offsetWidth;
+      const gap = 30;
+      const translateX = -currentIndex * (itemWidth + gap);
+      carousel.style.transform = `translateX(${translateX}px)`;
+      
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex >= maxIndex;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      const itemsPerView = getItemsPerView();
+      const maxIndex = Math.max(0, collectionItems.length - itemsPerView);
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        updateCarousel(true);
+      }, 250);
     });
     
-    carousel.addEventListener('mouseleave', () => {
-      isDown = false;
-      carousel.style.cursor = 'grab';
-    });
-    
-    carousel.addEventListener('mouseup', () => {
-      isDown = false;
-      carousel.style.cursor = 'grab';
-    });
-    
-    carousel.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - carousel.offsetLeft;
-      const walk = (x - startX) * 2;
-      carousel.scrollLeft = scrollLeft - walk;
-    });
-    
-    // Touch events for mobile
-    carousel.addEventListener('touchstart', (e) => {
-      isDown = true;
-      startX = e.touches[0].pageX - carousel.offsetLeft;
-      scrollLeft = carousel.scrollLeft;
-    });
-    
-    carousel.addEventListener('touchend', () => {
-      isDown = false;
-    });
-    
-    carousel.addEventListener('touchmove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.touches[0].pageX - carousel.offsetLeft;
-      const walk = (x - startX) * 2;
-      carousel.scrollLeft = scrollLeft - walk;
-    });
+    // Initial call after a short delay
+    setTimeout(() => {
+        updateCarousel();
+    }, 100);
   });
 </script>
 

@@ -147,10 +147,16 @@
     "collections_listing_cAa8Dw": {
       "type": "collections-listing",
       "blocks": {
-        "collection_bNVqp7": {
+        "collection_RznAfR": {
           "type": "collection",
           "settings": {
-            "collection": "4the"
+            "collection": "nem"
+          }
+        },
+        "collection_UGEcpg": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi"
           }
         },
         "collection_PxDcKV": {
@@ -159,21 +165,29 @@
             "collection": "chan"
           }
         },
-        "collection_UGEcpg": {
+        "collection_3eqRH7": {
           "type": "collection",
           "settings": {
-            "collection": "goi"
+            "collection": "phu-kien"
+          }
+        },
+        "collection_bNVqp7": {
+          "type": "collection",
+          "settings": {
+            "collection": "4the"
           }
         }
       },
       "block_order": [
-        "collection_bNVqp7",
+        "collection_RznAfR",
+        "collection_UGEcpg",
         "collection_PxDcKV",
-        "collection_UGEcpg"
+        "collection_3eqRH7",
+        "collection_bNVqp7"
       ],
       "name": "Collections Listing",
       "settings": {
-        "title": "Our Collections",
+        "title": "danh mục sản phẩm",
         "title_color": "#1c2c58",
         "text_color": "#212121"
       }
@@ -235,6 +249,19 @@
         "primary_color": "#2960ad",
         "text_color": "#1a1a1a",
         "description_color": "#666666"
+      }
+    },
+    "banner_with_content_NiwahU": {
+      "type": "banner-with-content",
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1010,
+        "image": "shopify://shop_images/20250528-140101.png",
+        "image_mobile": "shopify://shop_images/20250528-135154.png",
+        "title": "Đâu là chiếc nệm phù hợp cho bạn?",
+        "text": "<p>Cùng Ru9 khám phá và chọn ra chiếc nệm dành riêng cho bạn.</p>",
+        "btn_text": "Xem thêm",
+        "btn_link": "shopify://collections/nem"
       }
     },
     "journey_ru9_L4xXY7": {
@@ -471,66 +498,6 @@
         "lazyload_images": true
       }
     },
-    "masonry_C7y3G9": {
-      "type": "masonry",
-      "blocks": {
-        "image_PY6h6j": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Ori_Thumb-Website-5_5cb977e2-8a9d-4bda-8b14-47fb84092234.png",
-            "image_mobile": "shopify://shop_images/Ori_Thumb-Website-5_5cb977e2-8a9d-4bda-8b14-47fb84092234.png",
-            "btn_text": "Nệm",
-            "btn_link": "shopify://collections/nem"
-          }
-        },
-        "image_9mN4km": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Hompage_Desktop_G_i_13a5e439-2535-4e7c-8d95-fa3fa29696d0.png",
-            "image_mobile": "shopify://shop_images/Hompage_Mobile_G_i_8312563a-21aa-40d0-a1df-686773ea05e1.png",
-            "btn_text": "Gối",
-            "btn_link": "shopify://collections/goi"
-          }
-        },
-        "image_njPkCC": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Cate_Chan_Thumb_19e2b439-ca38-4b0e-8bb9-e431ae9388fc.png",
-            "image_mobile": "shopify://shop_images/Cate_Chan_Thumb_19e2b439-ca38-4b0e-8bb9-e431ae9388fc.png",
-            "btn_text": "Chăn",
-            "btn_link": "shopify://collections/chan"
-          }
-        },
-        "image_VUjiQA": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Cate_Ga_Desktop_17b10937-e4ad-41be-98c0-f554464c2b82.png",
-            "image_mobile": "shopify://shop_images/Cate_Ga_Desktop_17b10937-e4ad-41be-98c0-f554464c2b82.png",
-            "btn_text": "Ga trải giường",
-            "btn_link": "shopify://collections/bedding"
-          }
-        }
-      },
-      "block_order": [
-        "image_PY6h6j",
-        "image_9mN4km",
-        "image_njPkCC",
-        "image_VUjiQA"
-      ],
-      "disabled": true,
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1130,
-        "title": "Ngủ ngon hơn cùng sản phẩm giấc ngủ đến từ Ru9",
-        "description": "",
-        "description_html": "<div class=\"counter-container\">\n  <span id=\"counter\">0</span> giờ nghiên cứu để bạn chẳng cần phải nghĩ suy về đêm ngon giấc\n</div>\n\n<script>\n  // Hàm đếm số\n  function animateCounter() {\n    const counter = document.getElementById('counter');\n    const target = 3240;\n    const duration = 3000; // 3 giây\n    const frameRate = 30; // số lần cập nhật mỗi giây\n    const totalFrames = duration / 1000 * frameRate;\n    const increment = target / totalFrames;\n    \n    let current = 0;\n    let frame = 0;\n    \n    const animation = setInterval(() => {\n      frame++;\n      current += increment;\n      \n      if (frame >= totalFrames) {\n        clearInterval(animation);\n        current = target;\n      }\n      \n      counter.textContent = Math.floor(current).toLocaleString('vi-VN');\n    }, 1000 / frameRate);\n  }\n  \n  // Chạy animation khi trang được tải\n  document.addEventListener('DOMContentLoaded', animateCounter);\n</script>\n\n<style>\n  #counter {\n    font-weight: bold;\n  }\n</style>",
-        "odd_row_height": "375",
-        "even_row_height": "225",
-        "button_color": "#1b2a57",
-        "button_background": "#ffffff",
-        "carousel_mobile": true
-      }
-    },
     "featured_collection_tab_bxaQPt": {
       "type": "featured-collection-tab",
       "blocks": {
@@ -690,20 +657,6 @@
         "color_tab_name": "#ffffff",
         "background_tab_name": "#2960ad",
         "background_tab_name_inactive": "#ddebfc"
-      }
-    },
-    "banner_with_content_NiwahU": {
-      "type": "banner-with-content",
-      "disabled": true,
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1010,
-        "image": "shopify://shop_images/20250528-140101.png",
-        "image_mobile": "shopify://shop_images/20250528-135154.png",
-        "title": "Đâu là chiếc nệm phù hợp cho bạn?",
-        "text": "<p>Cùng Ru9 khám phá và chọn ra chiếc nệm dành riêng cho bạn.</p>",
-        "btn_text": "Xem thêm",
-        "btn_link": "shopify://collections/nem"
       }
     },
     "text_and_image_JezEQt": {
@@ -1408,14 +1361,13 @@
     "content_dynamic_3BnXn9",
     "collections_listing_cAa8Dw",
     "featured_collections_6qfWNA",
+    "banner_with_content_NiwahU",
     "journey_ru9_L4xXY7",
     "dynamic_text_with_image_3FaeX8",
     "super_service_87efWC",
     "reviews_carousel_QPtXUf",
     "countdown_xAQXpY",
-    "masonry_C7y3G9",
     "featured_collection_tab_bxaQPt",
-    "banner_with_content_NiwahU",
     "text_and_image_JezEQt",
     "featured_collection_tab_MDJC8T",
     "banner_with_collection_KVT4Dz",

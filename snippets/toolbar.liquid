@@ -49,7 +49,7 @@
 
         <!-- Toolbar Menu 2 -->
         {%- if section.settings.toolbar_menu_2 != blank -%}
-          <div class="toolbar__item toolbar__item--menu">
+          <div class="toolbar__item toolbar__item--menu" {%- if section.settings.toolbar_menu_1 != blank %} style="margin-left: 21px;"{% endif %}>
             <ul class="inline-list toolbar__menu small--jc-center flex-wrap">
               {%- for link in toolbar_menu_2.links -%}
                 <li>
