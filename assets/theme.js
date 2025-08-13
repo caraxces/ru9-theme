@@ -9160,21 +9160,29 @@ theme.recentlyViewed = {
 
         if (variant) {
           // Regular price
-          this.cache.price.innerHTML = theme.Currency.formatMoney(
-            variant.price,
-            theme.settings.moneyFormat
-          );
+          if (this.cache.price) {
+            this.cache.price.innerHTML = theme.Currency.formatMoney(
+              variant.price,
+              theme.settings.moneyFormat
+            );
+          }
+          // Keep base price in sync for other features relying on it
+          if (this.cache.price) {
+            this.cache.price.setAttribute('data-product-price-base', String(variant.price));
+          }
 
           // Sale price, if necessary
           if (variant.compare_at_price > variant.price) {
-            this.cache.comparePrice.innerHTML = theme.Currency.formatMoney(
-              variant.compare_at_price,
-              theme.settings.moneyFormat
-            );
-            this.cache.priceWrapper.classList.remove(classes.hidden);
-            this.cache.price.classList.add(classes.onSale);
-            this.cache.comparePriceA11y.setAttribute("aria-hidden", "false");
-            this.cache.priceA11y.setAttribute("aria-hidden", "false");
+            if (this.cache.comparePrice) {
+              this.cache.comparePrice.innerHTML = theme.Currency.formatMoney(
+                variant.compare_at_price,
+                theme.settings.moneyFormat
+              );
+            }
+            if (this.cache.priceWrapper) this.cache.priceWrapper.classList.remove(classes.hidden);
+            if (this.cache.price) this.cache.price.classList.add(classes.onSale);
+            if (this.cache.comparePriceA11y) this.cache.comparePriceA11y.setAttribute("aria-hidden", "false");
+            if (this.cache.priceA11y) this.cache.priceA11y.setAttribute("aria-hidden", "false");
 
             var savings = variant.compare_at_price - variant.price;
 
@@ -9188,37 +9196,62 @@ theme.recentlyViewed = {
               );
             }
 
-            this.cache.savePrice.classList.remove(classes.hidden);
-            this.cache.savePrice.innerHTML = theme.strings.savePrice.replace(
-              "[saved_amount]",
-              savings
-            );
+            if (this.cache.savePrice) {
+              this.cache.savePrice.classList.remove(classes.hidden);
+              this.cache.savePrice.innerHTML = theme.strings.savePrice.replace(
+                "[saved_amount]",
+                savings
+              );
+            }
           } else {
             if (this.cache.priceWrapper) {
               this.cache.priceWrapper.classList.add(classes.hidden);
             }
-            this.cache.savePrice.classList.add(classes.hidden);
-            this.cache.price.classList.remove(classes.onSale);
+            if (this.cache.savePrice) this.cache.savePrice.classList.add(classes.hidden);
+            if (this.cache.price) this.cache.price.classList.remove(classes.onSale);
             if (this.cache.comparePriceA11y) {
               this.cache.comparePriceA11y.setAttribute("aria-hidden", "true");
             }
-            this.cache.priceA11y.setAttribute("aria-hidden", "true");
+            if (this.cache.priceA11y) this.cache.priceA11y.setAttribute("aria-hidden", "true");
           }
 
-          this.cacheDuplicate = {
-            installmentPrice: installmentWrapper.querySelector(
-              this.selectors.installmentPrice
-            ),
-          };
+          // Update discount badge per variant across all price containers in this product section
+          var hasDiscount = variant.compare_at_price > variant.price;
+          var priceContainers = this.container.querySelectorAll('.price-container-wrapper');
+          priceContainers.forEach(function(priceContainer){
+            // Prefer the canonical badge rendered by liquid
+            var discountBadge = priceContainer.querySelector('[data-discount-badge]') || priceContainer.querySelector('.product__discount-badge');
+            if (!discountBadge) return;
+            if (hasDiscount) {
+              var discountPercent = Math.round(((variant.compare_at_price - variant.price) / variant.compare_at_price) * 100);
+              discountBadge.textContent = '-' + discountPercent + '%';
+              discountBadge.style.display = '';
+            } else {
+              discountBadge.style.display = 'none';
+              discountBadge.textContent = '';
+            }
+          });
 
-          if (variant.price > minInstallmentPrice) {
-            installmentWrapper
-              .querySelector(".product-installment")
-              ?.classList.remove("hidden");
+          if (installmentWrapper) {
+            this.cacheDuplicate = {
+              installmentPrice: installmentWrapper.querySelector(
+                this.selectors.installmentPrice
+              ),
+            };
           } else {
-            installmentWrapper
-              .querySelector(".product-installment")
-              ?.classList.add("hidden");
+            this.cacheDuplicate = { installmentPrice: null };
+          }
+
+          if (installmentWrapper) {
+            if (variant.price > minInstallmentPrice) {
+              installmentWrapper
+                .querySelector(".product-installment")
+                ?.classList.remove("hidden");
+            } else {
+              installmentWrapper
+                .querySelector(".product-installment")
+                ?.classList.add("hidden");
+            }
           }
 
           if (this.cacheDuplicate.installmentPrice)

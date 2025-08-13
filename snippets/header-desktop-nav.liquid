@@ -115,7 +115,7 @@
         {%- assign animation_column = 1 -%}
 
         <div class="site-nav__dropdown megamenu text-left">
-          <div class="page-width gap">
+          <div class="page-width gap" style="{% if section.settings.section_width != 'page-width' %}{% if section.settings.section_width == 'full-width' %}--page-width: 100%{% elsif section.settings.section_width == 'customize_width' %}--page-width: {{ section.settings.customize_width | plus: 80 }}px{% endif %}{% endif %}">
             <div class="megamenu__content">
               <div class="grid">
                 <div class="grid__item medium-up--two-sixths appear-animation appear-delay-{{ animation_column }}">
@@ -438,3 +438,242 @@
     </li>
   {%- endfor -%}
 </ul>
+
+<style>
+  @media (min-width: 750px) {
+    /* Constrain megamenu width exactly like header (1360px) */
+    .site-nav__dropdown.megamenu .page-width {
+      margin: 0 auto !important;
+      max-width: 1360px !important;
+      width: 100% !important;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    /* Base layout */
+    .site-nav__dropdown.megamenu .megamenu__content .grid { display: block; }
+    .site-nav__dropdown.megamenu .megamenu__content .grid__item.appear-animation { width: 100% !important; max-width: none; }
+    .site-nav__dropdown.megamenu .megamenu__content .grid__item.appear-animation + .grid__item.appear-animation { margin-top: 24px; }
+
+    /* Only keep first row structure; other rows' cards will be moved into a scroller */
+    .site-nav__dropdown.megamenu .megamenu__content .grid__item.appear-animation:not(:first-child) { display: none !important; }
+
+    /* Scroller that shows only mega-cards, title (f-bold) stays fixed */
+    .site-nav__dropdown.megamenu .mega-scroll {
+      height: var(--mega-row-height, 288px);
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      padding-right: 0;
+      /* Hide scrollbar across browsers */
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+    .site-nav__dropdown.megamenu .mega-scroll::-webkit-scrollbar { display: none; }
+    .site-nav__dropdown.megamenu .mega-scroll > .mega-cards {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      min-height: var(--mega-row-height, 288px);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px; /* add a bit spacing between product cards */
+      align-items: flex-start;
+    }
+    .site-nav__dropdown.megamenu .mega-scroll > .mega-cards > * { margin: 0 !important; }
+
+    /* Dim titles in display-2 and display-3 */
+    .site-nav__dropdown.megamenu .grid__item.appear-delay-2 .f-bold,
+    .site-nav__dropdown.megamenu .grid__item.appear-delay-3 .f-bold {
+      opacity: 0.7;
+    }
+
+    /* Reveal animation */
+    .site-nav__dropdown.megamenu .grid__item.appear-delay-2,
+    .site-nav__dropdown.megamenu .grid__item.appear-delay-3 {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .site-nav__dropdown.megamenu .grid__item.appear-animation.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Place tabs inline next to .f-bold heading */
+    .site-nav__dropdown.megamenu .f-bold {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .site-nav__dropdown.megamenu .mega-tabs { display: inline-flex; gap: 12px; }
+    .site-nav__dropdown.megamenu .mega-tab {
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
+      font-weight: inherit; /* match .f-bold */
+      opacity: 0.6; /* lighter than f-bold */
+    }
+    .site-nav__dropdown.megamenu .mega-tab.is-active { opacity: 1; }
+
+    /* Align when header is left-center: center the scroller and fix row height */
+    .header-layout--left-center .site-nav__dropdown.megamenu .mega-scroll {
+      --mega-row-height: 288px;
+      height: 288px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    if (window.__ru9MegaStagedInit) return;
+    window.__ru9MegaStagedInit = true;
+
+    function initStagedReveal() {
+      var megaMenus = document.querySelectorAll('.site-nav__dropdown.megamenu');
+      if (!('IntersectionObserver' in window)) {
+        // Fallback: show everything if IO not supported
+        megaMenus.forEach(function (menu) {
+          menu.querySelectorAll('.mega-scroll > .mega-cards').forEach(function (el) {
+            el.classList.add('is-visible');
+          });
+        });
+        return;
+      }
+
+      megaMenus.forEach(function (menu) {
+        var scroller = menu.querySelector('.mega-scroll');
+        var targets = menu.querySelectorAll('.mega-scroll > .mega-cards');
+        if (!targets.length) return;
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, {
+          root: scroller || menu,
+          rootMargin: '0px 0px -10% 0px',
+          threshold: 0.1
+        });
+
+        targets.forEach(function (el) { io.observe(el); });
+      });
+    }
+
+    function initMegaTabsAndScroll() {
+      var megaMenus = document.querySelectorAll('.site-nav__dropdown.megamenu');
+      megaMenus.forEach(function (menu) {
+        var grid = menu.querySelector('.megamenu__content .grid');
+        if (!grid) return;
+        var pages = Array.prototype.slice.call(grid.querySelectorAll('.grid__item.appear-animation'));
+        if (pages.length === 0) return;
+
+        // Build scroller of mega-cards and keep first f-bold fixed
+        var firstRow = pages[0];
+        var firstBold = firstRow && firstRow.querySelector('.f-bold');
+        if (!firstBold) return;
+
+        var scroller = document.createElement('div');
+        scroller.className = 'mega-scroll';
+
+        var cardsList = [];
+        pages.forEach(function (page) {
+          var cards = page.querySelector('.mega-cards');
+          if (cards) {
+            cardsList.push(cards);
+          }
+        });
+
+        // Wrap each mega-cards into its own viewport container to ensure clear snapping
+        cardsList.forEach(function (cards) {
+          var viewport = document.createElement('div');
+          viewport.className = 'mega-cards';
+          // If cards is already a mega-cards element, move its children into viewport
+          while (cards.firstChild) {
+            viewport.appendChild(cards.firstChild);
+          }
+          scroller.appendChild(viewport);
+          // Remove original empty node
+          cards.parentNode && cards.parentNode.removeChild(cards);
+        });
+
+        // Insert scroller after first title
+        firstBold.parentNode.insertBefore(scroller, firstBold.nextSibling);
+
+        // Tabs inline next to first title for rows 2 and 3
+        var tabs = document.createElement('div');
+        tabs.className = 'mega-tabs';
+        [1, 2].forEach(function (idx) {
+          if (!pages[idx]) return;
+          var labelAnchor = pages[idx].querySelector('.f-bold a');
+          var label = labelAnchor ? labelAnchor.textContent.trim() : ('Collection ' + (idx + 1));
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'mega-tab';
+          btn.setAttribute('data-index', String(idx));
+          btn.textContent = label;
+          tabs.appendChild(btn);
+        });
+        firstBold.appendChild(tabs);
+
+        // Height: if header layout left-center exists, force 288px
+        if (document.querySelector('.header-layout--left-center')) {
+          scroller.style.setProperty('--mega-row-height', '288px');
+          scroller.style.height = '288px';
+        }
+
+        function highlightTabByIndex(activeIndex) {
+          tabs.querySelectorAll('.mega-tab').forEach(function (tab) {
+            var idx = parseInt(tab.getAttribute('data-index') || '0', 10);
+            tab.classList.toggle('is-active', idx === activeIndex);
+            tab.setAttribute('aria-selected', idx === activeIndex ? 'true' : 'false');
+          });
+        }
+
+        tabs.addEventListener('click', function (e) {
+          var btn = e.target && e.target.closest('.mega-tab');
+          if (!btn) return;
+          var idx = parseInt(btn.getAttribute('data-index') || '1', 10);
+          var targetCards = scroller.children[idx] || null; // index: 0 is first row's cards
+          if (!targetCards) return;
+          var offset = targetCards.offsetTop - scroller.firstElementChild.offsetTop;
+          scroller.scrollTo({ top: offset, behavior: 'smooth' });
+          highlightTabByIndex(idx);
+        });
+
+        // Sync tab state on scroll
+        scroller.addEventListener('scroll', function () {
+          var scrollTop = scroller.scrollTop + 1;
+          var current = 0;
+          for (var i = 0; i < scroller.children.length; i++) {
+            if (scrollTop >= scroller.children[i].offsetTop - scroller.firstElementChild.offsetTop) {
+              current = i;
+            }
+          }
+          // Only highlight for indexes 1 and 2 (display 2/3)
+          if (current >= 1 && current <= 2) {
+            highlightTabByIndex(current);
+          } else {
+            highlightTabByIndex(-1);
+          }
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        initStagedReveal();
+        initMegaTabsAndScroll();
+      });
+    } else {
+      initStagedReveal();
+      initMegaTabsAndScroll();
+    }
+  })();
+</script>

@@ -10,11 +10,10 @@
 {
   "current": {
     "rounded": 16,
-    "discount_percentage": 10,
-    "page_width": "1280",
+    "page_width": 1280,
     "spacing_grid_horizontal": 24,
     "spacing_grid_vertical": 24,
-    "color_body_bg": "#f8f6f4",
+    "color_body_bg": "#ffffff",
     "color_body_text": "#1b2a57",
     "color_heading_text": "#1c2c58",
     "color_price": "#234085",
@@ -30,11 +29,11 @@
     "background_arrow_hover": "#1b2a57",
     "color_cart_dot": "#ff7f41",
     "color_large_image_bg": "#0f0f0f",
-    "color_header": "#f8f6f4",
+    "color_header": "#ffffff",
     "color_header_text": "#1c2c58",
     "color_announcement": "#0f0f0f",
     "color_footer": "#345daa",
-    "color_drawer_background": "#f8f6f4",
+    "color_drawer_background": "#ffffff",
     "color_drawer_text": "#1c2c58",
     "color_drawer_border": "#e5e7eb",
     "color_drawer_button": "#2960ad",
@@ -72,6 +71,7 @@
     "favicon": "shopify://shop_images/Ru9_64x64_535227b0-b74c-4250-8066-eb99abf5f492.png",
     "show_breadcrumbs": true,
     "show_breadcrumbs_collection_link": false,
+    "discount_percentage": 10,
     "category_tag": "sản-phẩm_Sản phẩm, giấc-ngủ_Giấc ngủ, mẹo-vặt_Mẹo vặt,mẹ-bé_Mẹ & bé",
     "sections": {
       "pf-warranty-accordion": {

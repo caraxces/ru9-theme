@@ -109,7 +109,6 @@
       ],
       "name": "Product Bundle",
       "settings": {
-        "discount_percentage": 20,
         "bundle_products": [
           "foam-original",
           "tam-bao-ve-nem",

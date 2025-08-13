@@ -1,0 +1,472 @@
+{%- assign blog = blogs[section.settings.blog] -%}
+
+{% liquid
+  if section.settings.section_width != 'page-width'
+    if section.settings.section_width == 'full-width'
+      assign page_width = '100%'
+    endif
+    if section.settings.section_width == 'customize_width'
+      assign page_width = section.settings.customize_width | plus: 80 | append: 'px'
+    endif
+  endif
+%}
+
+<div class="ovh" data-section-id="{{ section.id }}" data-section-type="blog-carousel-section">
+  <div
+    class="page-width"
+    style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
+  >
+    {%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+    <header class="section-header text-{{ section.settings.heading_alignment }}{% if section.settings.view_all %}{% unless settings.type_headers_align_text %} section-header--with-link{% endunless %}{% endif %}">
+      {%- if section.settings.title != blank -%}
+        <h2 class="section-header__title m-0">
+          {{ section.settings.title | escape }}
+        </h2>
+      {%- endif -%}
+      <div class="section-header__side-content">
+        {%- if section.settings.view_all -%}
+          <a href="{{ blog.url }}" class="button--secondary view-all-button">
+            <span>
+              {%- if section.settings.view_all_text != blank -%}
+                {{ section.settings.view_all_text }}
+              {%- else -%}
+                {{ 'blogs.article.view_all' | t }}
+              {%- endif -%}
+            </span>
+          </a>
+        {%- endif -%}
+        <!-- Navigation Arrows -->
+        <div class="carousel-nav" style="display: flex; gap: 6px; margin-left: 24px;">
+          <button class="nav-btn nav-prev" style="width: 40px; height: 40px; border: 1px solid #E5E5E5; border-radius: 50%; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 9L4.5 6L7.5 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="nav-btn nav-next" style="width: 40px; height: 40px; border: 1px solid #E5E5E5; border-radius: 50%; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 9L7.5 6L4.5 3" stroke="#609EE9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    {%- unless blog.empty? -%}
+      <div class="blog-carousel-wrapper" style="overflow: hidden; margin-top: 30px;">
+        <div class="blog-carousel-slider" style="display: flex; gap: 24px;">
+          {%- for block in section.blocks -%}
+            {%- assign article = block.settings.article -%}
+            <div class="blog-carousel-slide scroll-trigger animate--fade-in" style="flex: 0 0 380px;" {{ block.shopify_attributes }}>
+              <div class="article-card-wrapper">
+                {%- if article.image -%}
+                  <a href="{{ article.url }}" class="article-card__image-link" aria-label="{{ article.title | escape }}">
+                    <div class="article-card__image-container">
+                      <img
+                        src="{{ article.image | image_url: width: 760 }}"
+                        alt="{{ article.image.alt | escape }}"
+                        class="article-card__image"
+                        loading="lazy"
+                        width="{{ article.image.width }}"
+                        height="{{ article.image.height }}"
+                      >
+                    </div>
+                  </a>
+                {%- else -%}
+                  <div class="article-card__image-container article-card__image-container--placeholder">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {%- endif -%}
+
+                <div class="article-card__info">
+                  {%- if section.settings.blog_show_date -%}
+                    <p class="article-card__date">
+                      {{ article.published_at | time_tag: format: 'month_day_year' }}
+                    </p>
+                  {%- endif -%}
+
+                  <h3 class="article-card__title">
+                    <a href="{{ article.url }}">{{ article.title }}</a>
+                  </h3>
+
+                  {%- if block.settings.custom_description != blank -%}
+                    <p class="article-card__custom-description">{{ block.settings.custom_description }}</p>
+                  {%- endif -%}
+
+                  {%- if section.settings.blog_show_excerpt -%}
+                    <div class="article-card__excerpt rte">
+                      {%- if article.excerpt.size > 0 -%}
+                        {{ article.excerpt | strip_html | truncatewords: 15 }}
+                      {%- else -%}
+                        {{ article.content | strip_html | truncatewords: 15 }}
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+       <!-- Progress Bar Section -->
+      <div class="carousel-progress-container" style="padding: 24px 0; display: flex; justify-content: flex-start;">
+        <div class="carousel-progress-bar-background" style="display: flex; width: 466px; height: 5.83px; align-items: center; flex-shrink: 0; border-radius: 100px; background: #E0E0E0;">
+          <div class="carousel-progress-bar" style="height: 100%; border-radius: 100px; background: #AFAFAF; width: 0%; transition: width 0.3s ease;"></div>
+        </div>
+      </div>
+    {%- else -%}
+      <div class="grid grid--uniform">
+        <p>Please select a blog to display articles.</p>
+      </div>
+    {%- endunless -%}
+    {%- if section.settings.divider -%}</div>{%- endif -%}
+  </div>
+</div>
+
+<style>
+  [data-section-id="{{ section.id }}"] .section-header__title {
+    color: #1C2C58;
+    font-family: Tinos, serif;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  [data-section-id="{{ section.id }}"] .view-all-button {
+    display: flex;
+    height: 43px;
+    padding: 12px 35px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    border: 2px solid #609EE9;
+    text-decoration: none;
+    color: inherit;
+  }
+  [data-section-id="{{ section.id }}"] .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  [data-section-id="{{ section.id }}"] .section-header__side-content {
+    display: flex;
+    align-items: center;
+  }
+  [data-section-id="{{ section.id }}"] .blog-carousel-slider {
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  [data-section-id="{{ section.id }}"] .nav-btn:hover {
+    background: #E5E5E5 !important;
+  }
+  
+  /* Article Card Styles */
+  [data-section-id="{{ section.id }}"] .article-card-wrapper {
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  [data-section-id="{{ section.id }}"] .article-card__image-container {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 365px; 
+    height: 399px;
+    border-radius: 12px; 
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  [data-section-id="{{ section.id }}"] .article-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    transition: transform 0.3s ease;
+  }
+  [data-section-id="{{ section.id }}"] .article-card__image-link:hover .article-card__image {
+    transform: scale(1.05);
+  }
+  [data-section-id="{{ section.id }}"] .article-card__info {
+    margin-top: 24px;
+    padding: 24px;
+    border-radius: 12px;
+    background: #F0F7FF;
+    font-family: "Be Vietnam Pro", sans-serif;
+    width: 365px;
+    height: 157px;
+    box-sizing: border-box;
+  }
+  [data-section-id="{{ section.id }}"] .article-card__date {
+    font-size: 14px;
+    color: #6B7280;
+    margin: 0 0 8px;
+  }
+  [data-section-id="{{ section.id }}"] .article-card__title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0 0 8px;
+    width: 332px;
+    height: 60px;
+    overflow: hidden;
+  }
+  [data-section-id="{{ section.id }}"] .article-card__title a {
+    color: #111827;
+    text-decoration: none;
+  }
+  [data-section-id="{{ section.id }}"] .article-card__title a:hover {
+    text-decoration: underline;
+  }
+  [data-section-id="{{ section.id }}"] .article-card__custom-description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #374151;
+    margin: 0 0 8px;
+  }
+  [data-section-id="{{ section.id }}"] .article-card__excerpt {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #000;
+    font-weight: 400;
+    width: 332px;
+    height: 52px;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sectionContainer = document.querySelector('[data-section-id="{{ section.id }}"]');
+  if (!sectionContainer) return;
+
+  const slider = sectionContainer.querySelector('.blog-carousel-slider');
+  const prevBtn = sectionContainer.querySelector('.nav-prev');
+  const nextBtn = sectionContainer.querySelector('.nav-next');
+  const progressBar = sectionContainer.querySelector('.carousel-progress-bar');
+  const progressBarContainer = sectionContainer.querySelector('.carousel-progress-container');
+
+  if (!slider) return;
+
+  let currentSlide = 0;
+
+  function updateCarousel() {
+    const slides = slider.querySelectorAll('.blog-carousel-slide');
+    if (slides.length === 0) return;
+
+    const containerWidth = slider.parentElement.offsetWidth;
+    const slideWidth = slides[0].offsetWidth;
+    const gap = 24;
+    const slidesPerView = Math.floor((containerWidth + gap) / (slideWidth + gap));
+    const maxSlides = Math.max(0, slides.length - slidesPerView);
+
+    currentSlide = Math.max(0, Math.min(currentSlide, maxSlides));
+    
+    const translateX = -currentSlide * (slideWidth + gap);
+    slider.style.transform = `translateX(${translateX}px)`;
+    
+    if (prevBtn) prevBtn.disabled = currentSlide === 0;
+    if (nextBtn) nextBtn.disabled = currentSlide >= maxSlides;
+
+    if (progressBarContainer && progressBar) {
+      if (maxSlides > 0) {
+        progressBarContainer.style.display = 'flex';
+        const progressPercent = (currentSlide / maxSlides) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+      } else {
+        progressBarContainer.style.display = 'none';
+      }
+    }
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateCarousel();
+      }
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function() {
+      const slides = slider.querySelectorAll('.blog-carousel-slide');
+      const containerWidth = slider.parentElement.offsetWidth;
+      const slideWidth = slides[0] ? slides[0].offsetWidth : 0;
+      const gap = 24;
+      const slidesPerView = Math.floor((containerWidth + gap) / (slideWidth + gap));
+      const maxSlides = Math.max(0, slides.length - slidesPerView);
+
+      if (currentSlide < maxSlides) {
+        currentSlide++;
+        updateCarousel();
+      }
+    });
+  }
+  
+  // Initial setup
+  updateCarousel();
+  
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    updateCarousel();
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Blog posts carousel",
+  "class": "index-section section-blogposts",
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "t:sections.all.section_width.options__1"
+        },
+        {
+          "value": "page-width",
+          "label": "t:sections.all.section_width.options__2"
+        },
+        {
+          "value": "customize_width",
+          "label": "t:sections.all.section_width.options__3"
+        }
+      ],
+      "default": "page-width",
+      "label": "t:sections.all.section_width.label"
+    },
+    {
+      "type": "range",
+      "id": "customize_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 10,
+      "default": 1800,
+      "unit": "px",
+      "label": "t:sections.all.customize_width.label"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.blog-posts.settings.title.label",
+      "default": "Blog posts"
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_alignment",
+      "default": "left",
+      "label": "t:common.text_alignment.label__1"
+    },
+    {
+      "id": "blog",
+      "type": "blog",
+      "label": "t:sections.blog-posts.settings.blog.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_tags",
+      "label": "t:sections.blog-posts.settings.blog_show_tags.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": "t:sections.blog-posts.settings.blog_show_date.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_comments",
+      "label": "t:sections.blog-posts.settings.blog_show_comments.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_excerpt",
+      "label": "t:sections.blog-template.settings.blog_show_excerpt.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_author",
+      "label": "t:sections.blog-posts.settings.blog_show_author.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "view_all",
+      "label": "t:sections.blog-posts.settings.view_all.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "t:sections.blog-posts.settings.view_all.label__1"
+    },
+    {
+      "type": "select",
+      "id": "blog_image_size",
+      "label": "t:sections.blog-posts.settings.blog_image_size.label",
+      "default": "wide",
+      "options": [
+        {
+          "value": "natural",
+          "label": "t:sections.blog-posts.settings.blog_image_size.options.natural.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.blog-posts.settings.blog_image_size.options.square.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.blog-posts.settings.blog_image_size.options.landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.blog-posts.settings.blog_image_size.options.portrait.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.blog-posts.settings.blog_image_size.options.wide.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.blog-posts.settings.divider.label",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article_slide",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Article"
+        },
+        {
+          "type": "text",
+          "id": "custom_description",
+          "label": "Custom description",
+          "default": "Custom description text for this article."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog posts carousel",
+      "settings": {
+        "blog": "News"
+      },
+      "blocks": [
+        { "type": "article_slide" },
+        { "type": "article_slide" },
+        { "type": "article_slide" },
+        { "type": "article_slide" }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  }
+}
+{% endschema %}

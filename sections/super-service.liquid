@@ -1,0 +1,204 @@
+{% comment %}
+  section-specific CSS
+{% endcomment %}
+<style>
+  .super-service-section-wrapper {
+    padding-bottom: 77px;
+    background-color: #fff;
+  }
+  .super-service-section {
+    background-color: {{ section.settings.background_color }};
+    padding: 30px 0;
+  }
+
+  .super-service-section .page-width {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .super-service__title {
+    color: #1C2C58;
+    font-family: 'Tinos', serif;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 0 50px 0;
+  }
+
+  .super-service__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    justify-items: start;
+    text-align: left;
+  }
+
+  @media screen and (max-width: 990px) {
+    .super-service__grid {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 40px;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .super-service__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .super-service__item {
+    width: 216px;
+  }
+
+  .super-service__item-icon {
+    margin-bottom: 20px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .super-service__item-icon img,
+  .super-service__item-icon svg {
+    max-height: 100%;
+    width: auto;
+  }
+
+  .super-service__item-title {
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 150%;
+    margin: 0 0 10px 0;
+    max-width: 132px;
+  }
+
+  .super-service__item-description {
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+</style>
+
+{% comment %}
+  Section HTML
+{% endcomment %}
+<div class="super-service-section" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    {% if section.settings.title != blank %}
+      <h2 class="super-service__title">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    <div class="super-service__grid">
+      {% for block in section.blocks %}
+        <div class="super-service__item" {{ block.shopify_attributes }}>
+          <div class="super-service__item-icon">
+            {% if block.settings.icon != blank %}
+              {{ block.settings.icon | image_url: width: 120 | image_tag: loading: 'lazy' }}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+          {% if block.settings.item_title != blank %}
+            <h3 class="super-service__item-title">{{ block.settings.item_title }}</h3>
+          {% endif %}
+          {% if block.settings.item_description != blank %}
+            <div class="super-service__item-description">
+              {{ block.settings.item_description }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      {% if section.blocks.size == 0 %}
+        {% for i in (1..4) %}
+          <div class="super-service__item">
+            <div class="super-service__item-icon">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            <h3 class="super-service__item-title">Service Title</h3>
+            <div class="super-service__item-description">
+              <p>Use this text to share information about your service.</p>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Super Service",
+  "tag": "section",
+  "class": "super-service-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Super Services"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F0F7FF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service_item",
+      "name": "Service Item",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "item_title",
+          "label": "Title",
+          "default": "Service Title"
+        },
+        {
+          "type": "richtext",
+          "id": "item_description",
+          "label": "Description",
+          "default": "<p>Use this text to share information about your service.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Super Service",
+      "blocks": [
+        {
+          "type": "service_item"
+        },
+        {
+          "type": "service_item"
+        },
+        {
+          "type": "service_item"
+        },
+        {
+          "type": "service_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -11,8 +11,64 @@
   "type": "footer",
   "name": "t:sections.footer-group.name",
   "sections": {
+    "footer_ru9_hGeLPa": {
+      "type": "footer-ru9",
+      "blocks": {
+        "column_xLyPdf": {
+          "type": "column",
+          "settings": {
+            "title": "Sản phẩm",
+            "content": "<p><a href=\"/collections/nem\" title=\"Nệm\">Nệm </a></p><p><a href=\"https://ru9.vn/collections/nem-foam\" target=\"_blank\" title=\"nệm foam\">Nệm Foam</a></p><p><a href=\"https://ru9.vn/collections/topper\" target=\"_blank\" title=\"topper\">Topper</a></p><p><a href=\"/collections/goi\" title=\"Gối\">Gối </a></p><p><a href=\"/collections/4the\" title=\"4The\">4The</a></p><p><a href=\"/collections/bedding\" title=\"Bedding\">Ga trải giường </a></p><p><a href=\"/collections/chan\" title=\"Chăn\">Chăn</a></p><p><a href=\"/collections/phu-kien\" title=\"Phụ kiện\">Phụ kiện </a></p><p><a href=\"https://rubaby.vn\" title=\"https://rubaby.vn\">Dành cho bé</a></p>"
+          }
+        },
+        "column_RfzkLM": {
+          "type": "column",
+          "settings": {
+            "title": "Chính sách",
+            "content": "<p><a href=\"/pages/100-dem-ngu-thu\" title=\"Ngủ thử 100 đêm\">100 đêm ngủ thử</a></p><p><a href=\"/pages/chinh-sach-van-chuyen\" target=\"_blank\" title=\"Chính sách vận chuyển\">Vận chuyển</a></p><p><a href=\"/pages/bao-hanh\" title=\"Chính Sách Bảo Hành\">Bảo hành</a></p><p><a href=\"/pages/warranty-rquest\" target=\"_blank\" title=\"Yêu cầu bảo hành\">Yêu cầu bảo hành</a></p><p><a href=\"/pages/huong-dan-thanh-toan\" title=\"Hướng Dẫn Thanh Toán\">Thanh toán</a></p><p><a href=\"/pages/mua-nem-tra-gop\" title=\"Mua Nệm Trả Góp Online - 0% Lãi Suất | Ru9®\">Trả góp 0%</a></p><p><a href=\"/pages/bao-mat\" title=\"Chính sách bảo mật thông tin\">Bảo mật thông tin </a></p><p><a href=\"https://ru9.vn/pages/ru9s-deposit-policy\">Chính sách đặt cọc</a></p>"
+          }
+        },
+        "column_FBDGTb": {
+          "type": "column",
+          "settings": {
+            "title": "Về chúng tôi",
+            "content": "<p><a href=\"/pages/about\" title=\"Chuyện Của Ru9\">Chuyện của Ru9</a></p><p><a href=\"/pages/trach-nhiem-cong-dong-csr\" title=\"Trách nhiệm cộng đồng\">Trách nhiệm cộng đồng</a></p><p><a href=\"/pages/certification\" title=\"Chứng nhận an toàn\">Chứng nhận</a></p><p><a href=\"/pages/faqs\" title=\"FAQs\">FAQs</a></p><p><a href=\"/blogs/magazine\" title=\"Ru9 Blog\">Blog</a></p><p><a href=\"/pages/career\" title=\"Việc Làm\">Việc làm</a></p><p><a href=\"/pages/press\" title=\"Báo Chí\">Báo chí</a></p><p><a href=\"/pages/danh-gia\" title=\"Đánh Giá\">Đánh giá</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_xLyPdf",
+        "column_RfzkLM",
+        "column_FBDGTb"
+      ],
+      "custom_css": [
+        ".footer-ru9 {background: #F0F7FF; padding: 40px 0; position: relative; overflow: hidden; }"
+      ],
+      "name": "Footer RU9 (custom)",
+      "settings": {
+        "enable_dark_veil": false,
+        "dark_veil_hue_shift": 0,
+        "dark_veil_noise": 0,
+        "dark_veil_scan": 0,
+        "dark_veil_scan_freq": 0,
+        "dark_veil_warp": 0,
+        "dark_veil_speed": 0.5,
+        "dark_veil_resolution_scale": 1,
+        "partner_logo": "shopify://shop_images/rubaby-logo.png",
+        "newsletter_title": "NHẬN THÔNG TIN ƯU ĐÃI TỪ RU9",
+        "social_facebook_link": "https://www.facebook.com/ru9vn",
+        "social_instagram_link": "https://www.facebook.com/ru9vn",
+        "social_youtube_link": "",
+        "social_tiktok_link": "https://www.facebook.com/ru9vn",
+        "addr_1": "<p>B2.009 Chung cư Sarimi, Nguyễn Cơ Thạch, Thành phố Thủ Đức, TP. Hồ Chí Minh<br/>0964777910</p>",
+        "addr_2": "<p>283A Hai Bà Trưng, Phường Xuân Hòa, <br/>TP. Hồ Chí Minh<br/>0964777910</p>",
+        "addr_3": "<p>228 Cầu Giấy, Phường Quan Hoa, Hà Nội<br/>0964777940</p>",
+        "hours": "<p>Giờ mở cửa<br/>09:00 - 21:00, Thứ 2 - Chủ nhật</p>"
+      }
+    },
     "contact_us_banner_7ty9ei": {
       "type": "contact-us-banner",
+      "disabled": true,
       "settings": {
         "mg": "150px,,0px,",
         "pd": "90px,,,",
@@ -58,6 +114,7 @@
         "navigate_aFLBpQ",
         "navigate_W9ikEk"
       ],
+      "disabled": true,
       "settings": {
         "footer_logo": "shopify://shop_images/footer-header.png",
         "copyright_text": "Ru9 © Copyright 2024",
@@ -173,6 +230,7 @@
     }
   },
   "order": [
+    "footer_ru9_hGeLPa",
     "contact_us_banner_7ty9ei",
     "footer_2_Wfpith",
     "footer-promotions",

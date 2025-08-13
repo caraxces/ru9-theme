@@ -1,0 +1,213 @@
+{%- liquid
+  assign section_id = section.id
+-%}
+
+<section class="reviews-carousel" id="reviews-carousel-{{ section_id }}" data-section-id="{{ section_id }}" data-autoplay="{{ section.settings.autoplay }}" data-interval="{{ section.settings.autoplay_interval }}">
+  <div class="page-width">
+    <div class="reviews-header">
+      <div class="reviews-stars" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="137" height="24" viewBox="0 0 137 24" fill="none">
+          <path d="M11.4987 0.414593C11.6783 -0.138197 12.4603 -0.138197 12.6399 0.414593L15.0778 7.91753C15.1581 8.16474 15.3885 8.33212 15.6484 8.33212H23.5375C24.1187 8.33212 24.3604 9.07585 23.8902 9.41755L17.5078 14.0547C17.2975 14.2074 17.2095 14.4783 17.2898 14.7255L19.7277 22.2284C19.9073 22.7812 19.2746 23.2409 18.8044 22.8992L12.422 18.2622C12.2117 18.1094 11.9269 18.1094 11.7166 18.2622L5.33427 22.8992C4.86405 23.2409 4.23136 22.7812 4.41097 22.2284L6.84882 14.7255C6.92915 14.4783 6.84115 14.2074 6.63086 14.0547L0.248482 9.41755C-0.221748 9.07585 0.0199116 8.33212 0.601152 8.33212H8.49023C8.75013 8.33212 8.98053 8.16474 9.06083 7.91753L11.4987 0.414593Z" fill="#609EE9"/>
+          <path d="M39.4988 0.414593C39.6784 -0.138197 40.4603 -0.138197 40.6399 0.414593L43.0778 7.91753C43.1581 8.16474 43.3886 8.33212 43.6485 8.33212H51.5375C52.1187 8.33212 52.3604 9.07585 51.8902 9.41755L45.5078 14.0547C45.2975 14.2074 45.2096 14.4783 45.2899 14.7255L47.7278 22.2284C47.9074 22.7812 47.2746 23.2409 46.8044 22.8992L40.422 18.2622C40.2117 18.1094 39.927 18.1094 39.7167 18.2622L33.3342 22.8992C32.864 23.2409 32.2313 22.7812 32.4109 22.2284L34.8488 14.7255C34.9291 14.4783 34.8411 14.2074 34.6308 14.0547L28.2484 9.41755C27.7782 9.07585 28.0199 8.33212 28.6011 8.33212H36.4902C36.7501 8.33212 36.9805 8.16474 37.0609 7.91753L39.4988 0.414593Z" fill="#609EE9"/>
+          <path d="M67.4987 0.414593C67.6783 -0.138197 68.4604 -0.138197 68.64 0.414593L71.0778 7.91753C71.1581 8.16474 71.3886 8.33212 71.6485 8.33212H79.5375C80.1187 8.33212 80.3604 9.07585 79.8902 9.41755L73.5078 14.0547C73.2975 14.2074 73.2095 14.4783 73.2898 14.7255L75.7278 22.2284C75.9074 22.7812 75.2746 23.2409 74.8044 22.8992L68.422 18.2622C68.2117 18.1094 67.927 18.1094 67.7167 18.2622L61.3342 22.8992C60.864 23.2409 60.2313 22.7812 60.4109 22.2284L62.8489 14.7255C62.9292 14.4783 62.8411 14.2074 62.6308 14.0547L56.2484 9.41755C55.7782 9.07585 56.0199 8.33212 56.6011 8.33212H64.4902C64.7501 8.33212 64.9805 8.16474 65.0609 7.91753L67.4987 0.414593Z" fill="#609EE9"/>
+          <path d="M95.4987 0.414593C95.6783 -0.138197 96.4604 -0.138197 96.64 0.414593L99.0774 7.91753C99.1584 8.16474 99.3884 8.33212 99.6484 8.33212H107.537C108.118 8.33212 108.36 9.07585 107.89 9.41755L101.507 14.0547C101.297 14.2074 101.209 14.4783 101.29 14.7255L103.727 22.2284C103.907 22.7812 103.274 23.2409 102.804 22.8992L96.422 18.2622C96.2117 18.1094 95.927 18.1094 95.7167 18.2622L89.3342 22.8992C88.864 23.2409 88.2313 22.7812 88.4109 22.2284L90.8489 14.7255C90.9292 14.4783 90.8411 14.2074 90.6308 14.0547L84.2484 9.41755C83.7782 9.07585 84.0199 8.33212 84.6011 8.33212H92.4902C92.7501 8.33212 92.9805 8.16474 93.0609 7.91753L95.4987 0.414593Z" fill="#609EE9"/>
+          <path d="M123.498 0.414593C123.678 -0.138197 124.46 -0.138197 124.64 0.414593L127.077 7.91753C127.158 8.16474 127.388 8.33212 127.648 8.33212H135.537C136.118 8.33212 136.36 9.07585 135.89 9.41755L129.507 14.0547C129.297 14.2074 129.209 14.4783 129.29 14.7255L131.727 22.2284C131.907 22.7812 131.274 23.2409 130.804 22.8992L124.422 18.2622C124.211 18.1094 123.927 18.1094 123.716 18.2622L117.334 22.8992C116.864 23.2409 116.231 22.7812 116.411 22.2284L118.848 14.7255C118.929 14.4783 118.841 14.2074 118.631 14.0547L112.248 9.41755C111.778 9.07585 112.02 8.33212 112.601 8.33212H120.49C120.75 8.33212 120.98 8.16474 121.061 7.91753L123.498 0.414593Z" fill="#609EE9"/>
+        </svg>
+      </div>
+      {% if section.settings.heading != blank %}
+        <div class="reviews-title">{{ section.settings.heading }}</div>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <div class="reviews-subtitle">{{ section.settings.subheading }}</div>
+      {% endif %}
+    </div>
+
+    {% capture row_one %}
+      {%- for block in section.blocks -%}
+        {%- assign _mod = forloop.index0 | modulo: 2 -%}
+        {%- if _mod == 0 -%}
+          <article class="review-card" {{ block.shopify_attributes }} style="--overlay-color: {{ block.settings.overlay_color }}; --overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};">
+            <div class="review-bg" aria-hidden="true">
+              {%- if block.settings.bg_image != blank -%}
+                <img src="{{ block.settings.bg_image | image_url: width: 940, height: 416, crop: 'center' }}" alt="" width="940" height="416" loading="lazy" decoding="async"/>
+              {%- endif -%}
+              <span class="review-overlay"></span>
+            </div>
+            <div class="review-inner">
+              <div class="review-head">
+                <div class="review-meta">
+                  <div class="review-name">{{ block.settings.customer_name }}</div>
+                  <div class="review-date">{{ block.settings.review_date }}</div>
+                </div>
+                <div class="review-stars" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="106" height="18" viewBox="0 0 106 18" fill="none">
+                  <path d="M8.95258 0.321586C9.09241 -0.107195 9.70126 -0.107195 9.84109 0.321586L11.7392 6.14137C11.8017 6.33312 11.9811 6.46295 12.1834 6.46295H18.3257C18.7782 6.46295 18.9663 7.03984 18.6003 7.30488L13.6311 10.9017C13.4674 11.0202 13.3989 11.2303 13.4614 11.422L15.3594 17.2418C15.4993 17.6706 15.0067 18.0272 14.6406 17.7621L9.67144 14.1653C9.5077 14.0468 9.28597 14.0468 9.12223 14.1653L4.15311 17.7621C3.78701 18.0272 3.29442 17.6706 3.43426 17.2418L5.3323 11.422C5.39484 11.2303 5.32633 11.0202 5.1626 10.9017L0.193461 7.30488C-0.172647 7.03984 0.0155026 6.46295 0.468039 6.46295H6.61025C6.8126 6.46295 6.99198 6.33312 7.0545 6.14137L8.95258 0.321586Z" fill="#609EE9"/>
+                  <path d="M30.7524 0.321586C30.8922 -0.107195 31.5011 -0.107195 31.6409 0.321586L33.539 6.14137C33.6015 6.33312 33.7809 6.46295 33.9832 6.46295H40.1255C40.578 6.46295 40.7662 7.03984 40.4001 7.30488L35.4309 10.9017C35.2672 11.0202 35.1987 11.2303 35.2612 11.422L37.1593 17.2418C37.2991 17.6706 36.8065 18.0272 36.4404 17.7621L31.4713 14.1653C31.3075 14.0468 31.0858 14.0468 30.9221 14.1653L25.9529 17.7621C25.5868 18.0272 25.0942 17.6706 25.234 17.2418L27.1321 11.422C27.1946 11.2303 27.1261 11.0202 26.9624 10.9017L21.9932 7.30488C21.6272 7.03984 21.8153 6.46295 22.2678 6.46295H28.4101C28.6124 6.46295 28.7918 6.33312 28.8543 6.14137L30.7524 0.321586Z" fill="#609EE9"/>
+                  <path d="M52.5522 0.321586C52.692 -0.107195 53.3009 -0.107195 53.4407 0.321586L55.3388 6.14137C55.4013 6.33312 55.5807 6.46295 55.783 6.46295H61.9253C62.3778 6.46295 62.566 7.03984 62.1999 7.30488L57.2307 10.9017C57.067 11.0202 56.9985 11.2303 57.061 11.422L58.9591 17.2418C59.0989 17.6706 58.6063 18.0272 58.2402 17.7621L53.2711 14.1653C53.1073 14.0468 52.8856 14.0468 52.7219 14.1653L47.7527 17.7621C47.3866 18.0272 46.894 17.6706 47.0338 17.2418L48.9319 11.422C48.9944 11.2303 48.9259 11.0202 48.7622 10.9017L43.793 7.30488C43.427 7.03984 43.6151 6.46295 44.0676 6.46295H50.2099C50.4122 6.46295 50.5916 6.33312 50.6541 6.14137L52.5522 0.321586Z" fill="#609EE9"/>
+                  <path d="M74.353 0.321586C74.4928 -0.107195 75.1017 -0.107195 75.2415 0.321586L77.1392 6.14137C77.2023 6.33312 77.3813 6.46295 77.5837 6.46295H83.7259C84.1782 6.46295 84.3667 7.03984 84.0007 7.30488L79.0311 10.9017C78.8676 11.0202 78.7991 11.2303 78.8622 11.422L80.7595 17.2418C80.8997 17.6706 80.4068 18.0272 80.0409 17.7621L75.0718 14.1653C74.9081 14.0468 74.6864 14.0468 74.5226 14.1653L69.5535 17.7621C69.1874 18.0272 68.6948 17.6706 68.8346 17.2418L70.7327 11.422C70.7952 11.2303 70.7267 11.0202 70.563 10.9017L65.5938 7.30488C65.2277 7.03984 65.4159 6.46295 65.8684 6.46295H72.0107C72.213 6.46295 72.3924 6.33312 72.4549 6.14137L74.353 0.321586Z" fill="#609EE9"/>
+                  <path d="M96.1524 0.321586C96.2925 -0.107195 96.9014 -0.107195 97.0415 0.321586L98.9389 6.14137C99.0019 6.33312 99.181 6.46295 99.3834 6.46295H105.526C105.978 6.46295 106.166 7.03984 105.8 7.30488L100.831 10.9017C100.667 11.0202 100.599 11.2303 100.662 11.422L102.559 17.2418C102.699 17.6706 102.207 18.0272 101.841 17.7621L96.8718 14.1653C96.7075 14.0468 96.4864 14.0468 96.3221 14.1653L91.3533 17.7621C90.9873 18.0272 90.4945 17.6706 90.6346 17.2418L92.532 11.422C92.5951 11.2303 92.5266 11.0202 92.3631 10.9017L87.3935 7.30488C87.0275 7.03984 87.2159 6.46295 87.6683 6.46295H93.8104C94.0129 6.46295 94.1919 6.33312 94.255 6.14137L96.1524 0.321586Z" fill="#609EE9"/>
+                 </svg>
+                </div>
+              </div>
+              <div class="review-content">{{ block.settings.review_text }}</div>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    {% endcapture %}
+    {% capture row_two %}
+      {%- for block in section.blocks -%}
+        {%- assign _mod = forloop.index0 | modulo: 2 -%}
+        {%- if _mod == 1 -%}
+          <article class="review-card" {{ block.shopify_attributes }} style="--overlay-color: {{ block.settings.overlay_color }}; --overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};">
+            <div class="review-bg" aria-hidden="true">
+              {%- if block.settings.bg_image != blank -%}
+                <img src="{{ block.settings.bg_image | image_url: width: 940, height: 416, crop: 'center' }}" alt="" width="940" height="416" loading="lazy" decoding="async"/>
+              {%- endif -%}
+              <span class="review-overlay"></span>
+            </div>
+            <div class="review-inner">
+              <div class="review-head">
+                <div class="review-meta">
+                  <div class="review-name">{{ block.settings.customer_name }}</div>
+                  <div class="review-date">{{ block.settings.review_date }}</div>
+                </div>
+                <div class="review-stars" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="106" height="18" viewBox="0 0 106 18" fill="none">
+                  <path d="M8.95258 0.321586C9.09241 -0.107195 9.70126 -0.107195 9.84109 0.321586L11.7392 6.14137C11.8017 6.33312 11.9811 6.46295 12.1834 6.46295H18.3257C18.7782 6.46295 18.9663 7.03984 18.6003 7.30488L13.6311 10.9017C13.4674 11.0202 13.3989 11.2303 13.4614 11.422L15.3594 17.2418C15.4993 17.6706 15.0067 18.0272 14.6406 17.7621L9.67144 14.1653C9.5077 14.0468 9.28597 14.0468 9.12223 14.1653L4.15311 17.7621C3.78701 18.0272 3.29442 17.6706 3.43426 17.2418L5.3323 11.422C5.39484 11.2303 5.32633 11.0202 5.1626 10.9017L0.193461 7.30488C-0.172647 7.03984 0.0155026 6.46295 0.468039 6.46295H6.61025C6.8126 6.46295 6.99198 6.33312 7.0545 6.14137L8.95258 0.321586Z" fill="#609EE9"/>
+                  <path d="M30.7524 0.321586C30.8922 -0.107195 31.5011 -0.107195 31.6409 0.321586L33.539 6.14137C33.6015 6.33312 33.7809 6.46295 33.9832 6.46295H40.1255C40.578 6.46295 40.7662 7.03984 40.4001 7.30488L35.4309 10.9017C35.2672 11.0202 35.1987 11.2303 35.2612 11.422L37.1593 17.2418C37.2991 17.6706 36.8065 18.0272 36.4404 17.7621L31.4713 14.1653C31.3075 14.0468 31.0858 14.0468 30.9221 14.1653L25.9529 17.7621C25.5868 18.0272 25.0942 17.6706 25.234 17.2418L27.1321 11.422C27.1946 11.2303 27.1261 11.0202 26.9624 10.9017L21.9932 7.30488C21.6272 7.03984 21.8153 6.46295 22.2678 6.46295H28.4101C28.6124 6.46295 28.7918 6.33312 28.8543 6.14137L30.7524 0.321586Z" fill="#609EE9"/>
+                  <path d="M52.5522 0.321586C52.692 -0.107195 53.3009 -0.107195 53.4407 0.321586L55.3388 6.14137C55.4013 6.33312 55.5807 6.46295 55.783 6.46295H61.9253C62.3778 6.46295 62.566 7.03984 62.1999 7.30488L57.2307 10.9017C57.067 11.0202 56.9985 11.2303 57.061 11.422L58.9591 17.2418C59.0989 17.6706 58.6063 18.0272 58.2402 17.7621L53.2711 14.1653C53.1073 14.0468 52.8856 14.0468 52.7219 14.1653L47.7527 17.7621C47.3866 18.0272 46.894 17.6706 47.0338 17.2418L48.9319 11.422C48.9944 11.2303 48.9259 11.0202 48.7622 10.9017L43.793 7.30488C43.427 7.03984 43.6151 6.46295 44.0676 6.46295H50.2099C50.4122 6.46295 50.5916 6.33312 50.6541 6.14137L52.5522 0.321586Z" fill="#609EE9"/>
+                  <path d="M74.353 0.321586C74.4928 -0.107195 75.1017 -0.107195 75.2415 0.321586L77.1392 6.14137C77.2023 6.33312 77.3813 6.46295 77.5837 6.46295H83.7259C84.1782 6.46295 84.3667 7.03984 84.0007 7.30488L79.0311 10.9017C78.8676 11.0202 78.7991 11.2303 78.8622 11.422L80.7595 17.2418C80.8997 17.6706 80.4068 18.0272 80.0409 17.7621L75.0718 14.1653C74.9081 14.0468 74.6864 14.0468 74.5226 14.1653L69.5535 17.7621C69.1874 18.0272 68.6948 17.6706 68.8346 17.2418L70.7327 11.422C70.7952 11.2303 70.7267 11.0202 70.563 10.9017L65.5938 7.30488C65.2277 7.03984 65.4159 6.46295 65.8684 6.46295H72.0107C72.213 6.46295 72.3924 6.33312 72.4549 6.14137L74.353 0.321586Z" fill="#609EE9"/>
+                  <path d="M96.1524 0.321586C96.2925 -0.107195 96.9014 -0.107195 97.0415 0.321586L98.9389 6.14137C99.0019 6.33312 99.181 6.46295 99.3834 6.46295H105.526C105.978 6.46295 106.166 7.03984 105.8 7.30488L100.831 10.9017C100.667 11.0202 100.599 11.2303 100.662 11.422L102.559 17.2418C102.699 17.6706 102.207 18.0272 101.841 17.7621L96.8718 14.1653C96.7075 14.0468 96.4864 14.0468 96.3221 14.1653L91.3533 17.7621C90.9873 18.0272 90.4945 17.6706 90.6346 17.2418L92.532 11.422C92.5951 11.2303 92.5266 11.0202 92.3631 10.9017L87.3935 7.30488C87.0275 7.03984 87.2159 6.46295 87.6683 6.46295H93.8104C94.0129 6.46295 94.1919 6.33312 94.255 6.14137L96.1524 0.321586Z" fill="#609EE9"/>
+                 </svg>
+                </div>
+              </div>
+              <div class="review-content">{{ block.settings.review_text }}</div>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    {% endcapture %}
+
+    <div class="reviews-viewport">
+      <div class="reviews-rows">
+        <div class="reviews-row reviews-row--1">
+          <div class="reviews-track reviews-track--1" aria-live="polite">
+            {{ row_one }}{{ row_one }}
+          </div>
+        </div>
+        <div class="reviews-row reviews-row--2">
+          <div class="reviews-track reviews-track--2" aria-live="polite">
+            {{ row_two }}{{ row_two }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #reviews-carousel-{{ section_id }} {
+      --card-width: 465px;
+      --card-height: 208px;
+      --gap: 16px;
+      --content-width: 423px;
+      --brand-font: "Be Vietnam Pro", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    #reviews-carousel-{{ section_id }} .reviews-header { margin-bottom: 16px; }
+    #reviews-carousel-{{ section_id }} .reviews-title { margin: 8px 0 4px; }
+    #reviews-carousel-{{ section_id }} .reviews-subtitle { color: #4A5568; }
+
+    #reviews-carousel-{{ section_id }} .reviews-viewport { position: relative; overflow: hidden; }
+    #reviews-carousel-{{ section_id }} .reviews-rows { display: grid; grid-template-rows: var(--card-height) var(--card-height); row-gap: var(--gap); }
+    #reviews-carousel-{{ section_id }} .reviews-row { overflow: hidden; }
+    #reviews-carousel-{{ section_id }} .reviews-track { display: inline-flex; gap: var(--gap); width: max-content; will-change: transform; animation: rc-scroll var(--duration, 40s) linear infinite; }
+    #reviews-carousel-{{ section_id }} .reviews-track--2 { animation-direction: reverse; }
+    #reviews-carousel-{{ section_id }} .reviews-viewport:hover .reviews-track { animation-play-state: paused; }
+    #reviews-carousel-{{ section_id }} .review-card {
+      position: relative;
+      flex: 0 0 var(--card-width);
+      width: var(--card-width);
+      height: var(--card-height);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    #reviews-carousel-{{ section_id }} .review-bg { position: absolute; inset: 0; z-index: 0; }
+    #reviews-carousel-{{ section_id }} .review-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    #reviews-carousel-{{ section_id }} .review-overlay { position: absolute; inset: 0; background: var(--overlay-color, rgba(0,0,0,0.08)); opacity: var(--overlay-opacity, .12); }
+
+    #reviews-carousel-{{ section_id }} .review-inner { position: relative; z-index: 1; height: 100%; padding: 12px 16px; display: flex; flex-direction: column; justify-content: flex-start; }
+    #reviews-carousel-{{ section_id }} .review-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    #reviews-carousel-{{ section_id }} .review-meta {
+      display: inline-flex;
+      padding: 5.198px 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2.079px;
+      margin-bottom: 8px;
+      font-family: var(--brand-font);
+    }
+    #reviews-carousel-{{ section_id }} .review-name { font-weight: 700; color: #1A202C; }
+    #reviews-carousel-{{ section_id }} .review-date { color: #718096; font-size: 12px; }
+
+    #reviews-carousel-{{ section_id }} .review-content {
+      width: var(--content-width);
+      height: 88px;
+      flex-shrink: 0;
+      overflow: hidden;
+      white-space: normal;
+      color: #000;
+      font-family: var(--brand-font);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+    }
+
+    @keyframes rc-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  </style>
+
+  <script>
+    (function(){
+      var root = document.getElementById('reviews-carousel-{{ section_id }}');
+      if (!root) return;
+      // Allow speed customization from settings (optional)
+      var interval = parseInt(root.getAttribute('data-interval') || '40000', 10);
+      if (interval && interval >= 5000) {
+        root.style.setProperty('--duration', (interval/1000) + 's');
+      }
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Customer reviews carousel",
+  "settings": [
+    { "type": "html", "id": "heading", "label": "Heading (HTML)" },
+    { "type": "richtext", "id": "subheading", "label": "Subheading" },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+    { "type": "range", "id": "autoplay_interval", "label": "Autoplay interval (ms)", "min": 1500, "max": 8000, "step": 100, "default": 3000 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "customer_name", "label": "Customer name" },
+        { "type": "text", "id": "review_date", "label": "Date" },
+        { "type": "textarea", "id": "review_text", "label": "Review text" },
+        { "type": "image_picker", "id": "bg_image", "label": "Background image (optional)" },
+        { "type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#ffffff" },
+        { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity (%)", "min": 0, "max": 100, "step": 1, "default": 12 }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Reviews carousel", "category": "Testimonials" }
+  ]
+}
+{% endschema %}
+
+

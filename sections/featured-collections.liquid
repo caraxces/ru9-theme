@@ -6,7 +6,7 @@
       
       <!-- Left side - Title and Description -->
       <div class="header-left" style="flex: 1; text-align: left;">
-        <h2 class="section-title" style="font-family: 'Tinos', serif; font-size: 48px; font-weight: 700; line-height: 120%; color: #1A1A1A; margin: 0 0 16px 0; text-align: left;">
+        <h2 class="section-title" style="font-family: 'Tinos', serif; font-size: 48px; font-weight: 400; line-height: 120%; color: #1A1A1A; margin: 0 0 16px 0; text-align: left;">
           {{ section.settings.title | default: 'Sản Phẩm Bán Chạy' }}
         </h2>
         <div class="section-description" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 400; line-height: 150%; color: #666; margin: 0; text-align: left;">
@@ -21,6 +21,7 @@
             <button 
               class="category-tab{% if forloop.index == 1 %} active{% endif %}" 
               data-tab="Tab-{{ block.id }}"
+              data-collection-url="{{ block.settings.collection.url }}"
               style="padding: 0; border: none; background: transparent; font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; {% if forloop.index == 1 %}color: #2960AD;{% else %}color: #1A1A1A;{% endif %}; position: relative; display: flex; align-items: center;"
             >
               {{ block.settings.tab_name | default: 'Nệm' }}
@@ -36,9 +37,9 @@
       <div class="header-right" style="flex: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
         
         <!-- View All Button -->
-        <button class="view-all-btn" style="display: flex; width: 145px; height: 40px; justify-content: center; align-items: center; gap: 10px; flex-shrink: 0; border-radius: 30px; border: 2px solid #609EE9; background: transparent; color: #609EE9; font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+        <a href="#" class="view-all-btn" style="display: flex; width: 145px; height: 40px; justify-content: center; align-items: center; gap: 10px; flex-shrink: 0; border-radius: 30px; border: 2px solid #609EE9; background: transparent; color: #609EE9; font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; text-decoration: none;">
           Xem tất cả
-        </button>
+        </a>
         
         <!-- Navigation Arrows -->
         <div class="carousel-nav" style="display: flex; gap: 6px;">
@@ -57,7 +58,7 @@
     </div>
     
     <!-- Product Carousel Section -->
-    <div class="product-carousel-section" style="padding: 0 5% 40px 5%;">
+    <div class="product-carousel-section" style="padding: 0 5% 20px 5%;">
       <div class="product-carousel" style="position: relative; overflow: hidden;">
         
         <!-- Product Cards Container -->
@@ -67,7 +68,7 @@
               
               {%- assign collection = block.settings.collection -%}
               {%- if collection != blank -%}
-                {%- for product in collection.products limit: 3 -%}
+                {%- for product in collection.products -%}
                                      <a href="{{ product.url }}" class="product-card" style="min-width: 280px; flex-shrink: 0; border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; display: block;">
                      
                      <!-- Product Image Container -->
@@ -137,7 +138,7 @@
                           <span style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; color: #666; text-decoration: line-through; margin-left: 4px;">
                             {{ product.compare_at_price | money }}
                           </span>
-                          <span class="discount-badge" style="padding: 6px 12px; background: #F0F7FF; color: #3373BD; border-radius: 8px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 600; margin-left: 8px;">
+                          <span class="discount-badge" style="padding: 6px 12px; background: #FFF; color: #9F332C; border-radius: 8px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 600; margin-left: 8px; border: 1px solid #9F332C;">
                             -{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%
                           </span>
                         {%- endif -%}
@@ -156,6 +157,14 @@
         </div>
       </div>
     </div>
+
+    <!-- Progress Bar Section -->
+    <div class="carousel-progress-container" style="padding: 0 5% 40px 5%; display: flex; justify-content: center;">
+      <div class="carousel-progress-bar-background" style="display: flex; width: 1196px; height: 5.83px; align-items: center; flex-shrink: 0; border-radius: 100px; background: #E0E0E0;">
+        <div class="carousel-progress-bar" style="height: 100%; border-radius: 100px; background: #AFAFAF; width: 0%; transition: width 0.3s ease;"></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -164,6 +173,10 @@
     font-family: 'Be Vietnam Pro', sans-serif;
   }
   
+  [data-section-id="{{ section.id }}"] .tab-content {
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
   .category-tab:hover {
     color: #2960AD !important;
   }
@@ -198,6 +211,10 @@
     opacity: 1 !important;
   }
   
+  .carousel-progress-container {
+    display: none; /* Hidden by default, shown by JS if needed */
+  }
+
   @media (max-width: 1200px) {
     .section-header {
       padding: 30px 4% 20px 4% !important;
@@ -349,9 +366,29 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const tabButtons = document.querySelectorAll('.category-tab');
-    const tabContents = document.querySelectorAll('.tab-content');
+    const sectionContainer = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!sectionContainer) return;
+
+    const tabButtons = sectionContainer.querySelectorAll('.category-tab');
+    const tabContents = sectionContainer.querySelectorAll('.tab-content');
+    const viewAllBtn = sectionContainer.querySelector('.view-all-btn');
+    const progressBarContainer = sectionContainer.querySelector('.carousel-progress-container');
+    const progressBar = sectionContainer.querySelector('.carousel-progress-bar');
     
+    // Function to update "View All" button and initial carousel state
+    function updateViewAllButton(activeButton) {
+      const collectionUrl = activeButton.getAttribute('data-collection-url');
+      if (viewAllBtn && collectionUrl) {
+        viewAllBtn.href = collectionUrl;
+      }
+    }
+
+    // Set initial state for the first tab
+    const initialActiveTab = document.querySelector('.category-tab.active');
+    if (initialActiveTab) {
+      updateViewAllButton(initialActiveTab);
+    }
+
     // Tab switching functionality
     tabButtons.forEach(button => {
       button.addEventListener('click', function() {
@@ -367,6 +404,7 @@
         });
         this.classList.add('active');
         this.style.color = '#2960AD';
+        updateViewAllButton(this); // Update View All button href
         
         // Add active indicator
         const indicator = document.createElement('div');
@@ -392,7 +430,7 @@
     let currentSlide = 0;
     
     function updateCarousel() {
-      const activeContent = document.querySelector('.tab-content.active');
+      const activeContent = sectionContainer.querySelector('.tab-content.active');
       if (activeContent) {
         const cards = activeContent.querySelectorAll('.product-card');
         const container = activeContent.parentElement;
@@ -416,16 +454,27 @@
         activeContent.style.transform = `translateX(${translateX}px)`;
         
         // Update button states
-        const prevBtn = document.querySelector('.nav-prev');
-        const nextBtn = document.querySelector('.nav-next');
+        const prevBtn = sectionContainer.querySelector('.nav-prev');
+        const nextBtn = sectionContainer.querySelector('.nav-next');
         if (prevBtn) prevBtn.disabled = currentSlide === 0;
         if (nextBtn) nextBtn.disabled = currentSlide >= maxSlides;
+
+        // Update progress bar
+        if (progressBarContainer && progressBar) {
+          if (maxSlides > 0) {
+            progressBarContainer.style.display = 'flex';
+            const progressPercent = (currentSlide / maxSlides) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+          } else {
+            progressBarContainer.style.display = 'none';
+          }
+        }
       }
     }
     
     // Navigation button event listeners
-    const prevBtn = document.querySelector('.nav-prev');
-    const nextBtn = document.querySelector('.nav-next');
+    const prevBtn = sectionContainer.querySelector('.nav-prev');
+    const nextBtn = sectionContainer.querySelector('.nav-next');
     
     if (prevBtn) {
       prevBtn.addEventListener('click', function() {
@@ -438,7 +487,7 @@
     
     if (nextBtn) {
       nextBtn.addEventListener('click', function() {
-        const activeContent = document.querySelector('.tab-content.active');
+        const activeContent = sectionContainer.querySelector('.tab-content.active');
         if (activeContent) {
           const cards = activeContent.querySelectorAll('.product-card');
           const container = activeContent.parentElement;
@@ -470,7 +519,7 @@
     });
     
     // Enhanced hover effect for product images
-    const productImageContainers = document.querySelectorAll('.product-image-container');
+    const productImageContainers = sectionContainer.querySelectorAll('.product-image-container');
     console.log('Found', productImageContainers.length, 'product image containers');
     
     productImageContainers.forEach((container, index) => {
