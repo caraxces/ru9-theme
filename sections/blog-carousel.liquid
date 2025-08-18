@@ -155,6 +155,15 @@
   [data-section-id="{{ section.id }}"] .nav-btn:hover {
     background: #E5E5E5 !important;
   }
+  [data-section-id="{{ section.id }}"] .blog-carousel-wrapper {
+    cursor: grab;
+  }
+  [data-section-id="{{ section.id }}"] .blog-carousel-wrapper.grabbing {
+    cursor: grabbing;
+  }
+  [data-section-id="{{ section.id }}"] .blog-carousel-wrapper.grabbing .blog-carousel-slide {
+    pointer-events: none;
+  }
   
   /* Article Card Styles */
   [data-section-id="{{ section.id }}"] .article-card-wrapper {
@@ -238,10 +247,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const nextBtn = sectionContainer.querySelector('.nav-next');
   const progressBar = sectionContainer.querySelector('.carousel-progress-bar');
   const progressBarContainer = sectionContainer.querySelector('.carousel-progress-container');
+  const carouselWrapper = sectionContainer.querySelector('.blog-carousel-wrapper');
 
-  if (!slider) return;
+  if (!slider || !carouselWrapper) return;
 
   let currentSlide = 0;
+  let isDown = false;
+  let startX;
+  let walk = 0;
+  let initialTranslateX = 0;
 
   function updateCarousel() {
     const slides = slider.querySelectorAll('.blog-carousel-slide');
@@ -256,6 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
     currentSlide = Math.max(0, Math.min(currentSlide, maxSlides));
     
     const translateX = -currentSlide * (slideWidth + gap);
+    slider.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     slider.style.transform = `translateX(${translateX}px)`;
     
     if (prevBtn) prevBtn.disabled = currentSlide === 0;
@@ -270,6 +285,56 @@ document.addEventListener('DOMContentLoaded', function() {
         progressBarContainer.style.display = 'none';
       }
     }
+  }
+
+  function getTranslateX() {
+      const style = window.getComputedStyle(slider);
+      const transform = style.transform;
+      if (transform === 'none') return 0;
+      const matrix = new DOMMatrixReadOnly(transform);
+      return matrix.m41;
+  }
+
+  function dragStart(e) {
+    isDown = true;
+    carouselWrapper.classList.add('grabbing');
+    startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+    slider.style.transition = 'none';
+    initialTranslateX = getTranslateX();
+    walk = 0;
+  }
+
+  function dragMove(e) {
+    if (!isDown) return;
+    e.preventDefault();
+    const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
+    walk = currentX - startX;
+    slider.style.transform = `translateX(${initialTranslateX + walk}px)`;
+  }
+
+  function dragEnd() {
+    if (!isDown) return;
+    isDown = false;
+    carouselWrapper.classList.remove('grabbing');
+    
+    const slides = slider.querySelectorAll('.blog-carousel-slide');
+    if (slides.length === 0) return;
+
+    const slideWidth = slides[0].offsetWidth;
+    const threshold = slideWidth / 4;
+    
+    const containerWidth = slider.parentElement.offsetWidth;
+    const gap = 24;
+    const slidesPerView = Math.floor((containerWidth + gap) / (slideWidth + gap));
+    const maxSlides = Math.max(0, slides.length - slidesPerView);
+
+    if (walk < -threshold && currentSlide < maxSlides) {
+        currentSlide++;
+    } else if (walk > threshold && currentSlide > 0) {
+        currentSlide--;
+    }
+
+    updateCarousel();
   }
 
   if (prevBtn) {
@@ -297,12 +362,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
+  carouselWrapper.addEventListener('mousedown', dragStart);
+  window.addEventListener('mousemove', dragMove);
+  window.addEventListener('mouseup', dragEnd);
+  carouselWrapper.addEventListener('touchstart', dragStart, { passive: true });
+  window.addEventListener('touchmove', dragMove);
+  window.addEventListener('touchend', dragEnd);
+
+  carouselWrapper.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', e => {
+          if (Math.abs(walk) > 5) { // if dragged more than 5px, prevent click
+              e.preventDefault();
+              e.stopPropagation();
+          }
+      });
+  });
+
   // Initial setup
   updateCarousel();
   
   // Handle window resize
+  let resizeTimer;
   window.addEventListener('resize', function() {
-    updateCarousel();
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      slider.style.transition = 'none'; // Prevent transition on resize
+      updateCarousel();
+    }, 250);
   });
 });
 </script>

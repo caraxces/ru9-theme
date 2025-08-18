@@ -299,7 +299,7 @@
 
 <!-- Footer Icon Text Bar -->
 {%- if section.settings.show_icon_text_bar -%}
-<div class="slideshow-footer-icon-text" style="width: 1440px; height: 47px; flex-shrink: 0; background: {{ section.settings.icon_bar_background_color | default: '#f8f9fa' }}; border-top: 1px solid #e9ecef; display: flex; align-items: center; justify-content: center;">
+<div class="slideshow-footer-icon-text" style="background: {{ section.settings.icon_bar_background_color | default: '#f8f9fa' }}; border-top: 1px solid #e9ecef; display: flex; align-items: center; justify-content: center;">
   <div class="icon-text-container" style="display: flex; align-items: center; justify-content: space-around; width: 100%; max-width: 1200px; padding: 0 20px;">
     
     <!-- Item 1 -->
@@ -330,7 +330,7 @@
           <path d="M6 22H12V24H6V22Z" fill="currentColor"/>
         </svg>
       {%- endif -%}
-      <span style="color: #000; font-family: 'Be Vietnam Pro'; font-size: 16px; font-style: normal; font-weight: 400; line-height: 150%;">{{ section.settings.icon_1_title }}</span>
+      <span style="color: #000; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-style: normal; font-weight: 450; line-height: 150%;">{{ section.settings.icon_1_title }}</span>
     </div>
     {%- endif -%}
 
@@ -362,7 +362,7 @@
           <path d="M6 22H12V24H6V22Z" fill="currentColor"/>
         </svg>
       {%- endif -%}
-      <span style="color: #000; font-family: 'Be Vietnam Pro'; font-size: 16px; font-style: normal; font-weight: 400; line-height: 150%;">{{ section.settings.icon_2_title }}</span>
+      <span style="color: #000; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-style: normal; font-weight: 450; line-height: 150%;">{{ section.settings.icon_2_title }}</span>
     </div>
     {%- endif -%}
 
@@ -394,7 +394,7 @@
           <path d="M6 22H12V24H6V22Z" fill="currentColor"/>
         </svg>
       {%- endif -%}
-      <span style="color: #000; font-family: 'Be Vietnam Pro'; font-size: 16px; font-style: normal; font-weight: 400; line-height: 150%;">{{ section.settings.icon_3_title }}</span>
+      <span style="color: #000; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-style: normal; font-weight: 450; line-height: 150%;">{{ section.settings.icon_3_title }}</span>
     </div>
     {%- endif -%}
 
@@ -405,11 +405,18 @@
 <style>
   .slideshow-footer-icon-text {
     margin: 0 auto;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    height: 47px;
+    flex-shrink: 0;
   }
 
   @media (max-width: 1440px) {
     .slideshow-footer-icon-text {
-      width: 100% !important;
     }
   }
 

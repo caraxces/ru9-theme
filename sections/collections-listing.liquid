@@ -69,16 +69,30 @@
 {%- endif -%}
 
 <style>
+  .collection-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .collection-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .collections-listing-section {
     font-family: 'Be Vietnam Pro', sans-serif;
   }
   
   .collections-carousel {
     user-select: none;
+    cursor: grab;
   }
   
-  .collections-carousel:active {
+  .collections-carousel.grabbing {
     cursor: grabbing;
+  }
+  .collections-carousel.grabbing a {
+    pointer-events: none;
   }
   
   .collection-image-container:hover img {
@@ -190,10 +204,8 @@
       const containerWidth = carousel.parentElement.offsetWidth;
       const itemWidth = collectionItems[0] ? collectionItems[0].offsetWidth : 416; // Fallback width
       const gap = 30;
-      if (itemWidth === 0) return 1; // Avoid division by zero
-      // Calculate how many full items fit
+      if (itemWidth === 0) return 1;
       const items = Math.floor(containerWidth / (itemWidth + gap));
-      // Check if there is space for another partial item, if so, we can scroll one more time.
       const remainingSpace = containerWidth - items * (itemWidth + gap);
       if (remainingSpace >= itemWidth) {
           return items + 1;
@@ -203,7 +215,7 @@
 
     function updateCarousel(isResize = false) {
       if (isResize) {
-        carousel.style.transition = 'none'; // Disable transition during resize
+        carousel.style.transition = 'none';
         currentIndex = 0;
       } else {
         carousel.style.transition = 'transform 0.4s ease';
@@ -239,6 +251,77 @@
       }
     });
 
+    // --- Drag/Swipe Logic ---
+    let isDown = false;
+    let startX;
+    let initialTranslateX;
+    let walk = 0;
+
+    function getTranslateX() {
+        const style = window.getComputedStyle(carousel);
+        const transform = style.transform;
+        if (transform === 'none') return 0;
+        const matrix = new DOMMatrixReadOnly(transform);
+        return matrix.m41;
+    }
+
+    function dragStart(e) {
+        isDown = true;
+        carousel.classList.add('grabbing');
+        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+        carousel.style.transition = 'none';
+        initialTranslateX = getTranslateX();
+        walk = 0;
+    }
+
+    function dragMove(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
+        walk = currentX - startX;
+        carousel.style.transform = `translateX(${initialTranslateX + walk}px)`;
+    }
+
+    function dragEnd() {
+        if (!isDown) return;
+        isDown = false;
+        carousel.classList.remove('grabbing');
+        carousel.style.transition = 'transform 0.4s ease';
+
+        const itemWidth = collectionItems[0] ? collectionItems[0].offsetWidth : 416;
+        const threshold = itemWidth / 4;
+        
+        const itemsPerView = getItemsPerView();
+        const maxIndex = Math.max(0, collectionItems.length - itemsPerView);
+
+        if (walk < -threshold && currentIndex < maxIndex) {
+            currentIndex++;
+        } else if (walk > threshold && currentIndex > 0) {
+            currentIndex--;
+        }
+
+        updateCarousel();
+    }
+
+    carousel.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', e => {
+            if (isDown || Math.abs(walk) > 5) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        });
+    });
+
+    // Mouse events
+    carousel.addEventListener('mousedown', dragStart);
+    window.addEventListener('mousemove', dragMove);
+    window.addEventListener('mouseup', dragEnd);
+
+    // Touch events
+    carousel.addEventListener('touchstart', dragStart);
+    window.addEventListener('touchmove', dragMove);
+    window.addEventListener('touchend', dragEnd);
+    
     let resizeTimer;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
@@ -247,7 +330,31 @@
       }, 250);
     });
     
-    // Initial call after a short delay
+    // --- Intersection Observer for Appear Animation ---
+    if ('IntersectionObserver' in window) {
+      const itemsToAnimate = carousel.querySelectorAll('.collection-item');
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      itemsToAnimate.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 100}ms`;
+        observer.observe(item);
+      });
+    } else {
+      // Fallback for older browsers
+      carousel.querySelectorAll('.collection-item').forEach(item => {
+        item.classList.add('is-visible');
+      });
+    }
+
     setTimeout(() => {
         updateCarousel();
     }, 100);

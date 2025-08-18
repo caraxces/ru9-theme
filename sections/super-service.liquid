@@ -51,7 +51,7 @@
   }
 
   .super-service__item {
-    width: 216px;
+    width: 236px;
   }
 
   .super-service__item-icon {
@@ -74,8 +74,19 @@
     font-size: 16px;
     font-weight: 700;
     line-height: 150%;
+    margin: 0 0 4px 0;
+    max-width: 202px;
+  }
+
+  .super-service__item-note {
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 18px */
     margin: 0 0 10px 0;
-    max-width: 132px;
+    min-height: 18px;
   }
 
   .super-service__item-description {
@@ -111,6 +122,7 @@
           {% if block.settings.item_title != blank %}
             <h3 class="super-service__item-title">{{ block.settings.item_title }}</h3>
           {% endif %}
+          <p class="super-service__item-note">{{ block.settings.item_note | default: '&nbsp;' }}</p>
           {% if block.settings.item_description != blank %}
             <div class="super-service__item-description">
               {{ block.settings.item_description }}
@@ -171,6 +183,11 @@
           "id": "item_title",
           "label": "Title",
           "default": "Service Title"
+        },
+        {
+          "type": "text",
+          "id": "item_note",
+          "label": "Note text"
         },
         {
           "type": "richtext",

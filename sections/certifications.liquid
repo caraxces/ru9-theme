@@ -1,0 +1,220 @@
+{% comment %}
+  Section: Certifications
+{% endcomment %}
+
+<style>
+  .certifications-section-{{ section.id }} {
+    width: 100%;
+    max-width: 1196px;
+    height: auto;
+    min-height: 359px;
+    margin: 60px auto;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  .certifications-section-{{ section.id }} .cs-left {
+    flex: 1;
+    text-align: left;
+  }
+  .certifications-section-{{ section.id }} .cs-right {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+  }
+  .certifications-section-{{ section.id }} .cs-title {
+    color: #1C2C58;
+    font-family: 'Tinos', serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+  }
+  .certifications-section-{{ section.id }} .cs-description {
+    color: #212121;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0 0 30px 0;
+  }
+  .certifications-section-{{ section.id }} .cs-cta {
+    display: inline-flex;
+    padding: 12px 35px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 30px;
+    background: #609EE9;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .certifications-section-{{ section.id }} .cs-cta:hover {
+    background: #4a8ad9;
+  }
+  .certifications-section-{{ section.id }} .cs-cert-item {
+    text-align: center;
+  }
+  .certifications-section-{{ section.id }} .cs-cert-image {
+    width: 100%;
+    height: 220px;
+    background: #f0f5ff;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .certifications-section-{{ section.id }} .cs-cert-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  .certifications-section-{{ section.id }} .cs-cert-label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  .certifications-section-{{ section.id }} .cs-cert-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1C2C58;
+  }
+
+  @media (max-width: 990px) {
+    .certifications-section-{{ section.id }} {
+      flex-direction: column;
+      height: auto;
+      text-align: center;
+    }
+    .certifications-section-{{ section.id }} .cs-left {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .certifications-section-{{ section.id }} .cs-right {
+      flex-direction: column;
+      width: 100%;
+    }
+    .certifications-section-{{ section.id }} .cs-cert-image {
+      height: 250px;
+    }
+  }
+</style>
+
+<section class="certifications-section-{{ section.id }}">
+  <div class="cs-left">
+    {% if section.settings.title != blank %}
+      <h2 class="cs-title">{{ section.settings.title | newline_to_br }}</h2>
+    {% endif %}
+    {% if section.settings.description != blank %}
+      <div class="cs-description rte">{{ section.settings.description }}</div>
+    {% endif %}
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link }}" class="cs-cta">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="cs-right">
+    {% for block in section.blocks %}
+      <div class="cs-cert-item">
+        <div class="cs-cert-image">
+          {% if block.settings.image != blank %}
+            <img 
+              src="{{ block.settings.image | image_url: width: 400 }}"
+              alt="{{ block.settings.name | escape }}"
+              loading="lazy"
+              width="200"
+              height="200">
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+        {% if block.settings.label != blank %}
+          <p class="cs-cert-label">{{ block.settings.label }}</p>
+        {% endif %}
+        {% if block.settings.name != blank %}
+          <h3 class="cs-cert-name">{{ block.settings.name }}</h3>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Certifications",
+  "tag": "section",
+  "class": "section-certifications",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title",
+      "default": "Cam Kết An Toàn\nTừ Lần Chạm Đầu Tiên"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Xem chi tiết"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "certification",
+      "name": "Certification",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Chứng nhận"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Certification Name",
+          "default": "CertiPUR-US®"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Certifications",
+      "blocks": [
+        { "type": "certification" },
+        { "type": "certification" }
+      ]
+    }
+  ]
+}
+{% endschema %}

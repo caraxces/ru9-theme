@@ -3,6 +3,40 @@
   Homepage content block with title, subtitle and 4 zig-zag image cards
 {%- endcomment -%}
 
+<style>
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  .journey-ru9 .journey-card {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .journey-ru9 .journey-card--1 {
+    animation-delay: 0s;
+  }
+
+  .journey-ru9 .journey-card--2 {
+    animation-delay: 0.75s;
+  }
+
+  .journey-ru9 .journey-card--3 {
+    animation-delay: 1.5s;
+  }
+
+  .journey-ru9 .journey-card--4 {
+    animation-delay: 2.25s;
+  }
+</style>
+
 <section class="journey-ru9" id="journey-ru9-{{ section.id }}">
   <div class="journey-ru9__container">
     {%- if section.settings.title != blank -%}

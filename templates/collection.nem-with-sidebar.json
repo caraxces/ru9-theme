@@ -48,6 +48,81 @@
         "copy_button_y": 92
       }
     },
+    "main_collection_custom_Y4Wd87": {
+      "type": "main-collection-custom",
+      "name": "Coll custom",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "enable_sidebar": false,
+        "collapsed": true,
+        "filter_style": "sidebar",
+        "enable_color_swatches": false,
+        "enable_swatch_labels": true,
+        "enable_sort": true,
+        "enable_collection_count": true,
+        "per_row": 3,
+        "rows_per_page": 2,
+        "default_sold_count": 0
+      }
+    },
+    "quiz_banner_zXHt4B": {
+      "type": "quiz-banner",
+      "name": "Quiz Banner (Advanced)",
+      "settings": {
+        "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
+        "title": "Đâu là chiếc nệm\nphù hợp với bạn?",
+        "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
+        "btn_text": "Quiz chọn nệm",
+        "note_text": "Chỉ mất 2 phút để tìm ra chiếc nệm sinh ra dành cho bạn.",
+        "q_1_title": "Question 1?",
+        "q_1_a_1_text": "",
+        "q_1_a_1_tags": "",
+        "q_1_a_2_text": "",
+        "q_1_a_2_tags": "",
+        "q_1_a_3_text": "",
+        "q_1_a_3_tags": "",
+        "q_1_a_4_text": "",
+        "q_1_a_4_tags": "",
+        "q_2_title": "Question 2?",
+        "q_2_a_1_text": "",
+        "q_2_a_1_tags": "",
+        "q_2_a_2_text": "",
+        "q_2_a_2_tags": "",
+        "q_2_a_3_text": "",
+        "q_2_a_3_tags": "",
+        "q_2_a_4_text": "",
+        "q_2_a_4_tags": "",
+        "q_3_title": "Question 3?",
+        "q_3_a_1_text": "",
+        "q_3_a_1_tags": "",
+        "q_3_a_2_text": "",
+        "q_3_a_2_tags": "",
+        "q_3_a_3_text": "",
+        "q_3_a_3_tags": "",
+        "q_3_a_4_text": "",
+        "q_3_a_4_tags": "",
+        "q_4_title": "Question 4?",
+        "q_4_a_1_text": "",
+        "q_4_a_1_tags": "",
+        "q_4_a_2_text": "",
+        "q_4_a_2_tags": "",
+        "q_4_a_3_text": "",
+        "q_4_a_3_tags": "",
+        "q_4_a_4_text": "",
+        "q_4_a_4_tags": "",
+        "q_5_title": "Question 5?",
+        "q_5_a_1_text": "",
+        "q_5_a_1_tags": "",
+        "q_5_a_2_text": "",
+        "q_5_a_2_tags": "",
+        "q_5_a_3_text": "",
+        "q_5_a_3_tags": "",
+        "q_5_a_4_text": "",
+        "q_5_a_4_tags": "",
+        "result_title": "We recommend for you"
+      }
+    },
     "main-collection": {
       "type": "main-collection",
       "blocks": {
@@ -73,6 +148,7 @@
         "subcollections",
         "product_grid"
       ],
+      "disabled": true,
       "settings": {
         "section_width": "customize_width",
         "customize_width": 1280,
@@ -87,6 +163,7 @@
     },
     "banner_with_content_K64e3r": {
       "type": "banner-with-content",
+      "disabled": true,
       "settings": {
         "section_width": "page-width",
         "customize_width": 1800,
@@ -169,6 +246,7 @@
     },
     "collection-content": {
       "type": "collection-content",
+      "disabled": true,
       "settings": {
         "section_width": "customize_width",
         "customize_width": 1280,
@@ -177,191 +255,228 @@
         "show_collection_description": true
       }
     },
-    "banner_with_content_NiwahU": {
-      "type": "banner-with-content",
-      "disabled": true,
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1010,
-        "image": "shopify://shop_images/banner-with-content-banner.png",
-        "image_mobile": "shopify://shop_images/banner-with-content-banner-mobile.png",
-        "title": "Đâu là chiếc nệm phù hợp cho bạn?",
-        "text": "<p>Cùng Ru9 khám phá và chọn ra chiếc nệm dành riêng cho bạn.</p>",
-        "btn_text": "Xem thêm",
-        "btn_link": ""
-      }
-    },
-    "compare_product_UeQD6G": {
-      "type": "compare-product",
+    "reviews_carousel_QUQNh3": {
+      "type": "reviews-carousel",
       "blocks": {
-        "product_UUa9LH": {
-          "type": "product",
+        "review_GWxeHz": {
+          "type": "review",
           "settings": {
-            "product_title": "NỆM ORIGINAL PRO",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": ""
+            "customer_name": "Phuong Nguyen",
+            "review_date": "Tháng 7, 2025",
+            "review_text": "Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.",
+            "bg_image": "shopify://shop_images/thang-4-thuoc-cung-gi.jpg",
+            "overlay_color": "#f0f7ff",
+            "overlay_opacity": 77
           }
         },
-        "product_CCLpHU": {
-          "type": "product",
+        "review_ME69kT": {
+          "type": "review",
           "settings": {
-            "product_title": "NỆM ORIGINAL PRO",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": ""
+            "customer_name": "Phuong Nguyen",
+            "review_date": "Tháng 7, 2025",
+            "review_text": "Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.",
+            "bg_image": "shopify://shop_images/khung-gio-ngu-tang-chieu-cao.jpg",
+            "overlay_color": "#f0f7ff",
+            "overlay_opacity": 77
           }
         },
-        "product_Kk7DYj": {
-          "type": "product",
+        "review_yMHfeP": {
+          "type": "review",
           "settings": {
-            "product_title": "NỆM ORIGINAL PRO",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": ""
+            "customer_name": "Phuong Nguyen",
+            "review_date": "Tháng 7, 2025",
+            "review_text": "Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.",
+            "bg_image": "shopify://shop_images/cach-ngu-nhanh-va-ngon.jpg",
+            "overlay_color": "#f0f7ff",
+            "overlay_opacity": 77
           }
         },
-        "product_DWnpfQ": {
-          "type": "product",
+        "review_FmJHcf": {
+          "type": "review",
           "settings": {
-            "product_title": "NỆM ORIGINAL PRO",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": ""
+            "customer_name": "Phuong Nguyen",
+            "review_date": "Tháng 7, 2025",
+            "review_text": "Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.",
+            "bg_image": "shopify://shop_images/lam-sao-de-ngu-nhanh.jpg",
+            "overlay_color": "#f0f7ff",
+            "overlay_opacity": 77
+          }
+        },
+        "review_gXepw8": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_date": "Tháng 7, 2025",
+            "review_text": "Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.",
+            "bg_image": "shopify://shop_images/cach-de-ngu-nhanh.jpg",
+            "overlay_color": "#f0f7ff",
+            "overlay_opacity": 77
+          }
+        },
+        "review_xPn64L": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_date": "Tháng 7, 2025",
+            "review_text": "",
+            "bg_image": "shopify://shop_images/nam-2026-menh-gi.jpg",
+            "overlay_color": "#f0f7ff",
+            "overlay_opacity": 77
           }
         }
       },
       "block_order": [
-        "product_UUa9LH",
-        "product_CCLpHU",
-        "product_Kk7DYj",
-        "product_DWnpfQ"
+        "review_GWxeHz",
+        "review_ME69kT",
+        "review_yMHfeP",
+        "review_FmJHcf",
+        "review_gXepw8",
+        "review_xPn64L"
       ],
-      "disabled": true,
+      "name": "Reviews carousel",
       "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1120,
-        "title": "So sánh các dòng nệm",
-        "description": ""
+        "heading": "<div style=\"color: #1C2C58; font-family: Tinos; font-size: 38px; font-style: normal; font-weight: 400; line-height: 120%;\">\n  Hơn <span style=\"color: #609EE9;\">50,000</span> Khách Hàng<br>\n  Và <span style=\"color: #609EE9;\">30,000</span> Đánh Giá 5 Sao Toàn Quốc\n</div>",
+        "subheading": "<p>Chia sẻ từ khách hàng lựa chọn ngủ ngon cùng Ru9</p>",
+        "autoplay": true,
+        "autoplay_interval": 3000
       }
     },
-    "text_with_icons_9yd9VT": {
-      "type": "text-with-icons",
+    "certifications_cWbJNF": {
+      "type": "certifications",
       "blocks": {
-        "text_block_KiEpc6": {
-          "type": "text_block",
+        "certification_g3zFwy": {
+          "type": "certification",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-1.png",
-            "title": "100 đêm ngủ thử không rủi ro",
-            "text": "<p>Nếu bạn không hài lòng, chúng tôi sẽ nhận lại nệm và hoàntiền 100%.</p>"
+            "label": "Chứng nhận",
+            "name": "CertiPUR-US®"
           }
         },
-        "text_block_cLLCJf": {
-          "type": "text_block",
+        "certification_ixNC8G": {
+          "type": "certification",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-2.png",
-            "title": "Miễn phí vận chuyển từ 1.500.000đ",
-            "text": "<p>Bạn chẳng cần lo lắng đến việc nhét lại nệm vào thùng đâu.</p>"
-          }
-        },
-        "text_block_4AREAP": {
-          "type": "text_block",
-          "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-3.png",
-            "title": "Bảo hành dài lâu",
-            "text": "<p>Nệm của Ru9 luôn êm ái và bền bỉ với thời gian.</p>"
+            "label": "Chứng nhận",
+            "name": "CertiPUR-US®"
           }
         }
       },
       "block_order": [
-        "text_block_KiEpc6",
-        "text_block_cLLCJf",
-        "text_block_4AREAP"
+        "certification_g3zFwy",
+        "certification_ixNC8G"
       ],
-      "disabled": true,
+      "name": "Certifications",
       "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1000,
-        "bg": "#f2fbf8",
-        "title": "An tâm hơn với dịch vụ vượt trội",
-        "align_text": "center",
-        "desktop_columns_per_row": 3,
-        "icon_color": "#000000",
-        "button_label": "",
-        "button_link": "",
-        "divider": false,
-        "space_around": true
+        "title": "Cam Kết An Toàn\nTừ Lần Chạm Đầu Tiên",
+        "description": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>",
+        "button_text": "Xem chi tiết",
+        "button_link": ""
       }
     },
-    "text_with_icons_RnPjUn": {
-      "type": "text-with-icons",
+    "super_service_DXgqM9": {
+      "type": "super-service",
       "blocks": {
-        "text_block_wTkKzK": {
-          "type": "text_block",
+        "service_item_mbrUyr": {
+          "type": "service_item",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-1.png",
-            "title": "100 đêm ngủ thử không rủi ro",
-            "text": "<p>Nếu bạn không hài lòng, chúng tôi sẽ nhận lại nệm và hoàn tiền.</p>"
+            "icon": "shopify://shop_images/100-dem-ngu-thu_1.svg",
+            "item_title": "100 đêm ngủ thử",
+            "item_note": "",
+            "item_description": "<p>Trải nghiệm sản phẩm<br/>ngay tại nhà với cam kết<br/>đổi trả linh hoạt.</p>"
           }
         },
-        "text_block_BRgwtT": {
-          "type": "text_block",
+        "service_item_fJkXVP": {
+          "type": "service_item",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-2.png",
-            "title": "Miễn phí vận chuyển từ 1.500.000đ",
-            "text": "<p>Ru9 miễn phí vận chuyển từ 1.500.000đ nên bạn chỉ cần chọn sản phẩm mình thích!</p>"
+            "icon": "shopify://shop_images/Free_shipping_1.png",
+            "item_title": "Miễn phí vận chuyển",
+            "item_note": "(từ 1.500.000vnd)",
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>"
           }
         },
-        "text_block_6WVxfy": {
-          "type": "text_block",
+        "service_item_Ry6FnG": {
+          "type": "service_item",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-3.png",
-            "title": "Bảo hành dài lâu",
-            "text": "<p>Nệm của Ru9 luôn êm ái và bền bỉ với thời gian.</p>"
+            "icon": "shopify://shop_images/Group_48.svg",
+            "item_title": "Bảo hành dài lâu",
+            "item_note": "",
+            "item_description": "<p>Mỗi chiếc nệm được<br/>bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>"
           }
         },
-        "text_block_Pnp8BH": {
-          "type": "text_block",
+        "service_item_7y66Fn": {
+          "type": "service_item",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/payment-icon.png",
-            "title": "Thanh toán linh hoạt",
-            "text": "<p>Mua sắm dễ dàng với đa dạng hình thức thanh toán. <br/><br/></p>"
+            "icon": "shopify://shop_images/Group_48.svg",
+            "item_title": "Thanh toán linh hoạt",
+            "item_note": "",
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>"
           }
         }
       },
       "block_order": [
-        "text_block_wTkKzK",
-        "text_block_BRgwtT",
-        "text_block_6WVxfy",
-        "text_block_Pnp8BH"
+        "service_item_mbrUyr",
+        "service_item_fJkXVP",
+        "service_item_Ry6FnG",
+        "service_item_7y66Fn"
       ],
+      "name": "Super Service",
       "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1000,
-        "bg": "",
-        "title": "An tâm hơn với dịch vụ vượt trội",
-        "align_text": "center",
-        "desktop_columns_per_row": 4,
-        "icon_color": "#000000",
-        "button_label": "",
-        "button_link": "",
-        "divider": false,
-        "space_around": false
+        "title": "An Tâm Hơn Với Dịch Vụ Vượt Trội",
+        "background_color": "#f0f7ff"
+      }
+    },
+    "blog_carousel_hh43j9": {
+      "type": "blog-carousel",
+      "blocks": {
+        "article_slide_BWpQQD": {
+          "type": "article_slide",
+          "settings": {
+            "article": "magazine/nem-1m2-x-2m-gia-re",
+            "custom_description": ""
+          }
+        },
+        "article_slide_QCBDDa": {
+          "type": "article_slide",
+          "settings": {
+            "article": "magazine/nem-topper-hcm",
+            "custom_description": ""
+          }
+        },
+        "article_slide_Uc89h4": {
+          "type": "article_slide",
+          "settings": {
+            "article": "magazine/nhung-truyen-ngan-ke-chuyen-dem-khuya-cho-be",
+            "custom_description": ""
+          }
+        },
+        "article_slide_iKA7Gk": {
+          "type": "article_slide",
+          "settings": {
+            "article": "magazine/tu-the-nam-giup-tang-vong-3",
+            "custom_description": ""
+          }
+        }
+      },
+      "block_order": [
+        "article_slide_BWpQQD",
+        "article_slide_QCBDDa",
+        "article_slide_Uc89h4",
+        "article_slide_iKA7Gk"
+      ],
+      "name": "Blog posts carousel",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "Blog posts",
+        "heading_alignment": "left",
+        "blog": "magazine",
+        "blog_show_tags": false,
+        "blog_show_date": false,
+        "blog_show_comments": false,
+        "blog_show_excerpt": true,
+        "blog_show_author": false,
+        "view_all": true,
+        "view_all_text": "",
+        "blog_image_size": "wide",
+        "divider": false
       }
     },
     "faq_A7dpqH": {
@@ -394,6 +509,7 @@
         "question_fYyR84",
         "question_HKy3rr"
       ],
+      "disabled": true,
       "settings": {
         "section_width": "customize_width",
         "customize_width": 800,
@@ -468,14 +584,16 @@
   "order": [
     "collection-header",
     "independent_webhook_popup_6ky34i",
+    "main_collection_custom_Y4Wd87",
+    "quiz_banner_zXHt4B",
     "main-collection",
     "banner_with_content_K64e3r",
     "compare_product_fL4TxW",
     "collection-content",
-    "banner_with_content_NiwahU",
-    "compare_product_UeQD6G",
-    "text_with_icons_9yd9VT",
-    "text_with_icons_RnPjUn",
+    "reviews_carousel_QUQNh3",
+    "certifications_cWbJNF",
+    "super_service_DXgqM9",
+    "blog_carousel_hh43j9",
     "faq_A7dpqH",
     "testimonials_AdcbcV"
   ]
