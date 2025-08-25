@@ -7,9 +7,9 @@
   <div class="tvc-container page-width">
     <div class="tvc-text-column">
       {%- if section.settings.heading != blank -%}
-        <h2 class="tvc-heading">
-          {{ section.settings.heading | escape }}
-        </h2>
+        <div class="tvc-heading">
+          {{ section.settings.heading }}
+        </div>
       {%- endif -%}
     </div>
     <div class="tvc-video-column">
@@ -47,28 +47,30 @@
 
   .tvc-text-column {
     flex: 1;
-    max-width: 450px;
   }
 
   .tvc-heading {
     color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 39px;
+    font-size: 36px;
     font-style: normal;
     font-weight: 700;
     line-height: 48px;
     margin: 0;
   }
 
+  .tvc-heading p {
+    margin: 0;
+  }
+
   .tvc-video-column {
-    flex-shrink: 0;
+    flex: 1.8;
   }
 
   .tvc-video-wrapper {
     position: relative;
-    width: 980px;
-    height: 551px;
-    flex-shrink: 0;
+    width: 100%;
+    aspect-ratio: 16 / 9;
     border-radius: 10px;
     overflow: hidden;
     background-color: #f0f0f0;
@@ -86,15 +88,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  @media (max-width: 1200px) {
-    .tvc-video-wrapper {
-      width: 100%;
-      max-width: 980px;
-      height: auto;
-      aspect-ratio: 16 / 9;
-    }
   }
 
   @media (max-width: 990px) {
@@ -126,10 +119,10 @@
   "class": "index-section",
   "settings": [
     {
-      "type": "text",
+      "type": "richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "7 năm đồng hành cùng giấc ngủ người Việt"
+      "default": "<p>7 năm đồng hành<br>cùng giấc ngủ người Việt</p>"
     },
     {
       "type": "video",
