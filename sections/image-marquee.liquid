@@ -1,0 +1,117 @@
+{% comment %}
+  Section: Image Marquee
+  - Displays a horizontally scrolling marquee of images.
+{% endcomment %}
+
+<div class="marquee-section-wrapper" style="background: #FFFBE9; overflow: hidden; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+  <div class="marquee-section" data-section-id="{{ section.id }}">
+    <div class="marquee-content-{{ section.id }}" style="display: inline-flex; align-items: center; white-space: nowrap;">
+      {%- if section.blocks.size > 0 -%}
+        {%- for i in (1..2) -%}
+          {%- for block in section.blocks -%}
+            <div class="marquee-item" {{ block.shopify_attributes }} style="padding: 0 44px; flex-shrink: 0;">
+              {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" style="display: block;">{%- endif -%}
+              {%- if block.settings.image != blank -%}
+                {%- assign image_height = 122 -%}
+                {%- assign image_width = image_height | times: block.settings.image.aspect_ratio | round -%}
+                <img
+                  src="{{ block.settings.image | img_url: 'x122' }}"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  width="{{ image_width }}"
+                  height="{{ image_height }}"
+                  style="height: {{ image_height }}px; width: {{ image_width }}px; display: block;"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div style="width: 150px;">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.url != blank -%}</a>{%- endif -%}
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .marquee-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 200px;
+    padding: 39px 0;
+  }
+
+  .marquee-content-{{ section.id }} {
+    animation: marquee-{{ section.id }} {{ section.settings.speed }}s linear infinite;
+  }
+
+  .marquee-section:hover .marquee-content-{{ section.id }} {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-{{ section.id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Image Marquee",
+  "class": "index-section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "s",
+      "label": "Animation Speed",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Marquee",
+      "category": "Image",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

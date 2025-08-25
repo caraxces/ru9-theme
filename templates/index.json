@@ -118,7 +118,7 @@
         "autoplay_speed": 7,
         "lazyload_images": true,
         "show_icon_text_bar": true,
-        "icon_bar_background_color": "#f8f9fa",
+        "icon_bar_background_color": "#fffbeb",
         "icon_1_title": "100 đêm ngủ thử",
         "icon_1_type": "sleep",
         "icon_1_color": "#007bff",
@@ -328,6 +328,57 @@
         "caption_4": ""
       }
     },
+    "image_marquee_hcRmaa": {
+      "type": "image-marquee",
+      "blocks": {
+        "image_Uy6aTg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/source_image.png",
+            "url": ""
+          }
+        },
+        "image_GciqEJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/a6b3533063f5b180aae6a6d3eb2b2edd4ad0607b.png",
+            "url": ""
+          }
+        },
+        "image_hkBF6X": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/266a775cdc46b92cd704c09d005ebb9fb3720525.png",
+            "url": ""
+          }
+        },
+        "image_GzQeNj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/c10d49c51e794d84c2ba3a493a9896a8903df0ed.png",
+            "url": ""
+          }
+        },
+        "image_zWGwW3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/318af7b8a987ad0599e5ab9a362adf1ee42b6fb8.png",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_Uy6aTg",
+        "image_GciqEJ",
+        "image_hkBF6X",
+        "image_GzQeNj",
+        "image_zWGwW3"
+      ],
+      "name": "Image Marquee",
+      "settings": {
+        "speed": 30
+      }
+    },
     "dynamic_text_with_image_3FaeX8": {
       "type": "dynamic-text-with-image",
       "blocks": {
@@ -355,6 +406,15 @@
         "title": "",
         "description": "",
         "divider": false
+      }
+    },
+    "tvc_section_WrUqBM": {
+      "type": "tvc-section",
+      "name": "TVC Section",
+      "settings": {
+        "heading": "7 năm đồng hành cùng giấc ngủ người Việt",
+        "video": "shopify://files/videos/video-best-seller.mp4",
+        "poster_image": "shopify://shop_images/chat-lieu-vai-tencel-la-gi.jpg"
       }
     },
     "super_service_87efWC": {
@@ -607,7 +667,9 @@
     "featured_collections_6qfWNA",
     "quiz_banner_4z7U33",
     "journey_ru9_L4xXY7",
+    "image_marquee_hcRmaa",
     "dynamic_text_with_image_3FaeX8",
+    "tvc_section_WrUqBM",
     "super_service_87efWC",
     "reviews_carousel_QPtXUf",
     "certifications_4j8wGm",

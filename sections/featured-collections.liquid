@@ -1,56 +1,46 @@
 <div data-section-id="{{ section.id }}" data-section-type="featured-collections">
-  <div class="featured-collections-section" style="width: 100%; max-width: 2280px; min-height: 603.83px; margin: 0 auto 60px auto;">
+  <div class="featured-collections-section" style="width: 100%; min-height: auto; margin: 0 auto 60px auto; padding: 0 5%;">
     
     <!-- Header Section -->
-    <div class="section-header" style="padding: 40px 5% 30px 5%; display: flex; justify-content: space-between; align-items: flex-start;">
+    <div class="section-header" style="padding: 40px 0 30px 0; display: flex; justify-content: space-between; align-items: flex-end;">
       
       <!-- Left side - Title and Description -->
-      <div class="header-left" style="flex: 1; text-align: left;">
-        <h2 class="section-title" style="font-family: 'Tinos', serif; font-size: 48px; font-weight: 400; line-height: 120%; color: #1A1A1A; margin: 0 0 16px 0; text-align: left;">
-          {{ section.settings.title | default: 'Sản Phẩm Bán Chạy' }}
+      <div class="header-left" style="flex: 1; text-align: left; display: flex; flex-direction: column; gap: 24px;">
+        <h2 class="section-title" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 32px; font-weight: 700; line-height: 120%; color: #1A1A1A; margin: 0; text-align: left;">
+          {{ section.settings.title | default: 'Sản phẩm bán chạy' }}
         </h2>
-        <div class="section-description" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 400; line-height: 150%; color: #666; margin: 0; text-align: left;">
-          {{ section.settings.description | default: 'Chiếc nệm foam êm ái cho giấc ngủ thoải mái nhất' }}
-        </div>
-      </div>
       
-      <!-- Center - Category Tabs -->
-      <div class="header-center" style="flex: 1; display: flex; justify-content: center; align-items: center; padding-top: 25px;">
-        <div class="category-tabs" style="display: flex; gap: 32px; align-items: center;">
+        <div class="category-tabs" style="display: flex; gap: 16px; align-items: center;">
           {%- for block in section.blocks -%}
             <button 
               class="category-tab{% if forloop.index == 1 %} active{% endif %}" 
               data-tab="Tab-{{ block.id }}"
               data-collection-url="{{ block.settings.collection.url }}"
-              style="padding: 0; border: none; background: transparent; font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; {% if forloop.index == 1 %}color: #2960AD;{% else %}color: #1A1A1A;{% endif %}; position: relative; display: flex; align-items: center;"
             >
               {{ block.settings.tab_name | default: 'Nệm' }}
-              {%- if forloop.index == 1 -%}
-                <div class="active-indicator" style="position: absolute; bottom: -8px; left: 0; width: 100%; height: 2px; background: #2960AD; border-radius: 1px;"></div>
-              {%- endif -%}
             </button>
           {%- endfor -%}
         </div>
       </div>
       
       <!-- Right side - View All Button and Navigation -->
-      <div class="header-right" style="flex: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+      <div class="header-right" style="display: flex; align-items: center; gap: 24px;">
         
         <!-- View All Button -->
-        <a href="#" class="view-all-btn" style="display: flex; width: 145px; height: 40px; justify-content: center; align-items: center; gap: 10px; flex-shrink: 0; border-radius: 30px; border: 2px solid #609EE9; background: transparent; color: #609EE9; font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; text-decoration: none;">
+        <a href="#" class="view-all-link" style="color: #1A1A1A; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 500; text-decoration: underline; line-height: 1;">
           Xem tất cả
         </a>
         
         <!-- Navigation Arrows -->
         <div class="carousel-nav" style="display: flex; gap: 6px;">
-          <button class="nav-btn nav-prev" style="width: 40px; height: 40px; border: 1px solid #E5E5E5; border-radius: 50%; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; margin-right: 50px;">
+          <button class="nav-btn nav-prev">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.5 9L4.5 6L7.5 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <button class="nav-btn nav-next" style="width: 40px; height: 40px; border: 1px solid #E5E5E5; border-radius: 50%; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+          <button class="nav-btn nav-next">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4.5 9L7.5 6L4.5 3" stroke="#609EE9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4.5 9L7.5 6L4.5 3" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
         </div>
@@ -58,7 +48,7 @@
     </div>
     
     <!-- Product Carousel Section -->
-    <div class="product-carousel-section" style="padding: 0 5% 20px 5%;">
+    <div class="product-carousel-section">
       <div class="product-carousel" style="position: relative; overflow: hidden;">
         
         <!-- Product Cards Container -->
@@ -69,10 +59,10 @@
               {%- assign collection = block.settings.collection -%}
               {%- if collection != blank -%}
                 {%- for product in collection.products -%}
-                                     <a href="{{ product.url }}" class="product-card" style="min-width: 280px; flex-shrink: 0; border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; display: block;">
+                                     <a href="{{ product.url }}" class="product-card" style="width: 380px; flex-shrink: 0; border-radius: 5px; overflow: hidden; text-decoration: none; color: inherit; display: block;">
                      
                      <!-- Product Image Container -->
-                     <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}" style="position: relative; width: 425px; height: 281px; flex-shrink: 0; aspect-ratio: 121/80; background: #F8F9FA; border-radius: 16px 16px 16px 16px; overflow: hidden; cursor: pointer;">
+                     <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}" style="position: relative; width: 380px; height: 284px; flex-shrink: 0; background: #FFFDF4; border-radius: 5px; overflow: hidden; cursor: pointer;">
                       
                       <!-- Product Label Badge -->
                       {%- if block.settings.product_label != blank -%}
@@ -88,7 +78,7 @@
                           src="{{ product.featured_image | img_url: '400x320', crop: 'center' }}" 
                           alt="{{ product.title }}"
                           width="400" height="320"
-                          style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px 16px 16px 16px; transition: opacity 0.3s ease;"
+                          style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; transition: opacity 0.3s ease;"
                         >
                         <!-- Product Image Secondary (Hover) -->
                         {%- if product.media.size > 1 -%}
@@ -100,54 +90,50 @@
                                 src="{{ second_image | img_url: '400x320', crop: 'center' }}" 
                                 alt="{{ product.title }}"
                                 width="400" height="320"
-                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px 16px 16px 16px; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s ease;"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s ease;"
                               >
                             {%- endif -%}
                           {%- endfor -%}
                         {%- endif -%}
                       {%- else -%}
-                        <div style="width: 100%; height: 100%; background: #E9ECEF; display: flex; align-items: center; justify-content: center; color: #6C757D; border-radius: 16px 16px 0 0;">
+                        <div style="width: 100%; height: 100%; background: #E9ECEF; display: flex; align-items: center; justify-content: center; color: #6C757D; border-radius: 5px;">
                           No Image
                         </div>
                       {%- endif -%}
                     </div>
                     
                     <!-- Product Info -->
-                    <div class="product-info" style="padding: 24px; margin: 0;">
-                      
-                      <!-- Rating -->
-                      <div class="product-rating" style="display: flex; align-items: center; gap: 6px; margin-bottom: 10px;">
-                        <span style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #000; font-weight: 500;">5.0/5</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
-                          <path d="M5.91709 0.406727C6.10057 -0.135581 6.89945 -0.135571 7.08293 0.406727L8.19718 3.70012C8.27924 3.94264 8.51457 4.10685 8.78007 4.10685H12.3859C12.9797 4.10685 13.2265 4.83651 12.7462 5.17168L9.82898 7.2071C9.61415 7.35699 9.52436 7.62267 9.60639 7.8652L10.7206 11.1586C10.9041 11.7009 10.2578 12.1519 9.77739 11.8167L6.86027 9.78127C6.64545 9.63137 6.35456 9.63137 6.13974 9.78127L3.22258 11.8167C2.74223 12.1519 2.09591 11.7009 2.27939 11.1586L3.39365 7.8652C3.47571 7.62267 3.38581 7.35699 3.17099 7.2071L0.253832 5.17167C-0.226523 4.83651 0.0203404 4.10685 0.614096 4.10685H4.21991C4.48544 4.10685 4.72077 3.94264 4.80283 3.70012L5.91709 0.406727Z" fill="#609EE9"/>
+                    <div class="product-info" style="padding: 16px 0 0 0; margin: 0; text-align: left;">
+                      <div class="product-rating" style="margin-bottom: 8px;">
+                        <svg width="81" height="14" viewBox="0 0 81 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M6.84155 0.245755C6.94841 -0.0819184 7.41368 -0.0819184 7.52054 0.245755L8.97105 4.69322C9.01883 4.83976 9.15591 4.93898 9.31055 4.93898H14.0044C14.3502 4.93898 14.494 5.37983 14.2143 5.58238L10.4169 8.33108C10.2917 8.4216 10.2394 8.58218 10.2872 8.72871L11.7377 13.1762C11.8445 13.5038 11.4681 13.7763 11.1883 13.5738L7.3909 10.8251C7.26577 10.7346 7.09632 10.7346 6.9712 10.8251L3.1738 13.5738C2.89403 13.7763 2.51759 13.5038 2.62445 13.1762L4.07493 8.72871C4.12273 8.58218 4.07037 8.4216 3.94525 8.33108L0.147842 5.58238C-0.131937 5.37983 0.0118471 4.93898 0.357675 4.93898H5.05154C5.20618 4.93898 5.34326 4.83976 5.39104 4.69322L6.84155 0.245755Z" fill="#FFDC5F"/>
+                          <path d="M23.5007 0.245755C23.6076 -0.0819184 24.0729 -0.0819184 24.1797 0.245755L25.6302 4.69322C25.678 4.83976 25.8151 4.93898 25.9697 4.93898H30.6636C31.0094 4.93898 31.1532 5.37983 30.8735 5.58238L27.0761 8.33108C26.9509 8.4216 26.8986 8.58218 26.9463 8.72871L28.3969 13.1762C28.5037 13.5038 28.1273 13.7763 27.8475 13.5738L24.0501 10.8251C23.925 10.7346 23.7555 10.7346 23.6304 10.8251L19.833 13.5738C19.5532 13.7763 19.1768 13.5038 19.2836 13.1762L20.7341 8.72871C20.7819 8.58218 20.7295 8.4216 20.6044 8.33108L16.807 5.58238C16.5272 5.37983 16.671 4.93898 17.0169 4.93898H21.7107C21.8654 4.93898 22.0025 4.83976 22.0502 4.69322L23.5007 0.245755Z" fill="#FFDC5F"/>
+                          <path d="M40.1609 0.245755C40.2678 -0.0819184 40.733 -0.0819184 40.8399 0.245755L42.2904 4.69322C42.3382 4.83976 42.4753 4.93898 42.6299 4.93898H47.3238C47.6696 4.93898 47.8134 5.37983 47.5336 5.58238L43.7362 8.33108C43.6111 8.4216 43.5587 8.58218 43.6065 8.72871L45.057 13.1762C45.1639 13.5038 44.7874 13.7763 44.5077 13.5738L40.7102 10.8251C40.5851 10.7346 40.4157 10.7346 40.2905 10.8251L36.4931 13.5738C36.2134 13.7763 35.8369 13.5038 35.9438 13.1762L37.3943 8.72871C37.4421 8.58218 37.3897 8.4216 37.2646 8.33108L33.4672 5.58238C33.1874 5.37983 33.3312 4.93898 33.677 4.93898H38.3709C38.5255 4.93898 38.6626 4.83976 38.7104 4.69322L40.1609 0.245755Z" fill="#FFDC5F"/>
+                          <path d="M56.8201 0.245755C56.9269 -0.0819184 57.3922 -0.0819184 57.4991 0.245755L58.9493 4.69322C58.9975 4.83976 59.1343 4.93898 59.289 4.93898H63.9828C64.3285 4.93898 64.4725 5.37983 64.1929 5.58238L60.3951 8.33108C60.2701 8.4216 60.2178 8.58218 60.266 8.72871L61.716 13.1762C61.823 13.5038 61.4464 13.7763 61.1668 13.5738L57.3694 10.8251C57.2443 10.7346 57.0748 10.7346 56.9497 10.8251L53.1523 13.5738C52.8725 13.7763 52.4961 13.5038 52.603 13.1762L54.0535 8.72871C54.1012 8.58218 54.0489 8.4216 53.9238 8.33108L50.1263 5.58238C49.8466 5.37983 49.9904 4.93898 50.3362 4.93898H55.0301C55.1847 4.93898 55.3218 4.83976 55.3696 4.69322L56.8201 0.245755Z" fill="#FFDC5F"/>
+                          <path d="M73.4789 0.245755C73.586 -0.0819184 74.0513 -0.0819184 74.1584 0.245755L75.6084 4.69322C75.6566 4.83976 75.7934 4.93898 75.9481 4.93898H80.6419C80.9876 4.93898 81.1316 5.37983 80.852 5.58238L77.0542 8.33108C76.9292 8.4216 76.8769 8.58218 76.9251 8.72871L78.3751 13.1762C78.4822 13.5038 78.1055 13.7763 77.8259 13.5738L74.0287 10.8251C73.9032 10.7346 73.7342 10.7346 73.6086 10.8251L69.8115 13.5738C69.5318 13.7763 69.1552 13.5038 69.2623 13.1762L70.7123 8.72871C70.7605 8.58218 70.7081 8.4216 70.5832 8.33108L66.7854 5.58238C66.5057 5.37983 66.6497 4.93898 66.9954 4.93898H71.6892C71.8439 4.93898 71.9808 4.83976 72.029 4.69322L73.4789 0.245755Z" fill="#FFDC5F"/>
                         </svg>
-                        <span style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #666; font-weight: 400;">(600)</span>
                       </div>
-                      
                       <!-- Product Name -->
-                      <h3 class="product-name" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 27px; font-weight: 700; color: #000; margin: 0 0 0px 0; line-height: 130%;">
+                      <h3 class="product-name" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 20px; font-weight: 500; color: #1C2C58; margin: 0 0 8px 0; line-height: 27px;">
                         {{ product.title }}
                       </h3>
                       
+                      <div class="product-meta" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #666; margin-bottom: 8px;">
+                          25cm, 6 sizes
+                      </div>
+                      
                       <!-- Price Information -->
-                      <div class="product-price" style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-                        <span class="price" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 24px; font-weight: 700; color: #9F332C;">
-                          {{ product.price | money }}
+                      <div class="product-price" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                        <span class="price" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 600; color: #1A1A1A;">
+                          Từ {{ product.price | money }}
                         </span>
                         {%- if product.compare_at_price > product.price -%}
-                          <span style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; color: #666; text-decoration: line-through; margin-left: 4px;">
+                          <span style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #999; text-decoration: line-through;">
                             {{ product.compare_at_price | money }}
-                          </span>
-                          <span class="discount-badge" style="padding: 6px 12px; background: #FFF; color: #9F332C; border-radius: 8px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 600; margin-left: 8px; border: 1px solid #9F332C;">
-                            -{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%
                           </span>
                         {%- endif -%}
                       </div>
                       
-                      <!-- Sold Count -->
-                      <div class="sold-count" style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #9CA3AF; margin-top: 8px;">
-                        Đã bán: 1005
-                      </div>
                     </div>
                   </a>
                 {%- endfor -%}
@@ -159,9 +145,9 @@
     </div>
 
     <!-- Progress Bar Section -->
-    <div class="carousel-progress-container" style="padding: 0 5% 40px 5%; display: flex; justify-content: center;">
-      <div class="carousel-progress-bar-background" style="display: flex; width: 1196px; height: 5.83px; align-items: center; flex-shrink: 0; border-radius: 100px; background: #E0E0E0;">
-        <div class="carousel-progress-bar" style="height: 100%; border-radius: 100px; background: #AFAFAF; width: 0%; transition: width 0.3s ease;"></div>
+    <div class="carousel-progress-container" style="padding: 24px 0 40px 0;">
+      <div class="carousel-progress-bar-background" style="width: 100%; height: 2px; border-radius: 100px; background: #F2F2F2;">
+        <div class="carousel-progress-bar" style="height: 100%; border-radius: 100px; background: #1A1A1A; width: 0%; transition: width 0.3s ease;"></div>
       </div>
     </div>
 
@@ -203,22 +189,68 @@
   [data-section-id="{{ section.id }}"] .tab-content {
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
+  
+  .category-tab {
+    display: flex;
+    height: 45px;
+    min-height: 45px;
+    padding: 12px 24px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 100.1px;
+    border: 1px solid transparent;
+    background: #FFFBE9;
+    color: #1A1A1A;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
 
   .category-tab:hover {
-    color: #2960AD !important;
+    background: #e9ecef;
   }
   
   .category-tab.active {
-    color: #2960AD !important;
+    background: #FFD35B;
+    color: #1A1A1A;
+    font-weight: 600;
   }
   
-  .view-all-btn:hover {
-    background: #609EE9 !important;
-    color: #fff !important;
+  .view-all-link:hover {
+    color: #000 !important;
   }
   
-  .nav-btn:hover {
-    background: #E5E5E5 !important;
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .nav-btn.nav-prev {
+    background: #FFF9E5;
+  }
+  .nav-btn.nav-prev:hover {
+    background: #FFF3CD;
+  }
+  .nav-btn.nav-next {
+    background: #FFD35B;
+  }
+   .nav-btn.nav-next:hover {
+    background: #FBC947;
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
   
   .product-image-container.has-secondary-image:hover .product-image-primary {
@@ -398,7 +430,7 @@
 
     const tabButtons = sectionContainer.querySelectorAll('.category-tab');
     const tabContents = sectionContainer.querySelectorAll('.tab-content');
-    const viewAllBtn = sectionContainer.querySelector('.view-all-btn');
+    const viewAllBtn = sectionContainer.querySelector('.view-all-link');
     const progressBarContainer = sectionContainer.querySelector('.carousel-progress-container');
     const progressBar = sectionContainer.querySelector('.carousel-progress-bar');
     const prevBtn = sectionContainer.querySelector('.nav-prev');
@@ -457,6 +489,10 @@
       }
 
       function dragStart(e) {
+        if (e.target.closest('.product-info')) {
+          isDown = false;
+          return;
+        }
         isDown = true;
         carouselContainer.classList.add('grabbing');
         startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
@@ -478,33 +514,37 @@
         isDown = false;
         carouselContainer.classList.remove('grabbing');
         
-        const itemWidth = productCards[0] ? productCards[0].offsetWidth : 280;
-        const threshold = itemWidth / 4;
-        
-        const itemsPerView = getItemsPerView();
-        const maxIndex = Math.max(0, productCards.length - itemsPerView);
+        // Only update position if dragged, otherwise it's a click
+        if (Math.abs(walk) > 10) { 
+            const itemWidth = productCards[0] ? productCards[0].offsetWidth : 280;
+            const threshold = itemWidth / 4;
+            
+            const itemsPerView = getItemsPerView();
+            const maxIndex = Math.max(0, productCards.length - itemsPerView);
 
-        if (walk < -threshold && currentIndex < maxIndex) {
-            currentIndex++;
-        } else if (walk > threshold && currentIndex > 0) {
-            currentIndex--;
+            if (walk < -threshold && currentIndex < maxIndex) {
+                currentIndex++;
+            } else if (walk > threshold && currentIndex > 0) {
+                currentIndex--;
+            }
         }
-
         updateCarousel();
       }
 
+      tabContent.addEventListener('mousedown', dragStart);
+      tabContent.addEventListener('mousemove', dragMove);
+      tabContent.addEventListener('mouseup', dragEnd);
+      tabContent.addEventListener('mouseleave', dragEnd);
+
       tabContent.querySelectorAll('a').forEach(link => {
           link.addEventListener('click', e => {
-              if (isDown || Math.abs(walk) > 5) {
+              if (Math.abs(walk) > 10) { // Threshold to differentiate click from drag
                   e.preventDefault();
                   e.stopPropagation();
               }
           });
       });
 
-      tabContent.addEventListener('mousedown', dragStart);
-      window.addEventListener('mousemove', dragMove);
-      window.addEventListener('mouseup', dragEnd);
       tabContent.addEventListener('touchstart', dragStart, { passive: true });
       window.addEventListener('touchmove', dragMove);
       window.addEventListener('touchend', dragEnd);
@@ -554,6 +594,8 @@
       const collectionUrl = activeButton.getAttribute('data-collection-url');
       if (viewAllBtn && collectionUrl) {
         viewAllBtn.href = collectionUrl;
+      } else if (viewAllBtn) {
+        viewAllBtn.href = '#'; // Fallback
       }
     }
 
@@ -564,16 +606,8 @@
         
         tabButtons.forEach(btn => {
           btn.classList.remove('active');
-          btn.style.color = '#1A1A1A';
-          const indicator = btn.querySelector('.active-indicator');
-          if (indicator) indicator.remove();
         });
         this.classList.add('active');
-        this.style.color = '#2960AD';
-        const indicator = document.createElement('div');
-        indicator.className = 'active-indicator';
-        indicator.style.cssText = 'position: absolute; bottom: -8px; left: 0; width: 100%; height: 2px; background: #2960AD; border-radius: 1px;';
-        this.appendChild(indicator);
         
         tabContents.forEach(content => {
           content.classList.remove('active');
