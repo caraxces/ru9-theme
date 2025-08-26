@@ -133,15 +133,17 @@
         "icon_3_image": "shopify://shop_images/Free_shipping_1.png"
       }
     },
-    "content_dynamic_3BnXn9": {
-      "type": "content-dynamic",
-      "name": "Content Dynamic",
+    "content_banner_cta_UzRzpc": {
+      "type": "content-banner-cta",
+      "name": "Content Banner CTA",
       "settings": {
-        "quote_text_1": "\"Mọi điều tuyệt vời đều bắt đầu bằng",
-        "quote_text_2": "một giấc ngủ ngon\"",
-        "counter_number": 3240,
-        "left_background_color": "#f0f7ff",
-        "counter_color": "#609ee9"
+        "main_title": "Mọi điều tuyệt vời đều bắt đầu từ một giấc ngủ ngon",
+        "subtitle": "<p>Với hơn 3,240 giờ nghiên cứu để bạn chỉ việc nghỉ ngơi, chẳng cần nghĩ ngợi.</p>",
+        "secondary_title": "Ru9 - Nơi giấc ngủ ngon bắt đầu",
+        "description": "<p>Chúng tôi không ngừng cải tiến từng chi tiết, để sản phẩm không chỉ \"êm\" mà còn \"hiểu\" được cơ thể bạn. Mỗi thiết kế, mỗi cải tiến trong chất liệu đều hướng đến cảm giác thoải mái và nâng đỡ tốt nhất cho cơ thể bạn. Từ đó, giấc ngủ không còn là điều xa xỉ, mà trở thành điều hiển nhiên và dễ dàng tiếp cận hơn với mọi người.</p>",
+        "image": "shopify://shop_images/00909003ee41844939ad76f1fa4bf6dda646c676.png",
+        "button_text": "Xem chi tiết",
+        "button_link": ""
       }
     },
     "collections_listing_cAa8Dw": {
@@ -251,6 +253,87 @@
         "description_color": "#666666"
       }
     },
+    "image_marquee_hcRmaa": {
+      "type": "image-marquee",
+      "blocks": {
+        "image_Uy6aTg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/source_image.png",
+            "url": ""
+          }
+        },
+        "image_GciqEJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/a6b3533063f5b180aae6a6d3eb2b2edd4ad0607b.png",
+            "url": ""
+          }
+        },
+        "image_hkBF6X": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/266a775cdc46b92cd704c09d005ebb9fb3720525.png",
+            "url": ""
+          }
+        },
+        "image_GzQeNj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/c10d49c51e794d84c2ba3a493a9896a8903df0ed.png",
+            "url": ""
+          }
+        },
+        "image_zWGwW3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/318af7b8a987ad0599e5ab9a362adf1ee42b6fb8.png",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_Uy6aTg",
+        "image_GciqEJ",
+        "image_hkBF6X",
+        "image_GzQeNj",
+        "image_zWGwW3"
+      ],
+      "name": "Image Marquee",
+      "settings": {
+        "quote_text": "<p>Trong suốt hành trình phát triển, Ru9 tự hào được xuất hiện trên nhiều tờ báo và tạp chí uy tín, ghi nhận nỗ lực mang đến <br> giấc ngủ chất lượng cho người Việt. Đây là minh chứng cho niềm tin từ khách hàng và sự đánh giá cao của giới chuyên môn.</p>",
+        "speed": 30
+      }
+    },
+    "dynamic_text_with_image_3FaeX8": {
+      "type": "dynamic-text-with-image",
+      "blocks": {
+        "image_with_text_AyyYjw": {
+          "type": "image-with-text",
+          "settings": {
+            "title": "Image with text",
+            "text": "<p>Pair large text with an image to tell a story, explain a detail about your product, or describe a new promotion.</p>",
+            "align_text": "left",
+            "layout": "right"
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_AyyYjw"
+      ],
+      "name": "Dynamic image with text",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "mg": "50px,,20px,",
+        "pd": "",
+        "mg_mb": "",
+        "pd_mb": "",
+        "title": "",
+        "description": "",
+        "divider": false
+      }
+    },
     "quiz_banner_4z7U33": {
       "type": "quiz-banner",
       "name": "Quiz Banner (Advanced)",
@@ -309,106 +392,6 @@
         "result_title": "We recommend for you"
       }
     },
-    "journey_ru9_L4xXY7": {
-      "type": "journey-ru9",
-      "name": "Hành trình của Ru9",
-      "settings": {
-        "title": "Hành Trình Của Ru9",
-        "subtitle": "<p>Ru9 bắt đầu với niềm tin rằng, ai cũng xứng đáng có được giấc ngủ ngon thật dễ dàng. Chúng mình hướng về mục tiêu đơn giản: đặt chất lượng lên trên hết.</p>",
-        "label_1": "",
-        "image_1": "shopify://shop_images/thang-4-thuoc-cung-gi.jpg",
-        "caption_1": "7 năm đồng hành cùng triệu giấc ngủ Việt",
-        "label_2": "Giấc ngủ trọn vẹn",
-        "image_2": "shopify://shop_images/khung-gio-ngu-tang-chieu-cao.jpg",
-        "caption_2": "",
-        "label_3": "",
-        "image_3": "shopify://shop_images/DSC0728.jpg",
-        "caption_3": "Mang giá trị thật đến cộng đồng",
-        "label_4": "Mang giá trị thật đến cộng đồng",
-        "image_4": "shopify://shop_images/uong-bot-nghe-vao-buoi-toi.jpg",
-        "caption_4": ""
-      }
-    },
-    "image_marquee_hcRmaa": {
-      "type": "image-marquee",
-      "blocks": {
-        "image_Uy6aTg": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/source_image.png",
-            "url": ""
-          }
-        },
-        "image_GciqEJ": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/a6b3533063f5b180aae6a6d3eb2b2edd4ad0607b.png",
-            "url": ""
-          }
-        },
-        "image_hkBF6X": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/266a775cdc46b92cd704c09d005ebb9fb3720525.png",
-            "url": ""
-          }
-        },
-        "image_GzQeNj": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/c10d49c51e794d84c2ba3a493a9896a8903df0ed.png",
-            "url": ""
-          }
-        },
-        "image_zWGwW3": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/318af7b8a987ad0599e5ab9a362adf1ee42b6fb8.png",
-            "url": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_Uy6aTg",
-        "image_GciqEJ",
-        "image_hkBF6X",
-        "image_GzQeNj",
-        "image_zWGwW3"
-      ],
-      "name": "Image Marquee",
-      "settings": {
-        "speed": 30
-      }
-    },
-    "dynamic_text_with_image_3FaeX8": {
-      "type": "dynamic-text-with-image",
-      "blocks": {
-        "image_with_text_AyyYjw": {
-          "type": "image-with-text",
-          "settings": {
-            "title": "Image with text",
-            "text": "<p>Pair large text with an image to tell a story, explain a detail about your product, or describe a new promotion.</p>",
-            "align_text": "left",
-            "layout": "right"
-          }
-        }
-      },
-      "block_order": [
-        "image_with_text_AyyYjw"
-      ],
-      "name": "Dynamic image with text",
-      "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
-        "mg": "50px,,20px,",
-        "pd": "",
-        "mg_mb": "",
-        "pd_mb": "",
-        "title": "",
-        "description": "",
-        "divider": false
-      }
-    },
     "tvc_section_WrUqBM": {
       "type": "tvc-section",
       "name": "TVC Section",
@@ -423,10 +406,11 @@
         "service_item_ALLhND": {
           "type": "service_item",
           "settings": {
-            "icon": "shopify://shop_images/100-dem-ngu-thu_1.svg",
+            "icon": "shopify://shop_images/65e5e239d4e9350c57080d9b0abbcb6003a0c04c.png",
             "item_title": "100 đêm ngủ thử",
             "item_note": "",
-            "item_description": "<p>Trải nghiệm sản phẩm<br/>ngay tại nhà với cam kết<br/>đổi trả linh hoạt.</p>"
+            "item_description": "<p>Trải nghiệm sản phẩm ngay tại nhà với cam kết đổi trả linh hoạt.</p>",
+            "item_link": ""
           }
         },
         "service_item_g8XcJ6": {
@@ -435,7 +419,8 @@
             "icon": "shopify://shop_images/Free_shipping_1.png",
             "item_title": "Miễn phí vận chuyển",
             "item_note": "(từ 1.500.000vnd)",
-            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>"
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>",
+            "item_link": ""
           }
         },
         "service_item_bPPic3": {
@@ -444,7 +429,8 @@
             "icon": "shopify://shop_images/Group_48.svg",
             "item_title": "Bảo hành dài lâu",
             "item_note": "",
-            "item_description": "<p>Mỗi chiếc nệm được<br/>bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>"
+            "item_description": "<p>Mỗi chiếc nệm được bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>",
+            "item_link": ""
           }
         },
         "service_item_wm6AEU": {
@@ -453,7 +439,8 @@
             "icon": "shopify://shop_images/Group_48.svg",
             "item_title": "Thanh toán linh hoạt",
             "item_note": "",
-            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>"
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>",
+            "item_link": ""
           }
         }
       },
@@ -465,8 +452,40 @@
       ],
       "name": "Super Service",
       "settings": {
-        "title": "An Tâm Hơn Với Dịch Vụ Vượt Trội",
-        "background_color": "#f0f7ff"
+        "title": "An tâm hơn với dịch vụ vượt trội",
+        "background_color": "#f5f9ff"
+      }
+    },
+    "certifications_4j8wGm": {
+      "type": "certifications",
+      "blocks": {
+        "certification_4dN64d": {
+          "type": "certification",
+          "settings": {
+            "image": "shopify://shop_images/CertiPUR-US_RGB_800x800_2x_88cf4f88-169d-44a5-b952-1c5750a7388b.png",
+            "label": "Chứng nhận",
+            "name": "CertiPUR-US®"
+          }
+        },
+        "certification_JL8KN7": {
+          "type": "certification",
+          "settings": {
+            "image": "shopify://shop_images/Oeko-Tex-Aug-2020-01-01.png",
+            "label": "Chứng nhận",
+            "name": "OEKO-TEX®"
+          }
+        }
+      },
+      "block_order": [
+        "certification_4dN64d",
+        "certification_JL8KN7"
+      ],
+      "name": "Certifications",
+      "settings": {
+        "title": "Cam kết an toàn\ntừ lần chạm đầu tiên",
+        "description": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>",
+        "button_text": "Xem chi tiết",
+        "button_link": ""
       }
     },
     "reviews_carousel_QPtXUf": {
@@ -479,7 +498,7 @@
             "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>",
             "product_name": "Nệm Original",
             "button_text": "Xem Nệm",
-            "button_link": "shopify://products/bo-vo-goi-linen-ru9"
+            "button_link": "shopify://products/foam-original"
           }
         },
         "review_d8we9c": {
@@ -543,127 +562,72 @@
       ],
       "name": "Reviews carousel",
       "settings": {
-        "heading": "<p><br/>  Hơn 50,000 Khách Hàng<br/>  Và 30,000 Đánh Giá 5 Sao Toàn Quốc<br/></p>"
-      }
-    },
-    "certifications_4j8wGm": {
-      "type": "certifications",
-      "blocks": {
-        "certification_4dN64d": {
-          "type": "certification",
-          "settings": {
-            "image": "shopify://shop_images/CertiPUR-US_RGB_800x800_2x_88cf4f88-169d-44a5-b952-1c5750a7388b.png",
-            "label": "Chứng nhận",
-            "name": "CertiPUR-US®"
-          }
-        },
-        "certification_JL8KN7": {
-          "type": "certification",
-          "settings": {
-            "image": "shopify://shop_images/Oeko-Tex-Aug-2020-01-01.png",
-            "label": "Chứng nhận",
-            "name": "OEKO-TEX®"
-          }
-        }
-      },
-      "block_order": [
-        "certification_4dN64d",
-        "certification_JL8KN7"
-      ],
-      "name": "Certifications",
-      "settings": {
-        "title": "Cam Kết An Toàn\nTừ Lần Chạm Đầu Tiên",
-        "description": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>",
-        "button_text": "Xem chi tiết",
-        "button_link": ""
+        "heading": "<p>Hơn 50,000 Khách Hàng<br/>Và 30,000 Đánh Giá 5 Sao Toàn Quốc</p>"
       }
     },
     "blog_carousel_CXkPPY": {
       "type": "blog-carousel",
       "blocks": {
-        "article_slide_VzJ9rQ": {
-          "type": "article_slide",
+        "topic_tab_dQTUiL": {
+          "type": "topic_tab",
           "settings": {
-            "article": "magazine/thang-6-cung-gi",
-            "custom_description": ""
+            "tab_title": "Topic",
+            "article_1": "magazine/nem-1m2-x-2m-gia-re",
+            "article_2": "magazine/tu-the-nam-giam-dau-dau",
+            "article_3": "magazine/dia-chi-mua-nem-foam",
+            "article_4": "magazine/tu-the-nam-giup-tang-vong-3",
+            "article_5": "magazine/dem-bong-ep-2mx2m2"
           }
         },
-        "article_slide_rBdwq3": {
-          "type": "article_slide",
+        "topic_tab_cWdgCY": {
+          "type": "topic_tab",
           "settings": {
-            "article": "magazine/thang-4-cung-gi",
-            "custom_description": ""
+            "tab_title": "Topic",
+            "article_1": "magazine/thang-3-cung-gi",
+            "article_2": "magazine/thang-9-cung-gi",
+            "article_3": "magazine/thang-11-cung-gi",
+            "article_4": "magazine/thang-8-cung-gi",
+            "article_5": "magazine/meo-dan-gian-giup-tre-ngu-sau-giac"
           }
         },
-        "article_slide_J7nJdE": {
-          "type": "article_slide",
+        "topic_tab_TTmcX4": {
+          "type": "topic_tab",
           "settings": {
-            "article": "magazine/kich-thuoc-giuong-tang",
-            "custom_description": ""
-          }
-        },
-        "article_slide_3tBKe7": {
-          "type": "article_slide",
-          "settings": {
-            "article": "magazine/vai-jean-la-gi",
-            "custom_description": ""
-          }
-        },
-        "article_slide_V3WGyj": {
-          "type": "article_slide",
-          "settings": {
-            "article": "magazine/vai-microfiber-la-gi",
-            "custom_description": ""
-          }
-        },
-        "article_slide_cifygG": {
-          "type": "article_slide",
-          "settings": {
-            "article": "magazine/nhung-dieu-can-biet-ve-chieu-dieu-hoa",
-            "custom_description": ""
+            "tab_title": "Topic",
+            "article_1": "magazine/vai-denim-la-gi",
+            "article_2": "magazine/vai-jean-la-gi",
+            "article_3": "magazine/nhung-dieu-can-biet-ve-chieu-dieu-hoa",
+            "article_4": "magazine/vai-microfiber-la-gi",
+            "article_5": "magazine/vai-polyester-la-gi"
           }
         }
       },
       "block_order": [
-        "article_slide_VzJ9rQ",
-        "article_slide_rBdwq3",
-        "article_slide_J7nJdE",
-        "article_slide_3tBKe7",
-        "article_slide_V3WGyj",
-        "article_slide_cifygG"
+        "topic_tab_dQTUiL",
+        "topic_tab_cWdgCY",
+        "topic_tab_TTmcX4"
       ],
       "name": "Blog posts carousel",
       "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
         "title": "Blog posts",
-        "heading_alignment": "left",
-        "blog": "magazine",
-        "blog_show_tags": false,
-        "blog_show_date": false,
-        "blog_show_comments": false,
-        "blog_show_excerpt": true,
-        "blog_show_author": false,
         "view_all": true,
-        "view_all_text": "",
-        "blog_image_size": "wide",
-        "divider": false
+        "view_all_link": "",
+        "view_all_text": ""
       }
     }
   },
   "order": [
     "slideshow",
-    "content_dynamic_3BnXn9",
+    "content_banner_cta_UzRzpc",
     "collections_listing_cAa8Dw",
     "featured_collections_6qfWNA",
-    "quiz_banner_4z7U33",
-    "journey_ru9_L4xXY7",
     "image_marquee_hcRmaa",
     "dynamic_text_with_image_3FaeX8",
+    "quiz_banner_4z7U33",
     "tvc_section_WrUqBM",
     "super_service_87efWC",
-    "reviews_carousel_QPtXUf",
     "certifications_4j8wGm",
+    "reviews_carousel_QPtXUf",
     "blog_carousel_CXkPPY"
   ]
 }

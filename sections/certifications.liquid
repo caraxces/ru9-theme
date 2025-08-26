@@ -5,39 +5,42 @@
 <style>
   .certifications-section-{{ section.id }} {
     width: 100%;
-    padding: 0 5%;
-    height: auto;
-    min-height: 359px;
-    margin: 0 auto 60px auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
+    padding: 60px 0;
+    margin: 0 auto;
     font-family: "Be Vietnam Pro", sans-serif;
   }
+  .certifications-section-{{ section.id }} .certifications__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 2.85%;
+  }
   .certifications-section-{{ section.id }} .cs-left {
-    flex: 1;
+    flex: 0 0 420px;
     text-align: left;
   }
   .certifications-section-{{ section.id }} .cs-right {
     flex: 1;
     display: flex;
-    justify-content: space-around;
-    gap: 30px;
+    gap: 40px;
   }
   .certifications-section-{{ section.id }} .cs-title {
     color: #1C2C58;
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 39px;
     font-weight: 700;
-    line-height: 48px;
+    line-height: 1.4;
     margin: 0 0 20px 0;
+    text-transform: none;
   }
   .certifications-section-{{ section.id }} .cs-description {
-    color: #212121;
-    font-size: 20px;
+    color: #3C3C3C;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.4;
+    line-height: 1.6;
     margin: 0 0 30px 0;
   }
   .certifications-section-{{ section.id }} .cs-cta {
@@ -45,55 +48,62 @@
     padding: 12px 35px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    border-radius: 30px;
-    background: #234085;
+    border-radius: 100px;
+    background: #1C2C58;
     color: #fff;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 700;
     text-decoration: none;
     transition: background-color 0.3s ease;
+    border: 1px solid transparent;
   }
   .certifications-section-{{ section.id }} .cs-cta:hover {
-    background: #4a8ad9;
+    background: #fff;
+    color: #1C2C58;
+    border-color: #1C2C58;
   }
   .certifications-section-{{ section.id }} .cs-cert-item {
     text-align: center;
+    flex: 1;
   }
   .certifications-section-{{ section.id }} .cs-cert-image {
     width: 100%;
-    height: 220px;
-    background: #f0f5ff;
+    height: auto;
+    aspect-ratio: 1/1;
+    background: #F5F9FF;
     border-radius: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .certifications-section-{{ section.id }} .cs-cert-image img {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
     object-fit: contain;
-    border-radius: 12px;
   }
   .certifications-section-{{ section.id }} .cs-cert-label {
     font-size: 16px;
-    color: #555;
-    margin-bottom: 5px;
+    color: #000;
+    margin: 0 0 8px 0;
+    font-weight: 400;
   }
   .certifications-section-{{ section.id }} .cs-cert-name {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: #1C2C58;
   }
 
   @media (max-width: 990px) {
-    .certifications-section-{{ section.id }} {
+    .certifications-section-{{ section.id }} .certifications__container {
       flex-direction: column;
-      height: auto;
+      gap: 40px;
       text-align: center;
     }
     .certifications-section-{{ section.id }} .cs-left {
+      flex: 1;
       text-align: center;
     }
   }
@@ -102,51 +112,49 @@
     .certifications-section-{{ section.id }} .cs-right {
       flex-direction: column;
       width: 100%;
-    }
-    .certifications-section-{{ section.id }} .cs-cert-image {
-      height: 250px;
+      align-items: center;
     }
   }
 </style>
 
 <section class="certifications-section-{{ section.id }}">
-  <div class="cs-left">
-    {% if section.settings.title != blank %}
-      <h2 class="cs-title">{{ section.settings.title | newline_to_br }}</h2>
-    {% endif %}
-    {% if section.settings.description != blank %}
-      <div class="cs-description rte">{{ section.settings.description }}</div>
-    {% endif %}
-    {% if section.settings.button_text != blank %}
-      <a href="{{ section.settings.button_link }}" class="cs-cta">
-        {{ section.settings.button_text }}
-      </a>
-    {% endif %}
-  </div>
+  <div class="certifications__container">
+    <div class="cs-left">
+      {% if section.settings.title != blank %}
+        <h2 class="cs-title">{{ section.settings.title | newline_to_br }}</h2>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <div class="cs-description rte">{{ section.settings.description }}</div>
+      {% endif %}
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="cs-cta">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
 
-  <div class="cs-right">
-    {% for block in section.blocks %}
-      <div class="cs-cert-item">
-        <div class="cs-cert-image">
-          {% if block.settings.image != blank %}
-            <img 
-              src="{{ block.settings.image | image_url: width: 400 }}"
-              alt="{{ block.settings.name | escape }}"
-              loading="lazy"
-              width="200"
-              height="200">
-          {% else %}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    <div class="cs-right">
+      {% for block in section.blocks %}
+        <div class="cs-cert-item">
+          <div class="cs-cert-image">
+            {% if block.settings.image != blank %}
+              <img
+                src="{{ block.settings.image | image_url: width: 400 }}"
+                alt="{{ block.settings.name | escape }}"
+                loading="lazy">
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+          {% if block.settings.label != blank %}
+            <p class="cs-cert-label">{{ block.settings.label }}</p>
+          {% endif %}
+          {% if block.settings.name != blank %}
+            <h3 class="cs-cert-name">{{ block.settings.name }}</h3>
           {% endif %}
         </div>
-        {% if block.settings.label != blank %}
-          <p class="cs-cert-label">{{ block.settings.label }}</p>
-        {% endif %}
-        {% if block.settings.name != blank %}
-          <h3 class="cs-cert-name">{{ block.settings.name }}</h3>
-        {% endif %}
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 
@@ -160,7 +168,7 @@
       "type": "textarea",
       "id": "title",
       "label": "Title",
-      "default": "Cam Kết An Toàn\nTừ Lần Chạm Đầu Tiên"
+      "default": "Cam kết an toàn từ lần chạm đầu tiên"
     },
     {
       "type": "richtext",

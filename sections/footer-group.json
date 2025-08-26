@@ -42,7 +42,7 @@
         "column_FBDGTb"
       ],
       "custom_css": [
-        ".footer-ru9 {background: #F0F7FF; padding: 40px 0; position: relative; overflow: hidden; }"
+        ".footer-ru9 {background: #1c2c58; padding: 40px 0; position: relative; overflow: hidden;}"
       ],
       "name": "Footer RU9 (custom)",
       "settings": {
@@ -63,7 +63,7 @@
         "addr_1": "<p>B2.009 Chung cư Sarimi, Nguyễn Cơ Thạch, Thành phố Thủ Đức, TP. Hồ Chí Minh<br/>0964777910</p>",
         "addr_2": "<p>283A Hai Bà Trưng, Phường Xuân Hòa, <br/>TP. Hồ Chí Minh<br/>0964777910</p>",
         "addr_3": "<p>228 Cầu Giấy, Phường Quan Hoa, Hà Nội<br/>0964777940</p>",
-        "hours": "<p>Giờ mở cửa<br/>09:00 - 21:00, Thứ 2 - Chủ nhật</p>"
+        "hours": "<p>09:00 - 21:00, Thứ 2 - Chủ nhật</p>"
       }
     },
     "contact_us_banner_7ty9ei": {

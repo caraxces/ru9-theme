@@ -60,7 +60,7 @@
 .reviews-carousel-section { padding: 60px 0; font-family: "Be Vietnam Pro", sans-serif; }
 .reviews-carousel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
 .reviews-carousel-header__left { display: flex; flex-direction: column; gap: 8px; }
-.reviews-carousel-title { font-family: "Be Vietnam Pro", sans-serif; font-size: 32px; font-weight: 700; line-height: 1.2; color: #1C2C58; }
+.reviews-carousel-title { font-family: "Be Vietnam Pro", sans-serif; font-size: 39px; font-weight: 700; line-height: 1.2; color: #1C2C58; }
 .reviews-carousel-title p { margin: 0; }
 .reviews-carousel-header__right { display: flex; gap: 12px; }
 .reviews-carousel-nav { width: 40px; height: 40px; border-radius: 50%; background-color: #F5F9FF; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s; }
@@ -80,13 +80,14 @@
 .review-card__name { font-size: 18px; font-weight: 700; color: #1C2C58; margin: 0 0 8px; }
 .review-card__text { font-size: 16px; line-height: 1.6; color: #4A4A4A; flex-grow: 1; margin: 0 0 16px; }
 .review-card__text p { margin: 0; }
-.review-card__product { font-size: 14px; color: #7A7A7A; margin: 0 0 16px; }
-.review-card__button { display: inline-block; text-decoration: none; padding: 10px 20px;width: 159px;; border: 1px solid #E0E0E0; border-radius: 30px; color: #4A4A4A; text-align: center; font-size: 14px; font-weight: 500; transition: background-color 0.3s, color 0.3s; }
+.review-card__product { font-size: 14px; color: #1C2C58; margin: 0 0 16px; }
+.review-card__button { display: inline-block; text-decoration: none; padding: 10px 20px;width: 159px;; border: 1px solid #000000; border-radius: 30px; color: #4A4A4A; text-align: center; font-size: 14px; font-weight: 500; transition: background-color 0.3s, color 0.3s; }
 .review-card__button:hover { background-color: #1C2C58; color: #fff; border-color: #1C2C58; }
 
 /* Progress Bar */
-.reviews-carousel-progress { width: 100%; height: 4px; background-color: #E0E0E0; border-radius: 2px; }
-.reviews-carousel-progress-bar { width: 0; height: 100%; background-color: #1C2C58; border-radius: 2px; transition: width 0.5s ease-in-out; }
+.reviews-carousel-progress { width: 100%; height: 4px; background-color: #E0E0E0; border-radius: 2px; overflow: hidden; display: none; position: relative; }
+.reviews-carousel-progress-bar { width: 0; height: 100%; background-color: #234085; border-radius: 2px; position: absolute; top: 0; left: 0; z-index: 2; }
+.reviews-carousel-track.is-dragging { cursor: grabbing; user-select: none; }
 </style>
 
 <script>
@@ -95,79 +96,153 @@
   const carouselId = `reviews-carousel-${sectionId}`;
 
   const initCarousel = (carousel) => {
-    // Prevent re-initialization
     if (carousel.dataset.initialized) return;
 
+    const viewport = carousel.querySelector('.reviews-carousel-viewport');
     const track = carousel.querySelector('.reviews-carousel-track');
-    const cards = carousel.querySelectorAll('.review-card');
+    const cards = Array.from(carousel.querySelectorAll('.review-card'));
     const prevButton = carousel.querySelector('.reviews-carousel-nav--prev');
     const nextButton = carousel.querySelector('.reviews-carousel-nav--next');
+    const progressContainer = carousel.querySelector('.reviews-carousel-progress');
     const progressBar = carousel.querySelector('.reviews-carousel-progress-bar');
     
-    // Check if essential elements exist
-    if (!track || !prevButton || !nextButton || !progressBar || cards.length === 0) {
+    if (!track || !cards.length || !prevButton || !nextButton || !progressContainer || !progressBar) {
       return;
     }
 
-    const cardCount = cards.length;
     let currentIndex = 0;
-    let cardWidth = 0;
-    let gap = 0;
-    let visibleCards = 1; // Default to 1 to avoid division by zero
-    let maxIndex = 0;
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID = 0;
 
-    function updateCarouselState() {
-      // Calculate dimensions
-      if (cards[0] && cards[0].offsetWidth > 0) {
-          cardWidth = cards[0].offsetWidth;
-          const trackStyle = window.getComputedStyle(track);
-          gap = parseInt(trackStyle.gap) || 24;
-          const viewportWidth = carousel.querySelector('.reviews-carousel-viewport').offsetWidth;
-          visibleCards = Math.floor((viewportWidth + gap) / (cardWidth + gap));
-      } else {
-        // If cards are not rendered yet, wait and retry.
-        setTimeout(updateCarouselState, 50);
-        return;
+    let cardWidth, gap, viewportWidth, visibleCards, maxIndex, totalTrackWidth, maxScroll;
+
+    function calculateDimensions() {
+      cardWidth = cards.length > 0 ? cards[0].offsetWidth : 0;
+      if (cardWidth === 0) return;
+      gap = parseInt(window.getComputedStyle(track).gap) || 24;
+      viewportWidth = viewport.offsetWidth;
+      visibleCards = Math.floor((viewportWidth + gap) / (cardWidth + gap));
+      maxIndex = cards.length > visibleCards ? cards.length - visibleCards : 0;
+      totalTrackWidth = (cards.length * cardWidth) + Math.max(0, cards.length - 1) * gap;
+      maxScroll = totalTrackWidth - viewportWidth;
+
+      if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
       }
-      
-      maxIndex = cardCount > visibleCards ? cardCount - visibleCards : 0;
-      
-      // Update transform
-      const newTransform = -currentIndex * (cardWidth + gap);
-      track.style.transform = `translateX(${newTransform}px)`;
+    }
+    
+    function updateProgressBar() {
+      if (totalTrackWidth > viewportWidth) {
+        progressContainer.style.display = 'block';
+        const thumbWidth = (viewportWidth / totalTrackWidth) * 100;
+        progressBar.style.width = `${thumbWidth}%`;
 
-      // Update buttons
+        const clampedTranslate = Math.max(-maxScroll, Math.min(0, currentTranslate));
+        const currentScroll = -clampedTranslate;
+        
+        const scrollPercentage = maxScroll > 0 ? (currentScroll / maxScroll) : 0;
+        const thumbTranslate = scrollPercentage * (100 - thumbWidth);
+        progressBar.style.left = `${thumbTranslate}%`;
+      } else {
+        progressContainer.style.display = 'none';
+      }
+    }
+    
+    function setPositionByIndex() {
+      currentTranslate = -currentIndex * (cardWidth + gap);
+      prevTranslate = currentTranslate;
+      track.style.transition = 'transform 0.5s ease-in-out';
+      progressBar.style.transition = 'width 0.5s ease-in-out, left 0.5s ease-in-out';
+      track.style.transform = `translateX(${currentTranslate}px)`;
+      
       prevButton.disabled = currentIndex === 0;
       nextButton.disabled = currentIndex >= maxIndex;
       
-      // Update progress bar
-      const progress = maxIndex > 0 ? (currentIndex / maxIndex) * 100 : (cardCount > 0 ? 100 : 0);
-      progressBar.style.width = `${progress}%`;
+      updateProgressBar();
     }
 
-    nextButton.addEventListener('click', () => {
-      if (currentIndex < maxIndex) {
-        currentIndex++;
-        updateCarouselState();
+    function startDrag(e) {
+      isDragging = true;
+      startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+      animationID = requestAnimationFrame(animation);
+      track.style.transition = 'none';
+      progressBar.style.transition = 'none';
+      track.classList.add('is-dragging');
+    }
+
+    function drag(e) {
+      if (isDragging) {
+        e.preventDefault();
+        const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        currentTranslate = prevTranslate + currentPosition - startPos;
       }
-    });
+    }
+
+    function endDrag() {
+      if (!isDragging) return;
+      cancelAnimationFrame(animationID);
+      isDragging = false;
+      track.classList.remove('is-dragging');
+
+      const movedBy = currentTranslate - prevTranslate;
+
+      if (movedBy < -50 && currentIndex < maxIndex) {
+        currentIndex += 1;
+      }
+      if (movedBy > 50 && currentIndex > 0) {
+        currentIndex -= 1;
+      }
+      
+      setPositionByIndex();
+    }
+
+    function animation() {
+      if (!isDragging) return;
+      track.style.transform = `translateX(${currentTranslate}px)`;
+      updateProgressBar();
+      requestAnimationFrame(animation);
+    }
+    
+    function onResize() {
+      calculateDimensions();
+      setPositionByIndex();
+    }
 
     prevButton.addEventListener('click', () => {
       if (currentIndex > 0) {
         currentIndex--;
-        updateCarouselState();
+        setPositionByIndex();
       }
     });
 
-    // Use ResizeObserver for better performance and accuracy
-    const resizeObserver = new ResizeObserver(entries => {
-        updateCarouselState();
+    nextButton.addEventListener('click', () => {
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        setPositionByIndex();
+      }
     });
-    resizeObserver.observe(carousel.querySelector('.reviews-carousel-viewport'));
 
-    // Initial setup
-    updateCarouselState();
+    track.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
     
+    track.addEventListener('mousedown', startDrag);
+    track.addEventListener('touchstart', startDrag, { passive: true });
+    track.addEventListener('mousemove', drag);
+    track.addEventListener('touchmove', drag, { passive: false });
+    track.addEventListener('mouseup', endDrag);
+    track.addEventListener('mouseleave', endDrag);
+    track.addEventListener('touchend', endDrag);
+
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(viewport);
+
+    setTimeout(() => {
+        calculateDimensions();
+        setPositionByIndex();
+    }, 150);
+
     carousel.dataset.initialized = true;
   };
   
@@ -178,16 +253,12 @@
     }
   }
 
-  // Run on initial load, but after a short delay to ensure assets are loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(setup, 100);
-  });
-  
-  // Run when section is loaded or reloaded in theme editor
+  document.addEventListener('DOMContentLoaded', setup);
   document.addEventListener('shopify:section:load', function(event) {
     if (event.detail.sectionId === sectionId) {
       const carouselElement = event.target.querySelector(`#${carouselId}`);
       if (carouselElement) {
+          delete carouselElement.dataset.initialized;
           initCarousel(carouselElement);
       }
     }

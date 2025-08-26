@@ -1,0 +1,214 @@
+<style>
+  .content-banner-cta-section {
+    padding: 60px 0;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  .content-banner-cta-main-title-wrapper {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .content-banner-cta-main-title {
+    font-size: 39px;
+    font-weight: 700;
+    color: #1C2C58;
+    margin: 0;
+  }
+  .content-banner-cta-container {
+    position: relative;
+    max-width: 1595px;
+    height: 500px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .content-banner-cta-content {
+    position: relative;
+    z-index: 2;
+    width: 55%;
+    height: 100%;
+    padding: 50px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 60%, rgba(255,255,255,0) 100%);
+  }
+  .content-banner-cta-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1C2C58;
+    margin: 0 0 16px;
+    line-height: 1.4;
+  }
+  .content-banner-cta-subtitle p {
+    margin: 0;
+  }
+  .content-banner-cta-secondary-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1C2C58;
+    margin: 0 0 16px;
+  }
+  .content-banner-cta-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 32px;
+  }
+  .content-banner-cta-description p {
+    margin: 0;
+  }
+  .content-banner-cta-button {
+    display: inline-block;
+    background-color: #1C2C58;
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+  }
+  .content-banner-cta-button:hover {
+    background-color: #2b4282;
+  }
+  .content-banner-cta-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  @media screen and (max-width: 1600px) {
+    .content-banner-cta-container {
+      max-width: 95%;
+    }
+  }
+
+  @media screen and (max-width: 990px) {
+    .content-banner-cta-content {
+      width: 70%;
+      padding: 40px;
+      background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 70%, rgba(255,255,255,0) 100%);
+    }
+    .content-banner-cta-main-title {
+        font-size: 32px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .content-banner-cta-section {
+        padding: 40px 0;
+    }
+    .content-banner-cta-container {
+      height: 450px;
+    }
+    .content-banner-cta-content {
+      width: 100%;
+      height: 100%;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.85);
+      text-align: center;
+      align-items: center;
+    }
+    .content-banner-cta-button {
+      align-self: center;
+    }
+    .content-banner-cta-main-title {
+        font-size: 28px;
+    }
+    .content-banner-cta-subtitle {
+        font-size: 20px;
+    }
+  }
+</style>
+
+<div class="content-banner-cta-section">
+  <div class="page-width">
+    <div class="content-banner-cta-main-title-wrapper">
+        <h2 class="content-banner-cta-main-title">{{ section.settings.main_title | escape }}</h2>
+    </div>
+    <div class="content-banner-cta-container">
+      {%- if section.settings.image -%}
+        <img
+          src="{{ section.settings.image | img_url: '1600x' }}"
+          alt="{{ section.settings.image.alt | escape }}"
+          class="content-banner-cta-background-image"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          loading="lazy"
+        >
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg content-banner-cta-background-image' }}
+      {%- endif -%}
+      <div class="content-banner-cta-content">
+          <div class="content-banner-cta-subtitle">{{ section.settings.subtitle }}</div>
+          <h4 class="content-banner-cta-secondary-title">{{ section.settings.secondary_title | escape }}</h4>
+          <div class="content-banner-cta-description">{{ section.settings.description }}</div>
+          {%- if section.settings.button_text != blank -%}
+              <a href="{{ section.settings.button_link }}" class="content-banner-cta-button">
+                  {{ section.settings.button_text | escape }}
+              </a>
+          {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Content Banner CTA",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title",
+      "default": "Mọi điều tuyệt vời đều bắt đầu từ một giấc ngủ ngon"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>Với hơn 3,240 giờ nghiên cứu để bạn chỉ việc nghỉ ngơi, chẳng cần nghĩ ngợi.</p>"
+    },
+    {
+      "type": "text",
+      "id": "secondary_title",
+      "label": "Secondary Title",
+      "default": "Ru9 - Nơi giấc ngủ ngon bắt đầu"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Chúng tôi không ngừng cải tiến từng chi tiết, để sản phẩm không chỉ \"êm\" mà còn \"hiểu\" được cơ thể bạn. Mỗi thiết kế, mỗi cải tiến trong chất liệu đều hướng đến cảm giác thoải mái và nâng đỡ tốt nhất cho cơ thể bạn. Từ đó, giấc ngủ không còn là điều xa xỉ, mà trở thành điều hiển nhiên và dễ dàng tiếp cận hơn với mọi người.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Xem chi tiết"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Banner CTA"
+    }
+  ]
+}
+{% endschema %}

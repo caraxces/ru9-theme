@@ -3,6 +3,14 @@
   - Displays a horizontally scrolling marquee of images.
 {% endcomment %}
 
+{%- if section.settings.quote_text != blank -%}
+  <div class="page-width">
+    <div class="image-marquee-quote">
+      {{ section.settings.quote_text }}
+    </div>
+  </div>
+{%- endif -%}
+
 <div class="marquee-section-wrapper" style="background: #FFFBE9; overflow: hidden; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
   <div class="marquee-section" data-section-id="{{ section.id }}">
     <div class="marquee-content-{{ section.id }}" style="display: inline-flex; align-items: center; white-space: nowrap;">
@@ -37,6 +45,25 @@
 </div>
 
 <style>
+  .image-marquee-quote {
+    color: #000;
+    text-align: center;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0.6px;
+    max-width: 980px;
+    margin: 0 auto 50px;
+    width: 1274px;
+  }
+
+  .image-marquee-quote p {
+    margin: 0;width: 1274px;
+    justify-self: anchor-center;
+  }
+
   .marquee-section {
     width: 100%;
     display: flex;
@@ -70,6 +97,12 @@
   "class": "index-section",
   "max_blocks": 12,
   "settings": [
+    {
+      "type": "richtext",
+      "id": "quote_text",
+      "label": "Quote",
+      "default": "<p>Trong suốt hành trình phát triển, Ru9 tự hào được xuất hiện trên nhiều tờ báo và tạp chí uy tín, ghi nhận nỗ lực mang đến <br> giấc ngủ chất lượng cho người Việt. Đây là minh chứng cho niềm tin từ khách hàng và sự đánh giá cao của giới chuyên môn.</p>"
+    },
     {
       "type": "range",
       "id": "speed",

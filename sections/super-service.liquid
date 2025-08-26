@@ -3,36 +3,36 @@
 {% endcomment %}
 <style>
   .super-service-section-wrapper {
-    padding-bottom: 77px;
+    padding-top: 60px;
+    padding-bottom: 60px;
     background-color: #fff;
   }
   .super-service-section {
-    background-color: {{ section.settings.background_color }};
-    padding: 30px 0;
+    padding: 0;
   }
 
   .super-service-section .page-width {
     max-width: var(--page-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 2.85%;
   }
 
   .super-service__title {
     color: #1C2C58;
-    font-family: 'Tinos', serif;
-    font-size: 38px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 39px;
     font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
+    font-weight: 700;
+    line-height: 1.2;
     text-align: left;
-    max-width: 600px;
+    max-width: none;
     margin: 0 0 50px 0;
   }
 
   .super-service__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 24px;
     justify-items: start;
     text-align: left;
   }
@@ -40,7 +40,7 @@
   @media screen and (max-width: 990px) {
     .super-service__grid {
       grid-template-columns: repeat(2, 1fr);
-      row-gap: 40px;
+      row-gap: 24px;
     }
   }
 
@@ -50,13 +50,38 @@
     }
   }
 
+  .super-service__item-wrapper {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .super-service__item-wrapper.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .super-service__item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+  
   .super-service__item {
-    width: 236px;
+    width: 100%;
+    background-color: {{ section.settings.background_color }};
+    border-radius: 12px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
   }
 
   .super-service__item-icon {
-    margin-bottom: 20px;
-    height: 64px;
+    margin-bottom: 24px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -69,32 +94,33 @@
   }
 
   .super-service__item-title {
-    color: #000;
+    color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
-    line-height: 150%;
+    line-height: 1.5;
     margin: 0 0 4px 0;
-    max-width: 202px;
+    max-width: none;
   }
 
   .super-service__item-note {
-    color: #000;
+    color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 150%; /* 18px */
-    margin: 0 0 10px 0;
-    min-height: 18px;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+    min-height: auto;
   }
 
   .super-service__item-description {
     color: #000;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 1.6;
+    flex-grow: 1;
   }
 </style>
 
@@ -111,35 +137,56 @@
 
     <div class="super-service__grid">
       {% for block in section.blocks %}
-        <div class="super-service__item" {{ block.shopify_attributes }}>
-          <div class="super-service__item-icon">
-            {% if block.settings.icon != blank %}
-              {{ block.settings.icon | image_url: width: 120 | image_tag: loading: 'lazy' }}
-            {% else %}
-              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        <div class="super-service__item-wrapper" style="transition-delay: {{ forloop.index0 | times: 100 }}ms;" {{ block.shopify_attributes }}>
+          {% if block.settings.item_link != blank %}
+            <a href="{{ block.settings.item_link }}" class="super-service__item-link">
+          {% endif %}
+          
+          <div class="super-service__item">
+            <div class="super-service__item-icon">
+              {%- assign icon = block.settings.icon -%}
+              {% if icon != blank %}
+                {%- if icon.format == 'svg' -%}
+                  <img src="{{ icon | image_url: master }}"
+                       alt="{{ icon.alt | escape }}"
+                       width="{{ icon.width }}"
+                       height="{{ icon.height }}"
+                       loading="lazy">
+                {%- else -%}
+                  {{ icon | image_url: width: 120 | image_tag: loading: 'lazy' }}
+                {%- endif -%}
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+            {% if block.settings.item_title != blank %}
+              <h3 class="super-service__item-title">{{ block.settings.item_title }}</h3>
+            {% endif %}
+            <p class="super-service__item-note">{{ block.settings.item_note | default: '&nbsp;' }}</p>
+            {% if block.settings.item_description != blank %}
+              <div class="super-service__item-description">
+                {{ block.settings.item_description }}
+              </div>
             {% endif %}
           </div>
-          {% if block.settings.item_title != blank %}
-            <h3 class="super-service__item-title">{{ block.settings.item_title }}</h3>
-          {% endif %}
-          <p class="super-service__item-note">{{ block.settings.item_note | default: '&nbsp;' }}</p>
-          {% if block.settings.item_description != blank %}
-            <div class="super-service__item-description">
-              {{ block.settings.item_description }}
-            </div>
+
+          {% if block.settings.item_link != blank %}
+            </a>
           {% endif %}
         </div>
       {% endfor %}
 
       {% if section.blocks.size == 0 %}
         {% for i in (1..4) %}
-          <div class="super-service__item">
-            <div class="super-service__item-icon">
-              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-            </div>
-            <h3 class="super-service__item-title">Service Title</h3>
-            <div class="super-service__item-description">
-              <p>Use this text to share information about your service.</p>
+          <div class="super-service__item-wrapper">
+            <div class="super-service__item">
+              <div class="super-service__item-icon">
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <h3 class="super-service__item-title">Service Title</h3>
+              <div class="super-service__item-description">
+                <p>Use this text to share information about your service.</p>
+              </div>
             </div>
           </div>
         {% endfor %}
@@ -158,13 +205,13 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "Our Super Services"
+      "default": "An tâm hơn với dịch vụ vượt trội"
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background Color",
-      "default": "#F0F7FF"
+      "label": "Item Background Color",
+      "default": "#F5F9FF"
     }
   ],
   "blocks": [
@@ -194,6 +241,11 @@
           "id": "item_description",
           "label": "Description",
           "default": "<p>Use this text to share information about your service.</p>"
+        },
+        {
+          "type": "url",
+          "id": "item_link",
+          "label": "Link"
         }
       ]
     }
@@ -219,3 +271,38 @@
   ]
 }
 {% endschema %}
+
+<script>
+  function animateSuperService(container) {
+    const itemsToAnimate = container.querySelectorAll('.super-service__item-wrapper');
+    if (itemsToAnimate.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -100px 0px' // Start animation when 100px from bottom is visible
+    });
+
+    itemsToAnimate.forEach(item => {
+      observer.observe(item);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const sectionElement = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (sectionElement) {
+      animateSuperService(sectionElement);
+    }
+  });
+
+  document.addEventListener('shopify:section:load', function(event) {
+    if (event.detail.sectionId === '{{ section.id }}') {
+      animateSuperService(event.target);
+    }
+  });
+</script>
