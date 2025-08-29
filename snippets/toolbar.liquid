@@ -23,7 +23,7 @@
   >
     <div class="toolbar__content flex ai-center jc-between gap-x">
       <!-- Left side: Menu -->
-      <div class="toolbar__left flex ai-center">
+      <div class="toolbar__left flex ai-center medium-down--hide">
         <!-- Toolbar Menu 1 (About) -->
         {%- if section.settings.toolbar_menu_1 != blank -%}
           <div class="toolbar__item toolbar__item--menu toolbar__item--about">
@@ -81,7 +81,7 @@
       </div>
 
       <!-- Right side: Search, Language, Social, Selectors -->
-      <div class="toolbar__right flex ai-center jc-end gap-x">
+      <div class="toolbar__right flex ai-center jc-end gap-x medium-down--hide">
         {%- if settings.search_enable -%}
           <div class="toolbar__search small--hide">
             <a

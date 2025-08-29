@@ -460,6 +460,23 @@
           </li>
         {%- endfor -%}
 
+        {%- if toolbar_menu_1 != blank or toolbar_menu_2 != blank -%}
+          <li class="mobile-nav__item mobile-nav__item--separator"></li>
+          <li class="mobile-nav__item">
+             <span class="mobile-nav__faux-link mobile-nav__faux-link--bold">About</span>
+          </li>
+          {%- for link in toolbar_menu_1.links -%}
+            <li class="mobile-nav__item">
+                <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
+            </li>
+          {%- endfor -%}
+          {%- for link in toolbar_menu_2.links -%}
+            <li class="mobile-nav__item">
+              <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+
         {%- assign have_secondary_list = false -%}
         {%- if section.settings.toolbar_menu != blank or shop.customer_accounts_enabled -%}
           {%- assign have_secondary_list = true -%}

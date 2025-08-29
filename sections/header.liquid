@@ -132,6 +132,34 @@
   .toolbar__dropdown a:hover {
     background-color: #f5f5f5 !important;
   }
+
+  @media screen and (max-width: 989px) {
+    .toolbar__content {
+      justify-content: center !important;
+    }
+    .header-layout--mobile {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12.5px 0;
+    }
+    .header-layout--mobile .header-item--left,
+    .header-layout--mobile .header-item--icons {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+    .header-layout--mobile .header-item--left {
+      justify-content: flex-start;
+    }
+    .header-layout--mobile .header-item--icons {
+      justify-content: flex-end;
+    }
+    .header-layout--mobile .header-item--logo {
+      flex-shrink: 0;
+      padding: 0 15px;
+    }
+  }
 </style>
 
 <div class="relative" data-section-id="{{ section.id }}" data-section-type="header">
@@ -178,16 +206,57 @@
           class="page-width"
           style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
         >
-          <div
-            class="header-layout header-layout--{{ section.settings.main_menu_alignment }}"
-            data-logo-align="{{ logo_alignment }}"
-          >
-            {% comment %}
-              <button
-                type="button"
-                class="site-nav__link site-nav__link--icon site-nav__link--hamburger js-drawer-open-nav large-up--hide"
-                aria-controls="NavDrawer"
-              >
+          <div class="large-up--hide">
+            <div class="header-layout--mobile">
+              <div class="header-item--left">
+                <button
+                  type="button"
+                  class="site-nav__link site-nav__link--icon js-drawer-open-nav"
+                  aria-controls="NavDrawer"
+                >
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    role="presentation"
+                    class="icon icon-hamburger"
+                    viewBox="0 0 22 20"
+                    fill="none"
+                  >
+                    <path d="M0.5 0.666504H21.5V2.99984H0.5V0.666504ZM0.5 8.83317H21.5V11.1665H0.5V8.83317ZM0.5 16.9998H21.5V19.3332H0.5V16.9998Z" fill="#2D3748"/>
+                  </svg>
+                  <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+                </button>
+                {%- if settings.search_enable -%}
+                  <a
+                    href="{{ routes.search_url }}"
+                    class="site-nav__link site-nav__link--icon js-search-header"
+                    rel="nofollow"
+                  >
+                    {% render 'icon-search' %}
+                    <span class="icon__text visually-hidden">{{ 'general.search.title' | t }}</span>
+                  </a>
+                {%- endif -%}
+              </div>
+              <div class="header-item header-item--logo">
+                {%- render 'header-logo-block', section: section -%}
+              </div>
+              <div class="header-item header-item--icons">
+                 {%- render 'header-icons', section: section, mobile: true -%}
+              </div>
+            </div>
+          </div>
+
+          <div class="medium-down--hide">
+            <div
+              class="header-layout header-layout--{{ section.settings.main_menu_alignment }}"
+              data-logo-align="{{ logo_alignment }}"
+            >
+              {% comment %}
+                <button
+                  type="button"
+                  class="site-nav__link site-nav__link--icon site-nav__link--hamburger js-drawer-open-nav large-up--hide"
+                  aria-controls="NavDrawer"
+                >
                 <svg
                   aria-hidden="true"
                   focusable="false"

@@ -73,8 +73,6 @@
         "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
         "title": "Đâu là chiếc nệm\nphù hợp với bạn?",
         "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
-        "btn_text": "Quiz chọn nệm",
-        "note_text": "Chỉ mất 2 phút để tìm ra chiếc nệm sinh ra dành cho bạn.",
         "q_1_title": "Question 1?",
         "q_1_a_1_text": "",
         "q_1_a_1_tags": "",
@@ -262,66 +260,42 @@
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_date": "Tháng 7, 2025",
-            "review_text": "Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.",
-            "bg_image": "shopify://shop_images/thang-4-thuoc-cung-gi.jpg",
-            "overlay_color": "#f0f7ff",
-            "overlay_opacity": 77
+            "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>"
           }
         },
         "review_ME69kT": {
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_date": "Tháng 7, 2025",
-            "review_text": "Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.",
-            "bg_image": "shopify://shop_images/khung-gio-ngu-tang-chieu-cao.jpg",
-            "overlay_color": "#f0f7ff",
-            "overlay_opacity": 77
+            "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>"
           }
         },
         "review_yMHfeP": {
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_date": "Tháng 7, 2025",
-            "review_text": "Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.",
-            "bg_image": "shopify://shop_images/cach-ngu-nhanh-va-ngon.jpg",
-            "overlay_color": "#f0f7ff",
-            "overlay_opacity": 77
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>"
           }
         },
         "review_FmJHcf": {
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_date": "Tháng 7, 2025",
-            "review_text": "Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.",
-            "bg_image": "shopify://shop_images/lam-sao-de-ngu-nhanh.jpg",
-            "overlay_color": "#f0f7ff",
-            "overlay_opacity": 77
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>"
           }
         },
         "review_gXepw8": {
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_date": "Tháng 7, 2025",
-            "review_text": "Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.",
-            "bg_image": "shopify://shop_images/cach-de-ngu-nhanh.jpg",
-            "overlay_color": "#f0f7ff",
-            "overlay_opacity": 77
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>"
           }
         },
         "review_xPn64L": {
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_date": "Tháng 7, 2025",
-            "review_text": "",
-            "bg_image": "shopify://shop_images/nam-2026-menh-gi.jpg",
-            "overlay_color": "#f0f7ff",
-            "overlay_opacity": 77
+            "review_text": "<p></p>"
           }
         }
       },
@@ -335,10 +309,7 @@
       ],
       "name": "Reviews carousel",
       "settings": {
-        "heading": "<div style=\"color: #1C2C58; font-family: Tinos; font-size: 38px; font-style: normal; font-weight: 400; line-height: 120%;\">\n  Hơn <span style=\"color: #609EE9;\">50,000</span> Khách Hàng<br>\n  Và <span style=\"color: #609EE9;\">30,000</span> Đánh Giá 5 Sao Toàn Quốc\n</div>",
-        "subheading": "<p>Chia sẻ từ khách hàng lựa chọn ngủ ngon cùng Ru9</p>",
-        "autoplay": true,
-        "autoplay_interval": 3000
+        "heading": "<p>Hơn <strong>50,000</strong> Khách Hàng<br>Và <strong>30,000</strong> Đánh Giá 5 Sao Toàn Quốc</p>"
       }
     },
     "certifications_cWbJNF": {
@@ -425,58 +396,11 @@
     },
     "blog_carousel_hh43j9": {
       "type": "blog-carousel",
-      "blocks": {
-        "article_slide_BWpQQD": {
-          "type": "article_slide",
-          "settings": {
-            "article": "magazine/nem-1m2-x-2m-gia-re",
-            "custom_description": ""
-          }
-        },
-        "article_slide_QCBDDa": {
-          "type": "article_slide",
-          "settings": {
-            "article": "magazine/nem-topper-hcm",
-            "custom_description": ""
-          }
-        },
-        "article_slide_Uc89h4": {
-          "type": "article_slide",
-          "settings": {
-            "article": "magazine/nhung-truyen-ngan-ke-chuyen-dem-khuya-cho-be",
-            "custom_description": ""
-          }
-        },
-        "article_slide_iKA7Gk": {
-          "type": "article_slide",
-          "settings": {
-            "article": "magazine/tu-the-nam-giup-tang-vong-3",
-            "custom_description": ""
-          }
-        }
-      },
-      "block_order": [
-        "article_slide_BWpQQD",
-        "article_slide_QCBDDa",
-        "article_slide_Uc89h4",
-        "article_slide_iKA7Gk"
-      ],
       "name": "Blog posts carousel",
       "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
         "title": "Blog posts",
-        "heading_alignment": "left",
-        "blog": "magazine",
-        "blog_show_tags": false,
-        "blog_show_date": false,
-        "blog_show_comments": false,
-        "blog_show_excerpt": true,
-        "blog_show_author": false,
         "view_all": true,
-        "view_all_text": "",
-        "blog_image_size": "wide",
-        "divider": false
+        "view_all_text": ""
       }
     },
     "faq_A7dpqH": {
