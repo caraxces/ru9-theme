@@ -1,4 +1,5 @@
 <div
+  id="section-{{ section.id }}"
   data-section-id="{{ section.id }}"
   data-section-type="slideshow-section"
 >
@@ -296,6 +297,163 @@
   {%- endif -%}
 </div>
 
+<!-- Footer Icon Text Bar -->
+{%- if section.settings.show_icon_text_bar -%}
+<div class="slideshow-footer-icon-text" style="background: {{ section.settings.icon_bar_background_color | default: '#FFFBEB' }}; border-top: 1px solid #e9ecef; display: flex; align-items: center; justify-content: center;">
+  <div class="icon-text-container" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 40px; width: 100%; max-width: 1200px; padding: 0 20px;">
+    
+    <!-- Item 1 -->
+    {%- if section.settings.icon_1_title != blank -%}
+    <div class="icon-text-item" style="display: flex; align-items: center; gap: 12px;">
+      {%- if section.settings.icon_1_image != blank -%}
+        <img src="{{ section.settings.icon_1_image | img_url: '48x48', scale: 2 }}" 
+             alt="{{ section.settings.icon_1_title }}" 
+             width="24" height="24"
+             style="width: 24px; height: 24px; object-fit: contain;">
+      {%- elsif section.settings.icon_1_type == 'sleep' -%}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="currentColor"/>
+          <path d="M12 6C9.79 6 8 7.79 8 10C8 12.21 9.79 14 12 14C14.21 14 16 12.21 16 10C16 7.79 14.21 6 12 6Z" fill="currentColor"/>
+        </svg>
+      {%- elsif section.settings.icon_1_type == 'payment' -%}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V6H20V18Z" fill="currentColor"/>
+          <path d="M6 8H18V10H6V8Z" fill="currentColor"/>
+          <path d="M6 12H18V14H6V12Z" fill="currentColor"/>
+          <path d="M6 16H12V18H6V16Z" fill="currentColor"/>
+        </svg>
+      {%- elsif section.settings.icon_1_type == 'shipping' -%}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 8H16V4C16 2.9 15.1 2 14 2H10C8.9 2 8 2.9 8 4V8H4C2.9 8 2 8.9 2 10V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V10C22 8.9 21.1 8 20 8ZM10 4H14V8H10V4ZM20 20H4V10H20V20Z" fill="currentColor"/>
+          <path d="M6 14H18V16H6V14Z" fill="currentColor"/>
+          <path d="M6 18H18V20H6V18Z" fill="currentColor"/>
+          <path d="M6 22H12V24H6V22Z" fill="currentColor"/>
+        </svg>
+      {%- endif -%}
+      <span style="color: #000; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-style: normal; font-weight: 450; line-height: 150%;">{{ section.settings.icon_1_title }}</span>
+    </div>
+    {%- endif -%}
+
+    <!-- Item 2 -->
+    {%- if section.settings.icon_2_title != blank -%}
+    <div class="icon-text-item" style="display: flex; align-items: center; gap: 12px;">
+      {%- if section.settings.icon_2_image != blank -%}
+        <img src="{{ section.settings.icon_2_image | img_url: '48x48', scale: 2 }}" 
+             alt="{{ section.settings.icon_2_title }}" 
+             width="24" height="24"
+             style="width: 24px; height: 24px; object-fit: contain;">
+      {%- elsif section.settings.icon_2_type == 'sleep' -%}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="currentColor"/>
+          <path d="M12 6C9.79 6 8 7.79 8 10C8 12.21 9.79 14 12 14C14.21 14 16 12.21 16 10C16 7.79 14.21 6 12 6Z" fill="currentColor"/>
+        </svg>
+      {%- elsif section.settings.icon_2_type == 'payment' -%}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V6H20V18Z" fill="currentColor"/>
+          <path d="M6 8H18V10H6V8Z" fill="currentColor"/>
+          <path d="M6 12H18V14H6V12Z" fill="currentColor"/>
+          <path d="M6 16H12V18H6V16Z" fill="currentColor"/>
+        </svg>
+      {%- elsif section.settings.icon_2_type == 'shipping' -%}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 8H16V4C16 2.9 15.1 2 14 2H10C8.9 2 8 2.9 8 4V8H4C2.9 8 2 8.9 2 10V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V10C22 8.9 21.1 8 20 8ZM10 4H14V8H10V4ZM20 20H4V10H20V20Z" fill="currentColor"/>
+          <path d="M6 14H18V16H6V14Z" fill="currentColor"/>
+          <path d="M6 18H18V20H6V18Z" fill="currentColor"/>
+          <path d="M6 22H12V24H6V22Z" fill="currentColor"/>
+        </svg>
+      {%- endif -%}
+      <span style="color: #000; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-style: normal; font-weight: 450; line-height: 150%;">{{ section.settings.icon_2_title }}</span>
+    </div>
+    {%- endif -%}
+
+    <!-- Item 3 -->
+    {%- if section.settings.icon_3_title != blank -%}
+    <div class="icon-text-item" style="display: flex; align-items: center; gap: 12px;">
+      {%- if section.settings.icon_3_image != blank -%}
+        <img src="{{ section.settings.icon_3_image | img_url: '48x48', scale: 2 }}" 
+             alt="{{ section.settings.icon_3_title }}" 
+             width="24" height="24"
+             style="width: 24px; height: 24px; object-fit: contain;">
+      {%- elsif section.settings.icon_3_type == 'sleep' -%}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="currentColor"/>
+          <path d="M12 6C9.79 6 8 7.79 8 10C8 12.21 9.79 14 12 14C14.21 14 16 12.21 16 10C16 7.79 14.21 6 12 6Z" fill="currentColor"/>
+        </svg>
+      {%- elsif section.settings.icon_3_type == 'payment' -%}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V6H20V18Z" fill="currentColor"/>
+          <path d="M6 8H18V10H6V8Z" fill="currentColor"/>
+          <path d="M6 12H18V14H6V12Z" fill="currentColor"/>
+          <path d="M6 16H12V18H6V16Z" fill="currentColor"/>
+        </svg>
+      {%- elsif section.settings.icon_3_type == 'shipping' -%}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 8H16V4C16 2.9 15.1 2 14 2H10C8.9 2 8 2.9 8 4V8H4C2.9 8 2 8.9 2 10V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V10C22 8.9 21.1 8 20 8ZM10 4H14V8H10V4ZM20 20H4V10H20V20Z" fill="currentColor"/>
+          <path d="M6 14H18V16H6V14Z" fill="currentColor"/>
+          <path d="M6 18H18V20H6V18Z" fill="currentColor"/>
+          <path d="M6 22H12V24H6V22Z" fill="currentColor"/>
+        </svg>
+      {%- endif -%}
+      <span style="color: #000; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-style: normal; font-weight: 450; line-height: 150%;">{{ section.settings.icon_3_title }}</span>
+    </div>
+    {%- endif -%}
+
+  </div>
+</div>
+{%- endif -%}
+
+<style>
+  .slideshow-footer-icon-text {
+    margin: 0 auto;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    height: 47px;
+    flex-shrink: 0;
+  }
+
+  .icon-text-item > span {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1440px) {
+    .slideshow-footer-icon-text {
+    }
+  }
+
+  @media (max-width: 768px) {
+    .slideshow-footer-icon-text {
+      height: auto !important;
+      padding: 15px 0 !important;
+    }
+    
+    .icon-text-container {
+      gap: 20px !important;
+    }
+    
+    .icon-text-item {
+      gap: 12px !important;
+    }
+
+    .icon-text-item > span {
+      font-size: 14px !important;
+    }
+    
+    .icon-text-icon {
+      width: 32px !important;
+      height: 32px !important;
+    }
+    
+    .icon-text-icon svg {
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+</style>
+
 {% schema %}
 {
   "name": "t:sections.slideshow.name",
@@ -416,6 +574,148 @@
       "label": "t:common.lazyload_images.label",
       "info": "t:common.lazyload_images.info",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Icon Text Bar Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon_text_bar",
+      "label": "Show Icon Text Bar",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "icon_bar_background_color",
+      "label": "Background Color",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "header",
+      "content": "Icon 1 Settings"
+    },
+    {
+      "type": "text",
+      "id": "icon_1_title",
+      "label": "Icon 1 Title",
+      "default": "100 đêm ngủ thử"
+    },
+    {
+      "type": "select",
+      "id": "icon_1_type",
+      "label": "Icon 1 Type",
+      "options": [
+        {
+          "value": "sleep",
+          "label": "Sleep"
+        },
+        {
+          "value": "payment",
+          "label": "Payment"
+        },
+        {
+          "value": "shipping",
+          "label": "Shipping"
+        }
+      ],
+      "default": "sleep"
+    },
+    {
+      "type": "color",
+      "id": "icon_1_color",
+      "label": "Icon 1 Color",
+      "default": "#007bff"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1_image",
+      "label": "Icon 1 Image",
+      "info": "Upload an image to replace the icon"
+    },
+    {
+      "type": "header",
+      "content": "Icon 2 Settings"
+    },
+    {
+      "type": "text",
+      "id": "icon_2_title",
+      "label": "Icon 2 Title",
+      "default": "Thanh toán linh hoạt"
+    },
+    {
+      "type": "select",
+      "id": "icon_2_type",
+      "label": "Icon 2 Type",
+      "options": [
+        {
+          "value": "sleep",
+          "label": "Sleep"
+        },
+        {
+          "value": "payment",
+          "label": "Payment"
+        },
+        {
+          "value": "shipping",
+          "label": "Shipping"
+        }
+      ],
+      "default": "payment"
+    },
+    {
+      "type": "color",
+      "id": "icon_2_color",
+      "label": "Icon 2 Color",
+      "default": "#007bff"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2_image",
+      "label": "Icon 2 Image",
+      "info": "Upload an image to replace the icon"
+    },
+    {
+      "type": "header",
+      "content": "Icon 3 Settings"
+    },
+    {
+      "type": "text",
+      "id": "icon_3_title",
+      "label": "Icon 3 Title",
+      "default": "Miễn phí vận chuyển*"
+    },
+    {
+      "type": "select",
+      "id": "icon_3_type",
+      "label": "Icon 3 Type",
+      "options": [
+        {
+          "value": "sleep",
+          "label": "Sleep"
+        },
+        {
+          "value": "payment",
+          "label": "Payment"
+        },
+        {
+          "value": "shipping",
+          "label": "Shipping"
+        }
+      ],
+      "default": "shipping"
+    },
+    {
+      "type": "color",
+      "id": "icon_3_color",
+      "label": "Icon 3 Color",
+      "default": "#007bff"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3_image",
+      "label": "Icon 3 Image",
+      "info": "Upload an image to replace the icon"
     }
   ],
   "blocks": [

@@ -19,7 +19,7 @@
     class="page-width"
     style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
   >
-    <div class="section-header text-center">
+    <div class="section-header text-left">
       <h2 class="section-header__title">{{ section.settings.title }}</h2>
       <div class="rte text-lg">{{ section.settings.description }}</div>
     </div>
@@ -42,7 +42,7 @@
             <td class="product-column">
               {%- if block.settings.product_image -%}
                 <img 
-                  src="{{ block.settings.product_image | img_url: '300x300', crop: 'center' }}" 
+                  src="{{ block.settings.product_image | image_url: width: 300, height: 300, crop: 'center' }}" 
                   alt="{{ block.settings.product_title }}"
                   width="150"
                   height="150"
@@ -71,20 +71,20 @@
             <td class="product-column">
               {%- if block.settings.comfort_layer_1_image -%}
                 <img 
-                  src="{{ block.settings.comfort_layer_1_image | img_url: '150x150', crop: 'center' }}" 
+                  src="{{ block.settings.comfort_layer_1_image | image_url: width: 150, height: 150, crop: 'center' }}" 
                   alt="Layer 1"
-                  width="80"
-                  height="30"
+                  width="160"
+                  height="60"
                   style="margin: 0 auto; display: block;"
                   loading="lazy"
                 >
               {%- endif -%}
               {%- if block.settings.comfort_layer_2_image -%}
                 <img 
-                  src="{{ block.settings.comfort_layer_2_image | img_url: '150x150', crop: 'center' }}" 
+                  src="{{ block.settings.comfort_layer_2_image | image_url: width: 150, height: 150, crop: 'center' }}" 
                   alt="Layer 2"
-                  width="80"
-                  height="30"
+                  width="160"
+                  height="60"
                   style="margin: 0 auto; display: block;"
                   loading="lazy"
                 >
@@ -150,7 +150,7 @@
               <td class="product-column">
                 {%- if block.settings.product_image -%}
                   <img 
-                    src="{{ block.settings.product_image | img_url: '300x300', crop: 'center' }}" 
+                    src="{{ block.settings.product_image | image_url: width: 300, height: 300, crop: 'center' }}" 
                     alt="{{ block.settings.product_title }}"
                     width="150"
                     height="150"
@@ -179,20 +179,20 @@
               <td class="product-column">
                 {%- if block.settings.comfort_layer_1_image -%}
                   <img 
-                    src="{{ block.settings.comfort_layer_1_image | img_url: '150x150', crop: 'center' }}" 
+                    src="{{ block.settings.comfort_layer_1_image | image_url: width: 150, height: 150, crop: 'center' }}" 
                     alt="Layer 1"
-                    width="80"
-                    height="30"
+                    width="160"
+                    height="60"
                     style="margin: 0 auto; display: block;"
                     loading="lazy"
                   >
                 {%- endif -%}
                 {%- if block.settings.comfort_layer_2_image -%}
                   <img 
-                    src="{{ block.settings.comfort_layer_2_image | img_url: '150x150', crop: 'center' }}" 
+                    src="{{ block.settings.comfort_layer_2_image | image_url: width: 150, height: 150, crop: 'center' }}" 
                     alt="Layer 2"
-                    width="80"
-                    height="30"
+                    width="160"
+                    height="60"
                     style="margin: 0 auto; display: block;"
                     loading="lazy"
                   >
@@ -247,6 +247,7 @@
   .mattress-comparison-table {
     width: 100%;
     margin-top: 30px;
+    font-family: 'Be Vietnam Pro', sans-serif;
   }
   
   .mattress-comparison-table table {
@@ -267,7 +268,7 @@
   /* Column Widths */
   .first-column {
     width: 15%;
-    background-color: #f9f9f9;
+    background-color: #fff;
     font-weight: bold;
     text-align: left;
   }
@@ -279,7 +280,7 @@
   
   /* Header Row */
   .header-row th {
-    background-color: #f9f9f9;
+    background-color: #F0F7FF;
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
@@ -336,13 +337,13 @@
   
   .buy-button {
     display: inline-block;
-    background-color: #000;
+    background-color: #1C2C58;
     color: white;
     padding: 8px 20px;
     text-transform: uppercase;
     font-weight: bold;
     text-decoration: none;
-    border-radius: 0;
+    border-radius: 15px;
     transition: background-color 0.3s;
   }
   
@@ -394,7 +395,7 @@
   .mobile-comparison-table .first-column {
     width: 120px;
     min-width: 120px;
-    background-color: #f9f9f9;
+    background-color: #fff;
     font-weight: bold;
     text-align: left;
     position: sticky;
@@ -412,13 +413,18 @@
   /* Section Header Styles */
   .section-header {
     margin-bottom: 30px;
+    text-align: left;
   }
   
   .section-header__title {
-    font-size: 24px;
+    font-family: 'Tinos', serif;
+    color: #1C2C58;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    text-transform: capitalize;
     margin-bottom: 10px;
-    text-transform: uppercase;
-    text-align: center;
   }
 </style>
 

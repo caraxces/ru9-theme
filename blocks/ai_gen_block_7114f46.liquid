@@ -1,0 +1,198 @@
+{% doc %}
+  @prompt
+    Create a text block where the text has an image fill or background, making the text appear to be filled with an image rather than a solid color
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .image-fill-text-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding: {{ block.settings.padding }}px;
+    text-align: {{ block.settings.text_alignment }};
+    background-color: {{ block.settings.background_color }};
+    overflow: hidden;
+  }
+
+  .image-fill-text-{{ ai_gen_id }} {
+    display: inline-block;
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: {{ block.settings.font_weight }};
+    line-height: 1.2;
+    margin: 0;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: {{ block.settings.image_scale }}%;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  @media screen and (max-width: 749px) {
+    .image-fill-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.font_size_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="image-fill-text-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <h2 
+    class="image-fill-text-{{ ai_gen_id }}" 
+    style="{% if block.settings.image %}background-image: url('{{ block.settings.image | image_url: width: 1000 }}');{% else %}background-image: linear-gradient(to right, {{ block.settings.fallback_color_1 }}, {{ block.settings.fallback_color_2 }});{% endif %}"
+  >
+    {{ block.settings.text }}
+  </h2>
+</div>
+
+{% schema %}
+{
+  "name": "Image Fill Text",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "YOUR TEXT HERE"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 20,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Font size",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Font size (mobile)",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        },
+        {
+          "value": "900",
+          "label": "Black"
+        }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Fill image"
+    },
+    {
+      "type": "range",
+      "id": "image_scale",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Image scale",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Fallback Colors (when no image is selected)"
+    },
+    {
+      "type": "color",
+      "id": "fallback_color_1",
+      "label": "Gradient color 1",
+      "default": "#3b82f6"
+    },
+    {
+      "type": "color",
+      "id": "fallback_color_2",
+      "label": "Gradient color 2",
+      "default": "#8b5cf6"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding",
+      "default": 30
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Fill Text"
+    }
+  ]
+}
+{% endschema %}

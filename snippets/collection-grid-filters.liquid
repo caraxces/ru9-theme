@@ -174,3 +174,12 @@
     }
   {% endstyle %}
 {%- endunless -%}
+
+<style>
+/* Fix: Make collection-filter move down when filter-form expands */
+.collection-sidebar:has(.collapsible-content.is-open) ~ .collection-filter,
+.filter-form:has(.collapsible-content.is-open) ~ .collection-filter {
+  margin-top: 45px;
+  transition: margin-top 0.3s ease;
+}
+</style>

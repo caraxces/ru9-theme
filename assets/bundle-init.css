@@ -1,0 +1,104 @@
+/*
+ * Bundle Init Feature Styles
+ */
+
+.product-bundle-init-wrapper {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.bundle-initial-screen .page-width,
+.bundle-stepper-screen .page-width,
+.bundle-summary-screen .page-width {
+  text-align: center;
+}
+
+.bundle-main-image {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  margin: 20px auto;
+  border-radius: 8px;
+}
+
+.bundle-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+#bundle-product-container {
+  /* This will hold the standard product form, which should be styled by theme's main css */
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.bundle-summary-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.bundle-summary-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 15px 0;
+}
+
+.bundle-summary-item:last-child {
+  border-bottom: none;
+}
+
+.bundle-summary-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+.bundle-summary-item-details {
+  flex-grow: 1;
+}
+
+.bundle-summary-item-title {
+  font-weight: bold;
+}
+
+.bundle-summary-item-variant {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.bundle-summary-item-price {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.bundle-summary-pricing {
+  max-width: 400px;
+  margin: 20px auto 0;
+  text-align: right;
+  border-top: 2px solid #333;
+  padding-top: 20px;
+}
+
+.bundle-summary-pricing p,
+.bundle-summary-pricing h3 {
+  margin: 5px 0;
+}
+
+.bundle-summary-pricing h3 {
+  font-size: 1.4em;
+}
+
+.bundle-summary-actions {
+  margin-top: 30px;
+}
+
+/* Helper class */
+.hidden {
+  display: none !important;
+} 

@@ -1033,8 +1033,8 @@
       {
         "type": "checkbox",
         "id": "cart_additional_buttons",
-        "label": "t:settings_schema.cart.settings.cart_additional_buttons.label",
-        "info": "t:settings_schema.cart.settings.cart_additional_buttons.info"
+        "label": "Hiển thị các nút thanh toán bổ sung",
+        "info": "Việc hiển thị các nút thanh toán bổ sung trên trang giỏ hàng có thể thay đổi hành vi của cửa hàng của bạn. [Tìm hiểu thêm](https://help.shopify.com/manual/payments/accelerated-checkouts)"
       },
       {
         "type": "checkbox",
@@ -1043,13 +1043,119 @@
       },
       {
         "type": "checkbox",
+        "id": "cart_shipping_calculator_enable",
+        "label": "t:settings_schema.cart.settings.cart_shipping_calculator_enable.label",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_shipping_calculator_default_country",
+        "label": "t:settings_schema.cart.settings.cart_shipping_calculator_default_country.label",
+        "default": "United States"
+      },
+      {
+        "type": "checkbox",
         "id": "cart_terms_conditions_enable",
         "label": "t:settings_schema.cart.settings.cart_terms_conditions_enable.label"
       },
       {
-        "type": "url",
+        "type": "page",
         "id": "cart_terms_conditions_page",
         "label": "t:settings_schema.cart.settings.cart_terms_conditions_page.label"
+      },
+      {
+        "type": "header",
+        "content": "Thông báo miễn phí vận chuyển"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_free_shipping_enable",
+        "label": "Bật thông báo miễn phí vận chuyển",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "cart_free_shipping_threshold",
+        "label": "Ngưỡng miễn phí vận chuyển (VND)",
+        "default": 2000000
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_free_shipping_icon",
+        "label": "Icon Miễn phí vận chuyển"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_warranty_icon",
+        "label": "Icon Bảo hành"
+      },
+      {
+        "type": "header",
+        "content": "Cross-sell"
+      },
+      {
+        "type": "product_list",
+        "id": "cart_cross_sell_products",
+        "label": "Chọn các sản phẩm cross-sell",
+        "limit": 5
+      },
+      {
+        "type": "header",
+        "content": "Voucher hình ảnh"
+      },
+      {
+        "type": "paragraph",
+        "content": "Tải lên tối đa 5 voucher để hiển thị trong giỏ hàng."
+      },
+      {
+        "type": "image_picker",
+        "id": "voucher_image_1",
+        "label": "Ảnh Voucher 1"
+      },
+      {
+        "type": "text",
+        "id": "voucher_code_1",
+        "label": "Mã cho Voucher 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "voucher_image_2",
+        "label": "Ảnh Voucher 2"
+      },
+      {
+        "type": "text",
+        "id": "voucher_code_2",
+        "label": "Mã cho Voucher 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "voucher_image_3",
+        "label": "Ảnh Voucher 3"
+      },
+      {
+        "type": "text",
+        "id": "voucher_code_3",
+        "label": "Mã cho Voucher 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "voucher_image_4",
+        "label": "Ảnh Voucher 4"
+      },
+      {
+        "type": "text",
+        "id": "voucher_code_4",
+        "label": "Mã cho Voucher 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "voucher_image_5",
+        "label": "Ảnh Voucher 5"
+      },
+      {
+        "type": "text",
+        "id": "voucher_code_5",
+        "label": "Mã cho Voucher 5"
       }
     ]
   },
@@ -1220,6 +1326,16 @@
         "type": "checkbox",
         "id": "disable_animations",
         "label": "t:settings_schema.extras.settings.disable_animations.label"
+      },
+      {
+        "type": "range",
+        "id": "discount_percentage",
+        "min": 0,
+        "max": 50,
+        "step": 5,
+        "unit": "%",
+        "label": "Bundle Discount Percentage",
+        "default": 10
       }
     ]
   },

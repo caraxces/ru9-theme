@@ -27,6 +27,15 @@
     color: #fff;
     display: flex;
   } */
+  
+  /* SVG icon for section title */
+  .section-header__icon {
+    display: inline-block;
+    vertical-align: middle;
+    height: 1.2em;
+    width: auto;
+    margin-right: 0.5em;
+  }
 {% endstyle %}
 
 <div
@@ -43,6 +52,9 @@
     >
       <div class="section-header small--space-md{% if section.settings.view_all %}{% unless settings.type_headers_align_text %} section-header--with-link{% endunless %}{% endif %}">
         <h2 class="section-header__title">
+          {%- if section.settings.title_icon != blank -%}
+            <span class="section-header__icon">{{ section.settings.title_icon }}</span>
+          {%- endif -%}
           {{ section.settings.title }}
         </h2>
       </div>
@@ -159,6 +171,12 @@
       "id": "title",
       "label": "t:sections.featured-collection.settings.title.label",
       "default": "Featured collection"
+    },
+    {
+      "type": "textarea",
+      "id": "title_icon",
+      "label": "Title Icon (SVG)",
+      "info": "Paste SVG code to display an icon before the title"
     },
     {
       "type": "range",

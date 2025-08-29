@@ -1,0 +1,311 @@
+{%- liquid
+  assign section_id = section.id
+-%}
+
+<section class="reviews-carousel-section" id="reviews-carousel-{{ section_id }}" data-section-id="{{ section_id }}">
+  <div class="page-width">
+    <div class="reviews-carousel-header">
+      <div class="reviews-carousel-header__left">
+        <div class="reviews-carousel-stars">
+          <svg width="137" height="24" viewBox="0 0 137 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.4987 0.414593C11.6783 -0.138197 12.4603 -0.138197 12.6399 0.414593L15.0778 7.91753C15.1581 8.16474 15.3885 8.33212 15.6484 8.33212H23.5375C24.1187 8.33212 24.3604 9.07585 23.8902 9.41755L17.5078 14.0547C17.2975 14.2074 17.2095 14.4783 17.2898 14.7255L19.7277 22.2284C19.9073 22.7812 19.2746 23.2409 18.8044 22.8992L12.422 18.2622C12.2117 18.1094 11.9269 18.1094 11.7166 18.2622L5.33427 22.8992C4.86405 23.2409 4.23136 22.7812 4.41097 22.2284L6.84882 14.7255C6.92915 14.4783 6.84115 14.2074 6.63086 14.0547L0.248482 9.41755C-0.221748 9.07585 0.0199116 8.33212 0.601152 8.33212H8.49023C8.75013 8.33212 8.98053 8.16474 9.06083 7.91753L11.4987 0.414593Z" fill="#FFDC5F"/><path d="M39.4988 0.414593C39.6784 -0.138197 40.4603 -0.138197 40.6399 0.414593L43.0778 7.91753C43.1581 8.16474 43.3886 8.33212 43.6485 8.33212H51.5375C52.1187 8.33212 52.3604 9.07585 51.8902 9.41755L45.5078 14.0547C45.2975 14.2074 45.2096 14.4783 45.2899 14.7255L47.7278 22.2284C47.9074 22.7812 47.2746 23.2409 46.8044 22.8992L40.422 18.2622C40.2117 18.1094 39.927 18.1094 39.7167 18.2622L33.3342 22.8992C32.864 23.2409 32.2313 22.7812 32.4109 22.2284L34.8488 14.7255C34.9291 14.4783 34.8411 14.2074 34.6308 14.0547L28.2484 9.41755C27.7782 9.07585 28.0199 8.33212 28.6011 8.33212H36.4902C36.7501 8.33212 36.9805 8.16474 37.0609 7.91753L39.4988 0.414593Z" fill="#FFDC5F"/><path d="M67.4987 0.414593C67.6783 -0.138197 68.4604 -0.138197 68.64 0.414593L71.0778 7.91753C71.1581 8.16474 71.3886 8.33212 71.6485 8.33212H79.5375C80.1187 8.33212 80.3604 9.07585 79.8902 9.41755L73.5078 14.0547C73.2975 14.2074 73.2095 14.4783 73.2898 14.7255L75.7278 22.2284C75.9074 22.7812 75.2746 23.2409 74.8044 22.8992L68.422 18.2622C68.2117 18.1094 67.927 18.1094 67.7167 18.2622L61.3342 22.8992C60.864 23.2409 60.2313 22.7812 60.4109 22.2284L62.8489 14.7255C62.9292 14.4783 62.8411 14.2074 62.6308 14.0547L56.2484 9.41755C55.7782 9.07585 56.0199 8.33212 56.6011 8.33212H64.4902C64.7501 8.33212 64.9805 8.16474 65.0609 7.91753L67.4987 0.414593Z" fill="#FFDC5F"/><path d="M95.4987 0.414593C95.6783 -0.138197 96.4604 -0.138197 96.64 0.414593L99.0774 7.91753C99.1584 8.16474 99.3884 8.33212 99.6484 8.33212H107.537C108.118 8.33212 108.36 9.07585 107.89 9.41755L101.507 14.0547C101.297 14.2074 101.209 14.4783 101.29 14.7255L103.727 22.2284C103.907 22.7812 103.274 23.2409 102.804 22.8992L96.422 18.2622C96.2117 18.1094 95.927 18.1094 95.7167 18.2622L89.3342 22.8992C88.864 23.2409 88.2313 22.7812 88.4109 22.2284L90.8489 14.7255C90.9292 14.4783 90.8411 14.2074 90.6308 14.0547L84.2484 9.41755C83.7782 9.07585 84.0199 8.33212 84.6011 8.33212H92.4902C92.7501 8.33212 92.9805 8.16474 93.0609 7.91753L95.4987 0.414593Z" fill="#FFDC5F"/><path d="M123.498 0.414593C123.678 -0.138197 124.46 -0.138197 124.64 0.414593L127.077 7.91753C127.158 8.16474 127.388 8.33212 127.648 8.33212H135.537C136.118 8.33212 136.36 9.07585 135.89 9.41755L129.507 14.0547C129.297 14.2074 129.209 14.4783 129.29 14.7255L131.727 22.2284C131.907 22.7812 131.274 23.2409 130.804 22.8992L124.422 18.2622C124.211 18.1094 123.927 18.1094 123.716 18.2622L117.334 22.8992C116.864 23.2409 116.231 22.7812 116.411 22.2284L118.848 14.7255C118.929 14.4783 118.841 14.2074 118.631 14.0547L112.248 9.41755C111.778 9.07585 112.02 8.33212 112.601 8.33212H120.49C120.75 8.33212 120.98 8.16474 121.061 7.91753L123.498 0.414593Z" fill="#FFDC5F"/></svg>
+        </div>
+        {% if section.settings.heading != blank %}
+          <div class="reviews-carousel-title">{{ section.settings.heading }}</div>
+        {% endif %}
+      </div>
+      <div class="reviews-carousel-header__right">
+        <button class="reviews-carousel-nav reviews-carousel-nav--prev" aria-label="Previous slide">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 9L4.5 6L7.5 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="reviews-carousel-nav reviews-carousel-nav--next" aria-label="Next slide">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 9L7.5 6L4.5 3" stroke="#609EE9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="reviews-carousel-viewport">
+      <div class="reviews-carousel-track">
+        {%- for block in section.blocks -%}
+          <article class="review-card" {{ block.shopify_attributes }}>
+            <div class="review-card__image">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 380, height: 250, crop: 'center' }}" alt="{{ block.settings.customer_name | escape }}" width="380" height="250" loading="lazy"/>
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="review-card__content">
+              <div class="review-card__stars">
+                <svg width="106" height="18" viewBox="0 0 106 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.95258 0.321586C9.09241 -0.107195 9.70126 -0.107195 9.84109 0.321586L11.7392 6.14137C11.8017 6.33312 11.9811 6.46295 12.1834 6.46295H18.3257C18.7782 6.46295 18.9663 7.03984 18.6003 7.30488L13.6311 10.9017C13.4674 11.0202 13.3989 11.2303 13.4614 11.422L15.3594 17.2418C15.4993 17.6706 15.0067 18.0272 14.6406 17.7621L9.67144 14.1653C9.5077 14.0468 9.28597 14.0468 9.12223 14.1653L4.15311 17.7621C3.78701 18.0272 3.29442 17.6706 3.43426 17.2418L5.3323 11.422C5.39484 11.2303 5.32633 11.0202 5.1626 10.9017L0.193461 7.30488C-0.172647 7.03984 0.0155026 6.46295 0.468039 6.46295H6.61025C6.8126 6.46295 6.99198 6.33312 7.0545 6.14137L8.95258 0.321586Z" fill="#FFDC5F"/><path d="M30.7524 0.321586C30.8922 -0.107195 31.5011 -0.107195 31.6409 0.321586L33.539 6.14137C33.6015 6.33312 33.7809 6.46295 33.9832 6.46295H40.1255C40.578 6.46295 40.7662 7.03984 40.4001 7.30488L35.4309 10.9017C35.2672 11.0202 35.1987 11.2303 35.2612 11.422L37.1593 17.2418C37.2991 17.6706 36.8065 18.0272 36.4404 17.7621L31.4713 14.1653C31.3075 14.0468 31.0858 14.0468 30.9221 14.1653L25.9529 17.7621C25.5868 18.0272 25.0942 17.6706 25.234 17.2418L27.1321 11.422C27.1946 11.2303 27.1261 11.0202 26.9624 10.9017L21.9932 7.30488C21.6272 7.03984 21.8153 6.46295 22.2678 6.46295H28.4101C28.6124 6.46295 28.7918 6.33312 28.8543 6.14137L30.7524 0.321586Z" fill="#FFDC5F"/><path d="M52.5522 0.321586C52.692 -0.107195 53.3009 -0.107195 53.4407 0.321586L55.3388 6.14137C55.4013 6.33312 55.5807 6.46295 55.783 6.46295H61.9253C62.3778 6.46295 62.566 7.03984 62.1999 7.30488L57.2307 10.9017C57.067 11.0202 56.9985 11.2303 57.061 11.422L58.9591 17.2418C59.0989 17.6706 58.6063 18.0272 58.2402 17.7621L53.2711 14.1653C53.1073 14.0468 52.8856 14.0468 52.7219 14.1653L47.7527 17.7621C47.3866 18.0272 46.894 17.6706 47.0338 17.2418L48.9319 11.422C48.9944 11.2303 48.9259 11.0202 48.7622 10.9017L43.793 7.30488C43.427 7.03984 43.6151 6.46295 44.0676 6.46295H50.2099C50.4122 6.46295 50.5916 6.33312 50.6541 6.14137L52.5522 0.321586Z" fill="#FFDC5F"/><path d="M74.353 0.321586C74.4928 -0.107195 75.1017 -0.107195 75.2415 0.321586L77.1392 6.14137C77.2023 6.33312 77.3813 6.46295 77.5837 6.46295H83.7259C84.1782 6.46295 84.3667 7.03984 84.0007 7.30488L79.0311 10.9017C78.8676 11.0202 78.7991 11.2303 78.8622 11.422L80.7595 17.2418C80.8997 17.6706 80.4068 18.0272 80.0409 17.7621L75.0718 14.1653C74.9081 14.0468 74.6864 14.0468 74.5226 14.1653L69.5535 17.7621C69.1874 18.0272 68.6948 17.6706 68.8346 17.2418L70.7327 11.422C70.7952 11.2303 70.7267 11.0202 70.563 10.9017L65.5938 7.30488C65.2277 7.03984 65.4159 6.46295 65.8684 6.46295H72.0107C72.213 6.46295 72.3924 6.33312 72.4549 6.14137L74.353 0.321586Z" fill="#FFDC5F"/><path d="M96.1524 0.321586C96.2925 -0.107195 96.9014 -0.107195 97.0415 0.321586L98.9389 6.14137C99.0019 6.33312 99.181 6.46295 99.3834 6.46295H105.526C105.978 6.46295 106.166 7.03984 105.8 7.30488L100.831 10.9017C100.667 11.0202 100.599 11.2303 100.662 11.422L102.559 17.2418C102.699 17.6706 102.207 18.0272 101.841 17.7621L96.8718 14.1653C96.7075 14.0468 96.4864 14.0468 96.3221 14.1653L91.3533 17.7621C90.9873 18.0272 90.4945 17.6706 90.6346 17.2418L92.532 11.422C92.5951 11.2303 92.5266 11.0202 92.3631 10.9017L87.3935 7.30488C87.0275 7.03984 87.2159 6.46295 87.6683 6.46295H93.8104C94.0129 6.46295 94.1919 6.33312 94.255 6.14137L96.1524 0.321586Z" fill="#FFDC5F"/></svg>
+              </div>
+              <p class="review-card__name">{{ block.settings.customer_name }}</p>
+              <div class="review-card__text rte">{{ block.settings.review_text }}</div>
+              <p class="review-card__product">{{ block.settings.product_name }}</p>
+              {%- if block.settings.button_link != blank -%}
+                <a href="{{ block.settings.button_link }}" class="review-card__button">{{ block.settings.button_text }}</a>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="reviews-carousel-progress">
+      <div class="reviews-carousel-progress-bar"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* General Styles */
+.reviews-carousel-section { padding: 60px 0; font-family: "Be Vietnam Pro", sans-serif; }
+.reviews-carousel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.reviews-carousel-header__left { display: flex; flex-direction: column; gap: 8px; }
+.reviews-carousel-title { font-family: "Be Vietnam Pro", sans-serif; font-size: 39px; font-weight: 700; line-height: 1.2; color: #1C2C58; }
+.reviews-carousel-title p { margin: 0; }
+.reviews-carousel-header__right { display: flex; gap: 12px; }
+.reviews-carousel-nav { width: 40px; height: 40px; border-radius: 50%; background-color: #F5F9FF; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s; }
+.reviews-carousel-nav:hover { background-color: #234085; }
+.reviews-carousel-nav:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Carousel Viewport & Track */
+.reviews-carousel-viewport { overflow: hidden; margin-bottom: 30px; }
+.reviews-carousel-track { display: flex; gap: 24px; transition: transform 0.5s ease-in-out; }
+
+/* Review Card */
+.review-card { flex: 0 0 386px; width: 386px; display: flex; flex-direction: column; gap: 10px; }
+.review-card__image { width: 386px; height: 265px; flex-shrink: 0; aspect-ratio: 67/46; border-radius: 12px; overflow: hidden; }
+.review-card__image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.review-card__content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; border-radius: 12px; background: #F5F9FF; }
+.review-card__stars { margin-bottom: 12px; }
+.review-card__name { font-size: 18px; font-weight: 700; color: #1C2C58; margin: 0 0 8px; }
+.review-card__text { font-size: 16px; line-height: 1.6; color: #4A4A4A; flex-grow: 1; margin: 0 0 16px; }
+.review-card__text p { margin: 0; }
+.review-card__product { font-size: 14px; color: #1C2C58; margin: 0 0 16px; }
+.review-card__button { display: inline-block; text-decoration: none; padding: 10px 20px;width: 159px;; border: 1px solid #000000; border-radius: 30px; color: #4A4A4A; text-align: center; font-size: 14px; font-weight: 500; transition: background-color 0.3s, color 0.3s; }
+.review-card__button:hover { background-color: #1C2C58; color: #fff; border-color: #1C2C58; }
+
+/* Progress Bar */
+.reviews-carousel-progress { width: 100%; height: 4px; background-color: #E0E0E0; border-radius: 2px; overflow: hidden; display: none; position: relative; }
+.reviews-carousel-progress-bar { width: 0; height: 100%; background-color: #234085; border-radius: 2px; position: absolute; top: 0; left: 0; z-index: 2; }
+.reviews-carousel-track.is-dragging { cursor: grabbing; user-select: none; }
+</style>
+
+<script>
+(function() {
+  const sectionId = '{{ section_id }}';
+  const carouselId = `reviews-carousel-${sectionId}`;
+
+  const initCarousel = (carousel) => {
+    if (carousel.dataset.initialized) return;
+
+    const viewport = carousel.querySelector('.reviews-carousel-viewport');
+    const track = carousel.querySelector('.reviews-carousel-track');
+    const cards = Array.from(carousel.querySelectorAll('.review-card'));
+    const prevButton = carousel.querySelector('.reviews-carousel-nav--prev');
+    const nextButton = carousel.querySelector('.reviews-carousel-nav--next');
+    const progressContainer = carousel.querySelector('.reviews-carousel-progress');
+    const progressBar = carousel.querySelector('.reviews-carousel-progress-bar');
+    
+    if (!track || !cards.length || !prevButton || !nextButton || !progressContainer || !progressBar) {
+      return;
+    }
+
+    let currentIndex = 0;
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID = 0;
+
+    let cardWidth, gap, viewportWidth, visibleCards, maxIndex, totalTrackWidth, maxScroll;
+
+    function calculateDimensions() {
+      cardWidth = cards.length > 0 ? cards[0].offsetWidth : 0;
+      if (cardWidth === 0) return;
+      gap = parseInt(window.getComputedStyle(track).gap) || 24;
+      viewportWidth = viewport.offsetWidth;
+      visibleCards = Math.floor((viewportWidth + gap) / (cardWidth + gap));
+      maxIndex = cards.length > visibleCards ? cards.length - visibleCards : 0;
+      totalTrackWidth = (cards.length * cardWidth) + Math.max(0, cards.length - 1) * gap;
+      maxScroll = totalTrackWidth - viewportWidth;
+
+      if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
+      }
+    }
+    
+    function updateProgressBar() {
+      if (totalTrackWidth > viewportWidth) {
+        progressContainer.style.display = 'block';
+        const thumbWidth = (viewportWidth / totalTrackWidth) * 100;
+        progressBar.style.width = `${thumbWidth}%`;
+
+        const clampedTranslate = Math.max(-maxScroll, Math.min(0, currentTranslate));
+        const currentScroll = -clampedTranslate;
+        
+        const scrollPercentage = maxScroll > 0 ? (currentScroll / maxScroll) : 0;
+        const thumbTranslate = scrollPercentage * (100 - thumbWidth);
+        progressBar.style.left = `${thumbTranslate}%`;
+      } else {
+        progressContainer.style.display = 'none';
+      }
+    }
+    
+    function setPositionByIndex() {
+      currentTranslate = -currentIndex * (cardWidth + gap);
+      prevTranslate = currentTranslate;
+      track.style.transition = 'transform 0.5s ease-in-out';
+      progressBar.style.transition = 'width 0.5s ease-in-out, left 0.5s ease-in-out';
+      track.style.transform = `translateX(${currentTranslate}px)`;
+      
+      prevButton.disabled = currentIndex === 0;
+      nextButton.disabled = currentIndex >= maxIndex;
+      
+      updateProgressBar();
+    }
+
+    function startDrag(e) {
+      isDragging = true;
+      startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+      animationID = requestAnimationFrame(animation);
+      track.style.transition = 'none';
+      progressBar.style.transition = 'none';
+      track.classList.add('is-dragging');
+    }
+
+    function drag(e) {
+      if (isDragging) {
+        e.preventDefault();
+        const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        currentTranslate = prevTranslate + currentPosition - startPos;
+      }
+    }
+
+    function endDrag() {
+      if (!isDragging) return;
+      cancelAnimationFrame(animationID);
+      isDragging = false;
+      track.classList.remove('is-dragging');
+
+      const movedBy = currentTranslate - prevTranslate;
+
+      if (movedBy < -50 && currentIndex < maxIndex) {
+        currentIndex += 1;
+      }
+      if (movedBy > 50 && currentIndex > 0) {
+        currentIndex -= 1;
+      }
+      
+      setPositionByIndex();
+    }
+
+    function animation() {
+      if (!isDragging) return;
+      track.style.transform = `translateX(${currentTranslate}px)`;
+      updateProgressBar();
+      requestAnimationFrame(animation);
+    }
+    
+    function onResize() {
+      calculateDimensions();
+      setPositionByIndex();
+    }
+
+    prevButton.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        setPositionByIndex();
+      }
+    });
+
+    nextButton.addEventListener('click', () => {
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        setPositionByIndex();
+      }
+    });
+
+    track.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
+    
+    track.addEventListener('mousedown', startDrag);
+    track.addEventListener('touchstart', startDrag, { passive: true });
+    track.addEventListener('mousemove', drag);
+    track.addEventListener('touchmove', drag, { passive: false });
+    track.addEventListener('mouseup', endDrag);
+    track.addEventListener('mouseleave', endDrag);
+    track.addEventListener('touchend', endDrag);
+
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(viewport);
+
+    setTimeout(() => {
+        calculateDimensions();
+        setPositionByIndex();
+    }, 150);
+
+    carousel.dataset.initialized = true;
+  };
+  
+  const setup = () => {
+    const carouselElement = document.getElementById(carouselId);
+    if (carouselElement) {
+      initCarousel(carouselElement);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', setup);
+  document.addEventListener('shopify:section:load', function(event) {
+    if (event.detail.sectionId === sectionId) {
+      const carouselElement = event.target.querySelector(`#${carouselId}`);
+      if (carouselElement) {
+          delete carouselElement.dataset.initialized;
+          initCarousel(carouselElement);
+      }
+    }
+  });
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Customer Reviews Carousel",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p><strong>Hơn 50,000 khách hàng</strong><br>và <strong>30,000 đánh giá 5 sao</strong> toàn quốc</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "customer_name", "label": "Customer Name", "default": "Lê Trần Chi Kiên" },
+        { "type": "richtext", "id": "review_text", "label": "Review Text", "default": "<p>Sau nhiều lần đắn đo mình quyết định mua Nệm Foam Original, và thật sự đây là một khoản đầu tư xứng đáng.</p>" },
+        { "type": "text", "id": "product_name", "label": "Product Name", "default": "Nệm Original" },
+        { "type": "text", "id": "button_text", "label": "Button Text", "default": "Xem Nệm" },
+        { "type": "url", "id": "button_link", "label": "Button Link" }
+      ]
+    }
+  ],
+  "presets": [
+    { 
+      "name": "Reviews Carousel", 
+      "category": "Testimonials",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+

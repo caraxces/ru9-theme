@@ -1,0 +1,496 @@
+{%- if section.settings.title != blank -%}
+  <div class="collections-listing-section" data-section-id="{{ section.id }}">
+    
+    <div class="section-header">
+      <h2 class="section-title">
+        {{ section.settings.title }}
+      </h2>
+      <div class="carousel-nav">
+        <button class="nav-btn nav-prev">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.5 9L4.5 6L7.5 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="nav-btn nav-next">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.5 3L7.5 6L4.5 9" stroke="#609EE9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="collections-carousel-container">
+      <div class="collections-carousel">
+      
+      {%- for block in section.blocks -%}
+        {%- assign collection = block.settings.collection -%}
+        {%- if collection != blank -%}
+          
+          <div class="collection-item">
+            <div class="collection-image-container">
+              {%- if collection.image -%}
+                <img 
+                  src="{{ collection.image | img_url: '416x275', crop: 'center' }}" 
+                  alt="{{ collection.title }}"
+                  width="416" height="275"
+                >
+              {%- else -%}
+                <div class="placeholder-svg-container">
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="collection-info">
+              <h3 class="collection-title">
+                <a href="{{ collection.url }}">
+                  {{ collection.title }}
+                </a>
+              </h3>
+            </div>
+          </div>
+          
+        {%- endif -%}
+      {%- endfor -%}
+      
+      </div>
+    </div>
+    
+  </div>
+{%- endif -%}
+
+<style>
+  .collections-listing-section {
+    width: 100%;
+    margin: 0 auto 60px auto;
+    padding: 0 6.8%;
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+  .section-header__title{
+    padding-left: 10px !important;
+  }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  .section-title {
+    color: #1C2C58;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 39px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+    text-transform: capitalize;
+    margin: 0;
+  }
+  .carousel-nav {
+    display: flex;
+    gap: 6px;
+  }
+  .collections-carousel-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .collections-carousel {
+    display: flex;
+    transition: transform 0.4s ease;
+    user-select: none;
+    cursor: grab;
+    gap: 30px;
+  }
+  .collection-item {
+    width: 416px;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .collection-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .collection-image-container {
+    width: 416px;
+    height: 275px;
+    aspect-ratio: 59/39;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background: #F8F9FA;
+  }
+  .collection-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
+  .placeholder-svg-container {
+    width: 100%;
+    height: 100%;
+    background: #E9ECEF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6C757D;
+    border-radius: 12px;
+  }
+  .collection-info {
+    text-align: left;
+  }
+  .collection-title {
+    color: #212121;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    margin: 0;
+  }
+  .collection-title a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .collections-carousel.grabbing {
+    cursor: grabbing;
+  }
+  .collections-carousel.grabbing a {
+    pointer-events: none;
+  }
+  .collection-image-container:hover img {
+    transform: scale(1.05);
+  }
+  .collection-title a:hover {
+    color: #609EE9 !important;
+    transition: color 0.3s ease;
+  }
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #E5E5E5;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  .nav-btn:hover {
+    background-color: #f0f0f0;
+  }
+  .nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 1200px) {
+    .collection-item, .collection-image-container {
+      width: 350px;
+    }
+    .collection-image-container {
+      height: 231px;
+    }
+    .section-title {
+      font-size: 32px !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .section-header {
+      display: block;
+      margin-bottom: 30px;
+    }
+    .section-header .carousel-nav {
+      display: none;
+    }
+    .collections-carousel {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px !important;
+      margin-bottom: 0px !important;
+      cursor: default;
+    }
+    .collection-item, .collection-image-container {
+      width: 100%;
+      height: auto;
+    }
+    .collection-image-container {
+      aspect-ratio: 172 / 129.32;
+    }
+    .section-title {
+      font-size: 28px !important;
+      text-align: left;
+    }
+    .collection-title {
+      font-size: 18px !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .collection-item {
+      width: 100%;
+    }
+    .collection-image-container {
+      width: 100%;
+      height: auto;
+    }
+    .section-title {
+      font-size: 24px !important;
+    }
+    .collection-title {
+      font-size: 16px !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionContainer = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!sectionContainer) return;
+
+    const carousel = sectionContainer.querySelector('.collections-carousel');
+    const prevBtn = sectionContainer.querySelector('.nav-prev');
+    const nextBtn = sectionContainer.querySelector('.nav-next');
+    
+    if (!carousel || !prevBtn || !nextBtn) return;
+
+    if (window.innerWidth <= 768) {
+      sectionContainer.querySelectorAll('.collection-item').forEach(item => {
+        item.classList.add('is-visible');
+      });
+      return; // Exit script, do not initialize carousel functionality.
+    }
+
+    const collectionItems = carousel.querySelectorAll('.collection-item');
+    if (collectionItems.length === 0) {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      return;
+    }
+
+    let currentIndex = 0;
+
+    function getItemsPerView() {
+      const containerWidth = carousel.parentElement.offsetWidth;
+      const itemWidth = collectionItems[0] ? collectionItems[0].offsetWidth : 416; // Fallback width
+      const gap = 30;
+      if (itemWidth === 0) return 1;
+      const items = Math.floor(containerWidth / (itemWidth + gap));
+      const remainingSpace = containerWidth - items * (itemWidth + gap);
+      if (remainingSpace >= itemWidth) {
+          return items + 1;
+      }
+      return items > 0 ? items : 1;
+    }
+
+    function updateCarousel(isResize = false) {
+      if (isResize) {
+        carousel.style.transition = 'none';
+        currentIndex = 0;
+      } else {
+        carousel.style.transition = 'transform 0.4s ease';
+      }
+
+      const itemsPerView = getItemsPerView();
+      const maxIndex = Math.max(0, collectionItems.length - itemsPerView);
+      
+      currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+
+      const itemWidth = collectionItems[0].offsetWidth;
+      const gap = 30;
+      const translateX = -currentIndex * (itemWidth + gap);
+      carousel.style.transform = `translateX(${translateX}px)`;
+      
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex >= maxIndex;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      const itemsPerView = getItemsPerView();
+      const maxIndex = Math.max(0, collectionItems.length - itemsPerView);
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
+
+    // --- Drag/Swipe Logic ---
+    let isDown = false;
+    let startX;
+    let initialTranslateX;
+    let walk = 0;
+
+    function getTranslateX() {
+        const style = window.getComputedStyle(carousel);
+        const transform = style.transform;
+        if (transform === 'none') return 0;
+        const matrix = new DOMMatrixReadOnly(transform);
+        return matrix.m41;
+    }
+
+    function dragStart(e) {
+        isDown = true;
+        carousel.classList.add('grabbing');
+        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+        carousel.style.transition = 'none';
+        initialTranslateX = getTranslateX();
+        walk = 0;
+    }
+
+    function dragMove(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
+        walk = currentX - startX;
+        carousel.style.transform = `translateX(${initialTranslateX + walk}px)`;
+    }
+
+    function dragEnd() {
+        if (!isDown) return;
+        isDown = false;
+        carousel.classList.remove('grabbing');
+        carousel.style.transition = 'transform 0.4s ease';
+
+        const itemWidth = collectionItems[0] ? collectionItems[0].offsetWidth : 416;
+        const threshold = itemWidth / 4;
+        
+        const itemsPerView = getItemsPerView();
+        const maxIndex = Math.max(0, collectionItems.length - itemsPerView);
+
+        if (walk < -threshold && currentIndex < maxIndex) {
+            currentIndex++;
+        } else if (walk > threshold && currentIndex > 0) {
+            currentIndex--;
+        }
+
+        updateCarousel();
+    }
+
+    carousel.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', e => {
+            if (isDown || Math.abs(walk) > 5) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        });
+    });
+
+    // Mouse events
+    carousel.addEventListener('mousedown', dragStart);
+    window.addEventListener('mousemove', dragMove);
+    window.addEventListener('mouseup', dragEnd);
+
+    // Touch events
+    carousel.addEventListener('touchstart', dragStart);
+    window.addEventListener('touchmove', dragMove);
+    window.addEventListener('touchend', dragEnd);
+    
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        updateCarousel(true);
+      }, 250);
+    });
+    
+    // --- Intersection Observer for Appear Animation ---
+    if ('IntersectionObserver' in window) {
+      const itemsToAnimate = carousel.querySelectorAll('.collection-item');
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      itemsToAnimate.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 100}ms`;
+        observer.observe(item);
+      });
+    } else {
+      // Fallback for older browsers
+      carousel.querySelectorAll('.collection-item').forEach(item => {
+        item.classList.add('is-visible');
+      });
+    }
+
+    setTimeout(() => {
+        updateCarousel();
+    }, 100);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collections Listing",
+  "class": "index-section",
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Our Collections"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1C2C58"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#212121"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Select collection to display"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections Listing",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

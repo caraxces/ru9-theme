@@ -1,1 +1,918 @@
-{"sections":{"main":{"type":"main-product","blocks":{"judge_me_reviews_preview_badge_MD8JNY":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","disabled":true,"settings":{}},"trust_badge_wVtTm7":{"type":"trust_badge","disabled":true,"settings":{"trust_image":"shopify:\/\/shop_images\/Ru9_-_brief_40_-_Giang_sinh_r_n_rang_1940_x_750.png"}},"description":{"type":"description","settings":{"is_tab":false,"collapse_content":false}},"price":{"type":"price","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"variant_labels":true,"picker_type":"button","product_dynamic_variants_enable":true,"color_swatches":true}},"quantity_selector_WMfLWY":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":false,"surface_pickup_enable":false,"show_gift_card_recipient":false}},"productbundle_GcbRad":{"type":"productbundle","disabled":true,"settings":{"product_list":["tam-bao-ve-nem","bo-ga-giuong-cotton-sateen","tencel-bedding-set"],"cross_sell_title":"Quà tặng cho quý khách mua nệm","cross_sell_label":"- 50 %"}},"icon_with_text_b6k6a4":{"type":"icon_with_text","settings":{"icon_1":"chat","image_icon_1":"shopify:\/\/shop_images\/text-w-icon-4.png","title_1":"100 đêm ngủ thử","icon_2":"chat","image_icon_2":"shopify:\/\/shop_images\/text-w-icon-5.png","title_2":"Miễn phí vận chuyển *","icon_3":"chat","image_icon_3":"shopify:\/\/shop_images\/text-w-icon-6.png","title_3":"Bảo hành dài lâu","icon_4":"chat","image_icon_4":"shopify:\/\/shop_images\/text-w-icon-6.png","title_4":"Chất liệu Foam cao cấp"}},"carousel_modal_B8Mr9e":{"type":"carousel_modal","disabled":true,"settings":{}}},"block_order":["judge_me_reviews_preview_badge_MD8JNY","trust_badge_wVtTm7","description","price","variant_picker","quantity_selector_WMfLWY","buy_buttons","productbundle_GcbRad","icon_with_text_b6k6a4","carousel_modal_B8Mr9e"],"settings":{"section_width":"page-width","customize_width":1800,"enable_sticky_add_to_cart":true,"sku_enable":false,"image_position":"left","image_size":"large","product_zoom_enable":true,"product_carousel_enable":true,"limit_product_carousel":false,"thumbnail_position":"beside","thumbnail_height":"flexible","thumbnail_arrows":false,"mobile_layout":"partial","enable_video_looping":true,"product_video_style":"muted"}},"product_hotspot_XzDEYy":{"type":"product-hotspot","blocks":{"product_8BYAFb":{"type":"product","settings":{"hotspot_title":"Vỏ bọc tencel","hotspot_sub_title":"Thoáng mát và thấm hút tốt","direction":"vertical","content_position":"right","space":"250","left":"25%","top":"25%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}},"product_63wJz9":{"type":"product","settings":{"hotspot_title":"Lớp gòn kháng cháy","hotspot_sub_title":"Làm chậm cháy","direction":"vertical","content_position":"right","space":"240","left":"30%","top":"30%","space_mb":"110","left_mobile":"60%","top_mobile":"60%"}},"product_YTgbw6":{"type":"product","settings":{"hotspot_title":"Ru9 Contour Foam","hotspot_sub_title":"Đàn hồi cao, nâng đỡ theo đường cong cơ thể","direction":"vertical","content_position":"right","space":"330","left":"40%","top":"37%","space_mb":"110","left_mobile":"70%","top_mobile":"65%"}},"product_dpYgWc":{"type":"product","settings":{"hotspot_title":"Memory Foam tích hợp gel lạnh","hotspot_sub_title":"Giải tỏa lực ép, vô cùng êm ái","direction":"vertical","content_position":"right","space":"250","left":"50%","top":"45%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}},"product_BGphfJ":{"type":"product","settings":{"hotspot_title":"Lớp Foam Đáy PU","hotspot_sub_title":"Bền chắc, ngăn cách chuyển động","direction":"vertical","content_position":"right","space":"250","left":"60%","top":"55%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}}},"block_order":["product_8BYAFb","product_63wJz9","product_YTgbw6","product_dpYgWc","product_BGphfJ"],"settings":{"enable_anchor_link":true,"anchor_link_text":"Chi tiết sản phẩm","productHandle":"foam-original","heading":"Nệm Original - Được thiết kế với mọi tính năng mà bạn cần","content":"","banner_image":"shopify:\/\/shop_images\/Original.webp","banner_mobile":"{{ product.metafields.custom.hotspot_banner_mobile.value }}","margin-top":"0px","margin-bottom":"0px"}},"product_hotspot_LcX9T4":{"type":"product-hotspot","blocks":{"product_in8JBX":{"type":"product","settings":{"hotspot_title":"Công nghệ sợi lạnh IceFiber™","hotspot_sub_title":"Hấp thụ và làm mát nhiệt lượng do cơ thể tiếp xúc với nệm tạo ra","direction":"vertical","content_position":"right","space":"250","left":"25%","top":"50%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}},"product_AUA3f6":{"type":"product","settings":{"hotspot_title":"Lớp Microfiber 120gsm","hotspot_sub_title":"Êm ái, dễ chịu, tránh được tiếng sột soạt khi nằm","direction":"vertical","content_position":"right","space":"360","left":"75%","top":"45%","space_mb":"110","left_mobile":"60%","top_mobile":"60%"}},"product_rzgAnK":{"type":"product","settings":{"hotspot_title":"Lớp vải tráng TPU","hotspot_sub_title":"Chống thấm tuyệt đối","direction":"vertical","content_position":"right","space":"330","left":"87%","top":"47%","space_mb":"110","left_mobile":"70%","top_mobile":"65%"}}},"block_order":["product_in8JBX","product_AUA3f6","product_rzgAnK"],"custom_css":[".text-center.hotspot-heading {margin-bottom: 20px;}"],"settings":{"enable_anchor_link":true,"anchor_link_text":"Chi tiết sản phẩm","productHandle":"giai-nhiet-iceguard","heading":"Tấm giải nhiệt ứng dụng công nghệ vải lạnh IceFiber™ hiện đại nhất hiện nay","content":"","banner_image":"shopify:\/\/shop_images\/IceGuard1_1.png","banner_mobile":"{{ product.metafields.custom.hotspot_banner_mobile.value }}","margin-top":"0px","margin-bottom":"0px"}},"product_hotspot_BGaNkf":{"type":"product-hotspot","blocks":{"product_xREBUD":{"type":"product","settings":{"hotspot_title":"Vỏ bọc dệt kim","hotspot_sub_title":"Mềm mại, thông thoáng và sang trọng","direction":"vertical","content_position":"right","space":"250","left":"25%","top":"30%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}},"product_ax6PXg":{"type":"product","settings":{"hotspot_title":"Lớp bảo vệ ruột gối","hotspot_sub_title":"Thiết kế chỉn chu, giữ gối bền lâu","direction":"vertical","content_position":"right","space":"460","left":"60%","top":"55%","space_mb":"110","left_mobile":"60%","top_mobile":"60%"}},"product_ghVYbm":{"type":"product","settings":{"hotspot_title":"Hạt foam và bông trong ruột gối","hotspot_sub_title":"Mềm mại, đàn hồi, tương thích cơ thể","direction":"vertical","content_position":"right","space":"530","left":"75%","top":"65%","space_mb":"110","left_mobile":"70%","top_mobile":"65%"}}},"block_order":["product_xREBUD","product_ax6PXg","product_ghVYbm"],"settings":{"enable_anchor_link":true,"anchor_link_text":"Chi tiết sản phẩm","productHandle":"goi-om","heading":"Chiếc gối Ôm thấu hiểu những gì bạn cần","content":"Cải tiến chiếc gối quen thuộc, gối Ôm Ru9 sẽ đem đến giấc ngủ ngon bạn luôn tìm kiếm","banner_image":"shopify:\/\/shop_images\/goi-om-3d.png","banner_mobile":"{{ product.metafields.custom.hotspot_banner_mobile.value }}","margin-top":"0px","margin-bottom":"0px"}},"product_hotspot_JYk7dk":{"type":"product-hotspot","blocks":{"product_UVkTcr":{"type":"product","settings":{"hotspot_title":"Vỏ Cotton Sateen ","hotspot_sub_title":"Thoáng mát,chống nước và dầu","direction":"vertical","content_position":"right","space":"250","left":"25%","top":"30%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}},"product_y66nJJ":{"type":"product","settings":{"hotspot_title":"Lớp Bảo Vệ Foam","hotspot_sub_title":"Hạn chế ma sát trong quá trình chăm sóc gối","direction":"vertical","content_position":"right","space":"350","left":"50%","top":"55%","space_mb":"110","left_mobile":"60%","top_mobile":"30%"}},"product_BTx8AC":{"type":"product","settings":{"hotspot_title":"Ruột gối Microfiber 3D","hotspot_sub_title":"Bồng bềnh và nâng đỡ","direction":"vertical","content_position":"right","space":"350","left":"75%","top":"60%","space_mb":"110","left_mobile":"75%","top_mobile":"60%"}}},"block_order":["product_UVkTcr","product_y66nJJ","product_BTx8AC"],"settings":{"enable_anchor_link":true,"anchor_link_text":"Chi tiết sản phẩm","productHandle":"goi-may","heading":"{{ product.metafields.custom.hotspot_title.value }}","content":"","banner_image":"shopify:\/\/shop_images\/Goi-May-WebsiteChat_lieu.jpg","banner_mobile":"{{ product.metafields.custom.hotspot_banner_mobile.value }}","margin-top":"0px","margin-bottom":"0px"}},"product_hotspot_zAj7Lm":{"type":"product-hotspot","blocks":{"product_kWLDwR":{"type":"product","settings":{"hotspot_title":"Vỏ bọc dệt kim","hotspot_sub_title":"Mềm mại, thông thoáng và sang trọng","direction":"vertical","content_position":"right","space":"250","left":"25%","top":"30%","space_mb":"110","left_mobile":"30%","top_mobile":"30%"}},"product_gfy4FP":{"type":"product","settings":{"hotspot_title":"Comfort Top: Medium\/ Firm","hotspot_sub_title":"Lựa chọn độ êm ái hoặc nâng đỡ","direction":"vertical","content_position":"right","space":"250","left":"30%","top":"35%","space_mb":"110","left_mobile":"35%","top_mobile":"45%"}},"product_KQpcky":{"type":"product","settings":{"hotspot_title":"3-zoned Ru9 Contour layer","hotspot_sub_title":"Thiết kế 3 vùng nâng đỡ khác biệt cho từng vị trí  đầu - thân - chân","direction":"vertical","content_position":"right","space":"260","left":"35%","top":"45%","space_mb":"110","left_mobile":"45%","top_mobile":"52%"}},"product_gkzea7":{"type":"product","settings":{"hotspot_title":"Cooling Graphene Memory Foam layer","hotspot_sub_title":"Giải toả lực ép và tản nhiệt","direction":"vertical","content_position":"right","space":"270","left":"50%","top":"55%","space_mb":"110","left_mobile":"55%","top_mobile":"56%"}},"product_WAmQBe":{"type":"product","settings":{"hotspot_title":"Core layer PU Foam","hotspot_sub_title":"Khả năng ngăn cách chuyển động","direction":"vertical","content_position":"right","space":"280","left":"60%","top":"60%","space_mb":"110","left_mobile":"70%","top_mobile":"55%"}}},"block_order":["product_kWLDwR","product_gfy4FP","product_KQpcky","product_gkzea7","product_WAmQBe"],"settings":{"enable_anchor_link":true,"anchor_link_text":"Chi tiết sản phẩm","productHandle":"nem-original-pro","heading":"{{ product.metafields.custom.hotspot_title.value }}","content":"","banner_image":"{{ product.metafields.custom.hotspot_banner.value }}","margin-top":"0px","margin-bottom":"0px"}},"product_hotspot_pnDmHC":{"type":"product-hotspot","blocks":{"product_wUNCcK":{"type":"product","settings":{"hotspot_title":"Vỏ bọc tencel","hotspot_sub_title":"Thoáng mát và thấm hút tốt","direction":"vertical","content_position":"right","space":"250","left":"30%","top":"45%","space_mb":"110","left_mobile":"30%","top_mobile":"45%"}},"product_rH68dY":{"type":"product","settings":{"hotspot_title":"Lớp Bảo Vệ Foam","hotspot_sub_title":"Hạn chế ma sát trong quá trình chăm sóc gối","direction":"vertical","content_position":"right","space":"250","left":"55%","top":"35%","space_mb":"110","left_mobile":"55%","top_mobile":"45%"}},"product_KWebeG":{"type":"product","settings":{"hotspot_title":"Ruột gối Graphene Foam","hotspot_sub_title":"Nâng đỡ trọn vẹn, tản nhiệt hiệu quả","direction":"vertical","content_position":"right","space":"250","left":"75%","top":"35%","space_mb":"110","left_mobile":"80%","top_mobile":"40%"}}},"block_order":["product_wUNCcK","product_rH68dY","product_KWebeG"],"settings":{"enable_anchor_link":true,"anchor_link_text":"Chi tiết sản phẩm","productHandle":"goi-foam-niu","heading":"Chiếc gối thấu hiểu những gì bạn cần để ngủ thật ngon","content":"Gối Niu được thiết kế để tạo ra sự nâng đỡ lý tưởng nhất cho phần đầu - cổ - vai của bạn.","banner_image":"shopify:\/\/shop_images\/NIU-PILLOW-for-web_5702975d-3457-46e5-ab7c-f57b4b9a41a3.jpg","banner_mobile":"{{ product.metafields.custom.hotspot_banner.value }}","margin-top":"0px","margin-bottom":"0px"}},"product_hotspot_4TYCfN":{"type":"product-hotspot","blocks":{"product_3eYPGB":{"type":"product","settings":{"hotspot_title":"Vỏ bọc tencel","hotspot_sub_title":"Thoáng mát và thấm hút tốt","direction":"vertical","content_position":"right","space":"250","left":"30%","top":"45%","space_mb":"110","left_mobile":"30%","top_mobile":"45%"}},"product_rTGWtc":{"type":"product","settings":{"hotspot_title":"Memory Foam","hotspot_sub_title":"Êm ái linh hoạt, tích hợp than hoạt tính kháng khuẩn","direction":"vertical","content_position":"right","space":"250","left":"60%","top":"45%","space_mb":"110","left_mobile":"50%","top_mobile":"55%"}},"product_Ph6tDT":{"type":"product","settings":{"hotspot_title":"HR Foam","hotspot_sub_title":"Nâng đỡ hiệu quả, tích hợp phân tử trà xanh khử mùi","direction":"vertical","content_position":"right","space":"250","left":"85%","top":"35%","space_mb":"110","left_mobile":"80%","top_mobile":"40%"}}},"block_order":["product_3eYPGB","product_rTGWtc","product_Ph6tDT"],"settings":{"enable_anchor_link":true,"anchor_link_text":"Chi tiết sản phẩm","productHandle":"nem-cuon-foam-topper","heading":"Thoải mái trọn vẹn mọi nơi cùng Ru9 Foam Topper","content":"","banner_image":"shopify:\/\/shop_images\/PIC-1-2_89ba994c-4b07-4bb6-807a-e083fab8c3fc.png","banner_mobile":"{{ product.metafields.custom.hotspot_banner.value }}","margin-top":"0px","margin-bottom":"0px"}},"dynamic_text_with_image_L4VkFB":{"type":"dynamic-text-with-image","blocks":{"image_with_text_aTnYky":{"type":"image-with-text","settings":{"image":"{{ product.metafields.custom.image_3_hinh_1.value }}","title":"{{ product.metafields.custom.heading_3_hinh_1.value }}","text":"<p>{{ product.metafields.custom.text_block_3_hinh_1 | metafield_tag }}<\/p>","align_text":"left","layout":"right"}},"image_with_text_NFMQyg":{"type":"image-with-text","settings":{"image":"{{ product.metafields.custom.image_3_hinh_2.value }}","title":"{{ product.metafields.custom.heading_3_hinh_2.value }}","text":"<p>{{ product.metafields.custom.text_block_3_hinh_2 | metafield_tag }}<\/p>","align_text":"left","layout":"left"}},"image_with_text_WAkepD":{"type":"image-with-text","settings":{"image":"{{ product.metafields.custom.image_3_hinh_3.value }}","title":"{{ product.metafields.custom.heading_3_hinh_3.value }}","text":"<p>{{ product.metafields.custom.text_block_3_hinh_3 | metafield_tag }}<\/p>","align_text":"left","layout":"right"}}},"block_order":["image_with_text_aTnYky","image_with_text_NFMQyg","image_with_text_WAkepD"],"custom_css":["@media (max-width: 767px) {span {font-size: 16px; }}"],"settings":{"section_width":"page-width","customize_width":1800,"mg":"50px,,20px,","pd":"","mg_mb":"","pd_mb":"","title":"{{ product.metafields.custom.heading_3_hinh.value }}","description":"","divider":false}},"best_seller_DWCAYP":{"type":"best-seller","settings":{"mg":"54px,,40px,","pd":"","mg_mb":"","pd_mb":"","layout":"left","title":"{{ product.metafields.custom.video_button_label.value }}","text":"<p>{{ product.metafields.custom.video_text_block | metafield_tag }}<\/p>","linkvideo":"{{ product.metafields.custom.product_video_best_seller_video.value }}","poster":"{{ product.metafields.custom.product_video_best_seller_poster.value }}"}},"dynamic_faq_Whrn47":{"type":"dynamic-faq","blocks":{"question_d3nb6H":{"type":"question","settings":{"title":"{{ product.metafields.custom.ask1.value }}","text":"<p>{{ product.metafields.custom.answer1.value }}<\/p>"}},"question_wQaBbp":{"type":"question","settings":{"title":"{{ product.metafields.custom.ask2.value }}","text":"<p>{{ product.metafields.custom.answer2.value }}<\/p>"}},"question_PPVaTY":{"type":"question","settings":{"title":"{{ product.metafields.custom.ask3.value }}","text":"<p>{{ product.metafields.custom.answer3.value }}<\/p>"}},"question_f7x3UM":{"type":"question","settings":{"title":"{{ product.metafields.custom.ask4.value }}","text":"<p>{{ product.metafields.custom.answer4.value }}<\/p>"}},"question_4qDy8K":{"type":"question","settings":{"title":"{{ product.metafields.custom.ask5.value }}","text":"<p>{{ product.metafields.custom.answer5.value }}<\/p>"}}},"block_order":["question_d3nb6H","question_wQaBbp","question_PPVaTY","question_f7x3UM","question_4qDy8K"],"settings":{"enable_anchor_link":true,"anchor_link_text":"FAQs","mg":"24px,,20px,","pd":"40px,,,","mg_mb":"","pd_mb":"","title":"Các câu hỏi thường gặp","link":"shopify:\/\/pages\/faqs","link_text":"Xem những câu hỏi khác","text_alignment":"center","use_metafield":false,"metafield_limit":"5","divider":true}},"certification_VUqyB6":{"type":"certification","blocks":{"slide_zqGeDK":{"type":"slide","settings":{"banner":"shopify:\/\/shop_images\/Hompage_Desktop_Oeko_tex_bd30d664-3dfd-433e-a514-f771bb40ba94.png","banner_mobile":"shopify:\/\/shop_images\/Hompage_Mobile_Oeko_tex_877a34ad-3f04-4b27-814f-e396140ef1ef.png","title":"<p>An toàn cho sức khoẻ.<br\/>Bảo vệ cho làn da.<\/p>","description":"<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®<\/p>","image":"shopify:\/\/shop_images\/logo-certification-1.png"}},"slide_63THmd":{"type":"slide","settings":{"banner":"shopify:\/\/shop_images\/Hompage_Desktop_Certipur_US_310dce33-caaf-452e-ac90-2da51b97f80e.png","banner_mobile":"shopify:\/\/shop_images\/Hompage_Mobile_Certipur_US_86aa4a55-6779-43c2-89f4-231d338a70fe.png","title":"<p>An toàn cho sức khoẻ.<br\/>Bảo vệ cho làn da.<\/p>","description":"<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế Certipur-US <\/p>","image":"shopify:\/\/shop_images\/CertiPUR-US_RGB_800x800_2x_c1aaa1ca-c943-43f5-b804-8b2b044f2be4.webp"}}},"block_order":["slide_zqGeDK","slide_63THmd"],"settings":{"section_width":"customize_width","customize_width":1250,"bg":"#f0f7fe","title":"","description":""}},"172802814088f5e025":{"type":"apps","settings":{"enable_anchor_link":true,"anchor_link_text":"Reviews","full_width":false,"space_around":true}},"1730878240cfbec46e":{"type":"apps","blocks":{"judge_me_reviews_review_widget_LGBKUn":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}}},"block_order":["judge_me_reviews_review_widget_LGBKUn"],"settings":{"enable_anchor_link":false,"anchor_link_text":"","full_width":false,"space_around":true}},"sub":{"type":"product-full-width","disabled":true,"settings":{"max_width":true}},"product-recommendations":{"type":"product-recommendations","disabled":true,"settings":{"product_recommendations_heading":"You may also like","related_count":6,"products_per_row":3}},"recently-viewed":{"type":"recently-viewed","disabled":true,"settings":{"recent_count":5}},"collection-return":{"type":"collection-return","disabled":true,"settings":{}}},"order":["main","product_hotspot_XzDEYy","product_hotspot_LcX9T4","product_hotspot_BGaNkf","product_hotspot_JYk7dk","product_hotspot_zAj7Lm","product_hotspot_pnDmHC","product_hotspot_4TYCfN","dynamic_text_with_image_L4VkFB","best_seller_DWCAYP","dynamic_faq_Whrn47","certification_VUqyB6","172802814088f5e025","1730878240cfbec46e","sub","product-recommendations","recently-viewed","collection-return"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "judge_me_reviews_preview_badge_MD8JNY": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        },
+        "trust_badge_wVtTm7": {
+          "type": "trust_badge",
+          "disabled": true,
+          "settings": {
+            "trust_image": "shopify://shop_images/Ru9_-_brief_40_-_Giang_sinh_r_n_rang_1940_x_750.png"
+          }
+        },
+        "custom_JtBXGV": {
+          "type": "custom",
+          "settings": {
+            "code": "<style>\n.flash-sale-container {\n  display: none; /* Hidden by default, will be shown with JS if in valid time */\n  align-items: center;\n  background: #ff6b6b;\n  padding: 15px;\n  border-radius: 8px;\n  margin: 10px 0;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n} \n\n.flash-sale-status {\n  display: flex;\n  align-items: center;\n  margin-right: 20px;\n}\n\n.status-icon {\n  font-size: 24px;\n  color: #fff;\n  margin-right: 10px;\n  animation: pulse 1s infinite;\n}\n\n.status-text {\n  font-size: 16px;\n  font-weight: bold;\n  color: #fff;\n}\n\n.countdown-wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.countdown-block {\n  background: #fff;\n  padding: 8px 12px;\n  border-radius: 6px;\n  text-align: center;\n  min-width: 60px;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.05);\n}\n\n.countdown-block span {\n  font-size: 20px;\n  font-weight: bold;\n  color: #ff6b6b;\n  display: block;\n}\n\n.countdown-block label {\n  font-size: 12px;\n  color: #666;\n  margin-top: 4px;\n  display: block;\n}\n\n@keyframes pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.1); }\n  100% { transform: scale(1); }\n}\n\n.inactive .status-icon {\n  color: #fff;\n  animation: none;\n}\n\n.inactive .status-text {\n  color: #fff;\n}\n\n.inactive .countdown-block span {\n  color: #666;\n}\n</style>\n\n<div class=\"flash-sale-container\" id=\"flashSaleContainer\">\n  <div class=\"flash-sale-status\">\n    <div class=\"status-icon\" id=\"statusIcon\">⚡</div>\n    <div class=\"status-text\" id=\"statusText\">Flash Sale đang diễn ra!</div>\n  </div>\n  <div class=\"countdown-wrapper\">\n    <div class=\"countdown-block\">\n      <span id=\"hours\">00</span>\n      <label>Giờ</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"minutes\">00</span>\n      <label>Phút</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"seconds\">00</span>\n      <label>Giây</label>\n    </div>\n  </div>\n</div>\n\n<script>\nclass FlashSaleTimer {\n  constructor() {\n    this.statusText = document.getElementById('statusText');\n    this.statusIcon = document.getElementById('statusIcon');\n    this.container = document.getElementById('flashSaleContainer');\n    this.hoursElement = document.getElementById('hours');\n    this.minutesElement = document.getElementById('minutes');\n    this.secondsElement = document.getElementById('seconds');\n    \n    this.flashSaleStartHour = 23; // 11 PM\n    this.flashSaleEndHour = 8;    // 8 AM\n    \n    // Check if we should show the flash sale based on GMT+7 time\n    if (this.isWithinGMTPlus7TimeRange()) {\n      this.container.style.display = \"flex\"; // Show the container\n      this.updateTimer();\n      setInterval(() => this.updateTimer(), 1000);\n    }\n  }\n\n  // Get current time in GMT+7\n  getCurrentGMTPlus7Time() {\n    const now = new Date();\n    // Convert to GMT+7\n    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);\n    return new Date(utcTime + (7 * 60 * 60 * 1000));\n  }\n\n  // Check if current GMT+7 time is within flash sale hours (11 PM - 8 AM)\n  isWithinGMTPlus7TimeRange() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  isFlashSaleActive() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  getNextFlashSaleTime() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    let nextFlashSale = new Date(gmtPlus7Time);\n    \n    if (gmtPlus7Time.getHours() >= this.flashSaleEndHour && gmtPlus7Time.getHours() < this.flashSaleStartHour) {\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    } else {\n      nextFlashSale.setDate(nextFlashSale.getDate() + 1);\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    }\n    \n    return nextFlashSale;\n  }\n\n  getTimeRemaining(endTime) {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const total = endTime - gmtPlus7Time;\n    const seconds = Math.floor((total / 1000) % 60);\n    const minutes = Math.floor((total / 1000 / 60) % 60);\n    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);\n    \n    return {\n      total,\n      hours,\n      minutes,\n      seconds\n    };\n  }\n\n  updateTimer() {\n    const isActive = this.isFlashSaleActive();\n    let timeRemaining;\n    \n    if (isActive) {\n      // Calculate end time (8 AM in GMT+7)\n      const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n      const endTime = new Date(gmtPlus7Time);\n      endTime.setHours(this.flashSaleEndHour, 0, 0, 0);\n      if (endTime < gmtPlus7Time) {\n        endTime.setDate(endTime.getDate() + 1);\n      }\n      timeRemaining = this.getTimeRemaining(endTime);\n      \n      this.statusText.textContent = 'Flash Sale đang diễn ra!';\n      this.container.classList.remove('inactive');\n    } else {\n      timeRemaining = this.getTimeRemaining(this.getNextFlashSaleTime());\n      \n      this.statusText.textContent = 'Flash Sale sắp diễn ra';\n      this.container.classList.add('inactive');\n    }\n\n    this.hoursElement.textContent = timeRemaining.hours.toString().padStart(2, '0');\n    this.minutesElement.textContent = timeRemaining.minutes.toString().padStart(2, '0');\n    this.secondsElement.textContent = timeRemaining.seconds.toString().padStart(2, '0');\n  }\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  new FlashSaleTimer();\n});\n</script>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "is_tab": false,
+            "collapse_content": false
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "variant_labels": true,
+            "picker_type": "button",
+            "product_dynamic_variants_enable": true,
+            "color_swatches": true
+          }
+        },
+        "quantity_selector_WMfLWY": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "showroom_dropdown_WRL43J": {
+          "type": "showroom_dropdown",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "surface_pickup_enable": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "productbundle_GcbRad": {
+          "type": "productbundle",
+          "disabled": true,
+          "settings": {
+            "product_list": [
+              "tam-bao-ve-nem",
+              "bo-ga-giuong-cotton-sateen",
+              "tencel-bedding-set"
+            ],
+            "cross_sell_title": "Quà tặng cho quý khách mua nệm",
+            "cross_sell_label": "- 50 %"
+          }
+        },
+        "icon_with_text_b6k6a4": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon_1": "chat",
+            "image_icon_1": "shopify://shop_images/text-w-icon-5.png",
+            "title_1": "Miễn phí vận chuyển *",
+            "icon_2": "chat",
+            "title_2": "",
+            "icon_3": "chat",
+            "image_icon_3": "shopify://shop_images/text-w-icon-6.png",
+            "title_3": "Bảo hành dài lâu",
+            "icon_4": "chat",
+            "image_icon_4": "shopify://shop_images/text-w-icon-6.png",
+            "title_4": "Chất liệu Foam cao cấp"
+          }
+        },
+        "carousel_modal_B8Mr9e": {
+          "type": "carousel_modal",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_preview_badge_MD8JNY",
+        "trust_badge_wVtTm7",
+        "custom_JtBXGV",
+        "description",
+        "price",
+        "variant_picker",
+        "quantity_selector_WMfLWY",
+        "showroom_dropdown_WRL43J",
+        "buy_buttons",
+        "productbundle_GcbRad",
+        "icon_with_text_b6k6a4",
+        "carousel_modal_B8Mr9e"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "enable_sticky_add_to_cart": true,
+        "hide_payment_button_mobile": true,
+        "sku_enable": false,
+        "image_position": "left",
+        "image_size": "large",
+        "product_zoom_enable": true,
+        "product_carousel_enable": true,
+        "limit_product_carousel": false,
+        "thumbnail_position": "beside",
+        "thumbnail_height": "flexible",
+        "thumbnail_arrows": false,
+        "mobile_layout": "partial",
+        "enable_video_looping": true,
+        "product_video_style": "muted"
+      }
+    },
+    "product_hotspot_XzDEYy": {
+      "type": "product-hotspot",
+      "blocks": {
+        "product_8BYAFb": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Vỏ bọc tencel",
+            "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "25%",
+            "top": "25%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_63wJz9": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Lớp gòn kháng cháy",
+            "hotspot_sub_title": "Làm chậm cháy",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "240",
+            "left": "30%",
+            "top": "30%",
+            "space_mb": "110",
+            "left_mobile": "60%",
+            "top_mobile": "60%"
+          }
+        },
+        "product_YTgbw6": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Ru9 Contour Foam",
+            "hotspot_sub_title": "Đàn hồi cao, nâng đỡ theo đường cong cơ thể",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "330",
+            "left": "40%",
+            "top": "37%",
+            "space_mb": "110",
+            "left_mobile": "70%",
+            "top_mobile": "65%"
+          }
+        },
+        "product_dpYgWc": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Memory Foam tích hợp gel lạnh",
+            "hotspot_sub_title": "Giải tỏa lực ép, vô cùng êm ái",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "50%",
+            "top": "45%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_BGphfJ": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Lớp Foam Đáy PU",
+            "hotspot_sub_title": "Bền chắc, ngăn cách chuyển động",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "60%",
+            "top": "55%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        }
+      },
+      "block_order": [
+        "product_8BYAFb",
+        "product_63wJz9",
+        "product_YTgbw6",
+        "product_dpYgWc",
+        "product_BGphfJ"
+      ],
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Chi tiết sản phẩm",
+        "productHandle": "foam-original",
+        "heading": "Nệm Original - Được thiết kế với mọi tính năng mà bạn cần",
+        "content": "",
+        "banner_image": "shopify://shop_images/Original.webp",
+        "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
+        "margin-top": "0px",
+        "margin-bottom": "0px"
+      }
+    },
+    "product_hotspot_LcX9T4": {
+      "type": "product-hotspot",
+      "blocks": {
+        "product_in8JBX": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Công nghệ sợi lạnh IceFiber™",
+            "hotspot_sub_title": "Hấp thụ và làm mát nhiệt lượng do cơ thể tiếp xúc với nệm tạo ra",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "25%",
+            "top": "50%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_AUA3f6": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Lớp Microfiber 120gsm",
+            "hotspot_sub_title": "Êm ái, dễ chịu, tránh được tiếng sột soạt khi nằm",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "360",
+            "left": "75%",
+            "top": "45%",
+            "space_mb": "110",
+            "left_mobile": "60%",
+            "top_mobile": "60%"
+          }
+        },
+        "product_rzgAnK": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Lớp vải tráng TPU",
+            "hotspot_sub_title": "Chống thấm tuyệt đối",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "330",
+            "left": "87%",
+            "top": "47%",
+            "space_mb": "110",
+            "left_mobile": "70%",
+            "top_mobile": "65%"
+          }
+        }
+      },
+      "block_order": [
+        "product_in8JBX",
+        "product_AUA3f6",
+        "product_rzgAnK"
+      ],
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Chi tiết sản phẩm",
+        "productHandle": "giai-nhiet-iceguard",
+        "heading": "Tấm giải nhiệt ứng dụng công nghệ vải lạnh IceFiber™ hiện đại nhất hiện nay",
+        "content": "",
+        "banner_image": "shopify://shop_images/IceGuard1_1.png",
+        "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
+        "margin-top": "0px",
+        "margin-bottom": "0px"
+      }
+    },
+    "product_hotspot_BGaNkf": {
+      "type": "product-hotspot",
+      "blocks": {
+        "product_xREBUD": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Vỏ bọc dệt kim",
+            "hotspot_sub_title": "Mềm mại, thông thoáng và sang trọng",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "25%",
+            "top": "30%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_ax6PXg": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Lớp bảo vệ ruột gối",
+            "hotspot_sub_title": "Thiết kế chỉn chu, giữ gối bền lâu",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "460",
+            "left": "60%",
+            "top": "55%",
+            "space_mb": "110",
+            "left_mobile": "60%",
+            "top_mobile": "60%"
+          }
+        },
+        "product_ghVYbm": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Hạt foam và bông trong ruột gối",
+            "hotspot_sub_title": "Mềm mại, đàn hồi, tương thích cơ thể",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "530",
+            "left": "75%",
+            "top": "65%",
+            "space_mb": "110",
+            "left_mobile": "70%",
+            "top_mobile": "65%"
+          }
+        }
+      },
+      "block_order": [
+        "product_xREBUD",
+        "product_ax6PXg",
+        "product_ghVYbm"
+      ],
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Chi tiết sản phẩm",
+        "productHandle": "goi-om",
+        "heading": "Chiếc gối Ôm thấu hiểu những gì bạn cần",
+        "content": "Cải tiến chiếc gối quen thuộc, gối Ôm Ru9 sẽ đem đến giấc ngủ ngon bạn luôn tìm kiếm",
+        "banner_image": "shopify://shop_images/goi-om-3d.png",
+        "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
+        "margin-top": "0px",
+        "margin-bottom": "0px"
+      }
+    },
+    "product_hotspot_JYk7dk": {
+      "type": "product-hotspot",
+      "blocks": {
+        "product_UVkTcr": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Vỏ Cotton Sateen ",
+            "hotspot_sub_title": "Thoáng mát,chống nước và dầu",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "25%",
+            "top": "30%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_y66nJJ": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Lớp Bảo Vệ Foam",
+            "hotspot_sub_title": "Hạn chế ma sát trong quá trình chăm sóc gối",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "350",
+            "left": "50%",
+            "top": "55%",
+            "space_mb": "110",
+            "left_mobile": "60%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_BTx8AC": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Ruột gối Microfiber 3D",
+            "hotspot_sub_title": "Bồng bềnh và nâng đỡ",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "350",
+            "left": "75%",
+            "top": "60%",
+            "space_mb": "110",
+            "left_mobile": "75%",
+            "top_mobile": "60%"
+          }
+        }
+      },
+      "block_order": [
+        "product_UVkTcr",
+        "product_y66nJJ",
+        "product_BTx8AC"
+      ],
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Chi tiết sản phẩm",
+        "productHandle": "goi-may",
+        "heading": "{{ product.metafields.custom.hotspot_title.value }}",
+        "content": "",
+        "banner_image": "shopify://shop_images/Goi-May-WebsiteChat_lieu.jpg",
+        "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
+        "margin-top": "0px",
+        "margin-bottom": "0px"
+      }
+    },
+    "product_hotspot_zAj7Lm": {
+      "type": "product-hotspot",
+      "blocks": {
+        "product_kWLDwR": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Vỏ bọc dệt kim",
+            "hotspot_sub_title": "Mềm mại, thông thoáng và sang trọng",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "25%",
+            "top": "30%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "30%"
+          }
+        },
+        "product_gfy4FP": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Comfort Top: Medium/ Firm",
+            "hotspot_sub_title": "Lựa chọn độ êm ái hoặc nâng đỡ",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "30%",
+            "top": "35%",
+            "space_mb": "110",
+            "left_mobile": "35%",
+            "top_mobile": "45%"
+          }
+        },
+        "product_KQpcky": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "3-zoned Ru9 Contour layer",
+            "hotspot_sub_title": "Thiết kế 3 vùng nâng đỡ khác biệt cho từng vị trí  đầu - thân - chân",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "260",
+            "left": "35%",
+            "top": "45%",
+            "space_mb": "110",
+            "left_mobile": "45%",
+            "top_mobile": "52%"
+          }
+        },
+        "product_gkzea7": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Cooling Graphene Memory Foam layer",
+            "hotspot_sub_title": "Giải toả lực ép và tản nhiệt",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "270",
+            "left": "50%",
+            "top": "55%",
+            "space_mb": "110",
+            "left_mobile": "55%",
+            "top_mobile": "56%"
+          }
+        },
+        "product_WAmQBe": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Core layer PU Foam",
+            "hotspot_sub_title": "Khả năng ngăn cách chuyển động",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "280",
+            "left": "60%",
+            "top": "60%",
+            "space_mb": "110",
+            "left_mobile": "70%",
+            "top_mobile": "55%"
+          }
+        }
+      },
+      "block_order": [
+        "product_kWLDwR",
+        "product_gfy4FP",
+        "product_KQpcky",
+        "product_gkzea7",
+        "product_WAmQBe"
+      ],
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Chi tiết sản phẩm",
+        "productHandle": "nem-original-pro",
+        "heading": "{{ product.metafields.custom.hotspot_title.value }}",
+        "content": "",
+        "banner_image": "{{ product.metafields.custom.hotspot_banner.value }}",
+        "margin-top": "0px",
+        "margin-bottom": "0px"
+      }
+    },
+    "product_hotspot_pnDmHC": {
+      "type": "product-hotspot",
+      "blocks": {
+        "product_wUNCcK": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Vỏ bọc tencel",
+            "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "30%",
+            "top": "45%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "45%"
+          }
+        },
+        "product_rH68dY": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Lớp Bảo Vệ Foam",
+            "hotspot_sub_title": "Hạn chế ma sát trong quá trình chăm sóc gối",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "55%",
+            "top": "35%",
+            "space_mb": "110",
+            "left_mobile": "55%",
+            "top_mobile": "45%"
+          }
+        },
+        "product_KWebeG": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Ruột gối Graphene Foam",
+            "hotspot_sub_title": "Nâng đỡ trọn vẹn, tản nhiệt hiệu quả",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "75%",
+            "top": "35%",
+            "space_mb": "110",
+            "left_mobile": "80%",
+            "top_mobile": "40%"
+          }
+        }
+      },
+      "block_order": [
+        "product_wUNCcK",
+        "product_rH68dY",
+        "product_KWebeG"
+      ],
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Chi tiết sản phẩm",
+        "productHandle": "goi-foam-niu",
+        "heading": "Chiếc gối thấu hiểu những gì bạn cần để ngủ thật ngon",
+        "content": "Gối Niu được thiết kế để tạo ra sự nâng đỡ lý tưởng nhất cho phần đầu - cổ - vai của bạn.",
+        "banner_image": "shopify://shop_images/NIU-PILLOW-for-web_5702975d-3457-46e5-ab7c-f57b4b9a41a3.jpg",
+        "banner_mobile": "{{ product.metafields.custom.hotspot_banner.value }}",
+        "margin-top": "0px",
+        "margin-bottom": "0px"
+      }
+    },
+    "product_hotspot_4TYCfN": {
+      "type": "product-hotspot",
+      "blocks": {
+        "product_3eYPGB": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Vỏ bọc tencel",
+            "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "30%",
+            "top": "45%",
+            "space_mb": "110",
+            "left_mobile": "30%",
+            "top_mobile": "45%"
+          }
+        },
+        "product_rTGWtc": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "Memory Foam",
+            "hotspot_sub_title": "Êm ái linh hoạt, tích hợp than hoạt tính kháng khuẩn",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "60%",
+            "top": "45%",
+            "space_mb": "110",
+            "left_mobile": "50%",
+            "top_mobile": "55%"
+          }
+        },
+        "product_Ph6tDT": {
+          "type": "product",
+          "settings": {
+            "hotspot_title": "HR Foam",
+            "hotspot_sub_title": "Nâng đỡ hiệu quả, tích hợp phân tử trà xanh khử mùi",
+            "direction": "vertical",
+            "content_position": "right",
+            "space": "250",
+            "left": "85%",
+            "top": "35%",
+            "space_mb": "110",
+            "left_mobile": "80%",
+            "top_mobile": "40%"
+          }
+        }
+      },
+      "block_order": [
+        "product_3eYPGB",
+        "product_rTGWtc",
+        "product_Ph6tDT"
+      ],
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Chi tiết sản phẩm",
+        "productHandle": "nem-cuon-foam-topper",
+        "heading": "Thoải mái trọn vẹn mọi nơi cùng Ru9 Foam Topper",
+        "content": "",
+        "banner_image": "shopify://shop_images/PIC-1-2_89ba994c-4b07-4bb6-807a-e083fab8c3fc.png",
+        "banner_mobile": "{{ product.metafields.custom.hotspot_banner.value }}",
+        "margin-top": "0px",
+        "margin-bottom": "0px"
+      }
+    },
+    "dynamic_text_with_image_L4VkFB": {
+      "type": "dynamic-text-with-image",
+      "blocks": {
+        "image_with_text_aTnYky": {
+          "type": "image-with-text",
+          "settings": {
+            "image": "{{ product.metafields.custom.image_3_hinh_1.value }}",
+            "title": "{{ product.metafields.custom.heading_3_hinh_1.value }}",
+            "text": "<p>{{ product.metafields.custom.text_block_3_hinh_1 | metafield_tag }}</p>",
+            "align_text": "left",
+            "layout": "right"
+          }
+        },
+        "image_with_text_NFMQyg": {
+          "type": "image-with-text",
+          "settings": {
+            "image": "{{ product.metafields.custom.image_3_hinh_2.value }}",
+            "title": "{{ product.metafields.custom.heading_3_hinh_2.value }}",
+            "text": "<p>{{ product.metafields.custom.text_block_3_hinh_2 | metafield_tag }}</p>",
+            "align_text": "left",
+            "layout": "left"
+          }
+        },
+        "image_with_text_WAkepD": {
+          "type": "image-with-text",
+          "settings": {
+            "image": "{{ product.metafields.custom.image_3_hinh_3.value }}",
+            "title": "{{ product.metafields.custom.heading_3_hinh_3.value }}",
+            "text": "<p>{{ product.metafields.custom.text_block_3_hinh_3 | metafield_tag }}</p>",
+            "align_text": "left",
+            "layout": "right"
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_aTnYky",
+        "image_with_text_NFMQyg",
+        "image_with_text_WAkepD"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "mg": "50px,,20px,",
+        "pd": "",
+        "mg_mb": "",
+        "pd_mb": "",
+        "title": "{{ product.metafields.custom.heading_3_hinh.value }}",
+        "description": "",
+        "divider": false
+      }
+    },
+    "best_seller_DWCAYP": {
+      "type": "best-seller",
+      "settings": {
+        "mg": "54px,,40px,",
+        "pd": "",
+        "mg_mb": "",
+        "pd_mb": "",
+        "layout": "left",
+        "title": "{{ product.metafields.custom.video_button_label.value }}",
+        "text": "<p>{{ product.metafields.custom.video_text_block | metafield_tag }}</p>",
+        "linkvideo": "{{ product.metafields.custom.product_video_best_seller_video.value }}",
+        "poster": "{{ product.metafields.custom.product_video_best_seller_poster.value }}"
+      }
+    },
+    "dynamic_faq_Whrn47": {
+      "type": "dynamic-faq",
+      "blocks": {
+        "question_d3nb6H": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.ask1.value }}",
+            "text": "<p>{{ product.metafields.custom.answer1.value }}</p>"
+          }
+        },
+        "question_wQaBbp": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.ask2.value }}",
+            "text": "<p>{{ product.metafields.custom.answer2.value }}</p>"
+          }
+        },
+        "question_PPVaTY": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.ask3.value }}",
+            "text": "<p>{{ product.metafields.custom.answer3.value }}</p>"
+          }
+        },
+        "question_f7x3UM": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.ask4.value }}",
+            "text": "<p>{{ product.metafields.custom.answer4.value }}</p>"
+          }
+        },
+        "question_4qDy8K": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.ask5.value }}",
+            "text": "<p>{{ product.metafields.custom.answer5.value }}</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_d3nb6H",
+        "question_wQaBbp",
+        "question_PPVaTY",
+        "question_f7x3UM",
+        "question_4qDy8K"
+      ],
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "FAQs",
+        "mg": "24px,,20px,",
+        "pd": "40px,,,",
+        "mg_mb": "",
+        "pd_mb": "",
+        "title": "Các câu hỏi thường gặp",
+        "link": "shopify://pages/faqs",
+        "link_text": "Xem những câu hỏi khác",
+        "text_alignment": "center",
+        "use_metafield": false,
+        "metafield_limit": "5",
+        "divider": true
+      }
+    },
+    "certification_VUqyB6": {
+      "type": "certification",
+      "blocks": {
+        "slide_zqGeDK": {
+          "type": "slide",
+          "settings": {
+            "banner": "shopify://shop_images/Hompage_Desktop_Oeko_tex_bd30d664-3dfd-433e-a514-f771bb40ba94.png",
+            "banner_mobile": "shopify://shop_images/Hompage_Mobile_Oeko_tex_877a34ad-3f04-4b27-814f-e396140ef1ef.png",
+            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
+            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
+            "image": "shopify://shop_images/logo-certification-1.png"
+          }
+        },
+        "slide_63THmd": {
+          "type": "slide",
+          "settings": {
+            "banner": "shopify://shop_images/Hompage_Desktop_Certipur_US_310dce33-caaf-452e-ac90-2da51b97f80e.png",
+            "banner_mobile": "shopify://shop_images/Hompage_Mobile_Certipur_US_86aa4a55-6779-43c2-89f4-231d338a70fe.png",
+            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
+            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế Certipur-US </p>",
+            "image": "shopify://shop_images/CertiPUR-US_RGB_800x800_2x_c1aaa1ca-c943-43f5-b804-8b2b044f2be4.webp"
+          }
+        }
+      },
+      "block_order": [
+        "slide_zqGeDK",
+        "slide_63THmd"
+      ],
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1250,
+        "bg": "#f0f7fe",
+        "title": "",
+        "description": ""
+      }
+    },
+    "172802814088f5e025": {
+      "type": "apps",
+      "settings": {
+        "enable_anchor_link": true,
+        "anchor_link_text": "Reviews",
+        "full_width": false,
+        "space_around": true
+      }
+    },
+    "1730878240cfbec46e": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_LGBKUn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_LGBKUn"
+      ],
+      "settings": {
+        "enable_anchor_link": false,
+        "anchor_link_text": "",
+        "full_width": false,
+        "space_around": true
+      }
+    },
+    "featured_collection_gcPxQ3": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.featured_collection.name",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "Gợi ý các sản phẩm",
+        "home_featured_products": "bedding",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": false,
+        "view_all": false,
+        "divider": false,
+        "hide_price": false
+      }
+    },
+    "sub": {
+      "type": "product-full-width",
+      "disabled": true,
+      "settings": {
+        "max_width": true
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "product_recommendations_heading": "You may also like",
+        "related_count": 6,
+        "products_per_row": 3
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {
+        "recent_count": 5
+      }
+    },
+    "collection-return": {
+      "type": "collection-return",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "product_hotspot_XzDEYy",
+    "product_hotspot_LcX9T4",
+    "product_hotspot_BGaNkf",
+    "product_hotspot_JYk7dk",
+    "product_hotspot_zAj7Lm",
+    "product_hotspot_pnDmHC",
+    "product_hotspot_4TYCfN",
+    "dynamic_text_with_image_L4VkFB",
+    "best_seller_DWCAYP",
+    "dynamic_faq_Whrn47",
+    "certification_VUqyB6",
+    "172802814088f5e025",
+    "1730878240cfbec46e",
+    "featured_collection_gcPxQ3",
+    "sub",
+    "product-recommendations",
+    "recently-viewed",
+    "collection-return"
+  ]
+}

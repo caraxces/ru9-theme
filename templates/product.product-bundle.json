@@ -1,1 +1,90 @@
-{"sections":{"main":{"type":"main-product-bundle","blocks":{"description":{"type":"description","settings":{"is_tab":false,"collapse_content":true}},"price":{"type":"price","settings":{}},"product_combo_8Hztgx":{"type":"product_combo","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"variant_labels":true,"picker_type":"button","product_dynamic_variants_enable":true,"color_swatches":true}},"quantity_selector_WMfLWY":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":false,"surface_pickup_enable":false,"show_gift_card_recipient":false}},"icon_with_text_b6k6a4":{"type":"icon_with_text","settings":{"icon_1":"chat","image_icon_1":"shopify:\/\/shop_images\/text-w-icon-4.png","title_1":"100 đêm ngủ thử","icon_2":"chat","image_icon_2":"shopify:\/\/shop_images\/text-w-icon-5.png","title_2":"Miễn phí vận chuyển *","icon_3":"chat","image_icon_3":"shopify:\/\/shop_images\/text-w-icon-6.png","title_3":"Bảo hành dài lâu","icon_4":"chat","image_icon_4":"shopify:\/\/shop_images\/text-w-icon-6.png","title_4":"Chất liệu Foam cao cấp"}},"carousel_modal_B8Mr9e":{"type":"carousel_modal","settings":{}}},"block_order":["description","price","product_combo_8Hztgx","variant_picker","quantity_selector_WMfLWY","buy_buttons","icon_with_text_b6k6a4","carousel_modal_B8Mr9e"],"settings":{"section_width":"page-width","customize_width":1800,"sku_enable":false,"image_position":"left","image_size":"large","product_zoom_enable":true,"product_carousel_enable":false,"thumbnail_position":"below","thumbnail_height":"flexible","thumbnail_arrows":false,"mobile_layout":"partial","enable_video_looping":true,"product_video_style":"muted"}},"product_hotspot_pnDmHC":{"type":"product-hotspot","blocks":{"product_wUNCcK":{"type":"product","settings":{"hotspot_title":"Vỏ bọc tencel","hotspot_sub_title":"Thoáng mát và thấm hút tốt","direction":"vertical","content_position":"right","space":"250","left":"30%","top":"25%","space_mb":"110","left_mobile":"30%","top_mobile":"25%"}},"product_rH68dY":{"type":"product","settings":{"hotspot_title":"Lớp gòn kháng cháy","hotspot_sub_title":"Làm chậm cháy","direction":"vertical","content_position":"right","space":"250","left":"45%","top":"30%","space_mb":"110","left_mobile":"50%","top_mobile":"30%"}},"product_yNaXxB":{"type":"product","settings":{"hotspot_title":"Ru9 Contour Foam","hotspot_sub_title":"Đàn hồi cao, nâng đỡ theo đường cong cơ thể","direction":"vertical","content_position":"right","space":"250","left":"57%","top":"35%","space_mb":"110","left_mobile":"60%","top_mobile":"35%"}},"product_gwd6Ji":{"type":"product","settings":{"hotspot_title":"Memory Foam tích hợp gel lạnh","hotspot_sub_title":"Giải tỏa lực ép, vô cùng êm ái","direction":"vertical","content_position":"right","space":"250","left":"70%","top":"40%","space_mb":"110","left_mobile":"70%","top_mobile":"40%"}},"product_GVECe8":{"type":"product","settings":{"hotspot_title":"Lớp Foam Đáy PU","hotspot_sub_title":"Bền chắc, ngăn cách chuyển động","direction":"vertical","content_position":"right","space":"250","left":"75%","top":"50%","space_mb":"110","left_mobile":"80%","top_mobile":"50%"}}},"block_order":["product_wUNCcK","product_rH68dY","product_yNaXxB","product_gwd6Ji","product_GVECe8"],"disabled":true,"settings":{"enable_anchor_link":true,"anchor_link_text":"Chi tiết sản phẩm","productHandle":"{{ product.metafields.custom.hotspot_handle.value }}","heading":"{{ product.metafields.custom.hotspot_title.value }}","content":"","banner_image":"{{ product.metafields.custom.hotspot_banner.value }}","banner_mobile":"{{ product.metafields.custom.hotspot_banner.value }}","margin-top":"0px","margin-bottom":"0px"}},"dynamic_text_with_image_L4VkFB":{"type":"dynamic-text-with-image","blocks":{"image_with_text_aTnYky":{"type":"image-with-text","settings":{"image":"{{ product.metafields.custom.dynamic_image_1.value }}","title":"{{ product.metafields.custom.dynamic_title_1.value }}","text":"<p>{{ product.metafields.custom.dynamic_description_1 | metafield_tag }}<\/p>","align_text":"left","layout":"right"}},"image_with_text_NFMQyg":{"type":"image-with-text","settings":{"image":"{{ product.metafields.custom.dynamic_image_2.value }}","title":"{{ product.metafields.custom.dynamic_title_1.value }}","text":"<p>{{ product.metafields.custom.dynamic_desciption_2 | metafield_tag }}<\/p>","align_text":"left","layout":"left"}},"image_with_text_WAkepD":{"type":"image-with-text","settings":{"image":"{{ product.metafields.custom.dynamic_image_3.value }}","title":"{{ product.metafields.custom.dynamic_title_3.value }}","text":"<p>{{ product.metafields.custom.dynamic_description_3 | metafield_tag }}<\/p>","align_text":"left","layout":"right"}}},"block_order":["image_with_text_aTnYky","image_with_text_NFMQyg","image_with_text_WAkepD"],"disabled":true,"settings":{"section_width":"page-width","customize_width":1800,"mg":"50px,,20px,","pd":"","mg_mb":"","pd_mb":"","title":"{{ product.metafields.custom.dynamic_heading.value }}","description":"","divider":false}},"best_seller_DWCAYP":{"type":"best-seller","disabled":true,"settings":{"mg":"54px,,40px,","pd":"","mg_mb":"","pd_mb":"","layout":"left","title":"{{ product.metafields.custom.product_video_best_seller_title.value }}","text":"<p>{{ product.metafields.custom.product_video_best_seller_description | metafield_tag }}<\/p>","linkvideo":"{{ product.metafields.custom.product_video_best_seller_video.value }}","poster":"{{ product.metafields.custom.product_video_best_seller_poster.value }}"}},"dynamic_faq_Whrn47":{"type":"dynamic-faq","blocks":{"question_d3nb6H":{"type":"question","settings":{"title":"Frequently asked question","text":"<p>Use this text to answer questions in as much detail as possible for your customers.<\/p>"}},"question_wQaBbp":{"type":"question","settings":{"title":"Frequently asked question","text":"<p>Use this text to answer questions in as much detail as possible for your customers.<\/p>"}}},"block_order":["question_d3nb6H","question_wQaBbp"],"disabled":true,"settings":{"enable_anchor_link":true,"anchor_link_text":"FAQs","mg":"24px,,20px,","pd":"40px,,,","mg_mb":"","pd_mb":"","title":"Các câu hỏi thường gặp","link":"shopify:\/\/pages\/theme-faqs","link_text":"Xem những câu hỏi khác","text_alignment":"left","use_metafield":true,"metafield_limit":"5","divider":true}},"certification_VUqyB6":{"type":"certification","blocks":{"slide_63THmd":{"type":"slide","settings":{"banner":"shopify:\/\/shop_images\/certification-image-1.jpg","banner_mobile":"shopify:\/\/shop_images\/certification-image-1-mobile.jpg","title":"<p>An toàn cho sức khoẻ.<br\/>Bảo vệ cho làn da.<\/p>","description":"<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®<\/p>","image":"shopify:\/\/shop_images\/logo-certification-1.png"}},"slide_zqGeDK":{"type":"slide","settings":{"banner":"shopify:\/\/shop_images\/certification-image-1.jpg","title":"<p>An toàn cho sức khoẻ.<br\/>Bảo vệ cho làn da.<\/p>","description":"<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®<\/p>","image":"shopify:\/\/shop_images\/logo-certification-1.png"}}},"block_order":["slide_63THmd","slide_zqGeDK"],"settings":{"section_width":"customize_width","customize_width":1250,"bg":"#f0f7fe","title":"","description":""}},"172802814088f5e025":{"type":"apps","blocks":{"judge_me_reviews_review_widget_9bUmFB":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}}},"block_order":["judge_me_reviews_review_widget_9bUmFB"],"settings":{"enable_anchor_link":true,"anchor_link_text":"Reviews","full_width":false,"space_around":true}},"sub":{"type":"product-full-width","disabled":true,"settings":{"max_width":true}},"product-recommendations":{"type":"product-recommendations","disabled":true,"settings":{"product_recommendations_heading":"You may also like","related_count":6,"products_per_row":3}},"recently-viewed":{"type":"recently-viewed","disabled":true,"settings":{"recent_count":5}},"collection-return":{"type":"collection-return","disabled":true,"settings":{}}},"order":["main","product_hotspot_pnDmHC","dynamic_text_with_image_L4VkFB","best_seller_DWCAYP","dynamic_faq_Whrn47","certification_VUqyB6","172802814088f5e025","sub","product-recommendations","recently-viewed","collection-return"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product-bundle",
+      "blocks": {
+        "description": {
+          "type": "description",
+          "settings": {
+            "is_tab": false,
+            "collapse_content": true
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "product_combo_8Hztgx": {
+          "type": "product_combo",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "variant_labels": true,
+            "picker_type": "button",
+            "product_dynamic_variants_enable": true,
+            "color_swatches": true
+          }
+        },
+        "quantity_selector_WMfLWY": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "surface_pickup_enable": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "icon_with_text_b6k6a4": {
+          "type": "icon_with_text",
+          "settings": {}
+        },
+        "carousel_modal_B8Mr9e": {
+          "type": "carousel_modal",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "description",
+        "price",
+        "product_combo_8Hztgx",
+        "variant_picker",
+        "quantity_selector_WMfLWY",
+        "buy_buttons",
+        "icon_with_text_b6k6a4",
+        "carousel_modal_B8Mr9e"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "sku_enable": false,
+        "image_position": "left",
+        "product_zoom_enable": true,
+        "product_carousel_enable": false,
+        "thumbnail_position": "below",
+        "thumbnail_height": 100,
+        "thumbnail_arrows": false,
+        "mobile_layout": "partial",
+        "enable_video_looping": true,
+        "product_video_style": "muted",
+        "image_size": "large"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

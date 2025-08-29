@@ -69,32 +69,26 @@
       </header>
     {%- endif -%}
 
-    {%- unless blog.empty? -%}
+    {%- unless blog.empty? or blog.articles.size == 0 -%}
       <div class="blog-post-grid grid">
         <div class="blog-post-grid__left large-up--one-half">
-          {%- if section.settings.article_1 != blank -%}
-            {%- assign article = articles[section.settings.article_1] -%}
-            {%- render 'article-grid-item',
-              blog: blog,
-              article: article,
-              grid_item_width: 'w-full',
-              per_row: '3',
-              large_item: true,
-              image_size: section.settings.blog_image_size,
-              animate_loop: '1'
-            -%}
-          {%- else -%}
-            <div class="placeholder-article">
-              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-              <p>{{ 'homepage.onboarding.blog_title' | t }}</p>
-            </div>
-          {%- endif -%}
+          {%- for article in blog.articles limit: section.settings.post_limit -%}
+            {%- if forloop.first -%}
+              {%- render 'article-grid-item',
+                blog: blog,
+                article: article,
+                grid_item_width: 'w-full',
+                per_row: '3',
+                large_item: true,
+                image_size: section.settings.blog_image_size,
+                animate_loop: '1'
+              -%}
+            {%- endif -%}
+          {%- endfor -%}
         </div>
         <div class="blog-post-grid__right large-up--one-half" id="Blogpost-Slider-{{ section.id }}">
-          {%- for i in (2..4) -%}
-            {%- capture article_setting -%}article_{{ i }}{%- endcapture -%}
-            {%- if section.settings[article_setting] != blank -%}
-              {%- assign article = articles[section.settings[article_setting]] -%}
+          {%- for article in blog.articles limit: section.settings.post_limit -%}
+            {%- unless forloop.first -%}
               {%-
                 render 'article-grid-item',
                 blog: blog,
@@ -104,18 +98,14 @@
                 image_size: section.settings.blog_image_size,
                 animate_loop: forloop.index | plus: 1
               -%}
-            {%- else -%}
-              <div class="placeholder-article">
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                <p>{{ 'homepage.onboarding.blog_title' | t }}</p>
-              </div>
-            {%- endif -%}
+            {%- endunless -%}
           {%- endfor -%}
         </div>
       </div>
+
     {%- else -%}
       <div class="grid grid--uniform">
-        {%- for i in (1..4) -%}
+        {%- for i in (1..section.settings.post_limit) -%}
           <div class="grid__item medium-up--one-third" data-aos="row-of-3">
             <div class="grid">
               <div class="grid__item small--one-third">
@@ -207,28 +197,13 @@
       "label": "t:sections.blog-posts.settings.blog.label"
     },
     {
-      "type": "article",
-      "id": "article_1",
-      "label": "Featured article (large)",
-      "info": "Select the first article to display"
-    },
-    {
-      "type": "article",
-      "id": "article_2",
-      "label": "Second article",
-      "info": "Select the second article to display"
-    },
-    {
-      "type": "article",
-      "id": "article_3",
-      "label": "Third article",
-      "info": "Select the third article to display"
-    },
-    {
-      "type": "article",
-      "id": "article_4",
-      "label": "Fourth article",
-      "info": "Select the fourth article to display"
+      "type": "range",
+      "id": "post_limit",
+      "label": "t:sections.blog-posts.settings.post_limit.label",
+      "default": 3,
+      "min": 3,
+      "max": 12,
+      "step": 1
     },
     {
       "type": "checkbox",
@@ -306,7 +281,8 @@
     {
       "name": "t:sections.blog-posts.presets.blog_posts.name",
       "settings": {
-        "blog": "News"
+        "blog": "News",
+        "post_limit": 3
       }
     }
   ],

@@ -1,0 +1,462 @@
+<div class="blog-posts-section" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    <header class="blog-posts-header">
+      {%- if section.settings.title != blank -%}
+        <h2 class="blog-posts-title">
+          {{ section.settings.title | escape }}
+        </h2>
+      {%- endif -%}
+      {%- if section.settings.view_all and section.settings.view_all_link != blank -%}
+        <a href="{{ section.settings.view_all_link }}" class="button--secondary view-all-button">
+          <span>
+            {%- if section.settings.view_all_text != blank -%}
+              {{ section.settings.view_all_text }}
+            {%- else -%}
+              {{ 'blogs.article.view_all' | t }}
+            {%- endif -%}
+          </span>
+        </a>
+      {%- endif -%}
+    </header>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="topic-tabs-nav">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'topic_tab' -%}
+            <button class="topic-tab{% if forloop.first %} is-active{% endif %}" data-topic-id="{{ block.id }}">
+              {{ block.settings.tab_title }}
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="blog-carousel-wrapper">
+        <div class="blog-carousel-slider">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'topic_tab' -%}
+              {%- for i in (1..5) -%}
+                {%- assign article_setting_key = 'article_' | append: i -%}
+                {%- assign article = block.settings[article_setting_key] -%}
+                {%- if article != blank -%}
+                  <div class="blog-carousel-slide{% unless forloop.parentloop.first %} slide-hidden{% endunless %}" data-topic-id="{{ block.id }}">
+                    <div class="article-card-wrapper">
+                      <a href="{{ article.url }}" class="article-card__image-link" aria-label="{{ article.title | escape }}">
+                        <div class="article-card__image-container">
+                          {%- if article.image -%}
+                            <img
+                              src="{{ article.image | image_url: width: 760 }}"
+                              alt="{{ article.image.alt | escape }}"
+                              class="article-card__image"
+                              loading="lazy"
+                              width="{{ article.image.width }}"
+                              height="{{ article.image.height }}"
+                            >
+                          {%- else -%}
+                             {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          {%- endif -%}
+                        </div>
+                      </a>
+                      <div class="article-card__info">
+                        <h3 class="article-card__title">
+                          <a href="{{ article.url }}">{{ article.title }}</a>
+                        </h3>
+                        <div class="article-card__excerpt rte">
+                          {%- if article.excerpt.size > 0 -%}
+                            {{ article.excerpt | strip_html | truncatewords: 30 }}
+                          {%- else -%}
+                            {{ article.content | strip_html | truncatewords: 30 }}
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- else -%}
+      <div class="blog-posts-placeholder">
+        <p>Please add a topic tab and select articles in the section settings.</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .blog-posts-section {
+    padding: 60px 0;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  .blog-posts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+  }
+  .blog-posts-title {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 39px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .view-all-button {
+    color: #1C2C58;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .topic-tabs-nav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  .topic-tab {
+    display: inline-flex;
+    padding: 8px 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background: #FFFBE9;
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .topic-tab.is-active {
+    background: #FCE390;
+    font-weight: 700;
+  }
+  .topic-tab:hover:not(.is-active) {
+    background: #FFFBE9;
+  }
+
+  /* Carousel Styles */
+  .blog-carousel-wrapper {
+    overflow: hidden;
+    cursor: grab;
+  }
+  .blog-carousel-wrapper.grabbing {
+    cursor: grabbing;
+  }
+  .blog-carousel-wrapper.grabbing .blog-carousel-slide {
+    pointer-events: none;
+  }
+  .blog-carousel-slider {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .blog-carousel-slide {
+    flex: 0 0 23.5%;
+    min-width: 300px;
+  }
+  .blog-carousel-slide.slide-hidden {
+    display: none;
+  }
+
+  /* Article Card Styles */
+  .article-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .article-card__image-link {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .article-card__image-container {
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+  .article-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .article-card__image-link:hover .article-card__image {
+    transform: scale(1.05);
+  }
+  .article-card__info {
+    padding: 24px;
+    border-radius: 12px;
+    background: #F5F9FF;
+    flex-grow: 1;
+  }
+  .article-card__title {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 8px 0;
+  }
+  .article-card__title a {
+    color: #111827;
+    text-decoration: none;
+  }
+  .article-card__title a:hover {
+    text-decoration: underline;
+  }
+  .article-card__excerpt {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #374151;
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 990px) {
+    .blog-carousel-slide {
+      flex-basis: 48%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .blog-carousel-slide {
+      flex-basis: 80%;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sectionContainer = document.querySelector('[data-section-id="{{ section.id }}"]');
+  if (!sectionContainer) return;
+
+  const slider = sectionContainer.querySelector('.blog-carousel-slider');
+  const carouselWrapper = sectionContainer.querySelector('.blog-carousel-wrapper');
+  const topicTabsContainer = sectionContainer.querySelector('.topic-tabs-nav');
+  
+  if (!slider || !carouselWrapper) return;
+
+  let isDown = false;
+  let startX;
+  let walk = 0;
+  let initialTranslateX = 0;
+  let currentTranslateX = 0;
+  let activeTopicId = null;
+
+  function setEqualInfoHeight(topicId) {
+    const visibleSlides = slider.querySelectorAll(`.blog-carousel-slide[data-topic-id="${topicId}"]`);
+    if (visibleSlides.length === 0) return;
+
+    const infoBoxes = [];
+    visibleSlides.forEach(slide => {
+      const infoBox = slide.querySelector('.article-card__info');
+      if (infoBox) {
+        infoBox.style.height = 'auto';
+        infoBoxes.push(infoBox);
+      }
+    });
+
+    requestAnimationFrame(() => {
+        let maxHeight = 0;
+        infoBoxes.forEach(box => {
+            if (box.offsetHeight > maxHeight) {
+                maxHeight = box.offsetHeight;
+            }
+        });
+
+        if (maxHeight > 0) {
+            infoBoxes.forEach(box => {
+                box.style.height = `${maxHeight}px`;
+            });
+        }
+    });
+  }
+
+  function updateDragBoundaries() {
+    const visibleSlides = slider.querySelectorAll('.blog-carousel-slide:not(.slide-hidden)');
+    if (visibleSlides.length === 0) {
+      slider.dataset.minTranslateX = 0;
+      return;
+    }
+    const containerWidth = carouselWrapper.offsetWidth;
+    const slideWidth = visibleSlides[0].offsetWidth;
+    const gap = 24;
+    const sliderWidth = visibleSlides.length * (slideWidth + gap) - gap;
+    const minTranslateX = Math.min(0, -(sliderWidth - containerWidth));
+    slider.dataset.minTranslateX = minTranslateX;
+  }
+  
+  function switchTopic(topicId) {
+    activeTopicId = topicId;
+    const allSlides = slider.querySelectorAll('.blog-carousel-slide');
+    allSlides.forEach(slide => {
+      if (slide.dataset.topicId === topicId) {
+        slide.classList.remove('slide-hidden');
+      } else {
+        slide.classList.add('slide-hidden');
+      }
+    });
+    slider.style.transition = 'none';
+    slider.style.transform = 'translateX(0px)';
+    currentTranslateX = 0;
+    
+    setEqualInfoHeight(topicId);
+    setTimeout(updateDragBoundaries, 50);
+  }
+
+  function getTranslateX() {
+    const style = window.getComputedStyle(slider);
+    const transform = style.transform;
+    return transform === 'none' ? 0 : new DOMMatrixReadOnly(transform).m41;
+  }
+
+  function dragStart(e) {
+    isDown = true;
+    carouselWrapper.classList.add('grabbing');
+    startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+    slider.style.transition = 'none';
+    initialTranslateX = getTranslateX();
+    walk = 0;
+  }
+
+  function dragMove(e) {
+    if (!isDown) return;
+    e.preventDefault();
+    const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
+    walk = currentX - startX;
+    currentTranslateX = initialTranslateX + walk;
+    slider.style.transform = `translateX(${currentTranslateX}px)`;
+  }
+
+  function dragEnd() {
+    if (!isDown) return;
+    isDown = false;
+    carouselWrapper.classList.remove('grabbing');
+    const minTranslateX = parseFloat(slider.dataset.minTranslateX) || 0;
+    const maxTranslateX = 0;
+    slider.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    if (currentTranslateX > maxTranslateX) {
+      currentTranslateX = maxTranslateX;
+    } else if (currentTranslateX < minTranslateX) {
+      currentTranslateX = minTranslateX;
+    }
+    slider.style.transform = `translateX(${currentTranslateX}px)`;
+  }
+
+  if (topicTabsContainer) {
+    topicTabsContainer.addEventListener('click', function(e) {
+      if (e.target.classList.contains('topic-tab')) {
+        const clickedTab = e.target;
+        if (clickedTab.classList.contains('is-active')) return;
+        topicTabsContainer.querySelector('.topic-tab.is-active').classList.remove('is-active');
+        clickedTab.classList.add('is-active');
+        switchTopic(clickedTab.dataset.topicId);
+      }
+    });
+  }
+
+  carouselWrapper.addEventListener('mousedown', dragStart);
+  window.addEventListener('mousemove', dragMove);
+  window.addEventListener('mouseup', dragEnd);
+  carouselWrapper.addEventListener('touchstart', dragStart, { passive: true });
+  window.addEventListener('touchmove', dragMove);
+  window.addEventListener('touchend', dragEnd);
+
+  carouselWrapper.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', e => {
+      if (Math.abs(walk) > 10) { 
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+  });
+
+  function init() {
+    const initialActiveTab = topicTabsContainer ? topicTabsContainer.querySelector('.topic-tab.is-active') : null;
+    if (initialActiveTab) {
+      switchTopic(initialActiveTab.dataset.topicId);
+    }
+  }
+  
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        slider.style.transition = 'none';
+        if (activeTopicId) {
+          switchTopic(activeTopicId);
+        }
+    }, 250);
+  });
+  
+  init();
+});
+</script>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "class": "index-section section-blogposts",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Blog posts"
+    },
+    {
+      "type": "checkbox",
+      "id": "view_all",
+      "label": "Show 'View all' link",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "Link for 'View all'"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "Text for 'View all' link",
+      "default": "Xem tất cả"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "topic_tab",
+      "name": "Topic Tab",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "default": "Topic"
+        },
+        { "type": "article", "id": "article_1", "label": "Article 1" },
+        { "type": "article", "id": "article_2", "label": "Article 2" },
+        { "type": "article", "id": "article_3", "label": "Article 3" },
+        { "type": "article", "id": "article_4", "label": "Article 4" },
+        { "type": "article", "id": "article_5", "label": "Article 5" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog posts",
+      "blocks": [
+        { "type": "topic_tab", "settings": { "tab_title": "Nệm Foam" } },
+        { "type": "topic_tab", "settings": { "tab_title": "Topic 2" } }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  }
+}
+{% endschema %}

@@ -1,1 +1,524 @@
-{"sections":{"collection-header":{"type":"collection-header","settings":{"section_width":"customize_width","customize_width":1280,"max_width_desc":2000,"align_text":"left","enable":true,"collection_image_enable":true,"show_collection_description":false}},"main-collection":{"type":"main-collection","blocks":{"subcollections":{"type":"subcollections","disabled":true,"settings":{"subcollections_per_row":5}},"product_grid":{"type":"product_grid","settings":{"show_product_description":true,"product_grid_image_size":"circle","per_row":3,"rows_per_page":7,"mobile_flush_grid":false}}},"block_order":["subcollections","product_grid"],"settings":{"section_width":"customize_width","customize_width":1280,"enable_sidebar":false,"collapsed":false,"filter_style":"sidebar","enable_color_swatches":true,"enable_swatch_labels":false,"enable_sort":true,"enable_collection_count":false}},"banner_with_content_K64e3r":{"type":"banner-with-content","settings":{"section_width":"page-width","customize_width":1800,"image":"shopify:\/\/shop_images\/banner-with-content-banner.png","image_mobile":"shopify:\/\/shop_images\/banner-with-content-banner-mobile.png","title":"Đâu là chiếc nệm phù hợp cho bạn?","text":"<p>Cùng Ru9 khám phá và chọn ra chiếc nệm dành riêng cho bạn.<\/p>","btn_text":"Xem thêm","btn_link":""}},"compare_product_fL4TxW":{"type":"compare-product","blocks":{"product_ALQiAM":{"type":"product","settings":{"product_title":"NỆM ORIGINAL PRO","product_image":"shopify:\/\/shop_images\/copy.jpg","product_features":"<p>- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.<br\/>- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.<br\/>- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.<\/p>","comfort_layer_1_image":"shopify:\/\/shop_images\/so_sanh_Ori_Pro.png","product_thickness":"25 cm","suitable_for":"<p>- Người cần nâng đỡ cơ thể toàn diện<br\/>- Người có vấn đề về cột sống<\/p>","product_price":"Từ 12.990.000 VNĐ","product_url":"shopify:\/\/products\/nem-original-pro"}},"product_4JhiNN":{"type":"product","settings":{"product_title":"NỆM ORIGINAL","product_image":"shopify:\/\/shop_images\/Ru92389.jpg","product_features":"<p>- Giảm áp lực lên cơ thể, hạn chế tình trạng đau mỏi khi nằm lâu.  <br\/>- Ôm sát đường cong tự nhiên, nâng đỡ toàn diện suốt đêm.  <br\/>- Hạn chế truyền động, giúp giấc ngủ ngon và liền mạch, không làm ảnh hưởng đến người nằm cạnh.<\/p>","comfort_layer_1_image":"shopify:\/\/shop_images\/so_sanh_Ori.png","product_thickness":"25 cm","suitable_for":"<p>- Người tìm kiếm sự nâng đỡ cho cơ thể<\/p>","product_price":"Từ 8.490.000 VNĐ","product_url":"shopify:\/\/products\/foam-original"}},"product_atFTCC":{"type":"product","settings":{"product_title":"NỆM NEST","product_image":"shopify:\/\/shop_images\/RU9_0501_04749270-f731-43cb-a725-98aa4f23dae5.jpg","product_features":"<p>- Nâng đỡ cột sống theo đường cong tự nhiên, giúp duy trì tư thế ngủ thoải mái.  <br\/>- Hạn chế truyền động, mang đến giấc ngủ sâu và liền mạch, không ảnh hưởng đến người nằm cạnh.  <br\/>- Lớp vỏ bọc nệm từ chất liệu Tencel thoáng khí, thấm hút tốt, giữ cảm giác dễ chịu suốt đêm.<\/p>","comfort_layer_1_image":"shopify:\/\/shop_images\/so_sanh_Nest.png","product_thickness":"15 cm","suitable_for":"<p>- Người mới làm quen với nệm Foam<br\/>- Người lớn tuổi<\/p>","product_price":"Từ 5.990.000 VNĐ","product_url":"shopify:\/\/products\/foam-nest"}},"product_wmbR3E":{"type":"product","settings":{"product_title":"NỆM HYBRID","product_image":"shopify:\/\/shop_images\/Ru92166.jpg","product_features":"<p>- Các lớp foam bao quanh lò xo túi và bề mặt nệm giúp phân tán lực, nâng đỡ cơ thể một cách tối ưu.  <br\/>- Dễ dàng lựa chọn độ êm ái phù hợp với sở thích: Comfort Top nâng đỡ tốt hơn (firm) hoặc mềm mại hơn (medium).  <br\/>- Hệ thống lò xo túi đàn hồi, hỗ trợ cơ thể và hạn chế tối đa chuyển động, mang lại giấc ngủ êm ái.<\/p>","comfort_layer_1_image":"shopify:\/\/shop_images\/so_sanh_Ori_Pro.png","product_thickness":"25 cm","suitable_for":"<p>- Người bị đau lưng hoặc vấn đề về cột sống<\/p>","product_price":"Từ 12.990.000 VNĐ","product_url":"shopify:\/\/products\/nem-hybrid"}}},"block_order":["product_ALQiAM","product_4JhiNN","product_atFTCC","product_wmbR3E"],"settings":{"section_width":"page-width","customize_width":1800,"title":"So sánh các dòng nệm","description":""}},"collection-content":{"type":"collection-content","settings":{"section_width":"customize_width","customize_width":1280,"max_width_desc":2000,"align_text":"left","show_collection_description":true}},"banner_with_content_NiwahU":{"type":"banner-with-content","disabled":true,"settings":{"section_width":"customize_width","customize_width":1010,"image":"shopify:\/\/shop_images\/banner-with-content-banner.png","image_mobile":"shopify:\/\/shop_images\/banner-with-content-banner-mobile.png","title":"Đâu là chiếc nệm phù hợp cho bạn?","text":"<p>Cùng Ru9 khám phá và chọn ra chiếc nệm dành riêng cho bạn.<\/p>","btn_text":"Xem thêm","btn_link":""}},"compare_product_UeQD6G":{"type":"compare-product","blocks":{"product_UUa9LH":{"type":"product","settings":{"product_title":"NỆM ORIGINAL PRO","product_features":"<p>- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.<br>- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.<br>- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.<\/p>","product_thickness":"25 cm","suitable_for":"<p>- Người cần nâng đỡ cơ thể toàn diện<br>- Người có vấn đề về cột sống<\/p>","product_price":"Từ 12.990.000 VNĐ","product_url":""}},"product_CCLpHU":{"type":"product","settings":{"product_title":"NỆM ORIGINAL PRO","product_features":"<p>- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.<br>- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.<br>- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.<\/p>","product_thickness":"25 cm","suitable_for":"<p>- Người cần nâng đỡ cơ thể toàn diện<br>- Người có vấn đề về cột sống<\/p>","product_price":"Từ 12.990.000 VNĐ","product_url":""}},"product_Kk7DYj":{"type":"product","settings":{"product_title":"NỆM ORIGINAL PRO","product_features":"<p>- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.<br>- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.<br>- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.<\/p>","product_thickness":"25 cm","suitable_for":"<p>- Người cần nâng đỡ cơ thể toàn diện<br>- Người có vấn đề về cột sống<\/p>","product_price":"Từ 12.990.000 VNĐ","product_url":""}},"product_DWnpfQ":{"type":"product","settings":{"product_title":"NỆM ORIGINAL PRO","product_features":"<p>- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.<br>- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.<br>- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.<\/p>","product_thickness":"25 cm","suitable_for":"<p>- Người cần nâng đỡ cơ thể toàn diện<br>- Người có vấn đề về cột sống<\/p>","product_price":"Từ 12.990.000 VNĐ","product_url":""}}},"block_order":["product_UUa9LH","product_CCLpHU","product_Kk7DYj","product_DWnpfQ"],"disabled":true,"settings":{"section_width":"customize_width","customize_width":1120,"title":"So sánh các dòng nệm","description":""}},"text_with_icons_9yd9VT":{"type":"text-with-icons","blocks":{"text_block_KiEpc6":{"type":"text_block","settings":{"icon":"chat","image_icon":"shopify:\/\/shop_images\/text-w-icon-1.png","title":"100 đêm ngủ thử không rủi ro","text":"<p>Nếu bạn không hài lòng, chúng tôi sẽ nhận lại nệm và hoàntiền 100%.<\/p>"}},"text_block_cLLCJf":{"type":"text_block","settings":{"icon":"chat","image_icon":"shopify:\/\/shop_images\/text-w-icon-2.png","title":"Miễn phí vận chuyển từ 1.500.000đ","text":"<p>Bạn chẳng cần lo lắng đến việc nhét lại nệm vào thùng đâu.<\/p>"}},"text_block_4AREAP":{"type":"text_block","settings":{"icon":"chat","image_icon":"shopify:\/\/shop_images\/text-w-icon-3.png","title":"Bảo hành dài lâu","text":"<p>Nệm của Ru9 luôn êm ái và bền bỉ với thời gian.<\/p>"}}},"block_order":["text_block_KiEpc6","text_block_cLLCJf","text_block_4AREAP"],"settings":{"section_width":"customize_width","customize_width":1000,"bg":"#f2fbf8","title":"An tâm hơn với dịch vụ vượt trội","align_text":"center","desktop_columns_per_row":3,"icon_color":"#000000","button_label":"","button_link":"","divider":false,"space_around":true}},"faq_A7dpqH":{"type":"faq","blocks":{"question_re4fUV":{"type":"question","settings":{"title":"100 đêm ngủ thử là gì?","text":"<p>Ru9 hiểu rằng, chỉ 20 – 30 phút tại cửa hàng không thể cho bạn cảm nhận trọn vẹn về một sản phẩm sẽ gắn bó với bạn suốt nhiều năm. Vì vậy, chính sách 100 đêm ngủ thử của Ru9 sẽ cho phép khách hàng được ngủ thử và trải nghiệm sản phẩm của Ru9 ngay tại phòng ngủ nhà mình. Và nếu không ưng ý, bạn có thể trả lại sản phẩm và nhận số tiền hoàn = tiền đã thanh toán - phí thu hồi.<\/p>"}},"question_fYyR84":{"type":"question","settings":{"title":"Chi phí vận chuyển của Ru9 là bao nhiêu?","text":"<p>Tuỳ thuộc vào địa chỉ vận chuyển, Ru9 sẽ có chi phí áp dụng riêng. Chi tiết về chi phí tới các tỉnh \/ thành phố, khách hàng vui lòng tham khảo <a href=\"\/pages\/chinh-sach-van-chuyen\" title=\"Chính sách vận chuyển\"> <span style=\"text-decoration:underline\">tại đây<\/span><\/a><\/p>"}},"question_HKy3rr":{"type":"question","settings":{"title":"Chính sách giao hàng tiêu chuẩn của Ru9?","text":"<p>Use this text to answer questions in as much detail as possible for your customers.Giao hàng tại Hà Nội và TPHCM: 2-3 ngày<\/p><p>Giao hàng ở tỉnh: 4-6 ngày<\/p><p>Giao hàng ở khu vực cận HN và TPHCM: 2-3 ngày <\/p><p><em>*Khu vực cận HN và TPHCM bao gồm: <\/em><\/p><p>(Gồm các tỉnh sau: Vũng Tàu, Bình Dương, Bình Phước, Đồng Nai, Tây Ninh, Long An, Bến Tre, Tiền Giang, Hà Nam, Nam Định, Bắc Ninh, Hưng Yên, Hải Dương, Ninh Bình, Hòa Bình, Phú Thọ, Vĩnh Phúc, Bắc Giang, Thái Nguyên)<\/p>"}}},"block_order":["question_re4fUV","question_fYyR84","question_HKy3rr"],"settings":{"section_width":"customize_width","customize_width":800,"title":"FAQs"}},"testimonials_AdcbcV":{"type":"testimonials","blocks":{"testimonial_Ek8xHN":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>⭐⭐⭐⭐⭐ cho chất lượng nệm cũng như dịch vụ đặt hàng, giao hàng rất tốt, làm việc chuyên nghiệp.<\/p>","image":"shopify:\/\/shop_images\/review-1.jpg","author":"Duyen Tran Thi","author_info":"","date":"10 tháng 10, 2024"}},"testimonial_nMGKnp":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Đánh giá cao chất lượng sản phẩm cũng như dịch vụ của Ru9, từ chốt đơn đến giao nhận đều rất chuyên nghiệp. Mặc dù vì lý do cá nhân mình phải hoàn trả nệm nhưng nhân viên vẫn nhiệt tình lịch sự giải quyết nhanh gọn. Chắc chắn sau này mình vẫn sẽ ủng hộ Ru9 👍🏻👍🏻👍<\/p>","image":"shopify:\/\/shop_images\/review-2.jpg","author":"Duyen Tran Thi","author_info":"","date":"10 tháng 10, 2024"}},"testimonial_KgBtUW":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Đang trải nghiệm Nệm Original 1 tháng nay đánh giá nệm rất êm, tốt, càng nằm càng thích ko muốn dậy, nhân viên nhiệt tình, giao hàng nhanh, đóng gói cẩn thận, đánh giá 5 sao.<\/p>","image":"shopify:\/\/shop_images\/review-3.jpg","author":"Duyen Tran Thi","author_info":"","date":"10 tháng 10, 2024"}},"testimonial_tHpjhK":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Đánh giá cao chất lượng sản phẩm cũng như dịch vụ của Ru9, từ chốt đơn đến giao nhận đều rất chuyên nghiệp. Mặc dù vì lý do cá nhân mình phải hoàn trả nệm nhưng nhân viên vẫn nhiệt tình lịch sự giải quyết nhanh gọn. Chắc chắn sau này mình vẫn sẽ ủng hộ Ru9 👍🏻👍🏻👍<\/p>","image":"shopify:\/\/shop_images\/review-2.jpg","author":"Duyen Tran Thi","author_info":"","date":"10 tháng 10, 2024"}}},"block_order":["testimonial_Ek8xHN","testimonial_nMGKnp","testimonial_KgBtUW","testimonial_tHpjhK"],"disabled":true,"settings":{"section_width":"customize_width","customize_width":1170,"title":"Đánh giá khách hàng","align_text":"left","round_images":false,"color_background":"rgba(0,0,0,0)"}}},"order":["collection-header","main-collection","banner_with_content_K64e3r","compare_product_fL4TxW","collection-content","banner_with_content_NiwahU","compare_product_UeQD6G","text_with_icons_9yd9VT","faq_A7dpqH","testimonials_AdcbcV"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection-header",
+      "custom_css": [
+        ".section-header__title {text-align: left;}"
+      ],
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1280,
+        "max_width_desc": 2000,
+        "align_text": "left",
+        "enable": true,
+        "collection_image_enable": true,
+        "show_collection_description": false
+      }
+    },
+    "independent_webhook_popup_6ky34i": {
+      "type": "independent-webhook-popup",
+      "name": "Independent Webhook Popup",
+      "settings": {
+        "enable_popup": true,
+        "popup_delay": 5,
+        "background_image": "shopify://shop_images/POP_UP_1.png",
+        "name_placeholder": "Họ và tên",
+        "name_x": 50,
+        "name_y": 65,
+        "phone_placeholder": "Số điện thoại",
+        "phone_x": 50,
+        "phone_y": 75,
+        "button_text": "Nhận mã ưu đãi ngay >",
+        "button_x": 50,
+        "button_y": 92,
+        "success_image": "shopify://shop_images/POP_UP_2.png",
+        "success_message": "Cảm ơn bạn đã đăng ký! Mã của bạn là RU9250.",
+        "coupon_code_to_copy": "RU9250",
+        "copy_button_text": "SAO CHÉP MÃ    >>>",
+        "copy_button_x": 50,
+        "copy_button_y": 92
+      }
+    },
+    "main_collection_custom_Y4Wd87": {
+      "type": "main-collection-custom",
+      "name": "Coll custom",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "enable_sidebar": false,
+        "collapsed": true,
+        "filter_style": "sidebar",
+        "enable_color_swatches": false,
+        "enable_swatch_labels": true,
+        "enable_sort": true,
+        "enable_collection_count": true,
+        "per_row": 3,
+        "rows_per_page": 2,
+        "default_sold_count": 0
+      }
+    },
+    "quiz_banner_zXHt4B": {
+      "type": "quiz-banner",
+      "name": "Quiz Banner (Advanced)",
+      "settings": {
+        "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
+        "title": "Đâu là chiếc nệm\nphù hợp với bạn?",
+        "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
+        "q_1_title": "Question 1?",
+        "q_1_a_1_text": "",
+        "q_1_a_1_tags": "",
+        "q_1_a_2_text": "",
+        "q_1_a_2_tags": "",
+        "q_1_a_3_text": "",
+        "q_1_a_3_tags": "",
+        "q_1_a_4_text": "",
+        "q_1_a_4_tags": "",
+        "q_2_title": "Question 2?",
+        "q_2_a_1_text": "",
+        "q_2_a_1_tags": "",
+        "q_2_a_2_text": "",
+        "q_2_a_2_tags": "",
+        "q_2_a_3_text": "",
+        "q_2_a_3_tags": "",
+        "q_2_a_4_text": "",
+        "q_2_a_4_tags": "",
+        "q_3_title": "Question 3?",
+        "q_3_a_1_text": "",
+        "q_3_a_1_tags": "",
+        "q_3_a_2_text": "",
+        "q_3_a_2_tags": "",
+        "q_3_a_3_text": "",
+        "q_3_a_3_tags": "",
+        "q_3_a_4_text": "",
+        "q_3_a_4_tags": "",
+        "q_4_title": "Question 4?",
+        "q_4_a_1_text": "",
+        "q_4_a_1_tags": "",
+        "q_4_a_2_text": "",
+        "q_4_a_2_tags": "",
+        "q_4_a_3_text": "",
+        "q_4_a_3_tags": "",
+        "q_4_a_4_text": "",
+        "q_4_a_4_tags": "",
+        "q_5_title": "Question 5?",
+        "q_5_a_1_text": "",
+        "q_5_a_1_tags": "",
+        "q_5_a_2_text": "",
+        "q_5_a_2_tags": "",
+        "q_5_a_3_text": "",
+        "q_5_a_3_tags": "",
+        "q_5_a_4_text": "",
+        "q_5_a_4_tags": "",
+        "result_title": "We recommend for you"
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "blocks": {
+        "subcollections": {
+          "type": "subcollections",
+          "disabled": true,
+          "settings": {
+            "subcollections_per_row": 5
+          }
+        },
+        "product_grid": {
+          "type": "product_grid",
+          "settings": {
+            "show_product_description": true,
+            "product_grid_image_size": "circle",
+            "per_row": 3,
+            "rows_per_page": 7,
+            "mobile_flush_grid": false
+          }
+        }
+      },
+      "block_order": [
+        "subcollections",
+        "product_grid"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1280,
+        "enable_sidebar": false,
+        "collapsed": false,
+        "filter_style": "sidebar",
+        "enable_color_swatches": false,
+        "enable_swatch_labels": false,
+        "enable_sort": false,
+        "enable_collection_count": false
+      }
+    },
+    "banner_with_content_K64e3r": {
+      "type": "banner-with-content",
+      "disabled": true,
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "image": "shopify://shop_images/20250528-140101.png",
+        "image_mobile": "shopify://shop_images/20250528-135154.png",
+        "title": "Đâu là chiếc nệm phù hợp cho bạn?",
+        "text": "<p>Cùng Ru9 khám phá và chọn ra chiếc nệm dành riêng cho bạn.</p>",
+        "btn_text": "Xem thêm",
+        "btn_link": ""
+      }
+    },
+    "compare_product_fL4TxW": {
+      "type": "compare-product",
+      "blocks": {
+        "product_ALQiAM": {
+          "type": "product",
+          "settings": {
+            "product_title": "NỆM ORIGINAL PRO",
+            "product_image": "shopify://shop_images/Thumb_Website_Ori_pro-1.png",
+            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
+            "comfort_layer_2_image": "shopify://shop_images/so_sanh_Ori_Pro.png",
+            "product_thickness": "25 cm",
+            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
+            "product_price": "Từ 12.990.000 VNĐ",
+            "product_url": "shopify://products/nem-original-pro"
+          }
+        },
+        "product_4JhiNN": {
+          "type": "product",
+          "settings": {
+            "product_title": "NỆM ORIGINAL",
+            "product_image": "shopify://shop_images/Ori_Thumb-Website-1.png",
+            "product_features": "- Giảm áp lực lên cơ thể, hạn chế tình trạng đau mỏi khi nằm lâu.  \n- Ôm sát đường cong tự nhiên, nâng đỡ toàn diện suốt đêm.  \n- Hạn chế truyền động, giúp giấc ngủ ngon và liền mạch, không làm ảnh hưởng đến người nằm cạnh.",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Ori.png",
+            "product_thickness": "25 cm",
+            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
+            "product_price": "Từ 8.490.000 VNĐ",
+            "product_url": "shopify://products/foam-original"
+          }
+        },
+        "product_atFTCC": {
+          "type": "product",
+          "settings": {
+            "product_title": "NỆM NEST",
+            "product_image": "shopify://shop_images/Nest_Thumb-1.png",
+            "product_features": "- Nâng đỡ cột sống theo đường cong tự nhiên, giúp duy trì tư thế ngủ thoải mái.  \n- Hạn chế truyền động, mang đến giấc ngủ sâu và liền mạch, không ảnh hưởng đến người nằm cạnh.  \n- Lớp vỏ bọc nệm từ chất liệu Tencel thoáng khí, thấm hút tốt, giữ cảm giác dễ chịu suốt đêm.",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
+            "product_thickness": "15 cm",
+            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
+            "product_price": "Từ 6.990.000 VNĐ",
+            "product_url": "shopify://products/foam-nest"
+          }
+        },
+        "product_wmbR3E": {
+          "type": "product",
+          "settings": {
+            "product_title": "NỆM HYBRID",
+            "product_image": "shopify://shop_images/Hybrid_Thumb-Website-2.png",
+            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_hybrid.png",
+            "product_thickness": "25 cm",
+            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
+            "product_price": "Từ 12.990.000 VNĐ",
+            "product_url": "shopify://products/nem-hybrid"
+          }
+        }
+      },
+      "block_order": [
+        "product_ALQiAM",
+        "product_4JhiNN",
+        "product_atFTCC",
+        "product_wmbR3E"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "So sánh các dòng nệm",
+        "description": ""
+      }
+    },
+    "collection-content": {
+      "type": "collection-content",
+      "disabled": true,
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1280,
+        "max_width_desc": 2000,
+        "align_text": "left",
+        "show_collection_description": true
+      }
+    },
+    "reviews_carousel_QUQNh3": {
+      "type": "reviews-carousel",
+      "blocks": {
+        "review_GWxeHz": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>"
+          }
+        },
+        "review_ME69kT": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>"
+          }
+        },
+        "review_yMHfeP": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>"
+          }
+        },
+        "review_FmJHcf": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>"
+          }
+        },
+        "review_gXepw8": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>"
+          }
+        },
+        "review_xPn64L": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p></p>"
+          }
+        }
+      },
+      "block_order": [
+        "review_GWxeHz",
+        "review_ME69kT",
+        "review_yMHfeP",
+        "review_FmJHcf",
+        "review_gXepw8",
+        "review_xPn64L"
+      ],
+      "name": "Reviews carousel",
+      "settings": {
+        "heading": "<p>Hơn <strong>50,000</strong> Khách Hàng<br>Và <strong>30,000</strong> Đánh Giá 5 Sao Toàn Quốc</p>"
+      }
+    },
+    "certifications_cWbJNF": {
+      "type": "certifications",
+      "blocks": {
+        "certification_g3zFwy": {
+          "type": "certification",
+          "settings": {
+            "label": "Chứng nhận",
+            "name": "CertiPUR-US®"
+          }
+        },
+        "certification_ixNC8G": {
+          "type": "certification",
+          "settings": {
+            "label": "Chứng nhận",
+            "name": "CertiPUR-US®"
+          }
+        }
+      },
+      "block_order": [
+        "certification_g3zFwy",
+        "certification_ixNC8G"
+      ],
+      "name": "Certifications",
+      "settings": {
+        "title": "Cam Kết An Toàn\nTừ Lần Chạm Đầu Tiên",
+        "description": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>",
+        "button_text": "Xem chi tiết",
+        "button_link": ""
+      }
+    },
+    "super_service_DXgqM9": {
+      "type": "super-service",
+      "blocks": {
+        "service_item_mbrUyr": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/100-dem-ngu-thu_1.svg",
+            "item_title": "100 đêm ngủ thử",
+            "item_note": "",
+            "item_description": "<p>Trải nghiệm sản phẩm<br/>ngay tại nhà với cam kết<br/>đổi trả linh hoạt.</p>"
+          }
+        },
+        "service_item_fJkXVP": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Free_shipping_1.png",
+            "item_title": "Miễn phí vận chuyển",
+            "item_note": "(từ 1.500.000vnd)",
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>"
+          }
+        },
+        "service_item_Ry6FnG": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Group_48.svg",
+            "item_title": "Bảo hành dài lâu",
+            "item_note": "",
+            "item_description": "<p>Mỗi chiếc nệm được<br/>bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>"
+          }
+        },
+        "service_item_7y66Fn": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Group_48.svg",
+            "item_title": "Thanh toán linh hoạt",
+            "item_note": "",
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "service_item_mbrUyr",
+        "service_item_fJkXVP",
+        "service_item_Ry6FnG",
+        "service_item_7y66Fn"
+      ],
+      "name": "Super Service",
+      "settings": {
+        "title": "An Tâm Hơn Với Dịch Vụ Vượt Trội",
+        "background_color": "#f0f7ff"
+      }
+    },
+    "blog_carousel_hh43j9": {
+      "type": "blog-carousel",
+      "name": "Blog posts carousel",
+      "settings": {
+        "title": "Blog posts",
+        "view_all": true,
+        "view_all_text": ""
+      }
+    },
+    "faq_A7dpqH": {
+      "type": "faq",
+      "blocks": {
+        "question_re4fUV": {
+          "type": "question",
+          "settings": {
+            "title": "100 đêm ngủ thử là gì?",
+            "text": "<p>Ru9 hiểu rằng, chỉ 20 – 30 phút tại cửa hàng không thể cho bạn cảm nhận trọn vẹn về một sản phẩm sẽ gắn bó với bạn suốt nhiều năm. Vì vậy, chính sách 100 đêm ngủ thử của Ru9 sẽ cho phép khách hàng được ngủ thử và trải nghiệm sản phẩm của Ru9 ngay tại phòng ngủ nhà mình. Và nếu không ưng ý, bạn có thể trả lại sản phẩm và nhận số tiền hoàn = tiền đã thanh toán - phí thu hồi.</p>"
+          }
+        },
+        "question_fYyR84": {
+          "type": "question",
+          "settings": {
+            "title": "Chi phí vận chuyển của Ru9 là bao nhiêu?",
+            "text": "<p>Tuỳ thuộc vào địa chỉ vận chuyển, Ru9 sẽ có chi phí áp dụng riêng. Chi tiết về chi phí tới các tỉnh / thành phố, khách hàng vui lòng tham khảo <a href=\"/pages/chinh-sach-van-chuyen\" title=\"Chính sách vận chuyển\"> <span style=\"text-decoration:underline\">tại đây</span></a></p>"
+          }
+        },
+        "question_HKy3rr": {
+          "type": "question",
+          "settings": {
+            "title": "Chính sách giao hàng tiêu chuẩn của Ru9?",
+            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.Giao hàng tại Hà Nội và TPHCM: 2-3 ngày</p><p>Giao hàng ở tỉnh: 4-6 ngày</p><p>Giao hàng ở khu vực cận HN và TPHCM: 2-3 ngày </p><p><em>*Khu vực cận HN và TPHCM bao gồm: </em></p><p>(Gồm các tỉnh sau: Vũng Tàu, Bình Dương, Bình Phước, Đồng Nai, Tây Ninh, Long An, Bến Tre, Tiền Giang, Hà Nam, Nam Định, Bắc Ninh, Hưng Yên, Hải Dương, Ninh Bình, Hòa Bình, Phú Thọ, Vĩnh Phúc, Bắc Giang, Thái Nguyên)</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_re4fUV",
+        "question_fYyR84",
+        "question_HKy3rr"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 800,
+        "title": "FAQs"
+      }
+    },
+    "testimonials_AdcbcV": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_Ek8xHN": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>⭐⭐⭐⭐⭐ cho chất lượng nệm cũng như dịch vụ đặt hàng, giao hàng rất tốt, làm việc chuyên nghiệp.</p>",
+            "image": "shopify://shop_images/review-1.jpg",
+            "author": "Duyen Tran Thi",
+            "author_info": "",
+            "date": "10 tháng 10, 2024"
+          }
+        },
+        "testimonial_nMGKnp": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Đánh giá cao chất lượng sản phẩm cũng như dịch vụ của Ru9, từ chốt đơn đến giao nhận đều rất chuyên nghiệp. Mặc dù vì lý do cá nhân mình phải hoàn trả nệm nhưng nhân viên vẫn nhiệt tình lịch sự giải quyết nhanh gọn. Chắc chắn sau này mình vẫn sẽ ủng hộ Ru9 👍🏻👍🏻👍</p>",
+            "image": "shopify://shop_images/review-2.jpg",
+            "author": "Duyen Tran Thi",
+            "author_info": "",
+            "date": "10 tháng 10, 2024"
+          }
+        },
+        "testimonial_KgBtUW": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Đang trải nghiệm Nệm Original 1 tháng nay đánh giá nệm rất êm, tốt, càng nằm càng thích ko muốn dậy, nhân viên nhiệt tình, giao hàng nhanh, đóng gói cẩn thận, đánh giá 5 sao.</p>",
+            "image": "shopify://shop_images/review-3.jpg",
+            "author": "Duyen Tran Thi",
+            "author_info": "",
+            "date": "10 tháng 10, 2024"
+          }
+        },
+        "testimonial_tHpjhK": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Đánh giá cao chất lượng sản phẩm cũng như dịch vụ của Ru9, từ chốt đơn đến giao nhận đều rất chuyên nghiệp. Mặc dù vì lý do cá nhân mình phải hoàn trả nệm nhưng nhân viên vẫn nhiệt tình lịch sự giải quyết nhanh gọn. Chắc chắn sau này mình vẫn sẽ ủng hộ Ru9 👍🏻👍🏻👍</p>",
+            "image": "shopify://shop_images/review-2.jpg",
+            "author": "Duyen Tran Thi",
+            "author_info": "",
+            "date": "10 tháng 10, 2024"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_Ek8xHN",
+        "testimonial_nMGKnp",
+        "testimonial_KgBtUW",
+        "testimonial_tHpjhK"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1170,
+        "title": "Đánh giá khách hàng",
+        "align_text": "left",
+        "round_images": false,
+        "color_background": "rgba(0,0,0,0)"
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "independent_webhook_popup_6ky34i",
+    "main_collection_custom_Y4Wd87",
+    "quiz_banner_zXHt4B",
+    "main-collection",
+    "banner_with_content_K64e3r",
+    "compare_product_fL4TxW",
+    "collection-content",
+    "reviews_carousel_QUQNh3",
+    "certifications_cWbJNF",
+    "super_service_DXgqM9",
+    "blog_carousel_hh43j9",
+    "faq_A7dpqH",
+    "testimonials_AdcbcV"
+  ]
+}

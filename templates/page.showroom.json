@@ -1,1 +1,103 @@
-{"sections":{"16571274958ff743be":{"type":"slideshow","blocks":{"1657127495df6309f6-0":{"type":"image","settings":{"top_subheading":"","title":"","title_size":48,"subheading":"","link":"shopify:\/\/collections\/all","link_text":"","link_2":"","link_text_2":"","color_accent":"#f19072","text_align":"vertical-bottom horizontal-left","image":"shopify:\/\/shop_images\/banner_store_locator.jpg","image_mobile":"shopify:\/\/shop_images\/banner_store_locator_mb.jpg","overlay_opacity":0}}},"block_order":["1657127495df6309f6-0"],"settings":{"section_height":"natural","mobile_height":"auto","style":"dots","autoplay":true,"autoplay_speed":5,"lazyload_images":true}},"showroom":{"type":"showroom","blocks":{"f460d794-973d-4086-9d4f-926daf50b99d":{"type":"showroom","settings":{"city":"Hà Nội","image":"shopify:\/\/shop_images\/KEY03205-HDR_db2bf5a7-cb98-4254-a9dc-6320446c0aae.jpg","name":"Flagship Showroom Ru9 Tràng Thi","address":"71 Tràng Thi, Hàng Bông, Hoàn Kiếm","address_url":"https:\/\/www.google.com\/maps\/place\/Ru9+H%C3%A0+N%E1%BB%99i\/@21.0278221,105.8425679,17z\/data=!4m13!1m7!3m6!1s0x3135ab96f0cd39ad:0xafdc7eb893840bbf!2zNzEgVHLDoG5nIFRoaSwgSMOgbmcgQsO0bmcsIEhvw6BuIEtp4bq_bSwgSMOgIE7hu5lpLCBWaWV0bmFt!3b1!8m2!3d21.0278171!4d105.8447566!3m4!1s0x3135ab9cb37e0fd7:0xc9c1ac0df314cf1a!8m2!3d21.0278171!4d105.8447566","date":"Cả Tuần","time":"T2 - CN: 9:00 - 21:00","phone":"0964 777 940"}},"f460d794-973d-4086-9d4f-926daf50b991":{"type":"showroom","settings":{"city":"TP Hồ Chí Minh","image":"shopify:\/\/shop_images\/DSC09521.jpg","name":"Flagship Showroom Ru9 Hai Bà Trưng","address":"283A Hai Bà Trưng, Phường 8, Quận 3, TP. Hồ Chí Minh","address_url":"https:\/\/www.google.com\/maps\/place\/Ru9+-+The+Sleep+Company\/@10.7882904,106.6891126,17z\/data=!3m1!4b1!4m5!3m4!1s0x31752795ed4b09a3:0x1e7ee98350bfabc1!8m2!3d10.7882851!4d106.6913013","date":"Cả Tuần","time":"T2 - CN: 9:00 - 21:00","phone":"0964 777 910"}}},"block_order":["f460d794-973d-4086-9d4f-926daf50b99d","f460d794-973d-4086-9d4f-926daf50b991"],"settings":{"title":"Địa điểm"}}},"order":["16571274958ff743be","showroom"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "16571274958ff743be": {
+      "type": "slideshow",
+      "blocks": {
+        "1657127495df6309f6-0": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 48,
+            "subheading": "",
+            "link": "shopify://collections/all",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "#f19072",
+            "text_align": "vertical-bottom horizontal-left",
+            "image": "shopify://shop_images/banner_store_locator.jpg",
+            "image_mobile": "shopify://shop_images/banner_store_locator_mb.jpg",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "1657127495df6309f6-0"
+      ],
+      "settings": {
+        "section_height": "natural",
+        "mobile_height": "auto",
+        "style": "dots",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "lazyload_images": true
+      }
+    },
+    "showroom": {
+      "type": "showroom",
+      "blocks": {
+        "f460d794-973d-4086-9d4f-926daf50b99d": {
+          "type": "showroom",
+          "settings": {
+            "city": "Hà Nội",
+            "image": "shopify://shop_images/Slide3.jpg",
+            "name": "Flagship Showroom Ru9 Cầu Giấy",
+            "address": "228 Đ. Cầu Giấy, Quan Hoa, Cầu Giấy, Hà Nội",
+            "address_url": "https://maps.app.goo.gl/2Yx2gVWVrqnN21Nw5",
+            "date": "Cả Tuần",
+            "time": "T2 - CN: 9:00 - 21:00",
+            "phone": "0964 777 940"
+          }
+        },
+        "f460d794-973d-4086-9d4f-926daf50b991": {
+          "type": "showroom",
+          "settings": {
+            "city": "TP Hồ Chí Minh",
+            "image": "shopify://shop_images/Slide1.jpg",
+            "name": "Flagship Showroom Ru9 Hai Bà Trưng",
+            "address": "283A Hai Bà Trưng, Phường 8, Quận 3, TP. Hồ Chí Minh",
+            "address_url": "https://www.google.com/maps/place/Ru9+-+The+Sleep+Company/@10.7882904,106.6891126,17z/data=!3m1!4b1!4m5!3m4!1s0x31752795ed4b09a3:0x1e7ee98350bfabc1!8m2!3d10.7882851!4d106.6913013",
+            "date": "Cả Tuần",
+            "time": "T2 - CN: 9:00 - 21:00",
+            "phone": "0964 777 910"
+          }
+        },
+        "showroom_bbmXrE": {
+          "type": "showroom",
+          "settings": {
+            "city": "TP Hồ Chí Minh",
+            "image": "shopify://shop_images/Slide2.jpg",
+            "name": "Showroom Ru9 Sala",
+            "address": "Shop 09, B2 Sarimi, KĐT Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông, Quận 2, TP. Hồ Chí Minh",
+            "address_url": "https://maps.app.goo.gl/8HWWbx6JspgUtmXX8",
+            "date": "Cả Tuần",
+            "time": "T2 - CN: 9:00 - 21:00",
+            "phone": "0964777960"
+          }
+        }
+      },
+      "block_order": [
+        "f460d794-973d-4086-9d4f-926daf50b99d",
+        "f460d794-973d-4086-9d4f-926daf50b991",
+        "showroom_bbmXrE"
+      ],
+      "settings": {
+        "title": "Địa điểm"
+      }
+    }
+  },
+  "order": [
+    "16571274958ff743be",
+    "showroom"
+  ]
+}

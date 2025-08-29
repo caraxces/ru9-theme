@@ -1,0 +1,438 @@
+<style>
+  .quiz-banner-section {
+    padding: 30px 0;
+  }
+  .quiz-banner-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background: #F5F9FF;
+    border-radius: 6px;
+    height: 350px;
+    max-width: 1595px;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .quiz-banner-left {
+    flex-basis: 45%;
+    height: 100%;
+    flex-shrink: 0;
+  }
+  .quiz-banner-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .quiz-banner-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+  .quiz-banner-title {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px; /* 143.59% */
+    letter-spacing: 0.6px;
+    margin: 0 0 15px 0;
+  }
+
+  .quiz-banner-subtitle {
+    color: #000;
+    text-align: center;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px; /* 150% */
+    letter-spacing: 0.6px;
+    margin: 0 0 25px 0;
+    max-width: 500px;
+  }
+  .quiz-banner-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+  }
+  .quiz-btn {
+    display: inline-flex;
+    padding: 12px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background: #1C2C58;
+    color: white;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.3s ease;
+  }
+  .quiz-btn:hover {
+    background: #3a4c7a;
+    color: white;
+  }
+
+  @media (max-width: 990px) {
+    .quiz-banner-container {
+      flex-direction: column;
+      height: auto;
+    }
+    .quiz-banner-left {
+      width: 100%;
+      max-width: 499px;
+      height: auto;
+    }
+    .quiz-banner-right {
+      align-items: center;
+      text-align: center;
+    }
+  }
+  
+  /* Quiz Popup Styles */
+  .quiz-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .quiz-popup-content {
+    background: #fff;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .quiz-popup-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 30px;
+    line-height: 1;
+    z-index: 2;
+    color: #888;
+  }
+  .quiz-steps-container {
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+  }
+  .quiz-step {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 50px 40px 30px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transform: translateX(20px);
+    text-align: center;
+    overflow-y: auto;
+  }
+  .quiz-step.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  .quiz-step.prev {
+     transform: translateX(-20px);
+  }
+  .quiz-step h3 {
+    font-size: 26px;
+    margin-bottom: 40px;
+    font-weight: 600;
+  }
+  .quiz-answers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .quiz-answer {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 16px;
+  }
+  .quiz-answer:hover {
+    border-color: #000;
+    background: #f7f7f7;
+  }
+  .quiz-navigation {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+  }
+  .quiz-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .quiz-progress-bar-inner {
+    height: 100%;
+    width: 0;
+    background: #4a90e2;
+    transition: width 0.4s ease;
+    border-radius: 4px;
+  }
+
+  /* Result styling */
+  .quiz-result-product {
+    display: flex;
+    gap: 20px;
+    text-align: left;
+  }
+  .quiz-result-product img {
+    max-width: 150px;
+    border-radius: 8px;
+  }
+  .quiz-result-product-info h4 {
+    margin: 0 0 10px;
+    font-size: 20px;
+  }
+  .quiz-result-product-info .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4a90e2;
+  }
+  .quiz-result-product-info .view-product-btn {
+      margin-top: 15px;
+      display: inline-block;
+  }
+
+  @media (min-width: 768px) {
+    .quiz-answers {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
+
+<div class="index-section quiz-banner-section" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    <div class="quiz-banner-container">
+      <div class="quiz-banner-left">
+        {%- if section.settings.image != blank -%}
+          <img 
+            src="{{ section.settings.image | image_url: width: 1000 }}" 
+            alt="{{ section.settings.title | escape }}"
+            width="499"
+            height="348"
+            loading="lazy">
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      <div class="quiz-banner-right">
+        {%- if section.settings.title != blank -%}
+          <h2 class="quiz-banner-title">
+            {{ section.settings.title | escape }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="quiz-banner-subtitle rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+        <div class="quiz-banner-buttons">
+          {%- if section.settings.button_1_text != blank -%}
+            <button type="button" class="quiz-btn quiz-start-button">
+              {{ section.settings.button_1_text }}
+            </button>
+          {%- endif -%}
+          {%- if section.settings.button_2_text != blank and section.settings.button_2_link != blank -%}
+            <a href="{{ section.settings.button_2_link }}" class="quiz-btn">
+              {{ section.settings.button_2_text }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz-popup-{{ section.id }}" class="quiz-popup-overlay">
+  <div class="quiz-popup-content">
+    <span class="quiz-popup-close">&times;</span>
+    <div class="quiz-steps-container">
+      {%- for i in (1..5) -%}
+        {%- capture question_title_key -%}q_{{ i }}_title{%- endcapture -%}
+        {%- assign question_title = section.settings[question_title_key] -%}
+
+        <div class="quiz-step" data-step="{{ i }}">
+            <h3>{{ question_title }}</h3>
+            <div class="quiz-answers">
+                {%- for j in (1..4) -%}
+                    {%- capture answer_text_key -%}q_{{ i }}_a_{{ j }}_text{%- endcapture -%}
+                    {%- capture answer_tags_key -%}q_{{ i }}_a_{{ j }}_tags{%- endcapture -%}
+                    {%- assign answer_text = section.settings[answer_text_key] -%}
+                    {%- assign answer_tags = section.settings[answer_tags_key] -%}
+
+                    {%- if answer_text != blank -%}
+                        <div class="quiz-answer" data-tags="{{ answer_tags | escape }}">{{ answer_text }}</div>
+                    {%- endif -%}
+                {%- endfor -%}
+            </div>
+        </div>
+      {%- endfor -%}
+
+      <!-- Result Step -->
+      <div class="quiz-step" data-step="result">
+        <h3>{{ section.settings.result_title }}</h3>
+        <div id="quiz-result-content-{{ section.id }}">
+          <!-- Recommended product will be injected here by JS -->
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-navigation">
+        <div class="quiz-progress-bar">
+            <div class="quiz-progress-bar-inner" id="quiz-progress-bar-inner-{{ section.id }}"></div>
+        </div>
+    </div>
+  </div>
+</div>
+
+{%- capture product_results -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'product_result' and block.settings.product != blank -%}
+      {
+        "product_id": "{{ block.settings.product.id }}",
+        "title": "{{ block.settings.product.title | escape }}",
+        "url": "{{ block.settings.product.url }}",
+        "image": "{{ block.settings.product.featured_image | image_url: width: 300 }}",
+        "price": "{{ block.settings.product.price | money }}",
+        "tags": [
+          {%- assign product_tags = block.settings.tags | split: ',' -%}
+          {%- for tag in product_tags -%}
+            "{{ tag | strip | handle }}"{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<script type="application/json" id="quiz-products-{{ section.id }}">
+  [{{ product_results }}]
+</script>
+
+{% schema %}
+{
+  "name": "Quiz Banner (Advanced)",
+  "settings": [
+    { "type": "header", "content": "Banner Content" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Đâu là chiếc nệm phù hợp với bạn?" },
+    { "id": "text", "type": "richtext", "label": "Subtitle", "default": "<p>Chỉ mất 2 phút cùng Ru9 khám phá và chọn chiếc nệm cho bạn.</p>" },
+    { "type": "text", "label": "Button 1 Text", "id": "button_1_text", "default": "Quizz chọn nệm" },
+    { "type": "text", "label": "Button 2 Text", "id": "button_2_text", "default": "So sánh các loại nệm" },
+    { "type": "url", "label": "Button 2 Link", "id": "button_2_link" },
+
+    { "type": "header", "content": "Question 1" },
+    { "type": "text", "id": "q_1_title", "label": "Question", "default": "Question 1?" },
+    { "type": "text", "id": "q_1_a_1_text", "label": "Answer 1 Text" },
+    { "type": "text", "id": "q_1_a_1_tags", "label": "Answer 1 Tags", "info": "Comma-separated, e.g: soft, side-sleeper" },
+    { "type": "text", "id": "q_1_a_2_text", "label": "Answer 2 Text" },
+    { "type": "text", "id": "q_1_a_2_tags", "label": "Answer 2 Tags" },
+    { "type": "text", "id": "q_1_a_3_text", "label": "Answer 3 Text" },
+    { "type": "text", "id": "q_1_a_3_tags", "label": "Answer 3 Tags" },
+    { "type": "text", "id": "q_1_a_4_text", "label": "Answer 4 Text" },
+    { "type": "text", "id": "q_1_a_4_tags", "label": "Answer 4 Tags" },
+
+    { "type": "header", "content": "Question 2" },
+    { "type": "text", "id": "q_2_title", "label": "Question", "default": "Question 2?" },
+    { "type": "text", "id": "q_2_a_1_text", "label": "Answer 1 Text" },
+    { "type": "text", "id": "q_2_a_1_tags", "label": "Answer 1 Tags" },
+    { "type": "text", "id": "q_2_a_2_text", "label": "Answer 2 Text" },
+    { "type": "text", "id": "q_2_a_2_tags", "label": "Answer 2 Tags" },
+    { "type": "text", "id": "q_2_a_3_text", "label": "Answer 3 Text" },
+    { "type": "text", "id": "q_2_a_3_tags", "label": "Answer 3 Tags" },
+    { "type": "text", "id": "q_2_a_4_text", "label": "Answer 4 Text" },
+    { "type": "text", "id": "q_2_a_4_tags", "label": "Answer 4 Tags" },
+
+    { "type": "header", "content": "Question 3" },
+    { "type": "text", "id": "q_3_title", "label": "Question", "default": "Question 3?" },
+    { "type": "text", "id": "q_3_a_1_text", "label": "Answer 1 Text" },
+    { "type": "text", "id": "q_3_a_1_tags", "label": "Answer 1 Tags" },
+    { "type": "text", "id": "q_3_a_2_text", "label": "Answer 2 Text" },
+    { "type": "text", "id": "q_3_a_2_tags", "label": "Answer 2 Tags" },
+    { "type": "text", "id": "q_3_a_3_text", "label": "Answer 3 Text" },
+    { "type": "text", "id": "q_3_a_3_tags", "label": "Answer 3 Tags" },
+    { "type": "text", "id": "q_3_a_4_text", "label": "Answer 4 Text" },
+    { "type": "text", "id": "q_3_a_4_tags", "label": "Answer 4 Tags" },
+
+    { "type": "header", "content": "Question 4" },
+    { "type": "text", "id": "q_4_title", "label": "Question", "default": "Question 4?" },
+    { "type": "text", "id": "q_4_a_1_text", "label": "Answer 1 Text" },
+    { "type": "text", "id": "q_4_a_1_tags", "label": "Answer 1 Tags" },
+    { "type": "text", "id": "q_4_a_2_text", "label": "Answer 2 Text" },
+    { "type": "text", "id": "q_4_a_2_tags", "label": "Answer 2 Tags" },
+    { "type": "text", "id": "q_4_a_3_text", "label": "Answer 3 Text" },
+    { "type": "text", "id": "q_4_a_3_tags", "label": "Answer 3 Tags" },
+    { "type": "text", "id": "q_4_a_4_text", "label": "Answer 4 Text" },
+    { "type": "text", "id": "q_4_a_4_tags", "label": "Answer 4 Tags" },
+
+    { "type": "header", "content": "Question 5" },
+    { "type": "text", "id": "q_5_title", "label": "Question", "default": "Question 5?" },
+    { "type": "text", "id": "q_5_a_1_text", "label": "Answer 1 Text" },
+    { "type": "text", "id": "q_5_a_1_tags", "label": "Answer 1 Tags" },
+    { "type": "text", "id": "q_5_a_2_text", "label": "Answer 2 Text" },
+    { "type": "text", "id": "q_5_a_2_tags", "label": "Answer 2 Tags" },
+    { "type": "text", "id": "q_5_a_3_text", "label": "Answer 3 Text" },
+    { "type": "text", "id": "q_5_a_3_tags", "label": "Answer 3 Tags" },
+    { "type": "text", "id": "q_5_a_4_text", "label": "Answer 4 Text" },
+    { "type": "text", "id": "q_5_a_4_tags", "label": "Answer 4 Tags" },
+
+    { "type": "header", "content": "Quiz Result" },
+    { "type": "text", "id": "result_title", "label": "Result page title", "default": "We recommend for you" }
+  ],
+  "blocks": [
+    {
+      "type": "product_result",
+      "name": "Product Result",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Recommended Product"
+        },
+        {
+          "type": "text",
+          "id": "tags",
+          "label": "Product Tags",
+          "info": "Comma-separated. Must match tags from answers. e.g: soft, side-sleeper, hot"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Quiz Banner (Advanced)" }
+  ]
+}
+{% endschema %}

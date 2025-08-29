@@ -1,0 +1,140 @@
+{% comment %}
+  Section: TVC Section
+  - Displays a heading and an autoplaying video.
+{% endcomment %}
+
+<div class="tvc-section-wrapper">
+  <div class="tvc-container page-width">
+    <div class="tvc-text-column">
+      {%- if section.settings.heading != blank -%}
+        <div class="tvc-heading">
+          {{ section.settings.heading }}
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="tvc-video-column">
+      <div id="tvc-video-wrapper-{{ section.id }}" class="tvc-video-wrapper">
+        {%- if section.settings.video -%}
+          {{ section.settings.video | video_tag:
+            class: 'tvc-video',
+            autoplay: true,
+            loop: true,
+            muted: true,
+            playsinline: true,
+            controls: false
+          }}
+        {%- else -%}
+          <div class="tvc-placeholder">
+            {{ 'video' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .tvc-section-wrapper {
+    padding: 50px 0;
+  }
+
+  .tvc-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .tvc-text-column {
+    flex: 1;
+  }
+
+  .tvc-heading {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 48px;
+    margin: 0;
+  }
+
+  .tvc-heading p {
+    margin: 0;
+  }
+
+  .tvc-video-column {
+    flex: 1.8;
+  }
+
+  .tvc-video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+  }
+
+  .tvc-video-wrapper .tvc-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tvc-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 990px) {
+    .tvc-container {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .tvc-text-column {
+      margin-bottom: 30px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tvc-heading {
+      font-size: 32px;
+      line-height: 40px;
+    }
+  }
+</style>
+
+<script>
+  // No script needed for a simple autoplay background video.
+</script>
+
+{% schema %}
+{
+  "name": "TVC Section",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>7 năm đồng hành<br>cùng giấc ngủ người Việt</p>"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TVC Section",
+      "category": "Video"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,216 @@
+<div class="content-dynamic-section" data-section-id="{{ section.id }}" data-section-type="content-dynamic">
+  <div class="content-dynamic-container" style="width: 1218.5px; height: 153px; flex-shrink: 0; margin: 0 auto; display: flex; align-items: center; gap: 20px;">
+    
+    <!-- Ô bên trái - Quote -->
+    <div class="content-dynamic-left" style="border-radius: 6px; background: {{ section.settings.left_background_color | default: '#F0F7FF' }}; width: 710px; height: 153px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; padding: 20px;">
+             <div class="content-dynamic-text" style="text-align: left;">
+         <div class="quote-text" style="font-family: 'Tinos'; font-style: normal; font-weight: 400; line-height: 120%; color: #1C2C58;">
+           <div style="font-size: 38px; margin-bottom: 20px;">{{ section.settings.quote_text_1 | default: 'Mọi điều tuyệt vời đều bắt đầu bằng' }}</div>
+           <div style="font-size: 50px;">{{ section.settings.quote_text_2 | default: 'một giấc ngủ ngon' }}</div>
+         </div>
+       </div>
+    </div>
+
+    <!-- Ô bên phải - Counter -->
+    <div class="content-dynamic-right" style="display: inline-flex; height: 153px; flex-direction: column; align-items: flex-start; gap: 7px; flex-shrink: 0; justify-content: center;">
+      <div class="counter-text" style="color: var(--Typography-Text-1, #212121); font-family: 'Be Vietnam Pro', sans-serif; font-size: 20px; font-style: normal; font-weight: 400; line-height: 140%;">
+        Với hơn <span class="counter-number" data-target="{{ section.settings.counter_number | default: 3240 }}" style="color: {{ section.settings.counter_color | default: '#609EE9' }}; font-family: 'Be Vietnam Pro', sans-serif; font-size: 24px; font-style: normal; font-weight: 700; line-height: 140%;">0</span> giờ nghiên cứu
+      </div>
+      <div class="subtitle-text" style="color: var(--Typography-Text-1, #212121); font-family: 'Be Vietnam Pro', sans-serif; font-size: 20px; font-style: normal; font-weight: 400; line-height: 140%;">
+        để bạn chỉ việc nghỉ ngơi, chẳng cần nghĩ ngợi.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .content-dynamic-section {
+    padding: 40px 0;
+    overflow-x: hidden; /* Prevent horizontal scrollbar during animation */
+  }
+
+  /* Animation Styles */
+  .content-dynamic-left,
+  .content-dynamic-right {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .content-dynamic-left {
+    transform: translateX(-30px);
+  }
+
+  .content-dynamic-right {
+    transform: translateX(30px);
+  }
+
+  .content-dynamic-left.is-visible,
+  .content-dynamic-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (max-width: 1280px) {
+    .content-dynamic-container {
+      width: 100% !important;
+      max-width: 1218.5px;
+      padding: 0 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .content-dynamic-container {
+      flex-direction: column !important;
+      height: auto !important;
+      gap: 20px !important;
+    }
+
+    .content-dynamic-left {
+      width: 100% !important;
+      height: 120px !important;
+    }
+
+    .content-dynamic-right {
+      width: 100% !important;
+      height: auto !important;
+      align-items: center !important;
+      text-align: center;
+    }
+
+    .counter-text {
+      font-size: 20px !important;
+    }
+
+    .subtitle-text {
+      font-size: 14px !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionEl = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!sectionEl) return;
+
+    // --- Appear animation for left and right boxes ---
+    const leftBox = sectionEl.querySelector('.content-dynamic-left');
+    const rightBox = sectionEl.querySelector('.content-dynamic-right');
+
+    if (leftBox && rightBox && 'IntersectionObserver' in window) {
+      const boxObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            leftBox.classList.add('is-visible');
+            setTimeout(() => {
+              rightBox.classList.add('is-visible');
+            }, 200); // Stagger the right box animation
+            observer.unobserve(sectionEl);
+          }
+        });
+      }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+      });
+      boxObserver.observe(sectionEl);
+    } else {
+      // Fallback for older browsers
+      if(leftBox) leftBox.classList.add('is-visible');
+      if(rightBox) rightBox.classList.add('is-visible');
+    }
+
+    // --- Counter animation (improved with requestAnimationFrame) ---
+    const counterElements = sectionEl.querySelectorAll('.counter-number');
+    
+    const counterObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
+          const duration = 2000; // 2 seconds
+          let start = null;
+
+          const step = (timestamp) => {
+            if (!start) start = timestamp;
+            const progress = timestamp - start;
+            const current = Math.min(Math.floor(progress / duration * target), target);
+            counter.textContent = current.toLocaleString();
+            if (progress < duration) {
+              window.requestAnimationFrame(step);
+            } else {
+              counter.textContent = target.toLocaleString();
+            }
+          };
+
+          window.requestAnimationFrame(step);
+          observer.unobserve(counter);
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    counterElements.forEach(counter => {
+      counterObserver.observe(counter);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Content Dynamic",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Quote Settings"
+    },
+    {
+      "type": "text",
+      "id": "quote_text_1",
+      "label": "Quote Text Line 1 (38px)",
+      "default": "Mọi điều tuyệt vời đều bắt đầu bằng",
+      "info": "First line of quote with 38px font size"
+    },
+    {
+      "type": "text",
+      "id": "quote_text_2",
+      "label": "Quote Text Line 2 (50px)",
+      "default": "một giấc ngủ ngon",
+      "info": "Second line of quote with 50px font size"
+    },
+    {
+      "type": "header",
+      "content": "Counter Settings"
+    },
+    {
+      "type": "number",
+      "id": "counter_number",
+      "label": "Counter Number",
+      "default": 3240,
+      "info": "The number to count up to"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "color",
+      "id": "left_background_color",
+      "label": "Left Background Color",
+      "default": "#F0F7FF"
+    },
+    {
+      "type": "color",
+      "id": "counter_color",
+      "label": "Counter Number Color",
+      "default": "#609EE9"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Dynamic",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}

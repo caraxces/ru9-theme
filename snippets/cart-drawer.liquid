@@ -1,18 +1,500 @@
 {%- if settings.cart_type == 'drawer' -%}
+  <style>
+    /* General Drawer Styles */
+    #CartDrawer {
+      --font-stack-header: 'Tinos', serif;
+      --font-stack-body: 'Be Vietnam Pro', sans-serif;
+      font-family: var(--font-stack-body);
+    }
+    .drawer__inner {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      height: 100%;
+    }
+    .drawer__scrollable {
+      overflow-y: auto;
+      flex-grow: 1;
+      padding: 0 20px;
+      scrollbar-width: none; /* For Firefox */
+      -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    }
+    .drawer__scrollable::-webkit-scrollbar {
+      display: none; /* For Chrome, Safari, and Opera */
+    }
+    .drawer__header .drawer__title {
+      font-family: var(--font-stack-header);
+      width: 155px;
+      height: 39px;
+      flex-shrink: 0;
+      color: #1C2C58;
+      font-family: Tinos;
+      font-size: 38px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%;
+    }
+    .drawer__header .drawer__count {
+      font-family: var(--font-stack-body);
+      font-size: 16px;
+    }
+    .cart-drawer__services {
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 0;
+      border-bottom: 1px solid #e9e9e9;
+      text-align: center;
+    }
+    .cart-drawer__service-item {
+      font-family: var(--font-stack-body);
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #000;
+      text-align: center;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+    }
+    .cart-drawer__service-icon {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .cart-drawer__divider {
+      display: block;
+      width: 100%;
+      height: 2px;
+      margin: 20px 0;
+    }
+
+    /* Cart Items */
+    .cart-item__title {
+      color: #000;
+      font-family: "Be Vietnam Pro";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 140%; /* 28px */
+    }
+    .cart-item__variant {
+      overflow: hidden;
+      color: #000;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%; /* 24px */
+    }
+    .cart-item__price--original {
+      overflow: hidden;
+      color: #808080;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%; /* 24px */
+      text-decoration-line: line-through;
+    }
+    .cart-item__price--final {
+      overflow: hidden;
+      color: #9F332C;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; /* 24px */
+      margin-left: 10px;
+    }
+
+    .cart-drawer__free-shipping-info {
+      padding: 15px;
+      text-align: center;
+      color: #1C2C58;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+    }
+
+    /* Cart Item Layout */
+    .cart__item {
+      display: flex;
+      gap: 15px;
+      padding: 20px 0;
+      border-bottom: 1px solid #e9e9e9;
+    }
+    .cart__image {
+      flex-shrink: 0;
+    }
+    .cart__item-details {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-item__price-wrapper {
+      margin: 5px 0;
+    }
+    .cart-item__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto; /* Pushes footer to the bottom */
+    }
+    .cart-item__remove {
+      font-family: var(--font-stack-body);
+      font-size: 14px;
+      text-decoration: underline;
+      color: #808080;
+    }
+    
+    /* Discount Code */
+    .cart-drawer__discount-header {
+        overflow: hidden;
+        color: #1C2C58;
+        text-align: center;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+        margin: 20px 0 10px;
+    }
+    .cart-drawer__discount-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    .cart-drawer__discount-input {
+      width: 70%;
+      flex-grow: 1;
+      height: 38px;
+      border-radius: 8px;
+      background: #F0F7FF;
+      border: 1px solid #D1E5FF;
+      padding: 0 15px;
+      font-family: var(--font-stack-body);
+    }
+    .cart-drawer__discount-button {
+      background: #1C2C58;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0 20px;
+      cursor: pointer;
+      font-family: var(--font-stack-body);
+      height: 38px;
+      flex-shrink: 0;
+    }
+    .cart-drawer__voucher-carousel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+      position: relative;
+    }
+    .cart-drawer__voucher-carousel-inner {
+      overflow: hidden;
+      width: 100%;
+    }
+    .cart-drawer__voucher-list {
+      display: flex;
+      gap: 10px;
+      transition: transform 0.3s ease-in-out;
+    }
+    .cart-drawer__voucher-item {
+      position: relative;
+      flex: 0 0 auto;
+    }
+    .cart-drawer__voucher-item img {
+      display: block;
+      width: 130px;
+      height: auto;
+      border-radius: 8px;
+    }
+    .voucher-copy-button {
+      position: absolute;
+      bottom: 8px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .cart-drawer__carousel-arrow {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0 10px;
+    }
+
+    /* Cart Summary */
+    .cart-drawer__summary-item {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-stack-body);
+      font-size: 16px;
+      padding: 5px 0;
+    }
+    .cart-drawer__summary-item .price-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .cart-drawer__summary-item .price--original {
+      overflow: hidden;
+      color: #808080;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      text-decoration-line: line-through;
+    }
+    .cart-drawer__summary-item .price--final {
+      overflow: hidden;
+      color: #9F332C;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%;
+    }
+    .summary-item__right-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .summary-item__right-content .text-right {
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    .cart-drawer__savings {
+      width: 100%;
+      height: 38px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: #F0F7FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 15px 0;
+    }
+    .cart-drawer__savings span {
+      overflow: hidden;
+      color: #3373BD;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%;
+    }
+    .cart-drawer__cross-sell-header {
+      color: #000;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      margin: 20px 0 10px;
+    }
+    .cart-drawer__cross-sell-slider-wrapper {
+      position: relative;
+    }
+    .cart-drawer__cross-sell-slider {
+      display: flex;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      gap: 15px;
+      padding: 10px;
+    }
+    .cart-drawer__cross-sell-item {
+      display: flex;
+      gap: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      background: #F0F7FF;
+      align-items: flex-start; /* Aligns items to the top */
+      flex: 0 0 100%; /* Each item takes full width */
+    }
+    .cross-sell-item__image {
+      width: 140px;
+      height: 140px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: #FFF;
+    }
+    .cross-sell-item__info {
+      flex-grow: 1;
+    }
+    .cross-sell-item__variant-select {
+      color: #000;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 16px;
+      text-decoration-line: underline;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      margin-bottom: 3px;
+      padding-right: 20px; /* Space for custom arrow */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M4.5 6.75L9 11.25L13.5 6.75' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
+    .cross-sell-item__quantity-label {
+      color: #000;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 16px;
+    }
+    .cross-sell-item__quantity-wrapper {
+        display: inline-flex;
+        height: 27px;
+        align-items: center;
+        flex-shrink: 0;
+    }
+    .cross-sell-item__add-btn {
+      display: flex;
+      width: 70px;
+      height: 40px;
+      padding: 12px 0;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      border-radius: 15px;
+      background: #609EE9;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .cart-drawer__cross-sell-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: 1px solid #e9e9e9;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-drawer__cross-sell-arrow--prev {
+      left: -10px;
+    }
+    .cart-drawer__cross-sell-arrow--next {
+      right: -10px;
+    }
+    .cross-sell-item__info h4 { font-size: 16px; }
+    .cross-sell-item__info p,
+    .cross-sell-item__variant-select,
+    .cross-sell-item__quantity-label {
+      font-size: 14px;
+    }
+    .cross-sell-item__image {
+      width: 140px;
+      height: 140px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: #FFF;
+    }
+    .cross-sell-item__price-wrapper .compare-at-price {
+        font-size: 14px;
+        text-decoration: line-through;
+        opacity: 0.7;
+    }
+    .cross-sell-item__form-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 15px;
+        margin-top: 10px;
+    }
+    .cross-sell-item__quantity {
+        width: 50%;
+    }
+    .cross-sell-item__add-btn {
+      display: flex;
+      width: 70px;
+      height: 40px;
+      padding: 12px 0;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      border-radius: 15px;
+      background: #609EE9;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    /* Checkout Buttons */
+    .cart__checkout-wrapper--custom {
+      display: flex;
+      gap: 10px;
+    }
+    .btn--cod, .btn--online {
+      flex: 1;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #9F332C;
+      text-decoration: none;
+      font-family: var(--font-stack-body);
+      font-weight: 700;
+    }
+    .btn--cod {
+      background-color: #9F332C;
+      color: white;
+    }
+    .btn--online {
+      background-color: #9F332C;
+      color: white;
+    }
+  </style>
+
   <div id="CartDrawer" class="drawer drawer--right">
     <form id="CartDrawerForm" action="{{ routes.cart_url }}" method="post" novalidate class="drawer__contents" data-location="cart-drawer">
       <div class="drawer__fixed-header">
         <div class="drawer__header relative appear-animation appear-delay-1">
           <div class="h2 drawer__title">{{ 'cart.general.title' | t }}</div>
           <div class="drawer__count">
-            <span class="cart-link__bubble-num">
-              {{ 'cart.general.count' | t: count: cart.item_count }}
-            </span>  
-            {{ 'cart.general.count_products' | t }}
+             {{ 'cart.general.count' | t: count: cart.item_count }} {{ 'cart.general.count_products' | t }}
           </div>
           <div class="drawer__close absolute right-0">
             <button type="button" class="drawer__close-button js-drawer-close">
-              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><title>icon-X</title><path d="m19 17.61 27.12 27.13m0-27.12L19 44.74"/></svg>
+              {%- render 'close-icon' -%}
               <span class="icon__fallback-text">{{ 'cart.general.close_cart' | t }}</span>
             </button>
           </div>
@@ -20,66 +502,205 @@
       </div>
 
       <div class="drawer__inner">
-        <div class="drawer__scrollable">
-          <div data-products class="appear-animation appear-delay-2"></div>
+        <!-- SERVICES -->
+        <div class="cart-drawer__services">
+          <div class="cart-drawer__service-item">
+            {% if settings.cart_free_shipping_icon != blank %}
+              <img src="{{ settings.cart_free_shipping_icon | image_url: width: 64 }}" class="cart-drawer__service-icon" alt="Miễn phí vận chuyển" width="32" height="32">
+            {% endif %}
+            <span>Miễn phí vận chuyển</span>
+          </div>
+          <div class="cart-drawer__service-item">
+            {% if settings.cart_warranty_icon != blank %}
+              <img src="{{ settings.cart_warranty_icon | image_url: width: 64 }}" class="cart-drawer__service-icon" alt="Bảo hành dài lâu" width="32" height="32">
+            {% endif %}
+            <span>Bảo hành dài lâu</span>
+          </div>
+        </div>
 
-          {% if settings.cart_notes_enable %}
-            <div class="appear-animation appear-delay-3">
-              <label for="CartNoteDrawer">{{ 'cart.general.note' | t }}</label>
-              <textarea name="note" class="input-full cart-notes" id="CartNoteDrawer">{{ cart.note }}</textarea>
+        <div class="drawer__scrollable">
+          <!-- FREE SHIPPING DETAILS -->
+          {%- if settings.cart_free_shipping_enable -%}
+            <div class="cart-drawer__free-shipping-info appear-animation appear-delay-2">
+              {%- assign threshold = settings.cart_free_shipping_threshold -%}
+              {%- if cart.total_price >= threshold -%}
+                Đơn hàng của bạn được miễn phí vận chuyển
+              {%- else -%}
+                {%- assign remaining = threshold | minus: cart.total_price -%}
+                Mua thêm {{ remaining | money }} để được miễn phí vận chuyển
+              {%- endif -%}
             </div>
-          {% endif %}
+          {%- endif -%}
+
+          <!-- CART ITEMS -->
+          <div data-products class="appear-animation appear-delay-2">
+            {%- comment -%} Cart items are rendered here via JS {%- endcomment -%}
+          </div>
+
+          <svg class="cart-drawer__divider" xmlns="http://www.w3.org/2000/svg" width="439" height="2" viewBox="0 0 439 2" fill="none">
+            <path d="M0 1L439 1.00004" stroke="#C4C4C4"/>
+          </svg>
+          
+          <!-- DISCOUNT CODE -->
+          <div class="cart-drawer__discount-wrapper">
+              <h3 class="cart-drawer__discount-header">Nhập mã ưu đãi của bạn</h3>
+              <form action="{{ routes.cart_url }}/update" method="post" class="cart-drawer__discount-form" novalidate>
+                  <input type="text" id="CartDrawer-Discount" name="discount" class="cart-drawer__discount-input" placeholder="Mã ưu đãi">
+                  <button type="button" class="cart-drawer__discount-button">Áp dụng</button>
+              </form>
+              <div class="cart-drawer__voucher-carousel">
+                  <button type="button" class="cart-drawer__carousel-arrow prev">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" fill="none"><path d="M12.9163 15.5L18.0833 20.6668L16.7917 21.9583L10.3333 15.5L16.7917 9.04163L18.0833 10.3331L12.9163 15.5Z" fill="#9E9EB0"/><circle cx="15.5" cy="15.5" r="15" stroke="#E9E9E9"/></svg>
+                  </button>
+                  <div class="cart-drawer__voucher-carousel-inner">
+                      <div class="cart-drawer__voucher-list">
+                        {% for i in (1..5) %}
+                          {%- assign voucher_image_setting = 'voucher_image_' | append: i -%}
+                          {%- assign voucher_code_setting = 'voucher_code_' | append: i -%}
+                          {%- assign voucher_image = settings[voucher_image_setting] -%}
+                          {%- assign voucher_code = settings[voucher_code_setting] -%}
+                          {% if voucher_image != blank and voucher_code != blank %}
+                            <div class="cart-drawer__voucher-item">
+                              <img src="{{ voucher_image | image_url: width: 260 }}" alt="Voucher {{ i }}" loading="lazy" width="130" height="65">
+                              <button class="voucher-copy-button" data-copy-code="{{ voucher_code }}">Copy</button>
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                  </div>
+                   <button type="button" class="cart-drawer__carousel-arrow next">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" fill="none"><path d="M18.0837 15.5L12.9167 10.3332L14.2083 9.04171L20.6667 15.5L14.2083 21.9584L12.9167 20.6669L18.0837 15.5Z" fill="#609EE9"/><circle cx="15.5" cy="15.5" r="15" stroke="#E9E9E9"/></svg>
+                  </button>
+              </div>
+          </div>
+
+          <!-- CROSS-SELL -->
+          {%- assign cross_sell_products = settings.cart_cross_sell_products -%}
+          {%- if cross_sell_products.count > 0 -%}
+          <div class="cart-drawer__cross-sell">
+            <h3 class="cart-drawer__cross-sell-header">Giấc ngủ trọn vẹn hơn với các phụ kiện</h3>
+            <div class="cart-drawer__cross-sell-slider-wrapper">
+              <button type="button" class="cart-drawer__cross-sell-arrow cart-drawer__cross-sell-arrow--prev" aria-label="Previous product">
+                <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" fill="none">
+                  <path d="M12.9163 15.5L18.0833 20.6668L16.7917 21.9583L10.3333 15.5L16.7917 9.04163L18.0833 10.3331L12.9163 15.5Z" fill="#9E9EB0"/>
+                </svg>
+              </button>
+              <div class="cart-drawer__cross-sell-slider">
+                {%- for product in cross_sell_products -%}
+                    {%- assign current_variant = product.first_available_variant -%}
+                    <div class="cart-drawer__cross-sell-item" data-product-id="{{ product.id }}">
+                      <a href="{{ product.url }}" class="cross-sell-item__image">
+                        <img src="{{ product.featured_image | image_url: width: 280, height: 280 }}" width="140" height="140" alt="{{ product.featured_image.alt | escape }}" loading="lazy">
+                      </a>
+                      <div class="cross-sell-item__info">
+                        <div>
+                          <h4 class="cross-sell-item__title"><a href="{{ product.url }}">{{ product.title }}</a></h4>
+                          <div class="cross-sell-item__price-wrapper">
+                            <span class="price">{{ current_variant.price | money }}</span>
+                            {% if current_variant.compare_at_price > current_variant.price %}
+                              <del class="compare-at-price">{{ current_variant.compare_at_price | money }}</del>
+                            {% endif %}
+                          </div>
+                        </div>
+                        
+                        <form method="post" action="{{ routes.cart_add_url }}" class="cross-sell-item__form">
+                          <div>
+                            <input type="hidden" name="id" value="{{ current_variant.id }}">
+                            
+                            {% if product.variants.size > 1 %}
+                               <select name="id" class="cross-sell-item__variant-select">
+                                  {% for variant in product.variants %}
+                                      <option {% if variant == current_variant %}selected="selected"{% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+                                  {% endfor %}
+                               </select>
+                            {% endif %}
+  
+                            <div class="cross-sell-item__form-row">
+                              <div class="cross-sell-item__quantity">
+                                <label for="cross-sell-quantity-{{ product.id }}" class="cross-sell-item__quantity-label">Số lượng:</label>
+                                <div class="cross-sell-item__quantity-wrapper js-qty__wrapper">
+                                  <button type="button" class="js-qty__adjust js-qty__adjust--minus" aria-label="-">-</button>
+                                  <input type="text" id="cross-sell-quantity-{{ product.id }}" name="quantity" value="1" min="1" class="js-qty__num">
+                                  <button type="button" class="js-qty__adjust js-qty__adjust--plus" aria-label="+">+</button>
+                                </div>
+                              </div>
+                              <button type="button" class="cross-sell-item__add-btn">Thêm</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                </div>
+                <button type="button" class="cart-drawer__cross-sell-arrow cart-drawer__cross-sell-arrow--next" aria-label="Next product">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" fill="none">
+                  <path d="M18.0837 15.5L12.9167 10.3332L14.2083 9.04171L20.6667 15.5L14.2083 21.9584L12.9167 20.6669L18.0837 15.5Z" fill="#609EE9"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          {%- endif -%}
         </div>
 
         <div class="drawer__footer appear-animation appear-delay-4">
-          <div data-discounts class="hide">
-            {% if cart.cart_level_discount_applications != blank %}
-              <div class="cart__discounts cart__item-sub cart__item-row">
-                <div>{{ 'cart.general.discounts' | t }}</div>
-                <div class="text-right">
-                  {% for cart_discount in cart.cart_level_discount_applications %}
-                    <div class="cart__discount">
-                      {{ cart_discount.title }} (-{{ cart_discount.total_allocated_amount | money }})
-                    </div>
-                  {% endfor %}
+          <div data-cart-footer>
+            <svg class="cart-drawer__divider" xmlns="http://www.w3.org/2000/svg" width="439" height="2" viewBox="0 0 439 2" fill="none">
+              <path d="M0 1L439 1.00004" stroke="#C4C4C4"/>
+            </svg>
+            
+            <!-- SUMMARY -->
+            <div class="cart-drawer__summary">
+                {%- comment -%}
+                  Calculate original total price based on the same logic as cart-item.liquid
+                  This ensures we capture both compare_at_price and original_price correctly.
+                {%- endcomment -%}
+                {%- assign original_total_price_calculated = 0 -%}
+                {%- for item in cart.items -%}
+                    {%- assign line_price = 0 -%}
+                    {%- if item.variant.compare_at_price > item.price -%}
+                        {%- assign line_price = item.variant.compare_at_price | times: item.quantity -%}
+                    {%- else -%}
+                        {%- assign line_price = item.original_price | times: item.quantity -%}
+                    {%- endif -%}
+                    {%- assign original_total_price_calculated = original_total_price_calculated | plus: line_price -%}
+                {%- endfor -%}
+
+                {%- assign total_savings = original_total_price_calculated | minus: cart.total_price -%}
+
+                <div class="cart-drawer__savings" data-savings-display>
+                  <span>Bạn đã tiết kiệm được {{ total_savings | money }}</span>
                 </div>
-              </div>
-            {% endif %}
+
+                <div class="cart-drawer__summary-item">
+                    <span>Tạm tính</span>
+                    <div class="summary-item__right-content">
+                      <span class="price-container">
+                        {%- if total_savings > 0 -%}
+                          <del class="price--original">{{ original_total_price_calculated | money }}</del>
+                        {%- endif -%}
+                        <span data-subtotal class="price--final">{{ cart.total_price | money }}</span>
+                      </span>
+                      {%- if cart.cart_level_discount_applications.size > 0 -%}
+                        <span class="text-right">Đã áp dụng ưu đãi</span>
+                      {%- endif -%}
+                    </div>
           </div>
 
-          <div class="cart__item-sub cart__item-row hide">
-            <div class="ajaxcart__subtotal">{{ 'cart.general.subtotal' | t }}</div>
-            <div data-subtotal>{{ cart.total_price | money }}</div>
-          </div>
-
-          <div class="cart__item-row text-center hide">
-            <small>
-              {{ 'cart.general.shipping_at_checkout' | t }}<br />
-            </small>
-          </div>
-
-          {% if settings.cart_terms_conditions_enable %}
-            <div class="cart__item-row cart__terms">
-              <input type="checkbox" id="CartTermsDrawer" class="cart__terms-checkbox">
-              <label for="CartTermsDrawer">
-                {% if settings.cart_terms_conditions_page != blank %}
-                  {{ 'cart.general.terms_html' | t: url: settings.cart_terms_conditions_page.url }}
-                {% else %}
-                  {{ 'cart.general.terms' | t }}
-                {% endif %}
-              </label>
+                <div class="cart-drawer__summary-item">
+                    <span>Vận chuyển</span>
+                    <span>Miễn phí</span>
+                </div>
             </div>
-          {% endif %}
 
-          <div class="cart__checkout-wrapper">
-            <button type="submit" name="checkout" data-terms-required="{{ settings.cart_terms_conditions_enable }}" class="btn cart__checkout hide">
-              {{ 'cart.general.checkout' | t }}
-            </button>
+            <svg class="cart-drawer__divider" xmlns="http://www.w3.org/2000/svg" width="439" height="2" viewBox="0 0 439 2" fill="none">
+              <path d="M0 1L439 1.00004" stroke="#C4C4C4"/>
+            </svg>
 
-            <a href="{{ routes.cart_url }}" class="btn btn--secondary cart__checkout">
-              <span class="text">{{ 'cart.general.your_cart' | t | upcase }}</span>
-            </a>
-
+            <!-- CHECKOUT BUTTONS -->
+            <div class="cart__checkout-wrapper--custom">
+                <button type="submit" name="checkout" class="btn btn--cod">Thanh toán COD</button>
+                <button type="submit" name="checkout" class="btn btn--online">Thanh toán online</button>
+            </div>
             {% if additional_checkout_buttons and settings.cart_additional_buttons %}
               <div class="additional-checkout-buttons additional-checkout-buttons--vertical">{{ content_for_additional_checkout_buttons }}</div>
             {% endif %}
@@ -93,5 +714,141 @@
         </div>
       </div>
     </form>
+
+    <script>
+      (function() {
+        // --- General Cart Drawer Functions ---
+        function rebuildCart() {
+          if (theme && typeof theme.CartForm === 'function') {
+            const cartFormInstance = new theme.CartForm(document.getElementById('CartDrawerForm'));
+            cartFormInstance.buildCart();
+          } else {
+            window.location.href = '{{ routes.cart_url }}';
+          }
+        }
+
+        // --- Event Delegation for Clicks ---
+        document.addEventListener('click', function(event) {
+          const target = event.target;
+
+          // Handle Slider Arrows
+          const prevArrow = target.closest('.cart-drawer__cross-sell-arrow--prev');
+          const nextArrow = target.closest('.cart-drawer__cross-sell-arrow--next');
+          if (prevArrow || nextArrow) {
+            const slider = document.querySelector('.cart-drawer__cross-sell-slider');
+            if (!slider) return;
+            const slideWidth = slider.querySelector('.cart-drawer__cross-sell-item').clientWidth;
+            slider.scrollLeft += nextArrow ? slideWidth : -slideWidth;
+            return;
+          }
+
+          // Handle Apply Discount Button
+          const applyButton = target.closest('.cart-drawer__discount-button');
+          if (applyButton) {
+            event.preventDefault();
+            const form = applyButton.closest('form');
+            const discountInput = form.querySelector('input[name="discount"]');
+            if (!discountInput.value) {
+              alert('Vui lòng nhập mã giảm giá.');
+              return;
+            }
+            
+            const originalButtonText = applyButton.textContent;
+            applyButton.textContent = 'Đang áp dụng...';
+            applyButton.disabled = true;
+
+            fetch('/cart/update.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({ 'discount': discountInput.value })
+            })
+            .then(res => res.json())
+            .then(cart => {
+              if (cart.status) {
+                alert(cart.description || 'Mã giảm giá không hợp lệ.');
+                discountInput.value = '';
+              }
+              rebuildCart();
+            })
+            .catch(e => console.error(e))
+            .finally(() => {
+              applyButton.textContent = originalButtonText;
+              applyButton.disabled = false;
+            });
+            return;
+          }
+
+          // Handle Cross-Sell Add to Cart Button
+          const addButton = target.closest('.cross-sell-item__add-btn');
+          if (addButton) {
+            event.preventDefault();
+            const form = addButton.closest('form');
+            const submitButton = form.querySelector('.cross-sell-item__add-btn');
+            
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = '...';
+            submitButton.disabled = true;
+
+            fetch('{{ routes.cart_add_url }}.js', {
+              method: 'POST',
+              body: new FormData(form),
+              headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+            .then(res => res.json())
+            .then(item => {
+              if (item.status) {
+                alert(item.description || 'Sản phẩm đã hết hàng.');
+              }
+              rebuildCart();
+            })
+            .catch(e => console.error(e))
+            .finally(() => {
+              submitButton.textContent = originalButtonText;
+              submitButton.disabled = false;
+            });
+            return;
+          }
+
+          // Handle Voucher Copy Button
+          const copyButton = target.closest('.voucher-copy-button');
+          if (copyButton) {
+            event.preventDefault();
+            const codeToCopy = copyButton.dataset.copyCode;
+            
+            navigator.clipboard.writeText(codeToCopy).then(() => {
+              const originalText = copyButton.textContent;
+              copyButton.textContent = 'Đã chép!';
+              copyButton.disabled = true;
+              setTimeout(() => {
+                copyButton.textContent = originalText;
+                copyButton.disabled = false;
+              }, 2000);
+            }).catch(err => {
+              console.error('Không thể sao chép: ', err);
+              alert('Không thể sao chép mã.');
+            });
+            return;
+          }
+        });
+
+        // --- Event Delegation for Form Submissions ---
+        document.addEventListener('submit', function(event) {
+          // ... (existing submit handler)
+        });
+        
+        // --- Event Delegation for Select Focus/Blur to toggle arrow direction ---
+        document.addEventListener('focusin', function(event) {
+            if (event.target.matches('.cross-sell-item__variant-select')) {
+                event.target.style.backgroundImage = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M4.5 11.25L9 6.75L13.5 11.25' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`;
+            }
+        });
+
+        document.addEventListener('focusout', function(event) {
+            if (event.target.matches('.cross-sell-item__variant-select')) {
+                event.target.style.backgroundImage = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M4.5 6.75L9 11.25L13.5 6.75' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`;
+            }
+        });
+      })();
+    </script>
   </div>
 {%- endif -%}

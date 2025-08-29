@@ -1,0 +1,211 @@
+{%- liquid
+  assign section_id = section.id
+-%}
+
+<section id="services-{{ section_id }}" class="services-section">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <div class="services-heading">{{ section.settings.heading }}</div>
+    {% endif %}
+
+    <div class="services-items">
+      {%- for block in section.blocks -%}
+        <div class="service-item" {{ block.shopify_attributes }}>
+          <div class="service-icon">
+            {% if block.settings.icon_svg != blank %}
+              <div class="service-icon-svg">{{ block.settings.icon_svg }}</div>
+            {% elsif block.settings.icon_image != blank %}
+              <img src="{{ block.settings.icon_image | image_url: width: 284, height: 216, crop: 'center' }}" alt="{{ block.settings.title | escape }}" width="142" height="108" loading="lazy" decoding="async" />
+            {% endif %}
+          </div>
+          <div class="service-content">
+            {% if block.settings.title != blank %}
+              <div class="service-title">{{ block.settings.title }}</div>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <div class="service-text">{{ block.settings.text }}</div>
+            {% endif %}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <style>
+    #services-{{ section_id }} .services-heading {
+      width: 568px;
+      height: 39px;
+      flex-shrink: 0;
+      color: #1C2C58;
+      font-family: Tinos, serif;
+      font-size: 38px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%;
+      margin-bottom: 24px;
+    }
+
+    #services-{{ section_id }} .services-items { display: grid; gap: 20px; justify-items: center; }
+    /* When staged, hide original list container */
+    #services-{{ section_id }}.services-has-stage .services-items { display: none; }
+
+    #services-{{ section_id }} .service-item {
+      width: 710px;
+      height: 243px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      border-radius: 8px;
+      background: #F0F7FF;
+      padding: 16px 24px;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+    }
+
+    /* Stage for one-by-one flip */
+    #services-{{ section_id }} .services-stage { position: relative; width: 710px; height: 243px; margin: 0 auto; perspective: 1000px; }
+    #services-{{ section_id }} .services-stage .service-item { position: absolute; inset: 0; opacity: 0; transform: rotateY(90deg); }
+    #services-{{ section_id }} .services-stage .service-item.is-active { opacity: 1; transform: rotateY(0); transition: transform 500ms ease, opacity 500ms ease; }
+    #services-{{ section_id }} .services-stage .service-item.flip-out-left { animation: svc-flip-out-left 500ms ease forwards; }
+    #services-{{ section_id }} .services-stage .service-item.flip-in-right { animation: svc-flip-in-right 500ms ease forwards; }
+
+    /* Flip-in effect */
+    #services-{{ section_id }} .service-item.is-pre { transform: rotateY(-90deg); opacity: 0; }
+    #services-{{ section_id }} .service-item.is-flip { animation: svc-flip-in 600ms ease forwards; }
+    @keyframes svc-flip-in { from { transform: rotateY(-90deg); opacity: 0; } to { transform: rotateY(0); opacity: 1; } }
+
+    #services-{{ section_id }} .service-icon { width: 142px; height: 108px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    #services-{{ section_id }} .service-icon img { width: 142px; height: 108px; object-fit: contain; }
+    #services-{{ section_id }} .service-icon-svg svg { width: 142px; height: 108px; }
+
+    #services-{{ section_id }} .service-content { display: flex; flex-direction: column; gap: 8px; }
+    #services-{{ section_id }} .service-title {
+      width: 178px;
+      color: #000;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%;
+    }
+    #services-{{ section_id }} .service-text {
+      width: 240px;
+      color: #000;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+    }
+
+    @media (max-width: 989px) {
+      #services-{{ section_id }} .service-item { width: 100%; height: auto; align-items: flex-start; }
+      #services-{{ section_id }} .service-content { width: auto; }
+    }
+
+    @keyframes svc-flip-in-right { from { transform: rotateY(90deg); opacity: 0; } to { transform: rotateY(0); opacity: 1; } }
+    @keyframes svc-flip-out-left { from { transform: rotateY(0); opacity: 1; } to { transform: rotateY(-90deg); opacity: 0; } }
+  </style>
+</section>
+
+<script>
+  (function(){
+    var root = document.getElementById('services-{{ section_id }}');
+    if (!root) return;
+    var list = root.querySelector('.services-items');
+    var items = list ? Array.prototype.slice.call(list.children) : [];
+    if (!items.length) return;
+
+    // Build stage and move cards into stage for replacement flips
+    var stage = document.createElement('div');
+    stage.className = 'services-stage';
+    root.classList.add('services-has-stage');
+    list.parentNode.insertBefore(stage, list);
+    items.forEach(function(el){ stage.appendChild(el); });
+
+    items = Array.prototype.slice.call(stage.querySelectorAll('.service-item'));
+    var index = 0; var animating = false; var engaged = false; var originalOverflow = ''; var activated = false;
+    function lockScroll(){ originalOverflow = document.body.style.overflow; document.body.style.overflow = 'hidden'; }
+    function unlockScroll(){ document.body.style.overflow = originalOverflow || ''; }
+
+    function setActive(i){ items.forEach(function(c){ c.classList.remove('is-active'); }); if (items[i]) items[i].classList.add('is-active'); }
+    setActive(index);
+
+    function step(dir){
+      if (animating) return;
+      var next = index + dir;
+      if (next < 0 || next >= items.length) {
+        // unlock to allow normal page scroll when user tries to leave the stage
+        root.removeEventListener('wheel', onWheel);
+        root.removeEventListener('touchstart', onTouchStart);
+        root.removeEventListener('touchend', onTouchEnd);
+        unlockScroll();
+        return;
+      }
+      animating = true;
+      var cur = items[index];
+      var nxt = items[next];
+      // reset classes
+      ['flip-in-right','flip-in-left','flip-out-left','flip-out-right'].forEach(function(k){ cur.classList.remove(k); nxt.classList.remove(k); });
+      // prepare next visibility
+      nxt.style.opacity = '1';
+      if (dir > 0) { cur.classList.add('flip-out-left'); nxt.classList.add('flip-in-right'); }
+      else { cur.classList.add('flip-out-right'); nxt.classList.add('flip-in-left'); }
+      setTimeout(function(){
+        cur.classList.remove('is-active','flip-out-left','flip-out-right');
+        nxt.classList.remove('flip-in-left','flip-in-right');
+        index = next; setActive(index); animating = false;
+      }, 520);
+    }
+
+    function onWheel(e){
+      if (!engaged) { engaged = true; lockScroll(); }
+      e.preventDefault();
+      var dir = e.deltaY > 0 ? 1 : -1;
+      step(dir);
+    }
+    var sx=0, sy=0;
+    function onTouchStart(e){ var t=e.touches[0]; sx=t.clientX; sy=t.clientY; }
+    function onTouchEnd(e){ var t=e.changedTouches[0]; var dx=t.clientX-sx; var dy=t.clientY-sy; if (Math.abs(dy) > Math.abs(dx)+6) { if (!engaged) { engaged=true; lockScroll(); } step(dy<0?1:-1); } }
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting && !activated) {
+          activated = true;
+          root.addEventListener('wheel', onWheel, { passive: false });
+          root.addEventListener('touchstart', onTouchStart, { passive: true });
+          root.addEventListener('touchend', onTouchEnd, { passive: true });
+        }
+      });
+    }, { threshold: 0.35 });
+    io.observe(root);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Services list",
+  "settings": [
+    { "type": "html", "id": "heading", "label": "Heading (HTML)" }
+  ],
+  "blocks": [
+    {
+      "type": "services_item",
+      "name": "Service",
+      "settings": [
+        { "type": "image_picker", "id": "icon_image", "label": "Icon image (142x108)" },
+        { "type": "textarea", "id": "icon_svg", "label": "Icon SVG (optional)" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Services list", "category": "Text" }
+  ]
+}
+{% endschema %}
+
+

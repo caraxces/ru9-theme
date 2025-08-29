@@ -1,181 +1,955 @@
-{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
-
-<div class="page-width">
-  {%- if section.settings.title != blank -%}
+<div data-section-id="{{ section.id }}" data-section-type="featured-collections">
+  <div class="featured-collections-section">
+    
+    <!-- Header Section -->
     <div class="section-header">
-      <h2 class="section-header__title">{{ section.settings.title }}</h2>
-    </div>
-  {%- endif -%}
-
-  <div class="grid grid--uniform{% unless section.settings.enable_gutter %} grid--no-gutters{% endunless %}">
-    {%- liquid
-      assign isEmpty = true
-      if section.blocks.size > 0
-        assign isEmpty = false
-      endif
-    -%}
-
-    {%- for block in section.blocks -%}
-      {%- liquid
-        assign collection = collections[block.settings.collection]
-        assign background_position = block.settings.focal_point
-
-        capture gridView
-          if section.blocks.size < section.settings.per_row
-            assign products_per_row = section.blocks.size
-          else
-            assign products_per_row = section.settings.per_row
-          endif
-          render 'products_per_row', products_per_row: products_per_row, style: 'fractions'
-        endcapture
-      -%}
-
-      {%- render 'collection-grid-item',
-        collection: collection,
-        block: block,
-        gridView: gridView,
-        background_position: background_position,
-        per_row: section.settings.per_row,
-        sizeVariable: gridView,
-        fallback: 'variable'
-      -%}
-    {%- endfor -%}
-
-    {%- if isEmpty -%}
-      <div class="page-width">
-        <div class="grid">
-          <div class="grid__item">
-            <div class="rte">
-              {{ 'home_page.onboarding.no_content' | t }}
-            </div>
-          </div>
+      <div class="header-left">
+        <h2 class="section-title">
+          {{ section.settings.title | default: 'Sản phẩm bán chạy' }}
+        </h2>
+      </div>
+      <div class="header-right">
+        <a href="#" class="view-all-link">
+          Xem tất cả
+        </a>
+        <div class="carousel-nav">
+          <button class="nav-btn nav-prev">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.5 9L4.5 6L7.5 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="nav-btn nav-next">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.5 9L7.5 6L4.5 3" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
       </div>
-    {%- endif -%}
-
+    </div>
+    
+    <!-- Category Tabs -->
+    <div class="category-tabs-container">
+      <div class="category-tabs">
+        {%- for block in section.blocks -%}
+          <button 
+            class="category-tab{% if forloop.index == 1 %} active{% endif %}" 
+            data-tab="Tab-{{ block.id }}"
+            data-collection-url="{{ block.settings.collection.url }}"
+          >
+            {{ block.settings.tab_name | default: 'Nệm' }}
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+    
+    <!-- Product Carousel Section -->
+    <div class="product-carousel-section">
+      <div class="product-carousel">
+        <div class="product-cards-container">
+          {%- for block in section.blocks -%}
+            <div class="tab-content{% if forloop.index == 1 %} active{% endif %}" id="Tab-content-{{ block.id }}">
+              
+              {%- assign collection = block.settings.collection -%}
+              {%- if collection != blank -%}
+                {%- for product in collection.products -%}
+                  <a href="{{ product.url }}" class="product-card">
+                    <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}">
+                      {%- if block.settings.product_label != blank -%}
+                        <div class="product-label">
+                          {{ block.settings.product_label }}
+                        </div>
+                      {%- endif -%}
+                      {%- if product.featured_image -%}
+                        <img 
+                          class="product-image-primary"
+                          src="{{ product.featured_image | img_url: '400x320', crop: 'center' }}" 
+                          alt="{{ product.title }}"
+                          width="400" height="320"
+                        >
+                        {%- if product.media.size > 1 -%}
+                          {%- for media in product.media offset: 1 limit: 1 -%}
+                            {%- assign second_image = media.preview_image -%}
+                            {%- if second_image != blank -%}
+                              <img 
+                                class="product-image-secondary"
+                                src="{{ second_image | img_url: '400x320', crop: 'center' }}" 
+                                alt="{{ product.title }}"
+                                width="400" height="320"
+                              >
+                            {%- endif -%}
+                          {%- endfor -%}
+                        {%- endif -%}
+                      {%- else -%}
+                        <div class="placeholder-image">
+                          No Image
+                        </div>
+                      {%- endif -%}
+                    </div>
+                    
+                    <div class="product-info">
+                      <div class="product-rating">
+                        <svg width="81" height="14" viewBox="0 0 81 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M6.84155 0.245755C6.94841 -0.0819184 7.41368 -0.0819184 7.52054 0.245755L8.97105 4.69322C9.01883 4.83976 9.15591 4.93898 9.31055 4.93898H14.0044C14.3502 4.93898 14.494 5.37983 14.2143 5.58238L10.4169 8.33108C10.2917 8.4216 10.2394 8.58218 10.2872 8.72871L11.7377 13.1762C11.8445 13.5038 11.4681 13.7763 11.1883 13.5738L7.3909 10.8251C7.26577 10.7346 7.09632 10.7346 6.9712 10.8251L3.1738 13.5738C2.89403 13.7763 2.51759 13.5038 2.62445 13.1762L4.07493 8.72871C4.12273 8.58218 4.07037 8.4216 3.94525 8.33108L0.147842 5.58238C-0.131937 5.37983 0.0118471 4.93898 0.357675 4.93898H5.05154C5.20618 4.93898 5.34326 4.83976 5.39104 4.69322L6.84155 0.245755Z" fill="#FFDC5F"/>
+                          <path d="M23.5007 0.245755C23.6076 -0.0819184 24.0729 -0.0819184 24.1797 0.245755L25.6302 4.69322C25.678 4.83976 25.8151 4.93898 25.9697 4.93898H30.6636C31.0094 4.93898 31.1532 5.37983 30.8735 5.58238L27.0761 8.33108C26.9509 8.4216 26.8986 8.58218 26.9463 8.72871L28.3969 13.1762C28.5037 13.5038 28.1273 13.7763 27.8475 13.5738L24.0501 10.8251C23.925 10.7346 23.7555 10.7346 23.6304 10.8251L19.833 13.5738C19.5532 13.7763 19.1768 13.5038 19.2836 13.1762L20.7341 8.72871C20.7819 8.58218 20.7295 8.4216 20.6044 8.33108L16.807 5.58238C16.5272 5.37983 16.671 4.93898 17.0169 4.93898H21.7107C21.8654 4.93898 22.0025 4.83976 22.0502 4.69322L23.5007 0.245755Z" fill="#FFDC5F"/>
+                          <path d="M40.1609 0.245755C40.2678 -0.0819184 40.733 -0.0819184 40.8399 0.245755L42.2904 4.69322C42.3382 4.83976 42.4753 4.93898 42.6299 4.93898H47.3238C47.6696 4.93898 47.8134 5.37983 47.5336 5.58238L43.7362 8.33108C43.6111 8.4216 43.5587 8.58218 43.6065 8.72871L45.057 13.1762C45.1639 13.5038 44.7874 13.7763 44.5077 13.5738L40.7102 10.8251C40.5851 10.7346 40.4157 10.7346 40.2905 10.8251L36.4931 13.5738C36.2134 13.7763 35.8369 13.5038 35.9438 13.1762L37.3943 8.72871C37.4421 8.58218 37.3897 8.4216 37.2646 8.33108L33.4672 5.58238C33.1874 5.37983 33.3312 4.93898 33.677 4.93898H38.3709C38.5255 4.93898 38.6626 4.83976 38.7104 4.69322L40.1609 0.245755Z" fill="#FFDC5F"/>
+                          <path d="M56.8201 0.245755C56.9269 -0.0819184 57.3922 -0.0819184 57.4991 0.245755L58.9493 4.69322C58.9975 4.83976 59.1343 4.93898 59.289 4.93898H63.9828C64.3285 4.93898 64.4725 5.37983 64.1929 5.58238L60.3951 8.33108C60.2701 8.4216 60.2178 8.58218 60.266 8.72871L61.716 13.1762C61.823 13.5038 61.4464 13.7763 61.1668 13.5738L57.3694 10.8251C57.2443 10.7346 57.0748 10.7346 56.9497 10.8251L53.1523 13.5738C52.8725 13.7763 52.4961 13.5038 52.603 13.1762L54.0535 8.72871C54.1012 8.58218 54.0489 8.4216 53.9238 8.33108L50.1263 5.58238C49.8466 5.37983 49.9904 4.93898 50.3362 4.93898H55.0301C55.1847 4.93898 55.3218 4.83976 55.3696 4.69322L56.8201 0.245755Z" fill="#FFDC5F"/>
+                          <path d="M73.4789 0.245755C73.586 -0.0819184 74.0513 -0.0819184 74.1584 0.245755L75.6084 4.69322C75.6566 4.83976 75.7934 4.93898 75.9481 4.93898H80.6419C80.9876 4.93898 81.1316 5.37983 80.852 5.58238L77.0542 8.33108C76.9292 8.4216 76.8769 8.58218 76.9251 8.72871L78.3751 13.1762C78.4822 13.5038 78.1055 13.7763 77.8259 13.5738L74.0287 10.8251C73.9032 10.7346 73.7342 10.7346 73.6086 10.8251L69.8115 13.5738C69.5318 13.7763 69.1552 13.5038 69.2623 13.1762L70.7123 8.72871C70.7605 8.58218 70.7081 8.4216 70.5832 8.33108L66.7854 5.58238C66.5057 5.37983 66.6497 4.93898 66.9954 4.93898H71.6892C71.8439 4.93898 71.9808 4.83976 72.029 4.69322L73.4789 0.245755Z" fill="#FFDC5F"/>
+                        </svg>
+                        {%- assign rating = product.metafields.reviews.rating.value -%}
+                        {%- if rating != blank -%}
+                          <span class="rating-score">{{ rating.rating | round: 1 }}</span>
+                          <span class="rating-count">({{ product.metafields.reviews.rating_count }})</span>
+                        {%- endif -%}
+                      </div>
+                      <h3 class="product-name">{{ product.title }}</h3>
+                      <div class="product-meta">25cm, 6 sizes</div>
+                      <div class="product-price">
+                        <span class="price">Từ {{ product.price | money }}</span>
+                        {%- if product.compare_at_price > product.price -%}
+                           {%- assign sale_percentage = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                          <span class="discount-badge">-{{ sale_percentage }}%</span>
+                          <span class="compare-price">{{ product.compare_at_price | money }}</span>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  </a>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+    <div class="carousel-progress-container">
+      <div class="carousel-progress-bar-background">
+        <div class="carousel-progress-bar"></div>
+      </div>
+    </div>
   </div>
 </div>
 
-{%- if section.settings.divider -%}</div>{%- endif -%}
+<style>
+  /* General Section Styles */
+  .featured-collections-section {
+    width: 100%;
+    min-height: auto;
+    margin: 0 auto 60px auto;
+    padding: 0 6.8%;
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+  .section-header {
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .header-left {
+    flex: 1;
+    text-align: left;
+  }
+  .section-title {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 39px;
+    font-weight: 700;
+    line-height: 120%;
+    color: #1C2C58;
+    margin: 0;
+    text-align: left;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .view-all-link {
+    color: #1A1A1A;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: underline;
+    line-height: 1;
+  }
+  .view-all-link:hover {
+    color: #000 !important;
+  }
+
+  /* Category Tabs */
+  .category-tabs-container {
+    margin-bottom: 24px;
+  }
+  .category-tabs {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .category-tab {
+    display: flex;
+    height: 45px;
+    min-height: 45px;
+    padding: 12px 24px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 100.1px;
+    border: 1px solid transparent;
+    background: #FFFBE9;
+    color: #1A1A1A;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .category-tab:hover {
+    background: #e9ecef;
+  }
+  .category-tab.active {
+    background: #FFD35B;
+    color: #1A1A1A;
+    font-weight: 600;
+  }
+
+  /* Carousel Styles */
+  .product-carousel-section {
+    position: relative;
+  }
+  .product-carousel {
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+  }
+  .product-carousel.grabbing {
+    cursor: grabbing;
+  }
+  .product-carousel.grabbing .product-card {
+    pointer-events: none;
+  }
+  .product-cards-container {
+    display: flex;
+    gap: 2%;
+    transition: transform 0.3s ease;
+  }
+  .tab-content {
+    display: none;
+    gap: 2%;
+    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .tab-content.active {
+    display: flex;
+  }
+
+  /* Carousel Navigation */
+  .carousel-nav {
+    display: flex;
+    gap: 6px;
+  }
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  .nav-btn.nav-prev {
+    background: #FFF9E5;
+  }
+  .nav-btn.nav-prev:hover {
+    background: #FFF3CD;
+  }
+  .nav-btn.nav-next {
+    background: #FFD35B;
+  }
+  .nav-btn.nav-next:hover {
+    background: #FBC947;
+  }
+  .nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Carousel Progress Bar */
+  .carousel-progress-container {
+    padding: 24px 0 40px 0;
+    display: none;
+  }
+  .carousel-progress-bar-background {
+    width: 100%;
+    height: 2px;
+    border-radius: 100px;
+    background: #F2F2F2;
+  }
+  .carousel-progress-bar {
+    height: 100%;
+    border-radius: 100px;
+    background: #1A1A1A;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  /* Product Card Styles */
+  .product-card {
+    width: 380px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out !important;
+  }
+  .product-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .product-image-container {
+    position: relative;
+    width: 380px;
+    height: 284px;
+    background: #FFFDF4;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .placeholder-image {
+    width: 100%;
+    height: 100%;
+    background: #E9ECEF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6C757D;
+    border-radius: 5px;
+  }
+  .product-label {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ block.settings.label_color | default: '#fff' }};
+    background: {{ block.settings.label_bg | default: '#609EE9' }};
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .product-image-primary, .product-image-secondary {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: opacity 0.3s ease;
+  }
+  .product-image-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  .product-image-container.has-secondary-image:hover .product-image-primary,
+  .product-carousel.grabbing .product-image-container.has-secondary-image:hover .product-image-primary {
+    opacity: 0 !important;
+  }
+  .product-image-container.has-secondary-image:hover .product-image-secondary,
+  .product-carousel.grabbing .product-image-container.has-secondary-image:hover .product-image-secondary {
+    opacity: 1 !important;
+  }
+  .product-info {
+    padding: 16px 0 0 0;
+    margin: 0;
+    text-align: left;
+  }
+  .product-rating {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rating-score {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .rating-count {
+    font-size: 14px;
+    color: #666;
+  }
+  .product-name {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #1C2C58;
+    margin: 0 0 8px 0;
+    line-height: 27px;
+  }
+  .product-meta {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .product-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    line-height: 1.2;
+  }
+  .price {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1A1A1A;
+  }
+  .discount-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: #3264E0;
+    background-color: #EBF5FF;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .compare-price {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+    width: 100%;
+  }
+  
+  /* Medium screens */
+  @media (max-width: 1200px) {
+    .product-card {
+      width: calc(50% - 1%) !important;
+      min-width: 250px;
+    }
+    .product-image-container {
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 121/80 !important;
+    }
+    .product-name {
+      font-size: 24px !important;
+    }
+    .product-info {
+      padding: 20px !important;
+    }
+    .section-title {
+      font-size: 36px !important;
+    }
+  }
+  
+  /* Mobile screens */
+  @media (max-width: 768px) {
+    .featured-collections-section {
+      padding: 0 4%;
+    }
+    .section-header {
+      flex-direction: row !important;
+      flex-wrap: wrap;
+      align-items: center;
+      padding-bottom: 0px !important;
+    }
+    .header-left {
+      order: 1;
+      flex: 1 1 auto;
+    }
+    .header-right {
+      order: 2;
+      flex: 0 0 auto;
+    }
+    .header-right .carousel-nav {
+      display: none;
+    }
+    .category-tabs-container {
+      order: 3;
+      width: 100%;
+      margin: 0 -4% 24px -4%;
+      position: relative;
+    }
+    .category-tabs-container::after {
+      content: none;
+    }
+    .category-tabs {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      cursor: grab;
+      padding: 0 4%;
+    }
+    .category-tabs::-webkit-scrollbar {
+        display: none;
+    }
+    .product-carousel-section {
+      margin: 0 -4%;
+    }
+    .product-carousel {
+      padding: 0 4%;
+    }
+    .product-cards-container, .tab-content {
+      gap: 4% !important;
+    }
+    .product-card {
+      width: 319.8px !important;
+      flex-shrink: 0;
+      min-width: auto;
+    }
+    .product-image-container {
+      height: 240.44px !important;
+      aspect-ratio: unset !important;
+    }
+    .product-name {
+      font-size: 22px !important;
+    }
+    .product-info {
+      padding: 16px !important;
+    }
+    .section-title {
+      font-size: 28px !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-name {
+      font-size: 20px !important;
+    }
+    .product-info {
+      padding: 12px !important;
+    }
+    .section-title {
+      font-size: 24px !important;
+    }
+    .category-tab {
+      font-size: 16px !important;
+    }
+    .view-all-btn {
+      width: 90px !important;
+      height: 28px !important;
+      padding: 6px 16px !important;
+      font-size: 12px !important;
+    }
+    .nav-btn {
+      width: 24px !important;
+      height: 24px !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionContainer = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!sectionContainer) return;
+
+    const tabButtons = sectionContainer.querySelectorAll('.category-tab');
+    const tabContents = sectionContainer.querySelectorAll('.tab-content');
+    const viewAllBtn = sectionContainer.querySelector('.view-all-link');
+    const progressBarContainer = sectionContainer.querySelector('.carousel-progress-container');
+    const progressBar = sectionContainer.querySelector('.carousel-progress-bar');
+    const prevBtn = sectionContainer.querySelector('.nav-prev');
+    const nextBtn = sectionContainer.querySelector('.nav-next');
+    const carouselContainer = sectionContainer.querySelector('.product-carousel');
+    
+    let carousels = {};
+
+    // --- Drag-to-scroll for tabs ---
+    const tabsContainer = sectionContainer.querySelector('.category-tabs');
+    if (tabsContainer) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let isDragging = false;
+
+        const startDrag = (e) => {
+            isDown = true;
+            isDragging = false;
+            startX = (e.pageX || e.touches[0].pageX) - tabsContainer.offsetLeft;
+            scrollLeft = tabsContainer.scrollLeft;
+            tabsContainer.style.cursor = 'grabbing';
+        };
+
+        const endDrag = () => {
+            isDown = false;
+            tabsContainer.style.cursor = 'grab';
+        };
+
+        const moveDrag = (e) => {
+            if (!isDown) return;
+            const x = (e.pageX || (e.touches && e.touches[0].pageX)) - tabsContainer.offsetLeft;
+            if (x === undefined) return;
+            
+            const walk = x - startX;
+            if (Math.abs(walk) > 5) {
+                isDragging = true;
+            }
+            if(isDragging){
+                 e.preventDefault();
+            }
+
+            tabsContainer.scrollLeft = scrollLeft - walk;
+        };
+        
+        tabsContainer.addEventListener('click', (e) => {
+            if (isDragging) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+
+        tabsContainer.addEventListener('mousedown', startDrag);
+        tabsContainer.addEventListener('mousemove', moveDrag);
+        tabsContainer.addEventListener('mouseup', endDrag);
+        tabsContainer.addEventListener('mouseleave', endDrag);
+
+        tabsContainer.addEventListener('touchstart', startDrag);
+        tabsContainer.addEventListener('touchmove', moveDrag);
+        tabsContainer.addEventListener('touchend', endDrag);
+    }
+
+    function initializeCarouselForTab(tabContent) {
+      const carouselId = tabContent.id;
+      if (carousels[carouselId] && carousels[carouselId].initialized) return;
+
+      const productCards = tabContent.querySelectorAll('.product-card');
+      if (productCards.length === 0) return;
+
+      let currentIndex = 0;
+      let isDown = false;
+      let startX;
+      let initialTranslateX;
+      let walk = 0;
+
+      function getItemsPerView() {
+        const containerWidth = tabContent.parentElement.offsetWidth;
+        const itemWidth = productCards[0] ? productCards[0].offsetWidth : 280;
+        const gap = containerWidth * 0.02; // 2% gap
+        if (itemWidth === 0) return 1;
+        return Math.floor(containerWidth / (itemWidth + gap)) || 1;
+      }
+
+      function getTranslateX() {
+          const style = window.getComputedStyle(tabContent);
+          const transform = style.transform;
+          if (transform === 'none') return 0;
+          const matrix = new DOMMatrixReadOnly(transform);
+          return matrix.m41;
+      }
+
+      function updateCarousel() {
+        tabContent.style.transition = 'transform 0.4s ease';
+        const itemsPerView = getItemsPerView();
+        const maxIndex = Math.max(0, productCards.length - itemsPerView);
+        currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+
+        const itemWidth = productCards[0].offsetWidth;
+        const gap = tabContent.parentElement.offsetWidth * 0.02;
+        const translateX = -currentIndex * (itemWidth + gap);
+        tabContent.style.transform = `translateX(${translateX}px)`;
+        
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= maxIndex;
+
+        if (progressBar) {
+          progressBarContainer.style.display = maxIndex > 0 ? 'flex' : 'none';
+          progressBar.style.width = maxIndex > 0 ? `${(currentIndex / maxIndex) * 100}%` : '0%';
+        }
+      }
+
+      function dragStart(e) {
+        if (e.target.closest('.product-info')) {
+          isDown = false;
+          return;
+        }
+        isDown = true;
+        carouselContainer.classList.add('grabbing');
+        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+        tabContent.style.transition = 'none';
+        initialTranslateX = getTranslateX();
+        walk = 0;
+      }
+
+      function dragMove(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
+        walk = currentX - startX;
+        tabContent.style.transform = `translateX(${initialTranslateX + walk}px)`;
+      }
+
+      function dragEnd() {
+        if (!isDown) return;
+        isDown = false;
+        carouselContainer.classList.remove('grabbing');
+        
+        // Only update position if dragged, otherwise it's a click
+        if (Math.abs(walk) > 10) { 
+            const itemWidth = productCards[0] ? productCards[0].offsetWidth : 280;
+            const threshold = itemWidth / 4;
+            
+            const itemsPerView = getItemsPerView();
+            const maxIndex = Math.max(0, productCards.length - itemsPerView);
+
+            if (walk < -threshold && currentIndex < maxIndex) {
+                currentIndex++;
+            } else if (walk > threshold && currentIndex > 0) {
+                currentIndex--;
+            }
+        }
+        updateCarousel();
+      }
+
+      tabContent.addEventListener('mousedown', dragStart);
+      tabContent.addEventListener('mousemove', dragMove);
+      tabContent.addEventListener('mouseup', dragEnd);
+      tabContent.addEventListener('mouseleave', dragEnd);
+
+      tabContent.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', e => {
+              if (Math.abs(walk) > 10) { // Threshold to differentiate click from drag
+                  e.preventDefault();
+                  e.stopPropagation();
+              }
+          });
+      });
+
+      tabContent.addEventListener('touchstart', dragStart, { passive: true });
+      window.addEventListener('touchmove', dragMove);
+      window.addEventListener('touchend', dragEnd);
+
+      carousels[carouselId] = {
+        initialized: true,
+        next: () => {
+          const itemsPerView = getItemsPerView();
+          const maxIndex = Math.max(0, productCards.length - itemsPerView);
+          if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateCarousel();
+          }
+        },
+        prev: () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+          }
+        },
+        reset: () => {
+            currentIndex = 0;
+            updateCarousel();
+        },
+        update: () => updateCarousel(true)
+      };
+
+      updateCarousel();
+    }
+    
+    function getActiveCarousel() {
+        const activeContent = sectionContainer.querySelector('.tab-content.active');
+        return activeContent ? carousels[activeContent.id] : null;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      const activeCarousel = getActiveCarousel();
+      if (activeCarousel) activeCarousel.next();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      const activeCarousel = getActiveCarousel();
+      if (activeCarousel) activeCarousel.prev();
+    });
+
+    function updateViewAllButton(activeButton) {
+      const collectionUrl = activeButton.getAttribute('data-collection-url');
+      if (viewAllBtn && collectionUrl) {
+        viewAllBtn.href = collectionUrl;
+      } else if (viewAllBtn) {
+        viewAllBtn.href = '#'; // Fallback
+      }
+    }
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const tabId = this.getAttribute('data-tab');
+        const targetContent = document.getElementById('Tab-content-' + tabId.split('-')[1]);
+        
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+        
+        tabContents.forEach(content => {
+          content.classList.remove('active');
+          content.style.display = 'none';
+        });
+
+        targetContent.classList.add('active');
+        targetContent.style.display = 'flex';
+        
+        updateViewAllButton(this);
+        initializeCarouselForTab(targetContent);
+        
+        const activeCarousel = getActiveCarousel();
+        if (activeCarousel) activeCarousel.reset();
+      });
+    });
+
+    const initialActiveTab = sectionContainer.querySelector('.category-tab.active');
+    if (initialActiveTab) {
+      updateViewAllButton(initialActiveTab);
+      const initialTabContent = sectionContainer.querySelector('.tab-content.active');
+      if (initialTabContent) {
+        initializeCarouselForTab(initialTabContent);
+      }
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        Object.values(carousels).forEach(carousel => {
+          if(carousel && typeof carousel.update === 'function') {
+            carousel.update()
+          }
+        });
+      }, 250);
+    });
+
+    // --- Intersection Observer for Appear Animation ---
+    if ('IntersectionObserver' in window) {
+      const itemsToAnimate = sectionContainer.querySelectorAll('.product-card');
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      itemsToAnimate.forEach((item, index) => {
+        const tabContent = item.closest('.tab-content');
+        const itemIndexWithinTab = Array.from(tabContent.querySelectorAll('.product-card')).indexOf(item);
+        
+        let delay = 0;
+        if (window.innerWidth <= 768) {
+          // On mobile, animate items in pairs.
+          delay = Math.floor(itemIndexWithinTab / 2) * 100;
+        } else {
+          // On desktop, stagger all items.
+          delay = itemIndexWithinTab * 100;
+        }
+
+        item.style.transitionDelay = `${delay}ms`;
+        observer.observe(item);
+      });
+    } else {
+      // Fallback for older browsers
+      sectionContainer.querySelectorAll('.product-card').forEach(item => {
+        item.classList.add('is-visible');
+      });
+    }
+
+  });
+</script>
 
 {% schema %}
 {
-  "name": "t:sections.featured-collections.name",
+  "name": "Featured Collections",
   "class": "index-section",
-  "max_blocks": 15,
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  },
   "settings": [
     {
       "type": "text",
       "id": "title",
-      "label": "t:sections.featured-collections.settings.title.label",
-      "default": "Collection list"
+      "label": "Section Title",
+      "default": "Sản Phẩm Bán Chạy"
     },
     {
-      "type": "checkbox",
-      "id": "divider",
-      "label": "t:sections.featured-collections.settings.divider.label",
-      "default": false
+      "type": "text",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Chiếc nệm foam êm ái cho giấc ngủ thoải mái nhất"
     },
     {
-      "type": "range",
-      "id": "per_row",
-      "label": "t:sections.featured-collections.settings.per_row.label",
-      "default": 4,
-      "min": 2,
-      "max": 5,
-      "step": 1
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary Color",
+      "default": "#2960AD"
     },
     {
-      "type": "checkbox",
-      "id": "enable_gutter",
-      "label": "t:sections.featured-collections.settings.enable_gutter.label",
-      "default": true
-    }
-  ],
-  "presets": [
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1A1A1A"
+    },
     {
-      "name": "t:sections.featured-collections.presets.collection_list.name",
-      "blocks": [
-        {
-          "type": "collection"
-        },
-        {
-          "type": "collection"
-        },
-        {
-          "type": "collection"
-        },
-        {
-          "type": "collection"
-        }
-      ]
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#666"
     }
   ],
   "blocks": [
     {
-      "type": "collection",
-      "name": "t:sections.featured-collections.blocks.collection.name",
+      "type": "collection_tab",
+      "name": "Collection Tab",
+      "limit": 4,
       "settings": [
         {
-          "id": "collection",
+          "type": "text",
+          "id": "tab_name",
+          "default": "Nệm",
+          "label": "Tab Name"
+        },
+        {
           "type": "collection",
-          "label": "t:sections.featured-collections.blocks.collection.settings.collection.label"
+          "id": "collection",
+          "label": "Collection",
+          "info": "Select collection to display products"
         },
         {
           "type": "text",
-          "id": "title",
-          "label": "t:sections.featured-collections.blocks.collection.settings.title.label"
+          "id": "product_label",
+          "label": "Product Label",
+          "info": "e.g., 'Mới', 'Bán chạy', 'Top rated'"
         },
         {
-          "type": "select",
-          "id": "focal_point",
-          "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.label",
-          "info": "t:sections.featured-collections.blocks.collection.settings.focal_point.info",
-          "default": "center center",
-          "options": [
-            {
-              "value": "20% 0",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.20_0.label"
-            },
-            {
-              "value": "top center",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.top_center.label"
-            },
-            {
-              "value": "80% 0",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.80_0.label"
-            },
-            {
-              "value": "20% 50%",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.20_50.label"
-            },
-            {
-              "value": "center center",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.center_center.label"
-            },
-            {
-              "value": "80% 50%",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.80_50.label"
-            },
-            {
-              "value": "20% 100%",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.20_100.label"
-            },
-            {
-              "value": "bottom center",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.bottom_center.label"
-            },
-            {
-              "value": "80% 100%",
-              "label": "t:sections.featured-collections.blocks.collection.settings.focal_point.options.80_100.label"
-            }
-          ]
+          "type": "color",
+          "id": "label_color",
+          "label": "Label Text Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "label_bg",
+          "label": "Label Background",
+          "default": "#609EE9"
         }
       ]
     }
   ],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  }
+  "presets": [
+    {
+      "name": "Featured Collections",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "collection_tab"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
