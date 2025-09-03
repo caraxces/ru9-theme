@@ -62,7 +62,7 @@
   .collections-listing-section {
     width: 100%;
     margin: 0 auto 60px auto;
-    padding: 0 16px;
+    padding: 0 6.8%;
     font-family: 'Be Vietnam Pro', sans-serif;
   }
   .section-header__title{
@@ -185,7 +185,10 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
-
+  @media (max-width: 768px) {
+    .collections-listing-section {
+      padding: 0 4%;
+  }
   @media (max-width: 1200px) {
     .collection-item, .collection-image-container {
       width: 350px;

@@ -10,8 +10,7 @@
     <canvas id="darkveil-{{ section.id }}" class="darkveil-canvas" aria-hidden="true"></canvas>
   {%- endif -%}
   <div class="footer-ru9__inner page-width">
-    <div class="footer-ru9__top">
-      <div class="footer-ru9__logos">
+    <div class="footer-ru9__logos">
       <div class="footer-ru9__logo-ru9" aria-label="Ru9">
         <!-- Logo 1 (static) -->
         <svg xmlns="http://www.w3.org/2000/svg" width="161" height="137" viewBox="0 0 161 137" fill="none" role="img" aria-hidden="true">
@@ -52,91 +51,97 @@
           </svg>
         </svg>
       </div>
-      {%- if section.settings.partner_logo != blank -%}
+      {%- if section.settings.partner_logo_html != blank or section.settings.show_default_partner_logo -%}
         <div class="footer-ru9__logo-partner">
+          <div class="footer-ru9__logo-partner-image">
+            {%- if section.settings.partner_logo_html != blank -%}
+              {{ section.settings.partner_logo_html }}
+            {%- else -%}
+              <img src="{{ 'Asset 2@2x 1.svg' | asset_url }}" alt="Partner Logo" loading="lazy">
+            {%- endif -%}
+          </div>
           <div class="footer-ru9__logo-partner-label">Website thành viên</div>
-          <img
-            src="{{ section.settings.partner_logo | image_url }}"
-            alt="{{ section.settings.partner_logo.alt | default: 'Partner logo' }}"
-            loading="lazy"
-            width="{{ section.settings.partner_logo.width }}"
-            height="{{ section.settings.partner_logo.height }}"
-          >
         </div>
       {%- endif -%}
+    </div>
+    <div class="footer-ru9__subscribe">
+      {%- if section.settings.newsletter_title != blank -%}
+        <div class="footer-navigate__title f-bold text-xl footer-ru9__right-title">{{ section.settings.newsletter_title }}</div>
+      {%- endif -%}
+      <div class="footer__newsletter relative i-block w-full">
+        {% render 'footer-newsletter' %}
       </div>
-      <div class="footer-ru9__top-right">
-        {%- if section.settings.newsletter_title != blank -%}
-          <div class="footer-navigate__title f-bold text-xl footer-ru9__right-title">{{ section.settings.newsletter_title }}</div>
+      <div class="footer-ru9__social">
+        {%- if section.settings.social_facebook_link != blank -%}
+          <a href="{{ section.settings.social_facebook_link }}" class="footer-social__item" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12Z"/></svg>
+          </a>
         {%- endif -%}
-        <div class="footer__newsletter relative i-block w-full">
-          {% render 'footer-newsletter' %}
-        </div>
-        <div class="footer-ru9__social">
-          {%- if section.settings.social_facebook_link != blank -%}
-            <a href="{{ section.settings.social_facebook_link }}" class="footer-social__item" aria-label="Facebook" target="_blank" rel="noopener">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12Z"/></svg>
-            </a>
-          {%- endif -%}
-          {%- if section.settings.social_instagram_link != blank -%}
-            <a href="{{ section.settings.social_instagram_link }}" class="footer-social__item" aria-label="Instagram" target="_blank" rel="noopener">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6ZM18 6.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>
-            </a>
-          {%- endif -%}
-          {%- if section.settings.social_youtube_link != blank -%}
-            <a href="{{ section.settings.social_youtube_link }}" class="footer-social__item" aria-label="YouTube" target="_blank" rel="noopener">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 2C5.12 20 12 20 12 20s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>
-            </a>
-          {%- endif -%}
-          {%- if section.settings.social_tiktok_link != blank -%}
-            <a href="{{ section.settings.social_tiktok_link }}" class="footer-social__item" aria-label="TikTok" target="_blank" rel="noopener">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 8.5a6.9 6.9 0 0 1-4.6-1.7v6.7a6.1 6.1 0 1 1-6.1-6.1c.3 0 .6 0 .9.1v3a3.1 3.1 0 1 0 2.2 3V2h3.1a6.9 6.9 0 0 0 4.6 4V8.5Z"/></svg>
-            </a>
-          {%- endif -%}
-        </div>
+        {%- if section.settings.social_instagram_link != blank -%}
+          <a href="{{ section.settings.social_instagram_link }}" class="footer-social__item" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6ZM18 6.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.social_youtube_link != blank -%}
+          <a href="{{ section.settings.social_youtube_link }}" class="footer-social__item" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 2C5.12 20 12 20 12 20s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.social_tiktok_link != blank -%}
+          <a href="{{ section.settings.social_tiktok_link }}" class="footer-social__item" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 8.5a6.9 6.9 0 0 1-4.6-1.7v6.7a6.1 6.1 0 1 1-6.1-6.1c.3 0 .6 0 .9.1v3a3.1 3.1 0 1 0 2.2 3V2h3.1a6.9 6.9 0 0 0 4.6 4V8.5Z"/></svg>
+          </a>
+        {%- endif -%}
       </div>
     </div>
 
-    <div class="footer-ru9__content">
-      <div class="footer-ru9__address">
-        {%- if section.settings.addr_1 != blank -%}
-          <div class="address-item">
-            <div class="address-label">Showroom 1</div>
-            <div class="address-text rte">{{ section.settings.addr_1 }}</div>
-          </div>
-        {%- endif -%}
-        {%- if section.settings.addr_2 != blank -%}
-          <div class="address-item">
-            <div class="address-label">Showroom 2</div>
-            <div class="address-text rte">{{ section.settings.addr_2 }}</div>
-          </div>
-        {%- endif -%}
-        {%- if section.settings.addr_3 != blank -%}
-          <div class="address-item">
-            <div class="address-label">Showroom 3</div>
-            <div class="address-text rte">{{ section.settings.addr_3 }}</div>
-          </div>
-        {%- endif -%}
-        {%- if section.settings.hours != blank -%}
-          <div class="address-item">
-            <div class="address-label">Giờ mở cửa</div>
-            <div class="address-text rte">{{ section.settings.hours }}</div>
-          </div>
-        {%- endif -%}
-      </div>
-
-      <div class="footer-ru9__right">
-        <div class="footer-ru9__columns">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'column' -%}
-            <div class="footer-ru9__col" {{ block.shopify_attributes }}>
-              <div class="footer-ru9__col-title footer-navigate__title f-bold text-xl">{{ block.settings.title }}</div>
-              <div class="footer-ru9__col-content">{{ block.settings.content }}</div>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
+    <div class="footer-ru9__address">
+      {%- if section.settings.addr_1 != blank -%}
+        <div class="address-item">
+          <div class="address-label">Showroom 1</div>
+          <div class="address-text rte">{{ section.settings.addr_1 }}</div>
         </div>
+      {%- endif -%}
+      {%- if section.settings.addr_2 != blank -%}
+        <div class="address-item">
+          <div class="address-label">Showroom 2</div>
+          <div class="address-text rte">{{ section.settings.addr_2 }}</div>
+        </div>
+      {%- endif -%}
+      {%- if section.settings.addr_3 != blank -%}
+        <div class="address-item">
+          <div class="address-label">Showroom 3</div>
+          <div class="address-text rte">{{ section.settings.addr_3 }}</div>
+        </div>
+      {%- endif -%}
+      {%- if section.settings.hours != blank -%}
+        <div class="address-item">
+          <div class="address-label">Giờ mở cửa</div>
+          <div class="address-text rte">{{ section.settings.hours }}</div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="footer-ru9__links">
+      <div class="footer-ru9__columns">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'column' -%}
+          <div class="footer-ru9__col" {{ block.shopify_attributes }}>
+            <div class="footer-ru9__col-title footer-navigate__title f-bold text-xl">{{ block.settings.title }}</div>
+            <div class="footer-ru9__col-content">{{ block.settings.content }}</div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
       </div>
+    </div>
+
+    <div class="footer-ru9__badges">
+      {%- if section.settings.badge_1_html != blank -%}
+        <div class="footer-badge">{{ section.settings.badge_1_html }}</div>
+      {%- endif -%}
+      {%- if section.settings.badge_2_html != blank -%}
+        <div class="footer-badge">{{ section.settings.badge_2_html }}</div>
+      {%- endif -%}
     </div>
   </div>
 
@@ -157,35 +162,71 @@
       50% { transform: translate3d(2%, -1%, 0) scale(1.02); filter: hue-rotate(30deg); }
       100% { transform: translate3d(0,0,0) scale(1); filter: hue-rotate(0deg); }
     }
-    .footer-ru9__inner { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 28px; }
+    .footer-ru9__inner { position: relative; z-index: 1; }
     .darkveil-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; pointer-events: none; }
-    .footer-ru9__top { display: grid; grid-template-columns: 1fr 1.4fr; align-items: center; gap: 240px; padding-bottom: 40px; }
-    .footer-ru9__logos { display: flex; align-items: center; gap: 40px; }
+
+    /* Desktop Layout */
+    @media (min-width: 961px) {
+      .footer-ru9__inner {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+          "logos subscribe"
+          "address links"
+          "badges badges";
+        gap: 28px 100px;
+        align-items: start;
+      }
+      .footer-ru9__logos { grid-area: logos; }
+      .footer-ru9__subscribe { grid-area: subscribe; }
+      .footer-ru9__address { grid-area: address; }
+      .footer-ru9__links { grid-area: links; }
+      .footer-ru9__badges { grid-area: badges; }
+      .footer-ru9__logos, .footer-ru9__subscribe { margin-bottom: 12px; }
+    }
+
+    .footer-ru9__logos { display: flex; align-items: flex-start; gap: 40px; justify-content: space-between; }
+    .footer-ru9__logo-ru9, .footer-ru9__logo-partner-image {
+      width: 122px;
+      height: 105px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-ru9__logo-ru9 svg, .footer-ru9__logo-partner-image img, .footer-ru9__logo-partner-image svg {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
     .footer-ru9__logo-ru9 svg path { fill: #fff; }
-    .footer-ru9__top-right { display: flex; flex-direction: column; width: 100%; height: auto; padding-right: 65px; align-items: flex-start; }
-    .footer-ru9__logo-partner img { height: 60px; width: auto; display: block; }
-    .footer-ru9__logo-partner-label { color: #fff; font-family: "Be Vietnam Pro", sans-serif; font-size: 14px; font-style: normal; font-weight: 400; line-height: 150%; margin-bottom: 8px; }
-    .footer-ru9__right { display: flex; flex-direction: column; width: 100%; height: auto; padding-right: 65px; align-items: flex-start; }
+    .footer-ru9__subscribe { display: flex; flex-direction: column; width: 100%; height: auto; padding-right: 65px; align-items: flex-start; }
+    .footer-ru9__logo-partner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .footer-ru9__logo-partner-label { color: #fff; font-family: "Be Vietnam Pro", sans-serif; font-size: 14px; font-style: normal; font-weight: 400; line-height: 150%; margin-top: 8px; }
     .footer-ru9__right-title { color: #fff; font-family: "Be Vietnam Pro", sans-serif; font-size: 20px; font-style: normal; font-weight: 700; line-height: 150%; height: 44px; display: flex; align-items: center; width: 100%; }
     /* Newsletter input + button */
-    .footer-ru9__top-right .footer__newsletter, .footer-ru9__right .footer__newsletter { position: relative; width: 100%; max-width: 428px; }
-    .footer-ru9__top-right .footer__newsletter-input, .footer-ru9__right .footer__newsletter-input {
+    .footer-ru9__subscribe .footer__newsletter { position: relative; width: 100%; max-width: 428px; }
+    .footer-ru9__subscribe .footer__newsletter-input {
       display: flex; height: 44px; min-height: 44px; max-width: 428px;
       padding: 11.5px 170px 11.5px 10px; /* chừa chỗ cho nút bên phải */
       justify-content: center; align-items: flex-start;
     }
-    .footer-ru9__top-right .footer__newsletter-btn, .footer-ru9__right .footer__newsletter-btn {
+    .footer-ru9__subscribe .footer__newsletter-btn {
       position: absolute; right: 0; top: 0; height: 44px; width: 160px;
       display: flex; padding: 13px 10px; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0;
       border-radius: 0 12px 12px 0; background: #C5EDFF;
     }
-    .footer-ru9__content { display: grid; grid-template-columns: 1fr 1.4fr; gap: 100px; }
     .footer-ru9__address { display: inline-flex; padding: 4px 0 28px 0; flex-direction: column; align-items: flex-start; gap: 31px; }
     .footer-ru9__address .address-item { display: grid; grid-template-columns: 137px 1fr; gap: 12px; align-items: start; }
     .footer-ru9__address .address-label {
       color: #FFF;
       font-family: "Be Vietnam Pro", sans-serif;
-      font-size: 20px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: 150%; /* 30px */
@@ -195,21 +236,45 @@
     .footer-ru9__address .icon { display: inline-flex; height: 24px; width: 24px; }
     .footer-ru9__address .icon svg path { fill: #fff; }
     /* Giữ icon và nội dung cùng một dòng, loại bỏ khoảng trống do richtext */
-    .footer-ru9__address .address-text { margin: 0; color: #fff; width: 426px; font-size: 20px }
+    .footer-ru9__address .address-text { margin: 0; color: #fff; width: 426px; font-size: 14px }
     .footer-ru9__address .address-text p { margin: 0; color: #fff; }
     .footer-ru9__social { display: flex; gap: 16px; margin-top: 12px; }
     .footer-ru9__social .footer-social__item { width: 40px; height: 40px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: #fff; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.5); }
-    .footer-ru9__columns { width: 100%; max-width: 588px; min-height: 313px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .footer-ru9__columns { width: 100%; max-width: 588px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .footer-ru9__col-title { font-weight: 700; font-size: 20px; margin-bottom: 12px; color: #fff; }
-    .footer-ru9__col-content { display: grid; gap: 12px; color: #fff; }
-    .footer-ru9__col-content p, .footer-ru9__col-content a { margin: 0; color: #fff; }
-    @media (max-width: 960px) {
-      .footer-ru9__top { grid-template-columns: 1fr; gap: 28px; }
-      .footer-ru9__content { grid-template-columns: 1fr; }
-      .footer-ru9__columns { grid-template-columns: 1fr 1fr; }
+    .footer-ru9__col-content {
+      display: grid;
+      gap: 12px;
+      color: #fff;
     }
+    .footer-ru9__col-content p, .footer-ru9__col-content a { margin: 0; color: #fff; }
+    .footer-ru9__badges { display: flex; justify-content: center; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 24px; }
+
+    @media (max-width: 960px) {
+      .footer-ru9__inner { display: flex; flex-direction: column; gap: 32px; }
+      .footer-ru9__links { order: 1; }
+      .footer-ru9__logos {
+        order: 2;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+      }
+      .footer-ru9__subscribe { order: 3; padding-right: 0; }
+      .footer-ru9__address { order: 4; }
+      .footer-ru9__badges { order: 5; }
+
+      .footer-ru9__columns { grid-template-columns: 1fr; gap: 32px; }
+      .footer-ru9__address .address-text { width: auto; }
+      .footer-ru9__col-content {
+        grid-template-rows: repeat(4, auto);
+        grid-auto-flow: column;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px 28px;
+      }
+    }
+
     @media (max-width: 640px) {
-      .footer-ru9__columns { grid-template-columns: 1fr; }
+      /* No longer needed, layout is handled by 960px query */
     }
   </style>
 
@@ -305,7 +370,18 @@
     { "type": "range", "id": "dark_veil_warp", "label": "Warp amount", "min": 0, "max": 1, "step": 0.1, "default": 0 },
     { "type": "range", "id": "dark_veil_speed", "label": "Speed", "min": 0, "max": 2, "step": 0.1, "default": 0.5 },
     { "type": "range", "id": "dark_veil_resolution_scale", "label": "Resolution scale", "min": 0.5, "max": 2, "step": 0.1, "default": 1 },
-    { "type": "image_picker", "id": "partner_logo", "label": "Logo website thành viên" },
+    { "type": "header", "content": "Logo đối tác" },
+    {
+      "type": "checkbox",
+      "id": "show_default_partner_logo",
+      "label": "Hiển thị logo đối tác mặc định (Asset 2@2x 1.svg)",
+      "default": true
+    },
+    {
+      "type": "html",
+      "id": "partner_logo_html",
+      "label": "Mã SVG logo đối tác (ghi đè logo mặc định)"
+    },
     { "type": "header", "content": "Địa chỉ & giờ mở cửa" },
     { "type": "text", "id": "newsletter_title", "label": "Tiêu đề newsletter", "default": "NHẬN THÔNG TIN ƯU ĐÃI TỪ RU9" },
     { "type": "url", "id": "social_facebook_link", "label": "Facebook URL" },
@@ -315,7 +391,18 @@
     { "type": "richtext", "id": "addr_1", "label": "Địa chỉ 1" },
     { "type": "richtext", "id": "addr_2", "label": "Địa chỉ 2" },
     { "type": "richtext", "id": "addr_3", "label": "Địa chỉ 3" },
-    { "type": "richtext", "id": "hours", "label": "Giờ mở cửa" }
+    { "type": "richtext", "id": "hours", "label": "Giờ mở cửa" },
+    { "type": "header", "content": "Huy hiệu chứng nhận" },
+    {
+      "type": "html",
+      "id": "badge_1_html",
+      "label": "Mã HTML huy hiệu 1"
+    },
+    {
+      "type": "html",
+      "id": "badge_2_html",
+      "label": "Mã HTML huy hiệu 2"
+    }
   ],
   "blocks": [
     {

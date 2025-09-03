@@ -12613,7 +12613,7 @@ label.tag__checkbox-wrapper {
   line-height: var(--typeBaseLineHeight);
   margin: 0 0px 12px 0;
   overflow: hidden;
-  padding: 8px 15px;
+  padding: 8px 8px;
   position: relative;
   border-radius: calc(var(--buttonRadius) * 0.5);
   color: #374151;

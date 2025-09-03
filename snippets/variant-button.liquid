@@ -20,20 +20,10 @@
     for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}"
   >
     {{ option.name }}:
-    {%- if is_size -%}
-      &nbsp;
-      <span class="variant__label-info">
-        <span
-          data-variant-selected-label
-          data-index="{{ forloop.index0 }}"
-        >
-          {{ option.selected_value }}
-        </span>
-      </span>
-    {%- endif -%}
-    {%- if is_color -%}
-      &nbsp;
-      <span class="variant__label-info">
+    <span class="variant__label-info">
+      {%- if is_size -%}
+        <span data-variant-selected-label data-index="{{ forloop.index0 }}">{{ option.selected_value | split: ' - ' | first }} | {{ option.selected_value | split: ' - ' | last }}</span>
+      {%- elsif is_color -%}
         <span
           data-variant-color-label
           data-index="{{ forloop.index0 }}"
@@ -41,15 +31,16 @@
         >
           {{ option.selected_value }}
         </span>
-      </span>
-    {%- endif -%}
+      {%- endif -%}
+    </span>
   </label>
   {%- assign option_index = forloop.index -%}
   <fieldset
-    class="variant-input-wrap flex ai-center gap-x-md flex-wrap"
+    class="variant-input-wrap"
     name="{{ option.name }}"
     data-index="option{{ option_index }}"
     data-handle="{{ option.name | handleize }}"
+    data-option-count="{{ option.values.size }}"
     id="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}"
   >
     <legend class="hide">{{ option.name }}</legend>
@@ -102,18 +93,14 @@
         {%- else -%}
           <label
             for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"
-            class="variant__button-label{% unless product_available %} disabled{% endunless %}{% if is_size %} t-center{% endif %}"
+            class="variant__button-label{% unless product_available %} disabled{% endunless %}"
           >
-            {% if is_size %}
-              {% if value contains '-' %}
-                <span class="label-head block text-sm f-smb">{{ value | split: ' - ' | first | escape }}</span>
-                <span class="label-value block text-xs">{{ value | split: ' - ' | last | escape }}</span>
-              {% else %}
-                {{ value -}}
-              {% endif %}
+            {%- if is_size and value contains ' - ' -%}
+              <span class="label-head">{{ value | split: ' - ' | first | escape }}</span>
+              <span class="label-value">{{ value | split: ' - ' | last | escape }}</span>
             {%- else -%}
-              {{ value -}}
-            {% endif %}
+              {{ value | escape }}
+            {%- endif -%}
           </label>
         {%- endif -%}
       </div>

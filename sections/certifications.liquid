@@ -9,31 +9,42 @@
     margin: 0 auto;
     font-family: "Be Vietnam Pro", sans-serif;
   }
-  .certifications-section-{{ section.id }} .certifications__container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 80px;
-    max-width: var(--page-width);
-    margin: 0 auto;
-    padding: 0 2.85%;
+
+  /* --- Desktop Layout (2 columns) --- */
+  @media (min-width: 769px) {
+    .certifications-section-{{ section.id }} .certifications__container {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      grid-template-areas:
+        "title certifications"
+        "description certifications"
+        "cta certifications";
+      align-items: start;
+      gap: 80px;
+      max-width: var(--page-width);
+      margin: 0 auto;
+      padding: 0 2.85%;
+    }
+
+    .certifications-section-{{ section.id }} .cs-title { grid-area: title; }
+    .certifications-section-{{ section.id }} .cs-description-wrapper { grid-area: description; }
+    .certifications-section-{{ section.id }} .cs-cta-wrapper { grid-area: cta; }
+    .certifications-section-{{ section.id }} .certifications__slider-container { grid-area: certifications; }
+    
+    .certifications-section-{{ section.id }} .cs-cert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
   }
-  .certifications-section-{{ section.id }} .cs-left {
-    flex: 0 0 420px;
-    text-align: left;
-  }
-  .certifications-section-{{ section.id }} .cs-right {
-    flex: 1;
-    display: flex;
-    gap: 40px;
-  }
+
   .certifications-section-{{ section.id }} .cs-title {
     color: #1C2C58;
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 39px;
     font-weight: 700;
     line-height: 1.4;
-    margin: 0 0 20px 0;
+    margin: 0;
     text-transform: none;
   }
   .certifications-section-{{ section.id }} .cs-description {
@@ -41,7 +52,7 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 1.6;
-    margin: 0 0 30px 0;
+    margin: 20px 0 30px 0;
   }
   .certifications-section-{{ section.id }} .cs-cta {
     display: inline-flex;
@@ -62,11 +73,11 @@
     color: #1C2C58;
     border-color: #1C2C58;
   }
+
   .certifications-section-{{ section.id }} .cs-cert-item {
     text-align: center;
-    flex: 1;
   }
-  .certifications-section-{{ section.id }} .cs-cert-image {
+  .certifications-section-{{ section.id }} .cs-cert-image-wrapper {
     width: 100%;
     height: auto;
     aspect-ratio: 1/1;
@@ -78,11 +89,14 @@
     align-items: center;
     justify-content: center;
   }
-  .certifications-section-{{ section.id }} .cs-cert-image img {
+  .certifications-section-{{ section.id }} .cs-cert-image-wrapper img {
     max-width: 100%;
     max-height: 100%;
     height: auto;
     object-fit: contain;
+  }
+  .certifications-section-{{ section.id }} .cs-cert-labels {
+    display: block;
   }
   .certifications-section-{{ section.id }} .cs-cert-label {
     font-size: 16px;
@@ -96,132 +110,242 @@
     color: #1C2C58;
   }
 
-  @media (max-width: 990px) {
-    .certifications-section-{{ section.id }} .certifications__container {
-      flex-direction: column;
-      gap: 40px;
-      text-align: center;
-    }
-    .certifications-section-{{ section.id }} .cs-left {
-      flex: 1;
-      text-align: center;
-    }
+  .certifications-section-{{ section.id }} .flickity-buttons,
+  .certifications-section-{{ section.id }} .flickity-page-dots {
+    display: none;
   }
-
+  
+  /* --- Mobile Layout (Slider) --- */
   @media (max-width: 768px) {
-    .certifications-section-{{ section.id }} .cs-right {
-      flex-direction: column;
+    .certifications-section-{{ section.id }} {
+      padding: 40px 0;
+    }
+    .certifications-section-{{ section.id }} .certifications__container {
+      padding: 0 16px;
+      max-width: 100%;
+    }
+    .certifications-section-{{ section.id }} .cs-title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 33.6px;
+      letter-spacing: 0.6px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+    .certifications-section-{{ section.id }} .cs-description {
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+    .certifications-section-{{ section.id }} .cs-cta-wrapper {
+      text-align: center;
+    }
+
+    .certifications-section-{{ section.id }} .cs-cta {
+      width: 359px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .certifications-section-{{ section.id }} .certifications__slider-container {
+      position: relative;
+      background: #F5F9FF;
+      border-radius: 12px;
+      padding: 24px 24px 0px;
+    }
+    .certifications-section-{{ section.id }} .cs-cert-grid.flickity-enabled {
+      display: block;
+    }
+    .certifications-section-{{ section.id }} .cs-cert-item {
       width: 100%;
-      align-items: center;
+    }
+    .certifications-section-{{ section.id }} .cs-cert-image-wrapper {
+      background: transparent;
+    }
+    .certifications-section-{{ section.id }} .cs-cert-labels {
+      display: none;
+    }
+
+    .certifications-section-{{ section.id }} .flickity-page-dots {
+      display: block;
+      position: absolute;
+      bottom: 20px;
+      left: 24px;
+      width: auto;
+    }
+    .certifications-section-{{ section.id }} .flickity-page-dots .dot {
+      background: #E0E0E0;
+    }
+    .certifications-section-{{ section.id }} .flickity-page-dots .dot.is-selected {
+      background: #1C2C58;
+    }
+
+    .certifications-section-{{ section.id }} .flickity-button {
+      position: absolute;
+      bottom: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid #eee;
+      color: #1C2C58;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .certifications-section-{{ section.id }} .flickity-button.previous {
+      right: 72px;
+    }
+    .certifications-section-{{ section.id }} .flickity-button.next {
+      right: 24px;
+      background: #1C2C58;
+      color: #fff;
     }
   }
 </style>
 
 <section class="certifications-section-{{ section.id }}">
   <div class="certifications__container">
-    <div class="cs-left">
-      {% if section.settings.title != blank %}
-        <h2 class="cs-title">{{ section.settings.title | newline_to_br }}</h2>
-      {% endif %}
+    {% if section.settings.title != blank %}
+      <h2 class="cs-title">{{ section.settings.title | newline_to_br }}</h2>
+    {% endif %}
+
+    <div class="certifications__slider-container">
+      <div class="cs-cert-grid" id="certifications-slider-{{ section.id }}">
+        {% for block in section.blocks %}
+          <div class="cs-cert-item">
+            <div class="cs-cert-image-wrapper">
+              {% if block.settings.image != blank %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 400 }}"
+                  alt="{{ block.settings.name | escape }}"
+                  loading="lazy">
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+            <div class="cs-cert-labels">
+              {% if block.settings.label != blank %}
+                <p class="cs-cert-label">{{ block.settings.label }}</p>
+              {% endif %}
+              {% if block.settings.name != blank %}
+                <h3 class="cs-cert-name">{{ block.settings.name }}</h3>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+       <button class="flickity-button next" aria-label="Previous"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50 L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
+       <button class="flickity-button previous" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50 L 70,10 L 60,0 Z" class="arrow"></path></svg></button>
+    </div>
+    
+    <div class="cs-description-wrapper">
       {% if section.settings.description != blank %}
         <div class="cs-description rte">{{ section.settings.description }}</div>
       {% endif %}
+    </div>
+
+    <div class="cs-cta-wrapper">
       {% if section.settings.button_text != blank %}
         <a href="{{ section.settings.button_link }}" class="cs-cta">
           {{ section.settings.button_text }}
         </a>
       {% endif %}
     </div>
-
-    <div class="cs-right">
-      {% for block in section.blocks %}
-        <div class="cs-cert-item">
-          <div class="cs-cert-image">
-            {% if block.settings.image != blank %}
-              <img
-                src="{{ block.settings.image | image_url: width: 400 }}"
-                alt="{{ block.settings.name | escape }}"
-                loading="lazy">
-            {% else %}
-              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-            {% endif %}
-          </div>
-          {% if block.settings.label != blank %}
-            <p class="cs-cert-label">{{ block.settings.label }}</p>
-          {% endif %}
-          {% if block.settings.name != blank %}
-            <h3 class="cs-cert-name">{{ block.settings.name }}</h3>
-          {% endif %}
-        </div>
-      {% endfor %}
-    </div>
   </div>
 </section>
 
 {% schema %}
-{
-  "name": "Certifications",
-  "tag": "section",
-  "class": "section-certifications",
-  "settings": [
-    {
-      "type": "textarea",
-      "id": "title",
-      "label": "Title",
-      "default": "Cam kết an toàn từ lần chạm đầu tiên"
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "Description",
-      "default": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>"
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "Xem chi tiết"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button Link"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "certification",
-      "name": "Certification",
-      "limit": 2,
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "Chứng nhận"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Certification Name",
-          "default": "CertiPUR-US®"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Certifications",
-      "blocks": [
-        { "type": "certification" },
-        { "type": "certification" }
-      ]
-    }
-  ]
-}
+  {
+    "name": "Certifications",
+    "tag": "section",
+    "class": "section-certifications",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title",
+        "default": "Cam kết an toàn từ lần chạm đầu tiên"
+      },
+      {
+        "type": "richtext",
+        "id": "description",
+        "label": "Description",
+        "default": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Xem chi tiết"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "certification",
+        "name": "Certification",
+        "limit": 2,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Label",
+            "default": "Chứng nhận"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Certification Name",
+            "default": "CertiPUR-US®"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Certifications",
+        "blocks": [
+          { "type": "certification" },
+          { "type": "certification" }
+        ]
+      }
+    ]
+  }
 {% endschema %}
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const sectionElement = document.querySelector('.certifications-section-{{ section.id }}');
+  if (!sectionElement) return;
+
+  const sliderElement = sectionElement.querySelector('#certifications-slider-{{ section.id }}');
+  
+  if (sliderElement && window.innerWidth <= 768) {
+    const flkty = new Flickity(sliderElement, {
+      cellSelector: '.cs-cert-item',
+      contain: true,
+      prevNextButtons: false,
+      pageDots: true,
+      wrapAround: true
+    });
+
+    const sliderContainer = sectionElement.querySelector('.certifications__slider-container');
+    const prevButton = sliderContainer.querySelector('.flickity-button.previous');
+    const nextButton = sliderContainer.querySelector('.flickity-button.next');
+    
+    if(prevButton) {
+      prevButton.addEventListener('click', () => flkty.previous());
+    }
+    if(nextButton) {
+      nextButton.addEventListener('click', () => flkty.next());
+    }
+  }
+});
+</script>

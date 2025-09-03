@@ -349,7 +349,7 @@
         "only": "Chỉ",
         "cheaper": "Rẻ hơn"
       },
-      "description": "Sự miêu tả",
+      "description": "Mô tả",
       "in_stock_label": "Còn hàng, sẵn sàng giao hàng",
       "stock_label": {
         "one": "Còn ít hàng - còn lại {{ count }} sản phẩm",
