@@ -29,25 +29,13 @@
     margin: 0 0 50px 0;
   }
 
+  /* --- Desktop Grid Layout --- */
   .super-service__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
     justify-items: start;
     text-align: left;
-  }
-
-  @media screen and (max-width: 990px) {
-    .super-service__grid {
-      grid-template-columns: repeat(2, 1fr);
-      row-gap: 24px;
-    }
-  }
-
-  @media screen and (max-width: 550px) {
-    .super-service__grid {
-      grid-template-columns: 1fr;
-    }
   }
 
   .super-service__item-wrapper {
@@ -61,6 +49,11 @@
     transform: translateY(0);
   }
 
+  .super-service__slider-container .flickity-buttons,
+  .super-service__slider-container .flickity-page-dots {
+      display: none;
+  }
+  
   .super-service__item-link {
     display: block;
     text-decoration: none;
@@ -122,6 +115,109 @@
     line-height: 1.6;
     flex-grow: 1;
   }
+
+  /* --- Mobile Slider Layout --- */
+  @media screen and (max-width: 990px) {
+    .super-service__grid {
+      display: block; /* Override desktop grid to enable Flickity */
+    }
+
+    .super-service__item {
+      padding: 0;
+      background-color: transparent;
+    }
+    
+    .super-service__slider-container {
+      position: relative;
+      background-color: {{ section.settings.background_color }};
+      border-radius: 12px;
+      padding: 40px 40px 80px;
+    }
+
+    .super-service__item-wrapper {
+        width: 100%;
+        opacity: 1; /* Disable animation on mobile */
+        transform: none;
+        padding-right: 24px;
+    }
+    
+    .super-service__title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 33.6px;
+      letter-spacing: 0.6px;
+      text-align: center;
+    }
+    
+    .super-service__slider-container .flickity-page-dots {
+      display: block;
+      position: absolute;
+      bottom: 0px;
+      left: 0px !important;
+      width: auto;
+    }
+    .super-service__slider-container .flickity-page-dots .dot {
+      background: #E0E0E0;
+      opacity: 1;
+      transition: background 0.3s;
+    }
+    .super-service__slider-container .flickity-page-dots .dot.is-selected {
+      background: #1C2C58;
+    }
+
+    .super-service__slider-container .flickity-buttons {
+      display: block;
+    }
+
+    .super-service__slider-container .flickity-button {
+      position: absolute;
+      bottom: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #eee;
+      color: #1C2C58;
+      transition: all 0.2s;
+      padding: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .super-service__slider-container .flickity-button.previous {
+      right: 88px;
+    }
+    .super-service__slider-container .flickity-button.next {
+      right: 40px;
+      background: #1C2C58;
+      color: #fff;
+      border-color: #1C2C58;
+    }
+    .super-service__slider-container .flickity-button:hover {
+      transform: scale(1.05);
+    }
+    .super-service__slider-container .flickity-button svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .super-service__slider-container {
+      padding: 24px;
+    }
+    .super-service__slider-container .flickity-page-dots {
+       left: 24px;
+    }
+    .super-service__slider-container .flickity-button.previous {
+      right: 63px;
+    }
+    .super-service__slider-container .flickity-button.next {
+      right: 15px;
+    }
+  }
 </style>
 
 {% comment %}
@@ -135,62 +231,70 @@
       </h2>
     {% endif %}
 
-    <div class="super-service__grid">
-      {% for block in section.blocks %}
-        <div class="super-service__item-wrapper" style="transition-delay: {{ forloop.index0 | times: 100 }}ms;" {{ block.shopify_attributes }}>
-          {% if block.settings.item_link != blank %}
-            <a href="{{ block.settings.item_link }}" class="super-service__item-link">
-          {% endif %}
-          
-          <div class="super-service__item">
-            <div class="super-service__item-icon">
-              {%- assign icon = block.settings.icon -%}
-              {% if icon != blank %}
-                {%- if icon.format == 'svg' -%}
-                  <img src="{{ icon | image_url: master }}"
-                       alt="{{ icon.alt | escape }}"
-                       width="{{ icon.width }}"
-                       height="{{ icon.height }}"
-                       loading="lazy">
-                {%- else -%}
-                  {{ icon | image_url: width: 120 | image_tag: loading: 'lazy' }}
-                {%- endif -%}
-              {% else %}
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-              {% endif %}
-            </div>
-            {% if block.settings.item_title != blank %}
-              <h3 class="super-service__item-title">{{ block.settings.item_title }}</h3>
-            {% endif %}
-            <p class="super-service__item-note">{{ block.settings.item_note | default: '&nbsp;' }}</p>
-            {% if block.settings.item_description != blank %}
-              <div class="super-service__item-description">
-                {{ block.settings.item_description }}
-              </div>
-            {% endif %}
-          </div>
+    <div class="super-service__slider-container">
+      <div class="super-service__grid" id="super-service-slider-{{ section.id }}">
 
-          {% if block.settings.item_link != blank %}
-            </a>
-          {% endif %}
-        </div>
-      {% endfor %}
-
-      {% if section.blocks.size == 0 %}
-        {% for i in (1..4) %}
-          <div class="super-service__item-wrapper">
+        {% for block in section.blocks %}
+          <div class="super-service__item-wrapper" style="transition-delay: {{ forloop.index0 | times: 100 }}ms;" {{ block.shopify_attributes }}>
+            {% if block.settings.item_link != blank %}
+              <a href="{{ block.settings.item_link }}" class="super-service__item-link">
+            {% endif %}
+            
             <div class="super-service__item">
               <div class="super-service__item-icon">
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- assign icon = block.settings.icon -%}
+                {% if icon != blank %}
+                  {%- if icon.format == 'svg' -%}
+                    <img src="{{ icon | image_url: master }}"
+                         alt="{{ icon.alt | escape }}"
+                         width="{{ icon.width }}"
+                         height="{{ icon.height }}"
+                         loading="lazy">
+                  {%- else -%}
+                    {{ icon | image_url: width: 120 | image_tag: loading: 'lazy' }}
+                  {%- endif -%}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
               </div>
-              <h3 class="super-service__item-title">Service Title</h3>
-              <div class="super-service__item-description">
-                <p>Use this text to share information about your service.</p>
-              </div>
+              {% if block.settings.item_title != blank %}
+                <h3 class="super-service__item-title">{{ block.settings.item_title }}</h3>
+              {% endif %}
+              <p class="super-service__item-note">{{ block.settings.item_note | default: '&nbsp;' }}</p>
+              {% if block.settings.item_description != blank %}
+                <div class="super-service__item-description">
+                  {{ block.settings.item_description }}
+                </div>
+              {% endif %}
             </div>
+
+            {% if block.settings.item_link != blank %}
+              </a>
+            {% endif %}
           </div>
         {% endfor %}
-      {% endif %}
+
+        {% if section.blocks.size == 0 %}
+          {% for i in (1..4) %}
+            <div class="super-service__item-wrapper">
+              <div class="super-service__item">
+                <div class="super-service__item-icon">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+                <h3 class="super-service__item-title">Service Title</h3>
+                <div class="super-service__item-description">
+                  <p>Use this text to share information about your service.</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <div class="flickity-buttons">
+        <button class="flickity-button previous" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="flickity-button next" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+      </div>
     </div>
   </div>
 </div>
@@ -274,6 +378,8 @@
 
 <script>
   function animateSuperService(container) {
+    if (window.innerWidth <= 990) return; // Don't animate on mobile
+
     const itemsToAnimate = container.querySelectorAll('.super-service__item-wrapper');
     if (itemsToAnimate.length === 0) return;
 
@@ -285,7 +391,7 @@
         }
       });
     }, {
-      rootMargin: '0px 0px -100px 0px' // Start animation when 100px from bottom is visible
+      rootMargin: '0px 0px -100px 0px'
     });
 
     itemsToAnimate.forEach(item => {
@@ -293,16 +399,48 @@
     });
   }
 
+  function initializeSlider(container) {
+    const sliderElement = container.querySelector('#super-service-slider-{{ section.id }}');
+    if (sliderElement && window.innerWidth <= 990) {
+      const flkty = new Flickity(sliderElement, {
+        cellSelector: '.super-service__item-wrapper',
+        cellAlign: 'left',
+        contain: true,
+        prevNextButtons: false,
+        pageDots: true,
+        wrapAround: true,
+        watchCSS: true
+      });
+
+      const sliderContainer = container.querySelector('.super-service__slider-container');
+      const prevButton = sliderContainer.querySelector('.flickity-button.previous');
+      const nextButton = sliderContainer.querySelector('.flickity-button.next');
+      
+      if(prevButton) {
+        prevButton.addEventListener('click', () => {
+          flkty.previous();
+        });
+      }
+      if(nextButton) {
+        nextButton.addEventListener('click', () => {
+          flkty.next();
+        });
+      }
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     const sectionElement = document.querySelector('[data-section-id="{{ section.id }}"]');
     if (sectionElement) {
       animateSuperService(sectionElement);
+      initializeSlider(sectionElement);
     }
   });
 
   document.addEventListener('shopify:section:load', function(event) {
     if (event.detail.sectionId === '{{ section.id }}') {
       animateSuperService(event.target);
+      initializeSlider(event.target);
     }
   });
 </script>
