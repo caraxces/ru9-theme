@@ -104,13 +104,6 @@
             "trust_image": "shopify://shop_images/Chinh_sach_giao_hang-04.png"
           }
         },
-        "description": {
-          "type": "description",
-          "settings": {
-            "is_tab": false,
-            "collapse_content": false
-          }
-        },
         "price": {
           "type": "price",
           "settings": {}
@@ -133,6 +126,20 @@
         "quantity_selector_WMfLWY": {
           "type": "quantity_selector",
           "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "is_tab": false,
+            "collapse_content": false
+          }
+        },
+        "usage_guide_PRnkUz": {
+          "type": "usage_guide",
+          "settings": {
+            "title": "Hướng dẫn sử dụng",
+            "content": "<p>Thêm nội dung hướng dẫn sử dụng vào đây.</p>"
+          }
         },
         "showroom_dropdown_JdqRw8": {
           "type": "showroom_dropdown",
@@ -186,11 +193,12 @@
         "custom_ir6hFk",
         "judge_me_reviews_preview_badge_MD8JNY",
         "trust_badge_wVtTm7",
-        "description",
         "price",
         "variant_picker",
         "custom_fxKh9p",
         "quantity_selector_WMfLWY",
+        "description",
+        "usage_guide_PRnkUz",
         "showroom_dropdown_JdqRw8",
         "buy_buttons",
         "productbundle_GcbRad",
@@ -932,7 +940,10 @@
       "blocks": {
         "judge_me_reviews_review_widget_LGBKUn": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200
+          }
         }
       },
       "block_order": [

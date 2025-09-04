@@ -5,6 +5,9 @@
 {% endcomment %}
 
 <style>
+  .product-section {
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
   .product-block:not(.product-block-bundle) .variant__button-label.disabled:before {
     content: "";
     top: 50%;
@@ -27,51 +30,277 @@
     gap: 8px; /* Add some space between items */
   }
 
-  /* Responsive font sizes for price container */
-  @media (min-width: 420px) {
-    .price-container-wrapper .product__price {
-      font-size: 22px;
-    }
-    .price-container-wrapper .product__price--compare {
-      font-size: 20px;
-    }
-    .price-container-wrapper .product__discount-badge {
-      font-size: 14px;
-      height: 22px;
-      width: 55px;
-      border-radius: 6px;
-    }
-  }
-
-  @media (max-width: 410px) {
-    .price-container-wrapper .product__price {
-      font-size: 19px;
-    }
-    .price-container-wrapper .product__price--compare {
-      font-size: 17px;
-    }
-    .price-container-wrapper .product__discount-badge {
-      font-size: 12px;
-      height: 20px;
-      width: 50px;
-    }
-  }
-
-  .product__discount-badge {
-    width: 63px;
-    height: 25px;
-    background: #FF7F41;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Proxima Nova', sans-serif; /* You may need to import this font */
+  .product-block--price .product__price {
+    width: 168px;
+    flex-shrink: 0;
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
     font-style: normal;
     font-weight: 600;
+    line-height: 150%;
+  }
+
+  .product-block--price .product__price--compare {
+    width: 165px;
+    flex-shrink: 0;
+    color: #888;
+    font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    text-decoration-line: line-through;
+  }
+
+  .product-block--price .product__discount-badge {
+    display: flex;
+    padding: 0 7px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: #FCE390;
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-weight: 600;
+      font-size: 14px;
+    width: auto;
+    height: auto;
+    line-height: normal;
+  }
+  .product-single__subtitle {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 27px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+    margin-top: 8px;
+    margin-bottom: 15px;
+  }
+  .variant-picker__items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .variant-picker__item:nth-child(n+5) {
+    grid-column: span 2;
+  }
+  .product-accordion {
+    border-bottom: 1px solid #E0E0E0;
+  }
+  .product-accordion summary {
+    padding: 20px 0;
     font-size: 16px;
-    line-height: 25px;
-    color: #FFFFFF;
+    font-weight: 600;
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .product-accordion summary::-webkit-details-marker {
+    display: none;
+  }
+  .product-accordion summary .icon-toggle {
+    transition: transform 0.2s;
+  }
+  .product-accordion[open] summary .icon-toggle {
+    transform: rotate(180deg);
+  }
+  .product-accordion-content {
+    padding-bottom: 20px;
+  }
+  .product-accordion-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  .product-accordion--styled {
+    border-radius: 5px;
+    background: #F5F9FF;
+    padding: 0 20px;
+    border-bottom: none;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+    max-width: 646px;
+  }
+  .product-accordion--styled summary {
+    padding: 20px 0;
+    min-height: 60px;
+  }
+
+  .showroom-list .showroom-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #E0E0E0;
+  }
+  .showroom-list .showroom-item:last-child {
+    border-bottom: none;
+  }
+  .showroom-list .showroom-item a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .showroom-list .showroom-item .showroom-address {
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+  }
+  .showroom-list .showroom-item .showroom-address strong {
+    font-weight: 600;
+    color: #1C2C58;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .showroom-list .showroom-item .showroom-address p {
+    margin: 0;
+  }
+  .showroom-list .showroom-item .phone-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1C2C58;
+    white-space: nowrap;
+    margin-left: 20px;
+  }
+
+  .variant__label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .variant__label-info {
+    font-weight: 400;
+  }
+  .is-size .variant-input-wrap,
+  .is-firmness .variant-input-wrap {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .is-size .variant-input,
+  .is-firmness .variant-input {
+    display: flex;
+  }
+  .is-size .variant-input-wrap[data-option-count="2"],
+  .is-firmness .variant-input-wrap[data-option-count="2"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .is-size .variant-input-wrap[data-option-count="3"],
+  .is-firmness .variant-input-wrap[data-option-count="3"] {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .is-size .variant-input-wrap[data-option-count="4"],
+  .is-firmness .variant-input-wrap[data-option-count="4"] {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .is-size .variant-input-wrap[data-option-count="5"],
+  .is-firmness .variant-input-wrap[data-option-count="5"] {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .is-size .variant-input-wrap[data-option-count="5"] .variant-input:nth-child(n+5),
+  .is-firmness .variant-input-wrap[data-option-count="5"] .variant-input:nth-child(n+5) {
+    grid-column: span 1; /* Fallback for clean layout */
+  }
+  .is-size .variant-input-wrap[data-option-count="6"],
+  .is-firmness .variant-input-wrap[data-option-count="6"] {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .is-size .variant-input-wrap[data-option-count="6"] .variant-input:nth-child(n+6),
+  .is-firmness .variant-input-wrap[data-option-count="6"] .variant-input:nth-child(n+6) {
+    grid-column: span 2;
+  }
+  .variant-wrapper:not(.is-color) .variant__button-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 8px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    min-height: 60px;
     text-align: center;
+  }
+  .variant-wrapper:not(.is-color) .variant-input input[type="radio"]:checked + .variant__button-label {
+    border-color: #234085;
+    background-color: #F5F9FF;
+  }
+  .variant-wrapper:not(.is-color) .variant__button-label .label-head,
+  .variant-wrapper:not(.is-color) .variant__button-label .label-value {
+    display: block;
+  }
+  .variant-wrapper:not(.is-color) .variant__button-label .label-head {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1C2C58;
+  }
+  .variant-wrapper:not(.is-color) .variant__button-label .label-value {
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+  }
+  .promotion-block-container {
+    margin-bottom: 20px;
+  }
+  .promotion-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
+  }
+  .promotion-vouchers {
+    display: flex;
+    max-width: 646px;
+    width: 100%;
+    min-height: 55px;
+    padding: 4px 16px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #F5F5F5;
+    flex-wrap: wrap;
+  }
+  .promotion-voucher-item {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .promotion-voucher-item img {
+    display: block;
+    width: 84.99px;
+    height: 36.902px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+  .promotion-popup-modal .popup-modal__content {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+  }
+  .promotion-popup-modal .popup-modal__content-info {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    border-radius: 8px;
+  }
+
+  @media screen and (min-width: 769px) {
+    .product-section > .page-content > .page-width {
+      max-width: 100%;
+      padding-left: 120px;
+      padding-right: 110px;
+    }
   }
 </style>
 
@@ -207,6 +436,12 @@
                 </h1>
               {%- endif -%}
 
+              {%- if section.settings.product_subtitle != blank -%}
+                <div class="product-single__subtitle">
+                  {{ section.settings.product_subtitle }}
+                </div>
+              {%- endif -%}
+
               {%- if sku_enable -%}
                 <p data-sku class="product-single__sku">
                   {%- if current_variant.sku -%}
@@ -223,54 +458,68 @@
                 {%- case block.type -%}
                   {%- when '@app' -%}
                     {% render block %}
-                  {%- when 'showroom_dropdown' -%}
-                    <div class="product-block" {{ block.shopify_attributes }}>
-                      <div class="showroom-section">
-                        <div class="showroom-toggle" onclick="toggleShowroomDropdown(this)">
-                          <span class="showroom-title">
-                            <img src="{{ 'showroom.png' | asset_url }}" alt="Hệ thống cửa hàng" class="showroom-icon" />
-                            <span>Hệ thống cửa hàng</span>
-                          </span>
-                          <span class="arrow-icon">
-                            <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                          </span>
+                  {%- when 'promotion' -%}
+                    <div class="product-block promotion-block-container" {{ block.shopify_attributes }}>
+                      <div class="promotion-vouchers">
+                        <h3 class="promotion-title">{{ block.settings.title }}</h3>
+                        {%- for i in (1..4) -%}
+                          {%- capture voucher_image -%}voucher_image_{{ i }}{%- endcapture -%}
+                          {%- if block.settings[voucher_image] != blank -%}
+                            <modal-opener data-modal="#PromotionPopup-{{ block.id }}-{{ i }}">
+                              <button
+                                class="promotion-voucher-item"
+                                aria-label="Open promotion details"
+                              >
+                                <img
+                                  src="{{ block.settings[voucher_image] | img_url: 'master' }}"
+                                  alt="{{ block.settings[voucher_image].alt | default: 'Mã ưu đãi' }}"
+                                  width="85"
+                                  height="37"
+                                >
+                              </button>
+                            </modal-opener>
+                          {%- endif -%}
+                        {%- endfor -%}
                         </div>
-                      
-                       <div class="showroom-list">
-                          <div class="showroom-item">
-                            <a href="https://maps.google.com/?q=Shop%2009,%20B2%20Sarimi,%20K%C4%90T%20Sala,%2072%20Nguy%E1%BB%85n%20C%C6%A1%20Th%E1%BA%A1ch,%20P.%20An%20L%E1%BB%A3i%20%C4%90%C3%B4ng,%20Q.2,%20TP.%20HCM" target="_blank" rel="noopener">
-                              <strong>Q.2, TP.HCM:</strong>
-                              <span>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông</span>
-                            </a>
-                            <a class="phone-link" href="tel:0964777960"><i class="fas fa-phone"></i> 0964777960</a>
-                          </div>
-                          <div class="showroom-item">
-                            <a href="https://maps.google.com/?q=283A%20Hai%20B%C3%A0%20Tr%C6%B0ng,%20Ph%C6%B0%E1%BB%9Dng%20Xu%C3%A2n%20Ho%C3%A0,%20Q.3,%20TP.HCM" target="_blank" rel="noopener">
-                              <strong>Q.3, TP.HCM:</strong> 283A Hai Bà Trưng, Phường Xuân Hoà
-                            </a>
-                            <a class="phone-link" href="tel:0964777910"><i class="fas fa-phone"></i> 0964777910</a>
-                          </div>
-                          <div class="showroom-item">
-                            <a href="https://maps.google.com/?q=228%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20Q.%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20HN" target="_blank" rel="noopener">
-                              <strong>Q. Cầu Giấy, HN:</strong> 228 Cầu Giấy, Quan Hoa
-                            </a>
-                            <a class="phone-link" href="tel:0964777940"><i class="fas fa-phone"></i> 0964777940</a>
-                          </div>
-                        </div>
-                                          
-                        <script>
-                          function toggleShowroomDropdown(element) {
-                            const showroomSection = element.closest('.showroom-section');
-                            const dropdown = showroomSection.querySelector('.showroom-list');
-                            const arrow = showroomSection.querySelector('.arrow-icon');
-                            dropdown.classList.toggle('show');
-                            arrow.classList.toggle('rotate');
-                          }
-                        </script>
-                      </div>
                     </div>
+                  {%- when 'showroom_dropdown' -%}
+                    <details class="product-accordion product-accordion--styled" {{ block.shopify_attributes }}>
+                      <summary>
+                        <span>{{ block.settings.title }}</span>
+                        <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </summary>
+                      <div class="product-accordion-content">
+                        <div class="showroom-list showroom-list--accordion">
+                          {%- if block.settings.showroom_1_name != blank -%}
+                          <div class="showroom-item">
+                              <a href="{{ block.settings.showroom_1_map_link }}" target="_blank" rel="noopener" class="showroom-address">
+                                <strong>{{ block.settings.showroom_1_name }}</strong><br>
+                                {{ block.settings.showroom_1_address }}
+                              </a>
+                              <a class="phone-link" href="tel:{{ block.settings.showroom_1_phone | remove: ' ' }}">{{ block.settings.showroom_1_phone }}</a>
+                          </div>
+                          {%- endif -%}
+                          {%- if block.settings.showroom_2_name != blank -%}
+                          <div class="showroom-item">
+                              <a href="{{ block.settings.showroom_2_map_link }}" target="_blank" rel="noopener" class="showroom-address">
+                                <strong>{{ block.settings.showroom_2_name }}</strong><br>
+                                {{ block.settings.showroom_2_address }}
+                            </a>
+                              <a class="phone-link" href="tel:{{ block.settings.showroom_2_phone | remove: ' ' }}">{{ block.settings.showroom_2_phone }}</a>
+                          </div>
+                          {%- endif -%}
+                          {%- if block.settings.showroom_3_name != blank -%}
+                          <div class="showroom-item">
+                              <a href="{{ block.settings.showroom_3_map_link }}" target="_blank" rel="noopener" class="showroom-address">
+                                <strong>{{ block.settings.showroom_3_name }}</strong><br>
+                                {{ block.settings.showroom_3_address }}
+                            </a>
+                              <a class="phone-link" href="tel:{{ block.settings.showroom_3_phone | remove: ' ' }}">{{ block.settings.showroom_3_phone }}</a>
+                          </div>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </details>
                   {%- when 'separator' -%}
                     <div class="product-block" {{ block.shopify_attributes }}><hr></div>
                   {%- when 'text' -%}
@@ -279,15 +528,23 @@
                     </div>
 
                   {%- when 'tab' -%}
-                    {% assign tab_id = block.id | append: product.id %}
                     {% capture tab_content %}
                       {{ block.settings.content }}
                       {{ block.settings.page.content }}
+                      {% if block.settings.image != blank %}
+                        <img src="{{ block.settings.image | img_url: 'master' }}" loading="lazy" alt="{{ block.settings.image.alt | default: block.settings.title }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+                      {% endif %}
                     {% endcapture %}
                     {% unless tab_content == blank and block.settings.title == blank %}
-                      <div class="product-block product-block--tab" {{ block.shopify_attributes }}>
-                        {%- render 'tab', id: tab_id, title: block.settings.title, content: tab_content -%}
+                      <details class="product-accordion" {{ block.shopify_attributes }}>
+                        <summary>
+                          <span>{{ block.settings.title }}</span>
+                           <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                        <div class="product-accordion-content rte">
+                          {{ tab_content }}
                       </div>
+                      </details>
                     {% endunless %}
                   {%- when 'productbundle' -%}
                     <div class="product-block product-block-bundle" {{ block.shopunlessy_attributes }}>
@@ -304,17 +561,132 @@
                       {%- render 'tab-contact', id: tab_id, block: block -%}
                     </div>
                   {%- when 'description' -%}
-                    <div
-                      class="product-block{% if block.settings.is_tab %} product-block--tab{% endif %}{% if block.settings.collapse_content and block.settings.is_tab == false %} product-block--collapse{% endif %}"
-                      {{ block.shopify_attributes }}
-                    >
-                      {%- assign id = block.id | append: product.id -%}
-                      {%- render 'product-description',
-                        id: id,
-                        product: product,
-                        is_collapse_content: block.settings.collapse_content,
-                        is_tab: block.settings.is_tab
-                      -%}
+                     <details class="product-accordion product-accordion--styled" open {{ block.shopify_attributes }}>
+                        <summary>
+                          <span>{{ 'products.product.description' | t }}</span>
+                           <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                        <div class="product-accordion-content rte">
+                          {{ product.description }}
+                        </div>
+                      </details>
+                  {%- when 'usage_guide' -%}
+                    {%- capture usage_content -%}
+                      {%- if block.settings.image != blank -%}
+                        <img src="{{ block.settings.image | img_url: 'master' }}" loading="lazy" alt="{{ block.settings.image.alt | default: block.settings.title }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+                      {%- endif -%}
+                      {{ block.settings.content }}
+                    {%- endcapture -%}
+                    {%- unless usage_content == blank and block.settings.title == blank -%}
+                      <details class="product-accordion product-accordion--styled" {{ block.shopify_attributes }}>
+                        <summary>
+                          <span>{{ block.settings.title }}</span>
+                          <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                        <div class="product-accordion-content rte">
+                          {{ usage_content }}
+                        </div>
+                      </details>
+                    {%- endunless -%}
+                  {%- when 'size_guide_dropdown' -%}
+                    <div class="product-block" {{ block.shopify_attributes }}>
+                      <div class="size-guide-text-dropdown-container">
+                        <style>
+                          .size-guide-text-dropdown-container {
+                            border-radius: 5px;
+                            background: #F5F9FF;
+                            max-width: 646px;
+                            flex-shrink: 0;
+                            margin-bottom: 16px;
+                          }
+                      
+                          .size-guide-text-trigger {
+                            background: none;
+                            border: none;
+                            padding: 0 20px;
+                            width: 100%;
+                            min-height: 60px;
+                            
+                            font-family: "Be Vietnam Pro", sans-serif;
+                            font-weight: 600;
+                            font-size: 16px;
+                            line-height: 22px;
+                            color: #1C2C58;
+                            text-decoration: none;
+                            cursor: pointer;
+                            
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            gap: 8px;
+                            text-align: left;
+                          }
+                      
+                          .size-guide-text-trigger .arrow-icon {
+                            transition: transform 0.3s ease-out;
+                            flex-shrink: 0;
+                          }
+                      
+                          .size-guide-text-trigger.is-active .arrow-icon {
+                            transform: rotate(180deg);
+                          }
+                      
+                          .size-guide-content {
+                            max-height: 0;
+                            overflow: hidden;
+                            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+                            padding: 0 20px;
+                          }
+                      
+                          .size-guide-content.is-active {
+                            max-height: 1000px; /* Adjust if your image is taller */
+                            padding: 0 20px 20px;
+                          }
+                      
+                          .size-guide-content img {
+                            display: block;
+                            width: 100%;
+                            height: auto;
+                            border-radius: 4px;
+                          }
+                        </style>
+                      
+                        <button class="size-guide-text-trigger">
+                          <span>{{ block.settings.title | escape }}</span>
+                          <span class="arrow-icon">
+                            <svg width="18" height="10" viewBox="0 0 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </span>
+                        </button>
+                      
+                        <div class="size-guide-content">
+                          {%- if block.settings.image != blank -%}
+                            <img src="{{ block.settings.image | img_url: 'master' }}"
+                                 alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                                 width="{{ block.settings.image.width }}"
+                                 height="{{ block.settings.image.height }}"
+                                 loading="lazy">
+                          {%- else -%}
+                            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          {%- endif -%}
+                        </div>
+                      
+                        <script>
+                          (function() {
+                            const container = document.currentScript.parentElement;
+                            const trigger = container.querySelector('.size-guide-text-trigger');
+                            const content = container.querySelector('.size-guide-content');
+                          
+                            if (trigger && content) {
+                              trigger.addEventListener('click', function() {
+                                this.classList.toggle('is-active');
+                                content.classList.toggle('is-active');
+                              });
+                            }
+                          })();
+                        </script>
+                      </div>
                     </div>
                   {%- when 'price' -%}
                     <div class="product-block product-block--price" {{ block.shopify_attributes }}>
@@ -425,22 +797,6 @@
                           {%- endif -%}
                         </div>
                       {%- endif -%} {% endcomment %}
-                      <div class="product-installment flex ai-center">
-                        {% comment %}
-                          Caculate installment price in here
-                        {% endcomment %}
-                        {% liquid
-                          assign installment_price = current_variant.price | divided_by: 12
-                        %}
-                        <p class="text-wrap m-0 text-sm">
-                          <span class="text">{{ 'general.product.installment_price' | t }}</span>
-                          <span class="money" data-installment-price>
-                            {{ installment_price | money_without_currency }}
-                          </span>
-                          <span class="currency">{{ 'general.product.month_price' | t }}</span>
-                        </p>
-                        {% render 'icon-info' %}
-                      </div>
                     </div>
                   {%- when 'quantity_selector' -%}
                     <div class="product-block" {{ block.shopify_attributes }}>
@@ -848,6 +1204,41 @@
 
 {%- for block in blocks -%}
   {%- case block.type -%}
+    {%- when 'promotion' -%}
+      {%- for i in (1..4) -%}
+        {%- capture voucher_image -%}voucher_image_{{ i }}{%- endcapture -%}
+        {%- capture popup_bg -%}popup_bg_{{ i }}{%- endcapture -%}
+        {%- capture popup_content -%}popup_content_{{ i }}{%- endcapture -%}
+
+        {%- if block.settings[voucher_image] != blank -%}
+          <modal-dialog
+            id="PromotionPopup-{{ block.id }}-{{ i }}"
+            class="promotion-popup-modal popup-modal fixed top-0 left-0 w-full h-full m-auto"
+          >
+            <div
+              role="dialog"
+              aria-modal="true"
+              class="popup-modal__content absolute w-full h-auto m-auto"
+              tabindex="-1"
+              style="{% if block.settings[popup_bg] != blank %}background-image: url('{{ block.settings[popup_bg] | img_url: 'master' }}');{% endif %}"
+            >
+              <div class="popup-modal__content-info relative mx-auto">
+                <button
+                  id="ModalClose-{{ block.id }}-{{ i }}"
+                  type="button"
+                  class="popup-modal__toggle block border-none rounded-circle absolute z-index-3 button--close"
+                  aria-label="{{ 'accessibility.close_modal' | t }}"
+                >
+                  <span class="i__close e-none block relative color-current w-full h-full"></span>
+                </button>
+                <div class="rte">
+                  {{ block.settings[popup_content] }}
+                </div>
+              </div>
+            </div>
+          </modal-dialog>
+        {%- endif -%}
+      {%- endfor -%}
     {%- when 'carousel_modal' -%}
       <modal-dialog
         id="PopupModal-{{ block.id }}"
@@ -866,7 +1257,7 @@
               id="ModalClose-{{ block.id }}"
               type="button"
               class="product-popup-modal__toggle popup-modal__toggle block border-none rounded-circle absolute z-index-3 button--close"
-              aria-label="{{ 'accessibility.close' | t }}"
+              aria-label="{{ 'accessibility.close_modal' | t }}"
             >
               <span class="i__close e-none block relative color-current w-full h-full"></span>
             </button>

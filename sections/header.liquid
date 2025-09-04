@@ -160,6 +160,14 @@
       padding: 0 15px;
     }
   }
+
+  @media screen and (min-width: 990px) {
+    [data-section-id="{{ section.id }}"] .page-width {
+        max-width: 100%;
+        padding-left: 120px;
+        padding-right: 110px;
+    }
+  }
 </style>
 
 <div class="relative" data-section-id="{{ section.id }}" data-section-type="header">

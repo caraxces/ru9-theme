@@ -138,7 +138,7 @@
     font-family: 'Be Vietnam Pro', sans-serif;
   }
   .section-header {
-    padding-bottom: 30px;
+    padding-bottom: 0px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -274,7 +274,7 @@
 
   /* Carousel Progress Bar */
   .carousel-progress-container {
-    padding: 24px 0 40px 0;
+    {% comment %} padding: 24px 0 40px 0; {% endcomment %}
     display: none;
   }
   .carousel-progress-bar-background {
@@ -833,7 +833,7 @@
         });
       }, {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px 0px 0px'
       });
 
       itemsToAnimate.forEach((item, index) => {

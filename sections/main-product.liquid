@@ -78,6 +78,12 @@
       "label": "t:sections.main-product.settings.sku_enable.label"
     },
     {
+      "type": "text",
+      "id": "product_subtitle",
+      "label": "Phụ đề sản phẩm",
+      "info": "Hiển thị bên dưới tiêu đề chính của sản phẩm."
+    },
+    {
       "type": "header",
       "content": "t:sections.main-product.settings.header_media"
     },
@@ -228,7 +234,114 @@
   ],
   "blocks": [
     {
+      "type": "size_guide_dropdown",
+      "name": "Hướng dẫn chọn kích thước",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tiêu đề",
+          "default": "Hướng dẫn chọn kích thước"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Hình ảnh hướng dẫn"
+        }
+      ]
+    },
+    {
       "type": "@app"
+    },
+    {
+      "type": "promotion",
+      "name": "Mã ưu đãi",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tiêu đề",
+          "default": "Mã ưu đãi"
+        },
+        {
+          "type": "header",
+          "content": "Voucher 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "voucher_image_1",
+          "label": "Hình ảnh đại diện voucher"
+        },
+        {
+          "type": "image_picker",
+          "id": "popup_bg_1",
+          "label": "Hình nền popup"
+        },
+        {
+          "type": "richtext",
+          "id": "popup_content_1",
+          "label": "Nội dung popup"
+        },
+        {
+          "type": "header",
+          "content": "Voucher 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "voucher_image_2",
+          "label": "Hình ảnh đại diện voucher"
+        },
+        {
+          "type": "image_picker",
+          "id": "popup_bg_2",
+          "label": "Hình nền popup"
+        },
+        {
+          "type": "richtext",
+          "id": "popup_content_2",
+          "label": "Nội dung popup"
+        },
+        {
+          "type": "header",
+          "content": "Voucher 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "voucher_image_3",
+          "label": "Hình ảnh đại diện voucher"
+        },
+        {
+          "type": "image_picker",
+          "id": "popup_bg_3",
+          "label": "Hình nền popup"
+        },
+        {
+          "type": "richtext",
+          "id": "popup_content_3",
+          "label": "Nội dung popup"
+        },
+        {
+          "type": "header",
+          "content": "Voucher 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "voucher_image_4",
+          "label": "Hình ảnh đại diện voucher"
+        },
+        {
+          "type": "image_picker",
+          "id": "popup_bg_4",
+          "label": "Hình nền popup"
+        },
+        {
+          "type": "richtext",
+          "id": "popup_content_4",
+          "label": "Nội dung popup"
+        }
+      ]
     },
     {
       "type": "icon_with_text",
@@ -825,7 +938,93 @@
     {
       "type": "showroom_dropdown",
       "name": "Hệ thống cửa hàng",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tiêu đề",
+          "default": "Hệ thống cửa hàng"
+        },
+        {
+          "type": "header",
+          "content": "Showroom 1"
+        },
+        {
+          "type": "text",
+          "id": "showroom_1_name",
+          "label": "Tên Showroom 1",
+          "default": "Showroom 1"
+        },
+        {
+          "type": "richtext",
+          "id": "showroom_1_address",
+          "label": "Địa chỉ 1"
+        },
+        {
+          "type": "text",
+          "id": "showroom_1_phone",
+          "label": "Số điện thoại 1",
+          "default": "0964777910"
+        },
+        {
+          "type": "url",
+          "id": "showroom_1_map_link",
+          "label": "Link Google Maps 1"
+        },
+        {
+          "type": "header",
+          "content": "Showroom 2"
+        },
+        {
+          "type": "text",
+          "id": "showroom_2_name",
+          "label": "Tên Showroom 2",
+          "default": "Showroom 2"
+        },
+        {
+          "type": "richtext",
+          "id": "showroom_2_address",
+          "label": "Địa chỉ 2"
+        },
+        {
+          "type": "text",
+          "id": "showroom_2_phone",
+          "label": "Số điện thoại 2",
+          "default": "0964777910"
+        },
+        {
+          "type": "url",
+          "id": "showroom_2_map_link",
+          "label": "Link Google Maps 2"
+        },
+        {
+          "type": "header",
+          "content": "Showroom 3"
+        },
+        {
+          "type": "text",
+          "id": "showroom_3_name",
+          "label": "Tên Showroom 3",
+          "default": "Showroom 3"
+        },
+        {
+          "type": "richtext",
+          "id": "showroom_3_address",
+          "label": "Địa chỉ 3"
+        },
+        {
+          "type": "text",
+          "id": "showroom_3_phone",
+          "label": "Số điện thoại 3",
+          "default": "0964777940"
+        },
+        {
+          "type": "url",
+          "id": "showroom_3_map_link",
+          "label": "Link Google Maps 3"
+        }
+      ]
     },
     {
       "type": "buy_buttons",
@@ -1004,6 +1203,11 @@
           "default": "Shipping information"
         },
         {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Hình ảnh"
+        },
+        {
           "type": "richtext",
           "id": "content",
           "label": "t:product_block.tab.settings.content.label",
@@ -1013,6 +1217,29 @@
           "type": "page",
           "id": "page",
           "label": "t:product_block.tab.settings.page.label"
+        }
+      ]
+    },
+    {
+      "type": "usage_guide",
+      "name": "Hướng dẫn sử dụng",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tiêu đề",
+          "default": "Hướng dẫn sử dụng"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Hình ảnh"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Nội dung",
+          "default": "<p>Thêm nội dung hướng dẫn sử dụng vào đây.</p>"
         }
       ]
     },
