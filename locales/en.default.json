@@ -15,9 +15,9 @@
     },
     "accessibility": {
       "skip_to_content": "Skip to content",
-      "close_modal": "Close (esc)",
       "close": "Close",
-      "unit_price_separator": "/",
+      "close_modal": "Close modal",
+      "unit_price_separator": "per",
       "learn_more": "Learn more"
     },
     "button": {

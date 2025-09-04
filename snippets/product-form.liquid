@@ -6,6 +6,7 @@
 -%}
 
 {%- form 'product', product, id: form_id, class: form_classes -%}
+  <div id="bundle-items-container"></div>
   {%- liquid
     assign gift_card_recipient_feature_active = false
     if block.settings.show_gift_card_recipient and product.gift_card?

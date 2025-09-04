@@ -78,6 +78,12 @@
       "label": "t:sections.main-product.settings.sku_enable.label"
     },
     {
+      "type": "text",
+      "id": "product_subtitle",
+      "label": "Phụ đề sản phẩm",
+      "info": "Hiển thị bên dưới tiêu đề chính của sản phẩm."
+    },
+    {
       "type": "header",
       "content": "t:sections.main-product.settings.header_media"
     },
@@ -227,6 +233,24 @@
     }
   ],
   "blocks": [
+    {
+      "type": "size_guide_dropdown",
+      "name": "Hướng dẫn chọn kích thước",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tiêu đề",
+          "default": "Hướng dẫn chọn kích thước"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Hình ảnh hướng dẫn"
+        }
+      ]
+    },
     {
       "type": "@app"
     },
@@ -914,7 +938,93 @@
     {
       "type": "showroom_dropdown",
       "name": "Hệ thống cửa hàng",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tiêu đề",
+          "default": "Hệ thống cửa hàng"
+        },
+        {
+          "type": "header",
+          "content": "Showroom 1"
+        },
+        {
+          "type": "text",
+          "id": "showroom_1_name",
+          "label": "Tên Showroom 1",
+          "default": "Showroom 1"
+        },
+        {
+          "type": "richtext",
+          "id": "showroom_1_address",
+          "label": "Địa chỉ 1"
+        },
+        {
+          "type": "text",
+          "id": "showroom_1_phone",
+          "label": "Số điện thoại 1",
+          "default": "0964777910"
+        },
+        {
+          "type": "url",
+          "id": "showroom_1_map_link",
+          "label": "Link Google Maps 1"
+        },
+        {
+          "type": "header",
+          "content": "Showroom 2"
+        },
+        {
+          "type": "text",
+          "id": "showroom_2_name",
+          "label": "Tên Showroom 2",
+          "default": "Showroom 2"
+        },
+        {
+          "type": "richtext",
+          "id": "showroom_2_address",
+          "label": "Địa chỉ 2"
+        },
+        {
+          "type": "text",
+          "id": "showroom_2_phone",
+          "label": "Số điện thoại 2",
+          "default": "0964777910"
+        },
+        {
+          "type": "url",
+          "id": "showroom_2_map_link",
+          "label": "Link Google Maps 2"
+        },
+        {
+          "type": "header",
+          "content": "Showroom 3"
+        },
+        {
+          "type": "text",
+          "id": "showroom_3_name",
+          "label": "Tên Showroom 3",
+          "default": "Showroom 3"
+        },
+        {
+          "type": "richtext",
+          "id": "showroom_3_address",
+          "label": "Địa chỉ 3"
+        },
+        {
+          "type": "text",
+          "id": "showroom_3_phone",
+          "label": "Số điện thoại 3",
+          "default": "0964777940"
+        },
+        {
+          "type": "url",
+          "id": "showroom_3_map_link",
+          "label": "Link Google Maps 3"
+        }
+      ]
     },
     {
       "type": "buy_buttons",
