@@ -1,0 +1,303 @@
+{% comment %}
+  ** Reason to choice section **
+  - Shows a slider of reasons with images, titles, and content.
+{% endcomment %}
+
+<style>
+  .reason-to-choice {
+    padding: 50px 0;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  .reason-to-choice__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .reason-to-choice__title {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .reason-to-choice__nav {
+    display: flex;
+    gap: 10px;
+  }
+  .reason-to-choice__nav-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+  }
+  .reason-to-choice__nav-button:hover {
+    border-color: #ccc;
+  }
+  .reason-to-choice__nav-button.is-next {
+    background-color: #0051D2;
+    border-color: #0051D2;
+  }
+  .reason-to-choice__nav-button.is-next:hover {
+    background-color: #003DA5;
+    border-color: #003DA5;
+  }
+  .reason-to-choice__nav-button svg {
+    width: 20px;
+    height: 20px;
+  }
+  .reason-to-choice__nav-button.is-next svg path {
+    stroke: white;
+  }
+
+  .reason-carousel .flickity-viewport {
+    transition: height 0.2s;
+  }
+  .reason-carousel .flickity-prev-next-buttons,
+  .reason-carousel .flickity-page-dots {
+    display: none;
+  }
+
+  .reason-carousel__cell {
+    width: 515px;
+    margin-right: 20px;
+  }
+  .reason-carousel__image-wrapper {
+    width: 515px;
+    height: 400px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+  .reason-carousel__image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .reason-carousel__title {
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 28px */
+    width: 487px;
+    margin: 0 0 15px 0;
+  }
+  .reason-carousel__content {
+    width: 504px;
+    height: 139px;
+    flex-shrink: 0;
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 28px */
+  }
+
+  .reason-to-choice__progress {
+    margin-top: 20px;
+    background-color: #e0e0e0;
+    height: 4px;
+    border-radius: 2px;
+    width: 515px;
+  }
+  .reason-to-choice__progress-bar {
+    background-color: #0051D2;
+    height: 100%;
+    width: 0;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  @media screen and (min-width: 990px) {
+    .reason-to-choice.page-width {
+      max-width: 100%;
+      padding-left: 120px;
+      padding-right: 110px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .reason-to-choice__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .reason-carousel__cell,
+    .reason-carousel__image-wrapper,
+    .reason-carousel__title,
+    .reason-carousel__content,
+    .reason-to-choice__progress {
+      width: 100%;
+    }
+    .reason-carousel__image-wrapper {
+      height: 300px;
+    }
+     .reason-carousel__content {
+      height: auto;
+      min-height: 139px;
+    }
+  }
+</style>
+
+<div class="reason-to-choice page-width" data-section-id="{{ section.id }}">
+  <div class="reason-to-choice__header">
+    <h2 class="reason-to-choice__title">{{ section.settings.title | escape }}</h2>
+    {% if section.blocks.size > 1 %}
+      <div class="reason-to-choice__nav">
+        <button class="reason-to-choice__nav-button is-previous" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18L9 12L15 6" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="reason-to-choice__nav-button is-next" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if section.blocks.size > 0 %}
+    <div class="reason-carousel-wrapper">
+      <div class="reason-carousel">
+        {% for block in section.blocks %}
+          <div class="reason-carousel__cell">
+            <div class="reason-carousel__image-wrapper">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 1030 }}" 
+                     srcset="{{ block.settings.image | image_url: width: 515 }} 515w, {{ block.settings.image | image_url: width: 1030 }} 1030w"
+                     sizes="(max-width: 768px) 100vw, 515px"
+                     alt="{{ block.settings.image.alt | escape }}" 
+                     loading="lazy"
+                     width="515"
+                     height="400">
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+            <div class="reason-carousel__text-wrapper">
+              <h3 class="reason-carousel__title">{{ block.settings.title | escape }}</h3>
+              <div class="reason-carousel__content">{{ block.settings.content }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      
+      {% if section.blocks.size > 1 %}
+        <div class="reason-to-choice__progress">
+          <div class="reason-to-choice__progress-bar"></div>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  function initReasonToChoiceSlider(container) {
+    if (!container) return;
+
+    const carouselEl = container.querySelector('.reason-carousel');
+    const prevButton = container.querySelector('.is-previous');
+    const nextButton = container.querySelector('.is-next');
+    const progressBar = container.querySelector('.reason-to-choice__progress-bar');
+    
+    if (!carouselEl || typeof Flickity === 'undefined') return;
+
+    const carousel = new Flickity(carouselEl, {
+      pageDots: false,
+      prevNextButtons: false,
+      wrapAround: true,
+      cellAlign: 'left',
+      adaptiveHeight: true
+    });
+
+    if (prevButton && nextButton) {
+      prevButton.addEventListener('click', () => carousel.previous());
+      nextButton.addEventListener('click', () => carousel.next());
+    }
+
+    const updateProgress = () => {
+      if (progressBar) {
+        const slideCount = carousel.slides.length;
+        const progress = slideCount > 1 ? (carousel.selectedIndex / (slideCount - 1)) * 100 : 100;
+        progressBar.style.width = progress + '%';
+      }
+    };
+
+    carousel.on('select', updateProgress);
+    updateProgress();
+  }
+
+  function loadReasonSlider() {
+    const sectionContainer = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (sectionContainer) {
+      initReasonToChoiceSlider(sectionContainer);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadReasonSlider);
+  document.addEventListener('shopify:section:load', (event) => {
+    if (event.detail.sectionId === '{{ section.id }}') {
+      initReasonToChoiceSlider(event.target);
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Reason to choice",
+  "tag": "section",
+  "class": "reason-to-choice-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "4 Lý do bạn nên chọn chúng tôi"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reason",
+      "name": "Reason",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Nâng đỡ chuẩn xác cho từng vùng cơ thể"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Original Pro được thiết kế với 3 vùng foam nâng đỡ riêng biệt: đầu - thân – chân. Nhờ đó, cột sống luôn được giữ ở tư thế tự nhiên, giảm tình trạng đau lưng hay ê ẩm sau giấc ngủ. Bạn sẽ cảm nhận sự khác biệt rõ rệt chỉ sau vài đêm sử dụng.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reason to choice",
+      "blocks": [
+        { "type": "reason" },
+        { "type": "reason" },
+        { "type": "reason" },
+        { "type": "reason" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -5,6 +5,28 @@
 {% endcomment %}
 
 <style>
+  .product-image-container {
+    position: relative;
+  }
+  .product-tags-wrapper {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .product-tag-item {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    max-width: fit-content;
+  }
   .product-section {
     font-family: "Be Vietnam Pro", sans-serif;
   }
@@ -62,8 +84,8 @@
     background: #FCE390;
     color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-weight: 600;
-      font-size: 14px;
+    font-weight: 400;
+      font-size: 18px;
     width: auto;
     height: auto;
     line-height: normal;
@@ -295,12 +317,109 @@
     border-radius: 8px;
   }
 
+  .service-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .service-block__icon {
+    flex-shrink: 0;
+  }
+
+  .service-block__text p {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 27px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+    margin: 0;
+  }
+
+  .service-carousel-wrapper {
+    width: 100%;
+    height: 94px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #F5F9FF;
+    padding: 0 50px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .service-carousel {
+    width: 100%;
+  }
+
+  .service-carousel-cell {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .service-carousel-wrapper .flickity-prev-next-button {
+    width: 36px;
+    height: 36px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px;
+  }
+
+  .service-carousel-wrapper .flickity-prev-next-button .flickity-button-icon {
+    display: none;
+  }
+
+  .service-carousel-wrapper .flickity-prev-next-button.previous {
+    left: 10px;
+    background-color: #fff;
+    border: 1px solid #EBEBEB;
+    background-image: url('{{ "nav-next.svg" | asset_url }}');
+    transform: scaleX(-1);
+  }
+
+  .service-carousel-wrapper .flickity-prev-next-button.next {
+    right: 10px;
+    background-color: #234085;
+    background-image: url('{{ "nav-next.svg" | asset_url }}');
+  }
+
+  .product-grid {
+    align-items: start;
+  }
+  .is-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+  }
+
+  .service-carousel-wrapper .flickity-page-dots {
+    display: none;
+  }
+
   @media screen and (min-width: 769px) {
     .product-section > .page-content > .page-width {
       max-width: 100%;
       padding-left: 120px;
       padding-right: 110px;
     }
+  }
+
+  .product-grid {
+    display: grid;
+    grid-gap: 20px;
+    align-items: start;
+  }
+
+  .product-grid--medium .product-grid__images {
+    grid-column: span 7 / span 7;
   }
 </style>
 
@@ -381,33 +500,24 @@
 
       <div class="grid{% unless image_position == 'left' %} grid--product-images-right{% endunless %}{% if mobile_layout == 'partial' %} grid--product-images--partial{% endif %}">
         {%- if image_position == 'left' -%}
-          <div class="grid__item {{ product_image_width }} product-single__sticky">
+          <div class="grid__item {{ product_image_width }} product-single__sticky product-grid__images">
             {%- render 'product-images',
               section_id: section_id,
               product: product,
-              section: section,
-              isModal: isModal,
-              image_position: image_position,
-              product_zoom_enable: product_zoom_enable,
+              product_zoom_enable: section.settings.product_zoom_enable,
               product_zoom_size: product_zoom_size,
-              product_image_size: product_image_size,
-              thumbnail_arrows: thumbnail_arrows,
-              thumbnail_height: thumbnail_height,
-              thumbnail_position: thumbnail_position,
-              video_looping: video_looping,
-              video_style: video_style,
-              context: context,
-              sizes: sizes,
-              sizeVariable: product_image_width,
-              fallback: fallback,
-              product_carousel_enable: product_carousel_enable,
-              mobile_layout: mobile_layout
+              product_carousel_enable: section.settings.product_carousel_enable,
+              thumbnail_position: section.settings.thumbnail_position,
+              thumbnail_height: section.settings.thumbnail_height,
+              thumbnail_arrows: section.settings.thumbnail_arrows,
+              mobile_layout: section.settings.mobile_layout,
+              blocks: section.blocks
             -%}
           </div>
         {%- endif -%}
 
-        <div class="grid__item {{ product_description_width }}">
-          <div class="product-single__meta">
+        <div class="grid__item {{ product_description_width }} product-grid__info">
+          <div class="product-single__meta product-info-inner">
             <div class="product-block product-block--header">
               {%- if settings.vendor_enable -%}
                 <div class="product-single__vendor">
@@ -546,6 +656,65 @@
                       </div>
                       </details>
                     {% endunless %}
+                  {%- when 'service_carousel' -%}
+                    {%- liquid
+                      assign services_count = 0
+                      for i in (1..4)
+                        assign icon_setting = 'icon_' | append: i
+                        assign text_setting = 'text_' | append: i
+                        if block.settings[icon_setting] != blank or block.settings[text_setting] != blank
+                          assign services_count = services_count | plus: 1
+                        endif
+                      endfor
+
+                      assign show_nav_buttons = false
+                      if services_count > 1
+                        assign show_nav_buttons = true
+                      endif
+
+                      assign autoplay_duration = false
+                      if block.settings.autoplay and services_count > 1
+                        assign autoplay_duration = block.settings.delay | times: 1000
+                      endif
+                    -%}
+                    <div class="product-block product-block--service-carousel" {{ block.shopify_attributes }}>
+                      <div class="service-carousel-wrapper">
+                        <div class="service-carousel" 
+                          data-flickity='{ 
+                            "cellAlign": "left",
+                            "contain": true,
+                            "prevNextButtons": {{ show_nav_buttons }},
+                            "pageDots": false,
+                            "wrapAround": true,
+                            "autoPlay": {{ autoplay_duration }}
+                          }'>
+                          {%- for i in (1..4) -%}
+                            {%- liquid
+                              assign icon_setting = 'icon_' | append: i
+                              assign text_setting = 'text_' | append: i
+                              assign icon = block.settings[icon_setting]
+                              assign text = block.settings[text_setting]
+                            -%}
+                            {%- if icon != blank or text != blank -%}
+                              <div class="service-carousel-cell">
+                                <div class="service-block">
+                                  {%- if icon != blank -%}
+                                    <div class="service-block__icon">
+                                      <img src="{{ icon | img_url: 'master' }}" alt="{{ icon.alt | default: text }}" width="69" height="53">
+                                    </div>
+                                  {%- endif -%}
+                                  {%- if text != blank -%}
+                                    <div class="service-block__text">
+                                      <p>{{ text }}</p>
+                                    </div>
+                                  {%- endif -%}
+                                </div>
+                              </div>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
+                      </div>
+                    </div>
                   {%- when 'productbundle' -%}
                     <div class="product-block product-block-bundle" {{ block.shopunlessy_attributes }}>
                       {% render 'product-bundle',
@@ -1165,24 +1334,18 @@
         </div>
 
         {%- unless image_position == 'left' -%}
-          <div class="grid__item {{ product_image_width }} product-single__sticky">
+          <div class="grid__item {{ product_image_width }} product-single__sticky product-grid__images">
             {%- render 'product-images',
               section_id: section_id,
               product: product,
-              isModal: isModal,
-              image_position: image_position,
-              product_zoom_enable: product_zoom_enable,
+              product_zoom_enable: section.settings.product_zoom_enable,
               product_zoom_size: product_zoom_size,
-              product_image_size: product_image_size,
-              thumbnail_arrows: thumbnail_arrows,
-              thumbnail_position: thumbnail_position,
-              video_looping: video_looping,
-              video_style: video_style,
-              context: context,
-              sizes: sizes,
-              sizeVariable: product_image_width,
-              fallback: fallback,
-              mobile_layout: mobile_layout
+              product_carousel_enable: section.settings.product_carousel_enable,
+              thumbnail_position: section.settings.thumbnail_position,
+              thumbnail_height: section.settings.thumbnail_height,
+              thumbnail_arrows: section.settings.thumbnail_arrows,
+              mobile_layout: section.settings.mobile_layout,
+              blocks: section.blocks
             -%}
           </div>
         {%- endunless -%}
@@ -1333,4 +1496,51 @@ function showFullQ2Address() {
   transform: translateX(-50%) scale(0.98);
   box-shadow: 0
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const productSection = document.querySelector('.product-section[data-section-id="{{ section_id }}"]');
+    if (!productSection) return;
+
+    const imageColumnWrapper = productSection.querySelector('.product-grid__images .product-column-content');
+    const infoColumnWrapper = productSection.querySelector('.product-grid__info .product-info-inner');
+    
+    if (!imageColumnWrapper || !infoColumnWrapper) return;
+
+    const applyStickyBehavior = () => {
+      imageColumnWrapper.classList.remove('is-sticky');
+      infoColumnWrapper.classList.remove('is-sticky');
+
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        return;
+      }
+
+      const imageColHeight = imageColumnWrapper.offsetHeight;
+      const infoColHeight = infoColumnWrapper.offsetHeight;
+      const heightDifferenceThreshold = 50;
+
+      if (infoColHeight < imageColHeight - heightDifferenceThreshold) {
+        infoColumnWrapper.classList.add('is-sticky');
+      } else if (imageColHeight < infoColHeight - heightDifferenceThreshold) {
+        imageColumnWrapper.classList.add('is-sticky');
+      }
+    };
+
+    window.addEventListener('load', () => {
+      applyStickyBehavior();
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(applyStickyBehavior, 150);
+    });
+    
+    productSection.querySelectorAll('.product-grid__info details').forEach(detail => {
+      detail.addEventListener('toggle', () => {
+        setTimeout(applyStickyBehavior, 300); 
+      });
+    });
+  });
+</script>
 
