@@ -397,7 +397,8 @@
   .is-sticky {
     position: -webkit-sticky;
     position: sticky;
-    top: 20px;
+    top: 120px; /* Adjust this value to sit below your site's sticky header */
+    align-self: start; /* Ensures the column aligns to the top of the grid row */
   }
 
   .service-carousel-wrapper .flickity-page-dots {
@@ -421,6 +422,198 @@
   .product-grid--medium .product-grid__images {
     grid-column: span 7 / span 7;
   }
+  
+  /* 
+    Definitive Pure CSS Sticky Column Solution
+  */
+  @media screen and (min-width: 991px) {
+    /*
+      CRITICAL FIX: `position: sticky` will NOT work if any parent element
+      has `overflow` set to 'hidden', 'scroll', or 'auto'.
+      This rule aggressively targets all potential parent containers in the product grid
+      and forces them to allow sticky positioning.
+    */
+    .product-section,
+    .page-content--product,
+    .page-content--product > .page-width,
+    .grid {
+      overflow: visible !important;
+    }
+
+    /*
+      Disable theme's default sticky behavior on images.
+      A custom script will handle advanced sticky positioning for either column.
+    */
+    .product-section .product-single__sticky .sticky {
+        position: static; /* Let JS control positioning */
+    }
+  }
+
+  /* START: Mobile layout styles based on design */
+  @media screen and (max-width: 768px) {
+    .product-section > .page-content > .page-width {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    /* Full-width main image based on request */
+    .product__main-photos {
+      width: calc(100% + 32px);
+      margin-left: -16px;
+      margin-right: -16px;
+      height: auto;
+      aspect-ratio: 390 / 278.06;
+      flex-shrink: 0;
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    .product__main-photos .product-main-slide {
+      height: 100%;
+    }
+
+    .product__main-photos .product-main-slide img,
+    .product__main-photos .product-main-slide .media--image {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Thumbnail adjustments */
+    .product__thumbs--scroller .product__thumb-item {
+      width: 70px !important;
+      height: 70px !important;
+      flex-shrink: 0;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .product__thumbs--scroller .product__thumb-item .image-wrap {
+      height: 100% !important;
+      padding-bottom: 0 !important;
+    }
+
+    .product__thumbs--scroller .product__thumb-item .image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-single__meta .jdgm-widget--product-rating {
+      margin-bottom: 8px;
+    }
+
+    .product-single__title {
+      font-size: 24px;
+      line-height: 1.3;
+    }
+
+    .product-single__subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      margin-top: 4px;
+      margin-bottom: 24px;
+    }
+    
+    .product-block--price {
+      margin-bottom: 24px;
+    }
+
+    .price-container-wrapper {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .product-block--price .product__price {
+      font-size: 24px;
+      font-weight: 600;
+      width: auto;
+    }
+    .product-block--price .product__price--compare {
+      font-size: 18px;
+      width: auto;
+      order: 3;
+    }
+    .product-block--price .product__discount-badge {
+      font-size: 16px;
+      padding: 2px 8px;
+    }
+
+    .promotion-block-container {
+      margin-bottom: 24px;
+    }
+    .promotion-vouchers {
+      gap: 8px;
+      padding: 12px;
+    }
+    .promotion-title {
+      width: 100%;
+      margin-bottom: 4px;
+      text-align: left;
+    }
+
+    .variant__label {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .is-size .variant-input-wrap {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 8px;
+    }
+    
+    .variant-wrapper:not(.is-color) .variant__button-label {
+      min-height: 50px;
+      padding: 8px;
+    }
+    
+    .variant-wrapper:not(.is-color) .variant__button-label .label-head {
+      font-size: 14px;
+    }
+
+    .variant-wrapper:not(.is-color) .variant__button-label .label-value {
+      font-size: 12px;
+    }
+
+    .size-guide-text-dropdown-container,
+    .product-accordion--styled {
+      padding: 0 16px;
+      margin-left: -16px;
+      margin-right: -16px;
+      max-width: calc(100% + 32px);
+      width: calc(100% + 32px);
+      border-radius: 0;
+      background: #F5F9FF;
+    }
+    .size-guide-text-trigger,
+    .product-accordion--styled summary {
+      min-height: 50px;
+      font-size: 16px;
+      padding: 16px 0;
+    }
+
+    .is-firmness .variant-input-wrap {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .product-form__buttons .btn {
+      width: 100%;
+      max-width: 100%;
+      height: 50px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .product-single__meta .product-block {
+      margin-bottom: 24px;
+    }
+    
+    .product-single__meta hr {
+      display: none;
+    }
+  }
+  /* END: Mobile layout styles */
 </style>
 
 {%- liquid
@@ -1497,50 +1690,141 @@ function showFullQ2Address() {
   box-shadow: 0
 </style>
 
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const productSection = document.querySelector('.product-section[data-section-id="{{ section_id }}"]');
-    if (!productSection) return;
+/**
+ * Advanced Sticky Column Logic ("Koala" style)
+ * This script dynamically makes the shorter of the two product columns sticky.
+ */
+function initAdvancedSticky(productSection) {
+  if (!productSection) return;
 
-    const imageColumnWrapper = productSection.querySelector('.product-grid__images .product-column-content');
-    const infoColumnWrapper = productSection.querySelector('.product-grid__info .product-info-inner');
-    
-    if (!imageColumnWrapper || !infoColumnWrapper) return;
+  const gridContainer = productSection.querySelector('.grid');
+  const imageColumn = productSection.querySelector('.product-grid__images');
+  const infoColumn = productSection.querySelector('.product-grid__info');
+  const infoColumnInner = infoColumn ? infoColumn.querySelector('.product-info-inner') : null;
+  const imageColumnInner = imageColumn ? imageColumn.querySelector('.product-column-content') : null;
+  const interactiveElements = productSection.querySelectorAll('details.product-accordion, .size-guide-text-trigger');
 
-    const applyStickyBehavior = () => {
-      imageColumnWrapper.classList.remove('is-sticky');
-      infoColumnWrapper.classList.remove('is-sticky');
+  if (!gridContainer || !imageColumn || !infoColumn || !infoColumnInner || !imageColumnInner) {
+    return;
+  }
 
-      if (window.matchMedia('(max-width: 768px)').matches) {
-        return;
-      }
+  let scrollHandler = () => {};
+  
+  const setupStickyColumns = () => {
+    // Clean up styles from previous calculations before re-running
+    window.removeEventListener('scroll', scrollHandler);
+    imageColumnInner.style.cssText = '';
+    infoColumnInner.style.cssText = '';
+    imageColumn.style.height = '';
+    infoColumn.style.height = '';
+    imageColumn.style.position = '';
+    infoColumn.style.position = '';
 
-      const imageColHeight = imageColumnWrapper.offsetHeight;
-      const infoColHeight = infoColumnWrapper.offsetHeight;
-      const heightDifferenceThreshold = 50;
+    // This logic is for desktop viewports only
+    if (window.innerWidth < 991) {
+      return;
+    }
 
-      if (infoColHeight < imageColHeight - heightDifferenceThreshold) {
-        infoColumnWrapper.classList.add('is-sticky');
-      } else if (imageColHeight < infoColHeight - heightDifferenceThreshold) {
-        imageColumnWrapper.classList.add('is-sticky');
-      }
-    };
+    requestAnimationFrame(() => {
+        // Measure the inner content elements, not the grid containers which are equal height.
+        const imageColHeight = imageColumnInner.offsetHeight;
+        const infoColHeight = infoColumnInner.offsetHeight;
+            
+        // Exit if columns are of similar height, as no sticky effect is needed.
+        if (Math.abs(imageColHeight - infoColHeight) < 100) {
+            return;
+        }
 
-    window.addEventListener('load', () => {
-      applyStickyBehavior();
+        const shortCol = imageColHeight > infoColHeight ? infoColumn : imageColumn;
+        const shortColInner = imageColHeight > infoColHeight ? infoColumnInner : imageColumnInner;
+        
+        // **FIX**: Set position relative on the container of the element that will be docked.
+        // This makes it the positioning context for its absolutely positioned child.
+        shortCol.style.position = 'relative';
+        // Set an explicit height on the short column's container to prevent the grid from collapsing
+        // when its inner element is taken out of the document flow with `position: fixed`.
+        shortCol.style.height = `${shortCol.offsetHeight}px`;
+
+        const headerOffset = 120; // Adjust if your sticky header's height changes
+
+        scrollHandler = () => {
+            const scrollY = window.scrollY;
+            const gridRect = gridContainer.getBoundingClientRect();
+            const shortColInnerHeight = shortColInner.offsetHeight;
+            const gridAbsoluteTop = gridRect.top + scrollY;
+            const startPoint = gridAbsoluteTop - headerOffset;
+            const stopPoint = gridAbsoluteTop + gridRect.height - shortColInnerHeight - headerOffset;
+            const buffer = 2; // A small buffer to prevent jittering at the thresholds
+            
+            if (scrollY > startPoint + buffer && scrollY < stopPoint - buffer) {
+                // State 1: STICKY. The element is fixed relative to the viewport.
+                shortColInner.style.position = 'fixed';
+                shortColInner.style.top = `${headerOffset}px`;
+                shortColInner.style.bottom = 'auto';
+                shortColInner.style.width = `${shortCol.offsetWidth}px`;
+            } else if (scrollY >= stopPoint - buffer) {
+                // State 2: DOCKED. The element is positioned absolutely to the bottom of its parent container.
+                shortColInner.style.position = 'absolute';
+                shortColInner.style.top = 'auto';
+                shortColInner.style.bottom = '0px';
+                shortColInner.style.width = '100%';
+            } else {
+                // State 3: DEFAULT. The element is in its normal static position.
+                shortColInner.style.position = '';
+                shortColInner.style.top = '';
+                shortColInner.style.bottom = '';
+                shortColInner.style.width = '';
+            }
+        };
+        
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        scrollHandler(); // Run once immediately on setup to get the initial state right
     });
+  };
+  
+  const debounce = (func, delay) => {
+      let timeout;
+      return function(...args) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+  };
 
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(applyStickyBehavior, 150);
-    });
-    
-    productSection.querySelectorAll('.product-grid__info details').forEach(detail => {
-      detail.addEventListener('toggle', () => {
-        setTimeout(applyStickyBehavior, 300); 
-      });
-    });
+  const debouncedSetup = debounce(setupStickyColumns, 250);
+
+  // --- Event Listeners ---
+
+  // Run on initial load when all assets are ready
+  window.addEventListener('load', debouncedSetup);
+  // A fallback for DOMContentLoaded in case `load` is slow, e.g., with deferred scripts
+  document.addEventListener('DOMContentLoaded', () => setTimeout(debouncedSetup, 500));
+  
+  // Re-run when the browser is resized
+  window.addEventListener('resize', debouncedSetup);
+
+  // Re-run whenever an interactive element (accordion/dropdown) is toggled
+  interactiveElements.forEach(el => {
+    const eventName = el.tagName.toLowerCase() === 'details' ? 'toggle' : 'click';
+    el.addEventListener(eventName, debouncedSetup);
   });
+}
+
+// Initialize the script for the current section
+const currentProductSection = document.querySelector('#ProductSection-{{ section_id }}-{{ product.id }}');
+if (currentProductSection) {
+  initAdvancedSticky(currentProductSection);
+}
+
+// Re-initialize if the section is reloaded by the theme editor
+document.addEventListener('shopify:section:load', function(event) {
+  if (event.detail.sectionId === '{{ section_id }}') {
+    const reloadedSection = document.querySelector('#ProductSection-{{ section_id }}-{{ product.id }}');
+    if (reloadedSection) {
+      initAdvancedSticky(reloadedSection);
+    }
+  }
+});
 </script>
 
