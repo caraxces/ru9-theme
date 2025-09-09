@@ -5,6 +5,37 @@
 {% endcomment %}
 
 <style>
+  .product-image-container {
+    position: relative;
+  }
+  .product-grid__images {
+    position: relative;
+  }
+  .custom-nav-button {
+    display: none; /* Hidden by default */
+  }
+
+  @media screen and (min-width: 769px) {
+  .product-tags-wrapper {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+  .product-tag-item {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    max-width: fit-content;
+  }
   .product-section {
     font-family: "Be Vietnam Pro", sans-serif;
   }
@@ -62,8 +93,8 @@
     background: #FCE390;
     color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-weight: 600;
-      font-size: 14px;
+    font-weight: 400;
+      font-size: 18px;
     width: auto;
     height: auto;
     line-height: normal;
@@ -295,6 +326,94 @@
     border-radius: 8px;
   }
 
+  .service-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .service-block__icon {
+    flex-shrink: 0;
+  }
+
+  .service-block__text p {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 27px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+    margin: 0;
+  }
+
+  .service-carousel-wrapper {
+    width: 100%;
+    height: 94px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #F5F9FF;
+    padding: 0 50px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .service-carousel {
+    width: 100%;
+  }
+
+  .service-carousel-cell {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .service-carousel-wrapper .flickity-prev-next-button {
+    width: 36px;
+    height: 36px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px;
+  }
+
+  .service-carousel-wrapper .flickity-prev-next-button .flickity-button-icon {
+    display: none;
+  }
+
+  .service-carousel-wrapper .flickity-prev-next-button.previous {
+    left: 10px;
+    background-color: #fff;
+    border: 1px solid #EBEBEB;
+    background-image: url('{{ "nav-next.svg" | asset_url }}');
+    transform: scaleX(-1);
+  }
+
+  .service-carousel-wrapper .flickity-prev-next-button.next {
+    right: 10px;
+    background-color: #234085;
+    background-image: url('{{ "nav-next.svg" | asset_url }}');
+  }
+
+  .product-grid {
+    align-items: start;
+  }
+  .is-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 120px; /* Adjust this value to sit below your site's sticky header */
+    align-self: start; /* Ensures the column aligns to the top of the grid row */
+  }
+
+  .service-carousel-wrapper .flickity-page-dots {
+    display: none;
+  }
+
   @media screen and (min-width: 769px) {
     .product-section > .page-content > .page-width {
       max-width: 100%;
@@ -302,6 +421,288 @@
       padding-right: 110px;
     }
   }
+
+  .product-grid {
+    display: grid;
+    grid-gap: 20px;
+    align-items: start;
+  }
+
+  .product-grid--medium .product-grid__images {
+    grid-column: span 7 / span 7;
+  }
+  
+  /* 
+    Definitive Pure CSS Sticky Column Solution
+  */
+  @media screen and (min-width: 991px) {
+    /*
+      CRITICAL FIX: `position: sticky` will NOT work if any parent element
+      has `overflow` set to 'hidden', 'scroll', or 'auto'.
+      This rule aggressively targets all potential parent containers in the product grid
+      and forces them to allow sticky positioning.
+    */
+    .product-section,
+    .page-content--product,
+    .page-content--product > .page-width,
+    .grid {
+      overflow: visible !important;
+    }
+
+    /*
+      Disable theme's default sticky behavior on images.
+      A custom script will handle advanced sticky positioning for either column.
+    */
+    .product-section .product-single__sticky .sticky {
+        position: static; /* Let JS control positioning */
+    }
+  }
+
+  /* START: Mobile layout styles based on design */
+  @media screen and (max-width: 768px) {
+    .product-section > .page-content > .page-width {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .product-tags-wrapper {
+      position: absolute;
+      top: 15px;
+      left: 0px !important;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    /* Full-width main image based on request */
+    .product__main-photos {
+      height: 390px;
+      width: calc(100% + 32px);
+      margin-left: -16px;
+      margin-right: -16px;
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .product__photos img{
+      border-radius: 0 !important;
+    }
+
+    .product__main-photos .product-main-slide {
+      height: 100%;
+    }
+
+    .product__main-photos .product-main-slide img,
+    .product__main-photos .product-main-slide .media--image {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Hide thumbnails on mobile */
+    .product__thumbs {
+      display: none;
+    }
+
+    .product-single__meta .jdgm-widget--product-rating {
+      margin-bottom: 8px;
+    }
+
+    .product-single__title {
+      font-size: 24px;
+      line-height: 1.3;
+    }
+
+    .product-single__subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      margin-top: 4px;
+      margin-bottom: 24px;
+    }
+    
+    .product-block--price {
+      margin-bottom: 24px;
+    }
+
+    .price-container-wrapper {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .product-block--price .product__price {
+      font-size: 24px;
+      font-weight: 600;
+      width: auto;
+    }
+    .product-block--price [data-product-price-wrap] {
+      order: 3;
+      flex-basis: 100%;
+    }
+    .product-block--price .product__price--compare {
+      font-size: 18px;
+      width: auto;
+    }
+    .product-block--price .product__discount-badge {
+      font-size: 16px;
+      padding: 2px 8px;
+    }
+
+    .promotion-block-container {
+      margin-bottom: 24px;
+    }
+    .promotion-vouchers {
+      gap: 8px;
+      padding: 12px;
+    }
+    .promotion-title {
+      width: 100%;
+      margin-bottom: 4px;
+      text-align: left;
+    }
+
+    .variant__label {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .is-size .variant-input-wrap {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 2px;
+    }
+    .is-size .variant-input-wrap .variant-input {
+      grid-column: unset !important;
+    }
+    .is-size .variant-input-wrap[data-option-count="6"] {
+        /* Specific override for 6 items to create 3x2 grid */
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    
+    .variant-wrapper:not(.is-color) .variant__button-label {
+      min-height: 50px;
+      padding: 8px;
+    }
+    
+    .variant-wrapper:not(.is-color) .variant__button-label .label-head {
+      font-size: 14px;
+    }
+
+    .variant-wrapper:not(.is-color) .variant__button-label .label-value {
+      font-size: 12px;
+    }
+
+    .size-guide-text-dropdown-container,
+    .product-accordion--styled {
+      padding: 0 16px;
+      margin-left: -16px;
+      margin-right: -16px;
+      max-width: calc(100% + 32px);
+      width: calc(100% + 32px);
+      border-radius: 0;
+      background: #F5F9FF;
+    }
+    .size-guide-text-trigger,
+    .product-accordion--styled summary {
+      min-height: 50px;
+      font-size: 16px;
+      padding: 16px 0;
+    }
+
+    .is-firmness .variant-input-wrap {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .product-form__buttons .btn {
+      width: 100%;
+      max-width: 100%;
+      height: 50px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .product-single__meta .product-block {
+      margin-bottom: 24px;
+    }
+    
+    .product-single__meta hr {
+      display: none;
+    }
+    
+    /* Main picture nav buttons */
+    .product__main-photos .product-slideshow .flickity-prev-next-button,
+    .service-carousel-wrapper .flickity-prev-next-button {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: 22px;
+      height: 22px;
+      top: 50%;
+      background: #234085;
+      border-radius: 100px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 10px auto;
+      z-index: 999;
+    }
+    
+    .product__main-photos .product-slideshow .flickity-prev-next-button .flickity-button-icon,
+    .service-carousel-wrapper .flickity-prev-next-button .flickity-button-icon {
+      display: none;
+    }
+
+    .product__main-photos .product-slideshow .flickity-prev-next-button.previous,
+    .service-carousel-wrapper .flickity-prev-next-button.previous {
+      left: 16px;
+      background-image: url("data:image/svg+xml,%3csvg width='17' height='9' viewBox='0 0 17 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M2 1.5L8.5 7.5L15 1.5' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+      transform: translateY(-50%) rotate(90deg);
+    }
+
+    .product__main-photos .product-slideshow .flickity-prev-next-button.next,
+    .service-carousel-wrapper .flickity-prev-next-button.next {
+      right: 16px;
+      background-image: url("data:image/svg+xml,%3csvg width='17' height='9' viewBox='0 0 17 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M2 1.5L8.5 7.5L15 1.5' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+      transform: translateY(-50%) rotate(-90deg);
+    }
+
+    .custom-nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      border-radius: 100px;
+      background: #234085;
+      display: flex;
+      width: 22px;
+      height: 22px;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .custom-nav-prev {
+      left: 16px;
+    }
+
+    .custom-nav-next {
+      right: 16px;
+    }
+
+    .custom-nav-button svg {
+      width: 10px;
+      height: auto;
+    }
+
+    .custom-nav-prev svg {
+      transform: rotate(90deg);
+    }
+
+    .custom-nav-next svg {
+      transform: rotate(-90deg);
+    }
+  }
+  /* END: Mobile layout styles */
 </style>
 
 {%- liquid
@@ -381,33 +782,30 @@
 
       <div class="grid{% unless image_position == 'left' %} grid--product-images-right{% endunless %}{% if mobile_layout == 'partial' %} grid--product-images--partial{% endif %}">
         {%- if image_position == 'left' -%}
-          <div class="grid__item {{ product_image_width }} product-single__sticky">
+          <div class="grid__item {{ product_image_width }} product-single__sticky product-grid__images">
             {%- render 'product-images',
               section_id: section_id,
               product: product,
-              section: section,
-              isModal: isModal,
-              image_position: image_position,
-              product_zoom_enable: product_zoom_enable,
+              product_zoom_enable: section.settings.product_zoom_enable,
               product_zoom_size: product_zoom_size,
-              product_image_size: product_image_size,
-              thumbnail_arrows: thumbnail_arrows,
-              thumbnail_height: thumbnail_height,
-              thumbnail_position: thumbnail_position,
-              video_looping: video_looping,
-              video_style: video_style,
-              context: context,
-              sizes: sizes,
-              sizeVariable: product_image_width,
-              fallback: fallback,
-              product_carousel_enable: product_carousel_enable,
-              mobile_layout: mobile_layout
+              product_carousel_enable: section.settings.product_carousel_enable,
+              thumbnail_position: section.settings.thumbnail_position,
+              thumbnail_height: section.settings.thumbnail_height,
+              thumbnail_arrows: section.settings.thumbnail_arrows,
+              mobile_layout: section.settings.mobile_layout,
+              blocks: section.blocks
             -%}
+            <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+              <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+              <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
         {%- endif -%}
 
-        <div class="grid__item {{ product_description_width }}">
-          <div class="product-single__meta">
+        <div class="grid__item {{ product_description_width }} product-grid__info">
+          <div class="product-single__meta product-info-inner">
             <div class="product-block product-block--header">
               {%- if settings.vendor_enable -%}
                 <div class="product-single__vendor">
@@ -546,6 +944,62 @@
                       </div>
                       </details>
                     {% endunless %}
+                  {%- when 'service_carousel' -%}
+                    {%- liquid
+                      assign services_count = 0
+                      for i in (1..4)
+                        assign icon_setting = 'icon_' | append: i
+                        assign text_setting = 'text_' | append: i
+                        if block.settings[icon_setting] != blank or block.settings[text_setting] != blank
+                          assign services_count = services_count | plus: 1
+                        endif
+                      endfor
+
+                      assign show_nav_buttons = true
+
+                      assign autoplay_duration = false
+                      if block.settings.autoplay and services_count > 1
+                        assign autoplay_duration = block.settings.delay | times: 1000
+                      endif
+                    -%}
+                    <div class="product-block product-block--service-carousel" {{ block.shopify_attributes }}>
+                      <div class="service-carousel-wrapper">
+                        <div class="service-carousel" 
+                          data-flickity='{ 
+                            "cellAlign": "left",
+                            "contain": true,
+                            "prevNextButtons": {{ show_nav_buttons }},
+                            "pageDots": false,
+                            "wrapAround": true,
+                            "autoPlay": {{ autoplay_duration }}
+                          }'>
+                          {%- for i in (1..4) -%}
+                            {%- liquid
+                              assign icon_setting = 'icon_' | append: i
+                              assign text_setting = 'text_' | append: i
+                              assign icon = block.settings[icon_setting]
+                              assign text = block.settings[text_setting]
+                            -%}
+                            {%- if icon != blank or text != blank -%}
+                              <div class="service-carousel-cell">
+                                <div class="service-block">
+                                  {%- if icon != blank -%}
+                                    <div class="service-block__icon">
+                                      <img src="{{ icon | img_url: 'master' }}" alt="{{ icon.alt | default: text }}" width="69" height="53">
+                                    </div>
+                                  {%- endif -%}
+                                  {%- if text != blank -%}
+                                    <div class="service-block__text">
+                                      <p>{{ text }}</p>
+                                    </div>
+                                  {%- endif -%}
+                                </div>
+                              </div>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
+                      </div>
+                    </div>
                   {%- when 'productbundle' -%}
                     <div class="product-block product-block-bundle" {{ block.shopunlessy_attributes }}>
                       {% render 'product-bundle',
@@ -1165,25 +1619,25 @@
         </div>
 
         {%- unless image_position == 'left' -%}
-          <div class="grid__item {{ product_image_width }} product-single__sticky">
+          <div class="grid__item {{ product_image_width }} product-single__sticky product-grid__images">
             {%- render 'product-images',
               section_id: section_id,
               product: product,
-              isModal: isModal,
-              image_position: image_position,
-              product_zoom_enable: product_zoom_enable,
+              product_zoom_enable: section.settings.product_zoom_enable,
               product_zoom_size: product_zoom_size,
-              product_image_size: product_image_size,
-              thumbnail_arrows: thumbnail_arrows,
-              thumbnail_position: thumbnail_position,
-              video_looping: video_looping,
-              video_style: video_style,
-              context: context,
-              sizes: sizes,
-              sizeVariable: product_image_width,
-              fallback: fallback,
-              mobile_layout: mobile_layout
+              product_carousel_enable: section.settings.product_carousel_enable,
+              thumbnail_position: section.settings.thumbnail_position,
+              thumbnail_height: section.settings.thumbnail_height,
+              thumbnail_arrows: section.settings.thumbnail_arrows,
+              mobile_layout: section.settings.mobile_layout,
+              blocks: section.blocks
             -%}
+            <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+              <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+              <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
         {%- endunless -%}
       </div>
@@ -1333,4 +1787,174 @@ function showFullQ2Address() {
   transform: translateX(-50%) scale(0.98);
   box-shadow: 0
 </style>
+
+
+<script>
+/**
+ * Advanced Sticky Column Logic ("Koala" style)
+ * This script dynamically makes the shorter of the two product columns sticky.
+ */
+function initAdvancedSticky(productSection) {
+  if (!productSection) return;
+
+  const gridContainer = productSection.querySelector('.grid');
+  const imageColumn = productSection.querySelector('.product-grid__images');
+  const infoColumn = productSection.querySelector('.product-grid__info');
+  const infoColumnInner = infoColumn ? infoColumn.querySelector('.product-info-inner') : null;
+  const imageColumnInner = imageColumn ? imageColumn.querySelector('.product-column-content') : null;
+  const interactiveElements = productSection.querySelectorAll('details.product-accordion, .size-guide-text-trigger');
+
+  if (!gridContainer || !imageColumn || !infoColumn || !infoColumnInner || !imageColumnInner) {
+    return;
+  }
+
+  let scrollHandler = () => {};
+  
+  const setupStickyColumns = () => {
+    // Clean up styles from previous calculations before re-running
+    window.removeEventListener('scroll', scrollHandler);
+    imageColumnInner.style.cssText = '';
+    infoColumnInner.style.cssText = '';
+    imageColumn.style.height = '';
+    infoColumn.style.height = '';
+    imageColumn.style.position = '';
+    infoColumn.style.position = '';
+
+    // This logic is for desktop viewports only
+    if (window.innerWidth < 991) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+        // Measure the inner content elements, not the grid containers which are equal height.
+        const imageColHeight = imageColumnInner.offsetHeight;
+        const infoColHeight = infoColumnInner.offsetHeight;
+            
+        // Exit if columns are of similar height, as no sticky effect is needed.
+        if (Math.abs(imageColHeight - infoColHeight) < 100) {
+            return;
+        }
+
+        const shortCol = imageColHeight > infoColHeight ? infoColumn : imageColumn;
+        const shortColInner = imageColHeight > infoColHeight ? infoColumnInner : imageColumnInner;
+        
+        // **FIX**: Set position relative on the container of the element that will be docked.
+        // This makes it the positioning context for its absolutely positioned child.
+        shortCol.style.position = 'relative';
+        // Set an explicit height on the short column's container to prevent the grid from collapsing
+        // when its inner element is taken out of the document flow with `position: fixed`.
+        shortCol.style.height = `${shortCol.offsetHeight}px`;
+
+        const headerOffset = 120; // Adjust if your sticky header's height changes
+
+        scrollHandler = () => {
+            const scrollY = window.scrollY;
+            const gridRect = gridContainer.getBoundingClientRect();
+            const shortColInnerHeight = shortColInner.offsetHeight;
+            const gridAbsoluteTop = gridRect.top + scrollY;
+            const startPoint = gridAbsoluteTop - headerOffset;
+            const stopPoint = gridAbsoluteTop + gridRect.height - shortColInnerHeight - headerOffset;
+            const buffer = 2; // A small buffer to prevent jittering at the thresholds
+            
+            if (scrollY > startPoint + buffer && scrollY < stopPoint - buffer) {
+                // State 1: STICKY. The element is fixed relative to the viewport.
+                shortColInner.style.position = 'fixed';
+                shortColInner.style.top = `${headerOffset}px`;
+                shortColInner.style.bottom = 'auto';
+                shortColInner.style.width = `${shortCol.offsetWidth}px`;
+            } else if (scrollY >= stopPoint - buffer) {
+                // State 2: DOCKED. The element is positioned absolutely to the bottom of its parent container.
+                shortColInner.style.position = 'absolute';
+                shortColInner.style.top = 'auto';
+                shortColInner.style.bottom = '0px';
+                shortColInner.style.width = '100%';
+            } else {
+                // State 3: DEFAULT. The element is in its normal static position.
+                shortColInner.style.position = '';
+                shortColInner.style.top = '';
+                shortColInner.style.bottom = '';
+                shortColInner.style.width = '';
+            }
+        };
+        
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        scrollHandler(); // Run once immediately on setup to get the initial state right
+    });
+  };
+  
+  const debounce = (func, delay) => {
+      let timeout;
+      return function(...args) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+  };
+
+  const debouncedSetup = debounce(setupStickyColumns, 250);
+
+  // --- Event Listeners ---
+
+  // Run on initial load when all assets are ready
+  window.addEventListener('load', debouncedSetup);
+  // A fallback for DOMContentLoaded in case `load` is slow, e.g., with deferred scripts
+  document.addEventListener('DOMContentLoaded', () => setTimeout(debouncedSetup, 500));
+  
+  // Re-run when the browser is resized
+  window.addEventListener('resize', debouncedSetup);
+
+  // Re-run whenever an interactive element (accordion/dropdown) is toggled
+  interactiveElements.forEach(el => {
+    const eventName = el.tagName.toLowerCase() === 'details' ? 'toggle' : 'click';
+    el.addEventListener(eventName, debouncedSetup);
+  });
+}
+
+// Initialize the script for the current section
+const currentProductSection = document.querySelector('#ProductSection-{{ section_id }}-{{ product.id }}');
+if (currentProductSection) {
+  initAdvancedSticky(currentProductSection);
+}
+
+// Re-initialize if the section is reloaded by the theme editor
+document.addEventListener('shopify:section:load', function(event) {
+  if (event.detail.sectionId === '{{ section_id }}') {
+    const reloadedSection = document.querySelector('#ProductSection-{{ section_id }}-{{ product.id }}');
+    if (reloadedSection) {
+      initAdvancedSticky(reloadedSection);
+    }
+  }
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const productSections = document.querySelectorAll('.product-section');
+  
+  productSections.forEach(function(productSection) {
+    const flickityElement = productSection.querySelector('.product-slideshow');
+    const imageGrid = productSection.querySelector('.product-grid__images');
+
+    if (flickityElement && imageGrid) {
+      const prevButton = imageGrid.querySelector('.custom-nav-prev');
+      const nextButton = imageGrid.querySelector('.custom-nav-next');
+      
+      if (prevButton && nextButton) {
+        setTimeout(function() {
+          const flkty = Flickity.data(flickityElement);
+          if (flkty) {
+            prevButton.addEventListener('click', function(event) {
+              event.stopPropagation();
+              flkty.previous();
+            });
+            nextButton.addEventListener('click', function(event) {
+              event.stopPropagation();
+              flkty.next();
+            });
+          }
+        }, 500);
+      }
+    }
+  });
+});
+</script>
 

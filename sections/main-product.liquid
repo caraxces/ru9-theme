@@ -84,6 +84,11 @@
       "info": "Hiển thị bên dưới tiêu đề chính của sản phẩm."
     },
     {
+      "type": "text",
+      "id": "custom_text",
+      "label": "Custom text"
+    },
+    {
       "type": "header",
       "content": "t:sections.main-product.settings.header_media"
     },
@@ -233,6 +238,31 @@
     }
   ],
   "blocks": [
+    {
+      "type": "tag",
+      "name": "Product Tag",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag_text",
+          "label": "Tag Text",
+          "default": "Top rated"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#85AFEE"
+        },
+        {
+           "type": "color",
+           "id": "text_color",
+           "label": "Text Color",
+           "default": "#FFFFFF"
+        }
+      ]
+    },
     {
       "type": "size_guide_dropdown",
       "name": "Hướng dẫn chọn kích thước",
@@ -1170,6 +1200,90 @@
     },
 
     {
+      "type": "service_carousel",
+      "name": "Dịch vụ (Trình chiếu)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Cài đặt trình chiếu"
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Tự động chuyển",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "delay",
+          "label": "Thời gian chờ (giây)",
+          "min": 2,
+          "max": 10,
+          "step": 1,
+          "default": 5,
+          "unit": "s"
+        },
+        {
+          "type": "header",
+          "content": "Dịch vụ 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_1",
+          "label": "Icon 1"
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Text 1",
+          "default": "100 đêm ngủ thử"
+        },
+        {
+          "type": "header",
+          "content": "Dịch vụ 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_2",
+          "label": "Icon 2"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text 2"
+        },
+        {
+          "type": "header",
+          "content": "Dịch vụ 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_3",
+          "label": "Icon 3"
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "label": "Text 3"
+        },
+        {
+          "type": "header",
+          "content": "Dịch vụ 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_4",
+          "label": "Icon 4"
+        },
+        {
+          "type": "text",
+          "id": "text_4",
+          "label": "Text 4"
+        }
+      ]
+    },
+    {
       "type": "productbundle",
       "name": "Product cross sell",
       "limit": 1,
@@ -1296,3 +1410,29 @@
   ]
 }
 {% endschema %}
+
+<script>
+document.addEventListener('shopify:section:load', function() {
+  const isCarouselDisabled = {{ section.settings.product_carousel_enable | json }} === false;
+  if (isCarouselDisabled) {
+    const productImagesContainer = document.querySelector('#ProductSection-{{ section_id }} [data-product-images]');
+    if (productImagesContainer && typeof theme.Photoswipe !== 'undefined' && !productImagesContainer.photoswipe) {
+      productImagesContainer.photoswipe = new theme.Photoswipe(productImagesContainer, '{{ section_id }}');
+    }
+  }
+});
+
+// Fallback for initial page load
+document.addEventListener('DOMContentLoaded', function() {
+  // A short delay to ensure theme scripts have loaded
+  setTimeout(function() {
+    const isCarouselDisabled = {{ section.settings.product_carousel_enable | json }} === false;
+    if (isCarouselDisabled) {
+      const productImagesContainer = document.querySelector('#ProductSection-{{ section_id }} [data-product-images]');
+      if (productImagesContainer && typeof theme.Photoswipe !== 'undefined' && !productImagesContainer.photoswipe) {
+        productImagesContainer.photoswipe = new theme.Photoswipe(productImagesContainer, '{{ section_id }}');
+      }
+    }
+  }, 500);
+});
+</script>
