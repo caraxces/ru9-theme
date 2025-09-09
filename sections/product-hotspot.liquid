@@ -3,7 +3,7 @@
 {% if product.handle == product_handle %}
   {% style %}
     .pf-image-hotspot-wrapper {
-      padding: clamp(110px, 1vw, 40px) 0px 0px;
+      padding: clamp(0px, 1vw, 40px) 0px 0px;
       text-align: center;
     }
     .pf-image-hotspot-hotspots img {
@@ -167,6 +167,12 @@
     }
 
     @media (min-width: 769px) {
+      .pf-image-hotspot-hotspots {
+        width: 897.147px;
+        height: 670.214px;
+        flex-shrink: 0;
+        margin: auto;
+      }
       .visible-xs {
         display: none;
       }
@@ -203,6 +209,8 @@
       .hotspot-content {
         top: calc(-1 * var(--hotspot-height));
         z-index: -1;
+        padding-bottom: 5px;
+        border-bottom: 1px solid var(--colorTextBody);
       }
 
       .horizontal .hotspot-content {
@@ -250,6 +258,84 @@
       .horizontal.bottom .hotspot-content {
         transform: none;
         top: 35px;
+      }
+
+      .pf-image-hotspot .hotspot-sonar {
+        display: none;
+      }
+
+      .pf-image-hotspot.active::before,
+      .pf-image-hotspot.active::after {
+        content: '';
+        position: absolute;
+        background: var(--colorTextBody);
+        transition: all 0.3s ease-out;
+      }
+
+      /* Vertical Broken Line */
+      .vertical.active::before { /* Vertical part */
+        width: 1px;
+        height: calc(var(--hotspot-height) - 20px);
+        top: calc(-1 * var(--hotspot-height) + 20px);
+        left: 10px;
+      }
+      .vertical.active::after { /* Horizontal part */
+        height: 1px;
+        width: 0;
+        top: calc(-1 * var(--hotspot-height) + 20px);
+      }
+      .vertical.right.active::after {
+        left: 10px;
+        width: calc(100% + 40px);
+      }
+      .vertical.left.active::after {
+        right: 10px;
+        width: calc(100% + 40px);
+      }
+
+      /* Horizontal Broken Line */
+      .horizontal.active::before { /* Horizontal part */
+        height: 1px;
+        width: calc(var(--hotspot-height) - 20px);
+        left: 10px;
+        transform: translateY(-50%);
+        top: 0;
+      }
+       .horizontal.active::after { /* Vertical part */
+        width: 1px;
+        height: 0;
+        left: calc(var(--hotspot-height) - 10px);
+      }
+      .horizontal.top.active::after{
+        height: 20px;
+        top: -20px;
+      }
+      .horizontal.bottom.active::after{
+        height: 20px;
+        bottom: -20px;
+      }
+
+      /* Diagonal Line */
+      .diagonal.active::before {
+        width: 1px;
+        height: 0;
+        transform-origin: top left;
+        left: 10px;
+      }
+      .diagonal.active::after {
+        display: none;
+      }
+
+      .diagonal.right.active::before {
+        height: var(--hotspot-height);
+        transform: rotate(45deg);
+      }
+      .diagonal.left.active::before {
+        height: var(--hotspot-height);
+        transform: rotate(-45deg);
+        left: auto;
+        right: 10px;
+        transform-origin: top right;
       }
     }
     .hotspot-type-product.active .hotspot-content {
@@ -317,6 +403,59 @@
       .pf-image-hotspot.active .hotspot-sonar {
         height: var(--hotspot-height-mb);
         top: calc(-1 * var(--hotspot-height-mb) + 10px);
+      }
+
+      .hotspot-mobile {
+        display: none !important;
+      }
+
+      .hotspot-mobile-list {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 32px;
+        text-align: left;
+      }
+      .hotspot-mobile-list__item {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .hotspot-mobile-list__number-wrapper {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background-color: #1C2C58;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+      }
+      .hotspot-mobile-list__content {
+        flex: 1;
+      }
+      .hotspot-mobile-list__title {
+        color: #000;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 140%;
+        margin: 0 0 4px;
+      }
+      .hotspot-mobile-list__subtitle {
+        color: #000;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+        margin: 0;
       }
     }
     @media (max-width: 749px) {
@@ -428,6 +567,25 @@
         </div>
       </hotspot-img>
     </div>
+    {%- if section.blocks.size > 0 -%}
+      <div class="hotspot-mobile-list visible-xs">
+        {%- for block in section.blocks -%}
+          <div class="hotspot-mobile-list__item">
+            <div class="hotspot-mobile-list__number-wrapper">
+              <span class="hotspot-mobile-list__number">{{ forloop.index }}</span>
+            </div>
+            <div class="hotspot-mobile-list__content">
+              {%- if block.settings.hotspot_title != blank -%}
+                <h3 class="hotspot-mobile-list__title">{{ block.settings.hotspot_title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.hotspot_sub_title != blank -%}
+                <p class="hotspot-mobile-list__subtitle">{{ block.settings.hotspot_sub_title }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 
   <script>
@@ -435,9 +593,11 @@
       constructor() {
         super();
         this.hotspot = this.querySelectorAll('.pf-image-hotspot');
-        this.hotspot.forEach((hotspot) => {
-          hotspot.addEventListener('click', this.toggleHotspot.bind(this));
-        });
+        if (window.matchMedia('(min-width: 769px)').matches) {
+          this.hotspot.forEach((hotspot) => {
+            hotspot.addEventListener('click', this.toggleHotspot.bind(this));
+          });
+        }
       }
       toggleHotspot(e) {
         this.hotspot.forEach((hotspot) => {
@@ -448,6 +608,26 @@
     }
 
     customElements.define('hotspot-img', HotsptImage);
+
+    class DesktopHotspotLayout extends HTMLElement {
+      constructor() {
+        super();
+        this.dots = this.querySelectorAll('.hotspot-dot');
+        this.contentItems = this.querySelectorAll('.desktop-hotspot__content-item');
+      }
+
+      connectedCallback() {
+        this.contentItems.forEach(item => {
+          const id = item.dataset.hotspotId;
+          const matchingDot = this.querySelector(`.hotspot-dot[data-hotspot-id="${id}"]`);
+          if (matchingDot) {
+            item.prepend(matchingDot);
+          }
+        });
+      }
+    }
+    customElements.define('desktop-hotspot-layout', DesktopHotspotLayout);
+
   </script>
 {% endif %}
 {% schema %}
@@ -546,6 +726,10 @@
             {
               "value": "horizontal",
               "label": "horizontal"
+            },
+            {
+              "value": "diagonal",
+              "label": "diagonal"
             }
           ],
           "default": "vertical"

@@ -26,34 +26,28 @@
       assign Buybuttons = section.blocks | where: 'type', 'buy_buttons'
     -%}
     <div class="product__sticky-product desktop-only">
-      {%- if media_count > 0 -%}
-        <div class="product__sticky-image w-full shrink-0">
-          <div
-            class="relative ovh grid__image-ratio rounded-sm ovh"
-            style="--padding-bottom: 100%;"
-          >
-            <img
-              srcset="{{ image | img_url: '110x' }}"
-              src="{{ image | img_url: '110x' }}"
-              alt="{{ image.alt | default: product.title | escape }}"
-              sizes="110"
-              loading="lazy"
-              width="110"
-              height="110"
-            >
-          </div>
-        </div>
-      {%- endif -%}
       <div class="product__sticky-content">
         <h3 class="product__sticky-title fw-bold">{{ product.title }}</h3>
-        <div class="product__sticky-price desktop-price">{{ current_variant.price | money }}</div>
         <div class="product__sticky-variants">
-          {%- for option in product.options_with_values -%}
-            <div class="label-select text-xs">
-              <span data-header-option>{{ option.selected_value }}</span>
+            <div class="label-select text-xs" data-header-option-container>
+              {%- for option in product.options_with_values -%}
+                <span class="sticky-variant-item">{{ option.selected_value | split: '-' | first | strip }}</span>&nbsp;{%- unless forloop.last %} {% endunless -%}
+              {%- endfor -%}
             </div>
-          {%- endfor -%}
         </div>
+      </div>
+      <div class="product__sticky-price desktop-only" data-sticky-price>
+        {{ current_variant.price | money }}
+      </div>
+    </div>
+    <div class="sticky-mobile-info mobile-only">
+      <div class="sticky-mobile-info__text">
+        <span class="sticky-variant-title" data-header-option>
+          {%- for option in product.options_with_values -%}
+            {{ option.selected_value | split: '-' | first | strip }}{%- unless forloop.last %} / {% endunless -%}
+          {%- endfor -%}
+        </span>
+        <span class="sticky-variant-price" data-sticky-price>{{ current_variant.price | money }}</span>
       </div>
     </div>
     <div class="product__sticky-inner o-h">
@@ -105,14 +99,6 @@
                     {{ button_text }}
                   </span>
                 </button>
-                
-                <button
-                  type="button"
-                  class="btn btn--full btn--primary desktop-buy-now-btn"
-                  data-buy-now-sticky
-                >
-                  <span class="desktop-buy-now-text" data-buy-now-price>Mua Ngay - {{ current_variant.price | money }}</span>
-                </button>
               </div>
 
               <!-- Mobile Button Layout -->
@@ -125,21 +111,12 @@
                   {% endif %}
                   name="add"
                   data-add-to-cart-sticky
-                  class="btn btn--full btn--secondary add-to-cart mobile-add-to-cart-btn{% if enable_dynamic_buttons and product.selling_plan_groups == empty %} btn--secondary{% endif %}"
+                  class="btn btn--full add-to-cart mobile-add-to-cart-btn{% if enable_dynamic_buttons and product.selling_plan_groups == empty %} btn--secondary{% endif %}"
                   {% unless current_variant.available %}
                     disabled="disabled"
                   {% endunless %}
                 >
-                  <span class="icon-cart">{% render 'icon-cart-2' %}</span>
-                  <span class="mobile-cart-text">Thêm vào giỏ hàng</span>
-                </button>
-                
-                <button
-                  type="button"
-                  class="btn btn--full btn--primary buy-now-btn"
-                  data-buy-now-sticky
-                >
-                  <span class="mobile-buy-now-text" data-buy-now-price>Mua Ngay - {{ current_variant.price | money }}</span>
+                  <span class="mobile-cart-text">THÊM VÀO GIỎ</span>
                 </button>
               </div>
 
@@ -150,6 +127,9 @@
                       {% if variant == product.selected_or_first_available_variant %}
                         selected="selected"
                       {% endif %}
+                      {% for option_value in variant.options %}
+                        data-option{{ forloop.index }}="{{ option_value | escape }}"
+                      {% endfor %}
                       value="{{ variant.id }}"
                     >
                       {{ variant.title }} - {{ variant.price | money_with_currency }}
@@ -217,8 +197,8 @@
   /* Custom button styles */
   .custom-add-to-cart-btn {
     background-color: #ffffff !important;
-    border-color: #f97046 !important;
-    color: #f97046 !important;
+    border-color: #FCE390 !important;
+    color: #FCE390 !important;
     border-radius: calc(var(--buttonRadius) * 0.5) !important;
     padding: 11px 20px !important;
     font-size: var(--f-size-button) !important;
@@ -230,15 +210,15 @@
   
   .custom-add-to-cart-btn:hover,
   .custom-add-to-cart-btn:focus {
-    background-color: #f97046 !important;
-    border-color: #f97046 !important;
+    background-color: #FCE390 !important;
+    border-color: #FCE390 !important;
     color: #ffffff !important;
   }
   
   /* Desktop Buy Now Button Styles */
   .desktop-buy-now-btn {
-    background-color: #f97046 !important;
-    border-color: #f97046 !important;
+    background-color: #FCE390 !important;
+    border-color: #FCE390 !important;
     color: #ffffff !important;
     border-radius: calc(var(--buttonRadius) * 0.5) !important;
     padding: 11px 20px !important;
@@ -264,24 +244,23 @@
   /* Mobile Button Styles */
   .mobile-buttons .mobile-add-to-cart-btn {
     background-color: #ffffff !important;
-    border-color: #f97046 !important;
-    color: #f97046 !important;
+    border-color: #FCE390 !important;
+    color: #FCE390 !important;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     font-family: inherit !important;
     font-variant-numeric: normal !important;
   }
   
-  .mobile-buttons .mobile-add-to-cart-btn:hover,
-  .mobile-buttons .mobile-add-to-cart-btn:focus {
-    background-color: #f97046 !important;
-    border-color: #f97046 !important;
-    color: #ffffff !important;
+  .mobile-buttons .mobile-add-to-cart-btn:hover {
+    background-color: #FCE390 !important;
+    border-color: #FCE390 !important;
+    color: #000000 !important;
   }
   
   /* Buy Now Button Styles - Mobile Only */
   .mobile-buttons .buy-now-btn {
-    background-color: #f97046 !important;
-    border-color: #f97046 !important;
+    background-color: #FCE390 !important;
+    border-color: #FCE390 !important;
     color: #ffffff !important;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     font-family: inherit !important;
@@ -349,22 +328,23 @@
     
     .product__stick-product-wrap {
       width: 100% !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      background: #FFF;
     }
     
-    .product__sticky-inner {
-      width: 100% !important;
-    }
-    
-    .product__sticky-wrapper {
-      width: 100% !important;
-    }
-    
+    .product__sticky-inner,
+    .product__sticky-wrapper,
     .product-single__sticky-form {
-      width: 100% !important;
+      width: auto !important;
     }
     
     .product__sticky.active {
       transform: translateY(0) !important;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      background: #fff;
     }
     
     /* Hide desktop buttons on mobile */
@@ -374,39 +354,33 @@
     
     /* Show mobile buttons on mobile */
     .mobile-buttons {
-      width: 100vw !important;
+      width: auto !important;
       display: flex !important;
-      gap: 0;
       padding: 0;
       margin: 0;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
+      position: static;
+      margin-left: 0;
+      margin-right: 0;
     }
     
     .mobile-buttons .btn {
-      border-radius: 0;
-      height: 50px;
+      border-radius: 50px !important;
+      height: 48px;
       font-size: 14px !important;
       font-weight: 600;
       font-family: inherit !important;
       font-variant-numeric: normal !important;
-      flex: 1;
-    }
-    
-    .mobile-buttons .buy-now-btn {
-      font-size: 11px !important;
+      padding: 0 24px !important;
+      white-space: nowrap;
     }
     
     .mobile-buttons .btn:first-child {
-      border-radius: 0;
-      border-right: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px !important;
+      border-right: none;
     }
     
     .mobile-buttons .btn:last-child {
-      border-radius: 0;
+      border-radius: 50px !important;
     }
     
     /* Hide payment buttons on mobile when setting is enabled */
@@ -431,6 +405,31 @@
     .product__sticky-content {
       display: none !important;
     }
+
+    .sticky-mobile-info {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .sticky-mobile-info__text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .sticky-variant-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #000;
+    }
+
+    .sticky-variant-price {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1C2C58;
+    }
   }
   
   /* Desktop styles */
@@ -450,8 +449,22 @@
       display: flex !important;
       align-items: center !important;
       gap: 15px !important;
+      flex: 1;
+      justify-content: space-between;
     }
     
+    .product__sticky-price.desktop-only {
+      display: block !important;
+      font-size: 16px;
+      font-weight: 600;
+      color: #1C2C58;
+      white-space: nowrap;
+    }
+    
+    .sticky-variant-item {
+      text-decoration: underline;
+    }
+
     .product__sticky-image {
       flex-shrink: 0 !important;
       width: 110px !important;
@@ -537,15 +550,9 @@
       this.mark = document.querySelector('footer');
       this.inner = this.querySelector('.product__sticky-inner');
       this.toogle = this.querySelector('button[data-toggle]');
-      this.buyNowBtns = this.querySelectorAll('[data-buy-now-sticky]');
       this.variantSelect = this.querySelector('[data-product-select-sticky]');
       
       this.toogle?.addEventListener('click', this.toggleEvent.bind(this));
-      
-      // Add event listeners to all buy now buttons (desktop and mobile)
-      this.buyNowBtns.forEach(btn => {
-        btn.addEventListener('click', this.buyNowEvent.bind(this));
-      });
       
       this.variantSelect?.addEventListener('change', this.onVariantChange.bind(this));
     }
@@ -554,9 +561,6 @@
       setTimeout(() => {
         this.renderAnchorLink();
       }, 500);
-
-      // Reset all buy now buttons in case user came back to page
-      this.resetBuyNowButtons();
 
       // Always show on mobile
       if (window.matchMedia('(max-width: 749px)').matches) {
@@ -574,22 +578,38 @@
     onVariantChange(event) {
       const selectedOption = event.target.selectedOptions[0];
       if (selectedOption) {
-        const variantPrice = selectedOption.textContent.split(' - ')[1];
-        this.updateBuyNowPrice(variantPrice);
+        const variantData = selectedOption.textContent.split(' - ');
+        const variantPrice = variantData[variantData.length - 1];
+        this.updateStickyPrice(variantPrice.trim());
+
+        const optionValues = [];
+        let i = 1;
+        while(selectedOption.dataset[`option${i}`]) {
+          const rawValue = selectedOption.dataset[`option${i}`];
+          optionValues.push(rawValue.split('-')[0].trim());
+          i++;
+        }
+        const cleanedTitle = optionValues.join(' / ');
+
+        // Update variant title for mobile view
+        const mobileTitleEl = this.querySelector('.sticky-variant-title');
+        if (mobileTitleEl) {
+          mobileTitleEl.textContent = cleanedTitle;
+        }
+        
+        // Update variant title for desktop view
+        const desktopContainer = this.querySelector('.desktop-only [data-header-option-container]');
+        if (desktopContainer) {
+          const newHtml = optionValues.map(val => `<span class="sticky-variant-item">${val}</span>`).join(' ');
+          desktopContainer.innerHTML = newHtml;
+        }
       }
     }
 
-    updateBuyNowPrice(price) {
-      const buyNowPriceElements = this.querySelectorAll('[data-buy-now-price]');
-      buyNowPriceElements.forEach(element => {
-        element.textContent = `Mua Ngay - ${price}`;
-      });
-    }
-
-    resetBuyNowButtons() {
-      this.buyNowBtns.forEach(btn => {
-        btn.classList.remove('btn--loading');
-        btn.disabled = false;
+    updateStickyPrice(price) {
+      const priceElements = this.querySelectorAll('[data-sticky-price]');
+      priceElements.forEach(element => {
+        element.textContent = price;
       });
     }
 
@@ -683,70 +703,6 @@
       }
 
       this.classList.toggle('full');
-    }
-
-    buyNowEvent(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      
-      console.log('Buy Now clicked!', event.target); // Debug log
-      
-      // Get the current variant ID
-      const variantSelect = this.querySelector('[data-product-select-sticky]');
-      const variantId = variantSelect ? variantSelect.value : null;
-      
-      console.log('Variant ID:', variantId); // Debug log
-      
-      if (!variantId) {
-        console.log('No variant ID found!'); // Debug log
-        return;
-      }
-
-      // Add loading state to the clicked buy now button
-      const buyNowBtn = event.target.closest('[data-buy-now-sticky]');
-      if (buyNowBtn) {
-        buyNowBtn.classList.add('btn--loading');
-        buyNowBtn.disabled = true;
-        
-        // Reset button state after 3 seconds in case user comes back
-        setTimeout(() => {
-          buyNowBtn.classList.remove('btn--loading');
-          buyNowBtn.disabled = false;
-        }, 3000);
-      }
-
-      // Create a hidden form and submit it just like Shopify payment button does
-      // This is exactly how {{ form | payment_button }} works internally
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = '/cart/add';
-      
-      // Add variant ID
-      const variantInput = document.createElement('input');
-      variantInput.type = 'hidden';
-      variantInput.name = 'id';
-      variantInput.value = variantId;
-      
-      // Add quantity 
-      const quantityInput = document.createElement('input');
-      quantityInput.type = 'hidden';
-      quantityInput.name = 'quantity';
-      quantityInput.value = '1';
-      
-      // Add return_to parameter - this is the key to making it work like payment button
-      const returnToInput = document.createElement('input');
-      returnToInput.type = 'hidden';
-      returnToInput.name = 'return_to';
-      returnToInput.value = '/checkout';
-      
-      // Append inputs to form
-      form.appendChild(variantInput);
-      form.appendChild(quantityInput);
-      form.appendChild(returnToInput);
-      
-      // Append form to body and submit
-      document.body.appendChild(form);
-      form.submit();
     }
   }
 

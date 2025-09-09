@@ -12,7 +12,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
   }
   .reason-to-choice__title {
     font-size: 32px;
@@ -72,7 +71,7 @@
     flex-shrink: 0;
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 30px;
+    margin-bottom: 17px;
   }
   .reason-carousel__image-wrapper img {
     width: 100%;
@@ -125,27 +124,53 @@
     }
   }
 
-  @media screen and (max-width: 768px) {
-    .reason-to-choice__header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
-    }
-    .reason-carousel__cell,
-    .reason-carousel__image-wrapper,
-    .reason-carousel__title,
-    .reason-carousel__content,
-    .reason-to-choice__progress {
-      width: 100%;
-    }
-    .reason-carousel__image-wrapper {
-      height: 300px;
-    }
-     .reason-carousel__content {
-      height: auto;
-      min-height: 139px;
-    }
+@media screen and (max-width: 768px) {
+  .reason-to-choice__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    {% comment %} margin-bottom: 20px; /* Add some space after header */ {% endcomment %}
   }
+  .reason-to-choice {
+    padding-left: 16px;
+    padding-right: 0; /* Allow slider to bleed */
+  }
+  .reason-to-choice__title {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 33.6px;
+    letter-spacing: 0.6px;
+  }
+  .reason-to-choice__nav {
+    display: none;
+  }
+  .reason-carousel__cell {
+    width: 320px;
+  }
+  .reason-carousel__image-wrapper {
+    width: 320px;
+    height: 240px;
+    flex-shrink: 0;
+  }
+  .reason-carousel__title {
+    width: 320px;
+    flex-shrink: 0;
+    font-size: 18px;
+    overflow: hidden;
+  }
+  .reason-carousel__content {
+    width: 320px;
+    flex-shrink: 0;
+    font-size: 16px;
+    overflow: hidden;
+  }
+  .reason-to-choice__progress {
+    width: 100%;
+  }
+}
 </style>
 
 <div class="reason-to-choice page-width" data-section-id="{{ section.id }}">
