@@ -74,12 +74,20 @@
     display: grid;
     width: 100%;
     grid-template-columns: 200px 1fr;
-    grid-gap: var(--grid-desktop-vertical-spacing);
-    margin-bottom: 14px;
+    grid-column-gap: 20px;
     padding: 16px;
-    background: #ffffff;
-    position: relative;
-    border-radius: calc(var(--radiusBase) * 0.5);
+  }
+  .bundled_item_images_col {
+    grid-row: 1 / 4;
+  }
+  .bundled_product_info_wrapper {
+    align-self: start;
+  }
+  .variants {
+    align-self: center;
+  }
+  .action_block {
+    align-self: end;
   }
 
   .bundled_product .variant-input-wrap .variant__button-label {
@@ -157,7 +165,7 @@
   .bundled_product-item .price__container .price-item--sale,
   .bundled_product .price__regular .price-item.price-item--regular {
     color: #1C2C58;
-    font-weight: 600;
+    font-weight: 400;
   }
   .bundled_product .price-item.price-item--sale.price-item--last {
     font-size: 18px;
@@ -246,13 +254,66 @@
   }
 
   @media screen and (max-width: 768px) {
-    .bundled_product {
-      grid-template-columns: 100px 1fr;
-    }
+      .bundled_product {
+          display: flex;
+          flex-wrap: wrap;
+          grid-template-columns: none; /* Unset grid */
+          grid-row: auto;
+          grid-column: auto;
+          gap: 16px;
+          padding: 16px;
+      }
+      .bundled_item_images_col, .bundled_product_info_wrapper, .variants, .action_block {
+        grid-row: auto; /* Unset grid */
+        grid-column: auto; /* Unset grid */
+      }
+      .bundled_item_images_col {
+          width: 100px;
+          flex-shrink: 0;
+      }
+      .bundled_product_info_wrapper {
+          flex: 1;
+          align-self: stretch;
+          display: flex;
+          flex-direction: column;
+      }
+      .variants, .action_block {
+          flex-basis: 100%;
+      }
+      .bundled_product_title_inner a {
+          color: #1C2C58;
+          font-family: "Be Vietnam Pro", sans-serif;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%;
+      }
+      .bundled_product .price-item--last {
+          color: #1C2C58;
+          font-family: "Be Vietnam Pro", sans-serif;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%;
+      }
+      .bundled_product .price--on-sale .price-item--regular {
+          color: #888;
+          font-family: "Be Vietnam Pro", sans-serif;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%;
+          text-decoration-line: line-through;
+      }
+      .bundled_product .price--on-sale .price__sale {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+      }
   }
   @media screen and (max-width: 480px) {
     .bundled_product {
-      padding-bottom: 70px;
+      padding-bottom: 16px;
     }
     .bundled_item_details_col {
       position: static;
@@ -469,44 +530,33 @@
             class="bundled_product-item bundled_product bundled_product_summary product has_qty_input"
             data-id="{{pro.id}}"
           >
-            <div class="bundled_item_col bundled_item_images_col">
-              <div class="bundled_product_images images">
-                <a
-                  href="{{pro.url }}"
-                  class="image zoom"
+            <div class="bundled_item_images_col">
+              <a href="{{ pro.url }}" class="bundled_product_images images">
+                <img
+                  loading="lazy"
+                  width="300"
+                  height="300"
+                  src="{{ pro.media[0].preview_image | img_url: 'large' }}"
+                  alt="{{ pro.title }}"
                   title=""
-                  data-rel="photoSwipe"
-                  ><img
-                          loading="lazy"
-                    width="300"
-                    height="300"
-                    src="{{pro.media[0].preview_image | img_url: 'large'}}"
-                    class=""
-                    alt="{{pro.title}}"
-                    title=""
-                    loading="eager"
-                ></a>
-              </div>
+                />
+              </a>
             </div>
-            <div class="bundled_item_col bundled_item_details_col flex flex-col">
-              <div class="bundled_item_col_left">
-                <div class="details">
-                  <p class="bundled_product_title product_title">
-                    <span class="bundled_product_title_inner">
-                      <a
-                        class="bundled_product_permalink"
-                        href="{{pro.url | within: collection}}"
-                        target="_blank"
-                        aria-label="View product"
-                      >
-                        <span class="item_title">{{ pro.title }}</span>
-                      </a>
-                    </span>
-                  </p>
-                    </div>
-                {% render 'price', product: pro, price_class: '' %}
 
-                <div class="variants ">
+            <div class="bundled_product_info_wrapper">
+              <div class="details">
+                <p class="bundled_product_title product_title">
+                  <span class="bundled_product_title_inner">
+                    <a class="bundled_product_permalink" href="{{ pro.url | within: collection }}" target="_blank">
+                      <span class="item_title">{{ pro.title }}</span>
+                    </a>
+                  </span>
+                </p>
+              </div>
+              {% render 'price', product: pro, price_class: '' %}
+            </div>
+
+            <div class="variants">
                           {%- unless pro.has_only_default_variant -%}
                     {%- for option in product.options_with_values -%}
                       {%- liquid
@@ -523,19 +573,19 @@
                         {% assign current_size = option.selected_value %}
                       {% endif %}
                     {% endfor -%}
-                            {%- for option in pro.options_with_values -%}
-                              {%- liquid
-                                assign is_color = false
-                        assign color_option_index = 0
-                                assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase
-                        assign color_option_index = forloop.index0
-                                assign downcased_option = option.name | downcase
-                                if downcased_option contains swatch_trigger
-                          assign is_color = true
-                        elsif swatch_trigger == 'color' and downcased_option contains 'colour'
-                                  assign is_color = true
-                                endif
-                              -%}
+                        {%- for option in pro.options_with_values -%}
+                          {%- liquid
+                            assign is_color = false
+                            assign color_option_index = 0
+                            assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase
+                            assign color_option_index = forloop.index0
+                            assign downcased_option = option.name | downcase
+                            if downcased_option contains swatch_trigger
+                              assign is_color = true
+                            elsif swatch_trigger == 'color' and downcased_option contains 'colour'
+                              assign is_color = true
+                            endif
+                          -%}
                       {% if is_color -%}
                         {%- render 'variant--button',
                           block: block,
@@ -562,22 +612,19 @@
                           current_size: current_size
                         -%}
                       {% endif -%}
-                            {%- endfor -%}
-                          {%- endunless -%}
-                          <script type="application/json">
-                            {{ pro.variants | json }}
-                          </script>
-                        </div>
-                      </div>
-              <div class="bundled_item_col_right">
-                <div class="action_block t-center w-full relative">
-                  <div class="add-item-btn btn btn--static w-full">
-                          {{ 'products.bundle.add_to_cart' | t }}
-                      </div>
-                  <span class="stock hidden">{{ 'products.product.sold_out' | t }}</span>
-                </div>
-          </div>
-      </div>
+                        {%- endfor -%}
+                {%- endunless -%}
+                <script type="application/json">
+                  {{ pro.variants | json }}
+                </script>
+              </div>
+
+            <div class="action_block t-center w-full">
+              <div class="add-item-btn btn btn--static w-full">
+                  {{ 'products.bundle.add_to_cart' | t }}
+              </div>
+              <span class="stock hidden">{{ 'products.product.sold_out' | t }}</span>
+            </div>
           </product-bundle>
         {% endif -%}
       {% endfor %}

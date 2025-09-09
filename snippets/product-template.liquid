@@ -8,6 +8,14 @@
   .product-image-container {
     position: relative;
   }
+  .product-grid__images {
+    position: relative;
+  }
+  .custom-nav-button {
+    display: none; /* Hidden by default */
+  }
+
+  @media screen and (min-width: 769px) {
   .product-tags-wrapper {
     position: absolute;
     top: 15px;
@@ -18,6 +26,7 @@
     gap: 8px;
     align-items: flex-start;
   }
+}
   .product-tag-item {
     padding: 4px 12px;
     border-radius: 4px;
@@ -455,17 +464,28 @@
       padding-left: 16px;
       padding-right: 16px;
     }
-
+    .product-tags-wrapper {
+      position: absolute;
+      top: 15px;
+      left: 0px !important;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
     /* Full-width main image based on request */
     .product__main-photos {
+      height: 390px;
       width: calc(100% + 32px);
       margin-left: -16px;
       margin-right: -16px;
-      height: auto;
-      aspect-ratio: 390 / 278.06;
       flex-shrink: 0;
       overflow: hidden;
-      border-radius: 0;
+      position: relative;
+    }
+    .product__photos img{
+      border-radius: 0 !important;
     }
 
     .product__main-photos .product-main-slide {
@@ -478,24 +498,9 @@
         object-fit: cover;
     }
 
-    /* Thumbnail adjustments */
-    .product__thumbs--scroller .product__thumb-item {
-      width: 70px !important;
-      height: 70px !important;
-      flex-shrink: 0;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .product__thumbs--scroller .product__thumb-item .image-wrap {
-      height: 100% !important;
-      padding-bottom: 0 !important;
-    }
-
-    .product__thumbs--scroller .product__thumb-item .image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    /* Hide thumbnails on mobile */
+    .product__thumbs {
+      display: none;
     }
 
     .product-single__meta .jdgm-widget--product-rating {
@@ -528,10 +533,13 @@
       font-weight: 600;
       width: auto;
     }
+    .product-block--price [data-product-price-wrap] {
+      order: 3;
+      flex-basis: 100%;
+    }
     .product-block--price .product__price--compare {
       font-size: 18px;
       width: auto;
-      order: 3;
     }
     .product-block--price .product__discount-badge {
       font-size: 16px;
@@ -559,7 +567,14 @@
     
     .is-size .variant-input-wrap {
       grid-template-columns: repeat(3, 1fr) !important;
-      gap: 8px;
+      gap: 2px;
+    }
+    .is-size .variant-input-wrap .variant-input {
+      grid-column: unset !important;
+    }
+    .is-size .variant-input-wrap[data-option-count="6"] {
+        /* Specific override for 6 items to create 3x2 grid */
+        grid-template-columns: repeat(3, 1fr) !important;
     }
     
     .variant-wrapper:not(.is-color) .variant__button-label {
@@ -611,6 +626,80 @@
     
     .product-single__meta hr {
       display: none;
+    }
+    
+    /* Main picture nav buttons */
+    .product__main-photos .product-slideshow .flickity-prev-next-button,
+    .service-carousel-wrapper .flickity-prev-next-button {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: 22px;
+      height: 22px;
+      top: 50%;
+      background: #234085;
+      border-radius: 100px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 10px auto;
+      z-index: 999;
+    }
+    
+    .product__main-photos .product-slideshow .flickity-prev-next-button .flickity-button-icon,
+    .service-carousel-wrapper .flickity-prev-next-button .flickity-button-icon {
+      display: none;
+    }
+
+    .product__main-photos .product-slideshow .flickity-prev-next-button.previous,
+    .service-carousel-wrapper .flickity-prev-next-button.previous {
+      left: 16px;
+      background-image: url("data:image/svg+xml,%3csvg width='17' height='9' viewBox='0 0 17 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M2 1.5L8.5 7.5L15 1.5' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+      transform: translateY(-50%) rotate(90deg);
+    }
+
+    .product__main-photos .product-slideshow .flickity-prev-next-button.next,
+    .service-carousel-wrapper .flickity-prev-next-button.next {
+      right: 16px;
+      background-image: url("data:image/svg+xml,%3csvg width='17' height='9' viewBox='0 0 17 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M2 1.5L8.5 7.5L15 1.5' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+      transform: translateY(-50%) rotate(-90deg);
+    }
+
+    .custom-nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      border-radius: 100px;
+      background: #234085;
+      display: flex;
+      width: 22px;
+      height: 22px;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .custom-nav-prev {
+      left: 16px;
+    }
+
+    .custom-nav-next {
+      right: 16px;
+    }
+
+    .custom-nav-button svg {
+      width: 10px;
+      height: auto;
+    }
+
+    .custom-nav-prev svg {
+      transform: rotate(90deg);
+    }
+
+    .custom-nav-next svg {
+      transform: rotate(-90deg);
     }
   }
   /* END: Mobile layout styles */
@@ -706,6 +795,12 @@
               mobile_layout: section.settings.mobile_layout,
               blocks: section.blocks
             -%}
+            <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+              <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+              <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
         {%- endif -%}
 
@@ -860,10 +955,7 @@
                         endif
                       endfor
 
-                      assign show_nav_buttons = false
-                      if services_count > 1
-                        assign show_nav_buttons = true
-                      endif
+                      assign show_nav_buttons = true
 
                       assign autoplay_duration = false
                       if block.settings.autoplay and services_count > 1
@@ -1540,6 +1632,12 @@
               mobile_layout: section.settings.mobile_layout,
               blocks: section.blocks
             -%}
+            <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+              <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+              <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
         {%- endunless -%}
       </div>
@@ -1825,6 +1923,38 @@ document.addEventListener('shopify:section:load', function(event) {
       initAdvancedSticky(reloadedSection);
     }
   }
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const productSections = document.querySelectorAll('.product-section');
+  
+  productSections.forEach(function(productSection) {
+    const flickityElement = productSection.querySelector('.product-slideshow');
+    const imageGrid = productSection.querySelector('.product-grid__images');
+
+    if (flickityElement && imageGrid) {
+      const prevButton = imageGrid.querySelector('.custom-nav-prev');
+      const nextButton = imageGrid.querySelector('.custom-nav-next');
+      
+      if (prevButton && nextButton) {
+        setTimeout(function() {
+          const flkty = Flickity.data(flickityElement);
+          if (flkty) {
+            prevButton.addEventListener('click', function(event) {
+              event.stopPropagation();
+              flkty.previous();
+            });
+            nextButton.addEventListener('click', function(event) {
+              event.stopPropagation();
+              flkty.next();
+            });
+          }
+        }, 500);
+      }
+    }
+  });
 });
 </script>
 
