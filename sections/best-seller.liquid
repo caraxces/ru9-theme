@@ -7,6 +7,14 @@
       margin: 0 auto;
       color: #1b2a57;
     }
+    .best-seller-name {
+      color: #1C2C58;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 39px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 120%; /* 46.8px */
+    }
     .best-seller-text {
       margin-top: 40px;
       margin-bottom: 40px;
@@ -19,7 +27,18 @@
       margin-bottom: 0;
     }
     .best-seller-video iframe {
-      border-radius: 34px;
+      border-radius: 8px;
+    }
+    @media (min-width: 769px) {
+      .best-seller-container > .page-width {
+        max-width: 100%;
+        padding-left: 110px;
+        padding-right: 120px;
+      }
+      .best-seller-container .best-seller-content {
+        max-width: 100%;
+        margin: 0;
+      }
     }
     @media (max-width: 1280px) {
       .best-seller-video iframe {
@@ -39,7 +58,7 @@
     }
     @media (min-width: 769px) {
       .best-seller-name {
-        max-width: 300px;
+        max-width: 100%;
       }
       .best-seller-content .best-seller-content__item {
         width: 50%;
@@ -59,7 +78,7 @@
       .best-seller-text {
         margin-top: 30px;
         margin-bottom: 30px;
-        max-width: 406px;
+        max-width: 100%;
       }
       .best-seller-text p {
         font-size: 16px;
@@ -68,9 +87,6 @@
     }
 
     @media only screen and (max-width: 1199px) and (min-width: 769px) {
-      .best-seller-container .best-seller-content .best-seller-html {
-        padding-left: 24px;
-      }
       .best-seller-text {
         margin-top: 30px;
         margin-bottom: 30px;
@@ -96,6 +112,9 @@
     }
 
     @media only screen and (max-width: 768px) {
+      .best-seller-name {
+        font-size: 20px;
+      }
       .best-seller-action {
         text-align: center;
       }
@@ -136,7 +155,7 @@
     .featured_video {
       position: relative;
       display: flex;
-      border-radius: 34px;
+      border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--colorBorder);
     }
@@ -197,10 +216,10 @@
     }
     @media (max-width: 768px) {
       .featured_video {
-        border-radius: 20px;
+        border-radius: 8px;
       }
       .featured_video video {
-        border-radius: 20px;
+        border-radius: 8px;
       }
     }
   {% endstyle %}
@@ -328,7 +347,7 @@
       "id": "mg",
       "label": "Margin",
       "info": "Margin top, margin right, margin bottom, margin left. If you not use to blank",
-      "default": "50px,,20px,",
+      "default": "50px,,39px,",
       "placeholder": "50px,,50px,"
     },
     {

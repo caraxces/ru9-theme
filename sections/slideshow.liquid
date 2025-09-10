@@ -330,7 +330,7 @@
           <path d="M6 22H12V24H6V22Z" fill="currentColor"/>
         </svg>
       {%- endif -%}
-      <span style="color: #000; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-style: normal; font-weight: 450; line-height: 150%;">{{ section.settings.icon_1_title }}</span>
+      <span class="icon-text-item__title">{{ section.settings.icon_1_title }}</span>
     </div>
     {%- endif -%}
 
@@ -362,7 +362,7 @@
           <path d="M6 22H12V24H6V22Z" fill="currentColor"/>
         </svg>
       {%- endif -%}
-      <span style="color: #000; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-style: normal; font-weight: 450; line-height: 150%;">{{ section.settings.icon_2_title }}</span>
+      <span class="icon-text-item__title">{{ section.settings.icon_2_title }}</span>
     </div>
     {%- endif -%}
 
@@ -394,7 +394,7 @@
           <path d="M6 22H12V24H6V22Z" fill="currentColor"/>
         </svg>
       {%- endif -%}
-      <span style="color: #000; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-style: normal; font-weight: 450; line-height: 150%;">{{ section.settings.icon_3_title }}</span>
+      <span class="icon-text-item__title">{{ section.settings.icon_3_title }}</span>
     </div>
     {%- endif -%}
 
@@ -411,11 +411,17 @@
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    height: 47px;
+    height: 67px;
     flex-shrink: 0;
+    font-family: "Be Vietnam Pro", sans-serif;
   }
 
-  .icon-text-item > span {
+  .icon-text-item__title {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
     white-space: nowrap;
   }
 
@@ -438,7 +444,7 @@
       gap: 12px !important;
     }
 
-    .icon-text-item > span {
+    .icon-text-item__title {
       font-size: 14px !important;
     }
     

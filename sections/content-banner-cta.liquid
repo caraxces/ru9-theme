@@ -1,6 +1,12 @@
+{%- render 'section_css' -%}
+
 <style>
+  .content-banner-cta-section .page-width {
+    max-width: none;
+    padding: 0;
+  }
   .content-banner-cta-section {
-    padding: 16px 0;
+    padding: 65px 0;
     font-family: "Be Vietnam Pro", sans-serif;
   }
   .content-banner-cta-main-title-wrapper {
@@ -8,18 +14,19 @@
     margin-bottom: 40px;
   }
   .content-banner-cta-main-title {
-    font-size: 39px;
-    font-weight: 700;
-    color: #1C2C58;
-    margin: 0;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    font-size: {{ section.settings.main_title_font_size }}px;
+    line-height: {{ section.settings.main_title_line_height }};
+    color: {{ section.settings.main_title_color }};
   }
   .content-banner-cta-container {
     position: relative;
-    max-width: 1595px;
+    width: 1595px;
     height: 500px;
-    margin: 0 auto;
+    margin: 0 120px 0 110px;
     border-radius: 12px;
     overflow: hidden;
+    flex-shrink: 0;
   }
   .content-banner-cta-content {
     position: relative;
@@ -30,7 +37,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 60%, rgba(255,255,255,0) 100%);
+    background: transparent;
   }
   .content-banner-cta-text-wrapper {
     display: contents;
@@ -190,7 +197,7 @@
   }
 </style>
 
-<div class="content-banner-cta-section">
+<div class="content-banner-cta-section" style="background-color: {{ section.settings.background_color }};">
   <div class="page-width">
     <div class="content-banner-cta-main-title-wrapper">
         <h2 class="content-banner-cta-main-title">{{ section.settings.main_title | escape }}</h2>

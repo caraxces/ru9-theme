@@ -65,13 +65,19 @@
         {%- endfor -%}
       </div>
     </div>
-    <div class="reviews-carousel-progress">
+    <div class="reviews-carousel-progress-container">
+      <div class="reviews-carousel-progress-background"></div>
       <div class="reviews-carousel-progress-bar"></div>
     </div>
   </div>
 </section>
 
 <style>
+.reviews-carousel-section .page-width {
+  max-width: none;
+  margin: 0 90px 0 110px;
+  padding: 0;
+}
 /* General Styles */
 .reviews-carousel-section { padding: 0px 0; font-family: "Be Vietnam Pro", sans-serif; }
 .reviews-carousel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
@@ -108,11 +114,16 @@
 .review-card__button:hover { background-color: #1C2C58; color: #fff; border-color: #1C2C58; }
 
 /* Progress Bar */
-.reviews-carousel-progress { width: 100%; height: 4px; background-color: #E0E0E0; border-radius: 2px; overflow: hidden; display: none; position: relative; }
+.reviews-carousel-progress-container { width: 100%; height: 4px; display: none; position: relative; }
+.reviews-carousel-progress-background { width: 100%; height: 100%; background-color: #E0E0E0; border-radius: 2px; position: absolute; top: 0; left: 0; }
 .reviews-carousel-progress-bar { width: 0; height: 100%; background-color: #234085; border-radius: 2px; position: absolute; top: 0; left: 0; z-index: 2; }
 .reviews-carousel-track.is-dragging { cursor: grabbing; user-select: none; }
   
   @media (max-width: 768px) {
+    .reviews-carousel-section .page-width {
+      margin: 0 auto;
+      padding: 0 16px;
+    }
     .reviews-carousel-section { padding: 40px 0; }
     .reviews-carousel-header { flex-direction: column; align-items: flex-start; gap: 20px; }
     .reviews-carousel-title {
@@ -146,7 +157,7 @@
     const cards = Array.from(carousel.querySelectorAll('.review-card'));
     const prevButton = carousel.querySelector('.reviews-carousel-nav--prev');
     const nextButton = carousel.querySelector('.reviews-carousel-nav--next');
-    const progressContainer = carousel.querySelector('.reviews-carousel-progress');
+    const progressContainer = carousel.querySelector('.reviews-carousel-progress-container');
     const progressBar = carousel.querySelector('.reviews-carousel-progress-bar');
     
     if (!track || !cards.length || !prevButton || !nextButton || !progressContainer || !progressBar) {

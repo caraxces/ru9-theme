@@ -12,9 +12,9 @@
   }
 
   .super-service-section .page-width {
-    max-width: var(--page-width);
-    margin: 0 auto;
-    padding: 0 2.85%;
+    max-width: none;
+    margin: 0 90px 0 110px;
+    padding: 0;
   }
 
   .super-service__title {
@@ -118,6 +118,12 @@
 
   /* --- Mobile Slider Layout --- */
   @media screen and (max-width: 990px) {
+    .super-service-section .page-width {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    
     .super-service__grid {
       display: block; /* Override desktop grid to enable Flickity */
     }

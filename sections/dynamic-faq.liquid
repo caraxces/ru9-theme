@@ -1,13 +1,45 @@
 {%- render 'section_css' -%}
 
 {% style %}
+  .dynamic--brand {
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+  .dynamic--brand .section-header {
+    text-align: center;
+    margin-bottom: 0;
+  }
+  .dynamic--brand .page-heading {
+    font-weight: 700;
+    width: 100%;
+  }
+
+  .faq-questions-wrapper {
+    background: #F5F9FF;
+    border-radius: 5px;
+    padding: 16px 24px;
+    margin-top: 30px;
+  }
+
+  .faq-questions-wrapper > div:first-child .question .collapsible-trigger--inline {
+    border-top: none;
+  }
+
   @media screen and (min-width: 960px) {
     .dynamic--brand-w > * {
       padding-inline: 24px;
     }
+    .faq-questions-wrapper {
+      padding: 24px 40px;
+    }
   }
   .dynamic--brand-w .section-padding {
     padding-bottom: 0;
+  }
+  .dynamic--brand .rte.collapsible-content__inner--faq {
+    color: #000;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.4;
   }
   .dynamic--brand .collapsible-trigger__icon--circle svg {
     color: #fff;
@@ -15,12 +47,10 @@
     display: block;
   }
   .dynamic--brand .collapsible-trigger--inline .collapsible-trigger__icon {
-    width: 11px;
-    height: 11px;
+    width: auto;
+    height: auto;
     display: flex;
     align-items: center;
-    left: 0;
-    right: auto;
   }
   .dynamic--brand-w .question .collapsible-trigger.is-open .collapsible-trigger__icon--open {
     display: none !important;
@@ -35,16 +65,19 @@
     margin-bottom: 7px;
   }
   .dynamic--brand .collapsible-trigger--inline {
-    padding: 24px 0 24px 22px;
+    padding: 24px 0;
     margin: 0;
     border: none;
     font-weight: 500;
-    font-size: 17px;
-    line-height: 1.2;
+    font-size: 20px;
+    line-height: 1.4;
     border-top: 1px solid;
     border-color: var(--colorBorder);
     border-bottom: 0;
     border-radius: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   #readmore_faqs {
     line-height: 1;
@@ -66,11 +99,6 @@
       background: transparent;
     }
 
-    .dynamic--brand .rte.collapsible-content__inner--faq {
-      color: #717070;
-      font-size: 17px;
-      padding-inline: 24px;
-    }
     .dynamic--brand .collapsible-trigger__icon--circle .icon {
       fill: #717070;
       width: 32px;
@@ -92,12 +120,6 @@
       border-radius: 0;
       padding-block: 20px;
       margin-bottom: 0;
-    }
-    .dynamic--brand .rte.collapsible-content__inner--faq {
-      color: #717070;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 24px;
     }
     .dynamic--brand .collapsible-trigger__icon--circle .icon {
       fill: #717070 !important;
@@ -131,66 +153,59 @@
       </header>
     {%- endif -%}
 
-    {%- if section.blocks.size > 0 -%}
-      {% assign count = 0 %}
-      {%- for block in section.blocks -%}
-        {% if block.settings.title != blank %}
-          {% assign count = count | plus: 1 %}
-        {% endif %}
-      {%- endfor -%}
-
-      {% if section.settings.use_metafield -%}
-        {% for i in (1..section.settings.metafield_limit) -%}
-          {% capture title_metafield %}ask_{{ i }}{% endcapture %}
-          {% capture text_metafield %}answer_{{ i }}{% endcapture %}
-          {% liquid
-            assign obj = null
-            if template contains 'product'
-              assign obj = product
-            elsif template contains 'collection'
-              assign obj = collection
-            elsif template contains 'page'
-              assign obj = page
-            elsif template contains 'blog'
-              assign obj = blog
-            elsif template contains 'article'
-              assign obj = article
-            endif
-          %}
-
-          {% liquid
-            assign title = obj.metafields.custom[title_metafield]
-            assign rich_text = obj.metafields.custom[text_metafield].value.children
-            assign id = obj.handle | append: '-' | append: forloop.index
-          %}
-          {% render 'faq-item', title: title, use_metafield: true, text: rich_text, id: id %}
-        {% endfor -%}
-      {% else %}
+    <div class="faq-questions-wrapper">
+      {%- if section.blocks.size > 0 -%}
+        {% assign count = 0 %}
         {%- for block in section.blocks -%}
-          {% liquid
-            assign title = block.settings.title
-            assign text = block.settings.text
-            assign id = block.id
-          %}
-          {% render 'faq-item', title: title, text: text, id: id %}
+          {% if block.settings.title != blank %}
+            {% assign count = count | plus: 1 %}
+          {% endif %}
         {%- endfor -%}
-      {% endif %}
 
-      <div class="view_all t-center">
-        <a id="readmore_faqs" class="i-flex ai-center jc-center" href="{{ section.settings.link }}">
-          {{ section.settings.link_text }}
-          <svg class="icon" viewBox="0 0 100 100">
-            <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path>
-          </svg>
-        </a>
-      </div>
-    {%- endif -%}
+        {% if section.settings.use_metafield -%}
+          {% for i in (1..section.settings.metafield_limit) -%}
+            {% capture title_metafield %}ask_{{ i }}{% endcapture %}
+            {% capture text_metafield %}answer_{{ i }}{% endcapture %}
+            {% liquid
+              assign obj = null
+              if template contains 'product'
+                assign obj = product
+              elsif template contains 'collection'
+                assign obj = collection
+              elsif template contains 'page'
+                assign obj = page
+              elsif template contains 'blog'
+                assign obj = blog
+              elsif template contains 'article'
+                assign obj = article
+              endif
+            %}
 
-    {%- if section.blocks.size == 0 -%}
-      <div class="placeholder-noblocks">
-        {{ 'home_page.onboarding.no_content' | t }}
-      </div>
-    {%- endif -%}
+            {% liquid
+              assign title = obj.metafields.custom[title_metafield]
+              assign rich_text = obj.metafields.custom[text_metafield].value.children
+              assign id = obj.handle | append: '-' | append: forloop.index
+            %}
+            {% render 'faq-item', title: title, use_metafield: true, text: rich_text, id: id %}
+          {% endfor -%}
+        {% else %}
+          {%- for block in section.blocks -%}
+            {% liquid
+              assign title = block.settings.title
+              assign text = block.settings.text
+              assign id = block.id
+            %}
+            {% render 'faq-item', title: title, text: text, id: id %}
+          {%- endfor -%}
+        {% endif %}
+      {%- endif -%}
+
+      {%- if section.blocks.size == 0 -%}
+        <div class="placeholder-noblocks">
+          {{ 'home_page.onboarding.no_content' | t }}
+        </div>
+      {%- endif -%}
+    </div>
     {%- if section.settings.divider -%}</div>{%- endif -%}
   </div>
 </div>
