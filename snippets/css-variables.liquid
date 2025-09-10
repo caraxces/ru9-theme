@@ -1,40 +1,4 @@
 {%- style -%}
-  @font-face {
-      font-family: 'ProximaNova';
-      src: url({{'ProximaNova-Bold.woff2' | asset_url }}) format('woff2'),
-          url({{'ProximaNova-Bold.woff' | asset_url }}) format('woff');
-      font-weight: bold;
-      font-style: normal;
-      font-display: fallback;
-  }
-
-  @font-face {
-      font-family: 'ProximaNova';
-      src: url({{'ProximaNova-Regular.woff2' | asset_url }}) format('woff2'),
-          url({{'ProximaNova-Regular.woff' | asset_url }}) format('woff');
-      font-weight: normal;
-      font-style: normal;
-      font-display: fallback;
-  }
-
-  @font-face {
-      font-family: 'ProximaNova';
-      src: url({{'ProximaNova-SemiBold.woff2' | asset_url }}) format('woff2'),
-          url({{'ProximaNova-SemiBold.woff' | asset_url }}) format('woff');
-      font-weight: 600;
-      font-style: normal;
-      font-display: fallback;
-  }
-
-  @font-face {
-      font-family: 'ProximaNova';
-      src: url({{'ProximaNova-Medium.woff2' | asset_url }}) format('woff2'),
-          url({{'ProximaNova-Medium.woff' | asset_url }}) format('woff');
-      font-weight: 500;
-      font-style: normal;
-      font-display: fallback;
-  }
-
       :root {
         --typeHeaderPrimary: inherit;
         --typeHeaderFallback: {{ settings.type_header_font_family.fallback_families }};
@@ -43,7 +7,7 @@
         --typeHeaderLineHeight: {{ settings.type_header_line_height | default: 1.4 }};
         --typeHeaderSpacing: {{ settings.type_header_spacing | default: '25' | divided_by: 1000.00 | append: 'em' }};
 
-        --typeBasePrimary: ProximaNova;
+        --typeBasePrimary: "Be Vietnam Pro", sans-serif;
         --typeBaseFallback:{{ settings.type_base_font_family.fallback_families }};
         --typeBaseSize: {{ settings.type_base_size | default: 16 | append: 'px' }};
         --typeBaseWeight: 400;

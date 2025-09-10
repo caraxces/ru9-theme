@@ -52,7 +52,12 @@
 <style>
   .site-nav__link,
   .site-nav__dropdown-link:not(.site-nav__dropdown-link--top-level) {
-    font-size: {{ settings.type_navigation_size }}px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
   }
   {% if settings.type_navigation_capitalize %}
     .site-nav__link, .mobile-nav__link--top-level {
@@ -86,6 +91,10 @@
       border-top: 0;
     }
   {%- endif -%}
+
+  [data-section-id="{{ section.id }}"] a {
+    font-family: "Be Vietnam Pro", sans-serif !important;
+  }
 
   /* Navigation arrow hover effect */
   .site-nav__link:hover .nav-arrow {
@@ -164,8 +173,44 @@
   @media screen and (min-width: 990px) {
     [data-section-id="{{ section.id }}"] .page-width {
         max-width: 100%;
-        padding-left: 120px;
+        padding-left: 110px;
         padding-right: 110px;
+    }
+
+    [data-section-id="{{ section.id }}"] .site-header {
+      height: 68px;
+      min-height: 68px;
+    }
+
+    [data-section-id="{{ section.id }}"] .site-header > .page-width,
+    [data-section-id="{{ section.id }}"] .site-header > .page-width > .medium-down--hide {
+      height: 100%;
+    }
+
+    [data-section-id="{{ section.id }}"] .header-layout {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    [data-section-id="{{ section.id }}"] .header-item--navigation {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-wrapper--sticky .site-nav__link,
+    .header-wrapper--sticky .site-nav__link--icon {
+      color: #000 !important;
+    }
+
+    .site-header--stuck,
+    .header-wrapper--sticky {
+      background-color: #ffffff !important;
+    }
+
+    .site-header--opening .site-nav__dropdown {
+      background-color: #ffffff !important;
     }
   }
 </style>
@@ -358,18 +403,18 @@
             <div class="header-item header-item--icons">
               {%- render 'header-icons', section: section -%}
             </div>
-          </div>
 
-          {%- if section.settings.main_menu_alignment == 'center' -%}
-            <div class="text-center">
-              {%- render 'header-desktop-nav',
-                main_menu: main_menu,
-                section: section,
-                dropdown_alignment: dropdown_alignment,
-                hover_menu: section.settings.hover_menu
-              -%}
-            </div>
-          {%- endif -%}
+            {%- if section.settings.main_menu_alignment == 'center' -%}
+              <div class="text-center">
+                {%- render 'header-desktop-nav',
+                  main_menu: main_menu,
+                  section: section,
+                  dropdown_alignment: dropdown_alignment,
+                  hover_menu: section.settings.hover_menu
+                -%}
+              </div>
+            {%- endif -%}
+          </div>
         </div>
       </header>
     </div>

@@ -1,17 +1,40 @@
-<div data-section-id="{{ section.id }}" data-section-type="featured-collections">
+<div data-section-id="{{ section.id }}" data-section-type="featured-products-by-size">
   <div class="featured-collections-section">
+    
+    {%- liquid
+      assign source_collection = section.settings.collection
+      assign all_sizes = ''
+      if source_collection.products.size > 0
+        for product in source_collection.products
+          for option in product.options_with_values
+            if option.name == 'Kích thước' or option.name == 'Size'
+              for value in option.values
+                assign size_string = value | append: ','
+                unless all_sizes contains size_string
+                  assign all_sizes = all_sizes | append: size_string
+                endunless
+              endfor
+            endif
+          endfor
+        endfor
+        assign unique_sizes = all_sizes | remove_last: ',' | split: ',' | uniq
+        assign rendered_short_sizes = ''
+      endif
+    -%}
     
     <!-- Header Section -->
     <div class="section-header">
       <div class="header-left">
         <h2 class="section-title">
-          {{ section.settings.title | default: 'Sản phẩm bán chạy' }}
+          {{ section.settings.title }}
         </h2>
       </div>
       <div class="header-right">
-        <a href="#" class="view-all-link">
-          Xem tất cả
-        </a>
+        {%- if source_collection != blank -%}
+          <a href="{{ source_collection.url }}" class="view-all-link">
+            Xem tất cả
+          </a>
+        {%- endif -%}
         <div class="carousel-nav">
           <button class="nav-btn nav-prev">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,17 +50,23 @@
       </div>
     </div>
     
-    <!-- Category Tabs -->
+    <!-- Size Tabs -->
     <div class="category-tabs-container">
       <div class="category-tabs">
-        {%- for block in section.blocks -%}
-          <button 
-            class="category-tab{% if forloop.index == 1 %} active{% endif %}" 
-            data-tab="Tab-{{ block.id }}"
-            data-collection-url="{{ block.settings.collection.url }}"
-          >
-            {{ block.settings.tab_name | default: 'Nệm' }}
-          </button>
+        {%- for size in unique_sizes -%}
+          {%- if size != blank -%}
+            {%- assign short_size = size | split: '-' | first | strip -%}
+            {%- assign short_size_handle = short_size | handle | append: ',' -%}
+            {%- unless rendered_short_sizes contains short_size_handle -%}
+              <button 
+                class="category-tab{% if rendered_short_sizes == blank %} active{% endif %}" 
+                data-size="{{ short_size | handle }}"
+              >
+                {{ short_size }}
+              </button>
+              {%- assign rendered_short_sizes = rendered_short_sizes | append: short_size_handle -%}
+            {%- endunless -%}
+          {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
@@ -46,43 +75,69 @@
     <div class="product-carousel-section">
       <div class="product-carousel">
         <div class="product-cards-container">
-          {%- for block in section.blocks -%}
-            <div class="tab-content{% if forloop.index == 1 %} active{% endif %}" id="Tab-content-{{ block.id }}">
-              
-              {%- assign collection = block.settings.collection -%}
-              {%- if collection != blank -%}
-                {%- for product in collection.products -%}
-                  <a href="{{ product.url }}" class="product-card">
+          {%- if source_collection.products.size > 0 -%}
+            {%- for product in source_collection.products -%}
+              {%- liquid
+                assign size_option_key_index = 0
+                for option in product.options
+                  assign option_name_downcased = option | downcase
+                  if option_name_downcased == 'kích thước' or option_name_downcased == 'size'
+                    assign size_option_key_index = forloop.index
+                    break
+                  endif
+                endfor
+                assign size_option_key = 'option' | append: size_option_key_index
+              -%}
+
+              {%- for variant in product.variants -%}
+                {%- assign variant_size = variant[size_option_key] -%}
+                {%- if variant_size != blank -%}
+                  {%- liquid
+                    assign meta_info = ''
+                    if product.options.size > 1 and size_option_key_index > 0
+                      for i in (1..product.options.size)
+                        if i != size_option_key_index
+                          assign current_option_key = 'option' | append: i
+                          assign option_value = variant[current_option_key]
+                          if option_value != blank
+                            assign meta_info = meta_info | append: option_value | append: ', '
+                          endif
+                        endif
+                      endfor
+                      assign meta_info = meta_info | remove_last: ', '
+                    endif
+                  -%}
+                  <a href="{{ product.url }}?variant={{ variant.id }}" class="product-card" data-size="{{ variant_size | split: '-' | first | strip | handle }}">
                     <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}">
-                      {%- if block.settings.product_label != blank -%}
-                        <div class="product-label">
-                          {{ block.settings.product_label }}
+                      {%- if section.settings.product_label != blank -%}
+                        <div class="product-label" style="background-color: {{ section.settings.label_bg }}; color: {{ section.settings.label_color }};">
+                          {{ section.settings.product_label }}
                         </div>
                       {%- endif -%}
-                      {%- if product.featured_image -%}
+                      
+                      {%- assign image = variant.image | default: product.featured_image -%}
+                      {%- if image -%}
                         <img 
                           class="product-image-primary"
-                          src="{{ product.featured_image | img_url: '400x320', crop: 'center' }}" 
+                          src="{{ image | img_url: '400x320', crop: 'center' }}" 
                           alt="{{ product.title }}"
                           width="400" height="320"
                         >
-                        {%- if product.media.size > 1 -%}
-                          {%- for media in product.media offset: 1 limit: 1 -%}
-                            {%- assign second_image = media.preview_image -%}
-                            {%- if second_image != blank -%}
-                              <img 
-                                class="product-image-secondary"
-                                src="{{ second_image | img_url: '400x320', crop: 'center' }}" 
-                                alt="{{ product.title }}"
-                                width="400" height="320"
-                              >
-                            {%- endif -%}
-                          {%- endfor -%}
-                        {%- endif -%}
                       {%- else -%}
-                        <div class="placeholder-image">
-                          No Image
-                        </div>
+                        <div class="placeholder-image">No Image</div>
+                      {%- endif -%}
+
+                      {%- if product.media.size > 1 -%}
+                        {%- for media in product.media offset: 1 limit: 1 -%}
+                           {%- if media.preview_image != image -%}
+                            <img 
+                              class="product-image-secondary"
+                              src="{{ media.preview_image | img_url: '400x320', crop: 'center' }}" 
+                              alt="{{ product.title }}"
+                              width="400" height="320"
+                            >
+                          {%- endif -%}
+                        {%- endfor -%}
                       {%- endif -%}
                     </div>
                     
@@ -101,52 +156,50 @@
                           <span class="rating-count">({{ product.metafields.reviews.rating_count }})</span>
                         {%- endif -%}
                       </div>
-                      <h3 class="product-name">{{ product.title }}</h3>
-                      <div class="product-meta">25cm, 6 sizes</div>
+                      <h3 class="product-name">{{ product.title | split: '-' | first }}</h3>
+                      <div class="product-meta">{{ meta_info }}</div>
                       <div class="product-price">
-                        <span class="price">Từ {{ product.price | money }}</span>
-                        {%- if product.compare_at_price > product.price -%}
-                           {%- assign sale_percentage = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                        <span class="price">{{ variant.price | money }}</span>
+                        {%- if variant.compare_at_price > variant.price -%}
+                           {%- assign sale_percentage = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round -%}
                           <span class="discount-badge">-{{ sale_percentage }}%</span>
-                          <span class="compare-price">{{ product.compare_at_price | money }}</span>
+                          <span class="compare-price">{{ variant.compare_at_price | money }}</span>
                         {%- endif -%}
                       </div>
                     </div>
                   </a>
-                {%- endfor -%}
-              {%- endif -%}
-            </div>
-          {%- endfor -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endfor -%}
+          {%- endif -%}
         </div>
       </div>
     </div>
     <div class="carousel-progress-container">
-      <div class="carousel-progress-bg"></div>
       <div class="carousel-progress-bar"></div>
     </div>
   </div>
 </div>
 
 <style>
-  /* General Section Styles */
-  .featured-collections-section {
+  [data-section-id="{{ section.id }}"] .featured-collections-section {
     width: 100%;
     min-height: auto;
     margin: 0 auto 60px auto;
     padding: 0 6.8%;
     font-family: 'Be Vietnam Pro', sans-serif;
   }
-  .section-header {
+  [data-section-id="{{ section.id }}"] .section-header {
     padding-bottom: 0px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
   }
-  .header-left {
+  [data-section-id="{{ section.id }}"] .header-left {
     flex: 1;
     text-align: left;
   }
-  .section-title {
+  [data-section-id="{{ section.id }}"] .section-title {
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 39px;
     font-weight: 700;
@@ -155,12 +208,12 @@
     margin: 0;
     text-align: left;
   }
-  .header-right {
+  [data-section-id="{{ section.id }}"] .header-right {
     display: flex;
     align-items: center;
     gap: 24px;
   }
-  .view-all-link {
+  [data-section-id="{{ section.id }}"] .view-all-link {
     color: #1A1A1A;
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 16px;
@@ -168,20 +221,20 @@
     text-decoration: underline;
     line-height: 1;
   }
-  .view-all-link:hover {
+  [data-section-id="{{ section.id }}"] .view-all-link:hover {
     color: #000 !important;
   }
 
   /* Category Tabs */
-  .category-tabs-container {
+  [data-section-id="{{ section.id }}"] .category-tabs-container {
     margin-bottom: 24px;
   }
-  .category-tabs {
+  [data-section-id="{{ section.id }}"] .category-tabs {
     display: flex;
     gap: 16px;
     align-items: center;
   }
-  .category-tab {
+  [data-section-id="{{ section.id }}"] .category-tab {
     display: flex;
     height: 45px;
     min-height: 45px;
@@ -199,51 +252,45 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  .category-tab:hover {
+  [data-section-id="{{ section.id }}"] .category-tab:hover {
     background: #e9ecef;
   }
-  .category-tab.active {
+  [data-section-id="{{ section.id }}"] .category-tab.active {
     background: #FFD35B;
     color: #1A1A1A;
     font-weight: 600;
   }
 
   /* Carousel Styles */
-  .product-carousel-section {
+  [data-section-id="{{ section.id }}"] .product-carousel-section {
     position: relative;
   }
-  .product-carousel {
+  [data-section-id="{{ section.id }}"] .product-carousel {
     position: relative;
     overflow: hidden;
     cursor: grab;
   }
-  .product-carousel.grabbing {
+  [data-section-id="{{ section.id }}"] .product-carousel.grabbing {
     cursor: grabbing;
   }
-  .product-carousel.grabbing .product-card {
+  [data-section-id="{{ section.id }}"] .product-carousel.grabbing .product-card {
     pointer-events: none;
   }
-  .product-cards-container {
+  [data-section-id="{{ section.id }}"] .product-cards-container {
     display: flex;
     gap: 2%;
     transition: transform 0.3s ease;
   }
-  .tab-content {
-    display: none;
-    gap: 2%;
-    width: 100%;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  .tab-content.active {
-    display: flex;
+  [data-section-id="{{ section.id }}"] .product-card {
+    display: none; /* Hidden by default, shown by JS */
   }
 
   /* Carousel Navigation */
-  .carousel-nav {
+  [data-section-id="{{ section.id }}"] .carousel-nav {
     display: flex;
     gap: 6px;
   }
-  .nav-btn {
+  [data-section-id="{{ section.id }}"] .nav-btn {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -254,72 +301,66 @@
     transition: all 0.3s ease;
     border: none;
   }
-  .nav-btn.nav-prev {
+  [data-section-id="{{ section.id }}"] .nav-btn.nav-prev {
     background: #FFF9E5;
   }
-  .nav-btn.nav-prev:hover {
+  [data-section-id="{{ section.id }}"] .nav-btn.nav-prev:hover {
     background: #FFF3CD;
   }
-  .nav-btn.nav-next {
+  [data-section-id="{{ section.id }}"] .nav-btn.nav-next {
     background: #FFD35B;
   }
-  .nav-btn.nav-next:hover {
+  [data-section-id="{{ section.id }}"] .nav-btn.nav-next:hover {
     background: #FBC947;
   }
-  .nav-btn:disabled {
+  [data-section-id="{{ section.id }}"] .nav-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
   /* Carousel Progress Bar */
-  .carousel-progress-container {
+  [data-section-id="{{ section.id }}"] .carousel-progress-container {
     margin-top: 24px !important;
     width: 100% !important;
     height: 6px !important;
+    background: #F0F1EF !important;
+    border-radius: 3px !important;
     position: relative !important;
     display: block !important;
-    overflow: hidden !important;
+  }
+  [data-section-id="{{ section.id }}"] .carousel-progress-container .carousel-progress-bar {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100% !important;
+    background: #234085 !important;
     border-radius: 3px !important;
-  }
-  .carousel-progress-bg {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: #F0F1EF;
-    border-radius: 3px;
-    z-index: 1;
-  }
-  .carousel-progress-bar {
-    position: absolute;
-    top: 0; left: 0; height: 100%;
-    background: #234085;
-    border-radius: 3px;
-    width: 0%;
-    transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
-    z-index: 2;
-    display: block;
-    opacity: 1;
-    box-sizing: border-box;
+    width: 0% !important;
+    transition: width 0.3s ease !important;
+    display: block !important;
+    opacity: 1 !important;
+    z-index: 2 !important;
+    min-width: 1px !important;
+    box-sizing: border-box !important;
   }
 
   /* Product Card Styles */
-  .product-card {
+  [data-section-id="{{ section.id }}"] .product-card {
     width: 380px;
     flex-shrink: 0;
     border-radius: 5px;
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    display: block;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out !important;
   }
-  .product-card.is-visible {
+  [data-section-id="{{ section.id }}"] .product-card.is-visible {
     opacity: 1;
     transform: translateY(0);
   }
-
-  .product-image-container {
+  [data-section-id="{{ section.id }}"] .product-image-container {
     position: relative;
     width: 380px;
     height: 284px;
@@ -328,7 +369,7 @@
     overflow: hidden;
     cursor: pointer;
   }
-  .placeholder-image {
+  [data-section-id="{{ section.id }}"] .placeholder-image {
     width: 100%;
     height: 100%;
     background: #E9ECEF;
@@ -338,7 +379,7 @@
     color: #6C757D;
     border-radius: 5px;
   }
-  .product-label {
+  [data-section-id="{{ section.id }}"] .product-label {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -347,52 +388,50 @@
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 14px;
     font-weight: 600;
-    color: {{ block.settings.label_color | default: '#fff' }};
-    background: {{ block.settings.label_bg | default: '#609EE9' }};
     z-index: 2;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
-  .product-image-primary, .product-image-secondary {
+  [data-section-id="{{ section.id }}"] .product-image-primary, [data-section-id="{{ section.id }}"] .product-image-secondary {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
     transition: opacity 0.3s ease;
   }
-  .product-image-secondary {
+  [data-section-id="{{ section.id }}"] .product-image-secondary {
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
   }
-  .product-image-container.has-secondary-image:hover .product-image-primary,
-  .product-carousel.grabbing .product-image-container.has-secondary-image:hover .product-image-primary {
+  [data-section-id="{{ section.id }}"] .product-image-container.has-secondary-image:hover .product-image-primary,
+  [data-section-id="{{ section.id }}"] .product-carousel.grabbing .product-image-container.has-secondary-image:hover .product-image-primary {
     opacity: 0 !important;
   }
-  .product-image-container.has-secondary-image:hover .product-image-secondary,
-  .product-carousel.grabbing .product-image-container.has-secondary-image:hover .product-image-secondary {
+  [data-section-id="{{ section.id }}"] .product-image-container.has-secondary-image:hover .product-image-secondary,
+  [data-section-id="{{ section.id }}"] .product-carousel.grabbing .product-image-container.has-secondary-image:hover .product-image-secondary {
     opacity: 1 !important;
   }
-  .product-info {
+  [data-section-id="{{ section.id }}"] .product-info {
     padding: 16px 0 0 0;
     margin: 0;
     text-align: left;
   }
-  .product-rating {
+  [data-section-id="{{ section.id }}"] .product-rating {
     margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .rating-score {
+  [data-section-id="{{ section.id }}"] .rating-score {
     font-size: 14px;
     font-weight: 600;
   }
-  .rating-count {
+  [data-section-id="{{ section.id }}"] .rating-count {
     font-size: 14px;
     color: #666;
   }
-  .product-name {
+  [data-section-id="{{ section.id }}"] .product-name {
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 20px;
     font-weight: 500;
@@ -400,26 +439,26 @@
     margin: 0 0 8px 0;
     line-height: 27px;
   }
-  .product-meta {
+  [data-section-id="{{ section.id }}"] .product-meta {
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 14px;
     color: #666;
     margin-bottom: 8px;
   }
-  .product-price {
+  [data-section-id="{{ section.id }}"] .product-price {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 4px 8px;
     line-height: 1.2;
   }
-  .price {
+  [data-section-id="{{ section.id }}"] .price {
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 18px;
     font-weight: 600;
     color: #1A1A1A;
   }
-  .discount-badge {
+  [data-section-id="{{ section.id }}"] .discount-badge {
     font-size: 12px;
     font-weight: 600;
     color: #3264E0;
@@ -427,7 +466,7 @@
     padding: 2px 8px;
     border-radius: 4px;
   }
-  .compare-price {
+  [data-section-id="{{ section.id }}"] .compare-price {
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 14px;
     color: #999;
@@ -437,58 +476,58 @@
   
   /* Medium screens */
   @media (max-width: 1200px) {
-    .product-card {
+    [data-section-id="{{ section.id }}"] .product-card {
       width: calc(50% - 1%) !important;
       min-width: 250px;
     }
-    .product-image-container {
+    [data-section-id="{{ section.id }}"] .product-image-container {
       width: 100% !important;
       height: auto !important;
       aspect-ratio: 121/80 !important;
     }
-    .product-name {
+    [data-section-id="{{ section.id }}"] .product-name {
       font-size: 24px !important;
     }
-    .product-info {
+    [data-section-id="{{ section.id }}"] .product-info {
       padding: 20px !important;
     }
-    .section-title {
+    [data-section-id="{{ section.id }}"] .section-title {
       font-size: 36px !important;
     }
   }
   
   /* Mobile screens */
   @media (max-width: 768px) {
-    .featured-collections-section {
+    [data-section-id="{{ section.id }}"] .featured-collections-section {
       padding: 0 4%;
     }
-    .section-header {
+    [data-section-id="{{ section.id }}"] .section-header {
       flex-direction: row !important;
       flex-wrap: wrap;
       align-items: center;
       padding-bottom: 0px !important;
     }
-    .header-left {
+    [data-section-id="{{ section.id }}"] .header-left {
       order: 1;
       flex: 1 1 auto;
     }
-    .header-right {
+    [data-section-id="{{ section.id }}"] .header-right {
       order: 2;
       flex: 0 0 auto;
     }
-    .header-right .carousel-nav {
+    [data-section-id="{{ section.id }}"] .header-right .carousel-nav {
       display: none;
     }
-    .category-tabs-container {
+    [data-section-id="{{ section.id }}"] .category-tabs-container {
       order: 3;
       width: 100%;
       margin: 0 -4% 24px -4%;
       position: relative;
     }
-    .category-tabs-container::after {
+    [data-section-id="{{ section.id }}"] .category-tabs-container::after {
       content: none;
     }
-    .category-tabs {
+    [data-section-id="{{ section.id }}"] .category-tabs {
       flex-wrap: nowrap;
       justify-content: flex-start;
       overflow-x: auto;
@@ -497,58 +536,58 @@
       cursor: grab;
       padding: 0 4%;
     }
-    .category-tabs::-webkit-scrollbar {
+    [data-section-id="{{ section.id }}"] .category-tabs::-webkit-scrollbar {
         display: none;
     }
-    .product-carousel-section {
+    [data-section-id="{{ section.id }}"] .product-carousel-section {
       margin: 0 -4%;
     }
-    .product-carousel {
+    [data-section-id="{{ section.id }}"] .product-carousel {
       padding: 0 4%;
     }
-    .product-cards-container, .tab-content {
+    [data-section-id="{{ section.id }}"] .product-cards-container {
       gap: 4% !important;
     }
-    .product-card {
+    [data-section-id="{{ section.id }}"] .product-card {
       width: 319.8px !important;
       flex-shrink: 0;
       min-width: auto;
     }
-    .product-image-container {
+    [data-section-id="{{ section.id }}"] .product-image-container {
       height: 240.44px !important;
       aspect-ratio: unset !important;
     }
-    .product-name {
+    [data-section-id="{{ section.id }}"] .product-name {
       font-size: 22px !important;
     }
-    .product-info {
+    [data-section-id="{{ section.id }}"] .product-info {
       padding: 16px !important;
     }
-    .section-title {
+    [data-section-id="{{ section.id }}"] .section-title {
       font-size: 28px !important;
     }
   }
   
   @media (max-width: 480px) {
-    .product-name {
+    [data-section-id="{{ section.id }}"] .product-name {
       font-size: 20px !important;
     }
-    .product-info {
+    [data-section-id="{{ section.id }}"] .product-info {
       padding: 12px !important;
     }
-    .section-title {
+    [data-section-id="{{ section.id }}"] .section-title {
       font-size: 24px !important;
     }
-    .category-tab {
+    [data-section-id="{{ section.id }}"] .category-tab {
       font-size: 16px !important;
     }
-    .view-all-btn {
+    [data-section-id="{{ section.id }}"] .view-all-btn {
       width: 90px !important;
       height: 28px !important;
       padding: 6px 16px !important;
       font-size: 12px !important;
     }
-    .nav-btn {
+    [data-section-id="{{ section.id }}"] .nav-btn {
       width: 24px !important;
       height: 24px !important;
     }
@@ -563,15 +602,14 @@
     if (!sectionContainer) return;
 
     const tabButtons = sectionContainer.querySelectorAll('.category-tab');
-    const tabContents = sectionContainer.querySelectorAll('.tab-content');
-    const viewAllBtn = sectionContainer.querySelector('.view-all-link');
-    const progressBarContainer = sectionContainer.querySelector('.carousel-progress-container');
-    const progressBar = sectionContainer.querySelector('.carousel-progress-bar');
+    const productCardsContainer = sectionContainer.querySelector('.product-cards-container');
+    const allProductCards = sectionContainer.querySelectorAll('.product-card');
+  
     const prevBtn = sectionContainer.querySelector('.nav-prev');
     const nextBtn = sectionContainer.querySelector('.nav-next');
     const carouselContainer = sectionContainer.querySelector('.product-carousel');
     
-    let carousels = {};
+    let carousel = null;
 
     // --- Drag-to-scroll for tabs ---
     const tabsContainer = sectionContainer.querySelector('.category-tabs');
@@ -580,110 +618,80 @@
         let startX;
         let scrollLeft;
         let isDragging = false;
-
-        const startDrag = (e) => {
-            isDown = true;
-            isDragging = false;
-            startX = (e.pageX || e.touches[0].pageX) - tabsContainer.offsetLeft;
-            scrollLeft = tabsContainer.scrollLeft;
-            tabsContainer.style.cursor = 'grabbing';
-        };
-
-        const endDrag = () => {
-            isDown = false;
-            isDragging = false;
-            tabsContainer.style.cursor = 'grab';
-        };
-
-        const moveDrag = (e) => {
-            if (!isDown) return;
-            const x = (e.pageX || (e.touches && e.touches[0].pageX)) - tabsContainer.offsetLeft;
-            if (x === undefined) return;
-            
-            const walk = x - startX;
-            if (Math.abs(walk) > 5) {
-                isDragging = true;
-            }
-            if(isDragging){
-                 e.preventDefault();
-            }
-
-            tabsContainer.scrollLeft = scrollLeft - walk;
-        };
-        
-        tabsContainer.addEventListener('click', (e) => {
-            if (isDragging) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        }, true);
-
+        const startDrag = (e) => { isDown = true; isDragging = false; startX = (e.pageX || e.touches[0].pageX) - tabsContainer.offsetLeft; scrollLeft = tabsContainer.scrollLeft; tabsContainer.style.cursor = 'grabbing'; };
+        const endDrag = () => { isDown = false; isDragging = false; tabsContainer.style.cursor = 'grab'; };
+        const moveDrag = (e) => { if (!isDown) return; const x = (e.pageX || (e.touches && e.touches[0].pageX)) - tabsContainer.offsetLeft; if (x === undefined) return; const walk = x - startX; if (Math.abs(walk) > 5) { isDragging = true; } if(isDragging){ e.preventDefault(); } tabsContainer.scrollLeft = scrollLeft - walk; };
+        tabsContainer.addEventListener('click', (e) => { if (isDragging) { e.preventDefault(); e.stopPropagation(); } }, true);
         tabsContainer.addEventListener('mousedown', startDrag);
         tabsContainer.addEventListener('mousemove', moveDrag);
         tabsContainer.addEventListener('mouseup', endDrag);
         tabsContainer.addEventListener('mouseleave', endDrag);
-
         tabsContainer.addEventListener('touchstart', startDrag);
         tabsContainer.addEventListener('touchmove', moveDrag);
         tabsContainer.addEventListener('touchend', endDrag);
     }
 
-    function initializeCarouselForTab(tabContent) {
-      const carouselId = tabContent.id;
-      
-      if (carousels[carouselId] && carousels[carouselId].initialized) return;
-
-      const productCards = tabContent.querySelectorAll('.product-card');
-      
-      if (productCards.length === 0) return;
-
+    function initializeCarousel() {
       let currentIndex = 0;
       let isDown = false;
       let startX;
       let initialTranslateX;
       let walk = 0;
 
+      function getVisibleCards() {
+          return Array.from(allProductCards).filter(card => card.style.display !== 'none');
+      }
+
       function getItemsPerView() {
-        const containerWidth = tabContent.parentElement.offsetWidth;
-        const itemWidth = productCards[0] ? productCards[0].offsetWidth : 280;
-        const gap = containerWidth * 0.02; // 2% gap
+        const visibleCards = getVisibleCards();
+        if (visibleCards.length === 0) return 1;
+        const containerWidth = productCardsContainer.parentElement.offsetWidth;
+        const itemWidth = visibleCards[0].offsetWidth;
+        const gap = containerWidth * 0.02;
         if (itemWidth === 0) return 1;
-        return Math.floor((containerWidth + gap) / (itemWidth + gap)) || 1;
+        return Math.floor(containerWidth / (itemWidth + gap)) || 1;
       }
 
       function getTranslateX() {
-          const style = window.getComputedStyle(tabContent);
+          const style = window.getComputedStyle(productCardsContainer);
           const transform = style.transform;
           if (transform === 'none') return 0;
           const matrix = new DOMMatrixReadOnly(transform);
           return matrix.m41;
       }
 
-      function updateCarousel() {
-        tabContent.style.transition = 'transform 0.4s ease';
+      function updateCarousel(isResize = false) {
+        productCardsContainer.style.transition = isResize ? 'none' : 'transform 0.4s ease';
+        const visibleCards = getVisibleCards();
+        if (visibleCards.length === 0) {
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            productCardsContainer.style.transform = `translateX(0px)`;
+            return;
+        }
+        
         const itemsPerView = getItemsPerView();
-        const maxIndex = Math.max(0, productCards.length - itemsPerView);
+        const maxIndex = Math.max(0, visibleCards.length - itemsPerView);
         currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
 
-        const itemWidth = productCards[0].offsetWidth;
-        const gap = tabContent.parentElement.offsetWidth * 0.02;
+        const itemWidth = visibleCards[0].offsetWidth;
+        const gap = productCardsContainer.parentElement.offsetWidth * 0.02;
         const translateX = -currentIndex * (itemWidth + gap);
-        tabContent.style.transform = `translateX(${translateX}px)`;
+        productCardsContainer.style.transform = `translateX(${translateX}px)`;
+        
         prevBtn.disabled = currentIndex === 0;
         nextBtn.disabled = currentIndex >= maxIndex;
-        // Gọi updateProgressBar bằng requestAnimationFrame để đảm bảo DOM đã render
-        requestAnimationFrame(updateProgressBar);
+
+        // Update progress bar
+        updateProgressBar();
       }
 
       function dragStart(e) {
-        if (e.target.closest('.product-info')) {
-          isDown = false;
-          return;
-        }
+        if (e.target.closest('.product-info')) { isDown = false; return; }
         isDown = true;
         carouselContainer.classList.add('grabbing');
         startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
-        tabContent.style.transition = 'none';
+        productCardsContainer.style.transition = 'none';
         initialTranslateX = getTranslateX();
         walk = 0;
         if (e.type === 'touchstart') {
@@ -697,7 +705,7 @@
         e.preventDefault();
         const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
         walk = currentX - startX;
-        tabContent.style.transform = `translateX(${initialTranslateX + walk}px)`;
+        productCardsContainer.style.transform = `translateX(${initialTranslateX + walk}px)`;
         
         // Update progress bar in real-time during drag
         updateProgressBar();
@@ -706,41 +714,49 @@
       function updateProgressBar() {
         const progressBar = sectionContainer.querySelector('.carousel-progress-bar');
         if (!progressBar) return;
-        const containerWidth = tabContent.parentElement.offsetWidth;
-        const productCards = tabContent.querySelectorAll('.product-card');
-        if (productCards.length === 0) {
+        
+        const containerWidth = productCardsContainer.parentElement.offsetWidth;
+        const visibleCards = getVisibleCards();
+        
+        if (visibleCards.length === 0) {
           progressBar.style.width = '0%';
           return;
         }
-        const itemWidth = productCards[0].offsetWidth;
+        
+        const itemWidth = visibleCards[0].offsetWidth;
         const gap = containerWidth * 0.02;
-        const totalWidth = productCards.length * itemWidth + (productCards.length - 1) * gap;
-        const totalItems = productCards.length;
+        const totalWidth = visibleCards.length * itemWidth + (visibleCards.length - 1) * gap;
         const currentScroll = -getTranslateX();
-        // Số sản phẩm hiển thị thực tế (có thể là 4.5)
-        const visibleCount = containerWidth / (itemWidth + gap);
-        // Index sản phẩm đầu tiên đang hiển thị (có thể là số thập phân)
-        const firstVisibleIndex = currentScroll / (itemWidth + gap);
-        // Tính progress
-        let progress = (firstVisibleIndex + visibleCount) / totalItems;
-        progress = Math.max(0.2, Math.min(1, progress)); // min 20%, max 100%
-        progressBar.style.width = (progress * 100) + '%';
+        
+        if (totalWidth > containerWidth) {
+          const maxScroll = totalWidth - containerWidth;
+          const scrollProgress = Math.max(0, Math.min(1, currentScroll / maxScroll));
+          
+          const minProgress = 0.2;
+          const maxProgress = 1.0;
+          const progressPercent = minProgress + (scrollProgress * (maxProgress - minProgress));
+          
+          const finalPercent = Math.max(20, Math.min(100, progressPercent * 100));
+          progressBar.style.width = `${finalPercent}%`;
+        } else {
+          progressBar.style.width = '100%';
+        }
       }
 
       function dragEnd() {
         if (!isDown) return;
         isDown = false;
         carouselContainer.classList.remove('grabbing');
-        
         window.removeEventListener('touchmove', dragMove);
         window.removeEventListener('touchend', dragEnd);
-        // Only update position if dragged, otherwise it's a click
+        
         if (Math.abs(walk) > 10) { 
-            const itemWidth = productCards[0] ? productCards[0].offsetWidth : 280;
+            const visibleCards = getVisibleCards();
+            if (visibleCards.length === 0) return;
+            const itemWidth = visibleCards[0].offsetWidth;
             const threshold = itemWidth / 4;
-            
             const itemsPerView = getItemsPerView();
-            const maxIndex = Math.max(0, productCards.length - itemsPerView);
+            const maxIndex = Math.max(0, visibleCards.length - itemsPerView);
 
             if (walk < -threshold && currentIndex < maxIndex) {
                 currentIndex++;
@@ -751,37 +767,30 @@
         updateCarousel();
       }
 
-      tabContent.addEventListener('mousedown', dragStart);
-      tabContent.addEventListener('mousemove', dragMove);
-      tabContent.addEventListener('mouseup', dragEnd);
-      tabContent.addEventListener('mouseleave', dragEnd);
+      carouselContainer.addEventListener('mousedown', dragStart);
+      carouselContainer.addEventListener('mousemove', dragMove);
+      carouselContainer.addEventListener('mouseup', dragEnd);
+      carouselContainer.addEventListener('mouseleave', dragEnd);
+      carouselContainer.addEventListener('touchstart', dragStart);
 
-      tabContent.querySelectorAll('a').forEach(link => {
+      allProductCards.forEach(link => {
           link.addEventListener('click', e => {
-              if (Math.abs(walk) > 10) { // Threshold to differentiate click from drag
+              if (Math.abs(walk) > 10) {
                   e.preventDefault();
                   e.stopPropagation();
               }
           });
       });
 
-      tabContent.addEventListener('touchstart', dragStart);
-
-      carousels[carouselId] = {
-        initialized: true,
+      return {
         next: () => {
+          const visibleCards = getVisibleCards();
           const itemsPerView = getItemsPerView();
-          const maxIndex = Math.max(0, productCards.length - itemsPerView);
-          if (currentIndex < maxIndex) {
-            currentIndex++;
-            updateCarousel();
-          }
+          const maxIndex = Math.max(0, visibleCards.length - itemsPerView);
+          if (currentIndex < maxIndex) { currentIndex++; updateCarousel(); }
         },
         prev: () => {
-          if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-          }
+          if (currentIndex > 0) { currentIndex--; updateCarousel(); }
         },
         reset: () => {
             currentIndex = 0;
@@ -789,212 +798,110 @@
         },
         update: () => updateCarousel(true)
       };
+    }
 
-      // Khi khởi tạo carousel, gọi updateProgressBar bằng requestAnimationFrame để đảm bảo luôn hiển thị đúng
-      requestAnimationFrame(updateProgressBar);
+    function filterProducts(size) {
+      allProductCards.forEach(card => {
+        const cardSize = card.getAttribute('data-size');
+        if (cardSize === size) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      if (carousel) carousel.reset();
     }
     
-    function getActiveCarousel() {
-        const activeContent = sectionContainer.querySelector('.tab-content.active');
-        return activeContent ? carousels[activeContent.id] : null;
-    }
-
-    nextBtn.addEventListener('click', () => {
-      const activeCarousel = getActiveCarousel();
-      if (activeCarousel) activeCarousel.next();
-    });
-
-    prevBtn.addEventListener('click', () => {
-      const activeCarousel = getActiveCarousel();
-      if (activeCarousel) activeCarousel.prev();
-    });
-
-    function updateViewAllButton(activeButton) {
-      const collectionUrl = activeButton.getAttribute('data-collection-url');
-      if (viewAllBtn && collectionUrl) {
-        viewAllBtn.href = collectionUrl;
-      } else if (viewAllBtn) {
-        viewAllBtn.href = '#'; // Fallback
-      }
-    }
-
     tabButtons.forEach(button => {
       button.addEventListener('click', function() {
-        const tabId = this.getAttribute('data-tab');
-        const targetContent = document.getElementById('Tab-content-' + tabId.split('-')[1]);
-        
-        tabButtons.forEach(btn => {
-          btn.classList.remove('active');
-        });
+        tabButtons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
-        
-        tabContents.forEach(content => {
-          content.classList.remove('active');
-          content.style.display = 'none';
-        });
-
-        targetContent.classList.add('active');
-        targetContent.style.display = 'flex';
-        
-        updateViewAllButton(this);
-        initializeCarouselForTab(targetContent);
-        
-        const activeCarousel = getActiveCarousel();
-        if (activeCarousel) activeCarousel.reset();
+        const targetSize = this.getAttribute('data-size');
+        filterProducts(targetSize);
       });
     });
 
-    const initialActiveTab = sectionContainer.querySelector('.category-tab.active');
-    
-    if (initialActiveTab) {
-      updateViewAllButton(initialActiveTab);
-      const initialTabContent = sectionContainer.querySelector('.tab-content.active');
-      if (initialTabContent) {
-        initializeCarouselForTab(initialTabContent);
+    if (tabButtons.length > 0) {
+      carousel = initializeCarousel();
+      const initialActiveTab = sectionContainer.querySelector('.category-tab.active');
+      if (initialActiveTab) {
+        const initialSize = initialActiveTab.getAttribute('data-size');
+        filterProducts(initialSize);
       }
     }
+
+    nextBtn.addEventListener('click', () => carousel ? carousel.next() : null);
+    prevBtn.addEventListener('click', () => carousel ? carousel.prev() : null);
 
     let resizeTimer;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        Object.values(carousels).forEach(carousel => {
-          if(carousel && typeof carousel.update === 'function') {
-            carousel.update()
-          }
-        });
+        if (carousel) carousel.update();
       }, 250);
     });
 
     // --- Intersection Observer for Appear Animation ---
     if ('IntersectionObserver' in window) {
-      const itemsToAnimate = sectionContainer.querySelectorAll('.product-card');
-      const observer = new IntersectionObserver((entries, observer) => {
+      const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+            obs.unobserve(entry.target);
           }
         });
-      }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px 0px 0px'
-      });
-
-      itemsToAnimate.forEach((item, index) => {
-        const tabContent = item.closest('.tab-content');
-        const itemIndexWithinTab = Array.from(tabContent.querySelectorAll('.product-card')).indexOf(item);
-        
-        let delay = 0;
-        if (window.innerWidth <= 768) {
-          // On mobile, animate items in pairs.
-          delay = Math.floor(itemIndexWithinTab / 2) * 100;
-        } else {
-          // On desktop, stagger all items.
-          delay = itemIndexWithinTab * 100;
-        }
-
-        item.style.transitionDelay = `${delay}ms`;
+      }, { threshold: 0.1, rootMargin: '0px 0px 0px 0px' });
+      allProductCards.forEach((item, index) => {
+        item.style.transitionDelay = `${(index % 4) * 100}ms`;
         observer.observe(item);
       });
     } else {
-      // Fallback for older browsers
-      sectionContainer.querySelectorAll('.product-card').forEach(item => {
-        item.classList.add('is-visible');
-      });
+      allProductCards.forEach(item => item.classList.add('is-visible'));
     }
-
   });
 })();
 </script>
 
 {% schema %}
 {
-  "name": "Featured Collections",
+  "name": "Sản phẩm theo Kích thước",
   "class": "index-section",
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  },
   "settings": [
     {
       "type": "text",
       "id": "title",
       "label": "Section Title",
-      "default": "Sản Phẩm Bán Chạy"
+      "default": "Mua sắm theo Kích thước"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Chọn bộ sưu tập để lấy sản phẩm"
     },
     {
       "type": "text",
-      "id": "description",
-      "label": "Section Description",
-      "default": "Chiếc nệm foam êm ái cho giấc ngủ thoải mái nhất"
+      "id": "product_label",
+      "label": "Product Label",
+      "info": "e.g., 'Mới', 'Bán chạy', 'Top rated'"
     },
     {
       "type": "color",
-      "id": "primary_color",
-      "label": "Primary Color",
-      "default": "#2960AD"
+      "id": "label_color",
+      "label": "Label Text Color",
+      "default": "#fff"
     },
     {
       "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#1A1A1A"
-    },
-    {
-      "type": "color",
-      "id": "description_color",
-      "label": "Description Color",
-      "default": "#666"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "collection_tab",
-      "name": "Collection Tab",
-      "limit": 4,
-      "settings": [
-        {
-          "type": "text",
-          "id": "tab_name",
-          "default": "Nệm",
-          "label": "Tab Name"
-        },
-        {
-          "type": "collection",
-          "id": "collection",
-          "label": "Collection",
-          "info": "Select collection to display products"
-        },
-        {
-          "type": "text",
-          "id": "product_label",
-          "label": "Product Label",
-          "info": "e.g., 'Mới', 'Bán chạy', 'Top rated'"
-        },
-        {
-          "type": "color",
-          "id": "label_color",
-          "label": "Label Text Color",
-          "default": "#fff"
-        },
-        {
-          "type": "color",
-          "id": "label_bg",
-          "label": "Label Background",
-          "default": "#609EE9"
-        }
-      ]
+      "id": "label_bg",
+      "label": "Label Background",
+      "default": "#609EE9"
     }
   ],
   "presets": [
     {
-      "name": "Featured Collections",
-      "category": "Product",
-      "blocks": [
-        {
-          "type": "collection_tab"
-        }
-      ]
+      "name": "Sản phẩm theo Kích thước",
+      "category": "Product"
     }
   ]
 }
