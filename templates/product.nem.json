@@ -172,18 +172,17 @@
             "showroom_3_map_link": ""
           }
         },
-        "service_carousel_rqkqPc": {
-          "type": "service_carousel",
+        "service_grid_tzXXkC": {
+          "type": "service_grid",
           "settings": {
-            "autoplay": true,
-            "delay": 3,
             "icon_1": "shopify://shop_images/65e5e239d4e9350c57080d9b0abbcb6003a0c04c.png",
             "text_1": "100 đêm ngủ thử",
             "icon_2": "shopify://shop_images/Free_shipping_1.png",
-            "text_2": "100 đêm ngủ thử",
+            "text_2": "Miễn phí vận chuyển",
             "icon_3": "shopify://shop_images/payment_icon_e5154c63-1703-4a5c-b4f8-f192825dad11.png",
-            "text_3": "100 đêm ngủ thử",
-            "text_4": ""
+            "text_3": "Bảo hành dài lâu",
+            "icon_4": "shopify://shop_images/67e2ddb8fe6b716473d93489540935109179f904.png",
+            "text_4": "Thanh toán linh hoạt"
           }
         }
       },
@@ -198,7 +197,7 @@
         "description",
         "usage_guide_PRnkUz",
         "showroom_dropdown_JdqRw8",
-        "service_carousel_rqkqPc"
+        "service_grid_tzXXkC"
       ],
       "settings": {
         "section_width": "page-width",

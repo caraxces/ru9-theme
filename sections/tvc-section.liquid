@@ -11,6 +11,11 @@
           {{ section.settings.heading }}
         </div>
       {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="tvc-description">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
     </div>
     <div class="tvc-video-column">
       <div id="tvc-video-wrapper-{{ section.id }}" class="tvc-video-wrapper">
@@ -69,6 +74,23 @@
     margin: 0;
   }
 
+  .tvc-description {
+    width: 556px;
+    height: 226px;
+    flex-shrink: 0;
+    overflow: hidden;
+    color: var(--Typography-Text-1, #212121);
+    font-family: "Be Vietnam Pro";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 28px */
+    margin-top: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+  }
+
   .tvc-video-column {
     flex: 1.8;
   }
@@ -120,6 +142,10 @@
       line-height: 33.6px; /* 168% */
       letter-spacing: 0.6px;
     }
+
+    .tvc-description {
+      display: none;
+    }
   }
 </style>
 
@@ -137,6 +163,12 @@
       "id": "heading",
       "label": "Heading",
       "default": "<p>7 năm đồng hành<br>cùng giấc ngủ người Việt</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Với hơn 7 năm kinh nghiệm trong ngành nệm, Ru9 đã trở thành thương hiệu tin cậy của hàng triệu gia đình Việt Nam. Chúng tôi cam kết mang đến những sản phẩm nệm chất lượng cao, phù hợp với nhu cầu và sở thích của người Việt.</p>"
     },
     {
       "type": "video",

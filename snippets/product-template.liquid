@@ -278,6 +278,89 @@
     font-weight: 400;
     color: #555;
   }
+
+  /* Color Swatch Styles */
+  .is-color .variant-input-wrap {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .is-color .variant-input {
+    display: flex;
+  }
+
+  .is-color .variant__button-label {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0 0 0 1px var(--colorBorder, #E0E0E0);
+    display: block;
+    overflow: hidden;
+    position: relative;
+    text-indent: -9999px;
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .is-color .variant__button-label:before {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    border-color: var(--colorBody, #fff);
+  }
+
+  .is-color .variant__button-label::after {
+    content: "";
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: #fff;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+    border-radius: 5px;
+  }
+
+  .is-color .variant-input input[type="radio"]:checked + .variant__button-label:after {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .is-color .variant-input-wrap input[type="radio"]:checked + .variant__button-label {
+    box-shadow: none;
+  }
+
+  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
+    opacity: 0.5;
+    cursor: not-allowed;
+    position: relative;
+  }
+
+  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 45%, #ccc 45%, #ccc 55%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .is-color .variant__button-label:hover {
+    box-shadow: 0 0 0 1px var(--colorTextBody, #1C2C58);
+  }
   .promotion-block-container {
     margin-bottom: 20px;
   }
@@ -589,6 +672,22 @@
 
     .variant-wrapper:not(.is-color) .variant__button-label .label-value {
       font-size: 12px;
+    }
+
+    /* Color Swatch Mobile Styles */
+    .is-color .variant-input-wrap {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .is-color .variant__button-label {
+      width: 40px;
+      height: 40px;
+    }
+
+    .is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
+      width: 14px;
+      height: 14px;
     }
 
     .size-guide-text-dropdown-container,

@@ -56,7 +56,21 @@
         },
         "showroom_dropdown_WRL43J": {
           "type": "showroom_dropdown",
-          "settings": {}
+          "settings": {
+            "title": "Hệ thống cửa hàng",
+            "showroom_1_name": "Showroom 1",
+            "showroom_1_address": "",
+            "showroom_1_phone": "0964777910",
+            "showroom_1_map_link": "",
+            "showroom_2_name": "Showroom 2",
+            "showroom_2_address": "",
+            "showroom_2_phone": "0964777910",
+            "showroom_2_map_link": "",
+            "showroom_3_name": "Showroom 3",
+            "showroom_3_address": "",
+            "showroom_3_phone": "0964777940",
+            "showroom_3_map_link": ""
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -121,10 +135,12 @@
         "enable_sticky_add_to_cart": true,
         "hide_payment_button_mobile": true,
         "sku_enable": false,
+        "product_subtitle": "",
+        "custom_text": "",
         "image_position": "left",
         "image_size": "large",
         "product_zoom_enable": true,
-        "product_carousel_enable": true,
+        "product_carousel_enable": false,
         "limit_product_carousel": false,
         "thumbnail_position": "beside",
         "thumbnail_height": "flexible",
@@ -836,7 +852,10 @@
       "blocks": {
         "judge_me_reviews_review_widget_LGBKUn": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200
+          }
         }
       },
       "block_order": [
