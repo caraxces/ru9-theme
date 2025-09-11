@@ -159,6 +159,10 @@
     display: flex;
     gap: 24px;
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    padding-bottom: 20px;
   }
   .blog-carousel-slide {
     flex: 0 0 23.5%;
@@ -219,6 +223,25 @@
     line-height: 1.6;
     color: #374151;
     font-weight: 400;
+  }
+
+  /* Custom scrollbar styling */
+  .blog-carousel-slider::-webkit-scrollbar {
+    height: 8px;
+  }
+  .blog-carousel-slider::-webkit-scrollbar-track {
+    background: #F0F1EF;
+    border-radius: 100px;
+  }
+  .blog-carousel-slider::-webkit-scrollbar-thumb {
+    background: #234085;
+    border-radius: 100px;
+  }
+  .blog-carousel-slider::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b;
+  }
+  .blog-carousel-slider::-webkit-scrollbar-button {
+    display: none;
   }
 
   @media screen and (max-width: 990px) {
@@ -382,6 +405,16 @@ document.addEventListener('DOMContentLoaded', function() {
   carouselWrapper.addEventListener('touchstart', dragStart, { passive: true });
   window.addEventListener('touchmove', dragMove);
   window.addEventListener('touchend', dragEnd);
+
+  // Prevent drag on article cards and links
+  carouselWrapper.querySelectorAll('.article-card-wrapper, .article-card__image-link, .article-card__title a').forEach(element => {
+    element.addEventListener('mousedown', e => {
+      e.stopPropagation();
+    });
+    element.addEventListener('touchstart', e => {
+      e.stopPropagation();
+    }, { passive: true });
+  });
 
   carouselWrapper.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', e => {

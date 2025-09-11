@@ -4,6 +4,7 @@
     <!-- Header Section -->
     <div class="section-header">
       <div class="header-left">
+
         <h2 class="section-title">
           {{ section.settings.title | default: 'Sản phẩm bán chạy' }}
         </h2>
@@ -120,10 +121,6 @@
         </div>
       </div>
     </div>
-    <div class="carousel-progress-container">
-      <div class="carousel-progress-bg"></div>
-      <div class="carousel-progress-bar"></div>
-    </div>
   </div>
 </div>
 
@@ -138,6 +135,7 @@
   }
   .section-header {
     padding-bottom: 0px;
+    margin-bottom: 0 !important;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -230,12 +228,21 @@
   }
   .tab-content {
     display: none;
+    padding-bottom: 20px;
     gap: 2%;
     width: 100%;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+
   }
   .tab-content.active {
     display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
   }
 
   /* Carousel Navigation */
@@ -271,34 +278,23 @@
     cursor: not-allowed;
   }
 
-  /* Carousel Progress Bar */
-  .carousel-progress-container {
-    margin-top: 24px !important;
-    width: 100% !important;
-    height: 6px !important;
-    position: relative !important;
-    display: block !important;
-    overflow: hidden !important;
-    border-radius: 3px !important;
+  /* Custom scrollbar styling */
+  .tab-content::-webkit-scrollbar {
+    height: 8px;
   }
-  .carousel-progress-bg {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+  .tab-content::-webkit-scrollbar-track {
     background: #F0F1EF;
-    border-radius: 3px;
-    z-index: 1;
+    border-radius: 100px;
   }
-  .carousel-progress-bar {
-    position: absolute;
-    top: 0; left: 0; height: 100%;
+  .tab-content::-webkit-scrollbar-thumb {
     background: #234085;
-    border-radius: 3px;
-    width: 0%;
-    transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
-    z-index: 2;
-    display: block;
-    opacity: 1;
-    box-sizing: border-box;
+    border-radius: 100px;
+  }
+  .tab-content::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b;
+  }
+  .tab-content::-webkit-scrollbar-button {
+    display: none;
   }
 
   /* Product Card Styles */
@@ -467,6 +463,7 @@
       flex-wrap: wrap;
       align-items: center;
       padding-bottom: 0px !important;
+      margin-bottom: 0px !important;
     }
     .header-left {
       order: 1;
@@ -637,43 +634,9 @@
       
       if (productCards.length === 0) return;
 
-      let currentIndex = 0;
       let isDown = false;
       let startX;
-      let initialTranslateX;
-      let walk = 0;
-
-      function getItemsPerView() {
-        const containerWidth = tabContent.parentElement.offsetWidth;
-        const itemWidth = productCards[0] ? productCards[0].offsetWidth : 280;
-        const gap = containerWidth * 0.02; // 2% gap
-        if (itemWidth === 0) return 1;
-        return Math.floor((containerWidth + gap) / (itemWidth + gap)) || 1;
-      }
-
-      function getTranslateX() {
-          const style = window.getComputedStyle(tabContent);
-          const transform = style.transform;
-          if (transform === 'none') return 0;
-          const matrix = new DOMMatrixReadOnly(transform);
-          return matrix.m41;
-      }
-
-      function updateCarousel() {
-        tabContent.style.transition = 'transform 0.4s ease';
-        const itemsPerView = getItemsPerView();
-        const maxIndex = Math.max(0, productCards.length - itemsPerView);
-        currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
-
-        const itemWidth = productCards[0].offsetWidth;
-        const gap = tabContent.parentElement.offsetWidth * 0.02;
-        const translateX = -currentIndex * (itemWidth + gap);
-        tabContent.style.transform = `translateX(${translateX}px)`;
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= maxIndex;
-        // Gọi updateProgressBar bằng requestAnimationFrame để đảm bảo DOM đã render
-        requestAnimationFrame(updateProgressBar);
-      }
+      let scrollLeft;
 
       function dragStart(e) {
         if (e.target.closest('.product-info')) {
@@ -683,9 +646,7 @@
         isDown = true;
         carouselContainer.classList.add('grabbing');
         startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
-        tabContent.style.transition = 'none';
-        initialTranslateX = getTranslateX();
-        walk = 0;
+        scrollLeft = tabContent.scrollLeft;
         if (e.type === 'touchstart') {
           window.addEventListener('touchmove', dragMove);
           window.addEventListener('touchend', dragEnd);
@@ -696,59 +657,16 @@
         if (!isDown) return;
         e.preventDefault();
         const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
-        walk = currentX - startX;
-        tabContent.style.transform = `translateX(${initialTranslateX + walk}px)`;
-        
-        // Update progress bar in real-time during drag
-        updateProgressBar();
-      }
-      
-      function updateProgressBar() {
-        const progressBar = sectionContainer.querySelector('.carousel-progress-bar');
-        if (!progressBar) return;
-        const containerWidth = tabContent.parentElement.offsetWidth;
-        const productCards = tabContent.querySelectorAll('.product-card');
-        if (productCards.length === 0) {
-          progressBar.style.width = '0%';
-          return;
-        }
-        const itemWidth = productCards[0].offsetWidth;
-        const gap = containerWidth * 0.02;
-        const totalWidth = productCards.length * itemWidth + (productCards.length - 1) * gap;
-        const totalItems = productCards.length;
-        const currentScroll = -getTranslateX();
-        // Số sản phẩm hiển thị thực tế (có thể là 4.5)
-        const visibleCount = containerWidth / (itemWidth + gap);
-        // Index sản phẩm đầu tiên đang hiển thị (có thể là số thập phân)
-        const firstVisibleIndex = currentScroll / (itemWidth + gap);
-        // Tính progress
-        let progress = (firstVisibleIndex + visibleCount) / totalItems;
-        progress = Math.max(0.2, Math.min(1, progress)); // min 20%, max 100%
-        progressBar.style.width = (progress * 100) + '%';
+        const walk = currentX - startX;
+        tabContent.scrollLeft = scrollLeft - walk;
       }
 
       function dragEnd() {
         if (!isDown) return;
         isDown = false;
         carouselContainer.classList.remove('grabbing');
-        
         window.removeEventListener('touchmove', dragMove);
         window.removeEventListener('touchend', dragEnd);
-        // Only update position if dragged, otherwise it's a click
-        if (Math.abs(walk) > 10) { 
-            const itemWidth = productCards[0] ? productCards[0].offsetWidth : 280;
-            const threshold = itemWidth / 4;
-            
-            const itemsPerView = getItemsPerView();
-            const maxIndex = Math.max(0, productCards.length - itemsPerView);
-
-            if (walk < -threshold && currentIndex < maxIndex) {
-                currentIndex++;
-            } else if (walk > threshold && currentIndex > 0) {
-                currentIndex--;
-            }
-        }
-        updateCarousel();
       }
 
       tabContent.addEventListener('mousedown', dragStart);
@@ -758,7 +676,7 @@
 
       tabContent.querySelectorAll('a').forEach(link => {
           link.addEventListener('click', e => {
-              if (Math.abs(walk) > 10) { // Threshold to differentiate click from drag
+              if (isDown) {
                   e.preventDefault();
                   e.stopPropagation();
               }
@@ -770,28 +688,18 @@
       carousels[carouselId] = {
         initialized: true,
         next: () => {
-          const itemsPerView = getItemsPerView();
-          const maxIndex = Math.max(0, productCards.length - itemsPerView);
-          if (currentIndex < maxIndex) {
-            currentIndex++;
-            updateCarousel();
-          }
+          const scrollAmount = tabContent.offsetWidth * 0.8; // Scroll 80% of container width
+          tabContent.scrollLeft += scrollAmount;
         },
         prev: () => {
-          if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-          }
+          const scrollAmount = tabContent.offsetWidth * 0.8; // Scroll 80% of container width
+          tabContent.scrollLeft -= scrollAmount;
         },
         reset: () => {
-            currentIndex = 0;
-            updateCarousel();
+            tabContent.scrollLeft = 0;
         },
-        update: () => updateCarousel(true)
+        update: () => {} // No need for update function
       };
-
-      // Khi khởi tạo carousel, gọi updateProgressBar bằng requestAnimationFrame để đảm bảo luôn hiển thị đúng
-      requestAnimationFrame(updateProgressBar);
     }
     
     function getActiveCarousel() {
@@ -854,17 +762,7 @@
       }
     }
 
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        Object.values(carousels).forEach(carousel => {
-          if(carousel && typeof carousel.update === 'function') {
-            carousel.update()
-          }
-        });
-      }, 250);
-    });
+    // No need for resize handler since we're using native scroll
 
     // --- Intersection Observer for Appear Animation ---
     if ('IntersectionObserver' in window) {

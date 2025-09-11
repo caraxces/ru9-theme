@@ -53,17 +53,17 @@
     stroke: white;
   }
 
-  .reason-carousel .flickity-viewport {
-    transition: height 0.2s;
+  .reason-carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    padding-bottom: 20px;
   }
-  .reason-carousel .flickity-prev-next-buttons,
-  .reason-carousel .flickity-page-dots {
-    display: none;
-  }
-
   .reason-carousel__cell {
     width: 515px;
-    margin-right: 20px;
+    flex-shrink: 0;
   }
   .reason-carousel__image-wrapper {
     width: 515px;
@@ -101,19 +101,23 @@
     line-height: 140%; /* 28px */
   }
 
-  .reason-to-choice__progress {
-    margin-top: 20px;
-    background-color: #e0e0e0;
-    height: 4px;
-    border-radius: 2px;
-    width: 515px;
+  /* Custom scrollbar styling */
+  .reason-carousel::-webkit-scrollbar {
+    height: 8px;
   }
-  .reason-to-choice__progress-bar {
-    background-color: #0051D2;
-    height: 100%;
-    width: 0;
-    border-radius: 2px;
-    transition: width 0.4s ease;
+  .reason-carousel::-webkit-scrollbar-track {
+    background: #F0F1EF;
+    border-radius: 100px;
+  }
+  .reason-carousel::-webkit-scrollbar-thumb {
+    background: #234085;
+    border-radius: 100px;
+  }
+  .reason-carousel::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b;
+  }
+  .reason-carousel::-webkit-scrollbar-button {
+    display: none;
   }
 
   @media screen and (min-width: 990px) {
@@ -149,6 +153,7 @@
   }
   .reason-carousel__cell {
     width: 320px;
+    flex-shrink: 0;
   }
   .reason-carousel__image-wrapper {
     width: 320px;
@@ -166,9 +171,6 @@
     flex-shrink: 0;
     font-size: 16px;
     overflow: hidden;
-  }
-  .reason-to-choice__progress {
-    width: 100%;
   }
 }
 </style>
@@ -214,11 +216,6 @@
         {% endfor %}
       </div>
       
-      {% if section.blocks.size > 1 %}
-        <div class="reason-to-choice__progress">
-          <div class="reason-to-choice__progress-bar"></div>
-        </div>
-      {% endif %}
     </div>
   {% endif %}
 </div>
@@ -230,33 +227,20 @@
     const carouselEl = container.querySelector('.reason-carousel');
     const prevButton = container.querySelector('.is-previous');
     const nextButton = container.querySelector('.is-next');
-    const progressBar = container.querySelector('.reason-to-choice__progress-bar');
     
-    if (!carouselEl || typeof Flickity === 'undefined') return;
-
-    const carousel = new Flickity(carouselEl, {
-      pageDots: false,
-      prevNextButtons: false,
-      wrapAround: true,
-      cellAlign: 'left',
-      adaptiveHeight: true
-    });
+    if (!carouselEl) return;
 
     if (prevButton && nextButton) {
-      prevButton.addEventListener('click', () => carousel.previous());
-      nextButton.addEventListener('click', () => carousel.next());
+      prevButton.addEventListener('click', () => {
+        const scrollAmount = carouselEl.offsetWidth * 0.8;
+        carouselEl.scrollLeft -= scrollAmount;
+      });
+      
+      nextButton.addEventListener('click', () => {
+        const scrollAmount = carouselEl.offsetWidth * 0.8;
+        carouselEl.scrollLeft += scrollAmount;
+      });
     }
-
-    const updateProgress = () => {
-      if (progressBar) {
-        const slideCount = carousel.slides.length;
-        const progress = slideCount > 1 ? (carousel.selectedIndex / (slideCount - 1)) * 100 : 100;
-        progressBar.style.width = progress + '%';
-      }
-    };
-
-    carousel.on('select', updateProgress);
-    updateProgress();
   }
 
   function loadReasonSlider() {
