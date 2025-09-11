@@ -62,7 +62,7 @@
   }
 
   .product-block--price .product__price {
-    width: 168px;
+    width: 200px;
     flex-shrink: 0;
     color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
@@ -73,7 +73,7 @@
   }
 
   .product-block--price .product__price--compare {
-    width: 165px;
+    width: 185px;
     flex-shrink: 0;
     color: #888;
     font-family: "Be Vietnam Pro", sans-serif;
@@ -277,6 +277,89 @@
     font-size: 14px;
     font-weight: 400;
     color: #555;
+  }
+
+  /* Color Swatch Styles */
+  .is-color .variant-input-wrap {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .is-color .variant-input {
+    display: flex;
+  }
+
+  .is-color .variant__button-label {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0 0 0 1px var(--colorBorder, #E0E0E0);
+    display: block;
+    overflow: hidden;
+    position: relative;
+    text-indent: -9999px;
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .is-color .variant__button-label:before {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    border-color: var(--colorBody, #fff);
+  }
+
+  .is-color .variant__button-label::after {
+    content: "";
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: #fff;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+    border-radius: 5px;
+  }
+
+  .is-color .variant-input input[type="radio"]:checked + .variant__button-label:after {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .is-color .variant-input-wrap input[type="radio"]:checked + .variant__button-label {
+    box-shadow: none;
+  }
+
+  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
+    opacity: 0.5;
+    cursor: not-allowed;
+    position: relative;
+  }
+
+  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 45%, #ccc 45%, #ccc 55%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .is-color .variant__button-label:hover {
+    box-shadow: 0 0 0 1px var(--colorTextBody, #1C2C58);
   }
   .promotion-block-container {
     margin-bottom: 20px;
@@ -591,6 +674,22 @@
       font-size: 12px;
     }
 
+    /* Color Swatch Mobile Styles */
+    .is-color .variant-input-wrap {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .is-color .variant__button-label {
+      width: 40px;
+      height: 40px;
+    }
+
+    .is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
+      width: 14px;
+      height: 14px;
+    }
+
     .size-guide-text-dropdown-container,
     .product-accordion--styled {
       width: 360px;
@@ -764,6 +863,79 @@
 
   .service-carousel-wrapper .flickity-prev-next-button.next::before {
     background-image: url("data:image/svg+xml,%3csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M3.49945 0.828075C3.04445 1.28307 3.04445 2.01807 3.49945 2.47307L8.02612 6.99974L3.49945 11.5264C3.04445 11.9814 3.04445 12.7164 3.49945 13.1714C3.95446 13.6264 4.68946 13.6264 5.14446 13.1714L10.4995 7.81641C10.9545 7.36141 10.9545 6.62641 10.4995 6.17141L5.14446 0.816407C4.70112 0.373074 3.95446 0.373075 3.49945 0.828075Z' fill='white'/%3e%3c/svg%3e");
+  }
+
+  /* Service Grid Styles */
+  .service-grid-wrapper {
+    width: 100%;
+    max-width: 646px;
+    margin: 0 auto;
+  }
+
+  .service-grid {
+    display: grid;
+    gap: 16px;
+    width: 100%;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .service-grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 16px;
+    background: #F5F9FF;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .service-item__icon {
+    flex-shrink: 0;
+  }
+
+  .service-item__icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .service-item__text p {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+    margin: 0;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    .service-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 12px;
+    }
+
+    .service-item__icon img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .service-item__text p {
+      font-size: 14px;
+    }
   }
 </style>
 
@@ -1052,6 +1224,47 @@
                                   {%- endif -%}
                                   {%- if text != blank -%}
                                     <div class="service-block__text">
+                                      <p>{{ text }}</p>
+                                    </div>
+                                  {%- endif -%}
+                                </div>
+                              </div>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
+                      </div>
+                    </div>
+                  {%- when 'service_grid' -%}
+                    {%- liquid
+                      assign services_count = 0
+                      for i in (1..4)
+                        assign icon_setting = 'icon_' | append: i
+                        assign text_setting = 'text_' | append: i
+                        if block.settings[icon_setting] != blank or block.settings[text_setting] != blank
+                          assign services_count = services_count | plus: 1
+                        endif
+                      endfor
+                    -%}
+                    <div class="product-block product-block--service-grid" {{ block.shopify_attributes }}>
+                      <div class="service-grid-wrapper">
+                        <div class="service-grid" style="grid-template-columns: repeat({{ services_count }}, 1fr);">
+                          {%- for i in (1..4) -%}
+                            {%- liquid
+                              assign icon_setting = 'icon_' | append: i
+                              assign text_setting = 'text_' | append: i
+                              assign icon = block.settings[icon_setting]
+                              assign text = block.settings[text_setting]
+                            -%}
+                            {%- if icon != blank or text != blank -%}
+                              <div class="service-grid-item">
+                                <div class="service-item">
+                                  {%- if icon != blank -%}
+                                    <div class="service-item__icon">
+                                      <img src="{{ icon | img_url: 'master' }}" alt="{{ icon.alt | default: text }}" width="40" height="40">
+                                    </div>
+                                  {%- endif -%}
+                                  {%- if text != blank -%}
+                                    <div class="service-item__text">
                                       <p>{{ text }}</p>
                                     </div>
                                   {%- endif -%}

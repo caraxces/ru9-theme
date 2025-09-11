@@ -7,6 +7,19 @@
     padding: 0;
     margin: 0 90px 0 110px;
   }
+
+  @media (max-width: 990px) {
+    .quiz-banner-section {
+      padding: 0px !important;
+    }
+    .quiz-banner-section .page-width {
+      margin: 0;
+      padding: 0 16px;
+    }
+    .index-section.quiz-banner-section {
+      margin: 0px !important;
+    }
+  }
   .quiz-banner-container {
     display: flex;
     align-items: center;
@@ -99,11 +112,12 @@
       flex-direction: column;
       justify-content: center;
       padding: 16px;
-      width: 100%;
-      max-width: 360px;
+      width: 360px;
       height: 216px;
+      flex-shrink: 0;
       border-radius: 5px;
       margin: 0 auto;
+      margin-top: 0px !important;
     }
     .quiz-banner-left,
     .quiz-banner-subtitle {
