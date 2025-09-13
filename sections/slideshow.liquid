@@ -300,11 +300,11 @@
 <!-- Footer Icon Text Bar -->
 {%- if section.settings.show_icon_text_bar -%}
 <div class="slideshow-footer-icon-text" style="background: {{ section.settings.icon_bar_background_color | default: '#FFFBEB' }}; border-top: 1px solid #e9ecef; display: flex; align-items: center; justify-content: center;">
-  <div class="icon-text-container" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 40px; width: 100%; max-width: 1200px; padding: 0 20px;">
+  <div class="icon-text-container">
     
     <!-- Item 1 -->
     {%- if section.settings.icon_1_title != blank -%}
-    <div class="icon-text-item" style="display: flex; align-items: center; gap: 12px;">
+    <div class="icon-text-item">
       {%- if section.settings.icon_1_image != blank -%}
         <img src="{{ section.settings.icon_1_image | img_url: '48x48', scale: 2 }}" 
              alt="{{ section.settings.icon_1_title }}" 
@@ -336,7 +336,7 @@
 
     <!-- Item 2 -->
     {%- if section.settings.icon_2_title != blank -%}
-    <div class="icon-text-item" style="display: flex; align-items: center; gap: 12px;">
+    <div class="icon-text-item">
       {%- if section.settings.icon_2_image != blank -%}
         <img src="{{ section.settings.icon_2_image | img_url: '48x48', scale: 2 }}" 
              alt="{{ section.settings.icon_2_title }}" 
@@ -368,7 +368,7 @@
 
     <!-- Item 3 -->
     {%- if section.settings.icon_3_title != blank -%}
-    <div class="icon-text-item" style="display: flex; align-items: center; gap: 12px;">
+    <div class="icon-text-item">
       {%- if section.settings.icon_3_image != blank -%}
         <img src="{{ section.settings.icon_3_image | img_url: '48x48', scale: 2 }}" 
              alt="{{ section.settings.icon_3_title }}" 
@@ -404,58 +404,133 @@
 
 <style>
   .slideshow-footer-icon-text {
-    margin: 0 auto;
+    margin: 0 auto;;
     width: 100vw;
     position: relative;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    height: 67px;
+    height: clamp(50px, 4.5vw, 80px);
     flex-shrink: 0;
     font-family: "Be Vietnam Pro", sans-serif;
   }
 
+  .icon-text-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(20px, 3vw, 50px);
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 60px;
+  }
+
+  .icon-text-item {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1vw, 15px);
+  }
+
   .icon-text-item__title {
     color: #000;
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
     white-space: nowrap;
   }
 
-  @media (max-width: 1440px) {
-    .slideshow-footer-icon-text {
+  @media (min-width: 769px) {
+    .icon-text-item:nth-child(2) {
+      order: 3;
+    }
+    .icon-text-item:nth-child(3) {
+      order: 2;
     }
   }
 
+  /* Large screens - 1200px+ */
+  @media (min-width: 1200px) {
+    .slideshow-footer-icon-text {
+      height: clamp(60px, 5vw, 80px);
+    }
+    .icon-text-container {
+      gap: clamp(30px, 3.5vw, 50px);
+    }
+  }
+
+  /* Medium screens - 768px to 1199px */
+  @media (max-width: 1199px) and (min-width: 769px) {
+    .slideshow-footer-icon-text {
+      height: clamp(55px, 4.8vw, 70px);
+    }
+    .icon-text-container {
+      gap: clamp(25px, 3.2vw, 40px);
+    }
+  }
+
+  /* Small screens - 768px and below */
   @media (max-width: 768px) {
     .slideshow-footer-icon-text {
       height: auto !important;
-      padding: 15px 0 !important;
+      padding: 20px 0 !important;
     }
     
     .icon-text-container {
       gap: 20px !important;
+      flex-direction: column;
+      padding: 0 20px !important;
     }
     
     .icon-text-item {
-      gap: 12px !important;
+      gap: 10px !important;
     }
 
     .icon-text-item__title {
       font-size: 14px !important;
     }
+  }
+
+    .icon-text-item__title {
+      font-size: clamp(10px, 1.1vw, 16px) !important;
+    }
     
     .icon-text-icon {
-      width: 32px !important;
-      height: 32px !important;
+      width: clamp(20px, 2.5vw, 32px) !important;
+      height: clamp(20px, 2.5vw, 32px) !important;
     }
     
     .icon-text-icon svg {
-      width: 20px !important;
-      height: 20px !important;
+      width: clamp(16px, 2vw, 24px) !important;
+      height: clamp(16px, 2vw, 24px) !important;
+    }
+  }
+
+  /* Extra small screens - 480px and below */
+  @media (max-width: 480px) {
+    .slideshow-footer-icon-text {
+      padding: 8px 0 !important;
+    }
+    .icon-text-container {
+      gap: 12px !important;
+    }
+    .icon-text-item__title {
+      font-size: 12px !important;
+    }
+  }
+
+  /* Zoom levels - 50% to 200% */
+  @media (min-resolution: 0.5dppx) {
+    .icon-text-container {
+      gap: max(15px, 2vw);
+    }
+  }
+
+  @media (min-resolution: 2dppx) {
+    .icon-text-container {
+      gap: min(4vw, 60px);
     }
   }
 </style>

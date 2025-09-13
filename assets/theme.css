@@ -8804,7 +8804,7 @@ tool-tip[data-tool-tip-open="true"] .tool-tip__inner {
 }
 
 [data-type_headers_align_text="true"] .section-header {
-  text-align: center;
+  text-align: left;
 }
 
 .section-header select {
