@@ -30,9 +30,9 @@
             <div class="collection-image-container">
               {%- if collection.image -%}
                 <img 
-                  src="{{ collection.image | img_url: '416x275', crop: 'center' }}" 
+                  src="{{ collection.image | image_url: width: 280, height: 210, crop: 'center' }}" 
                   alt="{{ collection.title }}"
-                  width="416" height="275"
+                  width="280" height="210"
                 >
               {%- else -%}
                 <div class="placeholder-svg-container">
@@ -59,74 +59,94 @@
 {%- endif -%}
 
 <style>
+  /* ========================================
+     COLLECTIONS LISTING TEMPLATE
+     Responsive design for all zoom levels
+     ======================================== */
+  
   .collections-listing-section {
     width: 100%;
     margin: 0 auto 60px auto;
-    padding: 0 6.8%;
+    padding: 0 60px;
     font-family: 'Be Vietnam Pro', sans-serif;
   }
-  .section-header__title{
-    padding-left: 10px !important;
-  }
-  .section-header {
+  
+  .collections-listing-section .section-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 50px;
+    align-items: flex-start;
+    margin-bottom: 40px;
   }
-  .section-title {
+  
+  .collections-listing-section .section-title {
     color: #1C2C58;
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 39px;
     font-style: normal;
     font-weight: 700;
     line-height: 100%;
-    text-transform: capitalize;
     margin: 0;
+    text-align: left;
   }
+  
   .carousel-nav {
     display: flex;
-    gap: 6px;
+    padding-bottom: 16px;
+    gap: 8px;
   }
-  .collections-carousel-container {
+  
+  .collections-listing-section .collections-carousel-container {
     position: relative;
     overflow: hidden;
   }
-  .collections-carousel {
+  
+  .collections-listing-section .collections-carousel {
     display: flex;
     transition: transform 0.4s ease;
     user-select: none;
     cursor: grab;
-    gap: 30px;
+    gap: 20px;
   }
-  .collection-item {
-    width: 416px;
+  
+  .collections-listing-section .collection-item {
+    width: calc((100% - 60px) / 4);
     flex-shrink: 0;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
-  .collection-item.is-visible {
+  
+  .collections-listing-section .collection-item.is-visible {
     opacity: 1;
     transform: translateY(0);
   }
-  .collection-image-container {
-    width: 416px;
-    height: 275px;
-    aspect-ratio: 59/39;
-    border-radius: 12px;
+  
+  .collections-listing-section .collection-image-container {
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%;
+    border-radius: 15px;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     background: #F8F9FA;
+    position: relative;
   }
-  .collection-image-container img {
+  
+  .collections-listing-section .collection-image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 15px;
     transition: transform 0.3s ease;
   }
-  .placeholder-svg-container {
+  
+  .collections-listing-section .placeholder-svg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background: #E9ECEF;
@@ -134,41 +154,62 @@
     align-items: center;
     justify-content: center;
     color: #6C757D;
-    border-radius: 12px;
+    border-radius: 15px;
   }
-  .collection-info {
+  
+  .collections-listing-section .collection-info {
     text-align: left;
   }
-  .collection-title {
+  
+  .collections-listing-section .collection-title {
     color: #212121;
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 20px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 400;
     line-height: 140%;
     margin: 0;
+    text-align: left;
   }
-  .collection-title a {
+  
+  .collections-listing-section .collection-title a {
     text-decoration: none;
     color: inherit;
     display: block;
   }
+  
   .collections-carousel.grabbing {
     cursor: grabbing;
   }
+  
   .collections-carousel.grabbing a {
     pointer-events: none;
   }
+  
   .collection-image-container:hover img {
     transform: scale(1.05);
   }
+  
   .collection-title a:hover {
     color: #609EE9 !important;
     transition: color 0.3s ease;
   }
+
+  /* Desktop Layout - Carousel */
+  @media (min-width: 769px) {
+    .collections-listing-section .collections-carousel {
+      display: flex;
+    }
+    
+    .collections-listing-section .collection-item {
+      width: calc((100% - 60px) / 4);
+      flex-shrink: 0;
+    }
+  }
+  
   .nav-btn {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border: 1px solid #E5E5E5;
     border-radius: 50%;
     background: transparent;
@@ -178,73 +219,73 @@
     justify-content: center;
     transition: all 0.3s ease;
   }
+  
   .nav-btn:hover {
     background-color: #f0f0f0;
   }
+  
   .nav-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  /* ========================================
+     FIXED TEMPLATE - NO RESPONSIVE
+     Template cố định như Koala mattress
+     ======================================== */
+
+  /* Mobile Layout - 2x2 Grid */
   @media (max-width: 768px) {
     .collections-listing-section {
-      padding: 0 4%;
-  }
-  @media (max-width: 1200px) {
-    .collection-item, .collection-image-container {
-      width: 350px;
+      padding: 0 20px;
     }
-    .collection-image-container {
-      height: 231px;
+
+    .collections-listing-section .section-header {
+      margin-bottom: 0px;
+      text-align: left !important;
     }
-    .section-title {
-      font-size: 32px !important;
+    .collections-listing-section .section-title {
+      font-size: 20px;
+      text-align: left !important;
+      margin-bottom: 20px;
     }
-  }
-  
-  @media (max-width: 768px) {
-    .section-header {
-      display: block;
-      margin-bottom: 30px;
+    
+    .carousel-nav {
+      display: none; /* Ẩn navigation trên mobile vì hiển thị tất cả 4 items */
     }
-    .section-header .carousel-nav {
-      display: none;
-    }
-    .collections-carousel {
+    
+    .collections-listing-section .collections-carousel {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px !important;
-      margin-bottom: 0px !important;
-      cursor: default;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 15px;
+      transform: none !important; /* Tắt transform trên mobile */
     }
-    .collection-item, .collection-image-container {
+    
+    .collections-listing-section .collection-item {
       width: 100%;
-      height: auto;
+      opacity: 1;
+      transform: none;
     }
-    .collection-image-container {
-      aspect-ratio: 172 / 129.32;
+    
+    .collections-listing-section .collection-image-container {
+      padding-bottom: 75%;
+      margin-bottom: 15px;
+      border-radius: 8px;
     }
-    .section-title {
-      font-size: 28px !important;
+    
+    .collections-listing-section .collection-image-container img {
+      border-radius: 8px;
+    }
+    
+    .collections-listing-section .placeholder-svg-container {
+      border-radius: 8px;
+    }
+    
+    .collections-listing-section .collection-title {
+      font-size: 16px;
       text-align: left;
-    }
-    .collection-title {
-      font-size: 18px !important;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .collection-item {
-      width: 100%;
-    }
-    .collection-image-container {
-      width: 100%;
-      height: auto;
-    }
-    .section-title {
-      font-size: 24px !important;
-    }
-    .collection-title {
-      font-size: 16px !important;
+      text-transform: none;
     }
   }
 </style>
@@ -261,9 +302,15 @@
     if (!carousel || !prevBtn || !nextBtn) return;
 
     if (window.innerWidth <= 768) {
+      // Trên mobile, hiển thị tất cả items ngay lập tức với layout 2x2
       sectionContainer.querySelectorAll('.collection-item').forEach(item => {
         item.classList.add('is-visible');
+        item.style.opacity = '1';
+        item.style.transform = 'none';
       });
+      // Ẩn navigation buttons trên mobile
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
       return; // Exit script, do not initialize carousel functionality.
     }
 
@@ -277,16 +324,16 @@
     let currentIndex = 0;
 
     function getItemsPerView() {
-      const containerWidth = carousel.parentElement.offsetWidth;
-      const itemWidth = collectionItems[0] ? collectionItems[0].offsetWidth : 416; // Fallback width
-      const gap = 30;
-      if (itemWidth === 0) return 1;
-      const items = Math.floor(containerWidth / (itemWidth + gap));
-      const remainingSpace = containerWidth - items * (itemWidth + gap);
-      if (remainingSpace >= itemWidth) {
-          return items + 1;
+      // Always show 4 items on desktop
+      if (window.innerWidth > 1200) {
+        return 4;
       }
-      return items > 0 ? items : 1;
+      // Show 3 items on tablet
+      if (window.innerWidth > 768) {
+        return 3;
+      }
+      // Show 2 items on mobile
+      return 2;
     }
 
     function updateCarousel(isResize = false) {
@@ -302,8 +349,9 @@
       
       currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
 
-      const itemWidth = collectionItems[0].offsetWidth;
-      const gap = 30;
+      const containerWidth = carousel.parentElement.offsetWidth;
+      const gap = 15;
+      const itemWidth = (containerWidth - (itemsPerView - 1) * gap) / itemsPerView;
       const translateX = -currentIndex * (itemWidth + gap);
       carousel.style.transform = `translateX(${translateX}px)`;
       
@@ -364,10 +412,12 @@
         carousel.classList.remove('grabbing');
         carousel.style.transition = 'transform 0.4s ease';
 
-        const itemWidth = collectionItems[0] ? collectionItems[0].offsetWidth : 416;
+        const containerWidth = carousel.parentElement.offsetWidth;
+        const itemsPerView = getItemsPerView();
+        const gap = 15;
+        const itemWidth = (containerWidth - (itemsPerView - 1) * gap) / itemsPerView;
         const threshold = itemWidth / 4;
         
-        const itemsPerView = getItemsPerView();
         const maxIndex = Math.max(0, collectionItems.length - itemsPerView);
 
         if (walk < -threshold && currentIndex < maxIndex) {

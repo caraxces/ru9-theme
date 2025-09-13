@@ -5,16 +5,38 @@
   .quiz-banner-section .page-width {
     max-width: none;
     padding: 0;
-    margin: 0 90px 0 110px;
+    margin: 0 60px;
   }
 
-  @media (max-width: 990px) {
+  /* Large screens - 1400px+ (100% zoom equivalent) */
+  @media (min-width: 1400px) {
+    .quiz-banner-section .page-width {
+      margin: 0 60px;
+    }
+  }
+
+  /* Large screens - 1200px to 1399px */
+  @media (max-width: 1399px) and (min-width: 1200px) {
+    .quiz-banner-section .page-width {
+      margin: 0 clamp(60px, 8vw, 100px) 0 clamp(40px, 6vw, 80px);
+    }
+  }
+
+  /* Medium screens - 768px to 1199px */
+  @media (max-width: 1199px) and (min-width: 769px) {
+    .quiz-banner-section .page-width {
+      margin: 0 clamp(30px, 5vw, 60px) 0 clamp(20px, 4vw, 40px);
+    }
+  }
+
+  /* Small screens - 768px and below */
+  @media (max-width: 768px) {
     .quiz-banner-section {
       padding: 0px !important;
     }
     .quiz-banner-section .page-width {
       margin: 0;
-      padding: 0 16px;
+      padding: 0 clamp(15px, 4vw, 20px);
     }
     .index-section.quiz-banner-section {
       margin: 0px !important;
@@ -23,10 +45,12 @@
   .quiz-banner-container {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 2.5vw;
     background: #F5F9FF;
     border-radius: 6px;
-    height: 350px;
+    height: 22vw;
+    min-height: 300px;
+    max-height: 400px;
     max-width: 1595px;
     width: 100%;
     margin: 0 auto;
@@ -54,42 +78,44 @@
   .quiz-banner-title {
     color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 32px;
+    font-size: 39px;
     font-style: normal;
     font-weight: 700;
-    line-height: 40px; /* 143.59% */
+    line-height: 1.25;
     letter-spacing: 0.6px;
-    margin: 0 0 15px 0;
+    margin: 0 0 1vw 0;
   }
 
   .quiz-banner-subtitle {
     color: #000;
     text-align: center;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 18px;
+    font-size: clamp(14px, 1.2vw, 20px);
     font-style: normal;
     font-weight: 400;
-    line-height: 30px; /* 150% */
+    line-height: 1.5;
     letter-spacing: 0.6px;
-    margin: 0 0 25px 0;
-    max-width: 500px;
+    margin: 0 0 2vw 0;
+    max-width: 600px;
   }
   .quiz-banner-buttons {
     display: flex;
-    gap: 16px;
+    gap: 1vw;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
   }
   .quiz-btn {
     display: inline-flex;
-    padding: 12px 24px;
+    padding: clamp(8px, 1vw, 16px) clamp(16px, 2vw, 32px);
     justify-content: center;
     align-items: center;
     border-radius: 100px;
-    background: #1C2C58;
+    min-width: clamp(200px, 20vw, 350px);
+    background: #234085;
     color: white;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 16px;
+    font-size: clamp(14px, 1vw, 20px);
     font-weight: 500;
     border: none;
     cursor: pointer;
@@ -102,19 +128,38 @@
     color: white;
   }
 
-  @media (max-width: 990px) {
-    .quiz-banner-title {
-      font-size: 28px;
-      line-height: 32px;
-      margin: 0 0 20px 0 !important;
+  /* Large screens - 1200px+ */
+  @media (min-width: 1200px) {
+    .quiz-banner-container {
+      gap: 3vw;
+      height: 20vw;
     }
+  }
+
+  /* Medium screens - 768px to 1199px */
+  @media (max-width: 1199px) and (min-width: 769px) {
+    .quiz-banner-container {
+      gap: 2vw;
+      height: 25vw;
+    }
+    .quiz-banner-title {
+      font-size: clamp(20px, 2.2vw, 32px);
+    }
+    .quiz-banner-subtitle {
+      font-size: clamp(14px, 1.1vw, 20px);
+    }
+  }
+
+  /* Small screens - 768px and below */
+  @media (max-width: 768px) {
     .quiz-banner-container {
       flex-direction: column;
       justify-content: center;
-      padding: 16px;
-      width: 360px;
-      height: 216px;
-      flex-shrink: 0;
+      padding: 20px;
+      width: calc(100% - 40px);
+      max-width: 400px;
+      height: auto;
+      min-height: 250px;
       border-radius: 5px;
       margin: 0 auto;
       margin-top: 0px !important;
@@ -129,18 +174,55 @@
       flex: initial;
       padding: 0;
     }
+    .quiz-banner-title {
+      max-width: 200px;
+    }
     .quiz-banner-buttons {
       flex-direction: column;
+      gap: 2vw;
     }
     .quiz-btn {
-      width: 310px;
-      height: 40px;
+      width: 328px;
+      height: 45px;
       flex-shrink: 0;
       border-radius: 30px;
       background: #234085;
+      font-size: 14px;
     }
     .quiz-btn:hover {
       background: #3c5aa0;
+    }
+  }
+
+  /* Extra small screens - 480px and below */
+  @media (max-width: 480px) {
+    .quiz-banner-container {
+      width: 95vw;
+      padding: 3vw;
+      min-height: 200px;
+    }
+    .quiz-banner-title {
+      font-size: 20px;
+      margin: 0 0 15px 0 !important;
+      max-width: 200px;
+    }
+    .quiz-btn {
+      width: 328px;
+      height: 40px;
+      font-size: 14px;
+    }
+  }
+
+  /* Zoom levels - 50% to 200% */
+  @media (min-resolution: 0.5dppx) {
+    .quiz-banner-container {
+      gap: max(1vw, 10px);
+    }
+  }
+
+  @media (min-resolution: 2dppx) {
+    .quiz-banner-container {
+      gap: min(3vw, 50px);
     }
   }
   
@@ -173,7 +255,7 @@
     top: 15px;
     right: 20px;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 35px;
     line-height: 1;
     z-index: 2;
     color: #888;
@@ -206,7 +288,7 @@
      transform: translateX(-20px);
   }
   .quiz-step h3 {
-    font-size: 26px;
+    font-size: 30px;
     margin-bottom: 40px;
     font-weight: 600;
   }
@@ -221,7 +303,7 @@
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-size: 16px;
+    font-size: 20px;
   }
   .quiz-answer:hover {
     border-color: #000;
@@ -264,7 +346,7 @@
     font-size: 20px;
   }
   .quiz-result-product-info .price {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #4a90e2;
   }

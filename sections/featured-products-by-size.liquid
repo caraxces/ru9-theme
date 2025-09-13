@@ -175,18 +175,15 @@
         </div>
       </div>
     </div>
-    <div class="carousel-progress-container">
-      <div class="carousel-progress-bar"></div>
-    </div>
   </div>
 </div>
 
 <style>
   [data-section-id="{{ section.id }}"] .featured-collections-section {
     width: 100%;
-    min-height: auto;
+    min-height: auto; 
     margin: 0 auto 60px auto;
-    padding: 0 6.8%;
+    padding: 0 120px 0 90px;
     font-family: 'Be Vietnam Pro', sans-serif;
   }
   [data-section-id="{{ section.id }}"] .section-header {
@@ -206,6 +203,7 @@
     line-height: 120%;
     color: #1C2C58;
     margin: 0;
+    padding-bottom: 10px;
     text-align: left;
   }
   [data-section-id="{{ section.id }}"] .header-right {
@@ -318,31 +316,6 @@
     cursor: not-allowed;
   }
 
-  /* Carousel Progress Bar */
-  [data-section-id="{{ section.id }}"] .carousel-progress-container {
-    margin-top: 24px !important;
-    width: 100% !important;
-    height: 6px !important;
-    background: #F0F1EF !important;
-    border-radius: 3px !important;
-    position: relative !important;
-    display: block !important;
-  }
-  [data-section-id="{{ section.id }}"] .carousel-progress-container .carousel-progress-bar {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    height: 100% !important;
-    background: #234085 !important;
-    border-radius: 3px !important;
-    width: 0% !important;
-    transition: width 0.3s ease !important;
-    display: block !important;
-    opacity: 1 !important;
-    z-index: 2 !important;
-    min-width: 1px !important;
-    box-sizing: border-box !important;
-  }
 
   /* Product Card Styles */
   [data-section-id="{{ section.id }}"] .product-card {
@@ -474,7 +447,20 @@
     width: 100%;
   }
   
-  /* Medium screens */
+  /* Large screens - maintain fixed padding */
+  @media (min-width: 1400px) {
+    [data-section-id="{{ section.id }}"] .featured-collections-section {
+      padding: 0 120px 0 90px;
+    }
+  }
+  
+  /* Medium screens - responsive padding */
+  @media (max-width: 1399px) and (min-width: 1024px) {
+    [data-section-id="{{ section.id }}"] .featured-collections-section {
+      padding: 0 5% 0 4%;
+    }
+  }
+  
   @media (max-width: 1200px) {
     [data-section-id="{{ section.id }}"] .product-card {
       width: calc(50% - 1%) !important;
@@ -682,8 +668,6 @@
         prevBtn.disabled = currentIndex === 0;
         nextBtn.disabled = currentIndex >= maxIndex;
 
-        // Update progress bar
-        updateProgressBar();
       }
 
       function dragStart(e) {
@@ -706,42 +690,8 @@
         const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
         walk = currentX - startX;
         productCardsContainer.style.transform = `translateX(${initialTranslateX + walk}px)`;
-        
-        // Update progress bar in real-time during drag
-        updateProgressBar();
       }
       
-      function updateProgressBar() {
-        const progressBar = sectionContainer.querySelector('.carousel-progress-bar');
-        if (!progressBar) return;
-        
-        const containerWidth = productCardsContainer.parentElement.offsetWidth;
-        const visibleCards = getVisibleCards();
-        
-        if (visibleCards.length === 0) {
-          progressBar.style.width = '0%';
-          return;
-        }
-        
-        const itemWidth = visibleCards[0].offsetWidth;
-        const gap = containerWidth * 0.02;
-        const totalWidth = visibleCards.length * itemWidth + (visibleCards.length - 1) * gap;
-        const currentScroll = -getTranslateX();
-        
-        if (totalWidth > containerWidth) {
-          const maxScroll = totalWidth - containerWidth;
-          const scrollProgress = Math.max(0, Math.min(1, currentScroll / maxScroll));
-          
-          const minProgress = 0.2;
-          const maxProgress = 1.0;
-          const progressPercent = minProgress + (scrollProgress * (maxProgress - minProgress));
-          
-          const finalPercent = Math.max(20, Math.min(100, progressPercent * 100));
-          progressBar.style.width = `${finalPercent}%`;
-        } else {
-          progressBar.style.width = '100%';
-        }
-      }
 
       function dragEnd() {
         if (!isDown) return;

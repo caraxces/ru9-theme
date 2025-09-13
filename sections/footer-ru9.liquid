@@ -69,7 +69,24 @@
         <div class="footer-navigate__title f-bold text-xl footer-ru9__right-title">{{ section.settings.newsletter_title }}</div>
       {%- endif -%}
       <div class="footer__newsletter relative i-block w-full">
-        {% render 'footer-newsletter' %}
+        <form action="{{ routes.newsletter_subscribe_url }}" method="post" class="newsletter-form">
+          <input type="hidden" name="form_type" value="customer">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter-input-group">
+            <input 
+              type="email" 
+              name="contact[email]" 
+              placeholder="Nhập email" 
+              class="newsletter-input"
+              required
+              aria-label="Email address"
+            >
+            <button type="submit" class="newsletter-submit-btn">
+              Gửi thông tin
+            </button>
+          </div>
+        </form>
       </div>
       <div class="footer-ru9__social">
         {%- if section.settings.social_facebook_link != blank -%}
@@ -187,6 +204,17 @@
     }
 
     .footer-ru9__logos { display: flex; align-items: flex-start; gap: 40px; justify-content: space-between; }
+    
+    /* Desktop spacing between logos - chính xác 80px giữa hai logo */
+    @media (min-width: 961px) {
+      .footer-ru9__logos { 
+        gap: 0; 
+        justify-content: flex-start;
+      }
+      .footer-ru9__logo-partner {
+        margin-left: 80px;
+      }
+    }
     .footer-ru9__logo-ru9, .footer-ru9__logo-partner-image {
       width: 122px;
       height: 105px;
@@ -209,17 +237,82 @@
     }
     .footer-ru9__logo-partner-label { color: #fff; font-family: "Be Vietnam Pro", sans-serif; font-size: 14px; font-style: normal; font-weight: 400; line-height: 150%; margin-top: 8px; }
     .footer-ru9__right-title { color: #fff; font-family: "Be Vietnam Pro", sans-serif; font-size: 20px; font-style: normal; font-weight: 700; line-height: 150%; height: 44px; display: flex; align-items: center; width: 100%; }
-    /* Newsletter input + button */
-    .footer-ru9__subscribe .footer__newsletter { position: relative; width: 100%; max-width: 428px; }
-    .footer-ru9__subscribe .footer__newsletter-input {
-      display: flex; height: 44px; min-height: 44px; max-width: 428px;
-      padding: 11.5px 170px 11.5px 10px; /* chừa chỗ cho nút bên phải */
-      justify-content: center; align-items: flex-start;
+    /* Newsletter input + button - Design mới theo hình ảnh */
+    .footer-ru9__subscribe .footer__newsletter { 
+      position: relative; 
+      width: 100%; 
+      max-width: none; 
+      min-width: 100%;
     }
-    .footer-ru9__subscribe .footer__newsletter-btn {
-      position: absolute; right: 0; top: 0; height: 44px; width: 160px;
-      display: flex; padding: 13px 10px; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0;
-      border-radius: 0 12px 12px 0; background: #C5EDFF;
+    
+    .newsletter-form {
+      width: 100%;
+    }
+    
+    .newsletter-input-group {
+      display: flex;
+      height: 44px;
+      width: 100%;
+      min-width: 100%;
+      border-radius: 12px;
+      overflow: visible;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .newsletter-input {
+      display: flex;
+      flex: 5;
+      min-width: 500px;
+      height: 44px;
+      padding: 13px 10px;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      border: none;
+      outline: none;
+      background: #ffffff;
+      color: #333333;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      border-radius: 12px 0 0 12px;
+    }
+    
+    .newsletter-input::placeholder {
+      color: #666666;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 14px;
+    }
+    
+    .newsletter-submit-btn {
+      display: flex;
+      min-width: 200px;
+      width: 200px;
+      height: 44px;
+      padding: 13px 10px;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      border: none;
+      outline: none;
+      background: #C5EDFF;
+      color: #333333;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 0 12px 12px 0;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      white-space: nowrap;
+      justify-content: center;
+    }
+    
+    .newsletter-submit-btn:hover {
+      background: #B8E5FF;
+    }
+    
+    .newsletter-submit-btn:active {
+      background: #A8DDFF;
     }
     .footer-ru9__address { display: inline-flex; padding: 4px 0 28px 0; flex-direction: column; align-items: flex-start; gap: 31px; }
     .footer-ru9__address .address-item { display: grid; grid-template-columns: 137px 1fr; gap: 12px; align-items: start; }
@@ -270,6 +363,35 @@
         grid-auto-flow: column;
         grid-template-columns: repeat(2, 1fr);
         gap: 12px 28px;
+      }
+      
+      /* Mobile newsletter design */
+      .newsletter-input-group {
+        height: 40px;
+        border-radius: 12px;
+        width: 100%;
+      }
+      
+      .newsletter-input {
+        height: 40px;
+        padding: 0 14px;
+        font-size: 13px;
+        border-radius: 12px 0 0 12px;
+        flex: 5;
+        min-width: 300px;
+      }
+      
+      .newsletter-input::placeholder {
+        font-size: 13px;
+      }
+      
+      .newsletter-submit-btn {
+        height: 40px;
+        padding: 0 16px;
+        font-size: 13px;
+        border-radius: 0 12px 12px 0;
+        min-width: 120px;
+        width: 120px;
       }
     }
 
