@@ -122,15 +122,15 @@
         "icon_1_title": "100 đêm ngủ thử",
         "icon_1_type": "sleep",
         "icon_1_color": "#007bff",
-        "icon_1_image": "shopify://shop_images/100-dem-ngu-thu_1.svg",
+        "icon_1_image": "shopify://shop_images/Layer_1_1.svg",
         "icon_2_title": "Miễn phí vận chuyển",
         "icon_2_type": "payment",
         "icon_2_color": "#007bff",
-        "icon_2_image": "shopify://shop_images/payment_icon_e5154c63-1703-4a5c-b4f8-f192825dad11.png",
+        "icon_2_image": "shopify://shop_images/Layer_1.svg",
         "icon_3_title": "Thanh toán linh hoạt/Trả góp không lãi suất",
         "icon_3_type": "shipping",
         "icon_3_color": "#007bff",
-        "icon_3_image": "shopify://shop_images/Free_shipping_1.png"
+        "icon_3_image": "shopify://shop_images/Layer_1_2.svg"
       }
     },
     "content_banner_cta_UzRzpc": {
@@ -191,7 +191,7 @@
       ],
       "name": "Collections Listing",
       "settings": {
-        "title": "danh mục sản phẩm",
+        "title": "Danh mục sản phẩm",
         "title_color": "#1c2c58",
         "text_color": "#212121"
       }
@@ -248,22 +248,11 @@
       ],
       "name": "Featured Collections",
       "settings": {
-        "title": "Sản Phẩm Bán Chạy",
+        "title": "Sản phẩm bán chạy",
         "description": "Chiếc nệm foam êm ái cho giấc ngủ thoải mái nhất",
         "primary_color": "#2960ad",
         "text_color": "#1a1a1a",
         "description_color": "#666666"
-      }
-    },
-    "featured_products_by_size_c63dBV": {
-      "type": "featured-products-by-size",
-      "name": "Sản phẩm theo Kích thước",
-      "settings": {
-        "title": "Nệm Foam Ru9",
-        "collection": "nem",
-        "product_label": "",
-        "label_color": "#fff",
-        "label_bg": "#609EE9"
       }
     },
     "image_marquee_hcRmaa": {
@@ -316,6 +305,17 @@
       "settings": {
         "quote_text": "<p>Trong suốt hành trình phát triển, Ru9 tự hào được xuất hiện trên nhiều tờ báo và tạp chí uy tín, ghi nhận nỗ lực mang đến  giấc ngủ chất lượng cho người Việt. Đây là minh chứng cho niềm tin từ khách hàng và sự đánh giá cao của giới chuyên môn.</p>",
         "speed": 30
+      }
+    },
+    "featured_products_by_size_c63dBV": {
+      "type": "featured-products-by-size",
+      "name": "Sản phẩm theo Kích thước",
+      "settings": {
+        "title": "Nệm Foam Ru9",
+        "collection": "nem",
+        "product_label": "",
+        "label_color": "#ffffff",
+        "label_bg": "#609ee9"
       }
     },
     "dynamic_text_with_image_3FaeX8": {
@@ -414,13 +414,102 @@
         "video": "shopify://files/videos/video-best-seller.mp4"
       }
     },
+    "reviews_carousel_QPtXUf": {
+      "type": "reviews-carousel",
+      "blocks": {
+        "review_e3fUFp": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_d8we9c": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/bo-chan-ga"
+          }
+        },
+        "review_hjGPiw": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://collections/bedding"
+          }
+        },
+        "review_CFhi3c": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://collections/combo-bộ-sản-phẩm"
+          }
+        },
+        "review_zqbNMP": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://collections/goi"
+          }
+        },
+        "review_wD3C7F": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/percale-pillow-case"
+          }
+        }
+      },
+      "block_order": [
+        "review_e3fUFp",
+        "review_d8we9c",
+        "review_hjGPiw",
+        "review_CFhi3c",
+        "review_zqbNMP",
+        "review_wD3C7F"
+      ],
+      "name": "Reviews carousel",
+      "settings": {
+        "heading": "<p>Hơn <strong>50,000 </strong>Khách Hàng<br/>Và <strong>30,000 </strong>Đánh Giá 5 Sao Toàn Quốc</p>"
+      }
+    },
     "super_service_87efWC": {
       "type": "super-service",
       "blocks": {
         "service_item_ALLhND": {
           "type": "service_item",
           "settings": {
-            "icon": "shopify://shop_images/65e5e239d4e9350c57080d9b0abbcb6003a0c04c.png",
+            "icon": "shopify://shop_images/Layer_1_3.svg",
             "item_title": "100 đêm ngủ thử",
             "item_note": "",
             "item_description": "<p>Trải nghiệm sản phẩm ngay tại nhà với cam kết đổi trả linh hoạt.</p>",
@@ -430,7 +519,7 @@
         "service_item_g8XcJ6": {
           "type": "service_item",
           "settings": {
-            "icon": "shopify://shop_images/Free_shipping_1.png",
+            "icon": "shopify://shop_images/Layer_1_4.svg",
             "item_title": "Miễn phí vận chuyển",
             "item_note": "(từ 1.500.000vnd)",
             "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>",
@@ -440,7 +529,7 @@
         "service_item_bPPic3": {
           "type": "service_item",
           "settings": {
-            "icon": "shopify://shop_images/Group_48.svg",
+            "icon": "shopify://shop_images/Layer_1_5.svg",
             "item_title": "Bảo hành dài lâu",
             "item_note": "",
             "item_description": "<p>Mỗi chiếc nệm được bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>",
@@ -450,7 +539,7 @@
         "service_item_wm6AEU": {
           "type": "service_item",
           "settings": {
-            "icon": "shopify://shop_images/Group_48.svg",
+            "icon": "shopify://shop_images/Layer_1_6.svg",
             "item_title": "Thanh toán linh hoạt",
             "item_note": "",
             "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>",
@@ -500,95 +589,6 @@
         "description": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>",
         "button_text": "Xem chi tiết",
         "button_link": ""
-      }
-    },
-    "reviews_carousel_QPtXUf": {
-      "type": "reviews-carousel",
-      "blocks": {
-        "review_e3fUFp": {
-          "type": "review",
-          "settings": {
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
-          }
-        },
-        "review_d8we9c": {
-          "type": "review",
-          "settings": {
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": ""
-          }
-        },
-        "review_hjGPiw": {
-          "type": "review",
-          "settings": {
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": ""
-          }
-        },
-        "review_CFhi3c": {
-          "type": "review",
-          "settings": {
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": ""
-          }
-        },
-        "review_zqbNMP": {
-          "type": "review",
-          "settings": {
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": ""
-          }
-        },
-        "review_wD3C7F": {
-          "type": "review",
-          "settings": {
-            "customer_name": "Phuong Nguyen",
-            "review_text": "",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "review_e3fUFp",
-        "review_d8we9c",
-        "review_hjGPiw",
-        "review_CFhi3c",
-        "review_zqbNMP",
-        "review_wD3C7F"
-      ],
-      "name": "Reviews carousel",
-      "settings": {
-        "heading": "<p>Hơn 50,000 Khách Hàng<br/>Và 30,000 Đánh Giá 5 Sao Toàn Quốc</p>"
       }
     },
     "blog_carousel_CXkPPY": {
@@ -647,14 +647,14 @@
     "content_banner_cta_UzRzpc",
     "collections_listing_cAa8Dw",
     "featured_collections_6qfWNA",
-    "featured_products_by_size_c63dBV",
     "image_marquee_hcRmaa",
+    "featured_products_by_size_c63dBV",
     "dynamic_text_with_image_3FaeX8",
     "quiz_banner_4z7U33",
     "tvc_section_WrUqBM",
+    "reviews_carousel_QPtXUf",
     "super_service_87efWC",
     "certifications_4j8wGm",
-    "reviews_carousel_QPtXUf",
     "blog_carousel_CXkPPY"
   ]
 }

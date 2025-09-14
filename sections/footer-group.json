@@ -18,7 +18,7 @@
           "type": "column",
           "settings": {
             "title": "Sản phẩm",
-            "content": "<p><a href=\"/collections/nem\" title=\"Nệm\">Nệm </a></p><p><a href=\"https://ru9.vn/collections/nem-foam\" target=\"_blank\" title=\"nệm foam\">Nệm Foam</a></p><p><a href=\"https://ru9.vn/collections/topper\" target=\"_blank\" title=\"topper\">Topper</a></p><p><a href=\"/collections/goi\" title=\"Gối\">Gối </a></p><p><a href=\"/collections/4the\" title=\"4The\">4The</a></p><p><a href=\"/collections/bedding\" title=\"Bedding\">Ga trải giường </a></p><p><a href=\"/collections/chan\" title=\"Chăn\">Chăn</a></p><p><a href=\"/collections/phu-kien\" title=\"Phụ kiện\">Phụ kiện </a></p><p><a href=\"https://rubaby.vn\" title=\"https://rubaby.vn\">Dành cho bé</a></p>"
+            "content": "<p><a href=\"/collections/nem\" title=\"Nệm\">Nệm </a></p><p><a href=\"https://ru9.vn/collections/topper\" target=\"_blank\" title=\"topper\">Topper</a></p><p><a href=\"/collections/goi\" title=\"Gối\">Gối </a></p><p><a href=\"/collections/4the\" title=\"4The\">4The</a></p><p><a href=\"/collections/bedding\" title=\"Bedding\">Ga trải giường </a></p><p><a href=\"/collections/chan\" title=\"Chăn\">Chăn</a></p><p><a href=\"/collections/phu-kien\" title=\"Phụ kiện\">Phụ kiện </a></p><p><a href=\"https://rubaby.vn\" title=\"https://rubaby.vn\">Dành cho bé</a></p>"
           }
         },
         "column_RfzkLM": {
@@ -54,6 +54,8 @@
         "dark_veil_warp": 0,
         "dark_veil_speed": 0.5,
         "dark_veil_resolution_scale": 1,
+        "show_default_partner_logo": true,
+        "partner_logo_html": "",
         "newsletter_title": "NHẬN THÔNG TIN ƯU ĐÃI TỪ RU9",
         "social_facebook_link": "https://www.facebook.com/ru9vn",
         "social_instagram_link": "https://www.facebook.com/ru9vn",
@@ -62,7 +64,9 @@
         "addr_1": "<p>B2.009 Chung cư Sarimi, Nguyễn Cơ Thạch, Thành phố Thủ Đức, TP. Hồ Chí Minh<br/>0964777910</p>",
         "addr_2": "<p>283A Hai Bà Trưng, Phường Xuân Hòa, <br/>TP. Hồ Chí Minh<br/>0964777910</p>",
         "addr_3": "<p>228 Cầu Giấy, Phường Quan Hoa, Hà Nội<br/>0964777940</p>",
-        "hours": "<p>09:00 - 21:00, Thứ 2 - Chủ nhật</p>"
+        "hours": "<p>09:00 - 21:00, Thứ 2 - Chủ nhật</p>",
+        "badge_1_html": "",
+        "badge_2_html": ""
       }
     },
     "contact_us_banner_7ty9ei": {
