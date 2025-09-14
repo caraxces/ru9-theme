@@ -62,7 +62,7 @@
                       {%- if product.featured_image -%}
                         <img 
                           class="product-image-primary"
-                          src="{{ product.featured_image | img_url: '400x320', crop: 'center' }}" 
+                          src="{{ product.featured_image | image_url: width: 400, height: 320, crop: 'center' }}" 
                           alt="{{ product.title }}"
                           width="400" height="320"
                         >
@@ -72,7 +72,7 @@
                             {%- if second_image != blank -%}
                               <img 
                                 class="product-image-secondary"
-                                src="{{ second_image | img_url: '400x320', crop: 'center' }}" 
+                                src="{{ second_image | image_url: width: 400, height: 320, crop: 'center' }}" 
                                 alt="{{ product.title }}"
                                 width="400" height="320"
                               >
@@ -479,8 +479,8 @@
   [data-section-type="featured-collections"] .discount-badge {
     font-size: 12px;
     font-weight: 600;
-    color: #3264E0;
-    background-color: #EBF5FF;
+    color: #234085;
+    background: #FCE390;
     padding: 2px 8px;
     border-radius: 4px;
   }

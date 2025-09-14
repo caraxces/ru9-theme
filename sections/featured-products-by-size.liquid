@@ -119,7 +119,7 @@
                       {%- if image -%}
                         <img 
                           class="product-image-primary"
-                          src="{{ image | img_url: '400x320', crop: 'center' }}" 
+                          src="{{ image | image_url: width: 400, height: 320, crop: 'center' }}" 
                           alt="{{ product.title }}"
                           width="400" height="320"
                         >
@@ -132,7 +132,7 @@
                            {%- if media.preview_image != image -%}
                             <img 
                               class="product-image-secondary"
-                              src="{{ media.preview_image | img_url: '400x320', crop: 'center' }}" 
+                              src="{{ media.preview_image | image_url: width: 400, height: 320, crop: 'center' }}" 
                               alt="{{ product.title }}"
                               width="400" height="320"
                             >
@@ -436,7 +436,7 @@
     font-weight: 600;
     color: #3264E0;
     background-color: #EBF5FF;
-    padding: 2px 8px;
+    padding: 2px 5px;
     border-radius: 4px;
   }
   [data-section-id="{{ section.id }}"] .compare-price {
@@ -474,9 +474,6 @@
     [data-section-id="{{ section.id }}"] .product-name {
       font-size: 24px !important;
     }
-    [data-section-id="{{ section.id }}"] .product-info {
-      padding: 20px !important;
-    }
     [data-section-id="{{ section.id }}"] .section-title {
       font-size: 36px !important;
     }
@@ -502,7 +499,7 @@
       flex: 0 0 auto;
     }
     [data-section-id="{{ section.id }}"] .header-right .carousel-nav {
-      display: none;
+      display: none !important;
     }
     [data-section-id="{{ section.id }}"] .category-tabs-container {
       order: 3;
@@ -515,6 +512,7 @@
     }
     [data-section-id="{{ section.id }}"] .category-tabs {
       flex-wrap: nowrap;
+      width: 375px;
       justify-content: flex-start;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -530,37 +528,74 @@
     }
     [data-section-id="{{ section.id }}"] .product-carousel {
       padding: 0 4%;
+      overflow: visible;
     }
     [data-section-id="{{ section.id }}"] .product-cards-container {
-      gap: 4% !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      grid-template-rows: auto auto !important;
+      gap: 16px !important;
+      transform: none !important;
     }
     [data-section-id="{{ section.id }}"] .product-card {
-      width: 319.8px !important;
+      width: 100% !important;
       flex-shrink: 0;
       min-width: auto;
+      display: block !important;
+    }
+    [data-section-id="{{ section.id }}"] .product-card:nth-child(n+5) {
+      display: none !important;
     }
     [data-section-id="{{ section.id }}"] .product-image-container {
-      height: 240.44px !important;
+      width: 172px !important;
+      height: 129px !important;
+      flex-shrink: 0 !important;
       aspect-ratio: unset !important;
     }
     [data-section-id="{{ section.id }}"] .product-name {
-      font-size: 22px !important;
+      color: #1C2C58 !important;
+      font-family: "Be Vietnam Pro", sans-serif !important;
+      font-size: 16px !important;
+      font-style: normal !important;
+      font-weight: 500 !important;
+      line-height: 21px !important; /* 131.25% */
+      letter-spacing: 0.6px !important;
     }
-    [data-section-id="{{ section.id }}"] .product-info {
-      padding: 16px !important;
+    [data-section-id="{{ section.id }}"] .product-price {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
-    [data-section-id="{{ section.id }}"] .section-title {
-      font-size: 28px !important;
+    [data-section-id="{{ section.id }}"] .price {
+      color: #000 !important;
+      font-family: "Be Vietnam Pro", sans-serif !important;
+      font-size: 13px !important;
+      font-style: normal !important;
+      font-weight: 600 !important;
+      line-height: 27px !important; /* 207.692% */
+      letter-spacing: 0.6px !important;
+    }
+    [data-section-id="{{ section.id }}"] .discount-badge {
+      font-family: "Be Vietnam Pro", sans-serif !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      background: #FCE390 !important;
+      color: #234085 !important;
+    }
+    [data-section-id="{{ section.id }}"] .compare-price {
+      color: #888 !important;
+      font-family: "Be Vietnam Pro", sans-serif !important;
+      font-size: 13px !important;
+      font-style: normal !important;
+      font-weight: 400 !important;
+      line-height: 27px !important; /* 207.692% */
+      letter-spacing: 0.6px !important;
+      text-decoration-line: line-through !important;
     }
   }
   
   @media (max-width: 480px) {
-    [data-section-id="{{ section.id }}"] .product-name {
-      font-size: 20px !important;
-    }
-    [data-section-id="{{ section.id }}"] .product-info {
-      padding: 12px !important;
-    }
     [data-section-id="{{ section.id }}"] .section-title {
       font-size: 24px !important;
     }
@@ -629,6 +664,10 @@
       }
 
       function getItemsPerView() {
+        // Trên mobile, hiển thị tất cả sản phẩm trong grid
+        if (window.innerWidth <= 768) {
+          return getVisibleCards().length;
+        }
         const visibleCards = getVisibleCards();
         if (visibleCards.length === 0) return 1;
         const containerWidth = productCardsContainer.parentElement.offsetWidth;
@@ -647,6 +686,14 @@
       }
 
       function updateCarousel(isResize = false) {
+        // Trên mobile, không áp dụng carousel logic
+        if (window.innerWidth <= 768) {
+          prevBtn.disabled = true;
+          nextBtn.disabled = true;
+          productCardsContainer.style.transform = `translateX(0px)`;
+          return;
+        }
+
         productCardsContainer.style.transition = isResize ? 'none' : 'transform 0.4s ease';
         const visibleCards = getVisibleCards();
         if (visibleCards.length === 0) {
@@ -671,6 +718,8 @@
       }
 
       function dragStart(e) {
+        // Không cho phép drag trên mobile
+        if (window.innerWidth <= 768) return;
         if (e.target.closest('.product-info')) { isDown = false; return; }
         isDown = true;
         carouselContainer.classList.add('grabbing');
@@ -751,14 +800,21 @@
     }
 
     function filterProducts(size) {
+      let visibleCount = 0;
+      const isMobile = window.innerWidth <= 768;
+      const maxMobileCards = isMobile ? 4 : allProductCards.length;
+      
       allProductCards.forEach(card => {
         const cardSize = card.getAttribute('data-size');
-        if (cardSize === size) {
+        if (cardSize === size && visibleCount < maxMobileCards) {
           card.style.display = 'block';
+          visibleCount++;
         } else {
           card.style.display = 'none';
         }
       });
+      
+      
       if (carousel) carousel.reset();
     }
     
@@ -778,6 +834,17 @@
         const initialSize = initialActiveTab.getAttribute('data-size');
         filterProducts(initialSize);
       }
+      
+      // Đảm bảo giới hạn 4 sản phẩm trên mobile ngay từ đầu
+      if (window.innerWidth <= 768) {
+        setTimeout(() => {
+          const activeTab = sectionContainer.querySelector('.category-tab.active');
+          if (activeTab) {
+            const currentSize = activeTab.getAttribute('data-size');
+            filterProducts(currentSize);
+          }
+        }, 100);
+      }
     }
 
     nextBtn.addEventListener('click', () => carousel ? carousel.next() : null);
@@ -787,6 +854,14 @@
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
+        // Nếu chuyển sang mobile, cần filter lại để giới hạn 4 sản phẩm
+        if (window.innerWidth <= 768) {
+          const activeTab = sectionContainer.querySelector('.category-tab.active');
+          if (activeTab) {
+            const currentSize = activeTab.getAttribute('data-size');
+            filterProducts(currentSize);
+          }
+        }
         if (carousel) carousel.update();
       }, 250);
     });
