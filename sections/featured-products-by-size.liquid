@@ -183,7 +183,7 @@
     width: 100%;
     min-height: auto; 
     margin: 0 auto 60px auto;
-    padding: 0 120px 0 90px;
+    padding: 0 60px 0 60px;
     font-family: 'Be Vietnam Pro', sans-serif;
   }
   [data-section-id="{{ section.id }}"] .section-header {
@@ -450,14 +450,14 @@
   /* Large screens - maintain fixed padding */
   @media (min-width: 1400px) {
     [data-section-id="{{ section.id }}"] .featured-collections-section {
-      padding: 0 120px 0 90px;
+      padding: 0 60px 0 60px;
     }
   }
   
   /* Medium screens - responsive padding */
   @media (max-width: 1399px) and (min-width: 1024px) {
     [data-section-id="{{ section.id }}"] .featured-collections-section {
-      padding: 0 5% 0 4%;
+      padding: 0 60px 0 60px;
     }
   }
   
@@ -482,7 +482,7 @@
   /* Mobile screens */
   @media (max-width: 768px) {
     [data-section-id="{{ section.id }}"] .featured-collections-section {
-      padding: 0 4%;
+      padding: 0 20px;
     }
     [data-section-id="{{ section.id }}"] .section-header {
       flex-direction: row !important;
@@ -504,7 +504,7 @@
     [data-section-id="{{ section.id }}"] .category-tabs-container {
       order: 3;
       width: 100%;
-      margin: 0 -4% 24px -4%;
+      margin: 0 -20px 24px -20px;
       position: relative;
     }
     [data-section-id="{{ section.id }}"] .category-tabs-container::after {
@@ -518,16 +518,16 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       cursor: grab;
-      padding: 0 4%;
+      padding: 0 20px;
     }
     [data-section-id="{{ section.id }}"] .category-tabs::-webkit-scrollbar {
         display: none;
     }
     [data-section-id="{{ section.id }}"] .product-carousel-section {
-      margin: 0 -4%;
+      margin: 0 -20px;
     }
     [data-section-id="{{ section.id }}"] .product-carousel {
-      padding: 0 4%;
+      padding: 0 20px;
       overflow: visible;
     }
     [data-section-id="{{ section.id }}"] .product-cards-container {

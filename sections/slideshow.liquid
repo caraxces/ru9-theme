@@ -417,14 +417,37 @@
   }
 
   .icon-text-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 15px;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: clamp(20px, 3vw, 50px);
+    justify-items: center;
     width: 100%;
     max-width: 1200px;
     padding: 0 60px;
+  }
+  
+  /* Icon 1 và 2 ở hàng trên */
+  .icon-text-container .icon-text-item:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    margin-right: 20px;
+  }
+  
+  .icon-text-container .icon-text-item:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+    margin-left: 20px;
+  }
+  
+  /* Icon 3 ở hàng dưới, căn giữa */
+  .icon-text-container .icon-text-item:nth-child(3) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: center;
   }
 
   .icon-text-item {
@@ -479,9 +502,33 @@
     }
     
     .icon-text-container {
-      gap: 20px !important;
-      flex-direction: column;
+      gap: 15px !important;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
       padding: 0 20px !important;
+    }
+    
+    /* Mobile: icon 1,2 ở hàng trên */
+    .icon-text-container .icon-text-item:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: end;
+      margin-right: 10px;
+    }
+    
+    .icon-text-container .icon-text-item:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: start;
+      margin-left: 10px;
+    }
+    
+    /* Mobile: icon 3 ở hàng dưới */
+    .icon-text-container .icon-text-item:nth-child(3) {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      justify-self: center;
+      margin: 0;
     }
     
     .icon-text-item {
@@ -515,6 +562,31 @@
     }
     .icon-text-container {
       gap: 12px !important;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+    }
+    
+    /* Extra small: icon 1,2 ở hàng trên */
+    .icon-text-container .icon-text-item:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: end;
+      margin-right: 8px;
+    }
+    
+    .icon-text-container .icon-text-item:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: start;
+      margin-left: 8px;
+    }
+    
+    /* Extra small: icon 3 ở hàng dưới */
+    .icon-text-container .icon-text-item:nth-child(3) {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      justify-self: center;
+      margin: 0;
     }
     .icon-text-item__title {
       font-size: 12px !important;
