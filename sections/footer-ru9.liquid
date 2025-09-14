@@ -57,7 +57,7 @@
             {%- if section.settings.partner_logo_html != blank -%}
               {{ section.settings.partner_logo_html }}
             {%- else -%}
-              <img src="{{ 'Asset 2@2x 1.svg' | asset_url }}" alt="Partner Logo" loading="lazy">
+              <img src="{{ 'Asset 2@2x 1.svg' | asset_url }}" alt="Partner Logo" loading="lazy" width="122" height="105">
             {%- endif -%}
           </div>
           <div class="footer-ru9__logo-partner-label">Website thành viên</div>
@@ -319,7 +319,7 @@
     .footer-ru9__address .address-label {
       color: #FFF;
       font-family: "Be Vietnam Pro", sans-serif;
-      font-size: 16px;
+      font-size: 20px;
       font-style: normal;
       font-weight: 500;
       line-height: 150%; /* 30px */
@@ -329,7 +329,7 @@
     .footer-ru9__address .icon { display: inline-flex; height: 24px; width: 24px; }
     .footer-ru9__address .icon svg path { fill: #fff; }
     /* Giữ icon và nội dung cùng một dòng, loại bỏ khoảng trống do richtext */
-    .footer-ru9__address .address-text { margin: 0; color: #fff; width: 426px; font-size: 14px }
+    .footer-ru9__address .address-text { margin: 0; color: #fff; width: 426px; font-size: 18px }
     .footer-ru9__address .address-text p { margin: 0; color: #fff; }
     .footer-ru9__social { display: flex; gap: 16px; margin-top: 12px; }
     .footer-ru9__social .footer-social__item { width: 40px; height: 40px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: #fff; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.5); }
@@ -339,6 +339,7 @@
       display: grid;
       gap: 12px;
       color: #fff;
+      font-size: 18px;
     }
     .footer-ru9__col-content p, .footer-ru9__col-content a { margin: 0; color: #fff; }
     .footer-ru9__badges { display: flex; justify-content: center; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 24px; }
@@ -358,11 +359,14 @@
 
       .footer-ru9__columns { grid-template-columns: 1fr; gap: 32px; }
       .footer-ru9__address .address-text { width: auto; }
+      .footer-ru9__address .address-label { font-size: 16px; }
+      .footer-ru9__address .address-text { font-size: 14px; }
       .footer-ru9__col-content {
         grid-template-rows: repeat(4, auto);
         grid-auto-flow: column;
         grid-template-columns: repeat(2, 1fr);
         gap: 12px 28px;
+        font-size: 14px;
       }
       
       /* Mobile newsletter design */
@@ -377,8 +381,8 @@
         padding: 0 14px;
         font-size: 13px;
         border-radius: 12px 0 0 12px;
-        flex: 5;
-        min-width: 300px;
+        flex: 1;
+        min-width: 200px;
       }
       
       .newsletter-input::placeholder {
@@ -390,8 +394,8 @@
         padding: 0 16px;
         font-size: 13px;
         border-radius: 0 12px 12px 0;
-        min-width: 120px;
-        width: 120px;
+        min-width: 100px;
+        width: 100px;
       }
     }
 
