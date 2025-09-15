@@ -104,6 +104,21 @@
           "type": "price",
           "settings": {}
         },
+        "promotion_xkLgrj": {
+          "type": "promotion",
+          "settings": {
+            "title": "Mã ưu đãi :",
+            "voucher_image_1": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "popup_bg_1": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "popup_content_1": "",
+            "voucher_image_2": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "popup_bg_2": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "popup_content_2": "",
+            "popup_content_3": "",
+            "voucher_image_4": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "popup_content_4": ""
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -190,6 +205,7 @@
         "custom_ir6hFk",
         "tag_TkpVP9",
         "price",
+        "promotion_xkLgrj",
         "variant_picker",
         "usage_guide_KJqfAH",
         "buy_buttons",

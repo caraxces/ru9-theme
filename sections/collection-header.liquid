@@ -71,6 +71,68 @@
 {%- endif -%}
 
 <style>
+  /* Standard padding for collection-header section */
+  .collection-hero .page-width,
+  .page-content--top.page-width {
+    max-width: none;
+    padding: 0;
+    margin: 0 60px;
+  }
+  
+  /* Add padding-top for breadcrumb visibility */
+  .collection-hero .page-width,
+  .page-content--top.page-width {
+    padding-top: 50px;
+  }
+  
+  /* Large screens - maintain fixed padding */
+  @media (min-width: 1400px) {
+    .collection-hero .page-width,
+    .page-content--top.page-width {
+      margin: 0 60px;
+    }
+  }
+  
+  /* Medium screens - responsive padding */
+  @media (max-width: 1399px) and (min-width: 1024px) {
+    .collection-hero .page-width,
+    .page-content--top.page-width {
+      margin: 0 60px;
+    }
+  }
+  
+  /* Small screens - responsive padding */
+  @media (max-width: 1023px) and (min-width: 769px) {
+    .collection-hero .page-width,
+    .page-content--top.page-width {
+      margin: 0 clamp(30px, 5vw, 60px) 0 clamp(20px, 4vw, 40px);
+    }
+  }
+  
+  /* Mobile screens */
+  @media (max-width: 768px) {
+    .collection-hero .page-width,
+    .page-content--top.page-width {
+      margin: 0;
+      padding: 50px 15px 0 15px;
+    }
+  }
+  
+  /* Override any conflicting styles */
+  .collection-hero .page-width,
+  .page-content--top.page-width {
+    max-width: none !important;
+  }
+  
+  /* Ensure padding-top is preserved */
+  .collection-hero .page-width {
+    padding-top: 50px !important;
+  }
+  
+  .page-content--top.page-width {
+    padding-top: 50px !important;
+  }
+
   .collection-hero__image {
     width: 100%;
     height: 350px;

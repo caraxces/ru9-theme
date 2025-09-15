@@ -60,15 +60,15 @@
               
               <div class="cc-card">
                 <div class="cc-image-container">
-                  <a class="cc-image" href="{{ product.url }}" aria-label="{{ product.title }}">
-                    {%- if featured_image -%}
-                      <img
+                <a class="cc-image" href="{{ product.url }}" aria-label="{{ product.title }}">
+                  {%- if featured_image -%}
+                    <img
                         src="{{ featured_image | image_url: width: 760, height: 568, crop: 'center' }}"
                         srcset="{{ featured_image | image_url: width: 760, height: 568, crop: 'center' }} 2x, {{ featured_image | image_url: width: 380, height: 284, crop: 'center' }} 1x"
                         width="380" height="284" loading="lazy" alt="{{ featured_image.alt | escape }}"
-                      >
-                    {%- endif -%}
-                  </a>
+                    >
+                  {%- endif -%}
+                </a>
                   
                   {%- comment -%} Product badges {%- endcomment -%}
                   {%- if is_top_rated -%}
@@ -145,6 +145,71 @@
 {%- endif -%}
 
 <style>
+  /* Standard padding for main-collection-custom section */
+  .collection-content--custom .page-width {
+    max-width: none;
+    padding: 0 0 50px 0;
+    margin: 0 60px;
+  }
+  
+  /* Large screens - maintain fixed padding */
+  @media (min-width: 1400px) {
+    .collection-content--custom .page-width {
+      margin: 0 60px;
+    }
+  }
+  
+  /* Medium screens - responsive padding */
+  @media (max-width: 1399px) and (min-width: 1024px) {
+    .collection-content--custom .page-width {
+      margin: 0 60px;
+    }
+  }
+  
+  /* Small screens - responsive padding */
+  @media (max-width: 1023px) and (min-width: 769px) {
+    .collection-content--custom .page-width {
+      margin: 0 clamp(30px, 5vw, 60px) 0 clamp(20px, 4vw, 40px);
+    }
+  }
+  
+  /* Mobile screens */
+  @media (max-width: 768px) {
+    .collection-content--custom .page-width {
+      margin: 0;
+      padding: 0 15px 50px 15px;
+    }
+  }
+  
+  /* Override any conflicting styles */
+  .collection-content--custom .page-width {
+    max-width: none !important;
+    padding: 0 0 50px 0 !important;
+  }
+  
+  /* Ensure section header has same padding */
+  .collection-content--custom .section-header,
+  .collection-content--custom .section-header--flush {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+  
+  @media (max-width: 1023px) and (min-width: 769px) {
+    .collection-content--custom .section-header,
+    .collection-content--custom .section-header--flush {
+      margin-left: clamp(30px, 5vw, 60px);
+      margin-right: clamp(20px, 4vw, 40px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .collection-content--custom .section-header,
+    .collection-content--custom .section-header--flush {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+  }
+  
   .cc-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -333,38 +398,231 @@
 
   @media (max-width: 768px) {
     .cc-grid {
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-      padding: 0 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 0;
+    }
+    
+    .cc-mobile-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      gap: 12px;
+      padding-bottom: 20px;
+      margin-left: 15px;
+    }
+    
+    .cc-mobile-row::-webkit-scrollbar {
+      height: 8px;
+      display: block;
+    }
+    
+    .cc-mobile-row::-webkit-scrollbar-track {
+      background: #F0F1EF;
+      border-radius: 100px;
+    }
+    
+    .cc-mobile-row::-webkit-scrollbar-thumb {
+      background: #234085;
+      border-radius: 100px;
+    }
+    
+    .cc-mobile-row::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b;
+    }
+    
+    .cc-mobile-row::-webkit-scrollbar-button {
+      display: none;
+    }
+    
+    /* Force scrollbar to show */
+    .cc-mobile-row {
+      scrollbar-width: thin;
+      scrollbar-color: #234085 #F0F1EF;
+      scrollbar-gutter: stable;
+    }
+    
+    .cc-card {
+      width: 319.8px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     
     .cc-image-container {
-      width: 100%;
-      height: 180px;
+      width: 319.8px;
+      height: 240.44px;
+      flex-shrink: 0;
     }
     
     .cc-content {
-      padding: 12px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
     
     .cc-title {
-      font-size: 16px;
+      font-size: 14px;
+      line-height: 1.4;
     }
     
     .cc-description {
-      font-size: 13px;
+      font-size: 14px;
+      line-height: 1.4;
     }
     
     .cc-price__current {
-      font-size: 15px;
+      font-size: 14px;
+    }
+    
+    .cc-price__discount {
+      font-size: 14px;
+    }
+    
+    .cc-compare-price {
+      font-size: 14px;
     }
     
     .cc-buy-now {
+      width: 319.8px;
       height: 36px;
       font-size: 13px;
     }
+    
+    .cc-rating-text {
+      font-size: 12px;
+    }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Mobile horizontal scroll functionality with 2 rows
+    function initMobileScroll() {
+      if (window.innerWidth > 768) return;
+      
+      const ccGrid = document.querySelector('.cc-grid');
+      if (!ccGrid) return;
+      
+      // Group products into rows of 4
+      const cards = Array.from(ccGrid.querySelectorAll('.cc-card'));
+      const rows = [];
+      
+      for (let i = 0; i < cards.length; i += 4) {
+        rows.push(cards.slice(i, i + 4));
+      }
+      
+      // Clear existing content
+      ccGrid.innerHTML = '';
+      
+      // Create horizontal scrollable rows
+      rows.forEach((rowCards, rowIndex) => {
+        const rowContainer = document.createElement('div');
+        rowContainer.className = 'cc-mobile-row';
+        
+        // Add cards to row (1-4 products per row)
+        rowCards.forEach(card => {
+          const cardClone = card.cloneNode(true);
+          rowContainer.appendChild(cardClone);
+        });
+        
+        ccGrid.appendChild(rowContainer);
+      });
+      
+      // Add drag functionality to each row
+      const mobileRows = ccGrid.querySelectorAll('.cc-mobile-row');
+      mobileRows.forEach(row => {
+        addDragFunctionality(row);
+      });
+    }
+    
+    function addDragFunctionality(rowContainer) {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      let isDragging = false;
+
+      function dragStart(e) {
+        // Don't start drag if clicking on product links or buttons
+        if (e.target.closest('a') || e.target.closest('button')) {
+          isDown = false;
+          return;
+        }
+        isDown = true;
+        isDragging = false;
+        rowContainer.style.cursor = 'grabbing';
+        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+        scrollLeft = rowContainer.scrollLeft;
+        if (e.type === 'touchstart') {
+          window.addEventListener('touchmove', dragMove);
+          window.addEventListener('touchend', dragEnd);
+        }
+      }
+
+      function dragMove(e) {
+        if (!isDown) return;
+        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
+        const walk = currentX - startX;
+        
+        if (Math.abs(walk) > 5) {
+          isDragging = true;
+        }
+        
+        if (isDragging) {
+          e.preventDefault();
+        }
+        
+        rowContainer.scrollLeft = scrollLeft - walk;
+      }
+
+      function dragEnd() {
+        if (!isDown) return;
+        isDown = false;
+        isDragging = false;
+        rowContainer.style.cursor = 'grab';
+        window.removeEventListener('touchmove', dragMove);
+        window.removeEventListener('touchend', dragEnd);
+      }
+
+      // Mouse events
+      rowContainer.addEventListener('mousedown', dragStart);
+      rowContainer.addEventListener('mousemove', dragMove);
+      rowContainer.addEventListener('mouseup', dragEnd);
+      rowContainer.addEventListener('mouseleave', dragEnd);
+
+      // Touch events
+      rowContainer.addEventListener('touchstart', dragStart);
+
+      // Prevent link clicks when dragging
+      rowContainer.addEventListener('click', (e) => {
+        if (isDragging) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+
+      // Prevent default link behavior during drag
+      rowContainer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', e => {
+          if (isDragging) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        });
+      });
+    }
+    
+    // Initialize on load and resize
+    initMobileScroll();
+    window.addEventListener('resize', initMobileScroll);
+  });
+</script>
 
 {% schema %}
 {

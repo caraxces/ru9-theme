@@ -278,13 +278,41 @@
             "product_price": "Từ 12.990.000 VNĐ",
             "product_url": "shopify://products/nem-hybrid"
           }
+        },
+        "product_QVeCme": {
+          "type": "product",
+          "settings": {
+            "product_title": "NỆM HYBRID",
+            "product_image": "shopify://shop_images/Hybrid_Thumb-Website-2.png",
+            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_hybrid.png",
+            "product_thickness": "25 cm",
+            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
+            "product_price": "Từ 12.990.000 VNĐ",
+            "product_url": "shopify://products/nem-hybrid"
+          }
+        },
+        "product_kGMGE6": {
+          "type": "product",
+          "settings": {
+            "product_title": "NỆM HYBRID",
+            "product_image": "shopify://shop_images/Hybrid_Thumb-Website-2.png",
+            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_hybrid.png",
+            "product_thickness": "25 cm",
+            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
+            "product_price": "Từ 12.990.000 VNĐ",
+            "product_url": "shopify://products/nem-hybrid"
+          }
         }
       },
       "block_order": [
         "product_ALQiAM",
         "product_4JhiNN",
         "product_atFTCC",
-        "product_wmbR3E"
+        "product_wmbR3E",
+        "product_QVeCme",
+        "product_kGMGE6"
       ],
       "settings": {
         "section_width": "page-width",

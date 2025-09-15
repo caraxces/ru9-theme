@@ -211,7 +211,7 @@
   .is-size .variant-input-wrap,
   .is-firmness .variant-input-wrap {
     display: grid;
-    gap: 16px;
+    gap: 12px;
     margin-bottom: 16px;
   }
   .is-size .variant-input,
@@ -278,6 +278,16 @@
     font-size: 14px;
     font-weight: 400;
     color: #555;
+  }
+  
+  /* Style for firmness variant - bold and uppercase before dash */
+  .is-firmness .variant__button-label .label-head,
+  .variant-wrapper.is-firmness .variant__button-label .label-head,
+  .variant-wrapper[class*="firmness"] .variant__button-label .label-head,
+  .variant-wrapper[class*="softness"] .variant__button-label .label-head,
+  .variant-wrapper[class*="êm"] .variant__button-label .label-head {
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
   }
 
   /* Color Swatch Styles */
@@ -600,9 +610,165 @@
         object-fit: cover;
     }
 
-    /* Hide thumbnails on mobile */
+    /* Mobile thumbnail gallery */
     .product__thumbs {
+      display: block !important;
+      margin-top: 0px;
+      padding: 0 0px;
+    }
+    
+    .product__thumbs--scroller {
+      display: flex !important;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    
+    .product__thumbs--scroller::-webkit-scrollbar {
       display: none;
+    }
+    
+    .product__thumb-item {
+      flex-shrink: 0;
+      display: block !important;
+      position: relative !important;
+    }
+    
+    .product__thumb {
+      width: 51px !important;
+      height: 52px !important;
+      border-radius: 2px;
+      overflow: hidden;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    
+    .product__thumb-item.is-active .product__thumb,
+    .product__thumb-item:active .product__thumb {
+      width: 58px !important;
+      height: 58px !important;
+      flex-shrink: 0;
+    }
+    
+    .product__thumb-item.is-active .product__thumb .image-wrap,
+    .product__thumb-item:active .product__thumb .image-wrap {
+      width: 58px !important;
+      height: 58px !important;
+    }
+    
+    .product__thumb-item.is-active .product__thumb .image-wrap img,
+    .product__thumb-item:active .product__thumb .image-wrap img {
+      width: 58px !important;
+      height: 58px !important;
+    }
+    
+    .product__thumb .image-wrap {
+      width: 51px !important;
+      height: 52px !important;
+      padding-bottom: 0 !important;
+      position: relative;
+    }
+    
+    .product__thumb .image-wrap img {
+      width: 51px !important;
+      height: 52px !important;
+      object-fit: cover !important;
+      border-radius: 2px !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    .product__thumb-arrow {
+      display: none !important;
+    }
+    
+    /* Override any existing styles */
+    .huan-true .product__thumbs--scroller {
+      display: flex !important;
+    }
+    
+    .huan-true .product__thumb-item {
+      display: block !important;
+      position: relative !important;
+    }
+    
+    /* Mobile scroller for huan-false */
+    .huan-false .product__thumbs--scroller {
+      display: flex !important;
+      gap: 8px !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: #1C2C58 #F5F5F5 !important;
+      padding: 0 10px 15px 10px !important;
+      margin: 0 -10px !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar {
+      height: 4px !important;
+      display: block !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar-track {
+      background: #F5F5F5 !important;
+      border-radius: 100px !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar-thumb {
+      background: #1C2C58 !important;
+      border-radius: 100px !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+      background: #234085 !important;
+    }
+    
+    /* Force scrollbar to show */
+    .huan-false .product__thumbs--scroller {
+      scrollbar-gutter: stable !important;
+    }
+    
+    /* Mobile scroller for product__thumbs--below */
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller {
+      display: flex !important;
+      gap: 8px !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: #1C2C58 #F5F5F5 !important;
+      padding: 0 10px 15px 10px !important;
+      margin: 0 -10px !important;
+    }
+    
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar {
+      height: 4px !important;
+      display: block !important;
+    }
+    
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-track {
+      background: #F5F5F5 !important;
+      border-radius: 100px !important;
+    }
+    
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb {
+      background: #1C2C58 !important;
+      border-radius: 100px !important;
+    }
+    
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+      background: #234085 !important;
+    }
+    
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller {
+      scrollbar-gutter: stable !important;
+    }
+    
+    /* Active state styling */
+    .product__thumb-item.is-active {
+      z-index: 2;
     }
 
     .product-single__meta .jdgm-widget--product-rating {
@@ -669,10 +835,11 @@
     
     .is-size .variant-input-wrap {
       grid-template-columns: repeat(3, 1fr) !important;
-      gap: 2px;
+      gap: 8px !important;
     }
     .is-size .variant-input-wrap .variant-input {
       grid-column: unset !important;
+      margin: 0 !important;
     }
     .is-size .variant-input-wrap[data-option-count="6"] {
         /* Specific override for 6 items to create 3x2 grid */
@@ -681,7 +848,11 @@
     
     .variant-wrapper:not(.is-color) .variant__button-label {
       min-height: 50px;
-      padding: 8px;
+      padding: 8px 4px;
+    }
+    
+    .is-size .variant-input-wrap .variant-input {
+      margin: 0 !important;
     }
     
     .variant-wrapper:not(.is-color) .variant__button-label .label-head {
@@ -690,6 +861,16 @@
 
     .variant-wrapper:not(.is-color) .variant__button-label .label-value {
       font-size: 12px;
+    }
+    
+    /* Style for firmness variant - bold and uppercase before dash */
+    .is-firmness .variant__button-label .label-head,
+    .variant-wrapper.is-firmness .variant__button-label .label-head,
+    .variant-wrapper[class*="firmness"] .variant__button-label .label-head,
+    .variant-wrapper[class*="softness"] .variant__button-label .label-head,
+    .variant-wrapper[class*="êm"] .variant__button-label .label-head {
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
     }
 
     /* Color Swatch Mobile Styles */
@@ -2250,5 +2431,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+</script>
+
+<script>
+// Mobile thumbnail click handler
+document.addEventListener('DOMContentLoaded', function() {
+  initMobileThumbClick('{{ section_id }}');
+});
+
+function initMobileThumbClick(sectionId) {
+  setTimeout(function() {
+    const productWrapper = document.querySelector(`#ProductSection-${sectionId}`);
+    if (!productWrapper) return;
+
+    const thumbItems = productWrapper.querySelectorAll('.product__thumb-item');
+    
+    thumbItems.forEach(function(thumbItem) {
+      thumbItem.addEventListener('click', function() {
+        // Remove active class from all thumb items
+        thumbItems.forEach(function(item) {
+          item.classList.remove('is-active');
+        });
+        
+        // Add active class to clicked item
+        this.classList.add('is-active');
+        
+        // Remove active class after 300ms (duration of transition)
+        setTimeout(function() {
+          thumbItem.classList.remove('is-active');
+        }, 300);
+      });
+    });
+  }, 500);
+}
 </script>
 
