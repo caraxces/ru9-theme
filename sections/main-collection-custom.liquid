@@ -43,60 +43,79 @@
           <div class="cc-grid">
             {%- for product in collection.products -%}
               {%- assign featured_image = product.featured_image | default: product.images.first -%}
+              {%- assign is_new = false -%}
+              {%- assign is_best_seller = false -%}
+              {%- assign is_top_rated = false -%}
+              
+              {%- comment -%} Check product tags for badges {%- endcomment -%}
+              {%- for tag in product.tags -%}
+                {%- if tag == 'new' or tag == 'New' -%}
+                  {%- assign is_new = true -%}
+                {%- elsif tag == 'best-seller' or tag == 'Best Seller' -%}
+                  {%- assign is_best_seller = true -%}
+                {%- elsif tag == 'top-rated' or tag == 'Top rated' -%}
+                  {%- assign is_top_rated = true -%}
+                {%- endif -%}
+              {%- endfor -%}
+              
               <div class="cc-card">
-                <a class="cc-image" href="{{ product.url }}" aria-label="{{ product.title }}">
-                  {%- if featured_image -%}
-                    <img
-                      src="{{ featured_image | image_url: width: 736, height: 550, crop: 'center' }}"
-                      srcset="{{ featured_image | image_url: width: 736, height: 550, crop: 'center' }} 2x, {{ featured_image | image_url: width: 368, height: 275, crop: 'center' }} 1x"
-                      width="368" height="275" loading="lazy" alt="{{ featured_image.alt | escape }}"
-                    >
+                <div class="cc-image-container">
+                  <a class="cc-image" href="{{ product.url }}" aria-label="{{ product.title }}">
+                    {%- if featured_image -%}
+                      <img
+                        src="{{ featured_image | image_url: width: 760, height: 568, crop: 'center' }}"
+                        srcset="{{ featured_image | image_url: width: 760, height: 568, crop: 'center' }} 2x, {{ featured_image | image_url: width: 380, height: 284, crop: 'center' }} 1x"
+                        width="380" height="284" loading="lazy" alt="{{ featured_image.alt | escape }}"
+                      >
+                    {%- endif -%}
+                  </a>
+                  
+                  {%- comment -%} Product badges {%- endcomment -%}
+                  {%- if is_top_rated -%}
+                    <div class="cc-badge cc-badge--top-rated">Top rated</div>
+                  {%- elsif is_best_seller -%}
+                    <div class="cc-badge cc-badge--best-seller">Best Seller</div>
+                  {%- elsif is_new -%}
+                    <div class="cc-badge cc-badge--new">New</div>
                   {%- endif -%}
-                </a>
+                </div>
+                
                 <div class="cc-content">
+                  {%- comment -%} Rating stars {%- endcomment -%}
+                  <div class="cc-rating">
+                    <div class="cc-stars">
+                      <span class="cc-star">★</span>
+                      <span class="cc-star">★</span>
+                      <span class="cc-star">★</span>
+                      <span class="cc-star">★</span>
+                      <span class="cc-star">★</span>
+                    </div>
+                    <span class="cc-rating-text">5.0 (2025 đánh giá)</span>
+                  </div>
+                  
                   <a class="cc-title" href="{{ product.url }}">{{ product.title }}</a>
+                  
+                  <div class="cc-description">
+                    Demo content Demo content Demo content content Demo content
+                  </div>
+                  
                   <div class="cc-price-row">
                     <div class="cc-price">
                       {%- if product.compare_at_price > product.price -%}
-                        <span class="cc-price__current">{{ product.price | money }}</span>
-                        <span class="cc-price__compare">{{ product.compare_at_price | money }}</span>
+                        <span class="cc-price__current">Từ {{ product.price | money }}</span>
+                        <div class="cc-price__discount">-{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | round: 0 }}%</div>
                       {%- else -%}
-                        <span class="cc-price__current">{{ product.price | money }}</span>
+                        <span class="cc-price__current">Từ {{ product.price | money }}</span>
                       {%- endif -%}
                     </div>
-                    {%- if product.compare_at_price > product.price -%}
-                      {%- assign saving = product.compare_at_price | minus: product.price -%}
-                      {%- assign percent = saving | times: 100 | divided_by: product.compare_at_price -%}
-                      <div class="cc-sale-tag">-{{ percent | round: 0 }}%</div>
-                    {%- endif -%}
                   </div>
-                  {%- comment -%} Sold count per-product from metafields {%- endcomment -%}
-                  {%- liquid
-                    assign sold_count = ''
-                    if product.metafields.custom.sold_count != blank
-                      assign sold_count = product.metafields.custom.sold_count.value | default: product.metafields.custom.sold_count
-                    endif
-                    if sold_count == '' and product.metafields.custom.sold != blank
-                      assign sold_count = product.metafields.custom.sold.value | default: product.metafields.custom.sold
-                    endif
-                    if sold_count == '' and product.metafields.global.sold_count != blank
-                      assign sold_count = product.metafields.global.sold_count.value | default: product.metafields.global.sold_count
-                    endif
-                    if sold_count == '' and product.metafields.ru9.sold != blank
-                      assign sold_count = product.metafields.ru9.sold.value | default: product.metafields.ru9.sold
-                    endif
-                    if sold_count == '' and product.metafields.my_fields.sold_count != blank
-                      assign sold_count = product.metafields.my_fields.sold_count.value | default: product.metafields.my_fields.sold_count
-                    endif
-                    if sold_count == '' and section.settings.default_sold_count != blank
-                      assign sold_count = section.settings.default_sold_count | plus: 0
-                    endif
-                  -%}
-                  {%- if sold_count != '' -%}
-                    <div class="cc-sold">Đã bán: {{ sold_count }}</div>
+                  
+                  {%- if product.compare_at_price > product.price -%}
+                    <div class="cc-compare-price">{{ product.compare_at_price | money }}</div>
                   {%- endif -%}
+                  
                   <div class="cc-actions">
-                    <button class="cc-buy-now" type="button" onclick="window.location.href='{{ product.url }}'">Mua ngay</button>
+                    <button class="cc-buy-now" type="button" onclick="window.location.href='{{ product.url }}'">Thêm vào giỏ hàng</button>
                   </div>
                 </div>
               </div>
@@ -128,27 +147,222 @@
 <style>
   .cc-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(368px, 1fr));
-    gap: 32px 24px;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 24px;
+    padding: 0 0px;
   }
-  .cc-card { width: 368px; justify-self: center; }
-  .cc-image { display: block; width: 368px; height: 275px; flex-shrink: 0; overflow: hidden; border-radius: 12px; }
-  .cc-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .cc-content { width: 368px; height: 170px; flex-shrink: 0; padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-  .cc-title { display: block; color: var(--Typography-Text-1, #212121); font-family: "Be Vietnam Pro", sans-serif; font-size: 25px; font-style: normal; font-weight: 700; text-decoration: none; overflow: hidden; white-space: normal; margin: 0 0 0 0; }
-  .cc-price-row { display: flex; width: 368px; height: 21px; align-items: center; gap: 10px; flex-shrink: 0; }
-  .cc-price { display: inline-flex; align-items: center; gap: 8px; }
-  .cc-price__current { color: #9F332C; font-family: "Be Vietnam Pro", sans-serif; font-size: 18px; font-style: normal; font-weight: 700; line-height: 150%; }
-  .cc-price__compare { color: #8A8A8A; text-decoration: line-through; }
-  .cc-sale-tag { display: inline-flex; padding: 0 8px 0 7px; justify-content: center; align-items: center; border-radius: 8px; border: 1px solid #9F332C; background: #FFF; color: #9F332C; height: 21px; font-weight: 700; font-size: 12px; line-height: 21px; }
-  .cc-sold { color: var(--Typography-Text-1, #212121); font-family: "Be Vietnam Pro", sans-serif; font-size: 16px; font-style: normal; font-weight: 300; line-height: 140%; }
-  .cc-actions { margin-top: auto; }
-  .cc-buy-now { display: flex; width: 146px; height: 40px; padding: 12px 35px; justify-content: center; align-items: center; gap: 10px; flex-shrink: 0; border-radius: 30px; background: #9F332C; color: #fff; border: 0; cursor: pointer; font-family: "Be Vietnam Pro", sans-serif; font-weight: 700; }
+  
+  .cc-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .cc-image-container {
+    position: relative;
+    width: 380px;
+    height: 284px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .cc-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .cc-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .cc-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    z-index: 2;
+  }
+  
+  .cc-badge--top-rated {
+    background: #3264E0;
+  }
+  
+  .cc-badge--best-seller {
+    background: #234085;
+  }
+  
+  .cc-badge--new {
+    background: #234085;
+  }
+  
+  .cc-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .cc-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  
+  .cc-stars {
+    display: flex;
+    gap: 2px;
+  }
+  
+  .cc-star {
+    color: #FFD700;
+    font-size: 14px;
+  }
+  
+  .cc-rating-text {
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .cc-title {
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 27px; /* 135% */
+    letter-spacing: 0.6px;
+    text-decoration: none;
+    margin-bottom: 4px;
+  }
+  
+  .cc-title:hover {
+    color: #3264E0;
+  }
+  
+  .cc-description {
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 27px; /* 135% */
+    letter-spacing: 0.6px;
+    margin-bottom: 8px;
+  }
+  
+  .cc-price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  
+  .cc-price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .cc-price__current {
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 27px; /* 135% */
+    letter-spacing: 0.6px;
+  }
+  
+  .cc-price__discount {
+    background: #FCE390;
+    color: #000;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 27px; /* 135% */
+    letter-spacing: 0.6px;
+  }
+  
+  .cc-compare-price {
+    color: #888;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 27px; /* 150% */
+    letter-spacing: 0.6px;
+    text-decoration-line: line-through;
+    margin-bottom: 12px;
+  }
+  
+  .cc-actions {
+    margin-top: auto;
+  }
+  
+  .cc-buy-now {
+    width: 380px;
+    height: 40px;
+    background: #234085;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .cc-buy-now:hover {
+    background: #3264E0;
+  }
 
   @media (max-width: 768px) {
-    .cc-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-    .cc-card, .cc-image, .cc-content, .cc-price-row { width: 320px; }
-    .cc-image { height: 238px; }
+    .cc-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      padding: 0 15px;
+    }
+    
+    .cc-image-container {
+      width: 100%;
+      height: 180px;
+    }
+    
+    .cc-content {
+      padding: 12px;
+    }
+    
+    .cc-title {
+      font-size: 16px;
+    }
+    
+    .cc-description {
+      font-size: 13px;
+    }
+    
+    .cc-price__current {
+      font-size: 15px;
+    }
+    
+    .cc-buy-now {
+      height: 36px;
+      font-size: 13px;
+    }
   }
 </style>
 

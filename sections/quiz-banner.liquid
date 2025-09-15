@@ -57,14 +57,17 @@
     overflow: hidden;
   }
   .quiz-banner-left {
-    flex-basis: 45%;
-    height: 100%;
+    flex-basis: auto;
+    height: calc(100% - 20px);
+    margin: 10px 0;
     flex-shrink: 0;
+    max-width: 600px;
+    width: auto;
   }
   .quiz-banner-left img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
   .quiz-banner-right {
     flex: 1;
@@ -164,7 +167,9 @@
       margin: 0 auto;
       margin-top: 0px !important;
     }
-    .quiz-banner-left,
+    .quiz-banner-left {
+      display: none;
+    }
     .quiz-banner-subtitle {
       display: none;
     }

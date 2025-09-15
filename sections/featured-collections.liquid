@@ -285,7 +285,7 @@
       flex-wrap: nowrap;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
-      padding: 0;
+      padding: 0 0 20px 0;
     }
   }
 
@@ -364,7 +364,7 @@
 
   /* Product Card Styles */
   [data-section-type="featured-collections"] .product-card {
-    width: calc(25% - 1.5%);
+    width: calc((100% - 60px) / 4);
     flex-shrink: 0;
     border-radius: 5px;
     overflow: hidden;
@@ -377,12 +377,13 @@
 
   [data-section-type="featured-collections"] .product-image-container {
     position: relative;
-    width: 319.8px;
-    height: 240.44px;
-    flex-shrink: 0;
-    background: #FFFDF4;
-    border-radius: 5px;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%;
+    border-radius: 8px;
     overflow: hidden;
+    margin-bottom: 25px;
+    background: #F8F9FA;
     cursor: pointer;
   }
   [data-section-type="featured-collections"] .placeholder-image {
@@ -393,7 +394,7 @@
     align-items: center;
     justify-content: center;
     color: #6C757D;
-    border-radius: 5px;
+    border-radius: 8px;
   }
   [data-section-type="featured-collections"] .product-label {
     position: absolute;
@@ -410,10 +411,13 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
   [data-section-type="featured-collections"] .product-image-primary, [data-section-type="featured-collections"] .product-image-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: opacity 0.3s ease;
   }
   [data-section-type="featured-collections"] .product-image-secondary {
@@ -431,7 +435,7 @@
     opacity: 1 !important;
   }
   [data-section-type="featured-collections"] .product-info {
-    padding: 12px 0 0 0;
+    padding: 0;
     margin: 0;
     text-align: left;
   }
@@ -451,15 +455,16 @@
   }
   [data-section-type="featured-collections"] .product-name {
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
     color: #1C2C58;
     margin: 0 0 6px 0;
-    line-height: 22px;
+    line-height: 140%;
   }
   [data-section-type="featured-collections"] .product-meta {
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12px;
+    font-size: 20px;
+    font-weight: 400;
     color: #666;
     margin-bottom: 6px;
   }
@@ -472,12 +477,12 @@
   }
   [data-section-type="featured-collections"] .price {
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     color: #1A1A1A;
   }
   [data-section-type="featured-collections"] .discount-badge {
-    font-size: 12px;
+    font-size: 20px;
     font-weight: 600;
     color: #234085;
     background: #FCE390;
@@ -486,7 +491,7 @@
   }
   [data-section-type="featured-collections"] .compare-price {
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12px;
+    font-size: 20px;
     color: #999;
     text-decoration: line-through;
     width: 100%;
@@ -553,7 +558,7 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       cursor: grab;
-      padding: 0 20px 20px;
+      padding: 0 20px 30px;
       width: 375px;
     }
     [data-section-type="featured-collections"] .category-tab {
@@ -603,6 +608,7 @@
       height: 200px !important;
       flex-shrink: 0 !important;
       aspect-ratio: unset !important;
+      border-radius: 3px !important;
     }
     
     [data-section-type="featured-collections"] .product-name {

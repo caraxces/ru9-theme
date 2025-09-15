@@ -9,6 +9,54 @@
  */
 {
   "sections": {
+    "slideshow_YkdrHD": {
+      "type": "slideshow",
+      "blocks": {
+        "image_nUxkVn": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "https://rubaby.vn",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "{{ collection.metafields.custom.banner_desktop.value }}",
+            "image_mobile": "{{ collection.metafields.custom.banner_mobile.value }}",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_nUxkVn"
+      ],
+      "settings": {
+        "section_height": "natural",
+        "mobile_height": "500px",
+        "style": "dots",
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "lazyload_images": true,
+        "show_icon_text_bar": true,
+        "icon_bar_background_color": "#fffbeb",
+        "icon_1_title": "100 đêm ngủ thử",
+        "icon_1_type": "sleep",
+        "icon_1_color": "#007bff",
+        "icon_1_image": "shopify://shop_images/Layer_1_1.svg",
+        "icon_2_title": "Miễn phí vận chuyển",
+        "icon_2_type": "payment",
+        "icon_2_color": "#007bff",
+        "icon_2_image": "shopify://shop_images/Layer_1.svg",
+        "icon_3_title": "Thanh toán linh hoạt/Trả góp không lãi suất",
+        "icon_3_type": "shipping",
+        "icon_3_color": "#007bff",
+        "icon_3_image": "shopify://shop_images/Layer_1_2.svg"
+      }
+    },
     "collection-header": {
       "type": "collection-header",
       "custom_css": [
@@ -20,7 +68,7 @@
         "max_width_desc": 2000,
         "align_text": "left",
         "enable": true,
-        "collection_image_enable": true,
+        "collection_image_enable": false,
         "show_collection_description": false
       }
     },
@@ -73,6 +121,9 @@
         "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
         "title": "Đâu là chiếc nệm\nphù hợp với bạn?",
         "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
+        "button_1_text": "Quizz chọn nệm",
+        "button_2_text": "So sánh các loại nệm",
+        "button_2_link": "",
         "q_1_title": "Question 1?",
         "q_1_a_1_text": "",
         "q_1_a_1_tags": "",
@@ -260,42 +311,72 @@
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>"
+            "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
           }
         },
         "review_ME69kT": {
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>"
+            "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
           }
         },
         "review_yMHfeP": {
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>"
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
           }
         },
         "review_FmJHcf": {
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>"
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
           }
         },
         "review_gXepw8": {
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>"
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
           }
         },
         "review_xPn64L": {
           "type": "review",
           "settings": {
             "customer_name": "Phuong Nguyen",
-            "review_text": "<p></p>"
+            "review_text": "<p></p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
           }
         }
       },
@@ -351,7 +432,8 @@
             "icon": "shopify://shop_images/100-dem-ngu-thu_1.svg",
             "item_title": "100 đêm ngủ thử",
             "item_note": "",
-            "item_description": "<p>Trải nghiệm sản phẩm<br/>ngay tại nhà với cam kết<br/>đổi trả linh hoạt.</p>"
+            "item_description": "<p>Trải nghiệm sản phẩm<br/>ngay tại nhà với cam kết<br/>đổi trả linh hoạt.</p>",
+            "item_link": ""
           }
         },
         "service_item_fJkXVP": {
@@ -360,7 +442,8 @@
             "icon": "shopify://shop_images/Free_shipping_1.png",
             "item_title": "Miễn phí vận chuyển",
             "item_note": "(từ 1.500.000vnd)",
-            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>"
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>",
+            "item_link": ""
           }
         },
         "service_item_Ry6FnG": {
@@ -369,7 +452,8 @@
             "icon": "shopify://shop_images/Group_48.svg",
             "item_title": "Bảo hành dài lâu",
             "item_note": "",
-            "item_description": "<p>Mỗi chiếc nệm được<br/>bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>"
+            "item_description": "<p>Mỗi chiếc nệm được<br/>bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>",
+            "item_link": ""
           }
         },
         "service_item_7y66Fn": {
@@ -378,7 +462,8 @@
             "icon": "shopify://shop_images/Group_48.svg",
             "item_title": "Thanh toán linh hoạt",
             "item_note": "",
-            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>"
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>",
+            "item_link": ""
           }
         }
       },
@@ -400,6 +485,7 @@
       "settings": {
         "title": "Blog posts",
         "view_all": true,
+        "view_all_link": "",
         "view_all_text": ""
       }
     },
@@ -506,6 +592,7 @@
     }
   },
   "order": [
+    "slideshow_YkdrHD",
     "collection-header",
     "independent_webhook_popup_6ky34i",
     "main_collection_custom_Y4Wd87",
