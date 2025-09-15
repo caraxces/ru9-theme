@@ -280,14 +280,9 @@
     color: #555;
   }
   
-  /* Style for firmness variant - bold and uppercase before dash */
-  .is-firmness .variant__button-label .label-head,
-  .variant-wrapper.is-firmness .variant__button-label .label-head,
-  .variant-wrapper[class*="firmness"] .variant__button-label .label-head,
-  .variant-wrapper[class*="softness"] .variant__button-label .label-head,
-  .variant-wrapper[class*="êm"] .variant__button-label .label-head {
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
+  /* Comfort top variant styling - Simple approach */
+  .variant-input-wrap[data-index="option2"] .variant__button-label {
+    color: #212121 !important;
   }
 
   /* Color Swatch Styles */
@@ -863,14 +858,9 @@
       font-size: 12px;
     }
     
-    /* Style for firmness variant - bold and uppercase before dash */
-    .is-firmness .variant__button-label .label-head,
-    .variant-wrapper.is-firmness .variant__button-label .label-head,
-    .variant-wrapper[class*="firmness"] .variant__button-label .label-head,
-    .variant-wrapper[class*="softness"] .variant__button-label .label-head,
-    .variant-wrapper[class*="êm"] .variant__button-label .label-head {
-      font-weight: 700 !important;
-      text-transform: uppercase !important;
+    /* Comfort top variant styling - Simple approach */
+    .variant-input-wrap[data-index="option2"] .variant__button-label {
+      color: #212121 !important;
     }
 
     /* Color Swatch Mobile Styles */
@@ -2437,6 +2427,24 @@ document.addEventListener('DOMContentLoaded', function() {
 // Mobile thumbnail click handler
 document.addEventListener('DOMContentLoaded', function() {
   initMobileThumbClick('{{ section_id }}');
+  
+  // Split Comfort top text before and after dash (remove dash)
+  function splitComfortTopText() {
+    const comfortLabels = document.querySelectorAll('.variant-input-wrap[data-index="option2"] .variant__button-label');
+    comfortLabels.forEach(label => {
+      const text = label.textContent.trim();
+      if (text.includes(' - ')) {
+        const [beforeDash, afterDash] = text.split(' - ');
+        label.innerHTML = `<span style="font-weight: 500; text-transform: uppercase; color: #212121;">${beforeDash}</span> <span style="font-weight: 400; color: #212121;">${afterDash}</span>`;
+      }
+    });
+  }
+  
+  // Run on page load
+  splitComfortTopText();
+  
+  // Run when variants change
+  document.addEventListener('variant:change', splitComfortTopText);
 });
 
 function initMobileThumbClick(sectionId) {

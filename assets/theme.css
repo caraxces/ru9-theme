@@ -16200,9 +16200,55 @@ html[dir="rtl"] .product-single__meta .rte {
 .variant-wrapper.is-firmness .variant__button-label .label-head,
 .variant-wrapper[class*="firmness"] .variant__button-label .label-head,
 .variant-wrapper[class*="softness"] .variant__button-label .label-head,
-.variant-wrapper[class*="êm"] .variant__button-label .label-head {
+.variant-wrapper[class*="comfort"] .variant__button-label .label-head,
+.variant-wrapper[class*="êm"] .variant__button-label .label-head,
+.variant-wrapper[data-handle="softness"] .variant__button-label .label-head,
+.variant-wrapper[data-handle="dộ-em"] .variant__button-label .label-head,
+.variant-wrapper[data-handle="comfort-top"] .variant__button-label .label-head,
+.variant-input-wrap[data-handle="softness"] .variant__button-label .label-head,
+.variant-input-wrap[data-handle="dộ-em"] .variant__button-label .label-head,
+.variant-input-wrap[data-handle="comfort-top"] .variant__button-label .label-head {
   font-weight: 700 !important;
   text-transform: uppercase !important;
+}
+
+/* Target option 2 specifically for Comfort top */
+.variant-input-wrap[data-index="option2"] .variant__button-label .label-head {
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+/* More specific targeting for Comfort top */
+.variant-input-wrap[data-index="option2"] .variant__button-label .label-head,
+.variant-input-wrap[data-index="option2"] .variant-input .variant__button-label .label-head,
+.variant-input-wrap[data-index="option2"] .variant-input input[type="radio"] + .variant__button-label .label-head {
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  color: #1C2C58 !important;
+}
+
+/* Ultra specific targeting for Comfort top - force override */
+.variant-input-wrap[data-index="option2"] .variant__button-label .label-head,
+.variant-input-wrap[data-index="option2"] .variant-input .variant__button-label .label-head,
+.variant-input-wrap[data-index="option2"] .variant-input input[type="radio"] + .variant__button-label .label-head {
+  font-weight: 700 !important !important;
+  text-transform: uppercase !important !important;
+  color: #1C2C58 !important !important;
+}
+
+/* Universal targeting for any option 2 variant */
+[data-index="option2"] .label-head,
+[data-index="option2"] .variant__button-label .label-head,
+[data-index="option2"] .variant-input .label-head,
+[data-index="option2"] .variant-input .variant__button-label .label-head {
+  font-weight: 700 !important !important;
+  text-transform: uppercase !important !important;
+  color: #1C2C58 !important !important;
+}
+
+/* Comfort top variant styling - Simple approach */
+.variant-input-wrap[data-index="option2"] .variant__button-label {
+  color: #212121 !important;
 }
 
 /* Force mobile scroller to show for huan-false */
