@@ -284,6 +284,27 @@
   .variant-input-wrap[data-index="option2"] .variant__button-label {
     color: #212121 !important;
   }
+  
+  /* Make Comfort top variants share width equally and match height with other blocks */
+  .variant-input-wrap[data-index="option2"] {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+  }
+  
+  .variant-input-wrap[data-index="option2"] .variant-input {
+    flex: 1 !important;
+    width: 50% !important;
+  }
+  
+  .variant-input-wrap[data-index="option2"] .variant__button-label {
+    width: 100% !important;
+    min-height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
 
   /* Color Swatch Styles */
   .is-color .variant-input-wrap {
@@ -861,6 +882,27 @@
     /* Comfort top variant styling - Simple approach */
     .variant-input-wrap[data-index="option2"] .variant__button-label {
       color: #212121 !important;
+    }
+    
+    /* Make Comfort top variants share width equally and match height with other blocks - Mobile */
+    .variant-input-wrap[data-index="option2"] {
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 8px !important;
+    }
+    
+    .variant-input-wrap[data-index="option2"] .variant-input {
+      flex: 1 !important;
+      width: 50% !important;
+    }
+    
+    .variant-input-wrap[data-index="option2"] .variant__button-label {
+      width: 100% !important;
+      min-height: 50px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
     }
 
     /* Color Swatch Mobile Styles */
@@ -2435,7 +2477,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const text = label.textContent.trim();
       if (text.includes(' - ')) {
         const [beforeDash, afterDash] = text.split(' - ');
-        label.innerHTML = `<span style="font-weight: 500; text-transform: uppercase; color: #212121;">${beforeDash}</span> <span style="font-weight: 400; color: #212121;">${afterDash}</span>`;
+        // Capitalize first letter only
+        const capitalizedBeforeDash = beforeDash.charAt(0).toUpperCase() + beforeDash.slice(1).toLowerCase();
+        label.innerHTML = `<span style="font-weight: 500; color: #212121;">${capitalizedBeforeDash}</span> <span style="font-weight: 400; color: #212121;">${afterDash}</span>`;
       }
     });
   }

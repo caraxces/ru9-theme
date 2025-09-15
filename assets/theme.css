@@ -16251,6 +16251,27 @@ html[dir="rtl"] .product-single__meta .rte {
   color: #212121 !important;
 }
 
+/* Make Comfort top variants share width equally and match height with other blocks */
+.variant-input-wrap[data-index="option2"] {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 8px !important;
+}
+
+.variant-input-wrap[data-index="option2"] .variant-input {
+  flex: 1 !important;
+  width: 50% !important;
+}
+
+.variant-input-wrap[data-index="option2"] .variant__button-label {
+  width: 100% !important;
+  min-height: 60px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
 /* Force mobile scroller to show for huan-false */
 @media screen and (max-width: 768px) {
   .huan-false .product__thumbs--scroller {
