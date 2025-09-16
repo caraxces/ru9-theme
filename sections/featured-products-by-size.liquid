@@ -338,7 +338,7 @@
     width: 380px;
     height: 284px;
     background: #FFFDF4;
-    border-radius: 5px;
+    border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
   }
@@ -350,7 +350,7 @@
     align-items: center;
     justify-content: center;
     color: #6C757D;
-    border-radius: 5px;
+    border-radius: 8px;
   }
   [data-section-id="{{ section.id }}"] .product-label {
     position: absolute;
@@ -368,7 +368,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: opacity 0.3s ease;
   }
   [data-section-id="{{ section.id }}"] .product-image-secondary {
@@ -434,8 +434,8 @@
   [data-section-id="{{ section.id }}"] .discount-badge {
     font-size: 12px;
     font-weight: 600;
-    color: #3264E0;
-    background-color: #EBF5FF;
+    color: #234085;
+    background-color: #FCE390;
     padding: 2px 5px;
     border-radius: 4px;
   }
@@ -482,7 +482,7 @@
   /* Mobile screens */
   @media (max-width: 768px) {
     [data-section-id="{{ section.id }}"] .featured-collections-section {
-      padding: 0 20px;
+      padding: 0 15px;
     }
     [data-section-id="{{ section.id }}"] .section-header {
       flex-direction: row !important;
@@ -504,7 +504,7 @@
     [data-section-id="{{ section.id }}"] .category-tabs-container {
       order: 3;
       width: 100%;
-      margin: 0 -20px 24px -20px;
+      margin: 0 -15px 24px -15px;
       position: relative;
     }
     [data-section-id="{{ section.id }}"] .category-tabs-container::after {
@@ -518,22 +518,22 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       cursor: grab;
-      padding: 0 20px;
+      padding: 0 15px;
     }
     [data-section-id="{{ section.id }}"] .category-tabs::-webkit-scrollbar {
         display: none;
     }
     [data-section-id="{{ section.id }}"] .product-carousel-section {
-      margin: 0 -20px;
+      margin: 0 -15px;
     }
     [data-section-id="{{ section.id }}"] .product-carousel {
-      padding: 0 20px;
+      padding: 0 15px;
       overflow: visible;
     }
     [data-section-id="{{ section.id }}"] .product-cards-container {
       display: grid !important;
       grid-template-columns: 1fr 1fr !important;
-      grid-template-rows: auto auto !important;
+      grid-auto-rows: auto !important;
       gap: 16px !important;
       transform: none !important;
     }
@@ -543,7 +543,7 @@
       min-width: auto;
       display: block !important;
     }
-    [data-section-id="{{ section.id }}"] .product-card:nth-child(n+5) {
+    [data-section-id="{{ section.id }}"] .product-card[style*="display: none"] {
       display: none !important;
     }
     [data-section-id="{{ section.id }}"] .product-image-container {
@@ -551,6 +551,7 @@
       height: 129px !important;
       flex-shrink: 0 !important;
       aspect-ratio: unset !important;
+      border-radius: 3px !important;
     }
     [data-section-id="{{ section.id }}"] .product-name {
       color: #1C2C58 !important;
@@ -597,7 +598,7 @@
   
   @media (max-width: 480px) {
     [data-section-id="{{ section.id }}"] .section-title {
-      font-size: 24px !important;
+      font-size: 20px !important;
     }
     [data-section-id="{{ section.id }}"] .category-tab {
       font-size: 16px !important;
@@ -804,16 +805,28 @@
       const isMobile = window.innerWidth <= 768;
       const maxMobileCards = isMobile ? 4 : allProductCards.length;
       
+      // Reset all cards first
+      allProductCards.forEach(card => {
+        card.style.display = 'none';
+        card.classList.remove('is-visible');
+      });
+      
+      // Show matching cards
       allProductCards.forEach(card => {
         const cardSize = card.getAttribute('data-size');
         if (cardSize === size && visibleCount < maxMobileCards) {
           card.style.display = 'block';
+          card.classList.add('is-visible');
           visibleCount++;
-        } else {
-          card.style.display = 'none';
         }
       });
       
+      // Force reflow để đảm bảo CSS grid cập nhật
+      if (isMobile) {
+        productCardsContainer.style.display = 'none';
+        productCardsContainer.offsetHeight; // Trigger reflow
+        productCardsContainer.style.display = 'grid';
+      }
       
       if (carousel) carousel.reset();
     }

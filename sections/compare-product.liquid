@@ -26,139 +26,135 @@
 
     <!-- Desktop Comparison Table -->
     <div class="mattress-comparison-table desktop-table small--hide">
-      <table>
-        <!-- Header Row -->
-        <tr class="header-row">
-          <th class="first-column"></th>
-          {%- for block in section.blocks -%}
-            <th class="product-column">{{ block.settings.product_title }}</th>
-          {%- endfor -%}
-        </tr>
+      <div class="table-container">
+        <div class="table-wrapper">
+          <table>
+            <!-- Header Row -->
+            <tr class="header-row">
+              <th class="first-column"></th>
+              {%- for block in section.blocks -%}
+                <th class="product-column">{{ block.settings.product_title }}</th>
+              {%- endfor -%}
+            </tr>
         
-        <!-- Image Row -->
-        <tr class="image-row">
-          <td class="first-column"></td>
-          {%- for block in section.blocks -%}
-            <td class="product-column">
-              {%- if block.settings.product_image -%}
-                <img 
-                  src="{{ block.settings.product_image | image_url: width: 300, height: 300, crop: 'center' }}" 
-                  alt="{{ block.settings.product_title }}"
-                  width="150"
-                  height="150"
-                  style="margin: 0 auto; display: block;"
-                  loading="lazy"
-                >
-              {%- endif -%}
-            </td>
-          {%- endfor -%}
-        </tr>
+            <!-- Image Row -->
+            <tr class="image-row">
+              <td class="first-column"></td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">
+                  {%- if block.settings.product_image -%}
+                    <img 
+                      src="{{ block.settings.product_image | image_url: width: 320, height: 240, crop: 'center' }}" 
+                      alt="{{ block.settings.product_title }}"
+                      width="320"
+                      height="240"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
         
-        <!-- Features Row -->
-        <tr class="features-row">
-          <td class="first-column">Đặc tính sản phẩm</td>
-          {%- for block in section.blocks -%}
-            <td class="product-column">
-              {{ block.settings.product_features | newline_to_br }}
-            </td>
-          {%- endfor -%}
-        </tr>
+            <!-- Features Row -->
+            <tr class="features-row">
+              <td class="first-column">Đặc tính sản phẩm</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">
+                  {{ block.settings.product_features | newline_to_br }}
+                </td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Comfort Row -->
+            <tr class="comfort-row">
+              <td class="first-column">Độ êm ái</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">
+                  {%- if block.settings.comfort_layer_1_image -%}
+                    <img 
+                      src="{{ block.settings.comfort_layer_1_image | image_url: width: 150, height: 150, crop: 'center' }}" 
+                      alt="Layer 1"
+                      width="160"
+                      height="60"
+                      style="margin: 0 auto; display: block;"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                  {%- if block.settings.comfort_layer_2_image -%}
+                    <img 
+                      src="{{ block.settings.comfort_layer_2_image | image_url: width: 150, height: 150, crop: 'center' }}" 
+                      alt="Layer 2"
+                      width="160"
+                      height="60"
+                      style="margin: 0 auto; display: block;"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Height Row -->
+            <tr class="height-row">
+              <td class="first-column">Độ cao sản phẩm</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">{{ block.settings.product_thickness }}</td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Target Users Row -->
+            <tr class="target-users-row">
+              <td class="first-column">Đối tượng sử dụng</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">
+                  {{ block.settings.suitable_for | newline_to_br }}
+                </td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Price Row -->
+            <tr class="price-row">
+              <td class="first-column">Giá sản phẩm</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">{{ block.settings.product_price }}</td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Buy Button Row -->
+            <tr class="button-row">
+              <td class="first-column"></td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">
+                  <a href="{{ block.settings.product_url }}" class="buy-button">MUA NGAY</a>
+                </td>
+              {%- endfor -%}
+            </tr>
+          </table>
+        </div>
         
-        <!-- Comfort Row -->
-        <tr class="comfort-row">
-          <td class="first-column">Độ êm ái</td>
-          {%- for block in section.blocks -%}
-            <td class="product-column">
-              {%- if block.settings.comfort_layer_1_image -%}
-                <img 
-                  src="{{ block.settings.comfort_layer_1_image | image_url: width: 150, height: 150, crop: 'center' }}" 
-                  alt="Layer 1"
-                  width="160"
-                  height="60"
-                  style="margin: 0 auto; display: block;"
-                  loading="lazy"
-                >
-              {%- endif -%}
-              {%- if block.settings.comfort_layer_2_image -%}
-                <img 
-                  src="{{ block.settings.comfort_layer_2_image | image_url: width: 150, height: 150, crop: 'center' }}" 
-                  alt="Layer 2"
-                  width="160"
-                  height="60"
-                  style="margin: 0 auto; display: block;"
-                  loading="lazy"
-                >
-              {%- endif -%}
-            </td>
-          {%- endfor -%}
-        </tr>
-        
-        <!-- Height Row -->
-        <tr class="height-row">
-          <td class="first-column">Độ cao sản phẩm</td>
-          {%- for block in section.blocks -%}
-            <td class="product-column">{{ block.settings.product_thickness }}</td>
-          {%- endfor -%}
-        </tr>
-        
-        <!-- Target Users Row -->
-        <tr class="target-users-row">
-          <td class="first-column">Đối tượng sử dụng</td>
-          {%- for block in section.blocks -%}
-            <td class="product-column">
-              {{ block.settings.suitable_for | newline_to_br }}
-            </td>
-          {%- endfor -%}
-        </tr>
-        
-        <!-- Price Row -->
-        <tr class="price-row">
-          <td class="first-column">Giá sản phẩm</td>
-          {%- for block in section.blocks -%}
-            <td class="product-column">{{ block.settings.product_price }}</td>
-          {%- endfor -%}
-        </tr>
-        
-        <!-- Buy Button Row -->
-        <tr class="button-row">
-          <td class="first-column"></td>
-          {%- for block in section.blocks -%}
-            <td class="product-column">
-              <a href="{{ block.settings.product_url }}" class="buy-button">MUA NGAY</a>
-            </td>
-          {%- endfor -%}
-        </tr>
-      </table>
+      </div>
     </div>
     
     <!-- Mobile Comparison Table -->
     <div class="mattress-comparison-mobile medium-up--hide">
       <div class="mobile-comparison-table">
         <table>
-          <!-- Header Row -->
+          <!-- Header Row with Images Combined -->
           <tr class="header-row">
             <th class="first-column"></th>
             {%- for block in section.blocks -%}
-              <th class="product-column">{{ block.settings.product_title }}</th>
-            {%- endfor -%}
-          </tr>
-          
-          <!-- Image Row -->
-          <tr class="image-row">
-            <td class="first-column"></td>
-            {%- for block in section.blocks -%}
-              <td class="product-column">
+              <th class="product-column">
+                <span class="product-title">{{ block.settings.product_title }}</span>
                 {%- if block.settings.product_image -%}
-                  <img 
-                    src="{{ block.settings.product_image | image_url: width: 300, height: 300, crop: 'center' }}" 
-                    alt="{{ block.settings.product_title }}"
-                    width="150"
-                    height="150"
-                    style="margin: 0 auto; display: block;"
-                    loading="lazy"
-                  >
+                  <div class="image-container">
+                    <img 
+                      src="{{ block.settings.product_image | image_url: width: 318, height: 224, crop: 'center' }}" 
+                      alt="{{ block.settings.product_title }}"
+                      loading="lazy"
+                    >
+                  </div>
                 {%- endif -%}
-              </td>
+              </th>
             {%- endfor -%}
           </tr>
           
@@ -248,13 +244,113 @@
     width: 100%;
     margin-top: 30px;
     font-family: 'Be Vietnam Pro', sans-serif;
+    position: relative;
+  }
+  
+  /* Standard padding for compare-product section */
+  .compare-products .page-width {
+    max-width: none;
+    padding: 0;
+    margin: 0 60px;
+  }
+  
+  /* Large screens - maintain fixed padding */
+  @media (min-width: 1400px) {
+    .compare-products .page-width {
+      margin: 0 60px;
+    }
+  }
+  
+  /* Medium screens - responsive padding */
+  @media (max-width: 1399px) and (min-width: 1024px) {
+    .compare-products .page-width {
+      margin: 0 60px;
+    }
+  }
+  
+  /* Small screens - responsive padding */
+  @media (max-width: 1023px) and (min-width: 769px) {
+    .compare-products .page-width {
+      margin: 0 clamp(30px, 5vw, 60px) 0 clamp(20px, 4vw, 40px);
+    }
+  }
+  
+  /* Mobile screens */
+  @media (max-width: 768px) {
+    .compare-products .page-width {
+      margin: 0 !important;
+      padding: 0 15px !important;
+    }
+  }
+  
+  /* Override any conflicting styles */
+  .compare-products .page-width {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+  
+  /* Ensure section padding is consistent */
+  .compare-products.section-padding {
+    padding: 60px 0 !important;
+  }
+  
+  @media (max-width: 768px) {
+    .compare-products.section-padding {
+      padding: 30px 0 !important;
+    }
+  }
+  
+  .table-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .table-wrapper {
+    display: flex;
+    transition: transform 0.3s ease;
+    overflow-x: auto;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .table-wrapper.grabbing {
+    cursor: grabbing;
+  }
+  
+  .table-wrapper.grabbing .product-column {
+    pointer-events: none;
+  }
+  
+  /* Custom scrollbar styling like featured-collections */
+  .table-wrapper::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .table-wrapper::-webkit-scrollbar-track {
+    background: #F0F1EF;
+    border-radius: 100px;
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background: #234085;
+    border-radius: 100px;
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b;
+  }
+  
+  .table-wrapper::-webkit-scrollbar-button {
+    display: none;
   }
   
   .mattress-comparison-table table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed; /* Critical for equal column widths */
+    table-layout: fixed;
     border: 1px solid #e0e0e0;
+    flex-shrink: 0;
   }
   
   .mattress-comparison-table th,
@@ -267,15 +363,22 @@
   
   /* Column Widths */
   .first-column {
-    width: 15%;
+    width: 200px;
+    min-width: 200px;
     background-color: #fff;
     font-weight: bold;
     text-align: left;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   }
   
   .product-column {
-    width: calc(85% / {{ section.blocks.size }}); /* Distribute remaining width evenly */
+    width: 320px;
+    min-width: 320px;
     text-align: left;
+    flex-shrink: 0;
   }
   
   /* Header Row */
@@ -290,14 +393,15 @@
   .image-row td {
     text-align: center;
     vertical-align: middle;
-    padding: 20px 15px;
+    padding: 0;
+    height: 240px;
   }
   
   .image-row img {
-    max-width: 100%;
-    height: auto;
-    max-height: 150px;
-    object-fit: contain;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
   }
   
   /* Features Row */
@@ -351,6 +455,7 @@
     background-color: #333;
     color: white;
   }
+  
   
   /* Mobile Styles */
   .mattress-comparison-mobile {
@@ -407,7 +512,57 @@
   .mobile-comparison-table .product-column {
     width: 200px;
     min-width: 200px;
-    text-align: left;
+    text-align: center;
+  }
+  
+  /* Mobile Header Row - Title Above Image */
+  .mobile-comparison-table .header-row .product-column {
+    padding: 10px 10px 15px 10px;
+    text-align: center;
+    background-color: #fff;
+  }
+  
+  /* Mobile Product Column - White Background */
+  .mobile-comparison-table .product-column {
+    background-color: #fff;
+  }
+  
+  /* Mobile Features Row - Blue Background */
+  .mobile-comparison-table .features-row .product-column {
+    background-color: #F0F7FF;
+  }
+  
+  /* Mobile Height Row - Blue Background */
+  .mobile-comparison-table .height-row .product-column {
+    background-color: #F0F7FF;
+  }
+  
+  /* Mobile Price Row - Blue Background */
+  .mobile-comparison-table .price-row .product-column {
+    background-color: #F0F7FF;
+  }
+  
+  .mobile-comparison-table .header-row .product-title {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1C2C58;
+    text-transform: capitalize;
+    text-decoration: underline;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  
+  .mobile-comparison-table .header-row .image-container {
+    padding: 0 13px;
+  }
+  
+  .mobile-comparison-table .header-row .image-container img {
+    width: 100%;
+    height: 112px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
   }
   
   /* Section Header Styles */
@@ -417,7 +572,7 @@
   }
   
   .section-header__title {
-    font-family: 'Tinos', serif;
+    font-family: 'Be Vietnam Pro',sans-serif;
     color: #1C2C58;
     font-size: 38px;
     font-style: normal;
@@ -430,6 +585,87 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Desktop table drag functionality
+    function initDesktopDrag() {
+      const tableWrapper = document.querySelector('.table-wrapper');
+      
+      if (!tableWrapper) return;
+      
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      let isDragging = false;
+
+      function dragStart(e) {
+        // Don't start drag if clicking on product links or buttons
+        if (e.target.closest('a') || e.target.closest('button')) {
+          isDown = false;
+          return;
+        }
+        isDown = true;
+        isDragging = false;
+        tableWrapper.classList.add('grabbing');
+        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+        scrollLeft = tableWrapper.scrollLeft;
+        if (e.type === 'touchstart') {
+          window.addEventListener('touchmove', dragMove);
+          window.addEventListener('touchend', dragEnd);
+        }
+      }
+
+      function dragMove(e) {
+        if (!isDown) return;
+        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
+        const walk = currentX - startX;
+        
+        if (Math.abs(walk) > 5) {
+          isDragging = true;
+        }
+        
+        if (isDragging) {
+          e.preventDefault();
+        }
+        
+        tableWrapper.scrollLeft = scrollLeft - walk;
+      }
+
+      function dragEnd() {
+        if (!isDown) return;
+        isDown = false;
+        isDragging = false;
+        tableWrapper.classList.remove('grabbing');
+        window.removeEventListener('touchmove', dragMove);
+        window.removeEventListener('touchend', dragEnd);
+      }
+
+      // Mouse events
+      tableWrapper.addEventListener('mousedown', dragStart);
+      tableWrapper.addEventListener('mousemove', dragMove);
+      tableWrapper.addEventListener('mouseup', dragEnd);
+      tableWrapper.addEventListener('mouseleave', dragEnd);
+
+      // Touch events
+      tableWrapper.addEventListener('touchstart', dragStart);
+
+      // Prevent link clicks when dragging
+      tableWrapper.addEventListener('click', (e) => {
+        if (isDragging) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+
+      // Prevent default link behavior during drag
+      tableWrapper.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', e => {
+          if (isDragging) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        });
+      });
+    }
+    
     // Function to match row heights in mobile table
     function matchRowHeights() {
       if (window.innerWidth <= 768) {
@@ -459,12 +695,21 @@
       }
     }
     
+    // Initialize drag functionality
+    initDesktopDrag();
+    
     // Run on load and resize
-    window.addEventListener('resize', matchRowHeights);
-    window.addEventListener('load', matchRowHeights);
+    window.addEventListener('resize', () => {
+      matchRowHeights();
+    });
+    window.addEventListener('load', () => {
+      matchRowHeights();
+    });
     
     // Run after a short delay to ensure all content is loaded
-    setTimeout(matchRowHeights, 500);
+    setTimeout(() => {
+      matchRowHeights();
+    }, 500);
   });
 </script>
 
@@ -520,7 +765,7 @@
     {
       "type": "product",
       "name": "Sản phẩm",
-      "limit": 4,
+      "limit": 10,
       "settings": [
         {
           "type": "text",

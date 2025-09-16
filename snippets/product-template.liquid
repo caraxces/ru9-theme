@@ -155,7 +155,8 @@
     border-bottom: none;
     margin-bottom: 16px;
     flex-shrink: 0;
-    max-width: 646px;
+    max-width: 100%;
+    width: 100%;
   }
   .product-accordion--styled summary {
     padding: 20px 0;
@@ -210,7 +211,7 @@
   .is-size .variant-input-wrap,
   .is-firmness .variant-input-wrap {
     display: grid;
-    gap: 16px;
+    gap: 12px;
     margin-bottom: 16px;
   }
   .is-size .variant-input,
@@ -277,6 +278,32 @@
     font-size: 14px;
     font-weight: 400;
     color: #555;
+  }
+  
+  /* Comfort top variant styling - Simple approach */
+  .variant-input-wrap[data-index="option2"] .variant__button-label {
+    color: #212121 !important;
+  }
+  
+  /* Make Comfort top variants share width equally and match height with other blocks */
+  .variant-input-wrap[data-index="option2"] {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+  }
+  
+  .variant-input-wrap[data-index="option2"] .variant-input {
+    flex: 1 !important;
+    width: 50% !important;
+  }
+  
+  .variant-input-wrap[data-index="option2"] .variant__button-label {
+    width: 100% !important;
+    min-height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
   }
 
   /* Color Swatch Styles */
@@ -372,7 +399,7 @@
   }
   .promotion-vouchers {
     display: flex;
-    max-width: 646px;
+    max-width: 100%;
     width: 100%;
     min-height: 55px;
     padding: 4px 16px;
@@ -501,8 +528,8 @@
   @media screen and (min-width: 769px) {
     .product-section > .page-content > .page-width {
       max-width: 100%;
-      padding-left: 120px;
-      padding-right: 110px;
+      padding-left: 60px;
+      padding-right: 60px;
     }
   }
 
@@ -510,6 +537,23 @@
     display: grid;
     grid-gap: 20px;
     align-items: start;
+  }
+
+  /* Ensure all product blocks have consistent width and padding */
+  .product-block {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .product-block--price {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .product-block--service-carousel,
+  .product-block--service-grid {
+    width: 100%;
+    max-width: 100%;
   }
 
   .product-grid--medium .product-grid__images {
@@ -582,9 +626,165 @@
         object-fit: cover;
     }
 
-    /* Hide thumbnails on mobile */
+    /* Mobile thumbnail gallery */
     .product__thumbs {
+      display: block !important;
+      margin-top: 0px;
+      padding: 0 0px;
+    }
+    
+    .product__thumbs--scroller {
+      display: flex !important;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    
+    .product__thumbs--scroller::-webkit-scrollbar {
       display: none;
+    }
+    
+    .product__thumb-item {
+      flex-shrink: 0;
+      display: block !important;
+      position: relative !important;
+    }
+    
+    .product__thumb {
+      width: 51px !important;
+      height: 52px !important;
+      border-radius: 2px;
+      overflow: hidden;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    
+    .product__thumb-item.is-active .product__thumb,
+    .product__thumb-item:active .product__thumb {
+      width: 58px !important;
+      height: 58px !important;
+      flex-shrink: 0;
+    }
+    
+    .product__thumb-item.is-active .product__thumb .image-wrap,
+    .product__thumb-item:active .product__thumb .image-wrap {
+      width: 58px !important;
+      height: 58px !important;
+    }
+    
+    .product__thumb-item.is-active .product__thumb .image-wrap img,
+    .product__thumb-item:active .product__thumb .image-wrap img {
+      width: 58px !important;
+      height: 58px !important;
+    }
+    
+    .product__thumb .image-wrap {
+      width: 51px !important;
+      height: 52px !important;
+      padding-bottom: 0 !important;
+      position: relative;
+    }
+    
+    .product__thumb .image-wrap img {
+      width: 51px !important;
+      height: 52px !important;
+      object-fit: cover !important;
+      border-radius: 2px !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    .product__thumb-arrow {
+      display: none !important;
+    }
+    
+    /* Override any existing styles */
+    .huan-true .product__thumbs--scroller {
+      display: flex !important;
+    }
+    
+    .huan-true .product__thumb-item {
+      display: block !important;
+      position: relative !important;
+    }
+    
+    /* Mobile scroller for huan-false */
+    .huan-false .product__thumbs--scroller {
+      display: flex !important;
+      gap: 8px !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: #1C2C58 #F5F5F5 !important;
+      padding: 0 10px 15px 10px !important;
+      margin: 0 -10px !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar {
+      height: 4px !important;
+      display: block !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar-track {
+      background: #F5F5F5 !important;
+      border-radius: 100px !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar-thumb {
+      background: #1C2C58 !important;
+      border-radius: 100px !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+      background: #234085 !important;
+    }
+    
+    /* Force scrollbar to show */
+    .huan-false .product__thumbs--scroller {
+      scrollbar-gutter: stable !important;
+    }
+    
+    /* Mobile scroller for product__thumbs--below */
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller {
+      display: flex !important;
+      gap: 8px !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: #1C2C58 #F5F5F5 !important;
+      padding: 0 10px 15px 10px !important;
+      margin: 0 -10px !important;
+    }
+    
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar {
+      height: 4px !important;
+      display: block !important;
+    }
+    
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-track {
+      background: #F5F5F5 !important;
+      border-radius: 100px !important;
+    }
+    
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb {
+      background: #1C2C58 !important;
+      border-radius: 100px !important;
+    }
+    
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+      background: #234085 !important;
+    }
+    
+    .product__thumbs.product__thumbs--below .product__thumbs--scroller {
+      scrollbar-gutter: stable !important;
+    }
+    
+    /* Active state styling */
+    .product__thumb-item.is-active {
+      z-index: 2;
     }
 
     .product-single__meta .jdgm-widget--product-rating {
@@ -651,10 +851,11 @@
     
     .is-size .variant-input-wrap {
       grid-template-columns: repeat(3, 1fr) !important;
-      gap: 2px;
+      gap: 8px !important;
     }
     .is-size .variant-input-wrap .variant-input {
       grid-column: unset !important;
+      margin: 0 !important;
     }
     .is-size .variant-input-wrap[data-option-count="6"] {
         /* Specific override for 6 items to create 3x2 grid */
@@ -663,7 +864,11 @@
     
     .variant-wrapper:not(.is-color) .variant__button-label {
       min-height: 50px;
-      padding: 8px;
+      padding: 8px 4px;
+    }
+    
+    .is-size .variant-input-wrap .variant-input {
+      margin: 0 !important;
     }
     
     .variant-wrapper:not(.is-color) .variant__button-label .label-head {
@@ -672,6 +877,32 @@
 
     .variant-wrapper:not(.is-color) .variant__button-label .label-value {
       font-size: 12px;
+    }
+    
+    /* Comfort top variant styling - Simple approach */
+    .variant-input-wrap[data-index="option2"] .variant__button-label {
+      color: #212121 !important;
+    }
+    
+    /* Make Comfort top variants share width equally and match height with other blocks - Mobile */
+    .variant-input-wrap[data-index="option2"] {
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 8px !important;
+    }
+    
+    .variant-input-wrap[data-index="option2"] .variant-input {
+      flex: 1 !important;
+      width: 50% !important;
+    }
+    
+    .variant-input-wrap[data-index="option2"] .variant__button-label {
+      width: 100% !important;
+      min-height: 50px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
     }
 
     /* Color Swatch Mobile Styles */
@@ -692,7 +923,7 @@
 
     .size-guide-text-dropdown-container,
     .product-accordion--styled {
-      width: 360px;
+      width: 100%;
       flex-shrink: 0;
       margin: 0 auto 16px;
       padding: 0 16px;
@@ -822,7 +1053,7 @@
     }
     
     .service-carousel-wrapper {
-        width: 360px;
+        width: 100%;
         height: 58px;
         flex-shrink: 0;
         border-radius: 5px;
@@ -868,7 +1099,7 @@
   /* Service Grid Styles */
   .service-grid-wrapper {
     width: 100%;
-    max-width: 646px;
+    max-width: 100%;
     margin: 0 auto;
   }
 
@@ -1324,7 +1555,8 @@
                           .size-guide-text-dropdown-container {
                             border-radius: 5px;
                             background: #F5F9FF;
-                            max-width: 646px;
+                            max-width: 100%;
+                            width: 100%;
                             flex-shrink: 0;
                             margin-bottom: 16px;
                           }
@@ -2231,5 +2463,58 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+</script>
+
+<script>
+// Mobile thumbnail click handler
+document.addEventListener('DOMContentLoaded', function() {
+  initMobileThumbClick('{{ section_id }}');
+  
+  // Split Comfort top text before and after dash (remove dash)
+  function splitComfortTopText() {
+    const comfortLabels = document.querySelectorAll('.variant-input-wrap[data-index="option2"] .variant__button-label');
+    comfortLabels.forEach(label => {
+      const text = label.textContent.trim();
+      if (text.includes(' - ')) {
+        const [beforeDash, afterDash] = text.split(' - ');
+        // Capitalize first letter only
+        const capitalizedBeforeDash = beforeDash.charAt(0).toUpperCase() + beforeDash.slice(1).toLowerCase();
+        label.innerHTML = `<span style="font-weight: 500; color: #212121;">${capitalizedBeforeDash}</span> <span style="font-weight: 400; color: #212121;">${afterDash}</span>`;
+      }
+    });
+  }
+  
+  // Run on page load
+  splitComfortTopText();
+  
+  // Run when variants change
+  document.addEventListener('variant:change', splitComfortTopText);
+});
+
+function initMobileThumbClick(sectionId) {
+  setTimeout(function() {
+    const productWrapper = document.querySelector(`#ProductSection-${sectionId}`);
+    if (!productWrapper) return;
+
+    const thumbItems = productWrapper.querySelectorAll('.product__thumb-item');
+    
+    thumbItems.forEach(function(thumbItem) {
+      thumbItem.addEventListener('click', function() {
+        // Remove active class from all thumb items
+        thumbItems.forEach(function(item) {
+          item.classList.remove('is-active');
+        });
+        
+        // Add active class to clicked item
+        this.classList.add('is-active');
+        
+        // Remove active class after 300ms (duration of transition)
+        setTimeout(function() {
+          thumbItem.classList.remove('is-active');
+        }, 300);
+      });
+    });
+  }, 500);
+}
 </script>
 

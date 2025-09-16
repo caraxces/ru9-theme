@@ -2440,10 +2440,10 @@ img {
     }
   }
 
-  .scroll-trigger.animate--fade-in,
+  /* .scroll-trigger.animate--fade-in,
   .scroll-trigger.animate--slide-in {
     opacity: 0.01;
-  }
+  } */
 
   .scroll-trigger.animate--slide-in {
     transform: translateY(2rem);
@@ -16180,7 +16180,7 @@ html[dir="rtl"] .product-single__meta .rte {
 .product__thumb-item a.is-active:before,
 .product__thumb-item a:focus:before {
   bottom: 0;
-  box-shadow: inset 0 0 0 2px var(--colorTextBody);
+  box-shadow: inset 0 0 0 2px #1C2C58;
   content: "";
   display: block;
   left: 0;
@@ -16188,11 +16188,138 @@ html[dir="rtl"] .product-single__meta .rte {
   right: 0;
   top: 0;
   z-index: 1;
-  border-radius: calc(var(--radiusBase) * 0.75);
+  border-radius: 1px;
 }
 
 .product__thumb-item a:active:before {
   content: none;
+}
+
+/* Force firmness variant text to be bold and uppercase */
+.is-firmness .variant__button-label .label-head,
+.variant-wrapper.is-firmness .variant__button-label .label-head,
+.variant-wrapper[class*="firmness"] .variant__button-label .label-head,
+.variant-wrapper[class*="softness"] .variant__button-label .label-head,
+.variant-wrapper[class*="comfort"] .variant__button-label .label-head,
+.variant-wrapper[class*="êm"] .variant__button-label .label-head,
+.variant-wrapper[data-handle="softness"] .variant__button-label .label-head,
+.variant-wrapper[data-handle="dộ-em"] .variant__button-label .label-head,
+.variant-wrapper[data-handle="comfort-top"] .variant__button-label .label-head,
+.variant-input-wrap[data-handle="softness"] .variant__button-label .label-head,
+.variant-input-wrap[data-handle="dộ-em"] .variant__button-label .label-head,
+.variant-input-wrap[data-handle="comfort-top"] .variant__button-label .label-head {
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+/* Target option 2 specifically for Comfort top */
+.variant-input-wrap[data-index="option2"] .variant__button-label .label-head {
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+/* More specific targeting for Comfort top */
+.variant-input-wrap[data-index="option2"] .variant__button-label .label-head,
+.variant-input-wrap[data-index="option2"] .variant-input .variant__button-label .label-head,
+.variant-input-wrap[data-index="option2"] .variant-input input[type="radio"] + .variant__button-label .label-head {
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  color: #1C2C58 !important;
+}
+
+/* Ultra specific targeting for Comfort top - force override */
+.variant-input-wrap[data-index="option2"] .variant__button-label .label-head,
+.variant-input-wrap[data-index="option2"] .variant-input .variant__button-label .label-head,
+.variant-input-wrap[data-index="option2"] .variant-input input[type="radio"] + .variant__button-label .label-head {
+  font-weight: 700 !important !important;
+  text-transform: uppercase !important !important;
+  color: #1C2C58 !important !important;
+}
+
+/* Universal targeting for any option 2 variant */
+[data-index="option2"] .label-head,
+[data-index="option2"] .variant__button-label .label-head,
+[data-index="option2"] .variant-input .label-head,
+[data-index="option2"] .variant-input .variant__button-label .label-head {
+  font-weight: 700 !important !important;
+  text-transform: uppercase !important !important;
+  color: #1C2C58 !important !important;
+}
+
+/* Comfort top variant styling - Simple approach */
+.variant-input-wrap[data-index="option2"] .variant__button-label {
+  color: #212121 !important;
+}
+
+/* Make Comfort top variants share width equally and match height with other blocks */
+.variant-input-wrap[data-index="option2"] {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 8px !important;
+}
+
+.variant-input-wrap[data-index="option2"] .variant-input {
+  flex: 1 !important;
+  width: 50% !important;
+}
+
+.variant-input-wrap[data-index="option2"] .variant__button-label {
+  width: 100% !important;
+  min-height: 60px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* Force mobile scroller to show for huan-false */
+@media screen and (max-width: 768px) {
+  .huan-false .product__thumbs--scroller {
+    overflow-x: auto !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #1C2C58 #F5F5F5 !important;
+  }
+  
+  .huan-false .product__thumbs--scroller::-webkit-scrollbar {
+    height: 4px !important;
+    display: block !important;
+  }
+  
+  .huan-false .product__thumbs--scroller::-webkit-scrollbar-track {
+    background: #F5F5F5 !important;
+    border-radius: 100px !important;
+  }
+  
+  .huan-false .product__thumbs--scroller::-webkit-scrollbar-thumb {
+    background: #1C2C58 !important;
+    border-radius: 100px !important;
+  }
+  
+  /* Mobile scroller for product__thumbs--below */
+  .product__thumbs.product__thumbs--below .product__thumbs--scroller {
+    overflow-x: auto !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #1C2C58 #F5F5F5 !important;
+  }
+  
+  .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar {
+    height: 4px !important;
+    display: block !important;
+  }
+  
+  .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-track {
+    background: #F5F5F5 !important;
+    border-radius: 100px !important;
+  }
+  
+  .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb {
+    background: #1C2C58 !important;
+    border-radius: 100px !important;
+  }
+  
+  .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+    background: #234085 !important;
+  }
 }
 .product__thumbs--beside .product__thumb-item {
   margin-bottom: 15px;

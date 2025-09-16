@@ -104,6 +104,21 @@
           "type": "price",
           "settings": {}
         },
+        "promotion_xkLgrj": {
+          "type": "promotion",
+          "settings": {
+            "title": "Mã ưu đãi :",
+            "voucher_image_1": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "popup_bg_1": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "popup_content_1": "",
+            "voucher_image_2": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "popup_bg_2": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "popup_content_2": "",
+            "popup_content_3": "",
+            "voucher_image_4": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "popup_content_4": ""
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -175,13 +190,13 @@
         "service_grid_tzXXkC": {
           "type": "service_grid",
           "settings": {
-            "icon_1": "shopify://shop_images/65e5e239d4e9350c57080d9b0abbcb6003a0c04c.png",
+            "icon_1": "shopify://shop_images/Layer_1_3.svg",
             "text_1": "100 đêm ngủ thử",
-            "icon_2": "shopify://shop_images/Free_shipping_1.png",
+            "icon_2": "shopify://shop_images/Layer_1_4.svg",
             "text_2": "Miễn phí vận chuyển",
-            "icon_3": "shopify://shop_images/payment_icon_e5154c63-1703-4a5c-b4f8-f192825dad11.png",
+            "icon_3": "shopify://shop_images/Layer_1_5.svg",
             "text_3": "Bảo hành dài lâu",
-            "icon_4": "shopify://shop_images/67e2ddb8fe6b716473d93489540935109179f904.png",
+            "icon_4": "shopify://shop_images/Layer_1_6.svg",
             "text_4": "Thanh toán linh hoạt"
           }
         }
@@ -190,6 +205,7 @@
         "custom_ir6hFk",
         "tag_TkpVP9",
         "price",
+        "promotion_xkLgrj",
         "variant_picker",
         "usage_guide_KJqfAH",
         "buy_buttons",
@@ -929,42 +945,6 @@
         "divider": true
       }
     },
-    "certification_VUqyB6": {
-      "type": "certification",
-      "blocks": {
-        "slide_zqGeDK": {
-          "type": "slide",
-          "settings": {
-            "banner": "shopify://shop_images/Hompage_Desktop_Oeko_tex_bd30d664-3dfd-433e-a514-f771bb40ba94.png",
-            "banner_mobile": "shopify://shop_images/Hompage_Mobile_Oeko_tex_877a34ad-3f04-4b27-814f-e396140ef1ef.png",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
-            "image": "shopify://shop_images/logo-certification-1.png"
-          }
-        },
-        "slide_63THmd": {
-          "type": "slide",
-          "settings": {
-            "banner": "shopify://shop_images/Hompage_Desktop_Certipur_US_310dce33-caaf-452e-ac90-2da51b97f80e.png",
-            "banner_mobile": "shopify://shop_images/Hompage_Mobile_Certipur_US_86aa4a55-6779-43c2-89f4-231d338a70fe.png",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế Certipur-US </p>",
-            "image": "shopify://shop_images/CertiPUR-US_RGB_800x800_2x_c1aaa1ca-c943-43f5-b804-8b2b044f2be4.webp"
-          }
-        }
-      },
-      "block_order": [
-        "slide_zqGeDK",
-        "slide_63THmd"
-      ],
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1250,
-        "bg": "#f0f7fe",
-        "title": "",
-        "description": ""
-      }
-    },
     "172802814088f5e025": {
       "type": "apps",
       "settings": {
@@ -995,20 +975,109 @@
         "space_around": true
       }
     },
-    "featured_collection_EtQgJU": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.featured_collection.name",
+    "super_service_qUwnVM": {
+      "type": "super-service",
+      "blocks": {
+        "service_item_zWd8Lh": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_3.svg",
+            "item_title": "100 đêm ngủ thử",
+            "item_note": "",
+            "item_description": "<p>Trải nghiệm sản phẩm ngay tại nhà với cam kết đổi trả linh hoạt.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_JUzhgt": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_4.svg",
+            "item_title": "Miễn phí vận chuyển",
+            "item_note": "(từ 1.500.000vnd)",
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>",
+            "item_link": ""
+          }
+        },
+        "service_item_z9bGjB": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_5.svg",
+            "item_title": "Bảo hành dài lâu",
+            "item_note": "",
+            "item_description": "<p>Mỗi chiếc nệm được bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_UTXVmc": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_6.svg",
+            "item_title": "Thanh toán linh hoạt",
+            "item_note": "",
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>",
+            "item_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "service_item_zWd8Lh",
+        "service_item_JUzhgt",
+        "service_item_z9bGjB",
+        "service_item_UTXVmc"
+      ],
+      "name": "Super Service",
       "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
-        "title": "Gợi ý các sản phẩm",
-        "home_featured_products": "nem",
-        "per_row": 4,
-        "rows": 1,
-        "mobile_scrollable": false,
-        "view_all": false,
-        "divider": false,
-        "hide_price": false
+        "title": "An tâm hơn với dịch vụ vượt trội",
+        "background_color": "#f5f9ff"
+      }
+    },
+    "collections_listing_9YYPGa": {
+      "type": "collections-listing",
+      "blocks": {
+        "collection_3CKU7a": {
+          "type": "collection",
+          "settings": {
+            "collection": "nem"
+          }
+        },
+        "collection_HDHiUG": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi"
+          }
+        },
+        "collection_pMXCbU": {
+          "type": "collection",
+          "settings": {
+            "collection": "chan"
+          }
+        },
+        "collection_xiUYwi": {
+          "type": "collection",
+          "settings": {
+            "collection": "phu-kien"
+          }
+        },
+        "collection_p9E9WN": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "4the"
+          }
+        }
+      },
+      "block_order": [
+        "collection_3CKU7a",
+        "collection_HDHiUG",
+        "collection_pMXCbU",
+        "collection_xiUYwi",
+        "collection_p9E9WN"
+      ],
+      "name": "Collections Listing",
+      "settings": {
+        "title": "Có thể bạn cũng thích",
+        "title_color": "#1c2c58",
+        "text_color": "#212121"
       }
     },
     "sub": {
@@ -1055,10 +1124,10 @@
     "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",
     "dynamic_faq_Whrn47",
-    "certification_VUqyB6",
     "172802814088f5e025",
     "1730878240cfbec46e",
-    "featured_collection_EtQgJU",
+    "super_service_qUwnVM",
+    "collections_listing_9YYPGa",
     "sub",
     "product-recommendations",
     "recently-viewed",
