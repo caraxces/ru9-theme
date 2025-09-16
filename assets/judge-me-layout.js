@@ -100,7 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const widget = document.querySelector('.jdgm-rev-widg');
         if (widget && widget.offsetParent !== null) {
             // Wait an extra moment for Judge.me's own JS to finish arranging things
-            setTimeout(enhanceLayout, 200); 
+            setTimeout(() => {
+                enhanceLayout();
+                restructureReviewCards(); // Restructure individual cards
+            }, 200); 
             clearInterval(widgetPoller);
         }
         
@@ -110,4 +113,61 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Could not find visible Judge.me widget to enhance.');
         }
     }, 500);
+
+const restructureReviewCards = () => {
+    // Find reviews that haven't been restructured yet
+    const reviews = document.querySelectorAll('.jdgm-rev:not(.js-card-enhanced)');
+    if (reviews.length === 0) return;
+
+    console.log(`🚀 Found ${reviews.length} new review cards to restructure.`);
+
+    reviews.forEach(review => {
+        // Find the main components that haven't been moved yet
+        const picContainer = review.querySelector('.jdgm-rev__pics');
+        const header = review.querySelector('.jdgm-rev__header');
+        const content = review.querySelector('.jdgm-rev__content'); // This contains the body
+
+        // --- Create the new structure ---
+
+        // 1. Create the top row that will hold the image and author info
+        const topRow = document.createElement('div');
+        topRow.className = 'jdgm-rev-card__top-row';
+
+        // 2. Create the right column for author info
+        const rightColumn = document.createElement('div');
+        rightColumn.className = 'jdgm-custom-right-column-content';
+
+        // 3. Extract rating, timestamp, and author from the original header
+        if (header) {
+            const ratingRow = document.createElement('div');
+            ratingRow.className = 'jdgm-custom-rating-row';
+            
+            const rating = header.querySelector('.jdgm-rev__rating');
+            const timestamp = header.querySelector('.jdgm-rev__timestamp');
+            const authorWrapper = header.querySelector('.jdgm-rev__author-wrapper');
+
+            if (rating) ratingRow.appendChild(rating);
+            if (timestamp) ratingRow.appendChild(timestamp);
+            
+            rightColumn.appendChild(ratingRow);
+            if (authorWrapper) rightColumn.appendChild(authorWrapper);
+
+            header.remove(); // Clean up the original header
+        }
+
+        // 4. Assemble the top row
+        if (picContainer) topRow.appendChild(picContainer);
+        topRow.appendChild(rightColumn);
+
+        // 5. Append the new top row and the original content (body) to the main review card
+        review.appendChild(topRow);
+        if (content) review.appendChild(content);
+
+        review.classList.add('js-card-enhanced');
+    });
+};
+
+// Run restructuring on an interval to catch lazily-loaded reviews.
+setInterval(restructureReviewCards, 1000);
+
 });
