@@ -72,8 +72,11 @@
       {%- render 'social-meta-tags' -%}
   
       {%- render 'font-face' -%}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+
       {{ content_for_header }}
       {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+      {{ 'judge-me-layout.css' | asset_url | stylesheet_tag }}
       {%- render 'css-variables' -%}
   
       <script>
@@ -144,6 +147,7 @@
   
   
       <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'judge-me-layout.js' | asset_url }}" defer="defer"></script>
   
       {%- if request.page_type contains 'customers/' -%}
         <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
@@ -284,6 +288,10 @@
           <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRPQ9Q6"
           height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <!-- End Google Tag Manager (noscript) -->
-    </body>
-  </html>
+
+        <!-- Judge.me Custom Layout Script -->
+        <script src="{{ 'judge-me-layout.js' | asset_url }}" defer></script>
+        <script src="{{ 'judge-me-layout-debug.js' | asset_url }}" defer></script>
+  </body>
+</html>
   

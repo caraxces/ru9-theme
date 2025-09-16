@@ -1,0 +1,304 @@
+/* 
+  V12: JS-Powered Layout
+  - This version is designed to work with `judge-me-layout.js`.
+  - The JS file restructures the DOM, creating a `.jdgm-custom-left-column` 
+    and a `.jdgm-widget-actions-wrapper` ready for a carousel.
+  - This CSS is now much simpler, styling the predictable structure created by the JS.
+*/
+
+/* ==========================================================================
+   #RESET & WIDGET CONTAINER
+   ========================================================================== */
+
+.jdgm-rev-widg {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+    font-family: 'Lexend', sans-serif !important;
+}
+
+/* ==========================================================================
+   #HEADER & COLUMN STRUCTURE (JS-DRIVEN)
+   ========================================================================== */
+
+.jdgm-rev-widg__header {
+    display: flex !important;
+    text-align: left !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important; /* Stretch columns to be equal height */
+    padding: 0 !important;
+    margin-bottom: 40px !important;
+    gap: 0 0 !important; /* Add column gap */
+}
+.jdgm-histogram__clear-filter:not([disabled]):hover, .jdgm-histogram__clear-filter:hover, .jdgm-histogram__clear-filter{
+    color: #000000 !important;
+}
+/* 1. Title */
+.jdgm-rev-widg__title {
+    width: 100% !important;
+    margin-bottom: 20px !important; 
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    text-align: left !important; /* Center the title */
+}
+
+/* 2. Left Column (Created by JS) */
+.jdgm-custom-left-column {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    width: 391px !important;
+    flex-shrink: 0;
+    align-items: flex-start !important; /* Align inner content to the left */
+}
+
+
+/* 3. Right Column (Populated by JS) */
+.jdgm-widget-actions-wrapper {
+    flex-grow: 1 !important;
+    min-width: 0; /* Allows the container to shrink */
+    display: flex; /* Prepare for inner container */
+}
+
+/* 4. Image Carousel */
+.jdgm-custom-image-carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 10px; /* Space for scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #1C2C58 #e0e0e0;
+    align-items: center; /* Vertically center images if they are shorter */
+    margin-left: 40px !important;
+}
+.jdgm-custom-image-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+.jdgm-custom-image-carousel::-webkit-scrollbar-track {
+    background: #e0e0e0;
+    border-radius: 4px;
+}
+.jdgm-custom-image-carousel::-webkit-scrollbar-thumb {
+    background-color: #1C2C58;
+    border-radius: 4px;
+}
+/* Hide the scrollbar arrows */
+.jdgm-custom-image-carousel::-webkit-scrollbar-button {
+    display: none;
+}
+.jdgm-custom-image-carousel img,
+.jdgm-custom-image-carousel video {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+
+/* ==========================================================================
+   #LEFT COLUMN CONTENT STYLING
+   ========================================================================== */
+   
+.jdgm-rev-widg__summary {
+    display: grid !important;
+    grid-template-areas: 
+        "rating stars"
+        "rating text" !important;
+    grid-template-columns: auto 1fr !important;
+    align-items: center !important;
+    column-gap: 15px !important;
+    row-gap: 5px !important;
+}
+.jdgm-widget:not(.jdgm-review-widget--small,.jdgm-review-widget--medium) .jdgm-write-rev-link{
+    max-width: none !important; /* Override the original max-width */
+}
+.jdgm-rev-widg__summary::before {
+    grid-area: rating !important;
+    content: "5.0" !important;
+    font-size: 64px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: #1C2C58 !important;
+}
+.jdgm-rev-widg__summary-stars {
+    grid-area: stars !important;
+    align-self: end !important;
+}
+.jdgm-rev-widg__summary-text {
+    grid-area: text !important;
+    align-self: start !important;
+    width: 375px !important; /* Set width as requested */
+}
+.jdgm-write-rev-link {
+    display: block !important;
+    visibility: visible !important;
+    background-color: #1C2C58 !important;
+    color: #ffffff !important;
+    border-radius: 30px !important;
+    padding: 14px 24px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    width: 391px !important; /* Force explicit width */
+    box-sizing: border-box !important;
+}
+
+.jdgm-histogram {
+    display: block !important;
+    visibility: visible !important;
+    width: 391px !important; /* Force explicit width */
+    box-sizing: border-box !important;
+}
+
+/* Fix Histogram Layout */
+.jdgm-histogram__row {
+    display: flex !important;
+    align-items: center !important;
+}
+.jdgm-histogram__star {
+    width: 120px !important; /* Give stars a fixed width */
+}
+.jdgm-histogram__bar {
+    flex-grow: 1 !important; /* Allow bar to fill remaining space */
+    height: 6px !important; /* Give the bar a visible height */
+    background-color: #F0F0F0 !important; /* A light grey for the track */
+    border-radius: 3px !important;
+    overflow: hidden; /* Ensure the content respects the border-radius */
+}
+
+/* This is the actual colored bar */
+.jdgm-histogram__bar-content {
+    height: 100% !important;
+    background: #234085 !important;
+    border-radius: 3px !important;
+}
+
+.jdgm-histogram__frequency {
+    display: none !important; /* Hide the frequency number */
+}
+
+
+/* ==========================================================================
+   #RESPONSIVE (Temporarily Disabled for Desktop Focus)
+   ========================================================================== */
+/*
+@media (max-width: 990px) {
+    .jdgm-rev-widg__header {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px 0 !important;
+    }
+    .jdgm-custom-left-column {
+        width: 100% !important;
+        align-items: center;
+    }
+    .jdgm-rev-widg__summary {
+        justify-content: center !important;
+    }
+    .jdgm-widget-actions-wrapper {
+        width: 100%;
+    }
+    .jdgm-rev-widg__title {
+        text-align: center !important;
+    }
+}
+*/
+
+/* ==========================================================================
+   #INDIVIDUAL REVIEW CARD STYLING
+   ========================================================================== */
+
+.jdgm-rev.jdgm-divider-top {
+    display: flex !important;
+    gap: 24px !important;
+    align-items: flex-start !important; /* Align items to the top */
+    padding: 30px 0 !important;
+}
+
+/* Hide the initial icon */
+.jdgm-rev__icon {
+    display: none !important;
+}
+
+/* Ensure the picture is treated as a flex item and becomes the left column */
+.jdgm-rev__rev-pic {
+    order: 1; /* Left-most item */
+    flex-shrink: 0;
+}
+
+.jdgm-rev__rev-pic .jdgm-rev__pic-img {
+    width: 280px !important; 
+    height: 220px !important;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0; /* Add flex-shrink to the image itself */
+}
+
+/* The entire right column containing all other content */
+.jdgm-rev__content {
+    order: 2; /* Right item */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    flex-grow: 1; /* Allow this column to take up the remaining space */
+    min-width: 0; /* Prevents flex items from overflowing */
+}
+
+/* NEW: Override the pic-link container to match the image size */
+.jdgm-rev__pic-link {
+    width: 280px !important;
+    height: 220px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+/* A header row inside the right column for rating and timestamp */
+.jdgm-rev__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.jdgm-rev__rating {
+    order: 1; /* Rating on the left of this row */
+}
+
+.jdgm-rev__timestamp {
+    order: 2; /* Timestamp on the right of this row */
+    font-size: 14px;
+    color: #666;
+}
+
+
+/* Order of elements inside the content column */
+.jdgm-rev__header { order: 1; }
+.jdgm-rev__author-wrapper { order: 2; }
+.jdgm-rev__title { order: 3; }
+.jdgm-rev__body { order: 4; }
+
+
+/* Author Name Styling */
+.jdgm-rev__author {
+    color: #1C2C58 !important;
+    font-family: "Be Vietnam Pro", sans-serif !important; /* Fallback to sans-serif */
+    font-size: 20px !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: 150% !important; /* 30px */
+}
+
+/* ==========================================================================
+   #DEBUG VISUALIZERS (REVIEW CARD FOCUS)
+   ========================================================================== */
+.jdgm-rev { outline: 3px solid red !important; padding: 5px; }
+.jdgm-rev__rev-pic { outline: 2px solid blue !important; }
+.jdgm-rev__header { outline: 2px solid purple !important; }
+.jdgm-row-profile { outline: 2px solid orange !important; }
+.jdgm-rev__content { outline: 2px solid green !important; }
+  
