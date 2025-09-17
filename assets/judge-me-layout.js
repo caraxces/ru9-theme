@@ -122,46 +122,45 @@ const restructureReviewCards = () => {
     console.log(`🚀 Found ${reviews.length} new review cards to restructure.`);
 
     reviews.forEach(review => {
-        // Find the main components that haven't been moved yet
+        // Find the main components
         const picContainer = review.querySelector('.jdgm-rev__pics');
         const header = review.querySelector('.jdgm-rev__header');
         const content = review.querySelector('.jdgm-rev__content'); // This contains the body
 
-        // --- Create the new structure ---
-
-        // 1. Create the top row that will hold the image and author info
-        const topRow = document.createElement('div');
-        topRow.className = 'jdgm-rev-card__top-row';
-
-        // 2. Create the right column for author info
+        // Create the right column that will hold ALL text content
         const rightColumn = document.createElement('div');
         rightColumn.className = 'jdgm-custom-right-column-content';
 
-        // 3. Extract rating, timestamp, and author from the original header
+        // Re-assemble the text content into the new right column in the correct order
         if (header) {
             const ratingRow = document.createElement('div');
             ratingRow.className = 'jdgm-custom-rating-row';
             
             const rating = header.querySelector('.jdgm-rev__rating');
             const timestamp = header.querySelector('.jdgm-rev__timestamp');
-            const authorWrapper = header.querySelector('.jdgm-rev__author-wrapper');
-
             if (rating) ratingRow.appendChild(rating);
             if (timestamp) ratingRow.appendChild(timestamp);
-            
             rightColumn.appendChild(ratingRow);
-            if (authorWrapper) rightColumn.appendChild(authorWrapper);
 
-            header.remove(); // Clean up the original header
+            const authorWrapper = header.querySelector('.jdgm-rev__author-wrapper');
+            if (authorWrapper) rightColumn.appendChild(authorWrapper);
         }
 
-        // 4. Assemble the top row
-        if (picContainer) topRow.appendChild(picContainer);
-        topRow.appendChild(rightColumn);
+        // IMPORTANT: Append the body content to the right column
+        if (content) {
+            rightColumn.appendChild(content);
+        }
 
-        // 5. Append the new top row and the original content (body) to the main review card
-        review.appendChild(topRow);
-        if (content) review.appendChild(content);
+        // Clean up the original header which is now empty
+        if (header) {
+            header.remove();
+        }
+
+        // Prepend the picture container (left column) and append the new right column
+        if (picContainer) {
+            review.prepend(picContainer);
+        }
+        review.appendChild(rightColumn);
 
         review.classList.add('js-card-enhanced');
     });

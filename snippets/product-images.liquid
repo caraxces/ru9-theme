@@ -227,7 +227,7 @@
           </button>
         {%- endif -%}
 
-        <div class="huan-{{ section.settings.limit_product_carousel }} product__thumbs--scroller">
+        <div class="{% if product_carousel_enable %}huan-{{ section.settings.limit_product_carousel }}{% endif %} product__thumbs--scroller">
           {%- if check_block_combo -%}
             {%- liquid
               assign image_set = false
