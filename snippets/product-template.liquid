@@ -831,18 +831,18 @@
     }
 
     /* 
-      CRITICAL FIX: Lock max-width to 765px to prevent expansion
-      This ensures product-column-content never exceeds 765px
+      CRITICAL FIX: Dynamic max-width based on screen size
+      Use CSS calc to make max-width responsive to viewport width
     */
     .product-column-content {
-      max-width: 765px !important;
+      max-width: min(765px, 50vw) !important;
       width: 100% !important;
       box-sizing: border-box !important;
       overflow: hidden !important;
     }
 
     .product__photos img {
-      max-width: 765px !important;
+      max-width: min(765px, 50vw) !important;
       width: 100% !important;
       box-sizing: border-box !important;
       display: block !important;
@@ -852,8 +852,7 @@
     /* Force max-width lock during sticky states */
     .product-column-content[style*="position: fixed"],
     .product-column-content[style*="position: absolute"] {
-      max-width: 765px !important;
-      width: 100% !important;
+      max-width: min(765px, 50vw) !important;
       box-sizing: border-box !important;
       overflow: hidden !important;
     }
@@ -866,9 +865,8 @@
       padding-right: 16px;
     }
 
-    /* Mobile max-width lock */
+    /* Mobile responsive width handling */
     .product-column-content {
-      max-width: 765px !important;
       width: 100% !important;
       box-sizing: border-box !important;
       overflow: hidden !important;
@@ -876,7 +874,6 @@
     }
 
     .product__photos img {
-      max-width: 765px !important;
       width: 100% !important;
       box-sizing: border-box !important;
     }
@@ -3083,6 +3080,43 @@ function initAdvancedSticky(productSection) {
         // Measure the inner content elements, not the grid containers which are equal height.
         const imageColHeight = imageColumnInner.offsetHeight;
         const infoColHeight = infoColumnInner.offsetHeight;
+        
+        // Store original widths to maintain consistent sizing during sticky states
+        let imageColOriginalWidth = imageColumnInner.offsetWidth;
+        const infoColOriginalWidth = infoColumnInner.offsetWidth;
+        
+        // For carousel, get the actual rendered width from CSS computed styles
+        const carouselContainer = imageColumnInner.querySelector('.product__photos--below') || 
+                                 imageColumnInner.querySelector('.product-slideshow');
+        if (carouselContainer) {
+          // Get computed style to see the actual rendered width
+          const computedStyle = window.getComputedStyle(carouselContainer);
+          const computedWidth = parseFloat(computedStyle.width);
+          
+          // Debug: log the widths to console
+          console.log('Carousel debug:', {
+            offsetWidth: imageColumnInner.offsetWidth,
+            computedWidth: computedWidth,
+            carouselContainer: carouselContainer
+          });
+          
+          // Use the actual computed width - this respects the responsive CSS max-width
+          if (computedWidth && computedWidth > 0) {
+            imageColOriginalWidth = computedWidth; // This already respects min(765px, 50vw)
+            console.log('Using responsive carousel width:', computedWidth);
+          } else {
+            // Fallback: try to get width from the main image
+            const mainImage = carouselContainer.querySelector('.product-main-slide img') || 
+                             carouselContainer.querySelector('.product__photo img');
+            if (mainImage) {
+              const imageWidth = mainImage.naturalWidth || mainImage.offsetWidth;
+              imageColOriginalWidth = Math.min(imageWidth, 765); // Apply reasonable max
+            } else {
+              // Last fallback: use container width with reasonable max
+              imageColOriginalWidth = Math.min(imageColOriginalWidth, 765);
+            }
+          }
+        }
             
         // Exit if columns are of similar height, as no sticky effect is needed.
         if (Math.abs(imageColHeight - infoColHeight) < 100) {
@@ -3091,6 +3125,7 @@ function initAdvancedSticky(productSection) {
 
         const shortCol = imageColHeight > infoColHeight ? infoColumn : imageColumn;
         const shortColInner = imageColHeight > infoColHeight ? infoColumnInner : imageColumnInner;
+        const shortColOriginalWidth = imageColHeight > infoColHeight ? infoColOriginalWidth : imageColOriginalWidth;
         
         // **FIX**: Set position relative on the container of the element that will be docked.
         // This makes it the positioning context for its absolutely positioned child.
@@ -3115,13 +3150,13 @@ function initAdvancedSticky(productSection) {
                 shortColInner.style.position = 'fixed';
                 shortColInner.style.top = `${headerOffset}px`;
                 shortColInner.style.bottom = 'auto';
-                shortColInner.style.width = `${shortCol.offsetWidth}px`;
+                shortColInner.style.width = `${shortColOriginalWidth}px`; // Use stored original width
             } else if (scrollY >= stopPoint - buffer) {
                 // State 2: DOCKED. The element is positioned absolutely to the bottom of its parent container.
                 shortColInner.style.position = 'absolute';
                 shortColInner.style.top = 'auto';
                 shortColInner.style.bottom = '0px';
-                shortColInner.style.width = '100%';
+                shortColInner.style.width = `${shortColOriginalWidth}px`; // Use stored original width
             } else {
                 // State 3: DEFAULT. The element is in its normal static position.
                 shortColInner.style.position = '';
