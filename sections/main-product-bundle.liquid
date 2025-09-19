@@ -597,9 +597,907 @@
       font-size: 1.15rem;
     }
   }
+
+  /* Combo Products List Styles */
+  .combo-products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .combo-product-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #F8F9FA;
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
+  }
+
+  .combo-product-image {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #E5E7EB;
+  }
+
+  .combo-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .combo-product-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .combo-product-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    color: #1C2C58;
+    line-height: 1.4;
+  }
+
+  .combo-product-attributes {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: #6B7280;
+  }
+
+  .combo-product-attributes span:first-child {
+    font-weight: 500;
+    color: #374151;
+  }
+
+  /* Step 1 Bundle Layout Styles */
+  .bundle-step-1 .product-single__meta {
+    padding: 0;
+  }
+
+  .bundle-step-1 .product-block--header {
+    margin-bottom: 1.5rem;
+  }
+
+  .bundle-step-1 .product-reviews-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .bundle-step-1 .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .bundle-step-1 .stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .bundle-step-1 .star {
+    color: #FFD700;
+    font-size: 16px;
+  }
+
+  .bundle-step-1 .rating-value {
+    font-weight: 600;
+    color: #1C2C58;
+    font-size: 14px;
+  }
+
+  .bundle-step-1 .reviews-number {
+    color: #6B7280;
+    font-size: 14px;
+  }
+
+  .bundle-step-1 .product-single__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1C2C58;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .bundle-step-1 .product-block--price {
+    margin-bottom: 1.5rem;
+  }
+
+  .bundle-step-1 .price-container-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .bundle-step-1 .product__price {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1C2C58;
+  }
+
+  .bundle-step-1 .product__price--compare {
+    font-size: 18px;
+    color: #9CA3AF;
+    text-decoration: line-through;
+  }
+
+  .bundle-step-1 .product__discount-badge {
+    background: #FCE390;
+    color: #1C2C58;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .bundle-step-1 .promotion-block-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .bundle-step-1 .promotion-vouchers {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .bundle-step-1 .promotion-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1C2C58;
+    margin: 0;
+  }
+
+  .bundle-step-1 .promotion-voucher-item {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .bundle-step-1 .combo-products-list {
+    background-color: #F5F9FF;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .bundle-step-1 .combo-products-list h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1C2C58;
+    margin-bottom: 1rem;
+  }
+
+  .bundle-step-1 .combo-product-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  .bundle-step-1 .combo-product-image {
+    flex-shrink: 0;
+    width: 220px;
+    height: 130px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #E5E7EB;
+  }
+
+  .bundle-step-1 .combo-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .bundle-step-1 .combo-product-info h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #1C2C58;
+  }
+
+  .bundle-step-1 .combo-product-attributes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #6B7280;
+  }
+
+  .bundle-step-1 .combo-product-attributes span:first-child {
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .bundle-step-1 .bundle-cta-btn {
+    width: 100%;
+    background: #FCE390 !important;
+    color: #1C2C58 !important;
+    font-weight: bold !important;
+    font-size: 16px !important;
+    padding: 15px !important;
+    border-radius: 50px !important;
+    border: none !important;
+    margin-bottom: 1.5rem;
+  }
+
+  .bundle-step-1 .bundle-cta-btn:hover {
+    background: #F4D03F !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  /* Product Summary Block Styles */
+  .bundle-step-1 .product-summary-block {
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+
+
+  .bundle-step-1 .product-accordion {
+    background: #F5F9FF !important;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .bundle-step-1 .product-accordion summary {
+    background: #F5F9FF;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: #1C2C58;
+    border: none;
+    outline: none;
+  }
+
+  .bundle-step-1 .product-accordion summary:hover {
+    background: #E8F2FF;
+  }
+
+  .bundle-step-1 .product-accordion-content {
+    background: #F5F9FF;
+    padding: 0 20px 16px 20px;
+    border: none;
+  }
+
+  .bundle-step-1 .product-accordion[open] summary {
+    border: none;
+  }
+
+  .bundle-step-1 .icon-toggle {
+    transition: transform 0.3s ease;
+  }
+
+  .bundle-step-1 .product-accordion[open] .icon-toggle {
+    transform: rotate(180deg);
+  }
+
+  .bundle-step-1 .showroom-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bundle-step-1 .showroom-item {
+    padding: 8px 0;
+  }
+
+  .bundle-step-1 .showroom-item strong {
+    color: #1C2C58;
+    font-weight: 600;
+  }
+
+  .bundle-step-1 .showroom-item a {
+    color: #1C2C58;
+    text-decoration: none;
+  }
+
+  .bundle-step-1 .showroom-item a:hover {
+    text-decoration: underline;
+  }
+
+  /* Service Grid Styles */
+  .bundle-step-1 .product-block--service-grid {
+    margin-bottom: 1.5rem;
+  }
+
+  .bundle-step-1 .service-grid-wrapper {
+    background: transparent;
+  }
+
+  .bundle-step-1 .service-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .bundle-step-1 .service-grid-item {
+    background: #F5F9FF;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .bundle-step-1 .service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: transparent;
+    padding: 20px 16px;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+    border: none;
+    margin: 0;
+    height: 100%;
+  }
+
+  .bundle-step-1 .service-item:hover {
+    transform: translateY(-2px);
+  }
+
+  .bundle-step-1 .service-item__icon {
+    margin-bottom: 12px;
+    background: #F5F9FF;
+  }
+
+  .bundle-step-1 .service-item__icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .bundle-step-1 .service-item__text {
+    background: #F5F9FF;
+  }
+
+  .bundle-step-1 .service-item__text p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1C2C58;
+    line-height: 1.4;
+  }
+
+  /* Sticky Scrolling Styles */
+  .bundle-step-1 .product-grid {
+    align-items: start;
+  }
+
+  .bundle-step-1 .is-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 120px; /* Adjust this value to sit below your site's sticky header */
+    align-self: start; /* Ensures the column aligns to the top of the grid row */
+  }
+
+  /* 
+    Definitive Pure CSS Sticky Column Solution
+  */
+  @media screen and (min-width: 991px) {
+    /*
+      CRITICAL FIX: `position: sticky` will NOT work if any parent element
+      has `overflow` set to 'hidden', 'scroll', or 'auto'.
+      This rule aggressively targets all potential parent containers in the product grid
+      and forces them to allow sticky positioning.
+    */
+    .bundle-step-1 .page-content--product,
+    .bundle-step-1 .page-content--product > .page-width,
+    .bundle-step-1 .grid {
+      padding-bottom: 0 !important;
+      overflow: visible !important;
+    }
+
+    /*
+      Disable theme's default sticky behavior on images.
+      A custom script will handle advanced sticky positioning for either column.
+    */
+    .bundle-step-1 .product-single__sticky .sticky {
+        position: static; /* Let JS control positioning */
+    }
+
+    /* 
+      CRITICAL FIX: Dynamic max-width based on screen size
+      Use CSS calc to make max-width responsive to viewport width
+    */
+    .bundle-step-1 .product-column-content {
+      max-width: min(765px, 50vw) !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+
+    .bundle-step-1 .product__photos img {
+      max-width: min(765px, 50vw) !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      display: block !important;
+      margin: 0 auto !important;
+    }
+
+    /* Force max-width lock during sticky states */
+    .bundle-step-1 .product-column-content[style*="position: fixed"],
+    .bundle-step-1 .product-column-content[style*="position: absolute"] {
+      max-width: min(765px, 50vw) !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+  }
+
+  /* Step 2: Bundle Products Selection - Match Step 1 Layout */
+  .bundle-step-2 .product-grid {
+    align-items: start;
+  }
+
+  .bundle-step-2 .is-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 120px; /* Adjust this value to sit below your site's sticky header */
+    align-self: start; /* Ensures the column aligns to the top of the grid row */
+  }
+
+  /* Step 2 Specific Styles */
+  .bundle-step-2 .bundle-step-subtitle {
+    font-size: 0.8em;
+    font-weight: normal;
+    color: #666;
+    margin-left: 8px;
+  }
+
+  .bundle-step-2 .product-single__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .bundle-step-2 .product-block--price {
+    margin-bottom: 1.5rem;
+  }
+
+  .bundle-step-2 .price-container-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .bundle-step-2 .product__price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1C2C58;
+  }
+
+  .bundle-step-2 .product__price--compare {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1.2rem;
+  }
+
+  .bundle-step-2 .product__discount-badge {
+    background: #ff4444;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+
+
+  /* Action Buttons */
+  .bundle-step-2 .bundle-navigation {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .bundle-step-2 .bundle-back-btn,
+  .bundle-step-2 .bundle-continue-btn {
+    flex: 1;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .bundle-step-2 .bundle-back-btn {
+    background: #f5f5f5;
+    color: #666;
+    border: 1px solid #ddd;
+  }
+
+  .bundle-step-2 .bundle-back-btn:hover {
+    background: #e5e5e5;
+  }
+
+  .bundle-step-2 .bundle-continue-btn {
+    background: #1C2C58;
+    color: white;
+  }
+
+  .bundle-step-2 .bundle-continue-btn:hover {
+    background: #0f1a3a;
+  }
+
+
+  /* Accordion Styles */
+  .bundle-step-2 .product-accordion {
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .bundle-step-2 .product-accordion summary {
+    padding: 1rem;
+    background: #f9f9f9;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    color: #1C2C58;
+  }
+
+  .bundle-step-2 .product-accordion summary:hover {
+    background: #f0f0f0;
+  }
+
+  .bundle-step-2 .product-accordion-content {
+    padding: 1rem;
+    background: white;
+  }
+
+  /* Reviews Section */
+  .bundle-step-2 .product-reviews-summary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .bundle-step-2 .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .bundle-step-2 .stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .bundle-step-2 .star {
+    color: #ffd700;
+    font-size: 1.2rem;
+  }
+
+  .bundle-step-2 .rating-value {
+    font-weight: bold;
+    color: #1C2C58;
+  }
+
+  .bundle-step-2 .reviews-number {
+    color: #666;
+  }
+
+  /* Service Grid */
+  .bundle-step-2 .service-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .bundle-step-2 .service-item {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    background: white;
+  }
+
+  .bundle-step-2 .service-item__icon {
+    margin-bottom: 0.5rem;
+  }
+
+  .bundle-step-2 .service-item__text p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  /* 
+    Definitive Pure CSS Sticky Column Solution for Step 2
+  */
+  @media screen and (min-width: 991px) {
+    /*
+      CRITICAL FIX: `position: sticky` will NOT work if any parent element
+      has `overflow` set to 'hidden', 'scroll', or 'auto'.
+      This rule aggressively targets all potential parent containers in the product grid
+      and forces them to allow sticky positioning.
+    */
+    .bundle-step-2 .page-content--product,
+    .bundle-step-2 .page-content--product > .page-width,
+    .bundle-step-2 .grid {
+      padding-bottom: 0 !important;
+      overflow: visible !important;
+    }
+
+    /*
+      Disable theme's default sticky behavior on images.
+      A custom script will handle advanced sticky positioning for either column.
+    */
+    .bundle-step-2 .product-single__sticky .sticky {
+        position: static; /* Let JS control positioning */
+    }
+
+    /* 
+      CRITICAL FIX: Dynamic max-width based on screen size
+      Use CSS calc to make max-width responsive to viewport width
+    */
+    .bundle-step-2 .product-column-content {
+      max-width: min(765px, 50vw) !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+
+  .bundle-step-2 .product__photos img {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+
+  /* Ensure main photos container takes full width - Override all other rules */
+  .bundle-step-2 .product__main-photos {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    flex: 1 1 100% !important;
+    display: block !important;
+  }
+
+  /* Ensure product slideshow takes full width */
+  .bundle-step-2 .product__main-photos .product-slideshow {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  /* Ensure main slide takes full width */
+  .bundle-step-2 .product-main-slide {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    display: block !important;
+  }
+
+  /* Ensure main slide image takes full width */
+  .bundle-step-2 .product-main-slide img {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  /* Override any grid or flex constraints on the photos container */
+  .bundle-step-2 .product__photos {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+
+  /* Override any column width constraints */
+  .bundle-step-2 .product-column-content {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Grid layout - Left column should be half width with proper spacing */
+  .bundle-step-2 .grid__item.product-single__sticky {
+    width: 50% !important;
+    max-width: 50% !important;
+    flex: 0 0 50% !important;
+  }
+
+  /* Product grid images should respect the column width */
+  .bundle-step-2 .product-grid__images {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Right column should also be half width */
+  .bundle-step-2 .grid__item.product-grid__info {
+    width: 50% !important;
+    max-width: 50% !important;
+    flex: 0 0 50% !important;
+  }
+
+  /* Force override for the entire photos container hierarchy */
+  .bundle-step-2 .product__photos.product__photos--stack {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+
+  /* Override any potential flex or grid constraints */
+  .bundle-step-2 .product__main-photos[data-product-single-media-group] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    flex: none !important;
+    display: block !important;
+  }
+
+  /* Ensure grid container has proper display and spacing */
+  .bundle-step-2 .grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  /* Ensure proper spacing between columns */
+  .bundle-step-2 .grid__item {
+    padding: 0 10px !important;
+    box-sizing: border-box !important;
+  }
+
+    /* Force max-width lock during sticky states */
+    .bundle-step-2 .product-column-content[style*="position: fixed"],
+    .bundle-step-2 .product-column-content[style*="position: absolute"] {
+      max-width: min(765px, 50vw) !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+  }
+
+  /* Bundle Main Container - Override theme styles */
+  .bundle-main-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  /* Override any theme page-width styles that might affect our bundle */
+  .bundle-main-container * {
+    box-sizing: border-box;
+  }
+
+  .bundle-main-container .page-content {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Bundle Steps - Direct Padding */
+  .bundle-step-1,
+  .bundle-step-2,
+  .bundle-step-3 {
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    .bundle-step-1,
+    .bundle-step-2,
+    .bundle-step-3 {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
+  }
+
+  /* Bundle Container - No padding, just max-width */
+  .bundle-container {
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Mobile responsive styles */
+  @media screen and (max-width: 768px) {
+    .bundle-step-1 .product-single__title {
+      font-size: 20px;
+    }
+    
+    .bundle-step-1 .product__price {
+      font-size: 20px;
+    }
+    
+    .bundle-step-1 .promotion-vouchers {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .bundle-step-1 .combo-product-item {
+      padding: 8px;
+    }
+    
+    .bundle-step-1 .combo-product-image {
+      width: 50px;
+      height: 50px;
+    }
+
+    .bundle-step-1 .service-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .bundle-step-1 .service-grid-item {
+      padding: 0;
+      margin: 0;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .bundle-step-1 .service-item {
+      padding: 16px 12px;
+      margin: 0;
+      background: transparent;
+    }
+
+    .bundle-step-1 .product-summary-block,
+    .bundle-step-1 .product-block--service-grid {
+      padding: 16px;
+    }
+
+    .bundle-step-1 .product-accordion summary {
+      padding: 12px 16px;
+    }
+
+    .bundle-step-1 .product-accordion-content {
+      padding: 0 16px 12px 16px;
+    }
+  }
+
 </style>
 
-<div id="MainProductBundle-{{ section.id }}" class="js-main-product Product page-width">
+<div id="MainProductBundle-{{ section.id }}" class="bundle-main-container">
   <div class="bundle-loading-overlay">
     <div class="spinner"></div>
   </div>
@@ -609,349 +1507,447 @@
     <div class="bundle-step bundle-step-1" data-step="1">
       {%- liquid
         assign product_zoom_size = '1800x1800'
-        assign product_image_size = '620x'
         
         case section.settings.image_size
           when 'small'
             assign product_image_width = 'medium-up--two-fifths'
             assign product_description_width = 'medium-up--three-fifths'
-            assign product_image_size = '480x'
           when 'medium'
             assign product_image_width = 'large-up--one-half'
             assign product_description_width = 'large-up--one-half'
-            assign product_image_size = '620x'
           when 'large'
             assign product_image_width = 'large-up--three-fifths'
             assign product_description_width = 'large-up--two-fifths'
-            assign product_image_size = '740x'
         endcase
-        
-        assign product_img_structure = product.featured_media | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
       -%}
 
       <div class="page-content page-content--product">
-        <div class="{% if section.settings.section_width == 'customize_width' %}custom-width{% else %}page-width{% endif %}" {% if section.settings.section_width == 'customize_width' %}style="max-width: {{ section.settings.customize_width }}px;"{% endif %}>
+        <div class="bundle-container">
+          {%- if settings.show_breadcrumbs -%}
+            {%- render 'breadcrumbs', classes: 'spacing-base' -%}
+          {%- endif -%}
           <div class="grid{% unless section.settings.image_position == 'left' %} grid--product-images-right{% endunless %}{% if section.settings.mobile_layout == 'partial' %} grid--product-images--partial{% endif %}">
             {%- if section.settings.image_position == 'left' -%}
-              <div class="grid__item {{ product_image_width }} product-single__sticky">
-                {%- render 'product-images',
-                  section_id: section.id,
-                  product: product,
-                  section: section,
-                  isModal: false,
-                  image_position: section.settings.image_position,
-                  product_zoom_enable: section.settings.product_zoom_enable,
-                  product_zoom_size: product_zoom_size,
-                  product_image_size: product_image_size,
-                  thumbnail_arrows: section.settings.thumbnail_arrows,
-                  thumbnail_height: section.settings.thumbnail_height,
-                  thumbnail_position: section.settings.thumbnail_position,
-                  video_looping: section.settings.enable_video_looping,
-                  video_style: section.settings.product_video_style,
-                  context: 'bundle-step-1',
-                  sizes: sizes,
-                  sizeVariable: product_image_width,
-                  fallback: fallback,
-                  product_carousel_enable: section.settings.product_carousel_enable,
-                  mobile_layout: section.settings.mobile_layout
-                -%}
+              <div class="grid__item {{ product_image_width }} product-single__sticky product-grid__images">
+                <div class="product-column-content">
+                  {%- render 'product-images',
+                    section_id: section.id,
+                    product: product,
+                    product_zoom_enable: section.settings.product_zoom_enable,
+                    product_zoom_size: product_zoom_size,
+                    product_carousel_enable: false,
+                    thumbnail_position: 'below',
+                    thumbnail_height: section.settings.thumbnail_height,
+                    thumbnail_arrows: section.settings.thumbnail_arrows,
+                    mobile_layout: section.settings.mobile_layout,
+                    blocks: section.blocks
+                  -%}
+                  <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+                    <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+                    <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
               </div>
             {%- endif -%}
 
-            <div class="grid__item {{ product_description_width }}">
-              <div class="product-single__meta">
-                <!-- Product Header -->
+            <div class="grid__item {{ product_description_width }} product-grid__info">
+              <div class="product-single__meta product-info-inner">
                 <div class="product-block product-block--header">
                   {%- if settings.vendor_enable -%}
                     <div class="product-single__vendor">
-                      {{ product.vendor | link_to_vendor }}
+                      {%- assign vendor_handle = product.vendor | handleize -%}
+                      {%- if collections[vendor_handle] != empty -%}
+                        <a href="{{ routes.collections_url }}/{{ collections[vendor_handle].handle }}">
+                          {{ collections[vendor_handle].title }}
+                        </a>
+                      {%- else -%}
+                        {{ product.vendor | link_to_vendor }}
+                      {%- endif -%}
                     </div>
                   {%- endif -%}
-                  
-                  <h1 class="h2 product-single__title">
-                    {{ product.title }}
-                  </h1>
-                  
-                  {%- if section.settings.sku_enable and current_variant.sku -%}
-                    <p class="product-single__sku">{{ current_variant.sku }}</p>
-                  {%- endif -%}
-                </div>
 
-                <!-- Price Block -->
-                <div class="product-block product-block--price">
-                  <span class="product__price text-2xl f-smb">
-                    {{ current_variant.price | money }}
-                  </span>
-                  {%- if current_variant.compare_at_price > current_variant.price -%}
-                    <span class="product__price product__price--compare text-xl">
-                      {{ current_variant.compare_at_price | money }}
-                    </span>
-                  {%- endif -%}
-                </div>
-
-                <!-- Description block - hiển thị mặc định -->
-                <div class="product-block product-block--description">
-                  <div class="product-description">
-                    {{ product.description }}
+                  <!-- Product Reviews Section -->
+                  <div class="product-reviews-summary">
+                    <div class="product-rating">
+                      <div class="stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                      </div>
+                      <span class="rating-value">4.8</span>
+                    </div>
+                    <div class="reviews-count">
+                      <span class="reviews-number">(2025 đánh giá)</span>
+                    </div>
                   </div>
+
+                  <h1 class="h2 product-single__title">
+                    {%- unless product.empty? -%}
+                      {{ product.title }}
+                    {%- else -%}
+                      {{ 'home_page.onboarding.product_title' | t }}
+                    {%- endunless -%}
+                  </h1>
+
+                  {%- if section.settings.product_subtitle != blank -%}
+                    <div class="product-single__subtitle">
+                      {{ section.settings.product_subtitle }}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if section.settings.sku_enable -%}
+                    <p data-sku class="product-single__sku">
+                      {%- if current_variant.sku -%}
+                        {{ current_variant.sku }}
+                      {%- endif -%}
+                    </p>
+                  {%- endif -%}
                 </div>
 
-                                        <!-- Bundle CTA Button -->
-                        <div class="product-block">
-                          <!-- Debug: has_bundle_products = {{ has_bundle_products }} -->
-                          {%- if bundle_products_list -%}
-                            <!-- Debug: bundle_products count = {{ bundle_products_list.size }} -->
-                          {%- else -%}
-                            <!-- Debug: no bundle products found -->
-                          {%- endif -%}
-                          
-                          {%- if has_bundle_products -%}
-                            <button
-                              type="button"
-                              name="bundle-cta"
-                              data-bundle-cta
-                              id="BundleCTAButton-{{ section.id }}-{{ product.id }}"
-                              class="btn btn--full btn--primary bundle-cta-btn"
-                            >
-                              <span class="icon-cart">{% render 'icon-cart-2' %}</span>
-                              <span data-bundle-cta-text>
-                                Bắt đầu tạo combo
-                              </span>
-                            </button>
-                          {%- else -%}
-                            <div class="bundle-setup-notice" style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1rem; margin: 1rem 0; text-align: center;">
-                              <h4 style="margin: 0 0 0.5rem 0; color: #856404;">⚠️ Bundle chưa được cấu hình</h4>
-                              <p style="margin: 0; color: #856404; font-size: 1.15rem;">
-                                Để sử dụng tính năng bundle, vui lòng thêm sản phẩm vào bundle trong Theme Editor.
-                              </p>
-                              <div style="margin-top: 0.5rem;">
-                                <button
-                                  type="button"
-                                  class="btn btn--secondary"
-                                  style="font-size: 1rem; padding: 0.5rem 1rem;"
-                                  onclick="alert('Để thêm sản phẩm vào bundle:\\n\\n1. Vào Theme Editor\\n2. Chọn section Product Bundle\\n3. Trong settings, tìm Bundle Products\\n4. Click Change và chọn các sản phẩm muốn thêm vào bundle')"
-                                >
-                                  Hướng dẫn cấu hình
-                                </button>
+                <div data-product-blocks>
+                  <!-- Price Block -->
+                  <div class="product-block product-block--price">
+                    <div class="price-container-wrapper">
+                      <span class="product__price text-2xl f-smb">
+                        {{ current_variant.price | money }}
+                      </span>
+                      {%- if current_variant.compare_at_price > current_variant.price -%}
+                        <span class="product__price product__price--compare text-xl">
+                          {{ current_variant.compare_at_price | money }}
+                        </span>
+                      {%- endif -%}
+                      {%- if current_variant.compare_at_price > current_variant.price -%}
+                        {%- capture discount_percentage -%}{{ current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round }}{%- endcapture -%}
+                        <div class="product__discount-badge">-{{ discount_percentage }}%</div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+
+                  <!-- Combo Products List -->
+                  <div class="product-block">
+                    <h3 style="background-color: #F5F9FF; padding: 10px; border-radius: 5px; margin: 0 0 0 0;">{{ section.settings.combo_title | default: "Combo bao gồm các sản phẩm:" }}</h3>
+                    <div class="combo-products-list">
+                      {%- if has_bundle_products and bundle_products_list -%}
+                        {%- for bundle_product in bundle_products_list -%}
+                          <div class="combo-product-item">
+                            <div class="combo-product-image">
+                              {%- if bundle_product.featured_media -%}
+                                <img src="{{ bundle_product.featured_media | image_url: width: 60 }}" 
+                                     alt="{{ bundle_product.title }}" 
+                                     width="60" height="60"
+                                     loading="lazy">
+                              {%- endif -%}
+                            </div>
+                            <div class="combo-product-info">
+                              <h4>{{ bundle_product.title }}</h4>
+                              <div class="combo-product-attributes">
+                                <span>Số lượng: 1</span>
+                                <span>Kích thước: {{ bundle_product.options.size | default: '1' }} kích thước</span>
                               </div>
                             </div>
-                          {%- endif -%}
+                          </div>
+                        {%- endfor -%}
+                      {%- else -%}
+                        <div class="combo-product-placeholder" style="text-align: center; padding: 2rem; color: #666;">
+                          <p>Chưa có sản phẩm trong combo</p>
                         </div>
-                
-                <!-- Icon with text block - hiển thị động từ blocks -->
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'icon_with_text' -%}
-                    <div class="product-block" {{ block.shopify_attributes }}>
-                      <div class="icon-with-text">
-                        <div class="icon-with-text__grid" style="text-align: {{ block.settings.icon_alignment | default: 'center' }};" data-columns="{{ block.settings.grid_columns | default: '2' }}">
-                          {%- if block.settings.icon_1_image or block.settings.icon_1_heading -%}
-                            <div class="icon-with-text__item">
-                              <div class="icon-with-text__icon">
-                                {%- if block.settings.icon_1_image -%}
-                                  <img src="{{ block.settings.icon_1_image | img_url: '100x' }}" 
-                                       alt="{{ block.settings.icon_1_heading | default: 'Icon 1' }}"
-                                       width="{{ block.settings.icon_size | default: 25 }}"
-                                       height="{{ block.settings.icon_size | default: 25 }}"
-                                       style="width: {{ block.settings.icon_size | default: 25 }}px; height: {{ block.settings.icon_size | default: 25 }}px; object-fit: contain;">
-                                {%- else -%}
-                                  <svg width="{{ block.settings.icon_size | default: 25 }}" height="{{ block.settings.icon_size | default: 25 }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="currentColor"/>
-                                  </svg>
-                                {%- endif -%}
-                              </div>
-                              <div class="icon-with-text__content">
-                                <h3 class="icon-with-text__heading">{{ block.settings.icon_1_heading | default: '100 đêm ngủ thử' }}</h3>
-                              </div>
-                            </div>
-                          {%- endif -%}
-                          
-                          {%- if block.settings.icon_2_image or block.settings.icon_2_heading -%}
-                            <div class="icon-with-text__item">
-                              <div class="icon-with-text__icon">
-                                {%- if block.settings.icon_2_image -%}
-                                  <img src="{{ block.settings.icon_2_image | img_url: '100x' }}" 
-                                       alt="{{ block.settings.icon_2_heading | default: 'Icon 2' }}"
-                                       width="{{ block.settings.icon_size | default: 25 }}"
-                                       height="{{ block.settings.icon_size | default: 25 }}"
-                                       style="width: {{ block.settings.icon_size | default: 25 }}px; height: {{ block.settings.icon_size | default: 25 }}px; object-fit: contain;">
-                                {%- else -%}
-                                  <svg width="{{ block.settings.icon_size | default: 25 }}" height="{{ block.settings.icon_size | default: 25 }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M8 5V3a2 2 0 012-2h4a2 2 0 012 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
-                                {%- endif -%}
-                              </div>
-                              <div class="icon-with-text__content">
-                                <h3 class="icon-with-text__heading">{{ block.settings.icon_2_heading | default: 'Miễn phí vận chuyển *' }}</h3>
-                              </div>
-                            </div>
-                          {%- endif -%}
-                          
-                          {%- if block.settings.icon_3_image or block.settings.icon_3_heading -%}
-                            <div class="icon-with-text__item">
-                              <div class="icon-with-text__icon">
-                                {%- if block.settings.icon_3_image -%}
-                                  <img src="{{ block.settings.icon_3_image | img_url: '100x' }}" 
-                                       alt="{{ block.settings.icon_3_heading | default: 'Icon 3' }}"
-                                       width="{{ block.settings.icon_size | default: 25 }}"
-                                       height="{{ block.settings.icon_size | default: 25 }}"
-                                       style="width: {{ block.settings.icon_size | default: 25 }}px; height: {{ block.settings.icon_size | default: 25 }}px; object-fit: contain;">
-                                {%- else -%}
-                                  <svg width="{{ block.settings.icon_size | default: 25 }}" height="{{ block.settings.icon_size | default: 25 }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
-                                {%- endif -%}
-                              </div>
-                              <div class="icon-with-text__content">
-                                <h3 class="icon-with-text__heading">{{ block.settings.icon_3_heading | default: 'Bảo hành dài lâu' }}</h3>
-                              </div>
-                            </div>
-                          {%- endif -%}
-                          
-                          {%- unless block.settings.show_icon_4 == false -%}
-                            {%- if block.settings.icon_4_image or block.settings.icon_4_heading -%}
-                            <div class="icon-with-text__item">
-                              <div class="icon-with-text__icon">
-                                {%- if block.settings.icon_4_image -%}
-                                  <img src="{{ block.settings.icon_4_image | img_url: '100x' }}" 
-                                       alt="{{ block.settings.icon_4_heading | default: 'Icon 4' }}"
-                                       width="{{ block.settings.icon_size | default: 25 }}"
-                                       height="{{ block.settings.icon_size | default: 25 }}"
-                                       style="width: {{ block.settings.icon_size | default: 25 }}px; height: {{ block.settings.icon_size | default: 25 }}px; object-fit: contain;">
-                                {%- else -%}
-                                  <svg width="{{ block.settings.icon_size | default: 25 }}" height="{{ block.settings.icon_size | default: 25 }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M8 5V3a2 2 0 012-2h4a2 2 0 012 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
-                                {%- endif -%}
-                              </div>
-                              <div class="icon-with-text__content">
-                                <h3 class="icon-with-text__heading">{{ block.settings.icon_4_heading | default: 'Chất liệu Foam cao cấp' }}</h3>
-                              </div>
-                            </div>
-                          {%- endif -%}
-                          {%- endunless -%}
+                      {%- endif -%}
+                    </div>
+                  </div>
+
+                  <!-- Bundle CTA Button -->
+                  <div class="product-block">
+                    {%- if has_bundle_products -%}
+                      <button
+                        type="button"
+                        name="bundle-cta"
+                        data-bundle-cta
+                        id="BundleCTAButton-{{ section.id }}-{{ product.id }}"
+                        class="btn btn--full btn--primary bundle-cta-btn"
+                        style="background: #FCE390; color: #1C2C58; font-weight: bold; font-size: 16px; padding: 15px; border-radius: 50px; border: none;"
+                      >
+                        <span data-bundle-cta-text>
+                          {{ section.settings.cta_button_text | default: "BẮT ĐẦU TẠO COMBO" }}
+                        </span>
+                      </button>
+                    {%- else -%}
+                      <div class="bundle-setup-notice" style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1rem; margin: 1rem 0; text-align: center;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #856404;">⚠️ Bundle chưa được cấu hình</h4>
+                        <p style="margin: 0; color: #856404; font-size: 1.15rem;">
+                          Để sử dụng tính năng bundle, vui lòng thêm sản phẩm vào bundle trong Theme Editor.
+                        </p>
+                        <div style="margin-top: 0.5rem;">
+                          <button
+                            type="button"
+                            class="btn btn--secondary"
+                            style="font-size: 1rem; padding: 0.5rem 1rem;"
+                            onclick="alert('Để thêm sản phẩm vào bundle:\\n\\n1. Vào Theme Editor\\n2. Chọn section Product Bundle\\n3. Trong settings, tìm Bundle Products\\n4. Click Change và chọn các sản phẩm muốn thêm vào bundle')"
+                          >
+                            Hướng dẫn cấu hình
+                          </button>
                         </div>
                       </div>
+                    {%- endif -%}
+                  </div>
+
+                  <!-- Product Summary Block -->
+                  <div class="product-block product-summary-block">
+                    <div class="product-summary-content">
+                      <!-- Description Accordion -->
+                      <details class="product-accordion product-accordion--styled" open>
+                        <summary>
+                          <span>Mô tả sản phẩm</span>
+                          <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                        <div class="product-accordion-content rte">
+                          {{ product.description }}
+                        </div>
+                      </details>
+
+                      <!-- Store System Accordion -->
+                      <details class="product-accordion product-accordion--styled">
+                        <summary>
+                          <span>Hệ thống cửa hàng</span>
+                          <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                        <div class="product-accordion-content">
+                          <div class="showroom-list">
+                            <div class="showroom-item">
+                              <strong>Showroom 1</strong><br>
+                              <span>Địa chỉ showroom</span><br>
+                              <a href="tel:0964777910">0964777910</a>
+                            </div>
+                            <div class="showroom-item">
+                              <strong>Showroom 2</strong><br>
+                              <span>Địa chỉ showroom</span><br>
+                              <a href="tel:0964777910">0964777910</a>
+                            </div>
+                            <div class="showroom-item">
+                              <strong>Showroom 3</strong><br>
+                              <span>Địa chỉ showroom</span><br>
+                              <a href="tel:0964777940">0964777940</a>
+                            </div>
+                          </div>
+                        </div>
+                      </details>
+
+                      <!-- Reviews Accordion -->
+                      <details class="product-accordion product-accordion--styled">
+                        <summary>
+                          <span>Đánh giá</span>
+                          <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                        <div class="product-accordion-content">
+                          <div class="product-reviews-summary">
+                            <div class="product-rating">
+                              <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                              </div>
+                              <span class="rating-value">4.8</span>
+                            </div>
+                            <div class="reviews-count">
+                              <span class="reviews-number">(2025 đánh giá)</span>
+                            </div>
+                          </div>
+                        </div>
+                      </details>
                     </div>
-                  {%- endif -%}
-                {%- endfor -%}
-                
-                <!-- Product combo block -->
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'product_combo' -%}
-                    <div class="product-block" {{ block.shopify_attributes }}>
-                      <div class="product-combo">
-                        <!-- Product combo content will be rendered here -->
-                        {% render 'product-complementary', product: product, section: section %}
+                  </div>
+
+                  <!-- Service Grid -->
+                  <div class="product-block product-block--service-grid">
+                    <div class="service-grid-wrapper">
+                      <div class="service-grid" style="grid-template-columns: repeat(4, 1fr);">
+                        <div class="service-grid-item">
+                          <div class="service-item">
+                            <div class="service-item__icon">
+                              {%- if section.settings.service_icon_1 -%}
+                                <img src="{{ section.settings.service_icon_1 | image_url: width: 40 }}" alt="{{ section.settings.service_text_1 | default: '100 đêm ngủ thử' }}" width="40" height="40">
+                              {%- else -%}
+                                <img src="{{ 'Layer_1_3.svg' | asset_url }}" alt="{{ section.settings.service_text_1 | default: '100 đêm ngủ thử' }}" width="40" height="40">
+                              {%- endif -%}
+                            </div>
+                            <div class="service-item__text">
+                              <p>{{ section.settings.service_text_1 | default: "100 đêm ngủ thử" }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="service-grid-item">
+                          <div class="service-item">
+                            <div class="service-item__icon">
+                              {%- if section.settings.service_icon_2 -%}
+                                <img src="{{ section.settings.service_icon_2 | image_url: width: 40 }}" alt="{{ section.settings.service_text_2 | default: 'Miễn phí vận chuyển' }}" width="40" height="40">
+                              {%- else -%}
+                                <img src="{{ 'Layer_1_4.svg' | asset_url }}" alt="{{ section.settings.service_text_2 | default: 'Miễn phí vận chuyển' }}" width="40" height="40">
+                              {%- endif -%}
+                            </div>
+                            <div class="service-item__text">
+                              <p>{{ section.settings.service_text_2 | default: "Miễn phí vận chuyển" }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="service-grid-item">
+                          <div class="service-item">
+                            <div class="service-item__icon">
+                              {%- if section.settings.service_icon_3 -%}
+                                <img src="{{ section.settings.service_icon_3 | image_url: width: 40 }}" alt="{{ section.settings.service_text_3 | default: 'Bảo hành dài lâu' }}" width="40" height="40">
+                              {%- else -%}
+                                <img src="{{ 'Layer_1_5.svg' | asset_url }}" alt="{{ section.settings.service_text_3 | default: 'Bảo hành dài lâu' }}" width="40" height="40">
+                              {%- endif -%}
+                            </div>
+                            <div class="service-item__text">
+                              <p>{{ section.settings.service_text_3 | default: "Bảo hành dài lâu" }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="service-grid-item">
+                          <div class="service-item">
+                            <div class="service-item__icon">
+                              {%- if section.settings.service_icon_4 -%}
+                                <img src="{{ section.settings.service_icon_4 | image_url: width: 40 }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toán linh hoạt' }}" width="40" height="40">
+                              {%- else -%}
+                                <img src="{{ 'Layer_1_6.svg' | asset_url }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toán linh hoạt' }}" width="40" height="40">
+                              {%- endif -%}
+                            </div>
+                            <div class="service-item__text">
+                              <p>{{ section.settings.service_text_4 | default: "Thanh toán linh hoạt" }}</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  {%- endif -%}
-                {%- endfor -%}
-                
-                <!-- Buy buttons block -->
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'buy_buttons' -%}
-                    <div class="product-block" {{ block.shopify_attributes }}>
-                      <div class="product-form">
-                        {% render 'product-form',
-                          product: product,
-                          section: section,
-                          block: block
-                        %}
-                      </div>
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
-                
-                <!-- Description block -->
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'description' -%}
-                    <div class="product-block" {{ block.shopify_attributes }}>
-                      <div class="product-description">
-                        {% render 'product-description',
-                          product: product,
-                          block: block
-                        %}
-                      </div>
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
-                
-                <!-- Price block -->
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'price' -%}
-                    <div class="product-block product-block--price" {{ block.shopify_attributes }}>
-                      {% render 'price',
-                        product: product,
-                        show_vendor: settings.vendor_enable
-                      %}
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
-                
-                <!-- Variant picker block -->
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'variant_picker' -%}
-                    <div class="product-block" {{ block.shopify_attributes }}>
-                      {% render 'variant-button',
-                        product: product,
-                        block: block
-                      %}
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
-                
-                <!-- Quantity selector block -->
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'quantity_selector' -%}
-                    <div class="product-block" {{ block.shopify_attributes }}>
-                      <div class="product__quantity">
-                        {% render 'quantity-input',
-                          product: product
-                        %}
-                      </div>
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
-                
-                <!-- Carousel modal block -->
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'carousel_modal' -%}
-                    <div class="product-block" {{ block.shopify_attributes }}>
-                      <div class="product-block__modal">
-                        <modal-opener data-modal="#PopupModal-{{ block.id }}" class="grid no-wrap ai-start">
-                          {% for index in (1..4) %}
-                            {%- capture description_index -%}description_{{ index }}{%- endcapture -%}
-                            {%- capture image_index -%}picture_{{ index }}{%- endcapture -%}
-                            {%- capture title_index -%}title_{{ index }}{%- endcapture -%}
-                            {% liquid
-                              assign desc = product.metafields.custom.product_features.value[description_index].value
-                              assign img = product.metafields.custom.product_features.value[image_index].value
-                              assign title = product.metafields.custom.product_features.value[title_index].value
-                            %}
-                            {%- if img != blank and title != blank -%}
-                              <button class="block-modal grid__item block-modal--button t-center">
-                                {%- if img != blank -%}
-                                  <div class="block-modal--image image-wrap">
-                                    {% render 'image-element', img: img, classes: 'rounded-sm-large' %}
+                  </div>
+
+                  <!-- Render blocks from main-product.liquid -->
+                  {%- for block in section.blocks -%}
+                    {%- case block.type -%}
+                      {%- when 'description' -%}
+                        <details class="product-accordion product-accordion--styled" open {{ block.shopify_attributes }}>
+                          <summary>
+                            <span>{{ 'products.product.description' | t }}</span>
+                             <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          </summary>
+                          <div class="product-accordion-content rte">
+                            {{ product.description }}
+                          </div>
+                        </details>
+                      {%- when 'showroom_dropdown' -%}
+                        <details class="product-accordion product-accordion--styled" {{ block.shopify_attributes }}>
+                          <summary>
+                            <span>{{ block.settings.title }}</span>
+                            <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          </summary>
+                          <div class="product-accordion-content">
+                            <div class="showroom-list showroom-list--accordion">
+                              {%- if block.settings.showroom_1_name != blank -%}
+                              <div class="showroom-item">
+                                  <a href="{{ block.settings.showroom_1_map_link }}" target="_blank" rel="noopener" class="showroom-address">
+                                    <strong>{{ block.settings.showroom_1_name }}</strong><br>
+                                    {{ block.settings.showroom_1_address }}
+                                  </a>
+                                  <a class="phone-link" href="tel:{{ block.settings.showroom_1_phone | remove: ' ' }}">{{ block.settings.showroom_1_phone }}</a>
+                              </div>
+                              {%- endif -%}
+                              {%- if block.settings.showroom_2_name != blank -%}
+                              <div class="showroom-item">
+                                  <a href="{{ block.settings.showroom_2_map_link }}" target="_blank" rel="noopener" class="showroom-address">
+                                    <strong>{{ block.settings.showroom_2_name }}</strong><br>
+                                    {{ block.settings.showroom_2_address }}
+                                </a>
+                                  <a class="phone-link" href="tel:{{ block.settings.showroom_2_phone | remove: ' ' }}">{{ block.settings.showroom_2_phone }}</a>
+                              </div>
+                              {%- endif -%}
+                              {%- if block.settings.showroom_3_name != blank -%}
+                              <div class="showroom-item">
+                                  <a href="{{ block.settings.showroom_3_map_link }}" target="_blank" rel="noopener" class="showroom-address">
+                                    <strong>{{ block.settings.showroom_3_name }}</strong><br>
+                                    {{ block.settings.showroom_3_address }}
+                                </a>
+                                  <a class="phone-link" href="tel:{{ block.settings.showroom_3_phone | remove: ' ' }}">{{ block.settings.showroom_3_phone }}</a>
+                              </div>
+                              {%- endif -%}
+                            </div>
+                          </div>
+                        </details>
+                      {%- when 'service_grid' -%}
+                        {%- liquid
+                          assign services_count = 0
+                          for i in (1..4)
+                            assign icon_setting = 'icon_' | append: i
+                            assign text_setting = 'text_' | append: i
+                            if block.settings[icon_setting] != blank or block.settings[text_setting] != blank
+                              assign services_count = services_count | plus: 1
+                            endif
+                          endfor
+                        -%}
+                        <div class="product-block product-block--service-grid" {{ block.shopify_attributes }}>
+                          <div class="service-grid-wrapper">
+                            <div class="service-grid" style="grid-template-columns: repeat({{ services_count }}, 1fr);">
+                              {%- for i in (1..4) -%}
+                                {%- liquid
+                                  assign icon_setting = 'icon_' | append: i
+                                  assign text_setting = 'text_' | append: i
+                                  assign icon = block.settings[icon_setting]
+                                  assign text = block.settings[text_setting]
+                                -%}
+                                {%- if icon != blank or text != blank -%}
+                                  <div class="service-grid-item">
+                                    <div class="service-item">
+                                      {%- if icon != blank -%}
+                                        <div class="service-item__icon">
+                                          <img src="{{ icon | image_url: 'master' }}" alt="{{ icon.alt | default: text }}" width="40" height="40">
+                                        </div>
+                                      {%- endif -%}
+                                      {%- if text != blank -%}
+                                        <div class="service-item__text">
+                                          <p>{{ text }}</p>
+                                        </div>
+                                      {%- endif -%}
+                                    </div>
                                   </div>
                                 {%- endif -%}
-                                {%- if title != blank -%}
-                                  <div class="block-modal--title text-sm">{{ title }}</div>
-                                {%- endif -%}
-                              </button>
-                            {%- endif -%}
-                          {% endfor %}
-                        </modal-opener>
+                              {%- endfor -%}
+                            </div>
+                        </div>
                       </div>
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
+                    {%- endcase -%}
+                  {%- endfor -%}
+                </div>
               </div>
             </div>
 
-
+            {%- unless section.settings.image_position == 'left' -%}
+              <div class="grid__item {{ product_image_width }} product-single__sticky product-grid__images">
+                <div class="product-column-content">
+                  {%- render 'product-images',
+                    section_id: section.id,
+                    product: product,
+                    product_zoom_enable: section.settings.product_zoom_enable,
+                    product_zoom_size: product_zoom_size,
+                    product_carousel_enable: false,
+                    thumbnail_position: 'below',
+                    thumbnail_height: section.settings.thumbnail_height,
+                    thumbnail_arrows: section.settings.thumbnail_arrows,
+                    mobile_layout: section.settings.mobile_layout,
+                    blocks: section.blocks
+                  -%}
+                  <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+                    <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+                    <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+              </div>
+            {%- endunless -%}
           </div>
         </div>
       </div>
@@ -959,19 +1955,54 @@
 
     <!-- Step 2: Bundle Products Selection -->
     <div class="bundle-step bundle-step-2" data-step="2" style="display: none;">
-      <div class="page-content">
-        <div class="page-width">
-          <div class="bundle-step-header">
-            <h2 class="bundle-step-title">Chọn sản phẩm cho bundle</h2>
-            <div class="bundle-progress">
-                              <span class="bundle-progress-current">1</span> / <span class="bundle-progress-total">{% if has_bundle_products and bundle_products_list %}{{ bundle_products_list.size }}{% else %}0{% endif %}</span>
+      <div class="page-content page-content--product">
+        <div class="bundle-container">
+          {%- if settings.show_breadcrumbs -%}
+            {%- render 'breadcrumbs', classes: 'spacing-base' -%}
+          {%- endif -%}
+          <div class="grid grid--product-images-right">
+            <!-- Bundle Product Images (Left) -->
+            <div class="grid__item large-up--one-half product-single__sticky product-grid__images">
+              <div class="product-column-content">
+                <div class="product__photos product__photos-{{ section.id }} product__photos--stack product__photos--beside">
+                  <!-- Main Product Image - Full Width Above Thumbnails -->
+                  <div class="product__main-photos" data-product-single-media-group>
+                    <div data-product-photos class="product-slideshow" id="BundleProductPhotos-{{ section.id }}">
+                      <!-- Bundle product image will be loaded here -->
+                      <div class="product-main-slide" data-index="0">
+                        <div class="image-placeholder" style="width: 100%; height: 400px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666;">
+                          <p>Đang tải hình ảnh sản phẩm...</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Product Thumbnails Below Main Image -->
+                  <div data-product-thumbs class="product__thumbs product__thumbs--below">
+                    <div class="product__thumbs--scroller">
+                      <!-- Thumbnails will be loaded here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="bundle-products-grid">
-            <!-- Bundle products will be loaded here -->
-            <div class="bundle-product-placeholder" style="text-align: center; padding: 2rem; color: #666;">
-              <p>Đang tải sản phẩm...</p>
+            <!-- Bundle Product Info (Right) -->
+            <div class="grid__item large-up--one-half product-grid__info">
+              <div class="product-single__meta product-info-inner">
+                <!-- Product Header with Bundle Step Header as subtitle -->
+                <div class="product-block product-block--header">
+                  <h1 class="h2 product-single__title">Chọn sản phẩm cho bundle <span class="bundle-step-subtitle">(<span class="bundle-progress-current">1</span>/<span class="bundle-progress-total">{% if has_bundle_products and bundle_products_list %}{{ bundle_products_list.size }}{% else %}0{% endif %}</span>)</span></h1>
+                </div>
+
+                <!-- Bundle Product Content -->
+                <div class="bundle-products-grid">
+                  <!-- Bundle products will be loaded here -->
+                  <div class="bundle-product-placeholder" style="text-align: center; padding: 2rem; color: #666;">
+                    <p>Đang tải sản phẩm...</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -981,7 +2012,7 @@
     <!-- Step 3: Bundle Summary -->
     <div class="bundle-step bundle-step-3" data-step="3" style="display: none;">
       <div class="page-content page-content--product">
-        <div class="{% if section.settings.section_width == 'customize_width' %}custom-width{% else %}page-width{% endif %}" {% if section.settings.section_width == 'customize_width' %}style="max-width: {{ section.settings.customize_width }}px;"{% endif %}>
+        <div class="bundle-container">
           <div class="grid grid--product-images-right">
             <!-- Bundle Images (Left) -->
             <div class="grid__item large-up--one-half product-single__sticky">
@@ -991,7 +2022,7 @@
                     <div data-product-photos class="product-slideshow" id="BundlePhotos-{{ section.id }}">
                       <!-- Main bundle image will be loaded here -->
                       <div class="product-main-slide" data-index="0">
-                        <img src="{{ product.featured_image | img_url: '620x' }}" alt="{{ product.title }}" width="620" height="620" style="width: 100%; height: auto;">
+                        <img src="{{ product.featured_image | image_url: '620x' }}" alt="{{ product.title }}" width="620" height="620" style="width: 100%; height: auto;">
                       </div>
                     </div>
                   </div>
@@ -1062,106 +2093,31 @@
                   </div>
                 </div>
 
-                <!-- Icon with text block - hiển thị động từ blocks -->
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'icon_with_text' -%}
-                    <div class="product-block" {{ block.shopify_attributes }}>
-                      <div class="icon-with-text">
-                        <div class="icon-with-text__grid" style="text-align: {{ block.settings.icon_alignment | default: 'center' }};" data-columns="{{ block.settings.grid_columns | default: '2' }}">
-                          {%- if block.settings.icon_1_image or block.settings.icon_1_heading -%}
-                            <div class="icon-with-text__item">
-                              <div class="icon-with-text__icon">
-                                {%- if block.settings.icon_1_image -%}
-                                  <img src="{{ block.settings.icon_1_image | img_url: '100x' }}" 
-                                       alt="{{ block.settings.icon_1_heading | default: 'Icon 1' }}"
-                                       width="{{ block.settings.icon_size | default: 25 }}"
-                                       height="{{ block.settings.icon_size | default: 25 }}"
-                                       style="width: {{ block.settings.icon_size | default: 25 }}px; height: {{ block.settings.icon_size | default: 25 }}px; object-fit: contain;">
-                                {%- else -%}
-                                  <svg width="{{ block.settings.icon_size | default: 25 }}" height="{{ block.settings.icon_size | default: 25 }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="currentColor"/>
-                                  </svg>
-                                {%- endif -%}
-                              </div>
-                              <div class="icon-with-text__content">
-                                <h3 class="icon-with-text__heading">{{ block.settings.icon_1_heading | default: '100 đêm ngủ thử' }}</h3>
-                              </div>
-                            </div>
-                          {%- endif -%}
-                          
-                          {%- if block.settings.icon_2_image or block.settings.icon_2_heading -%}
-                            <div class="icon-with-text__item">
-                              <div class="icon-with-text__icon">
-                                {%- if block.settings.icon_2_image -%}
-                                  <img src="{{ block.settings.icon_2_image | img_url: '100x' }}" 
-                                       alt="{{ block.settings.icon_2_heading | default: 'Icon 2' }}"
-                                       width="{{ block.settings.icon_size | default: 25 }}"
-                                       height="{{ block.settings.icon_size | default: 25 }}"
-                                       style="width: {{ block.settings.icon_size | default: 25 }}px; height: {{ block.settings.icon_size | default: 25 }}px; object-fit: contain;">
-                                {%- else -%}
-                                  <svg width="{{ block.settings.icon_size | default: 25 }}" height="{{ block.settings.icon_size | default: 25 }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M8 5V3a2 2 0 012-2h4a2 2 0 012 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
-                                {%- endif -%}
-                              </div>
-                              <div class="icon-with-text__content">
-                                <h3 class="icon-with-text__heading">{{ block.settings.icon_2_heading | default: 'Miễn phí vận chuyển *' }}</h3>
-                              </div>
-                            </div>
-                          {%- endif -%}
-                          
-                          {%- if block.settings.icon_3_image or block.settings.icon_3_heading -%}
-                            <div class="icon-with-text__item">
-                              <div class="icon-with-text__icon">
-                                {%- if block.settings.icon_3_image -%}
-                                  <img src="{{ block.settings.icon_3_image | img_url: '100x' }}" 
-                                       alt="{{ block.settings.icon_3_heading | default: 'Icon 3' }}"
-                                       width="{{ block.settings.icon_size | default: 25 }}"
-                                       height="{{ block.settings.icon_size | default: 25 }}"
-                                       style="width: {{ block.settings.icon_size | default: 25 }}px; height: {{ block.settings.icon_size | default: 25 }}px; object-fit: contain;">
-                                {%- else -%}
-                                  <svg width="{{ block.settings.icon_size | default: 25 }}" height="{{ block.settings.icon_size | default: 25 }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
-                                {%- endif -%}
-                              </div>
-                              <div class="icon-with-text__content">
-                                <h3 class="icon-with-text__heading">{{ block.settings.icon_3_heading | default: 'Bảo hành dài lâu' }}</h3>
-                              </div>
-                            </div>
-                          {%- endif -%}
-                          
-                          {%- unless block.settings.show_icon_4 == false -%}
-                            {%- if block.settings.icon_4_image or block.settings.icon_4_heading -%}
-                            <div class="icon-with-text__item">
-                              <div class="icon-with-text__icon">
-                                {%- if block.settings.icon_4_image -%}
-                                  <img src="{{ block.settings.icon_4_image | img_url: '100x' }}" 
-                                       alt="{{ block.settings.icon_4_heading | default: 'Icon 4' }}"
-                                       width="{{ block.settings.icon_size | default: 25 }}"
-                                       height="{{ block.settings.icon_size | default: 25 }}"
-                                       style="width: {{ block.settings.icon_size | default: 25 }}px; height: {{ block.settings.icon_size | default: 25 }}px; object-fit: contain;">
-                                {%- else -%}
-                                  <svg width="{{ block.settings.icon_size | default: 25 }}" height="{{ block.settings.icon_size | default: 25 }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M8 5V3a2 2 0 012-2h4a2 2 0 012 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
-                                {%- endif -%}
-                              </div>
-                              <div class="icon-with-text__content">
-                                <h3 class="icon-with-text__heading">{{ block.settings.icon_4_heading | default: 'Chất liệu Foam cao cấp' }}</h3>
-                              </div>
-                            </div>
-                          {%- endif -%}
-                          {%- endunless -%}
-                        </div>
-                      </div>
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
               </div>
             </div>
+
+            {%- unless section.settings.image_position == 'left' -%}
+              <div class="grid__item {{ product_image_width }} product-single__sticky product-grid__images">
+                {%- render 'product-images',
+                  section_id: section.id,
+                  product: product,
+                  product_zoom_enable: section.settings.product_zoom_enable,
+                  product_zoom_size: product_zoom_size,
+                  product_carousel_enable: false,
+                  thumbnail_position: 'below',
+                  thumbnail_height: section.settings.thumbnail_height,
+                  thumbnail_arrows: section.settings.thumbnail_arrows,
+                  mobile_layout: section.settings.mobile_layout,
+                  blocks: section.blocks
+                -%}
+                <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+                  <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+                  <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+            {%- endunless -%}
           </div>
         </div>
       </div>
@@ -1212,13 +2168,13 @@
     {%- for block in section.blocks -%}
       {%- if block.type == 'icon_with_text' -%}
         {%- assign icon_block_found = true -%}
-        "icon_1_image": {{ block.settings.icon_1_image | img_url: '100x' | json }},
+        "icon_1_image": {{ block.settings.icon_1_image | image_url: '100x' | json }},
         "icon_1_heading": {{ block.settings.icon_1_heading | json }},
-        "icon_2_image": {{ block.settings.icon_2_image | img_url: '100x' | json }},
+        "icon_2_image": {{ block.settings.icon_2_image | image_url: '100x' | json }},
         "icon_2_heading": {{ block.settings.icon_2_heading | json }},
-        "icon_3_image": {{ block.settings.icon_3_image | img_url: '100x' | json }},
+        "icon_3_image": {{ block.settings.icon_3_image | image_url: '100x' | json }},
         "icon_3_heading": {{ block.settings.icon_3_heading | json }},
-        "icon_4_image": {{ block.settings.icon_4_image | img_url: '100x' | json }},
+        "icon_4_image": {{ block.settings.icon_4_image | image_url: '100x' | json }},
         "icon_4_heading": {{ block.settings.icon_4_heading | json }},
         "icon_size": {{ block.settings.icon_size | default: 25 | json }},
         "icon_alignment": {{ block.settings.icon_alignment | default: 'center' | json }},
@@ -1257,7 +2213,7 @@
               "handle": {{ bundle_product.handle | json }},
               "title": {{ bundle_product.title | json }},
               "id": {{ bundle_product.id | json }},
-              "featured_image": {{ bundle_product.featured_media.src | img_url: 'medium' | json }},
+              "featured_image": {{ bundle_product.featured_media | image_url: 'medium' | json }},
               "price": {{ bundle_product.price | json }},
               "compare_at_price": {{ bundle_product.compare_at_price | json }},
               "description": {{ bundle_product.description | json }},
@@ -1272,7 +2228,7 @@
               "media": [
                 {%- for media in bundle_product.media -%}
                   {
-                    "src": {{ media.src | img_url: 'medium' | json }},
+                    "src": {{ media | image_url: 'medium' | json }},
                     "alt": {{ media.alt | json }},
                     "id": {{ media.id | json }}
                   }{% unless forloop.last %},{% endunless %}
@@ -1286,7 +2242,7 @@
                     "price": {{ variant.price | json }},
                     "compare_at_price": {{ variant.compare_at_price | json }},
                     "available": {{ variant.available | json }},
-                    "featured_image": {{ variant.featured_media.src | img_url: 'medium' | json }},
+                    "featured_image": {{ variant.featured_media | image_url: 'medium' | json }},
                     "options": {{ variant.options | json }}
                   }{% unless forloop.last %},{% endunless %}
                 {%- endfor -%}
@@ -1645,6 +2601,15 @@ document.addEventListener('DOMContentLoaded', () => {
         bundleState.selectedProducts.bundle.push(autoSelectedProduct);
         console.log('✅ Auto-selected first product:', autoSelectedProduct);
       }
+      
+      // Load the first bundle product
+      console.log('Loading first bundle product...');
+      loadBundleProduct(0);
+      
+      // Initialize sticky columns for step 2
+      setTimeout(() => {
+        initializeStep2StickyColumns();
+      }, 100);
     }
     
     // Initialize step 3 if needed
@@ -1710,7 +2675,137 @@ document.addEventListener('DOMContentLoaded', () => {
       progressTotal.textContent = config.bundleProducts.length;
     }
 
-    // Render product using main-product.liquid layout
+    // Update the product image in the left column
+    const step2Element = container.querySelector('.bundle-step-2');
+    console.log('Step 2 element found:', !!step2Element);
+    
+    if (!step2Element) {
+      console.error('❌ Step 2 element not found!');
+      return;
+    }
+    
+    const productImageContainer = step2Element.querySelector('[data-product-photos]');
+    const productThumbsContainer = step2Element.querySelector('.product__thumbs--scroller');
+    
+    console.log('Product image container found:', !!productImageContainer);
+    console.log('Product thumbs container found:', !!productThumbsContainer);
+    
+    if (!productImageContainer) {
+      console.error('❌ Product image container not found!');
+      console.log('Available elements in step2:', step2Element.querySelectorAll('*'));
+      return;
+    }
+    
+    if (productImageContainer) {
+      // Debug the product structure first
+      console.log('=== PRODUCT IMAGE DEBUG ===');
+      console.log('Product object:', product);
+      console.log('Product.featured_image:', product.featured_image);
+      console.log('Product.media:', product.media);
+      console.log('Product.variants:', product.variants);
+      
+      if (product.variants && product.variants.length > 0) {
+        console.log('First variant:', product.variants[0]);
+        console.log('First variant featured_image:', product.variants[0].featured_image);
+      }
+      
+      // Get the first variant's image or fallback to featured image
+      let productImage = '';
+      
+      // Use the same logic as thumbnails - try media array first since thumbnails work
+      if (product.media && product.media.length > 0) {
+        // Check if media.src is actually a string or an object
+        if (typeof product.media[0].src === 'string') {
+          productImage = product.media[0].src;
+        } else if (product.media[0].src && typeof product.media[0].src === 'object') {
+          productImage = product.media[0].src.src || product.media[0].src.url || product.media[0].src.preview_image || '';
+        }
+      }
+      
+      // If media didn't work, try variant featured image
+      if (!productImage && product.variants && product.variants.length > 0 && product.variants[0].featured_image) {
+        if (typeof product.variants[0].featured_image === 'string') {
+          productImage = product.variants[0].featured_image;
+        } else if (product.variants[0].featured_image && typeof product.variants[0].featured_image === 'object') {
+          productImage = product.variants[0].featured_image.src || product.variants[0].featured_image.url || product.variants[0].featured_image.preview_image || '';
+        }
+      }
+      
+      // If variant didn't work, try product featured image
+      if (!productImage && product.featured_image) {
+        if (typeof product.featured_image === 'string') {
+          productImage = product.featured_image;
+        } else if (product.featured_image && typeof product.featured_image === 'object') {
+          productImage = product.featured_image.src || product.featured_image.url || product.featured_image.preview_image || '';
+        }
+      }
+      
+      console.log('Final product image URL:', productImage);
+      
+      if (productImage && productImage !== '') {
+        console.log('✅ Setting product image:', productImage);
+        productImageContainer.innerHTML = `
+          <div class="product-main-slide" data-index="0">
+            <img src="${productImage}" alt="${product.title}" width="620" height="620" style="width: 100%; height: auto;">
+          </div>
+        `;
+        console.log('✅ Updated product image successfully');
+      } else {
+        console.log('❌ No valid product image found');
+        console.log('ProductImage value:', productImage);
+        console.log('ProductImage type:', typeof productImage);
+        productImageContainer.innerHTML = `
+          <div class="product-main-slide" data-index="0">
+            <div class="image-placeholder" style="width: 100%; height: 400px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666;">
+              <p>Không có hình ảnh</p>
+            </div>
+          </div>
+        `;
+      }
+    } else {
+      console.log('Product image container not found');
+    }
+    
+    // Update thumbnails below the main image
+    if (productThumbsContainer && product.media && product.media.length > 1) {
+      console.log('=== THUMBNAIL DEBUG ===');
+      console.log('Product media array:', product.media);
+      console.log('First media item:', product.media[0]);
+      console.log('First media src:', product.media[0] ? product.media[0].src : 'undefined');
+      console.log('First media type:', typeof (product.media[0] ? product.media[0].src : 'undefined'));
+      
+      const thumbnailsHTML = product.media.map((media, index) => {
+        console.log(`Media ${index}:`, media);
+        console.log(`Media ${index} src:`, media.src);
+        console.log(`Media ${index} src type:`, typeof media.src);
+        
+        // Check if media.src is actually a string or an object
+        let imageUrl = '';
+        if (typeof media.src === 'string') {
+          imageUrl = media.src;
+        } else if (media.src && typeof media.src === 'object') {
+          // If it's an object, try to extract the URL
+          imageUrl = media.src.src || media.src.url || media.src.preview_image || '';
+        }
+        
+        console.log(`Final imageUrl for media ${index}:`, imageUrl);
+        
+        return `
+          <div class="product__thumb-item" data-index="${index}">
+            <a href="${imageUrl}" data-product-thumb class="product__thumb" data-index="${index}">
+              <div class="image-wrap image-wrap__thumbnail">
+                <img src="${imageUrl}" alt="${product.title}" loading="lazy">
+              </div>
+            </a>
+          </div>
+        `;
+      }).join('');
+      
+      productThumbsContainer.innerHTML = thumbnailsHTML;
+      console.log('Updated product thumbnails:', product.media.length);
+    }
+
+    // Render product info in the right column
     const productsGrid = container.querySelector('.bundle-products-grid');
     console.log('Products grid element:', productsGrid);
     
@@ -1733,53 +2828,9 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Product options:', product.options);
     }
         
-        // Use existing product template structure
+        // Use simplified product template structure for right column only
         const productHTML = `
           <div class="bundle-product-item" data-product-handle="${product.handle}" data-section-id="${config.sectionId}" data-product-id="${product.id}">
-            <div class="page-content page-content--product">
-              <div class="page-width">
-                <div class="grid grid--product-images-right">
-                  <!-- Product Images (Left) -->
-                  <div class="grid__item large-up--one-half product-single__sticky">
-                    <div data-product-images>
-                      <div class="product__photos product__photos-${config.sectionId} product__photos--stack product__photos--beside">
-                        <div class="product__main-photos" data-product-single-media-group>
-                          <div data-product-photos class="product-slideshow" id="ProductPhotos-${config.sectionId}-bundle-${product.id}">
-                            ${product.media && product.media.length > 0 ? product.media.map((media, index) => `
-                              <div class="product-main-slide" data-index="${index}">
-                                <img src="${media.preview_image || media.src}" alt="${product.title}" style="width: 100%; height: auto;">
-                              </div>
-                            `).join('') : `
-                              <div class="product-main-slide" data-index="0">
-                                <img src="${product.featured_image}" alt="${product.title}" style="width: 100%; height: auto;">
-                              </div>
-                            `}
-                          </div>
-                        </div>
-                        
-                        <!-- Product Thumbnails -->
-                        ${product.media && product.media.length > 1 ? `
-                          <div data-product-thumbs class="product__thumbs product__thumbs--beside product__thumbs-placement--left">
-                            <div class="product__thumbs--scroller">
-                              ${product.media.map((media, index) => `
-                                <div class="product__thumb-item" data-index="${index}">
-                                  <a href="${media.preview_image || media.src}" data-product-thumb class="product__thumb" data-index="${index}">
-                                    <div class="image-wrap image-wrap__thumbnail">
-                                      <img src="${media.preview_image || media.src}" alt="${product.title}" loading="lazy">
-                                    </div>
-                                  </a>
-                                </div>
-                              `).join('')}
-                            </div>
-                          </div>
-                        ` : ''}
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Product Info (Right) -->
-                  <div class="grid__item large-up--one-half">
-                    <div class="product-single__meta">
                       <!-- Product Header -->
                       <div class="product-block product-block--header">
                         <h1 class="h2 product-single__title">${product.title}</h1>
@@ -1804,12 +2855,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                       </div>
 
-                      <!-- Description Block -->
-                      <div class="product-block product-block--description">
-                        <div class="product-description">
-                          ${product.description}
-                        </div>
-                      </div>
 
                       <!-- Hidden ProductSelect for variant tracking -->
                       <select name="id" id="ProductSelect-bundle-${product.id}" class="product-single__variants" style="display: none;">
@@ -1920,6 +2965,137 @@ document.addEventListener('DOMContentLoaded', () => {
                       ` : ''}
 
 
+                      <!-- Product Summary Block -->
+                      <div class="product-block product-summary-block">
+                        <div class="product-summary-content">
+                          <!-- Description Accordion -->
+                          <details class="product-accordion product-accordion--styled" open>
+                            <summary>
+                              <span>Mô tả sản phẩm</span>
+                              <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </summary>
+                            <div class="product-accordion-content rte">
+                              ${product.description}
+                            </div>
+                          </details>
+
+                          <!-- Store System Accordion -->
+                          <details class="product-accordion product-accordion--styled">
+                            <summary>
+                              <span>Hệ thống cửa hàng</span>
+                              <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </summary>
+                            <div class="product-accordion-content">
+                              <div class="showroom-list">
+                                <div class="showroom-item">
+                                  <strong>Showroom 1</strong><br>
+                                  <span>Địa chỉ showroom</span><br>
+                                  <a href="tel:0964777910">0964777910</a>
+                                </div>
+                                <div class="showroom-item">
+                                  <strong>Showroom 2</strong><br>
+                                  <span>Địa chỉ showroom</span><br>
+                                  <a href="tel:0964777910">0964777910</a>
+                                </div>
+                                <div class="showroom-item">
+                                  <strong>Showroom 3</strong><br>
+                                  <span>Địa chỉ showroom</span><br>
+                                  <a href="tel:0964777940">0964777940</a>
+                                </div>
+                              </div>
+                            </div>
+                          </details>
+
+                          <!-- Reviews Accordion -->
+                          <details class="product-accordion product-accordion--styled">
+                            <summary>
+                              <span>Đánh giá</span>
+                              <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </summary>
+                            <div class="product-accordion-content">
+                              <div class="product-reviews-summary">
+                                <div class="product-rating">
+                                  <div class="stars">
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                    <span class="star">★</span>
+                                  </div>
+                                  <span class="rating-value">4.8</span>
+                                </div>
+                                <div class="reviews-count">
+                                  <span class="reviews-number">(2025 đánh giá)</span>
+                                </div>
+                              </div>
+                            </div>
+                          </details>
+                        </div>
+                      </div>
+
+                      <!-- Service Grid -->
+                      <div class="product-block product-block--service-grid">
+                        <div class="service-grid-wrapper">
+                          <div class="service-grid" style="grid-template-columns: repeat(4, 1fr);">
+                            <div class="service-grid-item">
+                              <div class="service-item">
+                                <div class="service-item__icon">
+                                  {%- if section.settings.service_icon_1 -%}
+                                    <img src="{{ section.settings.service_icon_1 | image_url: width: 40 }}" alt="{{ section.settings.service_text_1 | default: '100 đêm ngủ thử' }}" width="40" height="40">
+                                  {%- else -%}
+                                    <img src="{{ 'Layer_1_3.svg' | asset_url }}" alt="{{ section.settings.service_text_1 | default: '100 đêm ngủ thử' }}" width="40" height="40">
+                                  {%- endif -%}
+                                </div>
+                                <div class="service-item__text">
+                                  <p>{{ section.settings.service_text_1 | default: "100 đêm ngủ thử" }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="service-grid-item">
+                              <div class="service-item">
+                                <div class="service-item__icon">
+                                  {%- if section.settings.service_icon_2 -%}
+                                    <img src="{{ section.settings.service_icon_2 | image_url: width: 40 }}" alt="{{ section.settings.service_text_2 | default: 'Miễn phí vận chuyển' }}" width="40" height="40">
+                                  {%- else -%}
+                                    <img src="{{ 'Layer_1_4.svg' | asset_url }}" alt="{{ section.settings.service_text_2 | default: 'Miễn phí vận chuyển' }}" width="40" height="40">
+                                  {%- endif -%}
+                                </div>
+                                <div class="service-item__text">
+                                  <p>{{ section.settings.service_text_2 | default: "Miễn phí vận chuyển" }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="service-grid-item">
+                              <div class="service-item">
+                                <div class="service-item__icon">
+                                  {%- if section.settings.service_icon_3 -%}
+                                    <img src="{{ section.settings.service_icon_3 | image_url: width: 40 }}" alt="{{ section.settings.service_text_3 | default: 'Bảo hành dài lâu' }}" width="40" height="40">
+                                  {%- else -%}
+                                    <img src="{{ 'Layer_1_5.svg' | asset_url }}" alt="{{ section.settings.service_text_3 | default: 'Bảo hành dài lâu' }}" width="40" height="40">
+                                  {%- endif -%}
+                                </div>
+                                <div class="service-item__text">
+                                  <p>{{ section.settings.service_text_3 | default: "Bảo hành dài lâu" }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="service-grid-item">
+                              <div class="service-item">
+                                <div class="service-item__icon">
+                                  {%- if section.settings.service_icon_4 -%}
+                                    <img src="{{ section.settings.service_icon_4 | image_url: width: 40 }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toán linh hoạt' }}" width="40" height="40">
+                                  {%- else -%}
+                                    <img src="{{ 'Layer_1_6.svg' | asset_url }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toán linh hoạt' }}" width="40" height="40">
+                                  {%- endif -%}
+                                </div>
+                                <div class="service-item__text">
+                                  <p>{{ section.settings.service_text_4 | default: "Thanh toán linh hoạt" }}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
                       <!-- Navigation Buttons -->
                       <div class="product-block">
@@ -1928,12 +3104,6 @@ document.addEventListener('DOMContentLoaded', () => {
                           <button type="button" class="btn btn--primary bundle-continue-btn">Tiếp tục</button>
                         </div>
                       </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         `;
         
@@ -3561,6 +4731,7 @@ document.addEventListener('DOMContentLoaded', () => {
       minimumFractionDigits: 0
     }).format(amount);
   }
+
 });
 
 // Carousel Navigation
@@ -3694,10 +4865,456 @@ document.addEventListener('DOMContentLoaded', function() {
   {%- endif -%}
 {%- endfor -%}
 
+<script>
+/**
+ * Advanced Sticky Column Logic ("Koala" style)
+ * This script dynamically makes the shorter of the two product columns sticky.
+ */
+function initAdvancedSticky(productSection) {
+  if (!productSection) return;
+
+  const gridContainer = productSection.querySelector('.grid');
+  const imageColumn = productSection.querySelector('.product-grid__images');
+  const infoColumn = productSection.querySelector('.product-grid__info');
+  const infoColumnInner = infoColumn ? infoColumn.querySelector('.product-info-inner') : null;
+  const imageColumnInner = imageColumn ? imageColumn.querySelector('.product-column-content') : null;
+  const interactiveElements = productSection.querySelectorAll('details.product-accordion, .size-guide-text-trigger');
+
+  if (!gridContainer || !imageColumn || !infoColumn || !infoColumnInner || !imageColumnInner) {
+    return;
+  }
+
+  let scrollHandler = () => {};
+  
+  const setupStickyColumns = () => {
+    // Clean up styles from previous calculations before re-running
+    window.removeEventListener('scroll', scrollHandler);
+    imageColumnInner.style.cssText = '';
+    infoColumnInner.style.cssText = '';
+    imageColumn.style.height = '';
+    infoColumn.style.height = '';
+    imageColumn.style.position = '';
+    infoColumn.style.position = '';
+
+    // This logic is for desktop viewports only
+    if (window.innerWidth < 991) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+        // Measure the inner content elements, not the grid containers which are equal height.
+        const imageColHeight = imageColumnInner.offsetHeight;
+        const infoColHeight = infoColumnInner.offsetHeight;
+        
+        // Store original widths to maintain consistent sizing during sticky states
+        let imageColOriginalWidth = imageColumnInner.offsetWidth;
+        const infoColOriginalWidth = infoColumnInner.offsetWidth;
+        
+        // For carousel, get the actual rendered width from CSS computed styles
+        const carouselContainer = imageColumnInner.querySelector('.product__photos--below') || 
+                                 imageColumnInner.querySelector('.product-slideshow');
+        if (carouselContainer) {
+          // Get computed style to see the actual rendered width
+          const computedStyle = window.getComputedStyle(carouselContainer);
+          const computedWidth = parseFloat(computedStyle.width);
+          
+          // Debug: log the widths to console
+          console.log('Carousel debug:', {
+            offsetWidth: imageColumnInner.offsetWidth,
+            computedWidth: computedWidth,
+            carouselContainer: carouselContainer
+          });
+          
+          // Use the actual computed width - this respects the responsive CSS max-width
+          if (computedWidth && computedWidth > 0) {
+            imageColOriginalWidth = computedWidth; // This already respects min(765px, 50vw)
+            console.log('Using responsive carousel width:', computedWidth);
+          } else {
+            // Fallback: try to get width from the main image
+            const mainImage = carouselContainer.querySelector('.product-main-slide img') || 
+                             carouselContainer.querySelector('.product__photo img');
+            if (mainImage) {
+              const imageWidth = mainImage.naturalWidth || mainImage.offsetWidth;
+              imageColOriginalWidth = Math.min(imageWidth, 765); // Apply reasonable max
+            } else {
+              // Last fallback: use container width with reasonable max
+              imageColOriginalWidth = Math.min(imageColOriginalWidth, 765);
+            }
+          }
+        }
+            
+        // Exit if columns are of similar height, as no sticky effect is needed.
+        if (Math.abs(imageColHeight - infoColHeight) < 100) {
+            return;
+        }
+
+        const shortCol = imageColHeight > infoColHeight ? infoColumn : imageColumn;
+        const shortColInner = imageColHeight > infoColHeight ? infoColumnInner : imageColumnInner;
+        const shortColOriginalWidth = imageColHeight > infoColHeight ? infoColOriginalWidth : imageColOriginalWidth;
+        
+        // **FIX**: Set position relative on the container of the element that will be docked.
+        // This makes it the positioning context for its absolutely positioned child.
+        shortCol.style.position = 'relative';
+        // Set an explicit height on the short column's container to prevent the grid from collapsing
+        // when its inner element is taken out of the document flow with `position: fixed`.
+        shortCol.style.height = `${shortCol.offsetHeight}px`;
+
+        const headerOffset = 120; // Adjust if your sticky header's height changes
+
+        scrollHandler = () => {
+            const scrollY = window.scrollY;
+            const gridRect = gridContainer.getBoundingClientRect();
+            const shortColInnerHeight = shortColInner.offsetHeight;
+            const gridAbsoluteTop = gridRect.top + scrollY;
+            const startPoint = gridAbsoluteTop - headerOffset;
+            const stopPoint = gridAbsoluteTop + gridRect.height - shortColInnerHeight - headerOffset;
+            const buffer = 2; // A small buffer to prevent jittering at the thresholds
+            
+            if (scrollY > startPoint + buffer && scrollY < stopPoint - buffer) {
+                // State 1: STICKY. The element is fixed relative to the viewport.
+                shortColInner.style.position = 'fixed';
+                shortColInner.style.top = `${headerOffset}px`;
+                shortColInner.style.bottom = 'auto';
+                shortColInner.style.width = `${shortColOriginalWidth}px`; // Use stored original width
+            } else if (scrollY >= stopPoint - buffer) {
+                // State 2: DOCKED. The element is positioned absolutely to the bottom of its parent container.
+                shortColInner.style.position = 'absolute';
+                shortColInner.style.top = 'auto';
+                shortColInner.style.bottom = '0px';
+                shortColInner.style.width = `${shortColOriginalWidth}px`; // Use stored original width
+            } else {
+                // State 3: DEFAULT. The element is in its normal static position.
+                shortColInner.style.position = '';
+                shortColInner.style.top = '';
+                shortColInner.style.bottom = '';
+                shortColInner.style.width = '';
+            }
+        };
+        
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        scrollHandler(); // Run once immediately on setup to get the initial state right
+    });
+  };
+  
+  const debounce = (func, delay) => {
+      let timeout;
+      return function(...args) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+  };
+
+  const debouncedSetup = debounce(setupStickyColumns, 250);
+
+  // --- Event Listeners ---
+
+  // Run on initial load when all assets are ready
+  window.addEventListener('load', debouncedSetup);
+  // A fallback for DOMContentLoaded in case `load` is slow, e.g., with deferred scripts
+  document.addEventListener('DOMContentLoaded', () => setTimeout(debouncedSetup, 500));
+  
+  // Re-run when the browser is resized
+  window.addEventListener('resize', debouncedSetup);
+
+  // Re-run whenever an interactive element (accordion/dropdown) is toggled
+  interactiveElements.forEach(el => {
+    const eventName = el.tagName.toLowerCase() === 'details' ? 'toggle' : 'click';
+    el.addEventListener(eventName, debouncedSetup);
+  });
+}
+
+// Initialize the script for the current section
+const currentProductSection = document.querySelector('#ProductSection-{{ section.id }}-{{ product.id }}');
+if (currentProductSection) {
+  initAdvancedSticky(currentProductSection);
+}
+
+// Re-initialize if the section is reloaded by the theme editor
+document.addEventListener('shopify:section:load', function(event) {
+  if (event.detail.sectionId === '{{ section.id }}') {
+    const reloadedSection = document.querySelector('#ProductSection-{{ section.id }}-{{ product.id }}');
+    if (reloadedSection) {
+      initAdvancedSticky(reloadedSection);
+    }
+  }
+});
+
+/**
+ * Advanced Sticky Column Logic for Bundle Step 1
+ * This script dynamically makes the shorter of the two product columns sticky.
+ */
+function initBundleSticky(productSection) {
+  if (!productSection) return;
+
+  const gridContainer = productSection.querySelector('.grid');
+  const imageColumn = productSection.querySelector('.product-grid__images');
+  const infoColumn = productSection.querySelector('.product-grid__info');
+  const infoColumnInner = infoColumn ? infoColumn.querySelector('.product-info-inner') : null;
+  const imageColumnInner = imageColumn ? imageColumn.querySelector('.product-column-content') : null;
+  const interactiveElements = productSection.querySelectorAll('details.product-accordion, .size-guide-text-trigger');
+
+  if (!gridContainer || !imageColumn || !infoColumn || !infoColumnInner || !imageColumnInner) {
+    return;
+  }
+
+  let scrollHandler = () => {};
+  
+  const setupStickyColumns = () => {
+    // Clean up styles from previous calculations before re-running
+    window.removeEventListener('scroll', scrollHandler);
+    imageColumnInner.style.cssText = '';
+    infoColumnInner.style.cssText = '';
+    imageColumn.style.height = '';
+    infoColumn.style.height = '';
+    imageColumn.style.position = '';
+    infoColumn.style.position = '';
+
+    // This logic is for desktop viewports only
+    if (window.innerWidth < 991) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+        // Measure the inner content elements, not the grid containers which are equal height.
+        const imageColHeight = imageColumnInner.offsetHeight;
+        const infoColHeight = infoColumnInner.offsetHeight;
+        
+        // Store original widths to maintain consistent sizing during sticky states
+        let imageColOriginalWidth = imageColumnInner.offsetWidth;
+        const infoColOriginalWidth = infoColumnInner.offsetWidth;
+        
+        // For carousel, get the actual rendered width from CSS computed styles
+        const carouselContainer = imageColumnInner.querySelector('.product__photos--below') || 
+                                 imageColumnInner.querySelector('.product-slideshow');
+        if (carouselContainer) {
+          // Get computed style to see the actual rendered width
+          const computedStyle = window.getComputedStyle(carouselContainer);
+          const computedWidth = parseFloat(computedStyle.width);
+          
+          // Use the actual computed width - this respects the responsive CSS max-width
+          if (computedWidth && computedWidth > 0) {
+            imageColOriginalWidth = computedWidth; // This already respects min(765px, 50vw)
+          } else {
+            // Fallback: try to get width from the main image
+            const mainImage = carouselContainer.querySelector('.product-main-slide img') || 
+                             carouselContainer.querySelector('.product__photo img');
+            if (mainImage) {
+              const imageWidth = mainImage.naturalWidth || mainImage.offsetWidth;
+              imageColOriginalWidth = Math.min(imageWidth, 765); // Apply reasonable max
+            } else {
+              // Last fallback: use container width with reasonable max
+              imageColOriginalWidth = Math.min(imageColOriginalWidth, 765);
+            }
+          }
+        }
+            
+        // Exit if columns are of similar height, as no sticky effect is needed.
+        if (Math.abs(imageColHeight - infoColHeight) < 100) {
+            return;
+        }
+
+        const shortCol = imageColHeight > infoColHeight ? infoColumn : imageColumn;
+        const shortColInner = imageColHeight > infoColHeight ? infoColumnInner : imageColumnInner;
+        const shortColOriginalWidth = imageColHeight > infoColHeight ? infoColOriginalWidth : imageColOriginalWidth;
+        
+        // **FIX**: Set position relative on the container of the element that will be docked.
+        // This makes it the positioning context for its absolutely positioned child.
+        shortCol.style.position = 'relative';
+        // Set an explicit height on the short column's container to prevent the grid from collapsing
+        // when its inner element is taken out of the document flow with `position: fixed`.
+        shortCol.style.height = `${shortCol.offsetHeight}px`;
+
+        const headerOffset = 120; // Adjust if your sticky header's height changes
+
+        scrollHandler = () => {
+            const scrollY = window.scrollY;
+            const gridRect = gridContainer.getBoundingClientRect();
+            const shortColInnerHeight = shortColInner.offsetHeight;
+            const gridAbsoluteTop = gridRect.top + scrollY;
+            const startPoint = gridAbsoluteTop - headerOffset;
+            const stopPoint = gridAbsoluteTop + gridRect.height - shortColInnerHeight - headerOffset;
+            const buffer = 2; // A small buffer to prevent jittering at the thresholds
+            
+            if (scrollY > startPoint + buffer && scrollY < stopPoint - buffer) {
+                // State 1: STICKY. The element is fixed relative to the viewport.
+                shortColInner.style.position = 'fixed';
+                shortColInner.style.top = `${headerOffset}px`;
+                shortColInner.style.bottom = 'auto';
+                shortColInner.style.width = `${shortColOriginalWidth}px`; // Use stored original width
+            } else if (scrollY >= stopPoint - buffer) {
+                // State 2: DOCKED. The element is positioned absolutely to the bottom of its parent container.
+                shortColInner.style.position = 'absolute';
+                shortColInner.style.top = 'auto';
+                shortColInner.style.bottom = '0px';
+                shortColInner.style.width = `${shortColOriginalWidth}px`; // Use stored original width
+            } else {
+                // State 3: DEFAULT. The element is in its normal static position.
+                shortColInner.style.position = '';
+                shortColInner.style.top = '';
+                shortColInner.style.bottom = '';
+                shortColInner.style.width = '';
+            }
+        };
+        
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        scrollHandler(); // Run once immediately on setup to get the initial state right
+    });
+  };
+  
+  const debounce = (func, delay) => {
+      let timeout;
+      return function(...args) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+  };
+
+  const debouncedSetup = debounce(setupStickyColumns, 250);
+
+  // --- Event Listeners ---
+
+  // Run on initial load when all assets are ready
+  window.addEventListener('load', debouncedSetup);
+  // A fallback for DOMContentLoaded in case `load` is slow, e.g., with deferred scripts
+  document.addEventListener('DOMContentLoaded', () => setTimeout(debouncedSetup, 500));
+  
+  // Re-run when the browser is resized
+  window.addEventListener('resize', debouncedSetup);
+
+  // Re-run whenever an interactive element (accordion/dropdown) is toggled
+  interactiveElements.forEach(el => {
+    const eventName = el.tagName.toLowerCase() === 'details' ? 'toggle' : 'click';
+    el.addEventListener(eventName, debouncedSetup);
+  });
+}
+
+// Initialize sticky columns for step 2
+function initializeStep2StickyColumns() {
+  const step2Element = container.querySelector('.bundle-step-2');
+  if (!step2Element) return;
+  
+  const gridContainer = step2Element.querySelector('.grid');
+  const imageColumn = step2Element.querySelector('.product-single__sticky');
+  const infoColumn = step2Element.querySelector('.product-single__meta').parentElement;
+  const imageColumnInner = imageColumn ? imageColumn.querySelector('.product-column-content') : null;
+  const infoColumnInner = infoColumn ? infoColumn.querySelector('.product-single__meta') : null;
+  
+  if (!gridContainer || !imageColumn || !infoColumn || !imageColumnInner || !infoColumnInner) {
+    console.log('Step 2 sticky elements not found');
+    return;
+  }
+  
+  console.log('Initializing step 2 sticky columns');
+  
+  const setupStickyColumns = () => {
+    // Clean up styles from previous calculations before re-running
+    window.removeEventListener('scroll', scrollHandler);
+    imageColumnInner.style.cssText = '';
+    infoColumnInner.style.cssText = '';
+    imageColumn.style.height = '';
+    infoColumn.style.height = '';
+    imageColumn.style.position = '';
+    infoColumn.style.position = '';
+
+    // This logic is for desktop viewports only
+    if (window.innerWidth < 991) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      // Measure the inner content elements, not the grid containers which are equal height.
+      const imageColHeight = imageColumnInner.offsetHeight;
+      const infoColHeight = infoColumnInner.offsetHeight;
+      
+      // Store original widths to maintain consistent sizing during sticky states
+      const imageColWidth = imageColumnInner.offsetWidth;
+      const infoColWidth = infoColumnInner.offsetWidth;
+      
+      // Set the grid container height to the taller column
+      const maxHeight = Math.max(imageColHeight, infoColHeight);
+      gridContainer.style.height = maxHeight + 'px';
+      
+      // Make the image column sticky
+      imageColumn.style.position = 'sticky';
+      imageColumn.style.top = '120px';
+      imageColumn.style.alignSelf = 'start';
+      
+      // Set up scroll handler for dynamic positioning
+      let scrollHandler = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const containerRect = gridContainer.getBoundingClientRect();
+        const containerTop = containerRect.top + scrollTop;
+        const containerBottom = containerTop + gridContainer.offsetHeight;
+        const viewportBottom = scrollTop + window.innerHeight;
+        
+        // Calculate sticky positioning
+        if (scrollTop + 120 >= containerTop && scrollTop + 120 < containerBottom - imageColHeight) {
+          imageColumnInner.style.position = 'sticky';
+          imageColumnInner.style.top = '120px';
+        } else if (scrollTop + 120 >= containerBottom - imageColHeight) {
+          imageColumnInner.style.position = 'absolute';
+          imageColumnInner.style.top = (containerBottom - imageColHeight - containerTop) + 'px';
+        } else {
+          imageColumnInner.style.position = 'static';
+          imageColumnInner.style.top = 'auto';
+        }
+      };
+      
+      // Add scroll listener
+      window.addEventListener('scroll', scrollHandler);
+      
+      // Initial call
+      scrollHandler();
+    });
+  };
+  
+  // Debounce function
+  const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
+  
+  const debouncedSetup = debounce(setupStickyColumns, 250);
+  
+  // Run setup
+  debouncedSetup();
+  
+  // Re-run when the browser is resized
+  window.addEventListener('resize', debouncedSetup);
+}
+
+// Initialize the script for the current section
+const currentBundleSection = document.querySelector('#MainProductBundle-{{ section.id }}');
+if (currentBundleSection) {
+  initBundleSticky(currentBundleSection);
+}
+
+// Re-initialize if the section is reloaded by the theme editor
+document.addEventListener('shopify:section:load', function(event) {
+  if (event.detail.sectionId === '{{ section.id }}') {
+    const reloadedSection = document.querySelector('#MainProductBundle-{{ section.id }}');
+    if (reloadedSection) {
+      initBundleSticky(reloadedSection);
+    }
+  }
+});
+</script>
+
 {% schema %}
 {
   "name": "Product Bundle",
   "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
     {
       "type": "select",
       "id": "section_width",
@@ -3736,6 +5353,70 @@ document.addEventListener('DOMContentLoaded', function() {
       "id": "sku_enable",
       "label": "Show SKU",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Step 1 Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "combo_title",
+      "label": "Combo Products Title",
+      "default": "Combo bao gồm các sản phẩm:"
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA Button Text",
+      "default": "BẮT ĐẦU TẠO COMBO"
+    },
+    {
+      "type": "header",
+      "content": "Service Grid Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_icon_1",
+      "label": "Service Icon 1 (100 đêm ngủ thử)"
+    },
+    {
+      "type": "text",
+      "id": "service_text_1",
+      "label": "Service Text 1",
+      "default": "100 đêm ngủ thử"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_icon_2",
+      "label": "Service Icon 2 (Miễn phí vận chuyển)"
+    },
+    {
+      "type": "text",
+      "id": "service_text_2",
+      "label": "Service Text 2",
+      "default": "Miễn phí vận chuyển"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_icon_3",
+      "label": "Service Icon 3 (Bảo hành dài lâu)"
+    },
+    {
+      "type": "text",
+      "id": "service_text_3",
+      "label": "Service Text 3",
+      "default": "Bảo hành dài lâu"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_icon_4",
+      "label": "Service Icon 4 (Thanh toán linh hoạt)"
+    },
+    {
+      "type": "text",
+      "id": "service_text_4",
+      "label": "Service Text 4",
+      "default": "Thanh toán linh hoạt"
     },
     {
       "type": "select",
