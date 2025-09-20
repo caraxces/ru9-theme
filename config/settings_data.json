@@ -54,6 +54,7 @@
     "icon_weight": "2px",
     "product_save_amount": false,
     "product_save_type": "percent",
+    "vendor_enable": false,
     "quick_shop_enable": true,
     "product_grid_image_fill": true,
     "product_hover_image": true,

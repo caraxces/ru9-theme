@@ -1073,10 +1073,16 @@
     margin-left: 8px;
   }
 
-  .bundle-step-2 .product-single__title {
+  .bundle-step-2 .product-block--header .product-single__title {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 28px */
   }
 
   .bundle-step-2 .product-block--price {
@@ -1098,13 +1104,14 @@
 
   .bundle-step-2 .product__price--compare {
     text-decoration: line-through;
+    font-weight: 400;
     color: #999;
     font-size: 1.2rem;
   }
 
   .bundle-step-2 .product__discount-badge {
-    background: #ff4444;
-    color: white;
+    background: #FCE390;
+    color: #1C2C58;
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.9rem;
@@ -1367,7 +1374,7 @@
   /* Ensure grid container has proper display and spacing */
   .bundle-step-2 .grid {
     display: flex !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
     gap: 20px !important;
     width: 100% !important;
   }
@@ -1974,9 +1981,9 @@
                           <p>Đang tải hình ảnh sản phẩm...</p>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  
+            </div>
+          </div>
+
                   <!-- Product Thumbnails Below Main Image -->
                   <div data-product-thumbs class="product__thumbs product__thumbs--below">
                     <div class="product__thumbs--scroller">
@@ -1996,10 +2003,10 @@
                 </div>
 
                 <!-- Bundle Product Content -->
-                <div class="bundle-products-grid">
-                  <!-- Bundle products will be loaded here -->
-                  <div class="bundle-product-placeholder" style="text-align: center; padding: 2rem; color: #666;">
-                    <p>Đang tải sản phẩm...</p>
+          <div class="bundle-products-grid">
+            <!-- Bundle products will be loaded here -->
+            <div class="bundle-product-placeholder" style="text-align: center; padding: 2rem; color: #666;">
+              <p>Đang tải sản phẩm...</p>
                   </div>
                 </div>
               </div>
@@ -2991,12 +2998,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                   <strong>Showroom 1</strong><br>
                                   <span>Địa chỉ showroom</span><br>
                                   <a href="tel:0964777910">0964777910</a>
-                                </div>
+                        </div>
                                 <div class="showroom-item">
                                   <strong>Showroom 2</strong><br>
                                   <span>Địa chỉ showroom</span><br>
                                   <a href="tel:0964777910">0964777910</a>
-                                </div>
+                      </div>
                                 <div class="showroom-item">
                                   <strong>Showroom 3</strong><br>
                                   <span>Địa chỉ showroom</span><br>
@@ -3021,12 +3028,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <span class="star">★</span>
                                     <span class="star">★</span>
                                     <span class="star">★</span>
-                                  </div>
+                    </div>
                                   <span class="rating-value">4.8</span>
-                                </div>
+                  </div>
                                 <div class="reviews-count">
                                   <span class="reviews-number">(2025 đánh giá)</span>
-                                </div>
+                </div>
                               </div>
                             </div>
                           </details>
@@ -3102,8 +3109,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="bundle-navigation">
                           <button type="button" class="btn btn--secondary bundle-back-btn">Quay lại</button>
                           <button type="button" class="btn btn--primary bundle-continue-btn">Tiếp tục</button>
-                        </div>
-                      </div>
+              </div>
+            </div>
           </div>
         `;
         
