@@ -36,7 +36,8 @@
     "color_drawer_background": "#ffffff",
     "color_drawer_text": "#1c2c58",
     "color_drawer_border": "#e5e7eb",
-    "color_drawer_button": "#2960ad",
+    "color_drawer_button": "#fce390",
+    "color_drawer_button_text": "#0f0f0f",
     "color_breadcrumb_link": "#465076",
     "color_image_overlay_text_shadow": 20,
     "type_header_spacing": "0",
@@ -65,6 +66,8 @@
     "collection_grid_image": "product",
     "cart_icon": "cart",
     "cart_additional_buttons": true,
+    "cart_free_shipping_icon": "shopify://shop_images/Layer_1_4.svg",
+    "cart_warranty_icon": "shopify://shop_images/Layer_1_5.svg",
     "cart_cross_sell_products": [
       "goi-may",
       "goi-foam-niu",

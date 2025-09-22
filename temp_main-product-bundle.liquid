@@ -1,2220 +1,4 @@
-{%- liquid
-  assign current_variant = product.selected_or_first_available_variant
-  
-  # Check section settings only - more robust check
-  assign has_bundle_products = false
-  assign bundle_products_list = blank
-  
-  if section.settings.bundle_products
-    # Check if it's not empty by trying to access first element
-    assign first_product = section.settings.bundle_products | first
-    if first_product != blank
-      assign has_bundle_products = true
-      assign bundle_products_list = section.settings.bundle_products
-    endif
-  endif
--%}
-
-{{ 'main-product-bundle.css' | asset_url | stylesheet_tag }}
-
-<style>
-  /* Color swatch styles */
-  .color-swatch {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid #ddd;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-  
-  .color-swatch:hover {
-    transform: scale(1.1);
-  }
-  
-  .color-swatch.active,
-  .color-swatch.selected {
-    border-color: #000;
-    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
-  }
-  
-  .color-swatch.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  /* Variant label info styles */
-  .variant__label-info {
-    font-weight: bold;
-    color: #333;
-    margin-left: 8px;
-  }
-  
-  .variant__label-info span {
-    color: #007cba;
-  }
-
-  /* Fix variant button corner rounding issue when selected */
-  .variant-input-wrap input[type="radio"]:checked + label {
-    border-radius: calc(var(--buttonRadius) * 0.5) !important;
-    box-shadow: none !important;
-    border: 2px solid #448AED !important;
-    background: #F5F9FF !important;
-    color: #1C2C58 !important;
-  }
-
-  /* Ensure variant button labels maintain proper border-radius */
-  .variant-input-wrap label {
-    border-radius: calc(var(--buttonRadius) * 0.5) !important;
-    transition: all 0.2s ease !important;
-  }
-
-  /* Fix for data-dynamic-variants-enabled variant buttons */
-  [data-dynamic-variants-enabled] .variant-input-wrap input[type="radio"]:checked + .variant__button-label:not(.color-swatch) {
-    border-radius: 6px !important;
-    border: 2px solid #448AED !important;
-    background: #F5F9FF !important;
-    color: #1C2C58 !important;
-    box-shadow: none !important;
-    padding: 8px 16px !important;
-    overflow: visible !important;
-  }
-
-  /* Ensure unselected variant buttons maintain border-radius */
-  [data-dynamic-variants-enabled] .variant-input-wrap .variant__button-label {
-    border-radius: 6px !important;
-    border: 2px solid #e5e7eb !important;
-    background: white !important;
-    transition: all 0.2s ease !important;
-    padding: 8px 16px !important;
-    overflow: visible !important;
-  }
-
-  /* Fix container overflow that clips border-radius */
-  [data-dynamic-variants-enabled] .variant-input-wrap {
-    overflow: visible !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-input {
-    overflow: visible !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  /* Ensure parent containers don't clip border-radius */
-  [data-dynamic-variants-enabled] .variant-wrapper {
-    overflow: visible !important;
-    padding: 0 !important;
-    margin: 0 0 1rem 0 !important;
-  }
-
-  [data-dynamic-variants-enabled] .product-block {
-    overflow: visible !important;
-  }
-
-  /* Fix any potential clipping from flexbox containers */
-  [data-dynamic-variants-enabled] .variant-input-wrap {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    flex-wrap: wrap !important;
-    overflow: visible !important;
-  }
-
-  /* Fix color swatch styling - Match product-template.liquid */
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input-wrap {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 8px !important;
-    margin-bottom: 16px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    max-width: 100% !important;
-    width: fit-content !important;
-    justify-content: flex-start !important;
-    flex-wrap: wrap !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input {
-    display: flex !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant__button-label {
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    min-height: 45px !important;
-    max-width: 45px !important;
-    max-height: 45px !important;
-    flex-shrink: 0 !important;
-    background-color: transparent !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: 100% 100% !important;
-    display: block !important;
-    overflow: hidden !important;
-    position: relative !important;
-    text-indent: -9999px !important;
-    transition: all 0.2s ease !important;
-    cursor: pointer !important;
-    border-radius: 50% !important;
-    border: 2px solid transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant__button-label:hover {
-    transform: scale(1.05) !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input input[type="radio"]:checked + .variant__button-label {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 3px #448AED !important;
-    border-radius: 50% !important;
-    border: 2px solid #448AED !important;
-    background: #F5F9FF !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
-    content: "✓" !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    color: #448AED !important;
-    font-weight: bold !important;
-    font-size: 16px !important;
-    text-shadow: 0 0 2px rgba(255,255,255,0.8) !important;
-    background: none !important;
-    width: auto !important;
-    height: auto !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
-    opacity: 0.5 !important;
-    cursor: not-allowed !important;
-    position: relative !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input input[type="radio"]:disabled + .variant__button-label::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: linear-gradient(45deg, transparent 45%, #ccc 45%, #ccc 55%, transparent 55%) !important;
-    pointer-events: none !important;
-    border-radius: 50% !important;
-  }
-
-  /* Ensure color swatches maintain proper dimensions */
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input {
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    min-height: 45px !important;
-    max-width: 45px !important;
-    max-height: 45px !important;
-  }
-
-  /* Fix color variant layout in step 2 - Match product-template.liquid styling */
-  .bundle-step-2 .variant-wrapper.is-color .variant-input-wrap {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 8px !important;
-    margin-bottom: 16px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    max-width: 100% !important;
-    width: fit-content !important;
-    justify-content: flex-start !important;
-    flex-wrap: wrap !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant-input {
-    display: flex !important;
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    min-height: 45px !important;
-    max-width: 45px !important;
-    max-height: 45px !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant__button-label {
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    min-height: 45px !important;
-    max-width: 45px !important;
-    max-height: 45px !important;
-    flex-shrink: 0 !important;
-    background-color: transparent !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: 100% 100% !important;
-    display: block !important;
-    overflow: hidden !important;
-    position: relative !important;
-    text-indent: -9999px !important;
-    transition: all 0.2s ease !important;
-    cursor: pointer !important;
-    border-radius: 50% !important;
-    border: 2px solid transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant__button-label:hover {
-    transform: scale(1.05) !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant-input input[type="radio"]:checked + .variant__button-label {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 3px #448AED !important;
-    border-radius: 50% !important;
-    border: 2px solid #448AED !important;
-    background: #F5F9FF !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
-    content: "✓" !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    color: #448AED !important;
-    font-weight: bold !important;
-    font-size: 16px !important;
-    text-shadow: 0 0 2px rgba(255,255,255,0.8) !important;
-    background: none !important;
-    width: auto !important;
-    height: auto !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
-    opacity: 0.5 !important;
-    cursor: not-allowed !important;
-    position: relative !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant-input input[type="radio"]:disabled + .variant__button-label::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: linear-gradient(45deg, transparent 45%, #ccc 45%, #ccc 55%, transparent 55%) !important;
-    pointer-events: none !important;
-    border-radius: 50% !important;
-  }
-
-  /* Fix size variant button corner rounding */
-  [data-dynamic-variants-enabled] .variant-input-wrap .variant__button-label.t-center {
-    border-radius: 6px !important;
-    border: 2px solid #e5e7eb !important;
-    background: white !important;
-    transition: all 0.2s ease !important;
-    padding: 8px 16px !important;
-    overflow: visible !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-input-wrap input[type="radio"]:checked + .variant__button-label.t-center {
-    border-radius: 6px !important;
-    border: 2px solid #448AED !important;
-    background: #F5F9FF !important;
-    color: #1C2C58 !important;
-    box-shadow: none !important;
-    padding: 8px 16px !important;
-    overflow: visible !important;
-  }
-  
-  /* Icon with Text Styles */
-  .icon-with-text {
-    margin: 2rem 0;
-  }
-  
-  /* Step 3 Bundle Summary Styles - Match Step 1 & 2 Layout */
-  .bundle-step-3 .bundle-summary-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .bundle-step-3 .bundle-summary-title {
-    font-size: 1rem;
-    font-weight: 200;
-    margin: 0;
-    color: #6B7280;
-  }
-
-  /* Match Step 1 & 2 layout exactly */
-  .bundle-step-3 .product-grid {
-    align-items: start;
-  }
-
-  .bundle-step-3 .is-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 20px;
-  }
-
-  .bundle-step-3 .grid--product-images-right {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important;
-    gap: 0 !important;
-  }
-
-  /* Image column - exactly 50% width */
-  .bundle-step-3 .grid__item.product-single__sticky,
-  .bundle-step-3 .grid__item.product-grid__images {
-    flex: 0 0 50% !important;
-    width: 50% !important;
-    max-width: 50% !important;
-    min-width: 50% !important;
-    margin-right: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  /* Content column - exactly 50% width with 60px right padding */
-  .bundle-step-3 .grid__item.product-grid__info {
-    flex: 0 0 50% !important;
-    width: 50% !important;
-    max-width: 50% !important;
-    min-width: 50% !important;
-    margin-right: 0 !important;
-    padding-right: 60px !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Ensure images never exceed their containers */
-  .bundle-step-3 .product__photos img,
-  .bundle-step-3 .product-main-slide img {
-    max-width: 100% !important;
-    width: 100% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    box-sizing: border-box !important;
-  }
-
-  /* FIX Z-INDEX LAYERING - Ensure image column is not covered by content column */
-  .bundle-step-3 .grid__item.product-single__sticky,
-  .bundle-step-3 .grid__item.product-grid__images {
-    position: relative !important;
-    z-index: 2 !important;
-  }
-
-  .bundle-step-3 .grid__item.product-grid__info {
-    position: relative !important;
-    z-index: 1 !important;
-  }
-
-  /* Ensure image containers have proper z-index */
-  .bundle-step-3 .product__photos,
-  .bundle-step-3 .product-slideshow,
-  .bundle-step-3 .product__main-photos {
-    position: relative !important;
-    z-index: 3 !important;
-  }
-
-  /* Prevent content column from overlapping image column */
-  .bundle-step-3 .product-single__meta {
-    position: relative !important;
-    z-index: 1 !important;
-  }
-  
-  .bundle-step-3 .product__photos {
-    position: relative;
-    margin-bottom: 1rem;
-  }
-  
-  .bundle-step-3 .product__photos--beside {
-    display: flex;
-    flex-direction: column !important; /* Force column layout for step 3 */
-    gap: 1rem;
-  }
-  
-  .bundle-step-3 .product__thumbs-placement--left {
-    order: -1;
-    margin-left: 0;
-    margin-right: 1rem;
-  }
-  
-  
-  .bundle-step-3 .product-slideshow {
-    position: relative;
-  }
-  
-  .bundle-step-3 .product-main-slide {
-    display: none;
-  }
-  
-  .bundle-step-3 .product-main-slide:first-child,
-  .bundle-step-3 .product-main-slide[style*="display: block"] {
-    display: block !important;
-  }
-  
-  .bundle-step-3 .product-main-slide img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
-  .bundle-step-3 .product__thumbs {
-    width: 100% !important;
-    position: relative !important;
-    margin-top: 1rem;
-    display: block !important;
-    overflow: visible !important;
-  }
-  
-  .bundle-step-3 .product__thumbs--below {
-    display: block;
-  }
-  
-  .bundle-step-3 .product__thumbs--beside {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  
-  .bundle-step-3 .product__thumbs--scroller {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-    width: 100%;
-  }
-  
-  .bundle-step-3 .product__thumbs--scroller::-webkit-scrollbar {
-    height: 0;
-    width: 0;
-  }
-  
-  .bundle-step-3 .product__thumb {
-    display: block;
-    border: 2px solid transparent;
-    border-radius: calc(var(--radiusBase) * 0.75);
-    overflow: hidden;
-    transition: border-color 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .bundle-step-3 .product__thumb.active,
-  .bundle-step-3 .product__thumb.is-active {
-    border-color: var(--colorTextBody);
-  }
-  
-  .bundle-step-3 .product__thumb:focus {
-    outline: none;
-  }
-  
-  .bundle-step-3 .product__thumb:focus:before {
-    bottom: 0;
-    box-shadow: inset 0 0 0 2px var(--colorTextBody);
-    content: "";
-    display: block;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
-    border-radius: calc(var(--radiusBase) * 0.75);
-  }
-  
-  .bundle-step-3 .product__thumb img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    width: 100%;
-    border-radius: calc(var(--radiusBase) * 0.75);
-  }
-  
-  .bundle-step-3 .product__thumb-item {
-    width: 100%;
-    position: relative;
-  }
-  
-  .bundle-step-3 .image-wrap__thumbnail {
-    position: relative;
-    overflow: hidden;
-    border-radius: calc(var(--radiusBase) * 0.75);
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  
-  .bundle-step-3 .product-single__meta {
-    padding: 0;
-  }
-  
-  .bundle-step-3 .product-block {
-    margin-bottom: 1.5rem;
-  }
-  
-  .bundle-step-3 .product-single__title {
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin: 0 0 1rem 0;
-    color: #333;
-  }
-  
-  .bundle-step-3 .bundle-summary-products {
-    margin-bottom: 1.5rem;
-  }
-  
-  .bundle-step-3 .bundle-summary-product {
-    display: flex;
-    align-items: flex-start;
-    padding: 0;
-    border: none;
-    border-radius: 0;
-    margin-bottom: 0;
-    background: transparent;
-    position: relative;
-  }
-  
-  .bundle-step-3 .bundle-product-number {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1C2C58;
-    margin-right: 1rem;
-  }
-  
-  .bundle-step-3 .bundle-product-content {
-    display: flex;
-    align-items: flex-start;
-    flex: 1;
-    margin-left: 1.5rem;
-  }
-  
-  .bundle-step-3 .bundle-product-info {
-    flex: 1;
-    margin-right: 1.25rem;
-  }
-  
-  .bundle-step-3 .bundle-product-title {
-    font-size: 1.375rem;
-    font-weight: 700;
-    margin: 0 0 0.5rem 0;
-    color: #1C2C58;
-    line-height: 1.3;
-  }
-  
-  
-  .bundle-step-3 .bundle-product-attribute {
-    font-size: 1.125rem;
-    color: #6B7280;
-    margin-bottom: 0.25rem;
-    line-height: 1.4;
-  }
-  
-  .bundle-step-3 .bundle-product-change-link {
-    color: #007cba;
-    text-decoration: underline;
-    font-size: 1.125rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.2s ease;
-    margin-bottom: 10px;
-  }
-  
-  .bundle-step-3 .bundle-product-change-link:hover {
-    color: #005a8b;
-  }
-  
-  .bundle-step-3 .bundle-product-image {
-    flex-shrink: 0;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid #f3f4f6;
-  }
-  
-  .bundle-step-3 .bundle-product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .bundle-step-3 .bundle-summary-divider {
-    position: relative;
-    width: 100%;
-    height: 0;
-    margin: 2rem 0;
-    border: 2px solid #9CA3AF;
-  }
-  
-  .bundle-step-3 .bundle-summary-total {
-    padding: 1.5rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-  }
-  
-  .bundle-step-3 .bundle-total-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-  }
-  
-  .bundle-step-3 .bundle-total-row:last-child {
-    font-weight: 600;
-    font-size: 1.35rem;
-  }
-  
-  .bundle-step-3 .bundle-discount {
-    color: #28a745;
-  }
-  
-  .bundle-step-3 .bundle-final {
-    color: #007cba;
-  }
-  
-  .bundle-step-3 .bundle-summary-actions {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .bundle-step-3 .btn {
-    flex: 1;
-    padding: 1rem 2rem;
-    font-size: 1.25rem;
-    font-weight: 600;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .bundle-step-3 .btn--secondary {
-    background: #fff;
-    border-radius: 50px;
-    color: #333;
-    border: 2px solid #e5e5e5;
-  }
-  
-  .bundle-step-3 .btn--secondary:hover {
-    border-radius: 50px;
-    background: #f8f9fa;
-    border-color: #ccc;
-  }
-  
-  .bundle-step-3 .btn--primary {
-    border-radius: 50px;
-    background: #FF7F41;
-    color: #fff;
-  }
-  
-  .bundle-step-3 .btn--primary:hover {
-    border-radius: 50px;
-    background: #FF7F41;
-  }
-  
-  @media (max-width: 768px) {
-    .bundle-step-3 .grid--product-images-right {
-      flex-direction: column !important;
-      flex-wrap: wrap !important;
-    }
-    
-    .bundle-step-3 .grid__item.large-up--one-half {
-      flex: 0 0 100% !important;
-      max-width: 100% !important;
-      width: 100% !important;
-    }
-    
-    .bundle-step-3 .product__photos--beside {
-      flex-direction: column;
-    }
-    
-    .bundle-step-3 .product__thumbs-placement--left {
-      order: 0;
-      margin-right: 0;
-      margin-bottom: 1rem;
-    }
-    
-    .bundle-step-2 .product__photos--beside {
-      flex-direction: column;
-    }
-    
-    .bundle-step-2 .product__thumbs-placement--left {
-      order: 0;
-      margin-right: 0;
-      margin-bottom: 1rem;
-    }
-    
-    .bundle-step-3 .product__thumbs--beside {
-      flex-direction: row;
-      overflow-x: auto;
-      width: 100%;
-    }
-    
-    .bundle-step-2 .product__thumbs--beside {
-      flex-direction: row;
-      overflow-x: auto;
-      width: 100%;
-    }
-    
-    .bundle-step-3 .product__thumbs {
-      width: auto;
-    }
-    
-    .bundle-step-2 .product__thumbs {
-      width: auto;
-    }
-    
-    .bundle-step-3 .product__thumbs--scroller {
-      position: static;
-      overflow-x: scroll;
-      white-space: nowrap;
-      overflow-y: hidden;
-    }
-    
-    .bundle-step-2 .product__thumbs--scroller {
-      position: static;
-      overflow-x: scroll;
-      white-space: nowrap;
-      overflow-y: hidden;
-    }
-    
-    .bundle-step-3 .product__thumb-item {
-      display: inline-block;
-      margin-right: 8.5px;
-      width: 80px;
-      vertical-align: middle;
-      margin-bottom: 0;
-    }
-    
-    .bundle-step-2 .product__thumb-item {
-      display: inline-block;
-      margin-right: 8.5px;
-      width: 80px;
-      vertical-align: middle;
-      margin-bottom: 0;
-    }
-    
-    .bundle-step-3 .product__thumb-item:last-child {
-      margin-right: 0;
-    }
-    
-    .bundle-step-2 .product__thumb-item:last-child {
-      margin-right: 0;
-    }
-    
-    .bundle-step-3 .bundle-summary-actions {
-      flex-direction: column;
-    }
-    
-    .bundle-step-3 .bundle-summary-product {
-      flex-direction: column;
-      text-align: center;
-      padding: 0;
-    }
-    
-    .bundle-step-3 .bundle-product-number {
-      position: static;
-      margin-bottom: 0.75rem;
-      margin-left: 0;
-    }
-    
-    .bundle-step-3 .bundle-product-content {
-      flex-direction: column;
-      margin-left: 0;
-    }
-    
-    .bundle-step-3 .bundle-product-info {
-      margin-right: 0;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    
-    .bundle-step-3 .bundle-product-image {
-      width: 60px;
-      height: 60px;
-    }
-    
-    .bundle-step-3 .bundle-summary-divider {
-      margin: 1.5rem 0;
-    }
-    
-    .bundle-step-3 .bundle-summary-title {
-      font-size: 1rem;
-    }
-  }
-  
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .bundle-step-3 .grid--product-images-right {
-      display: flex !important;
-      flex-direction: row !important;
-      flex-wrap: nowrap !important;
-    }
-    
-    .bundle-step-3 .grid__item.large-up--one-half {
-      flex: 0 0 50% !important;
-      max-width: 50% !important;
-      width: 50% !important;
-    }
-  }
-  
-  .icon-with-text__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    align-items: start;
-  }
-  
-  .icon-with-text__grid[data-columns="1"] {
-    grid-template-columns: 1fr;
-  }
-  
-  .icon-with-text__grid[data-columns="2"] {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .icon-with-text__item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    text-align: left;
-    padding: 0.5rem 0;
-  }
-  
-  .icon-with-text__icon {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 24px;
-  }
-  
-  .icon-with-text__icon img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .icon-with-text__content {
-    flex: 1;
-  }
-  
-  .icon-with-text__heading {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 1.4;
-    color: #333;
-    font-family: inherit;
-  }
-  
-  @media (max-width: 768px) {
-    .icon-with-text__grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-    
-    .icon-with-text__item {
-      flex-direction: row;
-      text-align: left;
-      gap: 0.75rem;
-    }
-    
-    .icon-with-text__heading {
-      font-size: 1.15rem;
-    }
-  }
-
-  /* Combo Products List Styles */
-  .combo-products-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .combo-product-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: #F8F9FA;
-    border-radius: 8px;
-    border: 1px solid #E5E7EB;
-  }
-
-  .combo-product-image {
-    flex-shrink: 0;
-    width: 60px;
-    height: 60px;
-    border-radius: 6px;
-    overflow: hidden;
-    background: #fff;
-    border: 1px solid #E5E7EB;
-  }
-
-  .combo-product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .combo-product-info {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .combo-product-info h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0 0 0.25rem 0;
-    color: #1C2C58;
-    line-height: 1.4;
-  }
-
-  .combo-product-attributes {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.875rem;
-    color: #6B7280;
-  }
-
-  .combo-product-attributes span:first-child {
-    font-weight: 500;
-    color: #374151;
-  }
-
-  /* Step 1 Bundle Layout Styles */
-  .bundle-step-1 .product-single__meta {
-    padding: 0;
-  }
-
-  .bundle-step-1 .product-block--header {
-    margin-bottom: 1.5rem;
-  }
-
-  .bundle-step-1 .product-reviews-summary {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 1rem;
-  }
-
-  .bundle-step-1 .product-rating {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .bundle-step-1 .stars {
-    display: flex;
-    gap: 2px;
-  }
-
-  .bundle-step-1 .star {
-    color: #FFD700;
-    font-size: 16px;
-  }
-
-  .bundle-step-1 .rating-value {
-    font-weight: 600;
-    color: #1C2C58;
-    font-size: 14px;
-  }
-
-  .bundle-step-1 .reviews-number {
-    color: #6B7280;
-    font-size: 14px;
-  }
-
-  .bundle-step-1 .product-single__title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1C2C58;
-    margin-bottom: 1rem;
-    line-height: 1.3;
-  }
-
-  .bundle-step-1 .product-block--price {
-    margin-bottom: 1.5rem;
-  }
-
-  .bundle-step-1 .price-container-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .bundle-step-1 .product__price {
-    font-size: 24px;
-    font-weight: 600;
-    color: #1C2C58;
-  }
-
-  .bundle-step-1 .product__price--compare {
-    font-size: 18px;
-    color: #9CA3AF;
-    text-decoration: line-through;
-  }
-
-  .bundle-step-1 .product__discount-badge {
-    background: #FCE390;
-    color: #1C2C58;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  .bundle-step-1 .promotion-block-container {
-    margin-bottom: 1.5rem;
-  }
-
-  .bundle-step-1 .promotion-vouchers {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .bundle-step-1 .promotion-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1C2C58;
-    margin: 0;
-  }
-
-  .bundle-step-1 .promotion-voucher-item {
-    border: none;
-    background: none;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .bundle-step-1 .combo-products-list {
-    background-color: #F5F9FF;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-  }
-
-  .bundle-step-1 .combo-products-list h3 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #1C2C58;
-    margin-bottom: 1rem;
-  }
-
-  .bundle-step-1 .combo-product-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
-    background: #fff;
-    border: 1px solid #E5E7EB;
-    border-radius: 8px;
-    margin-bottom: 8px;
-  }
-
-  .bundle-step-1 .combo-product-image {
-    flex-shrink: 0;
-    width: 220px;
-    height: 130px;
-    border-radius: 6px;
-    overflow: hidden;
-    background: #fff;
-    border: 1px solid #E5E7EB;
-  }
-
-  .bundle-step-1 .combo-product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .bundle-step-1 .combo-product-info h4 {
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0 0 4px 0;
-    color: #1C2C58;
-  }
-
-  .bundle-step-1 .combo-product-attributes {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    color: #6B7280;
-  }
-
-  .bundle-step-1 .combo-product-attributes span:first-child {
-    font-weight: 500;
-    color: #374151;
-  }
-
-  .bundle-step-1 .bundle-cta-btn {
-    width: 100%;
-    background: #FCE390 !important;
-    color: #1C2C58 !important;
-    font-weight: bold !important;
-    font-size: 16px !important;
-    padding: 15px !important;
-    border-radius: 50px !important;
-    border: none !important;
-    margin-bottom: 1.5rem;
-  }
-
-  .bundle-step-1 .bundle-cta-btn:hover {
-    background: #F4D03F !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-
-  /* Product Summary Block Styles */
-  .bundle-step-1 .product-summary-block {
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-  }
-
-
-
-  .bundle-step-1 .product-accordion {
-    background: #F5F9FF !important;
-    border: none;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    overflow: hidden;
-  }
-
-  .bundle-step-1 .product-accordion summary {
-    background: #F5F9FF;
-    padding: 16px 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    color: #1C2C58;
-    border: none;
-    outline: none;
-  }
-
-  .bundle-step-1 .product-accordion summary:hover {
-    background: #E8F2FF;
-  }
-
-  .bundle-step-1 .product-accordion-content {
-    background: #F5F9FF;
-    padding: 0 20px 16px 20px;
-    border: none;
-  }
-
-  .bundle-step-1 .product-accordion[open] summary {
-    border: none;
-  }
-
-  .bundle-step-1 .icon-toggle {
-    transition: transform 0.3s ease;
-  }
-
-  .bundle-step-1 .product-accordion[open] .icon-toggle {
-    transform: rotate(180deg);
-  }
-
-  .bundle-step-1 .showroom-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .bundle-step-1 .showroom-item {
-    padding: 8px 0;
-  }
-
-  .bundle-step-1 .showroom-item strong {
-    color: #1C2C58;
-    font-weight: 600;
-  }
-
-  .bundle-step-1 .showroom-item a {
-    color: #1C2C58;
-    text-decoration: none;
-  }
-
-  .bundle-step-1 .showroom-item a:hover {
-    text-decoration: underline;
-  }
-
-  /* Service Grid Styles */
-  .bundle-step-1 .product-block--service-grid {
-    margin-bottom: 1.5rem;
-  }
-
-  .bundle-step-1 .service-grid-wrapper {
-    background: transparent;
-  }
-
-  .bundle-step-1 .service-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    background: transparent;
-    border-radius: 0;
-    overflow: visible;
-  }
-
-  .bundle-step-1 .service-grid-item {
-    background: #F5F9FF;
-    padding: 0;
-    margin: 0;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-
-  .bundle-step-1 .service-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background: transparent;
-    padding: 20px 16px;
-    border-radius: 5px;
-    transition: transform 0.2s ease;
-    border: none;
-    margin: 0;
-    height: 100%;
-  }
-
-  .bundle-step-1 .service-item:hover {
-    transform: translateY(-2px);
-  }
-
-  .bundle-step-1 .service-item__icon {
-    margin-bottom: 12px;
-    background: #F5F9FF;
-  }
-
-  .bundle-step-1 .service-item__icon img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-  }
-
-  .bundle-step-1 .service-item__text {
-    background: #F5F9FF;
-  }
-
-  .bundle-step-1 .service-item__text p {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: #1C2C58;
-    line-height: 1.4;
-  }
-
-  /* Sticky Scrolling Styles */
-  .bundle-step-1 .product-grid {
-    align-items: start;
-  }
-
-  .bundle-step-1 .is-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 120px; /* Adjust this value to sit below your site's sticky header */
-    align-self: start; /* Ensures the column aligns to the top of the grid row */
-  }
-
-  /* 
-    Definitive Pure CSS Sticky Column Solution
-  */
-  @media screen and (min-width: 991px) {
-    /*
-      CRITICAL FIX: `position: sticky` will NOT work if any parent element
-      has `overflow` set to 'hidden', 'scroll', or 'auto'.
-      This rule aggressively targets all potential parent containers in the product grid
-      and forces them to allow sticky positioning.
-    */
-    .bundle-step-1 .page-content--product,
-    .bundle-step-1 .page-content--product > .page-width,
-    .bundle-step-1 .grid {
-      padding-bottom: 0 !important;
-      overflow: visible !important;
-    }
-
-    /*
-      Disable theme's default sticky behavior on images.
-      A custom script will handle advanced sticky positioning for either column.
-    */
-    .bundle-step-1 .product-single__sticky .sticky {
-        position: static; /* Let JS control positioning */
-    }
-
-    /* 
-      CRITICAL FIX: Dynamic max-width based on screen size
-      Use CSS calc to make max-width responsive to viewport width
-    */
-    .bundle-step-1 .product-column-content {
-      max-width: min(765px, 50vw) !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-      overflow: hidden !important;
-    }
-
-    .bundle-step-1 .product__photos img {
-      max-width: min(765px, 50vw) !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-      display: block !important;
-      margin: 0 auto !important;
-    }
-
-    /* Force max-width lock during sticky states */
-    .bundle-step-1 .product-column-content[style*="position: fixed"],
-    .bundle-step-1 .product-column-content[style*="position: absolute"] {
-      max-width: min(765px, 50vw) !important;
-      box-sizing: border-box !important;
-      overflow: hidden !important;
-    }
-
-    /* Ensure product-main-slide respects container bounds during scroll animations */
-    .bundle-step-1 .product-column-content[style*="position: fixed"] .product-main-slide,
-    .bundle-step-1 .product-column-content[style*="position: fixed"] .product-main-slide img {
-      max-width: 100% !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-    }
-
-    /* Locked width columns - prevent any flex or grid from changing the locked widths */
-    .bundle-step-1 .grid__item[style*="width:"] {
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-    }
-
-    /* Lock all photos containers to prevent size fluctuations */
-    .bundle-step-1 .product__photos[style*="width:"] {
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      box-sizing: border-box !important;
-    }
-
-    .bundle-step-1 .product-slideshow[style*="width:"] {
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      box-sizing: border-box !important;
-    }
-
-    .bundle-step-1 .product__main-photos[style*="width:"] {
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      box-sizing: border-box !important;
-    }
-
-    /* AGGRESSIVE GRID LOCK - Prevent any column from changing size */
-    .bundle-step-1 .grid__item[style*="width:"] {
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      box-sizing: border-box !important;
-    }
-
-    /* Lock the main grid container */
-    .bundle-step-1 .grid {
-      display: flex !important;
-      flex-wrap: nowrap !important;
-      position: relative !important;
-      overflow: visible !important;
-      gap: 0 !important;
-    }
-
-    /* Image column - exactly 50% width */
-    .bundle-step-1 .grid__item.product-single__sticky,
-    .bundle-step-1 .grid__item.product-grid__images {
-      flex: 0 0 50% !important;
-      width: 50% !important;
-      max-width: 50% !important;
-      min-width: 50% !important;
-      margin-right: 0 !important;
-      padding-right: 0 !important;
-    }
-
-    /* Content column - exactly 50% width with 60px right padding */
-    .bundle-step-1 .grid__item.product-grid__info {
-      flex: 0 0 50% !important;
-      width: 50% !important;
-      max-width: 50% !important;
-      min-width: 50% !important;
-      margin-right: 0 !important;
-      padding-right: 60px !important;
-      box-sizing: border-box !important;
-    }
-
-    /* Ensure images never exceed their containers */
-    .bundle-step-1 .product__photos img,
-    .bundle-step-1 .product-main-slide img {
-      max-width: 100% !important;
-      width: 100% !important;
-      height: auto !important;
-      object-fit: cover !important;
-      box-sizing: border-box !important;
-    }
-
-    /* FIX Z-INDEX LAYERING - Ensure image column is not covered by content column */
-    .bundle-step-1 .grid__item.product-single__sticky,
-    .bundle-step-1 .grid__item.product-grid__images {
-      position: relative !important;
-      z-index: 2 !important;
-    }
-
-    .bundle-step-1 .grid__item.product-grid__info {
-      position: relative !important;
-      z-index: 1 !important;
-    }
-
-    /* Ensure image containers have proper z-index */
-    .bundle-step-1 .product__photos,
-    .bundle-step-1 .product-slideshow,
-    .bundle-step-1 .product__main-photos {
-      position: relative !important;
-      z-index: 3 !important;
-    }
-
-    /* Prevent content column from overlapping image column */
-    .bundle-step-1 .product-single__meta {
-      position: relative !important;
-      z-index: 1 !important;
-    }
-  }
-
-  /* Step 3: Bundle Summary - Match Step 1 Layout */
-  .bundle-step-3 .product-summary-block {
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-  }
-
-  .bundle-step-3 .product-accordion {
-    background: #F5F9FF !important;
-    border: none;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    overflow: hidden;
-  }
-
-  .bundle-step-3 .product-accordion summary {
-    background: #F5F9FF;
-    padding: 16px 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    color: #1C2C58;
-    border: none;
-    outline: none;
-  }
-
-  .bundle-step-3 .product-accordion summary:hover {
-    background: #E8F2FF;
-  }
-
-  .bundle-step-3 .product-accordion-content {
-    background: #F5F9FF;
-    padding: 0 20px 16px 20px;
-    border: none;
-  }
-
-  .bundle-step-3 .product-accordion[open] summary {
-    border: none;
-  }
-
-  .bundle-step-3 .icon-toggle {
-    transition: transform 0.3s ease;
-  }
-
-  .bundle-step-3 .product-accordion[open] .icon-toggle {
-    transform: rotate(180deg);
-  }
-
-  .bundle-step-3 .showroom-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .bundle-step-3 .showroom-item {
-    background: white;
-    padding: 12px 16px;
-    border-radius: 6px;
-    border: 1px solid #E8F2FF;
-  }
-
-  .bundle-step-3 .showroom-item strong {
-    color: #1C2C58;
-    font-weight: 600;
-  }
-
-  .bundle-step-3 .showroom-item a {
-    color: #1C2C58;
-    text-decoration: none;
-  }
-
-  .bundle-step-3 .showroom-item a:hover {
-    text-decoration: underline;
-  }
-
-  /* Service Grid Styles for Step 3 */
-  .bundle-step-3 .product-block--service-grid {
-    margin-bottom: 1.5rem;
-  }
-
-  .bundle-step-3 .service-grid-wrapper {
-    background: transparent;
-  }
-
-  .bundle-step-3 .service-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    background: transparent;
-    border-radius: 0;
-    overflow: visible;
-  }
-
-  .bundle-step-3 .service-grid-item {
-    background: #F5F9FF;
-    padding: 0;
-    margin: 0;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-
-  .bundle-step-3 .service-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background: transparent;
-    padding: 20px 16px;
-    border-radius: 5px;
-    transition: transform 0.2s ease;
-    border: none;
-    margin: 0;
-    height: 100%;
-  }
-
-  .bundle-step-3 .service-item:hover {
-    transform: translateY(-2px);
-  }
-
-  .bundle-step-3 .service-item__icon {
-    margin-bottom: 12px;
-    background: #F5F9FF;
-  }
-
-  .bundle-step-3 .service-item__icon img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-  }
-
-  .bundle-step-3 .service-item__text {
-    background: #F5F9FF;
-  }
-
-  .bundle-step-3 .service-item__text p {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: #1C2C58;
-    line-height: 1.4;
-  }
-
-  /* Step 2: Bundle Products Selection - Match Step 1 Layout */
-  .bundle-step-2 .product-grid {
-    align-items: start;
-  }
-
-  .bundle-step-2 .is-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 120px; /* Adjust this value to sit below your site's sticky header */
-    align-self: start; /* Ensures the column aligns to the top of the grid row */
-  }
-
-  /* Step 2 Specific Styles */
-  .bundle-step-2 .bundle-step-subtitle {
-    font-size: 0.8em;
-    font-weight: normal;
-    color: #666;
-    margin-left: 8px;
-  }
-  .bundle-step-title {
-    font-size: 20px;
-    font-weight: 400;
-    color: #1C2C58;
-    font-family: "Be Vietnam Pro";
-    line-height: 140%;
-    margin-bottom: 1rem;
-  }
-  .bundle-step-2 .product-block--header .product-single__title {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    color: #1C2C58;
-    font-family: "Be Vietnam Pro";
-    font-size: 39px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 28px */
-  }
-
-  .bundle-products-grid .product-single__title {
-    font-size: 39px;
-    font-weight: 600;
-    color: #1C2C58;
-    font-family: "Be Vietnam Pro";
-    line-height: 140%;
-    margin-bottom: 1rem;
-  }
-
-  .bundle-step-2 .product-block--price {
-    margin-bottom: 1.5rem;
-  }
-
-  .bundle-step-2 .price-container-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .bundle-step-2 .product__price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #1C2C58;
-  }
-
-  .bundle-step-2 .product__price--compare {
-    text-decoration: line-through;
-    font-weight: 400;
-    color: #999;
-    font-size: 1.2rem;
-  }
-
-  .bundle-step-2 .product__discount-badge {
-    background: #FCE390;
-    color: #1C2C58;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    font-weight: bold;
-  }
-
-
-  /* Action Buttons */
-  .bundle-step-2 .bundle-navigation {
-    display: flex;
-    gap: 1rem;
-    margin: 2rem 0;
-  }
-
-  .bundle-step-2 .bundle-back-btn,
-  .bundle-step-2 .bundle-continue-btn {
-    flex: 1;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .bundle-step-2 .bundle-back-btn {
-    background: #f5f5f5;
-    color: #666;
-    border: 1px solid #ddd;
-    border-radius: 50px;
-  }
-
-  .bundle-step-2 .bundle-back-btn:hover {
-    background: #e5e5e5;
-  }
-
-  .bundle-step-2 .bundle-continue-btn {
-    border-radius: 50px;
-    background: #FCE390;
-    color: #000000;
-  }
-
-  .bundle-step-2 .bundle-continue-btn:hover {
-    background: #0f1a3a;
-  }
-
-
-  /* Accordion Styles */
-  .bundle-step-2 .product-accordion {
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    overflow: hidden;
-  }
-
-  .bundle-step-2 .product-accordion summary {
-    padding: 1rem;
-    background: #f9f9f9;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    color: #1C2C58;
-  }
-
-  .bundle-step-2 .product-accordion summary {
-    background: #F5F9FF;
-  }
-
-  .bundle-step-2 .product-accordion-content {
-    padding: 1rem;
-    background: #F5F9FF;
-  }
-
-  /* Reviews Section */
-  .bundle-step-2 .product-reviews-summary {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .bundle-step-2 .product-rating {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .bundle-step-2 .stars {
-    display: flex;
-    gap: 2px;
-  }
-
-  .bundle-step-2 .star {
-    color: #ffd700;
-    font-size: 1.2rem;
-  }
-
-  .bundle-step-2 .rating-value {
-    font-weight: bold;
-    color: #1C2C58;
-  }
-
-  .bundle-step-2 .reviews-number {
-    color: #666;
-  }
-
-  /* Service Grid */
-  .bundle-step-2 .service-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin: 2rem 0;
-  }
-
-  .bundle-step-2 .service-item {
-    text-align: center;
-    padding: 1rem;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    background: white;
-  }
-
-  .bundle-step-2 .service-item__icon {
-    margin-bottom: 0.5rem;
-  }
-
-  .bundle-step-2 .service-item__text p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #666;
-  }
-
-  /* 
-    Definitive Pure CSS Sticky Column Solution for Step 2
-  */
-  @media screen and (min-width: 991px) {
-    /*
-      CRITICAL FIX: `position: sticky` will NOT work if any parent element
-      has `overflow` set to 'hidden', 'scroll', or 'auto'.
-      This rule aggressively targets all potential parent containers in the product grid
-      and forces them to allow sticky positioning.
-    */
-    .bundle-step-2 .page-content--product,
-    .bundle-step-2 .page-content--product > .page-width,
-    .bundle-step-2 .grid {
-      padding-bottom: 0 !important;
-      overflow: visible !important;
-    }
-
-    /*
-      Disable theme's default sticky behavior on images.
-      A custom script will handle advanced sticky positioning for either column.
-    */
-    .bundle-step-2 .product-single__sticky .sticky {
-        position: static; /* Let JS control positioning */
-    }
-
-    /* 
-      CRITICAL FIX: Dynamic max-width based on screen size
-      Use CSS calc to make max-width responsive to viewport width
-    */
-    .bundle-step-2 .product-column-content {
-      max-width: min(765px, 50vw) !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-      overflow: hidden !important;
-    }
-
-  .bundle-step-2 .product__photos img {
-    max-width: 100% !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    display: block !important;
-    margin: 0 auto !important;
-  }
-
-  /* Ensure main photos container takes full width - Override all other rules */
-  .bundle-step-2 .product__main-photos {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    flex: 1 1 100% !important;
-    display: block !important;
-  }
-
-  /* Ensure product slideshow takes full width */
-  .bundle-step-2 .product__main-photos .product-slideshow {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-  }
-
-  /* Ensure main slide takes full width */
-  .bundle-step-2 .product-main-slide {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    display: block !important;
-  }
-
-  /* Ensure main slide image takes full width */
-  .bundle-step-2 .product-main-slide img {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    display: block !important;
-  }
-
-  /* Override any grid or flex constraints on the photos container */
-  .bundle-step-2 .product__photos {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: block !important;
-  }
-
-  /* Override any column width constraints */
-  .bundle-step-2 .product-column-content {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  /* Grid layout - Left column should be half width with proper spacing */
-  .bundle-step-2 .grid__item.product-single__sticky {
-    width: 50% !important;
-    max-width: 50% !important;
-    flex: 0 0 50% !important;
-  }
-
-  /* Product grid images should respect the column width */
-  .bundle-step-2 .product-grid__images {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  /* Right column should also be half width */
-  .bundle-step-2 .grid__item.product-grid__info {
-    width: 50% !important;
-    max-width: 50% !important;
-    flex: 0 0 50% !important;
-  }
-
-  /* Force override for the entire photos container hierarchy */
-  .bundle-step-2 .product__photos.product__photos--stack {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: block !important;
-  }
-
-  /* Override any potential flex or grid constraints */
-  .bundle-step-2 .product__main-photos[data-product-single-media-group] {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    flex: none !important;
-    display: block !important;
-  }
-
-  /* Ensure grid container has proper display and spacing */
-  .bundle-step-2 .grid {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    gap: 20px !important;
-    width: 100% !important;
-  }
-
-  /* Ensure proper spacing between columns */
-  .bundle-step-2 .grid__item {
-    box-sizing: border-box !important;
-  }
-
-    /* Force max-width lock during sticky states */
-    .bundle-step-2 .product-column-content[style*="position: fixed"],
-    .bundle-step-2 .product-column-content[style*="position: absolute"] {
-      max-width: min(765px, 50vw) !important;
-      box-sizing: border-box !important;
-      overflow: hidden !important;
-    }
-  }
-
-  /* Bundle Main Container - Override theme styles */
-  .bundle-main-container {
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-    position: relative !important;
-    overflow: visible !important;
-  }
-
-  /* Override any theme page-width styles that might affect our bundle */
-  .bundle-main-container * {
-    box-sizing: border-box;
-  }
-
-  .bundle-main-container .page-content {
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* Bundle Steps - Direct Padding */
-  .bundle-step-1,
-  .bundle-step-2,
-  .bundle-step-3 {
-    padding-left: 60px !important;
-    padding-right: 60px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  @media screen and (max-width: 768px) {
-    .bundle-step-1,
-    .bundle-step-2,
-    .bundle-step-3 {
-      padding-left: 16px !important;
-      padding-right: 16px !important;
-    }
-  }
-
-  /* Bundle Container - No padding, just max-width */
-  .bundle-container {
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  /* Mobile responsive styles */
-  @media screen and (max-width: 768px) {
-    .bundle-step-1 .product-single__title {
-      font-size: 20px;
-    }
-    
-    .bundle-step-1 .product__price {
-      font-size: 20px;
-    }
-    
-    .bundle-step-1 .promotion-vouchers {
-      flex-wrap: wrap;
-
-    /* Mobile color swatch styles */
-    [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input-wrap {
-      gap: 6px !important;
-    }
-
-    [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant__button-label {
-      width: 40px !important;
-      height: 40px !important;
-      min-width: 40px !important;
-      min-height: 40px !important;
-      max-width: 40px !important;
-      max-height: 40px !important;
-    }
-
-    [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input {
-      width: 40px !important;
-      height: 40px !important;
-      min-width: 40px !important;
-      min-height: 40px !important;
-      max-width: 40px !important;
-      max-height: 40px !important;
-    }
-
-    [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
-      font-size: 14px !important;
-    }
-
-    /* Mobile step 2 color swatch styles */
-    .bundle-step-2 .variant-wrapper.is-color .variant-input-wrap {
-      gap: 6px !important;
-    }
-
-    .bundle-step-2 .variant-wrapper.is-color .variant__button-label {
-      width: 40px !important;
-      height: 40px !important;
-      min-width: 40px !important;
-      min-height: 40px !important;
-      max-width: 40px !important;
-      max-height: 40px !important;
-    }
-
-    .bundle-step-2 .variant-wrapper.is-color .variant-input {
-      width: 40px !important;
-      height: 40px !important;
-      min-width: 40px !important;
-      min-height: 40px !important;
-      max-width: 40px !important;
-      max-height: 40px !important;
-    }
-
-    .bundle-step-2 .variant-wrapper.is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
-      font-size: 14px !important;
-    }
-      gap: 8px;
-    }
-    
-    .bundle-step-1 .combo-product-item {
-      padding: 8px;
-    }
-    
-    .bundle-step-1 .combo-product-image {
-      width: 50px;
-      height: 50px;
-    }
-
-    .bundle-step-1 .service-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .bundle-step-1 .service-grid-item {
-      padding: 0;
-      margin: 0;
-      border-radius: 5px;
-      border: none;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    .bundle-step-1 .service-item {
-      padding: 16px 12px;
-      margin: 0;
-      background: transparent;
-    }
-
-    .bundle-step-1 .product-summary-block,
-    .bundle-step-1 .product-block--service-grid {
-      padding: 16px;
-    }
-
-    .bundle-step-1 .product-accordion summary {
-      padding: 12px 16px;
-    }
-
-    .bundle-step-1 .product-accordion-content {
-      padding: 0 16px 12px 16px;
-    }
-
-    /* Step 3 Mobile Styles */
-    .bundle-step-3 .service-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .bundle-step-3 .service-grid-item {
-      padding: 0;
-      margin: 0;
-      border-radius: 5px;
-      border: none;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    .bundle-step-3 .service-item {
-      padding: 16px 12px;
-      margin: 0;
-      background: transparent;
-    }
-
-    .bundle-step-3 .product-summary-block,
-    .bundle-step-3 .product-block--service-grid {
-      padding: 16px;
-    }
-
-    .bundle-step-3 .product-accordion summary {
-      padding: 12px 16px;
-    }
-
-    .bundle-step-3 .product-accordion-content {
-      padding: 0 16px 12px 16px;
-    }
-  }
-
-</style>
-
-<div id="MainProductBundle-{{ section.id }}" class="bundle-main-container">
-  <div class="bundle-loading-overlay">
-    <div class="spinner"></div>
-  </div>
-  
-  <div class="bundle-dynamic-content">
-    <!-- Step 1: Default Product Display -->
-    <div class="bundle-step bundle-step-1" data-step="1">
-      {%- liquid
-        assign product_zoom_size = '1800x1800'
-        
-        case section.settings.image_size
-          when 'small'
-            assign product_image_width = 'medium-up--two-fifths'
-            assign product_description_width = 'medium-up--three-fifths'
-          when 'medium'
+﻿          when 'medium'
             assign product_image_width = 'large-up--one-half'
             assign product_description_width = 'large-up--one-half'
           when 'large'
@@ -2274,16 +58,16 @@
                   <div class="product-reviews-summary">
                     <div class="product-rating">
                       <div class="stars">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
+                        <span class="star">â˜…</span>
+                        <span class="star">â˜…</span>
+                        <span class="star">â˜…</span>
+                        <span class="star">â˜…</span>
+                        <span class="star">â˜…</span>
                       </div>
                       <span class="rating-value">{{ section.settings.review_rating | default: '4.8' }}</span>
                     </div>
                     <div class="reviews-count">
-                      <span class="reviews-number">({{ section.settings.review_count | default: '2025 đánh giá' }})</span>
+                      <span class="reviews-number">({{ section.settings.review_count | default: '2025 Ä‘Ã¡nh giÃ¡' }})</span>
                     </div>
                   </div>
 
@@ -2331,7 +115,7 @@
 
                   <!-- Combo Products List -->
                   <div class="product-block">
-                    <h3 style="background-color: #F5F9FF; padding: 10px; border-radius: 5px; margin: 0 0 0 0;">{{ section.settings.combo_title | default: "Combo bao gồm các sản phẩm:" }}</h3>
+                    <h3 style="background-color: #F5F9FF; padding: 10px; border-radius: 5px; margin: 0 0 0 0;">{{ section.settings.combo_title | default: "Combo bao gá»“m cÃ¡c sáº£n pháº©m:" }}</h3>
                     <div class="combo-products-list">
                       {%- if has_bundle_products and bundle_products_list -%}
                         {%- for bundle_product in bundle_products_list -%}
@@ -2347,15 +131,15 @@
                             <div class="combo-product-info">
                               <h4>{{ bundle_product.title }}</h4>
                               <div class="combo-product-attributes">
-                                <span>Số lượng: 1</span>
-                                <span>Kích thước: {{ bundle_product.options.size | default: '1' }} kích thước</span>
+                                <span>Sá»‘ lÆ°á»£ng: 1</span>
+                                <span>KÃ­ch thÆ°á»›c: {{ bundle_product.options.size | default: '1' }} kÃ­ch thÆ°á»›c</span>
                               </div>
                             </div>
                           </div>
                         {%- endfor -%}
                       {%- else -%}
                         <div class="combo-product-placeholder" style="text-align: center; padding: 2rem; color: #666;">
-                          <p>Chưa có sản phẩm trong combo</p>
+                          <p>ChÆ°a cÃ³ sáº£n pháº©m trong combo</p>
                         </div>
                       {%- endif -%}
                     </div>
@@ -2373,23 +157,23 @@
                         style="background: #FCE390; color: #1C2C58; font-weight: bold; font-size: 16px; padding: 15px; border-radius: 50px; border: none;"
                       >
                         <span data-bundle-cta-text>
-                          {{ section.settings.cta_button_text | default: "BẮT ĐẦU TẠO COMBO" }}
+                          {{ section.settings.cta_button_text | default: "Báº®T Äáº¦U Táº O COMBO" }}
                         </span>
                       </button>
                     {%- else -%}
                       <div class="bundle-setup-notice" style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1rem; margin: 1rem 0; text-align: center;">
-                        <h4 style="margin: 0 0 0.5rem 0; color: #856404;">⚠️ Bundle chưa được cấu hình</h4>
+                        <h4 style="margin: 0 0 0.5rem 0; color: #856404;">âš ï¸ Bundle chÆ°a Ä‘Æ°á»£c cáº¥u hÃ¬nh</h4>
                         <p style="margin: 0; color: #856404; font-size: 1.15rem;">
-                          Để sử dụng tính năng bundle, vui lòng thêm sản phẩm vào bundle trong Theme Editor.
+                          Äá»ƒ sá»­ dá»¥ng tÃ­nh nÄƒng bundle, vui lÃ²ng thÃªm sáº£n pháº©m vÃ o bundle trong Theme Editor.
                         </p>
                         <div style="margin-top: 0.5rem;">
                           <button
                             type="button"
                             class="btn btn--secondary"
                             style="font-size: 1rem; padding: 0.5rem 1rem;"
-                            onclick="alert('Để thêm sản phẩm vào bundle:\\n\\n1. Vào Theme Editor\\n2. Chọn section Product Bundle\\n3. Trong settings, tìm Bundle Products\\n4. Click Change và chọn các sản phẩm muốn thêm vào bundle')"
+                            onclick="alert('Äá»ƒ thÃªm sáº£n pháº©m vÃ o bundle:\\n\\n1. VÃ o Theme Editor\\n2. Chá»n section Product Bundle\\n3. Trong settings, tÃ¬m Bundle Products\\n4. Click Change vÃ  chá»n cÃ¡c sáº£n pháº©m muá»‘n thÃªm vÃ o bundle')"
                           >
-                            Hướng dẫn cấu hình
+                            HÆ°á»›ng dáº«n cáº¥u hÃ¬nh
                           </button>
                         </div>
                       </div>
@@ -2402,7 +186,7 @@
                       <!-- Description Accordion -->
                       <details class="product-accordion product-accordion--styled" open>
                         <summary>
-                          <span>Mô tả sản phẩm</span>
+                          <span>MÃ´ táº£ sáº£n pháº©m</span>
                           <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </summary>
                         <div class="product-accordion-content rte">
@@ -2413,24 +197,24 @@
                       <!-- Store System Accordion -->
                       <details class="product-accordion product-accordion--styled">
                         <summary>
-                          <span>Hệ thống cửa hàng</span>
+                          <span>Há»‡ thá»‘ng cá»­a hÃ ng</span>
                           <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </summary>
                         <div class="product-accordion-content">
                           <div class="showroom-list">
                             <div class="showroom-item">
                               <strong>Showroom 1</strong><br>
-                              <span>Địa chỉ showroom</span><br>
+                              <span>Äá»‹a chá»‰ showroom</span><br>
                               <a href="tel:0964777910">0964777910</a>
                             </div>
                             <div class="showroom-item">
                               <strong>Showroom 2</strong><br>
-                              <span>Địa chỉ showroom</span><br>
+                              <span>Äá»‹a chá»‰ showroom</span><br>
                               <a href="tel:0964777910">0964777910</a>
                             </div>
                             <div class="showroom-item">
                               <strong>Showroom 3</strong><br>
-                              <span>Địa chỉ showroom</span><br>
+                              <span>Äá»‹a chá»‰ showroom</span><br>
                               <a href="tel:0964777940">0964777940</a>
                             </div>
                           </div>
@@ -2440,23 +224,23 @@
                       <!-- Reviews Accordion -->
                       <details class="product-accordion product-accordion--styled">
                         <summary>
-                          <span>Đánh giá</span>
+                          <span>ÄÃ¡nh giÃ¡</span>
                           <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </summary>
                         <div class="product-accordion-content">
                           <div class="product-reviews-summary">
                             <div class="product-rating">
                               <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
+                                <span class="star">â˜…</span>
+                                <span class="star">â˜…</span>
+                                <span class="star">â˜…</span>
+                                <span class="star">â˜…</span>
+                                <span class="star">â˜…</span>
                               </div>
                               <span class="rating-value">4.8</span>
                             </div>
                             <div class="reviews-count">
-                              <span class="reviews-number">(2025 đánh giá)</span>
+                              <span class="reviews-number">(2025 Ä‘Ã¡nh giÃ¡)</span>
                             </div>
                           </div>
                         </div>
@@ -2472,13 +256,13 @@
                           <div class="service-item">
                             <div class="service-item__icon">
                               {%- if section.settings.service_icon_1 -%}
-                                <img src="{{ section.settings.service_icon_1 | image_url: width: 40 }}" alt="{{ section.settings.service_text_1 | default: '100 đêm ngủ thử' }}" width="40" height="40">
+                                <img src="{{ section.settings.service_icon_1 | image_url: width: 40 }}" alt="{{ section.settings.service_text_1 | default: '100 Ä‘Ãªm ngá»§ thá»­' }}" width="40" height="40">
                               {%- else -%}
-                                <img src="{{ 'Layer_1_3.svg' | asset_url }}" alt="{{ section.settings.service_text_1 | default: '100 đêm ngủ thử' }}" width="40" height="40">
+                                <img src="{{ 'Layer_1_3.svg' | asset_url }}" alt="{{ section.settings.service_text_1 | default: '100 Ä‘Ãªm ngá»§ thá»­' }}" width="40" height="40">
                               {%- endif -%}
                             </div>
                             <div class="service-item__text">
-                              <p>{{ section.settings.service_text_1 | default: "100 đêm ngủ thử" }}</p>
+                              <p>{{ section.settings.service_text_1 | default: "100 Ä‘Ãªm ngá»§ thá»­" }}</p>
                             </div>
                           </div>
                         </div>
@@ -2486,13 +270,13 @@
                           <div class="service-item">
                             <div class="service-item__icon">
                               {%- if section.settings.service_icon_2 -%}
-                                <img src="{{ section.settings.service_icon_2 | image_url: width: 40 }}" alt="{{ section.settings.service_text_2 | default: 'Miễn phí vận chuyển' }}" width="40" height="40">
+                                <img src="{{ section.settings.service_icon_2 | image_url: width: 40 }}" alt="{{ section.settings.service_text_2 | default: 'Miá»…n phÃ­ váº­n chuyá»ƒn' }}" width="40" height="40">
                               {%- else -%}
-                                <img src="{{ 'Layer_1_4.svg' | asset_url }}" alt="{{ section.settings.service_text_2 | default: 'Miễn phí vận chuyển' }}" width="40" height="40">
+                                <img src="{{ 'Layer_1_4.svg' | asset_url }}" alt="{{ section.settings.service_text_2 | default: 'Miá»…n phÃ­ váº­n chuyá»ƒn' }}" width="40" height="40">
                               {%- endif -%}
                             </div>
                             <div class="service-item__text">
-                              <p>{{ section.settings.service_text_2 | default: "Miễn phí vận chuyển" }}</p>
+                              <p>{{ section.settings.service_text_2 | default: "Miá»…n phÃ­ váº­n chuyá»ƒn" }}</p>
                             </div>
                           </div>
                         </div>
@@ -2500,13 +284,13 @@
                           <div class="service-item">
                             <div class="service-item__icon">
                               {%- if section.settings.service_icon_3 -%}
-                                <img src="{{ section.settings.service_icon_3 | image_url: width: 40 }}" alt="{{ section.settings.service_text_3 | default: 'Bảo hành dài lâu' }}" width="40" height="40">
+                                <img src="{{ section.settings.service_icon_3 | image_url: width: 40 }}" alt="{{ section.settings.service_text_3 | default: 'Báº£o hÃ nh dÃ i lÃ¢u' }}" width="40" height="40">
                               {%- else -%}
-                                <img src="{{ 'Layer_1_5.svg' | asset_url }}" alt="{{ section.settings.service_text_3 | default: 'Bảo hành dài lâu' }}" width="40" height="40">
+                                <img src="{{ 'Layer_1_5.svg' | asset_url }}" alt="{{ section.settings.service_text_3 | default: 'Báº£o hÃ nh dÃ i lÃ¢u' }}" width="40" height="40">
                               {%- endif -%}
                             </div>
                             <div class="service-item__text">
-                              <p>{{ section.settings.service_text_3 | default: "Bảo hành dài lâu" }}</p>
+                              <p>{{ section.settings.service_text_3 | default: "Báº£o hÃ nh dÃ i lÃ¢u" }}</p>
                             </div>
                           </div>
                         </div>
@@ -2514,13 +298,13 @@
                           <div class="service-item">
                             <div class="service-item__icon">
                               {%- if section.settings.service_icon_4 -%}
-                                <img src="{{ section.settings.service_icon_4 | image_url: width: 40 }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toán linh hoạt' }}" width="40" height="40">
+                                <img src="{{ section.settings.service_icon_4 | image_url: width: 40 }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toÃ¡n linh hoáº¡t' }}" width="40" height="40">
                               {%- else -%}
-                                <img src="{{ 'Layer_1_6.svg' | asset_url }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toán linh hoạt' }}" width="40" height="40">
+                                <img src="{{ 'Layer_1_6.svg' | asset_url }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toÃ¡n linh hoáº¡t' }}" width="40" height="40">
                               {%- endif -%}
                             </div>
                             <div class="service-item__text">
-                              <p>{{ section.settings.service_text_4 | default: "Thanh toán linh hoạt" }}</p>
+                              <p>{{ section.settings.service_text_4 | default: "Thanh toÃ¡n linh hoáº¡t" }}</p>
                             </div>
                           </div>
                         </div>
@@ -2663,7 +447,7 @@
                       <!-- Bundle product image will be loaded here -->
                       <div class="product-main-slide" data-index="0">
                         <div class="image-placeholder" style="width: 100%; height: 400px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666;">
-                          <p>Đang tải hình ảnh sản phẩm...</p>
+                          <p>Äang táº£i hÃ¬nh áº£nh sáº£n pháº©m...</p>
                         </div>
                       </div>
             </div>
@@ -2684,14 +468,14 @@
               <div class="product-single__meta product-info-inner">
                 <!-- Product Header with Bundle Step Header as subtitle -->
                 <div class="product-block product-block--header">
-                  <h1 class="h2 bundle-step-title">Chọn sản phẩm cho bundle <span class="bundle-step-subtitle">(<span class="bundle-progress-current">1</span>/<span class="bundle-progress-total">{% if has_bundle_products and bundle_products_list %}{{ bundle_products_list.size }}{% else %}0{% endif %}</span>)</span></h1>
+                  <h1 class="h2 bundle-step-title">Chá»n sáº£n pháº©m cho bundle <span class="bundle-step-subtitle">(<span class="bundle-progress-current">1</span>/<span class="bundle-progress-total">{% if has_bundle_products and bundle_products_list %}{{ bundle_products_list.size }}{% else %}0{% endif %}</span>)</span></h1>
                 </div>
 
                 <!-- Bundle Product Content -->
           <div class="bundle-products-grid">
             <!-- Bundle products will be loaded here -->
             <div class="bundle-product-placeholder" style="text-align: center; padding: 2rem; color: #666;">
-              <p>Đang tải sản phẩm...</p>
+              <p>Äang táº£i sáº£n pháº©m...</p>
                   </div>
                 </div>
               </div>
@@ -2744,7 +528,7 @@
               <div class="product-single__meta">
                 <!-- Bundle Summary Title -->
                 <div class="product-block product-block--summary-title">
-                  <h2 class="bundle-summary-title">Kiểm tra lại bundle của bạn</h2>
+                  <h2 class="bundle-summary-title">Kiá»ƒm tra láº¡i bundle cá»§a báº¡n</h2>
                 </div>
                 
                 <!-- Bundle Header -->
@@ -2766,10 +550,10 @@
                 <div class="product-block">
                   <div class="bundle-summary-total">
                     <div class="bundle-total-row bundle-final">
-                      <span class="bundle-final-total">0đ</span>
+                      <span class="bundle-final-total">0Ä‘</span>
                     </div>
                     <div class="bundle-total-row">
-                      <span class="bundle-original-total">0đ</span>
+                      <span class="bundle-original-total">0Ä‘</span>
                       <span class="bundle-discount-badge">-{{ settings.discount_percentage | default: 10 }}%</span>
                     </div>
                   </div>
@@ -2779,7 +563,7 @@
                 <div class="product-block">
                   <div class="bundle-summary-actions">
                     <div class="bundle-quantity-selector">
-                      <label for="bundle-quantity">Số lượng combo:</label>
+                      <label for="bundle-quantity">Sá»‘ lÆ°á»£ng combo:</label>
                       <div class="quantity-dropdown">
                         <div class="quantity-display" data-quantity="1">
                           <span class="quantity-text">1</span>
@@ -2796,7 +580,7 @@
                         </div>
                       </div>
                     </div>
-                    <button type="button" class="btn btn--primary bundle-add-to-cart-btn" onclick="addBundleToCart()">Thêm vào giỏ</button>
+                    <button type="button" class="btn btn--primary bundle-buy-now-btn" onclick="console.log('Buy now clicked via onclick'); if(typeof buyBundleNow === 'function') { buyBundleNow(); } else { console.log('buyBundleNow function not found'); }">Mua ngay</button>
                   </div>
                 </div>
 
@@ -2806,7 +590,7 @@
                     <!-- Description Accordion -->
                     <details class="product-accordion product-accordion--styled" open>
                       <summary>
-                        <span>Mô tả sản phẩm</span>
+                        <span>MÃ´ táº£ sáº£n pháº©m</span>
                         <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                       </summary>
                       <div class="product-accordion-content rte">
@@ -2817,24 +601,24 @@
                     <!-- Store System Accordion -->
                     <details class="product-accordion product-accordion--styled">
                       <summary>
-                        <span>Hệ thống cửa hàng</span>
+                        <span>Há»‡ thá»‘ng cá»­a hÃ ng</span>
                         <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                       </summary>
                       <div class="product-accordion-content">
                         <div class="showroom-list">
                           <div class="showroom-item">
                             <strong>Showroom 1</strong><br>
-                            <span>Địa chỉ showroom</span><br>
+                            <span>Äá»‹a chá»‰ showroom</span><br>
                             <a href="tel:0964777910">0964777910</a>
                           </div>
                           <div class="showroom-item">
                             <strong>Showroom 2</strong><br>
-                            <span>Địa chỉ showroom</span><br>
+                            <span>Äá»‹a chá»‰ showroom</span><br>
                             <a href="tel:0964777910">0964777910</a>
                           </div>
                           <div class="showroom-item">
                             <strong>Showroom 3</strong><br>
-                            <span>Địa chỉ showroom</span><br>
+                            <span>Äá»‹a chá»‰ showroom</span><br>
                             <a href="tel:0964777940">0964777940</a>
                           </div>
                         </div>
@@ -2844,23 +628,23 @@
                     <!-- Reviews Accordion -->
                     <details class="product-accordion product-accordion--styled">
                       <summary>
-                        <span>Đánh giá</span>
+                        <span>ÄÃ¡nh giÃ¡</span>
                         <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                       </summary>
                       <div class="product-accordion-content">
                         <div class="product-reviews-summary">
                           <div class="product-rating">
                             <div class="stars">
-                              <span class="star">★</span>
-                              <span class="star">★</span>
-                              <span class="star">★</span>
-                              <span class="star">★</span>
-                              <span class="star">★</span>
+                              <span class="star">â˜…</span>
+                              <span class="star">â˜…</span>
+                              <span class="star">â˜…</span>
+                              <span class="star">â˜…</span>
+                              <span class="star">â˜…</span>
                             </div>
                             <span class="rating-value">4.8</span>
                           </div>
                           <div class="reviews-count">
-                            <span class="reviews-number">(2025 đánh giá)</span>
+                            <span class="reviews-number">(2025 Ä‘Ã¡nh giÃ¡)</span>
                           </div>
                         </div>
                       </div>
@@ -2876,13 +660,13 @@
                         <div class="service-item">
                           <div class="service-item__icon">
                             {%- if section.settings.service_icon_1 -%}
-                              <img src="{{ section.settings.service_icon_1 | image_url: width: 40 }}" alt="{{ section.settings.service_text_1 | default: '100 đêm ngủ thử' }}" width="40" height="40">
+                              <img src="{{ section.settings.service_icon_1 | image_url: width: 40 }}" alt="{{ section.settings.service_text_1 | default: '100 Ä‘Ãªm ngá»§ thá»­' }}" width="40" height="40">
                             {%- else -%}
-                              <img src="{{ 'Layer_1_3.svg' | asset_url }}" alt="{{ section.settings.service_text_1 | default: '100 đêm ngủ thử' }}" width="40" height="40">
+                              <img src="{{ 'Layer_1_3.svg' | asset_url }}" alt="{{ section.settings.service_text_1 | default: '100 Ä‘Ãªm ngá»§ thá»­' }}" width="40" height="40">
                             {%- endif -%}
                           </div>
                           <div class="service-item__text">
-                            <p>{{ section.settings.service_text_1 | default: "100 đêm ngủ thử" }}</p>
+                            <p>{{ section.settings.service_text_1 | default: "100 Ä‘Ãªm ngá»§ thá»­" }}</p>
                           </div>
                         </div>
                       </div>
@@ -2890,13 +674,13 @@
                         <div class="service-item">
                           <div class="service-item__icon">
                             {%- if section.settings.service_icon_2 -%}
-                              <img src="{{ section.settings.service_icon_2 | image_url: width: 40 }}" alt="{{ section.settings.service_text_2 | default: 'Miễn phí vận chuyển' }}" width="40" height="40">
+                              <img src="{{ section.settings.service_icon_2 | image_url: width: 40 }}" alt="{{ section.settings.service_text_2 | default: 'Miá»…n phÃ­ váº­n chuyá»ƒn' }}" width="40" height="40">
                             {%- else -%}
-                              <img src="{{ 'Layer_1_4.svg' | asset_url }}" alt="{{ section.settings.service_text_2 | default: 'Miễn phí vận chuyển' }}" width="40" height="40">
+                              <img src="{{ 'Layer_1_4.svg' | asset_url }}" alt="{{ section.settings.service_text_2 | default: 'Miá»…n phÃ­ váº­n chuyá»ƒn' }}" width="40" height="40">
                             {%- endif -%}
                           </div>
                           <div class="service-item__text">
-                            <p>{{ section.settings.service_text_2 | default: "Miễn phí vận chuyển" }}</p>
+                            <p>{{ section.settings.service_text_2 | default: "Miá»…n phÃ­ váº­n chuyá»ƒn" }}</p>
                           </div>
                         </div>
                       </div>
@@ -2904,13 +688,13 @@
                         <div class="service-item">
                           <div class="service-item__icon">
                             {%- if section.settings.service_icon_3 -%}
-                              <img src="{{ section.settings.service_icon_3 | image_url: width: 40 }}" alt="{{ section.settings.service_text_3 | default: 'Bảo hành dài lâu' }}" width="40" height="40">
+                              <img src="{{ section.settings.service_icon_3 | image_url: width: 40 }}" alt="{{ section.settings.service_text_3 | default: 'Báº£o hÃ nh dÃ i lÃ¢u' }}" width="40" height="40">
                             {%- else -%}
-                              <img src="{{ 'Layer_1_5.svg' | asset_url }}" alt="{{ section.settings.service_text_3 | default: 'Bảo hành dài lâu' }}" width="40" height="40">
+                              <img src="{{ 'Layer_1_5.svg' | asset_url }}" alt="{{ section.settings.service_text_3 | default: 'Báº£o hÃ nh dÃ i lÃ¢u' }}" width="40" height="40">
                             {%- endif -%}
                           </div>
                           <div class="service-item__text">
-                            <p>{{ section.settings.service_text_3 | default: "Bảo hành dài lâu" }}</p>
+                            <p>{{ section.settings.service_text_3 | default: "Báº£o hÃ nh dÃ i lÃ¢u" }}</p>
                           </div>
                         </div>
                       </div>
@@ -2918,13 +702,13 @@
                         <div class="service-item">
                           <div class="service-item__icon">
                             {%- if section.settings.service_icon_4 -%}
-                              <img src="{{ section.settings.service_icon_4 | image_url: width: 40 }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toán linh hoạt' }}" width="40" height="40">
+                              <img src="{{ section.settings.service_icon_4 | image_url: width: 40 }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toÃ¡n linh hoáº¡t' }}" width="40" height="40">
                             {%- else -%}
-                              <img src="{{ 'Layer_1_6.svg' | asset_url }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toán linh hoạt' }}" width="40" height="40">
+                              <img src="{{ 'Layer_1_6.svg' | asset_url }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toÃ¡n linh hoáº¡t' }}" width="40" height="40">
                             {%- endif -%}
                           </div>
                           <div class="service-item__text">
-                            <p>{{ section.settings.service_text_4 | default: "Thanh toán linh hoạt" }}</p>
+                            <p>{{ section.settings.service_text_4 | default: "Thanh toÃ¡n linh hoáº¡t" }}</p>
                           </div>
                         </div>
                       </div>
@@ -3023,13 +807,13 @@
     {%- endfor -%}
     {%- unless icon_block_found -%}
       "icon_1_image": null,
-      "icon_1_heading": "100 đêm ngủ thử",
+      "icon_1_heading": "100 Ä‘Ãªm ngá»§ thá»­",
       "icon_2_image": null,
-      "icon_2_heading": "Miễn phí vận chuyển *",
+      "icon_2_heading": "Miá»…n phÃ­ váº­n chuyá»ƒn *",
       "icon_3_image": null,
-      "icon_3_heading": "Bảo hành dài lâu",
+      "icon_3_heading": "Báº£o hÃ nh dÃ i lÃ¢u",
       "icon_4_image": null,
-      "icon_4_heading": "Chất liệu Foam cao cấp",
+      "icon_4_heading": "Cháº¥t liá»‡u Foam cao cáº¥p",
       "icon_size": 25,
       "icon_alignment": "center",
       "grid_columns": "2",
@@ -3134,6 +918,7 @@ document.addEventListener('DOMContentLoaded', () => {
         infoColumn.style.marginRight = '0';
         infoColumn.style.boxSizing = 'border-box';
         
+        console.log('ðŸ”’ Applied 50/50 layout - Image: 50%, Content: 50% + 60px padding');
       }
       
       // Set photo containers to take full width of their 50% column
@@ -3147,6 +932,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.style.boxSizing = 'border-box';
         container.style.position = 'relative';
         container.style.zIndex = '3';
+        console.log('ðŸ”’ Set container to 100% of 50% column:', container.className);
       });
       
       // Lock all images within the containers
@@ -3168,19 +954,56 @@ document.addEventListener('DOMContentLoaded', () => {
   const configElement = document.getElementById('BundleConfig-{{ section.id }}');
   if (!configElement) return;
 
+  console.log('Raw JSON text:', configElement.textContent);
   
   let config;
   try {
     config = JSON.parse(configElement.textContent);
+    console.log('Bundle Config loaded:', config);
+    console.log('Config type:', typeof config);
+    console.log('Config keys:', Object.keys(config));
   } catch (error) {
+    console.error('âŒ Error parsing config JSON:', error);
+    console.error('Raw text:', configElement.textContent);
     return;
   }
   
+  console.log('Debug info:', config.debug);
+  console.log('Has bundle products:', config.hasBundleProducts);
+  console.log('Bundle products count:', config.bundleProducts.length);
+  console.log('Bundle products:', config.bundleProducts);
+  
+  // Check if hasBundleProducts is boolean
+  console.log('hasBundleProducts type:', typeof config.hasBundleProducts);
+  console.log('hasBundleProducts value:', config.hasBundleProducts);
+  
+  // Check if bundleProducts is array
+  console.log('bundleProducts type:', typeof config.bundleProducts);
+  console.log('bundleProducts is array:', Array.isArray(config.bundleProducts));
+  
+  // Additional debug
+  if (config.debug) {
+    console.log('Section settings exists:', config.debug.sectionSettingsExists);
+    console.log('First product:', config.debug.firstProduct);
+    console.log('Section settings raw:', config.debug.sectionSettingsRaw);
+    console.log('Bundle products list exists:', config.debug.bundleProductsListExists);
+    console.log('Has bundle products raw:', config.debug.hasBundleProductsRaw);
+  }
+  
+  // Check if products are actually loaded
+  console.log('=== BUNDLE PRODUCTS DEBUG ===');
+  console.log('Bundle products array:', config.bundleProducts);
+  console.log('Bundle products length:', config.bundleProducts.length);
+  console.log('Bundle products type:', typeof config.bundleProducts);
+  console.log('Is array:', Array.isArray(config.bundleProducts));
   
   if (config.bundleProducts.length === 0) {
+    console.error('âŒ No products loaded into config.bundleProducts');
+    console.error('Debug info:', config.debug);
     
     // Try to load products from debug info if available
     if (config.debug && config.debug.sectionSettingsRaw && Array.isArray(config.debug.sectionSettingsRaw)) {
+      console.log('ðŸ”„ Attempting to load products from debug info...');
       config.bundleProducts = config.debug.sectionSettingsRaw.map(productHandle => {
         return {
           handle: productHandle,
@@ -3192,6 +1015,20 @@ document.addEventListener('DOMContentLoaded', () => {
           variants: [] // Fallback variants
         };
       });
+      console.log('âœ… Loaded products from debug info:', config.bundleProducts.length);
+    }
+  } else {
+    console.log('âœ… Products loaded successfully:', config.bundleProducts.length);
+    console.log('First product details:', config.bundleProducts[0]);
+    
+    // Debug variant structure
+    if (config.bundleProducts[0] && config.bundleProducts[0].variants) {
+      console.log('First product variants:', config.bundleProducts[0].variants);
+      console.log('First product options:', config.bundleProducts[0].options);
+      if (config.bundleProducts[0].variants.length > 0) {
+        console.log('First variant structure:', config.bundleProducts[0].variants[0]);
+        console.log('First variant options:', config.bundleProducts[0].variants[0].options);
+      }
     }
   }
   
@@ -3216,19 +1053,63 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeVariantPicker();
 
   // Event listeners
+  console.log('Setting up main event listener...');
   container.addEventListener('click', handleBundleEvents);
+  console.log('Main event listener set up successfully');
   
+  // Add simple test event listener for CTA button
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, setting up bundle event listeners...');
+    console.log('Container found:', !!container);
+    
+    // Test CTA button click
+    const ctaButton = container.querySelector('.bundle-cta-btn');
+    console.log('CTA button search result:', ctaButton);
+    
+    if (ctaButton) {
+      console.log('âœ… CTA button found:', ctaButton);
+      console.log('CTA button text:', ctaButton.textContent);
+      console.log('CTA button classes:', ctaButton.className);
+      
+      ctaButton.addEventListener('click', function(e) {
+        console.log('CTA button clicked via direct listener');
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Simple test - just show step 2
+        showStep(2);
+        loadBundleProduct(0);
+      });
+      
+      // Also add a test click to see if it works
+      console.log('Adding test click handler...');
+    } else {
+      console.log('âŒ CTA button not found');
+      console.log('Available buttons in container:');
+      const allButtons = container.querySelectorAll('button');
+      allButtons.forEach((btn, index) => {
+        console.log(`Button ${index}:`, {
+          text: btn.textContent,
+          classes: btn.className,
+          id: btn.id
+        });
+      });
+    }
+  });
 
                 function handleBundleEvents(e) {
+                console.log('Bundle event triggered:', e.target);
+                console.log('Event target classes:', e.target.className);
+                console.log('Event target closest .bundle-cta-btn:', e.target.closest('.bundle-cta-btn'));
+                console.log('Event target closest [data-bundle-cta]:', e.target.closest('[data-bundle-cta]'));
                 
-                // Add to cart button click
-                if (e.target.closest('.bundle-add-to-cart-btn')) {
-                  e.preventDefault();
-                  addBundleToCart();
-                }
                 // CTA button click
-                else if (e.target.closest('.bundle-cta-btn') || e.target.closest('[data-bundle-cta]')) {
+                if (e.target.closest('.bundle-cta-btn') || e.target.closest('[data-bundle-cta]')) {
                   e.preventDefault();
+                  console.log('CTA button clicked');
+                  console.log('Config:', config);
+                  console.log('Has bundle products:', config.hasBundleProducts);
+                  console.log('Bundle products:', config.bundleProducts);
                   
                   // More robust check for bundle products
                   const hasProducts = config.hasBundleProducts === true || config.hasBundleProducts === 'true';
@@ -3239,6 +1120,14 @@ document.addEventListener('DOMContentLoaded', () => {
                   const debugHasProducts = config.debug && config.debug.hasBundleProducts === true;
                   const debugFirstProduct = config.debug && config.debug.firstProduct && config.debug.firstProduct !== '';
                   
+                  console.log('Check results:');
+                  console.log('- hasProducts:', hasProducts);
+                  console.log('- productsArray:', productsArray);
+                  console.log('- hasValidProducts:', hasValidProducts);
+                  console.log('- debugHasProducts:', debugHasProducts);
+                  console.log('- debugFirstProduct:', debugFirstProduct);
+                  console.log('- config.hasBundleProducts:', config.hasBundleProducts);
+                  console.log('- config.bundleProducts:', config.bundleProducts);
                   
                   // Use multiple checks to ensure we have products
                   const shouldProceed = (hasProducts && hasValidProducts) || (debugHasProducts && debugFirstProduct);
@@ -3247,7 +1136,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     showStep(2);
                     loadBundleProduct(0);
                   } else {
-                    alert('Chưa có sản phẩm bundle được cấu hình!\n\nĐể thêm sản phẩm vào bundle:\n1. Vào Theme Editor\n2. Chọn section "Product Bundle"\n3. Trong settings, tìm "Bundle Products"\n4. Click "Change" và chọn các sản phẩm muốn thêm vào bundle');
+                    console.error('No bundle products configured');
+                    console.error('Debug info:', config.debug);
+                    alert('ChÆ°a cÃ³ sáº£n pháº©m bundle Ä‘Æ°á»£c cáº¥u hÃ¬nh!\n\nÄá»ƒ thÃªm sáº£n pháº©m vÃ o bundle:\n1. VÃ o Theme Editor\n2. Chá»n section "Product Bundle"\n3. Trong settings, tÃ¬m "Bundle Products"\n4. Click "Change" vÃ  chá»n cÃ¡c sáº£n pháº©m muá»‘n thÃªm vÃ o bundle');
                   }
                 }
 
@@ -3302,12 +1193,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.closest('.bundle-back-btn')) {
       e.preventDefault();
       if (bundleState.currentStep === 2) {
-        // Quay lại sản phẩm trước đó trong bundle
+        // Quay láº¡i sáº£n pháº©m trÆ°á»›c Ä‘Ã³ trong bundle
         if (bundleState.currentProductIndex > 0) {
+          console.log('Going back to previous product...');
           bundleState.currentProductIndex--;
           loadBundleProduct(bundleState.currentProductIndex);
         } else {
-          // Nếu đang ở sản phẩm đầu tiên, quay lại step 1
+          // Náº¿u Ä‘ang á»Ÿ sáº£n pháº©m Ä‘áº§u tiÃªn, quay láº¡i step 1
+          console.log('Going back to step 1...');
           showStep(1);
         }
       } else if (bundleState.currentStep > 1) {
@@ -3318,23 +1211,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Continue button
     if (e.target.closest('.bundle-continue-btn')) {
       e.preventDefault();
+      console.log('=== CONTINUE BUTTON CLICKED ===');
+      console.log('Current step:', bundleState.currentStep);
+      console.log('Current product index:', bundleState.currentProductIndex);
+      console.log('Total bundle products:', config.bundleProducts.length);
       
       if (bundleState.currentStep === 2) {
+        console.log('=== CONTINUE BUTTON - STEP 2 ===');
+        console.log('Current bundle state before continue:', bundleState.selectedProducts.bundle);
         
         if (bundleState.currentProductIndex < config.bundleProducts.length - 1) {
+          console.log('Moving to next product...');
           bundleState.currentProductIndex++;
           loadBundleProduct(bundleState.currentProductIndex);
         } else {
+          console.log('Moving to step 3...');
           showStep(3);
+          console.log('Rendering bundle summary...');
           renderBundleSummary();
         }
       }
     }
 
-    // Buy now button
-    if (e.target.closest('.bundle-buy-now-btn')) {
+    // Add to cart button
+    if (e.target.closest('.bundle-add-to-cart-btn')) {
       e.preventDefault();
-      buyBundleNow();
+      addBundleToCart();
     }
     
     // Change product link
@@ -3361,16 +1263,16 @@ document.addEventListener('DOMContentLoaded', () => {
       currentStepEl.style.display = 'block';
     }
     
-    // Initialize step 2 - tự động chọn sản phẩm đầu tiên
+    // Initialize step 2 - tá»± Ä‘á»™ng chá»n sáº£n pháº©m Ä‘áº§u tiÃªn
     if (step === 2) {
       console.log('=== INITIALIZING STEP 2 ===');
       
-      // Tự động chọn sản phẩm đầu tiên nếu chưa có sản phẩm nào được chọn
+      // Tá»± Ä‘á»™ng chá»n sáº£n pháº©m Ä‘áº§u tiÃªn náº¿u chÆ°a cÃ³ sáº£n pháº©m nÃ o Ä‘Æ°á»£c chá»n
       if (bundleState.selectedProducts.bundle.length === 0 && config.bundleProducts && config.bundleProducts.length > 0) {
         console.log('Auto-selecting first bundle product...');
         const firstProduct = config.bundleProducts[0];
         
-        // Tạo sản phẩm mặc định với variant đầu tiên
+        // Táº¡o sáº£n pháº©m máº·c Ä‘á»‹nh vá»›i variant Ä‘áº§u tiÃªn
         const defaultVariant = firstProduct.variants && firstProduct.variants.length > 0 ? firstProduct.variants[0] : null;
         const defaultImage = extractImageUrl(firstProduct.featured_image) || 
                             (firstProduct.media && firstProduct.media.length > 0 ? extractImageUrl(firstProduct.media[0]) : '');
@@ -3388,7 +1290,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         bundleState.selectedProducts.bundle.push(autoSelectedProduct);
-        console.log('✅ Auto-selected first product:', autoSelectedProduct);
+        console.log('âœ… Auto-selected first product:', autoSelectedProduct);
       }
       
       // Load the first bundle product
@@ -3412,14 +1314,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const firstSlide = currentStepEl.querySelector('.product-main-slide');
       if (firstSlide) {
         firstSlide.style.display = 'block';
-        console.log('✅ First slide made visible');
+        console.log('âœ… First slide made visible');
       }
       
       // Ensure first thumbnail is active
       const firstThumb = currentStepEl.querySelector('[data-product-thumb]');
       if (firstThumb) {
         firstThumb.classList.add('active');
-        console.log('✅ First thumbnail made active');
+        console.log('âœ… First thumbnail made active');
       }
       
       // Check if thumbnails exist
@@ -3469,7 +1371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Step 2 element found:', !!step2Element);
     
     if (!step2Element) {
-      console.error('❌ Step 2 element not found!');
+      console.error('âŒ Step 2 element not found!');
       return;
     }
     
@@ -3480,7 +1382,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Product thumbs container found:', !!productThumbsContainer);
     
     if (!productImageContainer) {
-      console.error('❌ Product image container not found!');
+      console.error('âŒ Product image container not found!');
       console.log('Available elements in step2:', step2Element.querySelectorAll('*'));
       return;
     }
@@ -3532,21 +1434,21 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Final product image URL:', productImage);
       
       if (productImage && productImage !== '') {
-        console.log('✅ Setting product image:', productImage);
+        console.log('âœ… Setting product image:', productImage);
         productImageContainer.innerHTML = `
           <div class="product-main-slide" data-index="0">
             <img src="${productImage}" alt="${product.title}" width="620" height="620" style="width: 100%; height: auto;">
           </div>
         `;
-        console.log('✅ Updated product image successfully');
+        console.log('âœ… Updated product image successfully');
       } else {
-        console.log('❌ No valid product image found');
+        console.log('âŒ No valid product image found');
         console.log('ProductImage value:', productImage);
         console.log('ProductImage type:', typeof productImage);
         productImageContainer.innerHTML = `
           <div class="product-main-slide" data-index="0">
             <div class="image-placeholder" style="width: 100%; height: 400px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666;">
-              <p>Không có hình ảnh</p>
+              <p>KhÃ´ng cÃ³ hÃ¬nh áº£nh</p>
             </div>
           </div>
         `;
@@ -3678,8 +1580,8 @@ document.addEventListener('DOMContentLoaded', () => {
                               });
                             }
                             return options.map(option => {
-                              const isColor = option.name.toLowerCase().includes('color') || option.name.toLowerCase().includes('màu') || option.name.toLowerCase().includes('colour');
-                              const isSize = option.name.toLowerCase().includes('size') || option.name.toLowerCase().includes('kích thước');
+                              const isColor = option.name.toLowerCase().includes('color') || option.name.toLowerCase().includes('mÃ u') || option.name.toLowerCase().includes('colour');
+                              const isSize = option.name.toLowerCase().includes('size') || option.name.toLowerCase().includes('kÃ­ch thÆ°á»›c');
                               
                               let labelHtml = '<label class="variant__label" for="ProductSelect-bundle-' + product.id + '-option-' + option.index + '">' + option.name + ':';
                               // Always add variant label info for all options
@@ -3689,8 +1591,8 @@ document.addEventListener('DOMContentLoaded', () => {
                               // Add size lock note for non-first products
                               if (isSize && bundleState.currentProductIndex > 0 && bundleState.lockedSize) {
                                 const firstProduct = config.bundleProducts[0];
-                                const firstProductTitle = firstProduct ? firstProduct.title : 'Sản phẩm đầu tiên';
-                                labelHtml += '<div class="size-lock-note" style="font-size: 12px; color: #6B7280; margin-top: 4px; font-style: italic;">Bạn đã chọn size <strong>' + bundleState.lockedSize + '</strong> ở ' + firstProductTitle + '</div>';
+                                const firstProductTitle = firstProduct ? firstProduct.title : 'Sáº£n pháº©m Ä‘áº§u tiÃªn';
+                                labelHtml += '<div class="size-lock-note" style="font-size: 12px; color: #6B7280; margin-top: 4px; font-style: italic;">Báº¡n Ä‘Ã£ chá»n size <strong>' + bundleState.lockedSize + '</strong> á»Ÿ ' + firstProductTitle + '</div>';
                               }
                               
                               let fieldsetHtml = '<fieldset class="variant-input-wrap flex ai-center gap-x-md flex-wrap" name="' + option.name + '" data-index="option' + (option.index + 1) + '" data-handle="' + option.name.toLowerCase().replace(/\s+/g, '-') + '" id="ProductSelect-bundle-' + product.id + '-option-' + option.index + '"><legend class="hide">' + option.name + '</legend>';
@@ -3701,12 +1603,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const checked = valueIndex === 0 ? 'checked="checked"' : '';
                                 
                                 if (isColor) {
-                                  // Chuẩn hóa tên màu cho file PNG
+                                  // Chuáº©n hÃ³a tÃªn mÃ u cho file PNG
                                   const colorValue = value.toLowerCase().replace(/\s+/g, '-');
                                   const colorFileName = colorValue + '_50x50.png';
-                                  // Đường dẫn CDN đúng chuẩn Shopify theme (tự động lấy file nếu có, fallback nếu không)
+                                  // ÄÆ°á»ng dáº«n CDN Ä‘Ãºng chuáº©n Shopify theme (tá»± Ä‘á»™ng láº¥y file náº¿u cÃ³, fallback náº¿u khÃ´ng)
                                   const colorImageUrl = `https://ru9.vn/cdn/shop/files/${colorFileName}`;
-                                  // Fallback màu cuối cùng nếu không có ảnh
+                                  // Fallback mÃ u cuá»‘i cÃ¹ng náº¿u khÃ´ng cÃ³ áº£nh
                                   const colorSwatchFallback = value.split(' ').pop().toLowerCase();
                                   
                                   return '<div class="variant-input" data-index="option' + (option.index + 1) + '" data-value="' + value + '">' +
@@ -3720,7 +1622,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                   // Check if value contains dimensions (e.g., "Single + 120 x 200cm")
                                   if (value.includes('+') || value.includes('x') || value.includes('cm')) {
                                     // Split by common separators
-                                    const parts = value.split(/[\+\-\–]/);
+                                    const parts = value.split(/[\+\-\â€“]/);
                                     if (parts.length >= 2) {
                                       sizeName = parts[0].trim();
                                       sizeDimensions = parts.slice(1).join(' ').trim();
@@ -3756,8 +1658,8 @@ document.addEventListener('DOMContentLoaded', () => {
                       <!-- Navigation Buttons -->
                       <div class="product-block">
                         <div class="bundle-navigation">
-                          <button type="button" class="btn btn--secondary bundle-back-btn">Quay lại</button>
-                          <button type="button" class="btn btn--primary bundle-continue-btn">Tiếp tục</button>
+                          <button type="button" class="btn btn--secondary bundle-back-btn">Quay láº¡i</button>
+                          <button type="button" class="btn btn--primary bundle-continue-btn">Tiáº¿p tá»¥c</button>
                         </div>
                       </div>
 
@@ -3767,7 +1669,7 @@ document.addEventListener('DOMContentLoaded', () => {
                           <!-- Description Accordion -->
                           <details class="product-accordion product-accordion--styled" open>
                             <summary>
-                              <span>Mô tả sản phẩm</span>
+                              <span>MÃ´ táº£ sáº£n pháº©m</span>
                               <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </summary>
                             <div class="product-accordion-content rte">
@@ -3778,7 +1680,7 @@ document.addEventListener('DOMContentLoaded', () => {
                           <!-- Store System Accordion -->
                           <details class="product-accordion product-accordion--styled">
                             <summary>
-                              <span>Hệ thống cửa hàng</span>
+                              <span>Há»‡ thá»‘ng cá»­a hÃ ng</span>
                               <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </summary>
                             <div class="product-accordion-content">
@@ -3817,23 +1719,23 @@ document.addEventListener('DOMContentLoaded', () => {
                           <!-- Reviews Accordion -->
                           <details class="product-accordion product-accordion--styled">
                             <summary>
-                              <span>Đánh giá</span>
+                              <span>ÄÃ¡nh giÃ¡</span>
                               <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </summary>
                             <div class="product-accordion-content">
                               <div class="product-reviews-summary">
                                 <div class="product-rating">
                                   <div class="stars">
-                                    <span class="star">★</span>
-                                    <span class="star">★</span>
-                                    <span class="star">★</span>
-                                    <span class="star">★</span>
-                                    <span class="star">★</span>
+                                    <span class="star">â˜…</span>
+                                    <span class="star">â˜…</span>
+                                    <span class="star">â˜…</span>
+                                    <span class="star">â˜…</span>
+                                    <span class="star">â˜…</span>
                                   </div>
                                   <span class="rating-value">{{ section.settings.review_rating | default: '4.8' }}</span>
                                 </div>
                                 <div class="reviews-count">
-                                  <span class="reviews-number">({{ section.settings.review_count | default: '2025 đánh giá' }})</span>
+                                  <span class="reviews-number">({{ section.settings.review_count | default: '2025 Ä‘Ã¡nh giÃ¡' }})</span>
                                 </div>
                               </div>
                             </div>
@@ -3849,13 +1751,13 @@ document.addEventListener('DOMContentLoaded', () => {
                               <div class="service-item">
                                 <div class="service-item__icon">
                                   {%- if section.settings.service_icon_1 -%}
-                                    <img src="{{ section.settings.service_icon_1 | image_url: width: 40 }}" alt="{{ section.settings.service_text_1 | default: '100 đêm ngủ thử' }}" width="40" height="40">
+                                    <img src="{{ section.settings.service_icon_1 | image_url: width: 40 }}" alt="{{ section.settings.service_text_1 | default: '100 Ä‘Ãªm ngá»§ thá»­' }}" width="40" height="40">
                                   {%- else -%}
-                                    <img src="{{ 'Layer_1_3.svg' | asset_url }}" alt="{{ section.settings.service_text_1 | default: '100 đêm ngủ thử' }}" width="40" height="40">
+                                    <img src="{{ 'Layer_1_3.svg' | asset_url }}" alt="{{ section.settings.service_text_1 | default: '100 Ä‘Ãªm ngá»§ thá»­' }}" width="40" height="40">
                                   {%- endif -%}
                                 </div>
                                 <div class="service-item__text">
-                                  <p>{{ section.settings.service_text_1 | default: "100 đêm ngủ thử" }}</p>
+                                  <p>{{ section.settings.service_text_1 | default: "100 Ä‘Ãªm ngá»§ thá»­" }}</p>
                                 </div>
                               </div>
                             </div>
@@ -3863,13 +1765,13 @@ document.addEventListener('DOMContentLoaded', () => {
                               <div class="service-item">
                                 <div class="service-item__icon">
                                   {%- if section.settings.service_icon_2 -%}
-                                    <img src="{{ section.settings.service_icon_2 | image_url: width: 40 }}" alt="{{ section.settings.service_text_2 | default: 'Miễn phí vận chuyển' }}" width="40" height="40">
+                                    <img src="{{ section.settings.service_icon_2 | image_url: width: 40 }}" alt="{{ section.settings.service_text_2 | default: 'Miá»…n phÃ­ váº­n chuyá»ƒn' }}" width="40" height="40">
                                   {%- else -%}
-                                    <img src="{{ 'Layer_1_4.svg' | asset_url }}" alt="{{ section.settings.service_text_2 | default: 'Miễn phí vận chuyển' }}" width="40" height="40">
+                                    <img src="{{ 'Layer_1_4.svg' | asset_url }}" alt="{{ section.settings.service_text_2 | default: 'Miá»…n phÃ­ váº­n chuyá»ƒn' }}" width="40" height="40">
                                   {%- endif -%}
                                 </div>
                                 <div class="service-item__text">
-                                  <p>{{ section.settings.service_text_2 | default: "Miễn phí vận chuyển" }}</p>
+                                  <p>{{ section.settings.service_text_2 | default: "Miá»…n phÃ­ váº­n chuyá»ƒn" }}</p>
                                 </div>
                               </div>
                             </div>
@@ -3877,13 +1779,13 @@ document.addEventListener('DOMContentLoaded', () => {
                               <div class="service-item">
                                 <div class="service-item__icon">
                                   {%- if section.settings.service_icon_3 -%}
-                                    <img src="{{ section.settings.service_icon_3 | image_url: width: 40 }}" alt="{{ section.settings.service_text_3 | default: 'Bảo hành dài lâu' }}" width="40" height="40">
+                                    <img src="{{ section.settings.service_icon_3 | image_url: width: 40 }}" alt="{{ section.settings.service_text_3 | default: 'Báº£o hÃ nh dÃ i lÃ¢u' }}" width="40" height="40">
                                   {%- else -%}
-                                    <img src="{{ 'Layer_1_5.svg' | asset_url }}" alt="{{ section.settings.service_text_3 | default: 'Bảo hành dài lâu' }}" width="40" height="40">
+                                    <img src="{{ 'Layer_1_5.svg' | asset_url }}" alt="{{ section.settings.service_text_3 | default: 'Báº£o hÃ nh dÃ i lÃ¢u' }}" width="40" height="40">
                                   {%- endif -%}
                                 </div>
                                 <div class="service-item__text">
-                                  <p>{{ section.settings.service_text_3 | default: "Bảo hành dài lâu" }}</p>
+                                  <p>{{ section.settings.service_text_3 | default: "Báº£o hÃ nh dÃ i lÃ¢u" }}</p>
                                 </div>
                               </div>
                             </div>
@@ -3891,13 +1793,13 @@ document.addEventListener('DOMContentLoaded', () => {
                               <div class="service-item">
                                 <div class="service-item__icon">
                                   {%- if section.settings.service_icon_4 -%}
-                                    <img src="{{ section.settings.service_icon_4 | image_url: width: 40 }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toán linh hoạt' }}" width="40" height="40">
+                                    <img src="{{ section.settings.service_icon_4 | image_url: width: 40 }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toÃ¡n linh hoáº¡t' }}" width="40" height="40">
                                   {%- else -%}
-                                    <img src="{{ 'Layer_1_6.svg' | asset_url }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toán linh hoạt' }}" width="40" height="40">
+                                    <img src="{{ 'Layer_1_6.svg' | asset_url }}" alt="{{ section.settings.service_text_4 | default: 'Thanh toÃ¡n linh hoáº¡t' }}" width="40" height="40">
                                   {%- endif -%}
                                 </div>
                                 <div class="service-item__text">
-                                  <p>{{ section.settings.service_text_4 | default: "Thanh toán linh hoạt" }}</p>
+                                  <p>{{ section.settings.service_text_4 | default: "Thanh toÃ¡n linh hoáº¡t" }}</p>
                                 </div>
                               </div>
                             </div>
@@ -3936,9 +1838,9 @@ document.addEventListener('DOMContentLoaded', () => {
         productsGrid.innerHTML = `
           <div class="bundle-product-item" data-product-handle="${product.handle}">
             <div class="error-message" style="text-align: center; padding: 2rem; color: red;">
-              <h3>Lỗi tải sản phẩm</h3>
-              <p>Không thể tải thông tin sản phẩm: ${product.title}</p>
-              <p>Lỗi: ${error.message}</p>
+              <h3>Lá»—i táº£i sáº£n pháº©m</h3>
+              <p>KhÃ´ng thá»ƒ táº£i thÃ´ng tin sáº£n pháº©m: ${product.title}</p>
+              <p>Lá»—i: ${error.message}</p>
             </div>
           </div>
         `;
@@ -4035,13 +1937,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
     
-    // Chỉ tính các sản phẩm bundle được chọn từ step 2, không tính sản phẩm mặc định từ step 1
+    // Chá»‰ tÃ­nh cÃ¡c sáº£n pháº©m bundle Ä‘Æ°á»£c chá»n tá»« step 2, khÃ´ng tÃ­nh sáº£n pháº©m máº·c Ä‘á»‹nh tá»« step 1
     const allProducts = [...bundleProductsWithCorrectPrice];
     
     console.log('=== ALL PRODUCTS DEBUG ===');
-    console.log('mainProduct (không tính vào bundle):', mainProduct);
+    console.log('mainProduct (khÃ´ng tÃ­nh vÃ o bundle):', mainProduct);
     console.log('bundleState.selectedProducts.bundle:', bundleState.selectedProducts.bundle);
-    console.log('allProducts (chỉ sản phẩm bundle được chọn):', allProducts);
+    console.log('allProducts (chá»‰ sáº£n pháº©m bundle Ä‘Æ°á»£c chá»n):', allProducts);
     console.log('allProducts length:', allProducts.length);
     
     // Debug each product's price
@@ -4083,9 +1985,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // Debug the actual HTML generation for this product
       if (product.variantOptions && product.variantOptions.length > 0) {
         const generatedHTML = product.variantOptions.map((option, optionIndex) => {
-          const optionName = optionIndex === 0 ? 'Kích thước' : 
-                            optionIndex === 1 ? 'Màu sắc' : 
-                            `Tùy chọn ${optionIndex + 1}`;
+          const optionName = optionIndex === 0 ? 'KÃ­ch thÆ°á»›c' : 
+                            optionIndex === 1 ? 'MÃ u sáº¯c' : 
+                            `TÃ¹y chá»n ${optionIndex + 1}`;
           return `${optionName}: ${option}`;
         }).join(', ');
         console.log(`  Generated HTML for product ${index}:`, generatedHTML);
@@ -4094,7 +1996,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    // Calculate total original price - chỉ tính các sản phẩm bundle được chọn
+    // Calculate total original price - chá»‰ tÃ­nh cÃ¡c sáº£n pháº©m bundle Ä‘Æ°á»£c chá»n
     console.log('=== CALCULATING TOTAL ORIGINAL PRICE (BUNDLE PRODUCTS ONLY) ===');
     
     // Get bundle quantity (default to 1 if not set)
@@ -4120,7 +2022,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     console.log('Final totalOriginal (bundle products only):', totalOriginal);
     
-    // Update bundle summary products (right side) - chỉ hiển thị các sản phẩm bundle được chọn
+    // Update bundle summary products (right side) - chá»‰ hiá»ƒn thá»‹ cÃ¡c sáº£n pháº©m bundle Ä‘Æ°á»£c chá»n
     summaryProducts.innerHTML = allProducts.map((product, index) => {
       return `
         <div class="bundle-summary-product">
@@ -4131,9 +2033,9 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="bundle-product-attributes">
                 ${product.variantOptions && product.variantOptions.length > 0 ? 
                   product.variantOptions.map((option, optionIndex) => {
-                    const optionName = optionIndex === 0 ? 'Kích thước' : 
-                                      optionIndex === 1 ? 'Màu sắc' : 
-                                      `Tùy chọn ${optionIndex + 1}`;
+                    const optionName = optionIndex === 0 ? 'KÃ­ch thÆ°á»›c' : 
+                                      optionIndex === 1 ? 'MÃ u sáº¯c' : 
+                                      `TÃ¹y chá»n ${optionIndex + 1}`;
                     return `<div class="bundle-product-attribute">${optionName}: ${option}</div>`;
                   }).join('') : 
                   `<div class="bundle-product-attribute">Variant: ${product.variantTitle}</div>`
@@ -4145,7 +2047,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   `<span class="bundle-product-compare-price">${formatMoney(product.compareAtPrice)}</span>` : 
                   ''}
               </div>
-              <div class="bundle-product-change-link" data-product-index="${index}">Thay đổi</div>
+              <div class="bundle-product-change-link" data-product-index="${index}">Thay Ä‘á»•i</div>
             </div>
             <div class="bundle-product-image">
               <img src="${product.image}" alt="${product.productTitle}" width="80" height="80">
@@ -4165,7 +2067,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <img src="${mainProduct.image}" alt="${mainProduct.productTitle}" width="620" height="620" style="width: 100%; height: auto;">
           </div>
         `;
-        console.log('✅ Created single main slide with main product image');
+        console.log('âœ… Created single main slide with main product image');
       }
       
       // Update thumbnails with selected bundle product images - Match Step 1 & 2 structure
@@ -4188,7 +2090,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
         
         thumbnailsContainer.innerHTML = thumbnailsHTML;
-        console.log(`✅ Created ${allImages.length} thumbnails for step 3`);
+        console.log(`âœ… Created ${allImages.length} thumbnails for step 3`);
         
         // Add click handlers to thumbnails
         const thumbLinks = thumbnailsContainer.querySelectorAll('[data-product-thumb]');
@@ -4251,30 +2153,30 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (originalTotalEl) {
       originalTotalEl.textContent = formatMoney(totalOriginal);
-      console.log('✅ Updated original total:', formatMoney(totalOriginal));
+      console.log('âœ… Updated original total:', formatMoney(totalOriginal));
     } else {
-      console.log('❌ Original total element not found');
+      console.log('âŒ Original total element not found');
     }
     
     if (discountAmountEl) {
       discountAmountEl.textContent = formatMoney(discountAmount);
-      console.log('✅ Updated discount amount:', formatMoney(discountAmount));
+      console.log('âœ… Updated discount amount:', formatMoney(discountAmount));
     } else {
-      console.log('❌ Discount amount element not found');
+      console.log('âŒ Discount amount element not found');
     }
     
     if (finalTotalEl) {
       finalTotalEl.textContent = formatMoney(totalFinal);
-      console.log('✅ Updated final total:', formatMoney(totalFinal));
+      console.log('âœ… Updated final total:', formatMoney(totalFinal));
     } else {
-      console.log('❌ Final total element not found');
+      console.log('âŒ Final total element not found');
     }
     
     // Initialize thumbnail click events
     initializeBundleThumbnailEvents();
     
-    // Initialize buy now button with direct event listener
-    initializeBuyNowButton();
+    // Initialize add to cart button with direct event listener
+    initializeAddToCartButton();
   }
 
   function initializeQuantitySelector() {
@@ -4298,39 +2200,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
       
-      console.log('✅ Quantity selector initialized with value:', currentQuantity);
+      console.log('âœ… Quantity selector initialized with value:', currentQuantity);
     } else {
-      console.log('❌ Quantity selector elements not found');
+      console.log('âŒ Quantity selector elements not found');
     }
   }
 
-  function initializeBuyNowButton() {
-    console.log('=== INITIALIZING BUY NOW BUTTON ===');
+  function initializeAddToCartButton() {
+    console.log('=== INITIALIZING ADD TO CART BUTTON ===');
     
-    // Try multiple selectors to find the buy now button
-    const buyNowBtn = container.querySelector('.bundle-buy-now-btn') || 
-                     container.querySelector('.btn--primary.bundle-buy-now-btn') ||
-                     container.querySelector('button.bundle-buy-now-btn');
+    // Try multiple selectors to find the add to cart button
+    const addToCartBtn = container.querySelector('.bundle-add-to-cart-btn') || 
+                        container.querySelector('.btn--primary.bundle-add-to-cart-btn') ||
+                        container.querySelector('button.bundle-add-to-cart-btn');
     
-    console.log('Buy now button found:', !!buyNowBtn);
-    console.log('Buy now button element:', buyNowBtn);
+    console.log('Add to cart button found:', !!addToCartBtn);
+    console.log('Add to cart button element:', addToCartBtn);
     
-    if (buyNowBtn) {
+    if (addToCartBtn) {
       // Remove any existing event listeners
-      buyNowBtn.removeEventListener('click', handleBuyNowClick);
+      addToCartBtn.removeEventListener('click', handleAddToCartClick);
       
       // Add direct event listener
-      buyNowBtn.addEventListener('click', handleBuyNowClick);
-      console.log('✅ Buy now button event listener added');
+      addToCartBtn.addEventListener('click', handleAddToCartClick);
+      console.log('âœ… Add to cart button event listener added');
       
       // Also add onclick attribute as fallback
-      buyNowBtn.onclick = handleBuyNowClick;
-      console.log('✅ Buy now button onclick attribute added');
+      addToCartBtn.onclick = handleAddToCartClick;
+      console.log('âœ… Add to cart button onclick attribute added');
     } else {
-      console.log('❌ Buy now button not found');
+      console.log('âŒ Add to cart button not found');
     }
   }
   
+  function handleAddToCartClick(e) {
+    console.log('=== ADD TO CART BUTTON CLICKED ===');
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Event:', e);
+    console.log('Target:', e.target);
+    addBundleToCart();
+  }
+
   function handleBuyNowClick(e) {
     console.log('=== BUY NOW BUTTON CLICKED ===');
     e.preventDefault();
@@ -4410,109 +2321,219 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function addBundleToCart() {
-    const items = [];
-    const bundleQty = bundleState.bundleQuantity || 1;
+  function buyBundleNow() {
+    console.log('=== BUY BUNDLE NOW FUNCTION CALLED ===');
+    console.log('bundleState:', bundleState);
+    console.log('bundleState.selectedProducts.main:', bundleState.selectedProducts.main);
+    console.log('bundleState.selectedProducts.bundle:', bundleState.selectedProducts.bundle);
     
-    // Skip main product for now - only add bundle products
-    // The main product might be the bundle itself, so we don't want to add it twice
+    const items = [];
+    
+    // Add main product
+    if (bundleState.selectedProducts.main.variantId) {
+      items.push({
+        id: bundleState.selectedProducts.main.variantId,
+        quantity: bundleState.selectedProducts.main.quantity || 1
+      });
+      console.log('âœ… Added main product to cart:', {
+        id: bundleState.selectedProducts.main.variantId,
+        quantity: bundleState.selectedProducts.main.quantity || 1
+      });
+    } else {
+      console.log('âŒ Main product variantId not found');
+    }
     
     // Add bundle products
-    bundleState.selectedProducts.bundle.forEach((product) => {
+    bundleState.selectedProducts.bundle.forEach((product, index) => {
       if (product.variantId) {
-        const bundleItem = {
+        items.push({
           id: product.variantId,
-          quantity: (product.quantity || 1) * bundleQty
-        };
-        items.push(bundleItem);
+          quantity: product.quantity || 1
+        });
+        console.log(`âœ… Added bundle product ${index} to cart:`, {
+          id: product.variantId,
+          quantity: product.quantity || 1,
+          title: product.productTitle
+        });
+      } else {
+        console.log(`âŒ Bundle product ${index} variantId not found:`, product);
       }
     });
+    
+    console.log('Final items array:', items);
 
-    if (items.length === 0) {
-      return;
+    // Create form for Buy it now
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/cart';
+
+    // Add items to form
+    items.forEach((item, index) => {
+      const idInput = document.createElement('input');
+      idInput.type = 'hidden';
+      idInput.name = `items[${index}][id]`;
+      idInput.value = item.id;
+      form.appendChild(idInput);
+
+      const quantityInput = document.createElement('input');
+      quantityInput.type = 'hidden';
+      quantityInput.name = `items[${index}][quantity]`;
+      quantityInput.value = item.quantity;
+      form.appendChild(quantityInput);
+    });
+
+    // Add checkout type
+    const checkoutInput = document.createElement('input');
+    checkoutInput.type = 'hidden';
+    checkoutInput.name = 'checkout';
+    checkoutInput.value = '';
+    form.appendChild(checkoutInput);
+
+    // Submit form to go directly to checkout
+    console.log('Submitting form to checkout with items:', items);
+    document.body.appendChild(form);
+    form.submit();
+    console.log('âœ… Form submitted successfully');
+  }
+
+  function addBundleToCart() {
+    console.log('=== ADD BUNDLE TO CART FUNCTION CALLED ===');
+    console.log('bundleState:', bundleState);
+    console.log('bundleState.selectedProducts.main:', bundleState.selectedProducts.main);
+    console.log('bundleState.selectedProducts.bundle:', bundleState.selectedProducts.bundle);
+    
+    const items = [];
+    
+    // Add main product
+    if (bundleState.selectedProducts.main.variantId) {
+      items.push({
+        id: bundleState.selectedProducts.main.variantId,
+        quantity: bundleState.selectedProducts.main.quantity || 1
+      });
+      console.log('âœ… Added main product to cart:', {
+        id: bundleState.selectedProducts.main.variantId,
+        quantity: bundleState.selectedProducts.main.quantity || 1
+      });
+    } else {
+      console.log('âŒ Main product variantId not found');
     }
+    
+    // Add bundle products
+    bundleState.selectedProducts.bundle.forEach((product, index) => {
+      if (product.variantId) {
+        items.push({
+          id: product.variantId,
+          quantity: product.quantity || 1
+        });
+        console.log(`âœ… Added bundle product ${index} to cart:`, {
+          id: product.variantId,
+          quantity: product.quantity || 1,
+          title: product.productTitle
+        });
+      } else {
+        console.log(`âŒ Bundle product ${index} variantId not found:`, product);
+      }
+    });
+    
+    console.log('Final items array:', items);
 
+    // Use Shopify's Cart API to add items
     fetch('/cart/add.js', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
       },
-      body: JSON.stringify({ items: items })
+      body: JSON.stringify({
+        items: items
+      })
     })
-    .then(response => {
-      if (!response.ok) {
-        return response.text().then(text => {
-          throw new Error(`HTTP error! status: ${response.status}, details: ${text}`);
-        });
-      }
-      return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
-      if (data.status && data.status !== 200) {
-        throw new Error(`Cart API error: ${data.description || 'Unknown error'}`);
+      console.log('âœ… Items added to cart successfully:', data);
+      
+      // Show success message
+      showCartSuccessMessage();
+      
+      // Update cart count if cart drawer exists
+      if (typeof window.updateCartCount === 'function') {
+        window.updateCartCount();
       }
       
-      if (typeof updateCartCount === 'function') updateCartCount();
-      
-      // Refresh cart drawer immediately
-      refreshCartDrawer();
+      // Trigger cart drawer open if it exists
+      if (typeof window.openCartDrawer === 'function') {
+        window.openCartDrawer();
+      } else if (document.querySelector('.cart-drawer') || document.querySelector('[data-cart-drawer]')) {
+        // Try to find and open cart drawer
+        const cartDrawer = document.querySelector('.cart-drawer') || document.querySelector('[data-cart-drawer]');
+        if (cartDrawer) {
+          cartDrawer.classList.add('is-open');
+        }
+      }
     })
     .catch(error => {
-      // Silent fail - no alert shown
+      console.error('âŒ Error adding items to cart:', error);
+      showCartErrorMessage();
     });
   }
 
-  function refreshCartDrawer() {
-    // Use the same method as cart-drawer.liquid
-    if (typeof theme !== 'undefined' && typeof theme.CartForm === 'function') {
-      const cartFormInstance = new theme.CartForm(document.getElementById('CartDrawerForm'));
-      cartFormInstance.buildCart();
-    } else {
-      // Fallback: reload the page
-      window.location.href = window.location.href;
+  function showCartSuccessMessage() {
+    // Create or show success message
+    let messageEl = document.querySelector('.bundle-cart-message');
+    if (!messageEl) {
+      messageEl = document.createElement('div');
+      messageEl.className = 'bundle-cart-message';
+      messageEl.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #28a745;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        z-index: 10000;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      `;
+      document.body.appendChild(messageEl);
     }
     
-    // Open the cart drawer
-    openCartDrawer();
+    messageEl.textContent = 'âœ… ÄÃ£ thÃªm sáº£n pháº©m vÃ o giá» hÃ ng!';
+    messageEl.style.display = 'block';
+    
+    // Hide after 3 seconds
+    setTimeout(() => {
+      messageEl.style.display = 'none';
+    }, 3000);
   }
 
-  function openCartDrawer() {
-    // Try multiple methods to open the cart drawer
-    
-    // Method 1: Try theme.Drawer if it exists
-    if (typeof theme !== 'undefined' && theme.Drawer) {
-      if (typeof theme.Drawer.open === 'function') {
-        theme.Drawer.open('CartDrawer');
-        return;
-      }
+  function showCartErrorMessage() {
+    // Create or show error message
+    let messageEl = document.querySelector('.bundle-cart-message');
+    if (!messageEl) {
+      messageEl = document.createElement('div');
+      messageEl.className = 'bundle-cart-message';
+      messageEl.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #dc3545;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        z-index: 10000;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      `;
+      document.body.appendChild(messageEl);
     }
     
-    // Method 2: Try to trigger cart drawer open event
-    const cartDrawer = document.getElementById('CartDrawer');
-    if (cartDrawer) {
-      // Add active class to show drawer
-      cartDrawer.classList.add('drawer--open', 'active', 'is-open');
-      document.body.classList.add('drawer-open', 'cart-open');
-      
-      // Dispatch custom event
-      document.dispatchEvent(new CustomEvent('cart:open'));
-      window.dispatchEvent(new CustomEvent('drawer:open', { detail: { id: 'CartDrawer' } }));
-      return;
-    }
+    messageEl.textContent = 'âŒ CÃ³ lá»—i xáº£y ra khi thÃªm vÃ o giá» hÃ ng!';
+    messageEl.style.display = 'block';
     
-    // Method 3: Try to click cart icon to open drawer
-    const cartTrigger = document.querySelector('[data-cart-drawer-toggle], .js-drawer-open-cart, .cart-icon, [href="#CartDrawer"]');
-    if (cartTrigger) {
-      cartTrigger.click();
-      return;
-    }
-    
-    // Method 4: Try to find and click any element that opens cart
-    const cartButton = document.querySelector('button[aria-controls="CartDrawer"], [data-drawer-target="CartDrawer"]');
-    if (cartButton) {
-      cartButton.click();
-    }
+    // Hide after 5 seconds
+    setTimeout(() => {
+      messageEl.style.display = 'none';
+    }, 5000);
   }
 
   function initializeVariantPicker() {
@@ -4604,23 +2625,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Store variants instance for later use
     container.variantsInstance = variants;
     
-    // Tự động chọn variant đầu tiên khi khởi tạo
+    // Tá»± Ä‘á»™ng chá»n variant Ä‘áº§u tiÃªn khi khá»Ÿi táº¡o
     setTimeout(() => {
       console.log('=== AUTO-SELECTING FIRST VARIANT ===');
       
-      // Tìm tất cả các option groups
+      // TÃ¬m táº¥t cáº£ cÃ¡c option groups
       const optionGroups = container.querySelectorAll('.variant-wrapper');
       console.log('Found option groups:', optionGroups.length);
       
       optionGroups.forEach((optionGroup, groupIndex) => {
         // Check if this is a size option and we have a locked size
         const isSizeGroup = optionGroup.classList.contains('size') || 
-                           optionGroup.querySelector('.variant__label')?.textContent.toLowerCase().includes('kích thước') ||
+                           optionGroup.querySelector('.variant__label')?.textContent.toLowerCase().includes('kÃ­ch thÆ°á»›c') ||
                            optionGroup.querySelector('.variant__label')?.textContent.toLowerCase().includes('size');
         
         if (isSizeGroup && bundleState.lockedSize && bundleState.currentProductIndex > 0) {
           // Auto-select the locked size for non-first products
-          console.log(`🔒 Auto-selecting locked size: ${bundleState.lockedSize} for product ${bundleState.currentProductIndex + 1}`);
+          console.log(`ðŸ”’ Auto-selecting locked size: ${bundleState.lockedSize} for product ${bundleState.currentProductIndex + 1}`);
           
           const sizeInputs = optionGroup.querySelectorAll('[data-variant-input]');
           
@@ -4675,11 +2696,11 @@ document.addEventListener('DOMContentLoaded', () => {
           });
           
           if (matchingInput && !matchingInput.disabled) {
-            console.log(`🔒 Found matching size input: ${matchingInput.value}`);
+            console.log(`ðŸ”’ Found matching size input: ${matchingInput.value}`);
             matchingInput.checked = true;
             matchingInput.dispatchEvent(new Event('change', { bubbles: true }));
           } else {
-            console.log(`⚠️ Locked size ${bundleState.lockedSize} not found or disabled, falling back to first available`);
+            console.log(`âš ï¸ Locked size ${bundleState.lockedSize} not found or disabled, falling back to first available`);
             const firstInput = optionGroup.querySelector('[data-variant-input]:not([disabled])');
             if (firstInput) {
               firstInput.checked = true;
@@ -4687,20 +2708,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
         } else {
-          // Tìm input đầu tiên trong mỗi group (default behavior)
+          // TÃ¬m input Ä‘áº§u tiÃªn trong má»—i group (default behavior)
           const firstInput = optionGroup.querySelector('[data-variant-input]');
           if (firstInput && !firstInput.disabled) {
             console.log(`Auto-selecting first input in group ${groupIndex}:`, firstInput.value);
             firstInput.checked = true;
             
-            // Trigger change event để cập nhật variant
+            // Trigger change event Ä‘á»ƒ cáº­p nháº­t variant
             firstInput.dispatchEvent(new Event('change', { bubbles: true }));
           }
         }
       });
       
-      console.log('✅ Auto-selection completed');
-    }, 100); // Delay nhỏ để đảm bảo DOM đã sẵn sàng
+      console.log('âœ… Auto-selection completed');
+    }, 100); // Delay nhá» Ä‘á»ƒ Ä‘áº£m báº£o DOM Ä‘Ã£ sáºµn sÃ ng
     
     // Use event delegation for variant inputs (works with dynamically created elements)
     container.addEventListener('change', function(event) {
@@ -4715,7 +2736,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Current product at start:', currentProduct);
         
         if (!currentProduct) {
-          console.error('❌ No current product found for index:', bundleState.currentProductIndex);
+          console.error('âŒ No current product found for index:', bundleState.currentProductIndex);
           return;
         }
         
@@ -4760,7 +2781,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const inputToUse = checkedInput || firstAvailableInput;
             if (inputToUse) {
               selectedOptions[optionIndex] = inputToUse.value;
-              console.log('✅ Ensured option', optionIndex, '=', inputToUse.value);
+              console.log('âœ… Ensured option', optionIndex, '=', inputToUse.value);
             }
           }
         });
@@ -4791,7 +2812,7 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log('Variant options:', variant.options);
           
           if (!variant.options) {
-            console.log('❌ Variant has no options array');
+            console.log('âŒ Variant has no options array');
             return false;
           }
           
@@ -4817,7 +2838,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Fallback: If no matching variant found, use the first available variant
         let variantToUse = matchingVariant;
         if (!variantToUse) {
-          console.log('❌ No matching variant found, using fallback...');
+          console.log('âŒ No matching variant found, using fallback...');
           console.log('Available variants:', currentProduct.variants.map(v => ({
             title: v.title,
             options: v.options
@@ -4837,7 +2858,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (variantToUse) {
-          console.log('✅ Using variant:', variantToUse.title);
+          console.log('âœ… Using variant:', variantToUse.title);
           console.log('Variant price:', variantToUse.price);
           
           // Update product select
@@ -4845,7 +2866,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (productSelect) {
             productSelect.value = variantToUse.id;
             productSelect.dispatchEvent(new Event('change'));
-            console.log('✅ Updated product select to variant ID:', variantToUse.id);
+            console.log('âœ… Updated product select to variant ID:', variantToUse.id);
           }
           
           // Check if price elements exist before updating
@@ -4908,12 +2929,12 @@ document.addEventListener('DOMContentLoaded', () => {
             bundleState.selectedProducts.bundle[existingIndex].compareAtPrice = variantToUse.compare_at_price;
             bundleState.selectedProducts.bundle[existingIndex].variantOptions = variantToUse.options;
             bundleState.selectedProducts.bundle[existingIndex].image = extractImageUrl(variantImage);
-            console.log('✅ Updated bundle state immediately for product:', currentProduct.title, 'variant:', variantToUse.title, 'image:', variantImage);
-            console.log('✅ Bundle state updated:', bundleState.selectedProducts.bundle[existingIndex]);
-            console.log('✅ Variant options saved:', variantToUse.options);
-            console.log('✅ Variant options type:', typeof variantToUse.options);
-            console.log('✅ Variant options is array:', Array.isArray(variantToUse.options));
-            console.log('✅ Variant options length:', variantToUse.options ? variantToUse.options.length : 'undefined');
+            console.log('âœ… Updated bundle state immediately for product:', currentProduct.title, 'variant:', variantToUse.title, 'image:', variantImage);
+            console.log('âœ… Bundle state updated:', bundleState.selectedProducts.bundle[existingIndex]);
+            console.log('âœ… Variant options saved:', variantToUse.options);
+            console.log('âœ… Variant options type:', typeof variantToUse.options);
+            console.log('âœ… Variant options is array:', Array.isArray(variantToUse.options));
+            console.log('âœ… Variant options length:', variantToUse.options ? variantToUse.options.length : 'undefined');
             
             // Check if this is the first product and has size variant
             if (bundleState.currentProductIndex === 0 && variantToUse.options && variantToUse.options.length > 0) {
@@ -4933,8 +2954,8 @@ document.addEventListener('DOMContentLoaded', () => {
               );
               
               if (isSizeOption) {
-                console.log('🎯 First product size selected:', firstOption);
-                console.log('🔒 Locking size for all other products to:', firstOption);
+                console.log('ðŸŽ¯ First product size selected:', firstOption);
+                console.log('ðŸ”’ Locking size for all other products to:', firstOption);
                 
                 // Store the selected size for other products
                 bundleState.lockedSize = firstOption;
@@ -4997,7 +3018,7 @@ document.addEventListener('DOMContentLoaded', () => {
                       });
                       
                       if (matchingVariant) {
-                        console.log(`🔒 Auto-updating product ${index + 1} (${product.productTitle}) to size: ${firstOption}`);
+                        console.log(`ðŸ”’ Auto-updating product ${index + 1} (${product.productTitle}) to size: ${firstOption}`);
                         product.variantId = matchingVariant.id;
                         product.variantTitle = matchingVariant.title;
                         product.variantPrice = matchingVariant.price;
@@ -5067,11 +3088,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!isMatchingSize) {
                   input.disabled = true;
                   input.closest('.variant__button-label')?.classList.add('disabled');
-                  console.log(`🔒 Disabled size option: ${input.value}`);
+                  console.log(`ðŸ”’ Disabled size option: ${input.value}`);
                 } else {
                   input.disabled = false;
                   input.closest('.variant__button-label')?.classList.remove('disabled');
-                  console.log(`🔒 Enabled matching size option: ${input.value}`);
+                  console.log(`ðŸ”’ Enabled matching size option: ${input.value}`);
                 }
               });
             }
@@ -5090,15 +3111,15 @@ document.addEventListener('DOMContentLoaded', () => {
               quantity: 1
             };
             bundleState.selectedProducts.bundle.push(newProduct);
-            console.log('✅ Added new product to bundle state:', newProduct);
-            console.log('✅ Variant options saved:', variantToUse.options);
-            console.log('✅ Variant options type:', typeof variantToUse.options);
-            console.log('✅ Variant options is array:', Array.isArray(variantToUse.options));
-            console.log('✅ Variant options length:', variantToUse.options ? variantToUse.options.length : 'undefined');
+            console.log('âœ… Added new product to bundle state:', newProduct);
+            console.log('âœ… Variant options saved:', variantToUse.options);
+            console.log('âœ… Variant options type:', typeof variantToUse.options);
+            console.log('âœ… Variant options is array:', Array.isArray(variantToUse.options));
+            console.log('âœ… Variant options length:', variantToUse.options ? variantToUse.options.length : 'undefined');
           }
         }
         } else {
-          console.log('❌ No matching variant found for options:', selectedOptions);
+          console.log('âŒ No matching variant found for options:', selectedOptions);
           console.log('Available variants:', currentProduct.variants.map(v => ({
             title: v.title,
             options: v.options
@@ -5118,7 +3139,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    console.log('✅ Variant picker initialized successfully');
+    console.log('âœ… Variant picker initialized successfully');
   }
 
   function updateBundleVariantLabels(variant, container) {
@@ -5175,11 +3196,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const innerSpan = label.querySelector(' [data-variant-selected-label]');
         if (innerSpan) {
           innerSpan.textContent = newText;
-          console.log('✅ Updated label index', optionIndex, 'from', innerSpan.getAttribute('data-original-text') || 'unknown', 'to:', newText);
+          console.log('âœ… Updated label index', optionIndex, 'from', innerSpan.getAttribute('data-original-text') || 'unknown', 'to:', newText);
         } else {
           // Fallback: update the container's text content
           label.textContent = newText;
-          console.log('✅ Updated label container index', optionIndex, 'to:', newText);
+          console.log('âœ… Updated label container index', optionIndex, 'to:', newText);
         }
       }
     });
@@ -5193,12 +3214,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (colorLabel && variant.options && variant.options[1]) {
       colorLabel.textContent = variant.options[1];
-      console.log('✅ Updated color label to:', variant.options[1]);
+      console.log('âœ… Updated color label to:', variant.options[1]);
     }
     
     if (sizeLabel && variant.options && variant.options[0]) {
       sizeLabel.textContent = variant.options[0];
-      console.log('✅ Updated size label to:', variant.options[0]);
+      console.log('âœ… Updated size label to:', variant.options[0]);
     }
     
     // Update all variant__label-info containers that have data-index
@@ -5214,11 +3235,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstSpan = container.querySelector('span');
         if (firstSpan) {
           firstSpan.textContent = variant.options[optionIndex];
-          console.log('✅ Updated label info container', index, 'to:', variant.options[optionIndex]);
+          console.log('âœ… Updated label info container', index, 'to:', variant.options[optionIndex]);
         } else {
           // If no span, update the container's text content
           container.textContent = variant.options[optionIndex];
-          console.log('✅ Updated label info container text', index, 'to:', variant.options[optionIndex]);
+          console.log('âœ… Updated label info container text', index, 'to:', variant.options[optionIndex]);
         }
       }
     });
@@ -5237,7 +3258,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const optionIndex = parseInt(dataIndex);
           if (!isNaN(optionIndex) && variant.options && variant.options[optionIndex]) {
             span.textContent = variant.options[optionIndex];
-            console.log(`✅ Updated span ${spanIndex} in label info ${index} to:`, variant.options[optionIndex]);
+            console.log(`âœ… Updated span ${spanIndex} in label info ${index} to:`, variant.options[optionIndex]);
           }
         }
       });
@@ -5245,7 +3266,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Force update all variant__label-info text content based on variant title
     if (variantLabels.length === 0) {
-      console.log('⚠️ No variant labels with data-index found, trying alternative approach...');
+      console.log('âš ï¸ No variant labels with data-index found, trying alternative approach...');
       
       // Try to update based on variant title
       allLabelInfoElements.forEach((labelInfo, index) => {
@@ -5253,23 +3274,23 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`Label info ${index} current text: "${currentText}"`);
         
         // If this looks like a size option, update with the first option
-        if (currentText.includes('Kích thước') || currentText.includes('Size')) {
+        if (currentText.includes('KÃ­ch thÆ°á»›c') || currentText.includes('Size')) {
           if (variant.options && variant.options[0]) {
             labelInfo.textContent = variant.options[0];
-            console.log(`✅ Force updated size label to: ${variant.options[0]}`);
+            console.log(`âœ… Force updated size label to: ${variant.options[0]}`);
           }
         }
         // If this looks like a color option, update with the second option
-        else if (currentText.includes('Màu') || currentText.includes('Color')) {
+        else if (currentText.includes('MÃ u') || currentText.includes('Color')) {
           if (variant.options && variant.options[1]) {
             labelInfo.textContent = variant.options[1];
-            console.log(`✅ Force updated color label to: ${variant.options[1]}`);
+            console.log(`âœ… Force updated color label to: ${variant.options[1]}`);
           }
         }
         // Otherwise, try to update with the full variant title
         else {
           labelInfo.textContent = variant.title;
-          console.log(`✅ Force updated label to variant title: ${variant.title}`);
+          console.log(`âœ… Force updated label to variant title: ${variant.title}`);
         }
       });
     }
@@ -5296,8 +3317,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (mainPriceElement) {
         const formattedPrice = formatMoney(variant.price);
         mainPriceElement.textContent = formattedPrice;
-        console.log('✅ Updated main price from', mainPriceElement.getAttribute('data-product-price-base'), 'to:', formattedPrice);
-        console.log('✅ Main price element after update:', mainPriceElement.textContent);
+        console.log('âœ… Updated main price from', mainPriceElement.getAttribute('data-product-price-base'), 'to:', formattedPrice);
+        console.log('âœ… Main price element after update:', mainPriceElement.textContent);
       }
       
       // Update compare price
@@ -5310,11 +3331,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const formattedComparePrice = formatMoney(variant.compare_at_price);
           comparePriceElement.textContent = formattedComparePrice;
           comparePriceElement.style.display = 'inline';
-          console.log('✅ Updated compare price to:', formattedComparePrice);
-          console.log('✅ Compare price element after update:', comparePriceElement.textContent);
+          console.log('âœ… Updated compare price to:', formattedComparePrice);
+          console.log('âœ… Compare price element after update:', comparePriceElement.textContent);
         } else {
           comparePriceElement.style.display = 'none';
-          console.log('✅ Hiding compare price');
+          console.log('âœ… Hiding compare price');
         }
       }
       
@@ -5328,11 +3349,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const discountPercent = Math.round((variant.compare_at_price - variant.price) / variant.compare_at_price * 100);
           discountBadge.textContent = `-${discountPercent}%`;
           discountBadge.style.display = 'inline';
-          console.log('✅ Updated discount badge to:', `-${discountPercent}%`);
-          console.log('✅ Discount badge after update:', discountBadge.textContent);
+          console.log('âœ… Updated discount badge to:', `-${discountPercent}%`);
+          console.log('âœ… Discount badge after update:', discountBadge.textContent);
         } else {
           discountBadge.style.display = 'none';
-          console.log('✅ Hiding discount badge');
+          console.log('âœ… Hiding discount badge');
         }
       }
     }
@@ -5342,10 +3363,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (installmentPrice) {
       const installmentAmount = Math.round(variant.price / 12);
       installmentPrice.textContent = formatMoney(installmentAmount);
-      console.log('✅ Updated installment price to:', formatMoney(installmentAmount));
+      console.log('âœ… Updated installment price to:', formatMoney(installmentAmount));
     }
     
-    console.log('✅ Price update completed');
+    console.log('âœ… Price update completed');
     
     // Update product image if variant has different image
     updateBundleProductImage(variant, container);
@@ -5391,7 +3412,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mainImage && variantImage !== mainImage.src) {
       mainImage.src = variantImage;
       mainImage.alt = currentProduct.title + ' - ' + variant.title;
-      console.log('✅ Updated main product image to:', variantImage);
+      console.log('âœ… Updated main product image to:', variantImage);
     }
     
     // Update thumbnails if they exist
@@ -5429,9 +3450,9 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (selectedColorSwatch) {
         selectedColorSwatch.classList.add('active', 'selected');
-        console.log('✅ Updated color swatch state for:', variant.options[1]);
+        console.log('âœ… Updated color swatch state for:', variant.options[1]);
       } else {
-        console.log('❌ Could not find color swatch for:', variant.options[1]);
+        console.log('âŒ Could not find color swatch for:', variant.options[1]);
         console.log('Available color swatches:', container.querySelectorAll('.color-swatch').length);
         console.log('Available color inputs:', container.querySelectorAll('[data-variant-input][data-color-name]').length);
       }
@@ -5442,7 +3463,7 @@ document.addEventListener('DOMContentLoaded', () => {
     colorInputs.forEach(input => {
       if (input.value === variant.options[1]) {
         input.checked = true;
-        console.log('✅ Updated color input state for:', variant.options[1]);
+        console.log('âœ… Updated color input state for:', variant.options[1]);
       } else {
         input.checked = false;
       }
@@ -5465,7 +3486,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                   </div>
                   <div class="icon-with-text__content">
-                    <h3 class="icon-with-text__heading">Miễn phí vận chuyển *</h3>
+                    <h3 class="icon-with-text__heading">Miá»…n phÃ­ váº­n chuyá»ƒn *</h3>
                   </div>
                 </div>
                 
@@ -5476,7 +3497,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                   </div>
                   <div class="icon-with-text__content">
-                    <h3 class="icon-with-text__heading">Bảo hành dài lâu</h3>
+                    <h3 class="icon-with-text__heading">Báº£o hÃ nh dÃ i lÃ¢u</h3>
                   </div>
                 </div>
                 
@@ -5488,7 +3509,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                   </div>
                   <div class="icon-with-text__content">
-                    <h3 class="icon-with-text__heading">Chất liệu Foam cao cấp</h3>
+                    <h3 class="icon-with-text__heading">Cháº¥t liá»‡u Foam cao cáº¥p</h3>
                   </div>
                 </div>
               </div>
@@ -5522,7 +3543,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           </div>
           <div class="icon-with-text__content">
-            <h3 class="icon-with-text__heading">${iconSettings.icon_1_heading || '100 đêm ngủ thử'}</h3>
+            <h3 class="icon-with-text__heading">${iconSettings.icon_1_heading || '100 Ä‘Ãªm ngá»§ thá»­'}</h3>
           </div>
         </div>
       `;
@@ -5547,7 +3568,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           </div>
           <div class="icon-with-text__content">
-            <h3 class="icon-with-text__heading">${iconSettings.icon_2_heading || 'Miễn phí vận chuyển *'}</h3>
+            <h3 class="icon-with-text__heading">${iconSettings.icon_2_heading || 'Miá»…n phÃ­ váº­n chuyá»ƒn *'}</h3>
           </div>
         </div>
       `;
@@ -5571,7 +3592,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           </div>
           <div class="icon-with-text__content">
-            <h3 class="icon-with-text__heading">${iconSettings.icon_3_heading || 'Bảo hành dài lâu'}</h3>
+            <h3 class="icon-with-text__heading">${iconSettings.icon_3_heading || 'Báº£o hÃ nh dÃ i lÃ¢u'}</h3>
           </div>
         </div>
       `;
@@ -5596,7 +3617,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           </div>
           <div class="icon-with-text__content">
-            <h3 class="icon-with-text__heading">${iconSettings.icon_4_heading || 'Chất liệu Foam cao cấp'}</h3>
+            <h3 class="icon-with-text__heading">${iconSettings.icon_4_heading || 'Cháº¥t liá»‡u Foam cao cáº¥p'}</h3>
           </div>
         </div>
       `;
@@ -5803,8 +3824,8 @@ function initAdvancedSticky(productSection) {
         const infoColOriginalWidth = infoColumnInner.offsetWidth;
         
         // LOCK THE WIDTHS FOREVER - This prevents any sizing changes during sticky scrolling
-        console.log('🔒 Locking image column width at:', imageColOriginalWidth);
-        console.log('🔒 Locking info column width at:', infoColOriginalWidth);
+        console.log('ðŸ”’ Locking image column width at:', imageColOriginalWidth);
+        console.log('ðŸ”’ Locking info column width at:', infoColOriginalWidth);
         
         // Lock the image column width immediately
         imageColumn.style.width = `${imageColOriginalWidth}px`;
@@ -5824,7 +3845,7 @@ function initAdvancedSticky(productSection) {
         const photosContainer = imageColumnInner.querySelector('.product__photos');
         if (photosContainer) {
           const photosWidth = photosContainer.offsetWidth;
-          console.log('🔒 Locking photos container width at:', photosWidth);
+          console.log('ðŸ”’ Locking photos container width at:', photosWidth);
           photosContainer.style.width = `${photosWidth}px`;
           photosContainer.style.maxWidth = `${photosWidth}px`;
           photosContainer.style.minWidth = `${photosWidth}px`;
@@ -5836,7 +3857,7 @@ function initAdvancedSticky(productSection) {
         const slideshowContainer = imageColumnInner.querySelector('.product-slideshow');
         if (slideshowContainer) {
           const slideshowWidth = slideshowContainer.offsetWidth;
-          console.log('🔒 Locking slideshow container width at:', slideshowWidth);
+          console.log('ðŸ”’ Locking slideshow container width at:', slideshowWidth);
           slideshowContainer.style.width = `${slideshowWidth}px`;
           slideshowContainer.style.maxWidth = `${slideshowWidth}px`;
           slideshowContainer.style.minWidth = `${slideshowWidth}px`;
@@ -5848,7 +3869,7 @@ function initAdvancedSticky(productSection) {
         const mainPhotosContainer = imageColumnInner.querySelector('.product__main-photos');
         if (mainPhotosContainer) {
           const mainPhotosWidth = mainPhotosContainer.offsetWidth;
-          console.log('🔒 Locking main photos container width at:', mainPhotosWidth);
+          console.log('ðŸ”’ Locking main photos container width at:', mainPhotosWidth);
           mainPhotosContainer.style.width = `${mainPhotosWidth}px`;
           mainPhotosContainer.style.maxWidth = `${mainPhotosWidth}px`;
           mainPhotosContainer.style.minWidth = `${mainPhotosWidth}px`;
@@ -6034,8 +4055,8 @@ function initBundleSticky(productSection) {
         const infoColOriginalWidth = infoColumnInner.offsetWidth;
         
         // LOCK THE WIDTHS FOREVER - This prevents any sizing changes during sticky scrolling
-        console.log('🔒 Locking image column width at:', imageColOriginalWidth);
-        console.log('🔒 Locking info column width at:', infoColOriginalWidth);
+        console.log('ðŸ”’ Locking image column width at:', imageColOriginalWidth);
+        console.log('ðŸ”’ Locking info column width at:', infoColOriginalWidth);
         
         // Lock the image column width immediately
         imageColumn.style.width = `${imageColOriginalWidth}px`;
@@ -6055,7 +4076,7 @@ function initBundleSticky(productSection) {
         const photosContainer = imageColumnInner.querySelector('.product__photos');
         if (photosContainer) {
           const photosWidth = photosContainer.offsetWidth;
-          console.log('🔒 Locking photos container width at:', photosWidth);
+          console.log('ðŸ”’ Locking photos container width at:', photosWidth);
           photosContainer.style.width = `${photosWidth}px`;
           photosContainer.style.maxWidth = `${photosWidth}px`;
           photosContainer.style.minWidth = `${photosWidth}px`;
@@ -6067,7 +4088,7 @@ function initBundleSticky(productSection) {
         const slideshowContainer = imageColumnInner.querySelector('.product-slideshow');
         if (slideshowContainer) {
           const slideshowWidth = slideshowContainer.offsetWidth;
-          console.log('🔒 Locking slideshow container width at:', slideshowWidth);
+          console.log('ðŸ”’ Locking slideshow container width at:', slideshowWidth);
           slideshowContainer.style.width = `${slideshowWidth}px`;
           slideshowContainer.style.maxWidth = `${slideshowWidth}px`;
           slideshowContainer.style.minWidth = `${slideshowWidth}px`;
@@ -6079,7 +4100,7 @@ function initBundleSticky(productSection) {
         const mainPhotosContainer = imageColumnInner.querySelector('.product__main-photos');
         if (mainPhotosContainer) {
           const mainPhotosWidth = mainPhotosContainer.offsetWidth;
-          console.log('🔒 Locking main photos container width at:', mainPhotosWidth);
+          console.log('ðŸ”’ Locking main photos container width at:', mainPhotosWidth);
           mainPhotosContainer.style.width = `${mainPhotosWidth}px`;
           mainPhotosContainer.style.maxWidth = `${mainPhotosWidth}px`;
           mainPhotosContainer.style.minWidth = `${mainPhotosWidth}px`;
@@ -6353,7 +4374,7 @@ document.addEventListener('shopify:section:load', function(event) {
       "type": "product_list",
       "id": "bundle_products",
       "label": "Bundle Products",
-      "info": "Chọn các sản phẩm sẽ được hiển thị trong Step 2 của bundle builder",
+      "info": "Chá»n cÃ¡c sáº£n pháº©m sáº½ Ä‘Æ°á»£c hiá»ƒn thá»‹ trong Step 2 cá»§a bundle builder",
       "limit": 10
     },
     {
@@ -6370,13 +4391,13 @@ document.addEventListener('shopify:section:load', function(event) {
       "type": "text",
       "id": "combo_title",
       "label": "Combo Products Title",
-      "default": "Combo bao gồm các sản phẩm:"
+      "default": "Combo bao gá»“m cÃ¡c sáº£n pháº©m:"
     },
     {
       "type": "text",
       "id": "cta_button_text",
       "label": "CTA Button Text",
-      "default": "BẮT ĐẦU TẠO COMBO"
+      "default": "Báº®T Äáº¦U Táº O COMBO"
     },
     {
       "type": "header",
@@ -6385,46 +4406,46 @@ document.addEventListener('shopify:section:load', function(event) {
     {
       "type": "image_picker",
       "id": "service_icon_1",
-      "label": "Service Icon 1 (100 đêm ngủ thử)"
+      "label": "Service Icon 1 (100 Ä‘Ãªm ngá»§ thá»­)"
     },
     {
       "type": "text",
       "id": "service_text_1",
       "label": "Service Text 1",
-      "default": "100 đêm ngủ thử"
+      "default": "100 Ä‘Ãªm ngá»§ thá»­"
     },
     {
       "type": "image_picker",
       "id": "service_icon_2",
-      "label": "Service Icon 2 (Miễn phí vận chuyển)"
+      "label": "Service Icon 2 (Miá»…n phÃ­ váº­n chuyá»ƒn)"
     },
     {
       "type": "text",
       "id": "service_text_2",
       "label": "Service Text 2",
-      "default": "Miễn phí vận chuyển"
+      "default": "Miá»…n phÃ­ váº­n chuyá»ƒn"
     },
     {
       "type": "image_picker",
       "id": "service_icon_3",
-      "label": "Service Icon 3 (Bảo hành dài lâu)"
+      "label": "Service Icon 3 (Báº£o hÃ nh dÃ i lÃ¢u)"
     },
     {
       "type": "text",
       "id": "service_text_3",
       "label": "Service Text 3",
-      "default": "Bảo hành dài lâu"
+      "default": "Báº£o hÃ nh dÃ i lÃ¢u"
     },
     {
       "type": "image_picker",
       "id": "service_icon_4",
-      "label": "Service Icon 4 (Thanh toán linh hoạt)"
+      "label": "Service Icon 4 (Thanh toÃ¡n linh hoáº¡t)"
     },
     {
       "type": "text",
       "id": "service_text_4",
       "label": "Service Text 4",
-      "default": "Thanh toán linh hoạt"
+      "default": "Thanh toÃ¡n linh hoáº¡t"
     },
     {
       "type": "select",
@@ -6570,7 +4591,7 @@ document.addEventListener('shopify:section:load', function(event) {
       "type": "text",
       "id": "showroom_1_address",
       "label": "Showroom 1 Address",
-      "default": "Địa chỉ showroom"
+      "default": "Äá»‹a chá»‰ showroom"
     },
     {
       "type": "text",
@@ -6593,7 +4614,7 @@ document.addEventListener('shopify:section:load', function(event) {
       "type": "text",
       "id": "showroom_2_address",
       "label": "Showroom 2 Address",
-      "default": "Địa chỉ showroom"
+      "default": "Äá»‹a chá»‰ showroom"
     },
     {
       "type": "text",
@@ -6616,7 +4637,7 @@ document.addEventListener('shopify:section:load', function(event) {
       "type": "text",
       "id": "showroom_3_address",
       "label": "Showroom 3 Address",
-      "default": "Địa chỉ showroom"
+      "default": "Äá»‹a chá»‰ showroom"
     },
     {
       "type": "text",
@@ -6643,7 +4664,7 @@ document.addEventListener('shopify:section:load', function(event) {
       "type": "text",
       "id": "review_count",
       "label": "Review Count",
-      "default": "2025 đánh giá"
+      "default": "2025 Ä‘Ã¡nh giÃ¡"
     }
   ],
   "blocks": [
@@ -6766,7 +4787,7 @@ document.addEventListener('shopify:section:load', function(event) {
           "type": "text",
           "id": "icon_1_heading",
           "label": "Icon 1 Heading",
-          "default": "100 đêm ngủ thử"
+          "default": "100 Ä‘Ãªm ngá»§ thá»­"
         },
         {
           "type": "header",
@@ -6781,7 +4802,7 @@ document.addEventListener('shopify:section:load', function(event) {
           "type": "text",
           "id": "icon_2_heading",
           "label": "Icon 2 Heading",
-          "default": "Miễn phí vận chuyển *"
+          "default": "Miá»…n phÃ­ váº­n chuyá»ƒn *"
         },
         {
           "type": "header",
@@ -6796,7 +4817,7 @@ document.addEventListener('shopify:section:load', function(event) {
           "type": "text",
           "id": "icon_3_heading",
           "label": "Icon 3 Heading",
-          "default": "Bảo hành dài lâu"
+          "default": "Báº£o hÃ nh dÃ i lÃ¢u"
         },
         {
           "type": "header",
@@ -6811,7 +4832,7 @@ document.addEventListener('shopify:section:load', function(event) {
           "type": "text",
           "id": "icon_4_heading",
           "label": "Icon 4 Heading",
-          "default": "Chất liệu Foam cao cấp"
+          "default": "Cháº¥t liá»‡u Foam cao cáº¥p"
         },
         {
           "type": "header",
@@ -6854,11 +4875,11 @@ document.addEventListener('shopify:section:load', function(event) {
           "options": [
             {
               "value": "1",
-              "label": "1 cột"
+              "label": "1 cá»™t"
             },
             {
               "value": "2",
-              "label": "2 cột (2x2)"
+              "label": "2 cá»™t (2x2)"
             }
           ],
           "default": "2"

@@ -437,23 +437,68 @@
   }
   
   /* Comfort top variant styling - Simple approach */
-  .variant-input-wrap[data-index="option2"] .variant__button-label {
+  .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
     color: #212121 !important;
   }
   
   /* Make Comfort top variants share width equally and match height with other blocks */
-  .variant-input-wrap[data-index="option2"] {
+  .variant-input-wrap[data-index="option2"]:not(.is-color) {
     display: flex !important;
     flex-direction: row !important;
     gap: 8px !important;
   }
   
-  .variant-input-wrap[data-index="option2"] .variant-input {
+  .variant-input-wrap[data-index="option2"]:not(.is-color) .variant-input {
     flex: 1 !important;
     width: 50% !important;
   }
+
+  /* Size variants in option2 should use column layout like option1 */
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 12px 8px !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 5px !important;
+    background-color: #fff !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+    width: 100% !important;
+    min-height: 60px !important;
+    text-align: center !important;
+    gap: 2px !important;
+  }
+
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-head,
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-value {
+    display: block !important;
+    width: 100% !important;
+    line-height: 1.2 !important;
+  }
+
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-head {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #1C2C58 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-value {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: #555 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Force override any conflicting styles */
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center > * {
+    display: block !important;
+    width: 100% !important;
+  }
   
-  .variant-input-wrap[data-index="option2"] .variant__button-label {
+  .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
     width: 100% !important;
     min-height: 60px !important;
     display: flex !important;
@@ -1379,23 +1424,53 @@
     }
     
     /* Comfort top variant styling - Simple approach */
-    .variant-input-wrap[data-index="option2"] .variant__button-label {
+    .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
       color: #212121 !important;
     }
     
     /* Make Comfort top variants share width equally and match height with other blocks - Mobile */
-    .variant-input-wrap[data-index="option2"] {
+    .variant-input-wrap[data-index="option2"]:not(.is-color) {
       display: flex !important;
       flex-direction: row !important;
       gap: 8px !important;
     }
     
-    .variant-input-wrap[data-index="option2"] .variant-input {
+    .variant-input-wrap[data-index="option2"]:not(.is-color) .variant-input {
       flex: 1 !important;
       width: 50% !important;
     }
+
+    /* Size variants in option2 should use column layout like option1 - Mobile */
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center {
+      min-height: 50px !important;
+      padding: 8px 4px !important;
+      gap: 1px !important;
+    }
     
-    .variant-input-wrap[data-index="option2"] .variant__button-label {
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-head,
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-value {
+      display: block !important;
+      width: 100% !important;
+      line-height: 1.2 !important;
+    }
+    
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-head {
+      font-size: 14px !important;
+      margin-bottom: 1px !important;
+    }
+
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-value {
+      font-size: 12px !important;
+      margin-top: 0 !important;
+    }
+
+    /* Force override any conflicting styles - Mobile */
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center > * {
+      display: block !important;
+      width: 100% !important;
+    }
+    
+    .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
       width: 100% !important;
       min-height: 50px !important;
       display: flex !important;

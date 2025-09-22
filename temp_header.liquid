@@ -1,0 +1,19 @@
+﻿{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  
+  # Check section settings only - more robust check
+  assign has_bundle_products = false
+  assign bundle_products_list = blank
+  
+  if section.settings.bundle_products
+    # Check if it's not empty by trying to access first element
+    assign first_product = section.settings.bundle_products | first
+    if first_product != blank
+      assign has_bundle_products = true
+      assign bundle_products_list = section.settings.bundle_products
+    endif
+  endif
+-%}
+
+{{ 'main-product-bundle.css' | asset_url | stylesheet_tag }}
+
