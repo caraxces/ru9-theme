@@ -12,10 +12,19 @@
 
 .jdgm-rev-widg {
     max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0 auto !important; /* Center the widget block */
+    box-sizing: border-box !important;
+    /* Mobile-first padding, based on featured-collections */
+    padding: 0 20px !important;
     text-align: left !important;
-    font-family: 'Lexend', sans-serif !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+}
+
+/* Desktop padding, based on featured-collections */
+@media (min-width: 769px) {
+    .jdgm-rev-widg {
+        padding: 0 60px !important;
+    }
 }
 
 /* ==========================================================================
@@ -90,8 +99,8 @@
 }
 .jdgm-custom-image-carousel img,
 .jdgm-custom-image-carousel video {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
     border-radius: 8px;
     flex-shrink: 0;
@@ -212,76 +221,90 @@
    #INDIVIDUAL REVIEW CARD STYLING
    ========================================================================== */
 
-.jdgm-rev.jdgm-divider-top {
+.jdgm-rev {
     display: flex !important;
     gap: 24px !important;
     align-items: flex-start !important; /* Align items to the top */
     padding: 30px 0 !important;
+    border-top: 1px solid #e0e0e0;
 }
 
-/* Hide the initial icon */
-.jdgm-rev__icon {
-    display: none !important;
-}
-
-/* Ensure the picture is treated as a flex item and becomes the left column */
-.jdgm-rev__rev-pic {
-    order: 1; /* Left-most item */
+/* 1. LEFT COLUMN (Image) */
+.jdgm-rev__pics {
     flex-shrink: 0;
+    width: 280px;
 }
 
-.jdgm-rev__rev-pic .jdgm-rev__pic-img {
-    width: 280px !important; 
-    height: 220px !important;
-    object-fit: cover;
-    border-radius: 8px;
-    flex-shrink: 0; /* Add flex-shrink to the image itself */
-}
-
-/* The entire right column containing all other content */
-.jdgm-rev__content {
-    order: 2; /* Right item */
-    display: flex;
-    flex-direction: column;
-    gap: 12px; 
-    flex-grow: 1; /* Allow this column to take up the remaining space */
-    min-width: 0; /* Prevents flex items from overflowing */
-}
-
-/* NEW: Override the pic-link container to match the image size */
-.jdgm-rev__pic-link {
+.jdgm-rev__pic-link,
+.jdgm-rev__pic-img {
+    display: block !important;
     width: 280px !important;
     height: 220px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
 }
 
-/* A header row inside the right column for rating and timestamp */
-.jdgm-rev__header {
+/* 2. RIGHT COLUMN (Content Wrapper created by JS) */
+.jdgm-custom-right-column-content {
+    flex-grow: 1;
+    min-width: 0; /* Prevents flex items from overflowing */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Vertical gap between rows */
+}
+.jdgm-widget a:not([href])[role="button"]{
+    cursor: pointer !important;
+    align-content: center !important;
+}
+/* Hide unwanted elements */
+.jdgm-rev__icon,
+.jdgm-rev__br {
+    display: none !important;
+}
+
+/* 3. STYLING WITHIN THE RIGHT COLUMN */
+
+/* A custom row for rating and timestamp created by JS */
+.jdgm-custom-rating-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
 }
 
+/* The header now acts as a container for rating, timestamp, and author */
+.jdgm-rev__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 8px; /* Space between rating line and author */
+}
+
+/* Create a "row" for the rating and timestamp */
 .jdgm-rev__rating {
-    order: 1; /* Rating on the left of this row */
+    order: 1;
 }
 
 .jdgm-rev__timestamp {
-    order: 2; /* Timestamp on the right of this row */
+    order: 2;
+    margin-left: auto; /* Push timestamp to the far right */
     font-size: 14px;
     color: #666;
 }
 
+/* Author wrapper is now a direct child, so it's controlled by the parent's flex-direction */
+.jdgm-rev__author-wrapper {
+   /* No special ordering needed anymore */
+}
 
-/* Order of elements inside the content column */
-.jdgm-rev__header { order: 1; }
-.jdgm-rev__author-wrapper { order: 2; }
-.jdgm-rev__title { order: 3; }
-.jdgm-rev__body { order: 4; }
-
+/* The content (title, body) will naturally fall after the header */
+.jdgm-rev__content {
+    /* The content (title, body) will naturally fall after the header */
+    padding: 0 !important;
+}
 
 /* Author Name Styling */
 .jdgm-rev__author {
@@ -294,11 +317,173 @@
 }
 
 /* ==========================================================================
-   #DEBUG VISUALIZERS (REVIEW CARD FOCUS)
+   #PAGINATION STYLING (V2)
    ========================================================================== */
-.jdgm-rev { outline: 3px solid red !important; padding: 5px; }
-.jdgm-rev__rev-pic { outline: 2px solid blue !important; }
-.jdgm-rev__header { outline: 2px solid purple !important; }
-.jdgm-row-profile { outline: 2px solid orange !important; }
-.jdgm-rev__content { outline: 2px solid green !important; }
+
+.jdgm-paginate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 40px;
+    /* Font will be inherited from .jdgm-rev-widg */
+}
+
+.jdgm-paginate a,
+.jdgm-paginate span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 5px;
+    box-sizing: border-box; /* Ensures consistent sizing and alignment */
+    text-decoration: none !important;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    color: #1C2C58 !important;
+    background-color: transparent;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.jdgm-paginate a:hover {
+    background-color: #f0f2f5;
+}
+
+/* Current, active page - Using the correct class from user feedback */
+.jdgm-paginate .jdgm-paginate__page.jdgm-curt {
+    background-color: #1C2C58 !important;
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+/* Styling for the next/last page arrows */
+.jdgm-paginate__page.jdgm-paginate__next-page,
+.jdgm-paginate__page.jdgm-paginate__last-page,
+.jdgm-paginate__page.jdgm-paginate__prev-page,
+.jdgm-paginate__page.jdgm-paginate__first-page {
+    color: #1C2C58 !important;
+}
+  
+/* ==========================================================================
+   #RESPONSIVE STYLES
+   ========================================================================== */
+@media (max-width: 768px) {
+    .jdgm-all-reviews__summary-text--verified{
+        justify-content: left !important;
+    }
+    .jdgm-rev-widg__summary-average{
+        display: none !important;
+    }
+    .jdgm-rev__timestamp{
+        width: 100% !important;
+        margin-left: 0 !important; /* Override desktop style to ensure left alignment */
+    }
+    /* 1. Header & Columns */
+    .jdgm-rev-widg__header {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 30px !important;
+    }
+
+    .jdgm-custom-left-column {
+        width: 100% !important;
+        align-items: flex-start !important; /* Revert to desktop's left-alignment */
+        gap: 20px !important;
+    }
+
+    .jdgm-widget-actions-wrapper {
+        width: 100% !important;
+    }
+
+    .jdgm-rev-widg__title {
+        text-align: center !important;
+        font-size: 24px !important;
+    }
+
+    /* 2. Summary & Actions - Reverted to Desktop Layout */
+    .jdgm-rev-widg__summary {
+        max-width: 391px; /* Ensure it doesn't overflow on small screens */
+        width: 100%;
+    }
+    
+    .jdgm-rev-widg__summary::before {
+       /* Inherit desktop styles */
+    }
+    
+    .jdgm-rev-widg__summary-text {
+       /* Inherit desktop styles */
+    }
+    
+    .jdgm-rev-widg__summary-average {
+       /* Inherit desktop styles */
+    }
+
+    .jdgm-write-rev-link,
+    .jdgm-histogram {
+        width: 100% !important;
+        max-width: 400px;
+    }
+
+    /* 3. Image Carousel */
+    .jdgm-custom-image-carousel {
+        margin-left: 0 !important;
+        width: 100%;
+    }
+
+    /* 4. Individual Review Cards: FINAL 2-Tier Mobile Layout */
+    .jdgm-rev {
+        flex-direction: column !important;
+        align-items: stretch !important; /* Let children take full width */
+        gap: 16px !important;
+    }
+
+    /* This is the new top row (Image + Author Info) */
+    .jdgm-rev-card__top-row {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .jdgm-custom-rating-row {
+        flex-wrap: wrap;
+        gap: 5px; /* Add a small gap between stars and the new timestamp line */
+    }
+
+    .jdgm-rev__pics {
+        width: 120px !important;
+        height: 120px !important;
+        object-fit: cover !important;
+    }
+
+    .jdgm-rev__pic-link,
+    .jdgm-rev__pic-img {
+        width: 120px !important;
+        height: 120px !important;
+        object-fit: cover !important;
+        border-radius: 5px !important;
+    }
+
+    .jdgm-custom-right-column-content {
+        flex-grow: 1; /* Allow it to take remaining space in the top row */
+    }
+
+    .jdgm-rev__content {
+        /* This now only contains the body and sits below the top row */
+        width: 100%;
+    }
+
+    .jdgm-rev__author {
+        font-size: 16px !important;
+    }
+
+    /* 5. Pagination */
+    .jdgm-paginate a, .jdgm-paginate span {
+        min-width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+}
   

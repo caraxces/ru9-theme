@@ -89,7 +89,7 @@
 }
 
 .bundle-progress-current {
-  color: #FF7F41;
+  color: #1C2C58;
   font-weight: 600;
 }
 
@@ -1225,7 +1225,7 @@
   width: 100%;
   height: auto;
   border-radius: 8px;
-  max-height: 500px;
+  max-height: 100%;
   object-fit: contain;
 }
 
@@ -1459,19 +1459,16 @@
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
-  border: 2px solid #ddd !important;
 }
 
 /* Color swatch states */
 .bundle-step-2 .variant-input .variant__button-label.color-swatch:hover {
   transform: scale(1.1);
-  border-color: #999 !important;
 }
 
 .bundle-step-2 .variant-input .variant__button-label.color-swatch.active,
 .bundle-step-2 .variant-input .variant__button-label.color-swatch.selected {
   border-color: #000 !important;
-  box-shadow: 0 0 0 2px white, 0 0 0 4px #000 !important;
 }
 
 /* Size Variant Styles */

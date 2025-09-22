@@ -10,6 +10,156 @@
   }
   .product-grid__images {
     position: relative;
+    padding-bottom: 20px !important;
+  }
+
+  /* Ensure scrollbar has space to display */
+  .product__thumbs {
+    margin-bottom: 20px !important;
+  }
+
+  /* Add space for scrollbar in product-grid__images */
+  .product-grid__images .product__thumbs--below {
+    margin-bottom: 20px !important;
+  }
+
+  /* CLEAN CSS - Product Thumbnails */
+  /* Carousel scrollbar styles - only when carousel is enabled */
+  .huan-false.product__thumbs--scroller {
+    gap: 12px !important;
+    overflow-x: scroll !important;
+    scrollbar-width: auto !important;
+    padding: 0 0 20px 0 !important;
+    margin: 0 !important;
+    scrollbar-gutter: stable !important;
+  }
+
+  .huan-false.product__thumbs--scroller::-webkit-scrollbar {
+    height: 8px !important;
+    display: block !important;
+  }
+
+  .huan-false.product__thumbs--scroller::-webkit-scrollbar-track {
+    background: #F0F1EF !important;
+    border-radius: 100px !important;
+  }
+
+  .huan-false.product__thumbs--scroller::-webkit-scrollbar-thumb {
+    background: #234085 !important;
+    border-radius: 100px !important;
+  }
+
+  .huan-false.product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b !important;
+  }
+
+  /* Force scrollbar to always show for carousel */
+  .huan-false.product__thumbs--scroller::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 1px;
+    flex-shrink: 0;
+  }
+
+
+  /* Desktop carousel - Active thumbnail state */
+  .huan-false.product__thumbs--below .product__thumb-item.is-active .product__thumb,
+  .huan-false.product__thumbs--below .product__thumb-item:active .product__thumb {
+    width: 160px !important;
+    height: 120px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .huan-false.product__thumbs--below .product__thumb-item.is-active .product__thumb .image-wrap,
+  .huan-false.product__thumbs--below .product__thumb-item:active .product__thumb .image-wrap {
+    width: 160px !important;
+    height: 120px !important;
+  }
+
+  .huan-false.product__thumbs--below .product__thumb-item.is-active .product__thumb .image-wrap img,
+  .huan-false.product__thumbs--below .product__thumb-item:active .product__thumb .image-wrap img {
+    width: 160px !important;
+    height: 120px !important;
+  }
+
+
+  /* Force override for active thumbnails in carousel */
+  .huan-false .product__thumb-item.is-active .product__thumb,
+  .huan-false .product__thumb-item:active .product__thumb {
+    width: 160px !important !important;
+    height: 120px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .huan-false .product__thumb-item.is-active .product__thumb .image-wrap,
+  .huan-false .product__thumb-item:active .product__thumb .image-wrap {
+    width: 160px !important !important;
+    height: 120px !important;
+  }
+
+  .huan-false .product__thumb-item.is-active .product__thumb .image-wrap img,
+  .huan-false .product__thumb-item:active .product__thumb .image-wrap img {
+    width: 160px !important !important;
+    height: 120px !important;
+  }
+
+  /* CRITICAL: Override theme.css with maximum specificity */
+  .product-grid__images .huan-false.product__thumbs--below .product__thumb-item {
+    width: 160px !important !important;
+    display: inline-block !important;
+    margin-right: 8.5px !important;
+    vertical-align: middle !important;
+  }
+
+  .product-grid__images .huan-false.product__thumbs--below .product__thumb-item .product__thumb {
+    width: 160px !important !important;
+    height: 120px !important;
+    display: block !important;
+  }
+
+  .product-grid__images .huan-false.product__thumbs--below .product__thumb-item .product__thumb .image-wrap {
+    width: 160px !important !important;
+    height: 120px !important;
+    position: relative !important;
+  }
+
+  .product-grid__images .huan-false.product__thumbs--below .product__thumb-item .product__thumb .image-wrap img {
+    width: 160px !important !important;
+    height: 120px !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    object-fit: cover !important;
+  }
+
+  /* ULTRA HIGH SPECIFICITY - Override theme.css completely */
+  .product-single__sticky .product-grid__images .huan-false.product__thumbs--below .product__thumb-item {
+    width: 160px !important !important;
+    display: inline-block !important;
+    margin-right: 8.5px !important;
+    vertical-align: middle !important;
+  }
+
+  .product-single__sticky .product-grid__images .huan-false.product__thumbs--below .product__thumb-item .product__thumb {
+    width: 160px !important;
+    height: 120px !important;
+    display: block !important;
+  }
+
+  .product-single__sticky .product-grid__images .huan-false.product__thumbs--below .product__thumb-item .product__thumb .image-wrap {
+    width: 160px !important;
+    height: 120px !important;
+    position: relative !important;
+  }
+
+  .product-single__sticky .product-grid__images .huan-false.product__thumbs--below .product__thumb-item .product__thumb .image-wrap img {
+    width: 160px !important;
+    height: 120px !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    object-fit: cover !important;
   }
   .custom-nav-button {
     display: none; /* Hidden by default */
@@ -26,6 +176,12 @@
     gap: 8px;
     align-items: flex-start;
   }
+
+
+
+
+
+
 }
   .product-tag-item {
     padding: 4px 12px;
@@ -281,23 +437,68 @@
   }
   
   /* Comfort top variant styling - Simple approach */
-  .variant-input-wrap[data-index="option2"] .variant__button-label {
+  .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
     color: #212121 !important;
   }
   
   /* Make Comfort top variants share width equally and match height with other blocks */
-  .variant-input-wrap[data-index="option2"] {
+  .variant-input-wrap[data-index="option2"]:not(.is-color) {
     display: flex !important;
     flex-direction: row !important;
     gap: 8px !important;
   }
   
-  .variant-input-wrap[data-index="option2"] .variant-input {
+  .variant-input-wrap[data-index="option2"]:not(.is-color) .variant-input {
     flex: 1 !important;
     width: 50% !important;
   }
+
+  /* Size variants in option2 should use column layout like option1 */
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 12px 8px !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 5px !important;
+    background-color: #fff !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+    width: 100% !important;
+    min-height: 60px !important;
+    text-align: center !important;
+    gap: 2px !important;
+  }
+
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-head,
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-value {
+    display: block !important;
+    width: 100% !important;
+    line-height: 1.2 !important;
+  }
+
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-head {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #1C2C58 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-value {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: #555 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Force override any conflicting styles */
+  .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center > * {
+    display: block !important;
+    width: 100% !important;
+  }
   
-  .variant-input-wrap[data-index="option2"] .variant__button-label {
+  .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
     width: 100% !important;
     min-height: 60px !important;
     display: flex !important;
@@ -306,12 +507,19 @@
     text-align: center !important;
   }
 
-  /* Color Swatch Styles */
+  /* Color Swatch Styles - Updated Design */
   .is-color .variant-input-wrap {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    display: flex !important;
+    grid-template-columns: repeat(auto-fit, 45px);
     gap: 8px;
     margin-bottom: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    width: fit-content;
+    justify-content: flex-start;
+    justify-items: center;
+    flex-wrap: wrap;
   }
 
   .is-color .variant-input {
@@ -319,53 +527,53 @@
   }
 
   .is-color .variant__button-label {
-    width: 45px;
-    height: 45px;
+    width: 45px !important;
+    height: 45px !important;
+    min-width: 45px !important;
+    min-height: 45px !important;
+    max-width: 45px !important;
+    max-height: 45px !important;
     flex-shrink: 0;
-    background-position: 50%;
+    background-color: transparent !important;
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow: 0 0 0 1px var(--colorBorder, #E0E0E0);
-    display: block;
+    background-size: 100% 100%;
+    display: block !important;
     overflow: hidden;
     position: relative;
     text-indent: -9999px;
-    transition: box-shadow 0.2s ease;
+    transition: all 0.2s ease;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 50% !important;
+    border: 2px solid transparent;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
   }
 
-  .is-color .variant__button-label:before {
-    bottom: 0;
-    content: "";
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 2;
-    border-color: var(--colorBody, #fff);
+  .is-color .variant__button-label:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
 
-  .is-color .variant__button-label::after {
-    content: "";
-    width: 22px;
-    height: 22px;
+  .is-color .variant-input input[type="radio"]:checked + .variant__button-label {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 3px #1C2C58;
+    border-radius: 50% !important;
+  }
+
+  .is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
+    content: "✓";
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background-color: #fff;
-    pointer-events: none;
-    transition: transform 0.3s ease;
-    border-radius: 5px;
-  }
-
-  .is-color .variant-input input[type="radio"]:checked + .variant__button-label:after {
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  .is-color .variant-input-wrap input[type="radio"]:checked + .variant__button-label {
-    box-shadow: none;
+    transform: translate(-50%, -50%);
+    color: #1C2C58;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 0 0 2px rgba(255,255,255,0.8);
+    background: none;
+    width: auto;
+    height: auto;
   }
 
   .is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
@@ -383,19 +591,51 @@
     height: 100%;
     background: linear-gradient(45deg, transparent 45%, #ccc 45%, #ccc 55%, transparent 55%);
     pointer-events: none;
+    border-radius: 50%;
   }
 
-  .is-color .variant__button-label:hover {
-    box-shadow: 0 0 0 1px var(--colorTextBody, #1C2C58);
+  /* Override any conflicting styles for color swatches */
+  .is-color .variant-input .variant__button-label {
+    width: 45px !important;
+    height: 45px !important;
+    min-width: 45px !important;
+    min-height: 45px !important;
+    max-width: 45px !important;
+    max-height: 45px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    background-color: transparent !important;
+  }
+
+  /* Ensure color swatches maintain square shape */
+  .is-color .variant-input {
+    width: 45px !important;
+    height: 45px !important;
+    min-width: 45px !important;
+    min-height: 45px !important;
+    max-width: 45px !important;
+    max-height: 45px !important;
+  }
+
+  /* Force override any background-color from theme */
+  .is-color .variant-input input[type="radio"] + .variant__button-label,
+  .is-color .variant-input input[type="radio"]:checked + .variant__button-label,
+  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
+    background-color: transparent !important;
   }
   .promotion-block-container {
     margin-bottom: 20px;
   }
   .promotion-title {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 400;
     margin: 0;
     white-space: nowrap;
+    margin: 0 0 0px !important;
+    align-self: center;
   }
   .promotion-vouchers {
     display: flex;
@@ -434,6 +674,54 @@
     background-color: rgba(0, 0, 0, 0.5);
     padding: 40px;
     border-radius: 8px;
+  }
+
+  /* Product Reviews Summary Styles */
+  .product-reviews-summary {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 0px;
+    padding: 8px 0;
+  }
+
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .star {
+    color: #FFD700;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .rating-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .reviews-count {
+    display: flex;
+    align-items: center;
+  }
+
+  .reviews-number {
+    font-size: 14px;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .reviews-number:hover {
+    color: #234085;
   }
 
   .service-block {
@@ -574,6 +862,8 @@
     .page-content--product,
     .page-content--product > .page-width,
     .grid {
+
+      padding-bottom: 0 !important;
       overflow: visible !important;
     }
 
@@ -584,6 +874,33 @@
     .product-section .product-single__sticky .sticky {
         position: static; /* Let JS control positioning */
     }
+
+    /* 
+      CRITICAL FIX: Dynamic max-width based on screen size
+      Use CSS calc to make max-width responsive to viewport width
+    */
+    .product-column-content {
+      max-width: min(765px, 50vw) !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+
+    .product__photos img {
+      max-width: min(765px, 50vw) !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      display: block !important;
+      margin: 0 auto !important;
+    }
+
+    /* Force max-width lock during sticky states */
+    .product-column-content[style*="position: fixed"],
+    .product-column-content[style*="position: absolute"] {
+      max-width: min(765px, 50vw) !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
   }
 
   /* START: Mobile layout styles based on design */
@@ -591,6 +908,19 @@
     .product-section > .page-content > .page-width {
       padding-left: 16px;
       padding-right: 16px;
+    }
+
+    /* Mobile responsive width handling */
+    .product-column-content {
+      width: 100% !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+      padding-bottom: 0 !important;
+    }
+
+    .product__photos img {
+      width: 100% !important;
+      box-sizing: border-box !important;
     }
     .product-tags-wrapper {
       position: absolute;
@@ -624,6 +954,7 @@
     .product__main-photos .product-main-slide .media--image {
         height: 100%;
         object-fit: cover;
+        padding-bottom: 20px !important;
     }
 
     /* Mobile thumbnail gallery */
@@ -631,19 +962,77 @@
       display: block !important;
       margin-top: 0px;
       padding: 0 0px;
+      margin-bottom: 20px !important;
     }
     
     .product__thumbs--scroller {
       display: flex !important;
       gap: 8px;
-      overflow-x: auto;
+      overflow-x: scroll !important;
       -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      scrollbar-width: auto !important;
+      padding: 0 0 20px 0 !important;
+      margin: 0 !important;
+    }
+
+    /* Mobile Thumbnail Items - Carousel only */
+    .huan-false.product__thumbs--below .product__thumb-item {
+      width: 120px !important;
+      flex-shrink: 0 !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumb {
+      width: 120px !important;
+      height: 90px !important;
+      border-radius: 3px !important;
+      overflow: hidden !important;
+      display: block !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumb .image-wrap {
+      width: 120px !important;
+      height: 90px !important;
+      padding-bottom: 0 !important;
+      position: relative !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumb .image-wrap img {
+      width: 120px !important;
+      height: 90px !important;
+      object-fit: cover !important;
+      border-radius: 3px !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
     }
     
     .product__thumbs--scroller::-webkit-scrollbar {
-      display: none;
+      height: 8px !important;
+      display: block !important;
+    }
+    
+    .product__thumbs--scroller::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
+      border-radius: 100px !important;
+    }
+    
+    .product__thumbs--scroller::-webkit-scrollbar-thumb {
+      background: #234085 !important;
+      border-radius: 100px !important;
+    }
+    
+    .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
+    }
+    
+    /* Force scrollbar to always show */
+    .product__thumbs--scroller::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 1px;
+      flex-shrink: 0;
     }
     
     .product__thumb-item {
@@ -711,75 +1100,171 @@
       position: relative !important;
     }
     
-    /* Mobile scroller for huan-false */
-    .huan-false .product__thumbs--scroller {
+    
+  /* Desktop scroller for product__thumbs--below - Carousel only */
+  .huan-false.product__thumbs--below .product__thumbs--scroller {
+    display: flex !important;
+    gap: 12px !important;
+    overflow-x: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: auto !important;
+    padding: 0 0 20px 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  
+  .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar {
+    height: 8px !important;
+    display: block !important;
+  }
+  
+  .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-track {
+    background: #F0F1EF !important;
+    border-radius: 100px !important;
+  }
+  
+  .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb {
+    background: #234085 !important;
+    border-radius: 100px !important;
+  }
+  
+  .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b !important;
+  }
+  
+  .huan-false.product__thumbs--below .product__thumbs--scroller {
+    scrollbar-gutter: stable !important;
+  }
+
+
+    /* Thumbnail below layout with carousel - Desktop */
+    .huan-false.product__thumbs--below {
+      width: 100% !important;
+      overflow: hidden !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumbs--scroller {
+      width: 100% !important;
       display: flex !important;
-      gap: 8px !important;
-      overflow-x: auto !important;
+      gap: 12px !important;
+      overflow-x: scroll !important;
       -webkit-overflow-scrolling: touch !important;
-      scrollbar-width: thin !important;
-      scrollbar-color: #1C2C58 #F5F5F5 !important;
-      padding: 0 10px 15px 10px !important;
-      margin: 0 -10px !important;
-    }
-    
-    .huan-false .product__thumbs--scroller::-webkit-scrollbar {
-      height: 4px !important;
-      display: block !important;
-    }
-    
-    .huan-false .product__thumbs--scroller::-webkit-scrollbar-track {
-      background: #F5F5F5 !important;
-      border-radius: 100px !important;
-    }
-    
-    .huan-false .product__thumbs--scroller::-webkit-scrollbar-thumb {
-      background: #1C2C58 !important;
-      border-radius: 100px !important;
-    }
-    
-    .huan-false .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
-      background: #234085 !important;
-    }
-    
-    /* Force scrollbar to show */
-    .huan-false .product__thumbs--scroller {
+      scrollbar-width: auto !important;
+      scrollbar-color: #234085 #F0F1EF !important;
+      padding: 0 0 30px 0 !important;
+      margin: 0 !important;
       scrollbar-gutter: stable !important;
     }
-    
-    /* Mobile scroller for product__thumbs--below */
-    .product__thumbs.product__thumbs--below .product__thumbs--scroller {
-      display: flex !important;
-      gap: 8px !important;
-      overflow-x: auto !important;
-      -webkit-overflow-scrolling: touch !important;
-      scrollbar-width: thin !important;
-      scrollbar-color: #1C2C58 #F5F5F5 !important;
-      padding: 0 10px 15px 10px !important;
-      margin: 0 -10px !important;
+
+    /* Ensure scrollbar has space to display - Carousel only */
+    .product-grid__images .huan-false.product__thumbs--below {
+      margin-bottom: 30px !important;
+      padding-bottom: 10px !important;
     }
-    
-    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar {
-      height: 4px !important;
+
+    /* Add extra space for scrollbar on desktop - Carousel only */
+    .product-grid__images {
+      padding-bottom: 0px !important;
+    }
+
+    /* Ensure scrollbar is visible and has space - Carousel only */
+    .product-grid__images .huan-false.product__thumbs--below .product__thumbs--scroller {
+      margin-bottom: 10px !important;
+    }
+
+    /* Force scrollbar to always show - Carousel only */
+    .huan-false.product__thumbs--below .product__thumbs--scroller::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 1px;
+      flex-shrink: 0;
+    }
+
+    /* Ensure scrollbar is visible - Carousel only */
+    .huan-false.product__thumbs--below .product__thumbs--scroller {
+      scrollbar-gutter: stable !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumb-item {
+      width: 160px !important;
+      flex-shrink: 0 !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumb {
+      width: 160px !important;
+      height: 120px !important;
+      border-radius: 5px !important;
+      overflow: hidden !important;
+      display: block !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumb .image-wrap {
+      width: 160px !important;
+      height: 120px !important;
+      padding-bottom: 0 !important;
+      position: relative !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumb .image-wrap img {
+      width: 160px !important;
+      height: 120px !important;
+      object-fit: cover !important;
+      border-radius: 5px !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+    }
+
+    /* Override theme.css specificity - Carousel only */
+    .huan-false.product__thumbs--below .product__thumb > .image-wrap img {
+      width: 160px !important;
+      height: 120px !important;
+      object-fit: cover !important;
+      border-radius: 5px !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumb-item.is-active .product__thumb,
+    .huan-false.product__thumbs--below .product__thumb-item:active .product__thumb {
+      width: 160px !important;
+      height: 120px !important;
+      flex-shrink: 0 !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumb-item.is-active .product__thumb .image-wrap,
+    .huan-false.product__thumbs--below .product__thumb-item:active .product__thumb .image-wrap {
+      width: 160px !important;
+      height: 120px !important;
+    }
+
+    .huan-false.product__thumbs--below .product__thumb-item.is-active .product__thumb .image-wrap img,
+    .huan-false.product__thumbs--below .product__thumb-item:active .product__thumb .image-wrap img {
+      width: 160px !important;
+      height: 120px !important;
+    }
+
+    /* Force scrollbar to always show for product__thumbs--below - Carousel only */
+    .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar {
+      height: 8px !important;
       display: block !important;
     }
-    
-    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-track {
-      background: #F5F5F5 !important;
+
+    .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
       border-radius: 100px !important;
     }
-    
-    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb {
-      background: #1C2C58 !important;
-      border-radius: 100px !important;
-    }
-    
-    .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+
+    .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb {
       background: #234085 !important;
+      border-radius: 100px !important;
     }
-    
-    .product__thumbs.product__thumbs--below .product__thumbs--scroller {
-      scrollbar-gutter: stable !important;
+
+    .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
     }
     
     /* Active state styling */
@@ -792,7 +1277,7 @@
     }
 
     .product-single__title {
-      font-size: 24px;
+      font-size: 20px;
       line-height: 1.3;
     }
 
@@ -834,13 +1319,72 @@
       margin-bottom: 24px;
     }
     .promotion-vouchers {
-      gap: 8px;
+      display: flex !important;
+      gap: 12px;
       padding: 12px;
+        overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      flex-wrap: nowrap !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
+    
+    .promotion-vouchers::-webkit-scrollbar {
+      display: none;
+    }
+    
     .promotion-title {
-      width: 100%;
-      margin-bottom: 4px;
+      flex-shrink: 0 !important;
+      margin: 0 !important;
       text-align: left;
+      white-space: nowrap !important;
+      min-width: fit-content;
+    }
+    
+    .promotion-voucher-item {
+      flex-shrink: 0 !important;
+      min-width: 80px;
+    }
+    
+    .promotion-voucher-item img {
+      width: 80px;
+      height: 35px;
+      object-fit: contain;
+      display: block;
+    }
+    
+    /* Force all promotion elements to stay in one line */
+    .promotion-vouchers > * {
+      flex-shrink: 0 !important;
+      white-space: nowrap !important;
+    }
+
+    /* Mobile Product Reviews Summary */
+    .product-reviews-summary {
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 0px;
+    }
+
+    .product-rating {
+      gap: 6px;
+    }
+
+    .star {
+      font-size: 14px;
+    }
+
+    .rating-value {
+      font-size: 13px;
+    }
+
+    .reviews-number {
+      font-size: 13px;
     }
 
     .variant__label {
@@ -880,23 +1424,53 @@
     }
     
     /* Comfort top variant styling - Simple approach */
-    .variant-input-wrap[data-index="option2"] .variant__button-label {
+    .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
       color: #212121 !important;
     }
     
     /* Make Comfort top variants share width equally and match height with other blocks - Mobile */
-    .variant-input-wrap[data-index="option2"] {
+    .variant-input-wrap[data-index="option2"]:not(.is-color) {
       display: flex !important;
       flex-direction: row !important;
       gap: 8px !important;
     }
     
-    .variant-input-wrap[data-index="option2"] .variant-input {
+    .variant-input-wrap[data-index="option2"]:not(.is-color) .variant-input {
       flex: 1 !important;
       width: 50% !important;
     }
+
+    /* Size variants in option2 should use column layout like option1 - Mobile */
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center {
+      min-height: 50px !important;
+      padding: 8px 4px !important;
+      gap: 1px !important;
+    }
     
-    .variant-input-wrap[data-index="option2"] .variant__button-label {
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-head,
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-value {
+      display: block !important;
+      width: 100% !important;
+      line-height: 1.2 !important;
+    }
+    
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-head {
+      font-size: 14px !important;
+      margin-bottom: 1px !important;
+    }
+
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center .label-value {
+      font-size: 12px !important;
+      margin-top: 0 !important;
+    }
+
+    /* Force override any conflicting styles - Mobile */
+    .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label.t-center > * {
+      display: block !important;
+      width: 100% !important;
+    }
+    
+    .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
       width: 100% !important;
       min-height: 50px !important;
       display: flex !important;
@@ -907,18 +1481,66 @@
 
     /* Color Swatch Mobile Styles */
     .is-color .variant-input-wrap {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(auto-fit, 40px);
       gap: 6px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 100%;
+      width: fit-content;
     }
 
     .is-color .variant__button-label {
-      width: 40px;
-      height: 40px;
+      width: 40px !important;
+      height: 40px !important;
+      min-width: 40px !important;
+      min-height: 40px !important;
+      max-width: 40px !important;
+      max-height: 40px !important;
+      border-radius: 50% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      background-color: transparent !important;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
     }
 
     .is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
-      width: 14px;
-      height: 14px;
+      font-size: 14px;
+    }
+
+    /* Override any conflicting styles for color swatches - Mobile */
+    .is-color .variant-input .variant__button-label {
+      width: 40px !important;
+      height: 40px !important;
+      min-width: 40px !important;
+      min-height: 40px !important;
+      max-width: 40px !important;
+      max-height: 40px !important;
+      border-radius: 50% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      display: block !important;
+      background-color: transparent !important;
+    }
+
+    /* Ensure color swatches maintain square shape - Mobile */
+    .is-color .variant-input {
+      width: 40px !important;
+      height: 40px !important;
+      min-width: 40px !important;
+      min-height: 40px !important;
+      max-width: 40px !important;
+      max-height: 40px !important;
+    }
+
+    /* Force override any background-color from theme - Mobile */
+    .is-color .variant-input input[type="radio"] + .variant__button-label,
+    .is-color .variant-input input[type="radio"]:checked + .variant__button-label,
+    .is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
+      background-color: transparent !important;
     }
 
     .size-guide-text-dropdown-container,
@@ -1058,6 +1680,186 @@
         flex-shrink: 0;
         border-radius: 5px;
         background: #F5F9FF;
+    }
+
+    /* Mobile thumbnail below layout */
+    .product__thumbs--below .product__thumb-item {
+      width: 120px !important;
+      flex-shrink: 0 !important;
+    }
+
+    .product__thumbs--below .product__thumb {
+      width: 120px !important;
+      height: 90px !important;
+      border-radius: 3px !important;
+      overflow: hidden !important;
+      display: block !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .product__thumbs--below .product__thumb .image-wrap {
+      width: 120px !important;
+      height: 90px !important;
+      padding-bottom: 0 !important;
+      position: relative !important;
+    }
+
+    .product__thumbs--below .product__thumb .image-wrap img {
+      width: 120px !important;
+      height: 90px !important;
+      object-fit: cover !important;
+      border-radius: 3px !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+    }
+
+    /* Override theme.css specificity for mobile */
+    .product__thumbs--below .product__thumb > .image-wrap img {
+      width: 120px !important;
+      height: 90px !important;
+      object-fit: cover !important;
+      border-radius: 3px !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+    }
+
+    .product__thumbs--below .product__thumb-item.is-active .product__thumb,
+    .product__thumbs--below .product__thumb-item:active .product__thumb {
+      width: 120px !important;
+      height: 90px !important;
+      flex-shrink: 0 !important;
+    }
+
+    .product__thumbs--below .product__thumb-item.is-active .product__thumb .image-wrap,
+    .product__thumbs--below .product__thumb-item:active .product__thumb .image-wrap {
+      width: 120px !important;
+      height: 90px !important;
+    }
+
+    .product__thumbs--below .product__thumb-item.is-active .product__thumb .image-wrap img,
+    .product__thumbs--below .product__thumb-item:active .product__thumb .image-wrap img {
+      width: 120px !important;
+      height: 90px !important;
+    }
+
+    /* Mobile scroller for product__thumbs--below - Carousel only */
+    .huan-false.product__thumbs--below .product__thumbs--scroller {
+      display: flex !important;
+      gap: 8px !important;
+      overflow-x: scroll !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: auto !important;
+      scrollbar-color: #234085 #F0F1EF !important;
+      padding: 0 10px 25px 10px !important;
+      margin: 0 -10px !important;
+    }
+    
+    .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar {
+      height: 8px !important;
+      display: block !important;
+    }
+    
+    .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
+      border-radius: 100px !important;
+    }
+    
+    .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb {
+      background: #234085 !important;
+      border-radius: 100px !important;
+    }
+    
+    .huan-false.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
+    }
+    
+    .huan-false.product__thumbs--below .product__thumbs--scroller {
+      scrollbar-gutter: stable !important;
+    }
+
+    /* Ensure scrollbar has space to display on mobile - Carousel only */
+    .product-grid__images .huan-false.product__thumbs--below {
+      margin-bottom: 0px !important;
+      padding-bottom: 0px !important;
+    }
+
+    /* Add extra space for scrollbar on mobile - Carousel only */
+    .product-grid__images {
+      padding-bottom: 0px !important;
+    }
+
+    /* Ensure scrollbar is visible and has space on mobile - Carousel only */
+    .product-grid__images .huan-false.product__thumbs--below .product__thumbs--scroller {
+      margin-bottom: 10px !important;
+    }
+
+    /* Force scrollbar to always show on mobile - Carousel only */
+    .huan-false.product__thumbs--below .product__thumbs--scroller {
+      overflow-x: scroll !important;
+      scrollbar-width: auto !important;
+    }
+
+    /* Mobile scroller for huan-false - Carousel only */
+    .huan-false .product__thumbs--scroller {
+      display: flex !important;
+      gap: 8px !important;
+      overflow-x: scroll !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: auto !important;
+      scrollbar-color: #234085 #F0F1EF !important;
+      padding: 0 10px 25px 10px !important;
+      margin: 0 -10px !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar {
+      height: 8px !important;
+      display: block !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
+      border-radius: 100px !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar-thumb {
+      background: #234085 !important;
+      border-radius: 100px !important;
+    }
+    
+    .huan-false .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
+    }
+    
+    .huan-false .product__thumbs--scroller {
+      scrollbar-gutter: stable !important;
+    }
+
+    /* Force scrollbar to always show for huan-false on mobile - Carousel only */
+    .huan-false .product__thumbs--scroller::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 1px;
+      flex-shrink: 0;
+    }
+
+    /* Ensure scrollbar has space to display for huan-false - Carousel only */
+    .product-grid__images .huan-false {
+      margin-bottom: 30px !important;
+      padding-bottom: 10px !important;
+    }
+
+    /* Override theme.css for huan-false mobile thumbnails - Carousel only */
+    .huan-false .product__thumb > .image-wrap img {
+      width: 120px !important;
+      height: 90px !important;
+      object-fit: cover !important;
+      border-radius: 3px !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
     }
   }
   /* END: Mobile layout styles */
@@ -1284,6 +2086,23 @@
                   {%- endif -%}
                 </div>
               {%- endif -%}
+
+              <!-- Product Reviews Section -->
+              <div class="product-reviews-summary">
+                <div class="product-rating">
+                  <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                  </div>
+                  <span class="rating-value">4.8</span>
+                </div>
+                <div class="reviews-count">
+                  <span class="reviews-number">(128 đánh giá)</span>
+                </div>
+              </div>
 
               {%- if isModal -%}
                 <p class="h2 product-single__title">
@@ -2336,6 +3155,43 @@ function initAdvancedSticky(productSection) {
         // Measure the inner content elements, not the grid containers which are equal height.
         const imageColHeight = imageColumnInner.offsetHeight;
         const infoColHeight = infoColumnInner.offsetHeight;
+        
+        // Store original widths to maintain consistent sizing during sticky states
+        let imageColOriginalWidth = imageColumnInner.offsetWidth;
+        const infoColOriginalWidth = infoColumnInner.offsetWidth;
+        
+        // For carousel, get the actual rendered width from CSS computed styles
+        const carouselContainer = imageColumnInner.querySelector('.product__photos--below') || 
+                                 imageColumnInner.querySelector('.product-slideshow');
+        if (carouselContainer) {
+          // Get computed style to see the actual rendered width
+          const computedStyle = window.getComputedStyle(carouselContainer);
+          const computedWidth = parseFloat(computedStyle.width);
+          
+          // Debug: log the widths to console
+          console.log('Carousel debug:', {
+            offsetWidth: imageColumnInner.offsetWidth,
+            computedWidth: computedWidth,
+            carouselContainer: carouselContainer
+          });
+          
+          // Use the actual computed width - this respects the responsive CSS max-width
+          if (computedWidth && computedWidth > 0) {
+            imageColOriginalWidth = computedWidth; // This already respects min(765px, 50vw)
+            console.log('Using responsive carousel width:', computedWidth);
+          } else {
+            // Fallback: try to get width from the main image
+            const mainImage = carouselContainer.querySelector('.product-main-slide img') || 
+                             carouselContainer.querySelector('.product__photo img');
+            if (mainImage) {
+              const imageWidth = mainImage.naturalWidth || mainImage.offsetWidth;
+              imageColOriginalWidth = Math.min(imageWidth, 765); // Apply reasonable max
+            } else {
+              // Last fallback: use container width with reasonable max
+              imageColOriginalWidth = Math.min(imageColOriginalWidth, 765);
+            }
+          }
+        }
             
         // Exit if columns are of similar height, as no sticky effect is needed.
         if (Math.abs(imageColHeight - infoColHeight) < 100) {
@@ -2344,6 +3200,7 @@ function initAdvancedSticky(productSection) {
 
         const shortCol = imageColHeight > infoColHeight ? infoColumn : imageColumn;
         const shortColInner = imageColHeight > infoColHeight ? infoColumnInner : imageColumnInner;
+        const shortColOriginalWidth = imageColHeight > infoColHeight ? infoColOriginalWidth : imageColOriginalWidth;
         
         // **FIX**: Set position relative on the container of the element that will be docked.
         // This makes it the positioning context for its absolutely positioned child.
@@ -2368,13 +3225,13 @@ function initAdvancedSticky(productSection) {
                 shortColInner.style.position = 'fixed';
                 shortColInner.style.top = `${headerOffset}px`;
                 shortColInner.style.bottom = 'auto';
-                shortColInner.style.width = `${shortCol.offsetWidth}px`;
+                shortColInner.style.width = `${shortColOriginalWidth}px`; // Use stored original width
             } else if (scrollY >= stopPoint - buffer) {
                 // State 2: DOCKED. The element is positioned absolutely to the bottom of its parent container.
                 shortColInner.style.position = 'absolute';
                 shortColInner.style.top = 'auto';
                 shortColInner.style.bottom = '0px';
-                shortColInner.style.width = '100%';
+                shortColInner.style.width = `${shortColOriginalWidth}px`; // Use stored original width
             } else {
                 // State 3: DEFAULT. The element is in its normal static position.
                 shortColInner.style.position = '';

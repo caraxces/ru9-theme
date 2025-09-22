@@ -50,7 +50,16 @@
         },
         "icon_with_text_b6k6a4": {
           "type": "icon_with_text",
-          "settings": {}
+          "settings": {
+            "icon_1_heading": "100 đêm ngủ thử",
+            "icon_2_heading": "Miễn phí vận chuyển *",
+            "icon_3_heading": "Bảo hành dài lâu",
+            "icon_4_heading": "Chất liệu Foam cao cấp",
+            "icon_size": 25,
+            "icon_alignment": "center",
+            "grid_columns": "2",
+            "show_icon_4": true
+          }
         },
         "carousel_modal_B8Mr9e": {
           "type": "carousel_modal",
@@ -70,7 +79,23 @@
       "settings": {
         "section_width": "page-width",
         "customize_width": 1800,
+        "bundle_products": [
+          "chan-microfiber",
+          "bo-vo-goi-cotton-sateen",
+          "foam-original",
+          "goi-may"
+        ],
         "sku_enable": false,
+        "combo_title": "Combo bao gồm các sản phẩm:",
+        "cta_button_text": "BẮT ĐẦU TẠO COMBO",
+        "service_icon_1": "shopify://shop_images/Layer_1_3.svg",
+        "service_text_1": "100 đêm ngủ thử",
+        "service_icon_2": "shopify://shop_images/Layer_1_4.svg",
+        "service_text_2": "Miễn phí vận chuyển",
+        "service_icon_3": "shopify://shop_images/Layer_1_5.svg",
+        "service_text_3": "Bảo hành dài lâu",
+        "service_icon_4": "shopify://shop_images/Layer_1_6.svg",
+        "service_text_4": "Thanh toán linh hoạt",
         "image_position": "left",
         "product_zoom_enable": true,
         "product_carousel_enable": false,
@@ -80,6 +105,8 @@
         "mobile_layout": "partial",
         "enable_video_looping": true,
         "product_video_style": "muted",
+        "enable_sticky_add_to_cart": false,
+        "hide_payment_button_mobile": false,
         "image_size": "large"
       }
     }

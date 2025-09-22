@@ -9,6 +9,54 @@
  */
 {
   "sections": {
+    "slideshow_XKY6Pb": {
+      "type": "slideshow",
+      "blocks": {
+        "image_kaJk7g": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "https://rubaby.vn",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "{{ collection.metafields.custom.banner_desktop.value }}",
+            "image_mobile": "{{ collection.metafields.custom.banner_mobile.value }}",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_kaJk7g"
+      ],
+      "settings": {
+        "section_height": "natural",
+        "mobile_height": "500px",
+        "style": "dots",
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "lazyload_images": true,
+        "show_icon_text_bar": true,
+        "icon_bar_background_color": "#fffbeb",
+        "icon_1_title": "100 đêm ngủ thử",
+        "icon_1_type": "sleep",
+        "icon_1_color": "#007bff",
+        "icon_1_image": "shopify://shop_images/Layer_1_1.svg",
+        "icon_2_title": "Miễn phí vận chuyển",
+        "icon_2_type": "payment",
+        "icon_2_color": "#007bff",
+        "icon_2_image": "shopify://shop_images/Layer_1.svg",
+        "icon_3_title": "Thanh toán linh hoạt/Trả góp không lãi suất",
+        "icon_3_type": "shipping",
+        "icon_3_color": "#007bff",
+        "icon_3_image": "shopify://shop_images/Layer_1_2.svg"
+      }
+    },
     "collection-header": {
       "type": "collection-header",
       "settings": {
@@ -17,7 +65,7 @@
         "max_width_desc": 2000,
         "align_text": "left",
         "enable": true,
-        "collection_image_enable": true,
+        "collection_image_enable": false,
         "show_collection_description": false
       }
     },
@@ -45,6 +93,24 @@
         "copy_button_y": 92
       }
     },
+    "main_collection_custom_9gqxPa": {
+      "type": "main-collection-custom",
+      "name": "Coll custom",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "enable_sidebar": true,
+        "collapsed": true,
+        "filter_style": "sidebar",
+        "enable_color_swatches": false,
+        "enable_swatch_labels": true,
+        "enable_sort": true,
+        "enable_collection_count": true,
+        "per_row": 3,
+        "rows_per_page": 2,
+        "default_sold_count": 0
+      }
+    },
     "main-collection": {
       "type": "main-collection",
       "blocks": {
@@ -70,6 +136,7 @@
         "subcollections",
         "product_grid"
       ],
+      "disabled": true,
       "settings": {
         "section_width": "customize_width",
         "customize_width": 1280,
@@ -92,339 +159,210 @@
         "show_collection_description": true
       }
     },
-    "banner_with_content_NiwahU": {
-      "type": "banner-with-content",
-      "disabled": true,
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1010,
-        "image": "shopify://shop_images/banner-with-content-banner.png",
-        "image_mobile": "shopify://shop_images/banner-with-content-banner-mobile.png",
-        "title": "Đâu là chiếc nệm phù hợp cho bạn?",
-        "text": "<p>Cùng Ru9 khám phá và chọn ra chiếc nệm dành riêng cho bạn.</p>",
-        "btn_text": "Xem thêm",
-        "btn_link": ""
-      }
-    },
-    "compare_product_UeQD6G": {
-      "type": "compare-product",
+    "reviews_carousel_eiGzK6": {
+      "type": "reviews-carousel",
       "blocks": {
-        "product_UUa9LH": {
-          "type": "product",
+        "review_FTCDtf": {
+          "type": "review",
           "settings": {
-            "product_title": "NỆM ORIGINAL PRO",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": ""
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
           }
         },
-        "product_CCLpHU": {
-          "type": "product",
+        "review_pcJFfq": {
+          "type": "review",
           "settings": {
-            "product_title": "NỆM ORIGINAL PRO",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": ""
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
           }
         },
-        "product_Kk7DYj": {
-          "type": "product",
+        "review_eKtgB3": {
+          "type": "review",
           "settings": {
-            "product_title": "NỆM ORIGINAL PRO",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": ""
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
           }
         },
-        "product_DWnpfQ": {
-          "type": "product",
+        "review_XWnMcE": {
+          "type": "review",
           "settings": {
-            "product_title": "NỆM ORIGINAL PRO",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": ""
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
+          }
+        },
+        "review_AGz3xG": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
+          }
+        },
+        "review_gxBhVD": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Phuong Nguyen",
+            "review_text": "<p></p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "product_UUa9LH",
-        "product_CCLpHU",
-        "product_Kk7DYj",
-        "product_DWnpfQ"
+        "review_FTCDtf",
+        "review_pcJFfq",
+        "review_eKtgB3",
+        "review_XWnMcE",
+        "review_AGz3xG",
+        "review_gxBhVD"
       ],
-      "disabled": true,
+      "name": "Reviews carousel",
       "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1120,
-        "title": "So sánh các dòng nệm",
-        "description": ""
+        "heading": "<p>Hơn <strong>50,000</strong> Khách Hàng<br/>Và <strong>30,000</strong> Đánh Giá 5 Sao Toàn Quốc</p>"
       }
     },
-    "text_with_icons_9yd9VT": {
-      "type": "text-with-icons",
+    "super_service_prmmGy": {
+      "type": "super-service",
       "blocks": {
-        "text_block_KiEpc6": {
-          "type": "text_block",
+        "service_item_VkkMW3": {
+          "type": "service_item",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-1.png",
-            "title": "100 đêm ngủ thử không rủi ro",
-            "text": "<p>Nếu bạn không hài lòng, chúng tôi sẽ nhận lại nệm và hoàntiền 100%.</p>"
+            "icon": "shopify://shop_images/Layer_1_3.svg",
+            "item_title": "100 đêm ngủ thử",
+            "item_note": "",
+            "item_description": "<p>Trải nghiệm sản phẩm ngay tại nhà với cam kết đổi trả linh hoạt.</p>",
+            "item_link": ""
           }
         },
-        "text_block_cLLCJf": {
-          "type": "text_block",
+        "service_item_gnyMfa": {
+          "type": "service_item",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-2.png",
-            "title": "Miễn phí vận chuyển từ 1.500.000đ",
-            "text": "<p>Bạn chẳng cần lo lắng đến việc nhét lại nệm vào thùng đâu.</p>"
+            "icon": "shopify://shop_images/Layer_1_4.svg",
+            "item_title": "Miễn phí vận chuyển",
+            "item_note": "(từ 1.500.000vnd)",
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>",
+            "item_link": ""
           }
         },
-        "text_block_4AREAP": {
-          "type": "text_block",
+        "service_item_9CXTBR": {
+          "type": "service_item",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-3.png",
-            "title": "Bảo hành dài lâu",
-            "text": "<p>Nệm của Ru9 luôn êm ái và bền bỉ với thời gian.</p>"
+            "icon": "shopify://shop_images/Layer_1_5.svg",
+            "item_title": "Bảo hành dài lâu",
+            "item_note": "",
+            "item_description": "<p>Mỗi chiếc nệm được bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_etJgdn": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_6.svg",
+            "item_title": "Thanh toán linh hoạt",
+            "item_note": "",
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>",
+            "item_link": ""
           }
         }
       },
       "block_order": [
-        "text_block_KiEpc6",
-        "text_block_cLLCJf",
-        "text_block_4AREAP"
+        "service_item_VkkMW3",
+        "service_item_gnyMfa",
+        "service_item_9CXTBR",
+        "service_item_etJgdn"
       ],
-      "disabled": true,
+      "name": "Super Service",
       "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1000,
-        "bg": "#f2fbf8",
         "title": "An tâm hơn với dịch vụ vượt trội",
-        "align_text": "center",
-        "desktop_columns_per_row": 3,
-        "icon_color": "#000000",
-        "button_label": "",
-        "button_link": "",
-        "divider": false,
-        "space_around": true
+        "background_color": "#f5f9ff"
       }
     },
-    "text_with_icons_9eXeGp": {
-      "type": "text-with-icons",
+    "collections_listing_jRVgyj": {
+      "type": "collections-listing",
       "blocks": {
-        "text_block_9m9Q4j": {
-          "type": "text_block",
+        "collection_NYndDT": {
+          "type": "collection",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-1.png",
-            "title": "100 đêm ngủ thử không rủi ro",
-            "text": "<p>Nếu bạn không hài lòng, chúng tôi sẽ nhận lại nệm và hoàn tiền.</p>"
+            "collection": "nem"
           }
         },
-        "text_block_P6Uiaq": {
-          "type": "text_block",
+        "collection_8VggX9": {
+          "type": "collection",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-2.png",
-            "title": "Miễn phí vận chuyển từ 1.500.000đ",
-            "text": "<p>Ru9 miễn phí vận chuyển từ 1.500.000đ nên bạn chỉ cần chọn sản phẩm mình thích!</p>"
+            "collection": "goi"
           }
         },
-        "text_block_NUDTVt": {
-          "type": "text_block",
+        "collection_KMFTnL": {
+          "type": "collection",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/text-w-icon-3.png",
-            "title": "Bảo hành dài lâu",
-            "text": "<p>Nệm của Ru9 luôn êm ái và bền bỉ với thời gian.</p>"
+            "collection": "chan"
           }
         },
-        "text_block_33CB9n": {
-          "type": "text_block",
+        "collection_Nkh6hi": {
+          "type": "collection",
           "settings": {
-            "icon": "chat",
-            "image_icon": "shopify://shop_images/payment-icon.png",
-            "title": "Thanh toán linh hoạt",
-            "text": "<p>Mua sắm dễ dàng với đa dạng hình thức thanh toán. <br/><br/></p>"
+            "collection": "phu-kien"
+          }
+        },
+        "collection_wFjyRp": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "4the"
           }
         }
       },
       "block_order": [
-        "text_block_9m9Q4j",
-        "text_block_P6Uiaq",
-        "text_block_NUDTVt",
-        "text_block_33CB9n"
+        "collection_NYndDT",
+        "collection_8VggX9",
+        "collection_KMFTnL",
+        "collection_Nkh6hi",
+        "collection_wFjyRp"
       ],
+      "name": "Collections Listing",
       "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1000,
-        "bg": "",
-        "title": "An tâm hơn với dịch vụ vượt trội",
-        "align_text": "center",
-        "desktop_columns_per_row": 4,
-        "icon_color": "#000000",
-        "button_label": "",
-        "button_link": "",
-        "divider": false,
-        "space_around": false
-      }
-    },
-    "faq_A7dpqH": {
-      "type": "faq",
-      "blocks": {
-        "question_re4fUV": {
-          "type": "question",
-          "settings": {
-            "title": "100 đêm ngủ thử là gì?",
-            "text": "<p>Ru9 hiểu rằng, chỉ 20 – 30 phút tại cửa hàng không thể cho bạn cảm nhận trọn vẹn về một sản phẩm sẽ gắn bó với bạn suốt nhiều năm. Vì vậy, chính sách 100 đêm ngủ thử của Ru9 sẽ cho phép khách hàng được ngủ thử và trải nghiệm sản phẩm của Ru9 ngay tại phòng ngủ nhà mình. Và nếu không ưng ý, bạn có thể trả lại sản phẩm và nhận số tiền hoàn = tiền đã thanh toán - phí thu hồi.</p>"
-          }
-        },
-        "question_fYyR84": {
-          "type": "question",
-          "settings": {
-            "title": "Chi phí vận chuyển của Ru9 là bao nhiêu?",
-            "text": "<p>Tuỳ thuộc vào địa chỉ vận chuyển, Ru9 sẽ có chi phí áp dụng riêng. Chi tiết về chi phí tới các tỉnh / thành phố, khách hàng vui lòng tham khảo <a href=\"/pages/chinh-sach-van-chuyen\" title=\"Chính sách vận chuyển\"> <span style=\"text-decoration:underline\">tại đây</span></a></p>"
-          }
-        },
-        "question_HKy3rr": {
-          "type": "question",
-          "settings": {
-            "title": "Chính sách giao hàng tiêu chuẩn của Ru9?",
-            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.Giao hàng tại Hà Nội và TPHCM: 2-3 ngày</p><p>Giao hàng ở tỉnh: 4-6 ngày</p><p>Giao hàng ở khu vực cận HN và TPHCM: 2-3 ngày </p><p><em>*Khu vực cận HN và TPHCM bao gồm: </em></p><p>(Gồm các tỉnh sau: Vũng Tàu, Bình Dương, Bình Phước, Đồng Nai, Tây Ninh, Long An, Bến Tre, Tiền Giang, Hà Nam, Nam Định, Bắc Ninh, Hưng Yên, Hải Dương, Ninh Bình, Hòa Bình, Phú Thọ, Vĩnh Phúc, Bắc Giang, Thái Nguyên)</p>"
-          }
-        }
-      },
-      "block_order": [
-        "question_re4fUV",
-        "question_fYyR84",
-        "question_HKy3rr"
-      ],
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 800,
-        "title": "FAQs"
-      }
-    },
-    "testimonials_AdcbcV": {
-      "type": "testimonials",
-      "blocks": {
-        "testimonial_Ek8xHN": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "5-stars",
-            "testimonial": "<p>Mình đã dùng nệm Original được hơn 6 tháng và hoàn toàn hài lòng với sự khác biệt. Nệm hỗ trợ cơ thể cực tốt, nhất là vùng lưng và cổ, giúp mình không còn đau nhức khi thức dậy. Mỗi đêm nằm lên là cảm giác như được thư giãn toàn bộ cơ thể.</p>",
-            "image": "shopify://shop_images/Ng_c_Lan.png",
-            "author": "Ngọc Lan",
-            "author_info": "Nệm Original",
-            "date": "5 tháng 7, 2024"
-          }
-        },
-        "testimonial_nMGKnp": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "5-stars",
-            "testimonial": "<p>Tấm phủ rất vừa, êm, vải mịn và màu giống với mô tả. Nếu biết có tấm phủ bảo vệ nệm thì mình đã không vất vả với mỗi lần giặt nệm rồi </p>",
-            "image": "shopify://shop_images/Ph_ng_Vy.png",
-            "author": "Phương Vy Phạm Ngọc",
-            "author_info": "Tấm Bảo Vệ",
-            "date": "10 tháng 10, 2024"
-          }
-        },
-        "testimonial_KgBtUW": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "5-stars",
-            "testimonial": "<p>Thiết kế tối ưu của gối Niu thực sự ấn tượng. Gối không quá cao hay thấp, giúp mình có được tư thế ngủ đúng, giảm căng thẳng ở vùng cổ và vai gáy rõ rệt.</p>",
-            "image": "shopify://shop_images/Th_o_Nguyen.png",
-            "author": "Nguyễn Thảo Nguyên",
-            "author_info": "Gối Niu",
-            "date": "11 tháng 11, 2019"
-          }
-        },
-        "testimonial_tHpjhK": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "5-stars",
-            "testimonial": "<p>Mỗi lần đi công tác hay du lịch xa, gối cổ Didi luôn là vật dụng không thể thiếu trong hành lý của tôi. Đặc biệt, phần vỏ gối dễ dàng tháo ra và giặt, rất tiện lợi và sạch sẽ. Chắc chắn sau này mình vẫn sẽ ủng hộ Ru9 👍🏻👍🏻👍</p>",
-            "image": "shopify://shop_images/Qu_nh_Anh.png",
-            "author": "Quỳnh Anh",
-            "author_info": "Gối Cổ Du Lịch Didi",
-            "date": "1 tháng 10, 2022"
-          }
-        },
-        "testimonial_pMPYC8": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "5-stars",
-            "testimonial": "<p>Start up việt nên ủng hộ hàng Việt.  Không biết phải từ chất liệu bạch đàn không mà mình đắp rất mát. Phù hợp với ai đắp chăn quanh năm như mình.Rất recommend mọi người dùng chăn này nha !</p>",
-            "image": "shopify://shop_images/H_ng_Qu_nh.png",
-            "author": "Hương Quỳnh",
-            "author_info": "Chăn bạch Đàn",
-            "date": "10 tháng 10, 2023"
-          }
-        },
-        "testimonial_DmWWF8": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "5-stars",
-            "testimonial": "<p>Chăn này mình dùng mát cực nhé, nhưng cũng không bị quá lạnh khi nằm quạt hay máy lạnh. Nói chúng 100đ, không có gì để chê luôn</p>",
-            "image": "shopify://shop_images/M_Thanh.png",
-            "author": "Mỹ Thanh",
-            "author_info": "Chăn Lạnh",
-            "date": "10 tháng 1, 2024"
-          }
-        },
-        "testimonial_hNWNDr": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "5-stars",
-            "testimonial": "<p>Lúc đầu mình cũng hơi lấn cấn không biết nên mua hay không tại thấy nhìn thiết kế hơi xấu. Nhưng mà mua xứng đáng lắm nhé, tại mình hay đi máy bay đeo cái nàu vào tai đỡ bị đau vì tiếng ồn, phần cổ cũng được giữ và không bị mỏi</p>",
-            "image": "shopify://shop_images/Hoang_Anh.png",
-            "author": "Hoàng Anh",
-            "author_info": "Gối Cổ 4The",
-            "date": "10 tháng 4, 2021"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_Ek8xHN",
-        "testimonial_nMGKnp",
-        "testimonial_KgBtUW",
-        "testimonial_tHpjhK",
-        "testimonial_pMPYC8",
-        "testimonial_DmWWF8",
-        "testimonial_hNWNDr"
-      ],
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1170,
-        "title": "Đánh giá khách hàng",
-        "align_text": "left",
-        "round_images": false,
-        "color_background": "rgba(0,0,0,0)"
+        "title": "Có thể bạn cũng thích",
+        "title_color": "#1c2c58",
+        "text_color": "#212121"
       }
     }
   },
   "order": [
+    "slideshow_XKY6Pb",
     "collection-header",
     "independent_webhook_popup_kNBhzQ",
+    "main_collection_custom_9gqxPa",
     "main-collection",
     "collection-content",
-    "banner_with_content_NiwahU",
-    "compare_product_UeQD6G",
-    "text_with_icons_9yd9VT",
-    "text_with_icons_9eXeGp",
-    "faq_A7dpqH",
-    "testimonials_AdcbcV"
+    "reviews_carousel_eiGzK6",
+    "super_service_prmmGy",
+    "collections_listing_jRVgyj"
   ]
 }

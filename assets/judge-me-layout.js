@@ -100,7 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const widget = document.querySelector('.jdgm-rev-widg');
         if (widget && widget.offsetParent !== null) {
             // Wait an extra moment for Judge.me's own JS to finish arranging things
-            setTimeout(enhanceLayout, 200); 
+            setTimeout(() => {
+                enhanceLayout();
+                restructureReviewCards(); // Restructure individual cards
+            }, 200); 
             clearInterval(widgetPoller);
         }
         
@@ -110,4 +113,60 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Could not find visible Judge.me widget to enhance.');
         }
     }, 500);
+
+const restructureReviewCards = () => {
+    // Find reviews that haven't been restructured yet
+    const reviews = document.querySelectorAll('.jdgm-rev:not(.js-card-enhanced)');
+    if (reviews.length === 0) return;
+
+    console.log(`🚀 Found ${reviews.length} new review cards to restructure.`);
+
+    reviews.forEach(review => {
+        // Find the main components
+        const picContainer = review.querySelector('.jdgm-rev__pics');
+        const header = review.querySelector('.jdgm-rev__header');
+        const content = review.querySelector('.jdgm-rev__content'); // This contains the body
+
+        // Create the right column that will hold ALL text content
+        const rightColumn = document.createElement('div');
+        rightColumn.className = 'jdgm-custom-right-column-content';
+
+        // Re-assemble the text content into the new right column in the correct order
+        if (header) {
+            const ratingRow = document.createElement('div');
+            ratingRow.className = 'jdgm-custom-rating-row';
+            
+            const rating = header.querySelector('.jdgm-rev__rating');
+            const timestamp = header.querySelector('.jdgm-rev__timestamp');
+            if (rating) ratingRow.appendChild(rating);
+            if (timestamp) ratingRow.appendChild(timestamp);
+            rightColumn.appendChild(ratingRow);
+
+            const authorWrapper = header.querySelector('.jdgm-rev__author-wrapper');
+            if (authorWrapper) rightColumn.appendChild(authorWrapper);
+        }
+
+        // IMPORTANT: Append the body content to the right column
+        if (content) {
+            rightColumn.appendChild(content);
+        }
+
+        // Clean up the original header which is now empty
+        if (header) {
+            header.remove();
+        }
+
+        // Prepend the picture container (left column) and append the new right column
+        if (picContainer) {
+            review.prepend(picContainer);
+        }
+        review.appendChild(rightColumn);
+
+        review.classList.add('js-card-enhanced');
+    });
+};
+
+// Run restructuring on an interval to catch lazily-loaded reviews.
+setInterval(restructureReviewCards, 1000);
+
 });

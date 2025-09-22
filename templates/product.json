@@ -106,7 +106,21 @@
         },
         "showroom_dropdown_nTzTtH": {
           "type": "showroom_dropdown",
-          "settings": {}
+          "settings": {
+            "title": "Hệ thống cửa hàng",
+            "showroom_1_name": "Showroom 1",
+            "showroom_1_address": "",
+            "showroom_1_phone": "0964777910",
+            "showroom_1_map_link": "",
+            "showroom_2_name": "Showroom 2",
+            "showroom_2_address": "",
+            "showroom_2_phone": "0964777910",
+            "showroom_2_map_link": "",
+            "showroom_3_name": "Showroom 3",
+            "showroom_3_address": "",
+            "showroom_3_phone": "0964777940",
+            "showroom_3_map_link": ""
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -165,12 +179,15 @@
         "icon_with_text_b6k6a4",
         "carousel_modal_B8Mr9e"
       ],
+      "disabled": true,
       "settings": {
         "section_width": "page-width",
         "customize_width": 1800,
         "enable_sticky_add_to_cart": true,
         "hide_payment_button_mobile": true,
         "sku_enable": false,
+        "product_subtitle": "",
+        "custom_text": "",
         "image_position": "left",
         "image_size": "large",
         "product_zoom_enable": true,
@@ -182,6 +199,43 @@
         "mobile_layout": "partial",
         "enable_video_looping": true,
         "product_video_style": "muted"
+      }
+    },
+    "main_product_bundle_y4WGaj": {
+      "type": "main-product-bundle",
+      "name": "Product Bundle",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "bundle_products": [
+          "chan-lanh",
+          "goi-om",
+          "foam-original",
+          "bo-ga-giuong-cotton-sateen"
+        ],
+        "sku_enable": true,
+        "combo_title": "Combo bao gồm các sản phẩm:",
+        "cta_button_text": "BẮT ĐẦU TẠO COMBO",
+        "service_icon_1": "shopify://shop_images/Layer_1_3.svg",
+        "service_text_1": "100 đêm ngủ thử",
+        "service_icon_2": "shopify://shop_images/Layer_1_4.svg",
+        "service_text_2": "Miễn phí vận chuyển",
+        "service_icon_3": "shopify://shop_images/Layer_1_5.svg",
+        "service_text_3": "Bảo hành dài lâu",
+        "service_icon_4": "shopify://shop_images/Layer_1_6.svg",
+        "service_text_4": "Thanh toán linh hoạt",
+        "image_position": "left",
+        "product_zoom_enable": true,
+        "product_carousel_enable": false,
+        "thumbnail_position": "beside",
+        "thumbnail_height": 100,
+        "thumbnail_arrows": false,
+        "mobile_layout": "partial",
+        "enable_video_looping": false,
+        "product_video_style": "muted",
+        "enable_sticky_add_to_cart": false,
+        "hide_payment_button_mobile": false,
+        "image_size": "medium"
       }
     },
     "product_hotspot_XzDEYy": {
@@ -891,7 +945,10 @@
       "blocks": {
         "judge_me_reviews_review_widget_LGBKUn": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200
+          }
         }
       },
       "block_order": [
@@ -952,6 +1009,7 @@
   "order": [
     "countdown_Gwp9bc",
     "main",
+    "main_product_bundle_y4WGaj",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",
     "product_hotspot_BGaNkf",

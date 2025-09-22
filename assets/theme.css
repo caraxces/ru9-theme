@@ -10040,9 +10040,8 @@ details[open] > .megamenu .appear-animation {
 }
 
 .drawer .js-qty__wrapper {
-  background-color: transparent;
+  background-color: white;
   border-color: var(--colorDrawerBorder);
-  max-width: 82px;
 }
 
 .drawer .js-qty__num {
@@ -16215,7 +16214,6 @@ html[dir="rtl"] .product-single__meta .rte {
 /* Target option 2 specifically for Comfort top */
 .variant-input-wrap[data-index="option2"] .variant__button-label .label-head {
   font-weight: 700 !important;
-  text-transform: uppercase !important;
 }
 
 /* More specific targeting for Comfort top */
@@ -16223,7 +16221,6 @@ html[dir="rtl"] .product-single__meta .rte {
 .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label .label-head,
 .variant-input-wrap[data-index="option2"] .variant-input input[type="radio"] + .variant__button-label .label-head {
   font-weight: 700 !important;
-  text-transform: uppercase !important;
   color: #1C2C58 !important;
 }
 
@@ -16231,9 +16228,8 @@ html[dir="rtl"] .product-single__meta .rte {
 .variant-input-wrap[data-index="option2"] .variant__button-label .label-head,
 .variant-input-wrap[data-index="option2"] .variant-input .variant__button-label .label-head,
 .variant-input-wrap[data-index="option2"] .variant-input input[type="radio"] + .variant__button-label .label-head {
-  font-weight: 700 !important !important;
-  text-transform: uppercase !important !important;
-  color: #1C2C58 !important !important;
+  font-weight: 700 !important;
+  color: #1C2C58 !important;
 }
 
 /* Universal targeting for any option 2 variant */
@@ -16241,9 +16237,8 @@ html[dir="rtl"] .product-single__meta .rte {
 [data-index="option2"] .variant__button-label .label-head,
 [data-index="option2"] .variant-input .label-head,
 [data-index="option2"] .variant-input .variant__button-label .label-head {
-  font-weight: 700 !important !important;
-  text-transform: uppercase !important !important;
-  color: #1C2C58 !important !important;
+  font-weight: 700 !important;
+  color: #1C2C58 !important;
 }
 
 /* Comfort top variant styling - Simple approach */
@@ -16332,7 +16327,7 @@ html[dir="rtl"] .product-single__meta .rte {
 .product__thumbs--below .product__thumb-item {
   display: inline-block;
   margin-right: 8.5px;
-  width: 80px;
+  width: 180px;
   vertical-align: middle;
 }
 
