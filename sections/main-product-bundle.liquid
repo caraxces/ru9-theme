@@ -3472,7 +3472,14 @@ document.addEventListener('DOMContentLoaded', () => {
                               // Always add variant label info for all options
                               labelHtml += '<span class="variant__label-info" data-index="' + option.index + '"><span data-variant-selected-label>' + option.values[0] + '</span></span>';
                               labelHtml += '</label>';
-                              
+                                                            
+                              // Add size lock note for non-first products
+                              if (isSize && bundleState.currentProductIndex > 0 && bundleState.lockedSize) {
+                                const firstProduct = config.bundleProducts[0];
+                                const firstProductTitle = firstProduct ? firstProduct.title : 'Sản phẩm đầu tiên';
+                                labelHtml += '<div class="size-lock-note" style="font-size: 12px; color: #6B7280; margin-top: 4px; font-style: italic;">Bạn đã chọn size <strong>' + bundleState.lockedSize + '</strong> ở ' + firstProductTitle + '</div>';
+                              }
+
                               let fieldsetHtml = '<fieldset class="variant-input-wrap flex ai-center gap-x-md flex-wrap" name="' + option.name + '" data-index="option' + (option.index + 1) + '" data-handle="' + option.name.toLowerCase().replace(/\s+/g, '-') + '" id="ProductSelect-bundle-' + product.id + '-option-' + option.index + '"><legend class="hide">' + option.name + '</legend>';
                               fieldsetHtml += option.values.map((value, valueIndex) => {
                                 const variant = product.variants.find(v => v.options[option.index] === value);

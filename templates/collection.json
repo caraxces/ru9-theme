@@ -304,6 +304,65 @@
         "background_color": "#f5f9ff"
       }
     },
+    "combo_best_selling_section": {
+      "type": "combo-best-selling",
+      "blocks": {
+        "combo_product_1": {
+          "type": "product_item",
+          "settings": {
+            "product": "",
+            "product_label": "Best seller",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#fff",
+            "label_bg": "#609EE9"
+          }
+        },
+        "combo_product_2": {
+          "type": "product_item",
+          "settings": {
+            "product": "",
+            "product_label": "Best seller",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#fff",
+            "label_bg": "#609EE9"
+          }
+        },
+        "combo_product_3": {
+          "type": "product_item",
+          "settings": {
+            "product": "",
+            "product_label": "Best seller",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#fff",
+            "label_bg": "#609EE9"
+          }
+        },
+        "combo_product_4": {
+          "type": "product_item",
+          "settings": {
+            "product": "",
+            "product_label": "Best seller",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#fff",
+            "label_bg": "#609EE9"
+          }
+        }
+      },
+      "block_order": [
+        "combo_product_1",
+        "combo_product_2",
+        "combo_product_3",
+        "combo_product_4"
+      ],
+      "name": "Combo Best Selling",
+      "settings": {
+        "title": "Combo bán chạy",
+        "description": "Combo sản phẩm được yêu thích nhất",
+        "primary_color": "#1C2C58",
+        "text_color": "#1A1A1A",
+        "description_color": "#666"
+      }
+    },
     "collections_listing_jRVgyj": {
       "type": "collections-listing",
       "blocks": {
@@ -361,6 +420,7 @@
     "main_collection_custom_9gqxPa",
     "main-collection",
     "collection-content",
+    "combo_best_selling_section",
     "reviews_carousel_eiGzK6",
     "super_service_prmmGy",
     "collections_listing_jRVgyj"
