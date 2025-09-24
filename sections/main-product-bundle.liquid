@@ -18,325 +18,6 @@
 {{ 'main-product-bundle.css' | asset_url | stylesheet_tag }}
 
 <style>
-  /* Color swatch styles */
-  .color-swatch {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid #ddd;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-  
-  .color-swatch:hover {
-    transform: scale(1.1);
-  }
-  
-  .color-swatch.active,
-  .color-swatch.selected {
-    border-color: #000;
-    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
-  }
-  
-  .color-swatch.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  /* Variant label info styles */
-  .variant__label-info {
-    font-weight: bold;
-    color: #333;
-    margin-left: 8px;
-  }
-  
-  .variant__label-info span {
-    color: #007cba;
-  }
-
-  /* Fix variant button corner rounding issue when selected */
-  .variant-input-wrap input[type="radio"]:checked + label {
-    border-radius: calc(var(--buttonRadius) * 0.5) !important;
-    box-shadow: none !important;
-    border: 2px solid #448AED !important;
-    background: #F5F9FF !important;
-    color: #1C2C58 !important;
-  }
-
-  /* Ensure variant button labels maintain proper border-radius */
-  .variant-input-wrap label {
-    border-radius: calc(var(--buttonRadius) * 0.5) !important;
-    transition: all 0.2s ease !important;
-  }
-
-  /* Fix for data-dynamic-variants-enabled variant buttons */
-  [data-dynamic-variants-enabled] .variant-input-wrap input[type="radio"]:checked + .variant__button-label:not(.color-swatch) {
-    border-radius: 6px !important;
-    border: 2px solid #448AED !important;
-    background: #F5F9FF !important;
-    color: #1C2C58 !important;
-    box-shadow: none !important;
-    padding: 8px 16px !important;
-    overflow: visible !important;
-  }
-
-  /* Ensure unselected variant buttons maintain border-radius */
-  [data-dynamic-variants-enabled] .variant-input-wrap .variant__button-label {
-    border-radius: 6px !important;
-    border: 2px solid #e5e7eb !important;
-    background: white !important;
-    transition: all 0.2s ease !important;
-    padding: 8px 16px !important;
-    overflow: visible !important;
-  }
-
-  /* Fix container overflow that clips border-radius */
-  [data-dynamic-variants-enabled] .variant-input-wrap {
-    overflow: visible !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-input {
-    overflow: visible !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  /* Ensure parent containers don't clip border-radius */
-  [data-dynamic-variants-enabled] .variant-wrapper {
-    overflow: visible !important;
-    padding: 0 !important;
-    margin: 0 0 1rem 0 !important;
-  }
-
-  [data-dynamic-variants-enabled] .product-block {
-    overflow: visible !important;
-  }
-
-  /* Fix any potential clipping from flexbox containers */
-  [data-dynamic-variants-enabled] .variant-input-wrap {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    flex-wrap: wrap !important;
-    overflow: visible !important;
-  }
-
-  /* Fix color swatch styling - Match product-template.liquid */
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input-wrap {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 8px !important;
-    margin-bottom: 16px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    max-width: 100% !important;
-    width: fit-content !important;
-    justify-content: flex-start !important;
-    flex-wrap: wrap !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input {
-    display: flex !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant__button-label {
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    min-height: 45px !important;
-    max-width: 45px !important;
-    max-height: 45px !important;
-    flex-shrink: 0 !important;
-    background-color: transparent !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: 100% 100% !important;
-    display: block !important;
-    overflow: hidden !important;
-    position: relative !important;
-    text-indent: -9999px !important;
-    transition: all 0.2s ease !important;
-    cursor: pointer !important;
-    border-radius: 50% !important;
-    border: 2px solid transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant__button-label:hover {
-    transform: scale(1.05) !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input input[type="radio"]:checked + .variant__button-label {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 3px #448AED !important;
-    border-radius: 50% !important;
-    border: 2px solid #448AED !important;
-    background: #F5F9FF !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
-    content: "✓" !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    color: #448AED !important;
-    font-weight: bold !important;
-    font-size: 16px !important;
-    text-shadow: 0 0 2px rgba(255,255,255,0.8) !important;
-    background: none !important;
-    width: auto !important;
-    height: auto !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
-    opacity: 0.5 !important;
-    cursor: not-allowed !important;
-    position: relative !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input input[type="radio"]:disabled + .variant__button-label::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: linear-gradient(45deg, transparent 45%, #ccc 45%, #ccc 55%, transparent 55%) !important;
-    pointer-events: none !important;
-    border-radius: 50% !important;
-  }
-
-  /* Ensure color swatches maintain proper dimensions */
-  [data-dynamic-variants-enabled] .variant-wrapper.is-color .variant-input {
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    min-height: 45px !important;
-    max-width: 45px !important;
-    max-height: 45px !important;
-  }
-
-  /* Fix color variant layout in step 2 - Match product-template.liquid styling */
-  .bundle-step-2 .variant-wrapper.is-color .variant-input-wrap {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 8px !important;
-    margin-bottom: 16px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    max-width: 100% !important;
-    width: fit-content !important;
-    justify-content: flex-start !important;
-    flex-wrap: wrap !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant-input {
-    display: flex !important;
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    min-height: 45px !important;
-    max-width: 45px !important;
-    max-height: 45px !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant__button-label {
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    min-height: 45px !important;
-    max-width: 45px !important;
-    max-height: 45px !important;
-    flex-shrink: 0 !important;
-    background-color: transparent !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: 100% 100% !important;
-    display: block !important;
-    overflow: hidden !important;
-    position: relative !important;
-    text-indent: -9999px !important;
-    transition: all 0.2s ease !important;
-    cursor: pointer !important;
-    border-radius: 50% !important;
-    border: 2px solid transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant__button-label:hover {
-    transform: scale(1.05) !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant-input input[type="radio"]:checked + .variant__button-label {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 3px #448AED !important;
-    border-radius: 50% !important;
-    border: 2px solid #448AED !important;
-    background: #F5F9FF !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
-    content: "✓" !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    color: #448AED !important;
-    font-weight: bold !important;
-    font-size: 16px !important;
-    text-shadow: 0 0 2px rgba(255,255,255,0.8) !important;
-    background: none !important;
-    width: auto !important;
-    height: auto !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
-    opacity: 0.5 !important;
-    cursor: not-allowed !important;
-    position: relative !important;
-  }
-
-  .bundle-step-2 .variant-wrapper.is-color .variant-input input[type="radio"]:disabled + .variant__button-label::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: linear-gradient(45deg, transparent 45%, #ccc 45%, #ccc 55%, transparent 55%) !important;
-    pointer-events: none !important;
-    border-radius: 50% !important;
-  }
-
-  /* Fix size variant button corner rounding */
-  [data-dynamic-variants-enabled] .variant-input-wrap .variant__button-label.t-center {
-    border-radius: 6px !important;
-    border: 2px solid #e5e7eb !important;
-    background: white !important;
-    transition: all 0.2s ease !important;
-    padding: 8px 16px !important;
-    overflow: visible !important;
-  }
-
-  [data-dynamic-variants-enabled] .variant-input-wrap input[type="radio"]:checked + .variant__button-label.t-center {
-    border-radius: 6px !important;
-    border: 2px solid #448AED !important;
-    background: #F5F9FF !important;
-    color: #1C2C58 !important;
-    box-shadow: none !important;
-    padding: 8px 16px !important;
-    overflow: visible !important;
-  }
-  
   /* Icon with Text Styles */
   .icon-with-text {
     margin: 2rem 0;
@@ -1156,8 +837,8 @@
 
   .bundle-step-1 .combo-product-attributes {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    gap: 4px;
     font-size: 14px;
     color: #6B7280;
   }
@@ -2055,6 +1736,33 @@
 
   /* Mobile responsive styles */
   @media screen and (max-width: 768px) {
+    /* Step 1 Mobile Layout - Make it vertical like product template */
+    .bundle-step-1 .grid {
+      display: flex !important;
+      flex-direction: column !important;
+      flex-wrap: wrap !important;
+    }
+    
+    .bundle-step-1 .grid__item.product-single__sticky,
+    .bundle-step-1 .grid__item.product-grid__images {
+      flex: 0 0 100% !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 100% !important;
+      margin-right: 0 !important;
+      padding-right: 0 !important;
+    }
+    
+    .bundle-step-1 .grid__item.product-grid__info {
+      flex: 0 0 100% !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 100% !important;
+      margin-right: 0 !important;
+      padding-right: 0 !important;
+      box-sizing: border-box !important;
+    }
+    
     .bundle-step-1 .product-single__title {
       font-size: 20px;
     }
@@ -2127,8 +1835,14 @@
     }
     
     .bundle-step-1 .combo-product-image {
-      width: 50px;
-      height: 50px;
+      width: 128px;
+      height: 98px;
+    }
+    
+    .bundle-step-1 .combo-product-attributes {
+      gap: 2px;
+      font-size: 12px;
+      align-items: flex-start;
     }
 
     .bundle-step-1 .service-grid {
@@ -2331,7 +2045,7 @@
 
                   <!-- Combo Products List -->
                   <div class="product-block">
-                    <h3 style="background-color: #F5F9FF; padding: 10px; border-radius: 5px; margin: 0 0 0 0;">{{ section.settings.combo_title | default: "Combo bao gồm các sản phẩm:" }}</h3>
+                      <h3 class="combo_title" style="background-color: #F5F9FF; padding: 10px; border-radius: 5px; margin: 0 0 0 0;">{{ section.settings.combo_title | default: "Combo bao gồm các sản phẩm:" }}</h3>
                     <div class="combo-products-list">
                       {%- if has_bundle_products and bundle_products_list -%}
                         {%- for bundle_product in bundle_products_list -%}
@@ -3679,21 +3393,24 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                             return options.map(option => {
                               const isColor = option.name.toLowerCase().includes('color') || option.name.toLowerCase().includes('màu') || option.name.toLowerCase().includes('colour');
-                              const isSize = option.name.toLowerCase().includes('size') || option.name.toLowerCase().includes('kích thước');
+                              const isSize = option.name.toLowerCase().includes('size') || 
+                                            option.name.toLowerCase().includes('kích thước') ||
+                                            option.name.toLowerCase().includes('kích thước') ||
+                                            option.name.toLowerCase().includes('kích thước');
                               
                               let labelHtml = '<label class="variant__label" for="ProductSelect-bundle-' + product.id + '-option-' + option.index + '">' + option.name + ':';
                               // Always add variant label info for all options
                               labelHtml += '<span class="variant__label-info" data-index="' + option.index + '"><span data-variant-selected-label>' + option.values[0] + '</span></span>';
                               labelHtml += '</label>';
-                              
+                                                            
                               // Add size lock note for non-first products
                               if (isSize && bundleState.currentProductIndex > 0 && bundleState.lockedSize) {
                                 const firstProduct = config.bundleProducts[0];
                                 const firstProductTitle = firstProduct ? firstProduct.title : 'Sản phẩm đầu tiên';
                                 labelHtml += '<div class="size-lock-note" style="font-size: 12px; color: #6B7280; margin-top: 4px; font-style: italic;">Bạn đã chọn size <strong>' + bundleState.lockedSize + '</strong> ở ' + firstProductTitle + '</div>';
                               }
-                              
-                              let fieldsetHtml = '<fieldset class="variant-input-wrap flex ai-center gap-x-md flex-wrap" name="' + option.name + '" data-index="option' + (option.index + 1) + '" data-handle="' + option.name.toLowerCase().replace(/\s+/g, '-') + '" id="ProductSelect-bundle-' + product.id + '-option-' + option.index + '"><legend class="hide">' + option.name + '</legend>';
+
+                              let fieldsetHtml = '<fieldset class="variant-input-wrap flex ai-center gap-x-md flex-wrap" name="' + option.name + '" data-index="option' + (option.index + 1) + '" data-handle="' + option.name.toLowerCase().replace(/\s+/g, '-') + '" data-option-count="' + option.values.length + '" id="ProductSelect-bundle-' + product.id + '-option-' + option.index + '"><legend class="hide">' + option.name + '</legend>';
                               fieldsetHtml += option.values.map((value, valueIndex) => {
                                 const variant = product.variants.find(v => v.options[option.index] === value);
                                 const isAvailable = variant && variant.available !== false;

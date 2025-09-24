@@ -6,6 +6,53 @@
       --font-stack-body: 'Be Vietnam Pro', sans-serif;
       font-family: var(--font-stack-body);
     }
+    
+    /* Desktop: Smaller drawer width */
+    @media (min-width: 769px) {
+      #CartDrawer {
+        width: 420px !important;
+        max-width: 420px !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      #CartDrawer .drawer__inner {
+        width: 420px !important;
+        max-width: 420px !important;
+      }
+      #CartDrawer.drawer--is-open {
+        transform: translateX(0) !important;
+      }
+    }
+    
+    /* Mobile: Full screen drawer */
+    @media (max-width: 768px) {
+      #CartDrawer {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      #CartDrawer .drawer__inner {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+    }
+    
+    /* Ensure drawer is properly positioned and visible */
+    #CartDrawer {
+      position: fixed !important;
+      top: 0 !important;
+      right: 0 !important;
+      height: 100vh !important;
+      z-index: 9999 !important;
+      background: #fff !important;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.1) !important;
+      transform: translateX(100%) !important;
+      transition: transform 0.3s ease !important;
+    }
+    
+    #CartDrawer.drawer--is-open {
+      transform: translateX(0) !important;
+    }
     .cross-sell-item__title a {
       border-bottom: none !important;
       font-size: 20px;
@@ -586,6 +633,13 @@
     .btn--online {
       background-color: #9F332C;
       color: white;
+    }
+    
+    /* Mobile responsive for checkout buttons */
+    @media (max-width: 768px) {
+      .btn--cod, .btn--online {
+        font-size: 14px;
+      }
     }
   </style>
 

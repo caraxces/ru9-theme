@@ -6746,16 +6746,17 @@ svg.icon-caret {
   -webkit-overflow-scrolling: touch;
   bottom: 0;
   color: var(--colorDrawerText);
-  max-width: 95%;
+  /* max-width: 95%; */
   overflow: hidden;
   position: fixed;
   top: 0;
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   z-index: 30;
   opacity: 0;
+  --radiusBase: 0;
   visibility: hidden;
   pointer-events: none;
-  padding: 12px;
+  /* padding: 12px; */
 }
 
 .drawer.active,
@@ -6834,7 +6835,7 @@ svg.icon-caret {
 }
 
 .drawer--right {
-  --width: 375px;
+  --width: 100vw;
   right: calc(-1 * var(--width));
   max-width: var(--width);
   width: 100%;
@@ -6843,7 +6844,7 @@ svg.icon-caret {
 @media only screen and (min-width: 769px) {
   .drawer--right,
   .drawer--left {
-    --width: 480px;
+    --width: 100%;
   }
 }
 
@@ -16253,10 +16254,10 @@ html[dir="rtl"] .product-single__meta .rte {
   gap: 8px !important;
 }
 
-.variant-input-wrap[data-index="option2"] .variant-input {
+/* .variant-input-wrap[data-index="option2"] .variant-input {
   flex: 1 !important;
   width: 50% !important;
-}
+} */
 
 .variant-input-wrap[data-index="option2"] .variant__button-label {
   width: 100% !important;

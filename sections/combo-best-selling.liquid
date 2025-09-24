@@ -1,0 +1,588 @@
+<div data-section-id="{{ section.id }}" data-section-type="combo-best-selling">
+  <div class="combo-best-selling-section">
+    
+    <!-- Header Section -->
+    <div class="section-header">
+      <h2 class="section-title">
+        {{ section.settings.title | default: 'Combo bán chạy' }}
+      </h2>
+    </div>
+    
+    <!-- Product Carousel Section -->
+    <div class="product-carousel-section">
+      <div class="product-carousel">
+        <div class="product-cards-container">
+          {%- for block in section.blocks -%}
+            {%- assign product = block.settings.product -%}
+            {%- if product != blank -%}
+              <a href="{{ product.url }}" class="product-card">
+                <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}">
+                  {%- if block.settings.product_label != blank -%}
+                    <div class="product-label">
+                      {{ block.settings.product_label }}
+                    </div>
+                  {%- endif -%}
+                  {%- if product.featured_image -%}
+                    <img 
+                      class="product-image-primary"
+                      src="{{ product.featured_image | image_url: width: 400, height: 320, crop: 'center' }}" 
+                      alt="{{ product.title }}"
+                      width="400" height="320"
+                    >
+                    {%- if product.media.size > 1 -%}
+                      {%- for media in product.media offset: 1 limit: 1 -%}
+                        {%- assign second_image = media.preview_image -%}
+                        {%- if second_image != blank -%}
+                          <img 
+                            class="product-image-secondary"
+                            src="{{ second_image | image_url: width: 400, height: 320, crop: 'center' }}" 
+                            alt="{{ product.title }}"
+                            width="400" height="320"
+                          >
+                        {%- endif -%}
+                      {%- endfor -%}
+                    {%- endif -%}
+                  {%- else -%}
+                    <div class="placeholder-image">
+                      No Image
+                    </div>
+                  {%- endif -%}
+                </div>
+                
+                <div class="product-info">
+                  <h3 class="product-name">{{ product.title }}</h3>
+                  <div class="product-description">
+                    {%- if block.settings.product_description != blank -%}
+                      {{ block.settings.product_description | truncate: 80 }}
+                    {%- else -%}
+                      {{ product.description | strip_html | truncate: 80 | default: 'Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.' }}
+                    {%- endif -%}
+                  </div>
+                </div>
+                
+                <div class="product-price-section">
+                  <div class="product-price">
+                    <span class="price">Từ {{ product.price | money }}</span>
+                    {%- if product.compare_at_price > product.price -%}
+                       {%- assign sale_percentage = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                      <span class="discount-badge">-{{ sale_percentage }}%</span>
+                    {%- endif -%}
+                  </div>
+                  <button class="buy-now-btn">Mua ngay</button>
+                </div>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* General Section Styles */
+  [data-section-type="combo-best-selling"] .combo-best-selling-section {
+    width: 100%;
+    min-height: auto;
+    margin: 0 auto 60px auto;
+    padding: 40px 60px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background-color: transparent; /* Transparent background */
+  }
+  
+  [data-section-type="combo-best-selling"] .combo-best-selling-section .section-header {
+    padding-bottom: 0px;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+  
+  [data-section-type="combo-best-selling"] .combo-best-selling-section .section-title {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 39px;
+    font-weight: 700;
+    line-height: 120%;
+    color: #1C2C58;
+    margin: 0;
+    text-align: left;
+  }
+
+  /* Product Grid Styles */
+  [data-section-type="combo-best-selling"] .product-carousel-section {
+    position: relative; 
+  }
+  
+  [data-section-type="combo-best-selling"] .product-carousel {
+    position: relative;
+  }
+  
+  /* Desktop: 4 products per row, no scroll */
+  [data-section-type="combo-best-selling"] .product-cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding-right: 0;
+  }
+
+  /* Mobile: Horizontal scroll only */
+  @media (max-width: 768px) {
+    [data-section-type="combo-best-selling"] .product-cards-container {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: none !important;
+      gap: 20px !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar {
+      display: none !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container {
+      -ms-overflow-style: none !important;
+    }
+  }
+
+
+
+  /* Product Card Styles - Combo Style */
+  [data-section-type="combo-best-selling"] .product-card {
+    width: 100%;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    opacity: 1;
+    transform: none;
+    background: #FFFBE9; /* Yellow background for product cards only */
+    padding: 0; /* Remove padding from card to not affect image */
+    border: 1px solid #E5E7EB;
+    transition: all 0.3s ease;
+  }
+  
+  [data-section-type="combo-best-selling"] .product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  }
+
+  /* Separate Image Container Styles - Independent from Product Card */
+  [data-section-type="combo-best-selling"] .product-image-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 74.74%; /* 284/380 = 0.7474 = 74.74% */
+    border-radius: 8px;
+    overflow: hidden;
+    background: #FFFBE9; /* Yellow background same as product card */
+    cursor: pointer;
+  }
+  
+  [data-section-type="combo-best-selling"] .placeholder-image {
+    width: 100%;
+    height: 100%;
+    background: #E9ECEF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6C757D;
+    border-radius: 8px;
+  }
+  
+  [data-section-type="combo-best-selling"] .product-label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: #609EE9;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Separate Image Styles - Independent from Product Card */
+  [data-section-type="combo-best-selling"] .product-image-primary, 
+  [data-section-type="combo-best-selling"] .product-image-secondary {
+    position: absolute;
+    top: 5px; /* 5px padding from top */
+    left: 5px; /* 5px padding from left */
+    width: calc(100% - 10px); /* Subtract 5px padding from both sides */
+    height: calc(100% - 10px); /* Subtract 5px padding from both sides */
+    object-fit: cover;
+    border-radius: 8px;
+    transition: opacity 0.3s ease;
+  }
+  
+  [data-section-type="combo-best-selling"] .product-image-secondary {
+    position: absolute;
+    top: 5px; /* Account for container padding */
+    left: 5px; /* Account for container padding */
+    width: calc(100% - 10px); /* Subtract padding from both sides */
+    height: calc(100% - 10px); /* Subtract padding from both sides */
+    opacity: 0;
+  }
+  
+  [data-section-type="combo-best-selling"] .product-image-container.has-secondary-image:hover .product-image-primary,
+  [data-section-type="combo-best-selling"] .product-carousel.grabbing .product-image-container.has-secondary-image:hover .product-image-primary {
+    opacity: 0 !important;
+  }
+  
+  [data-section-type="combo-best-selling"] .product-image-container.has-secondary-image:hover .product-image-secondary,
+  [data-section-type="combo-best-selling"] .product-carousel.grabbing .product-image-container.has-secondary-image:hover .product-image-secondary {
+    opacity: 1 !important;
+  }
+  
+  [data-section-type="combo-best-selling"] .product-info {
+    padding: 20px; /* Add padding only to product info, not image */
+    margin: 0;
+    text-align: left;
+  }
+  
+  [data-section-type="combo-best-selling"] .product-name {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1C2C58;
+    margin: 0 0 12px 0;
+    line-height: 140%;
+  }
+  
+  [data-section-type="combo-best-selling"] .product-description {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 0; /* Remove margin since price section is separate */
+    line-height: 150%;
+    height: 42px; /* Fixed height for 2 lines (14px * 1.5 * 2) */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  
+  /* Separate Price Section - Normal flow at bottom */
+  [data-section-type="combo-best-selling"] .product-price-section {
+    padding: 0 20px 20px 20px; /* Fixed 20px padding from bottom edge */
+    margin: 0;
+    background: transparent;
+  }
+  
+  [data-section-type="combo-best-selling"] .product-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  
+  [data-section-type="combo-best-selling"] .price {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1A1A1A;
+  }
+  
+  [data-section-type="combo-best-selling"] .discount-badge {
+    font-size: 14px;
+    font-weight: 600;
+    color: #234085;
+    background: #FCE390;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  [data-section-type="combo-best-selling"] .buy-now-btn {
+    width: 100%;
+    background: #1C2C58;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  [data-section-type="combo-best-selling"] .buy-now-btn:hover {
+    background: #234085;
+    transform: translateY(-1px);
+  }
+  
+  /* Mobile Layout */
+  @media (max-width: 768px) {
+    [data-section-type="combo-best-selling"] .combo-best-selling-section {
+      padding: 20px;
+      margin: 0 20px 40px 20px;
+    }
+    
+    [data-section-type="combo-best-selling"] .combo-best-selling-section .section-header {
+      padding-bottom: 0px !important;
+      margin-bottom: 20px;
+    }
+    
+    [data-section-type="combo-best-selling"] .combo-best-selling-section .section-title {
+      font-size: 24px;
+      margin-bottom: 0;
+      text-align: left;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-carousel-section {
+      margin: 0 -20px 0 -20px;
+      padding: 0 20px;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-carousel {
+      padding: 0;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-card {
+      width: 280px !important;
+      flex-shrink: 0;
+      min-width: 280px;
+    }
+    
+    /* Separate Mobile Image Container Styles */
+    [data-section-type="combo-best-selling"] .product-image-container {
+      width: 100% !important;
+      height: 200px !important;
+      flex-shrink: 0 !important;
+      aspect-ratio: unset !important;
+      border-radius: 3px !important;
+      /* 5px padding around the image on mobile */
+      padding: 5px !important;
+      box-sizing: border-box !important;
+    }
+    
+    /* Mobile Image Positioning */
+    [data-section-type="combo-best-selling"] .product-image-primary,
+    [data-section-type="combo-best-selling"] .product-image-secondary {
+      top: 5px !important;
+      left: 5px !important;
+      width: calc(100% - 10px) !important;
+      height: calc(100% - 10px) !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-name {
+      font-size: 18px !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-info {
+      padding: 12px 20px 0 20px !important; /* Add padding to product info on mobile, no bottom padding */
+    }
+    
+    [data-section-type="combo-best-selling"] .product-price-section {
+      padding: 0 20px 20px 20px !important; /* Fixed 20px padding from bottom edge on mobile */
+    }
+  }
+</style>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const sectionContainer = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!sectionContainer) return;
+
+    const productCardsContainer = sectionContainer.querySelector('.product-cards-container');
+
+    // Initialize mobile scroll only
+    function initializeMobileScroll() {
+      if (!productCardsContainer) return;
+
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      function dragStart(e) {
+        if (e.target.closest('.product-info')) {
+          isDown = false;
+          return;
+        }
+        isDown = true;
+        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+        scrollLeft = productCardsContainer.scrollLeft;
+        if (e.type === 'touchstart') {
+          window.addEventListener('touchmove', dragMove);
+          window.addEventListener('touchend', dragEnd);
+        }
+      }
+
+      function dragMove(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
+        const walk = currentX - startX;
+        productCardsContainer.scrollLeft = scrollLeft - walk;
+      }
+
+      function dragEnd() {
+        if (!isDown) return;
+        isDown = false;
+        window.removeEventListener('touchmove', dragMove);
+        window.removeEventListener('touchend', dragEnd);
+      }
+
+      // Only add scroll functionality on mobile
+      if (window.innerWidth <= 768) {
+        productCardsContainer.addEventListener('mousedown', dragStart);
+        productCardsContainer.addEventListener('mousemove', dragMove);
+        productCardsContainer.addEventListener('mouseup', dragEnd);
+        productCardsContainer.addEventListener('mouseleave', dragEnd);
+
+        productCardsContainer.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', e => {
+                if (isDown) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            });
+        });
+
+        productCardsContainer.addEventListener('touchstart', dragStart);
+      }
+    }
+
+    // Initialize mobile scroll
+    initializeMobileScroll();
+
+    // Re-initialize on resize
+    window.addEventListener('resize', function() {
+      initializeMobileScroll();
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Combo Best Selling",
+  "class": "index-section",
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Combo bán chạy"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Combo sản phẩm được yêu thích nhất"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary Color",
+      "default": "#1C2C58"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#666"
+    },
+    {
+      "type": "text",
+      "id": "image_padding",
+      "label": "Image Container Padding (Desktop)",
+      "info": "CSS padding value for image container on desktop (e.g., '10px', '15px 20px')",
+      "default": "0px"
+    },
+    {
+      "type": "text",
+      "id": "image_inner_padding",
+      "label": "Image Inner Padding (Desktop)",
+      "info": "CSS padding value for images inside container on desktop (e.g., '5px', '10px 15px')",
+      "default": "0px"
+    },
+    {
+      "type": "text",
+      "id": "mobile_image_padding",
+      "label": "Image Container Padding (Mobile)",
+      "info": "CSS padding value for image container on mobile (e.g., '5px', '10px 15px')",
+      "default": "0px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_item",
+      "name": "Product Item",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Select product to display"
+        },
+        {
+          "type": "text",
+          "id": "product_label",
+          "label": "Product Label",
+          "info": "e.g., 'Best seller', 'Mới', 'Top rated'",
+          "default": "Best seller"
+        },
+        {
+          "type": "textarea",
+          "id": "product_description",
+          "label": "Product Description",
+          "default": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ."
+        },
+        {
+          "type": "color",
+          "id": "label_color",
+          "label": "Label Text Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "label_bg",
+          "label": "Label Background",
+          "default": "#609EE9"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Combo Best Selling",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "product_item"
+        },
+        {
+          "type": "product_item"
+        },
+        {
+          "type": "product_item"
+        },
+        {
+          "type": "product_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
