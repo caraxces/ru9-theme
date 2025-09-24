@@ -24,17 +24,46 @@
        border-radius: calc(var(--radiusBase)* .75);
      }
 
-     .product__thumb-item--hide {
-       display: none !important;
-     }
+    .product__thumb-item--hide {
+      display: none !important;
+    }
 
-     .product__thumbs--scroller.show-all-image .product__thumb-item--hide {
-       display: block !important;
-     }
+    .product__thumbs--scroller.show-all-image .product__thumb-item--hide {
+      display: block !important;
+    }
 
-     .product__thumbs--scroller.show-all-image .overlay-image {
-       display: none;
-     }
+    .product__thumbs--scroller.show-all-image .overlay-image {
+      display: none;
+    }
+
+    /* Hide images from 6th onwards initially (show first 5 images) */
+    .product__thumbs--scroller .product__thumb-item:nth-child(n+6) {
+      display: none !important;
+    }
+
+    .product__thumbs--scroller.show-all-image .product__thumb-item:nth-child(n+6) {
+      display: block !important;
+    }
+    
+    /* Alternative selector for better compatibility */
+    .product__thumbs--scroller.show-all-image .product__thumb-item {
+      display: block !important;
+    }
+
+    /* Show more button styling */
+    .show-more-gallery-btn {
+      transition: all 0.3s ease;
+    }
+    
+    .show-more-gallery-btn:hover {
+      background: #F5F9FF !important;
+      border-color: #234085 !important;
+    }
+    
+    /* Hide show more button when all images are shown */
+    .product__thumbs--scroller.show-all-image ~ .show-more-gallery-btn {
+      display: none !important;
+    }
    }
 
    .product__zoom-wrapper {
@@ -483,6 +512,16 @@
           </button>
         {%- endif -%}
       </div>
+      
+      <!-- Show More Button for Desktop - Hide if carousel is enabled -->
+      {%- if product.media.size > 5 and thumbnail_position == 'below' and product_carousel_enable == false -%}
+        <div class="show-more-gallery-btn" style="display: flex; width: 237px; height: 55px; padding: 4px 0; justify-content: center; align-items: center; gap: 20px; flex-shrink: 0; border-radius: 30px; border: 1px solid #1C2C58; background: #FFF; margin: 20px auto 0; cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 600; color: #1C2C58;">
+          <span class="show-more-text">Xem thêm</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M5 7.5L10 12.5L15 7.5" stroke="#1C2C58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 
@@ -578,15 +617,151 @@
     }
   }
   customElements.define('overlay-image', OverlayImage);
+
+  // Show More Gallery Button Handler
+  function initShowMoreButton() {
+    console.log('Initializing show more button...');
+    
+    const showMoreBtns = document.querySelectorAll('.show-more-gallery-btn');
+    console.log('Found buttons:', showMoreBtns.length);
+    
+    showMoreBtns.forEach((btn, index) => {
+      console.log('Setting up button', index, btn);
+      
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log('Button clicked!', this);
+        
+        const scroller = this.previousElementSibling;
+        console.log('Scroller found:', scroller);
+        
+        if (scroller && scroller.classList.contains('product__thumbs--scroller')) {
+          // Remove the hiding class and force show all images
+          scroller.classList.add('show-all-image');
+          console.log('Expanded gallery - showing all images');
+          
+          // Remove any hiding styles from all thumb items
+          const allThumbItems = scroller.querySelectorAll('.product__thumb-item');
+          console.log('All thumb items found:', allThumbItems.length);
+          
+          allThumbItems.forEach((item, index) => {
+            // Remove any inline display:none styles
+            item.style.display = '';
+            // Remove any hiding classes
+            item.classList.remove('product__thumb-item--hide');
+            console.log('Cleared hiding styles for item', index + 1, item);
+          });
+          
+          // Hide the show more button
+          this.style.display = 'none';
+          console.log('Hidden show more button');
+        }
+      });
+    });
+  }
+  
+  // Initialize on DOM ready
+  document.addEventListener('DOMContentLoaded', initShowMoreButton);
+  
+  // Re-initialize on section load
+  document.addEventListener('shopify:section:load', function() {
+    setTimeout(initShowMoreButton, 100);
+  });
 </script>
 
 <script>
 document.addEventListener('shopify:section:load', function() {
   initMobileThumbZoom('{{ section_id }}');
+  
+  // Re-initialize show more button after section load
+  setTimeout(function() {
+    console.log('Re-initializing show more button after section load');
+  }, 100);
 });
 document.addEventListener('DOMContentLoaded', function() {
   initMobileThumbZoom('{{ section_id }}');
 });
+
+// Simple show more button handler - placed at the end to ensure it runs
+setTimeout(function() {
+  console.log('=== INITIALIZING SHOW MORE BUTTON ===');
+  
+  const showMoreBtns = document.querySelectorAll('.show-more-gallery-btn');
+  console.log('Found show more buttons:', showMoreBtns.length);
+  
+  showMoreBtns.forEach((btn, index) => {
+    console.log('Setting up button', index);
+    
+    // Remove any existing event listeners
+    btn.onclick = null;
+    
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      console.log('=== BUTTON CLICKED ===');
+      console.log('Button element:', this);
+      
+      const scroller = this.previousElementSibling;
+      console.log('Scroller element:', scroller);
+      
+      if (scroller) {
+        console.log('Scroller classes:', scroller.className);
+        
+        // Add show-all-image class to scroller to trigger CSS
+        const scrollerInner = scroller.querySelector('.product__thumbs--scroller');
+        if (scrollerInner) {
+          scrollerInner.classList.add('show-all-image');
+          console.log('Added show-all-image class to scroller');
+        }
+        
+        // Find all thumb items
+        const thumbItems = scroller.querySelectorAll('.product__thumb-item');
+        console.log('Total thumb items found:', thumbItems.length);
+        
+        // Show all thumb items
+        thumbItems.forEach((item, i) => {
+          console.log('Processing item', i + 1, item);
+          
+          // Only process items from 6th onwards (index 5+)
+          if (i >= 5) {
+            console.log('Showing hidden item', i + 1);
+            console.log('Item before - display:', window.getComputedStyle(item).display);
+            console.log('Item before - visibility:', window.getComputedStyle(item).visibility);
+            console.log('Item before - opacity:', window.getComputedStyle(item).opacity);
+            
+            // Only remove display: none, keep all other properties unchanged
+            item.style.removeProperty('display');
+            item.style.removeProperty('visibility');
+            item.style.removeProperty('opacity');
+            
+            // Remove any hiding classes
+            item.classList.remove('product__thumb-item--hide');
+            item.classList.remove('hide');
+            item.classList.remove('hidden');
+            
+            console.log('Item after - display:', window.getComputedStyle(item).display);
+            console.log('Item after - visibility:', window.getComputedStyle(item).visibility);
+            console.log('Item after - opacity:', window.getComputedStyle(item).opacity);
+          }
+          // Items 1-5: Do nothing, keep original layout
+        });
+        
+        // Hide the button
+        this.style.display = 'none';
+        console.log('Button hidden');
+        
+        console.log('=== EXPANSION COMPLETE ===');
+      }
+    });
+    
+    console.log('Button', index, 'setup complete');
+  });
+  
+  console.log('=== SHOW MORE INITIALIZATION COMPLETE ===');
+}, 1000);
 
 function initMobileThumbZoom(sectionId) {
   // Use a timeout to ensure theme scripts have initialized Flickity and Photoswipe

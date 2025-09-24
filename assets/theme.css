@@ -16254,10 +16254,10 @@ html[dir="rtl"] .product-single__meta .rte {
   gap: 8px !important;
 }
 
-.variant-input-wrap[data-index="option2"] .variant-input {
+/* .variant-input-wrap[data-index="option2"] .variant-input {
   flex: 1 !important;
   width: 50% !important;
-}
+} */
 
 .variant-input-wrap[data-index="option2"] .variant__button-label {
   width: 100% !important;

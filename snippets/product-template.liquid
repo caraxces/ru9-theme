@@ -364,45 +364,77 @@
   .variant__label-info {
     font-weight: 400;
   }
+  /* Size Variant Styles - Apply to ALL size variants regardless of option position */
   .is-size .variant-input-wrap,
-  .is-firmness .variant-input-wrap {
+  .is-firmness .variant-input-wrap,
+  .variant-input-wrap[data-handle="kich-thuoc"],
+  .variant-input-wrap[data-handle="size"],
+  .variant-input-wrap[data-handle="kích-thước"] {
     display: grid;
     gap: 12px;
     margin-bottom: 16px;
   }
   .is-size .variant-input,
-  .is-firmness .variant-input {
+  .is-firmness .variant-input,
+  .variant-input-wrap[data-handle="kich-thuoc"] .variant-input,
+  .variant-input-wrap[data-handle="size"] .variant-input,
+  .variant-input-wrap[data-handle="kích-thước"] .variant-input {
     display: flex;
   }
   .is-size .variant-input-wrap[data-option-count="2"],
-  .is-firmness .variant-input-wrap[data-option-count="2"] {
+  .is-firmness .variant-input-wrap[data-option-count="2"],
+  .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="2"],
+  .variant-input-wrap[data-handle="size"][data-option-count="2"],
+  .variant-input-wrap[data-handle="kích-thước"][data-option-count="2"] {
     grid-template-columns: repeat(2, 1fr);
   }
   .is-size .variant-input-wrap[data-option-count="3"],
-  .is-firmness .variant-input-wrap[data-option-count="3"] {
+  .is-firmness .variant-input-wrap[data-option-count="3"],
+  .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="3"],
+  .variant-input-wrap[data-handle="size"][data-option-count="3"],
+  .variant-input-wrap[data-handle="kích-thước"][data-option-count="3"] {
     grid-template-columns: repeat(3, 1fr);
   }
   .is-size .variant-input-wrap[data-option-count="4"],
-  .is-firmness .variant-input-wrap[data-option-count="4"] {
+  .is-firmness .variant-input-wrap[data-option-count="4"],
+  .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="4"],
+  .variant-input-wrap[data-handle="size"][data-option-count="4"],
+  .variant-input-wrap[data-handle="kích-thước"][data-option-count="4"] {
     grid-template-columns: repeat(4, 1fr);
   }
   .is-size .variant-input-wrap[data-option-count="5"],
-  .is-firmness .variant-input-wrap[data-option-count="5"] {
+  .is-firmness .variant-input-wrap[data-option-count="5"],
+  .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="5"],
+  .variant-input-wrap[data-handle="size"][data-option-count="5"],
+  .variant-input-wrap[data-handle="kích-thước"][data-option-count="5"] {
     grid-template-columns: repeat(3, 1fr);
   }
   .is-size .variant-input-wrap[data-option-count="5"] .variant-input:nth-child(n+5),
-  .is-firmness .variant-input-wrap[data-option-count="5"] .variant-input:nth-child(n+5) {
+  .is-firmness .variant-input-wrap[data-option-count="5"] .variant-input:nth-child(n+5),
+  .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="5"] .variant-input:nth-child(n+5),
+  .variant-input-wrap[data-handle="size"][data-option-count="5"] .variant-input:nth-child(n+5),
+  .variant-input-wrap[data-handle="kích-thước"][data-option-count="5"] .variant-input:nth-child(n+5) {
     grid-column: span 1; /* Fallback for clean layout */
   }
   .is-size .variant-input-wrap[data-option-count="6"],
-  .is-firmness .variant-input-wrap[data-option-count="6"] {
+  .is-firmness .variant-input-wrap[data-option-count="6"],
+  .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"],
+  .variant-input-wrap[data-handle="size"][data-option-count="6"],
+  .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] {
     grid-template-columns: repeat(4, 1fr);
   }
   .is-size .variant-input-wrap[data-option-count="6"] .variant-input:nth-child(n+6),
-  .is-firmness .variant-input-wrap[data-option-count="6"] .variant-input:nth-child(n+6) {
+  .is-firmness .variant-input-wrap[data-option-count="6"] .variant-input:nth-child(n+6),
+  .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"] .variant-input:nth-child(n+6),
+  .variant-input-wrap[data-handle="size"][data-option-count="6"] .variant-input:nth-child(n+6),
+  .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] .variant-input:nth-child(n+6) {
     grid-column: span 2;
   }
-  .variant-wrapper:not(.is-color) .variant__button-label {
+  /* Button styling for size variants - Apply to ALL size variants regardless of option position */
+  .variant-wrapper:not(.is-color) .variant__button-label,
+  .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label,
+  .variant-input-wrap[data-handle="size"] .variant__button-label,
+  .variant-input-wrap[data-handle="kích-thước"] .variant__button-label {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -417,40 +449,174 @@
     min-height: 60px;
     text-align: center;
   }
-  .variant-wrapper:not(.is-color) .variant-input input[type="radio"]:checked + .variant__button-label {
+  .variant-wrapper:not(.is-color) .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-handle="kich-thuoc"] .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-handle="size"] .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-handle="kích-thước"] .variant-input input[type="radio"]:checked + .variant__button-label {
     border-color: #234085;
     background-color: #F5F9FF;
   }
   .variant-wrapper:not(.is-color) .variant__button-label .label-head,
-  .variant-wrapper:not(.is-color) .variant__button-label .label-value {
+  .variant-wrapper:not(.is-color) .variant__button-label .label-value,
+  .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-head,
+  .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-value,
+  .variant-input-wrap[data-handle="size"] .variant__button-label .label-head,
+  .variant-input-wrap[data-handle="size"] .variant__button-label .label-value,
+  .variant-input-wrap[data-handle="kích-thước"] .variant__button-label .label-head,
+  .variant-input-wrap[data-handle="kích-thước"] .variant__button-label .label-value {
     display: block;
   }
-  .variant-wrapper:not(.is-color) .variant__button-label .label-head {
+  .variant-wrapper:not(.is-color) .variant__button-label .label-head,
+  .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-head,
+  .variant-input-wrap[data-handle="size"] .variant__button-label .label-head,
+  .variant-input-wrap[data-handle="kích-thước"] .variant__button-label .label-head {
     font-size: 16px;
     font-weight: 600;
     color: #1C2C58;
   }
-  .variant-wrapper:not(.is-color) .variant__button-label .label-value {
+  .variant-wrapper:not(.is-color) .variant__button-label .label-value,
+  .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-value,
+  .variant-input-wrap[data-handle="size"] .variant__button-label .label-value,
+  .variant-input-wrap[data-handle="kích-thước"] .variant__button-label .label-value {
     font-size: 14px;
     font-weight: 400;
     color: #555;
   }
   
+  /* Override option2 styles for color variants - ensure they use color layout */
+  .variant-input-wrap[data-index="option2"].is-color,
+  .variant-input-wrap[data-index="option2"][data-handle="mau"],
+  .variant-input-wrap[data-index="option2"][data-handle="color"],
+  .variant-input-wrap[data-index="option2"][data-handle="colour"] {
+    display: flex !important;
+    grid-template-columns: repeat(auto-fit, 45px) !important;
+    gap: 8px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+    width: fit-content !important;
+    justify-content: flex-start !important;
+    justify-items: center !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .variant-input-wrap[data-index="option2"].is-color .variant-input,
+  .variant-input-wrap[data-index="option2"][data-handle="mau"] .variant-input,
+  .variant-input-wrap[data-index="option2"][data-handle="color"] .variant-input,
+  .variant-input-wrap[data-index="option2"][data-handle="colour"] .variant-input {
+    display: flex !important;
+    flex: unset !important;
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+  /* Override option2 styles for size variants - ensure they use size layout */
+  .variant-input-wrap[data-index="option2"].is-size,
+  .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"],
+  .variant-input-wrap[data-index="option2"][data-handle="size"],
+  .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] {
+    display: grid !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .variant-input-wrap[data-index="option2"].is-size .variant-input,
+  .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant-input,
+  .variant-input-wrap[data-index="option2"][data-handle="size"] .variant-input,
+  .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant-input {
+    display: flex !important;
+    flex: unset !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  /* Specific override for option2 size variants with 6 options - match option1 exactly */
+  .variant-input-wrap[data-index="option2"][data-option-count="6"].is-size,
+  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kich-thuoc"],
+  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="size"],
+  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kích-thước"] {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  
+  .variant-input-wrap[data-index="option2"][data-option-count="6"].is-size .variant-input:nth-child(n+6),
+  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kich-thuoc"] .variant-input:nth-child(n+6),
+  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="size"] .variant-input:nth-child(n+6),
+  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kích-thước"] .variant-input:nth-child(n+6) {
+    grid-column: span 2 !important;
+  }
+
+  /* Force override for variant-wrapper with is-size class - ensure grid layout */
+  .variant-wrapper.is-size .variant-input-wrap[data-index="option2"][data-option-count="6"],
+  .variant-wrapper.is-size .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"],
+  .variant-wrapper.is-size .variant-input-wrap[data-handle="size"][data-option-count="6"],
+  .variant-wrapper.is-size .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .variant-wrapper.is-size .variant-input-wrap[data-index="option2"][data-option-count="6"] .variant-input:nth-child(n+6),
+  .variant-wrapper.is-size .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"] .variant-input:nth-child(n+6),
+  .variant-wrapper.is-size .variant-input-wrap[data-handle="size"][data-option-count="6"] .variant-input:nth-child(n+6),
+  .variant-wrapper.is-size .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] .variant-input:nth-child(n+6) {
+    grid-column: span 2 !important;
+  }
+
+  /* Maximum specificity override for option2 size variants - force grid layout */
+  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-index="option2"][data-option-count="6"],
+  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"],
+  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="size"][data-option-count="6"],
+  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+    flex-direction: unset !important;
+  }
+
+  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-index="option2"][data-option-count="6"] .variant-input:nth-child(n+6),
+  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"] .variant-input:nth-child(n+6),
+  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="size"][data-option-count="6"] .variant-input:nth-child(n+6),
+  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] .variant-input:nth-child(n+6) {
+    grid-column: span 2 !important;
+  }
+
   /* Comfort top variant styling - Simple approach */
   .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
     color: #212121 !important;
   }
   
   /* Make Comfort top variants share width equally and match height with other blocks */
-  .variant-input-wrap[data-index="option2"]:not(.is-color) {
+  .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size) {
     display: flex !important;
     flex-direction: row !important;
     gap: 8px !important;
   }
   
-  .variant-input-wrap[data-index="option2"]:not(.is-color) .variant-input {
+  {% comment %} .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size) .variant-input {
     flex: 1 !important;
     width: 50% !important;
+  } {% endcomment %}
+
+  /* Override flex layout for size variants in option2 - force grid layout */
+  .variant-input-wrap[data-index="option2"].is-size,
+  .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"],
+  .variant-input-wrap[data-index="option2"][data-handle="size"],
+  .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] {
+    display: grid !important;
+    flex-direction: unset !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .variant-input-wrap[data-index="option2"].is-size .variant-input,
+  .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant-input,
+  .variant-input-wrap[data-index="option2"][data-handle="size"] .variant-input,
+  .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant-input {
+    flex: unset !important;
+    width: auto !important;
+    height: auto !important;
   }
 
   /* Size variants in option2 should use column layout like option1 */
@@ -507,8 +673,57 @@
     text-align: center !important;
   }
 
-  /* Color Swatch Styles - Updated Design */
-  .is-color .variant-input-wrap {
+  /* Specific button styling for option2 size variants - match option1 exactly */
+  .variant-input-wrap[data-index="option2"].is-size .variant__button-label,
+  .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant__button-label,
+  .variant-input-wrap[data-index="option2"][data-handle="size"] .variant__button-label,
+  .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant__button-label {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 12px 8px !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 5px !important;
+    background-color: #fff !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+    width: 100% !important;
+    min-height: 60px !important;
+    text-align: center !important;
+  }
+
+  .variant-input-wrap[data-index="option2"].is-size .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-index="option2"][data-handle="size"] .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant-input input[type="radio"]:checked + .variant__button-label {
+    border-color: #234085 !important;
+    background-color: #F5F9FF !important;
+  }
+
+  .variant-input-wrap[data-index="option2"].is-size .variant__button-label .label-head,
+  .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant__button-label .label-head,
+  .variant-input-wrap[data-index="option2"][data-handle="size"] .variant__button-label .label-head,
+  .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant__button-label .label-head {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #1C2C58 !important;
+  }
+
+  .variant-input-wrap[data-index="option2"].is-size .variant__button-label .label-value,
+  .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant__button-label .label-value,
+  .variant-input-wrap[data-index="option2"][data-handle="size"] .variant__button-label .label-value,
+  .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant__button-label .label-value {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: #555 !important;
+  }
+
+  /* Color Swatch Styles - Apply to ALL color variants regardless of option position */
+  .is-color .variant-input-wrap,
+  .variant-input-wrap[data-handle="mau"],
+  .variant-input-wrap[data-handle="color"],
+  .variant-input-wrap[data-handle="colour"] {
     display: flex !important;
     grid-template-columns: repeat(auto-fit, 45px);
     gap: 8px;
@@ -522,11 +737,17 @@
     flex-wrap: wrap;
   }
 
-  .is-color .variant-input {
+  .is-color .variant-input,
+  .variant-input-wrap[data-handle="mau"] .variant-input,
+  .variant-input-wrap[data-handle="color"] .variant-input,
+  .variant-input-wrap[data-handle="colour"] .variant-input {
     display: flex;
   }
 
-  .is-color .variant__button-label {
+  .is-color .variant__button-label,
+  .variant-input-wrap[data-handle="mau"] .variant__button-label,
+  .variant-input-wrap[data-handle="color"] .variant__button-label,
+  .variant-input-wrap[data-handle="colour"] .variant__button-label {
     width: 45px !important;
     height: 45px !important;
     min-width: 45px !important;
@@ -551,17 +772,26 @@
     box-sizing: border-box !important;
   }
 
-  .is-color .variant__button-label:hover {
+  .is-color .variant__button-label:hover,
+  .variant-input-wrap[data-handle="mau"] .variant__button-label:hover,
+  .variant-input-wrap[data-handle="color"] .variant__button-label:hover,
+  .variant-input-wrap[data-handle="colour"] .variant__button-label:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
 
-  .is-color .variant-input input[type="radio"]:checked + .variant__button-label {
+  .is-color .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"]:checked + .variant__button-label {
     box-shadow: 0 0 0 1px #fff, 0 0 0 3px #1C2C58;
     border-radius: 50% !important;
   }
 
-  .is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
+  .is-color .variant-input input[type="radio"]:checked + .variant__button-label::after,
+  .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"]:checked + .variant__button-label::after,
+  .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"]:checked + .variant__button-label::after,
+  .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"]:checked + .variant__button-label::after {
     content: "✓";
     position: absolute;
     top: 50%;
@@ -576,13 +806,19 @@
     height: auto;
   }
 
-  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
+  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label,
+  .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"]:disabled + .variant__button-label,
+  .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"]:disabled + .variant__button-label,
+  .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"]:disabled + .variant__button-label {
     opacity: 0.5;
     cursor: not-allowed;
     position: relative;
   }
 
-  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label::before {
+  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label::before,
+  .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"]:disabled + .variant__button-label::before,
+  .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"]:disabled + .variant__button-label::before,
+  .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"]:disabled + .variant__button-label::before {
     content: '';
     position: absolute;
     top: 0;
@@ -595,7 +831,10 @@
   }
 
   /* Override any conflicting styles for color swatches */
-  .is-color .variant-input .variant__button-label {
+  .is-color .variant-input .variant__button-label,
+  .variant-input-wrap[data-handle="mau"] .variant-input .variant__button-label,
+  .variant-input-wrap[data-handle="color"] .variant-input .variant__button-label,
+  .variant-input-wrap[data-handle="colour"] .variant-input .variant__button-label {
     width: 45px !important;
     height: 45px !important;
     min-width: 45px !important;
@@ -611,7 +850,10 @@
   }
 
   /* Ensure color swatches maintain square shape */
-  .is-color .variant-input {
+  .is-color .variant-input,
+  .variant-input-wrap[data-handle="mau"] .variant-input,
+  .variant-input-wrap[data-handle="color"] .variant-input,
+  .variant-input-wrap[data-handle="colour"] .variant-input {
     width: 45px !important;
     height: 45px !important;
     min-width: 45px !important;
@@ -623,7 +865,16 @@
   /* Force override any background-color from theme */
   .is-color .variant-input input[type="radio"] + .variant__button-label,
   .is-color .variant-input input[type="radio"]:checked + .variant__button-label,
-  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
+  .is-color .variant-input input[type="radio"]:disabled + .variant__button-label,
+  .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"] + .variant__button-label,
+  .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"]:disabled + .variant__button-label,
+  .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"] + .variant__button-label,
+  .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"]:disabled + .variant__button-label,
+  .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"] + .variant__button-label,
+  .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"]:checked + .variant__button-label,
+  .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"]:disabled + .variant__button-label {
     background-color: transparent !important;
   }
   .promotion-block-container {
@@ -1393,51 +1644,159 @@
       margin-bottom: 12px;
     }
     
-    .is-size .variant-input-wrap {
+    /* Size Variant Mobile Styles - Apply to ALL size variants regardless of option position */
+    .is-size .variant-input-wrap,
+    .is-firmness .variant-input-wrap,
+    .variant-input-wrap[data-handle="kich-thuoc"],
+    .variant-input-wrap[data-handle="size"],
+    .variant-input-wrap[data-handle="kích-thước"] {
       grid-template-columns: repeat(3, 1fr) !important;
       gap: 8px !important;
     }
-    .is-size .variant-input-wrap .variant-input {
+    .is-size .variant-input-wrap .variant-input,
+    .is-firmness .variant-input-wrap .variant-input,
+    .variant-input-wrap[data-handle="kich-thuoc"] .variant-input,
+    .variant-input-wrap[data-handle="size"] .variant-input,
+    .variant-input-wrap[data-handle="kích-thước"] .variant-input {
       grid-column: unset !important;
       margin: 0 !important;
     }
-    .is-size .variant-input-wrap[data-option-count="6"] {
+    .is-size .variant-input-wrap[data-option-count="6"],
+    .is-firmness .variant-input-wrap[data-option-count="6"],
+    .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"],
+    .variant-input-wrap[data-handle="size"][data-option-count="6"],
+    .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] {
         /* Specific override for 6 items to create 3x2 grid */
         grid-template-columns: repeat(3, 1fr) !important;
     }
     
-    .variant-wrapper:not(.is-color) .variant__button-label {
+    /* Mobile button styling for size variants - Apply to ALL size variants regardless of option position */
+    .variant-wrapper:not(.is-color) .variant__button-label,
+    .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label,
+    .variant-input-wrap[data-handle="size"] .variant__button-label,
+    .variant-input-wrap[data-handle="kích-thước"] .variant__button-label {
       min-height: 50px;
       padding: 8px 4px;
     }
     
-    .is-size .variant-input-wrap .variant-input {
+    .is-size .variant-input-wrap .variant-input,
+    .is-firmness .variant-input-wrap .variant-input,
+    .variant-input-wrap[data-handle="kich-thuoc"] .variant-input,
+    .variant-input-wrap[data-handle="size"] .variant-input,
+    .variant-input-wrap[data-handle="kích-thước"] .variant-input {
       margin: 0 !important;
     }
     
-    .variant-wrapper:not(.is-color) .variant__button-label .label-head {
+    .variant-wrapper:not(.is-color) .variant__button-label .label-head,
+    .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-head,
+    .variant-input-wrap[data-handle="size"] .variant__button-label .label-head,
+    .variant-input-wrap[data-handle="kích-thước"] .variant__button-label .label-head {
       font-size: 14px;
     }
 
-    .variant-wrapper:not(.is-color) .variant__button-label .label-value {
+    .variant-wrapper:not(.is-color) .variant__button-label .label-value,
+    .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-value,
+    .variant-input-wrap[data-handle="size"] .variant__button-label .label-value,
+    .variant-input-wrap[data-handle="kích-thước"] .variant__button-label .label-value {
       font-size: 12px;
     }
     
+    /* Override option2 styles for color variants on mobile - ensure they use color layout */
+    .variant-input-wrap[data-index="option2"].is-color,
+    .variant-input-wrap[data-index="option2"][data-handle="mau"],
+    .variant-input-wrap[data-index="option2"][data-handle="color"],
+    .variant-input-wrap[data-index="option2"][data-handle="colour"] {
+      display: flex !important;
+      grid-template-columns: repeat(auto-fit, 40px) !important;
+      gap: 6px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      max-width: 100% !important;
+      width: fit-content !important;
+      justify-content: flex-start !important;
+      justify-items: center !important;
+      flex-wrap: wrap !important;
+    }
+    
+    .variant-input-wrap[data-index="option2"].is-color .variant-input,
+    .variant-input-wrap[data-index="option2"][data-handle="mau"] .variant-input,
+    .variant-input-wrap[data-index="option2"][data-handle="color"] .variant-input,
+    .variant-input-wrap[data-index="option2"][data-handle="colour"] .variant-input {
+      display: flex !important;
+      flex: unset !important;
+      width: 40px !important;
+      height: 40px !important;
+    }
+
+    /* Override option2 styles for size variants on mobile - ensure they use size layout */
+    .variant-input-wrap[data-index="option2"].is-size,
+    .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"],
+    .variant-input-wrap[data-index="option2"][data-handle="size"],
+    .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 8px !important;
+      margin-bottom: 16px !important;
+    }
+    
+    .variant-input-wrap[data-index="option2"].is-size .variant-input,
+    .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant-input,
+    .variant-input-wrap[data-index="option2"][data-handle="size"] .variant-input,
+    .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant-input {
+      display: flex !important;
+      flex: unset !important;
+      width: auto !important;
+      height: auto !important;
+      grid-column: unset !important;
+      margin: 0 !important;
+    }
+
+    /* Specific override for option2 size variants with 6 options on mobile - match option1 exactly */
+    .variant-input-wrap[data-index="option2"][data-option-count="6"].is-size,
+    .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kich-thuoc"],
+    .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="size"],
+    .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kích-thước"] {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+
     /* Comfort top variant styling - Simple approach */
     .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
       color: #212121 !important;
     }
     
     /* Make Comfort top variants share width equally and match height with other blocks - Mobile */
-    .variant-input-wrap[data-index="option2"]:not(.is-color) {
+    .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size) {
       display: flex !important;
       flex-direction: row !important;
       gap: 8px !important;
     }
     
-    .variant-input-wrap[data-index="option2"]:not(.is-color) .variant-input {
+    .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size) .variant-input {
       flex: 1 !important;
       width: 50% !important;
+    }
+
+    /* Override flex layout for size variants in option2 on mobile - force grid layout */
+    .variant-input-wrap[data-index="option2"].is-size,
+    .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"],
+    .variant-input-wrap[data-index="option2"][data-handle="size"],
+    .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] {
+      display: grid !important;
+      flex-direction: unset !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 8px !important;
+      margin-bottom: 16px !important;
+    }
+
+    .variant-input-wrap[data-index="option2"].is-size .variant-input,
+    .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant-input,
+    .variant-input-wrap[data-index="option2"][data-handle="size"] .variant-input,
+    .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant-input {
+      flex: unset !important;
+      width: auto !important;
+      height: auto !important;
+      grid-column: unset !important;
+      margin: 0 !important;
     }
 
     /* Size variants in option2 should use column layout like option1 - Mobile */
@@ -1479,8 +1838,34 @@
       text-align: center !important;
     }
 
-    /* Color Swatch Mobile Styles */
-    .is-color .variant-input-wrap {
+    /* Specific mobile button styling for option2 size variants - match option1 exactly */
+    .variant-input-wrap[data-index="option2"].is-size .variant__button-label,
+    .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant__button-label,
+    .variant-input-wrap[data-index="option2"][data-handle="size"] .variant__button-label,
+    .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant__button-label {
+      min-height: 50px !important;
+      padding: 8px 4px !important;
+    }
+
+    .variant-input-wrap[data-index="option2"].is-size .variant__button-label .label-head,
+    .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant__button-label .label-head,
+    .variant-input-wrap[data-index="option2"][data-handle="size"] .variant__button-label .label-head,
+    .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant__button-label .label-head {
+      font-size: 14px !important;
+    }
+
+    .variant-input-wrap[data-index="option2"].is-size .variant__button-label .label-value,
+    .variant-input-wrap[data-index="option2"][data-handle="kich-thuoc"] .variant__button-label .label-value,
+    .variant-input-wrap[data-index="option2"][data-handle="size"] .variant__button-label .label-value,
+    .variant-input-wrap[data-index="option2"][data-handle="kích-thước"] .variant__button-label .label-value {
+      font-size: 12px !important;
+    }
+
+    /* Color Swatch Mobile Styles - Apply to ALL color variants regardless of option position */
+    .is-color .variant-input-wrap,
+    .variant-input-wrap[data-handle="mau"] .variant-input-wrap,
+    .variant-input-wrap[data-handle="color"] .variant-input-wrap,
+    .variant-input-wrap[data-handle="colour"] .variant-input-wrap {
       grid-template-columns: repeat(auto-fit, 40px);
       gap: 6px;
       margin-left: auto;
@@ -1489,7 +1874,10 @@
       width: fit-content;
     }
 
-    .is-color .variant__button-label {
+    .is-color .variant__button-label,
+    .variant-input-wrap[data-handle="mau"] .variant__button-label,
+    .variant-input-wrap[data-handle="color"] .variant__button-label,
+    .variant-input-wrap[data-handle="colour"] .variant__button-label {
       width: 40px !important;
       height: 40px !important;
       min-width: 40px !important;
@@ -1506,12 +1894,18 @@
       background-size: 100% 100%;
     }
 
-    .is-color .variant-input input[type="radio"]:checked + .variant__button-label::after {
+    .is-color .variant-input input[type="radio"]:checked + .variant__button-label::after,
+    .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"]:checked + .variant__button-label::after,
+    .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"]:checked + .variant__button-label::after,
+    .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"]:checked + .variant__button-label::after {
       font-size: 14px;
     }
 
     /* Override any conflicting styles for color swatches - Mobile */
-    .is-color .variant-input .variant__button-label {
+    .is-color .variant-input .variant__button-label,
+    .variant-input-wrap[data-handle="mau"] .variant-input .variant__button-label,
+    .variant-input-wrap[data-handle="color"] .variant-input .variant__button-label,
+    .variant-input-wrap[data-handle="colour"] .variant-input .variant__button-label {
       width: 40px !important;
       height: 40px !important;
       min-width: 40px !important;
@@ -1527,7 +1921,10 @@
     }
 
     /* Ensure color swatches maintain square shape - Mobile */
-    .is-color .variant-input {
+    .is-color .variant-input,
+    .variant-input-wrap[data-handle="mau"] .variant-input,
+    .variant-input-wrap[data-handle="color"] .variant-input,
+    .variant-input-wrap[data-handle="colour"] .variant-input {
       width: 40px !important;
       height: 40px !important;
       min-width: 40px !important;
@@ -1539,7 +1936,16 @@
     /* Force override any background-color from theme - Mobile */
     .is-color .variant-input input[type="radio"] + .variant__button-label,
     .is-color .variant-input input[type="radio"]:checked + .variant__button-label,
-    .is-color .variant-input input[type="radio"]:disabled + .variant__button-label {
+    .is-color .variant-input input[type="radio"]:disabled + .variant__button-label,
+    .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"] + .variant__button-label,
+    .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"]:checked + .variant__button-label,
+    .variant-input-wrap[data-handle="mau"] .variant-input input[type="radio"]:disabled + .variant__button-label,
+    .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"] + .variant__button-label,
+    .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"]:checked + .variant__button-label,
+    .variant-input-wrap[data-handle="color"] .variant-input input[type="radio"]:disabled + .variant__button-label,
+    .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"] + .variant__button-label,
+    .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"]:checked + .variant__button-label,
+    .variant-input-wrap[data-handle="colour"] .variant-input input[type="radio"]:disabled + .variant__button-label {
       background-color: transparent !important;
     }
 

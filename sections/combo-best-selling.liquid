@@ -52,8 +52,15 @@
                 <div class="product-info">
                   <h3 class="product-name">{{ product.title }}</h3>
                   <div class="product-description">
-                    {{ block.settings.product_description | default: 'Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.' }}
+                    {%- if block.settings.product_description != blank -%}
+                      {{ block.settings.product_description | truncate: 80 }}
+                    {%- else -%}
+                      {{ product.description | strip_html | truncate: 80 | default: 'Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.' }}
+                    {%- endif -%}
                   </div>
+                </div>
+                
+                <div class="product-price-section">
                   <div class="product-price">
                     <span class="price">Từ {{ product.price | money }}</span>
                     {%- if product.compare_at_price > product.price -%}
@@ -152,7 +159,7 @@
     opacity: 1;
     transform: none;
     background: #FFFBE9; /* Yellow background for product cards only */
-    padding: 20px;
+    padding: 0; /* Remove padding from card to not affect image */
     border: 1px solid #E5E7EB;
     transition: all 0.3s ease;
   }
@@ -162,15 +169,15 @@
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   }
 
+  /* Separate Image Container Styles - Independent from Product Card */
   [data-section-type="combo-best-selling"] .product-image-container {
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 75%;
+    padding-bottom: 74.74%; /* 284/380 = 0.7474 = 74.74% */
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 20px;
-    background: #F8F9FA;
+    background: #FFFBE9; /* Yellow background same as product card */
     cursor: pointer;
   }
   
@@ -200,13 +207,14 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
   
+  /* Separate Image Styles - Independent from Product Card */
   [data-section-type="combo-best-selling"] .product-image-primary, 
   [data-section-type="combo-best-selling"] .product-image-secondary {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 5px; /* 5px padding from top */
+    left: 5px; /* 5px padding from left */
+    width: calc(100% - 10px); /* Subtract 5px padding from both sides */
+    height: calc(100% - 10px); /* Subtract 5px padding from both sides */
     object-fit: cover;
     border-radius: 8px;
     transition: opacity 0.3s ease;
@@ -214,8 +222,10 @@
   
   [data-section-type="combo-best-selling"] .product-image-secondary {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 5px; /* Account for container padding */
+    left: 5px; /* Account for container padding */
+    width: calc(100% - 10px); /* Subtract padding from both sides */
+    height: calc(100% - 10px); /* Subtract padding from both sides */
     opacity: 0;
   }
   
@@ -230,7 +240,7 @@
   }
   
   [data-section-type="combo-best-selling"] .product-info {
-    padding: 0;
+    padding: 20px; /* Add padding only to product info, not image */
     margin: 0;
     text-align: left;
   }
@@ -249,8 +259,20 @@
     font-size: 14px;
     font-weight: 400;
     color: #666;
-    margin-bottom: 16px;
+    margin-bottom: 0; /* Remove margin since price section is separate */
     line-height: 150%;
+    height: 42px; /* Fixed height for 2 lines (14px * 1.5 * 2) */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  
+  /* Separate Price Section - Normal flow at bottom */
+  [data-section-type="combo-best-selling"] .product-price-section {
+    padding: 0 20px 20px 20px; /* Fixed 20px padding from bottom edge */
+    margin: 0;
+    background: transparent;
   }
   
   [data-section-type="combo-best-selling"] .product-price {
@@ -330,12 +352,25 @@
       min-width: 280px;
     }
     
+    /* Separate Mobile Image Container Styles */
     [data-section-type="combo-best-selling"] .product-image-container {
       width: 100% !important;
       height: 200px !important;
       flex-shrink: 0 !important;
       aspect-ratio: unset !important;
       border-radius: 3px !important;
+      /* 5px padding around the image on mobile */
+      padding: 5px !important;
+      box-sizing: border-box !important;
+    }
+    
+    /* Mobile Image Positioning */
+    [data-section-type="combo-best-selling"] .product-image-primary,
+    [data-section-type="combo-best-selling"] .product-image-secondary {
+      top: 5px !important;
+      left: 5px !important;
+      width: calc(100% - 10px) !important;
+      height: calc(100% - 10px) !important;
     }
     
     [data-section-type="combo-best-selling"] .product-name {
@@ -343,7 +378,11 @@
     }
     
     [data-section-type="combo-best-selling"] .product-info {
-      padding: 12px 0 0 0 !important;
+      padding: 12px 20px 0 20px !important; /* Add padding to product info on mobile, no bottom padding */
+    }
+    
+    [data-section-type="combo-best-selling"] .product-price-section {
+      padding: 0 20px 20px 20px !important; /* Fixed 20px padding from bottom edge on mobile */
     }
   }
 </style>
@@ -462,6 +501,27 @@
       "id": "description_color",
       "label": "Description Color",
       "default": "#666"
+    },
+    {
+      "type": "text",
+      "id": "image_padding",
+      "label": "Image Container Padding (Desktop)",
+      "info": "CSS padding value for image container on desktop (e.g., '10px', '15px 20px')",
+      "default": "0px"
+    },
+    {
+      "type": "text",
+      "id": "image_inner_padding",
+      "label": "Image Inner Padding (Desktop)",
+      "info": "CSS padding value for images inside container on desktop (e.g., '5px', '10px 15px')",
+      "default": "0px"
+    },
+    {
+      "type": "text",
+      "id": "mobile_image_padding",
+      "label": "Image Container Padding (Mobile)",
+      "info": "CSS padding value for image container on mobile (e.g., '5px', '10px 15px')",
+      "default": "0px"
     }
   ],
   "blocks": [
