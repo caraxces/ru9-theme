@@ -73,8 +73,12 @@
       "goi-foam-niu",
       "goi-om"
     ],
-    "voucher_image_1": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
-    "voucher_code_1": "test-deposit",
+    "voucher_image_1": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c_1.png",
+    "voucher_code_1": "A",
+    "voucher_image_2": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c_1.png",
+    "voucher_code_2": "B",
+    "voucher_image_3": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c_1.png",
+    "voucher_code_3": "C",
     "social_facebook_link": "https://m.me/ru9vn",
     "social_zalo_link": "https://zalo.me/2061353887673595200",
     "social_instagram_link": "https://www.instagram.com/ru9vn/",
@@ -82,7 +86,7 @@
     "favicon": "shopify://shop_images/Ru9_64x64_535227b0-b74c-4250-8066-eb99abf5f492.png",
     "show_breadcrumbs": true,
     "show_breadcrumbs_collection_link": false,
-    "discount_percentage": 10,
+    "discount_percentage": 15,
     "category_tag": "sản-phẩm_Sản phẩm, giấc-ngủ_Giấc ngủ, mẹo-vặt_Mẹo vặt,mẹ-bé_Mẹ & bé",
     "sections": {
       "pf-warranty-accordion": {

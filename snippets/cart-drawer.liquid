@@ -10,15 +10,15 @@
     /* Desktop: Smaller drawer width */
     @media (min-width: 769px) {
       #CartDrawer {
-        width: 400px !important;
-        max-width: 400px !important;
+        width: 420px !important;
+        max-width: 420px !important;
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
       }
       #CartDrawer .drawer__inner {
-        width: 400px !important;
-        max-width: 400px !important;
+        width: 420px !important;
+        max-width: 420px !important;
       }
       #CartDrawer.drawer--is-open {
         transform: translateX(0) !important;
@@ -633,6 +633,13 @@
     .btn--online {
       background-color: #9F332C;
       color: white;
+    }
+    
+    /* Mobile responsive for checkout buttons */
+    @media (max-width: 768px) {
+      .btn--cod, .btn--online {
+        font-size: 14px;
+      }
     }
   </style>
 

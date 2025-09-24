@@ -295,6 +295,14 @@
   .product-accordion[open] summary .icon-toggle {
     transform: rotate(180deg);
   }
+  
+  /* Hide toggle arrows on mobile */
+  @media (max-width: 768px) {
+    .product-accordion summary .icon-toggle,
+    .size-guide-text-trigger .arrow-icon {
+      display: none !important;
+    }
+  }
   .product-accordion-content {
     padding-bottom: 20px;
   }
@@ -887,6 +895,8 @@
     white-space: nowrap;
     margin: 0 0 0px !important;
     align-self: center;
+    flex-shrink: 0;
+    min-width: fit-content;
   }
   .promotion-vouchers {
     display: flex;
@@ -900,13 +910,37 @@
     flex-shrink: 0;
     border-radius: 5px;
     background: #F5F5F5;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f5f5f5;
+  }
+  
+  .promotion-vouchers::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .promotion-vouchers::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 3px;
+  }
+  
+  .promotion-vouchers::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+  }
+  
+  .promotion-vouchers::-webkit-scrollbar-thumb:hover {
+    background: #999;
   }
   .promotion-voucher-item {
     cursor: pointer;
     background: none;
     border: none;
     padding: 0;
+    flex-shrink: 0;
+    min-width: fit-content;
   }
   .promotion-voucher-item img {
     display: block;

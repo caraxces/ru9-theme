@@ -342,7 +342,7 @@
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem Nệm",
+            "button_text": "Xem sản phẩm",
             "button_link": ""
           }
         },
@@ -354,7 +354,7 @@
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem Nệm",
+            "button_text": "Xem sản phẩm",
             "button_link": ""
           }
         },
@@ -366,7 +366,7 @@
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem Nệm",
+            "button_text": "Xem sản phẩm",
             "button_link": ""
           }
         },
@@ -378,7 +378,7 @@
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem Nệm",
+            "button_text": "Xem sản phẩm",
             "button_link": ""
           }
         },
@@ -390,7 +390,7 @@
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem Nệm",
+            "button_text": "Xem sản phẩm",
             "button_link": ""
           }
         },
@@ -402,7 +402,7 @@
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem Nệm",
+            "button_text": "Xem sản phẩm",
             "button_link": ""
           }
         }
@@ -555,16 +555,6 @@
         "text_color": "#212121"
       }
     },
-    "blog_carousel_hh43j9": {
-      "type": "blog-carousel",
-      "name": "Blog posts carousel",
-      "settings": {
-        "title": "Blog posts",
-        "view_all": true,
-        "view_all_link": "",
-        "view_all_text": ""
-      }
-    },
     "faq_A7dpqH": {
       "type": "faq",
       "blocks": {
@@ -681,7 +671,6 @@
     "certifications_cWbJNF",
     "super_service_Ch8qQy",
     "collections_listing_4JU76Y",
-    "blog_carousel_hh43j9",
     "faq_A7dpqH",
     "testimonials_AdcbcV"
   ]

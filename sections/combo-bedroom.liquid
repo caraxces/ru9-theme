@@ -1,0 +1,700 @@
+<div data-section-id="{{ section.id }}" data-section-type="combo-bedroom">
+  <div class="combo-bedroom-section">
+    
+    <!-- Header Section with Navigation -->
+    <div class="section-header">
+      <div class="section-header-content">
+        <div class="section-header-text">
+          <h2 class="section-title">
+            {{ section.settings.title | default: 'Combo phòng ngủ' }}
+          </h2>
+          {%- if section.settings.description != blank -%}
+            <div class="section-description">
+              {{ section.settings.description | newline_to_br }}
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="section-navigation">
+          <button class="nav-arrow nav-arrow--prev" aria-label="Previous">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="nav-arrow nav-arrow--next" aria-label="Next">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Product Carousel Section -->
+    <div class="product-carousel-section">
+      <div class="product-carousel">
+        <div class="product-cards-container">
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- assign product = block.settings.product -%}
+              {%- if product != blank -%}
+                <a href="{{ product.url }}" class="product-card">
+                <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}">
+                  {%- if block.settings.product_label != blank -%}
+                    <div class="product-label">
+                      {{ block.settings.product_label }}
+                    </div>
+                  {%- endif -%}
+                  {%- if product.featured_image -%}
+                    <img 
+                      class="product-image-primary"
+                      src="{{ product.featured_image | image_url: width: 400, height: 320, crop: 'center' }}" 
+                      alt="{{ product.title }}"
+                      width="400" height="320"
+                    >
+                    {%- if product.media.size > 1 -%}
+                      {%- for media in product.media offset: 1 limit: 1 -%}
+                        {%- assign second_image = media.preview_image -%}
+                        {%- if second_image != blank -%}
+                          <img 
+                            class="product-image-secondary"
+                            src="{{ second_image | image_url: width: 400, height: 320, crop: 'center' }}" 
+                            alt="{{ product.title }}"
+                            width="400" height="320"
+                          >
+                        {%- endif -%}
+                      {%- endfor -%}
+                    {%- endif -%}
+                  {%- else -%}
+                    <div class="placeholder-image">
+                      No Image
+                    </div>
+                  {%- endif -%}
+                </div>
+                
+                <div class="product-info">
+                  <div class="product-rating">
+                    <svg width="81" height="14" viewBox="0 0 81 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6.84155 0.245755C6.94841 -0.0819184 7.41368 -0.0819184 7.52054 0.245755L8.97105 4.69322C9.01883 4.83976 9.15591 4.93898 9.31055 4.93898H14.0044C14.3502 4.93898 14.494 5.37983 14.2143 5.58238L10.4169 8.33108C10.2917 8.4216 10.2394 8.58218 10.2872 8.72871L11.7377 13.1762C11.8445 13.5038 11.4681 13.7763 11.1883 13.5738L7.3909 10.8251C7.26577 10.7346 7.09632 10.7346 6.9712 10.8251L3.1738 13.5738C2.89403 13.7763 2.51759 13.5038 2.62445 13.1762L4.07493 8.72871C4.12273 8.58218 4.07037 8.4216 3.94525 8.33108L0.147842 5.58238C-0.131937 5.37983 0.0118471 4.93898 0.357675 4.93898H5.05154C5.20618 4.93898 5.34326 4.83976 5.39104 4.69322L6.84155 0.245755Z" fill="#FFDC5F"/>
+                      <path d="M23.5007 0.245755C23.6076 -0.0819184 24.0729 -0.0819184 24.1797 0.245755L25.6302 4.69322C25.678 4.83976 25.8151 4.93898 25.9697 4.93898H30.6636C31.0094 4.93898 31.1532 5.37983 30.8735 5.58238L27.0761 8.33108C26.9509 8.4216 26.8986 8.58218 26.9463 8.72871L28.3969 13.1762C28.5037 13.5038 28.1273 13.7763 27.8475 13.5738L24.0501 10.8251C23.925 10.7346 23.7555 10.7346 23.6304 10.8251L19.833 13.5738C19.5532 13.7763 19.1768 13.5038 19.2836 13.1762L20.7341 8.72871C20.7819 8.58218 20.7295 8.4216 20.6044 8.33108L16.807 5.58238C16.5272 5.37983 16.671 4.93898 17.0169 4.93898H21.7107C21.8654 4.93898 22.0025 4.83976 22.0502 4.69322L23.5007 0.245755Z" fill="#FFDC5F"/>
+                      <path d="M40.1609 0.245755C40.2678 -0.0819184 40.733 -0.0819184 40.8399 0.245755L42.2904 4.69322C42.3382 4.83976 42.4753 4.93898 42.6299 4.93898H47.3238C47.6696 4.93898 47.8134 5.37983 47.5336 5.58238L43.7362 8.33108C43.6111 8.4216 43.5587 8.58218 43.6065 8.72871L45.057 13.1762C45.1639 13.5038 44.7874 13.7763 44.5077 13.5738L40.7102 10.8251C40.5851 10.7346 40.4157 10.7346 40.2905 10.8251L36.4931 13.5738C36.2134 13.7763 35.8369 13.5038 35.9438 13.1762L37.3943 8.72871C37.4421 8.58218 37.3897 8.4216 37.2646 8.33108L33.4672 5.58238C33.1874 5.37983 33.3312 4.93898 33.677 4.93898H38.3709C38.5255 4.93898 38.6626 4.83976 38.7104 4.69322L40.1609 0.245755Z" fill="#FFDC5F"/>
+                      <path d="M56.8201 0.245755C56.9269 -0.0819184 57.3922 -0.0819184 57.4991 0.245755L58.9493 4.69322C58.9975 4.83976 59.1343 4.93898 59.289 4.93898H63.9828C64.3285 4.93898 64.4725 5.37983 64.1929 5.58238L60.3951 8.33108C60.2701 8.4216 60.2178 8.58218 60.266 8.72871L61.716 13.1762C61.823 13.5038 61.4464 13.7763 61.1668 13.5738L57.3694 10.8251C57.2443 10.7346 57.0748 10.7346 56.9497 10.8251L53.1523 13.5738C52.8725 13.7763 52.4961 13.5038 52.603 13.1762L54.0535 8.72871C54.1012 8.58218 54.0489 8.4216 53.9238 8.33108L50.1263 5.58238C49.8466 5.37983 49.9904 4.93898 50.3362 4.93898H55.0301C55.1847 4.93898 55.3218 4.83976 55.3696 4.69322L56.8201 0.245755Z" fill="#FFDC5F"/>
+                      <path d="M73.4789 0.245755C73.586 -0.0819184 74.0513 -0.0819184 74.1584 0.245755L75.6084 4.69322C75.6566 4.83976 75.7934 4.93898 75.9481 4.93898H80.6419C80.9876 4.93898 81.1316 5.37983 80.852 5.58238L77.0542 8.33108C76.9292 8.4216 76.8769 8.58218 76.9251 8.72871L78.3751 13.1762C78.4822 13.5038 78.1055 13.7763 77.8259 13.5738L74.0287 10.8251C73.9032 10.7346 73.7342 10.7346 73.6086 10.8251L69.8115 13.5738C69.5318 13.7763 69.1552 13.5038 69.2623 13.1762L70.7123 8.72871C70.7605 8.58218 70.7081 8.4216 70.5832 8.33108L66.7854 5.58238C66.5057 5.37983 66.6497 4.93898 66.9954 4.93898H71.6892C71.8439 4.93898 71.9808 4.83976 72.029 4.69322L73.4789 0.245755Z" fill="#FFDC5F"/>
+                    </svg>
+                    {%- assign rating = product.metafields.reviews.rating.value -%}
+                    {%- if rating != blank -%}
+                      <span class="rating-score">{{ rating.rating | round: 1 }}</span>
+                      <span class="rating-count">({{ product.metafields.reviews.rating_count }})</span>
+                    {%- endif -%}
+                  </div>
+                  <h3 class="product-name">{{ product.title }}</h3>
+                  <div class="product-meta">
+                    {{ block.settings.bundle_items | default: 'Bao gồm: Nệm, gối, tấm bảo vệ' }}
+                  </div>
+                  <div class="product-price">
+                    <span class="price">Từ {{ product.price | money }}</span>
+                    {%- if product.compare_at_price > product.price -%}
+                       {%- assign sale_percentage = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                      <span class="discount-badge">-{{ sale_percentage }}%</span>
+                      <span class="compare-price">{{ product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            <div class="no-products-message">
+              <p>Không có sản phẩm nào để hiển thị. Vui lòng thêm sản phẩm trong admin.</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Debug - Ensure section is visible */
+  [data-section-type="combo-bedroom"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+  
+  /* General Section Styles */
+  [data-section-type="combo-bedroom"] .combo-bedroom-section {
+    width: 100%;
+    min-height: auto;
+    margin: 0 auto 60px auto;
+    padding: 0 60px 0 60px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  [data-section-type="combo-bedroom"] .combo-bedroom-section .section-header {
+    padding-bottom: 0px;
+    margin-bottom: 24px;
+  }
+  
+  [data-section-type="combo-bedroom"] .section-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  [data-section-type="combo-bedroom"] .section-header-text {
+    flex: 1;
+  }
+  
+  [data-section-type="combo-bedroom"] .combo-bedroom-section .section-title {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 39px;
+    font-weight: 700;
+    line-height: 120%;
+    color: #1C2C58;
+    margin: 0 0 12px 0;
+    text-align: left;
+  }
+  
+  [data-section-type="combo-bedroom"] .section-description {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
+    color: #666;
+    margin: 0;
+    text-align: left;
+  }
+  
+  /* Navigation Styles */
+  [data-section-type="combo-bedroom"] .section-navigation {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  [data-section-type="combo-bedroom"] .nav-arrow {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #E5E7EB;
+    border-radius: 50%;
+    background: #fff;
+    color: #1C2C58;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  [data-section-type="combo-bedroom"] .nav-arrow:hover {
+    background: #1C2C58;
+    color: #fff;
+    border-color: #1C2C58;
+  }
+  
+  [data-section-type="combo-bedroom"] .nav-arrow:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  [data-section-type="combo-bedroom"] .nav-arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Carousel Styles */
+  [data-section-type="combo-bedroom"] .product-carousel-section {
+    position: relative; 
+  }
+  [data-section-type="combo-bedroom"] .product-carousel {
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+  }
+  [data-section-type="combo-bedroom"] .product-carousel.grabbing {
+    cursor: grabbing;
+  }
+  [data-section-type="combo-bedroom"] .product-carousel.grabbing .product-card {
+    pointer-events: none;
+  }
+  [data-section-type="combo-bedroom"] .product-cards-container {
+    display: flex;
+    gap: 2%;
+    transition: transform 0.3s ease;
+    padding-right: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* Custom scrollbar styling */
+  [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-track {
+    background: #F0F1EF;
+    border-radius: 100px;
+  }
+  [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-thumb {
+    background: #234085;
+    border-radius: 100px;
+  }
+  [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b;
+  }
+  [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  /* Product Card Styles */
+  [data-section-type="combo-bedroom"] .product-card {
+    width: calc((100% - 60px) / 4);
+    flex-shrink: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    position: relative;
+  }
+
+  [data-section-type="combo-bedroom"] .product-image-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    background: #F8F9FA;
+    cursor: pointer;
+  }
+  [data-section-type="combo-bedroom"] .placeholder-image {
+    width: 100%;
+    height: 100%;
+    background: #E9ECEF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6C757D;
+    border-radius: 8px;
+  }
+  [data-section-type="combo-bedroom"] .product-label {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #609EE9;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  [data-section-type="combo-bedroom"] .product-image-primary, [data-section-type="combo-bedroom"] .product-image-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: opacity 0.3s ease;
+  }
+  [data-section-type="combo-bedroom"] .product-image-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  [data-section-type="combo-bedroom"] .product-image-container.has-secondary-image:hover .product-image-primary,
+  [data-section-type="combo-bedroom"] .product-carousel.grabbing .product-image-container.has-secondary-image:hover .product-image-primary {
+    opacity: 0 !important;
+  }
+  [data-section-type="combo-bedroom"] .product-image-container.has-secondary-image:hover .product-image-secondary,
+  [data-section-type="combo-bedroom"] .product-carousel.grabbing .product-image-container.has-secondary-image:hover .product-image-secondary {
+    opacity: 1 !important;
+  }
+  [data-section-type="combo-bedroom"] .product-info {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+  [data-section-type="combo-bedroom"] .product-rating {
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  [data-section-type="combo-bedroom"] .rating-score {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  [data-section-type="combo-bedroom"] .rating-count {
+    font-size: 12px;
+    color: #666;
+  }
+  [data-section-type="combo-bedroom"] .product-name {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #1C2C58;
+    margin: 0 0 6px 0;
+    line-height: 140%;
+  }
+  [data-section-type="combo-bedroom"] .product-meta {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 6px;
+    line-height: 140%;
+  }
+  [data-section-type="combo-bedroom"] .product-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    line-height: 1.2;
+  }
+  [data-section-type="combo-bedroom"] .price {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1A1A1A;
+  }
+  [data-section-type="combo-bedroom"] .discount-badge {
+    font-size: 20px;
+    font-weight: 600;
+    color: #234085;
+    background: #FCE390;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  [data-section-type="combo-bedroom"] .compare-price {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 20px;
+    color: #999;
+    text-decoration: line-through;
+    width: 100%;
+  }
+  
+  /* No Products Message */
+  [data-section-type="combo-bedroom"] .no-products-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  /* Mobile Layout */
+  @media (max-width: 768px) {
+    [data-section-type="combo-bedroom"] .combo-bedroom-section {
+      padding: 0 20px;
+    }
+    
+    [data-section-type="combo-bedroom"] .combo-bedroom-section .section-header {
+      flex-direction: row !important;
+      flex-wrap: wrap;
+      align-items: center;
+      padding-bottom: 0px !important;
+      margin-bottom: 20px;
+    }
+    
+    [data-section-type="combo-bedroom"] .section-header-content {
+      order: 1;
+      flex: 1 1 auto;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    
+    [data-section-type="combo-bedroom"] .section-navigation {
+      align-self: flex-end;
+    }
+    
+    [data-section-type="combo-bedroom"] .combo-bedroom-section .section-title {
+      font-size: 20px;
+      margin-bottom: 8px;
+      text-align: left;
+    }
+    
+    [data-section-type="combo-bedroom"] .section-description {
+      font-size: 16px;
+      line-height: 140%;
+    }
+    
+    [data-section-type="combo-bedroom"] .nav-arrow {
+      width: 36px;
+      height: 36px;
+    }
+    
+    [data-section-type="combo-bedroom"] .nav-arrow svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-carousel-section {
+      margin: 0 -20px 0 -20px;
+      padding: 0 20px;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-carousel {
+      padding: 0;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-cards-container {
+      gap: 20px !important;
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: none !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar {
+      display: none !important;
+    }
+    [data-section-type="combo-bedroom"] .product-cards-container {
+      -ms-overflow-style: none !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-card {
+      width: 280px !important;
+      flex-shrink: 0;
+      min-width: 280px;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-image-container {
+      width: 100% !important;
+      height: 200px !important;
+      flex-shrink: 0 !important;
+      aspect-ratio: unset !important;
+      border-radius: 3px !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-name {
+      font-size: 18px !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-info {
+      padding: 12px 0 0 0 !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-meta {
+      font-size: 14px !important;
+    }
+  }
+  
+</style>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const sectionContainer = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!sectionContainer) return;
+
+    const productCardsContainer = sectionContainer.querySelector('.product-cards-container');
+    const prevBtn = sectionContainer.querySelector('.nav-arrow--prev');
+    const nextBtn = sectionContainer.querySelector('.nav-arrow--next');
+    const carouselContainer = sectionContainer.querySelector('.product-carousel');
+
+    function initializeCarousel() {
+      if (productCardsContainer.children.length === 0) return;
+
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      function dragStart(e) {
+        if (e.target.closest('.product-info')) {
+          isDown = false;
+          return;
+        }
+        isDown = true;
+        carouselContainer.classList.add('grabbing');
+        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+        scrollLeft = productCardsContainer.scrollLeft;
+        if (e.type === 'touchstart') {
+          window.addEventListener('touchmove', dragMove);
+          window.addEventListener('touchend', dragEnd);
+        }
+      }
+
+      function dragMove(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
+        const walk = currentX - startX;
+        productCardsContainer.scrollLeft = scrollLeft - walk;
+      }
+
+      function dragEnd() {
+        if (!isDown) return;
+        isDown = false;
+        carouselContainer.classList.remove('grabbing');
+        window.removeEventListener('touchmove', dragMove);
+        window.removeEventListener('touchend', dragEnd);
+      }
+
+      productCardsContainer.addEventListener('mousedown', dragStart);
+      productCardsContainer.addEventListener('mousemove', dragMove);
+      productCardsContainer.addEventListener('mouseup', dragEnd);
+      productCardsContainer.addEventListener('mouseleave', dragEnd);
+
+      productCardsContainer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', e => {
+          if (isDown) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        });
+      });
+
+      productCardsContainer.addEventListener('touchstart', dragStart);
+    }
+
+    // Navigation functionality
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        const scrollAmount = productCardsContainer.offsetWidth * 0.8;
+        productCardsContainer.scrollLeft -= scrollAmount;
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const scrollAmount = productCardsContainer.offsetWidth * 0.8;
+        productCardsContainer.scrollLeft += scrollAmount;
+      });
+    }
+
+    // Initialize carousel
+    initializeCarousel();
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Combo Phòng Ngủ",
+  "class": "index-section",
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Combo phòng ngủ"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Combo sản phẩm phòng ngủ được yêu thích nhất"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary Color",
+      "default": "#1C2C58"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#666"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_item",
+      "name": "Product Item",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Select product to display"
+        },
+        {
+          "type": "text",
+          "id": "product_label",
+          "label": "Product Label",
+          "info": "e.g., 'Best seller', 'Mới', 'Top rated'",
+          "default": "Best seller"
+        },
+        {
+          "type": "textarea",
+          "id": "bundle_items",
+          "label": "Bao gồm (Bundle Items)",
+          "info": "List items included in this bundle (one per line)",
+          "default": "Bao gồm: Nệm Nest 1m6 x 2m, 2 gối Niu, Tấm bảo vệ Nệm 1m6 x 2m"
+        },
+        {
+          "type": "color",
+          "id": "label_color",
+          "label": "Label Text Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "label_bg",
+          "label": "Label Background",
+          "default": "#609EE9"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Combo Phòng Ngủ",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "product_item"
+        },
+        {
+          "type": "product_item"
+        },
+        {
+          "type": "product_item"
+        },
+        {
+          "type": "product_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

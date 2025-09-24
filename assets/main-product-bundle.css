@@ -6,6 +6,15 @@
   margin: 0 auto;
   padding: 0 20px;
 }
+@media screen and (min-width: 768px) {
+  .bundle-step-2 .variant-wrapper.size .variant-input-wrap[data-option-count="6"],
+  .bundle-step-2 .variant-wrapper.firmness .variant-input-wrap[data-option-count="6"],
+  .bundle-step-2 .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"],
+  .bundle-step-2 .variant-input-wrap[data-handle="size"][data-option-count="6"],
+  .bundle-step-2 .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] {
+    grid-template-columns: unset !important; /* hoặc auto/initial tùy layout gốc */
+  }
+}
   /* ===== VARIANT PICKING LAYOUT - SYNC WITH PRODUCT TEMPLATE ===== */
 
   /* Size Variant Styles - Apply to ALL size variants regardless of option position */
@@ -253,7 +262,6 @@
       .bundle-step-2 .variant-wrapper.size .variant-input-wrap[data-option-count="6"] .variant-input:nth-child(6) {
         grid-column: unset !important; /* ← Tắt span 2 */
       }
-    }
     /* Mobile: 2 columns layout - CORRECT 2:3 grid */
     .bundle-step-2 .variant-wrapper.size .variant-input-wrap,
     .bundle-step-2 .variant-wrapper.firmness .variant-input-wrap,
@@ -281,6 +289,7 @@
       min-height: 50px;
       padding: 8px 4px;
     }
+  }
     
     .bundle-step-2 .variant-wrapper:not(.is-color) .variant__button-label .label-head,
     .bundle-step-2 .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-head,
