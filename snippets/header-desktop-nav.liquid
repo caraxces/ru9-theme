@@ -162,7 +162,7 @@
                     <div class="f-bold">
                       <a
                         href="{{ childlink.url }}"
-                        class="site-nav__dropdown-link {% if active_sale_lv2 contains childtitle %} is-sale{% endif %} site-nav__dropdown-link--top-level"
+                        class="mega-tab mega-tab--first {% if active_sale_lv2 contains childtitle %} is-sale{% endif %}"
                         style="{% if active_sale_lv2 contains childtitle %}--active-sale-clr: {{ section.settings.color_active_sale.rgb }};{% endif %}"
                       >
                         {{ childlink.title }}
@@ -501,20 +501,102 @@
     .site-nav__dropdown.megamenu .f-bold {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
     }
-    .site-nav__dropdown.megamenu .mega-tabs { display: inline-flex; gap: 12px; }
-    .site-nav__dropdown.megamenu .mega-tab {
-      background: none;
-      border: 0;
-      padding: 0;
-      cursor: pointer;
-      font: inherit;
-      font-weight: inherit; /* match .f-bold */
-      opacity: 0.6; /* lighter than f-bold */
+    .site-nav__dropdown.megamenu .mega-tabs { 
+      display: inline !important; 
+      font-family: "Be Vietnam Pro", sans-serif !important;
+      font-weight: 600 !important;
+      font-size: 36px !important;
     }
-    .site-nav__dropdown.megamenu .mega-tab.is-active { opacity: 1; }
+    .site-nav__dropdown.megamenu .mega-tab {
+      background: none !important;
+      border: 0 !important;
+      padding: 0 !important;
+      margin-right: 24px !important;
+      cursor: pointer !important;
+      font-family: "Be Vietnam Pro", sans-serif !important;
+      font-weight: 600 !important;
+      font-size: 36px !important;
+      font-style: normal !important;
+      line-height: 150% !important;
+      text-decoration: none !important;
+      color: #AFAFAF !important; /* Màu không active */
+      display: inline !important;
+      white-space: nowrap !important;
+      box-sizing: border-box !important;
+      transition: color 0.3s ease !important;
+    }
+    .site-nav__dropdown.megamenu .mega-tab.is-active { 
+      color: #1C2C58 !important; /* Màu active */
+    }
+    
+    /* First tab styling - follows same rule as other tabs */
+    .site-nav__dropdown.megamenu .mega-tab--first {
+      color: #AFAFAF !important; /* Màu không active mặc định */
+    }
+    
+    .site-nav__dropdown.megamenu .mega-tab--first.is-active {
+      color: #1C2C58 !important; /* Màu active khi được chọn */
+    }
+    
+    /* View All Container */
+    .site-nav__dropdown.megamenu .view-all-container {
+      margin-left: auto !important;
+    }
+    
+    /* View All Button */
+    .site-nav__dropdown.megamenu .view-all-btn {
+      width: 165px !important;
+      height: 45px !important;
+      border-radius: 20px !important;
+      background: #234085 !important;
+      color: white !important;
+      border: none !important;
+      font-family: "Be Vietnam Pro", sans-serif !important;
+      font-size: 16px !important;
+      font-weight: 500 !important;
+      cursor: pointer !important;
+      display: inline-block !important;
+      text-align: center !important;
+      line-height: 45px !important;
+      text-decoration: none !important;
+      transition: background-color 0.3s ease !important;
+    }
+    
+    .site-nav__dropdown.megamenu .view-all-btn:hover {
+      background: #1a2f6b !important;
+    }
+    
+    /* Mega card image styling */
+    .site-nav__dropdown.megamenu .mega-card__image {
+      width: 240px !important;
+      height: 150px !important;
+      border-radius: 8px !important;
+      overflow: hidden !important;
+      background: #F8F9FA !important;
+      margin-bottom: 12px !important;
+      position: relative !important;
+    }
+    
+    .site-nav__dropdown.megamenu .mega-card__image img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+    }
+    
+    .site-nav__dropdown.megamenu .mega-card__image--placeholder {
+      width: 100% !important;
+      height: 100% !important;
+      background: #E9ECEF !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: #6C757D !important;
+      font-size: 14px !important;
+    }
 
     /* Align when header is left-center: center the scroller and fix row height */
     .header-layout--left-center .site-nav__dropdown.megamenu .mega-scroll {
@@ -606,29 +688,53 @@
         // Insert scroller after first title
         firstBold.parentNode.insertBefore(scroller, firstBold.nextSibling);
 
-        // Tabs inline next to first title for rows 2 and 3
+        // Create tabs container for left side
         var tabs = document.createElement('div');
         tabs.className = 'mega-tabs';
         [1, 2].forEach(function (idx) {
           if (!pages[idx]) return;
           var labelAnchor = pages[idx].querySelector('.f-bold a');
           var label = labelAnchor ? labelAnchor.textContent.trim() : ('Collection ' + (idx + 1));
-          var btn = document.createElement('button');
-          btn.type = 'button';
+          var href = labelAnchor ? labelAnchor.href : '#';
+          var btn = document.createElement('a');
+          btn.href = href;
           btn.className = 'mega-tab';
           btn.setAttribute('data-index', String(idx));
           btn.textContent = label;
           tabs.appendChild(btn);
         });
+        
+        // Create View All button container for right side
+        var viewAllContainer = document.createElement('div');
+        viewAllContainer.className = 'view-all-container';
+        var viewAllBtn = document.createElement('a');
+        viewAllBtn.href = '/collections/all';
+        viewAllBtn.className = 'view-all-btn';
+        viewAllBtn.textContent = 'Xem tất cả';
+        viewAllContainer.appendChild(viewAllBtn);
+        
+        // Add both containers to firstBold
         firstBold.appendChild(tabs);
+        firstBold.appendChild(viewAllContainer);
 
         // Height: if header layout left-center exists, force 288px
         if (document.querySelector('.header-layout--left-center')) {
           scroller.style.setProperty('--mega-row-height', '288px');
           scroller.style.height = '288px';
         }
+        
+        // Initialize first tab as active by default
+        highlightTabByIndex(0);
 
         function highlightTabByIndex(activeIndex) {
+          // Handle first tab (mega-tab--first)
+          var firstTab = firstBold.querySelector('.mega-tab--first');
+          if (firstTab) {
+            firstTab.classList.toggle('is-active', activeIndex === 0);
+            firstTab.setAttribute('aria-selected', activeIndex === 0 ? 'true' : 'false');
+          }
+          
+          // Handle other tabs
           tabs.querySelectorAll('.mega-tab').forEach(function (tab) {
             var idx = parseInt(tab.getAttribute('data-index') || '0', 10);
             tab.classList.toggle('is-active', idx === activeIndex);
@@ -639,6 +745,7 @@
         tabs.addEventListener('click', function (e) {
           var btn = e.target && e.target.closest('.mega-tab');
           if (!btn) return;
+          e.preventDefault(); // Ngăn chặn navigation đến href
           var idx = parseInt(btn.getAttribute('data-index') || '1', 10);
           var targetCards = scroller.children[idx] || null; // index: 0 is first row's cards
           if (!targetCards) return;
@@ -656,12 +763,8 @@
               current = i;
             }
           }
-          // Only highlight for indexes 1 and 2 (display 2/3)
-          if (current >= 1 && current <= 2) {
-            highlightTabByIndex(current);
-          } else {
-            highlightTabByIndex(-1);
-          }
+          // Highlight based on current scroll position (0, 1, 2)
+          highlightTabByIndex(current);
         });
       });
     }

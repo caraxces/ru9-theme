@@ -88,7 +88,7 @@
                   </div>
                   <h3 class="product-name">{{ product.title }}</h3>
                   <div class="product-meta">
-                    {{ block.settings.bundle_items | default: 'Bao gồm: Nệm, gối, tấm bảo vệ' }}
+                    <span class="bundle-label">Bao gồm:</span> {{ block.settings.bundle_items | default: 'Nệm, gối, tấm bảo vệ' }}
                   </div>
                   <div class="product-price">
                     <span class="price">Từ {{ product.price | money }}</span>
@@ -98,6 +98,7 @@
                       <span class="compare-price">{{ product.compare_at_price | money }}</span>
                     {%- endif -%}
                   </div>
+                  <button class="buy-now-btn">Mua ngay</button>
                 </div>
                 </a>
               {%- endif -%}
@@ -230,6 +231,7 @@
     gap: 2%;
     transition: transform 0.3s ease;
     padding-right: 0;
+    padding-bottom: 20px;
     overflow-x: auto;
     overflow-y: hidden;
     flex-wrap: nowrap;
@@ -366,6 +368,11 @@
     margin-bottom: 6px;
     line-height: 140%;
   }
+  
+  [data-section-type="combo-bedroom"] .bundle-label {
+    font-weight: 600;
+    color: #1C2C58;
+  }
   [data-section-type="combo-bedroom"] .product-price {
     display: flex;
     flex-wrap: wrap;
@@ -393,6 +400,27 @@
     color: #999;
     text-decoration: line-through;
     width: 100%;
+  }
+  
+  /* Buy Now Button */
+  [data-section-type="combo-bedroom"] .buy-now-btn {
+    width: 100%;
+    background: #1C2C58;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 20px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 12px;
+  }
+  
+  [data-section-type="combo-bedroom"] .buy-now-btn:hover {
+    background: #234085;
+    transform: translateY(-1px);
   }
   
   /* No Products Message */
@@ -472,6 +500,7 @@
       overflow-y: hidden !important;
       -webkit-overflow-scrolling: touch !important;
       scrollbar-width: none !important;
+      padding-bottom: 20px !important;
     }
     
     [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar {
@@ -505,6 +534,11 @@
     
     [data-section-type="combo-bedroom"] .product-meta {
       font-size: 14px !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .buy-now-btn {
+      font-size: 14px !important;
+      padding: 10px 16px !important;
     }
   }
   
