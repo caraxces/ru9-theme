@@ -206,7 +206,7 @@ input[type="search"]::placeholder {
   .mobile-nav__item
   .mobile-nav__child-item
   .mobile-nav__link {
-  padding: 10px 0px 10px 40px;
+  padding: 10px 0px 10px 0px;
 }
 .header_promotion .promotion_container .promotions {
   display: grid;

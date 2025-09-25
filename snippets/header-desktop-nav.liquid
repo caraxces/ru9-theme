@@ -117,8 +117,8 @@
         <div class="site-nav__dropdown megamenu text-left">
           <div class="page-width gap" style="{% if section.settings.section_width != 'page-width' %}{% if section.settings.section_width == 'full-width' %}--page-width: 100%{% elsif section.settings.section_width == 'customize_width' %}--page-width: {{ section.settings.customize_width | plus: 80 }}px{% endif %}{% endif %}">
             <div class="megamenu__content">
-              <div class="grid">
-                <div class="grid__item medium-up--two-sixths appear-animation appear-delay-{{ animation_column }}">
+              <div class="grid" style="padding-left: 0;">
+                <div class="grid__item medium-up--two-sixths appear-animation appear-delay-{{ animation_column }} " style="padding-left: 0;">
                   {%- assign animation_column = animation_column | plus: 1 -%}
 
                   {%- for childlink in link.links -%}
@@ -244,65 +244,6 @@
               </div>
             </div>
             
-          </div>
-          <div class="megamenu__bottom">
-            <div class="page-width">
-              <div class="megamenu__links flex-center py-base border-t">
-                {%- if section.settings.mega_menu_first_links_text != blank
-                  or section.settings.mega_menu_first_links_icon
-                -%}
-                  <a
-                    href="{{ section.settings.mega_menu_first_links_url }}"
-                    class="megamenu__links-item flex ai-center gap-x-xs"
-                  >
-                    {%- if section.settings.mega_menu_first_links_icon != blank -%}
-                      <span class="megamenu__links-icon">{{ section.settings.mega_menu_first_links_icon }}</span>
-                    {%- endif -%}
-                    {%- if section.settings.mega_menu_first_links_text != blank -%}
-                      <span class="megamenu__links-text">{{ section.settings.mega_menu_first_links_text }}</span>
-                    {%- endif -%}
-                  </a>
-                {%- endif -%}
-                {%- if section.settings.mega_menu_second_links_text != blank
-                  or section.settings.mega_menu_second_links_icon
-                -%}
-                  <a
-                    href="{{ section.settings.mega_menu_second_links_url }}"
-                    class="megamenu__links-item flex ai-center gap-x-xs"
-                  >
-                    {%- if section.settings.mega_menu_second_links_icon != blank -%}
-                      <span class="megamenu__links-icon">{{ section.settings.mega_menu_second_links_icon }}</span>
-                    {%- endif -%}
-                    {%- if section.settings.mega_menu_second_links_text != blank -%}
-                      <span class="megamenu__links-text">{{ section.settings.mega_menu_second_links_text }}</span>
-                    {%- endif -%}
-                  </a>
-                {%- endif -%}
-              </div>
-            </div>
-          </div>
-          <div class="megamenu_promotion">
-            <div class="promotion_container page-width">
-              <div class="promotions flex-center">
-                {%- assign block_promotion = section.blocks | where: 'type', 'header_promotion' -%}
-                {%- if block_promotion.size > 0 -%}
-                  {%- for block in block_promotion -%}
-                    <div class="promotion flex ai-center text-xs">
-                      {%- if block.settings.promotion_icon != blank -%}
-                        <div class="promotion_icon">
-                          {{ block.settings.promotion_icon }}
-                        </div>
-                      {%- endif -%}
-                      {%- if block.settings.promotion_text != blank -%}
-                        <div class="promotion_text">
-                          {{ block.settings.promotion_text }}
-                        </div>
-                      {%- endif -%}
-                    </div>
-                  {%- endfor -%}
-                {%- endif -%}
-              </div>
-            </div>
           </div>
         </div>
       {%- elsif has_dropdown -%}
@@ -449,10 +390,43 @@
       padding-left: 0;
       padding-right: 0;
     }
+    
+    /* Remove any grid borders that might create the black line */
+    .site-nav__dropdown.megamenu > .page-width {
+      display: block !important;
+      grid-template-columns: none !important;
+    }
+    
+    /* Ensure megamenu appears below site header and logo */
+    .site-nav__dropdown.megamenu {
+      z-index: 5 !important; /* Lower than logo z-index: 6 and site-header z-index: 20 */
+    }
     /* Base layout */
     .site-nav__dropdown.megamenu .megamenu__content .grid { display: block; }
     .site-nav__dropdown.megamenu .megamenu__content .grid__item.appear-animation { width: 100% !important; max-width: none; }
     .site-nav__dropdown.megamenu .megamenu__content .grid__item.appear-animation + .grid__item.appear-animation { margin-top: 24px; }
+    
+    /* Remove any borders from megamenu content */
+    .site-nav__dropdown.megamenu .megamenu__content {
+      border: none !important;
+      border-right: none !important;
+      border-left: none !important;
+      border-top: none !important;
+      border-bottom: none !important;
+    }
+    .site-nav__dropdown.megamenu .megamenu__content > * {
+      border: none !important;
+      border-right: none !important;
+      border-left: none !important;
+      border-top: none !important;
+      border-bottom: none !important;
+    }
+    
+    /* Hide megamenu bottom links and promotion on desktop */
+    .site-nav__dropdown.megamenu .megamenu__bottom,
+    .site-nav__dropdown.megamenu .megamenu_promotion {
+      display: none !important;
+    }
 
     /* Only keep first row structure; other rows' cards will be moved into a scroller */
     .site-nav__dropdown.megamenu .megamenu__content .grid__item.appear-animation:not(:first-child) { display: none !important; }
@@ -463,6 +437,8 @@
       overflow-y: auto;
       scroll-snap-type: y mandatory;
       padding-right: 0;
+      flex: 1; /* Take remaining space after view-all-container */
+      min-width: 0; /* Allow flex item to shrink below content size */
       /* Hide scrollbar across browsers */
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
@@ -472,9 +448,11 @@
       scroll-snap-align: start;
       scroll-snap-stop: always;
       min-height: var(--mega-row-height, 288px);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px; /* add a bit spacing between product cards */
+      display: grid;
+      grid-template-columns: repeat(6, 200px);
+      padding: 0;
+      gap: 24px 28px;
+      justify-content: start;
       align-items: flex-start;
     }
     .site-nav__dropdown.megamenu .mega-scroll > .mega-cards > * { margin: 0 !important; }
@@ -505,8 +483,17 @@
       gap: 12px;
       flex-wrap: wrap;
     }
+    
+    /* Container for mega-scroll and view-all-btn */
+    .site-nav__dropdown.megamenu .megamenu__content {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
     .site-nav__dropdown.megamenu .mega-tabs { 
-      display: inline !important; 
+      display: flex !important; 
+      flex-wrap: wrap !important;
+      gap: 24px !important;
       font-family: "Be Vietnam Pro", sans-serif !important;
       font-weight: 600 !important;
       font-size: 36px !important;
@@ -515,7 +502,7 @@
       background: none !important;
       border: 0 !important;
       padding: 0 !important;
-      margin-right: 24px !important;
+      margin: 0 !important;
       cursor: pointer !important;
       font-family: "Be Vietnam Pro", sans-serif !important;
       font-weight: 600 !important;
@@ -524,7 +511,7 @@
       line-height: 150% !important;
       text-decoration: none !important;
       color: #AFAFAF !important; /* Màu không active */
-      display: inline !important;
+      display: inline-block !important;
       white-space: nowrap !important;
       box-sizing: border-box !important;
       transition: color 0.3s ease !important;
@@ -533,9 +520,10 @@
       color: #1C2C58 !important; /* Màu active */
     }
     
-    /* First tab styling - follows same rule as other tabs */
+    /* First tab styling - now follows same rule as other tabs since it's in the same container */
     .site-nav__dropdown.megamenu .mega-tab--first {
       color: #AFAFAF !important; /* Màu không active mặc định */
+      margin: 0 !important; /* Same margin as other tabs */
     }
     
     .site-nav__dropdown.megamenu .mega-tab--first.is-active {
@@ -544,8 +532,11 @@
     
     /* View All Container */
     .site-nav__dropdown.megamenu .view-all-container {
-      margin-left: auto !important;
-    }
+      {% comment %} width:  !important; {% endcomment %}
+      flex-shrink: 0 !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: flex-start !important;    }
     
     /* View All Button */
     .site-nav__dropdown.megamenu .view-all-btn {
@@ -572,12 +563,12 @@
     
     /* Mega card image styling */
     .site-nav__dropdown.megamenu .mega-card__image {
-      width: 240px !important;
-      height: 150px !important;
+      width: 200px !important;
+      height: 148px !important;
       border-radius: 8px !important;
       overflow: hidden !important;
-      background: #F8F9FA !important;
-      margin-bottom: 12px !important;
+      background: #f3f4f6 !important;
+      margin-bottom: 8px !important;
       position: relative !important;
     }
     
@@ -588,14 +579,55 @@
     }
     
     .site-nav__dropdown.megamenu .mega-card__image--placeholder {
-      width: 100% !important;
-      height: 100% !important;
-      background: #E9ECEF !important;
+      width: 200px !important;
+      height: 148px !important;
+      background: #f3f4f6 !important;
+      border-radius: 12px !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       color: #6C757D !important;
       font-size: 14px !important;
+    }
+
+    /* Responsive grid columns for mega-cards */
+    @media (max-width: 1440px) {
+      .site-nav__dropdown.megamenu .mega-scroll > .mega-cards { 
+        grid-template-columns: repeat(5, 200px); 
+      }
+    }
+    @media (max-width: 1280px) {
+      .site-nav__dropdown.megamenu .mega-scroll > .mega-cards { 
+        grid-template-columns: repeat(4, 200px); 
+      }
+    }
+    @media (max-width: 1024px) {
+      .site-nav__dropdown.megamenu .mega-scroll > .mega-cards { 
+        grid-template-columns: repeat(3, 200px); 
+      }
+      .site-nav__dropdown.megamenu .view-all-container {
+        width: 160px !important;
+      }
+      .site-nav__dropdown.megamenu .view-all-btn {
+        width: 140px !important;
+        height: 40px !important;
+        line-height: 40px !important;
+        font-size: 13px !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .site-nav__dropdown.megamenu .megamenu__content {
+        flex-direction: column !important;
+        gap: 15px !important;
+      }
+      .site-nav__dropdown.megamenu .view-all-container {
+        width: 100% !important;
+        justify-content: center !important;
+        padding-top: 10px !important;
+      }
+      .site-nav__dropdown.megamenu .mega-scroll {
+        width: 100% !important;
+      }
     }
 
     /* Align when header is left-center: center the scroller and fix row height */
@@ -605,6 +637,16 @@
       margin-left: auto;
       margin-right: auto;
       width: 100%;
+    }
+    
+    /* Fix mega-card title alignment - override center alignment */
+    .site-nav__dropdown.megamenu .mega-card__link {
+      align-items: flex-start !important;
+    }
+    
+    .site-nav__dropdown.megamenu .mega-card__title {
+      text-align: left !important;
+      width: 100% !important;
     }
   }
 </style>
@@ -691,27 +733,49 @@
         // Create tabs container for left side
         var tabs = document.createElement('div');
         tabs.className = 'mega-tabs';
-        [1, 2].forEach(function (idx) {
-          if (!pages[idx]) return;
-          var labelAnchor = pages[idx].querySelector('.f-bold a');
-          var label = labelAnchor ? labelAnchor.textContent.trim() : ('Collection ' + (idx + 1));
+        
+        // Move the first tab (mega-tab--first) into the tabs container
+        var firstTab = firstBold.querySelector('.mega-tab--first');
+        if (firstTab) {
+          firstTab.setAttribute('data-index', '0');
+          tabs.appendChild(firstTab);
+        }
+        
+        // Create tabs for all pages except the first one (index 0)
+        for (var i = 1; i < pages.length; i++) {
+          var labelAnchor = pages[i].querySelector('.f-bold a');
+          var label = labelAnchor ? labelAnchor.textContent.trim() : ('Collection ' + (i + 1));
           var href = labelAnchor ? labelAnchor.href : '#';
           var btn = document.createElement('a');
           btn.href = href;
           btn.className = 'mega-tab';
-          btn.setAttribute('data-index', String(idx));
+          btn.setAttribute('data-index', String(i));
           btn.textContent = label;
           tabs.appendChild(btn);
-        });
+        }
         
         // Create View All button container for right side
         var viewAllContainer = document.createElement('div');
         viewAllContainer.className = 'view-all-container';
         var viewAllBtn = document.createElement('a');
-        viewAllBtn.href = '/collections/all';
         viewAllBtn.className = 'view-all-btn';
         viewAllBtn.textContent = 'Xem tất cả';
         viewAllContainer.appendChild(viewAllBtn);
+        
+        // Function to update view-all-btn link based on active tab
+        function updateViewAllBtnLink(activeIndex) {
+          var targetPage = pages[activeIndex];
+          if (targetPage) {
+            var labelAnchor = targetPage.querySelector('.f-bold a');
+            if (labelAnchor && labelAnchor.href) {
+              viewAllBtn.href = labelAnchor.href;
+            } else {
+              viewAllBtn.href = '/collections/all'; // fallback
+            }
+          } else {
+            viewAllBtn.href = '/collections/all'; // fallback
+          }
+        }
         
         // Add both containers to firstBold
         firstBold.appendChild(tabs);
@@ -740,6 +804,9 @@
             tab.classList.toggle('is-active', idx === activeIndex);
             tab.setAttribute('aria-selected', idx === activeIndex ? 'true' : 'false');
           });
+          
+          // Update view-all-btn link based on active tab
+          updateViewAllBtnLink(activeIndex);
         }
 
         tabs.addEventListener('click', function (e) {
