@@ -25,9 +25,9 @@
                 <img
                   src="{{ block.settings.image | img_url: 'x122' }}"
                   alt="{{ block.settings.image.alt | escape }}"
-                  width="{{ image_width }}"
-                  height="{{ image_height }}"
-                  style="height: {{ image_height }}px; width: {{ image_width }}px; display: block;"
+                  width=100%
+                  height="60px"
+                  style="height: 60px; width: 100%; display: block;"
                   loading="lazy"
                 >
               {%- else -%}
@@ -68,7 +68,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    height: 200px;
+    height: 80px;
     padding: 39px 0;
   }
 

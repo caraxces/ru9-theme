@@ -47,7 +47,7 @@
         background: #fff !important;
         z-index: 1001 !important;
         box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
-        padding: 20px !important;
+        padding: 0 20px 20px 20px !important;
       }
     }
     
@@ -70,6 +70,14 @@
       transform: translateX(0) !important;
       visibility: visible !important;
       opacity: 1 !important;
+    }
+    
+    /* Hide sticky add-to-cart when cart drawer is open */
+    #CartDrawer.drawer--is-open ~ sticky-add-to-cart,
+    body:has(#CartDrawer.drawer--is-open) sticky-add-to-cart {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
     }
     #CartDrawer .cross-sell-item__title a {
       border-bottom: none !important;
@@ -232,12 +240,6 @@
       object-fit: contain;
     }
 
-    .cart-drawer__divider {
-      display: block;
-      width: 100%;
-      height: 2px;
-      margin: 20px 0;
-    }
 
     /* Cart Items */
     .cart-item__title {
@@ -365,7 +367,7 @@
     .cart-drawer__discount-header {
         overflow: hidden;
         color: #1C2C58;
-        text-align: center;
+        text-align: left;
         text-overflow: ellipsis;
         white-space: nowrap;
         font-family: "Be Vietnam Pro", sans-serif;
@@ -428,6 +430,7 @@
       display: flex;
       gap: 10px;
       transition: transform 0.3s ease-in-out;
+      overflow: hidden;
     }
     .cart-drawer__voucher-item {
       position: relative;
@@ -458,7 +461,7 @@
 
     /* Cart Summary */
     #CartDrawer .cart-drawer__summary {
-      padding: 20px 0;
+      padding: 5px 0;
       background: #fff;
       width: 100%;
       opacity: 1 !important;
@@ -525,7 +528,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 15px 0;
+      margin: 0;
     }
     #CartDrawer .cart-drawer__savings span {
       overflow: hidden;
@@ -568,7 +571,7 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
       gap: 15px;
-      padding: 10px;
+      padding-bottom: 20px;
     }
     .cart-drawer__cross-sell-item {
       display: flex;
@@ -745,12 +748,12 @@
       font-size: 16px;
       border: none;
       cursor: pointer;
-      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
     }
-    #CartDrawer .btn--cod {
-      background-color: #FCE390;
-      color: #1C2C58;
-    }
+    
     #CartDrawer .btn--online {
       background-color: #FCE390;
       color: #1C2C58;
@@ -817,9 +820,6 @@
             {%- comment -%} Cart items are rendered here via JS {%- endcomment -%}
           </div>
 
-          <svg class="cart-drawer__divider" xmlns="http://www.w3.org/2000/svg" width="439" height="2" viewBox="0 0 439 2" fill="none">
-            <path d="M0 1L439 1.00004" stroke="#C4C4C4"/>
-          </svg>
           
           <!-- DISCOUNT CODE -->
           <div class="cart-drawer__discount-wrapper">
@@ -928,9 +928,6 @@
 
         <div class="drawer__footer appear-animation appear-delay-4">
           <div data-cart-footer>
-            <svg class="cart-drawer__divider" xmlns="http://www.w3.org/2000/svg" width="439" height="2" viewBox="0 0 439 2" fill="none">
-              <path d="M0 1L439 1.00004" stroke="#C4C4C4"/>
-            </svg>
             
             <!-- SUMMARY -->
             <div class="cart-drawer__summary">
@@ -976,14 +973,10 @@
                 </div>
             </div>
 
-            <svg class="cart-drawer__divider" xmlns="http://www.w3.org/2000/svg" width="439" height="2" viewBox="0 0 439 2" fill="none">
-              <path d="M0 1L439 1.00004" stroke="#C4C4C4"/>
-            </svg>
 
             <!-- CHECKOUT BUTTONS -->
             <div class="cart__checkout-wrapper--custom">
-                <button type="submit" name="checkout" class="btn btn--cod">Thanh toán COD</button>
-                <button type="submit" name="checkout" class="btn btn--online">Thanh toán online</button>
+                <button type="submit" name="checkout" class="btn btn--online">Thanh toán ngay</button>
             </div>
             {% if additional_checkout_buttons and settings.cart_additional_buttons %}
               <div class="additional-checkout-buttons additional-checkout-buttons--vertical">{{ content_for_additional_checkout_buttons }}</div>
@@ -1024,7 +1017,30 @@
             drawer.style.display = 'block';
             drawer.style.visibility = 'visible';
             drawer.style.opacity = '1';
+            
+            // Hide sticky add-to-cart when drawer is open
+            hideStickyAddToCart();
           }
+        }
+        
+        // Hide sticky add-to-cart when cart drawer is open
+        function hideStickyAddToCart() {
+          const stickyElements = document.querySelectorAll('sticky-add-to-cart');
+          stickyElements.forEach(element => {
+            element.style.display = 'none !important';
+            element.style.visibility = 'hidden !important';
+            element.style.opacity = '0 !important';
+          });
+        }
+        
+        // Show sticky add-to-cart when cart drawer is closed
+        function showStickyAddToCart() {
+          const stickyElements = document.querySelectorAll('sticky-add-to-cart');
+          stickyElements.forEach(element => {
+            element.style.display = '';
+            element.style.visibility = '';
+            element.style.opacity = '';
+          });
         }
         
         function updateCartCount() {
@@ -1044,7 +1060,7 @@
         document.addEventListener('click', function(event) {
           const target = event.target;
 
-          // Handle Slider Arrows
+          // Handle Cross-sell Slider Arrows
           const prevArrow = target.closest('.cart-drawer__cross-sell-arrow--prev');
           const nextArrow = target.closest('.cart-drawer__cross-sell-arrow--next');
           if (prevArrow || nextArrow) {
@@ -1052,6 +1068,28 @@
             if (!slider) return;
             const slideWidth = slider.querySelector('.cart-drawer__cross-sell-item').clientWidth;
             slider.scrollLeft += nextArrow ? slideWidth : -slideWidth;
+            return;
+          }
+
+          // Handle Voucher Carousel Arrows
+          const voucherPrevArrow = target.closest('.cart-drawer__carousel-arrow.prev');
+          const voucherNextArrow = target.closest('.cart-drawer__carousel-arrow.next');
+          if (voucherPrevArrow || voucherNextArrow) {
+            const voucherList = document.querySelector('.cart-drawer__voucher-list');
+            if (!voucherList) return;
+            
+            const voucherItemWidth = voucherList.querySelector('.cart-drawer__voucher-item').clientWidth;
+            const currentTransform = voucherList.style.transform || 'translateX(0px)';
+            const currentX = parseInt(currentTransform.match(/-?\d+/)[0]) || 0;
+            
+            if (voucherPrevArrow) {
+              const newX = Math.min(0, currentX + voucherItemWidth);
+              voucherList.style.transform = `translateX(${newX}px)`;
+            } else if (voucherNextArrow) {
+              const maxX = -(voucherList.scrollWidth - voucherList.parentElement.clientWidth);
+              const newX = Math.max(maxX, currentX - voucherItemWidth);
+              voucherList.style.transform = `translateX(${newX}px)`;
+            }
             return;
           }
 
@@ -1199,6 +1237,12 @@
               event.target.closest('[href*="cart"]')) {
             setTimeout(ensureDrawerVisible, 100);
           }
+          
+          // Check if cart drawer should be closed
+          if (event.target.closest('.js-drawer-close') || 
+              event.target.closest('[data-cart-drawer-close]')) {
+            setTimeout(showStickyAddToCart, 100);
+          }
         });
         
         // Also ensure drawer is visible on page load if it should be open
@@ -1207,5 +1251,6 @@
         }
       })();
     </script>
+
   </div>
 {%- endif -%}

@@ -11125,7 +11125,7 @@ input[type="image"] {
 }
 
 .product-block .product__price[data-product-price] {
-  color: #345daa;
+  color: #1C2C58;
 }
 
 @media (min-width: 769px) and (max-width: 959px) {

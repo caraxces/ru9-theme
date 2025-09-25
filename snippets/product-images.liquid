@@ -307,6 +307,7 @@
                 class="product__thumb photoswipe__image"
                 data-index="0"
                 data-id="{{ product.media[0].id }}"
+                data-zoom="true"
               >
                 <div
                   class="image-wrap image-wrap__thumbnail"
@@ -379,6 +380,7 @@
                   class="product__thumb photoswipe__image"
                   data-index="{{ forloop.index0 | plus: 1 }}"
                   data-id="{{ bundle.media[0].id }}"
+                  data-zoom="true"
                 >
                   <div
                     class="image-wrap image-wrap__thumbnail"
@@ -464,6 +466,7 @@
                     class="product__thumb photoswipe__image"
                     data-index="{{ forloop.index0 }}"
                     data-id="{{ media.id }}"
+                    data-zoom="true"
                   >
                     <div
                       class="image-wrap image-wrap__thumbnail"
@@ -608,6 +611,47 @@
     line-height: 1;
     color: white;
   }
+  
+  /* Thumbnail zoom styles */
+  .product__thumb-item a[data-zoom="true"] {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .product__thumb-item a[data-zoom="true"]:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .product__thumb-item a[data-zoom="true"]:hover .image-wrap__thumbnail {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Zoom modal styles */
+  .product-thumb-zoom-modal {
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .product-thumb-zoom-modal img {
+    animation: zoomIn 0.3s ease;
+  }
+  
+  @keyframes zoomIn {
+    from { 
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to { 
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 </style>
 
 {%- if product_carousel_enable == false -%}
@@ -635,6 +679,12 @@
               children.forEach(child => {
               child.classList.remove('relative');
               });
+              
+              // Re-initialize thumbnail zoom for newly visible items
+              setTimeout(() => {
+                console.log('Re-initializing zoom after overlay click');
+                initThumbnailZoom();
+              }, 200);
         }
         })
       }
@@ -678,6 +728,12 @@
             console.log('Cleared hiding styles for item', index + 1, item);
           });
           
+          // Re-initialize thumbnail zoom for newly visible items
+          setTimeout(() => {
+            console.log('Re-initializing zoom for expanded gallery');
+            initThumbnailZoom();
+          }, 200);
+          
           // Hide the show more button
           this.style.display = 'none';
           console.log('Hidden show more button');
@@ -698,6 +754,7 @@
 <script>
 document.addEventListener('shopify:section:load', function() {
   initMobileThumbZoom('{{ section_id }}');
+  initThumbnailZoom(); // Re-initialize thumbnail zoom
   
   // Re-initialize show more button after section load
   setTimeout(function() {
@@ -786,6 +843,341 @@ setTimeout(function() {
   
   console.log('=== SHOW MORE INITIALIZATION COMPLETE ===');
 }, 1000);
+
+// Thumbnail zoom functionality
+document.addEventListener('DOMContentLoaded', function() {
+  initThumbnailZoom();
+  
+  // Debug: Check for thumbnails
+  setTimeout(() => {
+    const allThumbItems = document.querySelectorAll('.product__thumb-item');
+    const allThumbLinks = document.querySelectorAll('.product__thumb-item a');
+    console.log('=== THUMBNAIL DEBUG ===');
+    console.log('Total thumbnail items found:', allThumbItems.length);
+    console.log('Total thumbnail links found:', allThumbLinks.length);
+    
+    allThumbItems.forEach((item, index) => {
+      const link = item.querySelector('a');
+      console.log(`Thumbnail Item ${index + 1}:`, {
+        itemClasses: item.className,
+        itemDataIndex: item.getAttribute('data-index'),
+        hasLink: !!link,
+        linkHref: link?.href,
+        linkClasses: link?.className,
+        hasDataZoom: link?.hasAttribute('data-zoom'),
+        dataZoom: link?.getAttribute('data-zoom'),
+        linkDataIndex: link?.getAttribute('data-index')
+      });
+    });
+    console.log('=== END THUMBNAIL DEBUG ===');
+  }, 1000);
+  
+  // Preload images for faster zoom (with delay to not block initial page load)
+  setTimeout(() => {
+    preloadThumbnailImages();
+  }, 2000);
+  
+  // Use event delegation for better reliability
+  document.addEventListener('click', function(e) {
+    console.log('Click detected on:', e.target);
+    console.log('Click target classes:', e.target.className);
+    console.log('Click target tag:', e.target.tagName);
+    
+    // Check if click is on thumbnail item or inside it
+    const thumbItem = e.target.closest('.product__thumb-item');
+    if (thumbItem) {
+      console.log('Thumbnail item clicked:', thumbItem);
+      
+      // Look for link inside the thumbnail item
+      const thumbLink = thumbItem.querySelector('a[data-zoom="true"]') || thumbItem.querySelector('a');
+      
+      if (thumbLink) {
+        console.log('Thumb link found inside item:', thumbLink);
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const imageUrl = thumbLink.href;
+        const imageAlt = thumbLink.querySelector('img')?.alt || '';
+        const imageIndex = thumbLink.dataset.index || thumbItem.dataset.index || '0';
+        
+        console.log('Thumbnail click processed:', { imageUrl, imageAlt, imageIndex });
+        createZoomModal(imageUrl, imageAlt, imageIndex);
+      } else {
+        console.log('No link found inside thumbnail item');
+      }
+    }
+  });
+});
+
+function initThumbnailZoom() {
+  // Function to setup zoom for thumbnails
+  function setupThumbnailZoom() {
+    const thumbItems = document.querySelectorAll('.product__thumb-item a[data-zoom="true"]');
+    
+    thumbItems.forEach((thumbLink, index) => {
+      // Remove existing event listeners to prevent duplicates
+      thumbLink.removeEventListener('click', handleThumbnailClick);
+      thumbLink.addEventListener('click', handleThumbnailClick);
+    });
+  }
+  
+  // Handle thumbnail click
+  function handleThumbnailClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Get the image data
+    const imageUrl = this.href;
+    const imageAlt = this.querySelector('img')?.alt || '';
+    const imageIndex = this.dataset.index;
+    
+    console.log('Thumbnail clicked:', { imageUrl, imageAlt, imageIndex });
+    
+    // Create zoom modal
+    createZoomModal(imageUrl, imageAlt, imageIndex);
+  }
+  
+  // Initial setup
+  setupThumbnailZoom();
+  
+  // Re-setup when show-all-image class is added
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        const target = mutation.target;
+        if (target.classList.contains('show-all-image')) {
+          console.log('Show-all-image detected, re-setting up zoom');
+          setTimeout(setupThumbnailZoom, 100);
+        }
+      }
+    });
+  });
+  
+  // Observe the scroller element
+  const scroller = document.querySelector('.product__thumbs--scroller');
+  if (scroller) {
+    observer.observe(scroller, { attributes: true, attributeFilter: ['class'] });
+  }
+}
+
+// Preload thumbnail images for faster zoom
+function preloadThumbnailImages() {
+  const thumbLinks = document.querySelectorAll('.product__thumb-item a');
+  const preloadedImages = new Map();
+  
+  console.log('Preloading thumbnail images...');
+  
+  thumbLinks.forEach((link, index) => {
+    const imageUrl = link.href;
+    if (imageUrl && !preloadedImages.has(imageUrl)) {
+      const img = new Image();
+      img.onload = () => {
+        console.log(`Preloaded image ${index + 1}:`, imageUrl);
+        preloadedImages.set(imageUrl, img);
+      };
+      img.onerror = () => {
+        console.warn(`Failed to preload image:`, imageUrl);
+      };
+      img.src = imageUrl;
+      preloadedImages.set(imageUrl, null); // Mark as loading
+    }
+  });
+  
+  // Store preloaded images globally for zoom modal
+  window.preloadedThumbnailImages = preloadedImages;
+}
+
+function createZoomModal(imageUrl, imageAlt, imageIndex) {
+  // Remove existing zoom modal if any
+  const existingModal = document.querySelector('.product-thumb-zoom-modal');
+  if (existingModal) {
+    existingModal.remove();
+  }
+  
+  // Create modal overlay
+  const modal = document.createElement('div');
+  modal.className = 'product-thumb-zoom-modal';
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  `;
+  
+  // Create image container
+  const imageContainer = document.createElement('div');
+  imageContainer.style.cssText = `
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `;
+  
+  // Create loading indicator
+  const loadingIndicator = document.createElement('div');
+  loadingIndicator.innerHTML = `
+    <div style="
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top: 3px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    "></div>
+    <div style="
+      margin-top: 10px;
+      color: white;
+      font-size: 14px;
+    ">Đang tải...</div>
+  `;
+  loadingIndicator.style.cssText = `
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+  `;
+  
+  // Add spin animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `;
+  document.head.appendChild(style);
+  
+  // Create zoomed image
+  const zoomedImage = document.createElement('img');
+  zoomedImage.alt = imageAlt;
+  zoomedImage.style.cssText = `
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  `;
+  
+  // Show loading indicator initially
+  imageContainer.appendChild(loadingIndicator);
+  
+  // Handle image loading
+  zoomedImage.onload = function() {
+    loadingIndicator.style.display = 'none';
+    console.log('Zoom image loaded successfully');
+  };
+  
+  zoomedImage.onerror = function() {
+    loadingIndicator.innerHTML = `
+      <div style="color: white; font-size: 14px; text-align: center;">
+        Không thể tải hình ảnh
+      </div>
+    `;
+    console.error('Failed to load zoom image');
+  };
+  
+  // Check if image is preloaded
+  if (window.preloadedThumbnailImages && window.preloadedThumbnailImages.has(imageUrl)) {
+    const preloadedImg = window.preloadedThumbnailImages.get(imageUrl);
+    if (preloadedImg) {
+      // Use preloaded image - should load instantly
+      zoomedImage.src = preloadedImg.src;
+      console.log('Using preloaded image for zoom');
+      loadingIndicator.style.display = 'none'; // Hide loading since it's already loaded
+    } else {
+      // Still loading, use original URL
+      zoomedImage.src = imageUrl;
+      console.log('Preloaded image still loading, using original URL');
+    }
+  } else {
+    // Not preloaded, use original URL
+    zoomedImage.src = imageUrl;
+    console.log('Image not preloaded, using original URL');
+  }
+  
+  // Create close button
+  const closeButton = document.createElement('button');
+  closeButton.innerHTML = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `;
+  closeButton.style.cssText = `
+    position: absolute;
+    top: -20px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: background 0.3s ease;
+  `;
+  
+  closeButton.addEventListener('mouseenter', function() {
+    this.style.background = 'rgba(0, 0, 0, 0.8)';
+  });
+  
+  closeButton.addEventListener('mouseleave', function() {
+    this.style.background = 'rgba(0, 0, 0, 0.5)';
+  });
+  
+  // Close modal function
+  function closeModal() {
+    modal.remove();
+    document.body.style.overflow = '';
+  }
+  
+  // Event listeners
+  closeButton.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  
+  // Keyboard support
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
+  
+  // Prevent body scroll
+  document.body.style.overflow = 'hidden';
+  
+  // Assemble modal
+  imageContainer.appendChild(zoomedImage);
+  imageContainer.appendChild(closeButton);
+  modal.appendChild(imageContainer);
+  document.body.appendChild(modal);
+  
+  // Add animation
+  modal.style.opacity = '0';
+  setTimeout(() => {
+    modal.style.transition = 'opacity 0.3s ease';
+    modal.style.opacity = '1';
+  }, 10);
+}
 
 function initMobileThumbZoom(sectionId) {
   // Use a timeout to ensure theme scripts have initialized Flickity and Photoswipe
