@@ -6,8 +6,8 @@
           {{ section.settings.title | escape }}
         </h2>
       {%- endif -%}
-      {%- if section.settings.view_all and section.settings.view_all_link != blank -%}
-        <a href="{{ section.settings.view_all_link }}" class="button--secondary view-all-button">
+      {%- if section.settings.view_all -%}
+        <a href="{{ section.settings.view_all_link | default: '/blogs/magazine' }}" class="button--secondary view-all-button">
           <span>
             {%- if section.settings.view_all_text != blank -%}
               {{ section.settings.view_all_text }}

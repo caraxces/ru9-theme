@@ -142,9 +142,14 @@
 
     .super-service__item-wrapper {
         width: 100%;
-        opacity: 1; /* Disable animation on mobile */
+        opacity: 0; /* Enable fade-in animation on mobile */
         transform: none;
         padding-right: 24px;
+        transition: opacity 0.6s ease-out;
+    }
+    
+    .super-service__item-wrapper.is-visible {
+        opacity: 1;
     }
     
     .super-service__title {
@@ -384,8 +389,6 @@
 
 <script>
   function animateSuperService(container) {
-    if (window.innerWidth <= 990) return; // Don't animate on mobile
-
     const itemsToAnimate = container.querySelectorAll('.super-service__item-wrapper');
     if (itemsToAnimate.length === 0) return;
 
@@ -397,7 +400,7 @@
         }
       });
     }, {
-      rootMargin: '0px 0px -100px 0px'
+      rootMargin: '0px 0px -50px 0px' // Reduced margin for gentler trigger
     });
 
     itemsToAnimate.forEach(item => {
@@ -415,7 +418,14 @@
         prevNextButtons: false,
         pageDots: true,
         wrapAround: true,
-        watchCSS: true
+        watchCSS: true,
+        // Disable complex transitions
+        selectedAttraction: 0.025,
+        friction: 0.28,
+        freeScroll: false,
+        // Smooth fade transitions
+        draggable: true,
+        dragThreshold: 10
       });
 
       const sliderContainer = container.querySelector('.super-service__slider-container');

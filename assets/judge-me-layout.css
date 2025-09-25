@@ -9,7 +9,9 @@
 /* ==========================================================================
    #RESET & WIDGET CONTAINER
    ========================================================================== */
-
+.jdgm-widget:not(.jdgm-medals-wrapper) .jdgm-medals-wrapper{
+    display: none !important;
+}
 .jdgm-rev-widg {
     max-width: 100% !important;
     margin: 0 auto !important; /* Center the widget block */
@@ -23,8 +25,58 @@
 /* Desktop padding, based on featured-collections */
 @media (min-width: 769px) {
     .jdgm-rev-widg {
-        padding: 0 60px !important;
+        padding: 0 !important;
     }
+}
+
+/* ==========================================================================
+   #OVERRIDE SHOPIFY BLOCK & JUDGE.ME CONTAINER CONSTRAINTS
+   ========================================================================== */
+
+/* Remove padding from Shopify app block */
+.jdgm-sort-dropdown-wrapper .jdgm-sort-dropdown, .jdgm-sort-dropdown-wrapper .jdgm-sort-dropdown-arrow{
+    color:#1C2C58 !important;
+}
+.shopify-app-block,
+[class*="shopify-block"],
+[class*="judge_me"],
+[class*="judgeme"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Override Judge.me product reviews max-width constraint */
+.judgeme_product_reviews,
+.judgeme_product_reviews .jdgm-rev-widg,
+.judgeme_product_reviews .jdgm-widget,
+.judgeme_product_reviews .jdgm-rev-widg__header,
+.judgeme_product_reviews .jdgm-rev-widg__body {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* Ensure all Judge.me containers take full width */
+.jdgm-widget,
+.jdgm-rev-widg,
+.jdgm-rev-widg__header,
+.jdgm-rev-widg__body,
+.jdgm-rev-widg__reviews {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Override any page-width constraints on Judge.me blocks */
+.page-width .jdgm-widget,
+.page-width .jdgm-rev-widg {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 /* ==========================================================================

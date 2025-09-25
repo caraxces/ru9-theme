@@ -974,13 +974,6 @@
   font-weight: 600;
 }
 
-.bundle-cta-btn:hover,
-[data-bundle-cta]:hover {
-  background: #e66a35;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 127, 65, 0.3);
-}
-
 /* Icon with text block */
 .icon-with-text {
   margin: 2rem 0;
@@ -1030,7 +1023,6 @@
 
 /* Bundle CTA Button */
 .bundle-cta-btn {
-  background: #ff6b35 !important;
   color: white !important;
   border: none !important;
   border-radius: 50px !important;
@@ -1040,15 +1032,10 @@
   text-transform: uppercase !important;
   letter-spacing: 0.5px !important;
   transition: all 0.3s ease !important;
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3) !important;
+  box-shadow: none !important;
   margin: 2rem 0 !important;
 }
 
-.bundle-cta-btn:hover {
-  background: #e55a2b !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4) !important;
-}
 
 .bundle-cta-btn:active {
   transform: translateY(0) !important;
