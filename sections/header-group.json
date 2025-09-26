@@ -17,7 +17,7 @@
         "header-0": {
           "type": "logo",
           "settings": {
-            "logo": "shopify://shop_images/logo-header.png",
+            "logo": "shopify://shop_images/logo.svg",
             "desktop_logo_width": 48,
             "mobile_logo_width": 34
           }

@@ -35,6 +35,20 @@
         width: 100% !important;
         max-width: 100% !important;
       }
+      
+      /* Mobile: Fixed footer full width */
+      #CartDrawer .drawer__footer {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        background: #fff !important;
+        z-index: 1001 !important;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
+        padding: 0 20px 20px 20px !important;
+      }
     }
     
     /* Ensure drawer is properly positioned and visible */
@@ -43,49 +57,64 @@
       top: 0 !important;
       right: 0 !important;
       height: 100vh !important;
-      z-index: 9999 !important;
+      z-index: 1000 !important;
       background: #fff !important;
       box-shadow: -2px 0 10px rgba(0,0,0,0.1) !important;
       transform: translateX(100%) !important;
       transition: transform 0.3s ease !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
     }
     
     #CartDrawer.drawer--is-open {
       transform: translateX(0) !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
-    .cross-sell-item__title a {
+    
+    /* Hide sticky add-to-cart when cart drawer is open */
+    #CartDrawer.drawer--is-open ~ sticky-add-to-cart,
+    body:has(#CartDrawer.drawer--is-open) sticky-add-to-cart {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+    #CartDrawer .cross-sell-item__title a {
       border-bottom: none !important;
       font-size: 20px;
       color: #1C2C58;
     }
-    .drawer__inner {
+    #CartDrawer .drawer__inner {
       display: flex;
       flex-direction: column;
       overflow: hidden;
       height: 100%;
     }
-    .drawer__fixed-header {
+    #CartDrawer .drawer__fixed-header {
       position: relative;
       flex-shrink: 0;
     }
-    .drawer__scrollable {
-      overflow-y: auto;
+    #CartDrawer .drawer__scrollable {
+      overflow-y: auto !important;
       flex-grow: 1;
       scrollbar-width: none; /* For Firefox */
       -ms-overflow-style: none; /* For Internet Explorer and Edge */
+      max-height: calc(100vh - 120px); /* Ensure scrollable area */
+      min-height: 200px; /* Minimum height to enable scroll */
+      padding-bottom: 200px !important; /* Space for fixed footer */
     }
-    .drawer__scrollable .drawer__header {
+    #CartDrawer .drawer__header {
       padding: 20px 0 15px 0;
       margin-bottom: 0;
       position: static;
       background: #fff;
       display: block;
       width: 100%;
+      flex-shrink: 0;
+      z-index: 10;
     }
-    .drawer__scrollable::-webkit-scrollbar {
-      display: none; /* For Chrome, Safari, and Opera */
-    }
-    .drawer__header .drawer__title {
+    
+    #CartDrawer .drawer__header .drawer__title {
       font-family: var(--font-stack-body);
       width: 344px;
       height: 39px;
@@ -96,14 +125,93 @@
       font-weight: 600;
       line-height: 120%;
     }
-    .drawer__header .drawer__count {
+    
+    #CartDrawer .drawer__header .drawer__count {
       font-family: var(--font-stack-body);
       font-size: 16px;
     }
-    .cart-drawer__services {
+    
+    /* Desktop only - Force header visibility */
+    @media (min-width: 769px) {
+      #CartDrawer .drawer__header {
+        background: #fff !important;
+        display: block !important;
+        width: 100% !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      
+      #CartDrawer .drawer__header .drawer__title {
+        display: block !important;
+        visibility: visible !important;
+      }
+      
+      #CartDrawer .drawer__header .drawer__count {
+        display: block !important;
+        visibility: visible !important;
+        color: #000 !important;
+      }
+      
+      /* Ensure drawer scrollable works on desktop */
+      #CartDrawer .drawer__scrollable {
+        overflow-y: auto !important;
+        height: auto !important;
+        max-height: calc(100vh - 150px) !important;
+        padding-bottom: 200px !important;
+      }
+      
+      /* Desktop: Fixed footer with drawer width */
+      #CartDrawer .drawer__footer {
+        position: fixed !important;
+        bottom: 0 !important;
+        right: 0 !important;
+        left: auto !important;
+        width: 420px !important;
+        max-width: 420px !important;
+        background: #fff !important;
+        z-index: 1001 !important;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
+        padding: 20px !important;
+      }
+    }
+    
+    #CartDrawer .cart-empty-message {
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 16px;
+      color: #666;
+    }
+    #CartDrawer .drawer__scrollable::-webkit-scrollbar {
+      display: none; /* For Chrome, Safari, and Opera */
+    }
+    
+    /* Remove gray line above drawer__scrollable */
+    #CartDrawer .drawer__scrollable {
+      border-top: none !important;
+    }
+    
+    #CartDrawer .drawer__scrollable::before {
+      display: none !important;
+    }
+    #CartDrawer .drawer__header .drawer__title {
+      font-family: var(--font-stack-body);
+      width: 344px;
+      height: 39px;
+      flex-shrink: 0;
+      color: #1C2C58;
+      font-size: 38px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 120%;
+    }
+    #CartDrawer .drawer__header .drawer__count {
+      font-family: var(--font-stack-body);
+      font-size: 16px;
+    }
+    #CartDrawer .cart-drawer__services {
       display: flex;
       justify-content: space-around;
-      padding: 80px 0 15px 0;
+      padding: 0px 0 15px 0;
       border-bottom: 1px solid #e9e9e9;
       text-align: center;
       margin: 0;
@@ -132,12 +240,6 @@
       object-fit: contain;
     }
 
-    .cart-drawer__divider {
-      display: block;
-      width: 100%;
-      height: 2px;
-      margin: 20px 0;
-    }
 
     /* Cart Items */
     .cart-item__title {
@@ -265,7 +367,7 @@
     .cart-drawer__discount-header {
         overflow: hidden;
         color: #1C2C58;
-        text-align: center;
+        text-align: left;
         text-overflow: ellipsis;
         white-space: nowrap;
         font-family: "Be Vietnam Pro", sans-serif;
@@ -328,6 +430,7 @@
       display: flex;
       gap: 10px;
       transition: transform 0.3s ease-in-out;
+      overflow: hidden;
     }
     .cart-drawer__voucher-item {
       position: relative;
@@ -357,19 +460,34 @@
     }
 
     /* Cart Summary */
-    .cart-drawer__summary-item {
+    #CartDrawer .cart-drawer__summary {
+      padding: 5px 0;
+      background: #fff;
+      width: 100%;
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+    
+    #CartDrawer .drawer__footer {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+    
+    #CartDrawer .cart-drawer__summary-item {
       display: flex;
       justify-content: space-between;
       font-family: var(--font-stack-body);
       font-size: 16px;
       padding: 5px 0;
     }
-    .cart-drawer__summary-item .price-container {
+    #CartDrawer .cart-drawer__summary-item .price-container {
       display: flex;
       gap: 10px;
       align-items: center;
     }
-    .cart-drawer__summary-item .price--original {
+    #CartDrawer .cart-drawer__summary-item .price--original {
       overflow: hidden;
       color: #808080;
       text-overflow: ellipsis;
@@ -381,7 +499,7 @@
       line-height: 150%;
       text-decoration-line: line-through;
     }
-    .cart-drawer__summary-item .price--final {
+    #CartDrawer .cart-drawer__summary-item .price--final {
       overflow: hidden;
       color: #9F332C;
       text-overflow: ellipsis;
@@ -392,16 +510,16 @@
       font-weight: 700;
       line-height: 150%;
     }
-    .summary-item__right-content {
+    #CartDrawer .summary-item__right-content {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
     }
-    .summary-item__right-content .text-right {
+    #CartDrawer .summary-item__right-content .text-right {
       font-size: 14px;
       margin-top: 4px;
     }
-    .cart-drawer__savings {
+    #CartDrawer .cart-drawer__savings {
       width: 100%;
       height: 38px;
       flex-shrink: 0;
@@ -410,9 +528,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 15px 0;
+      margin: 0;
     }
-    .cart-drawer__savings span {
+    #CartDrawer .cart-drawer__savings span {
       overflow: hidden;
       color: #1C2C58;
       text-align: center;
@@ -453,11 +571,12 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
       gap: 15px;
-      padding: 10px;
+      padding-bottom: 20px;
     }
     .cart-drawer__cross-sell-item {
       display: flex;
       flex-direction: column;
+      width: 100%;
       gap: 15px;
       padding: 15px;
       border-radius: 8px;
@@ -519,7 +638,7 @@
     }
     .cross-sell-item__quantity-wrapper {
         display: flex;
-        width: 146px;
+        width: 120px;
         height: 35px;
         padding-left: 4px;
         align-items: flex-start;
@@ -531,7 +650,7 @@
     }
     .cross-sell-item__add-btn {
       display: flex;
-      width: 166px;
+      width: 120px;
       height: 35px;
       padding: 12px 35px;
       justify-content: center;
@@ -591,7 +710,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 15px;
+        gap: 40px;
         width: 100%;
     }
     .cross-sell-item__quantity {
@@ -614,30 +733,35 @@
       cursor: pointer;
     }
     /* Checkout Buttons */
-    .cart__checkout-wrapper--custom {
+    #CartDrawer .cart__checkout-wrapper--custom {
       display: flex;
       gap: 10px;
+      margin-top: 20px;
     }
-    .btn--cod, .btn--online {
+    #CartDrawer .btn--cod, #CartDrawer .btn--online {
       flex: 1;
       border-radius: 15px;
       text-align: center;
       text-decoration: none;
       font-family: var(--font-stack-body);
       font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
     }
-    .btn--cod {
-      background-color: #9F332C;
-      color: white;
-    }
-    .btn--online {
-      background-color: #9F332C;
-      color: white;
+    
+    #CartDrawer .btn--online {
+      background-color: #FCE390;
+      color: #1C2C58;
     }
     
     /* Mobile responsive for checkout buttons */
     @media (max-width: 768px) {
-      .btn--cod, .btn--online {
+      #CartDrawer .btn--cod, #CartDrawer .btn--online {
         font-size: 14px;
       }
     }
@@ -646,19 +770,21 @@
   <div id="CartDrawer" class="drawer drawer--right">
     <form id="CartDrawerForm" action="{{ routes.cart_url }}" method="post" novalidate class="drawer__contents" data-location="cart-drawer">
       <div class="drawer__inner">
-        <div class="drawer__scrollable">
-          <div class="drawer__header relative appear-animation appear-delay-1">
-            <div class="h2 drawer__title">{{ 'cart.general.title' | t }}</div>
-            <div class="drawer__count">
-               {{ cart.item_count }} sản phẩm
-            </div>
-            <div class="drawer__close absolute right-0">
-              <button type="button" class="drawer__close-button js-drawer-close">
-                {%- render 'close-icon' -%}
-                <span class="icon__fallback-text">{{ 'cart.general.close_cart' | t }}</span>
-              </button>
-            </div>
+        <!-- Fixed Header - Always visible -->
+        <div class="drawer__header relative appear-animation appear-delay-1">
+          <div class="h2 drawer__title">{{ 'cart.general.title' | t }}</div>
+          <div class="drawer__count">
+             {{ cart.item_count }} sản phẩm
           </div>
+          <div class="drawer__close absolute right-0">
+            <button type="button" class="drawer__close-button js-drawer-close">
+              {%- render 'close-icon' -%}
+              <span class="icon__fallback-text">{{ 'cart.general.close_cart' | t }}</span>
+            </button>
+          </div>
+        </div>
+        
+        <div class="drawer__scrollable">
           
           <!-- SERVICES -->
           <div class="cart-drawer__services">
@@ -694,9 +820,6 @@
             {%- comment -%} Cart items are rendered here via JS {%- endcomment -%}
           </div>
 
-          <svg class="cart-drawer__divider" xmlns="http://www.w3.org/2000/svg" width="439" height="2" viewBox="0 0 439 2" fill="none">
-            <path d="M0 1L439 1.00004" stroke="#C4C4C4"/>
-          </svg>
           
           <!-- DISCOUNT CODE -->
           <div class="cart-drawer__discount-wrapper">
@@ -805,9 +928,6 @@
 
         <div class="drawer__footer appear-animation appear-delay-4">
           <div data-cart-footer>
-            <svg class="cart-drawer__divider" xmlns="http://www.w3.org/2000/svg" width="439" height="2" viewBox="0 0 439 2" fill="none">
-              <path d="M0 1L439 1.00004" stroke="#C4C4C4"/>
-            </svg>
             
             <!-- SUMMARY -->
             <div class="cart-drawer__summary">
@@ -845,7 +965,7 @@
                         <span class="text-right">Đã áp dụng ưu đãi</span>
                       {%- endif -%}
                     </div>
-          </div>
+                </div>
 
                 <div class="cart-drawer__summary-item">
                     <span>Vận chuyển</span>
@@ -853,14 +973,10 @@
                 </div>
             </div>
 
-            <svg class="cart-drawer__divider" xmlns="http://www.w3.org/2000/svg" width="439" height="2" viewBox="0 0 439 2" fill="none">
-              <path d="M0 1L439 1.00004" stroke="#C4C4C4"/>
-            </svg>
 
             <!-- CHECKOUT BUTTONS -->
             <div class="cart__checkout-wrapper--custom">
-                <button type="submit" name="checkout" class="btn btn--cod">Thanh toán COD</button>
-                <button type="submit" name="checkout" class="btn btn--online">Thanh toán online</button>
+                <button type="submit" name="checkout" class="btn btn--online">Thanh toán ngay</button>
             </div>
             {% if additional_checkout_buttons and settings.cart_additional_buttons %}
               <div class="additional-checkout-buttons additional-checkout-buttons--vertical">{{ content_for_additional_checkout_buttons }}</div>
@@ -871,7 +987,9 @@
 
       <div class="drawer__cart-empty appear-animation appear-delay-2">
         <div class="drawer__scrollable">
-          {{ 'cart.general.empty' | t }}
+          <div class="cart-empty-message">
+            {{ 'cart.general.empty' | t }}
+          </div>
         </div>
       </div>
     </form>
@@ -883,16 +1001,66 @@
           if (theme && typeof theme.CartForm === 'function') {
             const cartFormInstance = new theme.CartForm(document.getElementById('CartDrawerForm'));
             cartFormInstance.buildCart();
+            
+            // Update cart count in header after rebuild
+            updateCartCount();
           } else {
             window.location.href = '{{ routes.cart_url }}';
           }
+        }
+        
+        // Ensure drawer is visible when opened (desktop only)
+        function ensureDrawerVisible() {
+          const drawer = document.getElementById('CartDrawer');
+          if (drawer && window.innerWidth >= 769) {
+            drawer.classList.add('drawer--is-open');
+            drawer.style.display = 'block';
+            drawer.style.visibility = 'visible';
+            drawer.style.opacity = '1';
+            
+            // Hide sticky add-to-cart when drawer is open
+            hideStickyAddToCart();
+          }
+        }
+        
+        // Hide sticky add-to-cart when cart drawer is open
+        function hideStickyAddToCart() {
+          const stickyElements = document.querySelectorAll('sticky-add-to-cart');
+          stickyElements.forEach(element => {
+            element.style.display = 'none !important';
+            element.style.visibility = 'hidden !important';
+            element.style.opacity = '0 !important';
+          });
+        }
+        
+        // Show sticky add-to-cart when cart drawer is closed
+        function showStickyAddToCart() {
+          const stickyElements = document.querySelectorAll('sticky-add-to-cart');
+          stickyElements.forEach(element => {
+            element.style.display = '';
+            element.style.visibility = '';
+            element.style.opacity = '';
+          });
+        }
+        
+        function updateCartCount() {
+          // Fetch current cart data and update the count
+          fetch('/cart.js')
+            .then(response => response.json())
+            .then(cart => {
+              const countElement = document.querySelector('.drawer__count');
+              if (countElement) {
+                countElement.textContent = cart.item_count + ' sản phẩm';
+              }
+            })
+            .catch(error => console.error('Error updating cart count:', error));
         }
 
         // --- Event Delegation for Clicks ---
         document.addEventListener('click', function(event) {
           const target = event.target;
 
-          // Handle Slider Arrows
+          // Handle Cross-sell Slider Arrows
           const prevArrow = target.closest('.cart-drawer__cross-sell-arrow--prev');
           const nextArrow = target.closest('.cart-drawer__cross-sell-arrow--next');
           if (prevArrow || nextArrow) {
@@ -900,6 +1068,28 @@
             if (!slider) return;
             const slideWidth = slider.querySelector('.cart-drawer__cross-sell-item').clientWidth;
             slider.scrollLeft += nextArrow ? slideWidth : -slideWidth;
+            return;
+          }
+
+          // Handle Voucher Carousel Arrows
+          const voucherPrevArrow = target.closest('.cart-drawer__carousel-arrow.prev');
+          const voucherNextArrow = target.closest('.cart-drawer__carousel-arrow.next');
+          if (voucherPrevArrow || voucherNextArrow) {
+            const voucherList = document.querySelector('.cart-drawer__voucher-list');
+            if (!voucherList) return;
+            
+            const voucherItemWidth = voucherList.querySelector('.cart-drawer__voucher-item').clientWidth;
+            const currentTransform = voucherList.style.transform || 'translateX(0px)';
+            const currentX = parseInt(currentTransform.match(/-?\d+/)[0]) || 0;
+            
+            if (voucherPrevArrow) {
+              const newX = Math.min(0, currentX + voucherItemWidth);
+              voucherList.style.transform = `translateX(${newX}px)`;
+            } else if (voucherNextArrow) {
+              const maxX = -(voucherList.scrollWidth - voucherList.parentElement.clientWidth);
+              const newX = Math.max(maxX, currentX - voucherItemWidth);
+              voucherList.style.transform = `translateX(${newX}px)`;
+            }
             return;
           }
 
@@ -1038,7 +1228,29 @@
                 event.target.style.backgroundImage = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M4.5 6.75L9 11.25L13.5 6.75' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`;
             }
         });
+        
+        // Listen for drawer open events
+        document.addEventListener('click', function(event) {
+          // Check if cart drawer should be opened
+          if (event.target.closest('[data-cart-drawer-toggle]') || 
+              event.target.closest('.cart-link') ||
+              event.target.closest('[href*="cart"]')) {
+            setTimeout(ensureDrawerVisible, 100);
+          }
+          
+          // Check if cart drawer should be closed
+          if (event.target.closest('.js-drawer-close') || 
+              event.target.closest('[data-cart-drawer-close]')) {
+            setTimeout(showStickyAddToCart, 100);
+          }
+        });
+        
+        // Also ensure drawer is visible on page load if it should be open
+        if (document.getElementById('CartDrawer').classList.contains('drawer--is-open')) {
+          ensureDrawerVisible();
+        }
       })();
     </script>
+
   </div>
 {%- endif -%}

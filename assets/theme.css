@@ -6970,7 +6970,6 @@ svg.icon-caret {
 .drawer__contents {
   display: flex;
   flex-direction: column;
-  height: 100%;
   background-color: var(--colorBody);
   border-radius: calc(var(--radiusBase) * 0.75);
 }
@@ -9551,9 +9550,6 @@ details[open] > .site-nav__dropdown {
   margin: 0;
 }
 
-.mobile-lang {
-  margin-top: 20px;
-}
 
 .cart-link {
   display: block;
@@ -11129,7 +11125,7 @@ input[type="image"] {
 }
 
 .product-block .product__price[data-product-price] {
-  color: #345daa;
+  color: #1C2C58;
 }
 
 @media (min-width: 769px) and (max-width: 959px) {
@@ -12361,10 +12357,8 @@ input[type="image"] {
 .site-nav__dropdown.megamenu .megamenu__content > .grid { display: block !important; }
 .site-nav__dropdown.megamenu .megamenu__content > .grid > .grid__item { width: 100% !important; }
 .site-nav__dropdown.megamenu .megamenu__content > .grid > .grid__item + .grid__item { margin-top: 32px; }
-.site-nav__dropdown.megamenu .megamenu__content .f-bold { margin: 12px 24px 8px; }
-.site-nav__dropdown.megamenu .megamenu__content .f-bold a { color: #1C2C58; font-family: "Be Vietnam Pro", var(--typeBaseFallback); font-weight: 600; font-size: 24px; text-decoration: none; }
-
-/* Cards in megamenu */
+/* .site-nav__dropdown.megamenu .megamenu__content .f-bold { margin: 12px 24px 8px; } */
+.site-nav__dropdown.megamenu .megamenu__content .f-bold a { color: #1C2C58; font-family: "Be Vietnam Pro", var(--typeBaseFallback); font-weight: 600; font-size: 24px; text-decoration: none; }/* Cards in megamenu */
 .mega-heading {
   color: #1C2C58;
   font-family: "Be Vietnam Pro", var(--typeBaseFallback);
@@ -15739,10 +15733,6 @@ iframe.zoid-component-frame {
   display: none;
 }
 
-.drawer.is-empty .drawer__inner {
-  display: none;
-}
-
 .drawer.is-empty .drawer__cart-empty {
   padding-inline: var(--drawer-gutter);
   display: flex;
@@ -18165,7 +18155,7 @@ html[dir="rtl"] .product-single__meta .rte {
 }
 .popup-modal[open] {
   opacity: 1;
-  z-index: 101;
+  z-index: 1001;
 }
 
 .button--close {

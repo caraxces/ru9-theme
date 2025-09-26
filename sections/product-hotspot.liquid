@@ -210,7 +210,6 @@
         top: calc(-1 * var(--hotspot-height));
         z-index: -1;
         padding-bottom: 5px;
-        border-bottom: 1px solid var(--colorTextBody);
       }
 
       .horizontal .hotspot-content {
@@ -264,6 +263,7 @@
         display: none;
       }
 
+      /* Show only vertical line from hotspot position */
       .pf-image-hotspot.active::before,
       .pf-image-hotspot.active::after {
         content: '';
@@ -272,70 +272,26 @@
         transition: all 0.3s ease-out;
       }
 
-      /* Vertical Broken Line */
-      .vertical.active::before { /* Vertical part */
+      /* Vertical line only */
+      .vertical.active::before {
         width: 1px;
         height: calc(var(--hotspot-height) - 20px);
         top: calc(-1 * var(--hotspot-height) + 20px);
         left: 10px;
       }
-      .vertical.active::after { /* Horizontal part */
-        height: 1px;
-        width: 0;
-        top: calc(-1 * var(--hotspot-height) + 20px);
-      }
-      .vertical.right.active::after {
-        left: 10px;
-        width: calc(100% + 40px);
-      }
-      .vertical.left.active::after {
-        right: 10px;
-        width: calc(100% + 40px);
-      }
-
-      /* Horizontal Broken Line */
-      .horizontal.active::before { /* Horizontal part */
-        height: 1px;
-        width: calc(var(--hotspot-height) - 20px);
-        left: 10px;
-        transform: translateY(-50%);
-        top: 0;
-      }
-       .horizontal.active::after { /* Vertical part */
-        width: 1px;
-        height: 0;
-        left: calc(var(--hotspot-height) - 10px);
-      }
-      .horizontal.top.active::after{
-        height: 20px;
-        top: -20px;
-      }
-      .horizontal.bottom.active::after{
-        height: 20px;
-        bottom: -20px;
-      }
-
-      /* Diagonal Line */
-      .diagonal.active::before {
-        width: 1px;
-        height: 0;
-        transform-origin: top left;
-        left: 10px;
-      }
+      
+      /* Hide horizontal lines and other complex lines */
+      .vertical.active::after,
+      .horizontal.active::before,
+      .horizontal.active::after,
+      .diagonal.active::before,
       .diagonal.active::after {
-        display: none;
+        display: none !important;
       }
 
-      .diagonal.right.active::before {
-        height: var(--hotspot-height);
-        transform: rotate(45deg);
-      }
-      .diagonal.left.active::before {
-        height: var(--hotspot-height);
-        transform: rotate(-45deg);
-        left: auto;
-        right: 10px;
-        transform-origin: top right;
+      /* Hide underline for hotspot titles */
+      .hotspot-content {
+        border-bottom: none !important;
       }
     }
     .hotspot-type-product.active .hotspot-content {

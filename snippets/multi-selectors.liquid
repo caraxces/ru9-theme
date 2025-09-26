@@ -15,44 +15,45 @@
           aria-describedby="LangHeading-{{ location }}"
           data-disclosure-toggle
         >
-          <span class="disclosure-list__label">
-            {{ form.current_locale.endonym_name | capitalize }}
+          <span class="language-flag language-flag--{{ form.current_locale.iso_code | downcase }}">
+            {% if form.current_locale.iso_code == 'vi' %}
+              <img src="{{ 'vietnam.svg' | asset_url }}" alt="Vietnam" width="22" height="13">
+            {% elsif form.current_locale.iso_code == 'en' %}
+              <img src="{{ 'us.svg' | asset_url }}" alt="United States" width="22" height="13">
+            {% endif %}
           </span>
-          <svg
-            aria-hidden="true"
-            focusable="false"
-            role="presentation"
-            class="icon icon--wide icon-chevron-down"
-            viewBox="0 0 28 16"
-          >
-            <path d="m1.57 1.59 12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none"/>
-          </svg>
+          <span class="language-toggle-text">
+            {% if form.current_locale.iso_code == 'vi' %}EN{% else %}VI{% endif %}
+          </span>
         </button>
-        <span class="icon-wrap">
-          {% render 'icon-global' %}
-        </span>
         <ul
           id="LangList-{{ location }}"
           class="disclosure-list inline-list"
           data-disclosure-list
         >
           {%- for locale in form.available_locales -%}
-            <li class="disclosure-list__item{% if locale.iso_code == form.current_locale.iso_code %} disclosure-list__item--current{% endif %}">
-              <a
-                class="disclosure-list__option"
-                href="#"
-                lang="{{ locale.iso_code }}"
-                {% if locale.iso_code == form.current_locale.iso_code %}
-                  aria-current="true"
-                {% endif %}
-                data-value="{{ locale.iso_code }}"
-                data-disclosure-option
-              >
-                <span class="disclosure-list__label">
-                  {{ locale.iso_code | upcase }}
-                </span>
-              </a>
-            </li>
+            {%- unless locale.iso_code == form.current_locale.iso_code -%}
+              <li class="disclosure-list__item">
+                <a
+                  class="disclosure-list__option"
+                  href="#"
+                  lang="{{ locale.iso_code }}"
+                  data-value="{{ locale.iso_code }}"
+                  data-disclosure-option
+                >
+                  <span class="language-flag language-flag--{{ locale.iso_code | downcase }}">
+                    {% if locale.iso_code == 'vi' %}
+                      <img src="{{ 'vietnam.svg' | asset_url }}" alt="Vietnam" width="22" height="13">
+                    {% elsif locale.iso_code == 'en' %}
+                      <img src="{{ 'us.svg' | asset_url }}" alt="United States" width="22" height="13">
+                    {% endif %}
+                  </span>
+                  <span class="disclosure-list__label">
+                    {{ locale.iso_code | upcase }}
+                  </span>
+                </a>
+              </li>
+            {%- endunless -%}
           {%- endfor -%}
         </ul>
         <input
