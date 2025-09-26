@@ -1577,3 +1577,19 @@ product-recommendations[data-intent="related"] .product-slide {
   transform: translateX(-50%) scale(1);
   pointer-events: auto;
 }
+
+/* Fix megamenu padding issue on 13 inch screens */
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+  .site-nav__dropdown.megamenu > .page-width {
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+}
+
+/* Additional fix for smaller laptop screens */
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+  .site-nav__dropdown.megamenu .megamenu__content {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
