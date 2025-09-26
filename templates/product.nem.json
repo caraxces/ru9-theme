@@ -218,41 +218,36 @@
         "reason_mF9y7D": {
           "type": "reason",
           "settings": {
-            "title": "Nâng đỡ chuẩn xác cho từng vùng cơ thể",
-            "content": "<p>Original Pro được thiết kế với 3 vùng foam nâng đỡ riêng biệt: đầu - thân – chân. Nhờ đó, cột sống luôn được giữ ở tư thế tự nhiên, giảm tình trạng đau lưng hay ê ẩm sau giấc ngủ. Bạn sẽ cảm nhận sự khác biệt rõ rệt chỉ sau vài đêm sử dụng.</p>"
+            "image": "{{ product.metafields.custom.dynamic_image_1.value }}",
+            "title": "{{ product.metafields.custom.heading_3_hinh_1.value }}",
+            "content": "<p>{{ product.metafields.custom.text_block_3_hinh_1 | metafield_tag }}</p>"
+          }
+        },
+        "reason_gUwgCJ": {
+          "type": "reason",
+          "settings": {
+            "image": "{{ product.metafields.custom.image_3_hinh_2.value }}",
+            "title": "{{ product.metafields.custom.heading_3_hinh_2.value }}",
+            "content": "<p>{{ product.metafields.custom.text_block_3_hinh_2 | metafield_tag }}</p>"
           }
         },
         "reason_9DmCKX": {
           "type": "reason",
           "settings": {
-            "title": "Nâng đỡ chuẩn xác cho từng vùng cơ thể",
-            "content": "<p>Original Pro được thiết kế với 3 vùng foam nâng đỡ riêng biệt: đầu - thân – chân. Nhờ đó, cột sống luôn được giữ ở tư thế tự nhiên, giảm tình trạng đau lưng hay ê ẩm sau giấc ngủ. Bạn sẽ cảm nhận sự khác biệt rõ rệt chỉ sau vài đêm sử dụng.</p>"
-          }
-        },
-        "reason_dQeiKN": {
-          "type": "reason",
-          "settings": {
-            "title": "Nâng đỡ chuẩn xác cho từng vùng cơ thể",
-            "content": "<p>Original Pro được thiết kế với 3 vùng foam nâng đỡ riêng biệt: đầu - thân – chân. Nhờ đó, cột sống luôn được giữ ở tư thế tự nhiên, giảm tình trạng đau lưng hay ê ẩm sau giấc ngủ. Bạn sẽ cảm nhận sự khác biệt rõ rệt chỉ sau vài đêm sử dụng.</p>"
-          }
-        },
-        "reason_GiHPNn": {
-          "type": "reason",
-          "settings": {
-            "title": "Nâng đỡ chuẩn xác cho từng vùng cơ thể",
-            "content": "<p>Original Pro được thiết kế với 3 vùng foam nâng đỡ riêng biệt: đầu - thân – chân. Nhờ đó, cột sống luôn được giữ ở tư thế tự nhiên, giảm tình trạng đau lưng hay ê ẩm sau giấc ngủ. Bạn sẽ cảm nhận sự khác biệt rõ rệt chỉ sau vài đêm sử dụng.</p>"
+            "image": "{{ product.metafields.custom.image_3_hinh_3.value }}",
+            "title": "{{ product.metafields.custom.heading_3_hinh_3.value }}",
+            "content": "<p>{{ product.metafields.custom.text_block_3_hinh_3 | metafield_tag }}</p>"
           }
         }
       },
       "block_order": [
         "reason_mF9y7D",
-        "reason_9DmCKX",
-        "reason_dQeiKN",
-        "reason_GiHPNn"
+        "reason_gUwgCJ",
+        "reason_9DmCKX"
       ],
       "name": "Reason to choice",
       "settings": {
-        "title": "4 Lý do bạn nên chọn chúng tôi"
+        "title": "Lý do bạn nên chọn chúng tôi"
       }
     },
     "product_hotspot_XzDEYy": {
