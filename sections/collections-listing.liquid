@@ -24,14 +24,24 @@
       
       {%- for block in section.blocks -%}
         {%- assign collection = block.settings.collection -%}
-        {%- if collection != blank -%}
+        {%- assign custom_image = block.settings.custom_image -%}
+        {%- assign custom_title = block.settings.custom_title -%}
+        {%- assign custom_link = block.settings.custom_link -%}
+        
+        {%- if collection != blank or custom_image != blank -%}
           
           <div class="collection-item">
             <div class="collection-image-container">
-              {%- if collection.image -%}
+              {%- if custom_image != blank -%}
+                <img 
+                  src="{{ custom_image | image_url: width: 280, height: 210, crop: 'center' }}" 
+                  alt="{{ custom_title | default: collection.title }}"
+                  width="280" height="210"
+                >
+              {%- elsif collection.image -%}
                 <img 
                   src="{{ collection.image | image_url: width: 280, height: 210, crop: 'center' }}" 
-                  alt="{{ collection.title }}"
+                  alt="{{ custom_title | default: collection.title }}"
                   width="280" height="210"
                 >
               {%- else -%}
@@ -42,8 +52,8 @@
             </div>
             <div class="collection-info">
               <h3 class="collection-title">
-                <a href="{{ collection.url }}">
-                  {{ collection.title }}
+                <a href="{{ custom_link | default: collection.url }}">
+                  {{ custom_title | default: collection.title }}
                 </a>
               </h3>
             </div>
@@ -525,6 +535,24 @@
           "id": "collection",
           "label": "Collection",
           "info": "Select collection to display"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image",
+          "info": "Upload a custom image for this collection block. If not provided, will use collection's default image."
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title",
+          "info": "Override collection title with custom text"
+        },
+        {
+          "type": "url",
+          "id": "custom_link",
+          "label": "Custom Link",
+          "info": "Override collection URL with custom link"
         }
       ]
     }

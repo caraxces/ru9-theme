@@ -275,7 +275,7 @@
     }
     .cart-item__price--final {
       overflow: hidden;
-      color: #9F332C;
+      color: #1C2C58;
       text-overflow: ellipsis;
       white-space: nowrap;
       font-family: "Be Vietnam Pro", sans-serif;
@@ -501,7 +501,7 @@
     }
     #CartDrawer .cart-drawer__summary-item .price--final {
       overflow: hidden;
-      color: #9F332C;
+      color: #1C2C58;
       text-overflow: ellipsis;
       white-space: nowrap;
       font-family: "Be Vietnam Pro", sans-serif;
@@ -551,7 +551,7 @@
     .cart-drawer__cross-sell-header {
       color: #000;
       font-family: "Be Vietnam Pro", sans-serif;
-      font-size: 18px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: 150%;
@@ -911,7 +911,7 @@
                             <label for="cross-sell-quantity-{{ product.id }}" class="cross-sell-item__quantity-label">Số lượng:</label>
                             <div class="cross-sell-item__quantity-wrapper js-qty__wrapper">
                               <button type="button" class="js-qty__adjust js-qty__adjust--minus" aria-label="-">-</button>
-                              <input type="text" id="cross-sell-quantity-{{ product.id }}" name="quantity" value="1" min="1" class="js-qty__num">
+                              <input type="text" id="cross-sell-quantity-{{ product.id }}" name="quantity" value="0" min="1" class="js-qty__num">
                               <button type="button" class="js-qty__adjust js-qty__adjust--plus" aria-label="+">+</button>
                             </div>
                           </div>
@@ -968,8 +968,8 @@
                 </div>
 
                 <div class="cart-drawer__summary-item">
-                    <span>Vận chuyển</span>
-                    <span>Miễn phí</span>
+                    <span style="color: #000;">Vận chuyển</span>
+                    <span style="color: #1C2C58;">Miễn phí</span>
                 </div>
             </div>
 

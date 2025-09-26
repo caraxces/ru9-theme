@@ -37,7 +37,10 @@
         </div>
       </div>
       <div class="product__sticky-price desktop-only" data-sticky-price>
-        {{ current_variant.price | money }}
+        <div class="current-price">{{ current_variant.price | money }}</div>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <div class="original-price">{{ current_variant.compare_at_price | money }}</div>
+        {%- endif -%}
       </div>
     </div>
     <div class="sticky-mobile-info mobile-only">
@@ -47,7 +50,12 @@
             {{ option.selected_value | split: '-' | first | strip }}{%- unless forloop.last %} / {% endunless -%}
           {%- endfor -%}
         </span>
-        <span class="sticky-variant-price" data-sticky-price>{{ current_variant.price | money }}</span>
+        <div class="sticky-variant-price" data-sticky-price>
+          <span class="current-price">{{ current_variant.price | money }}</span>
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <span class="original-price">{{ current_variant.compare_at_price | money }}</span>
+          {%- endif -%}
+        </div>
       </div>
     </div>
     <div class="product__sticky-inner o-h">
@@ -165,6 +173,20 @@
     display: none;
     font-size: 12px;
     margin-bottom: 5px;
+  }
+
+  .current-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1C2C58;
+  }
+
+  .original-price {
+    font-size: 14px;
+    font-weight: 400;
+    color: #999;
+    text-decoration: line-through;
+    margin-top: 2px;
   }
   
   /* Desktop Only Elements - Always visible on desktop */
@@ -426,9 +448,23 @@
     }
 
     .sticky-variant-price {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .sticky-variant-price .current-price {
       font-size: 16px;
       font-weight: 600;
       color: #1C2C58;
+    }
+
+    .sticky-variant-price .original-price {
+      font-size: 14px;
+      font-weight: 400;
+      color: #999;
+      text-decoration: line-through;
+      margin-top: 2px;
     }
   }
   
@@ -454,11 +490,27 @@
     }
     
     .product__sticky-price.desktop-only {
-      display: block !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-end !important;
       font-size: 16px;
       font-weight: 600;
       color: #1C2C58;
       white-space: nowrap;
+    }
+
+    .product__sticky-price.desktop-only .current-price {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1C2C58;
+    }
+
+    .product__sticky-price.desktop-only .original-price {
+      font-size: 14px;
+      font-weight: 400;
+      color: #999;
+      text-decoration: line-through;
+      margin-top: 2px;
     }
     
     .sticky-variant-item {
@@ -582,6 +634,17 @@
         const variantPrice = variantData[variantData.length - 1];
         this.updateStickyPrice(variantPrice.trim());
 
+        // Update original price if available
+        const variantId = selectedOption.value;
+        const product = this.closest('[data-product-handle]');
+        if (product) {
+          const variantData = JSON.parse(product.querySelector('[data-variant-data]')?.textContent || '{}');
+          const variant = variantData[variantId];
+          if (variant) {
+            this.updateOriginalPrice(variant.compare_at_price, variant.price);
+          }
+        }
+
         const optionValues = [];
         let i = 1;
         while(selectedOption.dataset[`option${i}`]) {
@@ -609,8 +672,38 @@
     updateStickyPrice(price) {
       const priceElements = this.querySelectorAll('[data-sticky-price]');
       priceElements.forEach(element => {
-        element.textContent = price;
+        // Update current price
+        const currentPriceEl = element.querySelector('.current-price');
+        if (currentPriceEl) {
+          currentPriceEl.textContent = price;
+        } else {
+          // Fallback for old structure
+          element.textContent = price;
+        }
       });
+    }
+
+    updateOriginalPrice(compareAtPrice, currentPrice) {
+      const priceElements = this.querySelectorAll('[data-sticky-price]');
+      priceElements.forEach(element => {
+        const originalPriceEl = element.querySelector('.original-price');
+        if (originalPriceEl) {
+          if (compareAtPrice && compareAtPrice > currentPrice) {
+            originalPriceEl.textContent = this.formatMoney(compareAtPrice);
+            originalPriceEl.style.display = 'block';
+          } else {
+            originalPriceEl.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    formatMoney(cents) {
+      // Simple money formatting - you may need to adjust based on your theme's money format
+      return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+      }).format(cents / 100);
     }
 
     renderAnchorLink() {

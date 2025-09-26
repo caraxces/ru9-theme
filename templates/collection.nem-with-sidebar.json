@@ -331,123 +331,85 @@
         "show_collection_description": true
       }
     },
-    "reviews_carousel_QUQNh3": {
+    "reviews_carousel_ihYmK7": {
       "type": "reviews-carousel",
       "blocks": {
-        "review_GWxeHz": {
+        "review_MHYcqY": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/BANNER_INTRO_MOBILE.png",
             "customer_name": "Phuong Nguyen",
             "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>",
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
             "button_text": "Xem sản phẩm",
-            "button_link": ""
+            "button_link": "shopify://products/foam-original"
           }
         },
-        "review_ME69kT": {
+        "review_x6JhWU": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/120e99f9b519b575deafb8222d6574f102094362.png",
             "customer_name": "Phuong Nguyen",
             "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>",
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": ""
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/bo-chan-ga"
           }
         },
-        "review_yMHfeP": {
+        "review_Mw8U9j": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/chat-lieu-vai-tencel-la-gi.jpg",
             "customer_name": "Phuong Nguyen",
             "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": ""
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://collections/bedding"
           }
         },
-        "review_FmJHcf": {
+        "review_UxKmJq": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_67.png",
             "customer_name": "Phuong Nguyen",
             "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": ""
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://collections/combo-bộ-sản-phẩm"
           }
         },
-        "review_gXepw8": {
+        "review_hxzewp": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/tencel-la-chat-lieu-vai-gi.jpg",
             "customer_name": "Phuong Nguyen",
             "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": ""
-          }
-        },
-        "review_xPn64L": {
-          "type": "review",
-          "settings": {
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p></p>",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": ""
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://collections/goi"
           }
         }
       },
       "block_order": [
-        "review_GWxeHz",
-        "review_ME69kT",
-        "review_yMHfeP",
-        "review_FmJHcf",
-        "review_gXepw8",
-        "review_xPn64L"
+        "review_MHYcqY",
+        "review_x6JhWU",
+        "review_Mw8U9j",
+        "review_UxKmJq",
+        "review_hxzewp"
       ],
       "name": "Reviews carousel",
       "settings": {
-        "heading": "<p>Hơn <strong>50,000</strong> Khách Hàng<br/>Và <strong>30,000</strong> Đánh Giá 5 Sao Toàn Quốc</p>"
-      }
-    },
-    "certifications_cWbJNF": {
-      "type": "certifications",
-      "blocks": {
-        "certification_g3zFwy": {
-          "type": "certification",
-          "settings": {
-            "label": "Chứng nhận",
-            "name": "CertiPUR-US®"
-          }
-        },
-        "certification_ixNC8G": {
-          "type": "certification",
-          "settings": {
-            "label": "Chứng nhận",
-            "name": "CertiPUR-US®"
-          }
-        }
-      },
-      "block_order": [
-        "certification_g3zFwy",
-        "certification_ixNC8G"
-      ],
-      "name": "Certifications",
-      "settings": {
-        "title": "Cam Kết An Toàn\nTừ Lần Chạm Đầu Tiên",
-        "description": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>",
-        "button_text": "Xem chi tiết",
-        "button_link": ""
+        "heading": "<p>Hơn <strong>50,000 </strong>Khách Hàng<br/>Và <strong>30,000 </strong>Đánh Giá 5 Sao Toàn Quốc</p>"
       }
     },
     "super_service_Ch8qQy": {
@@ -667,8 +629,7 @@
     "banner_with_content_K64e3r",
     "compare_product_fL4TxW",
     "collection-content",
-    "reviews_carousel_QUQNh3",
-    "certifications_cWbJNF",
+    "reviews_carousel_ihYmK7",
     "super_service_Ch8qQy",
     "collections_listing_4JU76Y",
     "faq_A7dpqH",

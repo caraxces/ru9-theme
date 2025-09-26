@@ -168,12 +168,16 @@
           "settings": {
             "icon_1": "shopify://shop_images/Layer_1_3.svg",
             "text_1": "100 đêm ngủ thử",
+            "show_service_1": true,
             "icon_2": "shopify://shop_images/Layer_1_4.svg",
             "text_2": "Miễn phí vận chuyển",
+            "show_service_2": true,
             "icon_3": "shopify://shop_images/Layer_1_5.svg",
             "text_3": "Bảo hành dài lâu",
+            "show_service_3": true,
             "icon_4": "shopify://shop_images/Layer_1_6.svg",
-            "text_4": "Thanh toán linh hoạt"
+            "text_4": "Trả góp 0%",
+            "show_service_4": true
           }
         }
       },
