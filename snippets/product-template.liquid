@@ -2731,8 +2731,8 @@
                         assign text_setting = 'text_' | append: i
                         assign show_setting = 'show_service_' | append: i
                         if block.settings[show_setting]
-                          if block.settings[icon_setting] != blank or block.settings[text_setting] != blank
-                            assign services_count = services_count | plus: 1
+                        if block.settings[icon_setting] != blank or block.settings[text_setting] != blank
+                          assign services_count = services_count | plus: 1
                           endif
                         endif
                       endfor
@@ -2773,8 +2773,8 @@
                                       <p>{{ text }}</p>
                                     </div>
                                   {%- endif -%}
-                                </div>
-                              {%- endif -%}
+                              </div>
+                            {%- endif -%}
                             </div>
                           {%- endfor -%}
                         </div>

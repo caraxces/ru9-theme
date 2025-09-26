@@ -589,7 +589,127 @@ header .ru9_icon {
 }
 .megamenu__content {
   padding-right: 23px;
-  border-right: 1px solid;
+  border-right: none;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove all outlines and debug styles from megamenu */
+.site-nav__dropdown.megamenu,
+.site-nav__dropdown.megamenu *,
+.megamenu__content,
+.megamenu__content * {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Remove focus outlines */
+.site-nav__dropdown.megamenu:focus,
+.site-nav__dropdown.megamenu:focus-visible,
+.megamenu__content:focus,
+.megamenu__content:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove hover outlines */
+.site-nav__dropdown.megamenu:hover,
+.megamenu__content:hover {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove any browser dev tools highlighting */
+.site-nav__dropdown.megamenu::before,
+.site-nav__dropdown.megamenu::after,
+.megamenu__content::before,
+.megamenu__content::after {
+  display: none !important;
+}
+
+/* ========================================
+   MEGAMENU SIZING, PADDING, LAYOUT & MARGIN ONLY
+   ======================================== */
+
+/* Rule 1: Width < 1390px = Hide megamenu */
+@media screen and (max-width: 1389px) {
+  .site-nav__dropdown.megamenu {
+    display: none !important;
+  }
+}
+
+/* Rule 2: Width ≥ 1390px = Desktop Layout with Exact 60px Padding */
+@media screen and (min-width: 1390px) {
+  /* EXACT 60px padding ở TỆP CHA - SÁT VÀO LỀ */
+  .site-nav__dropdown.megamenu {
+    padding: 40px 60px !important; /* EXACT 60px left/right ở tệp cha */
+    margin: 0 !important;
+  }
+  
+  /* Tệp con .page-width - KHÔNG CÓ PADDING */
+  .site-nav__dropdown.megamenu > .page-width {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important; /* KHÔNG CÓ PADDING ở tệp con */
+    width: 100% !important;
+  }
+  
+  /* Clean megamenu content - NO CONFLICTING PADDING/MARGIN */
+  .site-nav__dropdown.megamenu .megamenu__content {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Simple layout - NO GRID COMPLEXITY */
+  .site-nav__dropdown.megamenu .megamenu__content .grid {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .site-nav__dropdown.megamenu .megamenu__content .grid__item {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* 6-column grid for mega cards */
+  .site-nav__dropdown.megamenu .mega-cards {
+    display: grid !important;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 24px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Responsive grid adjustments */
+  @media screen and (max-width: 1600px) {
+    .site-nav__dropdown.megamenu .mega-cards {
+      grid-template-columns: repeat(5, 1fr) !important;
+    }
+  }
+  
+  @media screen and (max-width: 1500px) {
+    .site-nav__dropdown.megamenu .mega-cards {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+}
+
+/* Remove any margin/padding outlines */
+.site-nav__dropdown.megamenu * {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Restore specific padding where needed */
+.megamenu__content {
+  padding-right: 23px !important;
 }
 .megamenu__banner {
   aspect-ratio: var(--width) / var(--height);
