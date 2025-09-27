@@ -399,13 +399,13 @@
   
   .bundle-step-3 .btn--primary {
     border-radius: 50px;
-    background: #FF7F41;
-    color: #fff;
+    background: #FCE390;
+    color: #1C2C58;
   }
   
   .bundle-step-3 .btn--primary:hover {
     border-radius: 50px;
-    background: #FF7F41;
+    background: #FCE390;
   }
   
   @media (max-width: 768px) {
@@ -1521,7 +1521,7 @@
     padding: 1rem;
     border: 1px solid #e5e5e5;
     border-radius: 8px;
-    background: white;
+    background: #F5F9FF;
   }
 
   .bundle-step-2 .service-item__icon {
@@ -2291,8 +2291,11 @@
                           for i in (1..4)
                             assign icon_setting = 'icon_' | append: i
                             assign text_setting = 'text_' | append: i
+                            assign show_setting = 'show_service_' | append: i
+                            if block.settings[show_setting]
                             if block.settings[icon_setting] != blank or block.settings[text_setting] != blank
                               assign services_count = services_count | plus: 1
+                              endif
                             endif
                           endfor
                         -%}
@@ -2303,9 +2306,12 @@
                                 {%- liquid
                                   assign icon_setting = 'icon_' | append: i
                                   assign text_setting = 'text_' | append: i
+                                  assign show_setting = 'show_service_' | append: i
                                   assign icon = block.settings[icon_setting]
                                   assign text = block.settings[text_setting]
+                                  assign show_service = block.settings[show_setting]
                                 -%}
+                                {%- if show_service -%}
                                 {%- if icon != blank or text != blank -%}
                                   <div class="service-grid-item">
                                     <div class="service-item">
@@ -2321,6 +2327,7 @@
                                       {%- endif -%}
                                     </div>
                                   </div>
+                                  {%- endif -%}
                                 {%- endif -%}
                               {%- endfor -%}
                             </div>

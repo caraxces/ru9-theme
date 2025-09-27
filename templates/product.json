@@ -68,28 +68,25 @@
             "code": "<style>\n.flash-sale-container {\n  display: none; /* Hidden by default, will be shown with JS if in valid time */\n  align-items: center;\n  background: #ff6b6b;\n  padding: 15px;\n  border-radius: 8px;\n  margin: 10px 0;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n} \n\n.flash-sale-status {\n  display: flex;\n  align-items: center;\n  margin-right: 20px;\n}\n\n.status-icon {\n  font-size: 24px;\n  color: #fff;\n  margin-right: 10px;\n  animation: pulse 1s infinite;\n}\n\n.status-text {\n  font-size: 16px;\n  font-weight: bold;\n  color: #fff;\n}\n\n.countdown-wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.countdown-block {\n  background: #fff;\n  padding: 8px 12px;\n  border-radius: 6px;\n  text-align: center;\n  min-width: 60px;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.05);\n}\n\n.countdown-block span {\n  font-size: 20px;\n  font-weight: bold;\n  color: #ff6b6b;\n  display: block;\n}\n\n.countdown-block label {\n  font-size: 12px;\n  color: #666;\n  margin-top: 4px;\n  display: block;\n}\n\n@keyframes pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.1); }\n  100% { transform: scale(1); }\n}\n\n.inactive .status-icon {\n  color: #fff;\n  animation: none;\n}\n\n.inactive .status-text {\n  color: #fff;\n}\n\n.inactive .countdown-block span {\n  color: #666;\n}\n</style>\n\n<div class=\"flash-sale-container\" id=\"flashSaleContainer\">\n  <div class=\"flash-sale-status\">\n    <div class=\"status-icon\" id=\"statusIcon\">⚡</div>\n    <div class=\"status-text\" id=\"statusText\">Flash Sale đang diễn ra!</div>\n  </div>\n  <div class=\"countdown-wrapper\">\n    <div class=\"countdown-block\">\n      <span id=\"hours\">00</span>\n      <label>Giờ</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"minutes\">00</span>\n      <label>Phút</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"seconds\">00</span>\n      <label>Giây</label>\n    </div>\n  </div>\n</div>\n\n<script>\nclass FlashSaleTimer {\n  constructor() {\n    this.statusText = document.getElementById('statusText');\n    this.statusIcon = document.getElementById('statusIcon');\n    this.container = document.getElementById('flashSaleContainer');\n    this.hoursElement = document.getElementById('hours');\n    this.minutesElement = document.getElementById('minutes');\n    this.secondsElement = document.getElementById('seconds');\n    \n    this.flashSaleStartHour = 23; // 11 PM\n    this.flashSaleEndHour = 8;    // 8 AM\n    \n    // Check if we should show the flash sale based on GMT+7 time\n    if (this.isWithinGMTPlus7TimeRange()) {\n      this.container.style.display = \"flex\"; // Show the container\n      this.updateTimer();\n      setInterval(() => this.updateTimer(), 1000);\n    }\n  }\n\n  // Get current time in GMT+7\n  getCurrentGMTPlus7Time() {\n    const now = new Date();\n    // Convert to GMT+7\n    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);\n    return new Date(utcTime + (7 * 60 * 60 * 1000));\n  }\n\n  // Check if current GMT+7 time is within flash sale hours (11 PM - 8 AM)\n  isWithinGMTPlus7TimeRange() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  isFlashSaleActive() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  getNextFlashSaleTime() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    let nextFlashSale = new Date(gmtPlus7Time);\n    \n    if (gmtPlus7Time.getHours() >= this.flashSaleEndHour && gmtPlus7Time.getHours() < this.flashSaleStartHour) {\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    } else {\n      nextFlashSale.setDate(nextFlashSale.getDate() + 1);\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    }\n    \n    return nextFlashSale;\n  }\n\n  getTimeRemaining(endTime) {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const total = endTime - gmtPlus7Time;\n    const seconds = Math.floor((total / 1000) % 60);\n    const minutes = Math.floor((total / 1000 / 60) % 60);\n    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);\n    \n    return {\n      total,\n      hours,\n      minutes,\n      seconds\n    };\n  }\n\n  updateTimer() {\n    const isActive = this.isFlashSaleActive();\n    let timeRemaining;\n    \n    if (isActive) {\n      // Calculate end time (8 AM in GMT+7)\n      const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n      const endTime = new Date(gmtPlus7Time);\n      endTime.setHours(this.flashSaleEndHour, 0, 0, 0);\n      if (endTime < gmtPlus7Time) {\n        endTime.setDate(endTime.getDate() + 1);\n      }\n      timeRemaining = this.getTimeRemaining(endTime);\n      \n      this.statusText.textContent = 'Flash Sale đang diễn ra!';\n      this.container.classList.remove('inactive');\n    } else {\n      timeRemaining = this.getTimeRemaining(this.getNextFlashSaleTime());\n      \n      this.statusText.textContent = 'Flash Sale sắp diễn ra';\n      this.container.classList.add('inactive');\n    }\n\n    this.hoursElement.textContent = timeRemaining.hours.toString().padStart(2, '0');\n    this.minutesElement.textContent = timeRemaining.minutes.toString().padStart(2, '0');\n    this.secondsElement.textContent = timeRemaining.seconds.toString().padStart(2, '0');\n  }\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  new FlashSaleTimer();\n});\n</script>"
           }
         },
-        "judge_me_reviews_preview_badge_MD8JNY": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "disabled": true,
-          "settings": {}
-        },
-        "trust_badge_wVtTm7": {
-          "type": "trust_badge",
-          "disabled": true,
+        "promotion_q6yCFm": {
+          "type": "promotion",
           "settings": {
-            "trust_image": "shopify://shop_images/Chinh_sach_giao_hang-04.png"
-          }
-        },
-        "description": {
-          "type": "description",
-          "settings": {
-            "is_tab": false,
-            "collapse_content": false
+            "title": "Mã ưu đãi",
+            "popup_content_1": "",
+            "popup_content_2": "",
+            "popup_content_3": "",
+            "popup_content_4": ""
           }
         },
         "price": {
           "type": "price",
           "settings": {}
+        },
+        "size_guide_dropdown_fkaRtp": {
+          "type": "size_guide_dropdown",
+          "settings": {
+            "title": "Hướng dẫn chọn kích thước"
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -100,9 +97,27 @@
             "color_swatches": true
           }
         },
-        "quantity_selector_WMfLWY": {
-          "type": "quantity_selector",
-          "settings": {}
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "surface_pickup_enable": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "is_tab": false,
+            "collapse_content": false
+          }
+        },
+        "usage_guide_7zymjD": {
+          "type": "usage_guide",
+          "settings": {
+            "title": "Thông số sản phẩm",
+            "content": "<p>Thêm nội dung hướng dẫn sử dụng vào đây.</p>"
+          }
         },
         "showroom_dropdown_nTzTtH": {
           "type": "showroom_dropdown",
@@ -122,64 +137,44 @@
             "showroom_3_map_link": ""
           }
         },
-        "buy_buttons": {
-          "type": "buy_buttons",
+        "usage_guide_Awrhpf": {
+          "type": "usage_guide",
           "settings": {
-            "show_dynamic_checkout": true,
-            "surface_pickup_enable": false,
-            "show_gift_card_recipient": false
+            "title": "Hướng dẫn sử dụng",
+            "content": "<p>Thêm nội dung hướng dẫn sử dụng vào đây.</p>"
           }
         },
-        "productbundle_GcbRad": {
-          "type": "productbundle",
-          "disabled": true,
+        "service_grid_MCNHkH": {
+          "type": "service_grid",
           "settings": {
-            "product_list": [
-              "tam-bao-ve-nem",
-              "bo-ga-giuong-cotton-sateen",
-              "tencel-bedding-set"
-            ],
-            "cross_sell_title": "Quà tặng cho quý khách mua nệm",
-            "cross_sell_label": "- 50 %"
+            "icon_1": "shopify://shop_images/Layer_1_3.svg",
+            "text_1": "100 đêm ngủ thử",
+            "show_service_1": true,
+            "icon_2": "shopify://shop_images/Layer_1_4.svg",
+            "text_2": "Miễn phí vận chuyển",
+            "show_service_2": true,
+            "icon_3": "shopify://shop_images/Layer_1_5.svg",
+            "text_3": "Bảo hành dài lâu",
+            "show_service_3": true,
+            "icon_4": "shopify://shop_images/Layer_1_6.svg",
+            "text_4": "Trả góp 0%",
+            "show_service_4": true
           }
-        },
-        "icon_with_text_b6k6a4": {
-          "type": "icon_with_text",
-          "settings": {
-            "icon_1": "chat",
-            "image_icon_1": "shopify://shop_images/text-w-icon-6.png",
-            "title_1": "Chất liệu Foam cao cấp",
-            "icon_2": "chat",
-            "image_icon_2": "shopify://shop_images/text-w-icon-5.png",
-            "title_2": "Miễn phí vận chuyển *",
-            "icon_3": "chat",
-            "image_icon_3": "shopify://shop_images/text-w-icon-6.png",
-            "title_3": "Bảo hành dài lâu",
-            "icon_4": "chat",
-            "title_4": ""
-          }
-        },
-        "carousel_modal_B8Mr9e": {
-          "type": "carousel_modal",
-          "disabled": true,
-          "settings": {}
         }
       },
       "block_order": [
         "custom_ir6hFk",
-        "judge_me_reviews_preview_badge_MD8JNY",
-        "trust_badge_wVtTm7",
-        "description",
+        "promotion_q6yCFm",
         "price",
+        "size_guide_dropdown_fkaRtp",
         "variant_picker",
-        "quantity_selector_WMfLWY",
-        "showroom_dropdown_nTzTtH",
         "buy_buttons",
-        "productbundle_GcbRad",
-        "icon_with_text_b6k6a4",
-        "carousel_modal_B8Mr9e"
+        "description",
+        "usage_guide_7zymjD",
+        "showroom_dropdown_nTzTtH",
+        "usage_guide_Awrhpf",
+        "service_grid_MCNHkH"
       ],
-      "disabled": true,
       "settings": {
         "section_width": "page-width",
         "customize_width": 1800,
@@ -203,6 +198,7 @@
     },
     "main_product_bundle_y4WGaj": {
       "type": "main-product-bundle",
+      "disabled": true,
       "name": "Product Bundle",
       "settings": {
         "section_width": "page-width",
@@ -235,7 +231,21 @@
         "product_video_style": "muted",
         "enable_sticky_add_to_cart": false,
         "hide_payment_button_mobile": false,
-        "image_size": "medium"
+        "image_size": "medium",
+        "showroom_1_name": "Showroom 1",
+        "showroom_1_address": "Địa chỉ showroom",
+        "showroom_1_phone": "0964777910",
+        "showroom_1_map_link": "",
+        "showroom_2_name": "Showroom 2",
+        "showroom_2_address": "Địa chỉ showroom",
+        "showroom_2_phone": "0964777910",
+        "showroom_2_map_link": "",
+        "showroom_3_name": "Showroom 3",
+        "showroom_3_address": "Địa chỉ showroom",
+        "showroom_3_phone": "0964777940",
+        "showroom_3_map_link": "",
+        "review_rating": "4.8",
+        "review_count": "2025 đánh giá"
       }
     },
     "product_hotspot_XzDEYy": {

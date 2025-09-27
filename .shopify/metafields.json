@@ -783,16 +783,6 @@
       }
     },
     {
-      "key": "subdesc",
-      "namespace": "ru9",
-      "name": "Subdesc",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
       "key": "discount",
       "namespace": "ru9",
       "name": "Discount",
@@ -2010,6 +2000,16 @@
       "type": {
         "name": "file_reference",
         "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "subdes",
+      "namespace": "custom",
+      "name": "Subdes",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
       }
     }
   ],

@@ -570,7 +570,7 @@
 }
 
 .variant__label-info span {
-  color: #007cba;
+  color: #000;
 }
 
 /* Fix variant button corner rounding issue when selected */
@@ -1243,8 +1243,8 @@
 }
 
 .bundle-discount-badge {
-  background: #ff6b35;
-  color: white;
+  background: #FCE390;
+  color: #1C2C58;
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 16px;

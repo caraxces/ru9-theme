@@ -93,66 +93,22 @@
         "copy_button_y": 92
       }
     },
-    "combo_best_selling_X76Ktx": {
-      "type": "combo-best-selling",
-      "blocks": {
-        "product_item_Vqp9KX": {
-          "type": "product_item",
-          "settings": {
-            "product": "combo-nhịp-ngủ-dịu-em",
-            "product_label": "Best seller",
-            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
-            "label_color": "#ffffff",
-            "label_bg": "#609ee9"
-          }
-        },
-        "product_item_AMbrqB": {
-          "type": "product_item",
-          "settings": {
-            "product": "combo-nang-dỡ-trọn-vẹn-1",
-            "product_label": "Best seller",
-            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
-            "label_color": "#ffffff",
-            "label_bg": "#609ee9"
-          }
-        },
-        "product_item_mGDLzH": {
-          "type": "product_item",
-          "settings": {
-            "product": "combo-giấc-ngủ-tối-ưu",
-            "product_label": "Best seller",
-            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
-            "label_color": "#ffffff",
-            "label_bg": "#609ee9"
-          }
-        },
-        "product_item_GbfMaK": {
-          "type": "product_item",
-          "settings": {
-            "product": "combo-ngu-ngon-tron-giac",
-            "product_label": "Best seller",
-            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
-            "label_color": "#ffffff",
-            "label_bg": "#609ee9"
-          }
-        }
-      },
-      "block_order": [
-        "product_item_Vqp9KX",
-        "product_item_AMbrqB",
-        "product_item_mGDLzH",
-        "product_item_GbfMaK"
-      ],
-      "name": "Combo Best Selling",
+    "main_collection_custom_xrVmzf": {
+      "type": "main-collection-custom",
+      "name": "Coll custom",
       "settings": {
-        "title": "Combo bán chạy",
-        "description": "Combo sản phẩm được yêu thích nhất",
-        "primary_color": "#1c2c58",
-        "text_color": "#1a1a1a",
-        "description_color": "#666666",
-        "image_padding": "0px",
-        "image_inner_padding": "0px",
-        "mobile_image_padding": "0px"
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "enable_sidebar": true,
+        "collapsed": false,
+        "filter_style": "sidebar",
+        "enable_color_swatches": true,
+        "enable_swatch_labels": true,
+        "enable_sort": true,
+        "enable_collection_count": true,
+        "per_row": 3,
+        "rows_per_page": 4,
+        "default_sold_count": 0
       }
     },
     "main-collection": {
@@ -202,8 +158,8 @@
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
             "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         },
         "product_item_k78fVe": {
@@ -212,8 +168,8 @@
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
             "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         },
         "product_item_KgdmAR": {
@@ -222,8 +178,8 @@
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
             "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         },
         "product_item_yCBbCt": {
@@ -232,8 +188,8 @@
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
             "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         }
       },
@@ -247,9 +203,9 @@
       "settings": {
         "title": "Combo phòng ngủ",
         "description": "",
-        "primary_color": "#1C2C58",
-        "text_color": "#1A1A1A",
-        "description_color": "#666"
+        "primary_color": "#1c2c58",
+        "text_color": "#1a1a1a",
+        "description_color": "#666666"
       }
     },
     "slideshow_fhCaUN": {
@@ -309,8 +265,8 @@
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
             "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         },
         "product_item_p3eHLE": {
@@ -319,8 +275,8 @@
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
             "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         },
         "product_item_hMUezj": {
@@ -329,8 +285,8 @@
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
             "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         },
         "product_item_mYPAMb": {
@@ -339,8 +295,8 @@
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
             "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         }
       },
@@ -354,9 +310,9 @@
       "settings": {
         "title": "Combo ga giường",
         "description": "",
-        "primary_color": "#1C2C58",
-        "text_color": "#1A1A1A",
-        "description_color": "#666"
+        "primary_color": "#1c2c58",
+        "text_color": "#1a1a1a",
+        "description_color": "#666666"
       }
     },
     "collection-content": {
@@ -568,7 +524,7 @@
     "slideshow_XKY6Pb",
     "collection-header",
     "independent_webhook_popup_kNBhzQ",
-    "combo_best_selling_X76Ktx",
+    "main_collection_custom_xrVmzf",
     "main-collection",
     "combo_bedroom_L4nDdn",
     "slideshow_fhCaUN",

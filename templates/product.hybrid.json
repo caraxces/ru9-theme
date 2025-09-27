@@ -50,24 +50,28 @@
             "color_swatches": true
           }
         },
-        "custom_cxnctX": {
-          "type": "custom",
-          "settings": {
-            "code": "<div class=\"size-guide-text-dropdown-container\">\n  <style>\n    .size-guide-text-dropdown-container {\n      margin: 20px 0;\n    }\n\n    .size-guide-text-trigger {\n      /* Reset style của button để trông như một dòng chữ */\n      background: none;\n      border: none;\n      padding: 0;\n      \n      /* Style cho chữ và layout */\n      font-family: 'Proxima Nova', sans-serif;\n      font-weight: 400;\n      font-size: 16px;\n      line-height: 22px;\n      color: #1C2C58;\n      text-decoration: underline;\n      cursor: pointer;\n      \n      /* Dùng flex để căn chỉnh chữ và icon mũi tên */\n      display: inline-flex;\n      align-items: center;\n      gap: 8px; /* Khoảng cách giữa chữ và mũi tên */\n    }\n\n    .size-guide-text-trigger .arrow-icon {\n      transition: transform 0.3s ease-out;\n    }\n\n    .size-guide-text-trigger.is-active .arrow-icon {\n      transform: rotate(180deg);\n    }\n\n    .size-guide-content {\n      max-height: 0;\n      overflow: hidden;\n      transition: max-height 0.4s ease-out, margin-top 0.4s ease-out;\n      margin-top: 0;\n    }\n\n    .size-guide-content.is-active {\n      max-height: 1000px; /* Điều chỉnh nếu ảnh của bạn rất cao */\n      margin-top: 10px; /* Khoảng cách giữa link và ảnh */\n    }\n\n    .size-guide-content img {\n      display: block;\n      width: 100%;\n      height: auto;\n      border-radius: 4px; /* Tùy chọn: bo góc nhẹ cho ảnh */\n    }\n  </style>\n\n  <!-- Nút kích hoạt dropdown (đã được style lại) -->\n  <button class=\"size-guide-text-trigger\">\n    <span>Hướng dẫn chọn kích thước</span>\n    <span class=\"arrow-icon\">\n      <svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n        <path d=\"M1 1L7 7L13 1\" stroke=\"#1C2C58\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n      </svg>\n    </span>\n  </button>\n\n  <!-- Nội dung dropdown -->\n  <div class=\"size-guide-content\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0428/4219/4071/files/size-guide.png?v=1752400514\" alt=\"Hướng dẫn chọn kích thước\">\n  </div>\n\n  <script>\n    (function() {\n      const container = document.currentScript.parentElement;\n      const trigger = container.querySelector('.size-guide-text-trigger');\n      const content = container.querySelector('.size-guide-content');\n\n      if (trigger && content) {\n        trigger.addEventListener('click', function() {\n          this.classList.toggle('is-active');\n          content.classList.toggle('is-active');\n        });\n      }\n    })();\n  </script>\n</div>"
-          }
-        },
-        "quantity_selector_WMfLWY": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
         "showroom_dropdown_MfUCtB": {
           "type": "showroom_dropdown",
-          "settings": {}
+          "settings": {
+            "title": "Hệ thống cửa hàng",
+            "showroom_1_name": "Showroom 1",
+            "showroom_1_address": "",
+            "showroom_1_phone": "0964777910",
+            "showroom_1_map_link": "",
+            "showroom_2_name": "Showroom 2",
+            "showroom_2_address": "",
+            "showroom_2_phone": "0964777910",
+            "showroom_2_map_link": "",
+            "showroom_3_name": "Showroom 3",
+            "showroom_3_address": "",
+            "showroom_3_phone": "0964777940",
+            "showroom_3_map_link": ""
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "surface_pickup_enable": false,
             "show_gift_card_recipient": false
           }
@@ -83,21 +87,21 @@
             "cross_sell_label": "Miễn phí"
           }
         },
-        "icon_with_text_b6k6a4": {
-          "type": "icon_with_text",
+        "service_grid_naqrzN": {
+          "type": "service_grid",
           "settings": {
-            "icon_1": "chat",
-            "image_icon_1": "shopify://shop_images/text-w-icon-4.png",
-            "title_1": "100 đêm ngủ thử",
-            "icon_2": "chat",
-            "image_icon_2": "shopify://shop_images/text-w-icon-5.png",
-            "title_2": "Miễn phí vận chuyển *",
-            "icon_3": "chat",
-            "image_icon_3": "shopify://shop_images/text-w-icon-6.png",
-            "title_3": "Bảo hành dài lâu",
-            "icon_4": "chat",
-            "image_icon_4": "shopify://shop_images/text-w-icon-6.png",
-            "title_4": "Chất liệu Foam cao cấp"
+            "icon_1": "shopify://shop_images/Layer_1_3.svg",
+            "text_1": "100 đêm ngủ thử",
+            "show_service_1": true,
+            "icon_2": "shopify://shop_images/Layer_1_4.svg",
+            "text_2": "Miễn phí vận chuyển",
+            "show_service_2": true,
+            "icon_3": "shopify://shop_images/Layer_1_5.svg",
+            "text_3": "Bảo hành dài lâu",
+            "show_service_3": true,
+            "icon_4": "shopify://shop_images/Layer_1_6.svg",
+            "text_4": "Trả góp 0%",
+            "show_service_4": true
           }
         },
         "carousel_modal_B8Mr9e": {
@@ -112,12 +116,10 @@
         "description",
         "price",
         "variant_picker",
-        "custom_cxnctX",
-        "quantity_selector_WMfLWY",
         "showroom_dropdown_MfUCtB",
         "buy_buttons",
         "productbundle_GcbRad",
-        "icon_with_text_b6k6a4",
+        "service_grid_naqrzN",
         "carousel_modal_B8Mr9e"
       ],
       "settings": {
@@ -126,6 +128,8 @@
         "enable_sticky_add_to_cart": true,
         "hide_payment_button_mobile": false,
         "sku_enable": false,
+        "product_subtitle": "",
+        "custom_text": "",
         "image_position": "left",
         "image_size": "large",
         "product_zoom_enable": true,
@@ -137,30 +141,6 @@
         "mobile_layout": "partial",
         "enable_video_looping": true,
         "product_video_style": "muted"
-      }
-    },
-    "independent_webhook_popup_XnyFiV": {
-      "type": "independent-webhook-popup",
-      "name": "Independent Webhook Popup",
-      "settings": {
-        "enable_popup": true,
-        "popup_delay": 5,
-        "background_image": "shopify://shop_images/POP_UP_1.png",
-        "name_placeholder": "Họ và tên",
-        "name_x": 50,
-        "name_y": 65,
-        "phone_placeholder": "Số điện thoại",
-        "phone_x": 50,
-        "phone_y": 75,
-        "button_text": "Nhận mã ưu đãi ngay >",
-        "button_x": 50,
-        "button_y": 92,
-        "success_image": "shopify://shop_images/POP_UP_2.png",
-        "success_message": "Cảm ơn bạn đã đăng ký! Mã của bạn là RU9250.",
-        "coupon_code_to_copy": "RU9250",
-        "copy_button_text": "SAO CHÉP MÃ    >>>",
-        "copy_button_x": 50,
-        "copy_button_y": 92
       }
     },
     "product_hotspot_XzDEYy": {
@@ -595,7 +575,10 @@
       "blocks": {
         "judge_me_reviews_review_widget_LGBKUn": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200
+          }
         }
       },
       "block_order": [
@@ -655,7 +638,6 @@
   },
   "order": [
     "main",
-    "independent_webhook_popup_XnyFiV",
     "product_hotspot_XzDEYy",
     "product_hotspot_pnDmHC",
     "product_hotspot_grhP6h",

@@ -153,32 +153,46 @@
         "collection_RznAfR": {
           "type": "collection",
           "settings": {
-            "collection": "nem"
+            "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_UGEcpg": {
           "type": "collection",
           "settings": {
-            "collection": "goi"
+            "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_PxDcKV": {
           "type": "collection",
           "settings": {
-            "collection": "chan"
+            "collection": "bedding",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_3eqRH7": {
           "type": "collection",
           "settings": {
-            "collection": "phu-kien"
+            "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_bNVqp7": {
           "type": "collection",
           "disabled": true,
           "settings": {
-            "collection": "4the"
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
           }
         }
       },
@@ -304,7 +318,7 @@
       "name": "Image Marquee",
       "settings": {
         "quote_text": "<p>Trong suốt hành trình phát triển, Ru9 tự hào được xuất hiện trên nhiều tờ báo và tạp chí uy tín, ghi nhận nỗ lực mang đến  giấc ngủ chất lượng cho người Việt. Đây là minh chứng cho niềm tin từ khách hàng và sự đánh giá cao của giới chuyên môn.</p>",
-        "speed": 30
+        "speed": 10
       }
     },
     "featured_products_by_size_c63dBV": {
@@ -411,7 +425,7 @@
       "settings": {
         "heading": "<p>7 năm đồng hành <br/>cùng giấc ngủ người Việt</p>",
         "description": "<p>Chúng tôi không ngừng cải tiến từng chi tiết, để sản phẩm không chỉ “êm” mà còn “hiểu” được cơ thể bạn.<br/>Mỗi thiết kế, mỗi cải tiến trong chất liệu đều hướng đến cảm giác thoải mái và nâng đỡ tốt nhất cho cơ thể bạn.<br/>Từ đó, giấc ngủ không còn là điều xa xỉ, mà trở thành điều hiển nhiên và dễ dàng tiếp cận hơn với mọi người.<br/> </p>",
-        "video": "shopify://files/videos/video-best-seller.mp4"
+        "video": "shopify://files/videos/ORIGINAL PRO - NƠI TÁI TẠO NĂNG LƯỢNG SAU MỖI HÀNH TRÌNH.mp4"
       }
     },
     "reviews_carousel_QPtXUf": {
@@ -420,6 +434,7 @@
         "review_e3fUFp": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/BANNER_INTRO_MOBILE.png",
             "customer_name": "Phuong Nguyen",
             "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>",
             "product_name": "Nệm Original",
@@ -432,6 +447,7 @@
         "review_d8we9c": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/120e99f9b519b575deafb8222d6574f102094362.png",
             "customer_name": "Phuong Nguyen",
             "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>",
             "product_name": "Nệm Original",
@@ -444,6 +460,7 @@
         "review_hjGPiw": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/chat-lieu-vai-tencel-la-gi.jpg",
             "customer_name": "Phuong Nguyen",
             "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
             "product_name": "Nệm Original",
@@ -456,6 +473,7 @@
         "review_CFhi3c": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_67.png",
             "customer_name": "Phuong Nguyen",
             "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
             "product_name": "Nệm Original",
@@ -468,6 +486,7 @@
         "review_zqbNMP": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/tencel-la-chat-lieu-vai-gi.jpg",
             "customer_name": "Phuong Nguyen",
             "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
             "product_name": "Nệm Original",
@@ -476,18 +495,6 @@
             "button_text": "Xem Nệm",
             "button_link": "shopify://collections/goi"
           }
-        },
-        "review_wD3C7F": {
-          "type": "review",
-          "settings": {
-            "customer_name": "Phuong Nguyen",
-            "review_text": "",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/percale-pillow-case"
-          }
         }
       },
       "block_order": [
@@ -495,8 +502,7 @@
         "review_d8we9c",
         "review_hjGPiw",
         "review_CFhi3c",
-        "review_zqbNMP",
-        "review_wD3C7F"
+        "review_zqbNMP"
       ],
       "name": "Reviews carousel",
       "settings": {

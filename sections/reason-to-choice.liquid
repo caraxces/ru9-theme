@@ -62,11 +62,12 @@
     padding-bottom: 20px;
   }
   .reason-carousel__cell {
-    width: 515px;
+    flex: 1;
+    min-width: 0;
     flex-shrink: 0;
   }
   .reason-carousel__image-wrapper {
-    width: 515px;
+    width: 100%;
     height: 400px;
     flex-shrink: 0;
     border-radius: 8px;
@@ -86,19 +87,16 @@
     font-style: normal;
     font-weight: 600;
     line-height: 140%; /* 28px */
-    width: 487px;
     margin: 0 0 15px 0;
   }
   .reason-carousel__content {
-    width: 504px;
-    height: 139px;
-    flex-shrink: 0;
     color: #000;
     font-family: "Be Vietnam Pro", sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: 140%; /* 28px */
+    min-height: 139px;
   }
 
   /* Custom scrollbar styling */
@@ -123,8 +121,8 @@
   @media screen and (min-width: 990px) {
     .reason-to-choice.page-width {
       max-width: 100%;
-      padding-left: 120px;
-      padding-right: 110px;
+      padding-left: 60px;
+      padding-right: 60px;
     }
   }
 
@@ -152,25 +150,23 @@
     display: none;
   }
   .reason-carousel__cell {
-    width: 320px;
+    flex: 1;
+    min-width: 280px;
     flex-shrink: 0;
   }
   .reason-carousel__image-wrapper {
-    width: 320px;
+    width: 100%;
     height: 240px;
     flex-shrink: 0;
   }
   .reason-carousel__title {
-    width: 320px;
-    flex-shrink: 0;
     font-size: 18px;
     overflow: hidden;
   }
   .reason-carousel__content {
-    width: 320px;
-    flex-shrink: 0;
     font-size: 16px;
     overflow: hidden;
+    min-height: auto;
   }
 }
 </style>
@@ -178,7 +174,7 @@
 <div class="reason-to-choice page-width" data-section-id="{{ section.id }}">
   <div class="reason-to-choice__header">
     <h2 class="reason-to-choice__title">{{ section.settings.title | escape }}</h2>
-    {% if section.blocks.size > 1 %}
+    {% if section.blocks.size > 3 %}
       <div class="reason-to-choice__nav">
         <button class="reason-to-choice__nav-button is-previous" aria-label="Previous">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18L9 12L15 6" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>

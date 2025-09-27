@@ -120,10 +120,14 @@
         "sku_enable": true,
         "combo_title": "Combo bao gồm các sản phẩm:",
         "cta_button_text": "BẮT ĐẦU TẠO COMBO",
+        "service_icon_1": "shopify://shop_images/Layer_1_3.svg",
         "service_text_1": "100 đêm ngủ thử",
+        "service_icon_2": "shopify://shop_images/Layer_1_4.svg",
         "service_text_2": "Miễn phí vận chuyển",
+        "service_icon_3": "shopify://shop_images/Layer_1_5.svg",
         "service_text_3": "Bảo hành dài lâu",
-        "service_text_4": "Thanh toán linh hoạt",
+        "service_icon_4": "shopify://shop_images/Layer_1_6.svg",
+        "service_text_4": "Trả góp 0%",
         "image_position": "left",
         "product_zoom_enable": true,
         "product_carousel_enable": false,
@@ -807,61 +811,6 @@
         "margin-bottom": "0px"
       }
     },
-    "dynamic_text_with_image_L4VkFB": {
-      "type": "dynamic-text-with-image",
-      "blocks": {
-        "image_with_text_aTnYky": {
-          "type": "image-with-text",
-          "settings": {
-            "image": "{{ product.metafields.custom.image_3_hinh_1.value }}",
-            "title": "{{ product.metafields.custom.heading_3_hinh_1.value }}",
-            "text": "<p>{{ product.metafields.custom.text_block_3_hinh_1 | metafield_tag }}</p>",
-            "align_text": "left",
-            "layout": "right"
-          }
-        },
-        "image_with_text_NFMQyg": {
-          "type": "image-with-text",
-          "settings": {
-            "image": "{{ product.metafields.custom.image_3_hinh_2.value }}",
-            "title": "{{ product.metafields.custom.heading_3_hinh_2.value }}",
-            "text": "<p>{{ product.metafields.custom.text_block_3_hinh_2 | metafield_tag }}</p>",
-            "align_text": "left",
-            "layout": "left"
-          }
-        },
-        "image_with_text_WAkepD": {
-          "type": "image-with-text",
-          "settings": {
-            "image": "{{ product.metafields.custom.image_3_hinh_3.value }}",
-            "title": "{{ product.metafields.custom.heading_3_hinh_3.value }}",
-            "text": "<p>{{ product.metafields.custom.text_block_3_hinh_3 | metafield_tag }}</p>",
-            "align_text": "left",
-            "layout": "right"
-          }
-        }
-      },
-      "block_order": [
-        "image_with_text_aTnYky",
-        "image_with_text_NFMQyg",
-        "image_with_text_WAkepD"
-      ],
-      "custom_css": [
-        "h2 {font-size: 32px;}",
-        "@media (max-width: 767px) {h2 {font-size: 24px; } span {font-size: 16px; }}"
-      ],
-      "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
-        "mg": "50px,,20px,",
-        "pd": "",
-        "mg_mb": "",
-        "pd_mb": "",
-        "title": "{{ product.metafields.custom.heading_3_hinh.value }}",
-        "description": "",
-        "divider": false
-      }
-    },
     "best_seller_DWCAYP": {
       "type": "best-seller",
       "custom_css": [
@@ -877,104 +826,6 @@
         "text": "<p>{{ product.metafields.custom.video_text_block | metafield_tag }}</p>",
         "linkvideo": "{{ product.metafields.custom.product_video_best_seller_video.value }}",
         "poster": "{{ product.metafields.custom.product_video_best_seller_poster.value }}"
-      }
-    },
-    "dynamic_faq_Whrn47": {
-      "type": "dynamic-faq",
-      "blocks": {
-        "question_d3nb6H": {
-          "type": "question",
-          "settings": {
-            "title": "{{ product.metafields.custom.ask1.value }}",
-            "text": "<p>{{ product.metafields.custom.answer1.value }}</p>"
-          }
-        },
-        "question_wQaBbp": {
-          "type": "question",
-          "settings": {
-            "title": "{{ product.metafields.custom.ask2.value }}",
-            "text": "<p>{{ product.metafields.custom.answer2.value }}</p>"
-          }
-        },
-        "question_PPVaTY": {
-          "type": "question",
-          "settings": {
-            "title": "{{ product.metafields.custom.ask3.value }}",
-            "text": "<p>{{ product.metafields.custom.answer3.value }}</p>"
-          }
-        },
-        "question_f7x3UM": {
-          "type": "question",
-          "settings": {
-            "title": "{{ product.metafields.custom.ask4.value }}",
-            "text": "<p>{{ product.metafields.custom.answer4.value }}</p>"
-          }
-        },
-        "question_4qDy8K": {
-          "type": "question",
-          "settings": {
-            "title": "{{ product.metafields.custom.ask5.value }}",
-            "text": "<p>{{ product.metafields.custom.answer5.value }}</p>"
-          }
-        }
-      },
-      "block_order": [
-        "question_d3nb6H",
-        "question_wQaBbp",
-        "question_PPVaTY",
-        "question_f7x3UM",
-        "question_4qDy8K"
-      ],
-      "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "FAQs",
-        "mg": "24px,,20px,",
-        "pd": "40px,,,",
-        "mg_mb": "",
-        "pd_mb": "",
-        "title": "Các câu hỏi thường gặp",
-        "link": "shopify://pages/faqs",
-        "link_text": "Xem những câu hỏi khác",
-        "text_alignment": "center",
-        "use_metafield": false,
-        "metafield_limit": "5",
-        "divider": true
-      }
-    },
-    "certification_VUqyB6": {
-      "type": "certification",
-      "blocks": {
-        "slide_zqGeDK": {
-          "type": "slide",
-          "settings": {
-            "banner": "shopify://shop_images/Hompage_Desktop_Oeko_tex_bd30d664-3dfd-433e-a514-f771bb40ba94.png",
-            "banner_mobile": "shopify://shop_images/Hompage_Mobile_Oeko_tex_877a34ad-3f04-4b27-814f-e396140ef1ef.png",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
-            "image": "shopify://shop_images/logo-certification-1.png"
-          }
-        },
-        "slide_63THmd": {
-          "type": "slide",
-          "settings": {
-            "banner": "shopify://shop_images/Hompage_Desktop_Certipur_US_310dce33-caaf-452e-ac90-2da51b97f80e.png",
-            "banner_mobile": "shopify://shop_images/Hompage_Mobile_Certipur_US_86aa4a55-6779-43c2-89f4-231d338a70fe.png",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế Certipur-US </p>",
-            "image": "shopify://shop_images/CertiPUR-US_RGB_800x800_2x_c1aaa1ca-c943-43f5-b804-8b2b044f2be4.webp"
-          }
-        }
-      },
-      "block_order": [
-        "slide_zqGeDK",
-        "slide_63THmd"
-      ],
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1250,
-        "bg": "#f0f7fe",
-        "title": "",
-        "description": ""
       }
     },
     "1730878240cfbec46e": {
@@ -1038,10 +889,7 @@
     "product_hotspot_zAj7Lm",
     "product_hotspot_pnDmHC",
     "product_hotspot_4TYCfN",
-    "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",
-    "dynamic_faq_Whrn47",
-    "certification_VUqyB6",
     "1730878240cfbec46e",
     "sub",
     "product-recommendations",
