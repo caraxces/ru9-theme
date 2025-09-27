@@ -448,7 +448,7 @@
       scroll-snap-stop: always;
       min-height: var(--mega-row-height, 288px);
       display: grid;
-      grid-template-columns: repeat(6, 200px);
+      grid-template-columns: repeat(6, 1fr);
       padding: 0;
       gap: 24px 28px;
       justify-content: start;
@@ -562,7 +562,7 @@
     
     /* Mega card image styling */
     .site-nav__dropdown.megamenu .mega-card__image {
-      width: 200px !important;
+      width: 100% !important;
       height: 148px !important;
       border-radius: 8px !important;
       overflow: hidden !important;
@@ -578,7 +578,7 @@
     }
     
     .site-nav__dropdown.megamenu .mega-card__image--placeholder {
-      width: 200px !important;
+      width: 100% !important;
       height: 148px !important;
       background: #f3f4f6 !important;
       border-radius: 12px !important;
@@ -592,17 +592,17 @@
     /* Responsive grid columns for mega-cards */
     @media (max-width: 1440px) {
       .site-nav__dropdown.megamenu .mega-scroll > .mega-cards { 
-        grid-template-columns: repeat(5, 200px); 
+        grid-template-columns: repeat(6, 1fr); 
       }
     }
     @media (max-width: 1280px) {
       .site-nav__dropdown.megamenu .mega-scroll > .mega-cards { 
-        grid-template-columns: repeat(4, 200px); 
+        grid-template-columns: repeat(4, 1fr); 
       }
     }
     @media (max-width: 1024px) {
       .site-nav__dropdown.megamenu .mega-scroll > .mega-cards { 
-        grid-template-columns: repeat(3, 200px); 
+        grid-template-columns: repeat(3, 1fr); 
       }
       .site-nav__dropdown.megamenu .view-all-container {
         width: 160px !important;

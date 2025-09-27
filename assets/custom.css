@@ -681,7 +681,7 @@ header .ru9_icon {
   .site-nav__dropdown.megamenu .mega-cards {
     display: grid !important;
     grid-template-columns: repeat(6, 1fr) !important;
-    gap: 24px !important;
+    gap: 16px !important;
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
@@ -690,7 +690,7 @@ header .ru9_icon {
   /* Responsive grid adjustments */
   @media screen and (max-width: 1600px) {
     .site-nav__dropdown.megamenu .mega-cards {
-      grid-template-columns: repeat(5, 1fr) !important;
+      grid-template-columns: repeat(6, 1fr) !important;
     }
   }
   
