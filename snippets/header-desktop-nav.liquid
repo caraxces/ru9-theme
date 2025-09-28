@@ -454,7 +454,32 @@
       justify-content: start;
       align-items: flex-start;
     }
-    .site-nav__dropdown.megamenu .mega-scroll > .mega-cards > * { margin: 0 !important; }
+    .site-nav__dropdown.megamenu .mega-scroll > .mega-cards > * { 
+      margin: 0 !important; 
+      padding: 0 !important;
+    }
+    
+    /* Ensure mega-card__link has no padding/margin */
+    .site-nav__dropdown.megamenu .mega-card__link {
+      margin: 0 !important;
+      padding: 0 !important;
+      display: block !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    
+    /* Reset any inherited margins/padding that might cause indentation */
+    .site-nav__dropdown.megamenu .mega-card__link * {
+      box-sizing: border-box !important;
+    }
+    
+    /* Specifically target any container that might add padding */
+    .site-nav__dropdown.megamenu .mega-cards .mega-card__link {
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      outline: none !important;
+    }
 
     /* Dim titles in display-2 and display-3 */
     .site-nav__dropdown.megamenu .grid__item.appear-delay-2 .f-bold,
@@ -560,33 +585,44 @@
       background: #1a2f6b !important;
     }
     
-    /* Mega card image styling */
+    /* Mega card image styling - Override theme.css */
     .site-nav__dropdown.megamenu .mega-card__image {
       width: 100% !important;
       height: 148px !important;
       border-radius: 8px !important;
       overflow: hidden !important;
       background: #f3f4f6 !important;
-      margin-bottom: 8px !important;
+      margin: 0 0 8px 0 !important;
+      padding: 0 !important;
       position: relative !important;
+      box-sizing: border-box !important;
     }
     
     .site-nav__dropdown.megamenu .mega-card__image img {
       width: 100% !important;
       height: 100% !important;
       object-fit: cover !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      outline: none !important;
+      box-sizing: border-box !important;
     }
     
     .site-nav__dropdown.megamenu .mega-card__image--placeholder {
       width: 100% !important;
       height: 148px !important;
       background: #f3f4f6 !important;
-      border-radius: 12px !important;
+      border-radius: 8px !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       color: #6C757D !important;
       font-size: 14px !important;
+      margin: 0 0 8px 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
     }
 
     /* Responsive grid columns for mega-cards */

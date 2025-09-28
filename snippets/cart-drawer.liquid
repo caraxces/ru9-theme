@@ -371,7 +371,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         font-family: "Be Vietnam Pro", sans-serif;
-        font-size: 18px;
+        font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: 150%;
@@ -442,16 +442,33 @@
       height: auto;
       border-radius: 8px;
     }
-    .voucher-copy-button {
-      position: absolute;
-      bottom: 8px;
-      right: 15px;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 12px;
-    }
+      .voucher-copy-button {
+        position: absolute;
+        bottom: 8px;
+        width: 60px;
+        right: 15px;
+        background: #759CE6;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 4px;
+        font-weight: 400;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .voucher-copy-button:hover {
+        background: #6B8CDB;
+      }
+      
+      .voucher-copy-button:active,
+      .voucher-copy-button.copied {
+        background: #ccc;
+        color: #333;
+      }
     .cart-drawer__carousel-arrow {
       background: none;
       border: none;
@@ -885,7 +902,7 @@
           
           <!-- DISCOUNT CODE -->
           <div class="cart-drawer__discount-wrapper">
-              <h3 class="cart-drawer__discount-header">Nhập mã ưu đãi của bạn</h3>
+              <h3 class="cart-drawer__discount-header">Nhập mã ưu đãi của bạn (copy và dán vào ô dưới)</h3>
               <form action="{{ routes.cart_url }}/update" method="post" class="cart-drawer__discount-form" novalidate>
                   <input type="text" id="CartDrawer-Discount" name="discount" class="cart-drawer__discount-input" placeholder="Mã ưu đãi">
                   <button type="button" class="cart-drawer__discount-button">Áp dụng</button>
@@ -1265,9 +1282,11 @@
             navigator.clipboard.writeText(codeToCopy).then(() => {
               const originalText = copyButton.textContent;
               copyButton.textContent = 'Đã chép!';
+              copyButton.classList.add('copied');
               copyButton.disabled = true;
               setTimeout(() => {
                 copyButton.textContent = originalText;
+                copyButton.classList.remove('copied');
                 copyButton.disabled = false;
               }, 2000);
             }).catch(err => {

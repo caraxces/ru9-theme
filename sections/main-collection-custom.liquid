@@ -217,9 +217,29 @@
   
   .cc-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
     padding: 0 0px;
+  }
+  
+  /* When sidebar is enabled, adjust grid to fit 3 products */
+  .collection-content--custom.enable-sidebar .cc-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 100%;
+  }
+  
+  /* When sidebar is enabled, make cards responsive */
+  .collection-content--custom.enable-sidebar .cc-card {
+    width: 100%;
+  }
+  
+  .collection-content--custom.enable-sidebar .cc-image-container {
+    width: 100%;
+    height: 284px;
+  }
+  
+  .collection-content--custom.enable-sidebar .cc-buy-now {
+    width: 100%;
   }
   
   .cc-card {
@@ -407,12 +427,35 @@
     background: #3264E0;
   }
 
+  /* Responsive adjustments for no sidebar layout */
+  @media (max-width: 1400px) {
+    .cc-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 1200px) {
+    .cc-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .collection-content--custom.enable-sidebar .cc-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
   @media (max-width: 768px) {
     .cc-grid {
       display: flex;
       flex-direction: column;
       gap: 20px;
       padding: 0;
+    }
+    
+    /* Override sidebar layout on mobile */
+    .collection-content--custom.enable-sidebar .cc-grid {
+      display: flex;
+      flex-direction: column;
     }
     
     .cc-mobile-row {
