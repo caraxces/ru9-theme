@@ -637,16 +637,78 @@
       margin-bottom: 0 !important;
     }
     .cross-sell-item__quantity-wrapper {
-        display: flex;
+        display: flex !important;
         width: 120px;
         height: 35px;
-        padding-left: 4px;
-        align-items: flex-start;
-        gap: 45px;
+        align-items: center;
+        gap: 0;
         flex-shrink: 0;
         border-radius: 5px;
         border: 1px solid #E5E7EB;
         background: #FFF;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .cross-sell-item__quantity-wrapper .cross-sell-qty__adjust {
+        width: 30px;
+        height: 35px;
+        border: none;
+        background: transparent;
+        color: #000;
+        font-size: 16px;
+        font-weight: normal;
+        cursor: pointer;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 1;
+        padding: 0;
+        margin: 0;
+        outline: none;
+    }
+    
+    .cross-sell-item__quantity-wrapper .cross-sell-qty__adjust:hover {
+        background: transparent;
+    }
+    
+    .cross-sell-item__quantity-wrapper .cross-sell-qty__adjust:active {
+        background: transparent;
+    }
+    
+    .cross-sell-item__quantity-wrapper .cross-sell-qty__adjust--minus {
+        border: none;
+    }
+    
+    .cross-sell-item__quantity-wrapper .cross-sell-qty__adjust--plus {
+        border: none;
+    }
+    
+    /* Ensure quantity wrapper children stay inside */
+    .cross-sell-item__quantity-wrapper > * {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .cross-sell-item__quantity-wrapper .cross-sell-qty__num {
+        flex: 1;
+        height: 35px;
+        border: none;
+        background: #FFF;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        color: #1C2C58;
+        outline: none;
+        padding: 0;
+        min-width: 0;
+        position: relative;
+        z-index: 1;
+        justify-content: center !important;
     }
     .cross-sell-item__add-btn {
       display: flex;
@@ -910,9 +972,9 @@
                           <div class="cross-sell-item__quantity">
                             <label for="cross-sell-quantity-{{ product.id }}" class="cross-sell-item__quantity-label">Số lượng:</label>
                             <div class="cross-sell-item__quantity-wrapper">
-                              <button type="button" class="js-qty__adjust js-qty__adjust--minus" aria-label="-">-</button>
-                              <input type="text" id="cross-sell-quantity-{{ product.id }}" name="quantity" value="0" min="1" class="js-qty__num">
-                              <button type="button" class="js-qty__adjust js-qty__adjust--plus" aria-label="+">+</button>
+                              <button type="button" class="cross-sell-qty__adjust cross-sell-qty__adjust--minus" aria-label="-">-</button>
+                              <input type="text" id="cross-sell-quantity-{{ product.id }}" name="quantity" value="1" min="1" class="cross-sell-qty__num">
+                              <button type="button" class="cross-sell-qty__adjust cross-sell-qty__adjust--plus" aria-label="+">+</button>
                             </div>
                           </div>
                           <button type="button" class="cross-sell-item__add-btn">Thêm</button>
@@ -1135,10 +1197,23 @@
             event.preventDefault();
             const form = addButton.closest('form');
             const submitButton = form.querySelector('.cross-sell-item__add-btn');
+            const quantityInput = form.querySelector('.cross-sell-qty__num');
+            
+            if (!quantityInput || parseInt(quantityInput.value) < 1) {
+              alert('Vui lòng chọn số lượng sản phẩm.');
+              return;
+            }
             
             const originalButtonText = submitButton.textContent;
-            submitButton.textContent = '...';
+            submitButton.textContent = 'Đang thêm...';
             submitButton.disabled = true;
+
+            // Update the hidden variant input with selected variant
+            const variantSelect = form.closest('.cart-drawer__cross-sell-item').querySelector('.cross-sell-item__variant-select');
+            if (variantSelect) {
+              const hiddenIdInput = form.querySelector('input[name="id"]');
+              hiddenIdInput.value = variantSelect.value;
+            }
 
             fetch('{{ routes.cart_add_url }}.js', {
               method: 'POST',
@@ -1149,6 +1224,9 @@
             .then(item => {
               if (item.status) {
                 alert(item.description || 'Sản phẩm đã hết hàng.');
+              } else {
+                // Reset quantity to 1 after successful add
+                quantityInput.value = '1';
               }
               rebuildCart();
             })
@@ -1157,6 +1235,24 @@
               submitButton.textContent = originalButtonText;
               submitButton.disabled = false;
             });
+            return;
+          }
+
+          // Handle Cross-sell Quantity Adjust Buttons
+          const qtyAdjust = target.closest('.cross-sell-qty__adjust');
+          if (qtyAdjust) {
+            event.preventDefault();
+            event.stopPropagation();
+            const isPlus = qtyAdjust.classList.contains('cross-sell-qty__adjust--plus');
+            const quantityInput = qtyAdjust.parentElement.querySelector('.cross-sell-qty__num');
+            if (!quantityInput) return;
+            
+            let currentValue = parseInt(quantityInput.value) || 0;
+            if (isPlus) {
+              quantityInput.value = currentValue + 1;
+            } else {
+              quantityInput.value = Math.max(0, currentValue - 1);
+            }
             return;
           }
 
@@ -1226,6 +1322,23 @@
         document.addEventListener('focusout', function(event) {
             if (event.target.matches('.cross-sell-item__variant-select')) {
                 event.target.style.backgroundImage = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M4.5 6.75L9 11.25L13.5 6.75' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`;
+            }
+        });
+
+        // Handle variant select change
+        document.addEventListener('change', function(event) {
+            if (event.target.matches('.cross-sell-item__variant-select')) {
+                const select = event.target;
+                const crossSellItem = select.closest('.cart-drawer__cross-sell-item');
+                const form = crossSellItem.querySelector('.cross-sell-item__form');
+                const hiddenIdInput = form.querySelector('input[name="id"]');
+                
+                // Update the hidden variant input
+                hiddenIdInput.value = select.value;
+                
+                // Update price display if needed
+                // This would require fetching variant data from Shopify
+                // For now, we'll just update the variant ID
             }
         });
         
