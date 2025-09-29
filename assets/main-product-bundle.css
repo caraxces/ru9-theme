@@ -1986,12 +1986,23 @@
   color: white;
 }
 
+/* CSS chung cho tất cả disabled variant buttons */
+.variant__button-label.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none; /* Ngăn user click vào disabled buttons */
+  user-select: none; /* Ngăn user select text */
+}
+
 .bundle-step-2 .variant__button-label.disabled {
   opacity: 0.5;
   cursor: not-allowed;
   position: relative;
+  pointer-events: none; /* Ngăn user click vào disabled buttons */
+  user-select: none; /* Ngăn user select text */
 }
 
+/* Removed strikethrough line for disabled variant buttons
 .bundle-step-2 .variant__button-label.disabled:before {
   content: "";
   position: absolute;
@@ -2003,6 +2014,7 @@
   transform: translateY(-50%) rotate(-45deg);
   z-index: 1;
 }
+*/
 
 /* Color Swatch Styles - Matching variant-button.liquid */
 .bundle-step-2 .variant__button-label.color-swatch {
@@ -2036,9 +2048,19 @@
   box-shadow: 0 0 0 2px white, 0 0 0 4px #000;
 }
 
+/* CSS chung cho disabled color swatches */
+.variant__button-label.color-swatch.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none; /* Ngăn user click vào disabled color swatches */
+  user-select: none; /* Ngăn user select text */
+}
+
 .bundle-step-2 .variant__button-label.color-swatch.disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  pointer-events: none; /* Ngăn user click vào disabled color swatches */
+  user-select: none; /* Ngăn user select text */
 }
 
 .bundle-step-2 .variant__input:checked + .variant__button-label.color-swatch {
