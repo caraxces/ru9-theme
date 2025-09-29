@@ -332,35 +332,6 @@
         "label_bg": "#609ee9"
       }
     },
-    "dynamic_text_with_image_3FaeX8": {
-      "type": "dynamic-text-with-image",
-      "blocks": {
-        "image_with_text_AyyYjw": {
-          "type": "image-with-text",
-          "settings": {
-            "title": "Image with text",
-            "text": "<p>Pair large text with an image to tell a story, explain a detail about your product, or describe a new promotion.</p>",
-            "align_text": "left",
-            "layout": "right"
-          }
-        }
-      },
-      "block_order": [
-        "image_with_text_AyyYjw"
-      ],
-      "name": "Dynamic image with text",
-      "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
-        "mg": "50px,,20px,",
-        "pd": "",
-        "mg_mb": "",
-        "pd_mb": "",
-        "title": "",
-        "description": "",
-        "divider": false
-      }
-    },
     "quiz_banner_4z7U33": {
       "type": "quiz-banner",
       "name": "Quiz Banner (Advanced)",
@@ -655,7 +626,6 @@
     "featured_collections_6qfWNA",
     "image_marquee_hcRmaa",
     "featured_products_by_size_c63dBV",
-    "dynamic_text_with_image_3FaeX8",
     "quiz_banner_4z7U33",
     "tvc_section_WrUqBM",
     "reviews_carousel_QPtXUf",
