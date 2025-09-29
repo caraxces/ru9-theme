@@ -35,36 +35,9 @@
   {%- for filter in filters -%}
     {%- capture filter_id -%}filter-{{ filter.label | handleize }}{%- endcapture -%}
     {%- assign filter_index = forloop.index -%}
-    <div class="collection-sidebar__group--{{ filter_index }}">
-      <div class="collection-sidebar__group relative {{ collapsed }}">
-        <button
-          type="button"
-          class="collapsible-trigger collapsible-trigger-btn collapsible--auto-height{% unless collapsed %} is-open{% endunless %} tag-list__header"
-          aria-controls="{{ location }}-{{ filter_index }}{% if filter_id %}-{{ filter_id }}{% endif %}"
-          data-collapsible-id="{{ filter_id }}"
-        >
-          {{ filter.label | escape }}
+    <div class="filter-group">
 
-          <span class="arrow dnone absolute top-0 right-0 ">
-            {% render 'icon-caret' %}
-          </span>
-        </button>
-        <a href="{{ filter.url_to_remove }}" class="collection-facets-clear absolute top-0 right-0 text-sm">
-          {{- 'collections.filters.clear' | t -}}
-        </a>
-        <div
-          id="{{ location }}-{{ filter_index }}-{{ filter_id }}"
-          class="collapsible-content collapsible-content--sidebar{% unless collapsed %} is-open{% endunless %}"
-          data-collapsible-id="{{ filter_id }}"
-          {% unless collapsed %}
-            style="height: auto;"
-          {% endunless %}
-        >
-          <button class="collapsible-content__inner-close f-bold dnone ai-center w-full">
-            <span class="arrow dnone">{% render 'icon-caret' %}</span>
-            {{ filter.label | escape }}
-          </button>
-          <div class="collapsible-content__inner">
+      <div class="filter-content">
             {%- case filter.type -%}
               {%- when 'list', 'boolean' -%}
                 {%- case filter.presentation -%}
@@ -295,16 +268,6 @@
                   <div class="price-range__slider-wrapper">
                     <div class="price-range__slider"></div>
                   </div>
-                  <div class="price-range__display-wrapper">
-                    <div class="value-wrap">
-                      <span class="label-text block text-sm f-medium">{{ 'cart.label.price_from' | t }} </span>
-                      <span class="price-range__display-min frame-value block text-sm">{{ filter_min_value }}</span>
-                    </div>
-                    <div class="value-wrap">
-                      <span class="label-text block text-sm f-medium">{{ 'cart.label.price_to' | t }} </span>
-                      <span class="price-range__display-max frame-value block text-sm">{{ filter_max_value }}</span>
-                    </div>
-                  </div>
                   <input
                     class="price-range__input price-range__input-min"
                     name="{{ filter.min_value.param_name }}"
@@ -319,8 +282,6 @@
                   >
                 </div>
             {%- endcase -%}
-          </div>
-        </div>
       </div>
     </div>
   {%- endfor -%}

@@ -156,6 +156,15 @@
     object-fit: cover;
     border-radius: 8px;
     flex-shrink: 0;
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+    image-rendering: pixelated !important;
+    -webkit-backface-visibility: hidden !important;
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
 }
 
 
@@ -173,7 +182,15 @@
     column-gap: 15px !important;
     row-gap: 5px !important;
 }
+.jdgm-rev__buyer-badge.jdgm-rev__buyer-badge {
+    background-color: #1C2C58 !important;
+}
+.jdgm-rev__reply {
+    background-color: #F0F7FF !important;
+}
 .jdgm-widget:not(.jdgm-review-widget--small,.jdgm-review-widget--medium) .jdgm-write-rev-link{
+    border: none !important;
+    border-color: transparent !important;
     max-width: none !important; /* Override the original max-width */
 }
 .jdgm-rev-widg__summary::before {
@@ -297,6 +314,15 @@
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+    image-rendering: pixelated !important;
+    -webkit-backface-visibility: hidden !important;
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
 }
 
 /* 2. RIGHT COLUMN (Content Wrapper created by JS) */
@@ -516,6 +542,15 @@
         height: 120px !important;
         object-fit: cover !important;
         border-radius: 5px !important;
+        image-rendering: -webkit-optimize-contrast !important;
+        image-rendering: crisp-edges !important;
+        image-rendering: pixelated !important;
+        -webkit-backface-visibility: hidden !important;
+        -webkit-transform: translateZ(0) !important;
+        transform: translateZ(0) !important;
+        backface-visibility: hidden !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
     }
 
     .jdgm-custom-right-column-content {

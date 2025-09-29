@@ -69,30 +69,6 @@
         "show_collection_description": false
       }
     },
-    "independent_webhook_popup_kNBhzQ": {
-      "type": "independent-webhook-popup",
-      "name": "Independent Webhook Popup",
-      "settings": {
-        "enable_popup": true,
-        "popup_delay": 5,
-        "background_image": "shopify://shop_images/POP_UP_1.png",
-        "name_placeholder": "Họ và tên",
-        "name_x": 50,
-        "name_y": 65,
-        "phone_placeholder": "Số điện thoại",
-        "phone_x": 50,
-        "phone_y": 75,
-        "button_text": "Nhận mã ưu đãi ngay >",
-        "button_x": 50,
-        "button_y": 92,
-        "success_image": "shopify://shop_images/POP_UP_2.png",
-        "success_message": "Cảm ơn bạn đã đăng ký! Mã của bạn là RU9250.",
-        "coupon_code_to_copy": "RU9250",
-        "copy_button_text": "SAO CHÉP MÃ    >>>",
-        "copy_button_x": 50,
-        "copy_button_y": 92
-      }
-    },
     "main_collection_custom_xrVmzf": {
       "type": "main-collection-custom",
       "name": "Coll custom",
@@ -476,32 +452,42 @@
         "collection_NYndDT": {
           "type": "collection",
           "settings": {
-            "collection": "nem"
+            "collection": "nem",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_8VggX9": {
           "type": "collection",
           "settings": {
-            "collection": "goi"
+            "collection": "goi",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_KMFTnL": {
           "type": "collection",
           "settings": {
-            "collection": "chan"
+            "collection": "chan",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_Nkh6hi": {
           "type": "collection",
           "settings": {
-            "collection": "phu-kien"
+            "collection": "phu-kien",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_wFjyRp": {
           "type": "collection",
           "disabled": true,
           "settings": {
-            "collection": "4the"
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
           }
         }
       },
@@ -523,7 +509,6 @@
   "order": [
     "slideshow_XKY6Pb",
     "collection-header",
-    "independent_webhook_popup_kNBhzQ",
     "main_collection_custom_xrVmzf",
     "main-collection",
     "combo_bedroom_L4nDdn",
