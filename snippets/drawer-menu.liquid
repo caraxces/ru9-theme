@@ -319,8 +319,7 @@
                               >
                                 {{- childlink.title -}}
                               </a>
-                              <a href="{{ childlink.url }}" class="show-more-btn text-sm" 
-                                style="padding: 5px 15px; background-color: #f19072; color: #ffffff; border-radius: 16px; text-decoration: none; display: inline-block;">
+                              <a href="{{ childlink.url }}" class="show-more-btn text-sm">
                                 {{ 'general.menu.show_more_btn' | t }}
                               </a>
                             </div>
@@ -347,7 +346,7 @@
                                       >
                                     {% endif %}
                                   </div>
-                                  {{ grandchildlink.title }}
+                                  <span class="megamenu__grandchild-title">{{ grandchildlink.title }}</span>
                                 </a>
                               </div>
                             {%- endfor -%}
@@ -972,6 +971,87 @@
   .disclosure-list.show {
     transform: translateX(-50%) translateY(0);
   }
+}
+
+/* --- Custom styles for drawer megamenu (v2) --- */
+
+/* Title of the slide-out menu and sub-groups */
+.megamenu__content .site-nav__dropdown-link--top-level.js-megamenu-close {
+  width: auto !important; /* Fixed width is not ideal for responsive titles */
+  height: auto !important;
+  color: #1C2C58 !important;
+  font-family: "Be Vietnam Pro", sans-serif !important;
+  font-size: clamp(18px, 5.3vw, 20px) !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important; /* 24px on 20px font */
+  letter-spacing: 0.6px !important;
+  padding: 5px 0 !important;
+}
+
+/* Container for each sub-item in the menu */
+.megamenu__grandchild-item {
+  margin-bottom: 10px !important;
+}
+
+/* The link itself, acting as a flex container for image and text */
+.megamenu__grandchild-item > .site-nav__dropdown-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  text-decoration: none !important;
+}
+
+/* Image container */
+.megamenu__grandchild-item .aspect-ratio {
+  width: 18.1vw !important;
+  max-width: 68px !important;
+  aspect-ratio: 68 / 50 !important;
+  height: auto !important;
+  flex-shrink: 0 !important;
+  border-radius: 4px !important;
+  overflow: hidden !important;
+}
+
+.megamenu__grandchild-item .aspect-ratio img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* Span for the grandchild link title */
+.megamenu__grandchild-title {
+  display: block !important;
+  height: auto !important; /* Fixed height is not recommended with responsive text */
+  flex-shrink: 0 !important;
+  color: #121212 !important;
+  font-family: "Be Vietnam Pro", sans-serif !important;
+  font-size: clamp(14px, 4.2vw, 16px) !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important; /* 24px on 16px font */
+  letter-spacing: 0.6px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.show-more-btn.text-sm {
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  color: #1C2C58 !important;
+  text-align: right !important;
+  font-family: "Be Vietnam Pro", sans-serif !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 28.8px !important;
+  text-decoration-line: underline !important;
+  text-decoration-style: solid !important;
+  text-decoration-skip-ink: auto !important;
+  text-decoration-thickness: auto !important;
+  text-underline-offset: auto !important;
 }
 </style>
 

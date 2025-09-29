@@ -646,7 +646,6 @@
     background: #fff;
     border: 1px solid #E5E7EB;
   }
-
   .combo-product-image img {
     width: 100%;
     height: 100%;
@@ -793,14 +792,12 @@
     border-radius: 8px;
     margin-bottom: 1.5rem;
   }
-
   .bundle-step-1 .combo-products-list h3 {
     font-size: 18px;
     font-weight: 600;
     color: #1C2C58;
     margin-bottom: 1rem;
   }
-
   .bundle-step-1 .combo-product-item {
     display: flex;
     align-items: center;
@@ -1297,7 +1294,6 @@
     margin: 0;
     height: 100%;
   }
-
   .bundle-step-3 .service-item:hover {
     transform: translateY(-2px);
   }
@@ -1591,14 +1587,12 @@
     flex: 1 1 100% !important;
     display: block !important;
   }
-
   /* Ensure product slideshow takes full width */
   .bundle-step-2 .product__main-photos .product-slideshow {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 100% !important;
   }
-
   /* Ensure main slide takes full width */
   .bundle-step-2 .product-main-slide {
     width: 100% !important;
@@ -1917,9 +1911,7 @@
       padding: 0 16px 12px 16px;
     }
   }
-
 </style>
-
 <div id="MainProductBundle-{{ section.id }}" class="bundle-main-container">
   <div class="bundle-loading-overlay">
     <div class="spinner"></div>
@@ -2068,8 +2060,8 @@
                             <div class="combo-product-info">
                               <h4>{{ bundle_product.title }}</h4>
                               <div class="combo-product-attributes">
-                                <span>Số lượng: 1</span>
-                                <span>Kích thước: {{ bundle_product.options.size | default: '1' }} kích thước</span>
+                                <span>Số lượng: {%- if forloop.index == 3 -%}{{ section.settings.third_product_quantity | default: 1 }}{%- else -%}1{%- endif -%}</span>
+                                <span>Tuỳ chọn: {{ bundle_product.variants.size }} tuỳ chọn</span>
                               </div>
                             </div>
                           </div>
@@ -2428,7 +2420,6 @@
         </div>
       </div>
     </div>
-
     <!-- Step 3: Bundle Summary -->
     <div class="bundle-step bundle-step-3" data-step="3" style="display: none;">
       <div class="page-content page-content--product">
@@ -2714,10 +2705,8 @@
 {%- else -%}
   <!-- Bundle products list is blank -->
 {%- endif -%}
-
 <!-- Raw section settings debug -->
 <!-- Raw section.settings.bundle_products: {{ section.settings.bundle_products | json }} -->
-
 <script id="BundleConfig-{{ section.id }}" type="application/json">
 {
   "mainProductId": {{ product.id | json }},
@@ -2822,7 +2811,6 @@
   "hasBundleProducts": {{ has_bundle_products | json }}
 }
 </script>
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('MainProductBundle-{{ section.id }}');
@@ -3164,7 +3152,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-
   async function loadBundleProduct(index) {
     console.log('=== LOAD BUNDLE PRODUCT DEBUG ===');
     console.log('Index:', index);
@@ -3181,7 +3168,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     bundleState.currentProductIndex = index;
+        // Reset quantity to 1 for all products except the third one
+        let defaultQuantity = 1;
+        if (index === 2) { // The third product has index 2
+          defaultQuantity = {{ section.settings.third_product_quantity | default: 1 }};
+        }
+        bundleState.bundleQuantity = defaultQuantity;
     
+        // Update quantity display
+        const quantityDisplay = container.querySelector('.quantity-display');
+        if (quantityDisplay) {
+          quantityDisplay.setAttribute('data-quantity', defaultQuantity);
+          const quantityText = quantityDisplay.querySelector('.quantity-text');
+          if (quantityText) {
+            quantityText.textContent = defaultQuantity;
+          }
+        }
     // Update progress
     const progressCurrent = container.querySelector('.bundle-progress-current');
     const progressTotal = container.querySelector('.bundle-progress-total');
@@ -3713,7 +3715,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     return '';
   }
-
   function renderBundleSummary() {
     const summaryProducts = container.querySelector('.bundle-summary-products');
     const bundlePhotos = container.querySelector('#BundlePhotos-{{ section.id }}');
@@ -3870,12 +3871,6 @@ document.addEventListener('DOMContentLoaded', () => {
                   `<div class="bundle-product-attribute">Variant: ${product.variantTitle}</div>`
                 }
               </div>
-              <div class="bundle-product-price">
-                ${formatMoney(product.price)}
-                ${product.compareAtPrice && product.compareAtPrice > product.price ? 
-                  `<span class="bundle-product-compare-price">${formatMoney(product.compareAtPrice)}</span>` : 
-                  ''}
-              </div>
               <div class="bundle-product-change-link" data-product-index="${index}">Thay đổi</div>
             </div>
             <div class="bundle-product-image">
@@ -3987,7 +3982,13 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('❌ Original total element not found');
     }
     
+    const discountBadgeEl = container.querySelector('.bundle-discount-badge');
+    if (discountBadgeEl) {
+      discountBadgeEl.textContent = `-${discountPercentage}%`;
+    }
+
     if (discountAmountEl) {
+      // This element might not exist, but if it does, we can update it.
       discountAmountEl.textContent = formatMoney(discountAmount);
       console.log('✅ Updated discount amount:', formatMoney(discountAmount));
     } else {
@@ -4142,22 +4143,52 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addBundleToCart() {
-    const items = [];
+    const bundleId = new Date().getTime();
     const bundleQty = bundleState.bundleQuantity || 1;
-    
-    // Skip main product for now - only add bundle products
-    // The main product might be the bundle itself, so we don't want to add it twice
-    
-    // Add bundle products
-    bundleState.selectedProducts.bundle.forEach((product) => {
-      if (product.variantId) {
-        const bundleItem = {
-          id: product.variantId,
-          quantity: (product.quantity || 1) * bundleQty
-        };
-        items.push(bundleItem);
+    let items = [];
+    let totalOriginalPrice = 0;
+
+    // 1. Add the main bundle product as a "parent" item (for display)
+    // We use a real variant but set its quantity to 0 if we don't want to charge for it separately.
+    // Or, a better approach: add it with quantity and create a discount product.
+
+    let bundledItemsInfo = [];
+
+    bundleState.selectedProducts.bundle.forEach((p, index) => {
+      const pQty = (p.quantity || 1) * bundleQty;
+      totalOriginalPrice += p.price * pQty;
+      items.push({
+        id: p.variantId,
+        quantity: pQty,
+        properties: {
+          '_bundle_id': bundleId,
+          '_bundle_child': p.productTitle,
+          'Bundle': '{{ product.title | escape }}'
+        }
+      });
+      bundledItemsInfo.push(`${pQty} x ${p.productTitle} (${p.variantTitle})`);
+    });
+
+    // Create the main bundle line item
+    items.unshift({
+      id: bundleState.selectedProducts.main.variantId,
+      quantity: bundleQty,
+      properties: {
+        '_bundle_id': bundleId,
+        '_bundle_parent': '{{ product.title | escape }}',
+        '_bundled_items': bundledItemsInfo.join(',\n')
       }
     });
+    totalOriginalPrice += bundleState.selectedProducts.main.variantPrice * bundleQty;
+
+    const discountPercentage = parseFloat(config.discountPercentage) || 10;
+    const discountAmount = totalOriginalPrice * (discountPercentage / 100);
+
+    // Shopify doesn't allow adding products with a negative price via the AJAX API.
+    // The discount must be applied via a Shopify Function, a discount code, or a draft order.
+    // The best we can do here is add all items and let a discount code/function handle the price.
+    // For this implementation, we will add items to the cart and the price will be the original price.
+    // The user will need to have an automatic discount set up in Shopify admin that applies to these items.
 
     if (items.length === 0) {
       return;
@@ -4281,9 +4312,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
-
-
   function initializeBundleProductVariantPicker(container) {
     console.log('=== INITIALIZE BUNDLE PRODUCT VARIANT PICKER ===');
     
@@ -4851,7 +4879,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log('✅ Variant picker initialized successfully');
   }
-
   function updateBundleVariantLabels(variant, container) {
     console.log('=== UPDATE VARIANT LABELS ===');
     console.log('Function called with variant:', variant);
@@ -5081,7 +5108,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update product image if variant has different image
     updateBundleProductImage(variant, container);
   }
-
   function updateBundleProductImage(variant, container) {
     console.log('=== UPDATE PRODUCT IMAGE ===');
     console.log('Updating product image for variant:', variant.title);
@@ -5487,7 +5513,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </modal-dialog>
   {%- endif -%}
 {%- endfor -%}
-
 <script>
 /**
  * Advanced Sticky Column Logic ("Koala" style)
@@ -5719,7 +5744,6 @@ document.addEventListener('shopify:section:load', function(event) {
     }
   }
 });
-
 /**
  * Advanced Sticky Column Logic for Bundle Step 1
  * This script dynamically makes the shorter of the two product columns sticky.
@@ -6045,7 +6069,6 @@ document.addEventListener('shopify:section:load', function(event) {
   }
 });
 </script>
-
 {% schema %}
 {
   "name": "Product Bundle",
@@ -6079,6 +6102,13 @@ document.addEventListener('shopify:section:load', function(event) {
       "unit": "px",
       "label": "Customize width",
       "default": 1800
+    },
+    {
+      "type": "number",
+      "id": "third_product_quantity",
+      "label": "Third product default quantity",
+      "info": "Set the default quantity for the 3rd product in the bundle.",
+      "default": 1
     },
     {
       "type": "product_list",
