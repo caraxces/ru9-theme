@@ -111,12 +111,7 @@
       "settings": {
         "section_width": "page-width",
         "customize_width": 1800,
-        "bundle_products": [
-          "foam-original",
-          "tam-bao-ve-nem",
-          "vo-ga-dem-cotton-sateen",
-          "bo-vo-goi-cotton-sateen"
-        ],
+        "bundle_products": "{{ product.metafields.custom.product_bundle.value }}",
         "sku_enable": true,
         "combo_title": "Combo bao gồm các sản phẩm:",
         "cta_button_text": "BẮT ĐẦU TẠO COMBO",
