@@ -7,6 +7,20 @@
       font-family: var(--font-stack-body);
     }
     
+    #CartDrawer .bundle-header {
+      padding: 15px 0;
+      font-weight: bold;
+      font-size: 18px;
+      color: #1C2C58;
+      border-bottom: 1px solid #e9e9e9;
+      margin-top: 10px;
+    }
+
+    #CartDrawer .cart__item--bundle-item {
+      background-color: #F0F7FF;
+      border-color: #D1E5FF;
+    }
+    
     /* Desktop: Smaller drawer width */
     @media (min-width: 769px) {
       #CartDrawer {
@@ -1088,6 +1102,90 @@
           }
         }
         
+        function handleBundleHeaders() {
+          const productContainer = document.querySelector('#CartDrawer [data-products]');
+          if (productContainer) {
+            const renderedBundleIds = new Set();
+            const bundleGroups = {}; // Track items by bundle ID
+            
+            // First, hide all headers to reset
+            productContainer.querySelectorAll('.bundle-header').forEach(h => h.style.display = 'none');
+            
+            // Group bundle items by bundle ID
+            const items = productContainer.querySelectorAll('.cart__item--bundle-item');
+            items.forEach(item => {
+              const bundleId = item.dataset.bundleId;
+              if (bundleId) {
+                if (!bundleGroups[bundleId]) {
+                  bundleGroups[bundleId] = [];
+                }
+                bundleGroups[bundleId].push(item);
+              }
+            });
+            
+            // For each bundle group, show header and add classes
+            Object.keys(bundleGroups).forEach(bundleId => {
+              const bundleItems = bundleGroups[bundleId];
+              
+              if (bundleItems.length > 0) {
+                // Show header and move to before first item
+                const header = productContainer.querySelector(`.bundle-header[data-bundle-id="${bundleId}"]`);
+                const firstItem = bundleItems[0];
+                
+                if (header && firstItem) {
+                  header.style.display = 'block';
+                  firstItem.parentNode.insertBefore(header, firstItem);
+                }
+                
+                // Add classes to first and last items for seamless styling
+                bundleItems.forEach((item, index) => {
+                  item.classList.remove('bundle-item-first', 'bundle-item-last', 'bundle-item-middle');
+                  
+                  if (bundleItems.length === 1) {
+                    item.classList.add('bundle-item-single');
+                  } else if (index === 0) {
+                    item.classList.add('bundle-item-first');
+                  } else if (index === bundleItems.length - 1) {
+                    item.classList.add('bundle-item-last');
+                  } else {
+                    item.classList.add('bundle-item-middle');
+                  }
+                });
+              }
+            });
+          }
+        }
+
+        // Use MutationObserver to detect when cart items are loaded
+        const productContainer = document.querySelector('#CartDrawer [data-products]');
+        if (productContainer) {
+          const observer = new MutationObserver((mutationsList, observer) => {
+            // We only need to run this once after new nodes are added.
+            for(const mutation of mutationsList) {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    handleBundleHeaders();
+                    break; 
+                }
+            }
+          });
+          observer.observe(productContainer, { childList: true });
+        }
+        
+        // Listen for cart:updated event from bundle add to cart
+        document.addEventListener('cart:updated', function() {
+          console.log('Cart updated event received, showing bundle headers...');
+          setTimeout(() => {
+            handleBundleHeaders();
+          }, 100);
+        });
+        
+        // Also run on initial page load
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(() => {
+            handleBundleHeaders();
+          }, 500);
+        });
+
         // Ensure drawer is visible when opened (desktop only)
         function ensureDrawerVisible() {
           const drawer = document.getElementById('CartDrawer');
