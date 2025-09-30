@@ -402,6 +402,110 @@
     @media (max-width: 640px) {
       /* No longer needed, layout is handled by 960px query */
     }
+
+    /* START: Floating Action Button (FAB) for Contacts */
+    .footer-ru9-fab-wrapper {
+      position: fixed;
+      right: 15px;
+      bottom: 25px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fab-contact-toggle, .fab-contact-item {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #234085;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+    }
+
+    .fab-contact-toggle {
+      position: relative;
+      z-index: 2;
+    }
+
+    .fab-contact-toggle svg {
+      width: 29px;
+      height: 29px;
+    }
+    
+    .fab-contact-item {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.5);
+      position: absolute; /* Keep items stacked */
+      bottom: 0;
+      z-index: 1;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-out;
+    }
+
+    .footer-ru9-fab-wrapper.active .fab-contact-item {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Staggered animation */
+    .footer-ru9-fab-wrapper.active .fab-contact-item:nth-child(2) {
+      transform: translateY(calc(-100% - 15px)) scale(1);
+      transition-delay: 0ms;
+    }
+    .footer-ru9-fab-wrapper.active .fab-contact-item:nth-child(3) {
+      transform: translateY(calc(-200% - 30px)) scale(1);
+      transition-delay: 50ms;
+    }
+    .footer-ru9-fab-wrapper.active .fab-contact-item:nth-child(4) {
+      transform: translateY(calc(-300% - 45px)) scale(1);
+      transition-delay: 100ms;
+    }
+
+    /* Rotate toggle icon */
+    .footer-ru9-fab-wrapper.active .fab-contact-toggle {
+      transform: rotate(45deg);
+    }
+
+    .fab-contact-item img {
+      width: 55%;
+      height: 55%;
+      object-fit: contain;
+    }
+
+    /* Zalo-specific styles if needed */
+    #fab-zalo { background-color: #0068FF; }
+    #fab-messenger { background-color: #0084FF; }
+    #fab-phone { background-color: #4CAF50; }
+
+    /* Adjust position when back-to-top is visible */
+    .backtop-show .footer-ru9-fab-wrapper {
+      bottom: 90px !important;
+    }
+
+    /* Adjust position when sticky ATC is active on mobile */
+    @media screen and (max-width: 1060px){
+      body.sticky-atc-is-active .footer-ru9-fab-wrapper {
+        bottom: 220px !important;
+      }
+    }
+    
+    @media(max-width: 767px){
+     {%if section.settings.hotline_enable -%}
+       .footer-ru9-fab-wrapper {
+          bottom: 100px!important;
+      }
+     {%endif-%}
+     .backtop-show .footer-ru9-fab-wrapper {
+      bottom: 160px !important;
+     }
+    }
+    /* END: Floating Action Button (FAB) for Contacts */
   </style>
 
   {%- if section.settings.enable_dark_veil -%}
@@ -484,6 +588,46 @@
   {%- endif -%}
 </div>
 
+<div class="footer-ru9-fab-wrapper" data-section-id="{{ section.id }}">
+  <button class="fab-contact-toggle" aria-label="Open contact options">
+    <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <mask id="mask0_184_5375_fab" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="29" height="29">
+        <path d="M28.5 0.5H0.5V28.5H28.5V0.5Z" fill="white"/>
+      </mask>
+      <g mask="url(#mask0_184_5375_fab)">
+        <path d="M14.5 0.5C6.772 0.5 0.5 6.772 0.5 14.5C0.5 22.228 6.772 28.5 14.5 28.5H23.124V25.532C26.4 22.956 28.5 18.98 28.5 14.5C28.5 6.772 22.228 0.5 14.5 0.5ZM9.46 15.76C8.76 15.76 8.2 15.2 8.2 14.5C8.2 13.8 8.76 13.24 9.46 13.24C10.16 13.24 10.72 13.8 10.72 14.5C10.72 15.2 10.16 15.76 9.46 15.76ZM14.5 15.76C13.8 15.76 13.24 15.2 13.24 14.5C13.24 13.8 13.8 13.24 14.5 13.24C15.2 13.24 15.76 13.8 15.76 14.5C15.76 15.2 15.2 15.76 14.5 15.76ZM19.54 15.76C18.84 15.76 18.28 15.2 18.28 14.5C18.28 13.8 18.84 13.24 19.54 13.24C20.24 13.24 20.8 13.8 20.8 14.5C20.8 15.2 20.24 15.76 19.54 15.76Z" fill="#FFFFFF"/>
+      </g>
+    </svg>
+  </button>
+  <a id="fab-phone" class="fab-contact-item" href="tel:{{ section.settings.hotline_number }}" title="Call Us">
+    <img src="{{ 'phone-icon.png' | asset_url }}" alt="Phone" loading="lazy">
+  </a>
+  <a id="fab-zalo" class="fab-contact-item" href="{{ settings.social_zalo_link }}" target="_blank" title="Chat on Zalo">
+    <img src="{{ 'stick_zalo.png' | asset_url }}" alt="Zalo" loading="lazy">
+  </a>
+  <a id="fab-messenger" class="fab-contact-item" href="https://m.me/ru9vn" target="_blank" title="Chat on Messenger">
+    <img src="{{ 'messenger.png' | asset_url }}" alt="Messenger" loading="lazy">
+  </a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const fabWrapper = document.querySelector('.footer-ru9-fab-wrapper[data-section-id="{{ section.id }}"]');
+  const fabToggle = fabWrapper.querySelector('.fab-contact-toggle');
+
+  fabToggle.addEventListener('click', function() {
+    fabWrapper.classList.toggle('active');
+  });
+
+  // Optional: Close when clicking outside
+  document.addEventListener('click', function(event) {
+    if (!fabWrapper.contains(event.target)) {
+      fabWrapper.classList.remove('active');
+    }
+  });
+});
+</script>
+
 {% schema %}
 {
   "name": "Footer RU9 (custom)",
@@ -528,6 +672,25 @@
       "type": "html",
       "id": "badge_2_html",
       "label": "Mã HTML huy hiệu 2"
+    },
+    { "type": "header", "content": "Hotline Button" },
+    {
+      "type": "checkbox",
+      "id": "hotline_enable",
+      "label": "Enable Hotline Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hotline_number",
+      "label": "Hotline Number",
+      "default": "1900636321"
+    },
+    {
+      "type": "color",
+      "id": "hotline_color",
+      "label": "Hotline Button Color",
+      "default": "#4CAF50"
     }
   ],
   "blocks": [

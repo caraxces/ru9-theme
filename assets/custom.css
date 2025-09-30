@@ -573,7 +573,7 @@ header .ru9_icon {
   width: 30%;
 }
 .megamenu__grandchild-item img {
-  border-radius: 15px;
+  border-radius: 2px;
 }
 .megamenu__grandchild-item a {
   font-size: 14px !important;

@@ -50,6 +50,18 @@
 {%- render 'cart-drawer' -%}
 
 <style>
+  /* START: Custom tablet breakpoint for header */
+  @media screen and (min-width: 990px) and (max-width: 1299px) {
+    [data-section-id="{{ section.id }}"] .large-up--hide {
+      display: block !important;
+    }
+
+    [data-section-id="{{ section.id }}"] .medium-down--hide {
+      display: none !important;
+    }
+  }
+  /* END: Custom tablet breakpoint for header */
+
   .site-nav__link,
   .site-nav__dropdown-link:not(.site-nav__dropdown-link--top-level) {
     font-family: "Be Vietnam Pro", sans-serif;
@@ -142,7 +154,7 @@
     background-color: #f5f5f5 !important;
   }
 
-  @media screen and (max-width: 989px) {
+  @media screen and (max-width: 1299px) {
     .toolbar__content {
       justify-content: center !important;
     }
@@ -170,7 +182,7 @@
     }
   }
 
-  @media screen and (min-width: 990px) {
+  @media screen and (min-width: 1300px) {
     [data-section-id="{{ section.id }}"] .page-width {
         max-width: 100%;
         padding-left: 60px;

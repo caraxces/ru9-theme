@@ -1,4 +1,88 @@
-<div class="cart__item" data-key="{{ product.key }}">
+{% comment %}
+  This logic checks if the cart item is part of a bundle.
+  If it is, it will render a header for the bundle (once per bundle)
+  and apply a custom background color to the item.
+{% endcomment %}
+
+{%- assign is_bundle_item = false -%}
+{%- assign bundle_id = '' -%}
+{%- assign bundle_title = '' -%}
+{%- assign bundle_discount_title = '' -%}
+
+{%- for p in product.properties -%}
+  {%- if p.first == '_bundle_id' -%}
+    {%- assign is_bundle_item = true -%}
+    {%- assign bundle_id = p.last -%}
+  {%- endif -%}
+  {%- if p.first == '_bundle_title' -%}
+    {%- assign bundle_title = p.last -%}
+  {%- endif -%}
+  {%- if p.first == '_bundle_discount_title' -%}
+    {%- assign bundle_discount_title = p.last -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}
+  Bundle header will be shown by JavaScript - one header per bundle group
+{%- endcomment -%}
+{%- if is_bundle_item -%}
+  <div class="bundle-header" data-bundle-id="{{ bundle_id }}" style="display: none;">
+    <div class="bundle-header__content" style="background: #F0F7FF; padding: 12px 16px; margin: 0 0 0 0; border-radius: 8px 8px 0 0; border-left: 4px solid #234085;border-bottom: #F0F7FF !important; display: flex; justify-content: space-between; align-items: center;">
+      <h4 style="color: #1C2C58; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 600; margin: 0;">
+        {{ bundle_title }}
+      </h4>
+      {%- if bundle_discount_title != blank -%}
+        <span class="bundle-voucher" style="font-size: 14px; color: #234085; font-weight: 600;">
+          {{ bundle_discount_title }}
+        </span>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  /* Bundle header - rounded top corners only */
+  .bundle-header {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-bottom: transparent !important;
+  }
+  
+  /* All bundle items - base styling */
+  .cart__item--bundle-item {
+    background-color: #F0F7FF !important;
+    border-left: 4px solid #234085 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 12px 12px 12px 16px !important;
+    border-radius: 0 !important;
+  }
+  
+  /* First bundle item - connect to header (no gap) */
+  .cart__item--bundle-item.bundle-item-first {
+    border-radius: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Middle bundle items */
+  .cart__item--bundle-item.bundle-item-middle {
+    border-radius: 0 !important;
+  }
+  
+  /* Last bundle item - rounded bottom corners */
+  .cart__item--bundle-item.bundle-item-last {
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Single bundle item - rounded bottom only */
+  .cart__item--bundle-item.bundle-item-single {
+    border-radius: 0 0 8px 8px !important;
+    margin-bottom: 12px !important;
+  }
+</style>
+
+<div class="cart__item{% if is_bundle_item %} cart__item--bundle-item{% endif %}" data-key="{{ product.key }}" {% if is_bundle_item %}data-bundle-id="{{ bundle_id }}"{% endif %} data-quantity="{{ product.quantity }}">
   <div class="cart__image">
     {% if product.image != blank %}
       <a href="{{ product.url }}" class="image-wrap" style="width: 100px; height: 100px;">
@@ -52,6 +136,8 @@
         {%- endif -%}
     </div>
     
+    {%- comment -%} Hide controls for bundle items, they will be controlled by a master footer {%- endcomment -%}
+    {%- unless is_bundle_item -%}
     <div class="cart-item__footer">
         <button type="button" class="cart-item__remove" data-cart-remove data-id="{{ product.key }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -79,6 +165,7 @@
             </button>
         </div>
     </div>
+    {%- endunless -%}
 
     {%- if product.selling_plan_allocation != empty -%}
       <div class="cart-item__variant">

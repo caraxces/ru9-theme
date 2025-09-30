@@ -12606,6 +12606,8 @@ label.tag__checkbox-wrapper {
   color: #9ca3af;
   isolation: isolate;
   box-shadow: none;
+  pointer-events: none; /* Ngăn user click vào disabled variant buttons */
+  user-select: none; /* Ngăn user select text */
 }
 
 .variant-input-wrap label:not(.color-swatch).disabled:after {
@@ -12614,6 +12616,12 @@ label.tag__checkbox-wrapper {
   inset: 0;
   background-color: #f3f4f6;
   z-index: -1;
+}
+
+/* CSS cho disabled color swatches */
+.variant-input-wrap label.color-swatch.disabled {
+  pointer-events: none; /* Ngăn user click vào disabled color swatches */
+  user-select: none; /* Ngăn user select text */
 }
 
 .variant-input-wrap input[type="radio"]:focus + label {

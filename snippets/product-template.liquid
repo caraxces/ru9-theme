@@ -734,10 +734,10 @@
   .variant-input-wrap[data-handle="colour"] {
     display: flex !important;
     grid-template-columns: repeat(auto-fit, 45px);
-    gap: 8px;
+    gap: 12px;
     margin-bottom: 16px;
-    margin-left: auto;
-    margin-right: auto;
+    {% comment %} margin-left: auto;
+    margin-right: auto; {% endcomment %}
     max-width: 100%;
     width: fit-content;
     justify-content: flex-start;
@@ -821,6 +821,8 @@
     opacity: 0.5;
     cursor: not-allowed;
     position: relative;
+    pointer-events: none; /* Ngăn user click vào disabled color swatches */
+    user-select: none; /* Ngăn user select text */
   }
 
   .is-color .variant-input input[type="radio"]:disabled + .variant__button-label::before,
