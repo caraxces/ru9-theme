@@ -7,6 +7,7 @@
 {%- assign is_bundle_item = false -%}
 {%- assign bundle_id = '' -%}
 {%- assign bundle_title = '' -%}
+{%- assign bundle_discount_title = '' -%}
 
 {%- for p in product.properties -%}
   {%- if p.first == '_bundle_id' -%}
@@ -16,6 +17,9 @@
   {%- if p.first == '_bundle_title' -%}
     {%- assign bundle_title = p.last -%}
   {%- endif -%}
+  {%- if p.first == '_bundle_discount_title' -%}
+    {%- assign bundle_discount_title = p.last -%}
+  {%- endif -%}
 {%- endfor -%}
 
 {%- comment -%}
@@ -23,10 +27,15 @@
 {%- endcomment -%}
 {%- if is_bundle_item -%}
   <div class="bundle-header" data-bundle-id="{{ bundle_id }}" style="display: none;">
-    <div class="bundle-header__content" style="background: #F0F7FF; padding: 12px 16px; margin: 0 0 0 0; border-radius: 8px 8px 0 0; border-left: 4px solid #234085;border-bottom: #F0F7FF !important;">
-      <h4 style="color: #1C2C58; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 600; margin: 0 0 4px 0;">
+    <div class="bundle-header__content" style="background: #F0F7FF; padding: 12px 16px; margin: 0 0 0 0; border-radius: 8px 8px 0 0; border-left: 4px solid #234085;border-bottom: #F0F7FF !important; display: flex; justify-content: space-between; align-items: center;">
+      <h4 style="color: #1C2C58; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 600; margin: 0;">
         {{ bundle_title }}
       </h4>
+      {%- if bundle_discount_title != blank -%}
+        <span class="bundle-voucher" style="font-size: 14px; color: #234085; font-weight: 600;">
+          {{ bundle_discount_title }}
+        </span>
+      {%- endif -%}
     </div>
   </div>
 {%- endif -%}
