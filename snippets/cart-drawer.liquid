@@ -18,7 +18,7 @@
 
     #CartDrawer .cart__item--bundle-item {
       background-color: #F0F7FF;
-      border-color: #D1E5FF;
+      border-color: transparent;
     }
     
     /* Desktop: Smaller drawer width */
@@ -93,6 +93,43 @@
       visibility: hidden !important;
       opacity: 0 !important;
     }
+
+    /* --- BUNDLE FOOTER STYLES --- */
+    /* Nối sản phẩm cuối cùng với footer */
+    .cart__item--bundle-item.is-before-footer {
+      margin-bottom: 0 !important;
+      border-bottom: none !important;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+    /* Style cho footer chung của bundle */
+    .bundle-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background-color: #F0F7FF;
+      border-left: 4px solid #234085;
+      border-radius: 0 0 8px 8px;
+      margin-bottom: 12px;
+    }
+    .bundle-footer .js-qty__wrapper {
+      border: 1px solid #E5E7EB;
+      border-radius: 5px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .bundle-footer .js-qty__num {
+      background-color: #fff;
+      border: none;
+    }
+    .bundle-footer .cart-item__remove {
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
     #CartDrawer .cross-sell-item__title a {
       border-bottom: none !important;
       font-size: 20px;
@@ -1094,9 +1131,7 @@
           if (theme && typeof theme.CartForm === 'function') {
             const cartFormInstance = new theme.CartForm(document.getElementById('CartDrawerForm'));
             cartFormInstance.buildCart();
-            
-            // Update cart count in header after rebuild
-            updateCartCount();
+            // MutationObserver will handle all UI updates instantly after this.
           } else {
             window.location.href = '{{ routes.cart_url }}';
           }
@@ -1156,16 +1191,105 @@
           }
         }
 
-        // Use MutationObserver to detect when cart items are loaded
+        function syncCartUIFromDOM() {
+          const countElement = document.querySelector('.drawer__count');
+          const cartItems = document.querySelectorAll('#CartDrawer .cart__item');
+
+          // Part 1: Update Count by reading DOM
+          const bundleGroups = {};
+          let standaloneItemCount = 0;
+          let totalStandaloneQty = 0;
+          cartItems.forEach(item => {
+            const bundleId = item.dataset.bundleId;
+            if (bundleId) {
+              if (!bundleGroups[bundleId]) bundleGroups[bundleId] = [];
+              bundleGroups[bundleId].push(item);
+            } else {
+              standaloneItemCount++;
+              totalStandaloneQty += parseInt(item.dataset.quantity, 10) || 1;
+            }
+          });
+
+          const bundleCount = Object.keys(bundleGroups).length;
+          let countText = '0 sản phẩm';
+          if (cartItems.length > 0) {
+            if (bundleCount > 0 && standaloneItemCount === 0) {
+              countText = `${bundleCount} bộ sản phẩm`;
+            } else if (bundleCount > 0 && standaloneItemCount > 0) {
+              countText = `${bundleCount} bộ + ${totalStandaloneQty} sản phẩm`;
+            } else if (standaloneItemCount > 0) {
+              countText = `${totalStandaloneQty} sản phẩm`;
+            }
+          }
+          if (countElement) countElement.textContent = countText;
+
+          // Part 2: Update Summary Prices by reading DOM
+          let totalOriginalPrice = 0, totalFinalPrice = 0;
+          const moneyRegex = /[^\d]/g;
+          const parsePrice = (el) => el ? (parseInt(el.textContent.replace(moneyRegex, ''), 10) || 0) : 0;
+
+          cartItems.forEach(item => {
+            const quantity = parseInt(item.dataset.quantity, 10) || 1;
+            const finalPriceUnit = parsePrice(item.querySelector('.cart-item__price--final'));
+            const originalPriceEl = item.querySelector('.cart-item__price--original');
+            const originalPriceUnit = originalPriceEl ? parsePrice(originalPriceEl) : finalPriceUnit;
+            totalFinalPrice += finalPriceUnit * quantity;
+            totalOriginalPrice += originalPriceUnit * quantity;
+          });
+          
+          const totalSavings = totalOriginalPrice - totalFinalPrice;
+          const formatMoney = (amount) => amount.toLocaleString('vi-VN') + '₫';
+
+          const savingsDisplay = document.querySelector('[data-savings-display] span');
+          if (savingsDisplay) savingsDisplay.textContent = 'Bạn đã tiết kiệm được ' + formatMoney(totalSavings);
+          const subtotalElement = document.querySelector('[data-subtotal]');
+          if (subtotalElement) subtotalElement.textContent = formatMoney(totalFinalPrice);
+          const priceContainer = document.querySelector('.cart-drawer__summary-item .price-container');
+          if (priceContainer) {
+            let priceOriginalEl = priceContainer.querySelector('.price--original');
+            if (totalSavings > 0) {
+              if (!priceOriginalEl) {
+                priceOriginalEl = document.createElement('del');
+                priceOriginalEl.className = 'price--original';
+                priceContainer.insertBefore(priceOriginalEl, subtotalElement);
+              }
+              priceOriginalEl.textContent = formatMoney(totalOriginalPrice);
+              priceOriginalEl.style.display = '';
+            } else {
+              if (priceOriginalEl) priceOriginalEl.style.display = 'none';
+            }
+          }
+          
+          // Part 3: Add/Update Bundle Footer
+          document.querySelectorAll('.bundle-footer').forEach(f => f.remove());
+          document.querySelectorAll('.is-before-footer').forEach(i => i.classList.remove('is-before-footer'));
+          Object.keys(bundleGroups).forEach(bundleId => {
+            const items = bundleGroups[bundleId];
+            if (items.length === 0) return;
+            const lastItem = items[items.length - 1];
+            lastItem.classList.add('is-before-footer');
+
+            const itemKeys = items.map(item => item.dataset.key);
+            const currentQuantity = parseInt(items[0].dataset.quantity, 10) || 1;
+            const footer = document.createElement('div');
+            footer.className = 'bundle-footer';
+            const removeBtnHTML = `<button type="button" class="cart-item__remove bundle__remove" data-bundle-keys="${itemKeys.join(',')}" title="Xóa bộ sản phẩm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6H5H21" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11V17" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11V17" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+            const qtyWrapperHTML = `<div style="display: flex; align-items: center; gap: 10px; margin-left: auto;"><span>Số lượng bộ:</span><div class="js-qty__wrapper bundle__qty-wrapper" data-bundle-keys="${itemKeys.join(',')}"><button type="button" class="js-qty__adjust js-qty__adjust--minus">&minus;</button><input type="text" class="js-qty__num" value="${currentQuantity}" min="1" pattern="[0-9]*" readonly><button type="button" class="js-qty__adjust js-qty__adjust--plus">+</button></div></div>`;
+            footer.innerHTML = `${removeBtnHTML} ${qtyWrapperHTML}`;
+            lastItem.insertAdjacentElement('afterend', footer);
+          });
+        }
+
+        // Use MutationObserver to detect when cart items are loaded/updated
         const productContainer = document.querySelector('#CartDrawer [data-products]');
         if (productContainer) {
-          const observer = new MutationObserver((mutationsList, observer) => {
-            // We only need to run this once after new nodes are added.
+          const observer = new MutationObserver((mutationsList) => {
             for(const mutation of mutationsList) {
-                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                    handleBundleHeaders();
-                    break; 
-                }
+              if (mutation.type === 'childList') {
+                handleBundleHeaders();
+                syncCartUIFromDOM();
+                break; 
+              }
             }
           });
           observer.observe(productContainer, { childList: true });
@@ -1176,6 +1300,7 @@
           console.log('Cart updated event received, showing bundle headers...');
           setTimeout(() => {
             handleBundleHeaders();
+            syncCartUIFromDOM();
           }, 100);
         });
         
@@ -1183,59 +1308,58 @@
         document.addEventListener('DOMContentLoaded', function() {
           setTimeout(() => {
             handleBundleHeaders();
+            syncCartUIFromDOM();
           }, 500);
         });
 
-        // Ensure drawer is visible when opened (desktop only)
-        function ensureDrawerVisible() {
-          const drawer = document.getElementById('CartDrawer');
-          if (drawer && window.innerWidth >= 769) {
-            drawer.classList.add('drawer--is-open');
-            drawer.style.display = 'block';
-            drawer.style.visibility = 'visible';
-            drawer.style.opacity = '1';
-            
-            // Hide sticky add-to-cart when drawer is open
-            hideStickyAddToCart();
-          }
-        }
-        
-        // Hide sticky add-to-cart when cart drawer is open
-        function hideStickyAddToCart() {
-          const stickyElements = document.querySelectorAll('sticky-add-to-cart');
-          stickyElements.forEach(element => {
-            element.style.display = 'none !important';
-            element.style.visibility = 'hidden !important';
-            element.style.opacity = '0 !important';
-          });
-        }
-        
-        // Show sticky add-to-cart when cart drawer is closed
-        function showStickyAddToCart() {
-          const stickyElements = document.querySelectorAll('sticky-add-to-cart');
-          stickyElements.forEach(element => {
-            element.style.display = '';
-            element.style.visibility = '';
-            element.style.opacity = '';
-          });
-        }
-        
-        function updateCartCount() {
-          // Fetch current cart data and update the count
-          fetch('/cart.js')
-            .then(response => response.json())
-            .then(cart => {
-              const countElement = document.querySelector('.drawer__count');
-              if (countElement) {
-                countElement.textContent = cart.item_count + ' sản phẩm';
-              }
-            })
-            .catch(error => console.error('Error updating cart count:', error));
-        }
+        // NOTE: All manual quantity listeners are removed. 
+        // The MutationObserver + the master bundle controls handle everything.
 
         // --- Event Delegation for Clicks ---
         document.addEventListener('click', function(event) {
           const target = event.target;
+
+          // --- BUNDLE CONTROLS (HIGHEST PRIORITY) ---
+          const bundleRemoveBtn = target.closest('.bundle__remove');
+          if (bundleRemoveBtn) {
+              event.preventDefault();
+              const keys = bundleRemoveBtn.dataset.bundleKeys.split(',');
+              if (keys.length === 0 || keys[0] === '') return;
+              const updates = keys.reduce((acc, key) => {
+                  if (key) acc[key] = 0;
+                  return acc;
+              }, {});
+              fetch('/cart/update.js', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                  body: JSON.stringify({ updates: updates })
+              }).then(res => res.json()).then(cart => rebuildCart()).catch(e => console.error(e));
+              return;
+          }
+      
+          const bundleQtyAdjust = target.closest('.bundle__qty-wrapper .js-qty__adjust');
+          if (bundleQtyAdjust) {
+              event.stopImmediatePropagation();
+              event.preventDefault();
+              const wrapper = bundleQtyAdjust.closest('.bundle__qty-wrapper');
+              const input = wrapper.querySelector('.js-qty__num');
+              const keys = wrapper.dataset.bundleKeys.split(',');
+              if (keys.length === 0 || keys[0] === '') return;
+              let currentQty = parseInt(input.value);
+              let newQty = bundleQtyAdjust.classList.contains('js-qty__adjust--minus') ? Math.max(1, currentQty - 1) : currentQty + 1;
+              if (newQty === currentQty) return;
+              input.value = newQty;
+              const updates = keys.reduce((acc, key) => {
+                  if (key) acc[key] = newQty;
+                  return acc;
+              }, {});
+              fetch('/cart/update.js', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                  body: JSON.stringify({ updates: updates })
+              }).then(res => res.json()).then(cart => rebuildCart()).catch(e => console.error(e));
+              return;
+          }
 
           // Handle Cross-sell Slider Arrows
           const prevArrow = target.closest('.cart-drawer__cross-sell-arrow--prev');
@@ -1479,6 +1603,11 @@
         if (document.getElementById('CartDrawer').classList.contains('drawer--is-open')) {
           ensureDrawerVisible();
         }
+        
+        // Update cart count on initial page load
+        document.addEventListener('DOMContentLoaded', function() {
+          syncCartUIFromDOM();
+        });
       })();
     </script>
 

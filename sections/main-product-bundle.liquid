@@ -179,7 +179,20 @@
                     <div class="combo-products-list">
                       {%- if has_bundle_products and bundle_products_list -%}
                         {%- for bundle_product in bundle_products_list -%}
-                          <div class="combo-product-item">
+                          {%- liquid
+                            # Determine quantity for this product
+                            assign product_quantity = 1
+                            if forloop.index == 3 and section.settings.product_3_quantity
+                              assign product_quantity = section.settings.product_3_quantity
+                            endif
+                            
+                            # Calculate total variant options (nhân tất cả options với nhau)
+                            assign total_variant_options = 1
+                            for option in bundle_product.options_with_values
+                              assign total_variant_options = total_variant_options | times: option.values.size
+                            endfor
+                          -%}
+                          <div class="combo-product-item" data-product-index="{{ forloop.index }}" data-quantity="{{ product_quantity }}">
                             <div class="combo-product-image">
                               {%- if bundle_product.featured_media -%}
                                 <img src="{{ bundle_product.featured_media | image_url: width: 440 }}" 
@@ -191,8 +204,8 @@
                             <div class="combo-product-info">
                               <h4>{{ bundle_product.title }}</h4>
                               <div class="combo-product-attributes">
-                                <span>Số lượng: 1</span>
-                                <span>Kích thước: {{ bundle_product.options.size | default: '1' }} kích thước</span>
+                                <span>Số lượng: {{ product_quantity }}</span>
+                                <span>Tùy chọn: {{ total_variant_options }} tùy chọn</span>
                               </div>
                             </div>
                           </div>
@@ -851,6 +864,7 @@
   "discountPercentage": {{ section.settings.discount_percentage | default: 10 }},
   "targetDiscountPercentage": {{ section.settings.target_discount_percentage | default: 15 }},
   "sectionId": {{ section.id | json }},
+  "product3Quantity": {{ section.settings.product_3_quantity | default: 2 }},
   "sectionSettings": {
     "product_carousel_enable": {{ section.settings.product_carousel_enable | json }},
     "thumbnail_position": {{ section.settings.thumbnail_position | json }},
@@ -1200,6 +1214,9 @@ document.addEventListener('DOMContentLoaded', () => {
               // Check if this product already exists in bundle state
               const existingIndex = bundleState.selectedProducts.bundle.findIndex(p => p.productId === currentProduct.id);
               
+              // Determine quantity based on product index (0-based, so index 2 = product 3)
+              const productQuantity = bundleState.currentProductIndex === 2 ? (config.product3Quantity || 2) : 1;
+              
               const productData = {
                 productId: currentProduct.id,
                 productHandle: currentProduct.handle,
@@ -1210,7 +1227,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 variantPrice: selectedVariant.price,
                 compareAtPrice: selectedVariant.compare_at_price,
                 variantOptions: selectedVariant.options,
-                quantity: 1
+                quantity: productQuantity
               };
               
               if (existingIndex >= 0) {
@@ -1285,6 +1302,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const defaultImage = extractImageUrl(firstProduct.featured_image) || 
                             (firstProduct.media && firstProduct.media.length > 0 ? extractImageUrl(firstProduct.media[0]) : '');
         
+        // Determine quantity based on product index
+        const productQuantity = bundleState.currentProductIndex === 2 ? (config.product3Quantity || 2) : 1;
+        
         const autoSelectedProduct = {
           productId: firstProduct.id,
           productHandle: firstProduct.handle,
@@ -1295,7 +1315,7 @@ document.addEventListener('DOMContentLoaded', () => {
           variantPrice: defaultVariant ? defaultVariant.price : firstProduct.price,
           compareAtPrice: defaultVariant ? defaultVariant.compare_at_price : firstProduct.compare_at_price,
           variantOptions: defaultVariant ? defaultVariant.options : [],
-          quantity: 1
+          quantity: productQuantity
         };
         
         bundleState.selectedProducts.bundle.push(autoSelectedProduct);
@@ -2019,8 +2039,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    // Calculate totals - NEW LOGIC với Target Discount
-    console.log('=== CALCULATING BUNDLE TOTALS ===');
+    // Calculate totals - 2 TẦNG GIẢM GIÁ
+    console.log('=== CALCULATING BUNDLE TOTALS (2 TẦNG GIẢM) ===');
     
     // Get bundle quantity (default to 1 if not set)
     const bundleQuantity = bundleState.bundleQuantity || 1;
@@ -2030,46 +2050,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const targetDiscount = config.targetDiscountPercentage || 15;
     console.log('Target discount percentage:', targetDiscount + '%');
     
+    // Step 1: Calculate current totals
+    let totalCurrentPrice = 0;     // Tổng price hiện tại (đã giảm tầng 1)
+    let totalCompareAtPrice = 0;   // Tổng compare_at_price (giá gốc)
+    
     allProducts.forEach((product, index) => {
-      // Parse prices
-      const compareAtPrice = parseFloat(product.compareAtPrice) || parseFloat(product.price) || 0; // Giá gốc (compare_at_price)
+      const currentPrice = parseFloat(product.price) || 0;
+      const compareAtPrice = parseFloat(product.compareAtPrice) || parseFloat(product.price) || 0;
       const quantity = parseInt(product.quantity) || 1;
       
-      // Calculate target price based on compare_at_price - target discount %
-      const targetPrice = compareAtPrice * (1 - targetDiscount / 100);
-      
-      // Calculate totals
-      const finalProductTotal = targetPrice * quantity * bundleQuantity;        // Giá hiển thị cho customer
-      const originalProductTotal = compareAtPrice * quantity * bundleQuantity;  // Giá gốc
-      
-      totalFinal += finalProductTotal;      // Tổng giá hiển thị (compare_at_price - target %)
-      totalOriginal += originalProductTotal; // Tổng compare_at_price (giá gốc)
-      
-      console.log(`Bundle Product ${index} (${product.productTitle}):`, {
-        compareAtPrice: compareAtPrice,
-        targetDiscount: targetDiscount + '%',
-        targetPrice: targetPrice,
-        quantity: quantity,
-        bundleQuantity: bundleQuantity,
-        finalProductTotal: finalProductTotal,
-        originalProductTotal: originalProductTotal,
-        runningTotalFinal: totalFinal,
-        runningTotalOriginal: totalOriginal
-      });
+      totalCurrentPrice += currentPrice * quantity * bundleQuantity;
+      totalCompareAtPrice += compareAtPrice * quantity * bundleQuantity;
     });
     
-    console.log('Final bundle-final-total (compare_at_price - ' + targetDiscount + '%):', totalFinal);
-    console.log('Final bundle-original-total (tổng compare_at_price):', totalOriginal);
+    // Step 2: Calculate voucher % needed
+    const targetFinalPriceIdeal = totalCompareAtPrice * (1 - targetDiscount / 100);
+    const neededVoucherExact = totalCurrentPrice > 0 ? 
+      ((totalCurrentPrice - targetFinalPriceIdeal) / totalCurrentPrice) * 100 : 0;
+    const neededVoucherRounded = Math.round(neededVoucherExact);
+    
+    // Step 3: Calculate ACTUAL final price sau 2 tầng giảm
+    const actualFinalPrice = totalCurrentPrice * (1 - neededVoucherRounded / 100);
+    
+    // Update totals
+    totalOriginal = totalCompareAtPrice;  // Giá gốc
+    totalFinal = actualFinalPrice;         // Giá cuối sau 2 tầng giảm
+    
+    console.log('Tổng Compare-at Price:', totalOriginal);
+    console.log('Tổng Current Price (sau giảm tầng 1):', totalCurrentPrice);
+    console.log('Target Final Price (lý tưởng):', targetFinalPriceIdeal);
+    console.log('Voucher % (exact):', neededVoucherExact.toFixed(2) + '%');
+    console.log('Voucher % (rounded):', neededVoucherRounded + '%');
+    console.log('Actual Final Price (sau 2 tầng):', actualFinalPrice);
+    console.log('Chênh lệch:', Math.abs(actualFinalPrice - targetFinalPriceIdeal));
     
     // Update bundle summary products (right side) - chỉ hiển thị các sản phẩm bundle được chọn
     summaryProducts.innerHTML = allProducts.map((product, index) => {
+      const productQty = product.quantity || 1;
+      const showQuantity = productQty > 1;
+      
       return `
         <div class="bundle-summary-product">
           <div class="bundle-product-number">${index + 1}.</div>
           <div class="bundle-product-content">
             <div class="bundle-product-info">
-              <div class="bundle-product-title">${product.productTitle}</div>
+              <div class="bundle-product-title">
+                ${product.productTitle}
+                ${showQuantity ? `<span style="color: #234085; font-weight: 600;"> × ${productQty}</span>` : ''}
+              </div>
               <div class="bundle-product-attributes">
+                ${showQuantity ? `<div class="bundle-product-attribute">Số lượng: ${productQty}</div>` : ''}
                 ${product.variantOptions && product.variantOptions.length > 0 ? 
                   product.variantOptions.map((option, optionIndex) => {
                     const optionName = optionIndex === 0 ? 'Kích thước' : 
@@ -2081,9 +2111,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
               </div>
               <div class="bundle-product-price">
-                ${formatMoney(product.price)}
+                ${formatMoney(product.price * productQty)}
                 ${product.compareAtPrice && product.compareAtPrice > product.price ? 
-                  `<span class="bundle-product-compare-price">${formatMoney(product.compareAtPrice)}</span>` : 
+                  `<span class="bundle-product-compare-price">${formatMoney(product.compareAtPrice * productQty)}</span>` : 
                   ''}
               </div>
               <div class="bundle-product-change-link" data-product-index="${index}">Thay đổi</div>
@@ -2163,14 +2193,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }, 100); // Wait 100ms for DOM to update
 
-    // Calculate discount summary
+    // Display summary
     console.log('=== BUNDLE PRICE SUMMARY ===');
     console.log('Total Original (compare_at_price):', totalOriginal);
-    console.log('Total Final (compare_at_price - target %):', totalFinal);
-    
-    // Sử dụng target discount percentage thay vì tính tự động
-    const displayDiscountPercentage = targetDiscount;
-    console.log('Display discount percentage:', displayDiscountPercentage + '%');
+    console.log('Total Final (sau 2 tầng giảm):', totalFinal);
+    console.log('Display discount percentage:', targetDiscount + '%');
     
     const discountAmount = totalOriginal - totalFinal;
     console.log('Discount amount:', discountAmount);
@@ -2196,8 +2223,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Update bundle-discount-badge (% giảm = target discount)
     if (discountBadgeEl) {
-      discountBadgeEl.textContent = `-${displayDiscountPercentage}%`;
-      console.log('✅ Updated discount badge:', `-${displayDiscountPercentage}%`);
+      discountBadgeEl.textContent = `-${targetDiscount}%`;
+      console.log('✅ Updated discount badge:', `-${targetDiscount}%`);
     } else {
       console.log('❌ Discount badge element not found');
     }
@@ -2394,7 +2421,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     console.log('Sending request to /cart/add.js...');
-    
+
     fetch('/cart/add.js', {
       method: 'POST',
       headers: {
@@ -3219,6 +3246,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           } else {
             // Add new product to bundle state
+            // Determine quantity (index 2 = product 3)
+            const productQuantity = bundleState.currentProductIndex === 2 ? (config.product3Quantity || 2) : 1;
+            
             const newProduct = {
               productId: currentProduct.id,
               productHandle: currentProduct.handle,
@@ -3229,7 +3259,7 @@ document.addEventListener('DOMContentLoaded', () => {
               variantPrice: variantToUse.price,
               compareAtPrice: variantToUse.compare_at_price,
               variantOptions: variantToUse.options,
-              quantity: 1
+              quantity: productQuantity
             };
             bundleState.selectedProducts.bundle.push(newProduct);
             console.log('✅ Added new product to bundle state:', newProduct);
@@ -3788,14 +3818,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalPrice = 0;           // Tổng price hiện tại
     let totalCompareAtPrice = 0;  // Tổng compare_at_price
     
-    const productCalculations = config.bundleProducts.map(product => {
+    const productCalculations = config.bundleProducts.map((product, idx) => {
       // Get first variant or use product price
       const variant = product.variants && product.variants.length > 0 ? product.variants[0] : null;
       const price = variant ? variant.price : product.price;
       const compareAtPrice = variant ? (variant.compare_at_price || variant.price) : (product.compare_at_price || product.price);
       
-      totalPrice += price;
-      totalCompareAtPrice += compareAtPrice;
+      // Determine quantity (product index 2 = product thứ 3)
+      const quantity = idx === 2 ? (config.product3Quantity || 2) : 1;
+      
+      totalPrice += price * quantity;
+      totalCompareAtPrice += compareAtPrice * quantity;
       
       // Calculate current discount for this product
       const currentDiscount = compareAtPrice > 0 ? 
@@ -3805,7 +3838,8 @@ document.addEventListener('DOMContentLoaded', () => {
         title: product.title,
         price: price,
         compareAtPrice: compareAtPrice,
-        currentDiscount: currentDiscount
+        currentDiscount: currentDiscount,
+        quantity: quantity
       };
     });
     
@@ -3813,12 +3847,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentBundleDiscount = totalCompareAtPrice > 0 ? 
       Math.round(((totalCompareAtPrice - totalPrice) / totalCompareAtPrice) * 100) : 0;
     
-    // Calculate what customer will see
-    const targetFinalPrice = totalCompareAtPrice * (1 - targetDiscount / 100);
+    // Calculate target final price (ideal)
+    const targetFinalPriceIdeal = totalCompareAtPrice * (1 - targetDiscount / 100);
     
-    // CÔNG THỨC ĐÚNG: Voucher % = (Current Price - Target Price) / Current Price × 100
-    const neededVoucherDiscount = totalPrice > 0 ? 
-      Math.round(((totalPrice - targetFinalPrice) / totalPrice) * 100 * 10) / 10 : 0;
+    // CÔNG THỨC: Voucher % = (Current Price - Target Price) / Current Price × 100
+    const neededVoucherDiscountExact = totalPrice > 0 ? 
+      ((totalPrice - targetFinalPriceIdeal) / totalPrice) * 100 : 0;
+    
+    // Round voucher về số nguyên (Shopify không hỗ trợ thập phân)
+    const neededVoucherDiscountRounded = Math.round(neededVoucherDiscountExact);
+    
+    // Tính giá cuối THỰC TẾ sau 2 tầng giảm
+    // = Compare-at Price × (1 - currentDiscount%) × (1 - voucherDiscount%)
+    const actualFinalPrice = totalPrice * (1 - neededVoucherDiscountRounded / 100);
     
     // Generate HTML
     calculatorResults.innerHTML = `
@@ -3826,9 +3867,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <h4 style="color: #234085; margin: 0 0 12px 0; font-size: 16px;">📊 Phân tích Bundle:</h4>
         ${productCalculations.map((product, idx) => `
           <div style="padding: 8px; background: #F9FAFB; border-radius: 4px; margin-bottom: 8px; font-size: 13px;">
-            <strong>${idx + 1}. ${product.title}</strong><br>
-            <span style="color: #888;">Price: ${formatMoney(product.price)}</span> | 
-            <span style="color: #666;">Compare: ${formatMoney(product.compareAtPrice)}</span> | 
+            <strong>${idx + 1}. ${product.title}</strong>
+            ${product.quantity > 1 ? `<span style="color: #234085; font-weight: 600;"> × ${product.quantity}</span>` : ''}<br>
+            <span style="color: #888;">Price: ${formatMoney(product.price)}${product.quantity > 1 ? ` × ${product.quantity} = ${formatMoney(product.price * product.quantity)}` : ''}</span><br>
+            <span style="color: #666;">Compare: ${formatMoney(product.compareAtPrice)}${product.quantity > 1 ? ` × ${product.quantity} = ${formatMoney(product.compareAtPrice * product.quantity)}` : ''}</span> | 
             <span style="color: ${product.currentDiscount > 0 ? '#16A34A' : '#888'};">
               Giảm: ${product.currentDiscount}%
             </span>
@@ -3856,39 +3898,50 @@ document.addEventListener('DOMContentLoaded', () => {
         
         <div style="border-top: 2px dashed #234085; margin: 16px 0; padding-top: 16px;">
           <div style="font-size: 14px; color: #666; margin-bottom: 4px;">
-            ${neededVoucherDiscount > 0 ? '⚠️ CẦN TẠO VOUCHER GIẢM THÊM:' : '✅ ĐÃ ĐẠT MỤC TIÊU:'}
+            ${neededVoucherDiscountRounded > 0 ? '⚠️ CẦN TẠO VOUCHER GIẢM THÊM:' : '✅ ĐÃ ĐẠT MỤC TIÊU:'}
           </div>
-          <div style="font-size: 32px; font-weight: bold; color: ${neededVoucherDiscount > 0 ? '#E53E3E' : '#16A34A'};">
-            ${neededVoucherDiscount}%
+          <div style="font-size: 32px; font-weight: bold; color: ${neededVoucherDiscountRounded > 0 ? '#E53E3E' : '#16A34A'};">
+            ${neededVoucherDiscountRounded}%
           </div>
-          ${neededVoucherDiscount > 0 ? `
+          ${neededVoucherDiscountRounded > 0 ? `
             <div style="margin-top: 12px; padding: 12px; background: #FEF2F2; border-radius: 6px; font-size: 13px;">
               <strong>🎫 Tạo Discount Code trong Shopify Admin:</strong><br>
               • Type: <strong>Percentage</strong><br>
-              • Value: <strong>${neededVoucherDiscount}%</strong><br>
-              • Applies to: <strong>Bundle products</strong>
+              • Value: <strong>${neededVoucherDiscountRounded}%</strong> (số nguyên)<br>
+              • Applies to: <strong>All bundle products</strong><br>
+              • Code example: <strong>BUNDLE${neededVoucherDiscountRounded}</strong>
+            </div>
+            <div style="margin-top: 8px; padding: 10px; background: #FFF9E6; border-radius: 6px; font-size: 12px;">
+              <strong>📐 Công thức 2 tầng giảm:</strong><br>
+              • Giá gốc: ${formatMoney(totalCompareAtPrice)}<br>
+              • Sau giảm ${currentBundleDiscount}%: ${formatMoney(totalPrice)}<br>
+              • Sau voucher ${neededVoucherDiscountRounded}%: ${formatMoney(actualFinalPrice)}<br>
+              • Target (${targetDiscount}%): ${formatMoney(targetFinalPriceIdeal)}<br>
+              • Chênh lệch: ${formatMoney(Math.abs(actualFinalPrice - targetFinalPriceIdeal))}
             </div>
           ` : ''}
         </div>
         
         <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #93C5FD;">
-          <div style="font-size: 14px; color: #666; margin-bottom: 4px;">💵 Giá khách hàng sẽ thấy:</div>
-          <div style="font-size: 28px; font-weight: bold; color: #234085;">${formatMoney(targetFinalPrice)}</div>
+          <div style="font-size: 14px; color: #666; margin-bottom: 4px;">💵 Giá cuối (sau 2 tầng giảm):</div>
+          <div style="font-size: 28px; font-weight: bold; color: #234085;">${formatMoney(actualFinalPrice)}</div>
           <div style="font-size: 12px; color: #888; margin-top: 4px;">
-            (${formatMoney(totalCompareAtPrice)} - ${targetDiscount}%)
+            = ${formatMoney(totalCompareAtPrice)} × ${((100 - currentBundleDiscount)/100).toFixed(2)} × ${((100 - neededVoucherDiscountRounded)/100).toFixed(2)}
           </div>
         </div>
       </div>
     `;
     
-    console.log('Calculator results:', {
-      targetDiscount,
-      currentBundleDiscount,
-      neededVoucherDiscount,
-      totalCompareAtPrice,
-      totalPrice,
-      targetFinalPrice
-    });
+    console.log('=== CALCULATOR RESULTS ===');
+    console.log('Target Discount:', targetDiscount + '%');
+    console.log('Total Compare-at Price:', formatMoney(totalCompareAtPrice));
+    console.log('Total Current Price:', formatMoney(totalPrice));
+    console.log('Current Discount %:', currentBundleDiscount + '%');
+    console.log('Voucher Needed (exact):', neededVoucherDiscountExact.toFixed(2) + '%');
+    console.log('Voucher Needed (rounded):', neededVoucherDiscountRounded + '%');
+    console.log('Target Final (ideal):', formatMoney(targetFinalPriceIdeal));
+    console.log('Actual Final (sau 2 tầng):', formatMoney(actualFinalPrice));
+    console.log('Chênh lệch:', formatMoney(Math.abs(actualFinalPrice - targetFinalPriceIdeal)));
   }
   
   // Run calculator in theme editor
@@ -4629,6 +4682,16 @@ document.addEventListener('shopify:section:load', function(event) {
       "label": "Bundle Products",
       "info": "Chọn các sản phẩm sẽ được hiển thị trong Step 2 của bundle builder",
       "limit": 10
+    },
+    {
+      "type": "range",
+      "id": "product_3_quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Số lượng sản phẩm thứ 3",
+      "info": "Nếu sản phẩm thứ 3 là gối/phụ kiện, có thể set số lượng > 1",
+      "default": 2
     },
     {
       "type": "checkbox",
