@@ -630,10 +630,10 @@
                 <div class="product-block">
                   <div class="bundle-summary-total">
                     <!-- Voucher Code Display -->
-                    <div class="bundle-total-row bundle-voucher-code" style="display: none;">
+                    {% comment %} <div class="bundle-total-row bundle-voucher-code" style="display: none;">
                       <span>Mã giảm giá</span>
                       <span class="voucher-code-display"></span>
-                    </div>
+                    </div> {% endcomment %}
                     <!-- Final Total (Giá sau giảm - tổng price) - HIỂN THỊ TRƯỚC -->
                     <div class="bundle-total-row bundle-final">
                       <span class="bundle-final-total">0đ</span>
@@ -2057,6 +2057,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Target discount percentage:', targetDiscount + '%');
     
     // --- NEW CALCULATION LOGIC ---
+    // This logic is now a DIRECT COPY of the theme editor's "runPricingCalculator" function
+    // to ensure 100% consistency.
     let newTotalOriginal = 0;
     let totalAfter1stDiscount = 0;
 
@@ -2068,41 +2070,39 @@ document.addEventListener('DOMContentLoaded', () => {
       newTotalOriginal += compareAtPrice * quantity;
       totalAfter1stDiscount += price * quantity;
     });
-
-    // Calculate the current discount percentage based on the products' individual sales
-    const currentDiscountPercentage = newTotalOriginal > 0 
-      ? ((newTotalOriginal - totalAfter1stDiscount) / newTotalOriginal) * 100 
-      : 0;
+    
+    // 1. Calculate the ideal target price
+    const targetFinalPriceIdeal = newTotalOriginal * (1 - targetDiscount / 100);
+    
+    // 2. Calculate the exact voucher discount needed
+    const neededVoucherDiscountExact = totalAfter1stDiscount > 0 ? 
+      ((totalAfter1stDiscount - targetFinalPriceIdeal) / totalAfter1stDiscount) * 100 : 0;
       
-    // ROUND the current discount before calculating the needed voucher discount to match the user's calculator logic
-    const currentDiscountRounded = Math.round(currentDiscountPercentage);
-      
-    // Calculate the needed additional discount to reach the target discount
-    const neededVoucherDiscount = Math.max(0, targetDiscount - currentDiscountRounded);
-
-    // Calculate final price by applying the *needed voucher discount* to the already discounted total (totalAfter1stDiscount)
-    let newTotalFinal = totalAfter1stDiscount * (1 - neededVoucherDiscount / 100);
+    // 3. Round the voucher discount to the nearest whole number
+    const neededVoucherDiscountRounded = Math.round(neededVoucherDiscountExact);
+    
+    // 4. Calculate the actual final price using the rounded voucher discount
+    const newTotalFinal = totalAfter1stDiscount * (1 - neededVoucherDiscountRounded / 100);
 
     // Apply the overall bundle quantity to the totals
     newTotalOriginal *= bundleQuantity;
-    newTotalFinal *= bundleQuantity;
+    // newTotalFinal is already calculated based on per-bundle logic, so we just multiply it.
+    let finalPriceWithQuantity = newTotalFinal * bundleQuantity;
     
     // Update totals for display
     totalOriginal = newTotalOriginal;
-    totalFinal = newTotalFinal;
+    totalFinal = finalPriceWithQuantity;
     
-    // Calculate the effective total discount percentage to display on the badge. This should be very close to the target discount.
-    const effectiveDiscount = totalOriginal > 0 ? Math.round(((totalOriginal - totalFinal) / totalOriginal) * 100) : 0;
-    
-    console.log('--- BUNDLE PRICING DEBUG ---');
+    // Update the badge to show the target discount, as per user request
+    const effectiveDiscount = targetDiscount;
+
+    console.log('--- BUNDLE PRICING DEBUG (STEP 3) ---');
     console.log('Target Discount:', targetDiscount + '%');
     console.log('Tổng Compare-at Price (Original):', totalOriginal);
     console.log('Tổng sau giảm giá tầng 1 (Sum of Prices):', totalAfter1stDiscount * bundleQuantity);
-    console.log('Current Discount % (Raw):', currentDiscountPercentage.toFixed(2));
-    console.log('Current Discount % (Rounded):', currentDiscountRounded);
-    console.log('Needed Voucher Discount % (để đạt target):', neededVoucherDiscount.toFixed(2));
+    console.log('Ideal Target Price:', targetFinalPriceIdeal * bundleQuantity);
+    console.log('Needed Voucher Discount % (Rounded):', neededVoucherDiscountRounded);
     console.log('Actual Final Price (sau chiết khấu tầng 2):', totalFinal);
-    console.log('Effective Total Discount % (for badge):', effectiveDiscount);
     // --- END NEW CALCULATION LOGIC ---
     
     // Update voucher code display
@@ -2254,10 +2254,10 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('❌ Original total element not found');
     }
     
-    // Update bundle-discount-badge with the effective total discount
+    // Update bundle-discount-badge to show the TARGET discount, not the effective one
     if (discountBadgeEl) {
-      discountBadgeEl.textContent = `-${effectiveDiscount}%`;
-      console.log('✅ Updated discount badge to effective discount:', `-${effectiveDiscount}%`);
+      discountBadgeEl.textContent = `-${targetDiscount}%`;
+      console.log('✅ Updated discount badge to target discount:', `-${targetDiscount}%`);
     } else {
       console.log('❌ Discount badge element not found');
     }
