@@ -629,6 +629,11 @@
                 <!-- Bundle Total -->
                 <div class="product-block">
                   <div class="bundle-summary-total">
+                    <!-- Voucher Code Display -->
+                    <div class="bundle-total-row bundle-voucher-code" style="display: none;">
+                      <span>Mã giảm giá</span>
+                      <span class="voucher-code-display"></span>
+                    </div>
                     <!-- Final Total (Giá sau giảm - tổng price) - HIỂN THỊ TRƯỚC -->
                     <div class="bundle-total-row bundle-final">
                       <span class="bundle-final-total">0đ</span>
@@ -863,6 +868,7 @@
   "moneyFormat": {{ shop.money_format | json }},
   "discountPercentage": {{ section.settings.discount_percentage | default: 10 }},
   "targetDiscountPercentage": {{ section.settings.target_discount_percentage | default: 15 }},
+  "voucherCode": {{ section.settings.voucher_code | json }},
   "sectionId": {{ section.id | json }},
   "product3Quantity": {{ section.settings.product_3_quantity | default: 2 }},
   "sectionSettings": {
@@ -2052,32 +2058,65 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- NEW CALCULATION LOGIC ---
     let newTotalOriginal = 0;
-    let newTotalFinal = 0;
+    let totalAfter1stDiscount = 0;
 
     allProducts.forEach((product, index) => {
       const compareAtPrice = parseFloat(product.compareAtPrice) || parseFloat(product.price) || 0;
+      const price = parseFloat(product.price) || 0;
       const quantity = parseInt(product.quantity) || 1;
       
-      // Calculate original total price
       newTotalOriginal += compareAtPrice * quantity;
-      
-      // Calculate the discounted price for each product
-      const discountedPrice = compareAtPrice * (1 - targetDiscount / 100);
-      newTotalFinal += discountedPrice * quantity;
+      totalAfter1stDiscount += price * quantity;
     });
 
-    // Apply bundle quantity to the totals
+    // Calculate the current discount percentage based on the products' individual sales
+    const currentDiscountPercentage = newTotalOriginal > 0 
+      ? ((newTotalOriginal - totalAfter1stDiscount) / newTotalOriginal) * 100 
+      : 0;
+      
+    // ROUND the current discount before calculating the needed voucher discount to match the user's calculator logic
+    const currentDiscountRounded = Math.round(currentDiscountPercentage);
+      
+    // Calculate the needed additional discount to reach the target discount
+    const neededVoucherDiscount = Math.max(0, targetDiscount - currentDiscountRounded);
+
+    // Calculate final price by applying the *needed voucher discount* to the already discounted total (totalAfter1stDiscount)
+    let newTotalFinal = totalAfter1stDiscount * (1 - neededVoucherDiscount / 100);
+
+    // Apply the overall bundle quantity to the totals
     newTotalOriginal *= bundleQuantity;
     newTotalFinal *= bundleQuantity;
     
-    // Update totals
-    totalOriginal = newTotalOriginal;  // Giá gốc
-    totalFinal = newTotalFinal;         // Giá cuối sau khi áp dụng chiết khấu
+    // Update totals for display
+    totalOriginal = newTotalOriginal;
+    totalFinal = newTotalFinal;
     
+    // Calculate the effective total discount percentage to display on the badge. This should be very close to the target discount.
+    const effectiveDiscount = totalOriginal > 0 ? Math.round(((totalOriginal - totalFinal) / totalOriginal) * 100) : 0;
+    
+    console.log('--- BUNDLE PRICING DEBUG ---');
+    console.log('Target Discount:', targetDiscount + '%');
     console.log('Tổng Compare-at Price (Original):', totalOriginal);
-    console.log('Actual Final Price (sau chiết khấu):', totalFinal);
+    console.log('Tổng sau giảm giá tầng 1 (Sum of Prices):', totalAfter1stDiscount * bundleQuantity);
+    console.log('Current Discount % (Raw):', currentDiscountPercentage.toFixed(2));
+    console.log('Current Discount % (Rounded):', currentDiscountRounded);
+    console.log('Needed Voucher Discount % (để đạt target):', neededVoucherDiscount.toFixed(2));
+    console.log('Actual Final Price (sau chiết khấu tầng 2):', totalFinal);
+    console.log('Effective Total Discount % (for badge):', effectiveDiscount);
     // --- END NEW CALCULATION LOGIC ---
     
+    // Update voucher code display
+    const voucherCode = config.voucherCode;
+    const voucherContainer = container.querySelector('.bundle-voucher-code');
+    const voucherDisplay = container.querySelector('.voucher-code-display');
+    
+    if (voucherContainer && voucherDisplay && voucherCode && voucherCode.trim() !== '') {
+      voucherDisplay.textContent = voucherCode.trim();
+      voucherContainer.style.display = 'flex';
+    } else if (voucherContainer) {
+      voucherContainer.style.display = 'none';
+    }
+
     // Update bundle summary products (right side) - chỉ hiển thị các sản phẩm bundle được chọn
     summaryProducts.innerHTML = allProducts.map((product, index) => {
       const productQty = product.quantity || 1;
@@ -2215,10 +2254,10 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('❌ Original total element not found');
     }
     
-    // Update bundle-discount-badge (% giảm = target discount)
+    // Update bundle-discount-badge with the effective total discount
     if (discountBadgeEl) {
-      discountBadgeEl.textContent = `-${targetDiscount}%`;
-      console.log('✅ Updated discount badge:', `-${targetDiscount}%`);
+      discountBadgeEl.textContent = `-${effectiveDiscount}%`;
+      console.log('✅ Updated discount badge to effective discount:', `-${effectiveDiscount}%`);
     } else {
       console.log('❌ Discount badge element not found');
     }
@@ -2379,6 +2418,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const items = [];
     const bundleQty = bundleState.bundleQuantity || 1;
     const bundleId = Date.now();
+    const voucherCode = config.voucherCode;
     
     console.log('Bundle quantity:', bundleQty);
     console.log('Bundle ID:', bundleId);
@@ -2388,15 +2428,22 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(`Processing bundle product ${index}:`, product);
       
       if (product.variantId) {
+        let properties = {
+          '_bundle_id': bundleId,
+          '_bundle_title': '{{ product.title }}',
+          '_product_title': product.productTitle,
+          '_variant_title': product.variantTitle || 'Default'
+        };
+        
+        // Attach the voucher code as a property if it exists
+        if (voucherCode && voucherCode.trim() !== '') {
+          properties['_bundle_voucher'] = voucherCode.trim();
+        }
+
         const bundleItem = {
           id: product.variantId,
           quantity: (product.quantity || 1) * bundleQty,
-          properties: {
-            '_bundle_id': bundleId,
-            '_bundle_title': '{{ product.title }}',
-            '_product_title': product.productTitle,
-            '_variant_title': product.variantTitle || 'Default'
-          }
+          properties: properties
         };
         items.push(bundleItem);
         console.log('✅ Added item to cart array:', bundleItem);
@@ -2454,7 +2501,7 @@ document.addEventListener('DOMContentLoaded', () => {
       refreshCartDrawer();
       
       // Show success message
-      alert(`✅ Đã thêm ${items.length} sản phẩm vào giỏ hàng!`);
+      {% comment %} alert(`✅ Đã thêm ${items.length} sản phẩm vào giỏ hàng!`); {% endcomment %}
     })
     .catch(error => {
       console.error('❌ Error adding to cart:', error);
@@ -4994,6 +5041,12 @@ document.addEventListener('shopify:section:load', function(event) {
       "id": "review_count",
       "label": "Review Count",
       "default": "2025 đánh giá"
+    },
+    {
+      "type": "text",
+      "id": "voucher_code",
+      "label": "Mã voucher cho bundle",
+      "info": "Mã này sẽ được hiển thị và tự động áp dụng khi khách hàng thanh toán."
     }
   ],
   "blocks": [

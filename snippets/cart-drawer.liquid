@@ -1106,7 +1106,24 @@
 
             <!-- CHECKOUT BUTTONS -->
             <div class="cart__checkout-wrapper--custom">
-                <button type="submit" name="checkout" class="btn btn--online">Thanh toán ngay</button>
+                {%- assign bundle_voucher = '' -%}
+                {%- for item in cart.items -%}
+                  {%- for property in item.properties -%}
+                    {%- if property.first == '_bundle_voucher' -%}
+                      {%- assign bundle_voucher = property.last -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if bundle_voucher != '' -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- if bundle_voucher != '' -%}
+                  <button type="submit" name="checkout" class="btn btn--online" onclick="window.location.href='/checkout?discount={{ bundle_voucher }}'; return false;">Thanh toán ngay</button>
+                {%- else -%}
+                  <button type="submit" name="checkout" class="btn btn--online">Thanh toán ngay</button>
+                {%- endif -%}
             </div>
             {% if additional_checkout_buttons and settings.cart_additional_buttons %}
               <div class="additional-checkout-buttons additional-checkout-buttons--vertical">{{ content_for_additional_checkout_buttons }}</div>

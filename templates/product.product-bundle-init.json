@@ -112,9 +112,11 @@
         "section_width": "page-width",
         "customize_width": 1800,
         "bundle_products": "{{ product.metafields.custom.product_bundle.value }}",
+        "product_3_quantity": 2,
         "sku_enable": true,
         "combo_title": "Combo bao gồm các sản phẩm:",
         "cta_button_text": "BẮT ĐẦU TẠO COMBO",
+        "target_discount_percentage": 15,
         "service_icon_1": "shopify://shop_images/Layer_1_3.svg",
         "service_text_1": "100 đêm ngủ thử",
         "service_icon_2": "shopify://shop_images/Layer_1_4.svg",
@@ -148,7 +150,8 @@
         "showroom_3_phone": "0964777940",
         "showroom_3_map_link": "",
         "review_rating": "4.8",
-        "review_count": "2025 đánh giá"
+        "review_count": "2025 đánh giá",
+        "voucher_code": "ComboGiacNguToiUU"
       }
     },
     "main": {

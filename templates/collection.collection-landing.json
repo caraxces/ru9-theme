@@ -69,30 +69,6 @@
         "show_collection_description": false
       }
     },
-    "independent_webhook_popup_kNBhzQ": {
-      "type": "independent-webhook-popup",
-      "name": "Independent Webhook Popup",
-      "settings": {
-        "enable_popup": true,
-        "popup_delay": 5,
-        "background_image": "shopify://shop_images/POP_UP_1.png",
-        "name_placeholder": "Họ và tên",
-        "name_x": 50,
-        "name_y": 65,
-        "phone_placeholder": "Số điện thoại",
-        "phone_x": 50,
-        "phone_y": 75,
-        "button_text": "Nhận mã ưu đãi ngay >",
-        "button_x": 50,
-        "button_y": 92,
-        "success_image": "shopify://shop_images/POP_UP_2.png",
-        "success_message": "Cảm ơn bạn đã đăng ký! Mã của bạn là RU9250.",
-        "coupon_code_to_copy": "RU9250",
-        "copy_button_text": "SAO CHÉP MÃ    >>>",
-        "copy_button_x": 50,
-        "copy_button_y": 92
-      }
-    },
     "combo_best_selling_Yf3WTR": {
       "type": "combo-best-selling",
       "blocks": {
@@ -102,8 +78,8 @@
             "product": "combo-giấc-ngủ-tối-ưu",
             "product_label": "Best seller",
             "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         },
         "product_item_wqLTQW": {
@@ -112,8 +88,8 @@
             "product": "combo-gối-trọn-nang-niu",
             "product_label": "Best seller",
             "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         },
         "product_item_GK4pBV": {
@@ -122,8 +98,8 @@
             "product": "combo-nhịp-ngủ-dịu-em",
             "product_label": "Best seller",
             "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         },
         "product_item_bP8mpe": {
@@ -132,8 +108,8 @@
             "product": "combo-nang-dỡ-trọn-vẹn-1",
             "product_label": "Best seller",
             "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
-            "label_color": "#fff",
-            "label_bg": "#609EE9"
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
           }
         }
       },
@@ -147,9 +123,9 @@
       "settings": {
         "title": "Combo bán chạy",
         "description": "Combo sản phẩm được yêu thích nhất",
-        "primary_color": "#1C2C58",
-        "text_color": "#1A1A1A",
-        "description_color": "#666",
+        "primary_color": "#1c2c58",
+        "text_color": "#1a1a1a",
+        "description_color": "#666666",
         "image_padding": "0px",
         "image_inner_padding": "0px",
         "mobile_image_padding": "0px"
@@ -228,9 +204,9 @@
         "product_item_k78fVe": {
           "type": "product_item",
           "settings": {
-            "product": "tencel-bedding-set",
+            "product": "bộ-ngủ-ngon",
             "product_label": "Best seller",
-            "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
+            "bundle_items": "<br> - Nệm Nest ,<br> - 2 gối Niu, <br>- Tấm bảo vệ Nệm 1m6 x 2m",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -596,7 +572,6 @@
   "order": [
     "slideshow_XKY6Pb",
     "collection-header",
-    "independent_webhook_popup_kNBhzQ",
     "combo_best_selling_Yf3WTR",
     "main_collection_custom_xrVmzf",
     "main-collection",
