@@ -84,14 +84,12 @@
           "type": "promotion",
           "settings": {
             "title": "Mã ưu đãi :",
-            "voucher_image_1": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
-            "popup_bg_1": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "enable_popup": false,
+            "voucher_image_1": "shopify://shop_images/250k-01.png",
             "popup_content_1": "",
-            "voucher_image_2": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
-            "popup_bg_2": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
+            "voucher_image_2": "{{ product.metafields.custom.voucher.value }}",
             "popup_content_2": "",
             "popup_content_3": "",
-            "voucher_image_4": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
             "popup_content_4": ""
           }
         },
@@ -127,7 +125,7 @@
               "goi-may",
               "goi-foam-niu"
             ],
-            "cross_sell_title": "Combo ngủ ngon",
+            "cross_sell_title": "Thăng hạng chất lượng giấc ngủ cùng",
             "cross_sell_label": ""
           }
         },
@@ -141,26 +139,8 @@
         "usage_guide_PRnkUz": {
           "type": "usage_guide",
           "settings": {
-            "title": "Hướng dẫn sử dụng",
-            "content": "<p>Thêm nội dung hướng dẫn sử dụng vào đây.</p>"
-          }
-        },
-        "showroom_dropdown_JdqRw8": {
-          "type": "showroom_dropdown",
-          "settings": {
             "title": "Hệ thống cửa hàng",
-            "showroom_1_name": "Showroom 1",
-            "showroom_1_address": "",
-            "showroom_1_phone": "0964777910",
-            "showroom_1_map_link": "",
-            "showroom_2_name": "Showroom 2",
-            "showroom_2_address": "",
-            "showroom_2_phone": "0964777910",
-            "showroom_2_map_link": "",
-            "showroom_3_name": "Showroom 3",
-            "showroom_3_address": "",
-            "showroom_3_phone": "0964777940",
-            "showroom_3_map_link": ""
+            "content": "<p><a href=\"https://maps.google.com/?q=Shop%2009,%20B2%20Sarimi,%20K%C4%90T%20Sala,%2072%20Nguy%E1%BB%85n%20C%C6%A1%20Th%E1%BA%A1ch,%20P.%20An%20L%E1%BB%A3i%20%C4%90%C3%B4ng,%20Q.2,%20TP.%20HCM\" target=\"_blank\"><strong>Q.2, TP.HCM:</strong></a> Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br/><a href=\"tel:0964777960\">0964777960</a></p><p><a href=\"https://maps.google.com/?q=283A%20Hai%20B%C3%A0%20Tr%C6%B0ng,%20Ph%C6%B0%E1%BB%9Dng%20Xu%C3%A2n%20Ho%C3%A0,%20Q.3,%20TP.HCM\" target=\"_blank\"><strong>Q.3, TP.HCM:</strong></a> 283A Hai Bà Trưng, Phường Xuân Hoà<br/><a href=\"tel:0964777910\">0964777910</a></p><p><a href=\"https://maps.google.com/?q=228%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20Q.%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20HN\" target=\"_blank\"><strong>Q. Cầu Giấy, HN:</strong></a>  228 Cầu Giấy, Quan Hoa<br/><a href=\"tel:0964777940\">0964777940</a></p>"
           }
         },
         "service_grid_tzXXkC": {
@@ -192,7 +172,6 @@
         "productbundle_GcbRad",
         "description",
         "usage_guide_PRnkUz",
-        "showroom_dropdown_JdqRw8",
         "service_grid_tzXXkC"
       ],
       "settings": {
@@ -223,24 +202,24 @@
           "type": "reason",
           "settings": {
             "image": "{{ product.metafields.custom.dynamic_image_1.value }}",
-            "title": "{{ product.metafields.custom.heading_3_hinh_1.value }}",
-            "content": "<p>{{ product.metafields.custom.text_block_3_hinh_1 | metafield_tag }}</p>"
+            "title": "{{ product.metafields.custom.dynamic_title_1.value }}",
+            "content": "<p>{{ product.metafields.custom.dynamic_description_1 | metafield_tag }}</p>"
           }
         },
         "reason_gUwgCJ": {
           "type": "reason",
           "settings": {
-            "image": "{{ product.metafields.custom.image_3_hinh_2.value }}",
-            "title": "{{ product.metafields.custom.heading_3_hinh_2.value }}",
-            "content": "<p>{{ product.metafields.custom.text_block_3_hinh_2 | metafield_tag }}</p>"
+            "image": "{{ product.metafields.custom.dynamic_image_2.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_2.value }}",
+            "content": "<p>{{ product.metafields.custom.dynamic_desciption_2 | metafield_tag }}</p>"
           }
         },
         "reason_9DmCKX": {
           "type": "reason",
           "settings": {
-            "image": "{{ product.metafields.custom.image_3_hinh_3.value }}",
-            "title": "{{ product.metafields.custom.heading_3_hinh_3.value }}",
-            "content": "<p>{{ product.metafields.custom.text_block_3_hinh_3 | metafield_tag }}</p>"
+            "image": "{{ product.metafields.custom.dynamic_image_3.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_2.value }}",
+            "content": "<p>{{ product.metafields.custom.dynamic_description_3 | metafield_tag }}</p>"
           }
         }
       },
@@ -1012,32 +991,46 @@
         "collection_3CKU7a": {
           "type": "collection",
           "settings": {
-            "collection": "nem"
+            "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_HDHiUG": {
           "type": "collection",
           "settings": {
-            "collection": "goi"
+            "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_pMXCbU": {
           "type": "collection",
           "settings": {
-            "collection": "chan"
+            "collection": "chan",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_xiUYwi": {
           "type": "collection",
           "settings": {
-            "collection": "phu-kien"
+            "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
         "collection_p9E9WN": {
           "type": "collection",
           "disabled": true,
           "settings": {
-            "collection": "4the"
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
           }
         }
       },

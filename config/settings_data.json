@@ -73,12 +73,10 @@
       "goi-foam-niu",
       "goi-om"
     ],
-    "voucher_image_1": "shopify://shop_images/voucher2.png",
-    "voucher_code_1": "A",
-    "voucher_image_2": "shopify://shop_images/voucher2.png",
-    "voucher_code_2": "B",
-    "voucher_image_3": "shopify://shop_images/voucher2.png",
-    "voucher_code_3": "C",
+    "voucher_image_1": "shopify://shop_images/VOUCHER_15.svg",
+    "voucher_code_1": "RU9250",
+    "voucher_code_2": "",
+    "voucher_code_3": "",
     "social_facebook_link": "https://m.me/ru9vn",
     "social_zalo_link": "https://zalo.me/2061353887673595200",
     "social_instagram_link": "https://www.instagram.com/ru9vn/",
@@ -433,7 +431,7 @@
         "settings": {
           "title": "",
           "sub_title": "",
-          "bg_color": "#FDF3E5"
+          "bg_color": "#fdf3e5"
         }
       },
       "pf-about-us-image-text": {

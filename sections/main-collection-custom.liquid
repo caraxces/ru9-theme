@@ -83,6 +83,7 @@
                 <div class="cc-content">
                   {%- comment -%} Rating stars {%- endcomment -%}
                   <div class="cc-rating">
+                    {%- assign rating = product.metafields.reviews.rating.value -%}
                     <div class="cc-stars">
                       <span class="cc-star">★</span>
                       <span class="cc-star">★</span>
@@ -90,15 +91,18 @@
                       <span class="cc-star">★</span>
                       <span class="cc-star">★</span>
                     </div>
-                    <span class="cc-rating-text">5.0 (2025 đánh giá)</span>
+                    {%- if rating and product.metafields.reviews.rating_count > 0 -%}
+                      <span class="cc-rating-text">{{ 5 }} ({{ product.metafields.reviews.rating_count }} đánh giá)</span>
+                    {%- endif -%}
                   </div>
                   
                   <a class="cc-title" href="{{ product.url }}">{{ product.title }}</a>
                   
                   <div class="cc-description">
-                    {%- if product.description != blank -%}
-                      {%- assign description = product.description | strip_html | truncate: 60 -%}
-                      {{ description }}
+                    {%- if product.metafields.custom.subdes.value != blank -%}
+                      {{ product.metafields.custom.subdes.value | strip_html | truncate: 60 }}
+                    {%- elsif product.description != blank -%}
+                      {{ product.description | strip_html | truncate: 60 }}
                     {%- else -%}
                       Sản phẩm chất lượng cao với thiết kế hiện đại, phù hợp cho mọi không gian sống.
                     {%- endif -%}

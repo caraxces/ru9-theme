@@ -110,16 +110,17 @@
         "enable_sort": true,
         "enable_collection_count": true,
         "per_row": 3,
-        "rows_per_page": 2,
-        "default_sold_count": 0
+        "rows_per_page": 6,
+        "default_sold_count": 280
       }
     },
     "quiz_banner_zXHt4B": {
       "type": "quiz-banner",
+      "disabled": true,
       "name": "Quiz Banner (Advanced)",
       "settings": {
         "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
-        "title": "Đâu là chiếc nệm\nphù hợp với bạn?",
+        "title": "Đâu là chiếc nệmphù hợp với bạn?",
         "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
         "button_1_text": "Quiz chọn nệm",
         "button_2_text": "So sánh các loại nệm",
@@ -249,7 +250,7 @@
             "comfort_layer_1_image": "shopify://shop_images/so_sanh_Ori.png",
             "product_thickness": "25 cm",
             "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 8.490.000 VNĐ",
+            "product_price": "Từ 9.990.000 VNĐ",
             "product_url": "shopify://products/foam-original"
           }
         },
@@ -282,27 +283,53 @@
         "product_QVeCme": {
           "type": "product",
           "settings": {
-            "product_title": "NỆM HYBRID",
-            "product_image": "shopify://shop_images/Hybrid_Thumb-Website-2.png",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "comfort_layer_1_image": "shopify://shop_images/so_sanh_hybrid.png",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": "shopify://products/nem-hybrid"
+            "product_title": "Nệm Topper",
+            "product_image": "shopify://shop_images/Ru_day1_5647.png",
+            "product_features": "- Thiết kế mỏng nhẹ, dễ cuộn gọn và đa dạng kích thước\n- Đảm bảo êm ái và nâng đỡ nhẹ nhàng\n- Tích hợp tinh chất trà xanh và than hoạt tính: kháng khuẩn giúp khử mùi tự nhiên",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
+            "product_thickness": "5 cm",
+            "suitable_for": "Linh hoạt cho người sống trong không gian nhỏ hoặc cần di chuyển nhiều",
+            "product_price": "Từ 3.490.000 VNĐ",
+            "product_url": "shopify://products/nem-cuon-foam-topper"
           }
         },
         "product_kGMGE6": {
           "type": "product",
           "settings": {
-            "product_title": "NỆM HYBRID",
-            "product_image": "shopify://shop_images/Hybrid_Thumb-Website-2.png",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "comfort_layer_1_image": "shopify://shop_images/so_sanh_hybrid.png",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": "shopify://products/nem-hybrid"
+            "product_title": "Nệm Original Lite",
+            "product_image": "shopify://shop_images/nem-original-1.jpg",
+            "product_features": "- Thiết kế mỏng nhẹ, dễ cuộn gọn và đa dạng kích thước\n- Đảm bảo êm ái và nâng đỡ nhẹ nhàng\n- Tích hợp tinh chất trà xanh và than hoạt tính: kháng khuẩn giúp khử mùi tự nhiên",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Ori.png",
+            "product_thickness": "20 cm",
+            "suitable_for": "Phù hợp với người muốn giấc ngủ êm ái và nâng đỡ cân bằng, đồng thời muốn tối ưu không gian sống và thoải mái ngân sách",
+            "product_price": "Từ 8.690.000 VNĐ",
+            "product_url": "shopify://products/foam-original"
+          }
+        },
+        "product_ytcEcY": {
+          "type": "product",
+          "settings": {
+            "product_title": "Nệm Topper Mây",
+            "product_image": "shopify://shop_images/may_tr_i.jpg",
+            "product_features": "- Cấu trúc bông Microfiber bồng bềnh, đàn hồi \n- Thiết kế bọc nệm thông minh và đa dạng kích thước",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
+            "product_thickness": "8 cm",
+            "suitable_for": "Dành cho người muốn nâng cấp không gian ngủ thành nơi nghỉ ngơi thư giãn và sang trọng.",
+            "product_price": "Từ 3.290.000 VNĐ",
+            "product_url": "shopify://products/may_topper218298303-1"
+          }
+        },
+        "product_mewfre": {
+          "type": "product",
+          "settings": {
+            "product_title": "Nệm Topper Mate",
+            "product_image": "shopify://shop_images/Copy-of-Mate-380-no-box.jpg",
+            "product_features": "- Cấu trúc 1 lớp foam nâng đỡ vững chắc, ổn định\n- Thiết kế mỏng nhẹ, dễ cuộn gọn và đa dạng kích thước",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
+            "product_thickness": "5 cm",
+            "suitable_for": "Giải pháp tiết kiệm, tiện lợi cho không gian nhỏ và người thích nằm chắc chắn mà vẫn êm ái.",
+            "product_price": "Từ 2.290.000 VNĐ",
+            "product_url": "shopify://products/mate_topper219071626"
           }
         }
       },
@@ -312,7 +339,9 @@
         "product_atFTCC",
         "product_wmbR3E",
         "product_QVeCme",
-        "product_kGMGE6"
+        "product_kGMGE6",
+        "product_ytcEcY",
+        "product_mewfre"
       ],
       "settings": {
         "section_width": "page-width",
@@ -323,6 +352,9 @@
     },
     "collection-content": {
       "type": "collection-content",
+      "custom_css": [
+        ".collection-hero .page-width {padding-bottom: 60px;}"
+      ],
       "settings": {
         "section_width": "customize_width",
         "customize_width": 1280,
@@ -337,36 +369,49 @@
         "review_MHYcqY": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/BANNER_INTRO_MOBILE.png",
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>",
+            "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
+            "customer_name": "Gon Pink",
+            "review_text": "<p>Mình nằm thử nệm Foam Original của Ru9 mới thấy khác biệt thiệt, foam ôm sát cơ thể giúp lưng – vai – hông được nâng đỡ đều, mình ngủ dậy không còn ê mỏi luôn. Thêm cái nữa là nệm cực thoáng khí, nằm lâu cũng không hầm nóng, vỏ thì tháo ra giặt siêu tiện. Nói chung là sản phẩm rất chất lượng so với giá tiền! </p>",
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem sản phẩm",
+            "button_text": "Xem Nệm",
             "button_link": "shopify://products/foam-original"
           }
         },
         "review_x6JhWU": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/120e99f9b519b575deafb8222d6574f102094362.png",
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>",
+            "image": "shopify://shop_images/177826117_3828731063871354_8843481793885550946_n.jpg",
+            "customer_name": "Hoàng Ku",
+            "review_text": "<p>Điều mình thích nhất khi nằm nệm foam Ru9 là đệm sẽ ôm sát theo đường cong của cơ thể, mình có quả “thắt đáy lưng ong” nên phần đáy lưng võng cong, nằm nệm cứng chỗ lưng đó bị rỗng nên rất khó chịu, ngủ phải gập người lại thì mới dễ ngủ. Nhưng với đệm Foam Ru9 thì mình chỉ cần nằm thẳng thôi, cấu trúc của đệm sẽ tự khắc làm đầy ngay chỗ thắt lưng của mình luôn! </p>",
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
             "button_text": "Xem Nệm",
-            "button_link": "shopify://products/bo-chan-ga"
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_GJYfxW": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Ane_cibi.jpg",
+            "customer_name": "Anne Cibi",
+            "review_text": "<p>Ghé Ru9 thăm showroom, kết quả là bê về túi to túi nhỏ luôn! Chăn bạch đàn, bộ ga gối tencel mướt mượt màu baby blue y chang cái nhà em nữa, nó mờ ê mê lắm</p>",
+            "product_name": "Bộ Ga Giường Ru9 Tencel",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/tencel-bedding-set"
           }
         },
         "review_Mw8U9j": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/chat-lieu-vai-tencel-la-gi.jpg",
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
-            "product_name": "Nệm Original",
+            "image": "shopify://shop_images/dao_lan_ph_ng_nest.jpg",
+            "customer_name": "Đào Lan Phương",
+            "review_text": "<p>Sau 3 tuần nằm thử, mình thật sự ưng chiếc nệm Nest này. Nệm dày, nằm chắc chắn chứ không bị lún, rất phù hợp cho người hay đau lưng như mình. Mong là chất lượng này sẽ bền lâu.</p>",
+            "product_name": "Nệm Nest",
             "verified_text": "Đã xác minh",
             "verification_link": "",
             "button_text": "Xem Nệm",
@@ -376,37 +421,81 @@
         "review_UxKmJq": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/Rectangle_67.png",
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
-            "product_name": "Nệm Original",
+            "image": "shopify://shop_images/mc_van_anh_topper.jpg",
+            "customer_name": "Vân Anh",
+            "review_text": "<p>Mình trải nghiệm Foam Topper Ru9 được gần tháng rồi. Cảm giác nằm êm mà vẫn nâng đỡ tốt, lưng mình đỡ đau rõ rệt. Cái hay nữa là topper nhẹ, dễ mang đi và vệ sinh. Nói chung khá hài lòng, chỉ mong dùng lâu dài vẫn giữ được độ thoải mái như hiện tại.</p>",
+            "product_name": "Nệm Foam Topper",
             "verified_text": "Đã xác minh",
             "verification_link": "",
             "button_text": "Xem Nệm",
-            "button_link": "shopify://collections/combo-bộ-sản-phẩm"
+            "button_link": "shopify://products/nem-cuon-foam-topper"
           }
         },
         "review_hxzewp": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/tencel-la-chat-lieu-vai-gi.jpg",
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
+            "image": "shopify://shop_images/287509779_10228461666790384_79999810057241775_n.jpg",
+            "customer_name": "Hằng Thúy Ngô",
+            "review_text": "<p>Sau hơn nửa năm nằm nệm Original, mình thấy giấc ngủ được cải thiện rõ rệt. Nệm ôm và nâng đỡ cơ thể tốt, lưng cổ không còn ê ẩm như trước. Cảm giác mỗi tối nằm xuống đều rất thoải mái và dễ chịu.</p>",
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
             "button_text": "Xem Nệm",
-            "button_link": "shopify://collections/goi"
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_E6XhJz": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/47580643_1094459747384007_5553427953934663680_n.jpg",
+            "customer_name": "Tu Lam Kha",
+            "review_text": "<p>Sau nhiều lần đắn đo mình quyết định mua Nệm Foam Original, và thật sự đây là một khoản đầu tư xứng đáng. Từ ngày dùng, mình không còn thức dậy với cảm giác đau lưng hay mỏi vai gáy nữa.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_F74qc9": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/IMG_8630.jpg",
+            "customer_name": "Ngọc Tú Anh",
+            "review_text": "<p>10 điểm cho Bộ ga giường Tecel của Ru9 nha. Vải mềm, mát, nằm không bị bí hay nóng lưng, cảm giác dễ chịu hơn hẳn bộ ga cũ. Cả nhà mình ai cũng mê</p>",
+            "product_name": "Bộ Bedding Tencel",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/tencel-bedding-set"
+          }
+        },
+        "review_iU8xqk": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/mieymeii.jpg",
+            "customer_name": "mieymeii",
+            "review_text": "<p>Cảm ơn Ru9 vì bộ ga giường mới thật tuyệt ♥️<br/>Chất liệu 100% cotton sợi dài, vô cùng mềm mại, nâng niu giấc ngủ của các nàng </p>",
+            "product_name": "Bộ Ga Giường Cotton Sateen",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/bo-ga-giuong-cotton-sateen"
           }
         }
       },
       "block_order": [
         "review_MHYcqY",
         "review_x6JhWU",
+        "review_GJYfxW",
         "review_Mw8U9j",
         "review_UxKmJq",
-        "review_hxzewp"
+        "review_hxzewp",
+        "review_E6XhJz",
+        "review_F74qc9",
+        "review_iU8xqk"
       ],
+      "custom_css": [],
       "name": "Reviews carousel",
       "settings": {
         "heading": "<p>Hơn <strong>50,000 </strong>Khách Hàng<br/>Và <strong>30,000 </strong>Đánh Giá 5 Sao Toàn Quốc</p>"
@@ -468,47 +557,61 @@
         "background_color": "#f5f9ff"
       }
     },
-    "collections_listing_4JU76Y": {
+    "collections_listing_nVcpEd": {
       "type": "collections-listing",
       "blocks": {
-        "collection_bbDaBr": {
+        "collection_Vdb9pE": {
           "type": "collection",
           "settings": {
-            "collection": "nem"
+            "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
-        "collection_C6Hgf8": {
+        "collection_Mqmzbe": {
           "type": "collection",
           "settings": {
-            "collection": "goi"
+            "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
-        "collection_VwnUft": {
+        "collection_e6PXyH": {
           "type": "collection",
           "settings": {
-            "collection": "chan"
+            "collection": "chan",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
-        "collection_N7XqXP": {
+        "collection_afCKW6": {
           "type": "collection",
           "settings": {
-            "collection": "phu-kien"
+            "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
+            "custom_title": "",
+            "custom_link": ""
           }
         },
-        "collection_QWrkyC": {
+        "collection_GD9B4f": {
           "type": "collection",
           "disabled": true,
           "settings": {
-            "collection": "4the"
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
           }
         }
       },
       "block_order": [
-        "collection_bbDaBr",
-        "collection_C6Hgf8",
-        "collection_VwnUft",
-        "collection_N7XqXP",
-        "collection_QWrkyC"
+        "collection_Vdb9pE",
+        "collection_Mqmzbe",
+        "collection_e6PXyH",
+        "collection_afCKW6",
+        "collection_GD9B4f"
       ],
       "name": "Collections Listing",
       "settings": {
@@ -631,7 +734,7 @@
     "collection-content",
     "reviews_carousel_ihYmK7",
     "super_service_Ch8qQy",
-    "collections_listing_4JU76Y",
+    "collections_listing_nVcpEd",
     "faq_A7dpqH",
     "testimonials_AdcbcV"
   ]

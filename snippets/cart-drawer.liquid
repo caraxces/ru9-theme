@@ -1106,7 +1106,24 @@
 
             <!-- CHECKOUT BUTTONS -->
             <div class="cart__checkout-wrapper--custom">
-                <button type="submit" name="checkout" class="btn btn--online">Thanh toán ngay</button>
+                {%- assign bundle_voucher = '' -%}
+                {%- for item in cart.items -%}
+                  {%- for property in item.properties -%}
+                    {%- if property.first == '_bundle_voucher' -%}
+                      {%- assign bundle_voucher = property.last -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if bundle_voucher != '' -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- if bundle_voucher != '' -%}
+                  <button type="submit" name="checkout" class="btn btn--online" onclick="window.location.href='/checkout?discount={{ bundle_voucher }}'; return false;">Thanh toán ngay</button>
+                {%- else -%}
+                  <button type="submit" name="checkout" class="btn btn--online">Thanh toán ngay</button>
+                {%- endif -%}
             </div>
             {% if additional_checkout_buttons and settings.cart_additional_buttons %}
               <div class="additional-checkout-buttons additional-checkout-buttons--vertical">{{ content_for_additional_checkout_buttons }}</div>
@@ -1260,6 +1277,16 @@
             }
           }
           
+          // Update discount applied text
+          const discountText = document.querySelector('.cart-drawer__summary-item .text-right');
+          if (discountText) {
+            // Check if there are any discount applications by looking for discount-related elements
+            const hasDiscount = document.querySelector('[data-discount]') || 
+                               document.querySelector('.cart-item__discount') ||
+                               totalSavings > 0;
+            discountText.style.display = hasDiscount ? '' : 'none';
+          }
+          
           // Part 3: Add/Update Bundle Footer
           document.querySelectorAll('.bundle-footer').forEach(f => f.remove());
           document.querySelectorAll('.is-before-footer').forEach(i => i.classList.remove('is-before-footer'));
@@ -1270,7 +1297,8 @@
             lastItem.classList.add('is-before-footer');
 
             const itemKeys = items.map(item => item.dataset.key);
-            const currentQuantity = parseInt(items[0].dataset.quantity, 10) || 1;
+            const customBundleQty = items[0].dataset.bundleQuantity;
+            const currentQuantity = customBundleQty ? parseInt(customBundleQty, 10) : 1;
             const footer = document.createElement('div');
             footer.className = 'bundle-footer';
             const removeBtnHTML = `<button type="button" class="cart-item__remove bundle__remove" data-bundle-keys="${itemKeys.join(',')}" title="Xóa bộ sản phẩm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6H5H21" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11V17" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11V17" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;

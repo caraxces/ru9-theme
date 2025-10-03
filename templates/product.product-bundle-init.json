@@ -112,9 +112,11 @@
         "section_width": "page-width",
         "customize_width": 1800,
         "bundle_products": "{{ product.metafields.custom.product_bundle.value }}",
+        "product_3_quantity": 2,
         "sku_enable": true,
         "combo_title": "Combo bao gồm các sản phẩm:",
         "cta_button_text": "BẮT ĐẦU TẠO COMBO",
+        "target_discount_percentage": 15,
         "service_icon_1": "shopify://shop_images/Layer_1_3.svg",
         "service_text_1": "100 đêm ngủ thử",
         "service_icon_2": "shopify://shop_images/Layer_1_4.svg",
@@ -135,20 +137,59 @@
         "enable_sticky_add_to_cart": false,
         "hide_payment_button_mobile": false,
         "image_size": "medium",
-        "showroom_1_name": "Showroom 1",
-        "showroom_1_address": "Địa chỉ showroom",
-        "showroom_1_phone": "0964777910",
+        "showroom_1_name": "",
+        "showroom_1_address": "",
+        "showroom_1_phone": "",
         "showroom_1_map_link": "",
-        "showroom_2_name": "Showroom 2",
-        "showroom_2_address": "Địa chỉ showroom",
-        "showroom_2_phone": "0964777910",
+        "showroom_2_name": "",
+        "showroom_2_address": "",
+        "showroom_2_phone": "",
         "showroom_2_map_link": "",
-        "showroom_3_name": "Showroom 3",
-        "showroom_3_address": "Địa chỉ showroom",
-        "showroom_3_phone": "0964777940",
+        "showroom_3_name": "",
+        "showroom_3_address": "",
+        "showroom_3_phone": "",
         "showroom_3_map_link": "",
         "review_rating": "4.8",
-        "review_count": "2025 đánh giá"
+        "review_count": "2025 đánh giá",
+        "voucher_code": "{{ product.metafields.custom.bundle_tactics_voucher.value }}"
+      }
+    },
+    "reason_to_choice_UDdRaN": {
+      "type": "reason-to-choice",
+      "blocks": {
+        "reason_4CWY9V": {
+          "type": "reason",
+          "settings": {
+            "image": "shopify://shop_images/Kh_i_ngu_n_c_a_kho_nh_kh_c_an_nhien.jpg",
+            "title": "",
+            "content": ""
+          }
+        },
+        "reason_xTVNaW": {
+          "type": "reason",
+          "settings": {
+            "image": "shopify://shop_images/Kh_i_ngu_n_c_a_h_nh_phuc_n_i_t_m.jpg",
+            "title": "",
+            "content": ""
+          }
+        },
+        "reason_B8qDMb": {
+          "type": "reason",
+          "settings": {
+            "image": "shopify://shop_images/Kh_i_ngu_n_c_a_nang_l_ng_tich_c_c.jpg",
+            "title": "",
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "reason_4CWY9V",
+        "reason_xTVNaW",
+        "reason_B8qDMb"
+      ],
+      "name": "Reason to choice",
+      "settings": {
+        "title": "Không chỉ là lựa chọn cho phòng ngủ,mà còn là đầu tư cho chất lượng cuộc sống"
       }
     },
     "main": {
@@ -876,6 +917,7 @@
   "order": [
     "countdown_Gwp9bc",
     "main_product_bundle_HQfEDh",
+    "reason_to_choice_UDdRaN",
     "main",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",

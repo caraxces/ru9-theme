@@ -432,7 +432,6 @@
 
     /* Scroller that shows only mega-cards, title (f-bold) stays fixed */
     .site-nav__dropdown.megamenu .mega-scroll {
-      height: var(--mega-row-height, 288px);
       overflow-y: auto;
       scroll-snap-type: y mandatory;
       padding-right: 0;
@@ -441,14 +440,14 @@
       /* Hide scrollbar across browsers */
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
+      transition: height 0.3s ease;
     }
     .site-nav__dropdown.megamenu .mega-scroll::-webkit-scrollbar { display: none; }
     .site-nav__dropdown.megamenu .mega-scroll > .mega-cards {
       scroll-snap-align: start;
       scroll-snap-stop: always;
-      min-height: var(--mega-row-height, 288px);
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       padding: 0;
       gap: 24px 28px;
       justify-content: start;
@@ -530,8 +529,8 @@
       margin: 0 !important;
       cursor: pointer !important;
       font-family: "Be Vietnam Pro", sans-serif !important;
-      font-weight: 600 !important;
-      font-size: 36px !important;
+      font-weight: 500 !important;
+      font-size: 34px !important;
       font-style: normal !important;
       line-height: 150% !important;
       text-decoration: none !important;
@@ -668,8 +667,6 @@
 
     /* Align when header is left-center: center the scroller and fix row height */
     .header-layout--left-center .site-nav__dropdown.megamenu .mega-scroll {
-      --mega-row-height: 288px;
-      height: 288px;
       margin-left: auto;
       margin-right: auto;
       width: 100%;
@@ -817,14 +814,16 @@
         firstBold.appendChild(tabs);
         firstBold.appendChild(viewAllContainer);
 
-        // Height: if header layout left-center exists, force 288px
-        if (document.querySelector('.header-layout--left-center')) {
-          scroller.style.setProperty('--mega-row-height', '288px');
-          scroller.style.height = '288px';
-        }
-        
         // Initialize first tab as active by default
         highlightTabByIndex(0);
+
+        function adjustScrollerHeight(activeIndex) {
+          var targetCards = scroller.children[activeIndex];
+          if (targetCards) {
+            var contentHeight = targetCards.scrollHeight;
+            scroller.style.height = contentHeight + 'px';
+          }
+        }
 
         function highlightTabByIndex(activeIndex) {
           // Handle first tab (mega-tab--first)
@@ -843,6 +842,7 @@
           
           // Update view-all-btn link based on active tab
           updateViewAllBtnLink(activeIndex);
+          adjustScrollerHeight(activeIndex);
         }
 
         tabs.addEventListener('click', function (e) {

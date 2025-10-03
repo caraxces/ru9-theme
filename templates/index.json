@@ -144,7 +144,7 @@
         "image": "shopify://shop_images/00909003ee41844939ad76f1fa4bf6dda646c676.png",
         "image_mobile": "shopify://shop_images/BANNER_INTRO_MOBILE.png",
         "button_text": "Xem chi tiết",
-        "button_link": ""
+        "button_link": "https://ru9.vn/pages/about"
       }
     },
     "collections_listing_cAa8Dw": {
@@ -339,7 +339,7 @@
         "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
         "title": "Đâu là chiếc nệm phù hợp với bạn?",
         "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
-        "button_1_text": "Quiz chọn nệm",
+        "button_1_text": "",
         "button_2_text": "So sánh các loại nệm",
         "button_2_link": "shopify://collections/nem",
         "q_1_title": "Question 1?",
@@ -390,6 +390,77 @@
         "result_title": "We recommend for you"
       }
     },
+    "combo_bedroom_jqpYBy": {
+      "type": "combo-bedroom",
+      "blocks": {
+        "product_item_MpjpGm": {
+          "type": "product_item",
+          "disabled": true,
+          "settings": {
+            "product": "bo-nem-nest",
+            "product_label": "",
+            "bundle_items": "<br> - Nệm Nest<br> - 2 gối Mây<br>- Bộ ga giường Cotton",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_6WikJL": {
+          "type": "product_item",
+          "settings": {
+            "product": "bộ-em-ai-trọn-giấc-copy",
+            "product_label": "",
+            "bundle_items": "<br> - Nệm Nest<br> - 2 gối Mây<br>- Bộ ga giường Cotton & Tấm bảo vệ",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_JyUexR": {
+          "type": "product_item",
+          "settings": {
+            "product": "combo-em-ai-tron-giac",
+            "product_label": "",
+            "bundle_items": "<br> - Nệm Original<br> - 2 gối Niu <br>- Bộ ga giường & Chăn Lạnh",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_gVHNxh": {
+          "type": "product_item",
+          "settings": {
+            "product": "combo-em-giấc-trọn-vẹn",
+            "product_label": "",
+            "bundle_items": "<br> - Nệm Original<br>- Bộ ga giường Cotton<br> - 2 gối Niu & Chăn",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_wXgNeq": {
+          "type": "product_item",
+          "settings": {
+            "product": "bo-ngu-em-ru9",
+            "product_label": "",
+            "bundle_items": "<br> - Nệm Original<br>- Bộ ga giường Cotton<br> - 2 gối Mây",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        }
+      },
+      "block_order": [
+        "product_item_MpjpGm",
+        "product_item_6WikJL",
+        "product_item_JyUexR",
+        "product_item_gVHNxh",
+        "product_item_wXgNeq"
+      ],
+      "name": "Combo Phòng Ngủ",
+      "settings": {
+        "title": "Combo phòng ngủ",
+        "description": "",
+        "primary_color": "#1c2c58",
+        "text_color": "#1a1a1a",
+        "description_color": "#666666"
+      }
+    },
     "tvc_section_WrUqBM": {
       "type": "tvc-section",
       "name": "TVC Section",
@@ -399,15 +470,93 @@
         "video": "shopify://files/videos/ORIGINAL PRO - NƠI TÁI TẠO NĂNG LƯỢNG SAU MỖI HÀNH TRÌNH.mp4"
       }
     },
-    "reviews_carousel_QPtXUf": {
+    "reviews_carousel_ECAtRY": {
       "type": "reviews-carousel",
       "blocks": {
-        "review_e3fUFp": {
+        "review_LgQfji": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/BANNER_INTRO_MOBILE.png",
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Showroom Ru9 bài trí rất đẹp, không gian dễ chịu. Mình tới trải nghiệm nệm thấy thích, nhân viên tư vấn nhiệt tình, nhẹ nhàng. Cảm giác chuyên nghiệp mà vẫn thoải mái.</p>",
+            "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
+            "customer_name": "Gon Pink",
+            "review_text": "<p>Mình nằm thử nệm Foam Original của Ru9 mới thấy khác biệt thiệt, foam ôm sát cơ thể giúp lưng – vai – hông được nâng đỡ đều, mình ngủ dậy không còn ê mỏi luôn. Thêm cái nữa là nệm cực thoáng khí, nằm lâu cũng không hầm nóng, vỏ thì tháo ra giặt siêu tiện. Nói chung là sản phẩm rất chất lượng so với giá tiền! </p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_j7fKiM": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/177826117_3828731063871354_8843481793885550946_n.jpg",
+            "customer_name": "Hoàng Ku",
+            "review_text": "<p>Điều mình thích nhất khi nằm nệm foam Ru9 là đệm sẽ ôm sát theo đường cong của cơ thể, mình có quả “thắt đáy lưng ong” nên phần đáy lưng võng cong, nằm nệm cứng chỗ lưng đó bị rỗng nên rất khó chịu, ngủ phải gập người lại thì mới dễ ngủ. Nhưng với đệm Foam Ru9 thì mình chỉ cần nằm thẳng thôi, cấu trúc của đệm sẽ tự khắc làm đầy ngay chỗ thắt lưng của mình luôn! </p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_wyUamJ": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Ane_cibi.jpg",
+            "customer_name": "Anne Cibi",
+            "review_text": "<p>Ghé Ru9 thăm showroom, kết quả là bê về túi to túi nhỏ luôn! Chăn bạch đàn, bộ ga gối tencel mướt mượt màu baby blue y chang cái nhà em nữa, nó mờ ê mê lắm</p>",
+            "product_name": "Bộ Ga Giường Ru9 Tencel",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/tencel-bedding-set"
+          }
+        },
+        "review_8Tc3PT": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/dao_lan_ph_ng_nest.jpg",
+            "customer_name": "Đào Lan Phương",
+            "review_text": "<p>Sau 3 tuần nằm thử, mình thật sự ưng chiếc nệm Nest này. Nệm dày, nằm chắc chắn chứ không bị lún, rất phù hợp cho người hay đau lưng như mình. Mong là chất lượng này sẽ bền lâu.</p>",
+            "product_name": "Nệm Nest",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://collections/bedding"
+          }
+        },
+        "review_rMnkzH": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/mc_van_anh_topper.jpg",
+            "customer_name": "Vân Anh",
+            "review_text": "<p>Mình trải nghiệm Foam Topper Ru9 được gần tháng rồi. Cảm giác nằm êm mà vẫn nâng đỡ tốt, lưng mình đỡ đau rõ rệt. Cái hay nữa là topper nhẹ, dễ mang đi và vệ sinh. Nói chung khá hài lòng, chỉ mong dùng lâu dài vẫn giữ được độ thoải mái như hiện tại.</p>",
+            "product_name": "Nệm Foam Topper",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/nem-cuon-foam-topper"
+          }
+        },
+        "review_zYiMD6": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/287509779_10228461666790384_79999810057241775_n.jpg",
+            "customer_name": "Hằng Thúy Ngô",
+            "review_text": "<p>Sau hơn nửa năm nằm nệm Original, mình thấy giấc ngủ được cải thiện rõ rệt. Nệm ôm và nâng đỡ cơ thể tốt, lưng cổ không còn ê ẩm như trước. Cảm giác mỗi tối nằm xuống đều rất thoải mái và dễ chịu.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_gCNcYV": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/47580643_1094459747384007_5553427953934663680_n.jpg",
+            "customer_name": "Tu Lam Kha",
+            "review_text": "<p>Sau nhiều lần đắn đo mình quyết định mua Nệm Foam Original, và thật sự đây là một khoản đầu tư xứng đáng. Từ ngày dùng, mình không còn thức dậy với cảm giác đau lưng hay mỏi vai gáy nữa.</p>",
             "product_name": "Nệm Original",
             "verified_text": "Đã xác minh",
             "verification_link": "",
@@ -415,65 +564,29 @@
             "button_link": "shopify://products/foam-original"
           }
         },
-        "review_d8we9c": {
+        "review_Y7kPQp": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/120e99f9b519b575deafb8222d6574f102094362.png",
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Tôi rất hài lòng với sản phẩm đệm này! Đệm mềm mại và êm ái, giúp tôi ngủ ngon và sâu hơn. Chất liệu đệm bền và thoải mái, hỗ trợ tốt cho cột sống.</p>",
-            "product_name": "Nệm Original",
+            "image": "shopify://shop_images/IMG_8630.jpg",
+            "customer_name": "Ngọc Tú Anh",
+            "review_text": "<p>10 điểm cho Bộ ga giường Tecel của Ru9 nha. Vải mềm, mát, nằm không bị bí hay nóng lưng, cảm giác dễ chịu hơn hẳn bộ ga cũ. Cả nhà mình ai cũng mê</p>",
+            "product_name": "Bộ Bedding Tencel",
             "verified_text": "Đã xác minh",
             "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/bo-chan-ga"
-          }
-        },
-        "review_hjGPiw": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/chat-lieu-vai-tencel-la-gi.jpg",
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://collections/bedding"
-          }
-        },
-        "review_CFhi3c": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/Rectangle_67.png",
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://collections/combo-bộ-sản-phẩm"
-          }
-        },
-        "review_zqbNMP": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/tencel-la-chat-lieu-vai-gi.jpg",
-            "customer_name": "Phuong Nguyen",
-            "review_text": "<p>Không gian thơm dễ chịu. Chăn lạnh dùng mát và mịn, recommend mọi người.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://collections/goi"
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/tencel-bedding-set"
           }
         }
       },
       "block_order": [
-        "review_e3fUFp",
-        "review_d8we9c",
-        "review_hjGPiw",
-        "review_CFhi3c",
-        "review_zqbNMP"
+        "review_LgQfji",
+        "review_j7fKiM",
+        "review_wyUamJ",
+        "review_8Tc3PT",
+        "review_rMnkzH",
+        "review_zYiMD6",
+        "review_gCNcYV",
+        "review_Y7kPQp"
       ],
       "name": "Reviews carousel",
       "settings": {
@@ -565,7 +678,7 @@
         "title": "Cam kết an toàn\ntừ lần chạm đầu tiên",
         "description": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>",
         "button_text": "Xem chi tiết",
-        "button_link": ""
+        "button_link": "https://ru9.vn/pages/certification"
       }
     },
     "blog_carousel_CXkPPY": {
@@ -627,8 +740,9 @@
     "image_marquee_hcRmaa",
     "featured_products_by_size_c63dBV",
     "quiz_banner_4z7U33",
+    "combo_bedroom_jqpYBy",
     "tvc_section_WrUqBM",
-    "reviews_carousel_QPtXUf",
+    "reviews_carousel_ECAtRY",
     "super_service_87efWC",
     "certifications_4j8wGm",
     "blog_carousel_CXkPPY"

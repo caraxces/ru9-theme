@@ -31,9 +31,20 @@
             "color_swatches": true
           }
         },
-        "quantity_selector_WMfLWY": {
-          "type": "quantity_selector",
-          "settings": {}
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "surface_pickup_enable": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "is_tab": false,
+            "collapse_content": false
+          }
         },
         "showroom_dropdown_9cpLEb": {
           "type": "showroom_dropdown",
@@ -51,21 +62,6 @@
             "showroom_3_address": "",
             "showroom_3_phone": "0964777940",
             "showroom_3_map_link": ""
-          }
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": false,
-            "surface_pickup_enable": false,
-            "show_gift_card_recipient": false
-          }
-        },
-        "description": {
-          "type": "description",
-          "settings": {
-            "is_tab": false,
-            "collapse_content": false
           }
         },
         "service_grid_qKDCDA": {
@@ -93,10 +89,9 @@
         "custom_7aBaTH",
         "price",
         "variant_picker",
-        "quantity_selector_WMfLWY",
-        "showroom_dropdown_9cpLEb",
         "buy_buttons",
         "description",
+        "showroom_dropdown_9cpLEb",
         "service_grid_qKDCDA",
         "carousel_modal_B8Mr9e"
       ],
@@ -112,7 +107,7 @@
         "image_size": "large",
         "product_zoom_enable": true,
         "product_carousel_enable": false,
-        "limit_product_carousel": true,
+        "limit_product_carousel": false,
         "thumbnail_position": "below",
         "thumbnail_height": "flexible",
         "thumbnail_arrows": false,
@@ -840,20 +835,67 @@
         "space_around": true
       }
     },
-    "featured_collection_jf7rcV": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.featured_collection.name",
+    "collections_listing_KVphRe": {
+      "type": "collections-listing",
+      "blocks": {
+        "collection_YXq4xk": {
+          "type": "collection",
+          "settings": {
+            "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_A4RFD3": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_6mqAq8": {
+          "type": "collection",
+          "settings": {
+            "collection": "chan",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_6qMy4G": {
+          "type": "collection",
+          "settings": {
+            "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_F3mBGw": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_YXq4xk",
+        "collection_A4RFD3",
+        "collection_6mqAq8",
+        "collection_6qMy4G",
+        "collection_F3mBGw"
+      ],
+      "name": "Collections Listing",
       "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
-        "title": "Gợi ý các sản phẩm",
-        "home_featured_products": "bedding",
-        "per_row": 4,
-        "rows": 1,
-        "mobile_scrollable": false,
-        "view_all": false,
-        "divider": false,
-        "hide_price": false
+        "title": "Có thể bạn cũng thích",
+        "title_color": "#1c2c58",
+        "text_color": "#212121"
       }
     },
     "sub": {
@@ -900,7 +942,7 @@
     "certification_VUqyB6",
     "172802814088f5e025",
     "1730878240cfbec46e",
-    "featured_collection_jf7rcV",
+    "collections_listing_KVphRe",
     "sub",
     "product-recommendations",
     "recently-viewed",
