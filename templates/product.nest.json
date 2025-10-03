@@ -36,17 +36,17 @@
           "settings": {
             "title": "Hệ thống cửa hàng",
             "showroom_1_name": "Showroom 1",
-            "showroom_1_address": "",
+            "showroom_1_address": "<p>B2.009 Chung cư Sarimi, Nguyễn Cơ Thạch, Thành phố Thủ Đức, TP. Hồ Chí Minh</p>",
             "showroom_1_phone": "0964777910",
-            "showroom_1_map_link": "",
+            "showroom_1_map_link": "https://maps.app.goo.gl/oYLGqyTqFY1Q3XUP8",
             "showroom_2_name": "Showroom 2",
-            "showroom_2_address": "",
+            "showroom_2_address": "<p>283A Hai Bà Trưng, Phường Xuân Hòa,<br/>TP. Hồ Chí Minh</p>",
             "showroom_2_phone": "0964777910",
-            "showroom_2_map_link": "",
+            "showroom_2_map_link": "https://maps.app.goo.gl/8szv6U4K8qkVbmdeA",
             "showroom_3_name": "Showroom 3",
-            "showroom_3_address": "",
+            "showroom_3_address": "<p>228 Cầu Giấy, Phường Quan Hoa, Hà Nội</p>",
             "showroom_3_phone": "0964777940",
-            "showroom_3_map_link": ""
+            "showroom_3_map_link": "https://maps.app.goo.gl/1y1nqMumEGhxRz3D9"
           }
         },
         "buy_buttons": {
@@ -327,6 +327,7 @@
         "product_gwd6Ji",
         "product_GVECe8"
       ],
+      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",

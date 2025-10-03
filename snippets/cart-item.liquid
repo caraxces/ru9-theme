@@ -82,7 +82,7 @@
   }
 </style>
 
-<div class="cart__item{% if is_bundle_item %} cart__item--bundle-item{% endif %}" data-key="{{ product.key }}" {% if is_bundle_item %}data-bundle-id="{{ bundle_id }}"{% endif %} data-quantity="{{ product.quantity }}">
+<div class="cart__item{% if is_bundle_item %} cart__item--bundle-item{% endif %}" data-key="{{ product.key }}" {% if is_bundle_item %}data-bundle-id="{{ bundle_id }}" data-bundle-quantity="{{ product.properties._bundle_quantity }}"{% endif %} data-quantity="{{ product.quantity }}">
   <div class="cart__image">
     {% if product.image != blank %}
       <a href="{{ product.url }}" class="image-wrap" style="width: 100px; height: 100px;">

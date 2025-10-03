@@ -151,7 +151,7 @@
         "showroom_3_map_link": "",
         "review_rating": "4.8",
         "review_count": "2025 đánh giá",
-        "voucher_code": "ComboGiacNguToiUU"
+        "voucher_code": "{{ product.metafields.custom.bundle_tactics_voucher.value }}"
       }
     },
     "main": {

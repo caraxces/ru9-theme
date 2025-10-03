@@ -70,6 +70,7 @@
         },
         "promotion_q6yCFm": {
           "type": "promotion",
+          "disabled": true,
           "settings": {
             "title": "Mã ưu đãi",
             "popup_content_1": "",
@@ -85,7 +86,8 @@
         "size_guide_dropdown_fkaRtp": {
           "type": "size_guide_dropdown",
           "settings": {
-            "title": "Hướng dẫn chọn kích thước"
+            "title": "Hướng dẫn chọn kích thước",
+            "image": "shopify://shop_images/size-guide.png"
           }
         },
         "variant_picker": {
@@ -119,26 +121,16 @@
             "content": "<p>Thêm nội dung hướng dẫn sử dụng vào đây.</p>"
           }
         },
-        "showroom_dropdown_nTzTtH": {
-          "type": "showroom_dropdown",
+        "usage_guide_F9jqCH": {
+          "type": "usage_guide",
           "settings": {
-            "title": "Hệ thống cửa hàng",
-            "showroom_1_name": "Showroom 1",
-            "showroom_1_address": "",
-            "showroom_1_phone": "0964777910",
-            "showroom_1_map_link": "",
-            "showroom_2_name": "Showroom 2",
-            "showroom_2_address": "",
-            "showroom_2_phone": "0964777910",
-            "showroom_2_map_link": "",
-            "showroom_3_name": "Showroom 3",
-            "showroom_3_address": "",
-            "showroom_3_phone": "0964777940",
-            "showroom_3_map_link": ""
+            "title": "Hệ thống của hàng",
+            "content": "<p><a href=\"https://maps.google.com/?q=Shop%2009,%20B2%20Sarimi,%20K%C4%90T%20Sala,%2072%20Nguy%E1%BB%85n%20C%C6%A1%20Th%E1%BA%A1ch,%20P.%20An%20L%E1%BB%A3i%20%C4%90%C3%B4ng,%20Q.2,%20TP.%20HCM\" target=\"_blank\"><strong>Q.2, TP.HCM:</strong></a> Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br/><a href=\"tel:0964777960\">0964777960</a></p><p><a href=\"https://maps.google.com/?q=283A%20Hai%20B%C3%A0%20Tr%C6%B0ng,%20Ph%C6%B0%E1%BB%9Dng%20Xu%C3%A2n%20Ho%C3%A0,%20Q.3,%20TP.HCM\" target=\"_blank\"><strong>Q.3, TP.HCM:</strong></a> 283A Hai Bà Trưng, Phường Xuân Hoà<br/><a href=\"tel:0964777910\">0964777910</a></p><p><a href=\"https://maps.google.com/?q=228%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20Q.%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20HN\" target=\"_blank\"><strong>Q. Cầu Giấy, HN:</strong></a>  228 Cầu Giấy, Quan Hoa<br/><a href=\"tel:0964777940\">0964777940</a></p>"
           }
         },
         "usage_guide_Awrhpf": {
           "type": "usage_guide",
+          "disabled": true,
           "settings": {
             "title": "Hướng dẫn sử dụng",
             "content": "<p>Thêm nội dung hướng dẫn sử dụng vào đây.</p>"
@@ -171,7 +163,7 @@
         "buy_buttons",
         "description",
         "usage_guide_7zymjD",
-        "showroom_dropdown_nTzTtH",
+        "usage_guide_F9jqCH",
         "usage_guide_Awrhpf",
         "service_grid_MCNHkH"
       ],
@@ -181,13 +173,13 @@
         "enable_sticky_add_to_cart": true,
         "hide_payment_button_mobile": true,
         "sku_enable": false,
-        "product_subtitle": "",
+        "product_subtitle": "{{ product.metafields.custom.subdes.value }}",
         "custom_text": "",
         "image_position": "left",
         "image_size": "large",
         "product_zoom_enable": true,
         "product_carousel_enable": false,
-        "limit_product_carousel": true,
+        "limit_product_carousel": false,
         "thumbnail_position": "below",
         "thumbnail_height": "flexible",
         "thumbnail_arrows": false,
@@ -209,9 +201,11 @@
           "foam-original",
           "bo-ga-giuong-cotton-sateen"
         ],
+        "product_3_quantity": 2,
         "sku_enable": true,
         "combo_title": "Combo bao gồm các sản phẩm:",
         "cta_button_text": "BẮT ĐẦU TẠO COMBO",
+        "target_discount_percentage": 15,
         "service_icon_1": "shopify://shop_images/Layer_1_3.svg",
         "service_text_1": "100 đêm ngủ thử",
         "service_icon_2": "shopify://shop_images/Layer_1_4.svg",
@@ -245,7 +239,8 @@
         "showroom_3_phone": "0964777940",
         "showroom_3_map_link": "",
         "review_rating": "4.8",
-        "review_count": "2025 đánh giá"
+        "review_count": "2025 đánh giá",
+        "voucher_code": ""
       }
     },
     "product_hotspot_XzDEYy": {
@@ -909,45 +904,65 @@
         "link": "shopify://pages/faqs",
         "link_text": "Xem những câu hỏi khác",
         "text_alignment": "center",
-        "use_metafield": false,
+        "use_metafield": true,
         "metafield_limit": "5",
         "divider": true
       }
     },
-    "certification_VUqyB6": {
-      "type": "certification",
+    "super_service_pac79r": {
+      "type": "super-service",
       "blocks": {
-        "slide_zqGeDK": {
-          "type": "slide",
+        "service_item_UgmWgP": {
+          "type": "service_item",
           "settings": {
-            "banner": "shopify://shop_images/Hompage_Desktop_Oeko_tex_bd30d664-3dfd-433e-a514-f771bb40ba94.png",
-            "banner_mobile": "shopify://shop_images/Hompage_Mobile_Oeko_tex_877a34ad-3f04-4b27-814f-e396140ef1ef.png",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
-            "image": "shopify://shop_images/logo-certification-1.png"
+            "icon": "shopify://shop_images/Layer_1_3.svg",
+            "item_title": "100 đêm ngủ thử",
+            "item_note": "",
+            "item_description": "<p>Trải nghiệm sản phẩm ngay tại nhà với cam kết đổi trả linh hoạt.</p>",
+            "item_link": ""
           }
         },
-        "slide_63THmd": {
-          "type": "slide",
+        "service_item_j7QJ4g": {
+          "type": "service_item",
           "settings": {
-            "banner": "shopify://shop_images/Hompage_Desktop_Certipur_US_310dce33-caaf-452e-ac90-2da51b97f80e.png",
-            "banner_mobile": "shopify://shop_images/Hompage_Mobile_Certipur_US_86aa4a55-6779-43c2-89f4-231d338a70fe.png",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế Certipur-US </p>",
-            "image": "shopify://shop_images/CertiPUR-US_RGB_800x800_2x_c1aaa1ca-c943-43f5-b804-8b2b044f2be4.webp"
+            "icon": "shopify://shop_images/Layer_1_4.svg",
+            "item_title": "Miễn phí vận chuyển",
+            "item_note": "(từ 1.500.000vnd)",
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>",
+            "item_link": ""
+          }
+        },
+        "service_item_7itmTa": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_5.svg",
+            "item_title": "Bảo hành dài lâu",
+            "item_note": "",
+            "item_description": "<p>Mỗi chiếc nệm được bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_w7CTDU": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_6.svg",
+            "item_title": "Thanh toán linh hoạt",
+            "item_note": "",
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>",
+            "item_link": ""
           }
         }
       },
       "block_order": [
-        "slide_zqGeDK",
-        "slide_63THmd"
+        "service_item_UgmWgP",
+        "service_item_j7QJ4g",
+        "service_item_7itmTa",
+        "service_item_w7CTDU"
       ],
+      "name": "Super Service",
       "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1250,
-        "bg": "#f0f7fe",
-        "title": "",
-        "description": ""
+        "title": "An tâm hơn với dịch vụ vượt trội",
+        "background_color": "#f5f9ff"
       }
     },
     "1730878240cfbec46e": {
@@ -971,20 +986,63 @@
         "space_around": true
       }
     },
-    "featured_collection_mGwJt3": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.featured_collection.name",
+    "collections_listing_6LHHpP": {
+      "type": "collections-listing",
+      "blocks": {
+        "collection_Fp7L9X": {
+          "type": "collection",
+          "settings": {
+            "collection": "nem",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_N8WehQ": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_Yr7gde": {
+          "type": "collection",
+          "settings": {
+            "collection": "chan",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_jHje3i": {
+          "type": "collection",
+          "settings": {
+            "collection": "phu-kien",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_J8JwVj": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_Fp7L9X",
+        "collection_N8WehQ",
+        "collection_Yr7gde",
+        "collection_jHje3i",
+        "collection_J8JwVj"
+      ],
+      "name": "Collections Listing",
       "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
-        "title": "Gợi ý các sản phẩm",
-        "home_featured_products": "chan",
-        "per_row": 4,
-        "rows": 1,
-        "mobile_scrollable": false,
-        "view_all": false,
-        "divider": false,
-        "hide_price": false
+        "title": "Có thể bạn cũng thích",
+        "title_color": "#1c2c58",
+        "text_color": "#212121"
       }
     },
     "sub": {
@@ -1030,9 +1088,9 @@
     "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",
     "dynamic_faq_Whrn47",
-    "certification_VUqyB6",
+    "super_service_pac79r",
     "1730878240cfbec46e",
-    "featured_collection_mGwJt3",
+    "collections_listing_6LHHpP",
     "sub",
     "product-recommendations",
     "recently-viewed",

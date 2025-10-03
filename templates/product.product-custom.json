@@ -797,42 +797,6 @@
         "divider": true
       }
     },
-    "certification_VUqyB6": {
-      "type": "certification",
-      "blocks": {
-        "slide_zqGeDK": {
-          "type": "slide",
-          "settings": {
-            "banner": "shopify://shop_images/Hompage_Desktop_Oeko_tex_bd30d664-3dfd-433e-a514-f771bb40ba94.png",
-            "banner_mobile": "shopify://shop_images/Hompage_Mobile_Oeko_tex_877a34ad-3f04-4b27-814f-e396140ef1ef.png",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
-            "image": "shopify://shop_images/logo-certification-1.png"
-          }
-        },
-        "slide_63THmd": {
-          "type": "slide",
-          "settings": {
-            "banner": "shopify://shop_images/Hompage_Desktop_Certipur_US_310dce33-caaf-452e-ac90-2da51b97f80e.png",
-            "banner_mobile": "shopify://shop_images/Hompage_Mobile_Certipur_US_86aa4a55-6779-43c2-89f4-231d338a70fe.png",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế Certipur-US </p>",
-            "image": "shopify://shop_images/CertiPUR-US_RGB_800x800_2x_c1aaa1ca-c943-43f5-b804-8b2b044f2be4.webp"
-          }
-        }
-      },
-      "block_order": [
-        "slide_zqGeDK",
-        "slide_63THmd"
-      ],
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1250,
-        "bg": "#f0f7fe",
-        "title": "",
-        "description": ""
-      }
-    },
     "172802814088f5e025": {
       "type": "apps",
       "settings": {
@@ -863,20 +827,119 @@
         "space_around": true
       }
     },
-    "featured_collection_gcPxQ3": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.featured_collection.name",
+    "super_service_6NCMDb": {
+      "type": "super-service",
+      "blocks": {
+        "service_item_CCJXDz": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_3.svg",
+            "item_title": "100 đêm ngủ thử",
+            "item_note": "",
+            "item_description": "<p>Trải nghiệm sản phẩm ngay tại nhà với cam kết đổi trả linh hoạt.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_P7rCt3": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_4.svg",
+            "item_title": "Miễn phí vận chuyển",
+            "item_note": "(từ 1.500.000vnd)",
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>",
+            "item_link": ""
+          }
+        },
+        "service_item_ebqEx4": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_5.svg",
+            "item_title": "Bảo hành dài lâu",
+            "item_note": "",
+            "item_description": "<p>Mỗi chiếc nệm được bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_EXxRtY": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_6.svg",
+            "item_title": "Thanh toán linh hoạt",
+            "item_note": "",
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>",
+            "item_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "service_item_CCJXDz",
+        "service_item_P7rCt3",
+        "service_item_ebqEx4",
+        "service_item_EXxRtY"
+      ],
+      "name": "Super Service",
       "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
-        "title": "Gợi ý các sản phẩm",
-        "home_featured_products": "bedding",
-        "per_row": 4,
-        "rows": 1,
-        "mobile_scrollable": false,
-        "view_all": false,
-        "divider": false,
-        "hide_price": false
+        "title": "An tâm hơn với dịch vụ vượt trội",
+        "background_color": "#f5f9ff"
+      }
+    },
+    "collections_listing_9Kh8kb": {
+      "type": "collections-listing",
+      "blocks": {
+        "collection_dV4THq": {
+          "type": "collection",
+          "settings": {
+            "collection": "nem",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_4HryGd": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_mfFrHh": {
+          "type": "collection",
+          "settings": {
+            "collection": "chan",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_jErLcG": {
+          "type": "collection",
+          "settings": {
+            "collection": "phu-kien",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_WbtHPq": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_dV4THq",
+        "collection_4HryGd",
+        "collection_mfFrHh",
+        "collection_jErLcG",
+        "collection_WbtHPq"
+      ],
+      "name": "Collections Listing",
+      "settings": {
+        "title": "Có thể bạn cũng thích",
+        "title_color": "#1c2c58",
+        "text_color": "#212121"
       }
     },
     "sub": {
@@ -920,10 +983,10 @@
     "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",
     "dynamic_faq_Whrn47",
-    "certification_VUqyB6",
     "172802814088f5e025",
     "1730878240cfbec46e",
-    "featured_collection_gcPxQ3",
+    "super_service_6NCMDb",
+    "collections_listing_9Kh8kb",
     "sub",
     "product-recommendations",
     "recently-viewed",
