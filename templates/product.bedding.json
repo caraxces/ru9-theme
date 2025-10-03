@@ -31,10 +31,6 @@
             "color_swatches": true
           }
         },
-        "quantity_selector_WMfLWY": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
         "showroom_dropdown_9cpLEb": {
           "type": "showroom_dropdown",
           "settings": {
@@ -93,7 +89,6 @@
         "custom_7aBaTH",
         "price",
         "variant_picker",
-        "quantity_selector_WMfLWY",
         "showroom_dropdown_9cpLEb",
         "buy_buttons",
         "description",

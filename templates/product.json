@@ -73,6 +73,7 @@
           "disabled": true,
           "settings": {
             "title": "Mã ưu đãi",
+            "enable_popup": true,
             "popup_content_1": "",
             "popup_content_2": "",
             "popup_content_3": "",
@@ -116,6 +117,7 @@
         },
         "usage_guide_7zymjD": {
           "type": "usage_guide",
+          "disabled": true,
           "settings": {
             "title": "Thông số sản phẩm",
             "content": "<p>Thêm nội dung hướng dẫn sử dụng vào đây.</p>"
@@ -186,6 +188,44 @@
         "mobile_layout": "partial",
         "enable_video_looping": true,
         "product_video_style": "muted"
+      }
+    },
+    "reason_to_choice_cbPGRj": {
+      "type": "reason-to-choice",
+      "blocks": {
+        "reason_9UrLte": {
+          "type": "reason",
+          "settings": {
+            "image": "{{ product.metafields.custom.dynamic_image_1.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_1.value }}",
+            "content": "<p>{{ product.metafields.custom.dynamic_description_1 | metafield_tag }}</p>"
+          }
+        },
+        "reason_cDXJDn": {
+          "type": "reason",
+          "settings": {
+            "image": "{{ product.metafields.custom.dynamic_image_2.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_2.value }}",
+            "content": "<p>{{ product.metafields.custom.dynamic_desciption_2 | metafield_tag }}</p>"
+          }
+        },
+        "reason_K6diX9": {
+          "type": "reason",
+          "settings": {
+            "image": "{{ product.metafields.custom.dynamic_image_3.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_2.value }}",
+            "content": "<p>{{ product.metafields.custom.dynamic_description_3 | metafield_tag }}</p>"
+          }
+        }
+      },
+      "block_order": [
+        "reason_9UrLte",
+        "reason_cDXJDn",
+        "reason_K6diX9"
+      ],
+      "name": "Reason to choice",
+      "settings": {
+        "title": "Lý do bạn nên chọn chúng tôi"
       }
     },
     "main_product_bundle_y4WGaj": {
@@ -993,6 +1033,7 @@
           "type": "collection",
           "settings": {
             "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
             "custom_title": "",
             "custom_link": ""
           }
@@ -1001,6 +1042,7 @@
           "type": "collection",
           "settings": {
             "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
             "custom_title": "",
             "custom_link": ""
           }
@@ -1009,6 +1051,7 @@
           "type": "collection",
           "settings": {
             "collection": "chan",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
             "custom_title": "",
             "custom_link": ""
           }
@@ -1017,6 +1060,7 @@
           "type": "collection",
           "settings": {
             "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
             "custom_title": "",
             "custom_link": ""
           }
@@ -1077,6 +1121,7 @@
   "order": [
     "countdown_Gwp9bc",
     "main",
+    "reason_to_choice_cbPGRj",
     "main_product_bundle_y4WGaj",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",

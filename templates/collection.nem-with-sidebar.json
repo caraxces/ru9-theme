@@ -116,10 +116,11 @@
     },
     "quiz_banner_zXHt4B": {
       "type": "quiz-banner",
+      "disabled": true,
       "name": "Quiz Banner (Advanced)",
       "settings": {
         "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
-        "title": "Đâu là chiếc nệm\nphù hợp với bạn?",
+        "title": "Đâu là chiếc nệmphù hợp với bạn?",
         "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
         "button_1_text": "Quiz chọn nệm",
         "button_2_text": "So sánh các loại nệm",
@@ -249,7 +250,7 @@
             "comfort_layer_1_image": "shopify://shop_images/so_sanh_Ori.png",
             "product_thickness": "25 cm",
             "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 8.490.000 VNĐ",
+            "product_price": "Từ 9.990.000 VNĐ",
             "product_url": "shopify://products/foam-original"
           }
         },
@@ -282,27 +283,53 @@
         "product_QVeCme": {
           "type": "product",
           "settings": {
-            "product_title": "NỆM HYBRID",
-            "product_image": "shopify://shop_images/Hybrid_Thumb-Website-2.png",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "comfort_layer_1_image": "shopify://shop_images/so_sanh_hybrid.png",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": "shopify://products/nem-hybrid"
+            "product_title": "Nệm Topper",
+            "product_image": "shopify://shop_images/Ru_day1_5647.png",
+            "product_features": "- Thiết kế mỏng nhẹ, dễ cuộn gọn và đa dạng kích thước\n- Đảm bảo êm ái và nâng đỡ nhẹ nhàng\n- Tích hợp tinh chất trà xanh và than hoạt tính: kháng khuẩn giúp khử mùi tự nhiên",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
+            "product_thickness": "5 cm",
+            "suitable_for": "Linh hoạt cho người sống trong không gian nhỏ hoặc cần di chuyển nhiều",
+            "product_price": "Từ 3.490.000 VNĐ",
+            "product_url": "shopify://products/nem-cuon-foam-topper"
           }
         },
         "product_kGMGE6": {
           "type": "product",
           "settings": {
-            "product_title": "NỆM HYBRID",
-            "product_image": "shopify://shop_images/Hybrid_Thumb-Website-2.png",
-            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
-            "comfort_layer_1_image": "shopify://shop_images/so_sanh_hybrid.png",
-            "product_thickness": "25 cm",
-            "suitable_for": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
-            "product_price": "Từ 12.990.000 VNĐ",
-            "product_url": "shopify://products/nem-hybrid"
+            "product_title": "Nệm Original Lite",
+            "product_image": "shopify://shop_images/nem-original-1.jpg",
+            "product_features": "- Thiết kế mỏng nhẹ, dễ cuộn gọn và đa dạng kích thước\n- Đảm bảo êm ái và nâng đỡ nhẹ nhàng\n- Tích hợp tinh chất trà xanh và than hoạt tính: kháng khuẩn giúp khử mùi tự nhiên",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Ori.png",
+            "product_thickness": "20 cm",
+            "suitable_for": "Phù hợp với người muốn giấc ngủ êm ái và nâng đỡ cân bằng, đồng thời muốn tối ưu không gian sống và thoải mái ngân sách",
+            "product_price": "Từ 8.690.000 VNĐ",
+            "product_url": "shopify://products/foam-original"
+          }
+        },
+        "product_ytcEcY": {
+          "type": "product",
+          "settings": {
+            "product_title": "Nệm Topper Mây",
+            "product_image": "shopify://shop_images/may_tr_i.jpg",
+            "product_features": "- Cấu trúc bông Microfiber bồng bềnh, đàn hồi \n- Thiết kế bọc nệm thông minh và đa dạng kích thước",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
+            "product_thickness": "8 cm",
+            "suitable_for": "Dành cho người muốn nâng cấp không gian ngủ thành nơi nghỉ ngơi thư giãn và sang trọng.",
+            "product_price": "Từ 3.290.000 VNĐ",
+            "product_url": "shopify://products/may_topper218298303-1"
+          }
+        },
+        "product_mewfre": {
+          "type": "product",
+          "settings": {
+            "product_title": "Nệm Topper Mate",
+            "product_image": "shopify://shop_images/Copy-of-Mate-380-no-box.jpg",
+            "product_features": "- Cấu trúc 1 lớp foam nâng đỡ vững chắc, ổn định\n- Thiết kế mỏng nhẹ, dễ cuộn gọn và đa dạng kích thước",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
+            "product_thickness": "5 cm",
+            "suitable_for": "Giải pháp tiết kiệm, tiện lợi cho không gian nhỏ và người thích nằm chắc chắn mà vẫn êm ái.",
+            "product_price": "Từ 2.290.000 VNĐ",
+            "product_url": "shopify://products/mate_topper219071626"
           }
         }
       },
@@ -312,7 +339,9 @@
         "product_atFTCC",
         "product_wmbR3E",
         "product_QVeCme",
-        "product_kGMGE6"
+        "product_kGMGE6",
+        "product_ytcEcY",
+        "product_mewfre"
       ],
       "settings": {
         "section_width": "page-width",

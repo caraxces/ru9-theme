@@ -1993,16 +1993,6 @@
       }
     },
     {
-      "key": "voucher",
-      "namespace": "custom",
-      "name": "voucher",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
       "key": "subdes",
       "namespace": "custom",
       "name": "Subdes",
@@ -2020,6 +2010,16 @@
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
+      }
+    },
+    {
+      "key": "voucher",
+      "namespace": "custom",
+      "name": "Voucher",
+      "description": "",
+      "type": {
+        "name": "list.file_reference",
+        "category": "REFERENCE"
       }
     }
   ],

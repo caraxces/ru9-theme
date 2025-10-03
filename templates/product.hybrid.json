@@ -12,34 +12,35 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "judge_me_reviews_preview_badge_MD8JNY": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "disabled": true,
-          "settings": {}
-        },
-        "trust_badge_crGyDj": {
-          "type": "trust_badge",
-          "disabled": true,
-          "settings": {
-            "trust_image": "shopify://shop_images/Ru9_-_brief_40_-_Giang_sinh_r_n_rang_1940_x_750.png"
-          }
-        },
         "custom_m49fr6": {
           "type": "custom",
           "settings": {
             "code": "<style>\n.flash-sale-container {\n  display: none; /* Hidden by default, will be shown with JS if in valid time */\n  align-items: center;\n  background: #ff6b6b;\n  padding: 15px;\n  border-radius: 8px;\n  margin: 10px 0;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n} \n\n.flash-sale-status {\n  display: flex;\n  align-items: center;\n  margin-right: 20px;\n}\n\n.status-icon {\n  font-size: 24px;\n  color: #fff;\n  margin-right: 10px;\n  animation: pulse 1s infinite;\n}\n\n.status-text {\n  font-size: 16px;\n  font-weight: bold;\n  color: #fff;\n}\n\n.countdown-wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.countdown-block {\n  background: #fff;\n  padding: 8px 12px;\n  border-radius: 6px;\n  text-align: center;\n  min-width: 60px;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.05);\n}\n\n.countdown-block span {\n  font-size: 20px;\n  font-weight: bold;\n  color: #ff6b6b;\n  display: block;\n}\n\n.countdown-block label {\n  font-size: 12px;\n  color: #666;\n  margin-top: 4px;\n  display: block;\n}\n\n@keyframes pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.1); }\n  100% { transform: scale(1); }\n}\n\n.inactive .status-icon {\n  color: #fff;\n  animation: none;\n}\n\n.inactive .status-text {\n  color: #fff;\n}\n\n.inactive .countdown-block span {\n  color: #666;\n}\n</style>\n\n<div class=\"flash-sale-container\" id=\"flashSaleContainer\">\n  <div class=\"flash-sale-status\">\n    <div class=\"status-icon\" id=\"statusIcon\">⚡</div>\n    <div class=\"status-text\" id=\"statusText\">Flash Sale đang diễn ra!</div>\n  </div>\n  <div class=\"countdown-wrapper\">\n    <div class=\"countdown-block\">\n      <span id=\"hours\">00</span>\n      <label>Giờ</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"minutes\">00</span>\n      <label>Phút</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"seconds\">00</span>\n      <label>Giây</label>\n    </div>\n  </div>\n</div>\n\n<script>\nclass FlashSaleTimer {\n  constructor() {\n    this.statusText = document.getElementById('statusText');\n    this.statusIcon = document.getElementById('statusIcon');\n    this.container = document.getElementById('flashSaleContainer');\n    this.hoursElement = document.getElementById('hours');\n    this.minutesElement = document.getElementById('minutes');\n    this.secondsElement = document.getElementById('seconds');\n    \n    this.flashSaleStartHour = 23; // 11 PM\n    this.flashSaleEndHour = 8;    // 8 AM\n    \n    // Check if we should show the flash sale based on GMT+7 time\n    if (this.isWithinGMTPlus7TimeRange()) {\n      this.container.style.display = \"flex\"; // Show the container\n      this.updateTimer();\n      setInterval(() => this.updateTimer(), 1000);\n    }\n  }\n\n  // Get current time in GMT+7\n  getCurrentGMTPlus7Time() {\n    const now = new Date();\n    // Convert to GMT+7\n    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);\n    return new Date(utcTime + (7 * 60 * 60 * 1000));\n  }\n\n  // Check if current GMT+7 time is within flash sale hours (11 PM - 8 AM)\n  isWithinGMTPlus7TimeRange() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  isFlashSaleActive() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  getNextFlashSaleTime() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    let nextFlashSale = new Date(gmtPlus7Time);\n    \n    if (gmtPlus7Time.getHours() >= this.flashSaleEndHour && gmtPlus7Time.getHours() < this.flashSaleStartHour) {\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    } else {\n      nextFlashSale.setDate(nextFlashSale.getDate() + 1);\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    }\n    \n    return nextFlashSale;\n  }\n\n  getTimeRemaining(endTime) {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const total = endTime - gmtPlus7Time;\n    const seconds = Math.floor((total / 1000) % 60);\n    const minutes = Math.floor((total / 1000 / 60) % 60);\n    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);\n    \n    return {\n      total,\n      hours,\n      minutes,\n      seconds\n    };\n  }\n\n  updateTimer() {\n    const isActive = this.isFlashSaleActive();\n    let timeRemaining;\n    \n    if (isActive) {\n      // Calculate end time (8 AM in GMT+7)\n      const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n      const endTime = new Date(gmtPlus7Time);\n      endTime.setHours(this.flashSaleEndHour, 0, 0, 0);\n      if (endTime < gmtPlus7Time) {\n        endTime.setDate(endTime.getDate() + 1);\n      }\n      timeRemaining = this.getTimeRemaining(endTime);\n      \n      this.statusText.textContent = 'Flash Sale đang diễn ra!';\n      this.container.classList.remove('inactive');\n    } else {\n      timeRemaining = this.getTimeRemaining(this.getNextFlashSaleTime());\n      \n      this.statusText.textContent = 'Flash Sale sắp diễn ra';\n      this.container.classList.add('inactive');\n    }\n\n    this.hoursElement.textContent = timeRemaining.hours.toString().padStart(2, '0');\n    this.minutesElement.textContent = timeRemaining.minutes.toString().padStart(2, '0');\n    this.secondsElement.textContent = timeRemaining.seconds.toString().padStart(2, '0');\n  }\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  new FlashSaleTimer();\n});\n</script>"
           }
         },
-        "description": {
-          "type": "description",
+        "promotion_Ujrtfc": {
+          "type": "promotion",
           "settings": {
-            "is_tab": false,
-            "collapse_content": false
+            "title": "Mã ưu đãi",
+            "enable_popup": false,
+            "voucher_image_1": "shopify://shop_images/250k-01.png",
+            "popup_content_1": "",
+            "popup_content_2": "",
+            "popup_content_3": "",
+            "popup_content_4": ""
           }
         },
         "price": {
           "type": "price",
           "settings": {}
+        },
+        "usage_guide_CNJTGE": {
+          "type": "usage_guide",
+          "settings": {
+            "title": "Hướng dẫn chọn kích thước",
+            "image": "shopify://shop_images/size-guide.png",
+            "content": ""
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -50,24 +51,6 @@
             "color_swatches": true
           }
         },
-        "showroom_dropdown_MfUCtB": {
-          "type": "showroom_dropdown",
-          "settings": {
-            "title": "Hệ thống cửa hàng",
-            "showroom_1_name": "Showroom 1",
-            "showroom_1_address": "",
-            "showroom_1_phone": "0964777910",
-            "showroom_1_map_link": "",
-            "showroom_2_name": "Showroom 2",
-            "showroom_2_address": "",
-            "showroom_2_phone": "0964777910",
-            "showroom_2_map_link": "",
-            "showroom_3_name": "Showroom 3",
-            "showroom_3_address": "",
-            "showroom_3_phone": "0964777940",
-            "showroom_3_map_link": ""
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -76,15 +59,18 @@
             "show_gift_card_recipient": false
           }
         },
-        "productbundle_GcbRad": {
-          "type": "productbundle",
-          "disabled": true,
+        "description": {
+          "type": "description",
           "settings": {
-            "product_list": [
-              "ru9-eye-mask"
-            ],
-            "cross_sell_title": "Quà tặng cho quý khách mua nệm",
-            "cross_sell_label": "Miễn phí"
+            "is_tab": false,
+            "collapse_content": false
+          }
+        },
+        "usage_guide_TbqDnd": {
+          "type": "usage_guide",
+          "settings": {
+            "title": "Hệ thống của hàng",
+            "content": "<p><a href=\"https://maps.google.com/?q=Shop%2009,%20B2%20Sarimi,%20K%C4%90T%20Sala,%2072%20Nguy%E1%BB%85n%20C%C6%A1%20Th%E1%BA%A1ch,%20P.%20An%20L%E1%BB%A3i%20%C4%90%C3%B4ng,%20Q.2,%20TP.%20HCM\" target=\"_blank\"><strong>Q.2, TP.HCM:</strong></a> Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br/><a href=\"tel:0964777960\">0964777960</a></p><p><a href=\"https://maps.google.com/?q=283A%20Hai%20B%C3%A0%20Tr%C6%B0ng,%20Ph%C6%B0%E1%BB%9Dng%20Xu%C3%A2n%20Ho%C3%A0,%20Q.3,%20TP.HCM\" target=\"_blank\"><strong>Q.3, TP.HCM:</strong></a> 283A Hai Bà Trưng, Phường Xuân Hoà<br/><a href=\"tel:0964777910\">0964777910</a></p><p><a href=\"https://maps.google.com/?q=228%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20Q.%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20HN\" target=\"_blank\"><strong>Q. Cầu Giấy, HN:</strong></a>  228 Cầu Giấy, Quan Hoa<br/><a href=\"tel:0964777940\">0964777940</a></p>"
           }
         },
         "service_grid_naqrzN": {
@@ -110,15 +96,14 @@
         }
       },
       "block_order": [
-        "judge_me_reviews_preview_badge_MD8JNY",
-        "trust_badge_crGyDj",
         "custom_m49fr6",
-        "description",
+        "promotion_Ujrtfc",
         "price",
+        "usage_guide_CNJTGE",
         "variant_picker",
-        "showroom_dropdown_MfUCtB",
         "buy_buttons",
-        "productbundle_GcbRad",
+        "description",
+        "usage_guide_TbqDnd",
         "service_grid_naqrzN",
         "carousel_modal_B8Mr9e"
       ],
@@ -128,19 +113,57 @@
         "enable_sticky_add_to_cart": true,
         "hide_payment_button_mobile": false,
         "sku_enable": false,
-        "product_subtitle": "",
+        "product_subtitle": "{{ product.metafields.custom.subdes.value }}",
         "custom_text": "",
         "image_position": "left",
         "image_size": "large",
         "product_zoom_enable": true,
         "product_carousel_enable": false,
-        "limit_product_carousel": true,
+        "limit_product_carousel": false,
         "thumbnail_position": "below",
         "thumbnail_height": "flexible",
         "thumbnail_arrows": false,
         "mobile_layout": "partial",
         "enable_video_looping": true,
         "product_video_style": "muted"
+      }
+    },
+    "reason_to_choice_aAxiWV": {
+      "type": "reason-to-choice",
+      "blocks": {
+        "reason_gBqhgK": {
+          "type": "reason",
+          "settings": {
+            "image": "{{ product.metafields.custom.dynamic_image_1.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_1.value }}",
+            "content": "<p>{{ product.metafields.custom.dynamic_description_1 | metafield_tag }}</p>"
+          }
+        },
+        "reason_aKxdHA": {
+          "type": "reason",
+          "settings": {
+            "image": "{{ product.metafields.custom.dynamic_image_2.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_2.value }}",
+            "content": "<p>{{ product.metafields.custom.dynamic_desciption_2 | metafield_tag }}</p>"
+          }
+        },
+        "reason_MC7JJw": {
+          "type": "reason",
+          "settings": {
+            "image": "{{ product.metafields.custom.dynamic_image_3.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_2.value }}",
+            "content": "<p>{{ product.metafields.custom.dynamic_description_3 | metafield_tag }}</p>"
+          }
+        }
+      },
+      "block_order": [
+        "reason_gBqhgK",
+        "reason_aKxdHA",
+        "reason_MC7JJw"
+      ],
+      "name": "Reason to choice",
+      "settings": {
+        "title": "Lý do bạn nên chọn chúng tôi"
       }
     },
     "product_hotspot_XzDEYy": {
@@ -252,7 +275,7 @@
             "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
             "direction": "vertical",
             "content_position": "right",
-            "space": "250",
+            "space": "200",
             "left": "30%",
             "top": "25%",
             "space_mb": "110",
@@ -591,20 +614,67 @@
         "space_around": true
       }
     },
-    "featured_collection_8jqPyP": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.featured_collection.name",
+    "collections_listing_97PmV6": {
+      "type": "collections-listing",
+      "blocks": {
+        "collection_DMJDdY": {
+          "type": "collection",
+          "settings": {
+            "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_R4Ndy9": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_hNpQWc": {
+          "type": "collection",
+          "settings": {
+            "collection": "chan",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_dh6XkM": {
+          "type": "collection",
+          "settings": {
+            "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_trjGmU": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_DMJDdY",
+        "collection_R4Ndy9",
+        "collection_hNpQWc",
+        "collection_dh6XkM",
+        "collection_trjGmU"
+      ],
+      "name": "Collections Listing",
       "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
-        "title": "Gợi ý các sản phẩm",
-        "home_featured_products": "nem",
-        "per_row": 4,
-        "rows": 1,
-        "mobile_scrollable": false,
-        "view_all": false,
-        "divider": false,
-        "hide_price": false
+        "title": "Có thể bạn cũng thích",
+        "title_color": "#1c2c58",
+        "text_color": "#212121"
       }
     },
     "sub": {
@@ -638,6 +708,7 @@
   },
   "order": [
     "main",
+    "reason_to_choice_aAxiWV",
     "product_hotspot_XzDEYy",
     "product_hotspot_pnDmHC",
     "product_hotspot_grhP6h",
@@ -647,7 +718,7 @@
     "certification_VUqyB6",
     "172802814088f5e025",
     "1730878240cfbec46e",
-    "featured_collection_8jqPyP",
+    "collections_listing_97PmV6",
     "sub",
     "product-recommendations",
     "recently-viewed",

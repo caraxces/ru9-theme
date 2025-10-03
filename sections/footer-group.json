@@ -61,12 +61,16 @@
         "social_instagram_link": "https://www.facebook.com/ru9vn",
         "social_youtube_link": "",
         "social_tiktok_link": "https://www.facebook.com/ru9vn",
+        "social_zalo_link": "https://zalo.me/2061353887673595200",
         "addr_1": "<p>B2.009 Chung cư Sarimi, Nguyễn Cơ Thạch, Thành phố Thủ Đức, TP. Hồ Chí Minh<br/>0964777910</p>",
         "addr_2": "<p>283A Hai Bà Trưng, Phường Xuân Hòa, <br/>TP. Hồ Chí Minh<br/>0964777910</p>",
         "addr_3": "<p>228 Cầu Giấy, Phường Quan Hoa, Hà Nội<br/>0964777940</p>",
         "hours": "<p>09:00 - 21:00, Thứ 2 - Chủ nhật</p>",
         "badge_1_html": "",
-        "badge_2_html": ""
+        "badge_2_html": "",
+        "hotline_enable": true,
+        "hotline_number": "1900636321",
+        "hotline_color": "#4caf50"
       }
     },
     "contact_us_banner_7ty9ei": {

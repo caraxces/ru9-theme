@@ -439,6 +439,7 @@
           "type": "collection",
           "settings": {
             "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
             "custom_title": "",
             "custom_link": ""
           }
@@ -447,6 +448,7 @@
           "type": "collection",
           "settings": {
             "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
             "custom_title": "",
             "custom_link": ""
           }
@@ -455,6 +457,7 @@
           "type": "collection",
           "settings": {
             "collection": "chan",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
             "custom_title": "",
             "custom_link": ""
           }
@@ -463,6 +466,7 @@
           "type": "collection",
           "settings": {
             "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
             "custom_title": "",
             "custom_link": ""
           }

@@ -22,6 +22,18 @@
           "type": "price",
           "settings": {}
         },
+        "promotion_9wmn3n": {
+          "type": "promotion",
+          "settings": {
+            "title": "Mã ưu đãi",
+            "enable_popup": false,
+            "voucher_image_1": "shopify://shop_images/250k-01.png",
+            "popup_content_1": "",
+            "popup_content_2": "",
+            "popup_content_3": "",
+            "popup_content_4": ""
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -29,24 +41,6 @@
             "picker_type": "button",
             "product_dynamic_variants_enable": true,
             "color_swatches": true
-          }
-        },
-        "showroom_dropdown_UxyXgK": {
-          "type": "showroom_dropdown",
-          "settings": {
-            "title": "Hệ thống cửa hàng",
-            "showroom_1_name": "Showroom 1",
-            "showroom_1_address": "<p>B2.009 Chung cư Sarimi, Nguyễn Cơ Thạch, Thành phố Thủ Đức, TP. Hồ Chí Minh</p>",
-            "showroom_1_phone": "0964777910",
-            "showroom_1_map_link": "https://maps.app.goo.gl/oYLGqyTqFY1Q3XUP8",
-            "showroom_2_name": "Showroom 2",
-            "showroom_2_address": "<p>283A Hai Bà Trưng, Phường Xuân Hòa,<br/>TP. Hồ Chí Minh</p>",
-            "showroom_2_phone": "0964777910",
-            "showroom_2_map_link": "https://maps.app.goo.gl/8szv6U4K8qkVbmdeA",
-            "showroom_3_name": "Showroom 3",
-            "showroom_3_address": "<p>228 Cầu Giấy, Phường Quan Hoa, Hà Nội</p>",
-            "showroom_3_phone": "0964777940",
-            "showroom_3_map_link": "https://maps.app.goo.gl/1y1nqMumEGhxRz3D9"
           }
         },
         "buy_buttons": {
@@ -62,6 +56,13 @@
           "settings": {
             "is_tab": false,
             "collapse_content": false
+          }
+        },
+        "usage_guide_jgNVVR": {
+          "type": "usage_guide",
+          "settings": {
+            "title": "Hệ thống của hàng",
+            "content": "<p><a href=\"https://maps.google.com/?q=Shop%2009,%20B2%20Sarimi,%20K%C4%90T%20Sala,%2072%20Nguy%E1%BB%85n%20C%C6%A1%20Th%E1%BA%A1ch,%20P.%20An%20L%E1%BB%A3i%20%C4%90%C3%B4ng,%20Q.2,%20TP.%20HCM\" target=\"_blank\"><strong>Q.2, TP.HCM:</strong></a> Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br/><a href=\"tel:0964777960\">0964777960</a></p><p><a href=\"https://maps.google.com/?q=283A%20Hai%20B%C3%A0%20Tr%C6%B0ng,%20Ph%C6%B0%E1%BB%9Dng%20Xu%C3%A2n%20Ho%C3%A0,%20Q.3,%20TP.HCM\" target=\"_blank\"><strong>Q.3, TP.HCM:</strong></a> 283A Hai Bà Trưng, Phường Xuân Hoà<br/><a href=\"tel:0964777910\">0964777910</a></p><p><a href=\"https://maps.google.com/?q=228%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20Q.%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20HN\" target=\"_blank\"><strong>Q. Cầu Giấy, HN:</strong></a>  228 Cầu Giấy, Quan Hoa<br/><a href=\"tel:0964777940\">0964777940</a></p>"
           }
         },
         "service_grid_ULWnHy": {
@@ -80,21 +81,17 @@
             "text_4": "Tra gop 0%",
             "show_service_4": true
           }
-        },
-        "carousel_modal_B8Mr9e": {
-          "type": "carousel_modal",
-          "settings": {}
         }
       },
       "block_order": [
         "custom_KLmBnb",
         "price",
+        "promotion_9wmn3n",
         "variant_picker",
-        "showroom_dropdown_UxyXgK",
         "buy_buttons",
         "description",
-        "service_grid_ULWnHy",
-        "carousel_modal_B8Mr9e"
+        "usage_guide_jgNVVR",
+        "service_grid_ULWnHy"
       ],
       "settings": {
         "section_width": "page-width",
@@ -108,7 +105,7 @@
         "image_size": "large",
         "product_zoom_enable": true,
         "product_carousel_enable": false,
-        "limit_product_carousel": true,
+        "limit_product_carousel": false,
         "thumbnail_position": "below",
         "thumbnail_height": "flexible",
         "thumbnail_arrows": false,
@@ -467,42 +464,6 @@
         "divider": true
       }
     },
-    "certification_VUqyB6": {
-      "type": "certification",
-      "blocks": {
-        "slide_63THmd": {
-          "type": "slide",
-          "settings": {
-            "banner": "shopify://shop_images/certification-image-1.jpg",
-            "banner_mobile": "shopify://shop_images/certification-image-1-mobile.jpg",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
-            "image": "shopify://shop_images/logo-certification-1.png"
-          }
-        },
-        "slide_zqGeDK": {
-          "type": "slide",
-          "settings": {
-            "banner": "shopify://shop_images/Screenshot_2024-11-09_095809.png",
-            "banner_mobile": "shopify://shop_images/Screenshot_2024-11-09_095809.png",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
-            "image": "shopify://shop_images/logo-certification-1.png"
-          }
-        }
-      },
-      "block_order": [
-        "slide_63THmd",
-        "slide_zqGeDK"
-      ],
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1250,
-        "bg": "#f0f7fe",
-        "title": "",
-        "description": ""
-      }
-    },
     "172802814088f5e025": {
       "type": "apps",
       "settings": {
@@ -533,27 +494,74 @@
         "space_around": true
       }
     },
+    "collections_listing_qVbQBx": {
+      "type": "collections-listing",
+      "blocks": {
+        "collection_CqfWRy": {
+          "type": "collection",
+          "settings": {
+            "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_icU8MW": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_ENyNAG": {
+          "type": "collection",
+          "settings": {
+            "collection": "chan",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_wKbQXx": {
+          "type": "collection",
+          "settings": {
+            "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_CkbjFH": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_CqfWRy",
+        "collection_icU8MW",
+        "collection_ENyNAG",
+        "collection_wKbQXx",
+        "collection_CkbjFH"
+      ],
+      "name": "Collections Listing",
+      "settings": {
+        "title": "Có thể bạn cũng thích",
+        "title_color": "#1c2c58",
+        "text_color": "#212121"
+      }
+    },
     "sub": {
       "type": "product-full-width",
       "disabled": true,
       "settings": {
         "max_width": true
-      }
-    },
-    "featured_collection_QwHgAT": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.featured_collection.name",
-      "settings": {
-        "section_width": "page-width",
-        "customize_width": 1800,
-        "title": "Gợi ý các sản phẩm",
-        "home_featured_products": "nem",
-        "per_row": 4,
-        "rows": 1,
-        "mobile_scrollable": false,
-        "view_all": false,
-        "divider": false,
-        "hide_price": false
       }
     },
     "product-recommendations": {
@@ -586,11 +594,10 @@
     "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",
     "dynamic_faq_Whrn47",
-    "certification_VUqyB6",
     "172802814088f5e025",
     "1730878240cfbec46e",
+    "collections_listing_qVbQBx",
     "sub",
-    "featured_collection_QwHgAT",
     "product-recommendations",
     "recently-viewed",
     "collection-return"

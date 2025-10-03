@@ -77,7 +77,7 @@
           "settings": {
             "product": "combo-giấc-ngủ-tối-ưu",
             "product_label": "Best seller",
-            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "product_description": "Tiết kiệm hơn khi chọn trọn bộ, tiện lợi cho giấc ngủ êm và lối sống tinh gọn.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -87,7 +87,7 @@
           "settings": {
             "product": "combo-gối-trọn-nang-niu",
             "product_label": "Best seller",
-            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "product_description": "Trọn bộ chăm sóc giấc ngủ, nâng niu từng phút nghỉ ngơi, nâng tầm trải nghiệm.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -97,7 +97,7 @@
           "settings": {
             "product": "combo-nhịp-ngủ-dịu-em",
             "product_label": "Best seller",
-            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "product_description": "Sự kết hợp hoàn chỉnh cho giấc ngủ êm dịu, thư thả từng khoảnh khắc nghỉ ngơi.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -107,7 +107,7 @@
           "settings": {
             "product": "combo-giac-ngu-diu-em",
             "product_label": "Best seller",
-            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "product_description": "Nâng tầm chất lượng giấc ngủ, êm ái thoải mái và linh hoạt cho mọi nhu cầu.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -196,7 +196,7 @@
           "settings": {
             "product": "bo-nem-nest",
             "product_label": "",
-            "bundle_items": "<br> - Nệm Nest ,<br> - 2 gối Mây, <br>- Bộ ga giường Cotton",
+            "bundle_items": "<br> - Nệm Nest<br> - 2 gối Mây<br>- Bộ ga giường Cotton",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -206,7 +206,7 @@
           "settings": {
             "product": "bộ-em-ai-trọn-giấc-copy",
             "product_label": "",
-            "bundle_items": "<br> - Nệm Nest ,<br> - 2 gối Mây, <br>- Bộ ga giường Cotton, - Tấm bảo vệ",
+            "bundle_items": "<br> - Nệm Nest<br> - 2 gối Mây<br>- Bộ ga giường Cotton + Tấm bảo vệ",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -216,7 +216,7 @@
           "settings": {
             "product": "combo-em-ai-tron-giac",
             "product_label": "",
-            "bundle_items": "<br> - Nệm Original<br> - 2 gối Niu <br>- Bộ ga giường, Chăn Lạnh",
+            "bundle_items": "<br> - Nệm Original<br> - 2 gối Niu <br>- Bộ ga giường & Chăn Lạnh",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -226,7 +226,7 @@
           "settings": {
             "product": "combo-em-giấc-trọn-vẹn",
             "product_label": "",
-            "bundle_items": "<br> - Nệm Original,<br>- Bộ ga giường Cotton<br> - 2 gối Niu,  Chăn",
+            "bundle_items": "<br> - Nệm Original<br>- Bộ ga giường Cotton<br> - 2 gối Niu & Chăn",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -236,7 +236,7 @@
           "settings": {
             "product": "bo-ngu-em-ru9",
             "product_label": "",
-            "bundle_items": "<br> - Nệm Original,<br>- Bộ ga giường Cotton<br> - 2 gối Mây",
+            "bundle_items": "<br> - Nệm Original<br>- Bộ ga giường Cotton<br> - 2 gối Mây",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }

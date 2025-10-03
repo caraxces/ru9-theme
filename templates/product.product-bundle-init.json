@@ -154,6 +154,44 @@
         "voucher_code": "{{ product.metafields.custom.bundle_tactics_voucher.value }}"
       }
     },
+    "reason_to_choice_UDdRaN": {
+      "type": "reason-to-choice",
+      "blocks": {
+        "reason_4CWY9V": {
+          "type": "reason",
+          "settings": {
+            "image": "shopify://shop_images/Kh_i_ngu_n_c_a_kho_nh_kh_c_an_nhien.jpg",
+            "title": "",
+            "content": ""
+          }
+        },
+        "reason_xTVNaW": {
+          "type": "reason",
+          "settings": {
+            "image": "shopify://shop_images/Kh_i_ngu_n_c_a_h_nh_phuc_n_i_t_m.jpg",
+            "title": "",
+            "content": ""
+          }
+        },
+        "reason_B8qDMb": {
+          "type": "reason",
+          "settings": {
+            "image": "shopify://shop_images/Kh_i_ngu_n_c_a_nang_l_ng_tich_c_c.jpg",
+            "title": "",
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "reason_4CWY9V",
+        "reason_xTVNaW",
+        "reason_B8qDMb"
+      ],
+      "name": "Reason to choice",
+      "settings": {
+        "title": "Không chỉ là lựa chọn cho phòng ngủ,mà còn là đầu tư cho chất lượng cuộc sống"
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -879,6 +917,7 @@
   "order": [
     "countdown_Gwp9bc",
     "main_product_bundle_HQfEDh",
+    "reason_to_choice_UDdRaN",
     "main",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",

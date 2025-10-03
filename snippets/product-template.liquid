@@ -2588,19 +2588,30 @@
                         {%- for i in (1..4) -%}
                           {%- capture voucher_image -%}voucher_image_{{ i }}{%- endcapture -%}
                           {%- if block.settings[voucher_image] != blank -%}
-                            <modal-opener data-modal="#PromotionPopup-{{ block.id }}-{{ i }}">
-                              <button
-                                class="promotion-voucher-item"
-                                aria-label="Open promotion details"
-                              >
+                            {%- if block.settings.enable_popup -%}
+                              <modal-opener data-modal="#PromotionPopup-{{ block.id }}-{{ i }}">
+                                <button
+                                  class="promotion-voucher-item"
+                                  aria-label="Open promotion details"
+                                >
+                                  <img
+                                    src="{{ block.settings[voucher_image] | img_url: 'master' }}"
+                                    alt="{{ block.settings[voucher_image].alt | default: 'Mã ưu đãi' }}"
+                                    width="85"
+                                    height="37"
+                                  >
+                                </button>
+                              </modal-opener>
+                            {%- else -%}
+                              <span class="promotion-voucher-item" style="cursor: default;">
                                 <img
                                   src="{{ block.settings[voucher_image] | img_url: 'master' }}"
                                   alt="{{ block.settings[voucher_image].alt | default: 'Mã ưu đãi' }}"
                                   width="85"
                                   height="37"
                                 >
-                              </button>
-                            </modal-opener>
+                              </span>
+                            {%- endif -%}
                           {%- endif -%}
                         {%- endfor -%}
                         </div>
@@ -3442,40 +3453,42 @@
 {%- for block in blocks -%}
   {%- case block.type -%}
     {%- when 'promotion' -%}
-      {%- for i in (1..4) -%}
-        {%- capture voucher_image -%}voucher_image_{{ i }}{%- endcapture -%}
-        {%- capture popup_bg -%}popup_bg_{{ i }}{%- endcapture -%}
-        {%- capture popup_content -%}popup_content_{{ i }}{%- endcapture -%}
+      {%- if block.settings.enable_popup -%}
+        {%- for i in (1..4) -%}
+          {%- capture voucher_image -%}voucher_image_{{ i }}{%- endcapture -%}
+          {%- capture popup_bg -%}popup_bg_{{ i }}{%- endcapture -%}
+          {%- capture popup_content -%}popup_content_{{ i }}{%- endcapture -%}
 
-        {%- if block.settings[voucher_image] != blank -%}
-          <modal-dialog
-            id="PromotionPopup-{{ block.id }}-{{ i }}"
-            class="promotion-popup-modal popup-modal fixed top-0 left-0 w-full h-full m-auto"
-          >
-            <div
-              role="dialog"
-              aria-modal="true"
-              class="popup-modal__content absolute w-full h-auto m-auto"
-              tabindex="-1"
-              style="{% if block.settings[popup_bg] != blank %}background-image: url('{{ block.settings[popup_bg] | img_url: 'master' }}');{% endif %}"
+          {%- if block.settings[voucher_image] != blank -%}
+            <modal-dialog
+              id="PromotionPopup-{{ block.id }}-{{ i }}"
+              class="promotion-popup-modal popup-modal fixed top-0 left-0 w-full h-full m-auto"
             >
-              <div class="popup-modal__content-info relative mx-auto">
-                <button
-                  id="ModalClose-{{ block.id }}-{{ i }}"
-                  type="button"
-                  class="popup-modal__toggle block border-none rounded-circle absolute z-index-3 button--close"
-                  aria-label="{{ 'accessibility.close_modal' | t }}"
-                >
-                  <span class="i__close e-none block relative color-current w-full h-full"></span>
-                </button>
-                <div class="rte">
-                  {{ block.settings[popup_content] }}
+              <div
+                role="dialog"
+                aria-modal="true"
+                class="popup-modal__content absolute w-full h-auto m-auto"
+                tabindex="-1"
+                style="{% if block.settings[popup_bg] != blank %}background-image: url('{{ block.settings[popup_bg] | img_url: 'master' }}');{% endif %}"
+              >
+                <div class="popup-modal__content-info relative mx-auto">
+                  <button
+                    id="ModalClose-{{ block.id }}-{{ i }}"
+                    type="button"
+                    class="popup-modal__toggle block border-none rounded-circle absolute z-index-3 button--close"
+                    aria-label="{{ 'accessibility.close_modal' | t }}"
+                  >
+                    <span class="i__close e-none block relative color-current w-full h-full"></span>
+                  </button>
+                  <div class="rte">
+                    {{ block.settings[popup_content] }}
+                  </div>
                 </div>
               </div>
-            </div>
-          </modal-dialog>
-        {%- endif -%}
-      {%- endfor -%}
+            </modal-dialog>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
     {%- when 'carousel_modal' -%}
       <modal-dialog
         id="PopupModal-{{ block.id }}"

@@ -144,7 +144,7 @@
         "image": "shopify://shop_images/00909003ee41844939ad76f1fa4bf6dda646c676.png",
         "image_mobile": "shopify://shop_images/BANNER_INTRO_MOBILE.png",
         "button_text": "Xem chi tiết",
-        "button_link": ""
+        "button_link": "https://ru9.vn/pages/about"
       }
     },
     "collections_listing_cAa8Dw": {
@@ -339,7 +339,7 @@
         "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
         "title": "Đâu là chiếc nệm phù hợp với bạn?",
         "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
-        "button_1_text": "Quiz chọn nệm",
+        "button_1_text": "",
         "button_2_text": "So sánh các loại nệm",
         "button_2_link": "shopify://collections/nem",
         "q_1_title": "Question 1?",
@@ -388,6 +388,76 @@
         "q_5_a_4_text": "",
         "q_5_a_4_tags": "",
         "result_title": "We recommend for you"
+      }
+    },
+    "combo_bedroom_jqpYBy": {
+      "type": "combo-bedroom",
+      "blocks": {
+        "product_item_MpjpGm": {
+          "type": "product_item",
+          "settings": {
+            "product": "bo-nem-nest",
+            "product_label": "",
+            "bundle_items": "<br> - Nệm Nest<br> - 2 gối Mây<br>- Bộ ga giường Cotton",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_6WikJL": {
+          "type": "product_item",
+          "settings": {
+            "product": "bộ-em-ai-trọn-giấc-copy",
+            "product_label": "",
+            "bundle_items": "<br> - Nệm Nest<br> - 2 gối Mây<br>- Bộ ga giường Cotton & Tấm bảo vệ",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_JyUexR": {
+          "type": "product_item",
+          "settings": {
+            "product": "combo-em-ai-tron-giac",
+            "product_label": "",
+            "bundle_items": "<br> - Nệm Original<br> - 2 gối Niu <br>- Bộ ga giường & Chăn Lạnh",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_gVHNxh": {
+          "type": "product_item",
+          "settings": {
+            "product": "combo-em-giấc-trọn-vẹn",
+            "product_label": "",
+            "bundle_items": "<br> - Nệm Original<br>- Bộ ga giường Cotton<br> - 2 gối Niu & Chăn",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_wXgNeq": {
+          "type": "product_item",
+          "settings": {
+            "product": "bo-ngu-em-ru9",
+            "product_label": "",
+            "bundle_items": "<br> - Nệm Original<br>- Bộ ga giường Cotton<br> - 2 gối Mây",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        }
+      },
+      "block_order": [
+        "product_item_MpjpGm",
+        "product_item_6WikJL",
+        "product_item_JyUexR",
+        "product_item_gVHNxh",
+        "product_item_wXgNeq"
+      ],
+      "name": "Combo Phòng Ngủ",
+      "settings": {
+        "title": "Combo phòng ngủ",
+        "description": "",
+        "primary_color": "#1c2c58",
+        "text_color": "#1a1a1a",
+        "description_color": "#666666"
       }
     },
     "tvc_section_WrUqBM": {
@@ -607,7 +677,7 @@
         "title": "Cam kết an toàn\ntừ lần chạm đầu tiên",
         "description": "<p>Tại Ru9, mỗi sản phẩm không chỉ mang đến sự thoải mái mà còn đảm bảo an toàn tuyệt đối cho sức khỏe người dùng ngay từ những lần tiếp xúc đầu tiên. Đó là lý do vì sao nệm và các chất liệu của Ru9 đều đạt được hai chứng nhận uy tín hàng đầu thế giới.</p>",
         "button_text": "Xem chi tiết",
-        "button_link": ""
+        "button_link": "https://ru9.vn/pages/certification"
       }
     },
     "blog_carousel_CXkPPY": {
@@ -669,6 +739,7 @@
     "image_marquee_hcRmaa",
     "featured_products_by_size_c63dBV",
     "quiz_banner_4z7U33",
+    "combo_bedroom_jqpYBy",
     "tvc_section_WrUqBM",
     "reviews_carousel_ECAtRY",
     "super_service_87efWC",
