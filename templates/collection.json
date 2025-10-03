@@ -178,6 +178,7 @@
       "blocks": {
         "product_item_Gj8HEx": {
           "type": "product_item",
+          "disabled": true,
           "settings": {
             "product": "bo-nem-nest",
             "product_label": "",

@@ -1277,6 +1277,16 @@
             }
           }
           
+          // Update discount applied text
+          const discountText = document.querySelector('.cart-drawer__summary-item .text-right');
+          if (discountText) {
+            // Check if there are any discount applications by looking for discount-related elements
+            const hasDiscount = document.querySelector('[data-discount]') || 
+                               document.querySelector('.cart-item__discount') ||
+                               totalSavings > 0;
+            discountText.style.display = hasDiscount ? '' : 'none';
+          }
+          
           // Part 3: Add/Update Bundle Footer
           document.querySelectorAll('.bundle-footer').forEach(f => f.remove());
           document.querySelectorAll('.is-before-footer').forEach(i => i.classList.remove('is-before-footer'));

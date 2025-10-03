@@ -395,6 +395,7 @@
       "blocks": {
         "product_item_MpjpGm": {
           "type": "product_item",
+          "disabled": true,
           "settings": {
             "product": "bo-nem-nest",
             "product_label": "",

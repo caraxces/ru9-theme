@@ -69,7 +69,7 @@
         "usage_guide_TbqDnd": {
           "type": "usage_guide",
           "settings": {
-            "title": "Hệ thống của hàng",
+            "title": "Hệ thống cửa hàng",
             "content": "<p><a href=\"https://maps.google.com/?q=Shop%2009,%20B2%20Sarimi,%20K%C4%90T%20Sala,%2072%20Nguy%E1%BB%85n%20C%C6%A1%20Th%E1%BA%A1ch,%20P.%20An%20L%E1%BB%A3i%20%C4%90%C3%B4ng,%20Q.2,%20TP.%20HCM\" target=\"_blank\"><strong>Q.2, TP.HCM:</strong></a> Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br/><a href=\"tel:0964777960\">0964777960</a></p><p><a href=\"https://maps.google.com/?q=283A%20Hai%20B%C3%A0%20Tr%C6%B0ng,%20Ph%C6%B0%E1%BB%9Dng%20Xu%C3%A2n%20Ho%C3%A0,%20Q.3,%20TP.HCM\" target=\"_blank\"><strong>Q.3, TP.HCM:</strong></a> 283A Hai Bà Trưng, Phường Xuân Hoà<br/><a href=\"tel:0964777910\">0964777910</a></p><p><a href=\"https://maps.google.com/?q=228%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20Q.%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20HN\" target=\"_blank\"><strong>Q. Cầu Giấy, HN:</strong></a>  228 Cầu Giấy, Quan Hoa<br/><a href=\"tel:0964777940\">0964777940</a></p>"
           }
         },
@@ -151,7 +151,7 @@
           "type": "reason",
           "settings": {
             "image": "{{ product.metafields.custom.dynamic_image_3.value }}",
-            "title": "{{ product.metafields.custom.dynamic_title_2.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_3.value }}",
             "content": "<p>{{ product.metafields.custom.dynamic_description_3 | metafield_tag }}</p>"
           }
         }
@@ -510,27 +510,174 @@
         "poster": "{{ product.metafields.custom.video_cover_image.value }}"
       }
     },
-    "dynamic_faq_Whrn47": {
-      "type": "dynamic-faq",
+    "reviews_carousel_7Lfzpi": {
+      "type": "reviews-carousel",
       "blocks": {
-        "question_d3nb6H": {
-          "type": "question",
+        "review_LpFtpp": {
+          "type": "review",
           "settings": {
-            "title": "Frequently asked question",
-            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>"
+            "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
+            "customer_name": "Gon Pink",
+            "review_text": "<p>Mình nằm thử nệm Foam Original của Ru9 mới thấy khác biệt thiệt, foam ôm sát cơ thể giúp lưng – vai – hông được nâng đỡ đều, mình ngủ dậy không còn ê mỏi luôn. Thêm cái nữa là nệm cực thoáng khí, nằm lâu cũng không hầm nóng, vỏ thì tháo ra giặt siêu tiện. Nói chung là sản phẩm rất chất lượng so với giá tiền! </p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/foam-original"
           }
         },
-        "question_wQaBbp": {
-          "type": "question",
+        "review_gGb6bC": {
+          "type": "review",
           "settings": {
-            "title": "Frequently asked question",
-            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>"
+            "image": "shopify://shop_images/177826117_3828731063871354_8843481793885550946_n.jpg",
+            "customer_name": "Hoàng Ku",
+            "review_text": "<p>Điều mình thích nhất khi nằm nệm foam Ru9 là đệm sẽ ôm sát theo đường cong của cơ thể, mình có quả “thắt đáy lưng ong” nên phần đáy lưng võng cong, nằm nệm cứng chỗ lưng đó bị rỗng nên rất khó chịu, ngủ phải gập người lại thì mới dễ ngủ. Nhưng với đệm Foam Ru9 thì mình chỉ cần nằm thẳng thôi, cấu trúc của đệm sẽ tự khắc làm đầy ngay chỗ thắt lưng của mình luôn! </p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_T4dWUk": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Ane_cibi.jpg",
+            "customer_name": "Anne Cibi",
+            "review_text": "<p>Ghé Ru9 thăm showroom, kết quả là bê về túi to túi nhỏ luôn! Chăn bạch đàn, bộ ga gối tencel mướt mượt màu baby blue y chang cái nhà em nữa, nó mờ ê mê lắm</p>",
+            "product_name": "Bộ Ga Giường Ru9 Tencel",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/tencel-bedding-set"
+          }
+        },
+        "review_yKPCWJ": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/dao_lan_ph_ng_nest.jpg",
+            "customer_name": "Đào Lan Phương",
+            "review_text": "<p>Sau 3 tuần nằm thử, mình thật sự ưng chiếc nệm Nest này. Nệm dày, nằm chắc chắn chứ không bị lún, rất phù hợp cho người hay đau lưng như mình. Mong là chất lượng này sẽ bền lâu.</p>",
+            "product_name": "Nệm Nest",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://collections/bedding"
+          }
+        },
+        "review_bq9Apj": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/mc_van_anh_topper.jpg",
+            "customer_name": "Vân Anh",
+            "review_text": "<p>Mình trải nghiệm Foam Topper Ru9 được gần tháng rồi. Cảm giác nằm êm mà vẫn nâng đỡ tốt, lưng mình đỡ đau rõ rệt. Cái hay nữa là topper nhẹ, dễ mang đi và vệ sinh. Nói chung khá hài lòng, chỉ mong dùng lâu dài vẫn giữ được độ thoải mái như hiện tại.</p>",
+            "product_name": "Nệm Foam Topper",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/nem-cuon-foam-topper"
+          }
+        },
+        "review_xhjAPG": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/287509779_10228461666790384_79999810057241775_n.jpg",
+            "customer_name": "Hằng Thúy Ngô",
+            "review_text": "<p>Sau hơn nửa năm nằm nệm Original, mình thấy giấc ngủ được cải thiện rõ rệt. Nệm ôm và nâng đỡ cơ thể tốt, lưng cổ không còn ê ẩm như trước. Cảm giác mỗi tối nằm xuống đều rất thoải mái và dễ chịu.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_qVQmRG": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/47580643_1094459747384007_5553427953934663680_n.jpg",
+            "customer_name": "Tu Lam Kha",
+            "review_text": "<p>Sau nhiều lần đắn đo mình quyết định mua Nệm Foam Original, và thật sự đây là một khoản đầu tư xứng đáng. Từ ngày dùng, mình không còn thức dậy với cảm giác đau lưng hay mỏi vai gáy nữa.</p>",
+            "product_name": "Nệm Original",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_LKnbqt": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/IMG_8630.jpg",
+            "customer_name": "Ngọc Tú Anh",
+            "review_text": "<p>10 điểm cho Bộ ga giường Tecel của Ru9 nha. Vải mềm, mát, nằm không bị bí hay nóng lưng, cảm giác dễ chịu hơn hẳn bộ ga cũ. Cả nhà mình ai cũng mê</p>",
+            "product_name": "Bộ Bedding Tencel",
+            "verified_text": "Đã xác minh",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/tencel-bedding-set"
           }
         }
       },
       "block_order": [
-        "question_d3nb6H",
-        "question_wQaBbp"
+        "review_LpFtpp",
+        "review_gGb6bC",
+        "review_T4dWUk",
+        "review_yKPCWJ",
+        "review_bq9Apj",
+        "review_xhjAPG",
+        "review_qVQmRG",
+        "review_LKnbqt"
+      ],
+      "name": "Reviews carousel",
+      "settings": {
+        "heading": "<p>Hơn <strong>50,000 </strong>Khách Hàng<br/>Và <strong>30,000 </strong>Đánh Giá 5 Sao Toàn Quốc</p>"
+      }
+    },
+    "dynamic_faq_mfnnfE": {
+      "type": "dynamic-faq",
+      "blocks": {
+        "question_8CNYaf": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.ask1.value }}",
+            "text": "<p>{{ product.metafields.custom.answer1.value }}</p>"
+          }
+        },
+        "question_4gnQmJ": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.ask2.value }}",
+            "text": "<p>{{ product.metafields.custom.answer2.value }}</p>"
+          }
+        },
+        "question_T6pkcm": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.ask3.value }}",
+            "text": "<p>{{ product.metafields.custom.answer3.value }}</p>"
+          }
+        },
+        "question_krbtfB": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.ask4.value }}",
+            "text": "<p>{{ product.metafields.custom.answer4.value }}</p>"
+          }
+        },
+        "question_xpRUpJ": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.ask5.value }}",
+            "text": "<p>{{ product.metafields.custom.answer5.value }}</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_8CNYaf",
+        "question_4gnQmJ",
+        "question_T6pkcm",
+        "question_krbtfB",
+        "question_xpRUpJ"
       ],
       "settings": {
         "enable_anchor_link": true,
@@ -542,46 +689,10 @@
         "title": "Các câu hỏi thường gặp",
         "link": "shopify://pages/faqs",
         "link_text": "Xem những câu hỏi khác",
-        "text_alignment": "left",
-        "use_metafield": true,
+        "text_alignment": "center",
+        "use_metafield": false,
         "metafield_limit": "5",
         "divider": true
-      }
-    },
-    "certification_VUqyB6": {
-      "type": "certification",
-      "blocks": {
-        "slide_63THmd": {
-          "type": "slide",
-          "settings": {
-            "banner": "shopify://shop_images/certification-image-1.jpg",
-            "banner_mobile": "shopify://shop_images/certification-image-1-mobile.jpg",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
-            "image": "shopify://shop_images/logo-certification-1.png"
-          }
-        },
-        "slide_zqGeDK": {
-          "type": "slide",
-          "settings": {
-            "banner": "shopify://shop_images/Screenshot_2024-11-09_095809.png",
-            "banner_mobile": "shopify://shop_images/Screenshot_2024-11-09_095809.png",
-            "title": "<p>An toàn cho sức khoẻ.<br/>Bảo vệ cho làn da.</p>",
-            "description": "<p>Sản phẩm đạt tiêu chuẩn an toàn quốc tế OEKO-TEX®</p>",
-            "image": "shopify://shop_images/logo-certification-1.png"
-          }
-        }
-      },
-      "block_order": [
-        "slide_63THmd",
-        "slide_zqGeDK"
-      ],
-      "settings": {
-        "section_width": "customize_width",
-        "customize_width": 1250,
-        "bg": "#f0f7fe",
-        "title": "",
-        "description": ""
       }
     },
     "172802814088f5e025": {
@@ -714,8 +825,8 @@
     "product_hotspot_grhP6h",
     "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",
-    "dynamic_faq_Whrn47",
-    "certification_VUqyB6",
+    "reviews_carousel_7Lfzpi",
+    "dynamic_faq_mfnnfE",
     "172802814088f5e025",
     "1730878240cfbec46e",
     "collections_listing_97PmV6",

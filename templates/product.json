@@ -86,6 +86,7 @@
         },
         "size_guide_dropdown_fkaRtp": {
           "type": "size_guide_dropdown",
+          "disabled": true,
           "settings": {
             "title": "Hướng dẫn chọn kích thước",
             "image": "shopify://shop_images/size-guide.png"
@@ -126,7 +127,7 @@
         "usage_guide_F9jqCH": {
           "type": "usage_guide",
           "settings": {
-            "title": "Hệ thống của hàng",
+            "title": "Hệ thống cửa hàng",
             "content": "<p><a href=\"https://maps.google.com/?q=Shop%2009,%20B2%20Sarimi,%20K%C4%90T%20Sala,%2072%20Nguy%E1%BB%85n%20C%C6%A1%20Th%E1%BA%A1ch,%20P.%20An%20L%E1%BB%A3i%20%C4%90%C3%B4ng,%20Q.2,%20TP.%20HCM\" target=\"_blank\"><strong>Q.2, TP.HCM:</strong></a> Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br/><a href=\"tel:0964777960\">0964777960</a></p><p><a href=\"https://maps.google.com/?q=283A%20Hai%20B%C3%A0%20Tr%C6%B0ng,%20Ph%C6%B0%E1%BB%9Dng%20Xu%C3%A2n%20Ho%C3%A0,%20Q.3,%20TP.HCM\" target=\"_blank\"><strong>Q.3, TP.HCM:</strong></a> 283A Hai Bà Trưng, Phường Xuân Hoà<br/><a href=\"tel:0964777910\">0964777910</a></p><p><a href=\"https://maps.google.com/?q=228%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20Q.%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20HN\" target=\"_blank\"><strong>Q. Cầu Giấy, HN:</strong></a>  228 Cầu Giấy, Quan Hoa<br/><a href=\"tel:0964777940\">0964777940</a></p>"
           }
         },
@@ -887,38 +888,38 @@
         "poster": "{{ product.metafields.custom.product_video_best_seller_poster.value }}"
       }
     },
-    "dynamic_faq_Whrn47": {
+    "dynamic_faq_MiJfc8": {
       "type": "dynamic-faq",
       "blocks": {
-        "question_d3nb6H": {
+        "question_PpYYEw": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask1.value }}",
             "text": "<p>{{ product.metafields.custom.answer1.value }}</p>"
           }
         },
-        "question_wQaBbp": {
+        "question_LHJret": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask2.value }}",
             "text": "<p>{{ product.metafields.custom.answer2.value }}</p>"
           }
         },
-        "question_PPVaTY": {
+        "question_TtFaEG": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask3.value }}",
             "text": "<p>{{ product.metafields.custom.answer3.value }}</p>"
           }
         },
-        "question_f7x3UM": {
+        "question_rEcm6T": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask4.value }}",
             "text": "<p>{{ product.metafields.custom.answer4.value }}</p>"
           }
         },
-        "question_4qDy8K": {
+        "question_7hEDdy": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask5.value }}",
@@ -927,11 +928,11 @@
         }
       },
       "block_order": [
-        "question_d3nb6H",
-        "question_wQaBbp",
-        "question_PPVaTY",
-        "question_f7x3UM",
-        "question_4qDy8K"
+        "question_PpYYEw",
+        "question_LHJret",
+        "question_TtFaEG",
+        "question_rEcm6T",
+        "question_7hEDdy"
       ],
       "settings": {
         "enable_anchor_link": true,
@@ -944,7 +945,7 @@
         "link": "shopify://pages/faqs",
         "link_text": "Xem những câu hỏi khác",
         "text_alignment": "center",
-        "use_metafield": true,
+        "use_metafield": false,
         "metafield_limit": "5",
         "divider": true
       }
@@ -1132,7 +1133,7 @@
     "product_hotspot_4TYCfN",
     "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",
-    "dynamic_faq_Whrn47",
+    "dynamic_faq_MiJfc8",
     "super_service_pac79r",
     "1730878240cfbec46e",
     "collections_listing_6LHHpP",

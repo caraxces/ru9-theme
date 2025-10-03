@@ -557,42 +557,46 @@
         "background_color": "#f5f9ff"
       }
     },
-    "collections_listing_4JU76Y": {
+    "collections_listing_nVcpEd": {
       "type": "collections-listing",
       "blocks": {
-        "collection_bbDaBr": {
+        "collection_Vdb9pE": {
           "type": "collection",
           "settings": {
             "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
             "custom_title": "",
             "custom_link": ""
           }
         },
-        "collection_C6Hgf8": {
+        "collection_Mqmzbe": {
           "type": "collection",
           "settings": {
             "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
             "custom_title": "",
             "custom_link": ""
           }
         },
-        "collection_VwnUft": {
+        "collection_e6PXyH": {
           "type": "collection",
           "settings": {
             "collection": "chan",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
             "custom_title": "",
             "custom_link": ""
           }
         },
-        "collection_N7XqXP": {
+        "collection_afCKW6": {
           "type": "collection",
           "settings": {
             "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
             "custom_title": "",
             "custom_link": ""
           }
         },
-        "collection_QWrkyC": {
+        "collection_GD9B4f": {
           "type": "collection",
           "disabled": true,
           "settings": {
@@ -603,11 +607,11 @@
         }
       },
       "block_order": [
-        "collection_bbDaBr",
-        "collection_C6Hgf8",
-        "collection_VwnUft",
-        "collection_N7XqXP",
-        "collection_QWrkyC"
+        "collection_Vdb9pE",
+        "collection_Mqmzbe",
+        "collection_e6PXyH",
+        "collection_afCKW6",
+        "collection_GD9B4f"
       ],
       "name": "Collections Listing",
       "settings": {
@@ -730,7 +734,7 @@
     "collection-content",
     "reviews_carousel_ihYmK7",
     "super_service_Ch8qQy",
-    "collections_listing_4JU76Y",
+    "collections_listing_nVcpEd",
     "faq_A7dpqH",
     "testimonials_AdcbcV"
   ]

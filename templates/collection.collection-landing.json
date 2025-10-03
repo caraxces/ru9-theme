@@ -76,7 +76,7 @@
           "type": "product_item",
           "settings": {
             "product": "combo-giấc-ngủ-tối-ưu",
-            "product_label": "Best seller",
+            "product_label": "Bán chạy",
             "product_description": "Tiết kiệm hơn khi chọn trọn bộ, tiện lợi cho giấc ngủ êm và lối sống tinh gọn.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
@@ -86,7 +86,7 @@
           "type": "product_item",
           "settings": {
             "product": "combo-gối-trọn-nang-niu",
-            "product_label": "Best seller",
+            "product_label": "Bán chạy",
             "product_description": "Trọn bộ chăm sóc giấc ngủ, nâng niu từng phút nghỉ ngơi, nâng tầm trải nghiệm.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
@@ -96,7 +96,7 @@
           "type": "product_item",
           "settings": {
             "product": "combo-nhịp-ngủ-dịu-em",
-            "product_label": "Best seller",
+            "product_label": "Bán chạy",
             "product_description": "Sự kết hợp hoàn chỉnh cho giấc ngủ êm dịu, thư thả từng khoảnh khắc nghỉ ngơi.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
@@ -106,7 +106,7 @@
           "type": "product_item",
           "settings": {
             "product": "combo-giac-ngu-diu-em",
-            "product_label": "Best seller",
+            "product_label": "Bán chạy",
             "product_description": "Nâng tầm chất lượng giấc ngủ, êm ái thoải mái và linh hoạt cho mọi nhu cầu.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
@@ -193,6 +193,7 @@
       "blocks": {
         "product_item_PgC3ga": {
           "type": "product_item",
+          "disabled": true,
           "settings": {
             "product": "bo-nem-nest",
             "product_label": "",
