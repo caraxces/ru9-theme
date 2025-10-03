@@ -1843,106 +1843,6 @@
       }
     },
     {
-      "key": "ask_1",
-      "namespace": "custom",
-      "name": "Ask 1",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "ask_2",
-      "namespace": "custom",
-      "name": "Ask 2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "ask_3",
-      "namespace": "custom",
-      "name": "Ask 3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "ask_4",
-      "namespace": "custom",
-      "name": "Ask 4",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "ask_5",
-      "namespace": "custom",
-      "name": "Ask 5",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "answer_1",
-      "namespace": "custom",
-      "name": "Answer 1",
-      "description": "",
-      "type": {
-        "name": "rich_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "answer_2",
-      "namespace": "custom",
-      "name": "Answer 2",
-      "description": "",
-      "type": {
-        "name": "rich_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "answer_3",
-      "namespace": "custom",
-      "name": "Answer 3",
-      "description": "",
-      "type": {
-        "name": "rich_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "answer_4",
-      "namespace": "custom",
-      "name": "Answer 4",
-      "description": "",
-      "type": {
-        "name": "rich_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "answer_5",
-      "namespace": "custom",
-      "name": "Answer 5",
-      "description": "",
-      "type": {
-        "name": "rich_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
       "key": "product_features",
       "namespace": "custom",
       "name": "Product Features",
@@ -2015,10 +1915,10 @@
     {
       "key": "voucher",
       "namespace": "custom",
-      "name": "Voucher",
+      "name": "voucher",
       "description": "",
       "type": {
-        "name": "list.file_reference",
+        "name": "file_reference",
         "category": "REFERENCE"
       }
     }
