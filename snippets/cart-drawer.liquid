@@ -578,6 +578,60 @@
       font-weight: 700;
       line-height: 150%;
     }
+    
+    /* Discount Applications Styling */
+    #CartDrawer .cart-drawer__discount-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-stack-body);
+      font-size: 16px;
+      padding: 8px 0;
+      color: #1C2C58;
+      border-bottom: 1px solid #f0f0f0;
+      margin-bottom: 8px;
+    }
+    #CartDrawer .cart-drawer__discount-title {
+      flex: 1;
+      color: #1C2C58;
+      font-weight: 500;
+    }
+    #CartDrawer .cart-drawer__discount-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #CartDrawer .cart-drawer__discount-amount {
+      overflow: hidden;
+      color: #E74C3C;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%;
+    }
+    #CartDrawer .cart-drawer__discount-remove {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      color: #999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    #CartDrawer .cart-drawer__discount-remove:hover {
+      background: #f5f5f5;
+      color: #666;
+    }
+    #CartDrawer .cart-drawer__discount-remove svg {
+      width: 16px;
+      height: 16px;
+    }
     #CartDrawer .summary-item__right-content {
       display: flex;
       flex-direction: column;
@@ -1082,6 +1136,24 @@
                   <span>Bạn đã tiết kiệm được {{ total_savings | money }}</span>
                 </div>
 
+                <!-- DISCOUNT APPLICATIONS -->
+                {%- if cart.cart_level_discount_applications.size > 0 -%}
+                  {%- for cart_discount in cart.cart_level_discount_applications -%}
+                    <div class="cart-drawer__summary-item cart-drawer__discount-item">
+                      <span class="cart-drawer__discount-title">{{ cart_discount.title }}</span>
+                      <div class="cart-drawer__discount-right">
+                        <span class="cart-drawer__discount-amount">-{{ cart_discount.total_allocated_amount | money }}</span>
+                        <button type="button" class="cart-drawer__discount-remove" data-discount-title="{{ cart_discount.title }}" title="Bỏ mã giảm giá">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                {%- endif -%}
+
                 <div class="cart-drawer__summary-item">
                     <span>Tạm tính</span>
                     <div class="summary-item__right-content">
@@ -1208,6 +1280,204 @@
           }
         }
 
+        function createDiscountField(cart, discountCode) {
+          // Remove existing discount fields
+          document.querySelectorAll('.cart-drawer__discount-item').forEach(item => item.remove());
+          
+          console.log('Creating discount field, cart data:', cart);
+          console.log('cart_level_discount_applications:', cart.cart_level_discount_applications);
+          
+          if (cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
+            const summaryContainer = document.querySelector('.cart-drawer__summary');
+            const savingsElement = document.querySelector('[data-savings-display]');
+            
+            if (summaryContainer && savingsElement) {
+              cart.cart_level_discount_applications.forEach((cartDiscount, index) => {
+                console.log(`Discount ${index}:`, cartDiscount);
+                
+                const discountItem = document.createElement('div');
+                discountItem.className = 'cart-drawer__summary-item cart-drawer__discount-item';
+                
+                // Safe handling of discount amount - try different possible properties
+                let discountAmount = 0;
+                let discountTitle = 'Discount';
+                
+                if (cartDiscount.total_allocated_amount) {
+                  discountAmount = cartDiscount.total_allocated_amount / 100; // Remove extra zeros
+                } else if (cartDiscount.amount) {
+                  discountAmount = cartDiscount.amount / 100; // Remove extra zeros
+                }
+                
+                if (cartDiscount.title) {
+                  discountTitle = cartDiscount.title;
+                } else if (cartDiscount.discount_application && cartDiscount.discount_application.title) {
+                  discountTitle = cartDiscount.discount_application.title;
+                }
+                
+                console.log(`Processed discount: amount=${discountAmount}, title=${discountTitle}`);
+                
+                discountItem.innerHTML = `
+                  <span class="cart-drawer__discount-title">${discountTitle}</span>
+                  <div class="cart-drawer__discount-right">
+                    <span class="cart-drawer__discount-amount">-${formatMoney(discountAmount)}</span>
+                    <button type="button" class="cart-drawer__discount-remove" data-discount-title="${discountTitle}" title="Bỏ mã giảm giá">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+                  </div>
+                `;
+                
+                savingsElement.parentNode.insertBefore(discountItem, savingsElement.nextSibling);
+              });
+              
+              console.log('Created discount field with X button');
+            }
+          } else {
+            console.log('No discount applications found in cart');
+          }
+        }
+
+        function updateCartPrices(cart) {
+          
+          // Update subtotal immediately using server cart total (already includes discounts)
+          const subtotalElement = document.querySelector('[data-subtotal]');
+          if (subtotalElement) {
+            subtotalElement.textContent = formatMoney(cart.total_price);
+            console.log('Updated subtotal immediately:', formatMoney(cart.total_price));
+          }
+          
+          // Calculate original price from DOM (before any discounts)
+          let totalOriginalPrice = 0;
+          const cartItems = document.querySelectorAll('#CartDrawer .cart__item');
+          const moneyRegex = /[^\d]/g;
+          const parsePrice = (el) => el ? (parseInt(el.textContent.replace(moneyRegex, ''), 10) || 0) : 0;
+          
+          cartItems.forEach(item => {
+            const quantity = parseInt(item.dataset.quantity, 10) || 1;
+            const originalPriceEl = item.querySelector('.cart-item__price--original');
+            const finalPriceEl = item.querySelector('.cart-item__price--final');
+            const originalPriceUnit = originalPriceEl ? parsePrice(originalPriceEl) : parsePrice(finalPriceEl);
+            totalOriginalPrice += originalPriceUnit * quantity;
+          });
+          
+          // Total savings = original price - final price (from server, includes all discounts)
+          const totalSavings = totalOriginalPrice - cart.total_price;
+          
+          console.log('updateCartPrices - Server calculation:', {
+            totalOriginalPrice,
+            serverTotalPrice: cart.total_price,
+            totalSavings
+          });
+          
+          const savingsDisplay = document.querySelector('[data-savings-display] span');
+          if (savingsDisplay) {
+            savingsDisplay.textContent = 'Bạn đã tiết kiệm được ' + formatMoney(totalSavings);
+          }
+          
+          // Show/hide original price
+          const priceContainer = document.querySelector('.cart-drawer__summary-item .price-container');
+          if (priceContainer) {
+            let priceOriginalEl = priceContainer.querySelector('.price--original');
+            if (totalSavings > 0) {
+              if (!priceOriginalEl) {
+                priceOriginalEl = document.createElement('del');
+                priceOriginalEl.className = 'price--original';
+                priceContainer.insertBefore(priceOriginalEl, subtotalElement);
+              }
+              priceOriginalEl.textContent = formatMoney(totalOriginalPrice);
+              priceOriginalEl.style.display = '';
+            } else {
+              if (priceOriginalEl) priceOriginalEl.style.display = 'none';
+            }
+          }
+          
+          // Show "Đã áp dụng ưu đãi" text
+          const discountText = document.querySelector('.cart-drawer__summary-item .text-right');
+          if (discountText && cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
+            discountText.style.display = '';
+          }
+        }
+
+        function updateCartPricesAfterRemoval(cart) {
+          
+          // Update subtotal immediately
+          const subtotalElement = document.querySelector('[data-subtotal]');
+          if (subtotalElement) {
+            subtotalElement.textContent = formatMoney(cart.total_price);
+            console.log('Updated subtotal after removal:', formatMoney(cart.total_price));
+          }
+          
+          // Calculate new savings (without cart-level discounts)
+          let totalOriginalPrice = 0;
+          const cartItems = document.querySelectorAll('#CartDrawer .cart__item');
+          const moneyRegex = /[^\d]/g;
+          const parsePrice = (el) => el ? (parseInt(el.textContent.replace(moneyRegex, ''), 10) || 0) : 0;
+          
+          cartItems.forEach(item => {
+            const quantity = parseInt(item.dataset.quantity, 10) || 1;
+            const originalPriceEl = item.querySelector('.cart-item__price--original');
+            const finalPriceEl = item.querySelector('.cart-item__price--final');
+            const originalPriceUnit = originalPriceEl ? parsePrice(originalPriceEl) : parsePrice(finalPriceEl);
+            totalOriginalPrice += originalPriceUnit * quantity;
+          });
+          
+          const newSavings = totalOriginalPrice - cart.total_price;
+          
+          // Update savings display
+          const savingsDisplay = document.querySelector('[data-savings-display] span');
+          if (savingsDisplay) {
+            savingsDisplay.textContent = 'Bạn đã tiết kiệm được ' + formatMoney(newSavings);
+          }
+          
+          // Hide original price if no savings
+          const priceContainer = document.querySelector('.cart-drawer__summary-item .price-container');
+          if (priceContainer) {
+            let priceOriginalEl = priceContainer.querySelector('.price--original');
+            if (newSavings > 0) {
+              if (!priceOriginalEl) {
+                priceOriginalEl = document.createElement('del');
+                priceOriginalEl.className = 'price--original';
+                priceContainer.insertBefore(priceOriginalEl, subtotalElement);
+              }
+              priceOriginalEl.textContent = formatMoney(totalOriginalPrice);
+              priceOriginalEl.style.display = '';
+            } else {
+              if (priceOriginalEl) priceOriginalEl.style.display = 'none';
+            }
+          }
+          
+          // Hide "Đã áp dụng ưu đãi" text
+          const discountText = document.querySelector('.cart-drawer__summary-item .text-right');
+          if (discountText) {
+            discountText.style.display = 'none';
+          }
+          
+          // Remove all discount fields
+          document.querySelectorAll('.cart-drawer__discount-item').forEach(item => item.remove());
+        }
+
+        function formatMoney(amount) {
+          if (amount === undefined || amount === null) {
+            return '0₫';
+          }
+          return amount.toLocaleString('vi-VN') + '₫';
+        }
+
+        function updateDiscountApplications() {
+          // This function will be called after cart rebuild to update discount display
+          // The discount applications are already rendered in the HTML by Liquid
+          // We just need to ensure they're visible and properly styled
+          const discountItems = document.querySelectorAll('.cart-drawer__discount-item');
+          console.log('Found discount items:', discountItems.length);
+          
+          discountItems.forEach(item => {
+            item.style.display = '';
+            console.log('Discount item:', item.textContent);
+          });
+        }
+
         function syncCartUIFromDOM() {
           const countElement = document.querySelector('.drawer__count');
           const cartItems = document.querySelectorAll('#CartDrawer .cart__item');
@@ -1245,6 +1515,7 @@
           const moneyRegex = /[^\d]/g;
           const parsePrice = (el) => el ? (parseInt(el.textContent.replace(moneyRegex, ''), 10) || 0) : 0;
 
+          // Calculate total from cart items
           cartItems.forEach(item => {
             const quantity = parseInt(item.dataset.quantity, 10) || 1;
             const finalPriceUnit = parsePrice(item.querySelector('.cart-item__price--final'));
@@ -1253,14 +1524,48 @@
             totalFinalPrice += finalPriceUnit * quantity;
             totalOriginalPrice += originalPriceUnit * quantity;
           });
+
+          // Get voucher discount amount from DOM
+          let voucherDiscountAmount = 0;
+          const discountItems = document.querySelectorAll('.cart-drawer__discount-amount');
+          discountItems.forEach(discountEl => {
+            const discountAmount = parsePrice(discountEl);
+            voucherDiscountAmount += discountAmount;
+          });
+
+          // If we have discount items in DOM, use DOM calculation
+          // Otherwise, use server cart total price (which already includes discounts)
+          let finalPriceAfterVoucher, totalSavings;
           
-          const totalSavings = totalOriginalPrice - totalFinalPrice;
-          const formatMoney = (amount) => amount.toLocaleString('vi-VN') + '₫';
+          if (voucherDiscountAmount > 0) {
+            // Use DOM calculation when discount items are visible
+            finalPriceAfterVoucher = Math.max(0, totalFinalPrice - voucherDiscountAmount);
+            totalSavings = totalOriginalPrice - finalPriceAfterVoucher;
+          } else {
+            // No discount items in DOM, prices are already correct from cart items
+            finalPriceAfterVoucher = totalFinalPrice;
+            totalSavings = totalOriginalPrice - totalFinalPrice;
+          }
+
+          console.log('Debug cart pricing:', {
+            totalOriginalPrice,
+            totalFinalPrice,
+            voucherDiscountAmount,
+            finalPriceAfterVoucher,
+            totalSavings,
+            hasDiscountItems: discountItems.length > 0
+          });
 
           const savingsDisplay = document.querySelector('[data-savings-display] span');
           if (savingsDisplay) savingsDisplay.textContent = 'Bạn đã tiết kiệm được ' + formatMoney(totalSavings);
+          
+          // Update subtotal with price after voucher discount
           const subtotalElement = document.querySelector('[data-subtotal]');
-          if (subtotalElement) subtotalElement.textContent = formatMoney(totalFinalPrice);
+          if (subtotalElement) {
+            subtotalElement.textContent = formatMoney(finalPriceAfterVoucher);
+            console.log('Updated subtotal to:', formatMoney(finalPriceAfterVoucher));
+          }
+          
           const priceContainer = document.querySelector('.cart-drawer__summary-item .price-container');
           if (priceContainer) {
             let priceOriginalEl = priceContainer.querySelector('.price--original');
@@ -1277,12 +1582,16 @@
             }
           }
           
+          // Update discount applications display
+          updateDiscountApplications();
+          
           // Update discount applied text
           const discountText = document.querySelector('.cart-drawer__summary-item .text-right');
           if (discountText) {
             // Check if there are any discount applications by looking for discount-related elements
             const hasDiscount = document.querySelector('[data-discount]') || 
                                document.querySelector('.cart-item__discount') ||
+                               document.querySelector('.cart-drawer__discount-item') ||
                                totalSavings > 0;
             discountText.style.display = hasDiscount ? '' : 'none';
           }
@@ -1444,10 +1753,22 @@
             })
             .then(res => res.json())
             .then(cart => {
+              console.log('Discount applied, cart response:', cart);
               if (cart.status) {
                 alert(cart.description || 'Mã giảm giá không hợp lệ.');
                 discountInput.value = '';
+              } else {
+                // Success - clear the input and update UI immediately
+                discountInput.value = '';
+                
+                // Immediately create discount field with X button
+                createDiscountField(cart, discountInput.value);
+                
+                // Update prices immediately
+                updateCartPrices(cart);
               }
+              
+              // Rebuild cart for full sync
               rebuildCart();
             })
             .catch(e => console.error(e))
@@ -1520,6 +1841,52 @@
             } else {
               quantityInput.value = Math.max(0, currentValue - 1);
             }
+            return;
+          }
+
+          // Handle Discount Remove Button
+          const discountRemoveButton = target.closest('.cart-drawer__discount-remove');
+          if (discountRemoveButton) {
+            event.preventDefault();
+            const discountTitle = discountRemoveButton.dataset.discountTitle;
+            
+            if (!discountTitle) return;
+            
+            const originalButtonContent = discountRemoveButton.innerHTML;
+            discountRemoveButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            discountRemoveButton.disabled = true;
+            
+            // Immediately hide the discount item for better UX
+            const discountItem = discountRemoveButton.closest('.cart-drawer__discount-item');
+            if (discountItem) {
+              discountItem.style.display = 'none';
+            }
+            
+            // Remove discount by setting it to empty string
+            fetch('/cart/update.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({ 'discount': '' })
+            })
+            .then(response => response.json())
+            .then(cart => {
+              console.log('Discount removed, cart response:', cart);
+              
+              // Immediately update prices and remove discount field
+              updateCartPricesAfterRemoval(cart);
+              
+              // Rebuild cart for full sync
+              rebuildCart();
+            })
+            .catch(error => {
+              console.error('Error removing discount:', error);
+              // Restore the button and show discount item again
+              discountRemoveButton.innerHTML = originalButtonContent;
+              discountRemoveButton.disabled = false;
+              if (discountItem) {
+                discountItem.style.display = '';
+              }
+            });
             return;
           }
 

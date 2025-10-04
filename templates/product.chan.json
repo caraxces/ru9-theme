@@ -409,6 +409,7 @@
         "certification_wKEBnC",
         "certification_fYNQAR"
       ],
+      "disabled": true,
       "name": "Certifications",
       "settings": {
         "title": "Cam kết an toàn\ntừ lần chạm đầu tiên",
@@ -424,14 +425,14 @@
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask1.value }}",
-            "text": "<p>{{ product.metafields.custom.answer1.value  }}</p>"
+            "text": "<p>{{ product.metafields.custom.answer1.value }}</p>"
           }
         },
         "question_wQaBbp": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask2.value }}",
-            "text": "<p>{{ product.metafields.custom.answer2.value  }}</p>"
+            "text": "<p>{{ product.metafields.custom.answer2.value }}</p>"
           }
         },
         "question_PPVaTY": {
@@ -463,6 +464,7 @@
         "question_f7x3UM",
         "question_4qDy8K"
       ],
+      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "FAQs",

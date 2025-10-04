@@ -25,13 +25,14 @@
             "link_text_2": "",
             "color_accent": "rgba(0,0,0,0)",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Banner_Deal_SHR_HN-100.jpg",
-            "image_mobile": "shopify://shop_images/Banner_Deal_SHR_HN_Mobile_2x_58d0932f-1052-460c-bc2b-695f2ecd56b8.png",
+            "image": "shopify://shop_images/Hanh_trinh_7_nam_web.png",
+            "image_mobile": "shopify://shop_images/Hanh-trinh-7-nam---web---mobile.jpg",
             "overlay_opacity": 0
           }
         },
         "image_JR4ARU": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "top_subheading": "",
             "title": "",
@@ -458,7 +459,10 @@
         "description": "",
         "primary_color": "#1c2c58",
         "text_color": "#1a1a1a",
-        "description_color": "#666666"
+        "description_color": "#666666",
+        "show_mobile_view_all": true,
+        "mobile_view_all_text": "Xem tất cả",
+        "mobile_view_all_url": "shopify://collections/bundle"
       }
     },
     "tvc_section_WrUqBM": {

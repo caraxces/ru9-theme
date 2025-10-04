@@ -296,11 +296,11 @@
     transform: rotate(180deg);
   }
   
-  /* Hide toggle arrows on mobile */
+  /* Show toggle arrows on mobile - same as desktop */
   @media (max-width: 768px) {
     .product-accordion summary .icon-toggle,
     .size-guide-text-trigger .arrow-icon {
-      display: none !important;
+      display: block !important;
     }
   }
   .product-accordion-content {
@@ -538,57 +538,11 @@
     height: auto !important;
   }
 
-  /* Specific override for option2 size variants with 6 options - match option1 exactly */
-  .variant-input-wrap[data-index="option2"][data-option-count="6"].is-size,
-  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kich-thuoc"],
-  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="size"],
-  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kích-thước"] {
-    grid-template-columns: repeat(4, 1fr) !important;
-  }
-  
-  .variant-input-wrap[data-index="option2"][data-option-count="6"].is-size .variant-input:nth-child(n+6),
-  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kich-thuoc"] .variant-input:nth-child(n+6),
-  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="size"] .variant-input:nth-child(n+6),
-  .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kích-thước"] .variant-input:nth-child(n+6) {
-    grid-column: span 2 !important;
-  }
+  /* Option2 size variants now use the same CSS as option1 - no specific overrides needed */
 
-  /* Force override for variant-wrapper with is-size class - ensure grid layout */
-  .variant-wrapper.is-size .variant-input-wrap[data-index="option2"][data-option-count="6"],
-  .variant-wrapper.is-size .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"],
-  .variant-wrapper.is-size .variant-input-wrap[data-handle="size"][data-option-count="6"],
-  .variant-wrapper.is-size .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 12px !important;
-    margin-bottom: 16px !important;
-  }
+  /* Option2 size variants now use the same CSS as option1 - no wrapper overrides needed */
 
-  .variant-wrapper.is-size .variant-input-wrap[data-index="option2"][data-option-count="6"] .variant-input:nth-child(n+6),
-  .variant-wrapper.is-size .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"] .variant-input:nth-child(n+6),
-  .variant-wrapper.is-size .variant-input-wrap[data-handle="size"][data-option-count="6"] .variant-input:nth-child(n+6),
-  .variant-wrapper.is-size .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] .variant-input:nth-child(n+6) {
-    grid-column: span 2 !important;
-  }
-
-  /* Maximum specificity override for option2 size variants - force grid layout */
-  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-index="option2"][data-option-count="6"],
-  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"],
-  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="size"][data-option-count="6"],
-  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 12px !important;
-    margin-bottom: 16px !important;
-    flex-direction: unset !important;
-  }
-
-  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-index="option2"][data-option-count="6"] .variant-input:nth-child(n+6),
-  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"] .variant-input:nth-child(n+6),
-  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="size"][data-option-count="6"] .variant-input:nth-child(n+6),
-  .variant-wrapper.js.kích-thước.is-size .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] .variant-input:nth-child(n+6) {
-    grid-column: span 2 !important;
-  }
+  /* Option2 size variants now use the same CSS as option1 - no maximum specificity overrides needed */
 
   /* Comfort top variant styling - Simple approach */
   .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
@@ -596,7 +550,7 @@
   }
   
   /* Make Comfort top variants share width equally and match height with other blocks */
-  .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size) {
+  .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size):not([data-handle="kich-thuoc"]):not([data-handle="size"]):not([data-handle="kích-thước"]):not([data-handle="kich-thước"]) {
     display: flex !important;
     flex-direction: row !important;
     gap: 8px !important;
@@ -1786,13 +1740,7 @@
       margin: 0 !important;
     }
 
-    /* Specific override for option2 size variants with 6 options on mobile - match option1 exactly */
-    .variant-input-wrap[data-index="option2"][data-option-count="6"].is-size,
-    .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kich-thuoc"],
-    .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="size"],
-    .variant-input-wrap[data-index="option2"][data-option-count="6"][data-handle="kích-thước"] {
-      grid-template-columns: repeat(3, 1fr) !important;
-    }
+    /* Option2 size variants now use the same CSS as option1 - no mobile 6 options overrides needed */
 
     /* Comfort top variant styling - Simple approach */
     .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
@@ -1800,13 +1748,13 @@
     }
     
     /* Make Comfort top variants share width equally and match height with other blocks - Mobile */
-    .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size) {
+    .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size):not([data-handle="kich-thuoc"]):not([data-handle="size"]):not([data-handle="kích-thước"]):not([data-handle="kich-thước"]) {
       display: flex !important;
       flex-direction: row !important;
       gap: 8px !important;
     }
     
-    .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size) .variant-input {
+    .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size):not([data-handle="kich-thuoc"]):not([data-handle="size"]):not([data-handle="kích-thước"]):not([data-handle="kich-thước"]) .variant-input {
       flex: 1 !important;
       width: 50% !important;
     }
@@ -1903,8 +1851,8 @@
     .variant-input-wrap[data-handle="colour"] .variant-input-wrap {
       grid-template-columns: repeat(auto-fit, 40px);
       gap: 6px;
-      margin-left: auto;
-      margin-right: auto;
+      {% comment %} margin-left: auto; {% endcomment %}
+      {% comment %} margin-right: auto; {% endcomment %}
       max-width: 100%;
       width: fit-content;
     }

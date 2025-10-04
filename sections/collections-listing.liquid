@@ -113,8 +113,6 @@
   .collections-listing-section .collections-carousel {
     display: flex;
     transition: transform 0.4s ease;
-    user-select: none;
-    cursor: grab;
     gap: 20px;
   }
   
@@ -124,6 +122,7 @@
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    position: relative;
   }
   
   .collections-listing-section .collection-item.is-visible {
@@ -186,15 +185,13 @@
     text-decoration: none;
     color: inherit;
     display: block;
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
   }
   
-  .collections-carousel.grabbing {
-    cursor: grabbing;
-  }
-  
-  .collections-carousel.grabbing a {
-    pointer-events: none;
-  }
+  /* Drag/Swipe styles removed - collections are now clickable */
   
   .collection-image-container:hover img {
     transform: scale(1.05);
@@ -203,6 +200,28 @@
   .collection-title a:hover {
     color: #609EE9 !important;
     transition: color 0.3s ease;
+  }
+
+  /* Make entire collection item clickable */
+  .collections-listing-section .collection-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .collections-listing-section .collection-title a {
+    position: relative;
+    z-index: 2;
+  }
+
+  .collections-listing-section .collection-image-container {
+    position: relative;
+    z-index: 1;
   }
 
   /* Desktop Layout - Carousel */
@@ -385,78 +404,7 @@
       }
     });
 
-    // --- Drag/Swipe Logic ---
-    let isDown = false;
-    let startX;
-    let initialTranslateX;
-    let walk = 0;
-
-    function getTranslateX() {
-        const style = window.getComputedStyle(carousel);
-        const transform = style.transform;
-        if (transform === 'none') return 0;
-        const matrix = new DOMMatrixReadOnly(transform);
-        return matrix.m41;
-    }
-
-    function dragStart(e) {
-        isDown = true;
-        carousel.classList.add('grabbing');
-        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
-        carousel.style.transition = 'none';
-        initialTranslateX = getTranslateX();
-        walk = 0;
-    }
-
-    function dragMove(e) {
-        if (!isDown) return;
-        e.preventDefault();
-        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
-        walk = currentX - startX;
-        carousel.style.transform = `translateX(${initialTranslateX + walk}px)`;
-    }
-
-    function dragEnd() {
-        if (!isDown) return;
-        isDown = false;
-        carousel.classList.remove('grabbing');
-        carousel.style.transition = 'transform 0.4s ease';
-
-        const containerWidth = carousel.parentElement.offsetWidth;
-        const itemsPerView = getItemsPerView();
-        const gap = 15;
-        const itemWidth = (containerWidth - (itemsPerView - 1) * gap) / itemsPerView;
-        const threshold = itemWidth / 4;
-        
-        const maxIndex = Math.max(0, collectionItems.length - itemsPerView);
-
-        if (walk < -threshold && currentIndex < maxIndex) {
-            currentIndex++;
-        } else if (walk > threshold && currentIndex > 0) {
-            currentIndex--;
-        }
-
-        updateCarousel();
-    }
-
-    carousel.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', e => {
-            if (isDown || Math.abs(walk) > 5) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        });
-    });
-
-    // Mouse events
-    carousel.addEventListener('mousedown', dragStart);
-    window.addEventListener('mousemove', dragMove);
-    window.addEventListener('mouseup', dragEnd);
-
-    // Touch events
-    carousel.addEventListener('touchstart', dragStart);
-    window.addEventListener('touchmove', dragMove);
-    window.addEventListener('touchend', dragEnd);
+    // Drag/Swipe functionality removed - collections are now clickable
     
     let resizeTimer;
     window.addEventListener('resize', () => {

@@ -16246,11 +16246,11 @@ html[dir="rtl"] .product-single__meta .rte {
 }
 
 /* Make Comfort top variants share width equally and match height with other blocks */
-.variant-input-wrap[data-index="option2"] {
+/* .variant-input-wrap[data-index="option2"] {
   display: flex !important;
   flex-direction: row !important;
   gap: 8px !important;
-}
+} */
 
 /* .variant-input-wrap[data-index="option2"] .variant-input {
   flex: 1 !important;
