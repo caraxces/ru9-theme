@@ -150,6 +150,7 @@
       "block_order": [
         "image_m8f9MV"
       ],
+      "disabled": true,
       "settings": {
         "section_height": "natural",
         "mobile_height": "500px",
@@ -235,6 +236,7 @@
         "product_item_Q3YTpm",
         "product_item_Pyjr8X"
       ],
+      "disabled": true,
       "name": "Combo Phòng Ngủ",
       "settings": {
         "title": "Combo phòng ngủ",

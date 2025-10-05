@@ -9,9 +9,90 @@
  */
 {
   "sections": {
+    "countdown_Gwp9bc": {
+      "type": "countdown",
+      "blocks": {
+        "content_yMKfNP": {
+          "type": "content",
+          "settings": {
+            "heading": "Flash sale 23:00 - 8:00 hằng ngày",
+            "heading_size": "h2",
+            "text": "<p>Diễn ra sau</p>",
+            "content_alignment": "left"
+          }
+        },
+        "timer_HWjLL8": {
+          "type": "timer",
+          "settings": {
+            "year": "2025",
+            "month": "02",
+            "day": "20",
+            "hour": "23",
+            "minute": "00",
+            "hide_timer": false,
+            "text": "<p>Flash sale đang diễn ra  </p>"
+          }
+        },
+        "button_CnVnhP": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_link": "",
+            "button": "Shop Collection",
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "content_yMKfNP",
+        "timer_HWjLL8",
+        "button_CnVnhP"
+      ],
+      "disabled": true,
+      "settings": {
+        "layout": "banner",
+        "full_width": false,
+        "text_color": "#ab2328",
+        "background_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "lazyload_images": true
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
+        "custom_ir6hFk": {
+          "type": "custom",
+          "settings": {
+            "code": "<style>\n.flash-sale-container {\n  display: none; /* Hidden by default, will be shown with JS if in valid time */\n  align-items: center;\n  background: #ff6b6b;\n  padding: 15px;\n  border-radius: 8px;\n  margin: 10px 0;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n} \n\n.flash-sale-status {\n  display: flex;\n  align-items: center;\n  margin-right: 20px;\n}\n\n.status-icon {\n  font-size: 24px;\n  color: #fff;\n  margin-right: 10px;\n  animation: pulse 1s infinite;\n}\n\n.status-text {\n  font-size: 16px;\n  font-weight: bold;\n  color: #fff;\n}\n\n.countdown-wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.countdown-block {\n  background: #fff;\n  padding: 8px 12px;\n  border-radius: 6px;\n  text-align: center;\n  min-width: 60px;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.05);\n}\n\n.countdown-block span {\n  font-size: 20px;\n  font-weight: bold;\n  color: #ff6b6b;\n  display: block;\n}\n\n.countdown-block label {\n  font-size: 12px;\n  color: #666;\n  margin-top: 4px;\n  display: block;\n}\n\n@keyframes pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.1); }\n  100% { transform: scale(1); }\n}\n\n.inactive .status-icon {\n  color: #fff;\n  animation: none;\n}\n\n.inactive .status-text {\n  color: #fff;\n}\n\n.inactive .countdown-block span {\n  color: #666;\n}\n</style>\n\n<div class=\"flash-sale-container\" id=\"flashSaleContainer\">\n  <div class=\"flash-sale-status\">\n    <div class=\"status-icon\" id=\"statusIcon\">⚡</div>\n    <div class=\"status-text\" id=\"statusText\">Flash Sale đang diễn ra!</div>\n  </div>\n  <div class=\"countdown-wrapper\">\n    <div class=\"countdown-block\">\n      <span id=\"hours\">00</span>\n      <label>Giờ</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"minutes\">00</span>\n      <label>Phút</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"seconds\">00</span>\n      <label>Giây</label>\n    </div>\n  </div>\n</div>\n\n<script>\nclass FlashSaleTimer {\n  constructor() {\n    this.statusText = document.getElementById('statusText');\n    this.statusIcon = document.getElementById('statusIcon');\n    this.container = document.getElementById('flashSaleContainer');\n    this.hoursElement = document.getElementById('hours');\n    this.minutesElement = document.getElementById('minutes');\n    this.secondsElement = document.getElementById('seconds');\n    \n    this.flashSaleStartHour = 23; // 11 PM\n    this.flashSaleEndHour = 8;    // 8 AM\n    \n    // Check if we should show the flash sale based on GMT+7 time\n    if (this.isWithinGMTPlus7TimeRange()) {\n      this.container.style.display = \"flex\"; // Show the container\n      this.updateTimer();\n      setInterval(() => this.updateTimer(), 1000);\n    }\n  }\n\n  // Get current time in GMT+7\n  getCurrentGMTPlus7Time() {\n    const now = new Date();\n    // Convert to GMT+7\n    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);\n    return new Date(utcTime + (7 * 60 * 60 * 1000));\n  }\n\n  // Check if current GMT+7 time is within flash sale hours (11 PM - 8 AM)\n  isWithinGMTPlus7TimeRange() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  isFlashSaleActive() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  getNextFlashSaleTime() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    let nextFlashSale = new Date(gmtPlus7Time);\n    \n    if (gmtPlus7Time.getHours() >= this.flashSaleEndHour && gmtPlus7Time.getHours() < this.flashSaleStartHour) {\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    } else {\n      nextFlashSale.setDate(nextFlashSale.getDate() + 1);\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    }\n    \n    return nextFlashSale;\n  }\n\n  getTimeRemaining(endTime) {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const total = endTime - gmtPlus7Time;\n    const seconds = Math.floor((total / 1000) % 60);\n    const minutes = Math.floor((total / 1000 / 60) % 60);\n    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);\n    \n    return {\n      total,\n      hours,\n      minutes,\n      seconds\n    };\n  }\n\n  updateTimer() {\n    const isActive = this.isFlashSaleActive();\n    let timeRemaining;\n    \n    if (isActive) {\n      // Calculate end time (8 AM in GMT+7)\n      const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n      const endTime = new Date(gmtPlus7Time);\n      endTime.setHours(this.flashSaleEndHour, 0, 0, 0);\n      if (endTime < gmtPlus7Time) {\n        endTime.setDate(endTime.getDate() + 1);\n      }\n      timeRemaining = this.getTimeRemaining(endTime);\n      \n      this.statusText.textContent = 'Flash Sale đang diễn ra!';\n      this.container.classList.remove('inactive');\n    } else {\n      timeRemaining = this.getTimeRemaining(this.getNextFlashSaleTime());\n      \n      this.statusText.textContent = 'Flash Sale sắp diễn ra';\n      this.container.classList.add('inactive');\n    }\n\n    this.hoursElement.textContent = timeRemaining.hours.toString().padStart(2, '0');\n    this.minutesElement.textContent = timeRemaining.minutes.toString().padStart(2, '0');\n    this.secondsElement.textContent = timeRemaining.seconds.toString().padStart(2, '0');\n  }\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  new FlashSaleTimer();\n});\n</script>"
+          }
+        },
+        "tag_TkpVP9": {
+          "type": "tag",
+          "settings": {
+            "tag_text": "Top rated",
+            "bg_color": "#85afee",
+            "text_color": "#ffffff"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "promotion_xkLgrj": {
+          "type": "promotion",
+          "settings": {
+            "title": "Mã ưu đãi :",
+            "enable_popup": false,
+            "voucher_image_1": "shopify://shop_images/250k-01.png",
+            "popup_content_1": "",
+            "voucher_image_2": "{{ product.metafields.custom.voucher.value }}",
+            "popup_content_2": "",
+            "popup_content_3": "",
+            "popup_content_4": ""
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -21,30 +102,13 @@
             "color_swatches": true
           }
         },
-        "custom_JtBXGV": {
-          "type": "custom",
+        "usage_guide_KJqfAH": {
+          "type": "usage_guide",
           "settings": {
-            "code": "<style>\n.flash-sale-container {\n  display: none; /* Hidden by default, will be shown with JS if in valid time */\n  align-items: center;\n  background: #ff6b6b;\n  padding: 15px;\n  border-radius: 8px;\n  margin: 10px 0;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n} \n\n.flash-sale-status {\n  display: flex;\n  align-items: center;\n  margin-right: 20px;\n}\n\n.status-icon {\n  font-size: 24px;\n  color: #fff;\n  margin-right: 10px;\n  animation: pulse 1s infinite;\n}\n\n.status-text {\n  font-size: 16px;\n  font-weight: bold;\n  color: #fff;\n}\n\n.countdown-wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.countdown-block {\n  background: #fff;\n  padding: 8px 12px;\n  border-radius: 6px;\n  text-align: center;\n  min-width: 60px;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.05);\n}\n\n.countdown-block span {\n  font-size: 20px;\n  font-weight: bold;\n  color: #ff6b6b;\n  display: block;\n}\n\n.countdown-block label {\n  font-size: 12px;\n  color: #666;\n  margin-top: 4px;\n  display: block;\n}\n\n@keyframes pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.1); }\n  100% { transform: scale(1); }\n}\n\n.inactive .status-icon {\n  color: #fff;\n  animation: none;\n}\n\n.inactive .status-text {\n  color: #fff;\n}\n\n.inactive .countdown-block span {\n  color: #666;\n}\n</style>\n\n<div class=\"flash-sale-container\" id=\"flashSaleContainer\">\n  <div class=\"flash-sale-status\">\n    <div class=\"status-icon\" id=\"statusIcon\">⚡</div>\n    <div class=\"status-text\" id=\"statusText\">Flash Sale đang diễn ra!</div>\n  </div>\n  <div class=\"countdown-wrapper\">\n    <div class=\"countdown-block\">\n      <span id=\"hours\">00</span>\n      <label>Giờ</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"minutes\">00</span>\n      <label>Phút</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"seconds\">00</span>\n      <label>Giây</label>\n    </div>\n  </div>\n</div>\n\n<script>\nclass FlashSaleTimer {\n  constructor() {\n    this.statusText = document.getElementById('statusText');\n    this.statusIcon = document.getElementById('statusIcon');\n    this.container = document.getElementById('flashSaleContainer');\n    this.hoursElement = document.getElementById('hours');\n    this.minutesElement = document.getElementById('minutes');\n    this.secondsElement = document.getElementById('seconds');\n    \n    this.flashSaleStartHour = 23; // 11 PM\n    this.flashSaleEndHour = 8;    // 8 AM\n    \n    // Check if we should show the flash sale based on GMT+7 time\n    if (this.isWithinGMTPlus7TimeRange()) {\n      this.container.style.display = \"flex\"; // Show the container\n      this.updateTimer();\n      setInterval(() => this.updateTimer(), 1000);\n    }\n  }\n\n  // Get current time in GMT+7\n  getCurrentGMTPlus7Time() {\n    const now = new Date();\n    // Convert to GMT+7\n    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);\n    return new Date(utcTime + (7 * 60 * 60 * 1000));\n  }\n\n  // Check if current GMT+7 time is within flash sale hours (11 PM - 8 AM)\n  isWithinGMTPlus7TimeRange() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  isFlashSaleActive() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  getNextFlashSaleTime() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    let nextFlashSale = new Date(gmtPlus7Time);\n    \n    if (gmtPlus7Time.getHours() >= this.flashSaleEndHour && gmtPlus7Time.getHours() < this.flashSaleStartHour) {\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    } else {\n      nextFlashSale.setDate(nextFlashSale.getDate() + 1);\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    }\n    \n    return nextFlashSale;\n  }\n\n  getTimeRemaining(endTime) {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const total = endTime - gmtPlus7Time;\n    const seconds = Math.floor((total / 1000) % 60);\n    const minutes = Math.floor((total / 1000 / 60) % 60);\n    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);\n    \n    return {\n      total,\n      hours,\n      minutes,\n      seconds\n    };\n  }\n\n  updateTimer() {\n    const isActive = this.isFlashSaleActive();\n    let timeRemaining;\n    \n    if (isActive) {\n      // Calculate end time (8 AM in GMT+7)\n      const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n      const endTime = new Date(gmtPlus7Time);\n      endTime.setHours(this.flashSaleEndHour, 0, 0, 0);\n      if (endTime < gmtPlus7Time) {\n        endTime.setDate(endTime.getDate() + 1);\n      }\n      timeRemaining = this.getTimeRemaining(endTime);\n      \n      this.statusText.textContent = 'Flash Sale đang diễn ra!';\n      this.container.classList.remove('inactive');\n    } else {\n      timeRemaining = this.getTimeRemaining(this.getNextFlashSaleTime());\n      \n      this.statusText.textContent = 'Flash Sale sắp diễn ra';\n      this.container.classList.add('inactive');\n    }\n\n    this.hoursElement.textContent = timeRemaining.hours.toString().padStart(2, '0');\n    this.minutesElement.textContent = timeRemaining.minutes.toString().padStart(2, '0');\n    this.secondsElement.textContent = timeRemaining.seconds.toString().padStart(2, '0');\n  }\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  new FlashSaleTimer();\n});\n</script>"
+            "title": "Hướng dẫn chọn kích thước",
+            "image": "shopify://shop_images/size-guide.png",
+            "content": ""
           }
-        },
-        "promotion_V4mkaE": {
-          "type": "promotion",
-          "disabled": true,
-          "settings": {
-            "title": "Mã ưu đãi:",
-            "enable_popup": true,
-            "voucher_image_1": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
-            "popup_content_1": "",
-            "voucher_image_2": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
-            "popup_content_2": "",
-            "voucher_image_3": "shopify://shop_images/dd8fc287b9d2f19a7f6e309e30f98f887b471d6c.png",
-            "popup_content_3": "",
-            "popup_content_4": ""
-          }
-        },
-        "price": {
-          "type": "price",
-          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -54,6 +118,17 @@
             "show_gift_card_recipient": false
           }
         },
+        "productbundle_GcbRad": {
+          "type": "productbundle",
+          "settings": {
+            "product_list": [
+              "goi-may",
+              "goi-foam-niu"
+            ],
+            "cross_sell_title": "Thăng hạng chất lượng giấc ngủ cùng",
+            "cross_sell_label": ""
+          }
+        },
         "description": {
           "type": "description",
           "settings": {
@@ -61,16 +136,17 @@
             "collapse_content": false
           }
         },
-        "usage_guide_DQr8LJ": {
+        "usage_guide_PRnkUz": {
           "type": "usage_guide",
           "settings": {
             "title": "Hệ thống cửa hàng",
             "content": "<p><a href=\"https://maps.google.com/?q=Shop%2009,%20B2%20Sarimi,%20K%C4%90T%20Sala,%2072%20Nguy%E1%BB%85n%20C%C6%A1%20Th%E1%BA%A1ch,%20P.%20An%20L%E1%BB%A3i%20%C4%90%C3%B4ng,%20Q.2,%20TP.%20HCM\" target=\"_blank\"><strong>Q.2, TP.HCM:</strong></a> Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br/><a href=\"tel:0964777960\">0964777960</a></p><p><a href=\"https://maps.google.com/?q=283A%20Hai%20B%C3%A0%20Tr%C6%B0ng,%20Ph%C6%B0%E1%BB%9Dng%20Xu%C3%A2n%20Ho%C3%A0,%20Q.3,%20TP.HCM\" target=\"_blank\"><strong>Q.3, TP.HCM:</strong></a> 283A Hai Bà Trưng, Phường Xuân Hoà<br/><a href=\"tel:0964777910\">0964777910</a></p><p><a href=\"https://maps.google.com/?q=228%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20Q.%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20HN\" target=\"_blank\"><strong>Q. Cầu Giấy, HN:</strong></a>  228 Cầu Giấy, Quan Hoa<br/><a href=\"tel:0964777940\">0964777940</a></p>"
           }
         },
-        "service_grid_aaTz8t": {
+        "service_grid_tzXXkC": {
           "type": "service_grid",
           "settings": {
+            "icon_1": "shopify://shop_images/Layer_1_3.svg",
             "text_1": "100 đêm ngủ thử",
             "show_service_1": false,
             "icon_2": "shopify://shop_images/Layer_1_4.svg",
@@ -80,20 +156,23 @@
             "text_3": "Bảo hành dài lâu",
             "show_service_3": true,
             "icon_4": "shopify://shop_images/Layer_1_6.svg",
-            "text_4": "Thanh toán linh hoạt",
+            "text_4": "Trả góp 0%",
             "show_service_4": true
           }
         }
       },
       "block_order": [
-        "variant_picker",
-        "custom_JtBXGV",
-        "promotion_V4mkaE",
+        "custom_ir6hFk",
+        "tag_TkpVP9",
         "price",
+        "promotion_xkLgrj",
+        "variant_picker",
+        "usage_guide_KJqfAH",
         "buy_buttons",
+        "productbundle_GcbRad",
         "description",
-        "usage_guide_DQr8LJ",
-        "service_grid_aaTz8t"
+        "usage_guide_PRnkUz",
+        "service_grid_tzXXkC"
       ],
       "settings": {
         "section_width": "page-width",
@@ -101,12 +180,12 @@
         "enable_sticky_add_to_cart": true,
         "hide_payment_button_mobile": true,
         "sku_enable": false,
-        "product_subtitle": "{{ product.metafields.custom.subdes.value }}",
-        "custom_text": "",
+        "product_subtitle": "Giải pháp tiên phong trong công nghệ giấc ngủ.",
+        "custom_text": "Top rated",
         "image_position": "left",
         "image_size": "large",
         "product_zoom_enable": true,
-        "product_carousel_enable": true,
+        "product_carousel_enable": false,
         "limit_product_carousel": false,
         "thumbnail_position": "below",
         "thumbnail_height": "flexible",
@@ -116,10 +195,10 @@
         "product_video_style": "muted"
       }
     },
-    "reason_to_choice_JT94Ep": {
+    "reason_to_choice_MiXBbP": {
       "type": "reason-to-choice",
       "blocks": {
-        "reason_JDan77": {
+        "reason_mF9y7D": {
           "type": "reason",
           "settings": {
             "image": "{{ product.metafields.custom.dynamic_image_1.value }}",
@@ -127,7 +206,7 @@
             "content": "<p>{{ product.metafields.custom.dynamic_description_1 | metafield_tag }}</p>"
           }
         },
-        "reason_bJwpgr": {
+        "reason_gUwgCJ": {
           "type": "reason",
           "settings": {
             "image": "{{ product.metafields.custom.dynamic_image_2.value }}",
@@ -135,7 +214,7 @@
             "content": "<p>{{ product.metafields.custom.dynamic_desciption_2 | metafield_tag }}</p>"
           }
         },
-        "reason_DATJwq": {
+        "reason_9DmCKX": {
           "type": "reason",
           "settings": {
             "image": "{{ product.metafields.custom.dynamic_image_3.value }}",
@@ -145,9 +224,9 @@
         }
       },
       "block_order": [
-        "reason_JDan77",
-        "reason_bJwpgr",
-        "reason_DATJwq"
+        "reason_mF9y7D",
+        "reason_gUwgCJ",
+        "reason_9DmCKX"
       ],
       "name": "Reason to choice",
       "settings": {
@@ -164,7 +243,7 @@
             "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
             "direction": "vertical",
             "content_position": "right",
-            "space": "250",
+            "space": "150",
             "left": "25%",
             "top": "25%",
             "space_mb": "110",
@@ -194,7 +273,7 @@
             "hotspot_sub_title": "Đàn hồi cao, nâng đỡ theo đường cong cơ thể",
             "direction": "vertical",
             "content_position": "right",
-            "space": "330",
+            "space": "250",
             "left": "40%",
             "top": "37%",
             "space_mb": "110",
@@ -239,6 +318,9 @@
         "product_YTgbw6",
         "product_dpYgWc",
         "product_BGphfJ"
+      ],
+      "custom_css": [
+        ".h3.primary-color.hotspot-item__title {white-space: nowrap;}"
       ],
       "settings": {
         "enable_anchor_link": true,
@@ -475,7 +557,7 @@
             "hotspot_sub_title": "Lựa chọn độ êm ái hoặc nâng đỡ",
             "direction": "vertical",
             "content_position": "right",
-            "space": "250",
+            "space": "260",
             "left": "30%",
             "top": "35%",
             "space_mb": "110",
@@ -490,7 +572,7 @@
             "hotspot_sub_title": "Thiết kế 3 vùng nâng đỡ khác biệt cho từng vị trí  đầu - thân - chân",
             "direction": "vertical",
             "content_position": "right",
-            "space": "260",
+            "space": "300",
             "left": "35%",
             "top": "45%",
             "space_mb": "110",
@@ -505,7 +587,7 @@
             "hotspot_sub_title": "Giải toả lực ép và tản nhiệt",
             "direction": "vertical",
             "content_position": "right",
-            "space": "270",
+            "space": "400",
             "left": "50%",
             "top": "55%",
             "space_mb": "110",
@@ -520,7 +602,7 @@
             "hotspot_sub_title": "Khả năng ngăn cách chuyển động",
             "direction": "vertical",
             "content_position": "right",
-            "space": "280",
+            "space": "380",
             "left": "60%",
             "top": "60%",
             "space_mb": "110",
@@ -535,6 +617,10 @@
         "product_KQpcky",
         "product_gkzea7",
         "product_WAmQBe"
+      ],
+      "custom_css": [
+        "h2 {padding: 20px; /* Bạn có thể thay đổi giá trị này theo nhu cầu */ margin-bottom: 20px;}",
+        ".h3.primary-color.hotspot-item__title {white-space: nowrap;}"
       ],
       "settings": {
         "enable_anchor_link": true,
@@ -718,6 +804,10 @@
         "image_with_text_NFMQyg",
         "image_with_text_WAkepD"
       ],
+      "custom_css": [
+        "h2 {font-size: 32px;}",
+        "@media (max-width: 767px) {h2 {font-size: 24px; } span {font-size: 16px; }}"
+      ],
       "settings": {
         "section_width": "page-width",
         "customize_width": 1800,
@@ -732,6 +822,9 @@
     },
     "best_seller_DWCAYP": {
       "type": "best-seller",
+      "custom_css": [
+        "@media (max-width: 767px) {span {font-size: 16px; }}"
+      ],
       "settings": {
         "mg": "54px,,40px,",
         "pd": "",
@@ -836,10 +929,10 @@
         "space_around": true
       }
     },
-    "super_service_6NCMDb": {
+    "super_service_qUwnVM": {
       "type": "super-service",
       "blocks": {
-        "service_item_CCJXDz": {
+        "service_item_zWd8Lh": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_3.svg",
@@ -849,7 +942,7 @@
             "item_link": ""
           }
         },
-        "service_item_P7rCt3": {
+        "service_item_JUzhgt": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_4.svg",
@@ -859,7 +952,7 @@
             "item_link": ""
           }
         },
-        "service_item_ebqEx4": {
+        "service_item_z9bGjB": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_5.svg",
@@ -869,7 +962,7 @@
             "item_link": ""
           }
         },
-        "service_item_EXxRtY": {
+        "service_item_UTXVmc": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_6.svg",
@@ -881,10 +974,10 @@
         }
       },
       "block_order": [
-        "service_item_CCJXDz",
-        "service_item_P7rCt3",
-        "service_item_ebqEx4",
-        "service_item_EXxRtY"
+        "service_item_zWd8Lh",
+        "service_item_JUzhgt",
+        "service_item_z9bGjB",
+        "service_item_UTXVmc"
       ],
       "name": "Super Service",
       "settings": {
@@ -892,42 +985,46 @@
         "background_color": "#f5f9ff"
       }
     },
-    "collections_listing_9Kh8kb": {
+    "collections_listing_9YYPGa": {
       "type": "collections-listing",
       "blocks": {
-        "collection_dV4THq": {
+        "collection_3CKU7a": {
           "type": "collection",
           "settings": {
             "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
             "custom_title": "",
             "custom_link": ""
           }
         },
-        "collection_4HryGd": {
+        "collection_HDHiUG": {
           "type": "collection",
           "settings": {
             "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
             "custom_title": "",
             "custom_link": ""
           }
         },
-        "collection_mfFrHh": {
+        "collection_pMXCbU": {
           "type": "collection",
           "settings": {
             "collection": "chan",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
             "custom_title": "",
             "custom_link": ""
           }
         },
-        "collection_jErLcG": {
+        "collection_xiUYwi": {
           "type": "collection",
           "settings": {
             "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
             "custom_title": "",
             "custom_link": ""
           }
         },
-        "collection_WbtHPq": {
+        "collection_p9E9WN": {
           "type": "collection",
           "disabled": true,
           "settings": {
@@ -938,11 +1035,11 @@
         }
       },
       "block_order": [
-        "collection_dV4THq",
-        "collection_4HryGd",
-        "collection_mfFrHh",
-        "collection_jErLcG",
-        "collection_WbtHPq"
+        "collection_3CKU7a",
+        "collection_HDHiUG",
+        "collection_pMXCbU",
+        "collection_xiUYwi",
+        "collection_p9E9WN"
       ],
       "name": "Collections Listing",
       "settings": {
@@ -981,8 +1078,9 @@
     }
   },
   "order": [
+    "countdown_Gwp9bc",
     "main",
-    "reason_to_choice_JT94Ep",
+    "reason_to_choice_MiXBbP",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",
     "product_hotspot_BGaNkf",
@@ -995,8 +1093,8 @@
     "dynamic_faq_Whrn47",
     "172802814088f5e025",
     "1730878240cfbec46e",
-    "super_service_6NCMDb",
-    "collections_listing_9Kh8kb",
+    "super_service_qUwnVM",
+    "collections_listing_9YYPGa",
     "sub",
     "product-recommendations",
     "recently-viewed",

@@ -14,7 +14,7 @@
             </div>
           {%- endif -%}
         </div>
-        <div class="section-navigation">
+        <div class="section-navigation desktop-nav">
           <button class="nav-arrow nav-arrow--prev" aria-label="Previous">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,6 +26,13 @@
             </svg>
           </button>
         </div>
+        {%- if section.settings.show_mobile_view_all and section.settings.mobile_view_all_url != blank -%}
+          <div class="section-navigation mobile-nav">
+            <a href="{{ section.settings.mobile_view_all_url }}" class="view-all-btn">
+              {{ section.settings.mobile_view_all_text | default: 'Xem tất cả' }}
+            </a>
+          </div>
+        {%- endif -%}
       </div>
     </div>
     
@@ -181,6 +188,16 @@
     align-items: center;
   }
   
+  /* Desktop Navigation */
+  [data-section-type="combo-bedroom"] .desktop-nav {
+    display: flex;
+  }
+  
+  /* Mobile Navigation */
+  [data-section-type="combo-bedroom"] .mobile-nav {
+    display: none;
+  }
+  
   [data-section-type="combo-bedroom"] .nav-arrow {
     width: 40px;
     height: 40px;
@@ -209,6 +226,22 @@
   [data-section-type="combo-bedroom"] .nav-arrow svg {
     width: 20px;
     height: 20px;
+  }
+  
+  /* View All Link Styles */
+  [data-section-type="combo-bedroom"] .view-all-btn {
+    color: #1A1A1A;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: underline;
+    line-height: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  [data-section-type="combo-bedroom"] .view-all-btn:hover {
+    opacity: 0.7;
+    text-decoration: underline;
   }
 
   /* Carousel Styles */
@@ -462,6 +495,16 @@
       align-self: center;
     }
     
+    /* Hide desktop nav on mobile */
+    [data-section-type="combo-bedroom"] .desktop-nav {
+      display: none !important;
+    }
+    
+    /* Show mobile nav on mobile */
+    [data-section-type="combo-bedroom"] .mobile-nav {
+      display: flex !important;
+    }
+    
     [data-section-type="combo-bedroom"] .combo-bedroom-section .section-title {
       font-size: 20px;
       margin-bottom: 8px;
@@ -668,6 +711,30 @@
       "id": "description_color",
       "label": "Description Color",
       "default": "#666"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Navigation Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_view_all",
+      "label": "Show 'View All' button on mobile",
+      "default": false,
+      "info": "When enabled, shows 'View All' button instead of navigation arrows on mobile"
+    },
+    {
+      "type": "text",
+      "id": "mobile_view_all_text",
+      "label": "Mobile 'View All' button text",
+      "default": "Xem tất cả",
+      "info": "Text displayed on the mobile 'View All' button"
+    },
+    {
+      "type": "url",
+      "id": "mobile_view_all_url",
+      "label": "Mobile 'View All' button link",
+      "info": "URL where the mobile 'View All' button should link to"
     }
   ],
   "blocks": [

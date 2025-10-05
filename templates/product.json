@@ -144,7 +144,7 @@
           "settings": {
             "icon_1": "shopify://shop_images/Layer_1_3.svg",
             "text_1": "100 đêm ngủ thử",
-            "show_service_1": true,
+            "show_service_1": false,
             "icon_2": "shopify://shop_images/Layer_1_4.svg",
             "text_2": "Miễn phí vận chuyển",
             "show_service_2": true,
