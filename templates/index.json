@@ -691,7 +691,7 @@
         "topic_tab_dQTUiL": {
           "type": "topic_tab",
           "settings": {
-            "tab_title": "Topic",
+            "tab_title": "Câu chuyện giấc ngủ",
             "article_1": "magazine/nem-1m2-x-2m-gia-re",
             "article_2": "magazine/tu-the-nam-giam-dau-dau",
             "article_3": "magazine/dia-chi-mua-nem-foam",
@@ -702,7 +702,7 @@
         "topic_tab_cWdgCY": {
           "type": "topic_tab",
           "settings": {
-            "tab_title": "Topic",
+            "tab_title": "Cung Hoàng đạo",
             "article_1": "magazine/thang-3-cung-gi",
             "article_2": "magazine/thang-9-cung-gi",
             "article_3": "magazine/thang-11-cung-gi",
@@ -713,7 +713,7 @@
         "topic_tab_TTmcX4": {
           "type": "topic_tab",
           "settings": {
-            "tab_title": "Topic",
+            "tab_title": "Mẹo hay",
             "article_1": "magazine/vai-denim-la-gi",
             "article_2": "magazine/vai-jean-la-gi",
             "article_3": "magazine/nhung-dieu-can-biet-ve-chieu-dieu-hoa",

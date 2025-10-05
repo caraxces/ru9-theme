@@ -916,6 +916,23 @@
       border: none;
       cursor: pointer;
     }
+    /* Bundle Voucher Notice */
+    .bundle-voucher-notice {
+      margin: 10px 0;
+    }
+    
+    .bundle-voucher-notice div {
+      background: #E8F4FD;
+      border: 1px solid #B3D9FF;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 14px;
+      color: #1C2C58;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
     /* Checkout Buttons */
     #CartDrawer .cart__checkout-wrapper--custom {
       display: flex;
@@ -1006,7 +1023,7 @@
 
           
           <!-- DISCOUNT CODE -->
-          <div class="cart-drawer__discount-wrapper">
+          <div class="cart-drawer__discount-wrapper" id="discount-wrapper">
               <h3 class="cart-drawer__discount-header">Nhập mã ưu đãi của bạn (copy và dán vào ô dưới)</h3>
               <form action="{{ routes.cart_url }}/update" method="post" class="cart-drawer__discount-form" novalidate>
                   <input type="text" id="CartDrawer-Discount" name="discount" class="cart-drawer__discount-input" placeholder="Mã ưu đãi">
@@ -1179,23 +1196,15 @@
             <!-- CHECKOUT BUTTONS -->
             <div class="cart__checkout-wrapper--custom">
                 {%- assign bundle_voucher = '' -%}
+                {%- comment -%} Check bundle items for voucher {%- endcomment -%}
                 {%- for item in cart.items -%}
-                  {%- for property in item.properties -%}
-                    {%- if property.first == '_bundle_voucher' -%}
-                      {%- assign bundle_voucher = property.last -%}
-                      {%- break -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-                  {%- if bundle_voucher != '' -%}
+                  {%- if item.properties._bundle_voucher -%}
+                    {%- assign bundle_voucher = item.properties._bundle_voucher -%}
                     {%- break -%}
                   {%- endif -%}
                 {%- endfor -%}
 
-                {%- if bundle_voucher != '' -%}
-                  <button type="submit" name="checkout" class="btn btn--online" onclick="window.location.href='/checkout?discount={{ bundle_voucher }}'; return false;">Thanh toán ngay</button>
-                {%- else -%}
-                  <button type="submit" name="checkout" class="btn btn--online">Thanh toán ngay</button>
-                {%- endif -%}
+                <button type="submit" name="checkout" class="btn btn--online" onclick="handleCheckout(); return false;">Thanh toán ngay</button>
             </div>
             {% if additional_checkout_buttons and settings.cart_additional_buttons %}
               <div class="additional-checkout-buttons additional-checkout-buttons--vertical">{{ content_for_additional_checkout_buttons }}</div>
@@ -1220,12 +1229,352 @@
           if (theme && typeof theme.CartForm === 'function') {
             const cartFormInstance = new theme.CartForm(document.getElementById('CartDrawerForm'));
             cartFormInstance.buildCart();
+            
+            // Check for bundle vouchers after cart rebuild
+            setTimeout(() => {
+              checkAndApplyBundleVouchers();
+              checkStoredBundleVoucher();
+              manageDiscountFieldForBundle();
+            }, 500);
+            
             // MutationObserver will handle all UI updates instantly after this.
           } else {
             window.location.href = '{{ routes.cart_url }}';
           }
         }
+
+        // Also call checkStoredBundleVoucher on initial page load
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(() => {
+            checkStoredBundleVoucher();
+          }, 1000);
+        });
+
+        // Function to refresh cart drawer (alias for rebuildCart)
+        function refreshCartDrawer() {
+          rebuildCart();
+        }
+
+        // Function to ensure drawer is visible
+        function ensureDrawerVisible() {
+          const drawer = document.getElementById('CartDrawer');
+          if (drawer) {
+            drawer.classList.add('drawer--is-open');
+          }
+        }
+
+        // Function to show sticky add to cart
+        function showStickyAddToCart() {
+          const drawer = document.getElementById('CartDrawer');
+          if (drawer) {
+            drawer.classList.remove('drawer--is-open');
+          }
+        }
+
+        function checkAndApplyBundleVouchers() {
+          console.log('=== CHECK AND APPLY BUNDLE VOUCHERS ===');
+          
+          // Get all bundle items in cart
+          const bundleItems = document.querySelectorAll('.cart__item--bundle-item');
+          console.log('Found bundle items:', bundleItems.length);
+          
+          bundleItems.forEach((item, index) => {
+            console.log(`Checking bundle item ${index}:`, item);
+            
+            // Look for bundle voucher in item properties
+            const propertiesEl = item.querySelector('.cart-item__properties');
+            if (propertiesEl) {
+              const bundleVoucherEl = propertiesEl.querySelector('[data-property-name="_bundle_voucher"]');
+              if (bundleVoucherEl) {
+                const voucherCode = bundleVoucherEl.textContent?.trim();
+                console.log('Found bundle voucher:', voucherCode);
+                
+                if (voucherCode && voucherCode !== '') {
+                  // Check if voucher is already applied
+                  const existingDiscount = document.querySelector('.cart-drawer__discount-item');
+                  if (!existingDiscount) {
+                    console.log('Auto-applying bundle voucher:', voucherCode);
+                    autoApplyBundleVoucher(voucherCode);
+                  } else {
+                    console.log('Voucher already applied, skipping...');
+                  }
+                }
+              }
+            }
+          });
+        }
+
+        function autoApplyBundleVoucher(voucherCode) {
+          console.log('=== AUTO APPLY BUNDLE VOUCHER ===');
+          console.log('Voucher code:', voucherCode);
+          
+          fetch('/cart/update.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({ 'discount': voucherCode })
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Bundle voucher application response:', data);
+            if (data.status) {
+              console.log('❌ Bundle voucher application failed:', data.description);
+            } else {
+              console.log('✅ Bundle voucher applied successfully');
+              
+              // Show success notification
+              showBundleVoucherNotification(voucherCode, data);
+              
+              // Update cart display
+              setTimeout(() => rebuildCart(), 300);
+            }
+          })
+          .catch(error => {
+            console.error('❌ Error applying bundle voucher:', error);
+          });
+        }
+
+        function showBundleVoucherNotification(voucherCode, cartData) {
+          console.log('=== SHOW BUNDLE VOUCHER NOTIFICATION ===');
+          
+          // Calculate discount amount
+          let discountAmount = 0;
+          if (cartData.cart_level_discount_applications && cartData.cart_level_discount_applications.length > 0) {
+            cartData.cart_level_discount_applications.forEach(discount => {
+              if (discount.title && discount.title.toLowerCase().includes(voucherCode.toLowerCase())) {
+                discountAmount = discount.total_allocated_amount || discount.amount || 0;
+              }
+            });
+          }
+          
+          // Create notification element
+          const notification = document.createElement('div');
+          notification.className = 'bundle-voucher-notification';
+          notification.innerHTML = `
+            <div style="
+              position: fixed;
+              top: 20px;
+              right: 20px;
+              background: #10B981;
+              color: white;
+              padding: 12px 16px;
+              border-radius: 8px;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+              z-index: 10000;
+              font-family: 'Be Vietnam Pro', sans-serif;
+              font-size: 14px;
+              max-width: 300px;
+            ">
+              <div style="font-weight: 600; margin-bottom: 4px;">
+                🎉 Bundle Voucher Applied!
+              </div>
+              <div style="font-size: 12px; opacity: 0.9;">
+                Code: ${voucherCode} • Savings: ${discountAmount > 0 ? (discountAmount / 100).toLocaleString('vi-VN') + '₫' : 'Applied'}
+              </div>
+            </div>
+          `;
+          
+          document.body.appendChild(notification);
+          
+          // Auto remove after 3 seconds
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.parentNode.removeChild(notification);
+            }
+          }, 3000);
+        }
+
+        // Ensure bundle voucher persists through checkout
+        function ensureBundleVoucherPersistence() {
+          console.log('=== ENSURE BUNDLE VOUCHER PERSISTENCE ===');
+          
+          // Get current discount code from cart
+          const discountInput = document.querySelector('.cart-drawer__discount-input');
+          if (discountInput && discountInput.value) {
+            const currentDiscount = discountInput.value;
+            console.log('Current discount in cart:', currentDiscount);
+            
+            // Store in sessionStorage for checkout persistence
+            sessionStorage.setItem('bundle_voucher_code', currentDiscount);
+            console.log('Stored voucher in sessionStorage:', currentDiscount);
+          }
+        }
+
+        // Check for stored voucher on page load
+        // Function to handle checkout with voucher
+        function handleCheckout() {
+          console.log('=== HANDLE CHECKOUT ===');
+          
+          // Get current cart state
+          fetch('/cart.js')
+            .then(response => response.json())
+            .then(cartData => {
+              // Check if discount is already applied
+              const hasDiscount = cartData.cart_level_discount_applications && 
+                                 cartData.cart_level_discount_applications.length > 0;
+              
+              // Find voucher from bundle items
+              let bundleVoucher = null;
+              for (const item of cartData.items) {
+                if (item.properties && item.properties._bundle_voucher) {
+                  bundleVoucher = item.properties._bundle_voucher;
+                  break;
+                }
+              }
+              
+              console.log('Cart state:', {
+                hasDiscount,
+                bundleVoucher,
+                discountApplications: cartData.cart_level_discount_applications
+              });
+              
+              if (hasDiscount) {
+                // Discount already applied, go directly to checkout
+                console.log('Discount already applied, going to checkout');
+                window.location.href = '/checkout';
+              } else if (bundleVoucher) {
+                // Apply bundle voucher first, then go to checkout
+                console.log('Applying bundle voucher before checkout:', bundleVoucher);
+                fetch('/cart/update.js', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                  },
+                  body: JSON.stringify({ 'discount': bundleVoucher })
+                })
+                .then(response => response.json())
+                .then(data => {
+                  console.log('Voucher applied before checkout:', data);
+                  // Go to checkout after voucher is applied
+                  window.location.href = '/checkout';
+                })
+                .catch(error => {
+                  console.error('Error applying voucher before checkout:', error);
+                  // Go to checkout anyway
+                  window.location.href = '/checkout';
+                });
+              } else {
+                // No discount and no bundle voucher, go to checkout normally
+                console.log('No discount or bundle voucher, going to checkout');
+                window.location.href = '/checkout';
+              }
+            })
+            .catch(error => {
+              console.error('Error getting cart state:', error);
+              // Fallback: go directly to checkout
+              window.location.href = '/checkout';
+            });
+        }
+
+
+        function checkStoredBundleVoucher() {
+          // Check if voucher is stored in bundle items and apply silently
+          fetch('/cart.js')
+            .then(response => response.json())
+            .then(cartData => {
+              const hasDiscount = cartData.cart_level_discount_applications &&
+                                 cartData.cart_level_discount_applications.length > 0;
+              
+              // Find voucher from bundle items
+              let storedVoucher = null;
+              for (const item of cartData.items) {
+                if (item.properties && item.properties._bundle_voucher) {
+                  storedVoucher = item.properties._bundle_voucher;
+                  break;
+                }
+              }
+              
+              console.log('=== CHECK STORED BUNDLE VOUCHER ===');
+              console.log('Has discount:', hasDiscount);
+              console.log('Stored voucher:', storedVoucher);
+              
+              if (!hasDiscount && storedVoucher) {
+                console.log('Auto-applying stored voucher:', storedVoucher);
+                // Apply voucher silently
+                fetch('/cart/update.js', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                  },
+                  body: JSON.stringify({ 'discount': storedVoucher })
+                })
+                .then(response => response.json())
+                .then(data => {
+                  console.log('Voucher re-applied successfully');
+                  // Refresh cart to show updated prices
+                  setTimeout(() => rebuildCart(), 500);
+                })
+                .catch(error => {
+                  console.error('Error re-applying voucher:', error);
+                });
+              } else if (hasDiscount) {
+                console.log('Discount already applied, no need to re-apply');
+              } else {
+                console.log('No stored voucher found');
+              }
+            })
+            .catch(error => {
+              console.error('Error checking stored voucher:', error);
+            });
+        }
         
+
+        function manageDiscountFieldForBundle() {
+          // Always show discount field to allow users to add additional vouchers
+          // Only hide if there's a specific reason (like preventing multiple discounts)
+          const discountWrapper = document.getElementById('discount-wrapper');
+          
+          if (discountWrapper) {
+            // Always show the discount input field
+            discountWrapper.style.display = '';
+            
+            // Optional: Add a note about bundle vouchers if present
+            fetch('/cart.js')
+              .then(response => response.json())
+              .then(cartData => {
+                let hasBundleVoucher = false;
+                for (const item of cartData.items) {
+                  if (item.properties && item.properties._bundle_voucher) {
+                    hasBundleVoucher = true;
+                    break;
+                  }
+                }
+                
+                // Add/update bundle voucher notice if needed
+                let noticeElement = document.querySelector('.bundle-voucher-notice');
+                if (hasBundleVoucher && !noticeElement) {
+                  noticeElement = document.createElement('div');
+                  noticeElement.className = 'bundle-voucher-notice';
+                  noticeElement.innerHTML = `
+                    <div style="
+                      background: #E8F4FD;
+                      border: 1px solid #B3D9FF;
+                      border-radius: 8px;
+                      padding: 12px;
+                      margin: 10px 0;
+                      font-family: 'Be Vietnam Pro', sans-serif;
+                      font-size: 14px;
+                      color: #1C2C58;
+                      text-align: center;
+                    ">
+                      💡 Bạn đã có voucher từ bundle. Bạn có thể thêm voucher khác nếu cần.
+                    </div>
+                  `;
+                  discountWrapper.parentNode.insertBefore(noticeElement, discountWrapper);
+                } else if (!hasBundleVoucher && noticeElement) {
+                  noticeElement.remove();
+                }
+              })
+              .catch(error => {
+                // Silent fail
+              });
+          }
+        }
+
         function handleBundleHeaders() {
           const productContainer = document.querySelector('#CartDrawer [data-products]');
           if (productContainer) {
@@ -1470,11 +1819,9 @@
           // The discount applications are already rendered in the HTML by Liquid
           // We just need to ensure they're visible and properly styled
           const discountItems = document.querySelectorAll('.cart-drawer__discount-item');
-          console.log('Found discount items:', discountItems.length);
           
           discountItems.forEach(item => {
             item.style.display = '';
-            console.log('Discount item:', item.textContent);
           });
         }
 
@@ -1525,7 +1872,7 @@
             totalOriginalPrice += originalPriceUnit * quantity;
           });
 
-          // Get voucher discount amount from DOM
+          // Get voucher discount amount from DOM first
           let voucherDiscountAmount = 0;
           const discountItems = document.querySelectorAll('.cart-drawer__discount-amount');
           discountItems.forEach(discountEl => {
@@ -1533,28 +1880,11 @@
             voucherDiscountAmount += discountAmount;
           });
 
-          // If we have discount items in DOM, use DOM calculation
-          // Otherwise, use server cart total price (which already includes discounts)
-          let finalPriceAfterVoucher, totalSavings;
+          // Calculate savings from price difference (more reliable)
+          const priceDifference = totalOriginalPrice - totalFinalPrice;
+          const totalSavings = priceDifference > 0 ? priceDifference : 0;
+          const finalPriceAfterVoucher = totalFinalPrice;
           
-          if (voucherDiscountAmount > 0) {
-            // Use DOM calculation when discount items are visible
-            finalPriceAfterVoucher = Math.max(0, totalFinalPrice - voucherDiscountAmount);
-            totalSavings = totalOriginalPrice - finalPriceAfterVoucher;
-          } else {
-            // No discount items in DOM, prices are already correct from cart items
-            finalPriceAfterVoucher = totalFinalPrice;
-            totalSavings = totalOriginalPrice - totalFinalPrice;
-          }
-
-          console.log('Debug cart pricing:', {
-            totalOriginalPrice,
-            totalFinalPrice,
-            voucherDiscountAmount,
-            finalPriceAfterVoucher,
-            totalSavings,
-            hasDiscountItems: discountItems.length > 0
-          });
 
           const savingsDisplay = document.querySelector('[data-savings-display] span');
           if (savingsDisplay) savingsDisplay.textContent = 'Bạn đã tiết kiệm được ' + formatMoney(totalSavings);
@@ -1760,6 +2090,9 @@
               } else {
                 // Success - clear the input and update UI immediately
                 discountInput.value = '';
+                
+                // Ensure voucher persists through checkout
+                ensureBundleVoucherPersistence();
                 
                 // Immediately create discount field with X button
                 createDiscountField(cart, discountInput.value);
@@ -1984,7 +2317,11 @@
           if (event.target.closest('[data-cart-drawer-toggle]') || 
               event.target.closest('.cart-link') ||
               event.target.closest('[href*="cart"]')) {
-            setTimeout(ensureDrawerVisible, 100);
+            setTimeout(() => {
+              ensureDrawerVisible();
+              // Check for stored vouchers when drawer opens
+              setTimeout(() => checkStoredBundleVoucher(), 500);
+            }, 100);
           }
           
           // Check if cart drawer should be closed
@@ -2002,6 +2339,56 @@
         // Update cart count on initial page load
         document.addEventListener('DOMContentLoaded', function() {
           syncCartUIFromDOM();
+        });
+
+        // Backup function to ensure voucher is applied before checkout
+        function ensureVoucherBeforeCheckout() {
+          console.log('=== ENSURE VOUCHER BEFORE CHECKOUT ===');
+          
+          fetch('/cart.js')
+            .then(response => response.json())
+            .then(cartData => {
+              const hasDiscount = cartData.cart_level_discount_applications && 
+                                 cartData.cart_level_discount_applications.length > 0;
+              
+              if (!hasDiscount) {
+                // Find bundle voucher
+                let bundleVoucher = null;
+                for (const item of cartData.items) {
+                  if (item.properties && item.properties._bundle_voucher) {
+                    bundleVoucher = item.properties._bundle_voucher;
+                    break;
+                  }
+                }
+                
+                if (bundleVoucher) {
+                  console.log('Last-minute voucher application:', bundleVoucher);
+                  fetch('/cart/update.js', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ 'discount': bundleVoucher })
+                  });
+                }
+              }
+            })
+            .catch(error => {
+              console.error('Error in backup voucher check:', error);
+            });
+        }
+
+        // Override the checkout button to ensure voucher is applied
+        document.addEventListener('click', function(event) {
+          if (event.target.closest('button[name="checkout"]') || 
+              event.target.closest('.btn--online')) {
+            
+            // Small delay to ensure voucher is applied
+            setTimeout(() => {
+              ensureVoucherBeforeCheckout();
+            }, 100);
+          }
         });
       })();
     </script>
