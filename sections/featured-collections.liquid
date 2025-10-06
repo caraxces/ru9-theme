@@ -102,7 +102,7 @@
                         {%- endif -%}
                       </div>
                       <h3 class="product-name">{{ product.title }}</h3>
-                      <div class="product-meta">25cm, 6 sizes</div>
+                      {% comment %} <div class="product-meta">25cm, 6 sizes</div> {% endcomment %}
                       <div class="product-price">
                         <span class="price">Từ {{ product.price | money }}</span>
                         {%- if product.compare_at_price > product.price -%}
