@@ -50,7 +50,7 @@
     max-height: 390px !important;
   }
 
-  /* MOBILE MAIN IMAGES - FILL PLACEHOLDER */
+  /* MOBILE MAIN IMAGES - FILL PLACEHOLDER WITH FADE */
   .product__main-photos .image-wrap img,
   .product__main-photos .image-wrap .media--image,
   .product__main-photos .image-wrap.loaded img,
@@ -67,6 +67,15 @@
     left: 0 !important;
     display: block !important;
     visibility: visible !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+  }
+
+  /* IMAGE LOADED STATE - SIMPLE FADE IN */
+  .product__main-photos .image-wrap.loaded img,
+  .product__main-photos .image-wrap.loaded .media--image,
+  .product__main-photos .product-main-slide.is-selected img,
+  .product__main-photos .product-main-slide.is-selected .media--image {
     opacity: 1 !important;
   }
 
@@ -82,13 +91,19 @@
     max-height: 390px !important;
   }
 
-  /* HIDE INACTIVE SLIDES, SHOW ACTIVE */
-  .product__main-photos .product-main-slide:not(.is-selected) {
-    display: none !important;
+  /* SIMPLE FADE TRANSITION */
+  .product__main-photos .product-main-slide {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 390px !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
   }
 
   .product__main-photos .product-main-slide.is-selected {
-    display: block !important;
+    opacity: 1 !important;
   }
 
   /* MOBILE SLIDER IMAGES - FILL PLACEHOLDER */
