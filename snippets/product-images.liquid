@@ -256,16 +256,15 @@
         {%- endif -%}
       </div>
 
-      <div
-        data-product-thumbs
-        class="product__thumbs product__thumbs--{{ thumbnail_position }} product__thumbs-placement--{{ image_position }}{%  unless check_block_combo %}{% if product.media.size == 1 %} medium-up--hide{% endif %}{% endunless %} %}"
-        data-position="{{ thumbnail_position }}"
-        {% if thumbnail_position == 'below' %}
-          data-position-tablet="beside"
-        {% endif %}
-        data-arrows="{{ thumbnail_arrows }}"
-        data-aos
-      >
+        <div
+          data-product-thumbs
+          class="product__thumbs product__thumbs--{{ thumbnail_position }}{% unless check_block_combo %}{% if product.media.size == 1 %} medium-up--hide{% endif %}{% endunless %}"
+          data-position="{{ thumbnail_position }}"
+          {% if thumbnail_position == 'below' %}
+            data-position-tablet="beside"
+          {% endif %}
+          data-arrows="{{ thumbnail_arrows }}"
+        >
         {%- if thumbnail_arrows -%}
           <button type="button" class="product__thumb-arrow product__thumb-arrow--prev hide">
             <svg

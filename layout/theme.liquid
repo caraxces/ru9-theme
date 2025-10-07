@@ -71,12 +71,13 @@
   
       {%- render 'social-meta-tags' -%}
   
+      {{ content_for_header }}
       {%- render 'font-face' -%}
       <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
 
-      {{ content_for_header }}
       {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
       {{ 'judge-me-layout.css' | asset_url | stylesheet_tag }}
+      {{ 'mobile-product-layout.css' | asset_url | stylesheet_tag }}
       {%- render 'css-variables' -%}
   
       <script>
@@ -211,7 +212,7 @@
           </image-element>
         </div>
       </template>
-      <script>
+      {% comment %} <script>
         document.addEventListener('DOMContentLoaded', function() {
             // URL hiện tại
             var currentURL = window.location.href;
@@ -261,7 +262,7 @@
                 }
             }
         });
-      </script>
+      </script> {% endcomment %}
        <!-- Google Tag Manager -->
         <script type="lazyload2">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

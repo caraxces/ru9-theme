@@ -419,7 +419,7 @@
     .footer-ru9-fab-wrapper {
       position: fixed;
       right: 15px;
-      bottom: 25px;
+      bottom: 15px;
       z-index: 999;
       display: flex;
       flex-direction: column;
@@ -496,25 +496,30 @@
     #fab-phone { background-color: #4CAF50; }
 
     /* Adjust position when back-to-top is visible */
-    .backtop-show .footer-ru9-fab-wrapper {
-      bottom: 90px !important;
+    .backtop-show .footer-ru9-fab-wrapper[data-section-id="{{ section.id }}"] {
+      bottom: 80px !important;
     }
 
     /* Adjust position when sticky ATC is active on mobile */
-    @media screen and (max-width: 1060px){
-      body.sticky-atc-is-active .footer-ru9-fab-wrapper {
+    {% comment %} @media screen and (max-width: 1060px){
+      body.sticky-atc-is-active .footer-ru9-fab-wrapper[data-section-id="{{ section.id }}"] {
         bottom: 220px !important;
       }
-    }
+    } {% endcomment %}
     
-    @media(max-width: 767px){
+    @media screen and (max-width: 767px){
+     /* Position fab-contact-toggle above product__stick-product-wrap with 20px gap */
+     .footer-ru9-fab-wrapper[data-section-id="{{ section.id }}"] {
+       bottom: 58px !important; /* 48px (product__stick-product-wrap height) + 20px gap - 10px adjustment */
+     }
+     
      {%if section.settings.hotline_enable -%}
-       .footer-ru9-fab-wrapper {
-          bottom: 100px!important;
+       .footer-ru9-fab-wrapper[data-section-id="{{ section.id }}"] {
+          bottom: 90px!important;
       }
      {%endif-%}
-     .backtop-show .footer-ru9-fab-wrapper {
-      bottom: 160px !important;
+     .backtop-show .footer-ru9-fab-wrapper[data-section-id="{{ section.id }}"] {
+      bottom: 150px !important;
      }
     }
     /* END: Floating Action Button (FAB) for Contacts */

@@ -55,7 +55,7 @@
                   <a href="{{ product.url }}" class="product-card">
                     <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}">
                       {%- if block.settings.product_label != blank -%}
-                        <div class="product-label">
+                        <div class="product-label" style="color: {{ block.settings.label_color | default: '#fff' }}; background: {{ block.settings.label_bg | default: '#609EE9' }};">
                           {{ block.settings.product_label }}
                         </div>
                       {%- endif -%}
@@ -102,7 +102,7 @@
                         {%- endif -%}
                       </div>
                       <h3 class="product-name">{{ product.title }}</h3>
-                      <div class="product-meta">25cm, 6 sizes</div>
+                      {% comment %} <div class="product-meta">25cm, 6 sizes</div> {% endcomment %}
                       <div class="product-price">
                         <span class="price">Từ {{ product.price | money }}</span>
                         {%- if product.compare_at_price > product.price -%}
@@ -405,8 +405,8 @@
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 14px;
     font-weight: 600;
-    color: {{ block.settings.label_color | default: '#fff' }};
-    background: {{ block.settings.label_bg | default: '#609EE9' }};
+    color: #fff;
+    background: #609EE9;
     z-index: 2;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
@@ -710,7 +710,8 @@
       let scrollLeft;
 
       function dragStart(e) {
-        if (e.target.closest('.product-info')) {
+        // Don't start drag if clicking on product card
+        if (e.target.closest('.product-card')) {
           isDown = false;
           return;
         }
@@ -745,12 +746,21 @@
       tabContent.addEventListener('mouseup', dragEnd);
       tabContent.addEventListener('mouseleave', dragEnd);
 
-      tabContent.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', e => {
-              if (isDown) {
-                  e.preventDefault();
-                  e.stopPropagation();
-              }
+      // Handle click events for product cards
+      tabContent.querySelectorAll('.product-card').forEach(card => {
+          card.addEventListener('click', (e) => {
+              // Allow click to proceed normally to product page
+              // The drag logic above already prevents drag on product cards
+              return true;
+          });
+      });
+
+      // Handle touch events for mobile
+      tabContent.querySelectorAll('.product-card').forEach(card => {
+          card.addEventListener('touchend', (e) => {
+              // Allow tap to proceed normally to product page
+              // The drag logic above already prevents drag on product cards
+              return true;
           });
       });
 

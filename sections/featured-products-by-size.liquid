@@ -721,7 +721,11 @@
       function dragStart(e) {
         // Không cho phép drag trên mobile
         if (window.innerWidth <= 768) return;
-        if (e.target.closest('.product-info')) { isDown = false; return; }
+        // Don't start drag if clicking on product card
+        if (e.target.closest('.product-card')) {
+          isDown = false;
+          return;
+        }
         isDown = true;
         carouselContainer.classList.add('grabbing');
         startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
@@ -773,12 +777,12 @@
       carouselContainer.addEventListener('mouseleave', dragEnd);
       carouselContainer.addEventListener('touchstart', dragStart);
 
-      allProductCards.forEach(link => {
-          link.addEventListener('click', e => {
-              if (Math.abs(walk) > 10) {
-                  e.preventDefault();
-                  e.stopPropagation();
-              }
+      // Handle click events for product cards
+      allProductCards.forEach(card => {
+          card.addEventListener('click', (e) => {
+              // Allow click to proceed normally to product page
+              // The drag logic above already prevents drag on product cards
+              return true;
           });
       });
 
