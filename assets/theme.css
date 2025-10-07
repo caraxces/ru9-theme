@@ -2451,7 +2451,7 @@ img {
 
   .scroll-trigger:not(.scroll-trigger--offscreen).animate--fade-in {
     /* opacity: 1; */
-    animation: var(--animation-fade-in);
+    /* animation: var(--animation-fade-in); */
     animation-delay: calc(var(--animation-order) * 75ms);
   }
 

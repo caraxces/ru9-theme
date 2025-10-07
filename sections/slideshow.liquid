@@ -221,7 +221,7 @@
               </div>
 
               {%- if link_slide -%}
-                <a href="{{ block.settings.link }}" aria-label="link-slide" class="hero__slide-link not-empty"></a>
+                <a href="{{ block.settings.link }}" aria-label="link-slide" class="hero__slide-link not-empty" style="outline: none; border: none;"></a>
               {%- endif -%}
 
               {%- if hero_text -%}
@@ -299,7 +299,7 @@
 
 <!-- Footer Icon Text Bar -->
 {%- if section.settings.show_icon_text_bar -%}
-<div class="slideshow-footer-icon-text" style="background: {{ section.settings.icon_bar_background_color | default: '#FFFBEB' }}; border-top: 1px solid #e9ecef; display: flex; align-items: center; justify-content: center;">
+<div class="slideshow-footer-icon-text" style="background: {{ section.settings.icon_bar_background_color | default: '#FFFBEB' }}; display: flex; align-items: center; justify-content: center;">
   <div class="icon-text-container">
     
     <!-- Item 1 -->

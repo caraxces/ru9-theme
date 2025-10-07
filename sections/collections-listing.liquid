@@ -30,7 +30,7 @@
         
         {%- if collection != blank or custom_image != blank -%}
           
-          <div class="collection-item">
+          <a href="{{ custom_link | default: collection.url }}" class="collection-item">
             <div class="collection-image-container">
               {%- if custom_image != blank -%}
                 <img 
@@ -52,12 +52,10 @@
             </div>
             <div class="collection-info">
               <h3 class="collection-title">
-                <a href="{{ custom_link | default: collection.url }}">
-                  {{ custom_title | default: collection.title }}
-                </a>
+                {{ custom_title | default: collection.title }}
               </h3>
             </div>
-          </div>
+          </a>
           
         {%- endif -%}
       {%- endfor -%}
@@ -123,6 +121,9 @@
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
   
   .collections-listing-section .collection-item.is-visible {
@@ -181,7 +182,7 @@
     text-align: left;
   }
   
-  .collections-listing-section .collection-title a {
+  .collections-listing-section .collection-title {
     text-decoration: none;
     color: inherit;
     display: block;
@@ -197,32 +198,11 @@
     transform: scale(1.05);
   }
   
-  .collection-title a:hover {
+  .collections-listing-section .collection-item:hover .collection-title {
     color: #609EE9 !important;
     transition: color 0.3s ease;
   }
 
-  /* Make entire collection item clickable */
-  .collections-listing-section .collection-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .collections-listing-section .collection-title a {
-    position: relative;
-    z-index: 2;
-  }
-
-  .collections-listing-section .collection-image-container {
-    position: relative;
-    z-index: 1;
-  }
 
   /* Desktop Layout - Carousel */
   @media (min-width: 769px) {
@@ -404,7 +384,14 @@
       }
     });
 
-    // Drag/Swipe functionality removed - collections are now clickable
+    // Handle click events for collection items
+    collectionItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            // Allow click to proceed normally to collection page
+            // The entire item is now a link, so no need for special handling
+            return true;
+        });
+    });
     
     let resizeTimer;
     window.addEventListener('resize', () => {

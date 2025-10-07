@@ -1060,6 +1060,91 @@
       padding-left: 60px;
       padding-right: 60px;
     }
+
+    /* ========================================
+       FIX WHITE GAP BETWEEN COLUMNS
+       ======================================== */
+    
+    /* Override grid system for product detail page to remove gap */
+    .product-section .grid {
+      margin-left: 0 !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 0 !important;
+      row-gap: 0 !important;
+    }
+
+    /* Remove padding from grid items to eliminate gap */
+    .product-section .grid .grid__item {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      width: auto !important;
+    }
+
+    /* Ensure proper alignment for image column */
+    .product-section .grid .product-grid__images {
+      grid-column: 1;
+      padding-right: 0 !important;
+      position: sticky !important;
+      top: 80px !important;
+      align-self: start !important;
+      overflow: hidden !important;
+    }
+
+    /* Ensure proper alignment for info column */
+    .product-section .grid .product-grid__info {
+      grid-column: 2;
+      padding-left: 40px !important;
+    }
+
+    /* Handle images on the right side */
+    .product-section .grid--product-images-right .product-grid__images {
+      grid-column: 2;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      position: sticky !important;
+      top: 80px !important;
+      align-self: start !important;
+      max-height: calc(100vh - 120px) !important;
+      overflow: hidden !important;
+    }
+
+    .product-section .grid--product-images-right .product-grid__info {
+      grid-column: 1;
+      padding-right: 40px !important;
+      padding-left: 0 !important;
+    }
+
+    /* Responsive adjustments */
+    @media screen and (max-width: 1200px) {
+      .product-section .grid .product-grid__info {
+        padding-left: 30px !important;
+      }
+      .product-section .grid--product-images-right .product-grid__info {
+        padding-right: 30px !important;
+      }
+      
+      /* Adjust sticky height for smaller screens */
+      .product-section .grid .product-grid__images,
+      .product-section .grid--product-images-right .product-grid__images {
+        max-height: calc(100vh - 140px) !important;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      .product-section .grid .product-grid__info {
+        padding-left: 20px !important;
+      }
+      .product-section .grid--product-images-right .product-grid__info {
+        padding-right: 20px !important;
+      }
+      
+      /* Further adjust sticky height for tablets */
+      .product-section .grid .product-grid__images,
+      .product-section .grid--product-images-right .product-grid__images {
+        max-height: calc(100vh - 160px) !important;
+      }
+    }
   }
 
   .product-grid {
@@ -1116,31 +1201,49 @@
         position: static; /* Let JS control positioning */
     }
 
-    /* 
-      CRITICAL FIX: Dynamic max-width based on screen size
-      Use CSS calc to make max-width responsive to viewport width
-    */
+    /* ========================================
+       KOALA-STYLE IMAGE CONSTRAINTS
+       ======================================== */
+    
+    /* Image container - maintain aspect ratio, no stretching */
     .product-column-content {
-      max-width: min(765px, 50vw) !important;
       width: 100% !important;
       box-sizing: border-box !important;
       overflow: hidden !important;
+      position: relative !important;
     }
 
-    .product__photos img {
-      max-width: min(765px, 50vw) !important;
+    /* Main product images - natural aspect ratio */
+    .product__photos img,
+    .product__photos video,
+    .product__main-photos img,
+    .product__main-photos video {
       width: 100% !important;
-      box-sizing: border-box !important;
+      height: auto !important;
+      object-fit: contain !important;
+      aspect-ratio: auto !important;
+      max-height: calc(100vh - 200px) !important;
       display: block !important;
       margin: 0 auto !important;
     }
 
-    /* Force max-width lock during sticky states */
+    /* Sticky behavior - maintain constraints */
+    .product-column-content[style*="position: sticky"],
     .product-column-content[style*="position: fixed"],
     .product-column-content[style*="position: absolute"] {
-      max-width: min(765px, 50vw) !important;
+      width: 100% !important;
       box-sizing: border-box !important;
       overflow: hidden !important;
+    }
+
+    /* Ensure images don't stretch during sticky states */
+    .product-column-content[style*="position: sticky"] .product__photos img,
+    .product-column-content[style*="position: fixed"] .product__photos img,
+    .product-column-content[style*="position: absolute"] .product__photos img {
+      width: 100% !important;
+      height: auto !important;
+      object-fit: contain !important;
+      max-height: calc(100vh - 200px) !important;
     }
   }
 
@@ -1149,6 +1252,31 @@
     .product-section > .page-content > .page-width {
       padding-left: 16px;
       padding-right: 16px;
+    }
+
+    /* Mobile: Reset grid to single column */
+    .product-section .grid {
+      display: block !important;
+      margin-left: 0 !important;
+    }
+
+    .product-section .grid .grid__item {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      width: 100% !important;
+    }
+
+    .product-section .grid .product-grid__info {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    /* Disable sticky behavior on mobile */
+    .product-section .grid .product-grid__images,
+    .product-section .grid--product-images-right .product-grid__images {
+      position: static !important;
+      max-height: none !important;
+      overflow: visible !important;
     }
 
     /* Mobile responsive width handling */

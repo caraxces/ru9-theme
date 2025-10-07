@@ -608,7 +608,8 @@
       let scrollLeft;
 
       function dragStart(e) {
-        if (e.target.closest('.product-info')) {
+        // Don't start drag if clicking on product card
+        if (e.target.closest('.product-card')) {
           isDown = false;
           return;
         }
@@ -643,12 +644,12 @@
       productCardsContainer.addEventListener('mouseup', dragEnd);
       productCardsContainer.addEventListener('mouseleave', dragEnd);
 
-      productCardsContainer.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', e => {
-          if (isDown) {
-            e.preventDefault();
-            e.stopPropagation();
-          }
+      // Handle click events for product cards
+      productCardsContainer.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          // Allow click to proceed normally to product page
+          // The drag logic above already prevents drag on product cards
+          return true;
         });
       });
 
