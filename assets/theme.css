@@ -16294,6 +16294,7 @@ html[dir="rtl"] .product-single__meta .rte {
     overflow-x: auto !important;
     scrollbar-width: thin !important;
     scrollbar-color: #1C2C58 #F5F5F5 !important;
+    padding-top: 20px !important;
   }
   
   .product__thumbs.product__thumbs--below .product__thumbs--scroller::-webkit-scrollbar {
