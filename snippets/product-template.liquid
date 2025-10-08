@@ -948,9 +948,23 @@
   }
 
   .star {
-    color: #FFD700;
     font-size: 18px;
     line-height: 1;
+  }
+  
+  .star--filled {
+    color: #FFD700;
+  }
+  
+  .star--half {
+    background: linear-gradient(90deg, #FFD700 50%, #E0E0E0 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .star--empty {
+    color: #E0E0E0;
   }
 
   .rating-value {
@@ -1597,6 +1611,21 @@
 
     .star {
       font-size: 14px;
+    }
+    
+    .star--filled {
+      color: #FFD700;
+    }
+    
+    .star--half {
+      background: linear-gradient(90deg, #FFD700 50%, #E0E0E0 50%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .star--empty {
+      color: #E0E0E0;
     }
 
     .rating-value {
@@ -2451,20 +2480,69 @@
               {%- endif -%}
 
               <!-- Product Reviews Section -->
+              {%- liquid
+                assign has_reviews = false
+                assign review_rating = 0
+                assign review_count = 0
+                
+                if product.metafields.reviews.rating.value != blank
+                  assign has_reviews = true
+                  assign review_rating = product.metafields.reviews.rating.value.rating
+                  assign review_count = product.metafields.reviews.rating_count
+                elsif product.metafields.judgeme.rating != blank
+                  assign has_reviews = true
+                  assign review_rating = product.metafields.judgeme.rating
+                  assign review_count = product.metafields.judgeme.review_count
+                endif
+              -%}
+              
               <div class="product-reviews-summary">
                 <div class="product-rating">
-                  <div class="stars">
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
+                  {%- if has_reviews -%}
+                    {%- liquid
+                      assign rating_floor = review_rating | floor
+                      assign rating_decimal = review_rating | modulo: 1
+                      assign has_half_star = false
+                      if rating_decimal >= 0.25 and rating_decimal < 0.75
+                        assign has_half_star = true
+                      elsif rating_decimal >= 0.75
+                        assign rating_floor = rating_floor | plus: 1
+                      endif
+                    -%}
+                    <div class="stars">
+                      {%- for i in (1..5) -%}
+                        {%- liquid
+                          assign next_star = rating_floor | plus: 1
+                          assign is_half_star = false
+                          if i == next_star and has_half_star
+                            assign is_half_star = true
+                          endif
+                        -%}
+                        {%- if i <= rating_floor -%}
+                          <span class="star star--filled">★</span>
+                        {%- elsif is_half_star -%}
+                          <span class="star star--half">★</span>
+                        {%- else -%}
+                          <span class="star star--empty">☆</span>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                    <span class="rating-value">{{ review_rating | round: 1 }}</span>
+                  {%- else -%}
+                    <div class="stars">
+                      <span class="star star--filled">★</span>
+                      <span class="star star--filled">★</span>
+                      <span class="star star--filled">★</span>
+                      <span class="star star--filled">★</span>
+                      <span class="star star--filled">★</span>
+                    </div>
+                  {%- endif -%}
+                </div>
+                {%- if has_reviews and review_count > 0 -%}
+                  <div class="reviews-count">
+                    <span class="reviews-number">({{ review_count }} đánh giá)</span>
                   </div>
-                  <span class="rating-value">4.8</span>
-                </div>
-                <div class="reviews-count">
-                  <span class="reviews-number">(128 đánh giá)</span>
-                </div>
+                {%- endif -%}
               </div>
 
               {%- if isModal -%}
