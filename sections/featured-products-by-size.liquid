@@ -4,19 +4,35 @@
     {%- liquid
       assign source_collection = section.settings.collection
       assign all_sizes = ''
+      assign size_option_name = ''
+      
       if source_collection.products.size > 0
-        for product in source_collection.products
+        for product in source_collection.products limit: 1
           for option in product.options_with_values
-            if option.name == 'Kích thước' or option.name == 'Size'
-              for value in option.values
-                assign size_string = value | append: ','
-                unless all_sizes contains size_string
-                  assign all_sizes = all_sizes | append: size_string
-                endunless
-              endfor
+            assign option_name_lower = option.name | downcase
+            if option_name_lower contains 'size' or option_name_lower contains 'kích thước' or option_name_lower contains 'kich thuoc'
+              assign size_option_name = option.name
+              break
             endif
           endfor
+          break
         endfor
+        
+        if size_option_name != blank
+          for product in source_collection.products
+            for option in product.options_with_values
+              if option.name == size_option_name
+                for value in option.values
+                  assign size_string = value | append: ','
+                  unless all_sizes contains size_string
+                    assign all_sizes = all_sizes | append: size_string
+                  endunless
+                endfor
+              endif
+            endfor
+          endfor
+        endif
+        
         assign unique_sizes = all_sizes | remove_last: ',' | split: ',' | uniq
         assign rendered_short_sizes = ''
       endif
@@ -50,6 +66,7 @@
       </div>
     </div>
     
+    
     <!-- Size Tabs -->
     <div class="category-tabs-container">
       <div class="category-tabs">
@@ -76,100 +93,102 @@
       <div class="product-carousel">
         <div class="product-cards-container">
           {%- if source_collection.products.size > 0 -%}
-            {%- for product in source_collection.products -%}
-              {%- liquid
-                assign size_option_key_index = 0
-                for option in product.options
-                  assign option_name_downcased = option | downcase
-                  if option_name_downcased == 'kích thước' or option_name_downcased == 'size'
-                    assign size_option_key_index = forloop.index
-                    break
-                  endif
-                endfor
-                assign size_option_key = 'option' | append: size_option_key_index
-              -%}
-
-              {%- for variant in product.variants -%}
-                {%- assign variant_size = variant[size_option_key] -%}
-                {%- if variant_size != blank -%}
+            {%- for size in unique_sizes -%}
+              {%- if size != blank -%}
+                {%- assign short_size = size | split: '-' | first | strip | handle -%}
+                
+                {%- for product in source_collection.products -%}
                   {%- liquid
-                    assign meta_info = ''
-                    if product.options.size > 1 and size_option_key_index > 0
-                      for i in (1..product.options.size)
-                        if i != size_option_key_index
-                          assign current_option_key = 'option' | append: i
-                          assign option_value = variant[current_option_key]
-                          if option_value != blank
-                            assign meta_info = meta_info | append: option_value | append: ', '
-                          endif
-                        endif
-                      endfor
-                      assign meta_info = meta_info | remove_last: ', '
-                    endif
-                  -%}
-                  <a href="{{ product.url }}?variant={{ variant.id }}" class="product-card" data-size="{{ variant_size | split: '-' | first | strip | handle }}">
-                    <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}">
-                      {%- if section.settings.product_label != blank -%}
-                        <div class="product-label" style="background-color: {{ section.settings.label_bg }}; color: {{ section.settings.label_color }};">
-                          {{ section.settings.product_label }}
-                        </div>
-                      {%- endif -%}
-                      
-                      {%- assign image = variant.image | default: product.featured_image -%}
-                      {%- if image -%}
-                        <img 
-                          class="product-image-primary"
-                          src="{{ image | image_url: width: 400, height: 320, crop: 'center' }}" 
-                          alt="{{ product.title }}"
-                          width="400" height="320"
-                        >
-                      {%- else -%}
-                        <div class="placeholder-image">No Image</div>
-                      {%- endif -%}
-
-                      {%- if product.media.size > 1 -%}
-                        {%- for media in product.media offset: 1 limit: 1 -%}
-                           {%- if media.preview_image != image -%}
-                            <img 
-                              class="product-image-secondary"
-                              src="{{ media.preview_image | image_url: width: 400, height: 320, crop: 'center' }}" 
-                              alt="{{ product.title }}"
-                              width="400" height="320"
-                            >
-                          {%- endif -%}
-                        {%- endfor -%}
-                      {%- endif -%}
-                    </div>
+                    assign size_option_key_index = 0
+                    for option in product.options
+                      if option == size_option_name
+                        assign size_option_key_index = forloop.index
+                        break
+                      endif
+                    endfor
+                    assign size_option_key = 'option' | append: size_option_key_index
                     
-                    <div class="product-info">
-                      <div class="product-rating">
-                        <svg width="81" height="14" viewBox="0 0 81 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.84155 0.245755C6.94841 -0.0819184 7.41368 -0.0819184 7.52054 0.245755L8.97105 4.69322C9.01883 4.83976 9.15591 4.93898 9.31055 4.93898H14.0044C14.3502 4.93898 14.494 5.37983 14.2143 5.58238L10.4169 8.33108C10.2917 8.4216 10.2394 8.58218 10.2872 8.72871L11.7377 13.1762C11.8445 13.5038 11.4681 13.7763 11.1883 13.5738L7.3909 10.8251C7.26577 10.7346 7.09632 10.7346 6.9712 10.8251L3.1738 13.5738C2.89403 13.7763 2.51759 13.5038 2.62445 13.1762L4.07493 8.72871C4.12273 8.58218 4.07037 8.4216 3.94525 8.33108L0.147842 5.58238C-0.131937 5.37983 0.0118471 4.93898 0.357675 4.93898H5.05154C5.20618 4.93898 5.34326 4.83976 5.39104 4.69322L6.84155 0.245755Z" fill="#FFDC5F"/>
-                          <path d="M23.5007 0.245755C23.6076 -0.0819184 24.0729 -0.0819184 24.1797 0.245755L25.6302 4.69322C25.678 4.83976 25.8151 4.93898 25.9697 4.93898H30.6636C31.0094 4.93898 31.1532 5.37983 30.8735 5.58238L27.0761 8.33108C26.9509 8.4216 26.8986 8.58218 26.9463 8.72871L28.3969 13.1762C28.5037 13.5038 28.1273 13.7763 27.8475 13.5738L24.0501 10.8251C23.925 10.7346 23.7555 10.7346 23.6304 10.8251L19.833 13.5738C19.5532 13.7763 19.1768 13.5038 19.2836 13.1762L20.7341 8.72871C20.7819 8.58218 20.7295 8.4216 20.6044 8.33108L16.807 5.58238C16.5272 5.37983 16.671 4.93898 17.0169 4.93898H21.7107C21.8654 4.93898 22.0025 4.83976 22.0502 4.69322L23.5007 0.245755Z" fill="#FFDC5F"/>
-                          <path d="M40.1609 0.245755C40.2678 -0.0819184 40.733 -0.0819184 40.8399 0.245755L42.2904 4.69322C42.3382 4.83976 42.4753 4.93898 42.6299 4.93898H47.3238C47.6696 4.93898 47.8134 5.37983 47.5336 5.58238L43.7362 8.33108C43.6111 8.4216 43.5587 8.58218 43.6065 8.72871L45.057 13.1762C45.1639 13.5038 44.7874 13.7763 44.5077 13.5738L40.7102 10.8251C40.5851 10.7346 40.4157 10.7346 40.2905 10.8251L36.4931 13.5738C36.2134 13.7763 35.8369 13.5038 35.9438 13.1762L37.3943 8.72871C37.4421 8.58218 37.3897 8.4216 37.2646 8.33108L33.4672 5.58238C33.1874 5.37983 33.3312 4.93898 33.677 4.93898H38.3709C38.5255 4.93898 38.6626 4.83976 38.7104 4.69322L40.1609 0.245755Z" fill="#FFDC5F"/>
-                          <path d="M56.8201 0.245755C56.9269 -0.0819184 57.3922 -0.0819184 57.4991 0.245755L58.9493 4.69322C58.9975 4.83976 59.1343 4.93898 59.289 4.93898H63.9828C64.3285 4.93898 64.4725 5.37983 64.1929 5.58238L60.3951 8.33108C60.2701 8.4216 60.2178 8.58218 60.266 8.72871L61.716 13.1762C61.823 13.5038 61.4464 13.7763 61.1668 13.5738L57.3694 10.8251C57.2443 10.7346 57.0748 10.7346 56.9497 10.8251L53.1523 13.5738C52.8725 13.7763 52.4961 13.5038 52.603 13.1762L54.0535 8.72871C54.1012 8.58218 54.0489 8.4216 53.9238 8.33108L50.1263 5.58238C49.8466 5.37983 49.9904 4.93898 50.3362 4.93898H55.0301C55.1847 4.93898 55.3218 4.83976 55.3696 4.69322L56.8201 0.245755Z" fill="#FFDC5F"/>
-                          <path d="M73.4789 0.245755C73.586 -0.0819184 74.0513 -0.0819184 74.1584 0.245755L75.6084 4.69322C75.6566 4.83976 75.7934 4.93898 75.9481 4.93898H80.6419C80.9876 4.93898 81.1316 5.37983 80.852 5.58238L77.0542 8.33108C76.9292 8.4216 76.8769 8.58218 76.9251 8.72871L78.3751 13.1762C78.4822 13.5038 78.1055 13.7763 77.8259 13.5738L74.0287 10.8251C73.9032 10.7346 73.7342 10.7346 73.6086 10.8251L69.8115 13.5738C69.5318 13.7763 69.1552 13.5038 69.2623 13.1762L70.7123 8.72871C70.7605 8.58218 70.7081 8.4216 70.5832 8.33108L66.7854 5.58238C66.5057 5.37983 66.6497 4.93898 66.9954 4.93898H71.6892C71.8439 4.93898 71.9808 4.83976 72.029 4.69322L73.4789 0.245755Z" fill="#FFDC5F"/>
-                        </svg>
-                        {%- assign rating = product.metafields.reviews.rating.value -%}
-                        {%- if rating != blank -%}
-                          <span class="rating-score">{{ rating.rating | round: 1 }}</span>
-                          <span class="rating-count">({{ product.metafields.reviews.rating_count }})</span>
-                        {%- endif -%}
+                    assign product_size = ''
+                    assign product_variant = product.selected_or_first_available_variant
+                    
+                    for variant in product.variants
+                      assign variant_size = variant[size_option_key]
+                      if variant_size != blank
+                        assign variant_size_handle = variant_size | split: '-' | first | strip | handle
+                        if variant_size_handle == short_size
+                          assign product_size = variant_size_handle
+                          assign product_variant = variant
+                          break
+                        endif
+                      endif
+                    endfor
+                  -%}
+
+                  {%- if product_size != blank -%}
+                <a href="{{ product.url }}" class="product-card" data-size="{{ product_size }}">
+                  <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}">
+                    {%- if section.settings.product_label != blank -%}
+                      <div class="product-label" style="background-color: {{ section.settings.label_bg }}; color: {{ section.settings.label_color }};">
+                        {{ section.settings.product_label }}
                       </div>
-                      <h3 class="product-name">{{ product.title | split: '-' | first }}</h3>
-                      <div class="product-meta">{{ meta_info }}</div>
-                      <div class="product-price">
-                        <span class="price">{{ variant.price | money }}</span>
-                        {%- if variant.compare_at_price > variant.price -%}
-                           {%- assign sale_percentage = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round -%}
-                          <span class="discount-badge">-{{ sale_percentage }}%</span>
-                          <span class="compare-price">{{ variant.compare_at_price | money }}</span>
+                    {%- endif -%}
+                    
+                    {%- assign image = product_variant.image | default: product.featured_image -%}
+                    {%- if image -%}
+                      <img 
+                        class="product-image-primary"
+                        src="{{ image | image_url: width: 400, height: 320, crop: 'center' }}" 
+                        alt="{{ product.title }}"
+                        width="400" height="320"
+                      >
+                    {%- else -%}
+                      <div class="placeholder-image">No Image</div>
+                    {%- endif -%}
+
+                    {%- if product.media.size > 1 -%}
+                      {%- for media in product.media offset: 1 limit: 1 -%}
+                         {%- if media.preview_image != image -%}
+                          <img 
+                            class="product-image-secondary"
+                            src="{{ media.preview_image | image_url: width: 400, height: 320, crop: 'center' }}" 
+                            alt="{{ product.title }}"
+                            width="400" height="320"
+                          >
                         {%- endif -%}
-                      </div>
+                      {%- endfor -%}
+                    {%- endif -%}
+                  </div>
+                  
+                  <div class="product-info">
+                    <div class="product-rating">
+                      <svg width="81" height="14" viewBox="0 0 81 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.84155 0.245755C6.94841 -0.0819184 7.41368 -0.0819184 7.52054 0.245755L8.97105 4.69322C9.01883 4.83976 9.15591 4.93898 9.31055 4.93898H14.0044C14.3502 4.93898 14.494 5.37983 14.2143 5.58238L10.4169 8.33108C10.2917 8.4216 10.2394 8.58218 10.2872 8.72871L11.7377 13.1762C11.8445 13.5038 11.4681 13.7763 11.1883 13.5738L7.3909 10.8251C7.26577 10.7346 7.09632 10.7346 6.9712 10.8251L3.1738 13.5738C2.89403 13.7763 2.51759 13.5038 2.62445 13.1762L4.07493 8.72871C4.12273 8.58218 4.07037 8.4216 3.94525 8.33108L0.147842 5.58238C-0.131937 5.37983 0.0118471 4.93898 0.357675 4.93898H5.05154C5.20618 4.93898 5.34326 4.83976 5.39104 4.69322L6.84155 0.245755Z" fill="#FFDC5F"/>
+                        <path d="M23.5007 0.245755C23.6076 -0.0819184 24.0729 -0.0819184 24.1797 0.245755L25.6302 4.69322C25.678 4.83976 25.8151 4.93898 25.9697 4.93898H30.6636C31.0094 4.93898 31.1532 5.37983 30.8735 5.58238L27.0761 8.33108C26.9509 8.4216 26.8986 8.58218 26.9463 8.72871L28.3969 13.1762C28.5037 13.5038 28.1273 13.7763 27.8475 13.5738L24.0501 10.8251C23.925 10.7346 23.7555 10.7346 23.6304 10.8251L19.833 13.5738C19.5532 13.7763 19.1768 13.5038 19.2836 13.1762L20.7341 8.72871C20.7819 8.58218 20.7295 8.4216 20.6044 8.33108L16.807 5.58238C16.5272 5.37983 16.671 4.93898 17.0169 4.93898H21.7107C21.8654 4.93898 22.0025 4.83976 22.0502 4.69322L23.5007 0.245755Z" fill="#FFDC5F"/>
+                        <path d="M40.1609 0.245755C40.2678 -0.0819184 40.733 -0.0819184 40.8399 0.245755L42.2904 4.69322C42.3382 4.83976 42.4753 4.93898 42.6299 4.93898H47.3238C47.6696 4.93898 47.8134 5.37983 47.5336 5.58238L43.7362 8.33108C43.6111 8.4216 43.5587 8.58218 43.6065 8.72871L45.057 13.1762C45.1639 13.5038 44.7874 13.7763 44.5077 13.5738L40.7102 10.8251C40.5851 10.7346 40.4157 10.7346 40.2905 10.8251L36.4931 13.5738C36.2134 13.7763 35.8369 13.5038 35.9438 13.1762L37.3943 8.72871C37.4421 8.58218 37.3897 8.4216 37.2646 8.33108L33.4672 5.58238C33.1874 5.37983 33.3312 4.93898 33.677 4.93898H38.3709C38.5255 4.93898 38.6626 4.83976 38.7104 4.69322L40.1609 0.245755Z" fill="#FFDC5F"/>
+                        <path d="M56.8201 0.245755C56.9269 -0.0819184 57.3922 -0.0819184 57.4991 0.245755L58.9493 4.69322C58.9975 4.83976 59.1343 4.93898 59.289 4.93898H63.9828C64.3285 4.93898 64.4725 5.37983 64.1929 5.58238L60.3951 8.33108C60.2701 8.4216 60.2178 8.58218 60.266 8.72871L61.716 13.1762C61.823 13.5038 61.4464 13.7763 61.1668 13.5738L57.3694 10.8251C57.2443 10.7346 57.0748 10.7346 56.9497 10.8251L53.1523 13.5738C52.8725 13.7763 52.4961 13.5038 52.603 13.1762L54.0535 8.72871C54.1012 8.58218 54.0489 8.4216 53.9238 8.33108L50.1263 5.58238C49.8466 5.37983 49.9904 4.93898 50.3362 4.93898H55.0301C55.1847 4.93898 55.3218 4.83976 55.3696 4.69322L56.8201 0.245755Z" fill="#FFDC5F"/>
+                        <path d="M73.4789 0.245755C73.586 -0.0819184 74.0513 -0.0819184 74.1584 0.245755L75.6084 4.69322C75.6566 4.83976 75.7934 4.93898 75.9481 4.93898H80.6419C80.9876 4.93898 81.1316 5.37983 80.852 5.58238L77.0542 8.33108C76.9292 8.4216 76.8769 8.58218 76.9251 8.72871L78.3751 13.1762C78.4822 13.5038 78.1055 13.7763 77.8259 13.5738L74.0287 10.8251C73.9032 10.7346 73.7342 10.7346 73.6086 10.8251L69.8115 13.5738C69.5318 13.7763 69.1552 13.5038 69.2623 13.1762L70.7123 8.72871C70.7605 8.58218 70.7081 8.4216 70.5832 8.33108L66.7854 5.58238C66.5057 5.37983 66.6497 4.93898 66.9954 4.93898H71.6892C71.8439 4.93898 71.9808 4.83976 72.029 4.69322L73.4789 0.245755Z" fill="#FFDC5F"/>
+                      </svg>
+                      {%- assign rating = product.metafields.reviews.rating.value -%}
+                      {%- if rating != blank -%}
+                        <span class="rating-score">{{ rating.rating | round: 1 }}</span>
+                        <span class="rating-count">({{ product.metafields.reviews.rating_count }})</span>
+                      {%- endif -%}
                     </div>
-                  </a>
-                {%- endif -%}
-              {%- endfor -%}
+                    <h3 class="product-name">{{ product.title | split: '-' | first }}</h3>
+                    <div class="product-meta"></div>
+                    <div class="product-price">
+                      <span class="price">{{ product_variant.price | money }}</span>
+                      {%- if product_variant.compare_at_price > product_variant.price -%}
+                         {%- assign sale_percentage = product_variant.compare_at_price | minus: product_variant.price | times: 100.0 | divided_by: product_variant.compare_at_price | round -%}
+                        <span class="discount-badge">-{{ sale_percentage }}%</span>
+                        <span class="compare-price">{{ product_variant.compare_at_price | money }}</span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </a>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
             {%- endfor -%}
           {%- endif -%}
         </div>
@@ -845,6 +864,7 @@
     });
 
     if (tabButtons.length > 0) {
+      
       carousel = initializeCarousel();
       const initialActiveTab = sectionContainer.querySelector('.category-tab.active');
       if (initialActiveTab) {

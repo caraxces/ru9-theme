@@ -119,9 +119,13 @@
                     </div>
                   </div>
                   
-                  {%- if product.compare_at_price > product.price -%}
-                    <div class="cc-compare-price">{{ product.compare_at_price | money }}</div>
-                  {%- endif -%}
+                  <div class="cc-compare-price-container">
+                    {%- if product.compare_at_price > product.price -%}
+                      <div class="cc-compare-price">{{ product.compare_at_price | money }}</div>
+                    {%- else -%}
+                      <div class="cc-compare-price cc-compare-price--empty"></div>
+                    {%- endif -%}
+                  </div>
                   
                   <div class="cc-actions">
                     <button class="cc-buy-now" type="button" onclick="window.location.href='{{ product.url }}'">Thêm vào giỏ hàng</button>
@@ -396,6 +400,12 @@
     letter-spacing: 0.6px;
   }
   
+  .cc-compare-price-container {
+    min-height: 31px;
+    margin-bottom: 12px;
+    margin-top: -8px; /* Compensate for parent gap */
+  }
+  
   .cc-compare-price {
     color: #888;
     font-family: "Be Vietnam Pro", sans-serif;
@@ -405,8 +415,10 @@
     line-height: 27px; /* 150% */
     letter-spacing: 0.6px;
     text-decoration-line: line-through;
-    margin-bottom: 12px;
-    margin-top: -8px; /* Compensate for parent gap */
+  }
+  
+  .cc-compare-price--empty {
+    visibility: hidden;
   }
   
   .cc-actions {

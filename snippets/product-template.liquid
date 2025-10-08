@@ -1484,6 +1484,14 @@
     .product__thumb-item.is-active {
       z-index: 2;
     }
+    
+    /* Mobile active thumbnail highlight */
+    @media screen and (max-width: 768px) {
+      .product__thumb-item.is-active .product__thumb {
+        border: 2px solid #234085 !important;
+        box-shadow: 0 0 8px rgba(35, 64, 133, 0.3) !important;
+      }
+    }
 
     .product-single__meta .jdgm-widget--product-rating {
       margin-bottom: 8px;
@@ -3698,6 +3706,57 @@ document.addEventListener('DOMContentLoaded', function() {
             });
           }
         }, 500);
+      }
+      
+      // Sync thumbnail scroller with main slideshow on mobile
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        setTimeout(function() {
+          const flkty = Flickity.data(flickityElement);
+          const thumbScroller = productSection.querySelector('.product__thumbs--scroller');
+          const thumbItems = productSection.querySelectorAll('.product__thumb-item');
+          
+          if (flkty && thumbScroller && thumbItems.length > 0) {
+            // Function to scroll thumbnail into view and highlight it
+            function syncThumbnail(index) {
+              thumbItems.forEach(function(item, idx) {
+                if (idx === index) {
+                  item.classList.add('is-active');
+                  
+                  // Calculate scroll position to center the active thumbnail
+                  const thumbRect = item.getBoundingClientRect();
+                  const scrollerRect = thumbScroller.getBoundingClientRect();
+                  const thumbCenter = item.offsetLeft + (item.offsetWidth / 2);
+                  const scrollerCenter = thumbScroller.offsetWidth / 2;
+                  const scrollPosition = thumbCenter - scrollerCenter;
+                  
+                  // Smooth scroll to position
+                  thumbScroller.scrollTo({
+                    left: scrollPosition,
+                    behavior: 'smooth'
+                  });
+                } else {
+                  item.classList.remove('is-active');
+                }
+              });
+            }
+            
+            // Listen to slideshow change events
+            flkty.on('change', function(index) {
+              syncThumbnail(index);
+            });
+            
+            // Set initial active state
+            syncThumbnail(flkty.selectedIndex);
+            
+            // Also handle thumbnail clicks to navigate slideshow
+            thumbItems.forEach(function(thumbItem, index) {
+              thumbItem.addEventListener('click', function(e) {
+                e.preventDefault();
+                flkty.select(index);
+              });
+            });
+          }
+        }, 600);
       }
     }
   });

@@ -13,17 +13,7 @@
   </nav>
   <div class="product__stick-product-wrap flex ai-center jc-between gap-x-sm flex-1">
     {%- liquid
-      assign product_media = product.media | where: 'media_type', 'image'
-      assign media_count = product_media | size
-      if media_count > 0
-        if product.selected_or_first_available_variant.image
-          assign image = product.selected_or_first_available_variant.image
-        else
-          assign image = product.featured_image.src
-        endif
-      endif
-
-      assign Buybuttons = section.blocks | where: 'type', 'buy_buttons'
+      assign buy_buttons = section.blocks | where: 'type', 'buy_buttons'
     -%}
     <div class="product__sticky-product desktop-only">
       <div class="product__sticky-content">
@@ -60,7 +50,7 @@
     </div>
     <div class="product__sticky-inner o-h">
       <div class="product__sticky-wrapper">
-        {%- if Buybuttons.size > 0 -%}
+        {%- if buy_buttons.size > 0 -%}
           {%- if product != blank -%}
             {%- form 'product', product, id: product_form_id, class: 'product-single__sticky-form' -%}
               {%- liquid
@@ -621,10 +611,59 @@
 
       this.onScrollHandler = this.onScroll.bind(this);
       window.addEventListener('scroll', this.onScrollHandler, false);
+      
+      // Listen for variant change events from main product form
+      this.variantChangeHandler = this.onMainVariantChange.bind(this);
+      document.addEventListener('variant:change', this.variantChangeHandler);
     }
 
     disconnectedCallback() {
       window.removeEventListener('scroll', this.onScrollHandler);
+      document.removeEventListener('variant:change', this.variantChangeHandler);
+    }
+    
+    onMainVariantChange(event) {
+      if (!event.detail || !event.detail.variant) {
+        return;
+      }
+      
+      const variant = event.detail.variant;
+      
+      // Update sticky cart price
+      if (variant.price) {
+        const formattedPrice = this.formatMoney(variant.price);
+        this.updateStickyPrice(formattedPrice);
+      }
+      
+      // Update original price
+      if (variant.compare_at_price && variant.price) {
+        this.updateOriginalPrice(variant.compare_at_price, variant.price);
+      } else {
+        this.updateOriginalPrice(null, variant.price);
+      }
+      
+      // Update variant options display
+      if (variant.options && Array.isArray(variant.options)) {
+        const cleanedOptions = variant.options.map(opt => opt.split('-')[0].trim());
+        
+        // Update mobile variant title
+        const mobileTitleEl = this.querySelector('.sticky-variant-title');
+        if (mobileTitleEl) {
+          mobileTitleEl.textContent = cleanedOptions.join(' / ');
+        }
+        
+        // Update desktop variant title
+        const desktopContainer = this.querySelector('.desktop-only [data-header-option-container]');
+        if (desktopContainer) {
+          const newHtml = cleanedOptions.map(val => `<span class="sticky-variant-item">${val}</span>`).join(' ');
+          desktopContainer.innerHTML = newHtml;
+        }
+      }
+      
+      // Update the hidden select if it exists
+      if (this.variantSelect) {
+        this.variantSelect.value = variant.id;
+      }
     }
 
     onVariantChange(event) {
@@ -636,12 +675,66 @@
 
         // Update original price if available
         const variantId = selectedOption.value;
-        const product = this.closest('[data-product-handle]');
-        if (product) {
-          const variantData = JSON.parse(product.querySelector('[data-variant-data]')?.textContent || '{}');
-          const variant = variantData[variantId];
-          if (variant) {
-            this.updateOriginalPrice(variant.compare_at_price, variant.price);
+        let hasUpdatedOriginalPrice = false;
+        
+        // Try to get variant data from product JSON
+        const productJson = document.querySelector('[data-product-json]');
+        if (productJson) {
+          try {
+            const productData = JSON.parse(productJson.textContent);
+            const variant = productData.variants.find(v => v.id == variantId);
+            if (variant) {
+              this.updateOriginalPrice(variant.compare_at_price, variant.price);
+              hasUpdatedOriginalPrice = true;
+            }
+          } catch (e) {
+            // Silent fail
+          }
+        }
+        
+        // Try to get from window.productData if available
+        if (!hasUpdatedOriginalPrice && window.productData) {
+          try {
+            const variant = window.productData.variants.find(v => v.id == variantId);
+            if (variant) {
+              this.updateOriginalPrice(variant.compare_at_price, variant.price);
+              hasUpdatedOriginalPrice = true;
+            }
+          } catch (e) {
+            // Silent fail
+          }
+        }
+        
+        // Fallback: try to get from variant data element
+        if (!hasUpdatedOriginalPrice) {
+          const product = this.closest('[data-product-handle]');
+          if (product) {
+            const variantDataEl = product.querySelector('[data-variant-data]');
+            if (variantDataEl) {
+              try {
+                const variantData = JSON.parse(variantDataEl.textContent);
+                const variant = variantData[variantId];
+                if (variant) {
+                  this.updateOriginalPrice(variant.compare_at_price, variant.price);
+                  hasUpdatedOriginalPrice = true;
+                }
+              } catch (e) {
+                // Silent fail
+              }
+            }
+          }
+        }
+        
+        // Final fallback: try to extract from option text content
+        if (!hasUpdatedOriginalPrice) {
+          const optionText = selectedOption.textContent;
+          const priceMatch = optionText.match(/(\d+[\.,]\d+)/g);
+          if (priceMatch && priceMatch.length >= 2) {
+            const currentPrice = parseFloat(priceMatch[priceMatch.length - 1].replace(',', '.'));
+            const comparePrice = parseFloat(priceMatch[priceMatch.length - 2].replace(',', '.'));
+            if (comparePrice > currentPrice) {
+              this.updateOriginalPrice(comparePrice * 100, currentPrice * 100);
+            }
           }
         }
 
@@ -685,17 +778,34 @@
 
     updateOriginalPrice(compareAtPrice, currentPrice) {
       const priceElements = this.querySelectorAll('[data-sticky-price]');
-      priceElements.forEach(element => {
+      
+      priceElements.forEach((element) => {
         const originalPriceEl = element.querySelector('.original-price');
         if (originalPriceEl) {
           if (compareAtPrice && compareAtPrice > currentPrice) {
-            originalPriceEl.textContent = this.formatMoney(compareAtPrice);
+            const formattedPrice = this.formatMoney(compareAtPrice);
+            originalPriceEl.textContent = formattedPrice;
             originalPriceEl.style.display = 'block';
           } else {
             originalPriceEl.style.display = 'none';
           }
         }
       });
+      
+      // Also update mobile sticky price
+      const mobilePriceEl = this.querySelector('.sticky-variant-price');
+      if (mobilePriceEl) {
+        const mobileOriginalPriceEl = mobilePriceEl.querySelector('.original-price');
+        if (mobileOriginalPriceEl) {
+          if (compareAtPrice && compareAtPrice > currentPrice) {
+            const formattedPrice = this.formatMoney(compareAtPrice);
+            mobileOriginalPriceEl.textContent = formattedPrice;
+            mobileOriginalPriceEl.style.display = 'block';
+          } else {
+            mobileOriginalPriceEl.style.display = 'none';
+          }
+        }
+      }
     }
 
     formatMoney(cents) {
