@@ -289,7 +289,6 @@
       min-height: 50px;
       padding: 8px 4px;
     }
-  }
     
     .bundle-step-2 .variant-wrapper:not(.is-color) .variant__button-label .label-head,
     .bundle-step-2 .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-head,
@@ -333,6 +332,7 @@
       font-size: 14px;
     }
   }
+
 [data-dynamic-variants-enabled] .variant-input-wrap input[type="radio"]:checked + .variant__button-label:not(.color-swatch) {
   border-radius: 6px !important;
   border: 2px solid #448AED !important;
@@ -1333,56 +1333,7 @@
     order: 2 !important;
   }
   
-  .bundle-step-2 .product__photos--beside {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .bundle-step-2 .product__thumbs-placement--left {
-    order: 0;
-    margin-right: 0;
-    margin-bottom: 0.5rem;
-  }
-  
-  .bundle-step-2 .product__thumbs {
-    width: 100%;
-    max-width: none;
-  }
-  
-  .bundle-step-2 .product__thumbs--beside {
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 0.5rem;
-  }
-  
-  .bundle-step-2 .product__thumbs--scroller {
-    position: static;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .bundle-step-2 .product__thumb-item {
-    display: inline-block;
-    margin-right: 0.5rem;
-    width: 60px;
-    flex-shrink: 0;
-    margin-bottom: 0;
-  }
-  
-  .bundle-step-2 .product__thumb-item:last-child {
-    margin-right: 0;
-  }
-  
-  /* .bundle-step-2 .product__main-photos {
-    min-height: 300px;
-  } */
-  
-  /* .bundle-step-2 .product-main-slide img {
-    max-height: 300px;
-  } */
+  /* MOBILE STEP 2 IMAGE STYLES - TO BE REBUILT */
   
   /* Step 3 Mobile Layout */
   .bundle-step-3 .grid--product-images-right {
@@ -1404,20 +1355,7 @@
     order: 2 !important;
   }
   
-  .bundle-step-3 .product__photos--beside {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-
-  
-  .bundle-step-3 .product__main-photos {
-    min-height: 300px;
-  }
-  
-  .bundle-step-3 .product-main-slide img {
-    max-height: 300px;
-  }
+  /* MOBILE STEP 3 IMAGE STYLES - TO BE REBUILT */
   
   /* Product Meta Mobile */
   .bundle-step-2 .product-single__meta,
@@ -1769,31 +1707,12 @@
     font-size: 28px;
   }
   
-  .bundle-step-2 .product__main-photos {
-    min-height: 400px;
-  }
-  
-  .bundle-step-3 .product__main-photos {
-    min-height: 400px;
-  }
-  
-  .bundle-step-2 .product-main-slide img {
-    max-height: 400px;
-  }
-  
-  .bundle-step-3 .product-main-slide img {
-    max-height: 400px;
-  }
+  /* TABLET IMAGE STYLES - TO BE REBUILT */
   
   .bundle-cta-btn {
     padding: 14px 28px !important;
     font-size: 1.25rem !important;
   }
-}
-
-/* Bundle Step 1 uses theme's default product layout */
-.bundle-step-1 {
-  /* Inherit all styles from main product template */
 }
 
 /* Product title - sát lề trên */
@@ -1804,76 +1723,100 @@
   padding-top: 0 !important;
 }
 
-/* Step 2 - Use stack layout with thumbnails on left */
-.bundle-step-2 .product__photos--beside {
-  display: flex;
-  gap: 1rem;
+/* IMAGE LAYOUT STYLES */
+
+/* Ensure first slide is visible - Force override theme styles */
+.product-main-slide.starting-slide {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-.bundle-step-2 .product__thumbs-placement--left {
-  order: -1;
-  margin-left: 0;
-  margin-right: 1rem;
+.product-main-slide.secondary-slide {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
-/* .bundle-step-2 .product__main-photos {
-  flex: 1;
-  min-height: 500px;
-} */
+/* When Flickity is initialized */
+.flickity-enabled .product-main-slide {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
 
-.bundle-step-2 .product-main-slide img {
+/* Ensure image-wrap is visible */
+.image-wrap {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.image-wrap img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* All steps image styles */
+.bundle-step-1 .product__photos,
+.bundle-step-2 .product__photos,
+.bundle-step-3 .product__photos {
+  position: relative;
+  width: 100%;
+}
+
+.bundle-step-1 .product__main-photos,
+.bundle-step-2 .product__main-photos,
+.bundle-step-3 .product__main-photos {
+  width: 100%;
+  position: relative;
+}
+
+.bundle-step-1 .product-slideshow,
+.bundle-step-2 .product-slideshow,
+.bundle-step-3 .product-slideshow {
+  width: 100%;
+  position: relative;
+}
+
+.bundle-step-1 .product-main-slide,
+.bundle-step-2 .product-main-slide,
+.bundle-step-3 .product-main-slide {
+  width: 100%;
+  position: relative;
+}
+
+.bundle-step-1 .product-main-slide img,
+.bundle-step-2 .product-main-slide img,
+.bundle-step-3 .product-main-slide img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
-  max-height: 100%;
-  object-fit: contain;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-/* Step 3 - Use stack layout with thumbnails on left */
-.bundle-step-3 .product__photos--beside {
-  display: flex;
-  gap: 1rem;
+/* Force image-element visibility */
+.bundle-step-1 image-element,
+.bundle-step-2 image-element,
+.bundle-step-3 image-element {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.bundle-step-1 image-element img,
+.bundle-step-2 image-element img,
+.bundle-step-3 image-element img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 
-
-/* Product Meta - Use theme's default styling - same as Step 1 */
-.bundle-step-2 .product-single__meta {
-  /* Use theme's default styling */
-}
-
-.bundle-step-2 .product-block {
-  /* Use theme's default styling */
-}
-
-.bundle-step-2 .product-single__title {
-  /* Use theme's default styling */
-}
-
-.bundle-step-2 .product__price {
-  /* Use theme's default styling */
-}
-
-.bundle-step-2 .product__price--compare {
-  /* Use theme's default styling */
-}
-
-.bundle-step-2 .product-description {
-  /* Use theme's default styling */
-}
-
-/* Variant Picker - Use theme's default styling */
-.bundle-step-2 .variant__button {
-  /* Use theme's default styling */
-}
-
-.bundle-step-2 .variant__button-label {
-  /* Use theme's default styling */
-}
-
-.bundle-step-2 .variant__button-label.color-swatch {
-  /* Use theme's default styling */
-}
 
 /* Quantity Selector - Hidden in bundle step 2 */
 .bundle-step-2 .product__quantity {
@@ -1883,23 +1826,6 @@
 .bundle-step-2 .quantity-input {
   display: none !important;
 }
-
-/* Add to Cart Buttons - Use theme's default styling */
-.bundle-step-2 .product-form {
-  /* Use theme's default styling */
-}
-
-.bundle-step-2 .btn--full {
-  /* Use theme's default styling */
-}
-
-.bundle-step-2 .btn--secondary {
-  /* Use theme's default styling */
-}
-
-.bundle-step-2 .btn--primary {
-  /* Use theme's default styling */
-} 
 
 /* Variant Picker Styles - Matching product-template.liquid */
 .bundle-step-2 .variant-wrapper {
@@ -2017,223 +1943,13 @@
     margin: 2rem 0;
   }
   
-  /* Step 3 Bundle Summary Styles - Match Step 1 & 2 Layout */
-  .bundle-step-3 .bundle-summary-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .bundle-step-3 .bundle-summary-title {
-    font-size: 1rem;
-    font-weight: 200;
-    margin: 0;
-    color: #6B7280;
-  }
-
-  /* Match Step 1 & 2 layout exactly */
-  .bundle-step-3 .product-grid {
-    align-items: start;
-  }
-
-  .bundle-step-3 .is-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 20px;
-  }
-
-  .bundle-step-3 .grid--product-images-right {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important;
-    gap: 0 !important;
-  }
-
-  /* Image column - exactly 50% width */
-  .bundle-step-3 .grid__item.product-single__sticky,
-  .bundle-step-3 .grid__item.product-grid__images {
-    flex: 0 0 50% !important;
-    width: 50% !important;
-    max-width: 50% !important;
-    min-width: 50% !important;
-    margin-right: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  /* Content column - exactly 50% width with 60px right padding */
-  .bundle-step-3 .grid__item.product-grid__info {
-    flex: 0 0 50% !important;
-    width: 50% !important;
-    max-width: 50% !important;
-    min-width: 50% !important;
-    margin-right: 0 !important;
-    padding-right: 60px !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Ensure images never exceed their containers */
-  .bundle-step-3 .product__photos img,
-  .bundle-step-3 .product-main-slide img {
-    max-width: 100% !important;
-    width: 100% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    box-sizing: border-box !important;
-  }
-
-  /* FIX Z-INDEX LAYERING - Ensure image column is not covered by content column */
-  .bundle-step-3 .grid__item.product-single__sticky,
-  .bundle-step-3 .grid__item.product-grid__images {
-    position: relative !important;
-    z-index: 2 !important;
-  }
-
-  .bundle-step-3 .grid__item.product-grid__info {
-    position: relative !important;
-    z-index: 1 !important;
-  }
-
-  /* Ensure image containers have proper z-index */
-  .bundle-step-3 .product__photos,
-  .bundle-step-3 .product-slideshow,
-  .bundle-step-3 .product__main-photos {
-    position: relative !important;
-    z-index: 3 !important;
-  }
-
-  /* Prevent content column from overlapping image column */
-  .bundle-step-3 .product-single__meta {
-    position: relative !important;
-    z-index: 1 !important;
-  }
-  
-  .bundle-step-3 .product__photos {
-    position: relative;
-    margin-bottom: 1rem;
-  }
-  
-  .bundle-step-3 .product__photos--beside {
-    display: flex;
-    flex-direction: column !important; /* Force column layout for step 3 */
-    gap: 1rem;
-  }
-  
-  .bundle-step-3 .product__thumbs-placement--left {
-    order: -1;
-    margin-left: 0;
-    margin-right: 1rem;
-  }
-  
-  
-  .bundle-step-3 .product-slideshow {
-    position: relative;
-  }
-  
-  .bundle-step-3 .product-main-slide {
-    display: none;
-  }
-  
-  .bundle-step-3 .product-main-slide:first-child,
-  .bundle-step-3 .product-main-slide[style*="display: block"] {
-    display: block !important;
-  }
-  
-  .bundle-step-3 .product-main-slide img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
-  .bundle-step-3 .product__thumbs {
-    width: 100% !important;
-    position: relative !important;
-    margin-top: 1rem;
-    display: block !important;
-    overflow: visible !important;
-  }
-  
-  .bundle-step-3 .product__thumbs--below {
-    display: block;
-  }
-  
-  .bundle-step-3 .product__thumbs--beside {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  
-  .bundle-step-3 .product__thumbs--scroller {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-    width: 100%;
-  }
-  
-  .bundle-step-3 .product__thumbs--scroller::-webkit-scrollbar {
-    height: 0;
-    width: 0;
-  }
-  
-  .bundle-step-3 .product__thumb {
-    display: block;
-    border: 2px solid transparent;
-    border-radius: calc(var(--radiusBase) * 0.75);
-    overflow: hidden;
-    transition: border-color 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .bundle-step-3 .product__thumb.active,
-  .bundle-step-3 .product__thumb.is-active {
-    border-color: var(--colorTextBody);
-  }
-  
-  .bundle-step-3 .product__thumb:focus {
-    outline: none;
-  }
-  
-  .bundle-step-3 .product__thumb:focus:before {
-    bottom: 0;
-    box-shadow: inset 0 0 0 2px var(--colorTextBody);
-    content: "";
-    display: block;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
-    border-radius: calc(var(--radiusBase) * 0.75);
-  }
-  
-  .bundle-step-3 .product__thumb img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    width: 100%;
-    border-radius: calc(var(--radiusBase) * 0.75);
-  }
-  
-  .bundle-step-3 .product__thumb-item {
-    width: 100%;
-    position: relative;
-  }
-  
-  .bundle-step-3 .image-wrap__thumbnail {
-    position: relative;
-    overflow: hidden;
-    border-radius: calc(var(--radiusBase) * 0.75);
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
+  /* STEP 3 IMAGE STYLES - TO BE REBUILT */
   
   .bundle-step-3 .product-single__meta {
     padding: 0;
   }
+  
+  /* STEP 3 PHOTOS & THUMBS LAYOUT - TO BE REBUILT */
   
   .bundle-step-3 .product-block {
     margin-bottom: 1.5rem;
@@ -2414,83 +2130,7 @@
       width: 100% !important;
     }
     
-    .bundle-step-3 .product__photos--beside {
-      flex-direction: column;
-    }
-    
-    .bundle-step-3 .product__thumbs-placement--left {
-      order: 0;
-      margin-right: 0;
-      margin-bottom: 1rem;
-    }
-    
-    .bundle-step-2 .product__photos--beside {
-      flex-direction: column;
-    }
-    
-    .bundle-step-2 .product__thumbs-placement--left {
-      order: 0;
-      margin-right: 0;
-      margin-bottom: 1rem;
-    }
-    
-    .bundle-step-3 .product__thumbs--beside {
-      flex-direction: row;
-      overflow-x: auto;
-      width: 100%;
-    }
-    
-    .bundle-step-2 .product__thumbs--beside {
-      flex-direction: row;
-      overflow-x: auto;
-      width: 100%;
-    }
-    
-    .bundle-step-3 .product__thumbs {
-      width: auto;
-    }
-    
-    .bundle-step-2 .product__thumbs {
-      width: auto;
-    }
-    
-    .bundle-step-3 .product__thumbs--scroller {
-      position: static;
-      overflow-x: scroll;
-      white-space: nowrap;
-      overflow-y: hidden;
-    }
-    
-    .bundle-step-2 .product__thumbs--scroller {
-      position: static;
-      overflow-x: scroll;
-      white-space: nowrap;
-      overflow-y: hidden;
-    }
-    
-    .bundle-step-3 .product__thumb-item {
-      display: inline-block;
-      margin-right: 8.5px;
-      width: 80px;
-      vertical-align: middle;
-      margin-bottom: 0;
-    }
-    
-    .bundle-step-2 .product__thumb-item {
-      display: inline-block;
-      margin-right: 8.5px;
-      width: 80px;
-      vertical-align: middle;
-      margin-bottom: 0;
-    }
-    
-    .bundle-step-3 .product__thumb-item:last-child {
-      margin-right: 0;
-    }
-    
-    .bundle-step-2 .product__thumb-item:last-child {
-      margin-right: 0;
-    }
+    /* MOBILE IMAGE STYLES STEP 2 & 3 - TO BE REBUILT */
     
     .bundle-step-3 .bundle-summary-actions {
       flex-direction: column;
@@ -3015,165 +2655,7 @@
     align-self: start; /* Ensures the column aligns to the top of the grid row */
   }
 
-  /* 
-    Definitive Pure CSS Sticky Column Solution
-  */
-  @media screen and (min-width: 991px) {
-    /*
-      CRITICAL FIX: `position: sticky` will NOT work if any parent element
-      has `overflow` set to 'hidden', 'scroll', or 'auto'.
-      This rule aggressively targets all potential parent containers in the product grid
-      and forces them to allow sticky positioning.
-    */
-    .bundle-step-1 .page-content--product,
-    .bundle-step-1 .page-content--product > .page-width,
-    .bundle-step-1 .grid {
-      padding-bottom: 0 !important;
-      overflow: visible !important;
-    }
-
-    /*
-      Disable theme's default sticky behavior on images.
-      A custom script will handle advanced sticky positioning for either column.
-    */
-    .bundle-step-1 .product-single__sticky .sticky {
-        position: static; /* Let JS control positioning */
-    }
-
-    /* 
-      CRITICAL FIX: Dynamic max-width based on screen size
-      Use CSS calc to make max-width responsive to viewport width
-    */
-    .bundle-step-1 .product-column-content {
-      max-width: min(765px, 50vw) !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-      overflow: hidden !important;
-    }
-
-    .bundle-step-1 .product__photos img {
-      max-width: min(765px, 50vw) !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-      display: block !important;
-      margin: 0 auto !important;
-    }
-
-    /* Force max-width lock during sticky states */
-    .bundle-step-1 .product-column-content[style*="position: fixed"],
-    .bundle-step-1 .product-column-content[style*="position: absolute"] {
-      max-width: min(765px, 50vw) !important;
-      box-sizing: border-box !important;
-      overflow: hidden !important;
-    }
-
-    /* Ensure product-main-slide respects container bounds during scroll animations */
-    .bundle-step-1 .product-column-content[style*="position: fixed"] .product-main-slide,
-    .bundle-step-1 .product-column-content[style*="position: fixed"] .product-main-slide img {
-      max-width: 100% !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-    }
-
-    /* Locked width columns - prevent any flex or grid from changing the locked widths */
-    .bundle-step-1 .grid__item[style*="width:"] {
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-    }
-
-    /* Lock all photos containers to prevent size fluctuations */
-    .bundle-step-1 .product__photos[style*="width:"] {
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      box-sizing: border-box !important;
-    }
-
-    .bundle-step-1 .product-slideshow[style*="width:"] {
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      box-sizing: border-box !important;
-    }
-
-    .bundle-step-1 .product__main-photos[style*="width:"] {
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      box-sizing: border-box !important;
-    }
-
-    /* AGGRESSIVE GRID LOCK - Prevent any column from changing size */
-    .bundle-step-1 .grid__item[style*="width:"] {
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      box-sizing: border-box !important;
-    }
-
-    /* Lock the main grid container */
-    .bundle-step-1 .grid {
-      display: flex !important;
-      flex-wrap: nowrap !important;
-      position: relative !important;
-      overflow: visible !important;
-      gap: 0 !important;
-    }
-
-    /* Image column - exactly 50% width */
-    .bundle-step-1 .grid__item.product-single__sticky,
-    .bundle-step-1 .grid__item.product-grid__images {
-      flex: 0 0 50% !important;
-      width: 50% !important;
-      max-width: 50% !important;
-      min-width: 50% !important;
-      margin-right: 0 !important;
-      padding-right: 0 !important;
-    }
-
-    /* Content column - exactly 50% width with 60px right padding */
-    .bundle-step-1 .grid__item.product-grid__info {
-      flex: 0 0 50% !important;
-      width: 50% !important;
-      max-width: 50% !important;
-      min-width: 50% !important;
-      margin-right: 0 !important;
-      padding-right: 60px !important;
-      box-sizing: border-box !important;
-    }
-
-    /* Ensure images never exceed their containers */
-    .bundle-step-1 .product__photos img,
-    .bundle-step-1 .product-main-slide img {
-      max-width: 100% !important;
-      width: 100% !important;
-      height: auto !important;
-      object-fit: cover !important;
-      box-sizing: border-box !important;
-    }
-
-    /* FIX Z-INDEX LAYERING - Ensure image column is not covered by content column */
-    .bundle-step-1 .grid__item.product-single__sticky,
-    .bundle-step-1 .grid__item.product-grid__images {
-      position: relative !important;
-      z-index: 2 !important;
-    }
-
-    .bundle-step-1 .grid__item.product-grid__info {
-      position: relative !important;
-      z-index: 1 !important;
-    }
-
-    /* Ensure image containers have proper z-index */
-    .bundle-step-1 .product__photos,
-    .bundle-step-1 .product-slideshow,
-    .bundle-step-1 .product__main-photos {
-      position: relative !important;
-      z-index: 3 !important;
-    }
-
-    /* Prevent content column from overlapping image column */
-    .bundle-step-1 .product-single__meta {
-      position: relative !important;
-      z-index: 1 !important;
-    }
-  }
+  /* DESKTOP STEP 1 IMAGE STYLES - TO BE REBUILT */
 
   /* Step 3: Bundle Summary - Match Step 1 Layout */
   .bundle-step-3 .product-summary-block {
@@ -3540,154 +3022,7 @@
     color: #666;
   }
 
-  /* 
-    Definitive Pure CSS Sticky Column Solution for Step 2
-  */
-  @media screen and (min-width: 991px) {
-    /*
-      CRITICAL FIX: `position: sticky` will NOT work if any parent element
-      has `overflow` set to 'hidden', 'scroll', or 'auto'.
-      This rule aggressively targets all potential parent containers in the product grid
-      and forces them to allow sticky positioning.
-    */
-    .bundle-step-2 .page-content--product,
-    .bundle-step-2 .page-content--product > .page-width,
-    .bundle-step-2 .grid {
-      padding-bottom: 0 !important;
-      overflow: visible !important;
-    }
-
-    /*
-      Disable theme's default sticky behavior on images.
-      A custom script will handle advanced sticky positioning for either column.
-    */
-    .bundle-step-2 .product-single__sticky .sticky {
-        position: static; /* Let JS control positioning */
-    }
-
-    /* 
-      CRITICAL FIX: Dynamic max-width based on screen size
-      Use CSS calc to make max-width responsive to viewport width
-    */
-    .bundle-step-2 .product-column-content {
-      max-width: min(765px, 50vw) !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-      overflow: hidden !important;
-    }
-
-  .bundle-step-2 .product__photos img {
-    max-width: 100% !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    display: block !important;
-    margin: 0 auto !important;
-  }
-
-  /* Ensure main photos container takes full width - Override all other rules */
-  .bundle-step-2 .product__main-photos {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    flex: 1 1 100% !important;
-    display: block !important;
-  }
-
-  /* Ensure product slideshow takes full width */
-  .bundle-step-2 .product__main-photos .product-slideshow {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-  }
-
-  /* Ensure main slide takes full width */
-  .bundle-step-2 .product-main-slide {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    display: block !important;
-  }
-
-  /* Ensure main slide image takes full width */
-  .bundle-step-2 .product-main-slide img {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    display: block !important;
-  }
-
-  /* Override any grid or flex constraints on the photos container */
-  .bundle-step-2 .product__photos {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: block !important;
-  }
-
-  /* Override any column width constraints */
-  .bundle-step-2 .product-column-content {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  /* Grid layout - Left column should be half width with proper spacing */
-  .bundle-step-2 .grid__item.product-single__sticky {
-    width: 50% !important;
-    max-width: 50% !important;
-    flex: 0 0 50% !important;
-  }
-
-  /* Product grid images should respect the column width */
-  .bundle-step-2 .product-grid__images {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  /* Right column should also be half width */
-  .bundle-step-2 .grid__item.product-grid__info {
-    width: 50% !important;
-    max-width: 50% !important;
-    flex: 0 0 50% !important;
-  }
-
-  /* Force override for the entire photos container hierarchy */
-  .bundle-step-2 .product__photos.product__photos--stack {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: block !important;
-  }
-
-  /* Override any potential flex or grid constraints */
-  .bundle-step-2 .product__main-photos[data-product-single-media-group] {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    flex: none !important;
-    display: block !important;
-  }
-
-  /* Ensure grid container has proper display and spacing */
-  .bundle-step-2 .grid {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    gap: 20px !important;
-    width: 100% !important;
-  }
-
-  /* Ensure proper spacing between columns */
-  .bundle-step-2 .grid__item {
-    box-sizing: border-box !important;
-  }
-
-    /* Force max-width lock during sticky states */
-    .bundle-step-2 .product-column-content[style*="position: fixed"],
-    .bundle-step-2 .product-column-content[style*="position: absolute"] {
-      max-width: min(765px, 50vw) !important;
-      box-sizing: border-box !important;
-      overflow: hidden !important;
-    }
-  }
+  /* DESKTOP STEP 2 IMAGE STYLES - TO BE REBUILT */
 
   /* Bundle Main Container - Override theme styles */
   .bundle-main-container {
@@ -3738,6 +3073,7 @@
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
+    overflow: visible;
   }
 
   /* Mobile responsive styles */
@@ -4403,5 +3739,116 @@
   
   .carousel-navigation {
     display: none;
+  }
+}
+
+/* Mobile slideshow for Step 1 - keep desktop layout unchanged */
+@media (max-width: 768px) {
+  .bundle-step-1 .product-slideshow {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 0;
+  }
+  
+  .bundle-step-1 .product-main-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-width: 100%;
+  }
+  
+  .bundle-step-1 .product-main-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+/* Step 2 ALL Screens - Image wrap positioning */
+.bundle-step-2 .image-wrap {
+  position: relative !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+}
+
+.bundle-step-2 .image-wrap.loaded {
+  background: transparent !important;
+}
+
+.bundle-step-2 .product-image-main {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+}
+
+.bundle-step-2 .product-main-slide {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.bundle-step-2 .product-main-slide.starting-slide {
+  display: block !important;
+}
+
+.bundle-step-2 .product-main-slide.secondary-slide {
+  display: none !important;
+}
+
+/* Desktop - only show selected slide */
+@media (min-width: 769px) {
+  .bundle-step-2 .product-main-slide.secondary-slide.is-selected {
+    display: block !important;
+  }
+}
+
+/* Step 2 Mobile Slideshow - IMPORTANT: Main slide must be visible */
+@media (max-width: 768px) {
+  /* Force Step 2 main slide to be visible on mobile */
+  .bundle-step-2 .product-slideshow {
+    display: flex !important;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 0;
+  }
+  
+  .bundle-step-2 .product-main-slide {
+    flex: 0 0 100% !important;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-width: 100% !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .bundle-step-2 .product-main-slide.starting-slide,
+  .bundle-step-2 .product-main-slide.secondary-slide {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .bundle-step-2 .product-main-slide img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .bundle-step-2 .image-wrap,
+  .bundle-step-2 .image-wrap img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }

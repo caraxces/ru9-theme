@@ -75,26 +75,30 @@
           <div class="grid{% unless section.settings.image_position == 'left' %} grid--product-images-right{% endunless %}{% if section.settings.mobile_layout == 'partial' %} grid--product-images--partial{% endif %}">
             {%- if section.settings.image_position == 'left' -%}
               <div class="grid__item {{ product_image_width }} product-single__sticky product-grid__images">
-                <div class="product-column-content">
-                  {%- render 'product-images',
-                    section_id: section.id,
-                    product: product,
-                    product_zoom_enable: section.settings.product_zoom_enable,
-                    product_zoom_size: product_zoom_size,
-                    product_carousel_enable: false,
-                    thumbnail_position: 'below',
-                    thumbnail_height: section.settings.thumbnail_height,
-                    thumbnail_arrows: section.settings.thumbnail_arrows,
-                    mobile_layout: section.settings.mobile_layout,
-                    blocks: section.blocks
-                  -%}
-                  <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
-                    <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </button>
-                  <button class="custom-nav-button custom-nav-next" aria-label="Next image">
-                    <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </button>
-                </div>
+                {%- render 'product-images',
+                  section_id: section.id,
+                  product: product,
+                  product_zoom_enable: section.settings.product_zoom_enable,
+                  product_zoom_size: product_zoom_size,
+                  product_carousel_enable: section.settings.product_carousel_enable,
+                  thumbnail_position: 'below',
+                  thumbnail_height: section.settings.thumbnail_height,
+                  thumbnail_arrows: section.settings.thumbnail_arrows,
+                  mobile_layout: section.settings.mobile_layout,
+                  blocks: section.blocks,
+                  context: 'main-product',
+                  sizes: sizes,
+                  sizeVariable: product_image_width,
+                  fallback: product_image_size,
+                  video_looping: section.settings.enable_video_looping,
+                  video_style: section.settings.video_style
+                -%}
+                <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+                  <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+                  <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
               </div>
             {%- endif -%}
 
@@ -482,26 +486,30 @@
 
             {%- unless section.settings.image_position == 'left' -%}
               <div class="grid__item {{ product_image_width }} product-single__sticky product-grid__images">
-                <div class="product-column-content">
-                  {%- render 'product-images',
-                    section_id: section.id,
-                    product: product,
-                    product_zoom_enable: section.settings.product_zoom_enable,
-                    product_zoom_size: product_zoom_size,
-                    product_carousel_enable: false,
-                    thumbnail_position: 'below',
-                    thumbnail_height: section.settings.thumbnail_height,
-                    thumbnail_arrows: section.settings.thumbnail_arrows,
-                    mobile_layout: section.settings.mobile_layout,
-                    blocks: section.blocks
-                  -%}
-                  <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
-                    <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </button>
-                  <button class="custom-nav-button custom-nav-next" aria-label="Next image">
-                    <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </button>
-                </div>
+                {%- render 'product-images',
+                  section_id: section.id,
+                  product: product,
+                  product_zoom_enable: section.settings.product_zoom_enable,
+                  product_zoom_size: product_zoom_size,
+                  product_carousel_enable: section.settings.product_carousel_enable,
+                  thumbnail_position: 'below',
+                  thumbnail_height: section.settings.thumbnail_height,
+                  thumbnail_arrows: section.settings.thumbnail_arrows,
+                  mobile_layout: section.settings.mobile_layout,
+                  blocks: section.blocks,
+                  context: 'main-product',
+                  sizes: sizes,
+                  sizeVariable: product_image_width,
+                  fallback: product_image_size,
+                  video_looping: section.settings.enable_video_looping,
+                  video_style: section.settings.video_style
+                -%}
+                <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+                  <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+                  <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
               </div>
             {%- endunless -%}
           </div>
@@ -517,30 +525,8 @@
             {%- render 'breadcrumbs', classes: 'spacing-base' -%}
           {%- endif -%}
           <div class="grid grid--product-images-right">
-            <!-- Bundle Product Images (Left) -->
-            <div class="grid__item large-up--one-half product-single__sticky product-grid__images">
-              <div class="product-column-content">
-                <div class="product__photos product__photos-{{ section.id }} product__photos--stack product__photos--beside">
-                  <!-- Main Product Image - Full Width Above Thumbnails -->
-                  <div class="product__main-photos" data-product-single-media-group>
-                    <div data-product-photos class="product-slideshow" id="BundleProductPhotos-{{ section.id }}">
-                      <!-- Bundle product image will be loaded here -->
-                      <div class="product-main-slide" data-index="0">
-                        <div class="image-placeholder" style="width: 100%; height: 400px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666;">
-                          <p>Đang tải hình ảnh sản phẩm...</p>
-                        </div>
-                      </div>
-            </div>
-          </div>
-
-                  <!-- Product Thumbnails Below Main Image -->
-                  <div data-product-thumbs class="product__thumbs product__thumbs--below">
-                    <div class="product__thumbs--scroller">
-                      <!-- Thumbnails will be loaded here -->
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="grid__item large-up--one-half product-single__sticky product-grid__images" id="Step2ImageColumn-{{ section.id }}" data-step2-images>
+              <!-- Step 2 images will be dynamically loaded here via JavaScript using real Shopify product data -->
             </div>
 
             <!-- Bundle Product Info (Right) -->
@@ -573,34 +559,31 @@
             {%- render 'breadcrumbs', classes: 'spacing-base' -%}
           {%- endif -%}
           <div class="grid grid--product-images-right">
-            <!-- Bundle Images (Left) -->
             <div class="grid__item large-up--one-half product-single__sticky product-grid__images">
-              <div class="product-column-content">
-                <div class="product__photos product__photos-{{ section.id }} product__photos--stack product__photos--beside">
-                  <!-- Main Product Image - Full Width Above Thumbnails -->
-                  <div class="product__main-photos" data-product-single-media-group>
-                    <div data-product-photos class="product-slideshow" id="BundlePhotos-{{ section.id }}">
-                      <!-- Main bundle image will be loaded here -->
-                      <div class="product-main-slide" data-index="0">
-                        <img src="{{ product.featured_image | image_url: '620x' }}" alt="{{ product.title }}" width="620" height="620" style="width: 100%; height: auto;">
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Product Thumbnails Below Main Image -->
-                  <div data-product-thumbs class="product__thumbs product__thumbs--below">
-                    <div class="product__thumbs--scroller">
-                      <!-- Thumbnails will be loaded here -->
-                    </div>
-                  </div>
-                </div>
-                <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
-                  <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-                <button class="custom-nav-button custom-nav-next" aria-label="Next image">
-                  <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
+              {%- render 'product-images',
+                section_id: section.id,
+                product: product,
+                product_zoom_enable: section.settings.product_zoom_enable,
+                product_zoom_size: product_zoom_size,
+                product_carousel_enable: section.settings.product_carousel_enable,
+                thumbnail_position: 'below',
+                thumbnail_height: section.settings.thumbnail_height,
+                thumbnail_arrows: section.settings.thumbnail_arrows,
+                mobile_layout: section.settings.mobile_layout,
+                blocks: section.blocks,
+                context: 'main-product',
+                sizes: sizes,
+                sizeVariable: 'large-up--one-half',
+                fallback: product_image_size,
+                video_looping: section.settings.enable_video_looping,
+                video_style: section.settings.video_style
+              -%}
+              <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+                <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+                <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
             </div>
 
             <!-- Bundle Summary (Right) -->
@@ -943,9 +926,14 @@
               "media": [
                 {%- for media in bundle_product.media -%}
                   {
-                    "src": {{ media | image_url: 'medium' | json }},
+                    "id": {{ media.id | json }},
+                    "media_type": {{ media.media_type | json }},
+                    "src": {{ media | image_url: 'large' | json }},
                     "alt": {{ media.alt | json }},
-                    "id": {{ media.id | json }}
+                    "preview_image": {
+                      "src": {{ media | image_url: 'large' | json }},
+                      "aspect_ratio": {{ media.aspect_ratio | default: 1 | json }}
+                    }
                   }{% unless forloop.last %},{% endunless %}
                 {%- endfor -%}
               ],
@@ -976,70 +964,182 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('MainProductBundle-{{ section.id }}');
   if (!container) return;
 
-  // IMMEDIATE WIDTH LOCK - Lock all photo containers as soon as page loads
-  function lockAllPhotoContainers() {
-    const step1Container = document.querySelector('.bundle-step-1');
-    if (step1Container) {
-      // Lock the main grid columns first
-      const imageColumn = step1Container.querySelector('.grid__item.product-single__sticky, .grid__item.product-grid__images');
-      const infoColumn = step1Container.querySelector('.grid__item.product-grid__info');
+  // Cache for Shopify product data to avoid repeated API calls
+  const productDataCache = {};
+
+  // Helper function to fetch product data from Shopify with caching
+  async function fetchShopifyProduct(handle) {
+    // Check cache first
+    if (productDataCache[handle]) {
+      console.log('📦 Using cached data for:', handle);
+      return productDataCache[handle];
+    }
+
+    console.log('🌐 Fetching from Shopify:', handle);
+    const response = await fetch(`/products/${handle}.js`);
+    const shopifyProduct = await response.json();
+    
+    // Convert Shopify product format to our format
+    const productData = {
+      id: shopifyProduct.id,
+      title: shopifyProduct.title,
+      handle: shopifyProduct.handle,
+      media: shopifyProduct.media || shopifyProduct.images.map(img => ({
+        id: img.id,
+        media_type: 'image',
+        src: img.src,
+        alt: img.alt,
+        preview_image: {
+          src: img.src,
+          aspect_ratio: img.width / img.height
+        }
+      })),
+      variants: shopifyProduct.variants
+    };
+    
+    // Cache the result
+    productDataCache[handle] = productData;
+    return productData;
+  }
+
+  // Helper function to render product images HTML for Step 2 (thumbnails below)
+  function renderProductImagesHTML(productData, sectionId, step) {
+    console.log('🖼️ renderProductImagesHTML called:', {
+      step,
+      hasProductData: !!productData,
+      hasMedia: !!(productData && productData.media),
+      mediaLength: productData?.media?.length,
+      productTitle: productData?.title
+    });
+    
+    if (!productData || !productData.media || productData.media.length === 0) {
+      console.warn('❌ No images to render:', productData);
+      return '<div class="product__photos"><p>Không có hình ảnh</p></div>';
+    }
+    
+    const productCarouselEnable = {{ section.settings.product_carousel_enable | json }};
+    const thumbnailArrows = {{ section.settings.thumbnail_arrows | json }};
+    
+    console.log('🖼️ Rendering', productData.media.length, 'images for', productData.title);
+    
+    // Main slideshow HTML
+    let slideshowHTML = '';
+    productData.media.forEach((media, index) => {
+      const mediaUrl = media.preview_image?.src || media.src || '';
+      const aspectRatio = media.preview_image?.aspect_ratio || 1;
       
-      if (imageColumn && infoColumn) {
-        // Image column - exactly 50% width
-        imageColumn.style.flex = '0 0 50%';
-        imageColumn.style.width = '50%';
-        imageColumn.style.maxWidth = '50%';
-        imageColumn.style.minWidth = '50%';
-        imageColumn.style.flexShrink = '0';
-        imageColumn.style.flexGrow = '0';
-        imageColumn.style.position = 'relative';
-        imageColumn.style.zIndex = '2';
-        imageColumn.style.paddingRight = '0';
-        imageColumn.style.marginRight = '0';
-        
-        // Content column - exactly 50% width with 60px right padding
-        infoColumn.style.flex = '0 0 50%';
-        infoColumn.style.width = '50%';
-        infoColumn.style.maxWidth = '50%';
-        infoColumn.style.minWidth = '50%';
-        infoColumn.style.flexShrink = '0';
-        infoColumn.style.flexGrow = '0';
-        infoColumn.style.position = 'relative';
-        infoColumn.style.zIndex = '1';
-        infoColumn.style.paddingRight = '60px';
-        infoColumn.style.marginRight = '0';
-        infoColumn.style.boxSizing = 'border-box';
-        
-      }
-      
-      // Set photo containers to take full width of their 50% column
-      const photosContainers = step1Container.querySelectorAll('.product__photos, .product-slideshow, .product__main-photos, .product-main-slide');
-      photosContainers.forEach(container => {
-        container.style.width = '100%';
-        container.style.maxWidth = '100%';
-        container.style.minWidth = '100%';
-        container.style.flexShrink = '0';
-        container.style.flexGrow = '0';
-        container.style.boxSizing = 'border-box';
-        container.style.position = 'relative';
-        container.style.zIndex = '3';
+      console.log(`  Image ${index}:`, {
+        mediaUrl,
+        aspectRatio,
+        rawMedia: media,
+        previewImage: media.preview_image,
+        src: media.src
       });
       
-      // Lock all images within the containers
-      const images = step1Container.querySelectorAll('.product__photos img, .product-main-slide img');
-      images.forEach(img => {
-        img.style.maxWidth = '100%';
-        img.style.width = '100%';
-        img.style.height = 'auto';
-        img.style.objectFit = 'cover';
-        img.style.boxSizing = 'border-box';
+      slideshowHTML += `
+        <div class="product-main-slide ${index === 0 ? 'starting-slide' : 'secondary-slide'}" data-index="${index}">
+          <div data-product-image-main class="product-image-main">
+            <div class="image-wrap loaded" style="height: 0; padding-bottom: ${100 / aspectRatio}%;">
+              <img src="${mediaUrl}" 
+                   alt="${productData.title}" 
+                   class="photoswipe__image lazyautosizes image-element lazyloaded" 
+                   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"
+                   loading="${index === 0 ? 'eager' : 'lazy'}">
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    
+    // Thumbnails HTML (below)
+    let thumbnailsHTML = '';
+    if (productData.media.length > 1) {
+      productData.media.forEach((media, index) => {
+        const mediaUrl = media.preview_image?.src || media.src || '';
+        const aspectRatio = media.preview_image?.aspect_ratio || 1;
+        
+        thumbnailsHTML += `
+          <div class="product__thumb-item" data-index="${index}">
+            <a href="${mediaUrl}" data-product-thumb class="product__thumb" data-index="${index}" data-id="${media.id || index}">
+              <div class="image-wrap image-wrap__thumbnail" style="height: 0; padding-bottom: ${100 / aspectRatio}%;">
+                <img src="${mediaUrl}" alt="${productData.title}" loading="lazy">
+              </div>
+            </a>
+          </div>
+        `;
       });
     }
+    
+    // Complete HTML structure with thumbnails below
+    return `
+      <div class="product-column-content" data-product-images>
+        <div class="product__photos${productCarouselEnable ? '' : ' product__photos--stack'} product__photos-${sectionId} product__photos--below">
+          <div class="product__main-photos" data-product-single-media-group>
+            <div data-product-photos class="product-slideshow" id="ProductPhotos-${step}-${sectionId}">
+              ${slideshowHTML}
+            </div>
+          </div>
+          
+          ${productData.media.length > 1 ? `
+            <div data-product-thumbs class="product__thumbs product__thumbs--below">
+              ${thumbnailArrows ? `
+                <button type="button" class="product__thumb-arrow product__thumb-arrow--prev hide">
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-left" viewBox="0 0 284.49 498.98">
+                    <path d="M249.49 0a35 35 0 0 1 24.75 59.75L84.49 249.49l189.75 189.74a35.002 35.002 0 1 1-49.5 49.5L10.25 274.24a35 35 0 0 1 0-49.5L224.74 10.25A34.89 34.89 0 0 1 249.49 0Z"/>
+                  </svg>
+                </button>
+              ` : ''}
+              
+              <div class="${productCarouselEnable ? 'huan-false' : ''} product__thumbs--scroller">
+                ${thumbnailsHTML}
+              </div>
+              
+              ${thumbnailArrows ? `
+                <button type="button" class="product__thumb-arrow product__thumb-arrow--next">
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-right" viewBox="0 0 284.49 498.98">
+                    <path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98Z"/>
+                  </svg>
+                </button>
+              ` : ''}
+            </div>
+          ` : ''}
+        </div>
+        <button class="custom-nav-button custom-nav-prev" aria-label="Previous image">
+          <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="custom-nav-button custom-nav-next" aria-label="Next image">
+          <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 1.5L8.5 7.5L15 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    `;
   }
   
-  // Lock immediately
-  setTimeout(lockAllPhotoContainers, 100);
-  window.addEventListener('resize', lockAllPhotoContainers);
+  // Helper function to initialize Flickity carousel
+  function initializeFlickityForStep(container, step) {
+    setTimeout(() => {
+      const slideshow = container.querySelector('.product-slideshow');
+      if (slideshow && window.Flickity) {
+        new Flickity(slideshow, {
+          cellAlign: 'left',
+          contain: true,
+          prevNextButtons: false,
+          pageDots: false,
+          wrapAround: true
+        });
+        
+        // Connect custom nav buttons to Flickity
+        const prevBtn = container.querySelector('.custom-nav-prev');
+        const nextBtn = container.querySelector('.custom-nav-next');
+        if (prevBtn && nextBtn) {
+          const flkty = Flickity.data(slideshow);
+          if (flkty) {
+            prevBtn.addEventListener('click', () => flkty.previous());
+            nextBtn.addEventListener('click', () => flkty.next());
+          }
+        }
+      }
+    }, 300);
+  }
 
   const configElement = document.getElementById('BundleConfig-{{ section.id }}');
   if (!configElement) return;
@@ -1403,134 +1503,67 @@ document.addEventListener('DOMContentLoaded', () => {
       progressTotal.textContent = config.bundleProducts.length;
     }
 
-    // Update the product image in the left column
-    const step2Element = container.querySelector('.bundle-step-2');
-    console.log('Step 2 element found:', !!step2Element);
+    // Step 2: Fetch real product data from Shopify and render images
+    const step2ImageColumn = document.getElementById('Step2ImageColumn-{{ section.id }}');
+    console.log('Step 2 Image Column found:', !!step2ImageColumn);
+    console.log('Product handle:', product.handle);
     
-    if (!step2Element) {
-      console.error('❌ Step 2 element not found!');
-      return;
-    }
-    
-    const productImageContainer = step2Element.querySelector('[data-product-photos]');
-    const productThumbsContainer = step2Element.querySelector('.product__thumbs--scroller');
-    
-    console.log('Product image container found:', !!productImageContainer);
-    console.log('Product thumbs container found:', !!productThumbsContainer);
-    
-    if (!productImageContainer) {
-      console.error('❌ Product image container not found!');
-      console.log('Available elements in step2:', step2Element.querySelectorAll('*'));
-      return;
-    }
-    
-    if (productImageContainer) {
-      // Debug the product structure first
-      console.log('=== PRODUCT IMAGE DEBUG ===');
-      console.log('Product object:', product);
-      console.log('Product.featured_image:', product.featured_image);
-      console.log('Product.media:', product.media);
-      console.log('Product.variants:', product.variants);
-      
-      if (product.variants && product.variants.length > 0) {
-        console.log('First variant:', product.variants[0]);
-        console.log('First variant featured_image:', product.variants[0].featured_image);
-      }
-      
-      // Get the first variant's image or fallback to featured image
-      let productImage = '';
-      
-      // Use the same logic as thumbnails - try media array first since thumbnails work
-      if (product.media && product.media.length > 0) {
-        // Check if media.src is actually a string or an object
-        if (typeof product.media[0].src === 'string') {
-          productImage = product.media[0].src;
-        } else if (product.media[0].src && typeof product.media[0].src === 'object') {
-          productImage = product.media[0].src.src || product.media[0].src.url || product.media[0].src.preview_image || '';
-        }
-      }
-      
-      // If media didn't work, try variant featured image
-      if (!productImage && product.variants && product.variants.length > 0 && product.variants[0].featured_image) {
-        if (typeof product.variants[0].featured_image === 'string') {
-          productImage = product.variants[0].featured_image;
-        } else if (product.variants[0].featured_image && typeof product.variants[0].featured_image === 'object') {
-          productImage = product.variants[0].featured_image.src || product.variants[0].featured_image.url || product.variants[0].featured_image.preview_image || '';
-        }
-      }
-      
-      // If variant didn't work, try product featured image
-      if (!productImage && product.featured_image) {
-        if (typeof product.featured_image === 'string') {
-          productImage = product.featured_image;
-        } else if (product.featured_image && typeof product.featured_image === 'object') {
-          productImage = product.featured_image.src || product.featured_image.url || product.featured_image.preview_image || '';
-        }
-      }
-      
-      console.log('Final product image URL:', productImage);
-      
-      if (productImage && productImage !== '') {
-        console.log('✅ Setting product image:', productImage);
-        productImageContainer.innerHTML = `
-          <div class="product-main-slide" data-index="0">
-            <img src="${productImage}" alt="${product.title}" width="620" height="620" style="width: 100%; height: auto;">
-          </div>
-        `;
-        console.log('✅ Updated product image successfully');
-      } else {
-        console.log('❌ No valid product image found');
-        console.log('ProductImage value:', productImage);
-        console.log('ProductImage type:', typeof productImage);
-        productImageContainer.innerHTML = `
-          <div class="product-main-slide" data-index="0">
-            <div class="image-placeholder" style="width: 100%; height: 400px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666;">
-              <p>Không có hình ảnh</p>
-            </div>
-          </div>
-        `;
-      }
+    if (step2ImageColumn && product && product.handle) {
+      // Fetch real product data from Shopify (with caching)
+      fetchShopifyProduct(product.handle)
+        .then(productData => {
+          console.log('🎯 Product Data:', productData);
+          console.log('🎯 Media:', productData.media);
+          
+          const imageHTML = renderProductImagesHTML(productData, '{{ section.id }}', 'step2');
+          step2ImageColumn.innerHTML = imageHTML;
+          console.log('✅ Step 2 images rendered');
+          
+          // Debug CSS after rendering
+          setTimeout(() => {
+            const slides = step2ImageColumn.querySelectorAll('.product-main-slide');
+            const images = step2ImageColumn.querySelectorAll('img');
+            console.log('🔍 Step 2 Debug - Slides found:', slides.length);
+            console.log('🔍 Step 2 Debug - Images found:', images.length);
+            
+            slides.forEach((slide, idx) => {
+              const computedStyle = window.getComputedStyle(slide);
+              console.log(`🔍 Slide ${idx}:`, {
+                display: computedStyle.display,
+                visibility: computedStyle.visibility,
+                opacity: computedStyle.opacity,
+                classes: slide.className
+              });
+            });
+            
+            images.forEach((img, idx) => {
+              const computedStyle = window.getComputedStyle(img);
+              console.log(`🔍 Image ${idx}:`, {
+                display: computedStyle.display,
+                visibility: computedStyle.visibility,
+                opacity: computedStyle.opacity,
+                src: img.src,
+                loaded: img.complete
+              });
+            });
+          }, 100);
+          
+          // Initialize Flickity if carousel is enabled
+          if ({{ section.settings.product_carousel_enable | json }}) {
+            initializeFlickityForStep(step2ImageColumn, 'step2');
+            console.log('✅ Flickity initialized for Step 2');
+          }
+        })
+        .catch(error => {
+          console.error('❌ Error fetching product data:', error);
+          step2ImageColumn.innerHTML = '<p>Không thể tải hình ảnh sản phẩm</p>';
+        });
     } else {
-      console.log('Product image container not found');
-    }
-    
-    // Update thumbnails below the main image
-    if (productThumbsContainer && product.media && product.media.length > 1) {
-      console.log('=== THUMBNAIL DEBUG ===');
-      console.log('Product media array:', product.media);
-      console.log('First media item:', product.media[0]);
-      console.log('First media src:', product.media[0] ? product.media[0].src : 'undefined');
-      console.log('First media type:', typeof (product.media[0] ? product.media[0].src : 'undefined'));
-      
-      const thumbnailsHTML = product.media.map((media, index) => {
-        console.log(`Media ${index}:`, media);
-        console.log(`Media ${index} src:`, media.src);
-        console.log(`Media ${index} src type:`, typeof media.src);
-        
-        // Check if media.src is actually a string or an object
-        let imageUrl = '';
-        if (typeof media.src === 'string') {
-          imageUrl = media.src;
-        } else if (media.src && typeof media.src === 'object') {
-          // If it's an object, try to extract the URL
-          imageUrl = media.src.src || media.src.url || media.src.preview_image || '';
-        }
-        
-        console.log(`Final imageUrl for media ${index}:`, imageUrl);
-        
-        return `
-          <div class="product__thumb-item" data-index="${index}">
-            <a href="${imageUrl}" data-product-thumb class="product__thumb" data-index="${index}">
-              <div class="image-wrap image-wrap__thumbnail">
-                <img src="${imageUrl}" alt="${product.title}" loading="lazy">
-              </div>
-            </a>
-          </div>
-        `;
-      }).join('');
-      
-      productThumbsContainer.innerHTML = thumbnailsHTML;
-      console.log('Updated product thumbnails:', product.media.length);
+      console.error('❌ Cannot render Step 2 images:', {
+        hasColumn: !!step2ImageColumn,
+        hasProduct: !!product,
+        hasHandle: !!(product && product.handle)
+      });
     }
 
     // Render product info in the right column
@@ -2152,73 +2185,6 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }).join('');
     
-    // Wait a bit for DOM to update, then update photos and thumbnails
-    setTimeout(() => {
-      // Update bundle photos (left side) - Create only 1 main slide
-      if (bundlePhotos) {
-        // Create only 1 main slide that will change its image when thumbnails are clicked
-        bundlePhotos.innerHTML = `
-          <div class="product-main-slide" data-index="0">
-            <img src="${mainProduct.image}" alt="${mainProduct.productTitle}" width="620" height="620" style="width: 100%; height: auto;">
-          </div>
-        `;
-        console.log('✅ Created single main slide with main product image');
-      }
-      
-      // Update thumbnails with selected bundle product images - Match Step 1 & 2 structure
-      const thumbnailsContainer = container.querySelector('.bundle-step-3 [data-product-thumbs] .product__thumbs--scroller');
-      if (thumbnailsContainer) {
-        console.log('Updating thumbnails with selected bundle products...');
-        const allImages = [mainProduct, ...allProducts];
-        
-        // Create thumbnails exactly like Step 1 & 2
-        const thumbnailsHTML = allImages.map((product, index) => {
-          return `
-            <div class="product__thumb-item" data-index="${index}">
-              <a href="${product.image}" data-product-thumb class="product__thumb" data-index="${index}" data-image-src="${product.image}">
-                <div class="image-wrap image-wrap__thumbnail">
-                  <img src="${product.image}" alt="${product.productTitle}" loading="lazy">
-                </div>
-              </a>
-            </div>
-          `;
-        }).join('');
-        
-        thumbnailsContainer.innerHTML = thumbnailsHTML;
-        console.log(`✅ Created ${allImages.length} thumbnails for step 3`);
-        
-        // Add click handlers to thumbnails
-        const thumbLinks = thumbnailsContainer.querySelectorAll('[data-product-thumb]');
-        thumbLinks.forEach((thumb, index) => {
-          thumb.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Remove active class from all thumbs
-            thumbLinks.forEach(t => t.classList.remove('active'));
-            // Add active class to clicked thumb
-            thumb.classList.add('active');
-            
-            // Update the single main slide image
-            const mainSlideImg = container.querySelector('.bundle-step-3 .product-main-slide img');
-            const imageSrc = thumb.getAttribute('data-image-src');
-            const productTitle = thumb.querySelector('img').alt;
-            
-            if (mainSlideImg && imageSrc) {
-              mainSlideImg.src = imageSrc;
-              mainSlideImg.alt = productTitle;
-              console.log(`Switched main image to: ${productTitle}`);
-            }
-          });
-        });
-        
-        // Make first thumbnail active by default
-        if (thumbLinks.length > 0) {
-          thumbLinks[0].classList.add('active');
-        }
-      }
-
-    }, 100); // Wait 100ms for DOM to update
-
     // Display summary
     console.log('=== BUNDLE PRICE SUMMARY ===');
     console.log('Total Original (compare_at_price):', totalOriginal);
@@ -2333,57 +2299,7 @@ document.addEventListener('DOMContentLoaded', () => {
     buyBundleNow();
   }
 
-  function initializeBundleThumbnailEvents() {
-    const thumbnails = container.querySelectorAll('.bundle-step-3 [data-product-thumb]');
-    const mainSlides = container.querySelectorAll('.bundle-step-3 .product-main-slide');
-    
-    console.log('Initializing bundle thumbnail events');
-    console.log('Found thumbnails:', thumbnails.length);
-    console.log('Found main slides:', mainSlides.length);
-    
-    thumbnails.forEach((thumb, index) => {
-      thumb.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Remove active class from all thumbnails
-        thumbnails.forEach(t => {
-          t.classList.remove('active', 'is-active');
-          t.removeAttribute('aria-selected');
-        });
-        
-        // Hide all main slides
-        mainSlides.forEach(slide => {
-          slide.style.display = 'none';
-          slide.classList.remove('is-selected');
-        });
-        
-        // Add active class to clicked thumbnail
-        thumb.classList.add('active', 'is-active');
-        thumb.setAttribute('aria-selected', 'true');
-        
-        // Show corresponding main slide
-        const targetSlide = mainSlides[index];
-        if (targetSlide) {
-          targetSlide.style.display = 'block';
-          targetSlide.classList.add('is-selected');
-        }
-        
-        console.log(`Clicked thumbnail ${index}, showing slide ${index}`);
-      });
-    });
-    
-    // Set first thumbnail as active by default
-    if (thumbnails.length > 0) {
-      thumbnails[0].classList.add('active', 'is-active');
-      thumbnails[0].setAttribute('aria-selected', 'true');
-    }
-    
-    // Show first slide by default
-    if (mainSlides.length > 0) {
-      mainSlides[0].style.display = 'block';
-      mainSlides[0].classList.add('is-selected');
-    }
-  }
+  // Step 3 uses product-images snippet, no custom events needed
 
   function changeProduct(productIndex) {
     console.log('Changing product at index:', productIndex);
@@ -2728,18 +2644,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Listen for variant changes on main product
     container.addEventListener('change', function(event) {
       if (event.target.closest('.bundle-step-1') && event.target.hasAttribute('data-variant-input')) {
-        console.log('Main product variant changed');
+        console.log('🔍 Main product variant changed');
         
         // Get the selected variant
         const selectedVariant = event.target.closest('.bundle-step-1').querySelector('[data-variant-input]:checked');
         if (selectedVariant) {
           const variantId = selectedVariant.value;
-          console.log('Selected variant ID:', variantId);
+          console.log('🔍 Selected variant ID:', variantId);
           
           // Find the variant data
           const variant = {{ product.variants | json }}.find(v => v.id.toString() === variantId);
           if (variant) {
-            console.log('Found variant:', variant);
+            console.log('🔍 Found variant:', variant);
             
             // Update main product in bundle state
             bundleState.selectedProducts.main = {
@@ -2751,14 +2667,75 @@ document.addEventListener('DOMContentLoaded', () => {
               quantity: bundleState.selectedProducts.main.quantity
             };
             
-            console.log('Updated main product in bundle state:', bundleState.selectedProducts.main);
+            console.log('🔍 Updated main product in bundle state:', bundleState.selectedProducts.main);
+          }
+        }
+      }
+      
+      // Listen for variant changes on Step 2 bundle products
+      if (event.target.closest('.bundle-step-2') && event.target.hasAttribute('data-variant-input')) {
+        console.log('🔍 Step 2 bundle product variant changed');
+        
+        // Get the selected variant
+        const selectedVariant = event.target.closest('.bundle-step-2').querySelector('[data-variant-input]:checked');
+        if (selectedVariant) {
+          const variantId = selectedVariant.value;
+          console.log('🔍 Step 2 - Selected variant ID:', variantId);
+          
+          // Find the current product being edited
+          const productContainer = event.target.closest('.bundle-product-item');
+          if (productContainer) {
+            const productId = productContainer.getAttribute('data-product-id');
+            console.log('🔍 Step 2 - Product ID:', productId);
+            
+            // Find the variant data from the current product
+            const productData = bundleState.selectedProducts.bundle.find(p => p.id.toString() === productId);
+            if (productData && productData.variants) {
+              const variant = productData.variants.find(v => v.id.toString() === variantId);
+              if (variant) {
+                console.log('🔍 Step 2 - Found variant:', variant);
+                
+                // Update the product in bundle state
+                productData.variantId = variant.id;
+                productData.variantTitle = variant.title;
+                productData.variantOptions = variant.options;
+                productData.variantPrice = variant.price;
+                productData.image = extractImageUrl(variant.featured_image) || productData.image;
+                
+                console.log('🔍 Step 2 - Updated product in bundle state:', productData);
+                
+                // Update the image display
+                updateProductImageForStep2(productData);
+              }
+            }
           }
         }
       }
     });
   }
 
-
+  // Update Step 2 images when variant changes
+  function updateProductImageForStep2(productData) {
+    const step2ImageColumn = document.getElementById('Step2ImageColumn-{{ section.id }}');
+    if (step2ImageColumn && productData && productData.handle) {
+      // Fetch real product data from Shopify (with caching)
+      fetchShopifyProduct(productData.handle)
+        .then(updatedProductData => {
+          console.log('🔄 Updated Product Data:', updatedProductData);
+          
+          const imageHTML = renderProductImagesHTML(updatedProductData, '{{ section.id }}', 'step2');
+          step2ImageColumn.innerHTML = imageHTML;
+          
+          // Re-initialize Flickity if carousel is enabled
+          if ({{ section.settings.product_carousel_enable | json }}) {
+            initializeFlickityForStep(step2ImageColumn, 'step2');
+          }
+        })
+        .catch(error => {
+          console.error('❌ Error updating product images:', error);
+        });
+    }
+  }
 
   function initializeBundleProductVariantPicker(container) {
     console.log('=== INITIALIZE BUNDLE PRODUCT VARIANT PICKER ===');
@@ -3708,58 +3685,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBundleProductImage(variant, container);
   }
 
-  function updateBundleProductImage(variant, container) {
-    console.log('=== UPDATE PRODUCT IMAGE ===');
-    console.log('Updating product image for variant:', variant.title);
-    
-    const currentProduct = config.bundleProducts[bundleState.currentProductIndex];
-    if (!currentProduct) return;
-    
-    // Get variant image if available
-    let variantImage = currentProduct.featured_image;
-    if (variant.featured_image) {
-      variantImage = variant.featured_image;
-    } else if (currentProduct.media && currentProduct.media.length > 0) {
-      // Try to find media that matches the variant by checking multiple criteria
-      const variantMedia = currentProduct.media.find(media => {
-        const mediaAlt = (media.alt || '').toLowerCase();
-        const mediaTitle = (media.title || '').toLowerCase();
-        const variantTitle = variant.title.toLowerCase();
-        
-        // Check if media alt text or title contains variant info
-        return mediaAlt.includes(variantTitle) || 
-               mediaTitle.includes(variantTitle) ||
-               // Also check for color names in variant title
-               variant.options && variant.options.some(option => {
-                 const optionLower = option.toLowerCase();
-                 return mediaAlt.includes(optionLower) || mediaTitle.includes(optionLower);
-               });
-      });
-      
-      if (variantMedia) {
-        variantImage = variantMedia.src;
-      }
-    }
-    
-    console.log('Selected variant image for', variant.title, ':', variantImage);
-    
-    // Update main product image
-    const mainImage = container.querySelector('.product-main-slide img');
-    if (mainImage && variantImage !== mainImage.src) {
-      mainImage.src = variantImage;
-      mainImage.alt = currentProduct.title + ' - ' + variant.title;
-      console.log('✅ Updated main product image to:', variantImage);
-    }
-    
-    // Update thumbnails if they exist
-    const thumbnails = container.querySelectorAll('.product__thumb img');
-    thumbnails.forEach((thumb, index) => {
-      if (index === 0) { // First thumbnail should match main image
-        thumb.src = variantImage;
-        thumb.alt = currentProduct.title + ' - ' + variant.title;
-      }
-    });
-  }
+  // Update bundle product image handled by updateProductImageForStep2()
 
   function updateColorSwatchState(variant, container) {
     console.log('=== UPDATE COLOR SWATCH STATE ===');
