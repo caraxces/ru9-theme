@@ -499,7 +499,6 @@
     display: flex !important;
     grid-template-columns: repeat(auto-fit, 45px) !important;
     gap: 8px !important;
-    margin-left: auto !important;
     margin-right: auto !important;
     max-width: 100% !important;
     width: fit-content !important;
@@ -548,10 +547,16 @@
   .variant-input-wrap[data-index="option2"]:not(.is-color) .variant__button-label {
     color: #212121 !important;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1380px) {
   /* Make Comfort top variants share width equally and match height with other blocks */
   .variant-input-wrap[data-index="option2"]:not(.is-color):not(.is-size):not([data-handle="kich-thuoc"]):not([data-handle="size"]):not([data-handle="kích-thước"]):not([data-handle="kich-thước"]) {
-    display: grid !important;
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .variant-input-wrap[data-index="option2"]:(.is-color):([data-handle="Màu"]):([data-handle="mau"]):([data-handle="color"]):([data-handle="colour"]) {
+    display: flex !important;
     flex-direction: row !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 8px !important;
@@ -1707,12 +1712,11 @@
       display: flex !important;
       grid-template-columns: repeat(auto-fit, 40px) !important;
       gap: 6px !important;
-      margin-left: auto !important;
       margin-right: auto !important;
       max-width: 100% !important;
       width: fit-content !important;
       justify-content: flex-start !important;
-      justify-items: center !important;
+      justify-items: left !important;
       flex-wrap: wrap !important;
     }
     

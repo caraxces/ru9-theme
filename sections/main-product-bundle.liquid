@@ -119,20 +119,69 @@
                   {%- endif -%}
 
                   <!-- Product Reviews Section -->
+                  {%- liquid
+                    assign has_reviews = false
+                    assign review_rating = 0
+                    assign review_count = 0
+                    
+                    if product.metafields.reviews.rating.value != blank
+                      assign has_reviews = true
+                      assign review_rating = product.metafields.reviews.rating.value.rating
+                      assign review_count = product.metafields.reviews.rating_count
+                    elsif product.metafields.judgeme.rating != blank
+                      assign has_reviews = true
+                      assign review_rating = product.metafields.judgeme.rating
+                      assign review_count = product.metafields.judgeme.review_count
+                    endif
+                  -%}
+                  
                   <div class="product-reviews-summary">
                     <div class="product-rating">
-                      <div class="stars">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
+                      {%- if has_reviews -%}
+                        {%- liquid
+                          assign rating_floor = review_rating | floor
+                          assign rating_decimal = review_rating | modulo: 1
+                          assign has_half_star = false
+                          if rating_decimal >= 0.25 and rating_decimal < 0.75
+                            assign has_half_star = true
+                          elsif rating_decimal >= 0.75
+                            assign rating_floor = rating_floor | plus: 1
+                          endif
+                        -%}
+                        <div class="stars">
+                          {%- for i in (1..5) -%}
+                            {%- liquid
+                              assign next_star = rating_floor | plus: 1
+                              assign is_half_star = false
+                              if i == next_star and has_half_star
+                                assign is_half_star = true
+                              endif
+                            -%}
+                            {%- if i <= rating_floor -%}
+                              <span class="star star--filled">★</span>
+                            {%- elsif is_half_star -%}
+                              <span class="star star--half">★</span>
+                            {%- else -%}
+                              <span class="star star--empty">☆</span>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
+                        <span class="rating-value">{{ review_rating | round: 1 }}</span>
+                      {%- else -%}
+                        <div class="stars">
+                          <span class="star star--filled">★</span>
+                          <span class="star star--filled">★</span>
+                          <span class="star star--filled">★</span>
+                          <span class="star star--filled">★</span>
+                          <span class="star star--filled">★</span>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                    {%- if has_reviews and review_count > 0 -%}
+                      <div class="reviews-count">
+                        <span class="reviews-number">({{ review_count }} đánh giá)</span>
                       </div>
-                      <span class="rating-value">{{ section.settings.review_rating | default: '4.8' }}</span>
-                    </div>
-                    <div class="reviews-count">
-                      <span class="reviews-number">({{ section.settings.review_count | default: '2025 đánh giá' }})</span>
-                    </div>
+                    {%- endif -%}
                   </div>
 
                   <h1 class="h2 product-single__title">
@@ -272,56 +321,17 @@
                       </details>
 
                       <!-- Store System Accordion -->
-                      <details class="product-accordion product-accordion--styled">
-                        <summary>
-                          <span>Hệ thống cửa hàng</span>
-                          <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </summary>
-                        <div class="product-accordion-content">
-                          <div class="showroom-list">
-                            <div class="showroom-item">
-                              <strong>Showroom 1</strong><br>
-                              <span>Địa chỉ showroom</span><br>
-                              <a href="tel:0964777910">0964777910</a>
-                            </div>
-                            <div class="showroom-item">
-                              <strong>Showroom 2</strong><br>
-                              <span>Địa chỉ showroom</span><br>
-                              <a href="tel:0964777910">0964777910</a>
-                            </div>
-                            <div class="showroom-item">
-                              <strong>Showroom 3</strong><br>
-                              <span>Địa chỉ showroom</span><br>
-                              <a href="tel:0964777940">0964777940</a>
-                            </div>
+                      {%- if section.settings.store_system_content != blank -%}
+                        <details class="product-accordion product-accordion--styled">
+                          <summary>
+                            <span>Hệ thống cửa hàng</span>
+                            <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          </summary>
+                          <div class="product-accordion-content rte">
+                            {{ section.settings.store_system_content }}
                           </div>
-                        </div>
-                      </details>
-
-                      <!-- Reviews Accordion -->
-                      <details class="product-accordion product-accordion--styled">
-                        <summary>
-                          <span>Đánh giá</span>
-                          <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </summary>
-                        <div class="product-accordion-content">
-                          <div class="product-reviews-summary">
-                            <div class="product-rating">
-                              <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                              </div>
-                              <span class="rating-value">4.8</span>
-                            </div>
-                            <div class="reviews-count">
-                              <span class="reviews-number">(2025 đánh giá)</span>
-                            </div>
-                          </div>
-                        </div>
-                      </details>
+                        </details>
+                      {%- endif -%}
                     </div>
                   </div>
 
@@ -393,43 +403,7 @@
                   {%- for block in section.blocks -%}
                     {%- case block.type -%}
                       {%- when 'showroom_dropdown' -%}
-                        <details class="product-accordion product-accordion--styled" {{ block.shopify_attributes }}>
-                          <summary>
-                            <span>{{ block.settings.title }}</span>
-                            <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                          </summary>
-                          <div class="product-accordion-content">
-                            <div class="showroom-list showroom-list--accordion">
-                              {%- if block.settings.showroom_1_name != blank -%}
-                              <div class="showroom-item">
-                                  <a href="{{ block.settings.showroom_1_map_link }}" target="_blank" rel="noopener" class="showroom-address">
-                                    <strong>{{ block.settings.showroom_1_name }}</strong><br>
-                                    {{ block.settings.showroom_1_address }}
-                                  </a>
-                                  <a class="phone-link" href="tel:{{ block.settings.showroom_1_phone | remove: ' ' }}">{{ block.settings.showroom_1_phone }}</a>
-                              </div>
-                              {%- endif -%}
-                              {%- if block.settings.showroom_2_name != blank -%}
-                              <div class="showroom-item">
-                                  <a href="{{ block.settings.showroom_2_map_link }}" target="_blank" rel="noopener" class="showroom-address">
-                                    <strong>{{ block.settings.showroom_2_name }}</strong><br>
-                                    {{ block.settings.showroom_2_address }}
-                                </a>
-                                  <a class="phone-link" href="tel:{{ block.settings.showroom_2_phone | remove: ' ' }}">{{ block.settings.showroom_2_phone }}</a>
-                              </div>
-                              {%- endif -%}
-                              {%- if block.settings.showroom_3_name != blank -%}
-                              <div class="showroom-item">
-                                  <a href="{{ block.settings.showroom_3_map_link }}" target="_blank" rel="noopener" class="showroom-address">
-                                    <strong>{{ block.settings.showroom_3_name }}</strong><br>
-                                    {{ block.settings.showroom_3_address }}
-                                </a>
-                                  <a class="phone-link" href="tel:{{ block.settings.showroom_3_phone | remove: ' ' }}">{{ block.settings.showroom_3_phone }}</a>
-                              </div>
-                              {%- endif -%}
-                            </div>
-                          </div>
-                        </details>
+                        {%- comment -%} Showroom dropdown block disabled - using hardcoded showroom info instead {%- endcomment -%}
                       {%- when 'service_grid' -%}
                         {%- liquid
                           assign services_count = 0
@@ -671,56 +645,17 @@
                     </details>
 
                     <!-- Store System Accordion -->
-                    <details class="product-accordion product-accordion--styled">
-                      <summary>
-                        <span>Hệ thống cửa hàng</span>
-                        <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      </summary>
-                      <div class="product-accordion-content">
-                        <div class="showroom-list">
-                          <div class="showroom-item">
-                            <strong>Showroom 1</strong><br>
-                            <span>Địa chỉ showroom</span><br>
-                            <a href="tel:0964777910">0964777910</a>
-                          </div>
-                          <div class="showroom-item">
-                            <strong>Showroom 2</strong><br>
-                            <span>Địa chỉ showroom</span><br>
-                            <a href="tel:0964777910">0964777910</a>
-                          </div>
-                          <div class="showroom-item">
-                            <strong>Showroom 3</strong><br>
-                            <span>Địa chỉ showroom</span><br>
-                            <a href="tel:0964777940">0964777940</a>
-                          </div>
+                    {%- if section.settings.store_system_content != blank -%}
+                      <details class="product-accordion product-accordion--styled">
+                        <summary>
+                          <span>Hệ thống cửa hàng</span>
+                          <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
+                        <div class="product-accordion-content rte">
+                          {{ section.settings.store_system_content }}
                         </div>
-                      </div>
-                    </details>
-
-                    <!-- Reviews Accordion -->
-                    <details class="product-accordion product-accordion--styled">
-                      <summary>
-                        <span>Đánh giá</span>
-                        <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      </summary>
-                      <div class="product-accordion-content">
-                        <div class="product-reviews-summary">
-                          <div class="product-rating">
-                            <div class="stars">
-                              <span class="star">★</span>
-                              <span class="star">★</span>
-                              <span class="star">★</span>
-                              <span class="star">★</span>
-                              <span class="star">★</span>
-                            </div>
-                            <span class="rating-value">4.8</span>
-                          </div>
-                          <div class="reviews-count">
-                            <span class="reviews-number">(2025 đánh giá)</span>
-                          </div>
-                        </div>
-                      </div>
-                    </details>
+                      </details>
+                    {%- endif -%}
                   </div>
                 </div>
 
@@ -1756,59 +1691,22 @@ document.addEventListener('DOMContentLoaded', () => {
                               <span>Hệ thống cửa hàng</span>
                               <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </summary>
-                            <div class="product-accordion-content">
+                            <div class="product-accordion-content rte">
                               <div class="showroom-list">
-                                {%- if section.settings.showroom_1_name != blank -%}
                                 <div class="showroom-item">
-                                  <a href="{{ section.settings.showroom_1_map_link | default: '#' }}" target="_blank" rel="noopener" class="showroom-address">
-                                    <strong>{{ section.settings.showroom_1_name }}</strong><br>
-                                    {{ section.settings.showroom_1_address }}
-                                  </a>
-                                  <a class="phone-link" href="tel:{{ section.settings.showroom_1_phone | remove: ' ' }}">{{ section.settings.showroom_1_phone }}</a>
+                                  <strong>Q.2, TP.HCM:</strong><br>
+                                  <span>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông</span><br>
+                                  <a href="tel:0964777960">0964777960</a>
                                 </div>
-                                {%- endif -%}
-                                {%- if section.settings.showroom_2_name != blank -%}
                                 <div class="showroom-item">
-                                  <a href="{{ section.settings.showroom_2_map_link | default: '#' }}" target="_blank" rel="noopener" class="showroom-address">
-                                    <strong>{{ section.settings.showroom_2_name }}</strong><br>
-                                    {{ section.settings.showroom_2_address }}
-                                  </a>
-                                  <a class="phone-link" href="tel:{{ section.settings.showroom_2_phone | remove: ' ' }}">{{ section.settings.showroom_2_phone }}</a>
+                                  <strong>Q.3, TP.HCM:</strong><br>
+                                  <span>283A Hai Bà Trưng, Phường Xuân Hoà</span><br>
+                                  <a href="tel:0964777910">0964777910</a>
                                 </div>
-                                {%- endif -%}
-                                {%- if section.settings.showroom_3_name != blank -%}
                                 <div class="showroom-item">
-                                  <a href="{{ section.settings.showroom_3_map_link | default: '#' }}" target="_blank" rel="noopener" class="showroom-address">
-                                    <strong>{{ section.settings.showroom_3_name }}</strong><br>
-                                    {{ section.settings.showroom_3_address }}
-                                  </a>
-                                  <a class="phone-link" href="tel:{{ section.settings.showroom_3_phone | remove: ' ' }}">{{ section.settings.showroom_3_phone }}</a>
-                                </div>
-                                {%- endif -%}
-                              </div>
-                            </div>
-                          </details>
-
-                          <!-- Reviews Accordion -->
-                          <details class="product-accordion product-accordion--styled">
-                            <summary>
-                              <span>Đánh giá</span>
-                              <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            </summary>
-                            <div class="product-accordion-content">
-                              <div class="product-reviews-summary">
-                                <div class="product-rating">
-                                  <div class="stars">
-                                    <span class="star">★</span>
-                                    <span class="star">★</span>
-                                    <span class="star">★</span>
-                                    <span class="star">★</span>
-                                    <span class="star">★</span>
-                                  </div>
-                                  <span class="rating-value">{{ section.settings.review_rating | default: '4.8' }}</span>
-                                </div>
-                                <div class="reviews-count">
-                                  <span class="reviews-number">({{ section.settings.review_count | default: '2025 đánh giá' }})</span>
+                                  <strong>Q. Cầu Giấy, HN:</strong><br>
+                                  <span>228 Cầu Giấy, Quan Hoa</span><br>
+                                  <a href="tel:0964777940">0964777940</a>
                                 </div>
                               </div>
                             </div>
@@ -4907,6 +4805,73 @@ document.addEventListener('shopify:section:load', function(event) {
 });
 </script>
 
+{% style %}
+  /* Showroom List Styling */
+  .showroom-list {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .showroom-item {
+    margin-bottom: 20px;
+    padding: 0;
+    line-height: 1.5;
+  }
+
+  .showroom-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .showroom-item strong {
+    font-weight: 600;
+    color: #1C2C58;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .showroom-item span {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+  }
+
+  .showroom-item a {
+    color: #1C2C58;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .showroom-item a:hover {
+    text-decoration: underline;
+  }
+
+  /* Store System Accordion Content Styling */
+  .product-accordion-content p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+
+  .product-accordion-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .product-accordion-content strong {
+    font-weight: 600;
+    color: #1C2C58;
+  }
+
+  .product-accordion-content a {
+    color: #1C2C58;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .product-accordion-content a:hover {
+    text-decoration: underline;
+  }
+{% endstyle %}
+
 {% schema %}
 {
   "name": "Product Bundle",
@@ -5150,6 +5115,13 @@ document.addEventListener('shopify:section:load', function(event) {
       "id": "enable_sticky_add_to_cart",
       "label": "Enable sticky add to cart",
       "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "store_system_content",
+      "label": "Hệ thống cửa hàng",
+      "info": "Nhập thông tin hệ thống cửa hàng. Có thể sử dụng HTML và links.",
+      "default": "<p><strong>Q.2, TP.HCM:</strong><br>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br><a href=\"tel:0964777960\">0964777960</a></p><p><strong>Q.3, TP.HCM:</strong><br>283A Hai Bà Trưng, Phường Xuân Hoà<br><a href=\"tel:0964777910\">0964777910</a></p><p><strong>Q. Cầu Giấy, HN:</strong><br>228 Cầu Giấy, Quan Hoa<br><a href=\"tel:0964777940\">0964777940</a></p>"
     },
     {
       "type": "checkbox",

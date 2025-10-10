@@ -15,6 +15,11 @@
           {%- endif -%}
         </div>
         <div class="section-navigation desktop-nav">
+          {%- if section.settings.show_desktop_view_all and section.settings.desktop_view_all_url != blank -%}
+            <a href="{{ section.settings.desktop_view_all_url }}" class="desktop-view-all-link">
+              {{ section.settings.desktop_view_all_text | default: 'Xem tất cả' }}
+            </a>
+          {%- endif -%}
           <button class="nav-arrow nav-arrow--prev" aria-label="Previous">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -191,6 +196,8 @@
   /* Desktop Navigation */
   [data-section-type="combo-bedroom"] .desktop-nav {
     display: flex;
+    align-items: center;
+    gap: 10px;
   }
   
   /* Mobile Navigation */
@@ -201,10 +208,10 @@
   [data-section-type="combo-bedroom"] .nav-arrow {
     width: 40px;
     height: 40px;
-    border: 1px solid #E5E7EB;
+    {% comment %} border: 1px solid; {% endcomment %}
     border-radius: 50%;
-    background: #fff;
-    color: #1C2C58;
+    background: #FFF9E5;
+    color: black;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -213,7 +220,7 @@
   }
   
   [data-section-type="combo-bedroom"] .nav-arrow:hover {
-    background: #1C2C58;
+    background: #FFD35B;
     color: #fff;
     border-color: #1C2C58;
   }
@@ -242,6 +249,22 @@
   [data-section-type="combo-bedroom"] .view-all-btn:hover {
     opacity: 0.7;
     text-decoration: underline;
+  }
+
+  /* Desktop View All Link Styles */
+  [data-section-type="combo-bedroom"] .desktop-view-all-link {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #1A1A1A;
+    text-decoration: underline;
+    margin-right: 20px;
+    line-height: 1;
+    transition: color 0.3s ease;
+  }
+  
+  [data-section-type="combo-bedroom"] .desktop-view-all-link:hover {
+    color: #000;
   }
 
   /* Carousel Styles */
@@ -584,6 +607,10 @@
       font-size: 14px !important;
       padding: 10px 16px !important;
     }
+    
+    [data-section-type="combo-bedroom"] .price {
+      font-size: 14px !important;
+    }
   }
   
 </style>
@@ -712,6 +739,30 @@
       "id": "description_color",
       "label": "Description Color",
       "default": "#666"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Navigation Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_desktop_view_all",
+      "label": "Show 'View All' link on desktop",
+      "default": false,
+      "info": "When enabled, shows 'View All' link next to navigation arrows on desktop"
+    },
+    {
+      "type": "text",
+      "id": "desktop_view_all_text",
+      "label": "Desktop 'View All' link text",
+      "default": "Xem tất cả",
+      "info": "Text displayed on the desktop 'View All' link"
+    },
+    {
+      "type": "url",
+      "id": "desktop_view_all_url",
+      "label": "Desktop 'View All' link destination",
+      "info": "URL where the desktop 'View All' link should link to"
     },
     {
       "type": "header",

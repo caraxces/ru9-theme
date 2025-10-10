@@ -768,10 +768,11 @@
         // Update current price
         const currentPriceEl = element.querySelector('.current-price');
         if (currentPriceEl) {
-          currentPriceEl.textContent = price;
+          // Use innerHTML to support HTML formatting (like <span class='m-symbol'>)
+          currentPriceEl.innerHTML = price;
         } else {
           // Fallback for old structure
-          element.textContent = price;
+          element.innerHTML = price;
         }
       });
     }
@@ -784,7 +785,8 @@
         if (originalPriceEl) {
           if (compareAtPrice && compareAtPrice > currentPrice) {
             const formattedPrice = this.formatMoney(compareAtPrice);
-            originalPriceEl.textContent = formattedPrice;
+            // Use innerHTML to support HTML formatting (like <span class='m-symbol'>)
+            originalPriceEl.innerHTML = formattedPrice;
             originalPriceEl.style.display = 'block';
           } else {
             originalPriceEl.style.display = 'none';
@@ -799,7 +801,8 @@
         if (mobileOriginalPriceEl) {
           if (compareAtPrice && compareAtPrice > currentPrice) {
             const formattedPrice = this.formatMoney(compareAtPrice);
-            mobileOriginalPriceEl.textContent = formattedPrice;
+            // Use innerHTML to support HTML formatting (like <span class='m-symbol'>)
+            mobileOriginalPriceEl.innerHTML = formattedPrice;
             mobileOriginalPriceEl.style.display = 'block';
           } else {
             mobileOriginalPriceEl.style.display = 'none';
@@ -809,11 +812,20 @@
     }
 
     formatMoney(cents) {
-      // Simple money formatting - you may need to adjust based on your theme's money format
-      return new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-      }).format(cents / 100);
+      // Use Shopify's theme money format if available
+      if (typeof theme !== 'undefined' && theme.Currency && theme.Currency.formatMoney) {
+        return theme.Currency.formatMoney(cents, theme.moneyFormat);
+      }
+      
+      // Fallback: Match theme's money format with m-symbol span
+      // Format: "X.XXX.XXX <span class='m-symbol'>VNĐ</span>"
+      const amount = cents / 100;
+      const formatted = new Intl.NumberFormat('vi-VN', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(amount);
+      
+      return formatted + " <span class='m-symbol'>VNĐ</span>";
     }
 
     renderAnchorLink() {

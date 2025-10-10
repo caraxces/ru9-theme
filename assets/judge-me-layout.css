@@ -7,6 +7,19 @@
 */
 
 /* ==========================================================================
+   #FORCE HIGH-QUALITY IMAGE RENDERING
+   ========================================================================== */
+
+/* Force high-quality image rendering globally for Judge.me images */
+.jdgm-rev__pic-img,
+.jdgm-rev__pic-link img {
+  image-rendering: -webkit-optimize-contrast !important;
+  image-rendering: crisp-edges !important;
+  -webkit-filter: none !important;
+  filter: contrast(1.02) !important;
+}
+
+/* ==========================================================================
    #RESET & WIDGET CONTAINER
    ========================================================================== */
 .jdgm-widget:not(.jdgm-medals-wrapper) .jdgm-medals-wrapper{
@@ -338,13 +351,14 @@
     border: none !important;
     image-rendering: -webkit-optimize-contrast !important;
     image-rendering: crisp-edges !important;
-    image-rendering: pixelated !important;
     -webkit-backface-visibility: hidden !important;
     -webkit-transform: translateZ(0) !important;
     transform: translateZ(0) !important;
     backface-visibility: hidden !important;
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale !important;
+    filter: contrast(1.05) !important;
+    -webkit-filter: none !important;
 }
 
 /* 2. RIGHT COLUMN (Content Wrapper created by JS) */
@@ -572,9 +586,9 @@
         max-width: 120px !important;
         min-height: 120px !important;
         max-height: 120px !important;
-        /* Better image rendering for quality */
+        /* Enhanced image rendering for maximum quality */
         image-rendering: -webkit-optimize-contrast !important;
-        image-rendering: auto !important;
+        image-rendering: crisp-edges !important;
         -webkit-backface-visibility: hidden !important;
         -webkit-transform: translateZ(0) scale(1) !important;
         transform: translateZ(0) scale(1) !important;
@@ -582,6 +596,8 @@
         -webkit-font-smoothing: subpixel-antialiased !important;
         -moz-osx-font-smoothing: auto !important;
         will-change: transform !important;
+        filter: contrast(1.05) !important;
+        -webkit-filter: none !important;
     }
 
     /* Right column next to image - ULTRA STRONG override */

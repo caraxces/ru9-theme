@@ -297,6 +297,9 @@
     display: flex;
     gap: 2%;
     transition: transform 0.3s ease;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
   [data-section-id="{{ section.id }}"] .product-card {
     display: none; /* Hidden by default, shown by JS */
@@ -446,7 +449,7 @@
   }
   [data-section-id="{{ section.id }}"] .price {
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     color: #1A1A1A;
   }
@@ -464,6 +467,25 @@
     color: #999;
     text-decoration: line-through;
     width: 100%;
+  }
+
+  /* Custom scrollbar for product carousel - Desktop only */
+  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-track {
+    background: #F0F1EF;
+    border-radius: 100px;
+  }
+  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-thumb {
+    background: #234085;
+    border-radius: 100px;
+  }
+  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b;
+  }
+  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-button {
+    display: none;
   }
   
   /* Large screens - maintain fixed padding */
@@ -555,6 +577,16 @@
       grid-auto-rows: auto !important;
       gap: 16px !important;
       transform: none !important;
+      overflow-x: hidden !important;
+    }
+    
+    /* Hide scrollbar on mobile */
+    [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar {
+      display: none !important;
+    }
+    [data-section-id="{{ section.id }}"] .product-cards-container {
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
     }
     [data-section-id="{{ section.id }}"] .product-card {
       width: 100% !important;
@@ -590,7 +622,7 @@
     [data-section-id="{{ section.id }}"] .price {
       color: #000 !important;
       font-family: "Be Vietnam Pro", sans-serif !important;
-      font-size: 13px !important;
+      font-size: 14px !important;
       font-style: normal !important;
       font-weight: 600 !important;
       line-height: 27px !important; /* 207.692% */
