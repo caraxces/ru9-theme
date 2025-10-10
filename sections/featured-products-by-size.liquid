@@ -96,6 +96,7 @@
             {%- for size in unique_sizes -%}
               {%- if size != blank -%}
                 {%- assign short_size = size | split: '-' | first | strip | handle -%}
+                {%- assign displayed_products_for_size = '' -%}
                 
                 {%- for product in source_collection.products -%}
                   {%- liquid
@@ -125,6 +126,9 @@
                   -%}
 
                   {%- if product_size != blank -%}
+                    {%- assign product_id_str = product.id | append: ',' -%}
+                    {%- unless displayed_products_for_size contains product_id_str -%}
+                      {%- assign displayed_products_for_size = displayed_products_for_size | append: product_id_str -%}
                 <a href="{{ product.url }}" class="product-card" data-size="{{ product_size }}">
                   <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}">
                     {%- if section.settings.product_label != blank -%}
@@ -186,6 +190,7 @@
                     </div>
                   </div>
                 </a>
+                    {%- endunless -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- endif -%}
@@ -300,6 +305,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    padding-bottom: 20  px;
   }
   [data-section-id="{{ section.id }}"] .product-card {
     display: none; /* Hidden by default, shown by JS */
@@ -684,6 +690,25 @@
     
     let carousel = null;
 
+    // Function to remove duplicate products based on product URL
+    function removeDuplicateProducts() {
+      const seenUrls = new Set();
+      const cardsArray = Array.from(allProductCards);
+      
+      cardsArray.forEach(card => {
+        const productUrl = card.getAttribute('href');
+        if (seenUrls.has(productUrl)) {
+          // Duplicate found - remove it
+          card.remove();
+        } else {
+          seenUrls.add(productUrl);
+        }
+      });
+    }
+
+    // Remove duplicates on page load
+    removeDuplicateProducts();
+
     // --- Drag-to-scroll for tabs ---
     const tabsContainer = sectionContainer.querySelector('.category-tabs');
     if (tabsContainer) {
@@ -707,9 +732,11 @@
     function initializeCarousel() {
       let currentIndex = 0;
       let isDown = false;
+      let isDragging = false;
       let startX;
       let initialTranslateX;
       let walk = 0;
+      const dragThreshold = 5;
 
       function getVisibleCards() {
           return Array.from(allProductCards).filter(card => card.style.display !== 'none');
@@ -772,13 +799,8 @@
       function dragStart(e) {
         // Không cho phép drag trên mobile
         if (window.innerWidth <= 768) return;
-        // Don't start drag if clicking on product card
-        if (e.target.closest('.product-card')) {
-          isDown = false;
-          return;
-        }
         isDown = true;
-        carouselContainer.classList.add('grabbing');
+        isDragging = false;
         startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
         productCardsContainer.style.transition = 'none';
         initialTranslateX = getTranslateX();
@@ -791,21 +813,28 @@
 
       function dragMove(e) {
         if (!isDown) return;
-        e.preventDefault();
         const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
         walk = currentX - startX;
-        productCardsContainer.style.transform = `translateX(${initialTranslateX + walk}px)`;
+        
+        if (Math.abs(walk) > dragThreshold) {
+          isDragging = true;
+          carouselContainer.classList.add('grabbing');
+          e.preventDefault();
+          productCardsContainer.style.transform = `translateX(${initialTranslateX + walk}px)`;
+        }
       }
       
 
       function dragEnd() {
         if (!isDown) return;
+        const wasDragging = isDragging;
         isDown = false;
+        isDragging = false;
         carouselContainer.classList.remove('grabbing');
         window.removeEventListener('touchmove', dragMove);
         window.removeEventListener('touchend', dragEnd);
         
-        if (Math.abs(walk) > 10) { 
+        if (wasDragging && Math.abs(walk) > dragThreshold) { 
             const visibleCards = getVisibleCards();
             if (visibleCards.length === 0) return;
             const itemWidth = visibleCards[0].offsetWidth;
@@ -828,11 +857,14 @@
       carouselContainer.addEventListener('mouseleave', dragEnd);
       carouselContainer.addEventListener('touchstart', dragStart);
 
-      // Handle click events for product cards
+      // Handle click events for product cards - block if was dragging
       allProductCards.forEach(card => {
           card.addEventListener('click', (e) => {
-              // Allow click to proceed normally to product page
-              // The drag logic above already prevents drag on product cards
+              if (isDragging) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+              }
               return true;
           });
       });

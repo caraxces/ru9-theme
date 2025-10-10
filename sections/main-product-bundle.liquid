@@ -148,7 +148,7 @@
                             assign rating_floor = rating_floor | plus: 1
                           endif
                         -%}
-                        <div class="stars">
+                      <div class="stars">
                           {%- for i in (1..5) -%}
                             {%- liquid
                               assign next_star = rating_floor | plus: 1
@@ -165,7 +165,7 @@
                               <span class="star star--empty">☆</span>
                             {%- endif -%}
                           {%- endfor -%}
-                        </div>
+                      </div>
                         <span class="rating-value">{{ review_rating | round: 1 }}</span>
                       {%- else -%}
                         <div class="stars">
@@ -174,13 +174,13 @@
                           <span class="star star--filled">★</span>
                           <span class="star star--filled">★</span>
                           <span class="star star--filled">★</span>
-                        </div>
+                    </div>
                       {%- endif -%}
                     </div>
                     {%- if has_reviews and review_count > 0 -%}
-                      <div class="reviews-count">
+                    <div class="reviews-count">
                         <span class="reviews-number">({{ review_count }} đánh giá)</span>
-                      </div>
+                    </div>
                     {%- endif -%}
                   </div>
 
@@ -322,15 +322,15 @@
 
                       <!-- Store System Accordion -->
                       {%- if section.settings.store_system_content != blank -%}
-                        <details class="product-accordion product-accordion--styled">
-                          <summary>
-                            <span>Hệ thống cửa hàng</span>
-                            <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                          </summary>
+                      <details class="product-accordion product-accordion--styled">
+                        <summary>
+                          <span>Hệ thống cửa hàng</span>
+                          <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </summary>
                           <div class="product-accordion-content rte">
                             {{ section.settings.store_system_content }}
-                          </div>
-                        </details>
+                        </div>
+                      </details>
                       {%- endif -%}
                     </div>
                   </div>
@@ -646,15 +646,15 @@
 
                     <!-- Store System Accordion -->
                     {%- if section.settings.store_system_content != blank -%}
-                      <details class="product-accordion product-accordion--styled">
-                        <summary>
-                          <span>Hệ thống cửa hàng</span>
-                          <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </summary>
+                    <details class="product-accordion product-accordion--styled">
+                      <summary>
+                        <span>Hệ thống cửa hàng</span>
+                        <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </summary>
                         <div class="product-accordion-content rte">
                           {{ section.settings.store_system_content }}
-                        </div>
-                      </details>
+                      </div>
+                    </details>
                     {%- endif -%}
                   </div>
                 </div>
@@ -1686,32 +1686,18 @@ document.addEventListener('DOMContentLoaded', () => {
                           </details>
 
                           <!-- Store System Accordion -->
+                          {%- if section.settings.store_system_content != blank -%}
                           <details class="product-accordion product-accordion--styled">
                             <summary>
                               <span>Hệ thống cửa hàng</span>
                               <svg class="icon-toggle" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L9 8.5L17 1.5" stroke="#1C2C58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </summary>
-                            <div class="product-accordion-content rte">
-                              <div class="showroom-list">
-                                <div class="showroom-item">
-                                  <strong>Q.2, TP.HCM:</strong><br>
-                                  <span>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông</span><br>
-                                  <a href="tel:0964777960">0964777960</a>
+                              <div class="product-accordion-content rte">
+                                {{ section.settings.store_system_content }}
                                 </div>
-                                <div class="showroom-item">
-                                  <strong>Q.3, TP.HCM:</strong><br>
-                                  <span>283A Hai Bà Trưng, Phường Xuân Hoà</span><br>
-                                  <a href="tel:0964777910">0964777910</a>
+                            </details>
+                                {%- endif -%}
                                 </div>
-                                <div class="showroom-item">
-                                  <strong>Q. Cầu Giấy, HN:</strong><br>
-                                  <span>228 Cầu Giấy, Quan Hoa</span><br>
-                                  <a href="tel:0964777940">0964777940</a>
-                                </div>
-                              </div>
-                            </div>
-                          </details>
-                        </div>
                       </div>
 
                       <!-- Service Grid -->
@@ -4249,40 +4235,88 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 /**
- * Advanced Sticky Column Logic ("Koala" style)
- * This script dynamically makes the shorter of the two product columns sticky.
+ * Simple Fixed-Width Sticky for Step 1
  */
-function initAdvancedSticky(productSection) {
+function initStep1Sticky(productSection) {
   if (!productSection) return;
+  if (window.innerWidth < 991) return; // Desktop only
 
   const gridContainer = productSection.querySelector('.grid');
   const imageColumn = productSection.querySelector('.product-grid__images');
   const infoColumn = productSection.querySelector('.product-grid__info');
-  const infoColumnInner = infoColumn ? infoColumn.querySelector('.product-info-inner') : null;
-  const imageColumnInner = imageColumn ? imageColumn.querySelector('.product-column-content') : null;
-  const interactiveElements = productSection.querySelectorAll('details.product-accordion, .size-guide-text-trigger');
 
-  if (!gridContainer || !imageColumn || !infoColumn || !infoColumnInner || !imageColumnInner) {
-    return;
-  }
+  if (!gridContainer || !imageColumn || !infoColumn) return;
 
-  let scrollHandler = () => {};
+  // Lock column widths immediately to prevent layout shifts
+  const setupFixedWidths = () => {
+    if (window.innerWidth < 991) return;
+
+    requestAnimationFrame(() => {
+      const imageColWidth = imageColumn.offsetWidth;
+      const infoColWidth = infoColumn.offsetWidth;
+      
+      // Lock both columns at their current width
+      imageColumn.style.width = `${imageColWidth}px`;
+      imageColumn.style.minWidth = `${imageColWidth}px`;
+      imageColumn.style.maxWidth = `${imageColWidth}px`;
+        imageColumn.style.flexShrink = '0';
+      
+      infoColumn.style.width = `${infoColWidth}px`;
+      infoColumn.style.minWidth = `${infoColWidth}px`;
+      infoColumn.style.maxWidth = `${infoColWidth}px`;
+        infoColumn.style.flexShrink = '0';
+      
+      // Make image column sticky
+      imageColumn.style.position = 'sticky';
+      imageColumn.style.top = '120px';
+      imageColumn.style.alignSelf = 'start';
+      
+      console.log('✅ Step 1 - Locked widths:', {
+        imageWidth: imageColWidth,
+        infoWidth: infoColWidth
+      });
+    });
+  };
   
-  const setupStickyColumns = () => {
-    // Clean up styles from previous calculations before re-running
-    window.removeEventListener('scroll', scrollHandler);
-    imageColumnInner.style.cssText = '';
-    infoColumnInner.style.cssText = '';
-    imageColumn.style.height = '';
-    infoColumn.style.height = '';
-    imageColumn.style.position = '';
-    infoColumn.style.position = '';
+  setupFixedWidths();
+  
+  // Re-run on window resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      setupFixedWidths();
+    }, 250);
+  });
+  
+  // Re-run when accordions toggle
+  const accordions = productSection.querySelectorAll('details.product-accordion');
+  accordions.forEach(accordion => {
+    accordion.addEventListener('toggle', () => {
+      setTimeout(setupFixedWidths, 10);
+    });
+  });
+}
 
-    // This logic is for desktop viewports only
-    if (window.innerWidth < 991) {
-      return;
+// Initialize sticky for Step 1 only
+const step1Section = document.querySelector('.bundle-step-1');
+if (step1Section) {
+  initStep1Sticky(step1Section);
+}
+
+// Re-initialize if section reloaded
+document.addEventListener('shopify:section:load', function(event) {
+  if (event.detail.sectionId === '{{ section.id }}') {
+    const reloadedStep1 = document.querySelector('.bundle-step-1');
+    if (reloadedStep1) {
+      initStep1Sticky(reloadedStep1);
     }
+  }
+});
 
+// Initialize sticky columns for step 2 - KEEP THIS
+(function() {
+  if (false) {
     requestAnimationFrame(() => {
         // Measure the inner content elements, not the grid containers which are equal height.
         const imageColHeight = imageColumnInner.offsetHeight;
@@ -4365,229 +4399,6 @@ function initAdvancedSticky(productSection) {
           if (computedWidth && computedWidth > 0) {
             imageColOriginalWidth = computedWidth; // This already respects min(765px, 50vw)
             console.log('Using responsive carousel width:', computedWidth);
-          } else {
-            // Fallback: try to get width from the main image
-            const mainImage = carouselContainer.querySelector('.product-main-slide img') || 
-                             carouselContainer.querySelector('.product__photo img');
-            if (mainImage) {
-              const imageWidth = mainImage.naturalWidth || mainImage.offsetWidth;
-              imageColOriginalWidth = Math.min(imageWidth, 765); // Apply reasonable max
-            } else {
-              // Last fallback: use container width with reasonable max
-              imageColOriginalWidth = Math.min(imageColOriginalWidth, 765);
-            }
-          }
-        }
-            
-        // Exit if columns are of similar height, as no sticky effect is needed.
-        if (Math.abs(imageColHeight - infoColHeight) < 100) {
-            return;
-        }
-
-        const shortCol = imageColHeight > infoColHeight ? infoColumn : imageColumn;
-        const shortColInner = imageColHeight > infoColHeight ? infoColumnInner : imageColumnInner;
-        const shortColOriginalWidth = imageColHeight > infoColHeight ? infoColOriginalWidth : imageColOriginalWidth;
-        
-        // **FIX**: Set position relative on the container of the element that will be docked.
-        // This makes it the positioning context for its absolutely positioned child.
-        shortCol.style.position = 'relative';
-        // Set an explicit height on the short column's container to prevent the grid from collapsing
-        // when its inner element is taken out of the document flow with `position: fixed`.
-        shortCol.style.height = `${shortCol.offsetHeight}px`;
-
-        const headerOffset = 120; // Adjust if your sticky header's height changes
-
-        scrollHandler = () => {
-            const scrollY = window.scrollY;
-            const gridRect = gridContainer.getBoundingClientRect();
-            const shortColInnerHeight = shortColInner.offsetHeight;
-            const gridAbsoluteTop = gridRect.top + scrollY;
-            const startPoint = gridAbsoluteTop - headerOffset;
-            const stopPoint = gridAbsoluteTop + gridRect.height - shortColInnerHeight - headerOffset;
-            const buffer = 2; // A small buffer to prevent jittering at the thresholds
-            
-            if (scrollY > startPoint + buffer && scrollY < stopPoint - buffer) {
-                // State 1: STICKY. The element is fixed relative to the viewport.
-                shortColInner.style.position = 'fixed';
-                shortColInner.style.top = `${headerOffset}px`;
-                shortColInner.style.bottom = 'auto';
-                // Use the locked width - no calculations needed
-                shortColInner.style.width = `${shortColOriginalWidth}px`;
-                shortColInner.style.maxWidth = `${shortColOriginalWidth}px`;
-            } else if (scrollY >= stopPoint - buffer) {
-                // State 2: DOCKED. The element is positioned absolutely to the bottom of its parent container.
-                shortColInner.style.position = 'absolute';
-                shortColInner.style.top = 'auto';
-                shortColInner.style.bottom = '0px';
-                // Use the locked width - no calculations needed
-                shortColInner.style.width = `${shortColOriginalWidth}px`;
-                shortColInner.style.maxWidth = `${shortColOriginalWidth}px`;
-            } else {
-                // State 3: DEFAULT. The element is in its normal static position.
-                shortColInner.style.position = '';
-                shortColInner.style.top = '';
-                shortColInner.style.bottom = '';
-                shortColInner.style.width = '';
-            }
-        };
-        
-        window.addEventListener('scroll', scrollHandler, { passive: true });
-        scrollHandler(); // Run once immediately on setup to get the initial state right
-    });
-  };
-  
-  const debounce = (func, delay) => {
-      let timeout;
-      return function(...args) {
-          clearTimeout(timeout);
-          timeout = setTimeout(() => func.apply(this, args), delay);
-      };
-  };
-
-  const debouncedSetup = debounce(setupStickyColumns, 250);
-
-  // --- Event Listeners ---
-
-  // Run on initial load when all assets are ready
-  window.addEventListener('load', debouncedSetup);
-  // A fallback for DOMContentLoaded in case `load` is slow, e.g., with deferred scripts
-  document.addEventListener('DOMContentLoaded', () => setTimeout(debouncedSetup, 500));
-  
-  // Re-run when the browser is resized
-  window.addEventListener('resize', debouncedSetup);
-
-  // Re-run whenever an interactive element (accordion/dropdown) is toggled
-  interactiveElements.forEach(el => {
-    const eventName = el.tagName.toLowerCase() === 'details' ? 'toggle' : 'click';
-    el.addEventListener(eventName, debouncedSetup);
-  });
-}
-
-// Initialize the script for the current section
-const currentProductSection = document.querySelector('#ProductSection-{{ section.id }}-{{ product.id }}');
-if (currentProductSection) {
-  initAdvancedSticky(currentProductSection);
-}
-
-// Re-initialize if the section is reloaded by the theme editor
-document.addEventListener('shopify:section:load', function(event) {
-  if (event.detail.sectionId === '{{ section.id }}') {
-    const reloadedSection = document.querySelector('#ProductSection-{{ section.id }}-{{ product.id }}');
-    if (reloadedSection) {
-      initAdvancedSticky(reloadedSection);
-    }
-  }
-});
-
-/**
- * Advanced Sticky Column Logic for Bundle Step 1
- * This script dynamically makes the shorter of the two product columns sticky.
- */
-function initBundleSticky(productSection) {
-  if (!productSection) return;
-
-  const gridContainer = productSection.querySelector('.grid');
-  const imageColumn = productSection.querySelector('.product-grid__images');
-  const infoColumn = productSection.querySelector('.product-grid__info');
-  const infoColumnInner = infoColumn ? infoColumn.querySelector('.product-info-inner') : null;
-  const imageColumnInner = imageColumn ? imageColumn.querySelector('.product-column-content') : null;
-  const interactiveElements = productSection.querySelectorAll('details.product-accordion, .size-guide-text-trigger');
-
-  if (!gridContainer || !imageColumn || !infoColumn || !infoColumnInner || !imageColumnInner) {
-    return;
-  }
-
-  let scrollHandler = () => {};
-  
-  const setupStickyColumns = () => {
-    // Clean up styles from previous calculations before re-running
-    window.removeEventListener('scroll', scrollHandler);
-    imageColumnInner.style.cssText = '';
-    infoColumnInner.style.cssText = '';
-    imageColumn.style.height = '';
-    infoColumn.style.height = '';
-    imageColumn.style.position = '';
-    infoColumn.style.position = '';
-
-    // This logic is for desktop viewports only
-    if (window.innerWidth < 991) {
-      return;
-    }
-
-    requestAnimationFrame(() => {
-        // Measure the inner content elements, not the grid containers which are equal height.
-        const imageColHeight = imageColumnInner.offsetHeight;
-        const infoColHeight = infoColumnInner.offsetHeight;
-        
-        // Store original widths to maintain consistent sizing during sticky states
-        let imageColOriginalWidth = imageColumnInner.offsetWidth;
-        const infoColOriginalWidth = infoColumnInner.offsetWidth;
-        
-        // LOCK THE WIDTHS FOREVER - This prevents any sizing changes during sticky scrolling
-        console.log('🔒 Locking image column width at:', imageColOriginalWidth);
-        console.log('🔒 Locking info column width at:', infoColOriginalWidth);
-        
-        // Lock the image column width immediately
-        imageColumn.style.width = `${imageColOriginalWidth}px`;
-        imageColumn.style.maxWidth = `${imageColOriginalWidth}px`;
-        imageColumn.style.minWidth = `${imageColOriginalWidth}px`;
-        imageColumn.style.flexShrink = '0';
-        imageColumn.style.flexGrow = '0';
-        
-        // Lock the info column width immediately  
-        infoColumn.style.width = `${infoColOriginalWidth}px`;
-        infoColumn.style.maxWidth = `${infoColOriginalWidth}px`;
-        infoColumn.style.minWidth = `${infoColOriginalWidth}px`;
-        infoColumn.style.flexShrink = '0';
-        infoColumn.style.flexGrow = '0';
-        
-        // LOCK THE PHOTOS CONTAINER WIDTH - This is the key fix!
-        const photosContainer = imageColumnInner.querySelector('.product__photos');
-        if (photosContainer) {
-          const photosWidth = photosContainer.offsetWidth;
-          console.log('🔒 Locking photos container width at:', photosWidth);
-          photosContainer.style.width = `${photosWidth}px`;
-          photosContainer.style.maxWidth = `${photosWidth}px`;
-          photosContainer.style.minWidth = `${photosWidth}px`;
-          photosContainer.style.flexShrink = '0';
-          photosContainer.style.flexGrow = '0';
-        }
-        
-        // LOCK THE SLIDESHOW CONTAINER WIDTH
-        const slideshowContainer = imageColumnInner.querySelector('.product-slideshow');
-        if (slideshowContainer) {
-          const slideshowWidth = slideshowContainer.offsetWidth;
-          console.log('🔒 Locking slideshow container width at:', slideshowWidth);
-          slideshowContainer.style.width = `${slideshowWidth}px`;
-          slideshowContainer.style.maxWidth = `${slideshowWidth}px`;
-          slideshowContainer.style.minWidth = `${slideshowWidth}px`;
-          slideshowContainer.style.flexShrink = '0';
-          slideshowContainer.style.flexGrow = '0';
-        }
-        
-        // LOCK THE MAIN PHOTOS CONTAINER WIDTH
-        const mainPhotosContainer = imageColumnInner.querySelector('.product__main-photos');
-        if (mainPhotosContainer) {
-          const mainPhotosWidth = mainPhotosContainer.offsetWidth;
-          console.log('🔒 Locking main photos container width at:', mainPhotosWidth);
-          mainPhotosContainer.style.width = `${mainPhotosWidth}px`;
-          mainPhotosContainer.style.maxWidth = `${mainPhotosWidth}px`;
-          mainPhotosContainer.style.minWidth = `${mainPhotosWidth}px`;
-          mainPhotosContainer.style.flexShrink = '0';
-          mainPhotosContainer.style.flexGrow = '0';
-        }
-        
-        // For carousel, get the actual rendered width from CSS computed styles
-        const carouselContainer = imageColumnInner.querySelector('.product__photos--below') || 
-                                 imageColumnInner.querySelector('.product-slideshow');
-        if (carouselContainer) {
-          // Get computed style to see the actual rendered width
-          const computedStyle = window.getComputedStyle(carouselContainer);
-          const computedWidth = parseFloat(computedStyle.width);
-          
-          // Use the actual computed width - this respects the responsive CSS max-width
-          if (computedWidth && computedWidth > 0) {
-            imageColOriginalWidth = computedWidth; // This already respects min(765px, 50vw)
           } else {
             // Fallback: try to get width from the main image
             const mainImage = carouselContainer.querySelector('.product-main-slide img') || 
@@ -4787,22 +4598,6 @@ function initializeStep2StickyColumns() {
   // Re-run when the browser is resized
   window.addEventListener('resize', debouncedSetup);
 }
-
-// Initialize the script for the current section
-const currentBundleSection = document.querySelector('#MainProductBundle-{{ section.id }}');
-if (currentBundleSection) {
-  initBundleSticky(currentBundleSection);
-}
-
-// Re-initialize if the section is reloaded by the theme editor
-document.addEventListener('shopify:section:load', function(event) {
-  if (event.detail.sectionId === '{{ section.id }}') {
-    const reloadedSection = document.querySelector('#MainProductBundle-{{ section.id }}');
-    if (reloadedSection) {
-      initBundleSticky(reloadedSection);
-    }
-  }
-});
 </script>
 
 {% style %}

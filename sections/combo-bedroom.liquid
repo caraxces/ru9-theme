@@ -452,7 +452,7 @@
   }
   [data-section-type="combo-bedroom"] .compare-price {
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 18px;
+    font-size: 14px;
     color: #999;
     text-decoration: line-through;
     width: 100%;
@@ -631,17 +631,14 @@
       if (productCardsContainer.children.length === 0) return;
 
       let isDown = false;
+      let isDragging = false;
       let startX;
       let scrollLeft;
+      const dragThreshold = 5;
 
       function dragStart(e) {
-        // Don't start drag if clicking on product card
-        if (e.target.closest('.product-card')) {
-          isDown = false;
-          return;
-        }
         isDown = true;
-        carouselContainer.classList.add('grabbing');
+        isDragging = false;
         startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
         scrollLeft = productCardsContainer.scrollLeft;
         if (e.type === 'touchstart') {
@@ -652,15 +649,22 @@
 
       function dragMove(e) {
         if (!isDown) return;
-        e.preventDefault();
         const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
         const walk = currentX - startX;
-        productCardsContainer.scrollLeft = scrollLeft - walk;
+        
+        if (Math.abs(walk) > dragThreshold) {
+          isDragging = true;
+          carouselContainer.classList.add('grabbing');
+          e.preventDefault();
+          productCardsContainer.scrollLeft = scrollLeft - walk;
+        }
       }
 
       function dragEnd() {
         if (!isDown) return;
+        const wasDragging = isDragging;
         isDown = false;
+        isDragging = false;
         carouselContainer.classList.remove('grabbing');
         window.removeEventListener('touchmove', dragMove);
         window.removeEventListener('touchend', dragEnd);
@@ -671,11 +675,14 @@
       productCardsContainer.addEventListener('mouseup', dragEnd);
       productCardsContainer.addEventListener('mouseleave', dragEnd);
 
-      // Handle click events for product cards
+      // Handle click events for product cards - block if was dragging
       productCardsContainer.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('click', (e) => {
-          // Allow click to proceed normally to product page
-          // The drag logic above already prevents drag on product cards
+          if (isDragging) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
           return true;
         });
       });

@@ -78,6 +78,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
+  }
+  
+  .dynamic--brand .collapsible-trigger--inline .collapsible-trigger__text {
+    flex: 1;
+    padding-right: 10px;
+  }
+  
+  .dynamic--brand .collapsible-trigger--inline .collapsible-trigger__icon {
+    flex-shrink: 0;
+    margin-left: 10px;
   }
   #readmore_faqs {
     line-height: 1;
@@ -108,7 +119,7 @@
   @media screen and (max-width: 768px) {
     .dynamic--brand .collapsible-trigger--inline .collapsible-trigger__icon {
       background: transparent;
-      margin-left: 2px;
+      margin-left: 15px;
     }
     .dynamic--brand .collapsible-trigger--inline {
       margin: 0;
@@ -117,6 +128,11 @@
       font-size: 18px;
       border-top: 1px solid;
       border-color: var(--colorBorder);
+      gap: 15px;
+    }
+    .dynamic--brand .collapsible-trigger--inline .collapsible-trigger__text {
+      padding-right: 15px;
+    }
       border-bottom: 0;
       border-radius: 0;
       padding-block: 20px;

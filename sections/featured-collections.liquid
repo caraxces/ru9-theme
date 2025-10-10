@@ -710,17 +710,14 @@
       if (productCards.length === 0) return;
 
       let isDown = false;
+      let isDragging = false;
       let startX;
       let scrollLeft;
+      const dragThreshold = 5;
 
       function dragStart(e) {
-        // Don't start drag if clicking on product card
-        if (e.target.closest('.product-card')) {
-          isDown = false;
-          return;
-        }
         isDown = true;
-        carouselContainer.classList.add('grabbing');
+        isDragging = false;
         startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
         scrollLeft = tabContent.scrollLeft;
         if (e.type === 'touchstart') {
@@ -731,15 +728,22 @@
 
       function dragMove(e) {
         if (!isDown) return;
-        e.preventDefault();
         const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
         const walk = currentX - startX;
-        tabContent.scrollLeft = scrollLeft - walk;
+        
+        if (Math.abs(walk) > dragThreshold) {
+          isDragging = true;
+          carouselContainer.classList.add('grabbing');
+          e.preventDefault();
+          tabContent.scrollLeft = scrollLeft - walk;
+        }
       }
 
       function dragEnd() {
         if (!isDown) return;
+        const wasDragging = isDragging;
         isDown = false;
+        isDragging = false;
         carouselContainer.classList.remove('grabbing');
         window.removeEventListener('touchmove', dragMove);
         window.removeEventListener('touchend', dragEnd);
@@ -750,20 +754,14 @@
       tabContent.addEventListener('mouseup', dragEnd);
       tabContent.addEventListener('mouseleave', dragEnd);
 
-      // Handle click events for product cards
+      // Handle click events for product cards - block if was dragging
       tabContent.querySelectorAll('.product-card').forEach(card => {
           card.addEventListener('click', (e) => {
-              // Allow click to proceed normally to product page
-              // The drag logic above already prevents drag on product cards
-              return true;
-          });
-      });
-
-      // Handle touch events for mobile
-      tabContent.querySelectorAll('.product-card').forEach(card => {
-          card.addEventListener('touchend', (e) => {
-              // Allow tap to proceed normally to product page
-              // The drag logic above already prevents drag on product cards
+              if (isDragging) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+              }
               return true;
           });
       });
