@@ -71,8 +71,9 @@
         "service_grid_aaTz8t": {
           "type": "service_grid",
           "settings": {
-            "text_1": "100 đêm ngủ thử",
-            "show_service_1": false,
+            "icon_1": "shopify://shop_images/ICON_THANH_TOAN_LINH_HO_T.png",
+            "text_1": "Thanh toán linh hoạt",
+            "show_service_1": true,
             "icon_2": "shopify://shop_images/Layer_1_4.svg",
             "text_2": "Miễn phí vận chuyển",
             "show_service_2": true,
@@ -80,7 +81,7 @@
             "text_3": "Bảo hành dài lâu",
             "show_service_3": true,
             "icon_4": "shopify://shop_images/Layer_1_6.svg",
-            "text_4": "Thanh toán linh hoạt",
+            "text_4": "Trả góp 0%",
             "show_service_4": true
           }
         }
@@ -139,7 +140,7 @@
           "type": "reason",
           "settings": {
             "image": "{{ product.metafields.custom.dynamic_image_3.value }}",
-            "title": "{{ product.metafields.custom.dynamic_title_2.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_3.value }}",
             "content": "<p>{{ product.metafields.custom.dynamic_description_3 | metafield_tag }}</p>"
           }
         }
@@ -151,7 +152,7 @@
       ],
       "name": "Reason to choice",
       "settings": {
-        "title": "Lý do bạn nên chọn chúng tôi"
+        "title": "Lý do bạn nên chọn sản phẩm"
       }
     },
     "product_hotspot_XzDEYy": {
@@ -822,6 +823,8 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget",
             "max_width": 1200
           }
         }

@@ -34,7 +34,7 @@
                   <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
-              <div class="toolbar__dropdown" style="position: absolute; top: 100%; left: 0; background: white; border: 1px solid #e5e5e5; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 200px; z-index: 1000; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease;">
+              <div class="toolbar__dropdown mobile-dropdown-up" style="position: absolute; top: 100%; left: 0; background: white; border: 1px solid #e5e5e5; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 200px; z-index: 9999; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease;">
                 <ul style="list-style: none; margin: 0; padding: 8px 0;">
                   {%- for link in toolbar_menu_1.links -%}
                     <li style="margin: 0;">
@@ -140,3 +140,133 @@
     </div>
   </div>
 </div>
+
+<style>
+  /* Mobile dropdown positioning - Force override inline styles */
+  @media (max-width: 768px) {
+    .toolbar__dropdown {
+      top: auto !important;
+      bottom: 100% !important;
+      transform: translateY(10px) !important;
+      z-index: 9999 !important;
+    }
+    
+    .toolbar__dropdown.show {
+      transform: translateY(0) !important;
+      z-index: 9999 !important;
+    }
+    
+    /* Force mobile positioning with higher specificity */
+    .toolbar__item--about .toolbar__dropdown {
+      top: auto !important;
+      bottom: 100% !important;
+      transform: translateY(10px) !important;
+    }
+    
+    .toolbar__item--about .toolbar__dropdown.show {
+      transform: translateY(0) !important;
+    }
+    
+    /* ULTRA FORCE - Override everything */
+    .toolbar__menu-wrapper .toolbar__dropdown {
+      top: auto !important;
+      bottom: 100% !important;
+      transform: translateY(10px) !important;
+    }
+    
+    .toolbar__menu-wrapper .toolbar__dropdown.show {
+      transform: translateY(0) !important;
+    }
+  }
+  
+  /* Ensure dropdown is always on top */
+  .toolbar__dropdown {
+    z-index: 9999 !important;
+  }
+  
+  /* NUCLEAR OPTION - Force mobile positioning with maximum specificity */
+  @media (max-width: 768px) {
+    div.toolbar__menu-wrapper div.toolbar__dropdown {
+      top: auto !important;
+      bottom: 100% !important;
+      transform: translateY(10px) !important;
+    }
+    
+    div.toolbar__menu-wrapper div.toolbar__dropdown.show {
+      transform: translateY(0) !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toolbarMenuTrigger = document.querySelector('.toolbar__menu-trigger');
+    const toolbarDropdown = document.querySelector('.toolbar__dropdown');
+    
+    if (toolbarMenuTrigger && toolbarDropdown) {
+      // Toggle dropdown on click
+      toolbarMenuTrigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = toolbarDropdown.classList.contains('show');
+        const isMobile = window.innerWidth <= 768;
+        
+        // Close all other dropdowns first
+        document.querySelectorAll('.toolbar__dropdown.show').forEach(dropdown => {
+          dropdown.classList.remove('show');
+        });
+        
+        // Toggle current dropdown
+        if (!isOpen) {
+          toolbarDropdown.classList.add('show');
+          toolbarDropdown.style.opacity = '1';
+          toolbarDropdown.style.visibility = 'visible';
+          
+          // FORCE MOBILE POSITIONING - Override everything
+          if (isMobile) {
+            // Remove all existing positioning
+            toolbarDropdown.style.top = '';
+            toolbarDropdown.style.bottom = '';
+            toolbarDropdown.style.transform = '';
+            
+            // Force new positioning
+            setTimeout(() => {
+              toolbarDropdown.style.setProperty('top', 'auto', 'important');
+              toolbarDropdown.style.setProperty('bottom', '100%', 'important');
+              toolbarDropdown.style.setProperty('transform', 'translateY(0)', 'important');
+              toolbarDropdown.style.setProperty('z-index', '9999', 'important');
+            }, 10);
+          } else {
+            // Desktop - keep original positioning
+            toolbarDropdown.style.top = '100%';
+            toolbarDropdown.style.bottom = '';
+            toolbarDropdown.style.transform = 'translateY(0)';
+          }
+        } else {
+          toolbarDropdown.classList.remove('show');
+          toolbarDropdown.style.opacity = '0';
+          toolbarDropdown.style.visibility = 'hidden';
+        }
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!toolbarMenuTrigger.contains(e.target) && !toolbarDropdown.contains(e.target)) {
+          toolbarDropdown.classList.remove('show');
+          toolbarDropdown.style.opacity = '0';
+          toolbarDropdown.style.visibility = 'hidden';
+        }
+      });
+      
+      // Close dropdown on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          toolbarDropdown.classList.remove('show');
+          toolbarDropdown.style.opacity = '0';
+          toolbarDropdown.style.visibility = 'hidden';
+        }
+      });
+    }
+  });
+</script>

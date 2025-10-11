@@ -353,7 +353,7 @@
     "collection-content": {
       "type": "collection-content",
       "custom_css": [
-        ".collection-hero .page-width {padding-bottom: 60px;}"
+        ".collection-hero .page-width {padding-bottom: 0px;}"
       ],
       "settings": {
         "section_width": "customize_width",

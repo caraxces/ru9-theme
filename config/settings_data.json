@@ -73,7 +73,7 @@
       "goi-foam-niu",
       "goi-om"
     ],
-    "voucher_image_1": "shopify://shop_images/VOUCHER_15.svg",
+    "voucher_image_1": "shopify://shop_images/250K_1.png",
     "voucher_code_1": "RU9250",
     "voucher_code_2": "",
     "voucher_code_3": "",
@@ -1510,11 +1510,6 @@
       },
       "16278478101612877664": {
         "type": "shopify://apps/pagefly-page-builder/blocks/app-embed/83e179f7-59a0-4589-8c66-c0dddf959200",
-        "disabled": false,
-        "settings": {}
-      },
-      "14916611450974054565": {
-        "type": "shopify://apps/automatic-discounts-upsells/blocks/theme_app_embed/afbdc23b-1384-41ba-afd7-f55ee7ffbc4c",
         "disabled": false,
         "settings": {}
       }

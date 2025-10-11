@@ -135,6 +135,7 @@
         "enable_video_looping": false,
         "product_video_style": "muted",
         "enable_sticky_add_to_cart": false,
+        "store_system_content": "<p><strong>Q.2, TP.HCM:</strong><br>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br><a href=\"tel:0964777960\">0964777960</a></p><p><strong>Q.3, TP.HCM:</strong><br>283A Hai Bà Trưng, Phường Xuân Hoà<br><a href=\"tel:0964777910\">0964777910</a></p><p><strong>Q. Cầu Giấy, HN:</strong><br>228 Cầu Giấy, Quan Hoa<br><a href=\"tel:0964777940\">0964777940</a></p>",
         "hide_payment_button_mobile": false,
         "image_size": "medium",
         "showroom_1_name": "",
@@ -168,7 +169,7 @@
         "reason_xTVNaW": {
           "type": "reason",
           "settings": {
-            "image": "shopify://shop_images/Kh_i_ngu_n_c_a_h_nh_phuc_n_i_t_m.jpg",
+            "image": "shopify://shop_images/20251010-153556.jpg",
             "title": "",
             "content": ""
           }
@@ -176,7 +177,7 @@
         "reason_B8qDMb": {
           "type": "reason",
           "settings": {
-            "image": "shopify://shop_images/Kh_i_ngu_n_c_a_nang_l_ng_tich_c_c.jpg",
+            "image": "shopify://shop_images/20251010-153553.jpg",
             "title": "",
             "content": ""
           }
@@ -187,9 +188,10 @@
         "reason_xTVNaW",
         "reason_B8qDMb"
       ],
+      "disabled": true,
       "name": "Reason to choice",
       "settings": {
-        "title": "Không chỉ là lựa chọn cho phòng ngủ,mà còn là đầu tư cho chất lượng cuộc sống"
+        "title": "Không chỉ là lựa chọn cho phòng ngủ, mà còn là đầu tư cho chất lượng cuộc sống"
       }
     },
     "main": {
@@ -871,6 +873,8 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget",
             "max_width": 1200
           }
         }

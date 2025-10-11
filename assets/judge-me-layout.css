@@ -7,6 +7,19 @@
 */
 
 /* ==========================================================================
+   #FORCE HIGH-QUALITY IMAGE RENDERING
+   ========================================================================== */
+
+/* Force high-quality image rendering globally for Judge.me images */
+.jdgm-rev__pic-img,
+.jdgm-rev__pic-link img {
+  image-rendering: -webkit-optimize-contrast !important;
+  image-rendering: crisp-edges !important;
+  -webkit-filter: none !important;
+  filter: contrast(1.02) !important;
+}
+
+/* ==========================================================================
    #RESET & WIDGET CONTAINER
    ========================================================================== */
 .jdgm-widget:not(.jdgm-medals-wrapper) .jdgm-medals-wrapper{
@@ -156,15 +169,37 @@
     object-fit: cover;
     border-radius: 8px;
     flex-shrink: 0;
-    image-rendering: -webkit-optimize-contrast !important;
-    image-rendering: crisp-edges !important;
-    image-rendering: pixelated !important;
-    -webkit-backface-visibility: hidden !important;
-    -webkit-transform: translateZ(0) !important;
-    transform: translateZ(0) !important;
-    backface-visibility: hidden !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale !important;
+    /* High-quality image rendering */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: auto;
+    image-rendering: optimizeQuality;
+    /* Hardware acceleration for smoother rendering */
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0) scale(1);
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    /* Better smoothing */
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    /* Performance hints */
+    will-change: auto;
+    /* Optimize rendering performance */
+    contain: layout style paint;
+    /* Ensure crisp rendering on high-DPI displays */
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    /* Prevent image blur during transforms */
+    -webkit-perspective: 1000;
+    perspective: 1000;
+}
+
+/* Force sharp rendering on retina/high-DPI displays */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-resolution: 192dpi) {
+    .jdgm-custom-image-carousel img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
 }
 
 
@@ -316,13 +351,14 @@
     border: none !important;
     image-rendering: -webkit-optimize-contrast !important;
     image-rendering: crisp-edges !important;
-    image-rendering: pixelated !important;
     -webkit-backface-visibility: hidden !important;
     -webkit-transform: translateZ(0) !important;
     transform: translateZ(0) !important;
     backface-visibility: hidden !important;
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale !important;
+    filter: contrast(1.05) !important;
+    -webkit-filter: none !important;
 }
 
 /* 2. RIGHT COLUMN (Content Wrapper created by JS) */
@@ -374,9 +410,6 @@
 }
 
 /* Author wrapper is now a direct child, so it's controlled by the parent's flex-direction */
-.jdgm-rev__author-wrapper {
-   /* No special ordering needed anymore */
-}
 
 /* The content (title, body) will naturally fall after the header */
 .jdgm-rev__content {
@@ -486,17 +519,6 @@
         width: 100%;
     }
     
-    .jdgm-rev-widg__summary::before {
-       /* Inherit desktop styles */
-    }
-    
-    .jdgm-rev-widg__summary-text {
-       /* Inherit desktop styles */
-    }
-    
-    .jdgm-rev-widg__summary-average {
-       /* Inherit desktop styles */
-    }
 
     .jdgm-write-rev-link,
     .jdgm-histogram {
@@ -511,59 +533,159 @@
     }
 
     /* 4. Individual Review Cards: FINAL 2-Tier Mobile Layout */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev,
+    .jdgm-rev-widg .jdgm-rev,
     .jdgm-rev {
         flex-direction: column !important;
-        align-items: stretch !important; /* Let children take full width */
+        align-items: stretch !important;
         gap: 16px !important;
+        display: flex !important;
+        flex-wrap: nowrap !important;
     }
 
-    /* This is the new top row (Image + Author Info) */
-    .jdgm-rev-card__top-row {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 16px;
+    /* This is the new top row (Image + Rating/Author Info) - ULTRA STRONG */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev-card__top-row,
+    .jdgm-rev-widg .jdgm-rev .jdgm-rev-card__top-row,
+    .jdgm-rev .jdgm-rev-card__top-row {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
-    .jdgm-custom-rating-row {
-        flex-wrap: wrap;
-        gap: 5px; /* Add a small gap between stars and the new timestamp line */
-    }
-
-    .jdgm-rev__pics {
+    /* Image column on mobile - ULTRA STRONG override */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev__pics,
+    .jdgm-rev-widg .jdgm-rev .jdgm-rev__pics,
+    .jdgm-rev .jdgm-rev__pics {
         width: 120px !important;
         height: 120px !important;
         object-fit: cover !important;
+        flex-shrink: 0 !important;
+        min-width: 120px !important;
+        max-width: 120px !important;
+        min-height: 120px !important;
+        max-height: 120px !important;
+        order: -1 !important;
+        display: block !important;
     }
 
-    .jdgm-rev__pic-link,
-    .jdgm-rev__pic-img {
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev__pics .jdgm-rev__pic-link,
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev__pics .jdgm-rev__pic-img,
+    .jdgm-rev-widg .jdgm-rev .jdgm-rev__pics .jdgm-rev__pic-link,
+    .jdgm-rev-widg .jdgm-rev .jdgm-rev__pics .jdgm-rev__pic-img,
+    .jdgm-rev .jdgm-rev__pics .jdgm-rev__pic-link,
+    .jdgm-rev .jdgm-rev__pics .jdgm-rev__pic-img {
         width: 120px !important;
         height: 120px !important;
         object-fit: cover !important;
         border-radius: 5px !important;
+        display: block !important;
+        min-width: 120px !important;
+        max-width: 120px !important;
+        min-height: 120px !important;
+        max-height: 120px !important;
+        /* Enhanced image rendering for maximum quality */
         image-rendering: -webkit-optimize-contrast !important;
         image-rendering: crisp-edges !important;
-        image-rendering: pixelated !important;
         -webkit-backface-visibility: hidden !important;
-        -webkit-transform: translateZ(0) !important;
-        transform: translateZ(0) !important;
+        -webkit-transform: translateZ(0) scale(1) !important;
+        transform: translateZ(0) scale(1) !important;
         backface-visibility: hidden !important;
-        -webkit-font-smoothing: antialiased !important;
-        -moz-osx-font-smoothing: grayscale !important;
+        -webkit-font-smoothing: subpixel-antialiased !important;
+        -moz-osx-font-smoothing: auto !important;
+        will-change: transform !important;
+        filter: contrast(1.05) !important;
+        -webkit-filter: none !important;
     }
 
-    .jdgm-custom-right-column-content {
-        flex-grow: 1; /* Allow it to take remaining space in the top row */
+    /* Right column next to image - ULTRA STRONG override */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-custom-right-column-content,
+    .jdgm-rev-widg .jdgm-rev .jdgm-custom-right-column-content,
+    .jdgm-rev .jdgm-custom-right-column-content {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        min-width: 0 !important;
+        width: auto !important;
+        max-width: none !important;
     }
 
-    .jdgm-rev__content {
-        /* This now only contains the body and sits below the top row */
-        width: 100%;
+    /* Rating row positioned next to image - ULTRA STRONG override */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-custom-rating-row,
+    .jdgm-rev-widg .jdgm-rev .jdgm-custom-rating-row,
+    .jdgm-rev .jdgm-custom-rating-row {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        width: 100% !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
     }
 
-    .jdgm-rev__author {
+    /* Make rating and timestamp stack vertically on mobile - ULTRA STRONG override */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev__rating,
+    .jdgm-rev-widg .jdgm-rev .jdgm-rev__rating,
+    .jdgm-rev .jdgm-rev__rating {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev__timestamp,
+    .jdgm-rev-widg .jdgm-rev .jdgm-rev__timestamp,
+    .jdgm-rev .jdgm-rev__timestamp {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin: 0 !important;
+        font-size: 12px !important;
+        color: #666 !important;
+        display: block !important;
+    }
+
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev__author,
+    .jdgm-rev-widg .jdgm-rev .jdgm-rev__author,
+    .jdgm-rev .jdgm-rev__author {
         font-size: 16px !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+
+    /* Author wrapper - ULTRA STRONG override */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev__author-wrapper,
+    .jdgm-rev-widg .jdgm-rev .jdgm-rev__author-wrapper,
+    .jdgm-rev .jdgm-rev__author-wrapper {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    /* Header positioning - ULTRA STRONG override */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev__header,
+    .jdgm-rev-widg .jdgm-rev .jdgm-rev__header,
+    .jdgm-rev .jdgm-rev__header {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        order: 0 !important;
+    }
+
+    /* Content (title, body) sits below the top row - ULTRA STRONG override */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev__content,
+    .jdgm-rev-widg .jdgm-rev .jdgm-rev__content,
+    .jdgm-rev .jdgm-rev__content {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+        order: 999 !important;
     }
 
     /* 5. Pagination */
