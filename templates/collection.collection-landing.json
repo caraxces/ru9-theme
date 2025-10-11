@@ -319,9 +319,9 @@
         "product_item_fH8Cab": {
           "type": "product_item",
           "settings": {
-            "product": "tencel-bedding-set",
+            "product": "bộ-ga-giường-cotton-sateen-copy",
             "product_label": "Best seller",
-            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
+            "bundle_items": "<br> Ga giường Cotton Sateen<br> Vỏ Gối Ôm Cotton Sateen<br> Vỏ Gối Cotton Sateen <br> Vỏ chăn Cotton Sateen",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -329,29 +329,9 @@
         "product_item_p3eHLE": {
           "type": "product_item",
           "settings": {
-            "product": "tencel-bedding-set",
+            "product": "bộ-ga-giường-tencel-copy",
             "product_label": "Best seller",
-            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
-            "label_color": "#ffffff",
-            "label_bg": "#609ee9"
-          }
-        },
-        "product_item_hMUezj": {
-          "type": "product_item",
-          "settings": {
-            "product": "tencel-bedding-set",
-            "product_label": "Best seller",
-            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
-            "label_color": "#ffffff",
-            "label_bg": "#609ee9"
-          }
-        },
-        "product_item_mYPAMb": {
-          "type": "product_item",
-          "settings": {
-            "product": "tencel-bedding-set",
-            "product_label": "Best seller",
-            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
+            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel <br> Vỏ chăn Tencel",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -359,9 +339,7 @@
       },
       "block_order": [
         "product_item_fH8Cab",
-        "product_item_p3eHLE",
-        "product_item_hMUezj",
-        "product_item_mYPAMb"
+        "product_item_p3eHLE"
       ],
       "name": "Combo Phòng Ngủ",
       "settings": {
