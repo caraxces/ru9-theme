@@ -218,7 +218,7 @@
           "type": "reason",
           "settings": {
             "image": "{{ product.metafields.custom.dynamic_image_3.value }}",
-            "title": "{{ product.metafields.custom.dynamic_title_2.value }}",
+            "title": "{{ product.metafields.custom.dynamic_title_3.value }}",
             "content": "<p>{{ product.metafields.custom.dynamic_description_3 | metafield_tag }}</p>"
           }
         }
@@ -230,7 +230,7 @@
       ],
       "name": "Reason to choice",
       "settings": {
-        "title": "Lý do bạn nên chọn chúng tôi"
+        "title": "Lý do bạn nên chọn sản phẩm"
       }
     },
     "product_hotspot_XzDEYy": {
@@ -915,6 +915,8 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget",
             "max_width": 1200
           }
         }

@@ -256,7 +256,13 @@
         "description": "",
         "primary_color": "#1c2c58",
         "text_color": "#1a1a1a",
-        "description_color": "#666666"
+        "description_color": "#666666",
+        "show_desktop_view_all": false,
+        "desktop_view_all_text": "Xem tất cả",
+        "desktop_view_all_url": "",
+        "show_mobile_view_all": false,
+        "mobile_view_all_text": "Xem tất cả",
+        "mobile_view_all_url": ""
       }
     },
     "slideshow_fhCaUN": {
@@ -315,7 +321,7 @@
           "settings": {
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
-            "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
+            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -325,7 +331,7 @@
           "settings": {
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
-            "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
+            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -335,7 +341,7 @@
           "settings": {
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
-            "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
+            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -345,7 +351,7 @@
           "settings": {
             "product": "tencel-bedding-set",
             "product_label": "Best seller",
-            "bundle_items": "Bao gồm:<br> Nệm Nest 1m6 x 2m,<br> 2 gối Niu, <br>Tấm bảo vệ Nệm 1m6 x 2m",
+            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -357,18 +363,24 @@
         "product_item_hMUezj",
         "product_item_mYPAMb"
       ],
-      "disabled": true,
       "name": "Combo Phòng Ngủ",
       "settings": {
         "title": "Combo ga giường",
         "description": "",
         "primary_color": "#1c2c58",
         "text_color": "#1a1a1a",
-        "description_color": "#666666"
+        "description_color": "#666666",
+        "show_desktop_view_all": false,
+        "desktop_view_all_text": "Xem tất cả",
+        "desktop_view_all_url": "",
+        "show_mobile_view_all": false,
+        "mobile_view_all_text": "Xem tất cả",
+        "mobile_view_all_url": ""
       }
     },
     "collection-content": {
       "type": "collection-content",
+      "disabled": true,
       "settings": {
         "section_width": "customize_width",
         "customize_width": 1280,
