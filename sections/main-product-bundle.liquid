@@ -80,7 +80,7 @@
                   product: product,
                   product_zoom_enable: section.settings.product_zoom_enable,
                   product_zoom_size: product_zoom_size,
-                  product_carousel_enable: section.settings.product_carousel_enable,
+                  product_carousel_enable: true,
                   thumbnail_position: 'below',
                   thumbnail_height: section.settings.thumbnail_height,
                   thumbnail_arrows: section.settings.thumbnail_arrows,
@@ -465,7 +465,7 @@
                   product: product,
                   product_zoom_enable: section.settings.product_zoom_enable,
                   product_zoom_size: product_zoom_size,
-                  product_carousel_enable: section.settings.product_carousel_enable,
+                  product_carousel_enable: true,
                   thumbnail_position: 'below',
                   thumbnail_height: section.settings.thumbnail_height,
                   thumbnail_arrows: section.settings.thumbnail_arrows,
@@ -539,7 +539,7 @@
                 product: product,
                 product_zoom_enable: section.settings.product_zoom_enable,
                 product_zoom_size: product_zoom_size,
-                product_carousel_enable: section.settings.product_carousel_enable,
+                product_carousel_enable: true,
                 thumbnail_position: 'below',
                 thumbnail_height: section.settings.thumbnail_height,
                 thumbnail_arrows: section.settings.thumbnail_arrows,
@@ -972,14 +972,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       
       slideshowHTML += `
-        <div class="product-main-slide ${index === 0 ? 'starting-slide' : 'secondary-slide'}" data-index="${index}">
+        <div class="product-main-slide ${index === 0 ? 'starting-slide' : 'secondary-slide'}" data-index="${index}" ${index === 0 ? 'style="display: block;"' : 'style="display: none;"'}>
           <div data-product-image-main class="product-image-main">
             <div class="image-wrap loaded" style="height: 0; padding-bottom: ${100 / aspectRatio}%;">
               <img src="${mediaUrl}" 
                    alt="${productData.title}" 
-                   class="photoswipe__image lazyautosizes image-element lazyloaded" 
+                   class="product-featured-img lazyautosizes image-element lazyloaded" 
                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"
-                   loading="${index === 0 ? 'eager' : 'lazy'}">
+                   loading="${index === 0 ? 'eager' : 'lazy'}"
+                   data-index="${index}">
             </div>
           </div>
         </div>
@@ -1049,29 +1050,68 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
   
-  // Helper function to initialize Flickity carousel
+  // Helper function to initialize Flickity carousel for mobile swipe
   function initializeFlickityForStep(container, step) {
     setTimeout(() => {
-      const slideshow = container.querySelector('.product-slideshow');
-      if (slideshow && window.Flickity) {
-        new Flickity(slideshow, {
+      // Try multiple selectors to find the slideshow
+      let slideshow = container.querySelector('.product-slideshow, [data-product-photos], .product-main-slideshow');
+      if (!slideshow) {
+        // For Step 1, look for the main slideshow container
+        slideshow = container.querySelector('.product-images, .product-main-images, .product-main-slideshow');
+      }
+      if (!slideshow) {
+        console.warn('⚠️ No slideshow element found for step:', step);
+        return;
+      }
+      
+      if (!window.Flickity && !window.theme?.Slideshow) {
+        console.warn('⚠️ Flickity library not loaded');
+        return;
+      }
+      
+      console.log('🎠 Initializing Flickity for', step, '- element:', slideshow);
+      
+      // Use theme.Slideshow (wrapper around Flickity) if available
+      const SlideClass = window.theme?.Slideshow || Flickity;
+      
+      try {
+        const flickityInstance = new SlideClass(slideshow, {
           cellAlign: 'left',
           contain: true,
           prevNextButtons: false,
-          pageDots: false,
-          wrapAround: true
+          pageDots: true, // Show dots on mobile
+          wrapAround: true,
+          adaptiveHeight: true,
+          draggable: true, // Enable drag/swipe
+          freeScroll: false,
+          dragThreshold: 10
         });
+        
+        console.log('✅ Flickity initialized for', step);
         
         // Connect custom nav buttons to Flickity
         const prevBtn = container.querySelector('.custom-nav-prev');
         const nextBtn = container.querySelector('.custom-nav-next');
         if (prevBtn && nextBtn) {
-          const flkty = Flickity.data(slideshow);
+          const flkty = Flickity.data ? Flickity.data(slideshow) : flickityInstance;
           if (flkty) {
-            prevBtn.addEventListener('click', () => flkty.previous());
-            nextBtn.addEventListener('click', () => flkty.next());
+            prevBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (flkty.previous) flkty.previous();
+              else if (flkty.flickity?.previous) flkty.flickity.previous();
+            });
+            nextBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (flkty.next) flkty.next();
+              else if (flkty.flickity?.next) flkty.flickity.next();
+            });
+            console.log('✅ Nav buttons connected to Flickity');
           }
         }
+      } catch (error) {
+        console.error('❌ Error initializing Flickity:', error);
       }
     }, 300);
   }
@@ -1125,6 +1165,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize variant picker for main product
   initializeVariantPicker();
+  
+  // Initialize Step 0 (main product page) immediately
+  console.log('=== INITIALIZING STEP 0 (Main Product Page) ===');
+  
+  // Try multiple selectors for Step 0
+  let step0Container = document.querySelector('.bundle-step-0');
+  if (!step0Container) {
+    step0Container = document.querySelector('.product-main-images');
+  }
+  if (!step0Container) {
+    step0Container = document.querySelector('.product-images');
+  }
+  if (!step0Container) {
+    step0Container = document.querySelector('.product-main-slideshow');
+  }
+  if (!step0Container) {
+    step0Container = document.querySelector('[data-section-id] .product-main-slideshow');
+  }
+  
+  console.log('🔍 Step 0 container found:', !!step0Container);
+  console.log('🔍 Step 0 container:', step0Container);
+  console.log('🔍 Step 0 container class:', step0Container ? step0Container.className : 'N/A');
+  
+  if (step0Container) {
+    // Ensure first slide is visible
+    const firstSlide = step0Container.querySelector('.product-main-slide');
+    if (firstSlide) {
+      firstSlide.style.display = 'block';
+      console.log('✅ Step 0: First slide made visible');
+    }
+    
+    // Ensure first thumbnail is active
+    const firstThumb = step0Container.querySelector('[data-product-thumb]');
+    if (firstThumb) {
+      firstThumb.classList.add('active');
+      console.log('✅ Step 0: First thumbnail made active');
+    }
+    
+    // Check if thumbnails exist
+    const thumbnails = step0Container.querySelectorAll('[data-product-thumb]');
+    console.log('Found thumbnails in step 0:', thumbnails.length);
+    
+    // Check if slideshow exists
+    const slideshow = step0Container.querySelector('.product-slideshow, [data-product-photos], .product-main-slideshow');
+    console.log('🔍 Step 0 slideshow found:', !!slideshow);
+    console.log('🔍 Step 0 slideshow element:', slideshow);
+    
+    // Check if Flickity already exists
+    if (slideshow && window.Flickity) {
+      const existingFlickity = Flickity.data(slideshow);
+      console.log('🔍 Step 0 existing Flickity:', !!existingFlickity);
+    }
+    
+    // Initialize thumbnail clicks
+    setTimeout(() => {
+      console.log('🔍 Step 0: Initializing thumbnail clicks...');
+      initializeThumbnailClicks(step0Container);
+    }, 400);
+    
+    // Force Flickity initialization
+    setTimeout(() => {
+      console.log('🎠 Step 0: Force initializing Flickity...');
+      initializeFlickityForStep(step0Container, 'step0');
+    }, 800);
+  } else {
+    console.warn('⚠️ Step 0: Container not found');
+  }
 
   // Event listeners
   container.addEventListener('click', handleBundleEvents);
@@ -1299,9 +1406,178 @@ document.addEventListener('DOMContentLoaded', () => {
           renderBundleSummary();
         }
       }
-    }
+  }
 
-    // Buy now button
+  // Initialize thumbnail click functionality and mobile swipe
+  function initializeThumbnailClicks(container) {
+    // Try different selectors for thumbnails
+    const thumbnails = container.querySelectorAll('[data-product-thumb]').length > 0 
+      ? container.querySelectorAll('[data-product-thumb]')
+      : container.querySelectorAll('.product__thumb-item a[data-index], .product__thumb[data-index]');
+    const slides = container.querySelectorAll('.product-main-slide');
+    
+    console.log('🖼️ initializeThumbnailClicks:', {
+      container: container,
+      containerClass: container.className,
+      thumbnailsCount: thumbnails.length,
+      slidesCount: slides.length,
+      allSlides: Array.from(slides).map(s => ({
+        class: s.className,
+        display: s.style.display,
+        index: s.getAttribute('data-index')
+      }))
+    });
+    
+    if (!thumbnails.length && !slides.length) {
+      console.warn('⚠️ No thumbnails or slides found in container');
+      return;
+    }
+    
+    if (!slides.length) {
+      console.warn('⚠️ No slides found - might be Flickity carousel');
+      return;
+    }
+    
+    // Function to switch to slide by index
+    function switchToSlide(targetIndex) {
+      console.log('🖼️ Switching to slide:', { targetIndex, totalSlides: slides.length });
+      
+      // Hide all slides
+      slides.forEach(slide => {
+        slide.classList.remove('starting-slide');
+        slide.classList.add('secondary-slide');
+        slide.style.display = 'none';
+      });
+      
+      // Show target slide
+      if (slides[targetIndex]) {
+        slides[targetIndex].classList.add('starting-slide');
+        slides[targetIndex].classList.remove('secondary-slide');
+        slides[targetIndex].style.display = 'block';
+        console.log('🖼️ Showing slide:', targetIndex);
+      }
+      
+      // Update thumbnail active states
+      thumbnails.forEach(t => t.classList.remove('active-thumb'));
+      if (thumbnails[targetIndex]) {
+        thumbnails[targetIndex].classList.add('active-thumb');
+      }
+    }
+    
+    // Check if Flickity carousel is initialized
+    const flickityElement = container.querySelector('.product-slideshow, [data-product-photos]');
+    const flkty = flickityElement && typeof Flickity !== 'undefined' ? Flickity.data(flickityElement) : null;
+    
+    if (flkty) {
+      console.log('✅ Flickity carousel detected - using Flickity navigation');
+      
+      // Thumbnail click handlers for Flickity
+      thumbnails.forEach((thumb, index) => {
+        thumb.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetIndex = parseInt(this.getAttribute('data-index'));
+          console.log('🖼️ Flickity thumbnail clicked:', targetIndex);
+          flkty.select(targetIndex);
+          
+          // Update thumbnail active states
+          thumbnails.forEach(t => t.classList.remove('active-thumb'));
+          this.classList.add('active-thumb');
+        });
+      });
+      
+      // Set first thumbnail as active
+      if (thumbnails[0]) {
+        thumbnails[0].classList.add('active-thumb');
+      }
+      
+      // Update active thumbnail when Flickity changes
+      flkty.on('change', function(index) {
+        thumbnails.forEach((t, i) => {
+          if (i === index) {
+            t.classList.add('active-thumb');
+          } else {
+            t.classList.remove('active-thumb');
+          }
+        });
+      });
+      
+      // Mobile swipe for Flickity (already built-in, just log for debug)
+      if (window.innerWidth <= 768) {
+        console.log('📱 Mobile swipe enabled via Flickity for', slides.length, 'slides');
+      }
+      
+      return; // Skip custom slide logic
+    }
+    
+    // Thumbnail click handlers for custom slides
+    thumbnails.forEach((thumb, index) => {
+      thumb.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetIndex = parseInt(this.getAttribute('data-index'));
+        switchToSlide(targetIndex);
+      });
+    });
+    
+    // Mobile swipe functionality
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let currentSlideIndex = 0;
+    
+    // Try multiple container selectors
+    const slideshowContainer = container.querySelector('.product-slideshow') || 
+                                container.querySelector('.product__main-photos') || 
+                                container.querySelector('.product__photos');
+    
+    if (slideshowContainer && slides.length > 1) {
+      console.log('📱 Swipe initialized on:', slideshowContainer, 'with', slides.length, 'slides');
+      
+      slideshowContainer.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        console.log('📱 Touch start:', touchStartX);
+      });
+      
+      slideshowContainer.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        const swipeDistance = touchStartX - touchEndX;
+        const minSwipeDistance = 50;
+        
+        console.log('📱 Touch end:', { touchEndX, swipeDistance, minSwipeDistance });
+        
+        // Find current active slide
+        slides.forEach((slide, index) => {
+          if (slide.classList.contains('starting-slide') || slide.style.display !== 'none') {
+            currentSlideIndex = index;
+          }
+        });
+        
+        console.log('📱 Current slide index:', currentSlideIndex, 'Total slides:', slides.length);
+        
+        // Swipe left (next slide)
+        if (swipeDistance > minSwipeDistance && currentSlideIndex < slides.length - 1) {
+          console.log('📱 Swipe left - next slide');
+          switchToSlide(currentSlideIndex + 1);
+        }
+        // Swipe right (previous slide)
+        else if (swipeDistance < -minSwipeDistance && currentSlideIndex > 0) {
+          console.log('📱 Swipe right - previous slide');
+          switchToSlide(currentSlideIndex - 1);
+        }
+      });
+    } else {
+      console.warn('⚠️ Swipe not initialized:', { 
+        slideshowContainer: !!slideshowContainer, 
+        slidesCount: slides.length 
+      });
+    }
+    
+    // Set first thumbnail as active
+    if (thumbnails[0]) {
+      thumbnails[0].classList.add('active-thumb');
+      console.log('🖼️ Set first thumbnail as active');
+    }
+  }
+
+  // Buy now button
     if (e.target.closest('.bundle-buy-now-btn')) {
       e.preventDefault();
       buyBundleNow();
@@ -1329,6 +1605,78 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentStepEl = container.querySelector(`[data-step="${step}"]`);
     if (currentStepEl) {
       currentStepEl.style.display = 'block';
+    }
+    
+    // Initialize Flickity for Step 3
+    if (step === 3) {
+      setTimeout(() => {
+        const step3Container = document.querySelector('.bundle-step-3');
+        if (step3Container) {
+          console.log('🎯 Step 3: Initializing Flickity carousel for mobile swipe');
+          
+          // Find the slideshow element
+          const slideshow = step3Container.querySelector('.product-slideshow, [data-product-photos]');
+          if (slideshow) {
+            // Check if Flickity already initialized
+            const existingFlickity = window.Flickity && Flickity.data(slideshow);
+            if (existingFlickity) {
+              console.log('✅ Step 3: Flickity already initialized');
+            } else if (window.theme?.Slideshow || window.Flickity) {
+              console.log('🎠 Step 3: Manually initializing Flickity...');
+              initializeFlickityForStep(step3Container, 'step3');
+            }
+          }
+          
+          // Also init thumbnail clicks
+          setTimeout(() => {
+            initializeThumbnailClicks(step3Container);
+          }, 400);
+        }
+      }, 100);
+    }
+    
+    // Initialize step 0 (main product page)
+    if (step === 0) {
+      console.log('=== INITIALIZING STEP 0 (Main Product Page) ===');
+      
+      // Ensure first slide is visible
+      const firstSlide = currentStepEl.querySelector('.product-main-slide');
+      if (firstSlide) {
+        firstSlide.style.display = 'block';
+        console.log('✅ Step 0: First slide made visible');
+      }
+      
+      // Ensure first thumbnail is active
+      const firstThumb = currentStepEl.querySelector('[data-product-thumb]');
+      if (firstThumb) {
+        firstThumb.classList.add('active');
+        console.log('✅ Step 0: First thumbnail made active');
+      }
+      
+      // Check if thumbnails exist
+      const thumbnails = currentStepEl.querySelectorAll('[data-product-thumb]');
+      console.log('Found thumbnails in step 0:', thumbnails.length);
+      
+      // Check if product__thumbs--scroller exists
+      const scroller = currentStepEl.querySelector('.product__thumbs--scroller');
+      console.log('Found product__thumbs--scroller:', !!scroller);
+      
+      if (scroller) {
+        console.log('Scroller innerHTML length:', scroller.innerHTML.length);
+        console.log('Scroller children count:', scroller.children.length);
+      }
+      
+      // Initialize thumbnail clicks
+      setTimeout(() => {
+        console.log('🔍 Step 0: Initializing thumbnail clicks...');
+        initializeThumbnailClicks(currentStepEl);
+      }, 400);
+      
+      // Force Flickity initialization
+      setTimeout(() => {
+        console.log('🎠 Step 0: Force initializing Flickity...');
+        initializeFlickityForStep(currentStepEl, 'step0');
+      }, 800);
     }
     
     // Initialize step 2 - tự động chọn sản phẩm đầu tiên
@@ -1365,9 +1713,181 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('✅ Auto-selected first product:', autoSelectedProduct);
       }
       
+      // Initialize Step 0 (main product page) first
+      console.log('=== INITIALIZING STEP 0 (Main Product Page) ===');
+      
+      // Try multiple selectors for Step 0
+      let step0Container = document.querySelector('.bundle-step-0');
+      if (!step0Container) {
+        step0Container = document.querySelector('.product-main-images');
+      }
+      if (!step0Container) {
+        step0Container = document.querySelector('.product-images');
+      }
+      if (!step0Container) {
+        step0Container = document.querySelector('.product-main-slideshow');
+      }
+      if (!step0Container) {
+        step0Container = document.querySelector('[data-section-id] .product-main-slideshow');
+      }
+      
+      console.log('🔍 Step 0 container found:', !!step0Container);
+      console.log('🔍 Step 0 container:', step0Container);
+      console.log('🔍 Step 0 container class:', step0Container ? step0Container.className : 'N/A');
+      
+      if (step0Container) {
+        // Ensure first slide is visible
+        const firstSlide = step0Container.querySelector('.product-main-slide');
+        if (firstSlide) {
+          firstSlide.style.display = 'block';
+          console.log('✅ Step 0: First slide made visible');
+        }
+        
+        // Ensure first thumbnail is active
+        const firstThumb = step0Container.querySelector('[data-product-thumb]');
+        if (firstThumb) {
+          firstThumb.classList.add('active');
+          console.log('✅ Step 0: First thumbnail made active');
+        }
+        
+        // Check if thumbnails exist
+        const thumbnails = step0Container.querySelectorAll('[data-product-thumb]');
+        console.log('Found thumbnails in step 0:', thumbnails.length);
+        
+        // Check if slideshow exists
+        const slideshow = step0Container.querySelector('.product-slideshow, [data-product-photos], .product-main-slideshow');
+        console.log('🔍 Step 0 slideshow found:', !!slideshow);
+        console.log('🔍 Step 0 slideshow element:', slideshow);
+        
+        // Check if Flickity already exists
+        if (slideshow && window.Flickity) {
+          const existingFlickity = Flickity.data(slideshow);
+          console.log('🔍 Step 0 existing Flickity:', !!existingFlickity);
+        }
+        
+        // Initialize thumbnail clicks
+        setTimeout(() => {
+          console.log('🔍 Step 0: Initializing thumbnail clicks...');
+          initializeThumbnailClicks(step0Container);
+        }, 400);
+        
+        // Force Flickity initialization
+        setTimeout(() => {
+          console.log('🎠 Step 0: Force initializing Flickity...');
+          initializeFlickityForStep(step0Container, 'step0');
+        }, 800);
+      } else {
+        console.warn('⚠️ Step 0: Container not found');
+      }
+      
       // Load the first bundle product
       console.log('Loading first bundle product...');
       loadBundleProduct(0);
+      
+      // Initialize Step 1 (copy logic from working Step 2 & 3)
+      setTimeout(() => {
+        console.log('=== INITIALIZING STEP 1 ===');
+        const step1Container = document.querySelector('.bundle-step-1');
+        
+        if (step1Container) {
+          // Ensure first slide is visible (like Step 3)
+          const firstSlide = step1Container.querySelector('.product-main-slide');
+          if (firstSlide) {
+            firstSlide.style.display = 'block';
+            console.log('✅ Step 1: First slide made visible');
+          }
+          
+          // Ensure first thumbnail is active (like Step 3)
+          const firstThumb = step1Container.querySelector('[data-product-thumb]');
+          if (firstThumb) {
+            firstThumb.classList.add('active');
+            console.log('✅ Step 1: First thumbnail made active');
+          }
+          
+          // Check if thumbnails exist (like Step 3)
+          const thumbnails = step1Container.querySelectorAll('[data-product-thumb]');
+          console.log('Found thumbnails in step 1:', thumbnails.length);
+          
+          // Check if product__thumbs--scroller exists (like Step 3)
+          const scroller = step1Container.querySelector('.product__thumbs--scroller');
+          console.log('Found product__thumbs--scroller:', !!scroller);
+          
+          if (scroller) {
+            console.log('Scroller innerHTML length:', scroller.innerHTML.length);
+            console.log('Scroller children count:', scroller.children.length);
+          }
+          
+          // Initialize thumbnail clicks (like Step 2 & 3)
+          setTimeout(() => {
+            console.log('🔍 Step 1: Initializing thumbnail clicks...');
+            initializeThumbnailClicks(step1Container);
+          }, 400);
+          
+          // Initialize Step 1 slideshow immediately
+          const step1Slideshow = step1Container.querySelector('#ProductPhotos-{{ section.id }}');
+          if (step1Slideshow && window.Flickity) {
+            // Check if Flickity already exists
+            const existingFlickity = Flickity.data(step1Slideshow);
+            if (!existingFlickity) {
+              const flickityInstance = new Flickity(step1Slideshow, {
+                cellAlign: 'left',
+                contain: true,
+                prevNextButtons: false,
+                pageDots: window.innerWidth <= 768 ? true : false, // Show dots on mobile
+                wrapAround: true,
+                draggable: true, // Enable drag/swipe for all screen sizes
+                adaptiveHeight: true,
+                dragThreshold: 10,
+                selectedAttraction: 0.025,
+                friction: 0.28
+              });
+              console.log('✅ Step 1: Flickity initialized for swipe');
+            } else {
+              console.log('✅ Step 1: Flickity already initialized');
+            }
+          } else if (step1Slideshow && window.theme?.Slideshow) {
+            // Fallback to theme.Slideshow if Flickity not available
+            const slideshowInstance = new theme.Slideshow(step1Slideshow, {
+              cellAlign: 'left',
+              contain: true,
+              prevNextButtons: false,
+              pageDots: window.innerWidth <= 768 ? true : false, // Show dots on mobile
+              wrapAround: true,
+              draggable: true, // Enable drag/swipe for all screen sizes
+              adaptiveHeight: true,
+              dragThreshold: 10,
+              selectedAttraction: 0.025,
+              friction: 0.28
+            });
+            console.log('✅ Step 1: Theme Slideshow initialized for swipe');
+          } else {
+            console.warn('⚠️ Step 1: Neither Flickity nor theme.Slideshow available');
+          }
+          
+          // Force Flickity initialization (like Step 2 & 3)
+          setTimeout(() => {
+            console.log('🎠 Step 1: Force initializing Flickity...');
+            initializeFlickityForStep(step1Container, 'step1');
+            
+            // Additional mobile-specific initialization
+            if (window.innerWidth <= 768) {
+              console.log('📱 Step 1: Mobile-specific Flickity setup...');
+              const mobileSlideshow = step1Container.querySelector('#ProductPhotos-{{ section.id }}');
+              if (mobileSlideshow && window.Flickity) {
+                const existingFlickity = Flickity.data(mobileSlideshow);
+                if (existingFlickity) {
+                  // Force refresh for mobile
+                  existingFlickity.resize();
+                  existingFlickity.reposition();
+                  console.log('📱 Step 1: Mobile Flickity refreshed');
+                }
+              }
+            }
+          }, 800);
+        } else {
+          console.warn('⚠️ Step 1: Container not found');
+        }
+      }, 1500);
       
       // Initialize sticky columns for step 2
       setTimeout(() => {
@@ -1454,6 +1974,20 @@ document.addEventListener('DOMContentLoaded', () => {
           step2ImageColumn.innerHTML = imageHTML;
           console.log('✅ Step 2 images rendered');
           
+          // Initialize Flickity carousel for Step 2 (for mobile swipe)
+          setTimeout(() => {
+            const step2Container = document.querySelector('.bundle-step-2');
+            if (step2Container) {
+              console.log('🎯 Step 2: Initializing Flickity carousel for mobile swipe');
+              initializeFlickityForStep(step2Container, 'step2');
+              
+              // Also init thumbnail clicks (will detect Flickity and use it)
+              setTimeout(() => {
+                initializeThumbnailClicks(step2Container);
+              }, 400);
+            }
+          }, 100);
+          
           // Debug CSS after rendering
           setTimeout(() => {
             const slides = step2ImageColumn.querySelectorAll('.product-main-slide');
@@ -1483,11 +2017,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           }, 100);
           
-          // Initialize Flickity if carousel is enabled
-          if ({{ section.settings.product_carousel_enable | json }}) {
-            initializeFlickityForStep(step2ImageColumn, 'step2');
-            console.log('✅ Flickity initialized for Step 2');
-          }
+          // Flickity is now always initialized for mobile swipe (handled above)
+          // No need for duplicate initialization here
         })
         .catch(error => {
           console.error('❌ Error fetching product data:', error);
@@ -4150,6 +4681,75 @@ document.addEventListener('DOMContentLoaded', function() {
     showSlide(0);
   });
 });
+
+// MAIN PRODUCT PAGE: Fix mobile swipe for main product slideshow
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🔧 Initializing main product page mobile swipe fix...');
+  
+  // Wait for theme's slideshow scripts to load
+  setTimeout(() => {
+    const mainSlideshow = document.querySelector('.product-slideshow');
+    if (mainSlideshow && window.Flickity) {
+      console.log('📱 Main product slideshow found:', mainSlideshow);
+      
+      // Check if Flickity is already initialized
+      const existingFlickity = Flickity.data(mainSlideshow);
+      console.log('🔍 Main product Flickity exists:', !!existingFlickity);
+      
+      if (existingFlickity) {
+        // Force refresh Flickity options for mobile
+        if (window.innerWidth <= 768) {
+          console.log('📱 Refreshing main product Flickity for mobile...');
+          existingFlickity.resize();
+          existingFlickity.reposition();
+          
+          // Ensure draggable is enabled
+          if (!existingFlickity.options.draggable) {
+            console.log('⚠️ Main product Flickity draggable disabled, reinitializing...');
+            existingFlickity.destroy();
+            
+            // Reinitialize with mobile-friendly options
+            const newFlickity = new Flickity(mainSlideshow, {
+              cellAlign: 'left',
+              contain: true,
+              prevNextButtons: false,
+              pageDots: true, // Show dots on mobile
+              wrapAround: true,
+              draggable: true, // CRITICAL: Enable swipe
+              adaptiveHeight: true,
+              dragThreshold: 5,
+              selectedAttraction: 0.025,
+              friction: 0.28,
+              touchVerticalScroll: true
+            });
+            
+            console.log('✅ Main product Flickity reinitialized with swipe enabled');
+          }
+        }
+      } else {
+        // Initialize Flickity if not already done
+        console.log('🎠 Initializing main product Flickity...');
+        const flickityInstance = new Flickity(mainSlideshow, {
+          cellAlign: 'left',
+          contain: true,
+          prevNextButtons: false,
+          pageDots: window.innerWidth <= 768,
+          wrapAround: true,
+          draggable: true,
+          adaptiveHeight: true,
+          dragThreshold: 5,
+          selectedAttraction: 0.025,
+          friction: 0.28,
+          touchVerticalScroll: true
+        });
+        
+        console.log('✅ Main product Flickity initialized');
+      }
+    } else {
+      console.warn('⚠️ Main product slideshow or Flickity not found');
+    }
+  }, 1000);
+});
 </script>
 
 <!-- Carousel Modal Dialogs -->
@@ -4666,6 +5266,22 @@ function initializeStep2StickyColumns() {
     text-decoration: underline;
   }
 {% endstyle %}
+
+<style>
+/* Active thumbnail state */
+.product__thumb.active-thumb {
+  border: 2px solid #000 !important;
+  opacity: 1 !important;
+}
+
+.product__thumb {
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.product__thumb:hover {
+  opacity: 0.8;
+}
+</style>
 
 {% schema %}
 {

@@ -4,34 +4,19 @@
     {%- liquid
       assign source_collection = section.settings.collection
       assign all_sizes = ''
-      assign size_option_name = ''
       
       if source_collection.products.size > 0
-        for product in source_collection.products limit: 1
-          for option in product.options_with_values
-            assign option_name_lower = option.name | downcase
-            if option_name_lower contains 'size' or option_name_lower contains 'kích thước' or option_name_lower contains 'kich thuoc'
-              assign size_option_name = option.name
-              break
+        for product in source_collection.products
+          for variant in product.variants
+            assign size_value = variant.option1
+            if size_value != blank
+              assign size_string = size_value | append: ','
+              unless all_sizes contains size_string
+                assign all_sizes = all_sizes | append: size_string
+              endunless
             endif
           endfor
-          break
         endfor
-        
-        if size_option_name != blank
-          for product in source_collection.products
-            for option in product.options_with_values
-              if option.name == size_option_name
-                for value in option.values
-                  assign size_string = value | append: ','
-                  unless all_sizes contains size_string
-                    assign all_sizes = all_sizes | append: size_string
-                  endunless
-                endfor
-              endif
-            endfor
-          endfor
-        endif
         
         assign unique_sizes = all_sizes | remove_last: ',' | split: ',' | uniq
         assign rendered_short_sizes = ''
@@ -100,20 +85,11 @@
                 
                 {%- for product in source_collection.products -%}
                   {%- liquid
-                    assign size_option_key_index = 0
-                    for option in product.options
-                      if option == size_option_name
-                        assign size_option_key_index = forloop.index
-                        break
-                      endif
-                    endfor
-                    assign size_option_key = 'option' | append: size_option_key_index
-                    
                     assign product_size = ''
                     assign product_variant = product.selected_or_first_available_variant
                     
                     for variant in product.variants
-                      assign variant_size = variant[size_option_key]
+                      assign variant_size = variant.option1
                       if variant_size != blank
                         assign variant_size_handle = variant_size | split: '-' | first | strip | handle
                         if variant_size_handle == short_size
@@ -126,9 +102,10 @@
                   -%}
 
                   {%- if product_size != blank -%}
-                    {%- assign product_id_str = product.id | append: ',' -%}
-                    {%- unless displayed_products_for_size contains product_id_str -%}
-                      {%- assign displayed_products_for_size = displayed_products_for_size | append: product_id_str -%}
+                    {%- assign product_size_key = product.id | append: '-' | append: product_size | append: ',' -%}
+                    {%- unless displayed_products_for_size contains product_size_key -%}
+                      {%- assign displayed_products_for_size = displayed_products_for_size | append: product_size_key -%}
+                      <!-- DEBUG: Product {{ product.id }} ({{ product.title }}) added for size {{ short_size }} -->
                 <a href="{{ product.url }}" class="product-card" data-size="{{ product_size }}">
                   <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}">
                     {%- if section.settings.product_label != blank -%}
@@ -190,7 +167,7 @@
                     </div>
                   </div>
                 </a>
-                    {%- endunless -%}
+                      {%- endunless -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- endif -%}
@@ -305,7 +282,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 20  px;
+    padding-bottom: 20px;
   }
   [data-section-id="{{ section.id }}"] .product-card {
     display: none; /* Hidden by default, shown by JS */
@@ -690,24 +667,8 @@
     
     let carousel = null;
 
-    // Function to remove duplicate products based on product URL
-    function removeDuplicateProducts() {
-      const seenUrls = new Set();
-      const cardsArray = Array.from(allProductCards);
-      
-      cardsArray.forEach(card => {
-        const productUrl = card.getAttribute('href');
-        if (seenUrls.has(productUrl)) {
-          // Duplicate found - remove it
-          card.remove();
-        } else {
-          seenUrls.add(productUrl);
-        }
-      });
-    }
-
-    // Remove duplicates on page load
-    removeDuplicateProducts();
+    // Liquid logic already handles duplicates per tab correctly
+    // No need for JavaScript duplicate removal
 
     // --- Drag-to-scroll for tabs ---
     const tabsContainer = sectionContainer.querySelector('.category-tabs');
@@ -734,7 +695,7 @@
       let isDown = false;
       let isDragging = false;
       let startX;
-      let initialTranslateX;
+      let initialScrollLeft;
       let walk = 0;
       const dragThreshold = 5;
 
@@ -802,8 +763,8 @@
         isDown = true;
         isDragging = false;
         startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
-        productCardsContainer.style.transition = 'none';
-        initialTranslateX = getTranslateX();
+        productCardsContainer.style.scrollBehavior = 'auto';
+        initialScrollLeft = productCardsContainer.scrollLeft;
         walk = 0;
         if (e.type === 'touchstart') {
           window.addEventListener('touchmove', dragMove);
@@ -818,9 +779,9 @@
         
         if (Math.abs(walk) > dragThreshold) {
           isDragging = true;
-          carouselContainer.classList.add('grabbing');
+          productCardsContainer.classList.add('grabbing');
           e.preventDefault();
-          productCardsContainer.style.transform = `translateX(${initialTranslateX + walk}px)`;
+          productCardsContainer.scrollLeft = initialScrollLeft - walk;
         }
       }
       
@@ -830,32 +791,20 @@
         const wasDragging = isDragging;
         isDown = false;
         isDragging = false;
-        carouselContainer.classList.remove('grabbing');
+        productCardsContainer.classList.remove('grabbing');
+        productCardsContainer.style.scrollBehavior = 'smooth';
         window.removeEventListener('touchmove', dragMove);
         window.removeEventListener('touchend', dragEnd);
         
-        if (wasDragging && Math.abs(walk) > dragThreshold) { 
-            const visibleCards = getVisibleCards();
-            if (visibleCards.length === 0) return;
-            const itemWidth = visibleCards[0].offsetWidth;
-            const threshold = itemWidth / 4;
-            const itemsPerView = getItemsPerView();
-            const maxIndex = Math.max(0, visibleCards.length - itemsPerView);
-
-            if (walk < -threshold && currentIndex < maxIndex) {
-                currentIndex++;
-            } else if (walk > threshold && currentIndex > 0) {
-                currentIndex--;
-            }
-        }
-        updateCarousel();
+        // No need for complex logic - just let the scroll stay where it is
+        // The scrollbar behavior is handled by CSS
       }
 
-      carouselContainer.addEventListener('mousedown', dragStart);
-      carouselContainer.addEventListener('mousemove', dragMove);
-      carouselContainer.addEventListener('mouseup', dragEnd);
-      carouselContainer.addEventListener('mouseleave', dragEnd);
-      carouselContainer.addEventListener('touchstart', dragStart);
+      productCardsContainer.addEventListener('mousedown', dragStart);
+      productCardsContainer.addEventListener('mousemove', dragMove);
+      productCardsContainer.addEventListener('mouseup', dragEnd);
+      productCardsContainer.addEventListener('mouseleave', dragEnd);
+      productCardsContainer.addEventListener('touchstart', dragStart);
 
       // Handle click events for product cards - block if was dragging
       allProductCards.forEach(card => {
@@ -898,12 +847,16 @@
         card.classList.remove('is-visible');
       });
       
-      // Show matching cards
+      // Show matching cards with duplicate prevention
+      const seenProductUrls = new Set();
       allProductCards.forEach(card => {
         const cardSize = card.getAttribute('data-size');
-        if (cardSize === size && visibleCount < maxMobileCards) {
+        const productUrl = card.getAttribute('href');
+        
+        if (cardSize === size && visibleCount < maxMobileCards && !seenProductUrls.has(productUrl)) {
           card.style.display = 'block';
           card.classList.add('is-visible');
+          seenProductUrls.add(productUrl);
           visibleCount++;
         }
       });

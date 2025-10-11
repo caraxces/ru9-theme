@@ -3742,22 +3742,76 @@
   }
 }
 
-/* Mobile slideshow for Step 1 - keep desktop layout unchanged */
+/* Mobile slideshow - Fix for MAIN PRODUCT PAGE (not just bundle steps) */
 @media (max-width: 768px) {
+  /* MAIN PRODUCT PAGE: Remove conflicting CSS that prevents Flickity from working */
+  .product-slideshow {
+    /* Remove any scroll-snap or overflow conflicts */
+    display: block !important;
+    overflow: visible !important;
+    touch-action: pan-y pinch-zoom !important; /* Allow horizontal swipe */
+  }
+  .product__thumbs--below .product__thumb-item{
+    margin-right: 0px!important;
+    width: 60px;
+    vertical-align: middle;
+  }
+  .product-main-slide {
+    display: block !important;
+    width: 100% !important;
+  }
+  
+  .product-main-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Ensure Flickity viewport is properly sized on mobile */
+  .product-slideshow.flickity-enabled {
+    display: block !important;
+    overflow: hidden !important;
+    touch-action: pan-y !important; /* Allow horizontal drag */
+  }
+  
+  .flickity-viewport {
+    overflow: hidden !important;
+    position: relative !important;
+    height: 100% !important;
+    touch-action: pan-y !important;
+  }
+  
+  .flickity-slider {
+    display: flex !important;
+    width: auto !important;
+    position: relative !important;
+    left: 0 !important;
+  }
+  
+  /* Ensure slides are properly positioned */
+  .product-slideshow.flickity-enabled .product-main-slide {
+    position: absolute !important;
+    left: 0 !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease !important;
+    width: 100% !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .product-slideshow.flickity-enabled .product-main-slide.is-selected {
+    position: relative !important;
+    opacity: 1 !important;
+  }
+  
+  /* BUNDLE STEP 1: Also fix bundle step slideshow */
   .bundle-step-1 .product-slideshow {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 0;
+    display: block !important;
+    overflow: visible !important;
   }
   
   .bundle-step-1 .product-main-slide {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    min-width: 100%;
+    display: block !important;
+    width: 100% !important;
   }
   
   .bundle-step-1 .product-main-slide img {
@@ -3765,6 +3819,39 @@
     height: auto;
     display: block;
   }
+  
+  .bundle-step-1 .flickity-viewport {
+    overflow: hidden !important;
+  }
+  
+  .bundle-step-1 .flickity-slider {
+    display: flex !important;
+    width: auto !important;
+  }
+  
+  .bundle-step-1 .product-slideshow.flickity-enabled {
+    display: block !important;
+    overflow: hidden !important;
+  }
+  
+  .bundle-step-1 .product-slideshow.flickity-enabled .product-main-slide {
+    position: absolute !important;
+    left: 0 !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease !important;
+  }
+  
+  .bundle-step-1 .product-slideshow.flickity-enabled .product-main-slide.is-selected {
+    position: relative !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Hide zoom button on bundle pages */
+.bundle-step-1 .product__photo-zoom,
+.bundle-step-2 .product__photo-zoom,
+.bundle-step-3 .product__photo-zoom {
+  display: none !important;
 }
 
 /* Step 2 ALL Screens - Image wrap positioning */
@@ -3850,5 +3937,29 @@
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+  }
+}
+
+/* Steps 1 & 3: 2-column thumbnail grid below main image (desktop only) */
+@media (min-width: 769px) {
+  .bundle-step-1 .product__thumbs--below .product__thumbs--scroller,
+  .bundle-step-3 .product__thumbs--below .product__thumbs--scroller {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+    overflow-x: visible !important;
+    white-space: normal !important;
+  }
+  
+  .bundle-step-1 .product__thumbs--below .product__thumb-item,
+  .bundle-step-3 .product__thumbs--below .product__thumb-item {
+    display: block !important;
+    width: 100% !important;
+    margin-right: 0 !important;
+  }
+  
+  .bundle-step-1 .product__thumbs--below,
+  .bundle-step-3 .product__thumbs--below {
+    margin-top: 15px;
   }
 }
