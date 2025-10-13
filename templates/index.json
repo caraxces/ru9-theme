@@ -155,7 +155,7 @@
           "type": "collection",
           "settings": {
             "collection": "nem",
-            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648.png",
+            "custom_image": "shopify://shop_images/PRO_dac6eb92-a8f8-45e6-9735-599312527463.jpg",
             "custom_title": "",
             "custom_link": ""
           }
@@ -164,7 +164,7 @@
           "type": "collection",
           "settings": {
             "collection": "goi",
-            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
+            "custom_image": "shopify://shop_images/G_I_NIU_e0cce619-9aaa-4f63-b789-07e66004a6e6.jpg",
             "custom_title": "",
             "custom_link": ""
           }
@@ -219,7 +219,7 @@
           "settings": {
             "tab_name": "Nệm",
             "collection": "nem",
-            "product_label": "",
+            "product_label": "Bán chạy",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -483,6 +483,7 @@
       "blocks": {
         "review_LgQfji": {
           "type": "review",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
             "customer_name": "Gon Pink",
@@ -731,6 +732,7 @@
         "topic_tab_cWdgCY",
         "topic_tab_TTmcX4"
       ],
+      "custom_css": [],
       "name": "Blog posts carousel",
       "settings": {
         "title": "Blog posts",

@@ -1011,18 +1011,18 @@
         "collection_pMXCbU": {
           "type": "collection",
           "settings": {
-            "collection": "chan",
-            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
-            "custom_title": "",
+            "collection": "bedding",
+            "custom_image": "shopify://shop_images/BEDDING_1.jpg",
+            "custom_title": "Bộ Ga Giường",
             "custom_link": ""
           }
         },
         "collection_xiUYwi": {
           "type": "collection",
           "settings": {
-            "collection": "phu-kien",
-            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
-            "custom_title": "",
+            "collection": "bundle",
+            "custom_image": "shopify://shop_images/bundle.jpg",
+            "custom_title": "Combo Tiết Kiệm",
             "custom_link": ""
           }
         },

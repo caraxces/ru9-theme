@@ -188,6 +188,7 @@
         "reason_QFNbjW",
         "reason_jiUwU6"
       ],
+      "disabled": true,
       "name": "Reason to choice",
       "settings": {
         "title": "Không chỉ là lựa chọn cho phòng ngủ, mà còn là đầu tư cho chất lượng cuộc sống"
@@ -850,6 +851,7 @@
     },
     "best_seller_DWCAYP": {
       "type": "best-seller",
+      "disabled": true,
       "custom_css": [
         "@media (max-width: 767px) {span {font-size: 16px; }}"
       ],
@@ -886,6 +888,125 @@
         "anchor_link_text": "",
         "full_width": false,
         "space_around": true
+      }
+    },
+    "super_service_DwGy4L": {
+      "type": "super-service",
+      "blocks": {
+        "service_item_cfbCBD": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_3.svg",
+            "item_title": "100 đêm ngủ thử",
+            "item_note": "",
+            "item_description": "<p>Trải nghiệm sản phẩm ngay tại nhà với cam kết đổi trả linh hoạt.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_zAzfAk": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_4.svg",
+            "item_title": "Miễn phí vận chuyển",
+            "item_note": "(từ 1.500.000vnd)",
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>",
+            "item_link": ""
+          }
+        },
+        "service_item_zfj4hi": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_5.svg",
+            "item_title": "Bảo hành dài lâu",
+            "item_note": "",
+            "item_description": "<p>Mỗi chiếc nệm được bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_WRHiFx": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_6.svg",
+            "item_title": "Thanh toán linh hoạt",
+            "item_note": "",
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>",
+            "item_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "service_item_cfbCBD",
+        "service_item_zAzfAk",
+        "service_item_zfj4hi",
+        "service_item_WRHiFx"
+      ],
+      "name": "Super Service",
+      "settings": {
+        "title": "An tâm hơn với dịch vụ vượt trội",
+        "background_color": "#f5f9ff"
+      }
+    },
+    "collections_listing_NBBbpg": {
+      "type": "collections-listing",
+      "blocks": {
+        "collection_DzJbyf": {
+          "type": "collection",
+          "settings": {
+            "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_NwfDzG": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_zNmUce": {
+          "type": "collection",
+          "settings": {
+            "collection": "bedding",
+            "custom_image": "shopify://shop_images/BEDDING_1.jpg",
+            "custom_title": "Bộ Ga Giường",
+            "custom_link": ""
+          }
+        },
+        "collection_UcU84n": {
+          "type": "collection",
+          "settings": {
+            "collection": "bundle",
+            "custom_image": "shopify://shop_images/bundle.jpg",
+            "custom_title": "Combo Tiết Kiệm",
+            "custom_link": ""
+          }
+        },
+        "collection_4ndGy3": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_DzJbyf",
+        "collection_NwfDzG",
+        "collection_zNmUce",
+        "collection_UcU84n",
+        "collection_4ndGy3"
+      ],
+      "name": "Collections Listing",
+      "settings": {
+        "title": "Có thể bạn cũng thích",
+        "title_color": "#1c2c58",
+        "text_color": "#212121"
       }
     },
     "sub": {
@@ -931,6 +1052,8 @@
     "product_hotspot_4TYCfN",
     "best_seller_DWCAYP",
     "1730878240cfbec46e",
+    "super_service_DwGy4L",
+    "collections_listing_NBBbpg",
     "sub",
     "product-recommendations",
     "recently-viewed",

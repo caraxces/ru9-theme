@@ -889,6 +889,125 @@
         "space_around": true
       }
     },
+    "super_service_MkcaBY": {
+      "type": "super-service",
+      "blocks": {
+        "service_item_dD4AUQ": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_3.svg",
+            "item_title": "100 đêm ngủ thử",
+            "item_note": "",
+            "item_description": "<p>Trải nghiệm sản phẩm ngay tại nhà với cam kết đổi trả linh hoạt.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_azabbP": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_4.svg",
+            "item_title": "Miễn phí vận chuyển",
+            "item_note": "(từ 1.500.000vnd)",
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>",
+            "item_link": ""
+          }
+        },
+        "service_item_adMJ7D": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_5.svg",
+            "item_title": "Bảo hành dài lâu",
+            "item_note": "",
+            "item_description": "<p>Mỗi chiếc nệm được bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_Mh668E": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_6.svg",
+            "item_title": "Thanh toán linh hoạt",
+            "item_note": "",
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>",
+            "item_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "service_item_dD4AUQ",
+        "service_item_azabbP",
+        "service_item_adMJ7D",
+        "service_item_Mh668E"
+      ],
+      "name": "Super Service",
+      "settings": {
+        "title": "An tâm hơn với dịch vụ vượt trội",
+        "background_color": "#f5f9ff"
+      }
+    },
+    "collections_listing_EMRfPL": {
+      "type": "collections-listing",
+      "blocks": {
+        "collection_HMVxgX": {
+          "type": "collection",
+          "settings": {
+            "collection": "nem",
+            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648_4be2ec4a-4958-44ff-bc6e-5ba32da47826.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_Nhatgz": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi",
+            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_UpDMJy": {
+          "type": "collection",
+          "settings": {
+            "collection": "bedding",
+            "custom_image": "shopify://shop_images/BEDDING_1.jpg",
+            "custom_title": "Bộ Ga Giường",
+            "custom_link": ""
+          }
+        },
+        "collection_BFakyt": {
+          "type": "collection",
+          "settings": {
+            "collection": "bundle",
+            "custom_image": "shopify://shop_images/bundle.jpg",
+            "custom_title": "Combo Tiết Kiệm",
+            "custom_link": ""
+          }
+        },
+        "collection_CQpK8F": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_HMVxgX",
+        "collection_Nhatgz",
+        "collection_UpDMJy",
+        "collection_BFakyt",
+        "collection_CQpK8F"
+      ],
+      "name": "Collections Listing",
+      "settings": {
+        "title": "Có thể bạn cũng thích",
+        "title_color": "#1c2c58",
+        "text_color": "#212121"
+      }
+    },
     "sub": {
       "type": "product-full-width",
       "disabled": true,
@@ -932,6 +1051,8 @@
     "product_hotspot_4TYCfN",
     "best_seller_DWCAYP",
     "1730878240cfbec46e",
+    "super_service_MkcaBY",
+    "collections_listing_EMRfPL",
     "sub",
     "product-recommendations",
     "recently-viewed",
