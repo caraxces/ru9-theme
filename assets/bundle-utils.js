@@ -324,11 +324,11 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         slideshowHTML += `
           <div class="product-main-slide ${index === 0 ? 'starting-slide' : 'secondary-slide'}" data-index="${index}" ${index === 0 ? 'style="display: block;"' : 'style="display: none;"'}>
             <div data-product-image-main class="product-image-main">
-              <div class="image-wrap loaded" style="height: 0; padding-bottom: ${100 / aspectRatio}%;">
+              <div class="image-wrap loaded" style="position: relative; width: 100%; height: auto;">
                 <img src="${mediaUrl}" 
                      alt="${productData.title}" 
                      class="product-featured-img lazyautosizes image-element lazyloaded" 
-                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"
+                     style="width: 100%; height: auto; object-fit: contain; display: block;"
                      loading="${index === 0 ? 'eager' : 'lazy'}"
                      data-index="${index}">
               </div>
@@ -3536,12 +3536,20 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         return;
       }
       
+      // For Step 2, we need to find the image column (left side), not the info column (right side)
+      // The container passed in might be the product-item container, so we need to search broader
+      const step2ImageColumn = document.getElementById(`Step2ImageColumn-${sectionId}`);
+      const imageContainer = step2ImageColumn || container;
+      
+      console.log('🔍 Image container:', imageContainer);
+      console.log('🔍 Container class:', imageContainer ? imageContainer.className : 'N/A');
+      
       // Find the main product image elements
-      const mainImageElements = container.querySelectorAll('.product-featured-img, .product-image-main img, [data-product-image-main] img');
+      const mainImageElements = imageContainer.querySelectorAll('.product-featured-img, .product-image-main img, [data-product-image-main] img');
       console.log('Found main image elements:', mainImageElements.length);
       
       // Find the main slide elements
-      const mainSlides = container.querySelectorAll('.product-main-slide');
+      const mainSlides = imageContainer.querySelectorAll('.product-main-slide');
       console.log('Found main slide elements:', mainSlides.length);
       
       // Get variant image URL
@@ -3631,8 +3639,37 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         }
       }
       
+      // Sync with Flickity if it exists
+      const slideshowElement = imageContainer.querySelector('.product-slideshow, [data-product-photos]');
+      if (slideshowElement && window.Flickity) {
+        const flickityInstance = Flickity.data(slideshowElement);
+        if (flickityInstance) {
+          console.log('🔄 Syncing Flickity with variant image change');
+          
+          // Force Flickity to re-read the DOM and update
+          flickityInstance.reloadCells();
+          flickityInstance.resize();
+          flickityInstance.reposition();
+          
+          // Select the first slide to show the variant image
+          flickityInstance.select(0, false, true);
+          
+          console.log('✅ Flickity synced with new variant image');
+        }
+      }
+      
+      // Fallback: Ensure first slide is visible if Flickity isn't active
+      if (!slideshowElement || !Flickity.data(slideshowElement)) {
+        const firstSlide = mainSlides[0];
+        if (firstSlide) {
+          firstSlide.style.display = 'block';
+          firstSlide.classList.add('starting-slide', 'is-selected');
+          console.log('✅ First slide made visible (no Flickity)');
+        }
+      }
+      
       // Update thumbnails if they exist
-      const thumbnails = container.querySelectorAll('[data-product-thumb] img, .product__thumb img');
+      const thumbnails = imageContainer.querySelectorAll('[data-product-thumb] img, .product__thumb img');
       console.log('Found thumbnail images:', thumbnails.length);
       
       // Find the thumbnail that matches the variant image

@@ -691,71 +691,11 @@
     }
 
     function initializeCarousel() {
-      let currentIndex = 0;
       let isDown = false;
       let isDragging = false;
       let startX;
-      let initialScrollLeft;
-      let walk = 0;
+      let scrollLeft;
       const dragThreshold = 5;
-
-      function getVisibleCards() {
-          return Array.from(allProductCards).filter(card => card.style.display !== 'none');
-      }
-
-      function getItemsPerView() {
-        // Trên mobile, hiển thị tất cả sản phẩm trong grid
-        if (window.innerWidth <= 768) {
-          return getVisibleCards().length;
-        }
-        const visibleCards = getVisibleCards();
-        if (visibleCards.length === 0) return 1;
-        const containerWidth = productCardsContainer.parentElement.offsetWidth;
-        const itemWidth = visibleCards[0].offsetWidth;
-        const gap = containerWidth * 0.02;
-        if (itemWidth === 0) return 1;
-        return Math.floor(containerWidth / (itemWidth + gap)) || 1;
-      }
-
-      function getTranslateX() {
-          const style = window.getComputedStyle(productCardsContainer);
-          const transform = style.transform;
-          if (transform === 'none') return 0;
-          const matrix = new DOMMatrixReadOnly(transform);
-          return matrix.m41;
-      }
-
-      function updateCarousel(isResize = false) {
-        // Trên mobile, không áp dụng carousel logic
-        if (window.innerWidth <= 768) {
-          prevBtn.disabled = true;
-          nextBtn.disabled = true;
-          productCardsContainer.style.transform = `translateX(0px)`;
-          return;
-        }
-
-        productCardsContainer.style.transition = isResize ? 'none' : 'transform 0.4s ease';
-        const visibleCards = getVisibleCards();
-        if (visibleCards.length === 0) {
-            prevBtn.disabled = true;
-            nextBtn.disabled = true;
-            productCardsContainer.style.transform = `translateX(0px)`;
-            return;
-        }
-        
-        const itemsPerView = getItemsPerView();
-        const maxIndex = Math.max(0, visibleCards.length - itemsPerView);
-        currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
-
-        const itemWidth = visibleCards[0].offsetWidth;
-        const gap = productCardsContainer.parentElement.offsetWidth * 0.02;
-        const translateX = -currentIndex * (itemWidth + gap);
-        productCardsContainer.style.transform = `translateX(${translateX}px)`;
-        
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= maxIndex;
-
-      }
 
       function dragStart(e) {
         // Không cho phép drag trên mobile
@@ -763,9 +703,7 @@
         isDown = true;
         isDragging = false;
         startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
-        productCardsContainer.style.scrollBehavior = 'auto';
-        initialScrollLeft = productCardsContainer.scrollLeft;
-        walk = 0;
+        scrollLeft = productCardsContainer.scrollLeft;
         if (e.type === 'touchstart') {
           window.addEventListener('touchmove', dragMove);
           window.addEventListener('touchend', dragEnd);
@@ -775,29 +713,23 @@
       function dragMove(e) {
         if (!isDown) return;
         const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
-        walk = currentX - startX;
+        const walk = currentX - startX;
         
         if (Math.abs(walk) > dragThreshold) {
           isDragging = true;
-          productCardsContainer.classList.add('grabbing');
+          carouselContainer.classList.add('grabbing');
           e.preventDefault();
-          productCardsContainer.scrollLeft = initialScrollLeft - walk;
+          productCardsContainer.scrollLeft = scrollLeft - walk;
         }
       }
-      
 
       function dragEnd() {
         if (!isDown) return;
-        const wasDragging = isDragging;
         isDown = false;
         isDragging = false;
-        productCardsContainer.classList.remove('grabbing');
-        productCardsContainer.style.scrollBehavior = 'smooth';
+        carouselContainer.classList.remove('grabbing');
         window.removeEventListener('touchmove', dragMove);
         window.removeEventListener('touchend', dragEnd);
-        
-        // No need for complex logic - just let the scroll stay where it is
-        // The scrollbar behavior is handled by CSS
       }
 
       productCardsContainer.addEventListener('mousedown', dragStart);
@@ -820,19 +752,17 @@
 
       return {
         next: () => {
-          const visibleCards = getVisibleCards();
-          const itemsPerView = getItemsPerView();
-          const maxIndex = Math.max(0, visibleCards.length - itemsPerView);
-          if (currentIndex < maxIndex) { currentIndex++; updateCarousel(); }
+          const scrollAmount = productCardsContainer.offsetWidth * 0.8;
+          productCardsContainer.scrollLeft += scrollAmount;
         },
         prev: () => {
-          if (currentIndex > 0) { currentIndex--; updateCarousel(); }
+          const scrollAmount = productCardsContainer.offsetWidth * 0.8;
+          productCardsContainer.scrollLeft -= scrollAmount;
         },
         reset: () => {
-            currentIndex = 0;
-            updateCarousel();
+          productCardsContainer.scrollLeft = 0;
         },
-        update: () => updateCarousel(true)
+        update: () => {}
       };
     }
 
@@ -916,7 +846,7 @@
             filterProducts(currentSize);
           }
         }
-        if (carousel) carousel.update();
+        // No need to call carousel.update() since we're using native scroll
       }, 250);
     });
 
