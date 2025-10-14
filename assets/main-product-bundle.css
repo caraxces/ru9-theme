@@ -3987,6 +3987,16 @@
     white-space: normal !important;
   }
   
+  /* Hide first thumbnail (data-index="0") on desktop */
+  .bundle-step-1 .product__thumbs--scroller [data-product-thumb][data-index="0"],
+  .bundle-step-1 .product__thumbs--scroller .product__thumb-item[data-index="0"],
+  .bundle-step-2 .product__thumbs--scroller [data-product-thumb][data-index="0"],
+  .bundle-step-2 .product__thumbs--scroller .product__thumb-item[data-index="0"],
+  .bundle-step-3 .product__thumbs--scroller [data-product-thumb][data-index="0"],
+  .bundle-step-3 .product__thumbs--scroller .product__thumb-item[data-index="0"] {
+    display: none !important;
+  }
+  
   .bundle-step-1 .product__thumbs--below .product__thumb-item,
   .bundle-step-3 .product__thumbs--below .product__thumb-item {
     display: block !important;

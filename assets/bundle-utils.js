@@ -3600,7 +3600,48 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       
       console.log('Final variant image URL:', variantImageUrl);
       
-      // Find thumbnails to determine which slide to show
+      // DESKTOP: Simply update the first main slide image with variant image
+      // Don't navigate slideshow - just update the image source
+      const isMobile = window.innerWidth <= 768;
+      
+      if (!isMobile) {
+        console.log('💻 Desktop mode: Updating first slide image only');
+        
+        // Find the first slide
+        const mainSlides = imageContainer.querySelectorAll('.product-main-slide');
+        if (mainSlides.length > 0) {
+          const firstSlide = mainSlides[0];
+          const slideImg = firstSlide.querySelector('img');
+          
+          if (slideImg) {
+            console.log('Updating first slide image:', slideImg.src, '->', variantImageUrl);
+            slideImg.src = variantImageUrl;
+            slideImg.alt = variant.title || slideImg.alt;
+            
+            // Trigger image load event
+            slideImg.dispatchEvent(new Event('load'));
+            console.log('✅ Desktop: First slide image updated');
+          }
+        }
+        
+        // Sync Flickity to refresh the display (but don't navigate)
+        const slideshowElement = imageContainer.querySelector('.product-slideshow, [data-product-photos]');
+        if (slideshowElement && window.Flickity) {
+          const flickityInstance = Flickity.data(slideshowElement);
+          if (flickityInstance) {
+            flickityInstance.resize();
+            flickityInstance.reposition();
+            console.log('✅ Desktop: Flickity refreshed');
+          }
+        }
+        
+        console.log('✅ Desktop: Product image update completed');
+        return; // Exit early for desktop
+      }
+      
+      // MOBILE ONLY: Find matching thumbnail and navigate to it
+      console.log('📱 Mobile mode: Finding matching thumbnail');
+      
       const thumbnails = imageContainer.querySelectorAll('[data-product-thumb], .product__thumb');
       console.log('Found thumbnails:', thumbnails.length);
       
@@ -3613,15 +3654,9 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         if (thumbImg) {
           const thumbSrc = thumbImg.src || thumbImg.getAttribute('data-src') || '';
           
-          console.log(`🔍 Checking thumbnail ${index}:`, {
-            thumbSrc: thumbSrc,
-            variantImageUrl: variantImageUrl
-          });
-          
-          // Clean URLs for comparison (remove protocol, domain, query params)
+          // Clean URLs for comparison (extract filename only)
           const cleanUrl = (url) => {
             if (!url) return '';
-            // Extract just the filename
             const parts = url.split('/');
             const filename = parts[parts.length - 1];
             return filename.split('?')[0].toLowerCase();
@@ -3630,7 +3665,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           const thumbFilename = cleanUrl(thumbSrc);
           const variantFilename = cleanUrl(variantImageUrl);
           
-          console.log(`  Comparing: "${thumbFilename}" vs "${variantFilename}"`);
+          console.log(`🔍 Thumbnail ${index}: "${thumbFilename}" vs "${variantFilename}"`);
           
           if (thumbFilename && variantFilename && thumbFilename === variantFilename) {
             matchingThumbnailIndex = index;
@@ -3640,54 +3675,43 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         }
       });
       
-      console.log('Matching thumbnail index:', matchingThumbnailIndex);
-      
-      // Sync with Flickity if it exists
+      // Navigate Flickity to matching thumbnail (mobile only)
       const slideshowElement = imageContainer.querySelector('.product-slideshow, [data-product-photos]');
       if (slideshowElement && window.Flickity) {
         const flickityInstance = Flickity.data(slideshowElement);
         if (flickityInstance) {
-          console.log('🔄 Syncing Flickity with variant image change');
+          console.log('🔄 Mobile: Syncing Flickity with variant image');
           
-          // Only navigate to matching thumbnail if found
           if (matchingThumbnailIndex >= 0) {
-            // Navigate to the slide that matches the variant image
+            // Navigate to the matching slide
             flickityInstance.select(matchingThumbnailIndex, false, true);
-            console.log(`✅ Flickity navigated to slide ${matchingThumbnailIndex}`);
+            console.log(`✅ Mobile: Flickity navigated to slide ${matchingThumbnailIndex}`);
           } else {
-            console.log('⚠️ No matching thumbnail found, keeping current slide');
-            // Just refresh Flickity without changing slide
+            console.log('⚠️ Mobile: No matching thumbnail, keeping current slide');
             flickityInstance.resize();
             flickityInstance.reposition();
           }
         }
       }
       
-      // Update thumbnail active states
+      // Update thumbnail active states (mobile only)
       if (matchingThumbnail) {
-        // Remove active state from all thumbnails
-        thumbnails.forEach(thumb => {
-          thumb.classList.remove('active', 'active-thumb');
-        });
-        
-        // Add active state to matching thumbnail
+        thumbnails.forEach(thumb => thumb.classList.remove('active', 'active-thumb'));
         matchingThumbnail.classList.add('active', 'active-thumb');
-        console.log('✅ Activated matching thumbnail');
+        console.log('✅ Mobile: Activated matching thumbnail');
         
-        // Scroll thumbnail into view if needed
+        // Scroll thumbnail into view
         const thumbnailsScroller = imageContainer.querySelector('.product__thumbs--scroller');
-        if (thumbnailsScroller && matchingThumbnail) {
-          // Smooth scroll the thumbnail container to show the active thumbnail
-          const scrollOptions = {
+        if (thumbnailsScroller) {
+          matchingThumbnail.scrollIntoView({
             behavior: 'smooth',
             block: 'nearest',
             inline: 'center'
-          };
-          matchingThumbnail.scrollIntoView(scrollOptions);
-          console.log('✅ Scrolled thumbnail into view');
+          });
+          console.log('✅ Mobile: Scrolled thumbnail into view');
         }
       } else {
-        console.log('⚠️ No matching thumbnail found, keeping current active state');
+        console.log('⚠️ Mobile: No matching thumbnail found');
       }
       
       console.log('✅ Product image update completed');
