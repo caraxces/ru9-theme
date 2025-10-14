@@ -3600,44 +3600,47 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       
       console.log('Final variant image URL:', variantImageUrl);
       
-      // Update main image elements
-      mainImageElements.forEach((img, index) => {
-        console.log(`Updating main image ${index}:`, img.src, '->', variantImageUrl);
-        img.src = variantImageUrl;
-        img.alt = variant.title || img.alt;
-        
-        // Trigger image load event
-        img.dispatchEvent(new Event('load'));
-      });
+      // Find thumbnails to determine which slide to show
+      const thumbnails = imageContainer.querySelectorAll('[data-product-thumb], .product__thumb');
+      console.log('Found thumbnails:', thumbnails.length);
       
-      // Update main slides - show the first slide and update its image
-      if (mainSlides.length > 0) {
-        const firstSlide = mainSlides[0];
-        const slideImg = firstSlide.querySelector('img');
-        
-        if (slideImg) {
-          console.log('Updating first slide image:', slideImg.src, '->', variantImageUrl);
-          slideImg.src = variantImageUrl;
-          slideImg.alt = variant.title || slideImg.alt;
+      // Find the thumbnail that matches the variant image
+      let matchingThumbnailIndex = -1;
+      let matchingThumbnail = null;
+      
+      thumbnails.forEach((thumbContainer, index) => {
+        const thumbImg = thumbContainer.querySelector('img');
+        if (thumbImg) {
+          const thumbSrc = thumbImg.src || thumbImg.getAttribute('data-src') || '';
           
-          // Show the first slide
-          firstSlide.style.display = 'block';
-          firstSlide.classList.add('starting-slide');
-          firstSlide.classList.remove('secondary-slide');
-          
-          // Hide other slides
-          mainSlides.forEach((slide, index) => {
-            if (index > 0) {
-              slide.style.display = 'none';
-              slide.classList.remove('starting-slide');
-              slide.classList.add('secondary-slide');
-            }
+          console.log(`🔍 Checking thumbnail ${index}:`, {
+            thumbSrc: thumbSrc,
+            variantImageUrl: variantImageUrl
           });
           
-          // Trigger image load event
-          slideImg.dispatchEvent(new Event('load'));
+          // Clean URLs for comparison (remove protocol, domain, query params)
+          const cleanUrl = (url) => {
+            if (!url) return '';
+            // Extract just the filename
+            const parts = url.split('/');
+            const filename = parts[parts.length - 1];
+            return filename.split('?')[0].toLowerCase();
+          };
+          
+          const thumbFilename = cleanUrl(thumbSrc);
+          const variantFilename = cleanUrl(variantImageUrl);
+          
+          console.log(`  Comparing: "${thumbFilename}" vs "${variantFilename}"`);
+          
+          if (thumbFilename && variantFilename && thumbFilename === variantFilename) {
+            matchingThumbnailIndex = index;
+            matchingThumbnail = thumbContainer;
+            console.log(`✅ Found matching thumbnail at index ${index}`);
+          }
         }
-      }
+      });
+      
+      console.log('Matching thumbnail index:', matchingThumbnailIndex);
       
       // Sync with Flickity if it exists
       const slideshowElement = imageContainer.querySelector('.product-slideshow, [data-product-photos]');
@@ -3646,76 +3649,45 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         if (flickityInstance) {
           console.log('🔄 Syncing Flickity with variant image change');
           
-          // Force Flickity to re-read the DOM and update
-          flickityInstance.reloadCells();
-          flickityInstance.resize();
-          flickityInstance.reposition();
-          
-          // Select the first slide to show the variant image
-          flickityInstance.select(0, false, true);
-          
-          console.log('✅ Flickity synced with new variant image');
+          // Only navigate to matching thumbnail if found
+          if (matchingThumbnailIndex >= 0) {
+            // Navigate to the slide that matches the variant image
+            flickityInstance.select(matchingThumbnailIndex, false, true);
+            console.log(`✅ Flickity navigated to slide ${matchingThumbnailIndex}`);
+          } else {
+            console.log('⚠️ No matching thumbnail found, keeping current slide');
+            // Just refresh Flickity without changing slide
+            flickityInstance.resize();
+            flickityInstance.reposition();
+          }
         }
       }
       
-      // Fallback: Ensure first slide is visible if Flickity isn't active
-      if (!slideshowElement || !Flickity.data(slideshowElement)) {
-        const firstSlide = mainSlides[0];
-        if (firstSlide) {
-          firstSlide.style.display = 'block';
-          firstSlide.classList.add('starting-slide', 'is-selected');
-          console.log('✅ First slide made visible (no Flickity)');
-        }
-      }
-      
-      // Update thumbnails if they exist
-      const thumbnails = imageContainer.querySelectorAll('[data-product-thumb] img, .product__thumb img');
-      console.log('Found thumbnail images:', thumbnails.length);
-      
-      // Find the thumbnail that matches the variant image
-      let matchingThumbnail = null;
-      thumbnails.forEach((thumb, index) => {
-        if (thumb.src === variantImageUrl || thumb.getAttribute('data-src') === variantImageUrl) {
-          matchingThumbnail = thumb;
-          console.log(`Found matching thumbnail ${index}`);
-        }
-      });
-      
-      // If we found a matching thumbnail, make it active
+      // Update thumbnail active states
       if (matchingThumbnail) {
         // Remove active state from all thumbnails
         thumbnails.forEach(thumb => {
-          const thumbContainer = thumb.closest('[data-product-thumb], .product__thumb');
-          if (thumbContainer) {
-            thumbContainer.classList.remove('active', 'active-thumb');
-          }
+          thumb.classList.remove('active', 'active-thumb');
         });
         
         // Add active state to matching thumbnail
-        const matchingThumbContainer = matchingThumbnail.closest('[data-product-thumb], .product__thumb');
-        if (matchingThumbContainer) {
-          matchingThumbContainer.classList.add('active', 'active-thumb');
-          console.log('✅ Activated matching thumbnail');
+        matchingThumbnail.classList.add('active', 'active-thumb');
+        console.log('✅ Activated matching thumbnail');
+        
+        // Scroll thumbnail into view if needed
+        const thumbnailsScroller = imageContainer.querySelector('.product__thumbs--scroller');
+        if (thumbnailsScroller && matchingThumbnail) {
+          // Smooth scroll the thumbnail container to show the active thumbnail
+          const scrollOptions = {
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center'
+          };
+          matchingThumbnail.scrollIntoView(scrollOptions);
+          console.log('✅ Scrolled thumbnail into view');
         }
       } else {
-        // If no matching thumbnail, activate the first one
-        if (thumbnails.length > 0) {
-          const firstThumb = thumbnails[0];
-          const firstThumbContainer = firstThumb.closest('[data-product-thumb], .product__thumb');
-          if (firstThumbContainer) {
-            // Remove active state from all thumbnails
-            thumbnails.forEach(thumb => {
-              const thumbContainer = thumb.closest('[data-product-thumb], .product__thumb');
-              if (thumbContainer) {
-                thumbContainer.classList.remove('active', 'active-thumb');
-              }
-            });
-            
-            // Add active state to first thumbnail
-            firstThumbContainer.classList.add('active', 'active-thumb');
-            console.log('✅ Activated first thumbnail as fallback');
-          }
-        }
+        console.log('⚠️ No matching thumbnail found, keeping current active state');
       }
       
       console.log('✅ Product image update completed');
