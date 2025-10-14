@@ -403,6 +403,15 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
     // Helper function to initialize Flickity carousel for mobile swipe
     function initializeFlickityForStep(container, step) {
       setTimeout(() => {
+        // DESKTOP: Disable Flickity, use static image with thumbnail clicks only
+        if (window.innerWidth > 768) {
+          console.log('💻 Desktop mode: Skipping Flickity for', step);
+          return;
+        }
+        
+        // MOBILE ONLY: Initialize Flickity
+        console.log('📱 Mobile mode: Initializing Flickity for', step);
+        
         // Try multiple selectors to find the slideshow
         let slideshow = container.querySelector('.product-slideshow, [data-product-photos], .product-main-slideshow');
         if (!slideshow) {
@@ -1428,7 +1437,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                             <span class="product__price text-2xl f-smb" data-product-price data-product-price-base="${product.price}">
                               ${BundleUtils.formatMoney(product.price)}
                             </span>
-                            ${product.compare_at_price ? `
+                            ${product.compare_at_price && product.compare_at_price > product.price ? `
                               <span class="product__price product__price--compare text-xl" data-compare-price>
                                 ${BundleUtils.formatMoney(product.compare_at_price)}
                               </span>
@@ -1438,7 +1447,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                             ` : ''}
                           </div>
                           
-  
+
                         </div>
   
   
@@ -3480,7 +3489,8 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         console.log('Compare price element before update:', comparePriceElement ? comparePriceElement.textContent : 'not found');
         
         if (comparePriceElement) {
-          if (variant.compare_at_price) {
+          // Only show if compare_at_price exists AND is greater than price
+          if (variant.compare_at_price && variant.compare_at_price > variant.price) {
             const formattedComparePrice = BundleUtils.formatMoney(variant.compare_at_price);
             comparePriceElement.textContent = formattedComparePrice;
             comparePriceElement.style.display = 'inline';
@@ -3488,7 +3498,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             console.log('✅ Compare price element after update:', comparePriceElement.textContent);
           } else {
             comparePriceElement.style.display = 'none';
-            console.log('✅ Hiding compare price');
+            console.log('✅ Hiding compare price (no discount)');
           }
         }
         
@@ -3498,15 +3508,22 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         console.log('Discount badge before update:', discountBadge ? discountBadge.textContent : 'not found');
         
         if (discountBadge) {
-          if (variant.compare_at_price) {
+          // Only show if compare_at_price exists AND is greater than price
+          if (variant.compare_at_price && variant.compare_at_price > variant.price) {
             const discountPercent = Math.round((variant.compare_at_price - variant.price) / variant.compare_at_price * 100);
-            discountBadge.textContent = `-${discountPercent}%`;
-            discountBadge.style.display = 'inline';
-            console.log('✅ Updated discount badge to:', `-${discountPercent}%`);
-            console.log('✅ Discount badge after update:', discountBadge.textContent);
+            // Only show if discount is > 0%
+            if (discountPercent > 0) {
+              discountBadge.textContent = `-${discountPercent}%`;
+              discountBadge.style.display = 'inline';
+              console.log('✅ Updated discount badge to:', `-${discountPercent}%`);
+              console.log('✅ Discount badge after update:', discountBadge.textContent);
+            } else {
+              discountBadge.style.display = 'none';
+              console.log('✅ Hiding discount badge (0% discount)');
+            }
           } else {
             discountBadge.style.display = 'none';
-            console.log('✅ Hiding discount badge');
+            console.log('✅ Hiding discount badge (no discount)');
           }
         }
       }
@@ -3601,38 +3618,54 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       console.log('Final variant image URL:', variantImageUrl);
       
       // DESKTOP: Simply update the first main slide image with variant image
-      // Don't navigate slideshow - just update the image source
+      // Don't use Flickity - static image with thumbnail navigation only
       const isMobile = window.innerWidth <= 768;
       
       if (!isMobile) {
-        console.log('💻 Desktop mode: Updating first slide image only');
+        console.log('💻 Desktop mode: Updating main image (static, no carousel)');
         
-        // Find the first slide
+        // Find all slides
         const mainSlides = imageContainer.querySelectorAll('.product-main-slide');
-        if (mainSlides.length > 0) {
-          const firstSlide = mainSlides[0];
-          const slideImg = firstSlide.querySelector('img');
-          
-          if (slideImg) {
-            console.log('Updating first slide image:', slideImg.src, '->', variantImageUrl);
-            slideImg.src = variantImageUrl;
-            slideImg.alt = variant.title || slideImg.alt;
-            
-            // Trigger image load event
-            slideImg.dispatchEvent(new Event('load'));
-            console.log('✅ Desktop: First slide image updated');
-          }
-        }
+        console.log('Found slides:', mainSlides.length);
         
-        // Sync Flickity to refresh the display (but don't navigate)
-        const slideshowElement = imageContainer.querySelector('.product-slideshow, [data-product-photos]');
-        if (slideshowElement && window.Flickity) {
-          const flickityInstance = Flickity.data(slideshowElement);
-          if (flickityInstance) {
-            flickityInstance.resize();
-            flickityInstance.reposition();
-            console.log('✅ Desktop: Flickity refreshed');
-          }
+        if (mainSlides.length > 0) {
+          // Hide all slides first
+          mainSlides.forEach(slide => {
+            slide.style.display = 'none';
+            slide.classList.remove('starting-slide', 'is-selected');
+            slide.classList.add('secondary-slide');
+          });
+          
+          // Find the slide that contains the variant image
+          let targetSlideIndex = -1;
+          mainSlides.forEach((slide, index) => {
+            const slideImg = slide.querySelector('img');
+            if (slideImg && slideImg.src) {
+              // Clean URLs for comparison
+              const cleanUrl = (url) => {
+                if (!url) return '';
+                const parts = url.split('/');
+                const filename = parts[parts.length - 1];
+                return filename.split('?')[0].toLowerCase();
+              };
+              
+              const slideFilename = cleanUrl(slideImg.src);
+              const variantFilename = cleanUrl(variantImageUrl);
+              
+              if (slideFilename === variantFilename) {
+                targetSlideIndex = index;
+                console.log(`✅ Found matching slide at index ${index}`);
+              }
+            }
+          });
+          
+          // Show the matching slide, or first slide as fallback
+          const slideToShow = targetSlideIndex >= 0 ? mainSlides[targetSlideIndex] : mainSlides[0];
+          slideToShow.style.display = 'block';
+          slideToShow.classList.add('starting-slide', 'is-selected');
+          slideToShow.classList.remove('secondary-slide');
+          
+          console.log('✅ Desktop: Showing slide at index', targetSlideIndex >= 0 ? targetSlideIndex : 0);
         }
         
         console.log('✅ Desktop: Product image update completed');
