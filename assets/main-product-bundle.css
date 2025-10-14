@@ -6,6 +6,42 @@
   margin: 0 auto;
   padding: 0 20px;
 }
+
+/* Step 1 Desktop Layout - Ensure 2 column layout */
+@media screen and (min-width: 991px) {
+  /* Force 2 column layout for Step 1 - Ultra high specificity */
+  .bundle-step-1 .grid,
+  .bundle-step-1 .grid.grid--product-images-right,
+  .bundle-step-1 .page-content .grid,
+  .bundle-step-1 .bundle-container .grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+  }
+  
+  /* Force main grid items to 50% width */
+  .bundle-step-1 .grid__item.product-single__sticky,
+  .bundle-step-1 .grid__item.product-grid__images,
+  .bundle-step-1 .grid__item.product-grid__info {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    max-width: 50% !important;
+    min-width: 50% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Override theme CSS for specific grid items only */
+  .bundle-step-1 .page-content .bundle-container .grid .grid__item.product-single__sticky,
+  .bundle-step-1 .page-content .bundle-container .grid .grid__item.product-grid__images,
+  .bundle-step-1 .page-content .bundle-container .grid .grid__item.product-grid__info {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    max-width: 50% !important;
+    min-width: 50% !important;
+    box-sizing: border-box !important;
+  }
+}
 @media screen and (min-width: 768px) {
   .bundle-step-2 .variant-wrapper.size .variant-input-wrap[data-option-count="6"],
   .bundle-step-2 .variant-wrapper.firmness .variant-input-wrap[data-option-count="6"],
