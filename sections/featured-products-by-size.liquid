@@ -268,6 +268,7 @@
     position: relative;
     overflow: hidden;
     cursor: grab;
+    padding-bottom: 40px; /* Space for fixed scrollbar */
   }
   [data-section-id="{{ section.id }}"] .product-carousel.grabbing {
     cursor: grabbing;
@@ -279,13 +280,51 @@
     display: flex;
     gap: 2%;
     transition: transform 0.3s ease;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    overflow: visible;
     padding-bottom: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Hide default scrollbar */
+  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Fixed scrollbar container */
+  [data-section-id="{{ section.id }}"] .scrollbar-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: #F0F1EF;
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  
+  /* Fixed scrollbar thumb */
+  [data-section-id="{{ section.id }}"] .scrollbar-thumb {
+    height: 100%;
+    background: #234085;
+    border-radius: 100px;
+    transition: width 0.3s ease, transform 0.3s ease;
+    min-width: 20px;
   }
   [data-section-id="{{ section.id }}"] .product-card {
     display: none; /* Hidden by default, shown by JS */
+  }
+  
+  [data-section-id="{{ section.id }}"] .product-cards-container.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+  
+  [data-section-id="{{ section.id }}"] .product-cards-container.is-dragging .product-card {
+    pointer-events: none;
   }
 
   /* Carousel Navigation */
@@ -551,7 +590,7 @@
       margin: 0 -15px;
     }
     [data-section-id="{{ section.id }}"] .product-carousel {
-      padding: 0 15px;
+      padding: 0 15px 40px 15px;
       overflow: visible;
     }
     [data-section-id="{{ section.id }}"] .product-cards-container {
@@ -691,148 +730,164 @@
     }
 
     function initializeCarousel() {
+      // Don't run smooth drag on mobile - use native scroll
+      if (window.innerWidth <= 768) {
+        return {
+          next: () => {},
+          prev: () => {},
+          reset: () => {},
+          update: () => {}
+        };
+      }
+
       let currentIndex = 0;
-      let isDown = false;
       let isDragging = false;
-      let startX;
-      let initialScrollLeft;
-      let walk = 0;
-      const dragThreshold = 5;
+      let startPos = 0;
+      let currentTranslate = 0;
+      let prevTranslate = 0;
+      let animationID = 0;
+      
+      let cardWidth, gap, viewportWidth, visibleCards, maxIndex, totalTrackWidth, maxScroll;
+      
+      const visibleProductCards = Array.from(allProductCards).filter(card => card.style.display !== 'none');
+      const scrollbarThumb = sectionContainer.querySelector('.scrollbar-thumb');
+      const scrollbarContainer = sectionContainer.querySelector('.scrollbar-container');
 
-      function getVisibleCards() {
-          return Array.from(allProductCards).filter(card => card.style.display !== 'none');
-      }
+      function calculateDimensions() {
+        const visibleCards = Array.from(allProductCards).filter(card => card.style.display !== 'none');
+        cardWidth = visibleCards.length > 0 ? visibleCards[0].offsetWidth : 0;
+        if (cardWidth === 0) return;
+        gap = parseInt(window.getComputedStyle(productCardsContainer).gap) || 24;
+        viewportWidth = productCardsContainer.offsetWidth;
+        const itemsPerView = Math.floor((viewportWidth + gap) / (cardWidth + gap));
+        maxIndex = visibleCards.length > itemsPerView ? visibleCards.length - itemsPerView : 0;
+        totalTrackWidth = (visibleCards.length * cardWidth) + Math.max(0, visibleCards.length - 1) * gap;
+        maxScroll = totalTrackWidth - viewportWidth;
 
-      function getItemsPerView() {
-        // Trên mobile, hiển thị tất cả sản phẩm trong grid
-        if (window.innerWidth <= 768) {
-          return getVisibleCards().length;
-        }
-        const visibleCards = getVisibleCards();
-        if (visibleCards.length === 0) return 1;
-        const containerWidth = productCardsContainer.parentElement.offsetWidth;
-        const itemWidth = visibleCards[0].offsetWidth;
-        const gap = containerWidth * 0.02;
-        if (itemWidth === 0) return 1;
-        return Math.floor(containerWidth / (itemWidth + gap)) || 1;
-      }
-
-      function getTranslateX() {
-          const style = window.getComputedStyle(productCardsContainer);
-          const transform = style.transform;
-          if (transform === 'none') return 0;
-          const matrix = new DOMMatrixReadOnly(transform);
-          return matrix.m41;
-      }
-
-      function updateCarousel(isResize = false) {
-        // Trên mobile, không áp dụng carousel logic
-        if (window.innerWidth <= 768) {
-          prevBtn.disabled = true;
-          nextBtn.disabled = true;
-          productCardsContainer.style.transform = `translateX(0px)`;
-          return;
-        }
-
-        productCardsContainer.style.transition = isResize ? 'none' : 'transform 0.4s ease';
-        const visibleCards = getVisibleCards();
-        if (visibleCards.length === 0) {
-            prevBtn.disabled = true;
-            nextBtn.disabled = true;
-            productCardsContainer.style.transform = `translateX(0px)`;
-            return;
-        }
-        
-        const itemsPerView = getItemsPerView();
-        const maxIndex = Math.max(0, visibleCards.length - itemsPerView);
-        currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
-
-        const itemWidth = visibleCards[0].offsetWidth;
-        const gap = productCardsContainer.parentElement.offsetWidth * 0.02;
-        const translateX = -currentIndex * (itemWidth + gap);
-        productCardsContainer.style.transform = `translateX(${translateX}px)`;
-        
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= maxIndex;
-
-      }
-
-      function dragStart(e) {
-        // Không cho phép drag trên mobile
-        if (window.innerWidth <= 768) return;
-        isDown = true;
-        isDragging = false;
-        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
-        productCardsContainer.style.scrollBehavior = 'auto';
-        initialScrollLeft = productCardsContainer.scrollLeft;
-        walk = 0;
-        if (e.type === 'touchstart') {
-          window.addEventListener('touchmove', dragMove);
-          window.addEventListener('touchend', dragEnd);
-        }
-      }
-
-      function dragMove(e) {
-        if (!isDown) return;
-        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
-        walk = currentX - startX;
-        
-        if (Math.abs(walk) > dragThreshold) {
-          isDragging = true;
-          productCardsContainer.classList.add('grabbing');
-          e.preventDefault();
-          productCardsContainer.scrollLeft = initialScrollLeft - walk;
+        if (currentIndex > maxIndex) {
+          currentIndex = maxIndex;
         }
       }
       
-
-      function dragEnd() {
-        if (!isDown) return;
-        const wasDragging = isDragging;
-        isDown = false;
-        isDragging = false;
-        productCardsContainer.classList.remove('grabbing');
-        productCardsContainer.style.scrollBehavior = 'smooth';
-        window.removeEventListener('touchmove', dragMove);
-        window.removeEventListener('touchend', dragEnd);
+      function setPositionByIndex() {
+        currentTranslate = -currentIndex * (cardWidth + gap);
+        prevTranslate = currentTranslate;
+        productCardsContainer.style.transition = 'transform 0.5s ease-in-out';
+        productCardsContainer.style.transform = `translateX(${currentTranslate}px)`;
+        updateScrollbar();
+      }
+      
+      function updateScrollbar() {
+        if (!scrollbarThumb || !scrollbarContainer) return;
         
-        // No need for complex logic - just let the scroll stay where it is
-        // The scrollbar behavior is handled by CSS
+        const scrollProgress = Math.abs(currentTranslate) / maxScroll;
+        const thumbWidth = Math.max(20, (viewportWidth / totalTrackWidth) * scrollbarContainer.offsetWidth);
+        const thumbPosition = scrollProgress * (scrollbarContainer.offsetWidth - thumbWidth);
+        
+        scrollbarThumb.style.width = `${thumbWidth}px`;
+        scrollbarThumb.style.transform = `translateX(${thumbPosition}px)`;
       }
 
-      productCardsContainer.addEventListener('mousedown', dragStart);
-      productCardsContainer.addEventListener('mousemove', dragMove);
-      productCardsContainer.addEventListener('mouseup', dragEnd);
-      productCardsContainer.addEventListener('mouseleave', dragEnd);
-      productCardsContainer.addEventListener('touchstart', dragStart);
+      function startDrag(e) {
+        isDragging = true;
+        startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        animationID = requestAnimationFrame(animation);
+        productCardsContainer.style.transition = 'none';
+        productCardsContainer.classList.add('is-dragging');
+      }
+
+      function drag(e) {
+        if (isDragging) {
+          e.preventDefault();
+          const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+          currentTranslate = prevTranslate + currentPosition - startPos;
+        }
+      }
+
+      function endDrag() {
+        if (!isDragging) return;
+        cancelAnimationFrame(animationID);
+        isDragging = false;
+        productCardsContainer.classList.remove('is-dragging');
+
+        const movedBy = currentTranslate - prevTranslate;
+
+        if (movedBy < -50 && currentIndex < maxIndex) {
+          currentIndex += 1;
+        }
+        if (movedBy > 50 && currentIndex > 0) {
+          currentIndex -= 1;
+        }
+        
+        setPositionByIndex();
+      }
+
+      function animation() {
+        if (!isDragging) return;
+        productCardsContainer.style.transform = `translateX(${currentTranslate}px)`;
+        updateScrollbar();
+        requestAnimationFrame(animation);
+      }
+      
+      function onResize() {
+        // Skip on mobile
+        if (window.innerWidth <= 768) return;
+        calculateDimensions();
+        setPositionByIndex();
+      }
+
+      // Event listeners
+      productCardsContainer.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
+      
+      productCardsContainer.addEventListener('mousedown', startDrag);
+      productCardsContainer.addEventListener('touchstart', startDrag, { passive: true });
+      productCardsContainer.addEventListener('mousemove', drag);
+      productCardsContainer.addEventListener('touchmove', drag, { passive: false });
+      productCardsContainer.addEventListener('mouseup', endDrag);
+      productCardsContainer.addEventListener('mouseleave', endDrag);
+      productCardsContainer.addEventListener('touchend', endDrag);
 
       // Handle click events for product cards - block if was dragging
       allProductCards.forEach(card => {
-          card.addEventListener('click', (e) => {
-              if (isDragging) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-              }
-              return true;
-          });
+        card.addEventListener('click', (e) => {
+          if (isDragging) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          return true;
+        });
       });
+
+      const resizeObserver = new ResizeObserver(onResize);
+      resizeObserver.observe(productCardsContainer);
+
+      setTimeout(() => {
+        calculateDimensions();
+        setPositionByIndex();
+      }, 150);
 
       return {
         next: () => {
-          const visibleCards = getVisibleCards();
-          const itemsPerView = getItemsPerView();
-          const maxIndex = Math.max(0, visibleCards.length - itemsPerView);
-          if (currentIndex < maxIndex) { currentIndex++; updateCarousel(); }
+          if (currentIndex < maxIndex) {
+            currentIndex++;
+            setPositionByIndex();
+          }
         },
         prev: () => {
-          if (currentIndex > 0) { currentIndex--; updateCarousel(); }
+          if (currentIndex > 0) {
+            currentIndex--;
+            setPositionByIndex();
+          }
         },
         reset: () => {
-            currentIndex = 0;
-            updateCarousel();
+          currentIndex = 0;
+          setPositionByIndex();
         },
-        update: () => updateCarousel(true)
+        update: () => {
+          calculateDimensions();
+          setPositionByIndex();
+        }
       };
     }
 
@@ -916,7 +971,7 @@
             filterProducts(currentSize);
           }
         }
-        if (carousel) carousel.update();
+        // No need to call carousel.update() since we're using native scroll
       }, 250);
     });
 

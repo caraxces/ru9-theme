@@ -34,14 +34,6 @@
           "type": "price",
           "settings": {}
         },
-        "usage_guide_CNJTGE": {
-          "type": "usage_guide",
-          "settings": {
-            "title": "Hướng dẫn chọn kích thước",
-            "image": "shopify://shop_images/size-guide.png",
-            "content": ""
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -49,6 +41,14 @@
             "picker_type": "button",
             "product_dynamic_variants_enable": true,
             "color_swatches": true
+          }
+        },
+        "usage_guide_CNJTGE": {
+          "type": "usage_guide",
+          "settings": {
+            "title": "Hướng dẫn chọn kích thước",
+            "image": "shopify://shop_images/size-guide.png",
+            "content": ""
           }
         },
         "buy_buttons": {
@@ -99,8 +99,8 @@
         "custom_m49fr6",
         "promotion_Ujrtfc",
         "price",
-        "usage_guide_CNJTGE",
         "variant_picker",
+        "usage_guide_CNJTGE",
         "buy_buttons",
         "description",
         "usage_guide_TbqDnd",
@@ -711,6 +711,8 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget",
             "max_width": 1200
           }
         }
@@ -749,17 +751,17 @@
         "collection_hNpQWc": {
           "type": "collection",
           "settings": {
-            "collection": "chan",
-            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
-            "custom_title": "",
+            "collection": "bedding",
+            "custom_image": "shopify://shop_images/BEDDING_1.jpg",
+            "custom_title": "Bộ Ga Giường",
             "custom_link": ""
           }
         },
         "collection_dh6XkM": {
           "type": "collection",
           "settings": {
-            "collection": "phu-kien",
-            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
+            "collection": "bundle",
+            "custom_image": "shopify://shop_images/bundle.jpg",
             "custom_title": "",
             "custom_link": ""
           }

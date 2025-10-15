@@ -112,11 +112,11 @@
         "section_width": "page-width",
         "customize_width": 1800,
         "bundle_products": "{{ product.metafields.custom.product_bundle.value }}",
-        "product_3_quantity": 2,
+        "product_3_quantity": 1,
         "sku_enable": true,
         "combo_title": "Combo bao gồm các sản phẩm:",
         "cta_button_text": "BẮT ĐẦU TẠO COMBO",
-        "target_discount_percentage": 15,
+        "target_discount_percentage": 10,
         "service_icon_1": "shopify://shop_images/Layer_1_3.svg",
         "service_text_1": "100 đêm ngủ thử",
         "service_icon_2": "shopify://shop_images/Layer_1_4.svg",
@@ -135,30 +135,30 @@
         "enable_video_looping": false,
         "product_video_style": "muted",
         "enable_sticky_add_to_cart": false,
-        "store_system_content": "<p><strong>Q.2, TP.HCM:</strong><br>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br><a href=\"tel:0964777960\">0964777960</a></p><p><strong>Q.3, TP.HCM:</strong><br>283A Hai Bà Trưng, Phường Xuân Hoà<br><a href=\"tel:0964777910\">0964777910</a></p><p><strong>Q. Cầu Giấy, HN:</strong><br>228 Cầu Giấy, Quan Hoa<br><a href=\"tel:0964777940\">0964777940</a></p>",
+        "store_system_content": "<p><strong>Q.2, TP.HCM:</strong><br/>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br/><a href=\"tel:0964777960\">0964777960</a></p><p><strong>Q.3, TP.HCM:</strong><br/>283A Hai Bà Trưng, Phường Xuân Hoà<br/><a href=\"tel:0964777910\">0964777910</a></p><p><strong>Q. Cầu Giấy, HN:</strong><br/>228 Cầu Giấy, Quan Hoa<br/><a href=\"tel:0964777940\">0964777940</a></p>",
         "hide_payment_button_mobile": false,
         "image_size": "medium",
-        "showroom_1_name": "",
-        "showroom_1_address": "",
-        "showroom_1_phone": "",
+        "showroom_1_name": "Showroom 1",
+        "showroom_1_address": "Địa chỉ showroom",
+        "showroom_1_phone": "0964777910",
         "showroom_1_map_link": "",
-        "showroom_2_name": "",
-        "showroom_2_address": "",
-        "showroom_2_phone": "",
+        "showroom_2_name": "Showroom 2",
+        "showroom_2_address": "Địa chỉ showroom",
+        "showroom_2_phone": "0964777910",
         "showroom_2_map_link": "",
-        "showroom_3_name": "",
-        "showroom_3_address": "",
-        "showroom_3_phone": "",
+        "showroom_3_name": "Showroom 3",
+        "showroom_3_address": "Địa chỉ showroom",
+        "showroom_3_phone": "0964777940",
         "showroom_3_map_link": "",
         "review_rating": "4.8",
         "review_count": "2025 đánh giá",
         "voucher_code": "{{ product.metafields.custom.bundle_tactics_voucher.value }}"
       }
     },
-    "reason_to_choice_UDdRaN": {
+    "reason_to_choice_XDrfzh": {
       "type": "reason-to-choice",
       "blocks": {
-        "reason_4CWY9V": {
+        "reason_eUNQNE": {
           "type": "reason",
           "settings": {
             "image": "shopify://shop_images/Kh_i_ngu_n_c_a_kho_nh_kh_c_an_nhien.jpg",
@@ -166,27 +166,27 @@
             "content": ""
           }
         },
-        "reason_xTVNaW": {
+        "reason_QFNbjW": {
           "type": "reason",
           "settings": {
-            "image": "shopify://shop_images/20251010-153556.jpg",
+            "image": "shopify://shop_images/Kh_i_ngu_n_c_a_h_nh_phuc_n_i_t_m.jpg",
             "title": "",
             "content": ""
           }
         },
-        "reason_B8qDMb": {
+        "reason_jiUwU6": {
           "type": "reason",
           "settings": {
-            "image": "shopify://shop_images/20251010-153553.jpg",
+            "image": "shopify://shop_images/Kh_i_ngu_n_c_a_nang_l_ng_tich_c_c.jpg",
             "title": "",
             "content": ""
           }
         }
       },
       "block_order": [
-        "reason_4CWY9V",
-        "reason_xTVNaW",
-        "reason_B8qDMb"
+        "reason_eUNQNE",
+        "reason_QFNbjW",
+        "reason_jiUwU6"
       ],
       "disabled": true,
       "name": "Reason to choice",
@@ -851,6 +851,7 @@
     },
     "best_seller_DWCAYP": {
       "type": "best-seller",
+      "disabled": true,
       "custom_css": [
         "@media (max-width: 767px) {span {font-size: 16px; }}"
       ],
@@ -889,10 +890,10 @@
         "space_around": true
       }
     },
-    "super_service_MkcaBY": {
+    "super_service_DwGy4L": {
       "type": "super-service",
       "blocks": {
-        "service_item_dD4AUQ": {
+        "service_item_cfbCBD": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_3.svg",
@@ -902,7 +903,7 @@
             "item_link": ""
           }
         },
-        "service_item_azabbP": {
+        "service_item_zAzfAk": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_4.svg",
@@ -912,7 +913,7 @@
             "item_link": ""
           }
         },
-        "service_item_adMJ7D": {
+        "service_item_zfj4hi": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_5.svg",
@@ -922,7 +923,7 @@
             "item_link": ""
           }
         },
-        "service_item_Mh668E": {
+        "service_item_WRHiFx": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_6.svg",
@@ -934,10 +935,10 @@
         }
       },
       "block_order": [
-        "service_item_dD4AUQ",
-        "service_item_azabbP",
-        "service_item_adMJ7D",
-        "service_item_Mh668E"
+        "service_item_cfbCBD",
+        "service_item_zAzfAk",
+        "service_item_zfj4hi",
+        "service_item_WRHiFx"
       ],
       "name": "Super Service",
       "settings": {
@@ -945,10 +946,10 @@
         "background_color": "#f5f9ff"
       }
     },
-    "collections_listing_EMRfPL": {
+    "collections_listing_NBBbpg": {
       "type": "collections-listing",
       "blocks": {
-        "collection_HMVxgX": {
+        "collection_DzJbyf": {
           "type": "collection",
           "settings": {
             "collection": "nem",
@@ -957,7 +958,7 @@
             "custom_link": ""
           }
         },
-        "collection_Nhatgz": {
+        "collection_NwfDzG": {
           "type": "collection",
           "settings": {
             "collection": "goi",
@@ -966,7 +967,7 @@
             "custom_link": ""
           }
         },
-        "collection_UpDMJy": {
+        "collection_zNmUce": {
           "type": "collection",
           "settings": {
             "collection": "bedding",
@@ -975,7 +976,7 @@
             "custom_link": ""
           }
         },
-        "collection_BFakyt": {
+        "collection_UcU84n": {
           "type": "collection",
           "settings": {
             "collection": "bundle",
@@ -984,7 +985,7 @@
             "custom_link": ""
           }
         },
-        "collection_CQpK8F": {
+        "collection_4ndGy3": {
           "type": "collection",
           "disabled": true,
           "settings": {
@@ -995,11 +996,11 @@
         }
       },
       "block_order": [
-        "collection_HMVxgX",
-        "collection_Nhatgz",
-        "collection_UpDMJy",
-        "collection_BFakyt",
-        "collection_CQpK8F"
+        "collection_DzJbyf",
+        "collection_NwfDzG",
+        "collection_zNmUce",
+        "collection_UcU84n",
+        "collection_4ndGy3"
       ],
       "name": "Collections Listing",
       "settings": {
@@ -1040,7 +1041,7 @@
   "order": [
     "countdown_Gwp9bc",
     "main_product_bundle_HQfEDh",
-    "reason_to_choice_UDdRaN",
+    "reason_to_choice_XDrfzh",
     "main",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",
@@ -1051,8 +1052,8 @@
     "product_hotspot_4TYCfN",
     "best_seller_DWCAYP",
     "1730878240cfbec46e",
-    "super_service_MkcaBY",
-    "collections_listing_EMRfPL",
+    "super_service_DwGy4L",
+    "collections_listing_NBBbpg",
     "sub",
     "product-recommendations",
     "recently-viewed",

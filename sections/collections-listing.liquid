@@ -34,15 +34,25 @@
             <div class="collection-image-container">
               {%- if custom_image != blank -%}
                 <img 
-                  src="{{ custom_image | image_url: width: 280, height: 210, crop: 'center' }}" 
+                  src="{{ custom_image | image_url: width: 560, height: 420, crop: 'center' }}" 
+                  srcset="{{ custom_image | image_url: width: 280, height: 210, crop: 'center' }} 280w,
+                          {{ custom_image | image_url: width: 560, height: 420, crop: 'center' }} 560w,
+                          {{ custom_image | image_url: width: 840, height: 630, crop: 'center' }} 840w"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                   alt="{{ custom_title | default: collection.title }}"
                   width="280" height="210"
+                  loading="lazy"
                 >
               {%- elsif collection.image -%}
                 <img 
-                  src="{{ collection.image | image_url: width: 280, height: 210, crop: 'center' }}" 
+                  src="{{ collection.image | image_url: width: 560, height: 420, crop: 'center' }}" 
+                  srcset="{{ collection.image | image_url: width: 280, height: 210, crop: 'center' }} 280w,
+                          {{ collection.image | image_url: width: 560, height: 420, crop: 'center' }} 560w,
+                          {{ collection.image | image_url: width: 840, height: 630, crop: 'center' }} 840w"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                   alt="{{ custom_title | default: collection.title }}"
                   width="280" height="210"
+                  loading="lazy"
                 >
               {%- else -%}
                 <div class="placeholder-svg-container">

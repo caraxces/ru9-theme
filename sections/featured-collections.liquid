@@ -232,6 +232,7 @@
     position: relative;
     overflow: hidden;
     cursor: grab;
+    padding-bottom: 40px; /* Space for fixed scrollbar */
   }
   [data-section-type="featured-collections"] .product-carousel.grabbing {
     cursor: grabbing;
@@ -244,6 +245,37 @@
     gap: 2%;
     transition: transform 0.3s ease;
     padding-right: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Hide default scrollbar */
+  [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Fixed scrollbar container */
+  [data-section-type="featured-collections"] .scrollbar-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: #F0F1EF;
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  
+  /* Fixed scrollbar thumb */
+  [data-section-type="featured-collections"] .scrollbar-thumb {
+    height: 100%;
+    background: #234085;
+    border-radius: 100px;
+    transition: width 0.3s ease, transform 0.3s ease;
+    min-width: 20px;
   }
   [data-section-type="featured-collections"] .tab-content {
     display: none;
@@ -251,18 +283,23 @@
     padding-right: 0;
     gap: 2%;
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: visible;
     flex-wrap: nowrap;
-    scroll-behavior: smooth;
   }
   [data-section-type="featured-collections"] .tab-content.active {
     display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: visible;
     flex-wrap: nowrap;
-    scroll-behavior: smooth;
     padding-right: 0;
+  }
+  
+  [data-section-type="featured-collections"] .tab-content.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+  
+  [data-section-type="featured-collections"] .tab-content.is-dragging .product-card {
+    pointer-events: none;
   }
 
   /* Mobile tab-content styling */
@@ -272,19 +309,13 @@
       padding: 0;
       gap: 4%;
       width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
+      overflow: visible;
       flex-wrap: nowrap;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
     }
     [data-section-type="featured-collections"] .tab-content.active {
       display: flex;
-      overflow-x: auto;
-      overflow-y: hidden;
+      overflow: visible;
       flex-wrap: nowrap;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
       padding: 0 0 20px 0;
     }
   }
@@ -577,7 +608,7 @@
     }
     
     [data-section-type="featured-collections"] .product-carousel {
-      padding: 0;
+      padding: 0 0 40px 0;
     }
     
     [data-section-type="featured-collections"] .product-cards-container {
@@ -709,79 +740,151 @@
       
       if (productCards.length === 0) return;
 
-      let isDown = false;
+      let currentIndex = 0;
       let isDragging = false;
-      let startX;
-      let scrollLeft;
-      const dragThreshold = 5;
+      let startPos = 0;
+      let currentTranslate = 0;
+      let prevTranslate = 0;
+      let animationID = 0;
+      
+      let cardWidth, gap, viewportWidth, visibleCards, maxIndex, totalTrackWidth, maxScroll;
+      
+      const scrollbarThumb = sectionContainer.querySelector('.scrollbar-thumb');
+      const scrollbarContainer = sectionContainer.querySelector('.scrollbar-container');
 
-      function dragStart(e) {
-        isDown = true;
-        isDragging = false;
-        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
-        scrollLeft = tabContent.scrollLeft;
-        if (e.type === 'touchstart') {
-          window.addEventListener('touchmove', dragMove);
-          window.addEventListener('touchend', dragEnd);
+      function calculateDimensions() {
+        cardWidth = productCards.length > 0 ? productCards[0].offsetWidth : 0;
+        if (cardWidth === 0) return;
+        gap = parseInt(window.getComputedStyle(tabContent).gap) || 24;
+        viewportWidth = tabContent.offsetWidth;
+        visibleCards = Math.floor((viewportWidth + gap) / (cardWidth + gap));
+        maxIndex = productCards.length > visibleCards ? productCards.length - visibleCards : 0;
+        totalTrackWidth = (productCards.length * cardWidth) + Math.max(0, productCards.length - 1) * gap;
+        maxScroll = totalTrackWidth - viewportWidth;
+
+        if (currentIndex > maxIndex) {
+          currentIndex = maxIndex;
         }
       }
-
-      function dragMove(e) {
-        if (!isDown) return;
-        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
-        const walk = currentX - startX;
+      
+      function setPositionByIndex() {
+        currentTranslate = -currentIndex * (cardWidth + gap);
+        prevTranslate = currentTranslate;
+        tabContent.style.transition = 'transform 0.5s ease-in-out';
+        tabContent.style.transform = `translateX(${currentTranslate}px)`;
+        updateScrollbar();
+      }
+      
+      function updateScrollbar() {
+        if (!scrollbarThumb || !scrollbarContainer) return;
         
-        if (Math.abs(walk) > dragThreshold) {
-          isDragging = true;
-          carouselContainer.classList.add('grabbing');
+        const scrollProgress = Math.abs(currentTranslate) / maxScroll;
+        const thumbWidth = Math.max(20, (viewportWidth / totalTrackWidth) * scrollbarContainer.offsetWidth);
+        const thumbPosition = scrollProgress * (scrollbarContainer.offsetWidth - thumbWidth);
+        
+        scrollbarThumb.style.width = `${thumbWidth}px`;
+        scrollbarThumb.style.transform = `translateX(${thumbPosition}px)`;
+      }
+
+      function startDrag(e) {
+        isDragging = true;
+        startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        animationID = requestAnimationFrame(animation);
+        tabContent.style.transition = 'none';
+        tabContent.classList.add('is-dragging');
+      }
+
+      function drag(e) {
+        if (isDragging) {
           e.preventDefault();
-          tabContent.scrollLeft = scrollLeft - walk;
+          const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+          currentTranslate = prevTranslate + currentPosition - startPos;
         }
       }
 
-      function dragEnd() {
-        if (!isDown) return;
-        const wasDragging = isDragging;
-        isDown = false;
+      function endDrag() {
+        if (!isDragging) return;
+        cancelAnimationFrame(animationID);
         isDragging = false;
-        carouselContainer.classList.remove('grabbing');
-        window.removeEventListener('touchmove', dragMove);
-        window.removeEventListener('touchend', dragEnd);
+        tabContent.classList.remove('is-dragging');
+
+        const movedBy = currentTranslate - prevTranslate;
+
+        if (movedBy < -50 && currentIndex < maxIndex) {
+          currentIndex += 1;
+        }
+        if (movedBy > 50 && currentIndex > 0) {
+          currentIndex -= 1;
+        }
+        
+        setPositionByIndex();
       }
 
-      tabContent.addEventListener('mousedown', dragStart);
-      tabContent.addEventListener('mousemove', dragMove);
-      tabContent.addEventListener('mouseup', dragEnd);
-      tabContent.addEventListener('mouseleave', dragEnd);
+      function animation() {
+        if (!isDragging) return;
+        tabContent.style.transform = `translateX(${currentTranslate}px)`;
+        updateScrollbar();
+        requestAnimationFrame(animation);
+      }
+      
+      function onResize() {
+        calculateDimensions();
+        setPositionByIndex();
+      }
+
+      // Event listeners
+      tabContent.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
+      
+      tabContent.addEventListener('mousedown', startDrag);
+      tabContent.addEventListener('touchstart', startDrag, { passive: true });
+      tabContent.addEventListener('mousemove', drag);
+      tabContent.addEventListener('touchmove', drag, { passive: false });
+      tabContent.addEventListener('mouseup', endDrag);
+      tabContent.addEventListener('mouseleave', endDrag);
+      tabContent.addEventListener('touchend', endDrag);
 
       // Handle click events for product cards - block if was dragging
       tabContent.querySelectorAll('.product-card').forEach(card => {
-          card.addEventListener('click', (e) => {
-              if (isDragging) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-              }
-              return true;
-          });
+        card.addEventListener('click', (e) => {
+          if (isDragging) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          return true;
+        });
       });
 
-      tabContent.addEventListener('touchstart', dragStart);
+      const resizeObserver = new ResizeObserver(onResize);
+      resizeObserver.observe(tabContent);
+
+      setTimeout(() => {
+        calculateDimensions();
+        setPositionByIndex();
+      }, 150);
 
       carousels[carouselId] = {
         initialized: true,
         next: () => {
-          const scrollAmount = tabContent.offsetWidth * 0.8; // Scroll 80% of container width
-          tabContent.scrollLeft += scrollAmount;
+          if (currentIndex < maxIndex) {
+            currentIndex++;
+            setPositionByIndex();
+          }
         },
         prev: () => {
-          const scrollAmount = tabContent.offsetWidth * 0.8; // Scroll 80% of container width
-          tabContent.scrollLeft -= scrollAmount;
+          if (currentIndex > 0) {
+            currentIndex--;
+            setPositionByIndex();
+          }
         },
         reset: () => {
-            tabContent.scrollLeft = 0;
+          currentIndex = 0;
+          setPositionByIndex();
         },
-        update: () => {} // No need for update function
+        update: () => {
+          calculateDimensions();
+          setPositionByIndex();
+        }
       };
     }
     

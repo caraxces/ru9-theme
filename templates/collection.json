@@ -243,7 +243,13 @@
         "description": "",
         "primary_color": "#1c2c58",
         "text_color": "#1a1a1a",
-        "description_color": "#666666"
+        "description_color": "#666666",
+        "show_desktop_view_all": false,
+        "desktop_view_all_text": "Xem tất cả",
+        "desktop_view_all_url": "",
+        "show_mobile_view_all": false,
+        "mobile_view_all_text": "Xem tất cả",
+        "mobile_view_all_url": ""
       }
     },
     "collection-content": {
@@ -261,6 +267,7 @@
       "blocks": {
         "review_hTzfi6": {
           "type": "review",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
             "customer_name": "Gon Pink",
@@ -459,18 +466,18 @@
         "collection_KMFTnL": {
           "type": "collection",
           "settings": {
-            "collection": "chan",
-            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
-            "custom_title": "",
+            "collection": "bedding",
+            "custom_image": "shopify://shop_images/BEDDING_1.jpg",
+            "custom_title": "Bộ Ga Giường",
             "custom_link": ""
           }
         },
         "collection_Nkh6hi": {
           "type": "collection",
           "settings": {
-            "collection": "phu-kien",
-            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
-            "custom_title": "",
+            "collection": "bundle",
+            "custom_image": "shopify://shop_images/bundle.jpg",
+            "custom_title": "Combo Tiết Kiệm",
             "custom_link": ""
           }
         },

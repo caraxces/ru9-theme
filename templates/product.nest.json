@@ -43,6 +43,14 @@
             "color_swatches": true
           }
         },
+        "usage_guide_RUYgnA": {
+          "type": "usage_guide",
+          "settings": {
+            "title": "Hướng dẫn chọn kích thước",
+            "image": "shopify://shop_images/size-guide.png",
+            "content": ""
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -88,6 +96,7 @@
         "price",
         "promotion_9wmn3n",
         "variant_picker",
+        "usage_guide_RUYgnA",
         "buy_buttons",
         "description",
         "usage_guide_jgNVVR",
@@ -149,7 +158,7 @@
       ],
       "name": "Reason to choice",
       "settings": {
-        "title": "Lý do bạn nên chọn chúng tôi"
+        "title": "Lý do bạn nên chọn sản phẩm"
       }
     },
     "independent_webhook_popup_TRBpyn": {
@@ -558,18 +567,18 @@
         "collection_ENyNAG": {
           "type": "collection",
           "settings": {
-            "collection": "chan",
-            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
-            "custom_title": "",
+            "collection": "bedding",
+            "custom_image": "shopify://shop_images/BEDDING_1.jpg",
+            "custom_title": "Bộ Ga Giường",
             "custom_link": ""
           }
         },
         "collection_wKbQXx": {
           "type": "collection",
           "settings": {
-            "collection": "phu-kien",
-            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
-            "custom_title": "",
+            "collection": "bundle",
+            "custom_image": "shopify://shop_images/bundle.jpg",
+            "custom_title": "Combo Tiết Kiệm",
             "custom_link": ""
           }
         },

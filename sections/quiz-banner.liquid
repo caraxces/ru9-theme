@@ -116,6 +116,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    flex: 1;
   }
   .quiz-btn {
     display: inline-flex;
@@ -210,14 +211,19 @@
       text-align: center;
       flex: initial;
       padding: 0;
-      order: -1;
+      order: 1;
     }
     .quiz-banner-title {
       max-width: 200px;
     }
+    .quiz-banner-left {
+      order: 2;
+    }
     .quiz-banner-buttons {
       flex-direction: column;
       gap: 2vw;
+      order: 3;
+      flex: initial;
     }
     .quiz-btn {
       width: 328px;
@@ -250,7 +256,7 @@
     }
     .quiz-banner-title {
       font-size: 20px;
-      margin: 0 0 15px 0 !important;
+      margin: 20px 0 0 0 !important;
       max-width: 200px;
     }
     .quiz-btn {
@@ -454,18 +460,18 @@
         {%- if section.settings.text != blank -%}
           <div class="quiz-banner-subtitle rte">{{ section.settings.text }}</div>
         {%- endif -%}
-        <div class="quiz-banner-buttons">
-          {%- if section.settings.button_1_text != blank -%}
-            <button type="button" class="quiz-btn quiz-start-button">
-              {{ section.settings.button_1_text }}
-            </button>
-          {%- endif -%}
-          {%- if section.settings.button_2_text != blank and section.settings.button_2_link != blank -%}
-            <a href="{{ section.settings.button_2_link }}" class="quiz-btn">
-              {{ section.settings.button_2_text }}
-            </a>
-          {%- endif -%}
-        </div>
+      </div>
+      <div class="quiz-banner-buttons">
+        {%- if section.settings.button_1_text != blank -%}
+          <button type="button" class="quiz-btn quiz-start-button">
+            {{ section.settings.button_1_text }}
+          </button>
+        {%- endif -%}
+        {%- if section.settings.button_2_text != blank and section.settings.button_2_link != blank -%}
+          <a href="{{ section.settings.button_2_link }}" class="quiz-btn">
+            {{ section.settings.button_2_text }}
+          </a>
+        {%- endif -%}
       </div>
     </div>
   </div>

@@ -86,7 +86,7 @@
           "type": "product_item",
           "settings": {
             "product": "combo-gối-trọn-nang-niu",
-            "product_label": "Bán chạy",
+            "product_label": "<b> Bán chạy</b>",
             "product_description": "Trọn bộ chăm sóc giấc ngủ, nâng niu từng phút nghỉ ngơi, nâng tầm trải nghiệm.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
@@ -96,7 +96,7 @@
           "type": "product_item",
           "settings": {
             "product": "combo-nhịp-ngủ-dịu-em",
-            "product_label": "Bán chạy",
+            "product_label": "<b> Bán chạy</b>",
             "product_description": "Sự kết hợp hoàn chỉnh cho giấc ngủ êm dịu, thư thả từng khoảnh khắc nghỉ ngơi.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
@@ -106,7 +106,7 @@
           "type": "product_item",
           "settings": {
             "product": "combo-giac-ngu-diu-em",
-            "product_label": "Bán chạy",
+            "product_label": "<b> Bán chạy</b>",
             "product_description": "Nâng tầm chất lượng giấc ngủ, êm ái thoải mái và linh hoạt cho mọi nhu cầu.",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
@@ -319,9 +319,9 @@
         "product_item_fH8Cab": {
           "type": "product_item",
           "settings": {
-            "product": "tencel-bedding-set",
-            "product_label": "Best seller",
-            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
+            "product": "bộ-ga-giường-cotton-sateen-copy",
+            "product_label": "",
+            "bundle_items": "<br>- Ga giường Cotton Sateen<br>- Vỏ Gối Cotton Sateen <br>- Vỏ chăn Cotton Sateen",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -329,29 +329,9 @@
         "product_item_p3eHLE": {
           "type": "product_item",
           "settings": {
-            "product": "tencel-bedding-set",
-            "product_label": "Best seller",
-            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
-            "label_color": "#ffffff",
-            "label_bg": "#609ee9"
-          }
-        },
-        "product_item_hMUezj": {
-          "type": "product_item",
-          "settings": {
-            "product": "tencel-bedding-set",
-            "product_label": "Best seller",
-            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
-            "label_color": "#ffffff",
-            "label_bg": "#609ee9"
-          }
-        },
-        "product_item_mYPAMb": {
-          "type": "product_item",
-          "settings": {
-            "product": "tencel-bedding-set",
-            "product_label": "Best seller",
-            "bundle_items": "<br> Ga giường Tencel<br> Vỏ Gối Ôm Tencel<br> Vỏ Gối Tencel",
+            "product": "bộ-ga-giường-tencel-copy",
+            "product_label": "",
+            "bundle_items": "<br>- Ga giường Tencel<br>- Vỏ Gối Tencel <br>- Vỏ chăn Tencel",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -359,9 +339,7 @@
       },
       "block_order": [
         "product_item_fH8Cab",
-        "product_item_p3eHLE",
-        "product_item_hMUezj",
-        "product_item_mYPAMb"
+        "product_item_p3eHLE"
       ],
       "name": "Combo Phòng Ngủ",
       "settings": {
@@ -394,6 +372,7 @@
       "blocks": {
         "review_YeBLza": {
           "type": "review",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
             "customer_name": "Gon Pink",
@@ -575,6 +554,7 @@
           "type": "collection",
           "settings": {
             "collection": "nem",
+            "custom_image": "shopify://shop_images/PRO_dac6eb92-a8f8-45e6-9735-599312527463.jpg",
             "custom_title": "",
             "custom_link": ""
           }
@@ -583,6 +563,7 @@
           "type": "collection",
           "settings": {
             "collection": "goi",
+            "custom_image": "shopify://shop_images/G_I_NIU_e0cce619-9aaa-4f63-b789-07e66004a6e6.jpg",
             "custom_title": "",
             "custom_link": ""
           }
@@ -590,16 +571,18 @@
         "collection_KMFTnL": {
           "type": "collection",
           "settings": {
-            "collection": "chan",
-            "custom_title": "",
+            "collection": "bedding",
+            "custom_image": "shopify://shop_images/BEDDING_1.jpg",
+            "custom_title": "Bộ Ga Giường",
             "custom_link": ""
           }
         },
         "collection_Nkh6hi": {
           "type": "collection",
           "settings": {
-            "collection": "phu-kien",
-            "custom_title": "",
+            "collection": "bundle",
+            "custom_image": "shopify://shop_images/bundle.jpg",
+            "custom_title": "Combo Tiết Kiệm",
             "custom_link": ""
           }
         },

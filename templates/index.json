@@ -155,7 +155,7 @@
           "type": "collection",
           "settings": {
             "collection": "nem",
-            "custom_image": "shopify://shop_images/6ba9584cd567d2894735f9fb1ec37436bbbed648.png",
+            "custom_image": "shopify://shop_images/PRO_dac6eb92-a8f8-45e6-9735-599312527463.jpg",
             "custom_title": "",
             "custom_link": ""
           }
@@ -164,7 +164,7 @@
           "type": "collection",
           "settings": {
             "collection": "goi",
-            "custom_image": "shopify://shop_images/Background_9cb9999a-b992-4584-b262-3ef431b6a011.png",
+            "custom_image": "shopify://shop_images/G_I_NIU_e0cce619-9aaa-4f63-b789-07e66004a6e6.jpg",
             "custom_title": "",
             "custom_link": ""
           }
@@ -219,7 +219,7 @@
           "settings": {
             "tab_name": "Nệm",
             "collection": "nem",
-            "product_label": "",
+            "product_label": "Bán chạy",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -338,7 +338,7 @@
       "name": "Quiz Banner (Advanced)",
       "settings": {
         "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
-        "mobile_image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223_1.png",
+        "mobile_image": "shopify://shop_images/01046d8b8d79e9872d0501166ffea7e0e835bf2e.png",
         "title": "Đâu là chiếc nệm phù hợp với bạn?",
         "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
         "button_1_text": "",
@@ -483,6 +483,7 @@
       "blocks": {
         "review_LgQfji": {
           "type": "review",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
             "customer_name": "Gon Pink",
@@ -696,9 +697,9 @@
           "type": "topic_tab",
           "settings": {
             "tab_title": "Câu chuyện giấc ngủ",
-            "article_1": "magazine/nem-1m2-x-2m-gia-re",
-            "article_2": "magazine/tu-the-nam-giam-dau-dau",
-            "article_3": "magazine/dia-chi-mua-nem-foam",
+            "article_1": "magazine/cach-chon-nem-ngu",
+            "article_2": "magazine/so-sanh-nem-foam-va-nem-cao-su",
+            "article_3": "magazine/so-sanh-nem-foam-va-nem-cao-su-non-dau-la-diem-khac-biet",
             "article_4": "magazine/tu-the-nam-giup-tang-vong-3",
             "article_5": "magazine/dem-bong-ep-2mx2m2"
           }
@@ -731,6 +732,7 @@
         "topic_tab_cWdgCY",
         "topic_tab_TTmcX4"
       ],
+      "custom_css": [],
       "name": "Blog posts carousel",
       "settings": {
         "title": "Blog posts",
