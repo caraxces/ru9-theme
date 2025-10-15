@@ -44,12 +44,13 @@
     <!-- Product Carousel Section -->
     <div class="product-carousel-section">
       <div class="product-carousel">
-        <div class="product-cards-container">
-          {%- if section.blocks.size > 0 -%}
-            {%- for block in section.blocks -%}
-              {%- assign product = block.settings.product -%}
-              {%- if product != blank -%}
-                <a href="{{ product.url }}" class="product-card">
+        <div class="product-cards-wrapper">
+          <div class="product-cards-container">
+            {%- if section.blocks.size > 0 -%}
+              {%- for block in section.blocks -%}
+                {%- assign product = block.settings.product -%}
+                {%- if product != blank -%}
+                  <a href="{{ product.url }}" class="product-card">
                 <div class="product-image-container{% if product.media.size > 1 %} has-secondary-image{% endif %}">
                   {%- if block.settings.product_label != blank -%}
                     <div class="product-label">
@@ -112,14 +113,15 @@
                   </div>
                   <button class="buy-now-btn">Mua ngay</button>
                 </div>
-                </a>
-              {%- endif -%}
-            {%- endfor -%}
-          {%- else -%}
-            <div class="no-products-message">
-              <p>Không có sản phẩm nào để hiển thị. Vui lòng thêm sản phẩm trong admin.</p>
-            </div>
-          {%- endif -%}
+                  </a>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- else -%}
+              <div class="no-products-message">
+                <p>Không có sản phẩm nào để hiển thị. Vui lòng thêm sản phẩm trong admin.</p>
+              </div>
+            {%- endif -%}
+          </div>
         </div>
       </div>
     </div>
@@ -271,55 +273,35 @@
   [data-section-type="combo-bedroom"] .product-carousel-section {
     position: relative; 
   }
+  
+  /* Viewport - overflow hidden */
   [data-section-type="combo-bedroom"] .product-carousel {
     position: relative;
     overflow: hidden;
-    cursor: grab;
+    padding-bottom: 20px;
   }
-  [data-section-type="combo-bedroom"] .product-carousel.grabbing {
-    cursor: grabbing;
+  
+  /* Wrapper - no styles needed, just structural */
+  [data-section-type="combo-bedroom"] .product-cards-wrapper {
+    width: 100%;
   }
-  [data-section-type="combo-bedroom"] .product-carousel.grabbing .product-card {
-    pointer-events: none;
-  }
+  
+  /* Track - flex container with transform */
   [data-section-type="combo-bedroom"] .product-cards-container {
     display: flex;
     gap: 2%;
-    transition: transform 0.3s ease;
-    padding-right: 0;
-    padding-bottom: 20px;
-    overflow: visible;
+    transition: transform 0.5s ease-in-out;
     flex-wrap: nowrap;
-    visibility: visible;
-    opacity: 1;
   }
   
   [data-section-type="combo-bedroom"] .product-cards-container.is-dragging {
     cursor: grabbing;
     user-select: none;
+    transition: none;
   }
   
   [data-section-type="combo-bedroom"] .product-cards-container.is-dragging .product-card {
     pointer-events: none;
-  }
-
-  /* Custom scrollbar styling */
-  [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar {
-    height: 8px;
-  }
-  [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-track {
-    background: #F0F1EF;
-    border-radius: 100px;
-  }
-  [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-thumb {
-    background: #234085;
-    border-radius: 100px;
-  }
-  [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-thumb:hover {
-    background: #1a2f6b;
-  }
-  [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-button {
-    display: none;
   }
 
   /* Product Card Styles */
@@ -563,6 +545,18 @@
     
     [data-section-type="combo-bedroom"] .product-carousel {
       padding: 0;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-carousel::-webkit-scrollbar {
+      display: none !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-cards-wrapper {
+      display: inline-block;
+      min-width: 100%;
     }
     
     [data-section-type="combo-bedroom"] .product-cards-container {
@@ -570,18 +564,9 @@
       display: flex !important;
       flex-direction: row !important;
       flex-wrap: nowrap !important;
-      overflow-x: auto !important;
-      overflow-y: hidden !important;
-      -webkit-overflow-scrolling: touch !important;
-      scrollbar-width: none !important;
+      transform: none !important;
+      transition: none !important;
       padding-bottom: 20px !important;
-    }
-    
-    [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar {
-      display: none !important;
-    }
-    [data-section-type="combo-bedroom"] .product-cards-container {
-      -ms-overflow-style: none !important;
     }
     
     [data-section-type="combo-bedroom"] .product-card {
