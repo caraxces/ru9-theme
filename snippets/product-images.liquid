@@ -651,6 +651,67 @@
       opacity: 1;
     }
   }
+  
+  /* Zoom modal navigation buttons */
+  .zoom-modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10001;
+    transition: background 0.2s;
+    color: white;
+  }
+  
+  .zoom-modal-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  .zoom-modal-nav-btn.prev {
+    left: 20px;
+  }
+  
+  .zoom-modal-nav-btn.next {
+    right: 20px;
+  }
+  
+  .zoom-modal-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  
+  .zoom-modal-nav-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  @media (max-width: 768px) {
+    .zoom-modal-nav-btn {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .zoom-modal-nav-btn.prev {
+      left: 10px;
+    }
+    
+    .zoom-modal-nav-btn.next {
+      right: 10px;
+    }
+    
+    .zoom-modal-nav-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
 </style>
 
 {%- if product_carousel_enable == false -%}
@@ -993,6 +1054,22 @@ function createZoomModal(imageUrl, imageAlt, imageIndex) {
     existingModal.remove();
   }
   
+  // Get all product images for navigation
+  const allImageButtons = Array.from(document.querySelectorAll('.js-thumb-zoom'));
+  const allImages = allImageButtons.map(btn => ({
+    url: btn.dataset.zoomImage,
+    alt: btn.dataset.zoomAlt,
+    mediaId: btn.dataset.mediaId
+  }));
+  
+  let currentIndex = imageIndex !== undefined ? imageIndex : 0;
+  
+  // If imageIndex not provided, try to find it by URL
+  if (imageIndex === undefined && imageUrl) {
+    currentIndex = allImages.findIndex(img => img.url === imageUrl);
+    if (currentIndex === -1) currentIndex = 0;
+  }
+  
   // Create modal overlay
   const modal = document.createElement('div');
   modal.className = 'product-thumb-zoom-modal';
@@ -1007,7 +1084,6 @@ function createZoomModal(imageUrl, imageAlt, imageIndex) {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
   `;
   
   // Create image container
@@ -1050,14 +1126,17 @@ function createZoomModal(imageUrl, imageAlt, imageIndex) {
   `;
   
   // Add spin animation
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  `;
-  document.head.appendChild(style);
+  if (!document.querySelector('#zoom-modal-spin-style')) {
+    const style = document.createElement('style');
+    style.id = 'zoom-modal-spin-style';
+    style.textContent = `
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
   
   // Create zoomed image
   const zoomedImage = document.createElement('img');
@@ -1068,44 +1147,53 @@ function createZoomModal(imageUrl, imageAlt, imageIndex) {
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.2s ease;
   `;
   
   // Show loading indicator initially
   imageContainer.appendChild(loadingIndicator);
   
-  // Handle image loading
-  zoomedImage.onload = function() {
-    loadingIndicator.style.display = 'none';
-    console.log('Zoom image loaded successfully');
-  };
-  
-  zoomedImage.onerror = function() {
-    loadingIndicator.innerHTML = `
-      <div style="color: white; font-size: 14px; text-align: center;">
-        Không thể tải hình ảnh
-      </div>
-    `;
-    console.error('Failed to load zoom image');
-  };
-  
-  // Check if image is preloaded
-  if (window.preloadedThumbnailImages && window.preloadedThumbnailImages.has(imageUrl)) {
-    const preloadedImg = window.preloadedThumbnailImages.get(imageUrl);
-    if (preloadedImg) {
-      // Use preloaded image - should load instantly
-      zoomedImage.src = preloadedImg.src;
-      console.log('Using preloaded image for zoom');
-      loadingIndicator.style.display = 'none'; // Hide loading since it's already loaded
+  // Function to load image
+  function loadImage(url, alt) {
+    loadingIndicator.style.display = 'flex';
+    zoomedImage.style.opacity = '0';
+    
+    const newImage = new Image();
+    newImage.onload = function() {
+      zoomedImage.src = newImage.src;
+      zoomedImage.alt = alt;
+      loadingIndicator.style.display = 'none';
+      zoomedImage.style.opacity = '1';
+      console.log('Zoom image loaded successfully');
+    };
+    
+    newImage.onerror = function() {
+      loadingIndicator.innerHTML = `
+        <div style="color: white; font-size: 14px; text-align: center;">
+          Không thể tải hình ảnh
+        </div>
+      `;
+      console.error('Failed to load zoom image');
+    };
+    
+    // Check if image is preloaded
+    if (window.preloadedThumbnailImages && window.preloadedThumbnailImages.has(url)) {
+      const preloadedImg = window.preloadedThumbnailImages.get(url);
+      if (preloadedImg && preloadedImg.complete) {
+        newImage.src = preloadedImg.src;
+        console.log('Using preloaded image for zoom');
+      } else {
+        newImage.src = url;
+        console.log('Preloaded image still loading, using original URL');
+      }
     } else {
-      // Still loading, use original URL
-      zoomedImage.src = imageUrl;
-      console.log('Preloaded image still loading, using original URL');
+      newImage.src = url;
+      console.log('Image not preloaded, using original URL');
     }
-  } else {
-    // Not preloaded, use original URL
-    zoomedImage.src = imageUrl;
-    console.log('Image not preloaded, using original URL');
   }
+  
+  // Initial load
+  loadImage(allImages[currentIndex].url, allImages[currentIndex].alt);
   
   // Create close button
   const closeButton = document.createElement('button');
@@ -1130,6 +1218,7 @@ function createZoomModal(imageUrl, imageAlt, imageIndex) {
     cursor: pointer;
     color: white;
     transition: background 0.3s ease;
+    z-index: 10002;
   `;
   
   closeButton.addEventListener('mouseenter', function() {
@@ -1140,6 +1229,102 @@ function createZoomModal(imageUrl, imageAlt, imageIndex) {
     this.style.background = 'rgba(0, 0, 0, 0.5)';
   });
   
+  // Create Previous button
+  const prevButton = document.createElement('button');
+  prevButton.className = 'zoom-modal-nav-btn prev';
+  prevButton.innerHTML = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `;
+  
+  // Create Next button
+  const nextButton = document.createElement('button');
+  nextButton.className = 'zoom-modal-nav-btn next';
+  nextButton.innerHTML = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `;
+  
+  // Navigation functions
+  function updateNavButtons() {
+    prevButton.disabled = currentIndex === 0;
+    nextButton.disabled = currentIndex === allImages.length - 1;
+  }
+  
+  function navigatePrevious() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      loadImage(allImages[currentIndex].url, allImages[currentIndex].alt);
+      updateNavButtons();
+      syncWithMainSlideshow();
+    }
+  }
+  
+  function navigateNext() {
+    if (currentIndex < allImages.length - 1) {
+      currentIndex++;
+      loadImage(allImages[currentIndex].url, allImages[currentIndex].alt);
+      updateNavButtons();
+      syncWithMainSlideshow();
+    }
+  }
+  
+  // Sync with main slideshow (Flickity)
+  function syncWithMainSlideshow() {
+    const slideshow = document.querySelector('.product-slideshow, .product__main-photos');
+    if (slideshow && window.Flickity) {
+      const flkty = Flickity.data(slideshow);
+      if (flkty) {
+        flkty.select(currentIndex, false, true); // Select without animation
+      }
+    }
+  }
+  
+  prevButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    navigatePrevious();
+  });
+  
+  nextButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    navigateNext();
+  });
+  
+  // Touch swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let touchStartY = 0;
+  let touchEndY = 0;
+  
+  modal.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+  
+  modal.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+  }, { passive: true });
+  
+  function handleSwipe() {
+    const diffX = touchStartX - touchEndX;
+    const diffY = Math.abs(touchStartY - touchEndY);
+    
+    // Only trigger if horizontal swipe is dominant (not vertical scroll)
+    if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY) {
+      if (diffX > 0) {
+        // Swipe left - next
+        navigateNext();
+      } else {
+        // Swipe right - previous
+        navigatePrevious();
+      }
+    }
+  }
+  
   // Close modal function
   function closeModal() {
     modal.remove();
@@ -1147,7 +1332,11 @@ function createZoomModal(imageUrl, imageAlt, imageIndex) {
   }
   
   // Event listeners
-  closeButton.addEventListener('click', closeModal);
+  closeButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closeModal();
+  });
+  
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
       closeModal();
@@ -1155,19 +1344,30 @@ function createZoomModal(imageUrl, imageAlt, imageIndex) {
   });
   
   // Keyboard support
-  document.addEventListener('keydown', function(e) {
+  const keydownHandler = function(e) {
     if (e.key === 'Escape') {
       closeModal();
+      document.removeEventListener('keydown', keydownHandler);
+    } else if (e.key === 'ArrowLeft') {
+      navigatePrevious();
+    } else if (e.key === 'ArrowRight') {
+      navigateNext();
     }
-  });
+  };
+  document.addEventListener('keydown', keydownHandler);
   
   // Prevent body scroll
   document.body.style.overflow = 'hidden';
+  
+  // Update navigation buttons state
+  updateNavButtons();
   
   // Assemble modal
   imageContainer.appendChild(zoomedImage);
   imageContainer.appendChild(closeButton);
   modal.appendChild(imageContainer);
+  modal.appendChild(prevButton);
+  modal.appendChild(nextButton);
   document.body.appendChild(modal);
   
   // Add animation
@@ -1179,40 +1379,54 @@ function createZoomModal(imageUrl, imageAlt, imageIndex) {
 }
 
 function initMobileThumbZoom(sectionId) {
-  // Use a timeout to ensure theme scripts have initialized Flickity and Photoswipe
-  setTimeout(function() {
-    const productWrapper = document.querySelector(`#ProductSection-${sectionId}`);
-    if (!productWrapper) return;
-
-    const thumbSliderEl = productWrapper.querySelector('[data-product-thumbs-slider]');
-    const productImagesContainer = productWrapper.querySelector('[data-product-images]');
-
-    if (!thumbSliderEl || !productImagesContainer || !window.Flickity) {
-      return;
-    }
-
-    // Flickity may not be initialized if there's only 1 image, so check for instance
-    const flickityInstance = Flickity.data(thumbSliderEl);
-
-    // Photoswipe instance is attached to the container element by the theme script
-    const photoswipeInstance = productImagesContainer.photoswipe;
-
-    if (flickityInstance && photoswipeInstance && !flickityInstance.isMobileZoomAttached) {
-      flickityInstance.on('staticClick', function(event, pointer, cellElement, cellIndex) {
-        if (typeof cellIndex !== 'number') return;
-
-        // Create a mock event to pass to the photoswipe open method
-        const fakeEvent = {
-          preventDefault: function() {},
-          currentTarget: cellElement
-        };
-
-        // Call the open method with the correct context and mock event
-        photoswipeInstance.open.call(photoswipeInstance, fakeEvent);
-      });
-      // Add a flag to prevent attaching the event multiple times
-      flickityInstance.isMobileZoomAttached = true;
-    }
-  }, 500);
+  // Replaced with new thumb zoom modal - no longer using Photoswipe
+  // This function is kept for compatibility but does nothing
+  console.log('initMobileThumbZoom called - using new thumb zoom modal instead');
 }
+
+// Initialize thumb zoom modal event listeners
+function initThumbZoomEventListeners() {
+  document.querySelectorAll('.js-thumb-zoom').forEach((btn, index) => {
+    // Remove any existing listeners to prevent duplicates
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    
+    newBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const imageUrl = this.dataset.zoomImage;
+      const imageAlt = this.dataset.zoomAlt;
+      const mediaId = this.dataset.mediaId;
+      
+      // Find the index of this button in all zoom buttons
+      const allButtons = document.querySelectorAll('.js-thumb-zoom');
+      let buttonIndex = 0;
+      allButtons.forEach((b, i) => {
+        if (b === this) buttonIndex = i;
+      });
+      
+      console.log('Opening zoom modal for image:', imageUrl, 'at index:', buttonIndex);
+      createZoomModal(imageUrl, imageAlt, buttonIndex);
+    });
+  });
+}
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Initializing thumb zoom event listeners');
+  initThumbZoomEventListeners();
+});
+
+// Re-initialize on section load (Shopify theme editor)
+document.addEventListener('shopify:section:load', function() {
+  console.log('Re-initializing thumb zoom on section load');
+  setTimeout(initThumbZoomEventListeners, 100);
+});
+
+// Re-initialize when variant changes (in case images change)
+document.addEventListener('variant:change', function() {
+  console.log('Re-initializing thumb zoom on variant change');
+  setTimeout(initThumbZoomEventListeners, 100);
+});
 </script>

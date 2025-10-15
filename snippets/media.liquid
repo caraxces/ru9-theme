@@ -133,7 +133,7 @@
         -%}
 
         {%- if product_zoom_enable and media.media_type == 'image' -%}
-          <button type="button" class="btn btn--body btn--circle js-photoswipe__zoom product__photo-zoom">
+          <button type="button" class="btn btn--body btn--circle js-thumb-zoom product__photo-zoom" data-zoom-image="{{ media | image_url: width: 2048 }}" data-zoom-alt="{{ media.alt | escape }}" data-media-id="{{ media.id }}">
             <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 64 64">
               <title>icon-search</title><path d="M47.16 28.58A18.58 18.58 0 1 1 28.58 10a18.58 18.58 0 0 1 18.58 18.58ZM54 54 41.94 42"/>
             </svg>
