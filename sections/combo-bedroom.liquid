@@ -288,12 +288,19 @@
     transition: transform 0.3s ease;
     padding-right: 0;
     padding-bottom: 20px;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: visible;
     flex-wrap: nowrap;
-    scroll-behavior: smooth;
     visibility: visible;
     opacity: 1;
+  }
+  
+  [data-section-type="combo-bedroom"] .product-cards-container.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+  
+  [data-section-type="combo-bedroom"] .product-cards-container.is-dragging .product-card {
+    pointer-events: none;
   }
 
   /* Custom scrollbar styling */
@@ -630,53 +637,97 @@
     function initializeCarousel() {
       if (productCardsContainer.children.length === 0) return;
 
-      let isDown = false;
+      let currentIndex = 0;
       let isDragging = false;
-      let startX;
-      let scrollLeft;
-      const dragThreshold = 5;
+      let startPos = 0;
+      let currentTranslate = 0;
+      let prevTranslate = 0;
+      let animationID = 0;
+      
+      let cardWidth, gap, viewportWidth, visibleCards, maxIndex, totalTrackWidth, maxScroll;
+      
+      const productCards = Array.from(productCardsContainer.querySelectorAll('.product-card'));
 
-      function dragStart(e) {
-        isDown = true;
-        isDragging = false;
-        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
-        scrollLeft = productCardsContainer.scrollLeft;
-        if (e.type === 'touchstart') {
-          window.addEventListener('touchmove', dragMove);
-          window.addEventListener('touchend', dragEnd);
+      function calculateDimensions() {
+        cardWidth = productCards.length > 0 ? productCards[0].offsetWidth : 0;
+        if (cardWidth === 0) return;
+        gap = parseInt(window.getComputedStyle(productCardsContainer).gap) || 24;
+        viewportWidth = productCardsContainer.offsetWidth;
+        visibleCards = Math.floor((viewportWidth + gap) / (cardWidth + gap));
+        maxIndex = productCards.length > visibleCards ? productCards.length - visibleCards : 0;
+        totalTrackWidth = (productCards.length * cardWidth) + Math.max(0, productCards.length - 1) * gap;
+        maxScroll = totalTrackWidth - viewportWidth;
+
+        if (currentIndex > maxIndex) {
+          currentIndex = maxIndex;
         }
       }
+      
+      function setPositionByIndex() {
+        currentTranslate = -currentIndex * (cardWidth + gap);
+        prevTranslate = currentTranslate;
+        productCardsContainer.style.transition = 'transform 0.5s ease-in-out';
+        productCardsContainer.style.transform = `translateX(${currentTranslate}px)`;
+      }
 
-      function dragMove(e) {
-        if (!isDown) return;
-        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
-        const walk = currentX - startX;
-        
-        if (Math.abs(walk) > dragThreshold) {
-          isDragging = true;
-          carouselContainer.classList.add('grabbing');
+      function startDrag(e) {
+        isDragging = true;
+        startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        animationID = requestAnimationFrame(animation);
+        productCardsContainer.style.transition = 'none';
+        productCardsContainer.classList.add('is-dragging');
+      }
+
+      function drag(e) {
+        if (isDragging) {
           e.preventDefault();
-          productCardsContainer.scrollLeft = scrollLeft - walk;
+          const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+          currentTranslate = prevTranslate + currentPosition - startPos;
         }
       }
 
-      function dragEnd() {
-        if (!isDown) return;
-        const wasDragging = isDragging;
-        isDown = false;
+      function endDrag() {
+        if (!isDragging) return;
+        cancelAnimationFrame(animationID);
         isDragging = false;
-        carouselContainer.classList.remove('grabbing');
-        window.removeEventListener('touchmove', dragMove);
-        window.removeEventListener('touchend', dragEnd);
+        productCardsContainer.classList.remove('is-dragging');
+
+        const movedBy = currentTranslate - prevTranslate;
+
+        if (movedBy < -50 && currentIndex < maxIndex) {
+          currentIndex += 1;
+        }
+        if (movedBy > 50 && currentIndex > 0) {
+          currentIndex -= 1;
+        }
+        
+        setPositionByIndex();
       }
 
-      productCardsContainer.addEventListener('mousedown', dragStart);
-      productCardsContainer.addEventListener('mousemove', dragMove);
-      productCardsContainer.addEventListener('mouseup', dragEnd);
-      productCardsContainer.addEventListener('mouseleave', dragEnd);
+      function animation() {
+        if (!isDragging) return;
+        productCardsContainer.style.transform = `translateX(${currentTranslate}px)`;
+        requestAnimationFrame(animation);
+      }
+      
+      function onResize() {
+        calculateDimensions();
+        setPositionByIndex();
+      }
+
+      // Event listeners
+      productCardsContainer.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
+      
+      productCardsContainer.addEventListener('mousedown', startDrag);
+      productCardsContainer.addEventListener('touchstart', startDrag, { passive: true });
+      productCardsContainer.addEventListener('mousemove', drag);
+      productCardsContainer.addEventListener('touchmove', drag, { passive: false });
+      productCardsContainer.addEventListener('mouseup', endDrag);
+      productCardsContainer.addEventListener('mouseleave', endDrag);
+      productCardsContainer.addEventListener('touchend', endDrag);
 
       // Handle click events for product cards - block if was dragging
-      productCardsContainer.querySelectorAll('.product-card').forEach(card => {
+      productCards.forEach(card => {
         card.addEventListener('click', (e) => {
           if (isDragging) {
             e.preventDefault();
@@ -687,24 +738,51 @@
         });
       });
 
-      productCardsContainer.addEventListener('touchstart', dragStart);
-    }
+      const resizeObserver = new ResizeObserver(onResize);
+      resizeObserver.observe(productCardsContainer);
 
-    // Navigation functionality
-    if (prevBtn && nextBtn) {
-      prevBtn.addEventListener('click', () => {
-        const scrollAmount = productCardsContainer.offsetWidth * 0.8;
-        productCardsContainer.scrollLeft -= scrollAmount;
-      });
-
-      nextBtn.addEventListener('click', () => {
-        const scrollAmount = productCardsContainer.offsetWidth * 0.8;
-        productCardsContainer.scrollLeft += scrollAmount;
-      });
+      setTimeout(() => {
+        calculateDimensions();
+        setPositionByIndex();
+      }, 150);
+      
+      return {
+        next: () => {
+          if (currentIndex < maxIndex) {
+            currentIndex++;
+            setPositionByIndex();
+          }
+        },
+        prev: () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+            setPositionByIndex();
+          }
+        },
+        reset: () => {
+          currentIndex = 0;
+          setPositionByIndex();
+        },
+        update: () => {
+          calculateDimensions();
+          setPositionByIndex();
+        }
+      };
     }
 
     // Initialize carousel
-    initializeCarousel();
+    const carousel = initializeCarousel();
+    
+    // Navigation functionality
+    if (prevBtn && nextBtn && carousel) {
+      prevBtn.addEventListener('click', () => {
+        if (carousel.prev) carousel.prev();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (carousel.next) carousel.next();
+      });
+    }
   });
 })();
 </script>
