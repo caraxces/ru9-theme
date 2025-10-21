@@ -9,60 +9,77 @@
     padding: 0;
   }
   .about-statistics-title {
-    text-align: center;
+    text-align: left;
     font-size: 32px;
     font-weight: 700;
     color: {{ section.settings.title_color | default: '#1A2230' }};
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
-  .about-statistics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-bottom: 40px;
-  }
-  .about-statistics-card {
+  .about-statistics-carousel {
     text-align: center;
-    padding: 30px 20px;
-    background-color: {{ section.settings.card_background_color | default: '#F5F5F5' }};
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(16,38,84,.06);
-  }
-  .about-statistics-number {
-    font-size: 48px;
+    font-size: 24px;
     font-weight: 700;
-    color: {{ section.settings.accent_color | default: '#4A90E2' }};
-    margin-bottom: 12px;
-    line-height: 1;
-  }
-  .about-statistics-label {
-    color: {{ section.settings.text_color | default: '#1A2230' }};
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 1.2;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 30px;
+    line-height: 1.4;
   }
   .about-statistics-description {
     text-align: center;
     font-size: 18px;
-    font-style: italic;
-    color: {{ section.settings.title_color | default: '#1A2230' }};
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
     margin-bottom: 30px;
-    max-width: 800px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
-  }
-  .about-statistics-message {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-    color: {{ section.settings.text_color | default: '#5E6B85' }};
     line-height: 1.6;
   }
-  .about-statistics-message p {
-    margin-bottom: 16px;
+  .about-statistics-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
   }
-  .about-statistics-message p:last-child {
-    margin-bottom: 0;
+  .about-statistics-separator-line {
+    flex: 1;
+    height: 1px;
+    background: #E5E7EB;
+  }
+  .about-statistics-separator-dots {
+    display: flex;
+    gap: 8px;
+    margin: 0 20px;
+  }
+  .about-statistics-separator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #D9D9D9;
+  }
+  .about-statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .about-statistics-card {
+    text-align: left;
+  }
+  .about-statistics-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .about-statistics-card p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .about-statistics-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
   }
 
   /* Mobile responsive */
@@ -99,19 +116,38 @@
   <div class="page-width">
     <div class="about-statistics-title">{{ section.settings.title | default: '<h2>Qua những câu chuyện thực tế</h2>' }}</div>
     
+    <div class="about-statistics-carousel">{{ section.settings.carousel_text | default: '95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM.' }}</div>
+    
+    <div class="about-statistics-description">{{ section.settings.description | default: '<p>Ru9 không thể lan tỏa giá trị của giấc ngủ chất lượng đến hàng triệu người Việt như hôm nay nếu không có sự tin tưởng và đồng hành của khách hàng trong suốt chặng đường ấy. Chính mỗi giấc ngủ ngon của bạn là nguồn cảm hứng để Ru9 tiếp tục hoàn thiện và lớn lên từng ngày.</p>' }}</div>
+    
+    <div class="about-statistics-separator">
+      <div class="about-statistics-separator-line"></div>
+      <div class="about-statistics-separator-dots">
+        <div class="about-statistics-separator-dot"></div>
+        <div class="about-statistics-separator-dot"></div>
+        <div class="about-statistics-separator-dot"></div>
+      </div>
+      <div class="about-statistics-separator-line"></div>
+    </div>
+    
     <div class="about-statistics-grid">
       {% for block in section.blocks %}
         <div class="about-statistics-card">
-          <div class="about-statistics-number">{{ block.settings.number }}</div>
-          <div class="about-statistics-label">{{ block.settings.label }}</div>
+          <div>{{ block.settings.title }}</div>
+          <div>{{ block.settings.description }}</div>
+          {% if block.settings.image != blank %}
+            <img 
+              src="{{ block.settings.image | image_url: width: 400 }}" 
+              alt="{{ block.settings.image.alt | escape }}"
+              width="400"
+              height="200"
+              loading="lazy"
+            >
+          {% else %}
+            <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Image+{{ forloop.index }}" alt="Image {{ forloop.index }}" width="400" height="200" />
+          {% endif %}
         </div>
       {% endfor %}
-    </div>
-
-    <p class="about-statistics-description">{{ section.settings.description | default: '"95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM."' }}</p>
-    
-    <div class="about-statistics-message">
-      {{ section.settings.message }}
     </div>
   </div>
 </div>
@@ -130,14 +166,14 @@
     },
     {
       "type": "html",
-      "id": "description",
-      "label": "Statistics Description",
-      "default": "<p>\"95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM.\"</p>"
+      "id": "carousel_text",
+      "label": "Carousel Text",
+      "default": "95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM."
     },
     {
-      "type": "richtext",
-      "id": "message",
-      "label": "Statistics Message",
+      "type": "html",
+      "id": "description",
+      "label": "Description Paragraph",
       "default": "<p>Ru9 không thể lan tỏa giá trị của giấc ngủ chất lượng đến hàng triệu người Việt như hôm nay nếu không có sự tin tưởng và đồng hành của khách hàng trong suốt chặng đường ấy. Chính mỗi giấc ngủ ngon của bạn là nguồn cảm hứng để Ru9 tiếp tục hoàn thiện và lớn lên từng ngày.</p>"
     },
     {
@@ -174,19 +210,24 @@
   "blocks": [
     {
       "type": "about_statistic_card",
-      "name": "Statistic Card",
+      "name": "Customer Story Card",
       "settings": [
         {
           "type": "html",
-          "id": "number",
-          "label": "Statistic Number",
-          "default": "<span class=\"stat-number\">34</span>"
+          "id": "title",
+          "label": "Card Title",
+          "default": "<h3>Chuyên Viên Trẻ</h3>"
         },
         {
           "type": "html",
-          "id": "label",
-          "label": "Statistic Label",
-          "default": "<span class=\"stat-label\">Tỉnh thành</span>"
+          "id": "description",
+          "label": "Card Description",
+          "default": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Image"
         }
       ]
     }
@@ -198,22 +239,22 @@
         {
           "type": "about_statistic_card",
           "settings": {
-            "number": "34",
-            "label": "Tỉnh thành"
+            "title": "<h3>Chuyên Viên Trẻ</h3>",
+            "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
           }
         },
         {
           "type": "about_statistic_card",
           "settings": {
-            "number": "35,000+",
-            "label": "Giấc ngủ ngon được giao đến tận nhà"
+            "title": "<h3>Những gia đình</h3>",
+            "description": "<p>Đáp ứng từng nhu cầu khác nhau của các thành viên trong gia đình, đã mang lại giấc ngủ sâu đồng hành và sự gắn kết trọn vẹn cho cả gia đình.</p>"
           }
         },
         {
           "type": "about_statistic_card",
           "settings": {
-            "number": "50,000+",
-            "label": "Khách hàng tin tưởng Ru9"
+            "title": "<h3>Khách hàng lớn tuổi</h3>",
+            "description": "<p>Hỗ trợ để mang lại giấc ngủ sâu hơn, cải thiện tình trạng mất ngủ, đau mỏi của người lớn tuổi.</p>"
           }
         }
       ]
