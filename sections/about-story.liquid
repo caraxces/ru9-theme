@@ -1,0 +1,178 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-story-section {
+    padding: 0;
+    background-color: transparent;
+  }
+  .about-story-section .page-width {
+    padding: 0;
+  }
+  .about-story-content {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  .about-story-image {
+    flex: 0 0 42%;
+  }
+  .about-story-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+  }
+  .about-story-text {
+    flex: 1;
+  }
+  .about-story-main-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #759CE6;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .about-story-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1C2C58;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    border-bottom: 1px solid #1C2C58;
+    padding-bottom: 20px;
+  }
+  .about-story-text p {
+    color: #333333;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .about-story-text p:last-child {
+    margin-bottom: 0;
+  }
+  .about-story-quote {
+    font-weight: 700;
+    color: #333333;
+    margin: 20px 0;
+    line-height: 1.6;
+  }
+  .about-story-image-quote {
+    font-weight: 700;
+    color: #333333;
+    margin: 20px 0 0 0;
+    line-height: 1.6;
+  }
+  .about-story-mission-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1C2C58;
+    margin: 30px 0 20px 0;
+    line-height: 1.2;
+    border-bottom: 1px solid #1C2C58;
+    padding-bottom: 20px;
+  }
+  .about-story-mission-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .about-story-mission-list li {
+    color: #333333;
+    margin-bottom: 8px;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 20px;
+  }
+  .about-story-mission-list li:before {
+    content: "•";
+    color: #1C2C58;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+
+</style>
+
+<div class="about-story-section">
+  <div class="page-width">
+    <div class="about-story-content">
+      <div class="about-story-image">
+        <div class="about-story-main-title">{{ section.settings.title | default: '<h2>Câu chuyện của chúng tôi</h2>' }}</div>
+        {% if section.settings.image != blank %}
+          <img 
+            src="{{ section.settings.image | image_url: width: 600 }}" 
+            alt="{{ section.settings.image.alt | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy"
+          >
+        {% else %}
+          <img src="https://via.placeholder.com/600x400/3D6DFF/FFFFFF?text=Founder+Trang" alt="Founder Trang" width="600" height="400" />
+        {% endif %}
+        <div class="about-story-image-quote">{{ section.settings.mission_quote | default: '<p>Tất cả đều bắt đầu từ những đêm mất ngủ, từ những trăn trở "Tại sao hôm nay ngủ dậy vẫn mệt?" hay "Chiếc nệm này có thực sự phù hợp chưa?"</p>' }}</div>
+      </div>
+      <div class="about-story-text">
+        <div class="about-story-subtitle">{{ section.settings.story_title | default: '<h3>Khởi nguồn từ giấc ngủ chưa trọn vẹn</h3>' }}</div>
+        {{ section.settings.story_content }}
+        <div class="about-story-mission-title">{{ section.settings.mission_title | default: '<h4>Sứ mệnh của chúng tôi</h4>' }}</div>
+        <div class="about-story-mission-content">
+          {{ section.settings.mission_content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Câu chuyện của chúng tôi</h2>"
+    },
+    {
+      "type": "html",
+      "id": "story_title",
+      "label": "Story Title",
+      "default": "<h3>Khởi nguồn từ giấc ngủ chưa trọn vẹn</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "story_content",
+      "label": "Story Content",
+      "default": "<p>Chắc hẳn bạn cũng từng có những đêm trằn trọc, dù nằm đủ 8 tiếng nhưng sáng dậy vẫn mệt mỏi đúng không?</p><p>Mình là Trang, Founder của Ru9, và mình cũng từng như vậy. Những năm làm việc căng thẳng khiến giấc ngủ của mình trở nên chập chờn, và mình nhận ra vấn đề không phải ngủ bao lâu, mà ngủ như thế nào mới thật sự quan trọng.</p><p>Từ mong muốn cải thiện giấc ngủ của chính mình, mình bắt đầu hành trình tìm hiểu về nệm foam, công nghệ giấc ngủ và những yếu tố ảnh hưởng đến chất lượng nghỉ ngơi. Càng nghiên cứu, mình càng nhận ra phần lớn nệm tại Việt Nam chưa đảm bảo tiêu chuẩn an toàn hay hỗ trợ đúng cách cho cơ thể.</p><p>Đó là lý do Ru9 ra đời, với khát vọng mang đến cho người Việt một giấc ngủ trọn vẹn và chất lượng hơn mỗi ngày. Ru9 cũng là công ty đầu tiên tại Việt Nam sản xuất nệm foam đóng thùng, đạt hai chứng nhận quốc tế khắt khe: CertiPUR-US® về độ an toàn và bền vững của foam, cùng STANDARD 100 by OEKO-TEX® về sự an toàn tuyệt đối cho sức khỏe người dùng.</p>"
+    },
+    {
+      "type": "html",
+      "id": "mission_quote",
+      "label": "Mission Quote",
+      "default": "<p>Tất cả đều bắt đầu từ những đêm mất ngủ, từ những trăn trở \"Tại sao hôm nay ngủ dậy vẫn mệt?\" hay \"Chiếc nệm này có thực sự phù hợp chưa?\"</p>"
+    },
+    {
+      "type": "html",
+      "id": "mission_title",
+      "label": "Mission Title",
+      "default": "<h4>Sứ mệnh của chúng tôi</h4>"
+    },
+    {
+      "type": "html",
+      "id": "mission_content",
+      "label": "Mission Content (HTML)",
+      "default": "<p>Ru9 được xây dựng trên niềm tin rằng mỗi người xứng đáng có được một giấc ngủ tốt. Đó không phải là điều xa xỉ, mà là nền tảng để tái tạo năng lượng, sức khỏe và niềm hạnh phúc.</p><p><strong>\"Đơn giản để tốt hơn\"</strong> – Chúng tôi mang đến những giải pháp giấc ngủ được thiết kế tinh gọn, khoa học và tối ưu, tập trung vào những gì thực sự cần thiết để tạo nên giấc ngủ chất lượng.</p><p>Ru9 không chỉ bán sản phẩm – chúng tôi mang đến một lời hứa:</p><ul><li>Một giấc ngủ ngon hơn.</li><li>Một ngày mới tràn đầy năng lượng.</li><li>Một cuộc sống chất lượng hơn.</li></ul><p>Mỗi sản phẩm Ru9 là sự kết nối giữa công nghệ, sự sáng tạo và lòng tận tâm. Không chỉ là một sản phẩm hay một đơn hàng, mà là cam kết chăm sóc sức khỏe giấc ngủ của bạn.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Story Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Story"
+    }
+  ]
+}
+{% endschema %}

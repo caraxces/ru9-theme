@@ -1,0 +1,166 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-newsletter-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#1A2230' }};
+    color: {{ section.settings.text_color | default: '#ffffff' }};
+    text-align: center;
+  }
+  .about-newsletter-section .page-width {
+    padding: 0;
+  }
+  .about-newsletter-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.text_color | default: '#ffffff' }};
+    margin-bottom: 40px;
+    line-height: 1.2;
+  }
+  .about-newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .about-newsletter-form input {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 100px;
+    font-size: 16px;
+    background-color: {{ section.settings.input_background_color | default: '#ffffff' }};
+    color: {{ section.settings.input_text_color | default: '#333333' }};
+  }
+  .about-newsletter-form input::placeholder {
+    color: {{ section.settings.input_placeholder_color | default: '#999999' }};
+  }
+  .about-newsletter-form button {
+    padding: 12px 30px;
+    background-color: {{ section.settings.button_background_color | default: '#4A90E2' }};
+    color: {{ section.settings.button_text_color | default: '#ffffff' }};
+    border: none;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .about-newsletter-form button:hover {
+    background-color: {{ section.settings.button_hover_color | default: '#3a7bc8' }};
+    transform: translateY(-2px);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .about-newsletter-section {
+      padding: 0;
+    }
+    .about-newsletter-title {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    .about-newsletter-form {
+      flex-direction: column;
+      gap: 15px;
+    }
+    .about-newsletter-form input {
+      padding: 15px 20px;
+    }
+    .about-newsletter-form button {
+      padding: 15px 30px;
+    }
+  }
+</style>
+
+<div class="about-newsletter-section">
+  <div class="page-width">
+    <div class="about-newsletter-title">{{ section.settings.title | default: '<h2>NHẬN THÔNG TIN ƯU ĐÃI TỪ RU9</h2>' }}</div>
+    <form class="about-newsletter-form" action="{{ routes.contact }}" method="post">
+      <input type="email" name="contact[email]" placeholder="{{ section.settings.placeholder | default: '<span>Nhập email</span>' }}" required />
+      <button type="submit">{{ section.settings.button_text | default: '<span>Gửi thông tin</span>' }}</button>
+    </form>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Newsletter",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Newsletter Title",
+      "default": "<h2>NHẬN THÔNG TIN ƯU ĐÃI TỪ RU9</h2>"
+    },
+    {
+      "type": "html",
+      "id": "placeholder",
+      "label": "Email Placeholder",
+      "default": "<span>Nhập email</span>"
+    },
+    {
+      "type": "html",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "<span>Gửi thông tin</span>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_background_color",
+      "label": "Input Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Input Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "input_placeholder_color",
+      "label": "Input Placeholder Color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button Background Color",
+      "default": "#4A90E2"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button Hover Color",
+      "default": "#3a7bc8"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Newsletter"
+    }
+  ]
+}
+{% endschema %}

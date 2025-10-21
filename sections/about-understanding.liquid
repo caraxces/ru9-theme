@@ -1,0 +1,190 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-understanding-section {
+    padding: 0;
+    }
+  .about-understanding-section .page-width {
+    padding: 0;
+  }
+  .about-understanding-content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+  .about-understanding-item {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  .about-understanding-item.reverse {
+    flex-direction: row-reverse;
+  }
+  .about-understanding-image {
+    flex: 0 0 45%;
+    position: relative;
+  }
+  .about-understanding-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+  }
+  .about-understanding-svg-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: -50px;
+    z-index: 2;
+    max-width: 300px;
+    max-height: 120px;
+    overflow: visible;
+  }
+  .about-understanding-svg-overlay svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .about-understanding-text {
+    flex: 1;
+  }
+  .about-understanding-text h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .about-understanding-text p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .about-understanding-text p:last-child {
+    margin-bottom: 0;
+  }
+
+</style>
+
+<div class="about-understanding-section">
+  <div class="page-width">    
+    <div class="about-understanding-content">
+      {% for block in section.blocks %}
+        <div class="about-understanding-item{% if block.settings.reverse_layout %} reverse{% endif %}">
+          <div class="about-understanding-image">
+            {% if block.settings.image != blank %}
+              <img 
+                src="{{ block.settings.image | image_url: width: 500 }}" 
+                alt="{{ block.settings.image.alt | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy"
+              >
+            {% else %}
+              <img src="https://via.placeholder.com/500x400/3D6DFF/FFFFFF?text=Understanding+{{ forloop.index }}" alt="Understanding {{ forloop.index }}" width="500" height="400" />
+            {% endif %}
+            {% if block.settings.svg_overlay != blank %}
+              <div class="about-understanding-svg-overlay">
+                {{ block.settings.svg_overlay }}
+              </div>
+            {% endif %}
+          </div>
+          <div class="about-understanding-text">
+            <div>{{ block.settings.title }}</div>
+            {{ block.settings.content }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Understanding",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Ru9 sẽ không ngừng lắng nghe và thấu hiểu</h2>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about_understanding_item",
+      "name": "Understanding Item",
+      "settings": [
+        {
+          "type": "html",
+          "id": "title",
+          "label": "Item Title",
+          "default": "Hiểu rằng mỗi giấc ngủ là một trải nghiệm cá nhân"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Item Content",
+          "default": "<p>Giấc ngủ không đơn giản là khoảng thời gian khép mắt, mà là trải nghiệm cá nhân gắn liền với sức khỏe, cảm xúc và chất lượng sống của mỗi người. Thế nhưng, thực tế tại Việt Nam cho thấy hiệu suất giấc ngủ chưa được quan tâm đúng cách.</p><p>Theo thống kê, có đến gần 1/3 người trưởng thành thường xuyên mất ngủ hoặc khó ngủ. Tình trạng này không chỉ khiến cơ thể mệt mỏi, giảm hiệu suất công việc, mà còn ảnh hưởng trực tiếp đến sự gắn kết gia đình, đời sống tinh thần và vấn đề sức khỏe khác.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Item Image"
+        },
+        {
+          "type": "html",
+          "id": "svg_overlay",
+          "label": "SVG Overlay Code"
+        },
+        {
+          "type": "checkbox",
+          "id": "reverse_layout",
+          "label": "Reverse Layout",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Understanding",
+      "blocks": [
+        {
+          "type": "about_understanding_item",
+          "settings": {
+            "title": "Hiểu rằng mỗi giấc ngủ là một trải nghiệm cá nhân",
+            "content": "<p>Giấc ngủ không đơn giản là khoảng thời gian khép mắt, mà là trải nghiệm cá nhân gắn liền với sức khỏe, cảm xúc và chất lượng sống của mỗi người. Thế nhưng, thực tế tại Việt Nam cho thấy hiệu suất giấc ngủ chưa được quan tâm đúng cách.</p><p>Theo thống kê, có đến gần 1/3 người trưởng thành thường xuyên mất ngủ hoặc khó ngủ. Tình trạng này không chỉ khiến cơ thể mệt mỏi, giảm hiệu suất công việc, mà còn ảnh hưởng trực tiếp đến sự gắn kết gia đình, đời sống tinh thần và vấn đề sức khỏe khác.</p>"
+          }
+        },
+        {
+          "type": "about_understanding_item",
+          "settings": {
+            "title": "Giải pháp cho giấc ngủ, đầu tư cho cuộc sống",
+            "content": "<p>Không chỉ dừng lại ở lời nhắc \"ngủ đủ 8 tiếng\", Ru9 đem đến giải pháp thực tiễn bằng những sản phẩm gần gũi, gắn liền với nhu cầu hàng ngày.</p><p>Là nơi mà công nghệ hiện đại gặp gỡ thói quen truyền thống để từng bước thay đổi quan niệm cũ rằng giấc ngủ chỉ cần \"tạm đủ\" là được.</p><p>Mở ra một góc nhìn mới cho người Việt về một giấc ngủ - không chỉ là sự thoải mái tức thời, mà còn là nền tảng để nâng cao sức khỏe và chất lượng sống cho tất cả mọi người.</p>",
+            "reverse_layout": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

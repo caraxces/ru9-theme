@@ -1,0 +1,259 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-community-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#F5F5F5' }};
+  }
+  .about-community-section .page-width {
+    padding: 0;
+  }
+  .about-community-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+  }
+  .about-community-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    margin-bottom: 60px;
+    font-style: italic;
+  }
+  .about-community-content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+  .about-community-item h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .about-community-item h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: {{ section.settings.accent_color | default: '#4A90E2' }};
+    margin: 20px 0;
+    line-height: 1.2;
+  }
+  .about-community-intro {
+    margin-bottom: 20px;
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+  }
+  .about-community-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+  }
+  .about-community-images img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+    height: 200px;
+    object-fit: cover;
+  }
+  .about-community-item p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .about-community-item p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .about-community-section {
+      padding: 0;
+    }
+    .about-community-title {
+      font-size: 24px;
+    }
+    .about-community-subtitle {
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+    .about-community-content {
+      gap: 40px;
+    }
+    .about-community-item h3 {
+      font-size: 20px;
+    }
+    .about-community-item h4 {
+      font-size: 18px;
+    }
+    .about-community-images {
+      grid-template-columns: 1fr;
+    }
+    .about-community-images img {
+      height: 150px;
+    }
+  }
+</style>
+
+<div class="about-community-section">
+  <div class="page-width">
+    <div class="about-community-title">{{ section.settings.title | default: '<h2>Mang giá trị thật đến cộng đồng</h2>' }}</div>
+    <div class="about-community-subtitle">{{ section.settings.subtitle | default: '<p>"Hành trình này không dừng lại ở sản phẩm hay dành riêng cho khách hàng"</p>' }}</div>
+    
+    <div class="about-community-content">
+      {% for block in section.blocks %}
+        <div class="about-community-item">
+          <div>{{ block.settings.title }}</div>
+          {% if block.settings.intro_text != blank %}
+            <p class="about-community-intro">{{ block.settings.intro_text }}</p>
+          {% endif %}
+          {% if block.settings.subtitle != blank %}
+            <h4>{{ block.settings.subtitle }}</h4>
+          {% endif %}
+          {% if block.settings.image_1 != blank or block.settings.image_2 != blank %}
+            <div class="about-community-images">
+              {% if block.settings.image_1 != blank %}
+                <img 
+                  src="{{ block.settings.image_1 | image_url: width: 500 }}" 
+                  alt="{{ block.settings.image_1.alt | escape }}"
+                  width="500"
+                  height="200"
+                  loading="lazy"
+                >
+              {% endif %}
+              {% if block.settings.image_2 != blank %}
+                <img 
+                  src="{{ block.settings.image_2 | image_url: width: 500 }}" 
+                  alt="{{ block.settings.image_2.alt | escape }}"
+                  width="500"
+                  height="200"
+                  loading="lazy"
+                >
+              {% endif %}
+            </div>
+          {% endif %}
+          {{ block.settings.content }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Community",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Mang giá trị thật đến cộng đồng</h2>"
+    },
+    {
+      "type": "html",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "<p>\"Hành trình này không dừng lại ở sản phẩm hay dành riêng cho khách hàng\"</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#4A90E2"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about_community_item",
+      "name": "Community Item",
+      "settings": [
+        {
+          "type": "html",
+          "id": "title",
+          "label": "Item Title",
+          "default": "<h3>Chương trình giáo dục giấc ngủ</h3>"
+        },
+        {
+          "type": "html",
+          "id": "intro_text",
+          "label": "Intro Text"
+        },
+        {
+          "type": "html",
+          "id": "subtitle",
+          "label": "Item Subtitle"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Item Content",
+          "default": "<p>Với Ru9, một giấc ngủ tốt bắt đầu từ sự thấu hiểu. Vì vậy, Ru9 đã và đang tổ chức các workshop chuyên sâu về giấc ngủ với sự đồng hành của các chuyên gia đầu ngành, nhằm lan tỏa kiến thức khoa học và giúp cộng đồng nhìn nhận giấc ngủ đúng cách hơn.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Community",
+      "blocks": [
+        {
+          "type": "about_community_item",
+          "settings": {
+            "title": "Chương trình giáo dục giấc ngủ",
+            "content": "<p>Với Ru9, một giấc ngủ tốt bắt đầu từ sự thấu hiểu. Vì vậy, Ru9 đã và đang tổ chức các workshop chuyên sâu về giấc ngủ với sự đồng hành của các chuyên gia đầu ngành, nhằm lan tỏa kiến thức khoa học và giúp cộng đồng nhìn nhận giấc ngủ đúng cách hơn.</p>"
+          }
+        },
+        {
+          "type": "about_community_item",
+          "settings": {
+            "title": "Kết nối cộng đồng - trao cơ hội cho mọi giấc ngủ",
+            "intro_text": "Giấc ngủ ngon là điều xứng đáng với tất cả mọi người, ở bất kỳ đâu, bất kỳ lúc nào. Đó là lý do chúng tôi không ngừng nỗ lực để mang sản phẩm của mình đến gần hơn với mọi người.",
+            "subtitle": "\"Tri ân những cống hiến lớn và cùng cộng đồng vượt qua thử thách\"",
+            "content": "<p>Sự lan tỏa và kết nối này không chỉ nằm trong lời nói, mà cần được thể hiện bằng hành động. Từ niềm tin đó, những chương trình hỗ trợ đặc biệt ra đời như cách Ru9 gửi lời tri ân đến những người đang góp phần làm nên một xã hội tốt đẹp hơn mỗi ngày.</p>"
+          }
+        },
+        {
+          "type": "about_community_item",
+          "settings": {
+            "title": "Cam kết với môi trường - tạo ảnh hưởng bền vững cho mai sau",
+            "content": "<p>Mỗi sản phẩm Ru9 bạn mang về nhà là một bước đi nhỏ để hướng tới sự bền vững. Vì vậy, mỗi sản phẩm được tạo ra đều bắt đầu từ những lựa chọn có trách nhiệm từ những chất liệu an toàn cho sức khỏe và thân thiện với môi trường đến quy trình sản xuất tiết kiệm năng lượng, giảm thiểu tối đa khí thải VOC (chỉ 0.5 phần triệu), không formaldehyde, không phthalates.</p><p>Song song đó, Ru9 đang cùng tham gia và dần triển khai chương trình \"Một sản phẩm - Một cây xanh\", gửi gắm mong muốn tái tạo thiên nhiên và vòng tuần hoàn tích cực giữa con người và môi trường.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

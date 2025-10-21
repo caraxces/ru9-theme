@@ -1,0 +1,183 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-customers-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#F5F5F5' }};
+  }
+  .about-customers-section .page-width {
+    padding: 0;
+  }
+  .about-customers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .about-customers-card {
+    text-align: center;
+    background-color: {{ section.settings.card_background_color | default: '#ffffff' }};
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+  }
+  .about-customers-image {
+    margin-bottom: 20px;
+  }
+  .about-customers-image img {
+    width: 100%;
+    border-radius: 12px;
+    height: 200px;
+    object-fit: cover;
+  }
+  .about-customers-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .about-customers-card p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 1024px) {
+    .about-customers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-customers-section {
+      padding: 0;
+    }
+    .about-customers-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .about-customers-card {
+      padding: 20px 15px;
+    }
+    .about-customers-image img {
+      height: 150px;
+    }
+    .about-customers-card h3 {
+      font-size: 18px;
+    }
+  }
+</style>
+
+<div class="about-customers-section">
+  <div class="page-width">
+    <div class="about-customers-grid">
+      {% for block in section.blocks %}
+        <div class="about-customers-card">
+          <div class="about-customers-image">
+            {% if block.settings.image != blank %}
+              <img 
+                src="{{ block.settings.image | image_url: width: 400 }}" 
+                alt="{{ block.settings.image.alt | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="200"
+                loading="lazy"
+              >
+            {% else %}
+              <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Customer+{{ forloop.index }}" alt="Customer {{ forloop.index }}" width="400" height="200" />
+            {% endif %}
+          </div>
+          <div>{{ block.settings.title }}</div>
+          <div>{{ block.settings.description }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Customers",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about_customer_card",
+      "name": "Customer Card",
+      "settings": [
+        {
+          "type": "html",
+          "id": "title",
+          "label": "Customer Title",
+          "default": "<h3>Chuyên Viên Trẻ</h3>"
+        },
+        {
+          "type": "html",
+          "id": "description",
+          "label": "Customer Description",
+          "default": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải sau những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Customer Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Customers",
+      "blocks": [
+        {
+          "type": "about_customer_card",
+          "settings": {
+            "title": "Chuyên Viên Trẻ",
+            "description": "Giải quyết triệt để tình trạng mệt mỏi, uể oải sau những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu."
+          }
+        },
+        {
+          "type": "about_customer_card",
+          "settings": {
+            "title": "Những gia đình",
+            "description": "Đáp ứng từng nhu cầu khác nhau của các thành viên trong gia đình, đã mang lại giấc ngủ sâu đồng hành và sự gắn kết trọn vẹn cho cả gia đình."
+          }
+        },
+        {
+          "type": "about_customer_card",
+          "settings": {
+            "title": "Khách hàng lớn tuổi",
+            "description": "Hỗ trợ để mang lại giấc ngủ sâu hơn, cải thiện tình trạng mất ngủ, đau mỏi của người lớn tuổi."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

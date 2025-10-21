@@ -1,0 +1,552 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-content-banner-section .page-width {
+    max-width: none;
+    padding: 0;
+  }
+  .about-content-banner-section {
+    padding: 0;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  .about-content-banner-breadcrumb {
+    padding: 0 0 0 0;
+    background-color: transparent;
+    border: none;
+  }
+  .about-content-banner-breadcrumb .page-width {
+    max-width: none;
+    padding: 0 0 0 60px;
+  }
+  .about-content-banner-breadcrumb-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+  }
+  .about-content-banner-breadcrumb-item {
+    display: flex;
+    align-items: center;
+  }
+  .about-content-banner-breadcrumb-item:not(:last-child)::after {
+    content: ">";
+    margin: 0 8px;
+    color: {{ section.settings.breadcrumb_separator_color | default: '#6c757d' }};
+  }
+  .about-content-banner-breadcrumb-link {
+    color: {{ section.settings.breadcrumb_link_color | default: '#007bff' }};
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .about-content-banner-breadcrumb-link:hover {
+    color: {{ section.settings.breadcrumb_link_hover_color | default: '#0056b3' }};
+    text-decoration: underline;
+  }
+  .about-content-banner-breadcrumb-current {
+    color: {{ section.settings.breadcrumb_current_color | default: '#6c757d' }};
+    font-weight: 500;
+  }
+  .about-content-banner-main-title-wrapper {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .about-content-banner-main-title {
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+    line-height: {{ section.settings.main_title_line_height }};
+    color: {{ section.settings.main_title_color }};
+  }
+  .about-content-banner-container {
+    position: relative;
+    height: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .about-content-banner-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: transparent;
+  }
+  .about-content-banner-text-wrapper {
+    display: contents;
+  }
+  .about-content-banner-subtitle {
+    font-weight: 700;
+    color: #1C2C58;
+    margin: 0 0 20px;
+    line-height: 1.4;
+  }
+  .about-content-banner-subtitle p {
+    margin: 0px;
+  }
+  .about-content-banner-secondary-title {
+    font-weight: 700;
+    color: #1C2C58;
+    margin: 0 0 20px;
+  }
+  .about-content-banner-description {
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  .about-content-banner-description p {
+    margin: 0;
+  }
+  .about-content-banner-button {
+    display: inline-block;
+    background-color: #234085;
+    margin-top: 50px;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+  }
+  .about-content-banner-button:hover {
+    background-color: #2b4282;
+  }
+  .about-content-banner-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  /* Long content section below banner */
+  .about-content-banner-long-content {
+    padding: 60px 0;
+    background-color: {{ section.settings.long_content_background_color | default: '#ffffff' }};
+  }
+  .about-content-banner-long-content .page-width {
+    max-width: 1200px;
+    padding: 0 20px;
+  }
+  .about-content-banner-long-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.8;
+    color: {{ section.settings.long_content_text_color | default: '#333333' }};
+  }
+  .about-content-banner-long-text p {
+    margin: 0 0 20px 0;
+  }
+  .about-content-banner-long-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Custom HTML/CSS content styling */
+  .about-content-banner-custom-content {
+    {{ section.settings.custom_css }}
+  }
+
+  /* Mobile image display */
+  @media (max-width: 768px) {
+    .about-content-banner-breadcrumb {
+      padding: 30px 0 0 0;
+    }
+    .about-content-banner-breadcrumb .page-width {
+      padding: 0 0 0 15px;
+    }
+    .about-content-banner-breadcrumb-list {
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+    .about-content-banner-breadcrumb-item:not(:last-child)::after {
+      margin: 0 6px;
+    }
+    .about-content-banner-background-image.medium-up--hide {
+      display: block !important;
+    }
+    .about-content-banner-background-image.small--hide {
+      display: none !important;
+    }
+  }
+
+  /* Desktop image display */
+  @media (min-width: 769px) {
+    .about-content-banner-background-image.medium-up--hide {
+      display: none !important;
+    }
+    .about-content-banner-background-image.small--hide {
+      display: block !important;
+    }
+  }
+
+  /* Desktop screens - 769px and above */
+  @media (min-width: 769px) {
+    .about-content-banner-container {
+      margin: 0 60px;
+      height: 500px;
+    }
+    .about-content-banner-content {
+      width: 60%;
+      padding: 0 60px;
+      background: transparent;
+    }
+    .about-content-banner-main-title {
+      font-size: 39px;
+    }
+    .about-content-banner-subtitle {
+      font-size: 22px;
+    }
+    .about-content-banner-secondary-title {
+      font-size: 22px;
+    }
+    .about-content-banner-description {
+      font-size: 16px;
+    }
+  }
+
+  /* Small screens - 768px and below */
+  @media (max-width: 768px) {
+    .about-content-banner-main-title-wrapper {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    .about-content-banner-container {
+      margin: 0 15px;
+      width: calc(100% - 30px);
+      height: 250px;
+    }
+    .about-content-banner-content {
+      width: 100%;
+      padding: 15px;
+      background: transparent;
+    }
+    
+    .about-content-banner-main-title {
+      font-size: 24px !important;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    
+    .about-content-banner-subtitle {
+      font-size: 16px !important;
+      max-width: 148px;
+    }
+    
+    .about-content-banner-secondary-title {
+      max-width: 148px;
+    }
+    
+    .about-content-banner-description {
+      font-size: 14px !important;
+    }
+    
+    .about-content-banner-button {
+      margin-top: 0px !important;
+    }
+
+    .about-content-banner-long-content {
+      padding: 40px 0;
+    }
+    .about-content-banner-long-text {
+      font-size: 16px;
+      padding: 0 15px;
+    }
+  }
+  
+  /* Extra small screens - 480px and below */
+  @media (max-width: 480px) {
+    .about-content-banner-section {
+      padding: 0;
+    }
+    .about-content-banner-container {
+      margin: 0 15px;
+      width: calc(100% - 30px);
+      height: 200px;
+    }
+    .about-content-banner-content {
+      padding: 15px;
+      text-align: left;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .about-content-banner-button {
+      align-self: flex-start;
+      width: auto;
+      height: auto;
+      padding: 8px 18px;
+      font-size: 12px;
+      margin-top: 0px;
+    }
+    .about-content-banner-main-title {
+      font-size: 20px !important;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .about-content-banner-subtitle,
+    .about-content-banner-secondary-title {
+      font-size: 12px !important;
+      font-weight: 600;
+      line-height: 1.2;
+      color: #1C2C58;
+      margin-bottom: 10px;
+      text-align: left;
+      max-width: 148px;
+    }
+
+    .about-content-banner-long-content {
+      padding: 30px 0;
+    }
+    .about-content-banner-long-text {
+      font-size: 14px;
+      padding: 0 10px;
+    }
+  }
+</style>
+
+<div class="about-content-banner-section" style="background-color: {{ section.settings.background_color }};">
+  {% if section.settings.show_breadcrumb %}
+    <div class="about-content-banner-breadcrumb">
+      <div class="page-width">
+        <nav aria-label="Breadcrumb">
+          <ol class="about-content-banner-breadcrumb-list">
+            <li class="about-content-banner-breadcrumb-item">
+              <a href="{{ routes.root_url }}" class="about-content-banner-breadcrumb-link">
+                {{ section.settings.home_text | default: 'Trang chủ' }}
+              </a>
+            </li>
+            <li class="about-content-banner-breadcrumb-item">
+              <span class="about-content-banner-breadcrumb-current">
+                {{ section.settings.current_page_text | default: 'Về Ru9' }}
+              </span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  {% endif %}
+  
+  <div class="page-width">
+    <div class="about-content-banner-main-title-wrapper">
+        <h2 class="about-content-banner-main-title">{{ section.settings.main_title | escape }}</h2>
+    </div>
+    <div class="about-content-banner-container">
+      {%- liquid
+        assign has_mobile_image = false
+        if section.settings.image_mobile != blank
+          assign has_mobile_image = true
+        endif
+      -%}
+
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1600 }}"
+          alt="{{ section.settings.image.alt | escape }}"
+          class="about-content-banner-background-image{% if has_mobile_image %} small--hide{% endif %}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          loading="lazy"
+        >
+      {%- elsif has_mobile_image == false -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg about-content-banner-background-image' }}
+      {%- endif -%}
+      
+      {%- if has_mobile_image -%}
+        <img
+          src="{{ section.settings.image_mobile | image_url: width: 750 }}"
+          alt="{{ section.settings.image_mobile.alt | escape }}"
+          class="about-content-banner-background-image medium-up--hide"
+          width="{{ section.settings.image_mobile.width }}"
+          height="{{ section.settings.image_mobile.height }}"
+          loading="lazy"
+        >
+      {%- endif -%}
+      <div class="about-content-banner-content">
+        <div class="about-content-banner-text-wrapper">
+          <div class="about-content-banner-subtitle about-content-banner-custom-content">{{ section.settings.subtitle }}</div>
+          <h4 class="about-content-banner-secondary-title about-content-banner-custom-content">{{ section.settings.secondary_title | escape }}</h4>
+        </div>
+        <div class="about-content-banner-description about-content-banner-custom-content">{{ section.settings.description }}</div>
+        {%- if section.settings.button_text != blank -%}
+            <a href="{{ section.settings.button_link }}" class="about-content-banner-button">
+                {{ section.settings.button_text | escape }}
+            </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Long content section below banner -->
+<div class="about-content-banner-long-content">
+  <div class="page-width">
+    <div class="about-content-banner-long-text">
+      {{ section.settings.long_content }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Content Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "Show Breadcrumb",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "home_text",
+      "label": "Home Text",
+      "default": "Trang chủ"
+    },
+    {
+      "type": "text",
+      "id": "current_page_text",
+      "label": "Current Page Text",
+      "default": "Về Ru9"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title",
+      "default": "Từ Giấc Mơ Đến Hiện Thực:"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>\"Hành trình mang giấc ngủ ngon đến với mọi gia đình Việt Nam\"</p>"
+    },
+    {
+      "type": "text",
+      "id": "secondary_title",
+      "label": "Secondary Title",
+      "default": "Ru9 - Nơi giấc ngủ ngon bắt đầu"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Chúng tôi không ngừng cải tiến từng chi tiết, để sản phẩm không chỉ \"êm\" mà còn \"hiểu\" được cơ thể bạn.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Xem chi tiết"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "richtext",
+      "id": "long_content",
+      "label": "Long Content Below Banner",
+      "default": "<p>Giữa nhịp sống bận rộn, nhiều người xem giấc ngủ chỉ như một thói quen, như một khoảng nghỉ ngắn giữa những lo toan thường nhật. Nhưng với Ru9, một giấc ngủ là nhiều hơn thế. Đó là lúc cơ thể được phục hồi, tâm trí được nghỉ ngơi và năng lượng cho ngày mới được tái tạo. Bởi Ru9 tin rằng, một giấc ngủ trọn vẹn không chỉ mang lại sự thoải mái, mà còn là nền tảng vững chắc cho sức khỏe và hạnh phúc lâu dài.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "long_content_background_color",
+      "label": "Long Content Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "long_content_text_color",
+      "label": "Long Content Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "main_title_color",
+      "label": "Main Title Color",
+      "default": "#1C2C58"
+    },
+    {
+      "type": "range",
+      "id": "main_title_line_height",
+      "label": "Main Title Line Height",
+      "min": 1.0,
+      "max": 2.0,
+      "step": 0.1,
+      "default": 1.2
+    },
+    {
+      "type": "textarea",
+      "id": "custom_css",
+      "label": "Custom CSS for Text Content",
+      "info": "Add custom CSS styles for subtitle, secondary title, and description text. Use .about-content-banner-custom-content selector."
+    },
+    {
+      "type": "color",
+      "id": "breadcrumb_background_color",
+      "label": "Breadcrumb Background Color",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "breadcrumb_border_color",
+      "label": "Breadcrumb Border Color",
+      "default": "#e9ecef"
+    },
+    {
+      "type": "color",
+      "id": "breadcrumb_link_color",
+      "label": "Breadcrumb Link Color",
+      "default": "#007bff"
+    },
+    {
+      "type": "color",
+      "id": "breadcrumb_link_hover_color",
+      "label": "Breadcrumb Link Hover Color",
+      "default": "#0056b3"
+    },
+    {
+      "type": "color",
+      "id": "breadcrumb_current_color",
+      "label": "Breadcrumb Current Page Color",
+      "default": "#6c757d"
+    },
+    {
+      "type": "color",
+      "id": "breadcrumb_separator_color",
+      "label": "Breadcrumb Separator Color",
+      "default": "#6c757d"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Content Banner"
+    }
+  ]
+}
+{% endschema %}

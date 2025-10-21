@@ -1,0 +1,268 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-showroom-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  .about-showroom-section .page-width {
+    padding: 0;
+  }
+  .about-showroom-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+  }
+  .about-showroom-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .about-showroom-intro {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+  }
+  .about-showroom-intro p {
+    margin-bottom: 16px;
+  }
+  .about-showroom-intro p:last-child {
+    margin-bottom: 0;
+  }
+  .about-showroom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .about-showroom-card {
+    background-color: {{ section.settings.card_background_color | default: '#F5F5F5' }};
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+    transition: transform 0.3s ease;
+  }
+  .about-showroom-card:hover {
+    transform: translateY(-5px);
+  }
+  .about-showroom-image {
+    margin-bottom: 20px;
+  }
+  .about-showroom-image img {
+    width: 100%;
+    border-radius: 12px;
+    height: 200px;
+    object-fit: cover;
+  }
+  .about-showroom-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .about-showroom-card p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .about-showroom-phone {
+    color: {{ section.settings.accent_color | default: '#4A90E2' }};
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 1024px) {
+    .about-showroom-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-showroom-section {
+      padding: 0;
+    }
+    .about-showroom-title {
+      font-size: 24px;
+    }
+    .about-showroom-subtitle {
+      font-size: 16px;
+    }
+    .about-showroom-intro {
+      margin-bottom: 30px;
+    }
+    .about-showroom-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .about-showroom-card {
+      padding: 20px 15px;
+    }
+    .about-showroom-image img {
+      height: 150px;
+    }
+    .about-showroom-card h3 {
+      font-size: 18px;
+    }
+  }
+</style>
+
+<div class="about-showroom-section">
+  <div class="page-width">
+    <div class="about-showroom-title">{{ section.settings.title | default: '<h2>Mời bạn đến trải nghiệm giấc ngủ 5 sao</h2>' }}</div>
+    <div class="about-showroom-subtitle">{{ section.settings.subtitle | default: '<p>Hệ Thống Showroom Ru9 với ba chi nhánh tiện lợi, luôn sẵn sàng đón tiếp bạn từ 09:00 - 21:00, Thứ 2 - Chủ nhật.</p>' }}</div>
+    
+    <div class="about-showroom-intro">
+      {{ section.settings.intro_content }}
+    </div>
+    
+    <div class="about-showroom-grid">
+      {% for block in section.blocks %}
+        <div class="about-showroom-card">
+          <div class="about-showroom-image">
+            {% if block.settings.image != blank %}
+              <img 
+                src="{{ block.settings.image | image_url: width: 400 }}" 
+                alt="{{ block.settings.image.alt | escape }}"
+                width="400"
+                height="200"
+                loading="lazy"
+              >
+            {% else %}
+              <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Showroom+{{ forloop.index }}" alt="Showroom {{ forloop.index }}" width="400" height="200" />
+            {% endif %}
+          </div>
+          <div>{{ block.settings.name }}</div>
+          <div>{{ block.settings.address }}</div>
+          <p class="about-showroom-phone">{{ block.settings.phone }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Showroom",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Mời bạn đến trải nghiệm giấc ngủ 5 sao</h2>"
+    },
+    {
+      "type": "html",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "<p>Hệ Thống Showroom Ru9 với ba chi nhánh tiện lợi, luôn sẵn sàng đón tiếp bạn từ 09:00 - 21:00, Thứ 2 - Chủ nhật.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_content",
+      "label": "Introduction Content",
+      "default": "<p>Để thực sự hiểu được giá trị của giấc ngủ chất lượng, bạn cần phải được chạm, cảm nhận và trải nghiệm trực tiếp. Showroom của Ru9 không chỉ là nơi trưng bày sản phẩm, mà là không gian riêng tư được thiết kế để bạn có thể tìm ra sản phẩm hoàn hảo cho bản thân và gia đình.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Phone Color",
+      "default": "#4A90E2"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about_showroom_card",
+      "name": "Showroom Card",
+      "settings": [
+        {
+          "type": "html",
+          "id": "name",
+          "label": "Showroom Name",
+          "default": "<h3>Showroom HCM 1</h3>"
+        },
+        {
+          "type": "html",
+          "id": "address",
+          "label": "Showroom Address",
+          "default": "<p>Toà B2 Sarimi, 72 Nguyễn Cơ Thạch, KĐT Sala, Quận 2</p>"
+        },
+        {
+          "type": "html",
+          "id": "phone",
+          "label": "Phone Number",
+          "default": "<p>0964.777.960</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Showroom Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Showroom",
+      "blocks": [
+        {
+          "type": "about_showroom_card",
+          "settings": {
+            "name": "Showroom HCM 1",
+            "address": "Toà B2 Sarimi, 72 Nguyễn Cơ Thạch, KĐT Sala, Quận 2",
+            "phone": "0964.777.960"
+          }
+        },
+        {
+          "type": "about_showroom_card",
+          "settings": {
+            "name": "Showroom HCM 2",
+            "address": "283A Hai Bà Trưng, Quận 3",
+            "phone": "0964.777.910"
+          }
+        },
+        {
+          "type": "about_showroom_card",
+          "settings": {
+            "name": "Showroom Hà Nội",
+            "address": "228 Cầu Giấy, Phường Quan Hoa, Hà Nội",
+            "phone": "0964.777.940"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

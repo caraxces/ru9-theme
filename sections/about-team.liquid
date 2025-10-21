@@ -1,0 +1,194 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-team-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  .about-team-section .page-width {
+    padding: 0;
+  }
+  .about-team-content {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+  .about-team-quote-left {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .about-team-quote-left h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .about-team-quote-left h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: {{ section.settings.subtitle_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .about-team-quote-left .quote-text {
+    font-size: 24px;
+    font-weight: 600;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .about-team-text {
+    flex: 0 0 40%;
+  }
+  .about-team-text h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .about-team-text h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: {{ section.settings.subtitle_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .about-team-text p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .about-team-text p:last-child {
+    margin-bottom: 0;
+  }
+  .about-team-image {
+    flex: 0 0 35%;
+  }
+  .about-team-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+  }
+  .about-team-content-text {
+    margin-bottom: 40px;
+  }
+  .about-team-content-text p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .about-team-content-text p:last-child {
+    margin-bottom: 0;
+  }
+  .about-team-quote {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    font-style: italic;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+</style>
+
+<div class="about-team-section">
+  <div class="page-width">
+    <div class="about-team-content">
+      <div class="about-team-quote-left">
+        <div>{{ section.settings.title | default: '<h2>Đội ngũ Ru9</h2>' }}</div>
+        <div>{{ section.settings.subtitle | default: '<h3>Nơi giấc mơ được nuôi dưỡng</h3>' }}</div>
+        <div class="quote-text">{{ section.settings.quote | default: '<p>Tại Ru9, chúng tôi tin rằng mọi giấc mơ đều xứng đáng được nâng niu.</p>' }}</div>
+      </div>
+      <div class="about-team-text">
+        {{ section.settings.content }}
+      </div>
+      <div class="about-team-image">
+        {% if section.settings.image != blank %}
+          <img 
+            src="{{ section.settings.image | image_url: width: 600 }}" 
+            alt="{{ section.settings.image.alt | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy"
+          >
+        {% else %}
+          <img src="https://via.placeholder.com/600x400/3D6DFF/FFFFFF?text=Ru9+Team" alt="Ru9 Team" width="600" height="400" />
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Team",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Đội ngũ Ru9</h2>"
+    },
+    {
+      "type": "html",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<h3>Nơi giấc mơ được nuôi dưỡng</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Team Content",
+      "default": "<p>Đó không chỉ là giấc mơ về một giấc ngủ ngon trọn vẹn cho các khách hàng, mà còn là hoài bão và khát vọng của mỗi thành viên trong đại gia đình Ru9.</p><p>Văn hóa Ru9 được xây dựng dựa trên sự gắn kết và thấu hiểu. Trong khi đội ngũ văn phòng tập trung nghiên cứu, sáng tạo và hoàn thiện sản phẩm, đội ngũ showroom luôn mang đến những trải nghiệm gần gũi và chân thật nhất cho khách hàng.</p>"
+    },
+    {
+      "type": "html",
+      "id": "quote",
+      "label": "Team Quote",
+      "default": "<p>Tại Ru9, chúng tôi tin rằng mọi giấc mơ đều xứng đáng được nâng niu.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Team Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#4A90E2"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Team"
+    }
+  ]
+}
+{% endschema %}

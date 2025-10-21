@@ -1,0 +1,291 @@
+<section class="metrics-reviews sky">
+  <div class="container">
+    <div class="metrics">
+      {% if section.settings.headline != blank %}
+        <h2>{{ section.settings.headline }}</h2>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <p class="desc">{{ section.settings.description }}</p>
+      {% endif %}
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          {% if section.settings.metric_1_number != blank %}
+            <div class="metric-number">{{ section.settings.metric_1_number }}</div>
+          {% endif %}
+          {% if section.settings.metric_1_caption != blank %}
+            <div class="metric-caption">{{ section.settings.metric_1_caption }}</div>
+          {% endif %}
+        </div>
+        
+        <div class="metric-card">
+          {% if section.settings.metric_2_number != blank %}
+            <div class="metric-number">{{ section.settings.metric_2_number }}</div>
+          {% endif %}
+          {% if section.settings.metric_2_caption != blank %}
+            <div class="metric-caption">{{ section.settings.metric_2_caption }}</div>
+          {% endif %}
+        </div>
+        
+        <div class="metric-card">
+          {% if section.settings.metric_3_number != blank %}
+            <div class="metric-number">{{ section.settings.metric_3_number }}</div>
+          {% endif %}
+          {% if section.settings.metric_3_caption != blank %}
+            <div class="metric-caption">{{ section.settings.metric_3_caption }}</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <div class="reviews">
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-image img ratio-4x3">
+            {% if section.settings.review_1_image != blank %}
+              {{ section.settings.review_1_image | image_url: width: 300 | image_tag: loading: 'lazy' }}
+            {% endif %}
+          </div>
+          {% if section.settings.review_1_text != blank %}
+            <p>{{ section.settings.review_1_text }}</p>
+          {% endif %}
+          {% if section.settings.review_1_author != blank %}
+            <div class="review-author">{{ section.settings.review_1_author }}</div>
+          {% endif %}
+        </div>
+        
+        <div class="review-card">
+          <div class="review-image img ratio-4x3">
+            {% if section.settings.review_2_image != blank %}
+              {{ section.settings.review_2_image | image_url: width: 300 | image_tag: loading: 'lazy' }}
+            {% endif %}
+          </div>
+          {% if section.settings.review_2_text != blank %}
+            <p>{{ section.settings.review_2_text }}</p>
+          {% endif %}
+          {% if section.settings.review_2_author != blank %}
+            <div class="review-author">{{ section.settings.review_2_author }}</div>
+          {% endif %}
+        </div>
+        
+        <div class="review-card">
+          <div class="review-image img ratio-4x3">
+            {% if section.settings.review_3_image != blank %}
+              {{ section.settings.review_3_image | image_url: width: 300 | image_tag: loading: 'lazy' }}
+            {% endif %}
+          </div>
+          {% if section.settings.review_3_text != blank %}
+            <p>{{ section.settings.review_3_text }}</p>
+          {% endif %}
+          {% if section.settings.review_3_author != blank %}
+            <div class="review-author">{{ section.settings.review_3_author }}</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.metrics h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.metrics .desc {
+  max-width: 700px;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.metric-card {
+  background: #F7FAFF;
+  border: 1px solid var(--c-border);
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+}
+
+.metric-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--c-primary);
+  margin-bottom: 8px;
+}
+
+.metric-caption {
+  font-size: 12px;
+  color: var(--c-muted);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.review-card {
+  background: white;
+  border: 1px solid var(--c-border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.review-card p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.review-author {
+  font-weight: 700;
+  color: #223255;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .metrics h2 {
+    font-size: 22px;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .metrics-grid .metric-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "About Metrics & Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Section Headline",
+      "default": "Những con số thực tế"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Minh chứng cho giá trị mà RU9 đang kiến tạo mỗi ngày."
+    },
+    {
+      "type": "header",
+      "content": "Metrics"
+    },
+    {
+      "type": "text",
+      "id": "metric_1_number",
+      "label": "Metric 1 Number",
+      "default": "34"
+    },
+    {
+      "type": "text",
+      "id": "metric_1_caption",
+      "label": "Metric 1 Caption",
+      "default": "Điểm chạm dịch vụ"
+    },
+    {
+      "type": "text",
+      "id": "metric_2_number",
+      "label": "Metric 2 Number",
+      "default": "35,000+"
+    },
+    {
+      "type": "text",
+      "id": "metric_2_caption",
+      "label": "Metric 2 Caption",
+      "default": "Khách hàng đã tin dùng"
+    },
+    {
+      "type": "text",
+      "id": "metric_3_number",
+      "label": "Metric 3 Number",
+      "default": "60,000+"
+    },
+    {
+      "type": "text",
+      "id": "metric_3_caption",
+      "label": "Metric 3 Caption",
+      "default": "Đêm ngủ được cải thiện"
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "textarea",
+      "id": "review_1_text",
+      "label": "Review 1 Text",
+      "default": "Nệm êm và hỗ trợ lưng rất tốt. Dịch vụ giao lắp tận nhà nhanh chóng."
+    },
+    {
+      "type": "text",
+      "id": "review_1_author",
+      "label": "Review 1 Author",
+      "default": "Ngọc A."
+    },
+    {
+      "type": "image_picker",
+      "id": "review_1_image",
+      "label": "Review 1 Image"
+    },
+    {
+      "type": "textarea",
+      "id": "review_2_text",
+      "label": "Review 2 Text",
+      "default": "Mình ngủ sâu hơn và không còn đau cổ khi thức dậy."
+    },
+    {
+      "type": "text",
+      "id": "review_2_author",
+      "label": "Review 2 Author",
+      "default": "Minh B."
+    },
+    {
+      "type": "image_picker",
+      "id": "review_2_image",
+      "label": "Review 2 Image"
+    },
+    {
+      "type": "textarea",
+      "id": "review_3_text",
+      "label": "Review 3 Text",
+      "default": "Đáng tiền nhất là sự tử tế và minh bạch của đội ngũ RU9."
+    },
+    {
+      "type": "text",
+      "id": "review_3_author",
+      "label": "Review 3 Author",
+      "default": "Thanh C."
+    },
+    {
+      "type": "image_picker",
+      "id": "review_3_image",
+      "label": "Review 3 Image"
+    }
+  ]
+}
+{% endschema %}

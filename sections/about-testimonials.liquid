@@ -1,0 +1,231 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-testimonials-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  .about-testimonials-section .page-width {
+    padding: 0;
+  }
+  .about-testimonials-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+  }
+  .about-testimonials-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+  }
+  .about-testimonials-intro p {
+    margin-bottom: 16px;
+  }
+  .about-testimonials-intro p:last-child {
+    margin-bottom: 0;
+  }
+  .about-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .about-testimonials-card {
+    background-color: {{ section.settings.card_background_color | default: '#F5F5F5' }};
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+  }
+  .about-testimonials-avatar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .about-testimonials-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .about-testimonials-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 16px;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .about-testimonials-card p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 1024px) {
+    .about-testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-testimonials-section {
+      padding: 0;
+    }
+    .about-testimonials-title {
+      font-size: 24px;
+    }
+    .about-testimonials-intro {
+      margin-bottom: 30px;
+    }
+    .about-testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .about-testimonials-card {
+      padding: 20px 15px;
+    }
+    .about-testimonials-avatar img {
+      width: 60px;
+      height: 60px;
+    }
+    .about-testimonials-card h4 {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<div class="about-testimonials-section">
+  <div class="page-width">
+    <div class="about-testimonials-title">{{ section.settings.title | default: '<h2>Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng</h2>' }}</div>
+    <div class="about-testimonials-intro">
+      {{ section.settings.intro_content }}
+    </div>
+    
+    <div class="about-testimonials-grid">
+      {% for block in section.blocks %}
+        <div class="about-testimonials-card">
+          <div class="about-testimonials-avatar">
+            {% if block.settings.avatar != blank %}
+              <img 
+                src="{{ block.settings.avatar | image_url: width: 80 }}" 
+                alt="{{ block.settings.avatar.alt | escape }}"
+                width="80"
+                height="80"
+                loading="lazy"
+              >
+            {% else %}
+              <img src="https://via.placeholder.com/80x80/3D6DFF/FFFFFF?text=Expert+{{ forloop.index }}" alt="Expert {{ forloop.index }}" width="80" height="80" />
+            {% endif %}
+          </div>
+          <div>{{ block.settings.name }}</div>
+          <div>{{ block.settings.testimonial }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Testimonials",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng</h2>"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_content",
+      "label": "Introduction Content",
+      "default": "<p>Chất lượng của Ru9 không chỉ được chứng minh qua trải nghiệm người dùng mà còn được kiểm chứng bởi các chuyên gia hàng đầu:</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about_testimonial_card",
+      "name": "Testimonial Card",
+      "settings": [
+        {
+          "type": "html",
+          "id": "name",
+          "label": "Expert Name",
+          "default": "<h4>TS.BS - Chuyên khoa Thần kinh, Bệnh viện Bạch Mai</h4>"
+        },
+        {
+          "type": "html",
+          "id": "testimonial",
+          "label": "Testimonial Text",
+          "default": "<p>\"Từ góc độ y khoa, tôi khuyến nghị RU9 cho bệnh nhân có vấn đề về giấc ngủ và đau lưng. Chất lượng foam và thiết kế hỗ trợ cột sống hiệu quả, đặc biệt phù hợp với cơ địa người Việt.\"</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Expert Avatar"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Testimonials",
+      "blocks": [
+        {
+          "type": "about_testimonial_card",
+          "settings": {
+            "name": "TS.BS - Chuyên khoa Thần kinh, Bệnh viện Bạch Mai",
+            "testimonial": "\"Từ góc độ y khoa, tôi khuyến nghị RU9 cho bệnh nhân có vấn đề về giấc ngủ và đau lưng. Chất lượng foam và thiết kế hỗ trợ cột sống hiệu quả, đặc biệt phù hợp với cơ địa người Việt.\""
+          }
+        },
+        {
+          "type": "about_testimonial_card",
+          "settings": {
+            "name": "Coach HLV Fitness với 500K followers",
+            "testimonial": "\"Recovery là 50% thành công trong fitness. RU9 giúp tôi phục hồi tốt hơn sau mỗi buổi tập. Sau 6 tháng sử dụng nệm Original, tôi cảm nhận rõ sự khác biệt trong chất lượng giấc ngủ và khả năng phục hồi cơ bắp.\""
+          }
+        },
+        {
+          "type": "about_testimonial_card",
+          "settings": {
+            "name": "Blogger 'Mom Life Vietnam' với 200K subscribers",
+            "testimonial": "\"Làm mẹ 2 con, giấc ngủ chất lượng là điều xa xỉ. Cho đến khi tôi tìm thấy RU9. Không chỉ tôi mà cả gia đình giờ đây đều có giấc ngủ ngon hơn, quan hệ gia đình cũng hòa thuận hơn.\""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

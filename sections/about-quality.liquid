@@ -1,0 +1,202 @@
+<section class="quality">
+  <div class="container">
+    <div class="grid grid-2">
+      <div class="content">
+        {% if section.settings.headline != blank %}
+          <h2>{{ section.settings.headline }}</h2>
+        {% endif %}
+        
+        {% if section.settings.description != blank %}
+          <p>{{ section.settings.description }}</p>
+        {% endif %}
+        
+        <div class="badges">
+          <div class="badge">
+            <div class="badge-icon">
+              {% if section.settings.badge_1_icon != blank %}
+                {{ section.settings.badge_1_icon | image_url: width: 56 | image_tag: loading: 'lazy' }}
+              {% endif %}
+            </div>
+            <div class="badge-text">
+              {% if section.settings.badge_1_title != blank %}
+                <strong>{{ section.settings.badge_1_title }}</strong>
+              {% endif %}
+              {% if section.settings.badge_1_description != blank %}
+                <span class="muted">{{ section.settings.badge_1_description }}</span>
+              {% endif %}
+            </div>
+          </div>
+          
+          <div class="badge">
+            <div class="badge-icon">
+              {% if section.settings.badge_2_icon != blank %}
+                {{ section.settings.badge_2_icon | image_url: width: 56 | image_tag: loading: 'lazy' }}
+              {% endif %}
+            </div>
+            <div class="badge-text">
+              {% if section.settings.badge_2_title != blank %}
+                <strong>{{ section.settings.badge_2_title }}</strong>
+              {% endif %}
+              {% if section.settings.badge_2_description != blank %}
+                <span class="muted">{{ section.settings.badge_2_description }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="img ratio-3x2 cover">
+        {% if section.settings.product_image != blank %}
+          {{ section.settings.product_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+        {% else %}
+          <span>img-product-sleeping.jpg</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.quality .grid-2 {
+  grid-template-columns: 55% 45%;
+  gap: 40px;
+  align-items: center;
+}
+
+.quality h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.quality p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.quality .badges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: white;
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.badge-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: #F2F6FF;
+  border: 1px solid var(--c-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.badge-text {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.badge-text strong {
+  display: block;
+  color: #1f2a44;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 768px) {
+  .quality .grid-2 {
+    gap: 18px;
+  }
+  
+  .quality .badges {
+    grid-template-columns: 1fr;
+  }
+  
+  .quality h2 {
+    font-size: 22px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "About Quality",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Section Headline",
+      "default": "Mang đến chất lượng ngủ vượt trội"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Chúng tôi theo đuổi các tiêu chuẩn vật liệu & quy trình nghiêm ngặt, kết hợp thử nghiệm thực tế từ khách hàng."
+    },
+    {
+      "type": "header",
+      "content": "Badge 1"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_title",
+      "label": "Badge 1 Title",
+      "default": "OEKO-TEX® Standard 100"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_description",
+      "label": "Badge 1 Description",
+      "default": "Chứng nhận an toàn tiếp xúc trực tiếp với da."
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_1_icon",
+      "label": "Badge 1 Icon"
+    },
+    {
+      "type": "header",
+      "content": "Badge 2"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_title",
+      "label": "Badge 2 Title",
+      "default": "SleepLab Verified"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_description",
+      "label": "Badge 2 Description",
+      "default": "Kiểm định độc lập bởi phòng lab giấc ngủ."
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_2_icon",
+      "label": "Badge 2 Icon"
+    },
+    {
+      "type": "header",
+      "content": "Product Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    }
+  ]
+}
+{% endschema %}

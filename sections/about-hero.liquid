@@ -1,0 +1,144 @@
+<section class="hero">
+  <div class="container">
+    <div class="wrap">
+      <div class="txt">
+        {% if section.settings.eyebrow != blank %}
+          <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+        {% endif %}
+        
+        {% if section.settings.headline != blank %}
+          <h1>{{ section.settings.headline }}</h1>
+        {% endif %}
+        
+        {% if section.settings.subtitle != blank %}
+          <p class="lead">{{ section.settings.subtitle }}</p>
+        {% endif %}
+
+        <div class="badge-row">
+          {% if section.settings.tag_1 != blank %}
+            <span class="tag">{{ section.settings.tag_1 }}</span>
+          {% endif %}
+          {% if section.settings.tag_2 != blank %}
+            <span class="tag">{{ section.settings.tag_2 }}</span>
+          {% endif %}
+          {% if section.settings.tag_3 != blank %}
+            <span class="tag">{{ section.settings.tag_3 }}</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="img ratio-16x9 cover hero-img">
+        {% if section.settings.hero_image != blank %}
+          {{ section.settings.hero_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+        {% else %}
+          <span>img-hero-sleep.jpg</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+
+.hero .wrap {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 700px;
+  margin-bottom: 16px;
+}
+
+.hero .lead {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 640px;
+  margin-bottom: 20px;
+}
+
+.hero .badge-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+  
+  .hero .wrap {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  
+  .hero h1 {
+    font-size: 28px;
+  }
+  
+  .hero .lead {
+    font-size: 16px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "About Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Về chúng tôi"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Main Headline",
+      "default": "Từ giấc mơ ngủ ngon đến những giá trị vĩnh cửu"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Chúng tôi theo đuổi sứ mệnh nâng niu giấc ngủ Việt bằng sản phẩm tinh gọn, chuẩn mực chất lượng và dịch vụ tận tâm."
+    },
+    {
+      "type": "text",
+      "id": "tag_1",
+      "label": "Tag 1",
+      "default": "Chất lượng kiểm định"
+    },
+    {
+      "type": "text",
+      "id": "tag_2",
+      "label": "Tag 2",
+      "default": "Bảo hành chu đáo"
+    },
+    {
+      "type": "text",
+      "id": "tag_3",
+      "label": "Tag 3",
+      "default": "Hơn 35.000+ khách hàng"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    }
+  ]
+}
+{% endschema %}

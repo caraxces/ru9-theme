@@ -1,0 +1,118 @@
+<section class="cta-before-footer divider">
+  <div class="container">
+    <div class="cta-grid">
+      <div class="cta-image img ratio-21x9 cover">
+        {% if section.settings.banner_image != blank %}
+          {{ section.settings.banner_image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+        {% else %}
+          <span>img-cta-sleeper.jpg</span>
+        {% endif %}
+      </div>
+      
+      <div class="cta-panel">
+        {% if section.settings.eyebrow != blank %}
+          <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+        {% endif %}
+        
+        {% if section.settings.headline != blank %}
+          <h2>{{ section.settings.headline }}</h2>
+        {% endif %}
+        
+        {% if section.settings.description != blank %}
+          <p>{{ section.settings.description }}</p>
+        {% endif %}
+        
+        <div class="quote">
+          {% if section.settings.quote_text != blank %}
+            <p><strong>{{ section.settings.quote_text }}</strong></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.cta-panel {
+  background: white;
+  border: 1px solid var(--c-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.cta-panel h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.cta-panel p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.cta-panel .quote {
+  margin-top: 14px;
+}
+
+@media (max-width: 768px) {
+  .cta-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  
+  .cta-panel {
+    padding: 20px;
+  }
+  
+  .cta-panel h2 {
+    font-size: 22px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "About CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Lời hứa cho mỗi giấc ngủ ngon"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Main Headline",
+      "default": "Tận tâm từ tư vấn đến hậu mãi"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Đổi trả trong thời gian cam kết, bảo hành rõ ràng, hỗ trợ tận nơi. RU9 luôn cố gắng làm đúng hơn điều đã hứa."
+    },
+    {
+      "type": "text",
+      "id": "quote_text",
+      "label": "Quote Text",
+      "default": "Chúng tôi không chỉ bán nệm. Chúng tôi trao tặng những đêm ngủ bình yên."
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    }
+  ]
+}
+{% endschema %}

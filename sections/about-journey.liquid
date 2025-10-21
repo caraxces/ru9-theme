@@ -1,0 +1,421 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-journey-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  .about-journey-section .page-width {
+    padding: 0;
+  }
+  .about-journey-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+  }
+  .about-journey-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+  }
+  .about-journey-intro p {
+    margin-bottom: 16px;
+  }
+  .about-journey-intro p:last-child {
+    margin-bottom: 0;
+  }
+  .about-journey-content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+  .about-journey-item h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .about-journey-image {
+    margin: 20px 0;
+  }
+  .about-journey-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+    height: 300px;
+    object-fit: cover;
+  }
+  .about-journey-item p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .about-journey-item p:last-child {
+    margin-bottom: 0;
+  }
+  .about-journey-awards h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 30px;
+    line-height: 1.2;
+  }
+  .about-journey-awards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  .about-journey-award-card {
+    background-color: {{ section.settings.card_background_color | default: '#F5F5F5' }};
+    padding: 30px 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+  }
+  .about-journey-award-icon {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .about-journey-award-icon img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+  .about-journey-award-card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .about-journey-award-card p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+    margin: 0;
+  }
+  .about-journey-media h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 30px;
+    line-height: 1.2;
+  }
+  .about-journey-media-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+  }
+  .about-journey-media-logos img {
+    height: 60px;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+  .about-journey-media-logos img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+  .about-journey-quote {
+    text-align: center;
+    font-size: 18px;
+    font-style: italic;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    max-width: 900px;
+    margin: 40px auto 0;
+    line-height: 1.6;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .about-journey-section {
+      padding: 0;
+    }
+    .about-journey-title {
+      font-size: 24px;
+    }
+    .about-journey-intro {
+      margin-bottom: 40px;
+    }
+    .about-journey-content {
+      gap: 40px;
+    }
+    .about-journey-item h3 {
+      font-size: 20px;
+    }
+    .about-journey-image img {
+      height: 200px;
+    }
+    .about-journey-awards h3 {
+      font-size: 20px;
+    }
+    .about-journey-awards-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .about-journey-award-card {
+      padding: 20px 15px;
+    }
+    .about-journey-award-icon img {
+      width: 60px;
+      height: 60px;
+    }
+    .about-journey-award-card h4 {
+      font-size: 16px;
+    }
+    .about-journey-media h3 {
+      font-size: 20px;
+    }
+    .about-journey-media-logos {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .about-journey-quote {
+      font-size: 16px;
+      margin-top: 30px;
+    }
+  }
+</style>
+
+<div class="about-journey-section">
+  <div class="page-width">
+    <div class="about-journey-title">{{ section.settings.title | default: '<h2>Từ giấc mơ ngủ ngon đến những vinh quang</h2>' }}</div>
+    <div class="about-journey-intro">
+      {{ section.settings.intro_content }}
+    </div>
+    
+    <div class="about-journey-content">
+      <div class="about-journey-item">
+        <div>{{ section.settings.journey_title | default: '<h3>Từ giấc mơ ngủ ngon đến hiện thực</h3>' }}</div>
+        {% if section.settings.journey_image != blank %}
+          <div class="about-journey-image">
+            <img 
+              src="{{ section.settings.journey_image | image_url: width: 600 }}" 
+              alt="{{ section.settings.journey_image.alt | escape }}"
+              width="600"
+              height="300"
+              loading="lazy"
+            >
+          </div>
+        {% endif %}
+        {{ section.settings.journey_content }}
+      </div>
+
+      <div class="about-journey-awards">
+        <div>{{ section.settings.awards_title | default: '<h3>Vinh danh những nỗ lực tiên phong</h3>' }}</div>
+        <div class="about-journey-awards-grid">
+          {% for block in section.blocks %}
+            <div class="about-journey-award-card">
+              <div class="about-journey-award-icon">
+                {% if block.settings.icon != blank %}
+                  <img 
+                    src="{{ block.settings.icon | image_url: width: 80 }}" 
+                    alt="{{ block.settings.icon.alt | escape }}"
+                    width="80"
+                    height="80"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <img src="https://via.placeholder.com/80x80/3D6DFF/FFFFFF?text=Award+{{ forloop.index }}" alt="Award {{ forloop.index }}" width="80" height="80" />
+                {% endif %}
+              </div>
+              <div>{{ block.settings.title }}</div>
+              <div>{{ block.settings.description }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="about-journey-media">
+        <div>{{ section.settings.media_title | default: '<h3>Lan tỏa câu chuyện truyền cảm hứng</h3>' }}</div>
+        <div class="about-journey-media-logos">
+          {% if section.settings.media_logo_1 != blank %}
+            <img src="{{ section.settings.media_logo_1 | image_url: width: 120 }}" alt="Media 1" width="120" height="60" loading="lazy" />
+          {% endif %}
+          {% if section.settings.media_logo_2 != blank %}
+            <img src="{{ section.settings.media_logo_2 | image_url: width: 120 }}" alt="Media 2" width="120" height="60" loading="lazy" />
+          {% endif %}
+          {% if section.settings.media_logo_3 != blank %}
+            <img src="{{ section.settings.media_logo_3 | image_url: width: 120 }}" alt="Media 3" width="120" height="60" loading="lazy" />
+          {% endif %}
+          {% if section.settings.media_logo_4 != blank %}
+            <img src="{{ section.settings.media_logo_4 | image_url: width: 120 }}" alt="Media 4" width="120" height="60" loading="lazy" />
+          {% endif %}
+          {% if section.settings.media_logo_5 != blank %}
+            <img src="{{ section.settings.media_logo_5 | image_url: width: 120 }}" alt="Media 5" width="120" height="60" loading="lazy" />
+          {% endif %}
+        </div>
+        {{ section.settings.media_content }}
+      </div>
+    </div>
+
+    <div class="about-journey-quote">{{ section.settings.quote | default: '<p>"Những thành tựu này là động lực mạnh mẽ để Ru9 tiếp tục kiên định với sứ mệnh mang giấc ngủ chất lượng đến mọi nhà, kiến tạo một tương lai tốt đẹp hơn cho thế hệ mai sau."</p>' }}</div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Journey",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Từ giấc mơ ngủ ngon đến những vinh quang</h2>"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_content",
+      "label": "Introduction Content",
+      "default": "<p>Tại Ru9, mỗi cột mốc là một chương của câu chuyện đầy cảm hứng. Từ những bước khởi đầu đầy thách thức tại Shark Tank Việt Nam, Ru9 đã kiên định đi trên con đường riêng để biến giấc mơ về giấc ngủ chất lượng thành hiện thực.</p>"
+    },
+    {
+      "type": "html",
+      "id": "journey_title",
+      "label": "Journey Title",
+      "default": "<h3>Từ giấc mơ ngủ ngon đến hiện thực</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "journey_content",
+      "label": "Journey Content",
+      "default": "<p>Hành trình của Ru9 bắt đầu từ một trải nghiệm cá nhân về giấc ngủ và sức khỏe, khi nhà sáng lập nhận ra tầm quan trọng của việc nghỉ ngơi chất lượng nhưng vẫn phù hợp với nhịp sống hiện đại. Từ đó, chị Trang Đặng - Nhà sáng lập kiêm CEO của Ru9 đã mang ý tưởng \"táo bạo\" này đến chương trình Shark Tank Việt Nam, đánh dấu bước ngoặt đầu tiên của thương hiệu.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "journey_image",
+      "label": "Journey Image"
+    },
+    {
+      "type": "html",
+      "id": "awards_title",
+      "label": "Awards Title",
+      "default": "<h3>Vinh danh những nỗ lực tiên phong</h3>"
+    },
+    {
+      "type": "html",
+      "id": "media_title",
+      "label": "Media Title",
+      "default": "<h3>Lan tỏa câu chuyện truyền cảm hứng</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "media_content",
+      "label": "Media Content",
+      "default": "<p>Hơn cả những sản phẩm, Ru9 mong muốn chia sẻ câu chuyện về hành trình phát triển để lan tỏa động lực đến những người trẻ. Câu chuyện khởi nghiệp của chị Trang Đặng đã được khám phá trong những buổi phỏng vấn trên truyền hình và các nền tảng podcast uy tín.</p>"
+    },
+    {
+      "type": "html",
+      "id": "quote",
+      "label": "Journey Quote",
+      "default": "<p>\"Những thành tựu này là động lực mạnh mẽ để Ru9 tiếp tục kiên định với sứ mệnh mang giấc ngủ chất lượng đến mọi nhà, kiến tạo một tương lai tốt đẹp hơn cho thế hệ mai sau.\"</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "media_logo_1",
+      "label": "Media Logo 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "media_logo_2",
+      "label": "Media Logo 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "media_logo_3",
+      "label": "Media Logo 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "media_logo_4",
+      "label": "Media Logo 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "media_logo_5",
+      "label": "Media Logo 5"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about_award_card",
+      "name": "Award Card",
+      "settings": [
+        {
+          "type": "html",
+          "id": "title",
+          "label": "Award Title",
+          "default": "<h4>Bản lĩnh Đương đầu</h4>"
+        },
+        {
+          "type": "html",
+          "id": "description",
+          "label": "Award Description",
+          "default": "<p>Những giải thưởng không chỉ là thành tựu của riêng Ru9, mà còn là sự công nhận cho tinh thần tiên phong và bản lĩnh của người sáng lập. Như giải thưởng \"Bản lĩnh Đương đầu\" tại WeChoice Awards 2020.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Award Icon"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Journey",
+      "blocks": [
+        {
+          "type": "about_award_card",
+          "settings": {
+            "title": "Bản lĩnh Đương đầu",
+            "description": "Những giải thưởng không chỉ là thành tựu của riêng Ru9, mà còn là sự công nhận cho tinh thần tiên phong và bản lĩnh của người sáng lập. Như giải thưởng \"Bản lĩnh Đương đầu\" tại WeChoice Awards 2020."
+          }
+        },
+        {
+          "type": "about_award_card",
+          "settings": {
+            "title": "Cựu Du học sinh với Khởi nghiệp Nổi bật",
+            "description": "Chị Trang Đặng còn được vinh danh với giải thưởng \"Cựu Du học sinh với Khởi nghiệp Nổi bật\" tại GFF Global Future Fair do VCCI tổ chức."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

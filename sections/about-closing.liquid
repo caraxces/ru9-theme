@@ -1,0 +1,132 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-closing-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#F5F5F5' }};
+  }
+  .about-closing-section .page-width {
+    padding: 0;
+  }
+  .about-closing-content {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  .about-closing-image {
+    flex: 1;
+  }
+  .about-closing-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+    height: 400px;
+    object-fit: cover;
+  }
+  .about-closing-text {
+    flex: 1;
+  }
+  .about-closing-text h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .about-closing-text p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .about-closing-section {
+      padding: 0;
+    }
+    .about-closing-content {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .about-closing-image img {
+      height: 250px;
+    }
+    .about-closing-text h2 {
+      font-size: 24px;
+    }
+  }
+</style>
+
+<div class="about-closing-section">
+  <div class="page-width">
+    <div class="about-closing-content">
+      <div class="about-closing-image">
+        {% if section.settings.image != blank %}
+          <img 
+            src="{{ section.settings.image | image_url: width: 600 }}" 
+            alt="{{ section.settings.image.alt | escape }}"
+            width="600"
+            height="400"
+            loading="lazy"
+          >
+        {% else %}
+          <img src="https://via.placeholder.com/600x400/3D6DFF/FFFFFF?text=Peaceful+Sleep" alt="Peaceful sleep" width="600" height="400" />
+        {% endif %}
+      </div>
+      <div class="about-closing-text">
+        <div>{{ section.settings.title | default: '<h2>Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày</h2>' }}</div>
+        <div>{{ section.settings.content | default: '<p>Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.</p>' }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Closing",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày</h2>"
+    },
+    {
+      "type": "html",
+      "id": "content",
+      "label": "Section Content",
+      "default": "<p>Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Closing Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Closing"
+    }
+  ]
+}
+{% endschema %}

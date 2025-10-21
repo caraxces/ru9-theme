@@ -1,0 +1,204 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-mission-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#F5F5F5' }};
+  }
+  .about-mission-section .page-width {
+    max-width: 1200px;
+    padding: 0 20px;
+  }
+  .about-mission-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 40px;
+  }
+  .about-mission-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  .about-mission-intro p {
+    margin-bottom: 16px;
+  }
+  .about-mission-intro p:last-child {
+    margin-bottom: 0;
+  }
+  .about-mission-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .about-mission-card {
+    text-align: center;
+    background-color: {{ section.settings.card_background_color | default: '#ffffff' }};
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+  }
+  .about-mission-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    height: 200px;
+    object-fit: cover;
+  }
+  .about-mission-card p {
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 1024px) {
+    .about-mission-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-mission-section {
+      padding: 0;
+    }
+    .about-mission-title {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    .about-mission-intro {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    .about-mission-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .about-mission-card {
+      padding: 20px 15px;
+    }
+  }
+</style>
+
+<div class="about-mission-section">
+  <div class="page-width">
+    <h2 class="about-mission-title">{{ section.settings.title | default: 'Sứ mệnh của chúng tôi' }}</h2>
+    
+    <div class="about-mission-intro">
+      {{ section.settings.intro_content }}
+    </div>
+    
+    <div class="about-mission-grid">
+      {% for block in section.blocks %}
+        <div class="about-mission-card">
+          {% if block.settings.image != blank %}
+            <img 
+              src="{{ block.settings.image | image_url: width: 400 }}" 
+              alt="{{ block.settings.image.alt | escape }}"
+              width="{{ block.settings.image.width }}"
+              height="200"
+              loading="lazy"
+            >
+          {% else %}
+            <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Mission+{{ forloop.index }}" alt="Mission {{ forloop.index }}" width="400" height="200" />
+          {% endif %}
+          <p>{{ block.settings.content }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Mission",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Sứ mệnh của chúng tôi"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_content",
+      "label": "Introduction Content",
+      "default": "<p>Tất cả đều bắt đầu từ những đêm mất ngủ, từ những trăn trở \"Tại sao hôm nay ngủ dậy vẫn mệt?\" hay \"Chiếc nệm này có thực sự phù hợp chưa?\"</p><p>Khi một giấc ngủ tốt có thể làm nên một ngày trọn vẹn và sứ mệnh của Ru9 là đồng hành để mang đến giấc ngủ chất lượng ấy, bắt đầu từ chiếc nệm bạn nằm mỗi tối.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about_mission_card",
+      "name": "Mission Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Image"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Card Content",
+          "default": "<p>Đó là lý do chúng tôi không ngừng nỗ lực để mang đến một hệ sinh thái chăm sóc giấc ngủ toàn diện, từ chiếc nệm bạn nằm, chiếc gối bạn ôm, đến từng tấm chăn ga bạn cuộn mình mỗi tối.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Mission",
+      "blocks": [
+        {
+          "type": "about_mission_card",
+          "settings": {
+            "content": "<p>Đó là lý do chúng tôi không ngừng nỗ lực để mang đến một hệ sinh thái chăm sóc giấc ngủ toàn diện, từ chiếc nệm bạn nằm, chiếc gối bạn ôm, đến từng tấm chăn ga bạn cuộn mình mỗi tối.</p>"
+          }
+        },
+        {
+          "type": "about_mission_card",
+          "settings": {
+            "content": "<p>Chúng tôi sẽ không ngừng cải tiến từng chi tiết, để sản phẩm không chỉ êm mà còn \"hiểu\" được cơ thể bạn. Mỗi thiết kế, mỗi sự nâng cấp trong chất liệu đều hướng đến cảm giác thoải mái và phù hợp nhất với cơ thể bạn.</p>"
+          }
+        },
+        {
+          "type": "about_mission_card",
+          "settings": {
+            "content": "<p>Từ đó, giấc ngủ chất lượng không còn là những suy nghĩ xa xỉ, mà trở thành điều hiển nhiên và dễ dàng tiếp cận hơn với mọi người.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

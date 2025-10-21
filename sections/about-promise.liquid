@@ -1,0 +1,224 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-promise-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#F5F5F5' }};
+  }
+  .about-promise-section .page-width {
+    padding: 0;
+  }
+  .about-promise-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+  }
+  .about-promise-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    line-height: 1.6;
+  }
+  .about-promise-intro p {
+    margin-bottom: 16px;
+  }
+  .about-promise-intro p:last-child {
+    margin-bottom: 0;
+  }
+  .about-promise-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+  .about-promise-card {
+    background-color: {{ section.settings.card_background_color | default: '#ffffff' }};
+    padding: 30px 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+    transition: transform 0.3s ease;
+  }
+  .about-promise-card:hover {
+    transform: translateY(-5px);
+  }
+  .about-promise-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .about-promise-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 1024px) {
+    .about-promise-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-promise-section {
+      padding: 0;
+    }
+    .about-promise-title {
+      font-size: 24px;
+    }
+    .about-promise-intro {
+      margin-bottom: 30px;
+    }
+    .about-promise-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .about-promise-card {
+      padding: 20px 15px;
+    }
+    .about-promise-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+    .about-promise-card h3 {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about-promise-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="about-promise-section">
+  <div class="page-width">
+    <div class="about-promise-title">{{ section.settings.title | default: '<h2>Lời hứa cho mỗi giấc ngủ ngon</h2>' }}</div>
+    <div class="about-promise-intro">
+      {{ section.settings.intro_content }}
+    </div>
+    
+    <div class="about-promise-grid">
+      {% for block in section.blocks %}
+        <div class="about-promise-card">
+          <span class="about-promise-icon">{{ block.settings.icon | default: '⭐' }}</span>
+          <div>{{ block.settings.title }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Promise",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Lời hứa cho mỗi giấc ngủ ngon</h2>"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_content",
+      "label": "Introduction Content",
+      "default": "<p>Ru9 không chỉ bán một sản phẩm mà còn là hành trình xây dựng một cộng đồng nơi mọi người đều được tận hưởng trọn vẹn giá trị của giấc ngủ. Vì sự tin tưởng của bạn không chỉ đến từ chất lượng sản phẩm, mà còn từ sự an tâm tuyệt đối trong suốt quá trình trải nghiệm. Đó là lý do Ru9 mang đến Cam kết 5 sao uy tín:</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about_promise_card",
+      "name": "Promise Card",
+      "settings": [
+        {
+          "type": "html",
+          "id": "title",
+          "label": "Promise Title",
+          "default": "<h3>Chất lượng</h3>"
+        },
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "Promise Icon",
+          "default": "<span>⭐</span>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Promise",
+      "blocks": [
+        {
+          "type": "about_promise_card",
+          "settings": {
+            "title": "Chất lượng",
+            "icon": "⭐"
+          }
+        },
+        {
+          "type": "about_promise_card",
+          "settings": {
+            "title": "Dịch vụ",
+            "icon": "⭐"
+          }
+        },
+        {
+          "type": "about_promise_card",
+          "settings": {
+            "title": "Trải nghiệm",
+            "icon": "⭐"
+          }
+        },
+        {
+          "type": "about_promise_card",
+          "settings": {
+            "title": "Giá trị",
+            "icon": "⭐"
+          }
+        },
+        {
+          "type": "about_promise_card",
+          "settings": {
+            "title": "Bảo hành",
+            "icon": "⭐"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
