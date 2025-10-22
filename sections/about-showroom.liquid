@@ -2,147 +2,163 @@
 
 <style>
   .about-showroom-section {
-    padding: 0;
-    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+    padding: 80px 0;
+    background-color: {{ section.settings.background_color | default: '#F8FAFC' }};
   }
   .about-showroom-section .page-width {
-    padding: 0;
+    padding: 0 20px;
   }
-  .about-showroom-title {
-    text-align: center;
-    font-size: 32px;
-    font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2230' }};
-    margin-bottom: 20px;
+  .about-showroom-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .about-showroom-top {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    align-items: start;
   }
   .about-showroom-subtitle {
-    text-align: center;
-    font-size: 18px;
-    color: {{ section.settings.text_color | default: '#5E6B85' }};
-    margin-bottom: 20px;
-    font-style: italic;
+    font-size: 16px;
+    color: {{ section.settings.subtitle_color | default: '#1A2B4D' }};
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.4;
   }
-  .about-showroom-intro {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto 40px;
-    color: {{ section.settings.text_color | default: '#5E6B85' }};
+  .about-showroom-title-description {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .about-showroom-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2B4D' }};
+    margin: 0;
+    line-height: 1.2;
+  }
+  .about-showroom-description {
+    color: {{ section.settings.text_color | default: '#333333' }};
     line-height: 1.6;
+    margin: 0;
+    font-size: 16px;
   }
-  .about-showroom-intro p {
+  .about-showroom-description p {
     margin-bottom: 16px;
   }
-  .about-showroom-intro p:last-child {
+  .about-showroom-description p:last-child {
     margin-bottom: 0;
   }
   .about-showroom-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    gap: 20px;
   }
   .about-showroom-card {
-    background-color: {{ section.settings.card_background_color | default: '#F5F5F5' }};
-    padding: 30px 20px;
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(16,38,84,.06);
-    transition: transform 0.3s ease;
-  }
-  .about-showroom-card:hover {
-    transform: translateY(-5px);
+    background-color: {{ section.settings.card_background_color | default: '#F8FAFC' }};
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: none;
+    transition: none;
   }
   .about-showroom-image {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   .about-showroom-image img {
     width: 100%;
-    border-radius: 12px;
+    border-radius: 8px;
     height: 200px;
     object-fit: cover;
   }
   .about-showroom-card h3 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2230' }};
-    margin-bottom: 12px;
+    color: {{ section.settings.title_color | default: '#1A2B4D' }};
+    margin: 0 0 8px 0;
     line-height: 1.2;
   }
   .about-showroom-card p {
-    color: {{ section.settings.text_color | default: '#5E6B85' }};
-    margin-bottom: 8px;
+    color: {{ section.settings.text_color | default: '#333333' }};
+    margin: 0;
     line-height: 1.4;
-  }
-  .about-showroom-phone {
-    color: {{ section.settings.accent_color | default: '#4A90E2' }};
-    font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   /* Mobile responsive */
-  @media (max-width: 1024px) {
-    .about-showroom-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
   @media (max-width: 768px) {
     .about-showroom-section {
-      padding: 0;
+      padding: 60px 0;
     }
-    .about-showroom-title {
-      font-size: 24px;
+    .about-showroom-content {
+      gap: 30px;
+    }
+    .about-showroom-top {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .about-showroom-title-description {
+      gap: 15px;
     }
     .about-showroom-subtitle {
-      font-size: 16px;
+      font-size: 14px;
     }
-    .about-showroom-intro {
-      margin-bottom: 30px;
+    .about-showroom-title {
+      font-size: 2em;
+    }
+    .about-showroom-description {
+      font-size: 14px;
     }
     .about-showroom-grid {
       grid-template-columns: 1fr;
       gap: 20px;
     }
-    .about-showroom-card {
-      padding: 20px 15px;
-    }
     .about-showroom-image img {
       height: 150px;
     }
     .about-showroom-card h3 {
-      font-size: 18px;
+      font-size: 14px;
+    }
+    .about-showroom-card p {
+      font-size: 12px;
     }
   }
 </style>
 
 <div class="about-showroom-section">
   <div class="page-width">
-    <div class="about-showroom-title">{{ section.settings.title | default: '<h2>Mời bạn đến trải nghiệm giấc ngủ 5 sao</h2>' }}</div>
-    <div class="about-showroom-subtitle">{{ section.settings.subtitle | default: '<p>Hệ Thống Showroom Ru9 với ba chi nhánh tiện lợi, luôn sẵn sàng đón tiếp bạn từ 09:00 - 21:00, Thứ 2 - Chủ nhật.</p>' }}</div>
-    
-    <div class="about-showroom-intro">
-      {{ section.settings.intro_content }}
-    </div>
-    
-    <div class="about-showroom-grid">
-      {% for block in section.blocks %}
-        <div class="about-showroom-card">
-          <div class="about-showroom-image">
-            {% if block.settings.image != blank %}
-              <img 
-                src="{{ block.settings.image | image_url: width: 400 }}" 
-                alt="{{ block.settings.image.alt | escape }}"
-                width="400"
-                height="200"
-                loading="lazy"
-              >
-            {% else %}
-              <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Showroom+{{ forloop.index }}" alt="Showroom {{ forloop.index }}" width="400" height="200" />
-            {% endif %}
+    <div class="about-showroom-content">
+      <div class="about-showroom-top">
+        <div class="about-showroom-subtitle">{{ section.settings.subtitle | default: 'Hệ Thống Showroom Ru9 với ba chỉ nhánh tiện lợi, luôn sẵn sàng đón tiếp bạn từ 09:00 - 21:00, Thứ 2 - Chủ nhật.' }}</div>
+        <div class="about-showroom-title-description">
+          <div class="about-showroom-title">{{ section.settings.title | default: 'Mời bạn đến trải nghiệm giấc ngủ 5 sao' }}</div>
+          <div class="about-showroom-description">
+            {{ section.settings.description | default: '<p>Để thực sự hiểu được giá trị của giấc ngủ chất lượng, bạn cần phải được chạm, cảm nhận và trải nghiệm trực tiếp. Showroom của Ru9 không chỉ là nơi trưng bày sản phẩm, mà là không gian riêng tư được thiết kế để bạn có thể tìm ra sản phẩm hoàn hảo cho bản thân và gia đình.</p>' }}
           </div>
-          <div>{{ block.settings.name }}</div>
-          <div>{{ block.settings.address }}</div>
-          <p class="about-showroom-phone">{{ block.settings.phone }}</p>
         </div>
-      {% endfor %}
+      </div>
+      
+      <div class="about-showroom-grid">
+        {% for block in section.blocks %}
+          <div class="about-showroom-card">
+            <div class="about-showroom-image">
+              {% if block.settings.image != blank %}
+                <img 
+                  src="{{ block.settings.image | image_url: width: 400 }}" 
+                  alt="{{ block.settings.image.alt | escape }}"
+                  width="400"
+                  height="200"
+                  loading="lazy"
+                >
+              {% else %}
+                <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Showroom+{{ forloop.index }}" alt="Showroom {{ forloop.index }}" width="400" height="200" />
+              {% endif %}
+            </div>
+            <div>{{ block.settings.name }}</div>
+            <div>{{ block.settings.address }}</div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
@@ -154,52 +170,52 @@
   "class": "section",
   "settings": [
     {
-      "type": "html",
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Hệ Thống Showroom Ru9 với ba chỉ nhánh tiện lợi, luôn sẵn sàng đón tiếp bạn từ 09:00 - 21:00, Thứ 2 - Chủ nhật."
+    },
+    {
+      "type": "text",
       "id": "title",
       "label": "Section Title",
-      "default": "<h2>Mời bạn đến trải nghiệm giấc ngủ 5 sao</h2>"
+      "default": "Mời bạn đến trải nghiệm giấc ngủ 5 sao"
     },
     {
       "type": "html",
-      "id": "subtitle",
-      "label": "Section Subtitle",
-      "default": "<p>Hệ Thống Showroom Ru9 với ba chi nhánh tiện lợi, luôn sẵn sàng đón tiếp bạn từ 09:00 - 21:00, Thứ 2 - Chủ nhật.</p>"
-    },
-    {
-      "type": "richtext",
-      "id": "intro_content",
-      "label": "Introduction Content",
+      "id": "description",
+      "label": "Description",
       "default": "<p>Để thực sự hiểu được giá trị của giấc ngủ chất lượng, bạn cần phải được chạm, cảm nhận và trải nghiệm trực tiếp. Showroom của Ru9 không chỉ là nơi trưng bày sản phẩm, mà là không gian riêng tư được thiết kế để bạn có thể tìm ra sản phẩm hoàn hảo cho bản thân và gia đình.</p>"
     },
     {
       "type": "color",
       "id": "background_color",
       "label": "Background Color",
-      "default": "#ffffff"
+      "default": "#F8FAFC"
     },
     {
       "type": "color",
       "id": "card_background_color",
       "label": "Card Background Color",
-      "default": "#F5F5F5"
+      "default": "#F8FAFC"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#1A2B4D"
     },
     {
       "type": "color",
       "id": "title_color",
       "label": "Title Color",
-      "default": "#1A2230"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Phone Color",
-      "default": "#4A90E2"
+      "default": "#1A2B4D"
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "Text Color",
-      "default": "#5E6B85"
+      "default": "#333333"
     }
   ],
   "blocks": [
@@ -208,22 +224,16 @@
       "name": "Showroom Card",
       "settings": [
         {
-          "type": "html",
+          "type": "text",
           "id": "name",
           "label": "Showroom Name",
-          "default": "<h3>Showroom HCM 1</h3>"
+          "default": "Showroom HCM 1:"
         },
         {
-          "type": "html",
+          "type": "text",
           "id": "address",
           "label": "Showroom Address",
-          "default": "<p>Toà B2 Sarimi, 72 Nguyễn Cơ Thạch, KĐT Sala, Quận 2</p>"
-        },
-        {
-          "type": "html",
-          "id": "phone",
-          "label": "Phone Number",
-          "default": "<p>0964.777.960</p>"
+          "default": "Tòa B2 Sarimi, 72 Nguyễn Cơ Thạch, KĐT Sala, Quận 2"
         },
         {
           "type": "image_picker",
@@ -240,25 +250,22 @@
         {
           "type": "about_showroom_card",
           "settings": {
-            "name": "Showroom HCM 1",
-            "address": "Toà B2 Sarimi, 72 Nguyễn Cơ Thạch, KĐT Sala, Quận 2",
-            "phone": "0964.777.960"
+            "name": "Showroom HCM 1:",
+            "address": "Tòa B2 Sarimi, 72 Nguyễn Cơ Thạch, KĐT Sala, Quận 2"
           }
         },
         {
           "type": "about_showroom_card",
           "settings": {
-            "name": "Showroom HCM 2",
-            "address": "283A Hai Bà Trưng, Quận 3",
-            "phone": "0964.777.910"
+            "name": "Showroom HCM 2:",
+            "address": "282A Hai Bà Trưng, Quận 3"
           }
         },
         {
           "type": "about_showroom_card",
           "settings": {
-            "name": "Showroom Hà Nội",
-            "address": "228 Cầu Giấy, Phường Quan Hoa, Hà Nội",
-            "phone": "0964.777.940"
+            "name": "Showroom Hà Nội:",
+            "address": "238 Cầu Giấy, Hà Nội"
           }
         }
       ]

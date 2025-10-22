@@ -33,6 +33,31 @@
     margin-right: auto;
     line-height: 1.6;
   }
+  .about-statistics-stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 30px 0;
+  }
+  .about-statistics-stat-item {
+    text-align: center;
+    color: white;
+    flex: 1;
+    min-width: 200px;
+  }
+  .about-statistics-stat-number {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .about-statistics-stat-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
   .about-statistics-separator {
     display: flex;
     align-items: center;
@@ -91,14 +116,6 @@
       font-size: 24px;
       margin-bottom: 30px;
     }
-    .about-statistics-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-    .about-statistics-card {
-      padding: 20px 15px;
-    }
     .about-statistics-number {
       font-size: 36px;
     }
@@ -107,6 +124,28 @@
       margin-bottom: 20px;
     }
     .about-statistics-message {
+      font-size: 14px;
+    }
+    .about-statistics-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .about-statistics-card {
+      padding: 20px 15px;
+    }
+    .about-statistics-stats {
+      flex-direction: column;
+      gap: 20px;
+      padding: 30px 15px !important;
+    }
+    .about-statistics-stat-item {
+      min-width: auto;
+    }
+    .about-statistics-stat-number {
+      font-size: 36px;
+    }
+    .about-statistics-stat-text {
       font-size: 14px;
     }
   }
@@ -120,6 +159,41 @@
     
     <div class="about-statistics-description">{{ section.settings.description | default: '<p>Ru9 không thể lan tỏa giá trị của giấc ngủ chất lượng đến hàng triệu người Việt như hôm nay nếu không có sự tin tưởng và đồng hành của khách hàng trong suốt chặng đường ấy. Chính mỗi giấc ngủ ngon của bạn là nguồn cảm hứng để Ru9 tiếp tục hoàn thiện và lớn lên từng ngày.</p>' }}</div>
     
+    {% for block in section.blocks %}
+      {% if block.type == 'statistic_block' %}
+        <div class="about-statistics-stats" style="
+          background-color: {{ block.settings.background_color | default: '#759CE6' }};
+          padding: {{ block.settings.padding | default: '40px 20px' }};
+          border-radius: {{ block.settings.border_radius | default: '12px' }};
+        ">
+          <div class="about-statistics-stat-item" style="flex: {{ block.settings.stat1_size | default: '1' }};">
+            <div class="about-statistics-stat-number" style="font-size: {{ block.settings.stat1_number_size | default: '48px' }};">
+              {{ block.settings.stat1_number }}
+            </div>
+            <div class="about-statistics-stat-text" style="font-size: {{ block.settings.stat1_text_size | default: '16px' }};">
+              {{ block.settings.stat1_text }}
+            </div>
+          </div>
+          <div class="about-statistics-stat-item" style="flex: {{ block.settings.stat2_size | default: '1' }};">
+            <div class="about-statistics-stat-number" style="font-size: {{ block.settings.stat2_number_size | default: '48px' }};">
+              {{ block.settings.stat2_number }}
+            </div>
+            <div class="about-statistics-stat-text" style="font-size: {{ block.settings.stat2_text_size | default: '16px' }};">
+              {{ block.settings.stat2_text }}
+            </div>
+          </div>
+          <div class="about-statistics-stat-item" style="flex: {{ block.settings.stat3_size | default: '1' }};">
+            <div class="about-statistics-stat-number" style="font-size: {{ block.settings.stat3_number_size | default: '48px' }};">
+              {{ block.settings.stat3_number }}
+            </div>
+            <div class="about-statistics-stat-text" style="font-size: {{ block.settings.stat3_text_size | default: '16px' }};">
+              {{ block.settings.stat3_text }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    
     <div class="about-statistics-separator">
       <div class="about-statistics-separator-line"></div>
       <div class="about-statistics-separator-dots">
@@ -132,21 +206,23 @@
     
     <div class="about-statistics-grid">
       {% for block in section.blocks %}
-        <div class="about-statistics-card">
-          <div>{{ block.settings.title }}</div>
-          <div>{{ block.settings.description }}</div>
-          {% if block.settings.image != blank %}
-            <img 
-              src="{{ block.settings.image | image_url: width: 400 }}" 
-              alt="{{ block.settings.image.alt | escape }}"
-              width="400"
-              height="200"
-              loading="lazy"
-            >
-          {% else %}
-            <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Image+{{ forloop.index }}" alt="Image {{ forloop.index }}" width="400" height="200" />
-          {% endif %}
-        </div>
+        {% if block.type == 'about_statistic_card' %}
+          <div class="about-statistics-card">
+            <div>{{ block.settings.title }}</div>
+            <div>{{ block.settings.description }}</div>
+            {% if block.settings.image != blank %}
+              <img 
+                src="{{ block.settings.image | image_url: width: 400 }}" 
+                alt="{{ block.settings.image.alt | escape }}"
+                width="400"
+                height="200"
+                loading="lazy"
+              >
+            {% else %}
+              <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Image+{{ forloop.index }}" alt="Image {{ forloop.index }}" width="400" height="200" />
+            {% endif %}
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -205,9 +281,144 @@
       "id": "text_color",
       "label": "Text Color",
       "default": "#5E6B85"
-    }
+    },
   ],
   "blocks": [
+    {
+      "type": "statistic_block",
+      "name": "Statistic Block",
+      "settings": [
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background Color",
+          "default": "#759CE6"
+        },
+        {
+          "type": "text",
+          "id": "padding",
+          "label": "Padding (CSS format)",
+          "default": "40px 20px"
+        },
+        {
+          "type": "text",
+          "id": "border_radius",
+          "label": "Border Radius",
+          "default": "12px"
+        },
+        {
+          "type": "header",
+          "content": "Statistic 1"
+        },
+        {
+          "type": "text",
+          "id": "stat1_number",
+          "label": "Number 1",
+          "default": "34"
+        },
+        {
+          "type": "text",
+          "id": "stat1_text",
+          "label": "Text 1",
+          "default": "Tỉnh thành"
+        },
+        {
+          "type": "range",
+          "id": "stat1_size",
+          "label": "Size 1",
+          "min": 0.5,
+          "max": 3,
+          "step": 0.1,
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "stat1_number_size",
+          "label": "Number 1 Font Size",
+          "default": "48px"
+        },
+        {
+          "type": "text",
+          "id": "stat1_text_size",
+          "label": "Text 1 Font Size",
+          "default": "16px"
+        },
+        {
+          "type": "header",
+          "content": "Statistic 2"
+        },
+        {
+          "type": "text",
+          "id": "stat2_number",
+          "label": "Number 2",
+          "default": "35,000+"
+        },
+        {
+          "type": "text",
+          "id": "stat2_text",
+          "label": "Text 2",
+          "default": "Giấc ngủ ngon được giao đến tận nhà"
+        },
+        {
+          "type": "range",
+          "id": "stat2_size",
+          "label": "Size 2",
+          "min": 0.5,
+          "max": 3,
+          "step": 0.1,
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "stat2_number_size",
+          "label": "Number 2 Font Size",
+          "default": "48px"
+        },
+        {
+          "type": "text",
+          "id": "stat2_text_size",
+          "label": "Text 2 Font Size",
+          "default": "16px"
+        },
+        {
+          "type": "header",
+          "content": "Statistic 3"
+        },
+        {
+          "type": "text",
+          "id": "stat3_number",
+          "label": "Number 3",
+          "default": "50,000+"
+        },
+        {
+          "type": "text",
+          "id": "stat3_text",
+          "label": "Text 3",
+          "default": "Khách hàng tin tưởng Ru9"
+        },
+        {
+          "type": "range",
+          "id": "stat3_size",
+          "label": "Size 3",
+          "min": 0.5,
+          "max": 3,
+          "step": 0.1,
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "stat3_number_size",
+          "label": "Number 3 Font Size",
+          "default": "48px"
+        },
+        {
+          "type": "text",
+          "id": "stat3_text_size",
+          "label": "Text 3 Font Size",
+          "default": "16px"
+        }
+      ]
+    },
     {
       "type": "about_statistic_card",
       "name": "Customer Story Card",
@@ -236,6 +447,29 @@
     {
       "name": "About Statistics",
       "blocks": [
+        {
+          "type": "statistic_block",
+          "settings": {
+            "background_color": "#759CE6",
+            "padding": "40px 20px",
+            "border_radius": "12px",
+            "stat1_number": "34",
+            "stat1_text": "Tỉnh thành",
+            "stat1_size": 1,
+            "stat1_number_size": "48px",
+            "stat1_text_size": "16px",
+            "stat2_number": "35,000+",
+            "stat2_text": "Giấc ngủ ngon được giao đến tận nhà",
+            "stat2_size": 1,
+            "stat2_number_size": "48px",
+            "stat2_text_size": "16px",
+            "stat3_number": "50,000+",
+            "stat3_text": "Khách hàng tin tưởng Ru9",
+            "stat3_size": 1,
+            "stat3_number_size": "48px",
+            "stat3_text_size": "16px"
+          }
+         },
         {
           "type": "about_statistic_card",
           "settings": {

@@ -1,0 +1,222 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-environment-section {
+    padding: 80px 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  .about-environment-section .page-width {
+    padding: 0 20px;
+  }
+  .about-environment-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .about-environment-left {
+    display: flex;
+    flex-direction: column;
+  }
+  .about-environment-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2B4D' }};
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+  }
+  .about-environment-separator {
+    width: 66%;
+    height: 1px;
+    background-color: {{ section.settings.separator_color | default: '#E5E7EB' }};
+    margin: 0;
+  }
+  .about-environment-right {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .about-environment-paragraph {
+    font-size: 1em;
+    color: {{ section.settings.text_color | default: '#333333' }};
+    line-height: 1.6;
+    margin: 0;
+  }
+  .about-environment-image {
+    text-align: center;
+    position: relative;
+  }
+  .about-environment-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  .about-environment-image-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-style: italic;
+    color: {{ section.settings.overlay_text_color | default: '#1A2B4D' }};
+    font-weight: 500;
+  }
+  .about-environment-highlight {
+    color: {{ section.settings.highlight_color | default: '#1A2B4D' }};
+    font-weight: 600;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .about-environment-section {
+      padding: 60px 0;
+    }
+    .about-environment-content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .about-environment-left {
+      gap: 15px;
+    }
+    .about-environment-title {
+      font-size: 2em;
+    }
+    .about-environment-separator {
+      width: 50%;
+    }
+    .about-environment-right {
+      gap: 20px;
+    }
+    .about-environment-image img {
+      height: 250px;
+    }
+    .about-environment-image-overlay {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+</style>
+
+<div class="about-environment-section">
+  <div class="page-width">
+    <div class="about-environment-content">
+      <div class="about-environment-left">
+        <h2 class="about-environment-title">{{ section.settings.title | default: 'Cam kết với môi trường - tạo ảnh hưởng bền vững cho mai sau' }}</h2>
+        <div class="about-environment-separator"></div>
+      </div>
+      
+      <div class="about-environment-right">
+        <p class="about-environment-paragraph">{{ section.settings.paragraph_1 | default: 'Mỗi sản phẩm Ru9 bạn mang về nhà là một bước đi nhỏ để hướng tới sự bền vững. Vì vậy, mỗi sản phẩm được tạo ra đều bắt đầu từ những lựa chọn có trách nhiệm từ những chất liệu an toàn cho sức khỏe và thân thiện với môi trường đến quy trình sản xuất tiết kiệm năng lượng, giảm thiểu tối đa khí thải VOC (chỉ 0.5 phần triệu), không formaldehyde, không phthalates – để bạn yên tâm ngủ sâu mỗi đêm, và thức dậy trong một thế giới vẫn trong lành như hôm qua.' }}</p>
+        
+        <div class="about-environment-image">
+          {% if section.settings.image != blank %}
+            <img 
+              src="{{ section.settings.image | image_url: width: 600 }}" 
+              alt="{{ section.settings.image.alt | escape }}"
+              width="600"
+              height="300"
+              loading="lazy"
+            >
+          {% else %}
+            <img src="https://via.placeholder.com/600x300/3D6DFF/FFFFFF?text=Environment+Image" alt="Environment Image" width="600" height="300" />
+          {% endif %}
+          <div class="about-environment-image-overlay">
+            {{ section.settings.image_overlay_text | default: 'Một sản phẩm Một cây xanh' }}
+          </div>
+        </div>
+        
+        <p class="about-environment-paragraph">{{ section.settings.paragraph_2 | default: 'Song song đó, Ru9 đang cùng tham gia và dẫn triển khai chương trình <span class="about-environment-highlight">"Một sản phẩm - Một cây xanh"</span>, gửi gắm mong muốn tái tạo thiên nhiên và vòng tuần hoàn tích cực giữa con người và môi trường.' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Environment",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Cam kết với môi trường - tạo ảnh hưởng bền vững cho mai sau</h2>"
+    },
+    {
+      "type": "html",
+      "id": "paragraph_1",
+      "label": "First Paragraph",
+      "default": "<p>Mỗi sản phẩm Ru9 bạn mang về nhà là một bước đi nhỏ để hướng tới sự bền vững. Vì vậy, mỗi sản phẩm được tạo ra đều bắt đầu từ những lựa chọn có trách nhiệm từ những chất liệu an toàn cho sức khỏe và thân thiện với môi trường đến quy trình sản xuất tiết kiệm năng lượng, giảm thiểu tối đa khí thải VOC (chỉ 0.5 phần triệu), không formaldehyde, không phthalates – để bạn yên tâm ngủ sâu mỗi đêm, và thức dậy trong một thế giới vẫn trong lành như hôm qua.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Environment Image"
+    },
+    {
+      "type": "html",
+      "id": "image_overlay_text",
+      "label": "Image Overlay Text",
+      "default": "<span>Một sản phẩm Một cây xanh</span>"
+    },
+    {
+      "type": "html",
+      "id": "paragraph_2",
+      "label": "Second Paragraph",
+      "default": "<p>Song song đó, Ru9 đang cùng tham gia và dẫn triển khai chương trình <span class=\"about-environment-highlight\">\"Một sản phẩm - Một cây xanh\"</span>, gửi gắm mong muốn tái tạo thiên nhiên và vòng tuần hoàn tích cực giữa con người và môi trường.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2B4D"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "separator_color",
+      "label": "Separator Color",
+      "default": "#E5E7EB"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight Color",
+      "default": "#1A2B4D"
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Overlay Text Color",
+      "default": "#1A2B4D"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Environment",
+      "settings": {
+        "title": "Cam kết với môi trường - tạo ảnh hưởng bền vững cho mai sau",
+        "paragraph_1": "Mỗi sản phẩm Ru9 bạn mang về nhà là một bước đi nhỏ để hướng tới sự bền vững. Vì vậy, mỗi sản phẩm được tạo ra đều bắt đầu từ những lựa chọn có trách nhiệm từ những chất liệu an toàn cho sức khỏe và thân thiện với môi trường đến quy trình sản xuất tiết kiệm năng lượng, giảm thiểu tối đa khí thải VOC (chỉ 0.5 phần triệu), không formaldehyde, không phthalates – để bạn yên tâm ngủ sâu mỗi đêm, và thức dậy trong một thế giới vẫn trong lành như hôm qua.",
+        "image_overlay_text": "Một sản phẩm Một cây xanh",
+        "paragraph_2": "Song song đó, Ru9 đang cùng tham gia và dẫn triển khai chương trình \"Một sản phẩm - Một cây xanh\", gửi gắm mong muốn tái tạo thiên nhiên và vòng tuần hoàn tích cực giữa con người và môi trường."
+      }
+    }
+  ]
+}
+{% endschema %}

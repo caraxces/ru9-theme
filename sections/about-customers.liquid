@@ -2,11 +2,35 @@
 
 <style>
   .about-customers-section {
-    padding: 0;
-    background-color: {{ section.settings.background_color | default: '#F5F5F5' }};
+    padding: 60px 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
   }
   .about-customers-section .page-width {
-    padding: 0;
+    padding: 0 20px;
+  }
+  .about-customers-header {
+    text-align: left;
+    margin-bottom: 50px;
+  }
+  .about-customers-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .about-customers-description {
+    font-size: 18px;
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    max-width: 800px;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .about-customers-separator {
+    width: 100px;
+    height: 2px;
+    background-color: #000000;
+    margin: 30px 0;
   }
   .about-customers-grid {
     display: grid;
@@ -14,32 +38,36 @@
     gap: 30px;
   }
   .about-customers-card {
-    text-align: center;
+    text-align: left;
     background-color: {{ section.settings.card_background_color | default: '#ffffff' }};
-    padding: 30px 20px;
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(16,38,84,.06);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
   }
   .about-customers-image {
     margin-bottom: 20px;
+    text-align: center;
   }
   .about-customers-image img {
     width: 100%;
-    border-radius: 12px;
+    max-width: 200px;
     height: 200px;
     object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
   }
   .about-customers-card h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: {{ section.settings.title_color | default: '#1A2230' }};
     margin-bottom: 16px;
-    line-height: 1.2;
+    line-height: 1.3;
   }
   .about-customers-card p {
     color: {{ section.settings.text_color | default: '#5E6B85' }};
     line-height: 1.6;
     margin: 0;
+    font-size: 16px;
   }
 
   /* Mobile responsive */
@@ -51,26 +79,42 @@
 
   @media (max-width: 768px) {
     .about-customers-section {
-      padding: 0;
+      padding: 40px 0;
+    }
+    .about-customers-title {
+      font-size: 24px;
+    }
+    .about-customers-description {
+      font-size: 16px;
     }
     .about-customers-grid {
       grid-template-columns: 1fr;
       gap: 20px;
     }
     .about-customers-card {
-      padding: 20px 15px;
+      padding: 20px;
     }
     .about-customers-image img {
       height: 150px;
+      max-width: 150px;
     }
     .about-customers-card h3 {
-      font-size: 18px;
+      font-size: 16px;
+    }
+    .about-customers-card p {
+      font-size: 14px;
     }
   }
 </style>
 
 <div class="about-customers-section">
   <div class="page-width">
+    <div class="about-customers-header">
+      <div class="about-customers-title">{{ section.settings.title | default: '<h2>Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng</h2>' }}</div>
+      <div class="about-customers-separator"></div>
+      <div class="about-customers-description">{{ section.settings.description | default: '<p>Chất lượng của Ru9 không chỉ được chứng minh qua trải nghiệm người dùng mà còn được kiểm chứng bởi các chuyên gia hàng đầu.</p>' }}</div>
+    </div>
+    
     <div class="about-customers-grid">
       {% for block in section.blocks %}
         <div class="about-customers-card">
@@ -79,16 +123,16 @@
               <img 
                 src="{{ block.settings.image | image_url: width: 400 }}" 
                 alt="{{ block.settings.image.alt | escape }}"
-                width="{{ block.settings.image.width }}"
+                width="400"
                 height="200"
                 loading="lazy"
               >
             {% else %}
-              <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Customer+{{ forloop.index }}" alt="Customer {{ forloop.index }}" width="400" height="200" />
+              <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Expert+{{ forloop.index }}" alt="Expert {{ forloop.index }}" width="400" height="200" />
             {% endif %}
           </div>
-          <div>{{ block.settings.title }}</div>
-          <div>{{ block.settings.description }}</div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.description }}</p>
         </div>
       {% endfor %}
     </div>
@@ -102,10 +146,22 @@
   "class": "section",
   "settings": [
     {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng</h2>"
+    },
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Section Description",
+      "default": "<p>Chất lượng của Ru9 không chỉ được chứng minh qua trải nghiệm người dùng mà còn được kiểm chứng bởi các chuyên gia hàng đầu.</p>"
+    },
+    {
       "type": "color",
       "id": "background_color",
       "label": "Background Color",
-      "default": "#F5F5F5"
+      "default": "#ffffff"
     },
     {
       "type": "color",
@@ -132,21 +188,21 @@
       "name": "Customer Card",
       "settings": [
         {
-          "type": "html",
+          "type": "text",
           "id": "title",
-          "label": "Customer Title",
-          "default": "<h3>Chuyên Viên Trẻ</h3>"
+          "label": "Expert Title",
+          "default": "TS.BS - Chuyên khoa Thần kinh, Bệnh viện Bạch Mai"
         },
         {
-          "type": "html",
+          "type": "textarea",
           "id": "description",
-          "label": "Customer Description",
-          "default": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải sau những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+          "label": "Expert Testimonial",
+          "default": "Từ góc độ y khoa, tôi khuyên nghị RU9 cho bệnh nhân có vấn đề về giấc ngủ và đau lưng. Chất lượng foam và thiết kế hỗ trợ cột sống hiệu quả, đặc biệt phù hợp với cơ thể người Việt."
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Customer Image"
+          "label": "Expert Image"
         }
       ]
     }
@@ -158,22 +214,22 @@
         {
           "type": "about_customer_card",
           "settings": {
-            "title": "Chuyên Viên Trẻ",
-            "description": "Giải quyết triệt để tình trạng mệt mỏi, uể oải sau những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu."
+            "title": "TS.BS - Chuyên khoa Thần kinh, Bệnh viện Bạch Mai",
+            "description": "Từ góc độ y khoa, tôi khuyên nghị RU9 cho bệnh nhân có vấn đề về giấc ngủ và đau lưng. Chất lượng foam và thiết kế hỗ trợ cột sống hiệu quả, đặc biệt phù hợp với cơ thể người Việt."
           }
         },
         {
           "type": "about_customer_card",
           "settings": {
-            "title": "Những gia đình",
-            "description": "Đáp ứng từng nhu cầu khác nhau của các thành viên trong gia đình, đã mang lại giấc ngủ sâu đồng hành và sự gắn kết trọn vẹn cho cả gia đình."
+            "title": "Coach HLV Fitness với 500K followers",
+            "description": "Recovery to 80% thành công trong Fitness, RU9 giúp tôi phục hồi tốt hơn sau mỗi buổi tập. Sau 8 tháng sử dụng nệm Original, tôi cảm nhận rõ sự khác biệt mang chất lượng giấc ngủ và khả năng phục hồi cơ bắp."
           }
         },
         {
           "type": "about_customer_card",
           "settings": {
-            "title": "Khách hàng lớn tuổi",
-            "description": "Hỗ trợ để mang lại giấc ngủ sâu hơn, cải thiện tình trạng mất ngủ, đau mỏi của người lớn tuổi."
+            "title": "Blogger Mars Life Vietnam với 200K subscribers",
+            "description": "Làm mẹ 2 con, giấc ngủ chất lượng là điều xa xỉ. Cho đến khi tôi dùng nệm Ru9, không chỉ tôi mà cả gia đình đều có giấc ngủ ngon hơn, quan hệ gia đình cũng hòa thuận hơn."
           }
         }
       ]

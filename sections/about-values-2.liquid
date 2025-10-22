@@ -1,0 +1,238 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-values-2-section {
+    padding: 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  .about-values-2-section .page-width {
+    padding: 0;
+  }
+  .about-values-2-quote-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 60px;
+    background: #F0F7FF;
+    border-radius: 5px;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-values-2-quote {
+    font-size: 24px;
+    font-weight: 400;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    max-width: 1000px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+  }
+  .about-values-2-quote-mark {
+    position: absolute;
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro";
+    font-size: 128px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 50px;
+    z-index: 1;
+  }
+  .about-values-2-quote-mark.open {
+    top: 40px;
+    left: 40px;
+  }
+  .about-values-2-quote-mark.close {
+    bottom: 40px;
+    right: 40px;
+  }
+  .about-values-2-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60px;
+    gap: 20px;
+  }
+  .about-values-2-separator-dots {
+    display: flex;
+    gap: 8px;
+  }
+  .about-values-2-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  .about-values-2-card {
+    text-align: left;
+  }
+  .about-values-2-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .about-values-2-card p {
+    color: {{ section.settings.text_color | default: '#333333' }};
+    line-height: 1.6;
+    margin: 0;
+    font-size: 16px;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .about-values-2-section {
+      padding: 0;
+    }
+    .about-values-2-quote {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    .about-values-2-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .about-values-2-card {
+      padding: 20px;
+    }
+    .about-values-2-card h3 {
+      font-size: 18px;
+    }
+  }
+</style>
+
+<div class="about-values-2-section">
+  <div class="page-width">
+    <div class="about-values-2-quote-container">
+      <div class="about-values-2-quote-mark open">"</div>
+      <div class="about-values-2-quote">{{ section.settings.quote | default: '<p>Mỗi giá trị cốt lõi đều là nền tảng để Ru9 kiên định theo đuổi hành trình cải thiện chất lượng sống qua giấc ngủ</p>' }}</div>
+      <div class="about-values-2-quote-mark close">"</div>
+    </div>
+    
+    <div class="about-values-2-separator">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1596" height="4" viewBox="0 0 1596 4" fill="none">
+        <path d="M0 2L1596 2" stroke="#E5E7EB" stroke-width="3"/>
+      </svg>
+      <div class="about-values-2-separator-dots">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="10" fill="#D9D9D9"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="10" fill="#D9D9D9"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="10" fill="#D9D9D9"/>
+        </svg>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="1596" height="4" viewBox="0 0 1596 4" fill="none">
+        <path d="M0 2L1596 2" stroke="#E5E7EB" stroke-width="3"/>
+      </svg>
+    </div>
+    
+    <div class="about-values-2-grid">
+      {% for block in section.blocks %}
+        <div class="about-values-2-card">
+          <div>{{ block.settings.title }}</div>
+          <div>{{ block.settings.content }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Values 2",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "quote",
+      "label": "Values Quote",
+      "default": "<p>Mỗi giá trị cốt lõi đều là nền tảng để Ru9 kiên định theo đuổi hành trình cải thiện chất lượng sống qua giấc ngủ</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5E6B85"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about_value_2_card",
+      "name": "Value Card",
+      "settings": [
+        {
+          "type": "html",
+          "id": "title",
+          "label": "Value Title",
+          "default": "<h3>Chất lượng tiên phong</h3>"
+        },
+        {
+          "type": "html",
+          "id": "content",
+          "label": "Value Content",
+          "default": "<p>Ru9 không dừng lại ở việc sản xuất hay bán một sản phẩm, mà còn hướng đến mục tiêu tạo nên những trải nghiệm ngủ êm ái chuẩn mực, an toàn và bền vững cho sức khỏe.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Values 2",
+      "blocks": [
+        {
+          "type": "about_value_2_card",
+          "settings": {
+            "title": "<h3>Chất lượng tiên phong</h3>",
+            "content": "<p>Ru9 không dừng lại ở việc sản xuất hay bán một sản phẩm, mà còn hướng đến mục tiêu tạo nên những trải nghiệm ngủ êm ái chuẩn mực, an toàn và bền vững cho sức khỏe.</p>"
+          }
+        },
+        {
+          "type": "about_value_2_card",
+          "settings": {
+            "title": "<h3>Khách hàng là trung tâm</h3>",
+            "content": "<p>Từ đó, những chính sách như 100 đêm ngủ thử ra đời, đảm bảo bạn tìm được chiếc nệm hoàn hảo, chấm dứt hoàn toàn những cơn đau lưng hay cảm giác mệt mỏi mỗi sáng.</p>"
+          }
+        },
+        {
+          "type": "about_value_2_card",
+          "settings": {
+            "title": "<h3>Trách nhiệm xã hội</h3>",
+            "content": "<p>Ru9 hướng tới việc xây dựng một cộng đồng khỏe mạnh hơn, bắt đầu từ việc nâng cao nhận thức và cải thiện giấc ngủ của từng gia đình Việt.</p>"
+          }
+        },
+        {
+          "type": "about_value_2_card",
+          "settings": {
+            "title": "<h3>Khoa học & đổi mới</h3>",
+            "content": "<p>Ru9 sẽ liên tục học hỏi, nghiên cứu và ứng dụng công nghệ tiên tiến để mang những giải pháp ngủ tốt nhất đến gần hơn với người Việt.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,230 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-community-paragraph-section {
+    padding: 80px 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  .about-community-paragraph-section .page-width {
+    padding: 0 20px;
+  }
+  .about-community-paragraph-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .about-community-paragraph-left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .about-community-paragraph-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2B4D' }};
+    margin: 0;
+    line-height: 1.2;
+    position: relative;
+  }
+  .about-community-paragraph-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50%;
+    height: 2px;
+    background-color: {{ section.settings.title_color | default: '#1A2B4D' }};
+  }
+  .about-community-paragraph-conclusion {
+    font-size: 1.15em;
+    color: {{ section.settings.text_color | default: '#333333' }};
+    line-height: 1.6;
+    margin: 0;
+  }
+  .about-community-paragraph-right {
+    display: flex;
+    flex-direction: column;
+  }
+  .about-community-paragraph-intro {
+    font-size: 1em;
+    color: {{ section.settings.text_color | default: '#333333' }};
+    line-height: 1.6;
+    margin: 0;
+  }
+  .about-community-paragraph-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+  }
+  .about-community-paragraph-image {
+    text-align: left;
+  }
+  .about-community-paragraph-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .about-community-paragraph-image-caption {
+    font-size: 14px;
+    color: {{ section.settings.text_color | default: '#333333' }};
+    margin: 0;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .about-community-paragraph-section {
+      padding: 60px 0;
+    }
+    .about-community-paragraph-content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .about-community-paragraph-left {
+      gap: 20px;
+    }
+    .about-community-paragraph-title {
+      font-size: 2em;
+    }
+    .about-community-paragraph-conclusion {
+      font-size: 1em;
+    }
+    .about-community-paragraph-images {
+      grid-template-columns: 1fr;
+      margin-top: 30px;
+    }
+    .about-community-paragraph-image img {
+      height: 150px;
+    }
+  }
+</style>
+
+<div class="about-community-paragraph-section">
+  <div class="page-width">
+    <div class="about-community-paragraph-content">
+      <div class="about-community-paragraph-left">
+        <h2 class="about-community-paragraph-title">{{ section.settings.title | default: 'Chương trình giáo dục giấc ngủ' }}</h2>
+        <p class="about-community-paragraph-conclusion">{{ section.settings.conclusion | default: 'Những buổi chia sẻ này chỉ là một phần trong hành trình lan tỏa tri thức mà Ru9 đang không ngừng thực hiện, để mỗi người Việt hiểu rằng đầu tư cho giấc ngủ chính là đầu tư cho chất lượng sống lâu dài.' }}</p>
+      </div>
+      
+      <div class="about-community-paragraph-right">
+        <p class="about-community-paragraph-intro">{{ section.settings.intro | default: 'Với Ru9, một giấc ngủ tốt bắt đầu từ sự thấu hiểu. Vì vậy, Ru9 đã và đang tổ chức các workshop chuyên sâu về giấc ngủ với sự đồng hành của các chuyên gia đầu ngành, nhằm lan tỏa kiến thức khoa học và giúp cộng đồng nhân nhận giấc ngủ đúng cách hơn. Từ việc giới mà nguyên nhân gây rối loạn giấc ngủ, đến chia số những phương pháp cải thiện giấc ngủ hiệu quả và dễ áp dụng, mỗi buổi workshop đầu mang đến giá trị thiết thực, giúp người tham gia biết cách chăm sóc giấc ngủ của chính mình.' }}</p>
+        
+        <div class="about-community-paragraph-images">
+          <div class="about-community-paragraph-image">
+            {% if section.settings.image_1 != blank %}
+              <img 
+                src="{{ section.settings.image_1 | image_url: width: 500 }}" 
+                alt="{{ section.settings.image_1.alt | escape }}"
+                width="500"
+                height="200"
+                loading="lazy"
+              >
+            {% else %}
+              <img src="https://via.placeholder.com/500x200/3D6DFF/FFFFFF?text=Image+1" alt="Image 1" width="500" height="200" />
+            {% endif %}
+            <p class="about-community-paragraph-image-caption">{{ section.settings.image_1_caption | default: 'Image 1 Caption' }}</p>
+          </div>
+          
+          <div class="about-community-paragraph-image">
+            {% if section.settings.image_2 != blank %}
+              <img 
+                src="{{ section.settings.image_2 | image_url: width: 500 }}" 
+                alt="{{ section.settings.image_2.alt | escape }}"
+                width="500"
+                height="200"
+                loading="lazy"
+              >
+            {% else %}
+              <img src="https://via.placeholder.com/500x200/3D6DFF/FFFFFF?text=Image+2" alt="Image 2" width="500" height="200" />
+            {% endif %}
+            <p class="about-community-paragraph-image-caption">{{ section.settings.image_2_caption | default: 'Image 2 Caption' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Community Paragraph",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "<h2>Chương trình giáo dục giấc ngủ</h2>"
+    },
+    {
+      "type": "html",
+      "id": "intro",
+      "label": "Introductory Paragraph",
+      "default": "<p>Với Ru9, một giấc ngủ tốt bắt đầu từ sự thấu hiểu. Vì vậy, Ru9 đã và đang tổ chức các workshop chuyên sâu về giấc ngủ với sự đồng hành của các chuyên gia đầu ngành, nhằm lan tỏa kiến thức khoa học và giúp cộng đồng nhân nhận giấc ngủ đúng cách hơn. Từ việc giới mà nguyên nhân gây rối loạn giấc ngủ, đến chia số những phương pháp cải thiện giấc ngủ hiệu quả và dễ áp dụng, mỗi buổi workshop đầu mang đến giá trị thiết thực, giúp người tham gia biết cách chăm sóc giấc ngủ của chính mình.</p>"
+    },
+    {
+      "type": "html",
+      "id": "conclusion",
+      "label": "Conclusion Paragraph",
+      "default": "<p>Những buổi chia sẻ này chỉ là một phần trong hành trình lan tỏa tri thức mà Ru9 đang không ngừng thực hiện, để mỗi người Việt hiểu rằng đầu tư cho giấc ngủ chính là đầu tư cho chất lượng sống lâu dài.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "html",
+      "id": "image_1_caption",
+      "label": "Image 1 Caption",
+      "default": "<p>Image 1 Caption</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "html",
+      "id": "image_2_caption",
+      "label": "Image 2 Caption",
+      "default": "<p>Image 2 Caption</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2B4D"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Community Paragraph",
+      "settings": {
+        "title": "Chương trình giáo dục giấc ngủ",
+        "intro": "Với Ru9, một giấc ngủ tốt bắt đầu từ sự thấu hiểu. Vì vậy, Ru9 đã và đang tổ chức các workshop chuyên sâu về giấc ngủ với sự đồng hành của các chuyên gia đầu ngành, nhằm lan tỏa kiến thức khoa học và giúp cộng đồng nhân nhận giấc ngủ đúng cách hơn. Từ việc giới mà nguyên nhân gây rối loạn giấc ngủ, đến chia số những phương pháp cải thiện giấc ngủ hiệu quả và dễ áp dụng, mỗi buổi workshop đầu mang đến giá trị thiết thực, giúp người tham gia biết cách chăm sóc giấc ngủ của chính mình.",
+        "conclusion": "Những buổi chia sẻ này chỉ là một phần trong hành trình lan tỏa tri thức mà Ru9 đang không ngừng thực hiện, để mỗi người Việt hiểu rằng đầu tư cho giấc ngủ chính là đầu tư cho chất lượng sống lâu dài.",
+        "image_1_caption": "Image 1 Caption",
+        "image_2_caption": "Image 2 Caption"
+      }
+    }
+  ]
+}
+{% endschema %}
