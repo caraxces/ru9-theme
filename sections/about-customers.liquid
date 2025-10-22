@@ -6,7 +6,7 @@
     background-color: {{ section.settings.background_color | default: '#ffffff' }};
   }
   .about-customers-section .page-width {
-    padding: 0 20px;
+    padding: 0 60px;
   }
   .about-customers-header {
     text-align: left;
@@ -49,9 +49,8 @@
     text-align: center;
   }
   .about-customers-image img {
-    width: 100%;
-    max-width: 200px;
-    height: 200px;
+    width: 422px;
+    height: 340px;
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid #E5E7EB;
@@ -95,8 +94,9 @@
       padding: 20px;
     }
     .about-customers-image img {
-      height: 150px;
-      max-width: 150px;
+      width: 100%;
+      max-width: 300px;
+      height: 240px;
     }
     .about-customers-card h3 {
       font-size: 16px;
@@ -121,14 +121,14 @@
           <div class="about-customers-image">
             {% if block.settings.image != blank %}
               <img 
-                src="{{ block.settings.image | image_url: width: 400 }}" 
+                src="{{ block.settings.image | image_url: width: 422, height: 340 }}" 
                 alt="{{ block.settings.image.alt | escape }}"
-                width="400"
-                height="200"
+                width="422"
+                height="340"
                 loading="lazy"
               >
             {% else %}
-              <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Expert+{{ forloop.index }}" alt="Expert {{ forloop.index }}" width="400" height="200" />
+              <img src="https://via.placeholder.com/422x340/3D6DFF/FFFFFF?text=Expert+{{ forloop.index }}" alt="Expert {{ forloop.index }}" width="422" height="340" />
             {% endif %}
           </div>
           <h3>{{ block.settings.title }}</h3>

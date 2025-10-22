@@ -1233,7 +1233,10 @@
             // Check for bundle vouchers after cart rebuild
             setTimeout(() => {
               checkAndApplyBundleVouchers();
-              checkStoredBundleVoucher();
+              if (!hasCheckedStoredVoucher) {
+                hasCheckedStoredVoucher = true;
+                checkStoredBundleVoucher();
+              }
               manageDiscountFieldForBundle();
             }, 500);
             
@@ -1244,10 +1247,14 @@
         }
 
         // Also call checkStoredBundleVoucher on initial page load
+        let hasCheckedStoredVoucher = false;
         document.addEventListener('DOMContentLoaded', function() {
-          setTimeout(() => {
-            checkStoredBundleVoucher();
-          }, 1000);
+          if (!hasCheckedStoredVoucher) {
+            hasCheckedStoredVoucher = true;
+            setTimeout(() => {
+              checkStoredBundleVoucher();
+            }, 1000);
+          }
         });
 
         // Function to refresh cart drawer (alias for rebuildCart)
@@ -1968,6 +1975,11 @@
           setTimeout(() => {
             handleBundleHeaders();
             syncCartUIFromDOM();
+            // Only check stored voucher if not already checked
+            if (!hasCheckedStoredVoucher) {
+              hasCheckedStoredVoucher = true;
+              checkStoredBundleVoucher();
+            }
           }, 100);
         });
         
@@ -1976,6 +1988,11 @@
           setTimeout(() => {
             handleBundleHeaders();
             syncCartUIFromDOM();
+            // Only check stored voucher if not already checked
+            if (!hasCheckedStoredVoucher) {
+              hasCheckedStoredVoucher = true;
+              checkStoredBundleVoucher();
+            }
           }, 500);
         });
 
@@ -2319,8 +2336,11 @@
               event.target.closest('[href*="cart"]')) {
             setTimeout(() => {
               ensureDrawerVisible();
-              // Check for stored vouchers when drawer opens
-              setTimeout(() => checkStoredBundleVoucher(), 500);
+              // Check for stored vouchers when drawer opens (only if not already checked)
+              if (!hasCheckedStoredVoucher) {
+                hasCheckedStoredVoucher = true;
+                setTimeout(() => checkStoredBundleVoucher(), 500);
+              }
             }, 100);
           }
           
@@ -2339,6 +2359,11 @@
         // Update cart count on initial page load
         document.addEventListener('DOMContentLoaded', function() {
           syncCartUIFromDOM();
+          // Only check stored voucher if not already checked
+          if (!hasCheckedStoredVoucher) {
+            hasCheckedStoredVoucher = true;
+            checkStoredBundleVoucher();
+          }
         });
 
         // Backup function to ensure voucher is applied before checkout

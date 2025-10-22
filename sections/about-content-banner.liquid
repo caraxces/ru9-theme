@@ -2,8 +2,8 @@
 
 <style>
   .about-content-banner-section .page-width {
-    max-width: none;
-    padding: 0;
+    max-width: 1480px;
+    padding: 0 60px;
   }
   .about-content-banner-section {
     padding: 0;
@@ -15,8 +15,8 @@
     border: none;
   }
   .about-content-banner-breadcrumb .page-width {
-    max-width: none;
-    padding: 0 0 0 60px;
+    max-width: 1480px;
+    padding: 0 60px;
   }
   .about-content-banner-breadcrumb-list {
     display: flex;
@@ -334,7 +334,7 @@
   
   <div class="page-width">
     <div class="about-content-banner-main-title-wrapper">
-        <h2 class="about-content-banner-main-title">{{ section.settings.main_title | escape }}</h2>
+        <div class="about-content-banner-main-title">{{ section.settings.main_title }}</div>
     </div>
     <div class="about-content-banner-container">
       {%- liquid
@@ -370,7 +370,7 @@
       <div class="about-content-banner-content">
         <div class="about-content-banner-text-wrapper">
           <div class="about-content-banner-subtitle about-content-banner-custom-content">{{ section.settings.subtitle }}</div>
-          <h4 class="about-content-banner-secondary-title about-content-banner-custom-content">{{ section.settings.secondary_title | escape }}</h4>
+          <div class="about-content-banner-secondary-title about-content-banner-custom-content">{{ section.settings.secondary_title }}</div>
         </div>
         <div class="about-content-banner-description about-content-banner-custom-content">{{ section.settings.description }}</div>
         {%- if section.settings.button_text != blank -%}
@@ -417,25 +417,25 @@
       "default": "Về Ru9"
     },
     {
-      "type": "text",
+      "type": "html",
       "id": "main_title",
       "label": "Main Title",
-      "default": "Từ Giấc Mơ Đến Hiện Thực:"
+      "default": "<h2>Từ Giấc Mơ Đến Hiện Thực:</h2>"
     },
     {
-      "type": "richtext",
+      "type": "html",
       "id": "subtitle",
       "label": "Subtitle",
       "default": "<p>\"Hành trình mang giấc ngủ ngon đến với mọi gia đình Việt Nam\"</p>"
     },
     {
-      "type": "text",
+      "type": "html",
       "id": "secondary_title",
       "label": "Secondary Title",
-      "default": "Ru9 - Nơi giấc ngủ ngon bắt đầu"
+      "default": "<h4>Ru9 - Nơi giấc ngủ ngon bắt đầu</h4>"
     },
     {
-      "type": "richtext",
+      "type": "html",
       "id": "description",
       "label": "Description",
       "default": "<p>Chúng tôi không ngừng cải tiến từng chi tiết, để sản phẩm không chỉ \"êm\" mà còn \"hiểu\" được cơ thể bạn.</p>"
@@ -462,7 +462,7 @@
       "label": "Button Link"
     },
     {
-      "type": "richtext",
+      "type": "html",
       "id": "long_content",
       "label": "Long Content Below Banner",
       "default": "<p>Giữa nhịp sống bận rộn, nhiều người xem giấc ngủ chỉ như một thói quen, như một khoảng nghỉ ngắn giữa những lo toan thường nhật. Nhưng với Ru9, một giấc ngủ là nhiều hơn thế. Đó là lúc cơ thể được phục hồi, tâm trí được nghỉ ngơi và năng lượng cho ngày mới được tái tạo. Bởi Ru9 tin rằng, một giấc ngủ trọn vẹn không chỉ mang lại sự thoải mái, mà còn là nền tảng vững chắc cho sức khỏe và hạnh phúc lâu dài.</p>"

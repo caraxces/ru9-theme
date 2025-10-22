@@ -1616,21 +1616,44 @@
       "about-statistics": {
         "type": "about-statistics",
         "blocks": {
-          "about_statistic_card_9yCGb8": {
+          "statistic_block_9LNfLV": {
+            "type": "statistic_block",
+            "settings": {
+              "background_color": "#759ce6",
+              "padding": "40px 20px",
+              "border_radius": "12px",
+              "stat1_number": "34",
+              "stat1_text": "Tỉnh thành",
+              "stat1_size": 1,
+              "stat1_number_size": "48px",
+              "stat1_text_size": "16px",
+              "stat2_number": "35,000+",
+              "stat2_text": "Giấc ngủ ngon được giao đến tận nhà",
+              "stat2_size": 1,
+              "stat2_number_size": "48px",
+              "stat2_text_size": "16px",
+              "stat3_number": "50,000+",
+              "stat3_text": "Khách hàng tin tưởng Ru9",
+              "stat3_size": 1,
+              "stat3_number_size": "48px",
+              "stat3_text_size": "16px"
+            }
+          },
+          "about_statistic_card_dC46U6": {
             "type": "about_statistic_card",
             "settings": {
               "title": "<h3>Chuyên Viên Trẻ</h3>",
               "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
             }
           },
-          "about_statistic_card_aV7xjj": {
+          "about_statistic_card_fXRQTW": {
             "type": "about_statistic_card",
             "settings": {
               "title": "<h3>Chuyên Viên Trẻ</h3>",
               "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
             }
           },
-          "about_statistic_card_qA3nhU": {
+          "about_statistic_card_kqqCFV": {
             "type": "about_statistic_card",
             "settings": {
               "title": "<h3>Chuyên Viên Trẻ</h3>",
@@ -1639,9 +1662,10 @@
           }
         },
         "block_order": [
-          "about_statistic_card_9yCGb8",
-          "about_statistic_card_aV7xjj",
-          "about_statistic_card_qA3nhU"
+          "statistic_block_9LNfLV",
+          "about_statistic_card_dC46U6",
+          "about_statistic_card_fXRQTW",
+          "about_statistic_card_kqqCFV"
         ],
         "settings": {
           "title": "<h2>Qua những câu chuyện thực tế</h2>",
@@ -1656,8 +1680,38 @@
       },
       "about-customers": {
         "type": "about-customers",
+        "blocks": {
+          "about_customer_card_6T43Wr": {
+            "type": "about_customer_card",
+            "settings": {
+              "title": "<h3>Chuyên Viên Trẻ</h3>",
+              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải sau những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+            }
+          },
+          "about_customer_card_DRAYYd": {
+            "type": "about_customer_card",
+            "settings": {
+              "title": "<h3>Chuyên Viên Trẻ</h3>",
+              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải sau những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+            }
+          },
+          "about_customer_card_CaVVPD": {
+            "type": "about_customer_card",
+            "settings": {
+              "title": "<h3>Chuyên Viên Trẻ</h3>",
+              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải sau những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+            }
+          }
+        },
+        "block_order": [
+          "about_customer_card_6T43Wr",
+          "about_customer_card_DRAYYd",
+          "about_customer_card_CaVVPD"
+        ],
         "settings": {
-          "background_color": "#f5f5f5",
+          "title": "<h2>Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng</h2>",
+          "description": "<p>Chất lượng của Ru9 không chỉ được chứng minh qua trải nghiệm người dùng mà còn được kiểm chứng bởi các chuyên gia hàng đầu.</p>",
+          "background_color": "#ffffff",
           "card_background_color": "#ffffff",
           "title_color": "#1a2230",
           "text_color": "#5e6b85"
@@ -1678,9 +1732,10 @@
         "type": "about-community",
         "settings": {
           "title": "<h2>Mang giá trị thật đến cộng đồng</h2>",
-          "subtitle": "<p>\"Hành trình này không dừng lại ở sản phẩm hay dành riêng cho khách hàng\"</p>",
+          "banner_text": "<p>\"Hành trình này không dừng lại ở sản phẩm hay dành riêng cho khách hàng\"</p>",
           "background_color": "#f5f5f5",
           "title_color": "#1a2230",
+          "banner_text_color": "#2a3b56",
           "accent_color": "#4a90e2",
           "text_color": "#5e6b85"
         }
@@ -1689,14 +1744,17 @@
         "type": "about-journey",
         "settings": {
           "title": "<h2>Từ giấc mơ ngủ ngon đến những vinh quang</h2>",
+          "subtitle": "<h2>ĐẾN NHỮNG VINH QUANG</h2>",
           "intro_content": "<p>Tại Ru9, mỗi cột mốc là một chương của câu chuyện đầy cảm hứng. Từ những bước khởi đầu đầy thách thức tại Shark Tank Việt Nam, Ru9 đã kiên định đi trên con đường riêng để biến giấc mơ về giấc ngủ chất lượng thành hiện thực.</p>",
-          "journey_title": "<h3>Từ giấc mơ ngủ ngon đến hiện thực</h3>",
-          "journey_content": "<p>Hành trình của Ru9 bắt đầu từ một trải nghiệm cá nhân về giấc ngủ và sức khỏe, khi nhà sáng lập nhận ra tầm quan trọng của việc nghỉ ngơi chất lượng nhưng vẫn phù hợp với nhịp sống hiện đại. Từ đó, chị Trang Đặng - Nhà sáng lập kiêm CEO của Ru9 đã mang ý tưởng \"táo bạo\" này đến chương trình Shark Tank Việt Nam, đánh dấu bước ngoặt đầu tiên của thương hiệu.</p>",
-          "awards_title": "<h3>Vinh danh những nỗ lực tiên phong</h3>",
-          "media_title": "<h3>Lan tỏa câu chuyện truyền cảm hứng</h3>",
-          "media_content": "<p>Hơn cả những sản phẩm, Ru9 mong muốn chia sẻ câu chuyện về hành trình phát triển để lan tỏa động lực đến những người trẻ. Câu chuyện khởi nghiệp của chị Trang Đặng đã được khám phá trong những buổi phỏng vấn trên truyền hình và các nền tảng podcast uy tín.</p>",
+          "story1_title": "<h3>Bản lĩnh Đương đầu</h3>",
+          "story1_content": "<p>Những giải thưởng không chỉ là thành tựu của riêng Ru9, mà còn là sự công nhận cho tinh thần tiên phong và bản lĩnh của người sáng lập. Như giải thưởng \"Bản lĩnh Đương đầu\" tại WeChoice Awards 2020 là sự ghi nhận cho những nỗ lực bền bỉ của chị Trang Đặng - Nhà sáng lập kiêm CEO cũng như là Ru9 trong việc hỗ trợ cộng đồng, đặc biệt trong giai đoạn đại dịch.</p>",
+          "story2_title": "<h3>Cựu Du học sinh với Khởi nghiệp Nổi bật</h3>",
+          "story2_content": "<p>Chị Trang Đặng còn được vinh danh với giải thưởng \"Cựu Du học sinh với Khởi nghiệp Nổi bật\" tại GFF Global Future Fair do VCCI tổ chức, tôn vinh những người trở về xây dựng và đóng góp cho đất nước bằng chính trí tuệ và đam mê của mình.</p>",
+          "story3_title": "<h3>Lan tỏa câu chuyện truyền cảm hứng</h3>",
+          "story3_content": "<p>Hơn cả những sản phẩm, Ru9 mong muốn chia sẻ câu chuyện về hành trình phát triển để lan tỏa động lực đến những người trẻ. Câu chuyện khởi nghiệp của chị Trang Đặng đã được khám phá trong những buổi phỏng vấn trên truyền hình và các nền tảng podcast uy tín.</p><p>Đặc biệt, chị Trang Đặng đã là khách mời trong tập đầu tiên của Vietnam Innovators (phiên bản tiếng Việt) do Vietcetera thực hiện, nơi chị đã chia sẻ những câu chuyện thành công, những bài học từ thất bại và tinh thần đổi mới đã giúp Ru9 vượt qua mọi thách thức.</p>",
           "quote": "<p>\"Những thành tựu này là động lực mạnh mẽ để Ru9 tiếp tục kiên định với sứ mệnh mang giấc ngủ chất lượng đến mọi nhà, kiến tạo một tương lai tốt đẹp hơn cho thế hệ mai sau.\"</p>",
           "background_color": "#ffffff",
+          "subtitle_color": "#3d6dff",
           "card_background_color": "#f5f5f5",
           "title_color": "#1a2230",
           "text_color": "#5e6b85"
@@ -1705,24 +1763,53 @@
       "about-promise": {
         "type": "about-promise",
         "settings": {
-          "title": "<h2>Lời hứa cho mỗi giấc ngủ ngon</h2>",
-          "intro_content": "<p>Ru9 không chỉ bán một sản phẩm mà còn là hành trình xây dựng một cộng đồng nơi mọi người đều được tận hưởng trọn vẹn giá trị của giấc ngủ. Vì sự tin tưởng của bạn không chỉ đến từ chất lượng sản phẩm, mà còn từ sự an tâm tuyệt đối trong suốt quá trình trải nghiệm. Đó là lý do Ru9 mang đến Cam kết 5 sao uy tín:</p>",
+          "title_line1": "Lời hứa cho mỗi",
+          "title_line2": "giấc ngủ ngon",
+          "description": "<p>Ru9 không chỉ bán một sản phẩm mà còn là hành trình xây dựng một cộng đồng nơi mọi người đều được tận hưởng trọn vẹn giá trị của giấc ngủ. Vì sự tin tưởng của bạn không chỉ đến từ chất lượng sản phẩm, mà còn từ sự an tâm tuyệt đối trong suốt quá trình trải nghiệm. Đó là lý do Ru9 mang đến Cam kết 5 sao uy tín:</p>",
           "background_color": "#f5f5f5",
-          "card_background_color": "#ffffff",
+          "subtitle_color": "#759ce6",
           "title_color": "#1a2230",
           "text_color": "#5e6b85"
         }
       },
       "about-showroom": {
         "type": "about-showroom",
+        "blocks": {
+          "about_showroom_card_YzYKQQ": {
+            "type": "about_showroom_card",
+            "settings": {
+              "name": "Showroom HCM 1:",
+              "address": "Tòa B2 Sarimi, 72 Nguyễn Cơ Thạch, KĐT Sala, Quận 2"
+            }
+          },
+          "about_showroom_card_4xrrmh": {
+            "type": "about_showroom_card",
+            "settings": {
+              "name": "Showroom HCM 1:",
+              "address": "Tòa B2 Sarimi, 72 Nguyễn Cơ Thạch, KĐT Sala, Quận 2"
+            }
+          },
+          "about_showroom_card_46wqE7": {
+            "type": "about_showroom_card",
+            "settings": {
+              "name": "Showroom HCM 1:",
+              "address": "Tòa B2 Sarimi, 72 Nguyễn Cơ Thạch, KĐT Sala, Quận 2"
+            }
+          }
+        },
+        "block_order": [
+          "about_showroom_card_YzYKQQ",
+          "about_showroom_card_4xrrmh",
+          "about_showroom_card_46wqE7"
+        ],
         "settings": {
-          "title": "<h2>Mời bạn đến trải nghiệm giấc ngủ 5 sao</h2>",
           "subtitle": "<p>Hệ Thống Showroom Ru9 với ba chi nhánh tiện lợi, luôn sẵn sàng đón tiếp bạn từ 09:00 - 21:00, Thứ 2 - Chủ nhật.</p>",
-          "intro_content": "<p>Để thực sự hiểu được giá trị của giấc ngủ chất lượng, bạn cần phải được chạm, cảm nhận và trải nghiệm trực tiếp. Showroom của Ru9 không chỉ là nơi trưng bày sản phẩm, mà là không gian riêng tư được thiết kế để bạn có thể tìm ra sản phẩm hoàn hảo cho bản thân và gia đình.</p>",
+          "title": "<h2>Mời bạn đến trải nghiệm giấc ngủ 5 sao</h2>",
+          "description": "<p>Để thực sự hiểu được giá trị của giấc ngủ chất lượng, bạn cần phải được chạm, cảm nhận và trải nghiệm trực tiếp. Showroom của Ru9 không chỉ là nơi trưng bày sản phẩm, mà là không gian riêng tư được thiết kế để bạn có thể tìm ra sản phẩm hoàn hảo cho bản thân và gia đình.</p>",
           "background_color": "#ffffff",
           "card_background_color": "#f5f5f5",
+          "subtitle_color": "#1a2b4d",
           "title_color": "#1a2230",
-          "accent_color": "#4a90e2",
           "text_color": "#5e6b85"
         }
       },
@@ -1765,6 +1852,51 @@
           "background_color": "#ffffff",
           "overlay_color": "#0000004d",
           "text_color": "#0056b3"
+        }
+      },
+      "about-community-paragraph": {
+        "type": "about-community-paragraph",
+        "settings": {
+          "title": "<h2>Chương trình giáo dục giấc ngủ</h2>",
+          "intro": "<p>Với Ru9, một giấc ngủ tốt bắt đầu từ sự thấu hiểu. Vì vậy, Ru9 đã và đang tổ chức các workshop chuyên sâu về giấc ngủ với sự đồng hành của các chuyên gia đầu ngành, nhằm lan tỏa kiến thức khoa học và giúp cộng đồng nhân nhận giấc ngủ đúng cách hơn. Từ việc giới mà nguyên nhân gây rối loạn giấc ngủ, đến chia số những phương pháp cải thiện giấc ngủ hiệu quả và dễ áp dụng, mỗi buổi workshop đầu mang đến giá trị thiết thực, giúp người tham gia biết cách chăm sóc giấc ngủ của chính mình.</p>",
+          "conclusion": "<p>Những buổi chia sẻ này chỉ là một phần trong hành trình lan tỏa tri thức mà Ru9 đang không ngừng thực hiện, để mỗi người Việt hiểu rằng đầu tư cho giấc ngủ chính là đầu tư cho chất lượng sống lâu dài.</p>",
+          "image_1_caption": "<p>Image 1 Caption</p>",
+          "image_2_caption": "<p>Image 2 Caption</p>",
+          "background_color": "#ffffff",
+          "title_color": "#1a2b4d",
+          "text_color": "#333333"
+        }
+      },
+      "about-environment": {
+        "type": "about-environment",
+        "settings": {
+          "title": "<h2>Cam kết với môi trường - tạo ảnh hưởng bền vững cho mai sau</h2>",
+          "paragraph_1": "<p>Mỗi sản phẩm Ru9 bạn mang về nhà là một bước đi nhỏ để hướng tới sự bền vững. Vì vậy, mỗi sản phẩm được tạo ra đều bắt đầu từ những lựa chọn có trách nhiệm từ những chất liệu an toàn cho sức khỏe và thân thiện với môi trường đến quy trình sản xuất tiết kiệm năng lượng, giảm thiểu tối đa khí thải VOC (chỉ 0.5 phần triệu), không formaldehyde, không phthalates – để bạn yên tâm ngủ sâu mỗi đêm, và thức dậy trong một thế giới vẫn trong lành như hôm qua.</p>",
+          "image_overlay_text": "<span>Một sản phẩm Một cây xanh</span>",
+          "paragraph_2": "<p>Song song đó, Ru9 đang cùng tham gia và dẫn triển khai chương trình <span class=\"about-environment-highlight\">\"Một sản phẩm - Một cây xanh\"</span>, gửi gắm mong muốn tái tạo thiên nhiên và vòng tuần hoàn tích cực giữa con người và môi trường.</p>",
+          "background_color": "#ffffff",
+          "title_color": "#1a2b4d",
+          "text_color": "#333333",
+          "separator_color": "#e5e7eb",
+          "highlight_color": "#1a2b4d",
+          "overlay_text_color": "#1a2b4d"
+        }
+      },
+      "about-values-2": {
+        "type": "about-values-2",
+        "settings": {
+          "quote": "<p>Mỗi giá trị cốt lõi đều là nền tảng để Ru9 kiên định theo đuổi hành trình cải thiện chất lượng sống qua giấc ngủ</p>",
+          "background_color": "#ffffff",
+          "card_background_color": "#f5f5f5",
+          "title_color": "#1a2230",
+          "text_color": "#5e6b85"
+        }
+      },
+      "image-marquee": {
+        "type": "image-marquee",
+        "settings": {
+          "quote_text": "<p>Trong suốt hành trình phát triển, Ru9 tự hào được xuất hiện trên nhiều tờ báo và tạp chí uy tín, ghi nhận nỗ lực mang đến giấc ngủ chất lượng cho người Việt. Đây là minh chứng cho niềm tin từ khách hàng và sự đánh giá cao của giới chuyên môn.</p>",
+          "speed": 30
         }
       }
     },

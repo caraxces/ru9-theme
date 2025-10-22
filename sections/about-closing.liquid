@@ -1,82 +1,149 @@
 {%- render 'section_css' -%}
 
 <style>
+  /* Desktop styles (default) - 1024px and above */
   .about-closing-section {
     padding: 0;
     background-color: {{ section.settings.background_color | default: '#F5F5F5' }};
   }
   .about-closing-section .page-width {
-    padding: 0;
+    padding: 0 60px;
   }
-  .about-closing-content {
-    display: flex;
-    gap: 40px;
-    align-items: center;
+  .about-closing-container {
+    flex-shrink: 0;
+    position: relative;
+    margin: 0 auto;
+    background-color: {{ section.settings.background_color | default: '#F5F5F5' }};
   }
   .about-closing-image {
-    flex: 1;
-  }
-  .about-closing-image img {
     width: 100%;
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(16,38,84,.06);
-    height: 400px;
+    height: 100%;
     object-fit: cover;
+    border-radius: 0;
   }
-  .about-closing-text {
-    flex: 1;
+  .about-closing-desktop-image {
+    display: block;
   }
-  .about-closing-text h2 {
-    font-size: 32px;
+  .about-closing-mobile-image {
+    display: none;
+  }
+  .about-closing-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: {{ section.settings.overlay_color | default: 'rgba(0, 0, 0, 0.3)' }};
+  }
+  .about-closing-content {
+    text-align: right;
+    color: {{ section.settings.text_color | default: '#ffffff' }};
+    max-width: 600px;
+    padding: 0 60px 0 40px;
+  }
+  .about-closing-title {
+    font-size: 48px;
     font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2230' }};
-    margin-bottom: 20px;
     line-height: 1.2;
+    margin-bottom: 20px;
   }
-  .about-closing-text p {
-    color: {{ section.settings.text_color | default: '#5E6B85' }};
-    line-height: 1.8;
-    margin: 0;
+  .about-closing-subtitle {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 0;
+  }
+  .about-closing-svg-tag {
+    position: absolute;
+    bottom: -10%;
+    right: 40px;
+    z-index: 2;
+  }
+  .about-closing-svg-tag svg {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
-  /* Mobile responsive */
+  /* Mobile styles - 768px and below */
   @media (max-width: 768px) {
-    .about-closing-section {
-      padding: 0;
+    .about-closing-container {
+      width: 100%;
+      height: 400px;
+      flex-shrink: 0;
+    }
+    .about-closing-desktop-image {
+      display: none;
+    }
+    .about-closing-mobile-image {
+      display: block;
     }
     .about-closing-content {
-      flex-direction: column;
-      gap: 20px;
+      max-width: 100%;
+      padding: 0 20px;
     }
-    .about-closing-image img {
-      height: 250px;
+    .about-closing-title {
+      font-size: 32px;
     }
-    .about-closing-text h2 {
-      font-size: 24px;
+    .about-closing-subtitle {
+      font-size: 18px;
+    }
+    .about-closing-svg-tag {
+      bottom: -30%;
+      right: 20px;
     }
   }
 </style>
 
 <div class="about-closing-section">
   <div class="page-width">
-    <div class="about-closing-content">
-      <div class="about-closing-image">
-        {% if section.settings.image != blank %}
-          <img 
-            src="{{ section.settings.image | image_url: width: 600 }}" 
-            alt="{{ section.settings.image.alt | escape }}"
-            width="600"
-            height="400"
-            loading="lazy"
-          >
+    <div class="about-closing-container">
+      <!-- Desktop Image -->
+      <img 
+        class="about-closing-image about-closing-desktop-image"
+        {% if section.settings.desktop_image != blank %}
+          src="{{ section.settings.desktop_image | image_url: width: 1920 }}" 
+          alt="{{ section.settings.desktop_image.alt | escape }}"
         {% else %}
-          <img src="https://via.placeholder.com/600x400/3D6DFF/FFFFFF?text=Peaceful+Sleep" alt="Peaceful sleep" width="600" height="400" />
+          src="https://via.placeholder.com/1920x602/3D6DFF/FFFFFF?text=Desktop+Closing" 
+          alt="Desktop Closing"
         {% endif %}
+        width="1920"
+        height="602"
+        loading="lazy"
+      >
+      
+      <!-- Mobile Image -->
+      <img 
+        class="about-closing-image about-closing-mobile-image"
+        {% if section.settings.mobile_image != blank %}
+          src="{{ section.settings.mobile_image | image_url: width: 768 }}" 
+          alt="{{ section.settings.mobile_image.alt | escape }}"
+        {% else %}
+          src="https://via.placeholder.com/768x400/3D6DFF/FFFFFF?text=Mobile+Closing" 
+          alt="Mobile Closing"
+        {% endif %}
+        width="768"
+        height="400"
+        loading="lazy"
+      >
+      
+      <!-- Overlay Content -->
+      <div class="about-closing-overlay">
+        <div class="about-closing-content">
+          <div class="about-closing-title">{{ section.settings.title | default: 'Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày' }}</div>
+          <div class="about-closing-subtitle">{{ section.settings.subtitle | default: 'Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.' }}</div>
+        </div>
       </div>
-      <div class="about-closing-text">
-        <div>{{ section.settings.title | default: '<h2>Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày</h2>' }}</div>
-        <div>{{ section.settings.content | default: '<p>Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.</p>' }}</div>
-      </div>
+      
+      {% if section.settings.svg_tag != blank %}
+        <div class="about-closing-svg-tag">
+          {{ section.settings.svg_tag }}
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -88,21 +155,31 @@
   "class": "section",
   "settings": [
     {
-      "type": "html",
-      "id": "title",
-      "label": "Section Title",
-      "default": "<h2>Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày</h2>"
-    },
-    {
-      "type": "html",
-      "id": "content",
-      "label": "Section Content",
-      "default": "<p>Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.</p>"
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop Closing Image (1920x602px)"
     },
     {
       "type": "image_picker",
-      "id": "image",
-      "label": "Closing Image"
+      "id": "mobile_image",
+      "label": "Mobile Closing Image (768x400px)"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Closing Title",
+      "default": "Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Closing Subtitle",
+      "default": "Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên."
+    },
+    {
+      "type": "html",
+      "id": "svg_tag",
+      "label": "SVG Tag"
     },
     {
       "type": "color",
@@ -112,15 +189,15 @@
     },
     {
       "type": "color",
-      "id": "title_color",
-      "label": "Title Color",
-      "default": "#1A2230"
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "rgba(0, 0, 0, 0.3)"
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "Text Color",
-      "default": "#5E6B85"
+      "default": "#ffffff"
     }
   ],
   "presets": [
