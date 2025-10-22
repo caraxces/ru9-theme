@@ -156,10 +156,10 @@
   /* Mobile image display */
   @media (max-width: 768px) {
     .about-content-banner-breadcrumb {
-      padding: 30px 0 0 0;
+      padding: 0 0 0 0;
     }
     .about-content-banner-breadcrumb .page-width {
-      padding: 0 0 0 15px;
+      padding: 0 15px;
     }
     .about-content-banner-breadcrumb-list {
       font-size: 12px;
@@ -213,13 +213,16 @@
 
   /* Small screens - 768px and below */
   @media (max-width: 768px) {
+    .about-content-banner-section .page-width {
+      padding: 0 15px;
+    }
     .about-content-banner-main-title-wrapper {
-      margin-left: 15px;
-      margin-right: 15px;
+      margin-left: 0;
+      margin-right: 0;
     }
     .about-content-banner-container {
-      margin: 0 15px;
-      width: calc(100% - 30px);
+      margin: 0;
+      width: 100%;
       height: 250px;
     }
     .about-content-banner-content {
@@ -230,8 +233,8 @@
     
     .about-content-banner-main-title {
       font-size: 24px !important;
-      margin-left: 15px;
-      margin-right: 15px;
+      margin-left: 0;
+      margin-right: 0;
     }
     
     .about-content-banner-subtitle {
@@ -254,9 +257,12 @@
     .about-content-banner-long-content {
       padding: 40px 0;
     }
+    .about-content-banner-long-content .page-width {
+      padding: 0 15px;
+    }
     .about-content-banner-long-text {
       font-size: 16px;
-      padding: 0 15px;
+      padding: 0;
     }
   }
   
@@ -266,8 +272,8 @@
       padding: 0;
     }
     .about-content-banner-container {
-      margin: 0 15px;
-      width: calc(100% - 30px);
+      margin: 0;
+      width: 100%;
       height: 200px;
     }
     .about-content-banner-content {
@@ -303,9 +309,12 @@
     .about-content-banner-long-content {
       padding: 30px 0;
     }
+    .about-content-banner-long-content .page-width {
+      padding: 0 15px;
+    }
     .about-content-banner-long-text {
       font-size: 14px;
-      padding: 0 10px;
+      padding: 0;
     }
   }
 </style>

@@ -62,6 +62,39 @@
     margin-bottom: 0;
   }
 
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .about-understanding-section .page-width {
+      padding: 0 15px;
+    }
+    .about-understanding-content {
+      gap: 40px;
+    }
+    .about-understanding-item {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .about-understanding-item.reverse {
+      flex-direction: column;
+    }
+    .about-understanding-text {
+      order: 1;
+    }
+    .about-understanding-image {
+      order: 2;
+      flex: none;
+    }
+    .about-understanding-svg-overlay {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      bottom: auto;
+      left: auto;
+      max-width: 150px;
+      max-height: 80px;
+    }
+  }
+
 </style>
 
 <div class="about-understanding-section">
