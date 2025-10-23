@@ -18,20 +18,20 @@
   display: none;
 }
 h3.reviews_title {
-  margin-bottom: clamp(20px, 6vw,60px);
+  margin-bottom: clamp(20px, 6vw,5rem);
   font-size: clamp(20px, 3vw,34px);
   font-weight: 700;
   line-height: 1.5;
 }
 .customer-reviews__section {
-  margin-bottom: clamp(50px, 16vw,160px);
+  margin-bottom: clamp(50px, 16vw,15rem);
 }
 .customer-experience__reviews .swiper-wrapper {
   margin-bottom: 0;
 }
 @media screen and (min-width: 767px) {
   .reviews_container {
-  margin-bottom: 160px;
+  margin-bottom: 15rem;
 }
   .customer-experience__reviews .swiper-wrapper {
     display: flex;

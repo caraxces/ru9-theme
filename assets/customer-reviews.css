@@ -50,10 +50,10 @@ line-height: 30px;
 
 @media only screen and (min-width: 1101px) {
   .customer_reviews .flickity-next {
-    right: -60px;
+    right: -5rem;
   }
   .customer_reviews .flickity-previous {
-    left: -60px;
+    left: -5rem;
   }
   .template-collection .section--divider{
     padding: 23px 0 100px;
@@ -140,10 +140,10 @@ line-height: 30px;
 }
 @media only screen and (max-width: 1110px) and (min-width: 769px) {
   .customer_reviews .flickity-next {
-    right: -60px;
+    right: -5rem;
   }
   .customer_reviews .flickity-previous {
-    left: -60px;
+    left: -5rem;
   }
   .customer_reviews .header_section {
     margin-bottom: 72px;

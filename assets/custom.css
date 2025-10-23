@@ -1168,7 +1168,7 @@ header .ru9_icon {
   }
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 95rem) {
   .product-recommendations-slider .product-slide {
     min-width: calc(100% / 4 - 20px);
   }
@@ -1535,7 +1535,7 @@ product-recommendations[data-intent="related"] .product-slide {
 }
 /* The design shows 3 products in a 1150px container.
    Width of container for products is 1002px. (1002 - 48 (gaps)) / 3 = 318px */
-@media (min-width: 960px) {
+@media (min-width: 95rem) {
     .new-rec-product-slide {
         width: calc((100% - 48px) / 3);
     }
@@ -1630,7 +1630,7 @@ product-recommendations[data-intent="related"] .product-slide {
 .short-address-tooltip .tooltip-content {
   visibility: hidden;
   opacity: 0;
-  min-width: 260px;
+  min-width: 25rem;
   max-width: 90vw;
   background: rgba(30, 30, 30, 0.95);
   color: #fff;

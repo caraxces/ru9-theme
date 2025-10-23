@@ -39,7 +39,8 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
 		featured_media: {{ product_5382491996311.featured_media | json }},
 		images: {{ product_5382491996311.images | json }},
 		quantity: {% assign quantity = '' %}{% for variant in product_5382491996311.variants %}{% assign quantity = quantity | append: variant.id | append: ':' | append: variant.inventory_quantity | append: ',' %}{% endfor %}{% assign quantity = quantity | split: ','%}{{quantity | json }}
-	};{% unless product.id == null %}window.__pageflyProducts["{{product.id}}"] = {
+	};
+{% unless product.id == null %}window.__pageflyProducts["{{product.id}}"] = {
 		id: {{ product.id | json }},
 		handle: {{ product.handle | json }},
 		title: {{ product.title | json }},
@@ -59,7 +60,8 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
 		featured_media: {{ product.featured_media | json }},
 		images: {{ product.images | json }},
 		quantity: {% assign quantity = '' %}{% for variant in product.variants %}{% assign quantity = quantity | append: variant.id | append: ':' | append: variant.inventory_quantity | append: ',' %}{% endfor %}{% assign quantity = quantity | split: ','%}{{quantity | json }}
-	};{% endunless %}window.__pageflyProducts["7920446537950"] = {
+	};{% endunless %}
+window.__pageflyProducts["7920446537950"] = {
 		id: {{ product_7920446537950.id | json }},
 		handle: {{ product_7920446537950.handle | json }},
 		title: {{ product_7920446537950.title | json }},
@@ -79,7 +81,8 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
 		featured_media: {{ product_7920446537950.featured_media | json }},
 		images: {{ product_7920446537950.images | json }},
 		quantity: {% assign quantity = '' %}{% for variant in product_7920446537950.variants %}{% assign quantity = quantity | append: variant.id | append: ':' | append: variant.inventory_quantity | append: ',' %}{% endfor %}{% assign quantity = quantity | split: ','%}{{quantity | json }}
-	};window.__pageflyProducts["7510725361886"] = {
+	};
+window.__pageflyProducts["7510725361886"] = {
 		id: {{ product_7510725361886.id | json }},
 		handle: {{ product_7510725361886.handle | json }},
 		title: {{ product_7510725361886.title | json }},
@@ -99,7 +102,8 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
 		featured_media: {{ product_7510725361886.featured_media | json }},
 		images: {{ product_7510725361886.images | json }},
 		quantity: {% assign quantity = '' %}{% for variant in product_7510725361886.variants %}{% assign quantity = quantity | append: variant.id | append: ':' | append: variant.inventory_quantity | append: ',' %}{% endfor %}{% assign quantity = quantity | split: ','%}{{quantity | json }}
-	};window.__pageflyProducts["7510771990750"] = {
+	};
+window.__pageflyProducts["7510771990750"] = {
 		id: {{ product_7510771990750.id | json }},
 		handle: {{ product_7510771990750.handle | json }},
 		title: {{ product_7510771990750.title | json }},
@@ -119,7 +123,8 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
 		featured_media: {{ product_7510771990750.featured_media | json }},
 		images: {{ product_7510771990750.images | json }},
 		quantity: {% assign quantity = '' %}{% for variant in product_7510771990750.variants %}{% assign quantity = quantity | append: variant.id | append: ':' | append: variant.inventory_quantity | append: ',' %}{% endfor %}{% assign quantity = quantity | split: ','%}{{quantity | json }}
-	};window.__pageflyProducts["7510733193438"] = {
+	};
+window.__pageflyProducts["7510733193438"] = {
 		id: {{ product_7510733193438.id | json }},
 		handle: {{ product_7510733193438.handle | json }},
 		title: {{ product_7510733193438.title | json }},
@@ -139,7 +144,8 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
 		featured_media: {{ product_7510733193438.featured_media | json }},
 		images: {{ product_7510733193438.images | json }},
 		quantity: {% assign quantity = '' %}{% for variant in product_7510733193438.variants %}{% assign quantity = quantity | append: variant.id | append: ':' | append: variant.inventory_quantity | append: ',' %}{% endfor %}{% assign quantity = quantity | split: ','%}{{quantity | json }}
-	};window.__pageflyProducts["7918461780190"] = {
+	};
+window.__pageflyProducts["7918461780190"] = {
 		id: {{ product_7918461780190.id | json }},
 		handle: {{ product_7918461780190.handle | json }},
 		title: {{ product_7918461780190.title | json }},
@@ -159,7 +165,8 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
 		featured_media: {{ product_7918461780190.featured_media | json }},
 		images: {{ product_7918461780190.images | json }},
 		quantity: {% assign quantity = '' %}{% for variant in product_7918461780190.variants %}{% assign quantity = quantity | append: variant.id | append: ':' | append: variant.inventory_quantity | append: ',' %}{% endfor %}{% assign quantity = quantity | split: ','%}{{quantity | json }}
-	};window.__pageflyProducts["7507941556446"] = {
+	};
+window.__pageflyProducts["7507941556446"] = {
 		id: {{ product_7507941556446.id | json }},
 		handle: {{ product_7507941556446.handle | json }},
 		title: {{ product_7507941556446.title | json }},

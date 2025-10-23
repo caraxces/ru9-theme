@@ -125,7 +125,7 @@
     }
 }
 
-@media screen and (min-width: 960px){
+@media screen and (min-width: 95rem){
     .cart__page-col:first-child {
         flex: 1 1 62.5%;
         padding-right: 40px;

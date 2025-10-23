@@ -159,16 +159,16 @@
 
 <style>
   /* Standard padding for main-collection-custom section */
-  .collection-content--custom .page-width {
-    max-width: 1480px;
-    padding: 0 60px 50px 60px;
+  {% comment %} .collection-content--custom .page-width {
+    max-width: 1594px;
+    padding: 0 5rem 50px 5rem;
     margin: 0 auto;
-  }
+  } {% endcomment %}
   
   /* Large screens - maintain fixed padding */
   @media (min-width: 1400px) {
     .collection-content--custom .page-width {
-      padding: 0 60px 50px 60px;
+      padding: 0 5rem 50px 5rem;
       margin: 0 auto;
     }
   }
@@ -176,7 +176,7 @@
   /* Medium screens - responsive padding */
   @media (max-width: 1399px) and (min-width: 1024px) {
     .collection-content--custom .page-width {
-      padding: 0 60px 50px 60px;
+      padding: 0 5rem 50px 5rem;
       margin: 0 auto;
     }
   }
@@ -184,7 +184,7 @@
   /* Small screens - responsive padding */
   @media (max-width: 1023px) and (min-width: 769px) {
     .collection-content--custom .page-width {
-      padding: 0 clamp(30px, 5vw, 60px) 50px clamp(20px, 4vw, 40px);
+      padding: 0 clamp(30px, 5vw, 5rem) 50px clamp(20px, 4vw, 40px);
       margin: 0 auto;
     }
   }
@@ -195,13 +195,6 @@
       margin: 0;
       padding: 0 15px 50px 15px;
     }
-  }
-  
-  /* Override any conflicting styles */
-  .collection-content--custom .page-width {
-    max-width: 1480px !important;
-    padding: 0 60px 50px 60px !important;
-    margin: 0 auto !important;
   }
   
   /* Ensure section header has same padding */
@@ -230,8 +223,10 @@
   .cc-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 20px;
     padding: 0 0px;
+    max-width: 100%;
+    overflow: hidden;
   }
   
   /* When sidebar is enabled, adjust grid to fit 3 products */
@@ -243,15 +238,18 @@
   /* When sidebar is enabled, make cards responsive */
   .collection-content--custom.enable-sidebar .cc-card {
     width: 100%;
+    max-width: 100%;
   }
   
   .collection-content--custom.enable-sidebar .cc-image-container {
     width: 100%;
-    height: 284px;
+    max-width: 100%;
+    height: 240px;
   }
   
   .collection-content--custom.enable-sidebar .cc-buy-now {
     width: 100%;
+    max-width: 100%;
   }
   
   .cc-card {
@@ -262,8 +260,9 @@
   
   .cc-image-container {
     position: relative;
-    width: 380px;
-    height: 284px;
+    width: 100%;
+    max-width: 350px;
+    height: 25rem;
     flex-shrink: 0;
     overflow: hidden;
     border-radius: 8px;
@@ -430,7 +429,8 @@
   }
   
   .cc-buy-now {
-    width: 380px;
+    width: 100%;
+    max-width: 350px;
     height: 40px;
     background: #234085;
     color: #fff;
@@ -451,16 +451,19 @@
   @media (max-width: 1400px) {
     .cc-grid {
       grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
   }
   
   @media (max-width: 1200px) {
     .cc-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
     
     .collection-content--custom.enable-sidebar .cc-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
   }
   
@@ -478,6 +481,18 @@
       flex-direction: column;
     }
     
+    /* Reset desktop changes for mobile */
+    .cc-image-container {
+      width: 319.8px;
+      height: 240.44px;
+      max-width: none;
+    }
+    
+    .cc-buy-now {
+      width: 319.8px;
+      max-width: none;
+    }
+    
     .cc-mobile-row {
       display: flex;
       flex-direction: row;
@@ -487,7 +502,6 @@
       -webkit-overflow-scrolling: touch;
       gap: 12px;
       padding-bottom: 20px;
-      margin-left: 15px;
     }
     
     .cc-mobile-row::-webkit-scrollbar {

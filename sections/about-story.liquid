@@ -15,21 +15,44 @@
   }
   .about-story-image {
     flex: 0 0 42%;
+    display: flex;
+    flex-direction: column;
   }
   .about-story-image img {
     width: 100%;
     border-radius: 16px;
     box-shadow: 0 6px 18px rgba(16,38,84,.06);
+    order: 2;
   }
-  .about-story-text {
-    flex: 1;
+  
+  /* Desktop layout - giữ nguyên */
+  .about-story-desktop-image {
+    display: block;
   }
+  .about-story-mobile-image {
+    display: none;
+  }
+  
+  /* Desktop - hiện elements như cũ */
   .about-story-main-title {
+    display: block;
     font-size: 32px;
     font-weight: 700;
     color: #759CE6;
     margin-bottom: 20px;
     line-height: 1.2;
+    order: 1;
+  }
+  .about-story-image-quote {
+    display: block;
+    font-weight: 700;
+    color: #333333;
+    margin: 20px 0 0 0;
+    line-height: 1.6;
+    order: 3;
+  }
+  .about-story-text {
+    flex: 1;
   }
   .about-story-subtitle {
     font-size: 24px;
@@ -89,7 +112,7 @@
     left: 0;
   }
 
-  /* Mobile responsive */
+  /* Mobile responsive - chỉ thay đổi mobile */
   @media (max-width: 768px) {
     .about-story-section .page-width {
       padding: 0 15px;
@@ -98,22 +121,42 @@
       flex-direction: column;
       gap: 20px;
     }
-    .about-story-image {
-      flex: none;
-      order: 1;
-    }
+    
+    /* Mobile - hiện mobile elements */
     .about-story-main-title {
       order: 1;
       margin-bottom: 15px;
+      display: block;
     }
     .about-story-image-quote {
       order: 2;
       margin: 15px 0;
+      display: block;
+    }
+    
+    /* Mobile - ảnh sát viền */
+    .about-story-image {
+      flex: none;
+      order: 3;
+      padding: 0;
+      margin: 0;
     }
     .about-story-image img {
-      order: 3;
+      order: 1;
       margin-bottom: 20px;
+      width: 100%;
+      border-radius: 0;
+      box-shadow: none;
     }
+    
+    /* Mobile image display */
+    .about-story-desktop-image {
+      display: none;
+    }
+    .about-story-mobile-image {
+      display: block;
+    }
+    
     .about-story-text {
       order: 4;
       flex: none;
@@ -134,11 +177,22 @@
             width="{{ section.settings.image.width }}"
             height="{{ section.settings.image.height }}"
             loading="lazy"
+            class="about-story-desktop-image"
           >
         {% else %}
-          <img src="https://via.placeholder.com/600x400/3D6DFF/FFFFFF?text=Founder+Trang" alt="Founder Trang" width="600" height="400" />
+          <img src="https://via.placeholder.com/600x400/3D6DFF/FFFFFF?text=Founder+Trang" alt="Founder Trang" width="600" height="400" class="about-story-desktop-image" />
         {% endif %}
         <div class="about-story-image-quote">{{ section.settings.mission_quote | default: '<p>Tất cả đều bắt đầu từ những đêm mất ngủ, từ những trăn trở "Tại sao hôm nay ngủ dậy vẫn mệt?" hay "Chiếc nệm này có thực sự phù hợp chưa?"</p>' }}</div>
+        {% if section.settings.image_mobile != blank %}
+          <img 
+            src="{{ section.settings.image_mobile | image_url: width: 600 }}" 
+            alt="{{ section.settings.image_mobile.alt | escape }}"
+            width="{{ section.settings.image_mobile.width }}"
+            height="{{ section.settings.image_mobile.height }}"
+            loading="lazy"
+            class="about-story-mobile-image"
+          >
+        {% endif %}
       </div>
       <div class="about-story-text">
         <div class="about-story-subtitle">{{ section.settings.story_title | default: '<h3>Khởi nguồn từ giấc ngủ chưa trọn vẹn</h3>' }}</div>
@@ -197,7 +251,12 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Story Image"
+      "label": "Story Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Story Image (Mobile)"
     }
   ],
   "presets": [

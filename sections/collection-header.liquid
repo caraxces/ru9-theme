@@ -46,7 +46,7 @@
     </div>
   {%- else -%}
     {%- assign disable_sticky_header = true -%}
-    <div class="page-width page-content page-content--top" style= "max-width: 1480px;">
+    <div class="page-width page-content page-content--top" style= "max-width: 1594px;">
       <header class="section-header section-header--flush {{ align }}">
         {%- render 'breadcrumbs', classes: align -%}
         <h1 class="section-header__title text-3xl f-smb">
@@ -74,9 +74,9 @@
   /* Standard padding for collection-header section */
   .collection-hero .page-width,
   .page-content--top.page-width {
-    max-width: 1480px;
+    max-width: 1594px;
     padding: 0;
-    margin: 0 60px;
+    margin: 0 5rem;
   }
   
   /* Add padding-top for breadcrumb visibility */
@@ -89,7 +89,7 @@
   @media (min-width: 1400px) {
     .collection-hero .page-width,
     .page-content--top.page-width {
-      margin: 0 60px;
+      margin: 0 5rem;
     }
   }
   
@@ -97,7 +97,7 @@
   @media (max-width: 1399px) and (min-width: 1024px) {
     .collection-hero .page-width,
     .page-content--top.page-width {
-      margin: 0 60px;
+      margin: 0 5rem;
     }
   }
   
@@ -105,7 +105,7 @@
   @media (max-width: 1023px) and (min-width: 769px) {
     .collection-hero .page-width,
     .page-content--top.page-width {
-      margin: 0 clamp(30px, 5vw, 60px) 0 clamp(20px, 4vw, 40px);
+      margin: 0 clamp(30px, 5vw, 5rem) 0 clamp(20px, 4vw, 40px);
     }
   }
   
@@ -121,7 +121,7 @@
   /* Override any conflicting styles */
   .collection-hero .page-width,
   .page-content--top.page-width {
-    max-width: 1480px !important;
+    max-width: 1594px !important;
   }
   
   /* Ensure padding-top is preserved */

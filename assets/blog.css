@@ -222,7 +222,7 @@ a.category-item {
     }
 }
 
-@media screen and (min-width: 960px){
+@media screen and (min-width: 95rem){
     .section-blog .grid__item-first .grid {
         --width-image: calc(674 / 1024 * 100%);
     } 

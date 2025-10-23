@@ -1,36 +1,54 @@
 /* ===============================
-   RU9 FIXED CANVAS LAYOUT
-   Desktop: Fixed 1480px canvas with 60px padding
-   Mobile: Keep original responsive behavior
+   RU9 RESPONSIVE CANVAS LAYOUT
+   Responsive canvas with proportional scaling
    Applied to: Homepage + All Templates
 ================================== */
 
-/* Desktop Fixed Layout - Only apply to desktop */
-@media (min-width: 769px) {
+/* Base styles - Mobile first approach */
+.page-width,
+.page_cart main {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Tablet and up (750px+) */
+@media screen and (min-width: 750px) {
+  .page-width,
+  .page_cart main {
+    padding: 0 3.2rem;
+  }
   
-  /* Override theme.css variables for all templates */
+  .header.page-width,
+  .utility-bar_grid.page-width {
+    padding-left: 3.2rem;
+    padding-right: 3.2rem;
+  }
+}
+
+/* Desktop and up (1200px+) */
+@media screen and (min-width: 1200px) {
+  .page-width,
+  .page_cart main {
+    padding: 0 5rem;
+  }
+  
+  .header:not(.drawer-menu).page-width {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+/* Large Desktop (1400px+) - Full canvas */
+@media screen and (min-width: 1400px) {
   :root {
-    --page-width: 1480px !important;
-    --page-width-margin: 0 !important;
-    --padding-body: 60px !important;
+    --page-width: 1594px !important;
   }
   
-  /* Force fixed layout for all templates */
-  body {
-    overflow-x: auto;
-  }
-  
-  body .main-content {
-    min-width: 1480px;
-    width: 100%;
-  }
-  
-  /* Override all .page-width classes for all templates */
-  .page-width {
-    max-width: 1480px !important;
-    margin: 0 auto !important;
-    padding-left: 60px !important;
-    padding-right: 60px !important;
+  .page-width,
+  .page_cart main {
+    max-width: 1594px !important;
+    padding: 0 5rem;
   }
   
   /* Specific sections that need fixed layout */
@@ -47,35 +65,31 @@
   .super-service-section .page-width,
   .certifications-section .page-width,
   .blog-carousel-section .page-width {
-    max-width: 1480px !important;
+    max-width: 1594px !important;
     margin: 0 auto !important;
-    padding-left: 60px !important;
-    padding-right: 60px !important;
+    padding: 0 5rem !important;
   }
   
   /* Certifications container fixed layout */
   .certifications__container {
-    max-width: 1480px !important;
+    max-width: 1594px !important;
     margin: 0 auto !important;
-    padding-left: 60px !important;
-    padding-right: 60px !important;
+    padding: 0 5rem !important;
   }
   
   /* Header and Footer fixed layout for all templates */
   .header-group .page-width,
   .footer-group .page-width {
-    max-width: 1480px !important;
+    max-width: 1594px !important;
     margin: 0 auto !important;
-    padding-left: 60px !important;
-    padding-right: 60px !important;
+    padding: 0 5rem !important;
   }
   
   /* Dropdown menu fixed layout for all templates */
   .site-nav__dropdown.megamenu {
-    max-width: 1480px !important;
+    max-width: 1594px !important;
     margin: 0 auto !important;
-    padding-left: 60px !important;
-    padding-right: 60px !important;
+    padding: 0 5rem !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: 100% !important;
@@ -83,10 +97,9 @@
   
   /* Ensure dropdown menu respects container */
   .site-nav__dropdown.megamenu.text-left {
-    max-width: 1480px !important;
+    max-width: 1594px !important;
     margin: 0 auto !important;
-    padding-left: 60px !important;
-    padding-right: 60px !important;
+    padding: 0 5rem !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: 100% !important;
@@ -97,10 +110,9 @@
     position: absolute !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    max-width: 1480px !important;
+    max-width: 1594px !important;
     margin: 0 auto !important;
-    padding-left: 60px !important;
-    padding-right: 60px !important;
+    padding: 0 5rem !important;
   }
   
   /* Ensure sections don't break out of container */
@@ -117,10 +129,9 @@
   
   .slideshow-section .page-width,
   .content-banner-cta-section .page-width {
-    max-width: 1480px !important;
+    max-width: 1594px !important;
     margin: 0 auto !important;
-    padding-left: 60px !important;
-    padding-right: 60px !important;
+    padding: 0 5rem !important;
   }
 }
 

@@ -28,7 +28,7 @@
     }
 }
 
-@media screen and (min-width: 960px){
+@media screen and (min-width: 95rem){
     .main-account {
         --w-banner: calc(680 / 1440 * 100%);
     }
@@ -79,7 +79,7 @@
 
 /* account */
 
-@media screen and (min-width: 960px){
+@media screen and (min-width: 95rem){
     .grid__account {
         --grid-desktop-vertical-spacing: 48px;
     }
@@ -92,7 +92,7 @@
     }
 }
 
-@media screen and (max-width: 560px){
+@media screen and (max-width: 55rem){
     .page-width--account {
         padding-inline: 0;
     }
@@ -139,7 +139,7 @@
 }
 
 
-@media screen and (min-width: 960px){
+@media screen and (min-width: 95rem){
     .grid__account .grid__item-left {
         width: 24.513%;
         padding-right: 24px;
@@ -351,7 +351,7 @@ html:has(#AddressNewForm:not(.hide)) {
     font-size: calc(var(--typeBaseSize) * 0.875);
 }
 
-@media screen and (max-width: 560px){
+@media screen and (max-width: 55rem){
     #address_form_new #addresses-cancel-submit {
         position: absolute;
         top: 24px;

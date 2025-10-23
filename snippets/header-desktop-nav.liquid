@@ -115,7 +115,7 @@
         {%- assign animation_column = 1 -%}
 
         <div class="site-nav__dropdown megamenu text-left">
-          <div class="page-width gap" style="--page-width: 1480px;">
+          <div class="page-width gap" style="--page-width: 1594px;">
             <div class="megamenu__content">
               <div class="grid" style="padding-left: 0;">
                 <div class="grid__item medium-up--two-sixths appear-animation appear-delay-{{ animation_column }} " style="padding-left: 0;">
@@ -384,20 +384,20 @@
   @media (min-width: 750px) {
     /* Fixed layout for all templates - Override any existing styles */
     .site-nav__dropdown.megamenu .page-width {
-      max-width: 1480px !important;
+      max-width: 1594px !important;
       width: 100% !important;
       margin: 0 auto !important;
-      padding-left: 60px !important;
-      padding-right: 60px !important;
+      padding-left: 5rem !important;
+      padding-right: 5rem !important;
     }
     
     .site-nav__dropdown.megamenu {
       left: 50% !important;
       transform: translateX(-50%) !important;
-      max-width: 1480px !important;
+      max-width: 1594px !important;
       margin: 0 auto !important;
-      padding-left: 60px !important;
-      padding-right: 60px !important;
+      padding-left: 5rem !important;
+      padding-right: 5rem !important;
     }
     
     /* Ensure megamenu appears below site header and logo */
@@ -405,23 +405,23 @@
       z-index: 5 !important; /* Lower than logo z-index: 6 and site-header z-index: 20 */
     }
     
-    /* Specific fix for 1520px screens to prevent 60px offset */
+    /* Specific fix for 1520px screens to prevent 5rem offset */
     @media (min-width: 1500px) and (max-width: 1600px) {
       .site-nav__dropdown.megamenu {
         left: 50% !important;
         transform: translateX(-50%) !important;
         position: absolute !important;
-        max-width: 1480px !important;
+        max-width: 1594px !important;
         margin: 0 auto !important;
-        padding-left: 60px !important;
-        padding-right: 60px !important;
+        padding-left: 5rem !important;
+        padding-right: 5rem !important;
       }
       
       .site-nav__dropdown.megamenu .page-width {
-        max-width: 1480px !important;
+        max-width: 1594px !important;
         margin: 0 auto !important;
-        padding-left: 60px !important;
-        padding-right: 60px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
       }
     }
     
@@ -544,7 +544,7 @@
       scroll-snap-align: start;
       scroll-snap-stop: always;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
       padding: 0;
       gap: 24px 28px;
       justify-content: start;
@@ -738,7 +738,7 @@
         grid-template-columns: repeat(3, 1fr); 
       }
       .site-nav__dropdown.megamenu .view-all-container {
-        width: 160px !important;
+        width: 15rem !important;
       }
       .site-nav__dropdown.megamenu .view-all-btn {
         width: 140px !important;

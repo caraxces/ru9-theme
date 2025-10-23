@@ -1,6 +1,6 @@
 {{ 'main-cart.css' | asset_url | stylesheet_tag: preload: true }}
 
-<div class="page-width" style="--page-width: 1360px;">
+<div class="page-width" style="--page-width: 135rem;">
   {%- render 'breadcrumbs' -%}
 
   <header class="section-header text-left{% if cart.item_count == 0 %} section-header--404{% endif %}">

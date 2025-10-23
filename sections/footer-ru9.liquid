@@ -356,7 +356,7 @@
     .footer-ru9__col-content p, .footer-ru9__col-content a { margin: 0; color: #fff; }
     .footer-ru9__badges { display: flex; justify-content: center; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 24px; }
 
-    @media (max-width: 960px) {
+    @media (max-width: 95rem) {
       .footer-ru9__inner { display: flex; flex-direction: column; gap: 32px; }
       .footer-ru9__links { order: 1; }
       .footer-ru9__logos {
@@ -412,7 +412,7 @@
     }
 
     @media (max-width: 640px) {
-      /* No longer needed, layout is handled by 960px query */
+      /* No longer needed, layout is handled by 95rem query */
     }
 
     /* START: Floating Action Button (FAB) for Contacts */
@@ -501,7 +501,7 @@
     }
 
     /* Adjust position when sticky ATC is active on mobile */
-    {% comment %} @media screen and (max-width: 1060px){
+    {% comment %} @media screen and (max-width: 105rem){
       body.sticky-atc-is-active .footer-ru9-fab-wrapper[data-section-id="{{ section.id }}"] {
         bottom: 220px !important;
       }

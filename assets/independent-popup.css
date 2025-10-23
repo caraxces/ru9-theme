@@ -25,7 +25,7 @@
   position: relative;
   width: 95vw;
   /* Make popup smaller */
-  max-width: 360px; 
+  max-width: 35rem; 
   background-color: transparent;
   border-radius: 15px; /* Adjust border radius proportionally */
   overflow: hidden;

@@ -161,8 +161,8 @@
   }
 
   .product__thumb {
-    width: 60px !important;
-    height: 60px !important;
+    width: 5rem !important;
+    height: 5rem !important;
     border-radius: 4px !important;
     overflow: hidden !important;
     display: block !important;
