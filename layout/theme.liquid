@@ -30,9 +30,9 @@
       <link rel="canonical" href="{{ canonical_url | replace: 'g%E1%BB%91i', 'goi'}}">
       {%elsif canonical_url contains '/pages/bo-phong-ngu'%}
       <link rel="canonical" href="{{ canonical_url | replace: 'pages', 'collections'}}">
-      {%elsif canonical_url contains '/products/g%E1%BB%91i-m%C3%A2y%}
-      <link rel="canonical" href="{{ canonical_url | replace: 'g%E1%BB%91i-m%C3%A2y%', 'goi-may'}}">
-      {%elsif canonical_url contains '/products/g%E1%BB%91i-may}
+      {%elsif canonical_url contains '/products/g%E1%BB%91i-m%C3%A2y'%}
+      <link rel="canonical" href="{{ canonical_url | replace: 'g%E1%BB%91i-m%C3%A2y', 'goi-may'}}">
+      {%elsif canonical_url contains '/products/g%E1%BB%91i-may'%}
       <link rel="canonical" href="{{ canonical_url | replace: 'g%E1%BB%91i-may', 'goi-may'}}">
       {%elsif canonical_url contains '/search'%}
       <link rel="canonical" href="https://ru9.vn/search">
@@ -78,6 +78,7 @@
       {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
       {{ 'judge-me-layout.css' | asset_url | stylesheet_tag }}
       {{ 'mobile-product-layout.css' | asset_url | stylesheet_tag }}
+      {{ 'homepage-fixed-layout.css' | asset_url | stylesheet_tag }}
       {%- render 'css-variables' -%}
   
       <script>

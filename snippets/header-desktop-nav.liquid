@@ -115,7 +115,7 @@
         {%- assign animation_column = 1 -%}
 
         <div class="site-nav__dropdown megamenu text-left">
-          <div class="page-width gap" style="{% if section.settings.section_width != 'page-width' %}{% if section.settings.section_width == 'full-width' %}--page-width: 100%{% elsif section.settings.section_width == 'customize_width' %}--page-width: {{ section.settings.customize_width | plus: 80 }}px{% endif %}{% endif %}">
+          <div class="page-width gap" style="--page-width: 1480px;">
             <div class="megamenu__content">
               <div class="grid" style="padding-left: 0;">
                 <div class="grid__item medium-up--two-sixths appear-animation appear-delay-{{ animation_column }} " style="padding-left: 0;">
@@ -382,12 +382,47 @@
 
 <style>
   @media (min-width: 750px) {
-    /* Constrain megamenu width exactly like header (1360px) */
+    /* Fixed layout for all templates - Override any existing styles */
     .site-nav__dropdown.megamenu .page-width {
-      max-width: 1360px !important;
+      max-width: 1480px !important;
       width: 100% !important;
-      padding-left: 0;
-      padding-right: 0;
+      margin: 0 auto !important;
+      padding-left: 60px !important;
+      padding-right: 60px !important;
+    }
+    
+    .site-nav__dropdown.megamenu {
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      max-width: 1480px !important;
+      margin: 0 auto !important;
+      padding-left: 60px !important;
+      padding-right: 60px !important;
+    }
+    
+    /* Ensure megamenu appears below site header and logo */
+    .site-nav__dropdown.megamenu {
+      z-index: 5 !important; /* Lower than logo z-index: 6 and site-header z-index: 20 */
+    }
+    
+    /* Specific fix for 1520px screens to prevent 60px offset */
+    @media (min-width: 1500px) and (max-width: 1600px) {
+      .site-nav__dropdown.megamenu {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        position: absolute !important;
+        max-width: 1480px !important;
+        margin: 0 auto !important;
+        padding-left: 60px !important;
+        padding-right: 60px !important;
+      }
+      
+      .site-nav__dropdown.megamenu .page-width {
+        max-width: 1480px !important;
+        margin: 0 auto !important;
+        padding-left: 60px !important;
+        padding-right: 60px !important;
+      }
     }
     
     /* Remove any grid borders that might create the black line */
@@ -396,14 +431,23 @@
       grid-template-columns: none !important;
     }
     
-    /* Ensure megamenu appears below site header and logo */
-    .site-nav__dropdown.megamenu {
-      z-index: 5 !important; /* Lower than logo z-index: 6 and site-header z-index: 20 */
+    /* Base layout - Fix grid positioning */
+    .site-nav__dropdown.megamenu .megamenu__content .grid { 
+      display: block !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      position: relative !important;
     }
-    /* Base layout */
-    .site-nav__dropdown.megamenu .megamenu__content .grid { display: block; }
-    .site-nav__dropdown.megamenu .megamenu__content .grid__item.appear-animation { width: 100% !important; max-width: none; }
-    .site-nav__dropdown.megamenu .megamenu__content .grid__item.appear-animation + .grid__item.appear-animation { margin-top: 24px; }
+    .site-nav__dropdown.megamenu .megamenu__content .grid__item.appear-animation { 
+      width: 100% !important; 
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .site-nav__dropdown.megamenu .megamenu__content .grid__item.appear-animation + .grid__item.appear-animation { 
+      margin-top: 24px !important; 
+    }
     
     /* Remove any borders from megamenu content */
     .site-nav__dropdown.megamenu .megamenu__content {
@@ -412,6 +456,9 @@
       border-left: none !important;
       border-top: none !important;
       border-bottom: none !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
     .site-nav__dropdown.megamenu .megamenu__content > * {
       border: none !important;
@@ -419,6 +466,56 @@
       border-left: none !important;
       border-top: none !important;
       border-bottom: none !important;
+    }
+    
+    /* Ensure grid container is properly positioned */
+    .site-nav__dropdown.megamenu .megamenu__content .grid {
+      position: relative !important;
+      left: 0 !important;
+      right: 0 !important;
+      transform: none !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    
+    /* Fix grid item positioning at 100% zoom */
+    .site-nav__dropdown.megamenu .megamenu__content .grid__item.medium-up--two-sixths {
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      position: relative !important;
+      left: 0 !important;
+      right: 0 !important;
+      transform: none !important;
+    }
+    
+    /* Specific fix for 100% zoom level */
+    @media screen and (min-width: 1200px) {
+      .site-nav__dropdown.megamenu .megamenu__content .grid__item.medium-up--two-sixths {
+        width: 100% !important;
+        flex: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    }
+    
+    /* Override theme grid system for megamenu */
+    .site-nav__dropdown.megamenu .megamenu__content .grid {
+      display: block !important;
+      grid-template-columns: none !important;
+      grid-gap: 0 !important;
+    }
+    
+    .site-nav__dropdown.megamenu .megamenu__content .grid__item {
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      float: none !important;
+      clear: both !important;
     }
     
     /* Hide megamenu bottom links and promotion on desktop */

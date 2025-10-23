@@ -1,0 +1,130 @@
+/* ===============================
+   RU9 FIXED CANVAS LAYOUT
+   Desktop: Fixed 1480px canvas with 60px padding
+   Mobile: Keep original responsive behavior
+   Applied to: Homepage + All Templates
+================================== */
+
+/* Desktop Fixed Layout - Only apply to desktop */
+@media (min-width: 769px) {
+  
+  /* Override theme.css variables for all templates */
+  :root {
+    --page-width: 1480px !important;
+    --page-width-margin: 0 !important;
+    --padding-body: 60px !important;
+  }
+  
+  /* Force fixed layout for all templates */
+  body {
+    overflow-x: auto;
+  }
+  
+  body .main-content {
+    min-width: 1480px;
+    width: 100%;
+  }
+  
+  /* Override all .page-width classes for all templates */
+  .page-width {
+    max-width: 1480px !important;
+    margin: 0 auto !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+  
+  /* Specific sections that need fixed layout */
+  .slideshow-section .page-width,
+  .content-banner-cta-section .page-width,
+  .collections-listing-section .page-width,
+  .featured-collections-section .page-width,
+  .image-marquee-section .page-width,
+  .featured-products-by-size-section .page-width,
+  .quiz-banner-section .page-width,
+  .combo-bedroom-section .page-width,
+  .tvc-section .page-width,
+  .reviews-carousel-section .page-width,
+  .super-service-section .page-width,
+  .certifications-section .page-width,
+  .blog-carousel-section .page-width {
+    max-width: 1480px !important;
+    margin: 0 auto !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+  
+  /* Certifications container fixed layout */
+  .certifications__container {
+    max-width: 1480px !important;
+    margin: 0 auto !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+  
+  /* Header and Footer fixed layout for all templates */
+  .header-group .page-width,
+  .footer-group .page-width {
+    max-width: 1480px !important;
+    margin: 0 auto !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+  
+  /* Dropdown menu fixed layout for all templates */
+  .site-nav__dropdown.megamenu {
+    max-width: 1480px !important;
+    margin: 0 auto !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+  }
+  
+  /* Ensure dropdown menu respects container */
+  .site-nav__dropdown.megamenu.text-left {
+    max-width: 1480px !important;
+    margin: 0 auto !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+  }
+  
+  /* Override any absolute positioning that might stick to left */
+  .site-nav__dropdown {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    max-width: 1480px !important;
+    margin: 0 auto !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+  
+  /* Ensure sections don't break out of container */
+  .section {
+    width: 100%;
+    max-width: none;
+  }
+  
+  /* Special handling for full-width sections that should still respect container */
+  .slideshow-section,
+  .content-banner-cta-section {
+    width: 100%;
+  }
+  
+  .slideshow-section .page-width,
+  .content-banner-cta-section .page-width {
+    max-width: 1480px !important;
+    margin: 0 auto !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+}
+
+/* Mobile - Keep original behavior (no changes) */
+@media (max-width: 768px) {
+  /* Mobile layout remains unchanged - keep original theme.css behavior */
+}
