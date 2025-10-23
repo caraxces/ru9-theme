@@ -33,7 +33,7 @@
   {%- if section.settings.title != blank or section.settings.view_all -%}
     <div
       class="page-width"
-      style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
+      style="max-width: 1480px; margin: 0 auto;{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
     >
       <div class="section-header small--space-md{% if section.settings.view_all %}{% unless settings.type_headers_align_text %} section-header--with-link{% endunless %}{% endif %}">
         <h2 class="section-header__title">
@@ -45,7 +45,7 @@
 
   <div
     class="page-width{% if section.settings.mobile_scrollable %} page-width--flush-small{% endif %}"
-    style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
+    style="max-width: 1480px; margin: 0 auto;{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
   >
     <div
       {% if section.settings.mobile_scrollable %}

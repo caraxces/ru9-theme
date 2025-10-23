@@ -160,29 +160,32 @@
 <style>
   /* Standard padding for main-collection-custom section */
   .collection-content--custom .page-width {
-    max-width: none;
-    padding: 0 0 50px 0;
-    margin: 0 60px;
+    max-width: 1480px;
+    padding: 0 60px 50px 60px;
+    margin: 0 auto;
   }
   
   /* Large screens - maintain fixed padding */
   @media (min-width: 1400px) {
     .collection-content--custom .page-width {
-      margin: 0 60px;
+      padding: 0 60px 50px 60px;
+      margin: 0 auto;
     }
   }
   
   /* Medium screens - responsive padding */
   @media (max-width: 1399px) and (min-width: 1024px) {
     .collection-content--custom .page-width {
-      margin: 0 60px;
+      padding: 0 60px 50px 60px;
+      margin: 0 auto;
     }
   }
   
   /* Small screens - responsive padding */
   @media (max-width: 1023px) and (min-width: 769px) {
     .collection-content--custom .page-width {
-      margin: 0 clamp(30px, 5vw, 60px) 0 clamp(20px, 4vw, 40px);
+      padding: 0 clamp(30px, 5vw, 60px) 50px clamp(20px, 4vw, 40px);
+      margin: 0 auto;
     }
   }
   
@@ -196,30 +199,31 @@
   
   /* Override any conflicting styles */
   .collection-content--custom .page-width {
-    max-width: none !important;
-    padding: 0 0 50px 0 !important;
+    max-width: 1480px !important;
+    padding: 0 60px 50px 60px !important;
+    margin: 0 auto !important;
   }
   
   /* Ensure section header has same padding */
   .collection-content--custom .section-header,
   .collection-content--custom .section-header--flush {
-    margin-left: 60px;
-    margin-right: 60px;
+    margin-left: 0;
+    margin-right: 0;
   }
   
   @media (max-width: 1023px) and (min-width: 769px) {
     .collection-content--custom .section-header,
     .collection-content--custom .section-header--flush {
-      margin-left: clamp(30px, 5vw, 60px);
-      margin-right: clamp(20px, 4vw, 40px);
+      margin-left: 0;
+      margin-right: 0;
     }
   }
   
   @media (max-width: 768px) {
     .collection-content--custom .section-header,
     .collection-content--custom .section-header--flush {
-      margin-left: 15px;
-      margin-right: 15px;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
   

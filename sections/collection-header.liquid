@@ -46,7 +46,7 @@
     </div>
   {%- else -%}
     {%- assign disable_sticky_header = true -%}
-    <div class="page-width page-content page-content--top" style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}">
+    <div class="page-width page-content page-content--top" style= "max-width: 1480px;">
       <header class="section-header section-header--flush {{ align }}">
         {%- render 'breadcrumbs', classes: align -%}
         <h1 class="section-header__title text-3xl f-smb">
@@ -74,7 +74,7 @@
   /* Standard padding for collection-header section */
   .collection-hero .page-width,
   .page-content--top.page-width {
-    max-width: none;
+    max-width: 1480px;
     padding: 0;
     margin: 0 60px;
   }
@@ -121,7 +121,7 @@
   /* Override any conflicting styles */
   .collection-hero .page-width,
   .page-content--top.page-width {
-    max-width: none !important;
+    max-width: 1480px !important;
   }
   
   /* Ensure padding-top is preserved */
