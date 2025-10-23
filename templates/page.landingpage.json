@@ -1,1 +1,849 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"section_width":"page-width","customize_width":1800,"text_alignment":"center","enable_customize_width_content":false,"customize_width_content":1800,"remove_space_below":false}},"snowflakes_yb9F9a":{"type":"snowflakes","settings":{"enable_snow":true}},"newyear_zBEyqP":{"type":"newyear","settings":{"enable_snow":true,"background_image":"shopify:\/\/shop_images\/love-and-rose-petals.jpg"}},"slideshow_UrNjmR":{"type":"slideshow","blocks":{"image_ek98jh":{"type":"image","settings":{"top_subheading":"","title":"","title_size":80,"subheading":"","link":"","link_text":"","link_2":"","link_text_2":"","color_accent":"rgba(0,0,0,0)","text_align":"vertical-center horizontal-left","image":"shopify:\/\/shop_images\/Landing_page_Desktop.png","image_mobile":"shopify:\/\/shop_images\/Landing_page_Mobile.png","overlay_opacity":0}}},"block_order":["image_ek98jh"],"settings":{"section_height":"650px","mobile_height":"auto","style":"bars","autoplay":true,"autoplay_speed":5,"lazyload_images":true}},"image_compare_dRrYGf":{"type":"image-compare","blocks":{"image_xeDPeB":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Banner_2_2.jpg"}},"image_BnqJBp":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Banner_2_1.jpg"}}},"block_order":["image_xeDPeB","image_BnqJBp"],"disabled":true,"settings":{"heading":"","heading_size":"h2","heading_position":"left","fullwidth":true,"slider_style":"classic","height":600,"color":"#ffffff","lazyload_images":true}},"countdown_tyxbU3":{"type":"countdown","blocks":{"content_CAzYrP":{"type":"content","settings":{"heading":"FLASH SALE","heading_size":"h1","text":"<h4>ƯU ĐÃI CHỈ CÒN:<\/h4>","content_alignment":"left"}},"timer_4Djgpb":{"type":"timer","settings":{"year":"2024","month":"12","day":"30","hour":"03","minute":"00","hide_timer":false,"text":""}},"button_6cgGYP":{"type":"button","disabled":true,"settings":{"button_link":"shopify:\/\/products\/foam-original","button":"Săn ngay","button_style":"solid"}}},"block_order":["content_CAzYrP","timer_4Djgpb","button_6cgGYP"],"custom_css":[],"settings":{"layout":"banner","full_width":false,"text_color":"#ab2328","background_color":"#ffffff","overlay_color":"#ab2328","overlay_opacity":0,"lazyload_images":true}},"feature_collection_manual_NmbMnj":{"type":"feature-collection-manual","blocks":{"collection_remGbK":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Nang_niu_gi_c_ng_chang.jpg","block_title":"Nâng niu giấc ngủ chàng","block_url":"shopify:\/\/collections\/gift-1tr"}},"collection_ymQhKD":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Om_p_gi_c_ng_nang.jpg","block_title":"Ôm ấp giấc ngủ nàng","block_url":"shopify:\/\/collections\/om-ấp-giấc-ngủ-của-nang"}},"collection_NqDdFK":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/V_v_b_n_ngon_gi_c.jpg","block_title":"Vỗ về bạn ngon giấc","block_url":"shopify:\/\/collections\/cham-chut-giấc-mơ-chinh-minh"}},"collection_3fbH9V":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Cham_soc_gi_c_ng_c_nha.jpg","block_title":"Cả nhà ngủ ngon","block_url":"shopify:\/\/collections\/san-soc-giấc-ngủ-tổ-ấm"}}},"block_order":["collection_remGbK","collection_ymQhKD","collection_NqDdFK","collection_3fbH9V"],"custom_css":[],"settings":{"section_width":"page-width","customize_width":1800,"title":"Mê Ly Christmas với gói quà ngủ ngon","per_row":4,"rows":1,"mobile_scrollable":false,"view_all":true,"view_all_number":"","divider":false}},"feature_collection_manual_FXGEwb":{"type":"feature-collection-manual","blocks":{"collection_Y7WfAw":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Ru_be_con_ngon_gi_c.jpg","block_title":"Ru bé con ngon giấc","block_url":"https:\/\/www.rubaby.vn\/collections\/ru9-gi%E1%BA%A5c-m%C6%A1-c%E1%BB%A7a-thien-th%E1%BA%A7n-nh%E1%BB%8F"}},"collection_rMpG3z":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Thoang_mat_ngon_gi_c.jpg","block_title":"Thoáng mát ngon giấc","block_url":"shopify:\/\/collections\/giấc-ngủ-mat-lanh"}},"collection_8mqP3H":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Gi_c_ng_ngon_d_i_1_tri_u.jpg","block_title":"Ngủ ngon dưới 1 triệu","block_url":"shopify:\/\/collections\/giấc-ngủ-ngon-dưới-1-triệu"}},"collection_LEQMCw":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Gi_c_ng_ngon_d_i_2_tri_u.jpg","block_title":"Ngủ ngon dưới 2 triệu","block_url":"shopify:\/\/collections\/giấc-ngủ-ngon-dưới-2-triệu"}}},"block_order":["collection_Y7WfAw","collection_rMpG3z","collection_8mqP3H","collection_LEQMCw"],"settings":{"section_width":"page-width","customize_width":1800,"title":"","per_row":4,"rows":1,"mobile_scrollable":false,"view_all":true,"view_all_number":"","divider":false}},"featured_collection_tab_y3fzqN":{"type":"featured-collection-tab","blocks":{"tab_3QqhYd":{"type":"tab","settings":{"tab_name":"Tab name","tab_label":"","product_1":"bo-ga-giuong-cotton-sateen","label_left_1":"","color_label_left_1":"","background_label_left_1":"","label_right_1":"","color_label_right_1":"","background_label_right_1":"","product_2":"","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"","background_label_right_2":"","product_3":"","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"","background_label_right_3":"","product_4":"","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}},"tab_iEcgPJ":{"type":"tab","settings":{"tab_name":"Tab name","tab_label":"","product_1":"","label_left_1":"","color_label_left_1":"","background_label_left_1":"","label_right_1":"","color_label_right_1":"","background_label_right_1":"","product_2":"","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"","background_label_right_2":"","product_3":"","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"","background_label_right_3":"","product_4":"","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}},"tab_Tn7Cr7":{"type":"tab","settings":{"tab_name":"Tab name","tab_label":"","product_1":"","label_left_1":"","color_label_left_1":"","background_label_left_1":"","label_right_1":"","color_label_right_1":"","background_label_right_1":"","product_2":"","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"","background_label_right_2":"","product_3":"","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"","background_label_right_3":"","product_4":"","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}},"tab_3ztpNk":{"type":"tab","settings":{"tab_name":"Tab name","tab_label":"","product_1":"","label_left_1":"","color_label_left_1":"","background_label_left_1":"","label_right_1":"","color_label_right_1":"","background_label_right_1":"","product_2":"","label_left_2":"","color_label_left_2":"","background_label_left_2":"","label_right_2":"","color_label_right_2":"","background_label_right_2":"","product_3":"","label_left_3":"","color_label_left_3":"","background_label_left_3":"","label_right_3":"","color_label_right_3":"","background_label_right_3":"","product_4":"","label_left_4":"","color_label_left_4":"","background_label_left_4":"","label_right_4":"","color_label_right_4":"","background_label_right_4":""}}},"block_order":["tab_3QqhYd","tab_iEcgPJ","tab_Tn7Cr7","tab_3ztpNk"],"disabled":true,"settings":{"section_width":"page-width","customize_width":1800,"title":"Heading","description":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_tab_name":"#ffffff","background_tab_name":"#ab2328","background_tab_name_inactive":"#e5e7eb"}},"feature_collection_manual_MNDaGd":{"type":"feature-collection-manual","blocks":{"collection_hcPkcN":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/G_i_Niu_c17f6d64-5e10-4467-be5a-fe204ed3555c.jpg","block_title":"<h3>Gối Niu 2.0<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">790.000VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n<span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">727.000VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/goi-foam-niu"}},"collection_VrVCwg":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Iceguard_570f6ced-53af-48a8-8ebe-227a3d26d75d.jpg","block_title":"<h3>Tấm giải nhiệt IceGuard™<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">1.499.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">1.380.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/giai-nhiet-iceguard"}},"collection_waQnVz":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Toppper.jpg","block_title":"<h3>Nệm cuộn Foam Topper<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">3.290.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 11%<\/span>\n        <\/div>\n       <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">3.027.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/nem-cuon-foam-topper"}},"collection_KmHMX7":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/G_i_Om_bb5481ec-a65b-41a0-b9c0-a23c2170add2.jpg","block_title":"<h3>Gối Ôm<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">1.150.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n      <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">1.058.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/goi-om"}}},"block_order":["collection_hcPkcN","collection_VrVCwg","collection_waQnVz","collection_KmHMX7"],"settings":{"section_width":"page-width","customize_width":1800,"title":"Sản phẩm bán chạy","per_row":4,"rows":1,"mobile_scrollable":false,"view_all":true,"view_all_number":"","divider":false}},"feature_collection_manual_Umw8HT":{"type":"feature-collection-manual","blocks":{"collection_gHbrgK":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/B_Bedding_Cotton_Sateen.jpg","block_title":"<h3>Bộ Ga Giường Cotton Sateen<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">2.190.000VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">2.015.000VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/bo-ga-giuong-cotton-sateen"}},"collection_wfpDnh":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Chan_L_nh.jpg","block_title":"<h3>Chăn Lạnh<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">990.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">911.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/chan-lanh"}},"collection_HkJGdW":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Chan_B_ch_Dan_179770b3-3eff-4871-965b-ba161f185846.jpg","block_title":"<h3>Chăn Bạch Đàn <\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">2.590.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">2.383.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/chan-bach-dan"}},"collection_QeYheG":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Chan_Microfiber_a68408d4-d04f-4850-8214-53c4a9aaea4d.jpg","block_title":"<h3>Chăn Microfiber<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">1.390.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">1.279.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/chan-microfiber"}}},"block_order":["collection_gHbrgK","collection_wfpDnh","collection_HkJGdW","collection_QeYheG"],"settings":{"section_width":"page-width","customize_width":1800,"title":"","per_row":4,"rows":1,"mobile_scrollable":false,"view_all":true,"view_all_number":"","divider":false}},"feature_collection_manual_mVjRNf":{"type":"feature-collection-manual","blocks":{"collection_4BwL8B":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/B_Bedding_Tencel.jpg","block_title":"<h3>Bộ Ga Giường Tencel<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">2.690.000  VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">2.475.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/tencel-bedding-set"}},"collection_JwrdLP":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/G_i_C_Gi_m_Am.jpg","block_title":"<h3>Gối Cổ Giảm Âm<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">999.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">920.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/goi-co-giam-am"}},"collection_ppYnkC":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/B_Bedding_Cotton_Sateen.jpg","block_title":"<h3>Bộ Vỏ Gối Cotton Sateen<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">469.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">432.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/bo-vo-goi-cotton-sateen"}},"collection_pjgLBx":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/B_Bedding_Tencel.jpg","block_title":"<h3>Bộ Vỏ Gối Tencel<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">539.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n      <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">496.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/bo-vo-goi-tencel"}}},"block_order":["collection_4BwL8B","collection_JwrdLP","collection_ppYnkC","collection_pjgLBx"],"settings":{"section_width":"page-width","customize_width":1800,"title":"","per_row":4,"rows":1,"mobile_scrollable":false,"view_all":true,"view_all_number":"","divider":false}},"feature_collection_manual_FUkXRw":{"type":"feature-collection-manual","blocks":{"collection_pt9BWb":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/G_i_May.jpg","block_title":"<h3>Gối Mây<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">419.000  VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">386.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/goi-may"}},"collection_bmzEKW":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/G_i_C_Du_L_ch.jpg","block_title":"<h3>Gối Didi<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">499.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">460.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/goi-didi"}},"collection_nMdxKT":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Chan_May_Dong_b3af9bb8-59c5-4441-b70f-969a52f3e52f.jpg","block_title":"<h3>Chăn Mây Đông<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">1.790.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n       <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">1.647.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/chan-may-dong"}},"collection_tFmRbP":{"type":"collection","settings":{"block_image":"shopify:\/\/shop_images\/Protector_92c421e3-43ca-4ac6-80a9-f49cc59c212a.jpg","block_title":"<h3>Tấm bảo vệ nệm<\/h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">569.000 VNĐ<\/span>\n            <span class=\"percent-sale\">- 8%<\/span>\n        <\/div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">524.000 VNĐ<\/span>\n    <\/div>\n<\/div>","block_url":"shopify:\/\/products\/tam-bao-ve-nem"}}},"block_order":["collection_pt9BWb","collection_bmzEKW","collection_nMdxKT","collection_tFmRbP"],"settings":{"section_width":"page-width","customize_width":1800,"title":"","per_row":4,"rows":1,"mobile_scrollable":false,"view_all":true,"view_all_number":"","divider":false}},"advanced_content_FChB6w":{"type":"advanced-content","blocks":{"liquid_8jdqhH":{"type":"liquid","settings":{"code":"<h2>NHỮNG MÓN QUÀ ĐẶC BIỆT NHẤT MÙA GIÁNG SINH 🎄<\/h2>\n<p>Cùng mọi người biến lời chúc MERRY CHRISTMAS thành hành động, mang giấc ngủ ngon đến với người mình thương, để mỗi ngày họ không còn mỏi mệt vì được ngủ ngon mê ly!<\/p>\n<p>Những gợi ý món quà phù hợp cho từng người thân yêu bạn muốn tặng <\/p>\n<p>Các sản phẩm đều được chứng nhận bởi các tiêu chuẩn an toàn khắt khe như OEKO-TEX® Standard 100, CertiPUR-US®…<\/p>\n\n<p>Tận dụng ngay các ưu đãi hấp dẫn khi mua sắm các sản phẩm cùng nhau<\/p>","width":"50%","alignment":"center"}},"image_UC4RKG":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/NH_NG_MON_QUA_D_C_BI_T_NH_T_MUA_GIANG_SINH.jpg","link":"","width":"50%","alignment":"center"}}},"block_order":["liquid_8jdqhH","image_UC4RKG"],"settings":{"full_width":false,"space_around":true,"lazyload_images":true}},"hotspots_WB7wYM":{"type":"hotspots","blocks":{"product_WpqEUe":{"type":"product","settings":{"featured_product":"goi-may","vertical":51,"horizontal":30}},"product_ymVAXG":{"type":"product","settings":{"featured_product":"nem-original-pro","vertical":70,"horizontal":70}}},"block_order":["product_WpqEUe","product_ymVAXG"],"disabled":true,"settings":{"title":"","heading_size":"h2","heading_position":"left","image":"shopify:\/\/shop_images\/Banner_N_m_Mobile.png","indent_image":false,"image_position":"left","hotspot_style":"tag","hotspot_color":"#000000","lazyload_images":true}},"advanced_content_UnWfxc":{"type":"advanced-content","blocks":{"image_MHxy8Y":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Menu_Banner_189cb80c-18c5-45ee-87fe-6db5629fb74e.jpg","link":"","width":"50%","alignment":"center"}},"liquid_GkdC9C":{"type":"liquid","settings":{"code":"<h2>THƯỞNG GIẤC NGỦ NGON VỚI GÓI QUÀ MÊ LY CHRISTMAS 🎄<\/h2><p>Dịp Giáng Sinh này sẽ là cơ hội tuyệt vời để bạn dành tặng những món quà ý nghĩa cho người thân mà vẫn tiết kiệm chi phí cùng với Ru9!<\/p>","width":"50%","alignment":"center"}}},"block_order":["image_MHxy8Y","liquid_GkdC9C"],"settings":{"full_width":false,"space_around":true,"lazyload_images":true}},"advanced_content_xjjzjA":{"type":"advanced-content","blocks":{"liquid_Gi8Pdd":{"type":"liquid","settings":{"code":"<h2>NHỮNG MÓN QUÀ MÊ LY TỪ RU9 ĐÃ SẴN SÀNG! 🎄<\/h2><p>Hãy đến Ru9 ngay từ hôm nay để trải nghiệm những sản phẩm chăm sóc giấc ngủ chất lượng và chọn lựa món quà hoàn hảo dành tặng những người đặc biệt trong mùa lễ hội này.<p> Đặc biệt, bạn sẽ được tặng dịch vụ gói quà miễn phí* khi mua sắm tại cửa hàng!<p>(*) Chương trình áp dụng cho hóa đơn trên 800.000 VNĐ.<\/p>","width":"50%","alignment":"center"}},"image_JrKhwC":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/showroom-ru9_3665573b-9635-4176-8822-a47187779767.jpg","link":"","width":"50%","alignment":"center"}}},"block_order":["liquid_Gi8Pdd","image_JrKhwC"],"settings":{"full_width":false,"space_around":true,"lazyload_images":true}},"promo_grid_ePktc7":{"type":"promo-grid","blocks":{"advanced_yjHQFy":{"type":"advanced","settings":{"subheading":"","heading":"","textarea":"","cta_text1":"Shop This","cta_link1":"","cta_text2":"Shop All","cta_link2":"","image":"shopify:\/\/shop_images\/20241206-162959.jpg","video_url":"","width":"50","height":500,"text_size":100,"text_align":"vertical-center horizontal-center","color_accent":"rgba(0,0,0,0)","boxed":false,"framed":false}},"advanced_TC7dHk":{"type":"advanced","settings":{"subheading":"","heading":"","textarea":"","cta_text1":"Shop This","cta_link1":"","cta_text2":"Shop All","cta_link2":"","image":"shopify:\/\/shop_images\/20241206-162959.jpg","video_url":"","width":"50","height":500,"text_size":100,"text_align":"vertical-center horizontal-center","color_accent":"rgba(0,0,0,0)","boxed":false,"framed":false}}},"block_order":["advanced_yjHQFy","advanced_TC7dHk"],"disabled":true,"settings":{"full_width":false,"gutter_size":20,"space_above":true,"space_below":true,"lazyload_images":true}}},"order":["main","snowflakes_yb9F9a","newyear_zBEyqP","slideshow_UrNjmR","image_compare_dRrYGf","countdown_tyxbU3","feature_collection_manual_NmbMnj","feature_collection_manual_FXGEwb","featured_collection_tab_y3fzqN","feature_collection_manual_MNDaGd","feature_collection_manual_Umw8HT","feature_collection_manual_mVjRNf","feature_collection_manual_FUkXRw","advanced_content_FChB6w","hotspots_WB7wYM","advanced_content_UnWfxc","advanced_content_xjjzjA","promo_grid_ePktc7"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "text_alignment": "center",
+        "enable_customize_width_content": false,
+        "customize_width_content": 1800,
+        "remove_space_below": false
+      }
+    },
+    "snowflakes_yb9F9a": {
+      "type": "snowflakes",
+      "settings": {
+        "enable_snow": true
+      }
+    },
+    "newyear_zBEyqP": {
+      "type": "newyear",
+      "settings": {
+        "enable_snow": true,
+        "background_image": "shopify://shop_images/love-and-rose-petals.jpg"
+      }
+    },
+    "slideshow_UrNjmR": {
+      "type": "slideshow",
+      "blocks": {
+        "image_ek98jh": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-left",
+            "image": "shopify://shop_images/Landing_page_Desktop.png",
+            "image_mobile": "shopify://shop_images/Landing_page_Mobile.png",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_ek98jh"
+      ],
+      "settings": {
+        "section_height": "650px",
+        "mobile_height": "auto",
+        "style": "bars",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "lazyload_images": true
+      }
+    },
+    "image_compare_dRrYGf": {
+      "type": "image-compare",
+      "blocks": {
+        "image_xeDPeB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Banner_2_2.jpg"
+          }
+        },
+        "image_BnqJBp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Banner_2_1.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_xeDPeB",
+        "image_BnqJBp"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h2",
+        "heading_position": "left",
+        "fullwidth": true,
+        "slider_style": "classic",
+        "height": 600,
+        "color": "#ffffff",
+        "lazyload_images": true
+      }
+    },
+    "countdown_tyxbU3": {
+      "type": "countdown",
+      "blocks": {
+        "content_CAzYrP": {
+          "type": "content",
+          "settings": {
+            "heading": "FLASH SALE",
+            "heading_size": "h1",
+            "text": "<h4>ƯU ĐÃI CHỈ CÒN:</h4>",
+            "content_alignment": "left"
+          }
+        },
+        "timer_4Djgpb": {
+          "type": "timer",
+          "settings": {
+            "year": "2024",
+            "month": "12",
+            "day": "30",
+            "hour": "03",
+            "minute": "00",
+            "hide_timer": false,
+            "text": ""
+          }
+        },
+        "button_6cgGYP": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_link": "shopify://products/foam-original",
+            "button": "Săn ngay",
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "content_CAzYrP",
+        "timer_4Djgpb",
+        "button_6cgGYP"
+      ],
+      "custom_css": [],
+      "settings": {
+        "layout": "banner",
+        "full_width": false,
+        "text_color": "#ab2328",
+        "background_color": "#ffffff",
+        "overlay_color": "#ab2328",
+        "overlay_opacity": 0,
+        "lazyload_images": true
+      }
+    },
+    "feature_collection_manual_NmbMnj": {
+      "type": "feature-collection-manual",
+      "blocks": {
+        "collection_remGbK": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Nang_niu_gi_c_ng_chang.jpg",
+            "block_title": "Nâng niu giấc ngủ chàng",
+            "block_url": "shopify://collections/gift-1tr"
+          }
+        },
+        "collection_ymQhKD": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Om_p_gi_c_ng_nang.jpg",
+            "block_title": "Ôm ấp giấc ngủ nàng",
+            "block_url": "shopify://collections/om-ấp-giấc-ngủ-của-nang"
+          }
+        },
+        "collection_NqDdFK": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/V_v_b_n_ngon_gi_c.jpg",
+            "block_title": "Vỗ về bạn ngon giấc",
+            "block_url": "shopify://collections/cham-chut-giấc-mơ-chinh-minh"
+          }
+        },
+        "collection_3fbH9V": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Cham_soc_gi_c_ng_c_nha.jpg",
+            "block_title": "Cả nhà ngủ ngon",
+            "block_url": "shopify://collections/san-soc-giấc-ngủ-tổ-ấm"
+          }
+        }
+      },
+      "block_order": [
+        "collection_remGbK",
+        "collection_ymQhKD",
+        "collection_NqDdFK",
+        "collection_3fbH9V"
+      ],
+      "custom_css": [],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "Mê Ly Christmas với gói quà ngủ ngon",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": false,
+        "view_all": true,
+        "view_all_number": "",
+        "divider": false
+      }
+    },
+    "feature_collection_manual_FXGEwb": {
+      "type": "feature-collection-manual",
+      "blocks": {
+        "collection_Y7WfAw": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Ru_be_con_ngon_gi_c.jpg",
+            "block_title": "Ru bé con ngon giấc",
+            "block_url": "https://www.rubaby.vn/collections/ru9-gi%E1%BA%A5c-m%C6%A1-c%E1%BB%A7a-thien-th%E1%BA%A7n-nh%E1%BB%8F"
+          }
+        },
+        "collection_rMpG3z": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Thoang_mat_ngon_gi_c.jpg",
+            "block_title": "Thoáng mát ngon giấc",
+            "block_url": "shopify://collections/giấc-ngủ-mat-lanh"
+          }
+        },
+        "collection_8mqP3H": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Gi_c_ng_ngon_d_i_1_tri_u.jpg",
+            "block_title": "Ngủ ngon dưới 1 triệu",
+            "block_url": "shopify://collections/giấc-ngủ-ngon-dưới-1-triệu"
+          }
+        },
+        "collection_LEQMCw": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Gi_c_ng_ngon_d_i_2_tri_u.jpg",
+            "block_title": "Ngủ ngon dưới 2 triệu",
+            "block_url": "shopify://collections/giấc-ngủ-ngon-dưới-2-triệu"
+          }
+        }
+      },
+      "block_order": [
+        "collection_Y7WfAw",
+        "collection_rMpG3z",
+        "collection_8mqP3H",
+        "collection_LEQMCw"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": false,
+        "view_all": true,
+        "view_all_number": "",
+        "divider": false
+      }
+    },
+    "featured_collection_tab_y3fzqN": {
+      "type": "featured-collection-tab",
+      "blocks": {
+        "tab_3QqhYd": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Tab name",
+            "tab_label": "",
+            "product_1": "bo-ga-giuong-cotton-sateen",
+            "label_left_1": "",
+            "color_label_left_1": "",
+            "background_label_left_1": "",
+            "label_right_1": "",
+            "color_label_right_1": "",
+            "background_label_right_1": "",
+            "product_2": "",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "",
+            "background_label_right_2": "",
+            "product_3": "",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "",
+            "background_label_right_3": "",
+            "product_4": "",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        },
+        "tab_iEcgPJ": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Tab name",
+            "tab_label": "",
+            "product_1": "",
+            "label_left_1": "",
+            "color_label_left_1": "",
+            "background_label_left_1": "",
+            "label_right_1": "",
+            "color_label_right_1": "",
+            "background_label_right_1": "",
+            "product_2": "",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "",
+            "background_label_right_2": "",
+            "product_3": "",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "",
+            "background_label_right_3": "",
+            "product_4": "",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        },
+        "tab_Tn7Cr7": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Tab name",
+            "tab_label": "",
+            "product_1": "",
+            "label_left_1": "",
+            "color_label_left_1": "",
+            "background_label_left_1": "",
+            "label_right_1": "",
+            "color_label_right_1": "",
+            "background_label_right_1": "",
+            "product_2": "",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "",
+            "background_label_right_2": "",
+            "product_3": "",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "",
+            "background_label_right_3": "",
+            "product_4": "",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        },
+        "tab_3ztpNk": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Tab name",
+            "tab_label": "",
+            "product_1": "",
+            "label_left_1": "",
+            "color_label_left_1": "",
+            "background_label_left_1": "",
+            "label_right_1": "",
+            "color_label_right_1": "",
+            "background_label_right_1": "",
+            "product_2": "",
+            "label_left_2": "",
+            "color_label_left_2": "",
+            "background_label_left_2": "",
+            "label_right_2": "",
+            "color_label_right_2": "",
+            "background_label_right_2": "",
+            "product_3": "",
+            "label_left_3": "",
+            "color_label_left_3": "",
+            "background_label_left_3": "",
+            "label_right_3": "",
+            "color_label_right_3": "",
+            "background_label_right_3": "",
+            "product_4": "",
+            "label_left_4": "",
+            "color_label_left_4": "",
+            "background_label_left_4": "",
+            "label_right_4": "",
+            "color_label_right_4": "",
+            "background_label_right_4": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_3QqhYd",
+        "tab_iEcgPJ",
+        "tab_Tn7Cr7",
+        "tab_3ztpNk"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "Heading",
+        "description": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+        "color_tab_name": "#ffffff",
+        "background_tab_name": "#ab2328",
+        "background_tab_name_inactive": "#e5e7eb"
+      }
+    },
+    "feature_collection_manual_MNDaGd": {
+      "type": "feature-collection-manual",
+      "blocks": {
+        "collection_hcPkcN": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/G_i_Niu_c17f6d64-5e10-4467-be5a-fe204ed3555c.jpg",
+            "block_title": "<h3>Gối Niu 2.0</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">790.000VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n<span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">727.000VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/goi-foam-niu"
+          }
+        },
+        "collection_VrVCwg": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Iceguard_570f6ced-53af-48a8-8ebe-227a3d26d75d.jpg",
+            "block_title": "<h3>Tấm giải nhiệt IceGuard™</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">1.499.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">1.380.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/giai-nhiet-iceguard"
+          }
+        },
+        "collection_waQnVz": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Toppper.jpg",
+            "block_title": "<h3>Nệm cuộn Foam Topper</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">3.290.000 VNĐ</span>\n            <span class=\"percent-sale\">- 11%</span>\n        </div>\n       <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">3.027.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/nem-cuon-foam-topper"
+          }
+        },
+        "collection_KmHMX7": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/G_i_Om_bb5481ec-a65b-41a0-b9c0-a23c2170add2.jpg",
+            "block_title": "<h3>Gối Ôm</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">1.150.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n      <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">1.058.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/goi-om"
+          }
+        }
+      },
+      "block_order": [
+        "collection_hcPkcN",
+        "collection_VrVCwg",
+        "collection_waQnVz",
+        "collection_KmHMX7"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "Sản phẩm bán chạy",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": false,
+        "view_all": true,
+        "view_all_number": "",
+        "divider": false
+      }
+    },
+    "feature_collection_manual_Umw8HT": {
+      "type": "feature-collection-manual",
+      "blocks": {
+        "collection_gHbrgK": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/B_Bedding_Cotton_Sateen.jpg",
+            "block_title": "<h3>Bộ Ga Giường Cotton Sateen</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">2.190.000VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">2.015.000VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/bo-ga-giuong-cotton-sateen"
+          }
+        },
+        "collection_wfpDnh": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Chan_L_nh.jpg",
+            "block_title": "<h3>Chăn Lạnh</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">990.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">911.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/chan-lanh"
+          }
+        },
+        "collection_HkJGdW": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Chan_B_ch_Dan_179770b3-3eff-4871-965b-ba161f185846.jpg",
+            "block_title": "<h3>Chăn Bạch Đàn </h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">2.590.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">2.383.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/chan-bach-dan"
+          }
+        },
+        "collection_QeYheG": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Chan_Microfiber_a68408d4-d04f-4850-8214-53c4a9aaea4d.jpg",
+            "block_title": "<h3>Chăn Microfiber</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">1.390.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">1.279.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/chan-microfiber"
+          }
+        }
+      },
+      "block_order": [
+        "collection_gHbrgK",
+        "collection_wfpDnh",
+        "collection_HkJGdW",
+        "collection_QeYheG"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": false,
+        "view_all": true,
+        "view_all_number": "",
+        "divider": false
+      }
+    },
+    "feature_collection_manual_mVjRNf": {
+      "type": "feature-collection-manual",
+      "blocks": {
+        "collection_4BwL8B": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/B_Bedding_Tencel.jpg",
+            "block_title": "<h3>Bộ Ga Giường Tencel</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">2.690.000  VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">2.475.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/tencel-bedding-set"
+          }
+        },
+        "collection_JwrdLP": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/G_i_C_Gi_m_Am.jpg",
+            "block_title": "<h3>Gối Cổ Giảm Âm</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">999.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">920.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/goi-co-giam-am"
+          }
+        },
+        "collection_ppYnkC": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/B_Bedding_Cotton_Sateen.jpg",
+            "block_title": "<h3>Bộ Vỏ Gối Cotton Sateen</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">469.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">432.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/bo-vo-goi-cotton-sateen"
+          }
+        },
+        "collection_pjgLBx": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/B_Bedding_Tencel.jpg",
+            "block_title": "<h3>Bộ Vỏ Gối Tencel</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">539.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n      <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">496.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/bo-vo-goi-tencel"
+          }
+        }
+      },
+      "block_order": [
+        "collection_4BwL8B",
+        "collection_JwrdLP",
+        "collection_ppYnkC",
+        "collection_pjgLBx"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": false,
+        "view_all": true,
+        "view_all_number": "",
+        "divider": false
+      }
+    },
+    "feature_collection_manual_FUkXRw": {
+      "type": "feature-collection-manual",
+      "blocks": {
+        "collection_pt9BWb": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/G_i_May.jpg",
+            "block_title": "<h3>Gối Mây</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">419.000  VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">386.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/goi-may"
+          }
+        },
+        "collection_bmzEKW": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/G_i_C_Du_L_ch.jpg",
+            "block_title": "<h3>Gối Didi</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">499.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">460.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/goi-didi"
+          }
+        },
+        "collection_nMdxKT": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Chan_May_Dong_b3af9bb8-59c5-4441-b70f-969a52f3e52f.jpg",
+            "block_title": "<h3>Chăn Mây Đông</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">1.790.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n       <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">1.647.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/chan-may-dong"
+          }
+        },
+        "collection_tFmRbP": {
+          "type": "collection",
+          "settings": {
+            "block_image": "shopify://shop_images/Protector_92c421e3-43ca-4ac6-80a9-f49cc59c212a.jpg",
+            "block_title": "<h3>Tấm bảo vệ nệm</h3>\n<div class=\"item\">\n    <div class=\"price\">\n        <div class=\"price-old-container\">\n            <span class=\"price-old\" style=\"text-decoration: line-through; color: gray;\">569.000 VNĐ</span>\n            <span class=\"percent-sale\">- 8%</span>\n        </div>\n        <span class=\"price-new\" style=\"font-weight: bold; font-size: 22px;\">524.000 VNĐ</span>\n    </div>\n</div>",
+            "block_url": "shopify://products/tam-bao-ve-nem"
+          }
+        }
+      },
+      "block_order": [
+        "collection_pt9BWb",
+        "collection_bmzEKW",
+        "collection_nMdxKT",
+        "collection_tFmRbP"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": false,
+        "view_all": true,
+        "view_all_number": "",
+        "divider": false
+      }
+    },
+    "advanced_content_FChB6w": {
+      "type": "advanced-content",
+      "blocks": {
+        "liquid_8jdqhH": {
+          "type": "liquid",
+          "settings": {
+            "code": "<h2>NHỮNG MÓN QUÀ ĐẶC BIỆT NHẤT MÙA GIÁNG SINH 🎄</h2>\n<p>Cùng mọi người biến lời chúc MERRY CHRISTMAS thành hành động, mang giấc ngủ ngon đến với người mình thương, để mỗi ngày họ không còn mỏi mệt vì được ngủ ngon mê ly!</p>\n<p>Những gợi ý món quà phù hợp cho từng người thân yêu bạn muốn tặng </p>\n<p>Các sản phẩm đều được chứng nhận bởi các tiêu chuẩn an toàn khắt khe như OEKO-TEX® Standard 100, CertiPUR-US®…</p>\n\n<p>Tận dụng ngay các ưu đãi hấp dẫn khi mua sắm các sản phẩm cùng nhau</p>",
+            "width": "50%",
+            "alignment": "center"
+          }
+        },
+        "image_UC4RKG": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/NH_NG_MON_QUA_D_C_BI_T_NH_T_MUA_GIANG_SINH.jpg",
+            "link": "",
+            "width": "50%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_8jdqhH",
+        "image_UC4RKG"
+      ],
+      "settings": {
+        "full_width": false,
+        "space_around": true,
+        "lazyload_images": true
+      }
+    },
+    "hotspots_WB7wYM": {
+      "type": "hotspots",
+      "blocks": {
+        "product_WpqEUe": {
+          "type": "product",
+          "settings": {
+            "featured_product": "goi-may",
+            "vertical": 51,
+            "horizontal": 30
+          }
+        },
+        "product_ymVAXG": {
+          "type": "product",
+          "settings": {
+            "featured_product": "nem-original-pro",
+            "vertical": 70,
+            "horizontal": 70
+          }
+        }
+      },
+      "block_order": [
+        "product_WpqEUe",
+        "product_ymVAXG"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "heading_position": "left",
+        "image": "shopify://shop_images/Banner_N_m_Mobile.png",
+        "indent_image": false,
+        "image_position": "left",
+        "hotspot_style": "tag",
+        "hotspot_color": "#000000",
+        "lazyload_images": true
+      }
+    },
+    "advanced_content_UnWfxc": {
+      "type": "advanced-content",
+      "blocks": {
+        "image_MHxy8Y": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Menu_Banner_189cb80c-18c5-45ee-87fe-6db5629fb74e.jpg",
+            "link": "",
+            "width": "50%",
+            "alignment": "center"
+          }
+        },
+        "liquid_GkdC9C": {
+          "type": "liquid",
+          "settings": {
+            "code": "<h2>THƯỞNG GIẤC NGỦ NGON VỚI GÓI QUÀ MÊ LY CHRISTMAS 🎄</h2><p>Dịp Giáng Sinh này sẽ là cơ hội tuyệt vời để bạn dành tặng những món quà ý nghĩa cho người thân mà vẫn tiết kiệm chi phí cùng với Ru9!</p>",
+            "width": "50%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "image_MHxy8Y",
+        "liquid_GkdC9C"
+      ],
+      "settings": {
+        "full_width": false,
+        "space_around": true,
+        "lazyload_images": true
+      }
+    },
+    "advanced_content_xjjzjA": {
+      "type": "advanced-content",
+      "blocks": {
+        "liquid_Gi8Pdd": {
+          "type": "liquid",
+          "settings": {
+            "code": "<h2>NHỮNG MÓN QUÀ MÊ LY TỪ RU9 ĐÃ SẴN SÀNG! 🎄</h2><p>Hãy đến Ru9 ngay từ hôm nay để trải nghiệm những sản phẩm chăm sóc giấc ngủ chất lượng và chọn lựa món quà hoàn hảo dành tặng những người đặc biệt trong mùa lễ hội này.<p> Đặc biệt, bạn sẽ được tặng dịch vụ gói quà miễn phí* khi mua sắm tại cửa hàng!<p>(*) Chương trình áp dụng cho hóa đơn trên 800.000 VNĐ.</p>",
+            "width": "50%",
+            "alignment": "center"
+          }
+        },
+        "image_JrKhwC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/showroom-ru9_3665573b-9635-4176-8822-a47187779767.jpg",
+            "link": "",
+            "width": "50%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_Gi8Pdd",
+        "image_JrKhwC"
+      ],
+      "settings": {
+        "full_width": false,
+        "space_around": true,
+        "lazyload_images": true
+      }
+    },
+    "promo_grid_ePktc7": {
+      "type": "promo-grid",
+      "blocks": {
+        "advanced_yjHQFy": {
+          "type": "advanced",
+          "settings": {
+            "subheading": "",
+            "heading": "",
+            "textarea": "",
+            "cta_text1": "Shop This",
+            "cta_link1": "",
+            "cta_text2": "Shop All",
+            "cta_link2": "",
+            "image": "shopify://shop_images/20241206-162959.jpg",
+            "video_url": "",
+            "width": "50",
+            "height": 500,
+            "text_size": 100,
+            "text_align": "vertical-center horizontal-center",
+            "color_accent": "rgba(0,0,0,0)",
+            "boxed": false,
+            "framed": false
+          }
+        },
+        "advanced_TC7dHk": {
+          "type": "advanced",
+          "settings": {
+            "subheading": "",
+            "heading": "",
+            "textarea": "",
+            "cta_text1": "Shop This",
+            "cta_link1": "",
+            "cta_text2": "Shop All",
+            "cta_link2": "",
+            "image": "shopify://shop_images/20241206-162959.jpg",
+            "video_url": "",
+            "width": "50",
+            "height": 500,
+            "text_size": 100,
+            "text_align": "vertical-center horizontal-center",
+            "color_accent": "rgba(0,0,0,0)",
+            "boxed": false,
+            "framed": false
+          }
+        }
+      },
+      "block_order": [
+        "advanced_yjHQFy",
+        "advanced_TC7dHk"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "gutter_size": 20,
+        "space_above": true,
+        "space_below": true,
+        "lazyload_images": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "snowflakes_yb9F9a",
+    "newyear_zBEyqP",
+    "slideshow_UrNjmR",
+    "image_compare_dRrYGf",
+    "countdown_tyxbU3",
+    "feature_collection_manual_NmbMnj",
+    "feature_collection_manual_FXGEwb",
+    "featured_collection_tab_y3fzqN",
+    "feature_collection_manual_MNDaGd",
+    "feature_collection_manual_Umw8HT",
+    "feature_collection_manual_mVjRNf",
+    "feature_collection_manual_FUkXRw",
+    "advanced_content_FChB6w",
+    "hotspots_WB7wYM",
+    "advanced_content_UnWfxc",
+    "advanced_content_xjjzjA",
+    "promo_grid_ePktc7"
+  ]
+}

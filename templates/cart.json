@@ -1,1 +1,81 @@
-{"sections":{"main":{"type":"main-cart","settings":{"sub_desc":"<p>Khi thanh toán thành công, nếu không nhận được email xác nhận đơn hàng, vui lòng liên hệ với Ru9 qua hotline: <\/p><p><strong>1900 63 63 21<\/strong><\/p>"}},"text_with_icons_9yd9VT":{"type":"text-with-icons","blocks":{"text_block_KiEpc6":{"type":"text_block","settings":{"icon":"chat","image_icon":"shopify:\/\/shop_images\/text-w-icon-1.png","title":"100 đêm ngủ thử không rủi ro","text":"<p>Nếu bạn không hài lòng, chúng tôi sẽ nhận lại nệm và hoàn tiền 100%.<\/p>"}},"text_block_cLLCJf":{"type":"text_block","settings":{"icon":"chat","image_icon":"shopify:\/\/shop_images\/text-w-icon-2.png","title":"Miễn phí vận chuyển từ 1.500.000đ","text":"<p>Bạn chẳng cần lo lắng đến việc nhét lại nệm vào thùng đâu.<\/p>"}},"text_block_4AREAP":{"type":"text_block","settings":{"icon":"chat","image_icon":"shopify:\/\/shop_images\/text-w-icon-3.png","title":"Bảo hành dài lâu","text":"<p>Nệm của Ru9 luôn êm ái và bền bỉ với thời gian.<\/p>"}}},"block_order":["text_block_KiEpc6","text_block_cLLCJf","text_block_4AREAP"],"settings":{"section_width":"customize_width","customize_width":1000,"bg":"#f2fbf8","title":"","align_text":"center","desktop_columns_per_row":3,"icon_color":"#000000","button_label":"","button_link":"","divider":false,"space_around":true}},"recently-viewed":{"type":"recently-viewed","disabled":true,"settings":{"recent_count":5}}},"order":["main","text_with_icons_9yd9VT","recently-viewed"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "sub_desc": "<p>Khi thanh toán thành công, nếu không nhận được email xác nhận đơn hàng, vui lòng liên hệ với Ru9 qua hotline: </p><p><strong>1900 63 63 21</strong></p>"
+      }
+    },
+    "text_with_icons_9yd9VT": {
+      "type": "text-with-icons",
+      "blocks": {
+        "text_block_KiEpc6": {
+          "type": "text_block",
+          "settings": {
+            "icon": "chat",
+            "image_icon": "shopify://shop_images/text-w-icon-1.png",
+            "title": "100 đêm ngủ thử không rủi ro",
+            "text": "<p>Nếu bạn không hài lòng, chúng tôi sẽ nhận lại nệm và hoàn tiền 100%.</p>"
+          }
+        },
+        "text_block_cLLCJf": {
+          "type": "text_block",
+          "settings": {
+            "icon": "chat",
+            "image_icon": "shopify://shop_images/text-w-icon-2.png",
+            "title": "Miễn phí vận chuyển từ 1.500.000đ",
+            "text": "<p>Bạn chẳng cần lo lắng đến việc nhét lại nệm vào thùng đâu.</p>"
+          }
+        },
+        "text_block_4AREAP": {
+          "type": "text_block",
+          "settings": {
+            "icon": "chat",
+            "image_icon": "shopify://shop_images/text-w-icon-3.png",
+            "title": "Bảo hành dài lâu",
+            "text": "<p>Nệm của Ru9 luôn êm ái và bền bỉ với thời gian.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_block_KiEpc6",
+        "text_block_cLLCJf",
+        "text_block_4AREAP"
+      ],
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1000,
+        "bg": "#f2fbf8",
+        "title": "",
+        "align_text": "center",
+        "desktop_columns_per_row": 3,
+        "icon_color": "#000000",
+        "button_label": "",
+        "button_link": "",
+        "divider": false,
+        "space_around": true
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {
+        "recent_count": 5
+      }
+    }
+  },
+  "order": [
+    "main",
+    "text_with_icons_9yd9VT",
+    "recently-viewed"
+  ]
+}

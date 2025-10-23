@@ -1482,50 +1482,51 @@
         "settings": {
           "show_breadcrumb": true,
           "home_text": "Trang chủ",
-          "current_page_text": "Về Ru9",
+          "current_page_text": "About us",
           "main_title": "",
-          "subtitle": "<p>Từ Giấc Mơ Đến Hiện Thực:</p>",
-          "secondary_title": "\"Hành trình mang giấc ngủ ngon đến với mọi gia đình Việt Nam\"",
+          "subtitle": "",
+          "secondary_title": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@1,400;1,600;1,700&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  :root { \n    --ru9-blue: #1C2C58; \n  }\n\n  .ru9-copy {\n    display: block;\n  }\n\n  .ru9-copy p {\n    margin: 0;\n    color: var(--ru9-blue);\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: italic;\n  }\n\n  /* MOBILE (default) */\n  .ru9-copy .intro {\n    font-size: 16px;\n    font-weight: 400;\n    line-height: 140%; /* 22.4px */\n  }\n\n  .ru9-copy .tagline {\n    font-size: 16px;\n    font-weight: 700;\n    line-height: 140%; /* 22.4px */\n  }\n\n  /* DESKTOP */\n  @media (min-width: 768px) {\n    .ru9-copy .intro {\n      font-size: 27px;\n      font-weight: 600;\n      line-height: 140%; /* 37.8px */\n    }\n\n    .ru9-copy .tagline {\n      font-size: 39px;\n      font-weight: 700;\n      line-height: 53px; /* 135.897% */\n    }\n  }\n</style>\n\n<div class=\"ru9-copy\">\n  <p class=\"intro\">Từ Giấc Mơ Đến Hiện Thực:</p>\n  <p class=\"tagline\">“Hành trình mang giấc ngủ ngon đến với mọi gia đình Việt Nam”</p>\n</div>",
           "description": "",
+          "image": "shopify://shop_images/cbe5cd3ffb860a0274c04630ee24b76b2c038474.png",
+          "image_mobile": "shopify://shop_images/b934cc4afc79dec50dcbf7559fe732221d332a77.png",
           "button_text": "",
           "button_link": "",
-          "long_content": "<p>Giữa nhịp sống bận rộn, nhiều người xem giấc ngủ chỉ như một thói quen, như một khoảng nghỉ ngắn giữa những lo toan thường nhật. Nhưng với Ru9, một giấc ngủ là nhiều hơn thế. Đó là lúc cơ thể được phục hồi, tâm trí được nghỉ ngơi và năng lượng cho ngày mới được tái tạo. Bởi Ru9 tin rằng, một giấc ngủ trọn vẹn không chỉ mang lại sự thoải mái, mà còn là nền tảng vững chắc cho sức khỏe và hạnh phúc lâu dài.</p>",
+          "long_content": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  .ru9-paragraph {\n    color: #000;\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-size: 20px;\n    font-style: normal;\n    font-weight: 400;\n    line-height: 140%; /* 28px */\n    text-align: left; /* ✅ căn trái */\n  }\n\n  @media (max-width: 767px) {\n    .ru9-paragraph {\n      font-size: 14px;\n      line-height: 150%;\n      width: 100%;\n      max-width: 301px;\n      margin: 0 auto; /* căn giữa khối nếu ở mobile */\n    }\n  }\n</style>\n\n<p class=\"ru9-paragraph\">\n  Giữa nhịp sống bận rộn, nhiều người xem giấc ngủ chỉ như một thói quen, như một khoảng nghỉ ngắn giữa những lo toan thường nhật. \n  Nhưng với Ru9, một giấc ngủ là nhiều hơn thế. \n  Đó là lúc cơ thể được phục hồi, tâm trí được nghỉ ngơi và năng lượng cho ngày mới được tái tạo. \n  Bởi Ru9 tin rằng, một giấc ngủ trọn vẹn không chỉ mang lại sự thoải mái, mà còn là nền tảng vững chắc cho sức khỏe và hạnh phúc lâu dài.\n</p>",
           "background_color": "#ffffff",
           "long_content_background_color": "#ffffff",
           "long_content_text_color": "#333333",
           "main_title_color": "#1c2c58",
-          "main_title_line_height": 1.2,
+          "main_title_line_height": 1,
           "custom_css": "",
           "breadcrumb_background_color": "#f8f9fa",
-          "breadcrumb_border_color": "#e9ecef",
-          "breadcrumb_link_color": "#007bff",
-          "breadcrumb_link_hover_color": "#0056b3",
-          "breadcrumb_current_color": "#6c757d",
-          "breadcrumb_separator_color": "#6c757d"
+          "breadcrumb_border_color": "#0f0f0f",
+          "breadcrumb_link_color": "#0f0f0f",
+          "breadcrumb_link_hover_color": "#0f0f0f",
+          "breadcrumb_current_color": "#0f0f0f",
+          "breadcrumb_separator_color": "#0f0f0f"
         }
       },
       "about-story": {
         "type": "about-story",
         "settings": {
-          "title": "<h2>Câu chuyện của chúng tôi</h2>",
+          "title": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  :root {\n    --blue: #759CE6;\n    --dark: #1C2C58;\n  }\n\n  .ru9-heading {\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: normal;\n    font-weight: 700;\n    line-height: 140%;\n    margin: 0;\n    text-align: left; /* mặc định mobile căn giữa */\n  }\n\n  /* MOBILE (default) */\n  .ru9-heading {\n    font-size: 20px;\n  }\n\n  .ru9-heading .blue { color: var(--blue); }\n  .ru9-heading .dark { color: var(--dark); }\n\n  /* DESKTOP */\n  @media (min-width: 768px) {\n    .ru9-heading {\n      font-size: 64px;\n      line-height: 80px;\n      text-align: left; /* căn trái trên desktop */\n    }\n\n    .ru9-heading .blue,\n    .ru9-heading .dark {\n      display: block; /* tách 2 dòng */\n    }\n  }\n</style>\n\n<p class=\"ru9-heading\">\n  <span class=\"blue\">Câu chuyện</span>\n  <span class=\"dark\">của chúng tôi</span>\n</p>",
           "story_title": "<h3>Khởi nguồn từ giấc ngủ chưa trọn vẹn</h3>",
           "story_content": "<p>Chắc hẳn bạn cũng từng có những đêm trằn trọc, dù nằm đủ 8 tiếng nhưng sáng dậy vẫn mệt mỏi đúng không?</p><p>Mình là Trang, Founder của Ru9, và mình cũng từng như vậy. Những năm làm việc căng thẳng khiến giấc ngủ của mình trở nên chập chờn, và mình nhận ra vấn đề không phải ngủ bao lâu, mà ngủ như thế nào mới thật sự quan trọng.</p><p>Từ mong muốn cải thiện giấc ngủ của chính mình, mình bắt đầu hành trình tìm hiểu về nệm foam, công nghệ giấc ngủ và những yếu tố ảnh hưởng đến chất lượng nghỉ ngơi. Càng nghiên cứu, mình càng nhận ra phần lớn nệm tại Việt Nam chưa đảm bảo tiêu chuẩn an toàn hay hỗ trợ đúng cách cho cơ thể.</p><p>Đó là lý do Ru9 ra đời, với khát vọng mang đến cho người Việt một giấc ngủ trọn vẹn và chất lượng hơn mỗi ngày. Ru9 cũng là công ty đầu tiên tại Việt Nam sản xuất nệm foam đóng thùng, đạt hai chứng nhận quốc tế khắt khe: CertiPUR-US® về độ an toàn và bền vững của foam, cùng STANDARD 100 by OEKO-TEX® về sự an toàn tuyệt đối cho sức khỏe người dùng.</p>",
-          "mission_quote": "<p>Tất cả đều bắt đầu từ những đêm mất ngủ, từ những trăn trở \"Tại sao hôm nay ngủ dậy vẫn mệt?\" hay \"Chiếc nệm này có thực sự phù hợp chưa?\"</p>",
+          "mission_quote": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@1,600&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  .ru9-paragraph {\n    color: #1C2C58;\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-size: 14px;\n    font-style: italic;\n    font-weight: 600;\n    line-height: 140%; /* 19.6px */\n    margin: 0;\n    text-align: justify; /* tuỳ chọn, giúp đoạn trông gọn gàng hơn */\n  }\n</style>\n\n<p class=\"ru9-paragraph\">\n  Tất cả đều bắt đầu từ những đêm mất ngủ, từ những trăn trở \n  \"Tại sao hôm nay ngủ dậy vẫn mệt?\" hay \n  \"Chiếc nệm này có thực sự phù hợp chưa?\"\n</p>",
           "mission_title": "<h4>Sứ mệnh của chúng tôi</h4>",
-          "mission_content": "<p>Ru9 được xây dựng trên niềm tin rằng mỗi người xứng đáng có được một giấc ngủ tốt. Đó không phải là điều xa xỉ, mà là nền tảng để tái tạo năng lượng, sức khỏe và niềm hạnh phúc.</p><p><strong>\"Đơn giản để tốt hơn\"</strong> – Chúng tôi mang đến những giải pháp giấc ngủ được thiết kế tinh gọn, khoa học và tối ưu, tập trung vào những gì thực sự cần thiết để tạo nên giấc ngủ chất lượng.</p><p>Ru9 không chỉ bán sản phẩm – chúng tôi mang đến một lời hứa:</p><ul>\n<li>Một giấc ngủ ngon hơn.</li>\n<li>Một ngày mới tràn đầy năng lượng.</li>\n<li>Một cuộc sống chất lượng hơn.</li>\n</ul><p>Mỗi sản phẩm Ru9 là sự kết nối giữa công nghệ, sự sáng tạo và lòng tận tâm. Không chỉ là một sản phẩm hay một đơn hàng, mà là cam kết chăm sóc sức khỏe giấc ngủ của bạn.</p>"
+          "mission_content": "<p>Ru9 được xây dựng trên niềm tin rằng mỗi người xứng đáng có được một giấc ngủ tốt. Đó không phải là điều xa xỉ, mà là nền tảng để tái tạo năng lượng, sức khỏe và niềm hạnh phúc.</p><p><strong>\"Đơn giản để tốt hơn\"</strong> – Chúng tôi mang đến những giải pháp giấc ngủ được thiết kế tinh gọn, khoa học và tối ưu, tập trung vào những gì thực sự cần thiết để tạo nên giấc ngủ chất lượng.</p><p>Ru9 không chỉ bán sản phẩm – chúng tôi mang đến một lời hứa:</p><ul>\n<li>Một giấc ngủ ngon hơn.</li>\n<li>Một ngày mới tràn đầy năng lượng.</li>\n<li>Một cuộc sống chất lượng hơn.</li>\n</ul><p>Mỗi sản phẩm Ru9 là sự kết nối giữa công nghệ, sự sáng tạo và lòng tận tâm. Không chỉ là một sản phẩm hay một đơn hàng, mà là cam kết chăm sóc sức khỏe giấc ngủ của bạn.</p>",
+          "image": "shopify://shop_images/Rectangle_213_1.png",
+          "image_mobile": "shopify://shop_images/M_i_di_u_tuy_t_v_i....._4.png"
         }
       },
       "about-team": {
         "type": "about-team",
         "settings": {
-          "title": "<h2>Đội ngũ Ru9</h2>",
-          "subtitle": "<h3>Nơi giấc mơ được nuôi dưỡng</h3>",
-          "content": "<p>Đó không chỉ là giấc mơ về một giấc ngủ ngon trọn vẹn cho các khách hàng, mà còn là hoài bão và khát vọng của mỗi thành viên trong đại gia đình Ru9.</p><p>Văn hóa Ru9 được xây dựng dựa trên sự gắn kết và thấu hiểu. Trong khi đội ngũ văn phòng tập trung nghiên cứu, sáng tạo và hoàn thiện sản phẩm, đội ngũ showroom luôn mang đến những trải nghiệm gần gũi và chân thật nhất cho khách hàng.</p>",
+          "title": "<!-- title.html -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  :root {\n    --blue-light: #759CE6;\n  }\n\n  h2 {\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: normal;\n    font-weight: 700;\n    margin: 0;\n    text-align: center; /* mobile */\n    color: var(--blue-light);\n    font-size: 20px;\n    line-height: 140%;\n  }\n\n  @media (min-width: 768px) {\n    h2 {\n      font-size: 64px;\n      line-height: 80px;\n      text-align: left; /* desktop */\n    }\n  }\n</style>\n\n<h2>Đội ngũ Ru9</h2>",
+          "subtitle": "<!-- subtitle.html -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  :root {\n    --blue-dark: #1C2C58;\n  }\n\n  h3 {\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: normal;\n    font-weight: 700;\n    margin: 0;\n    text-align: center; /* mobile */\n    color: var(--blue-dark);\n    font-size: 20px;\n    line-height: 140%;\n  }\n\n  /* Desktop: tách làm 2 dòng */\n  @media (min-width: 768px) {\n    h3 {\n      font-size: 64px;\n      line-height: 80px;\n      text-align: left;\n    }\n    h3 span {\n      display: block;\n    }\n  }\n</style>\n\n<h3>\n  <span>Nơi giấc mơ</span>\n  <span>được nuôi dưỡng</span>\n</h3>",
+          "content": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  .ru9-textblock {\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 20px;\n    line-height: 140%; /* 28px */\n    color: #000;\n    text-align: justify;\n    width: 301px; /* giới hạn chiều rộng */\n  }\n\n  .ru9-textblock p {\n    margin: 0 0 20px 0; /* khoảng cách giữa các đoạn */\n  }\n\n  /* MOBILE RESPONSIVE */\n  @media (max-width: 767px) {\n    .ru9-textblock {\n      font-size: 14px;\n      line-height: 150%;\n      text-align: left;\n      width: 100%; /* mobile tự co full màn hình */\n      max-width: 301px; /* đảm bảo không vượt quá */\n      margin: 0 auto; /* căn giữa nếu nằm độc lập */\n    }\n\n    .ru9-textblock p {\n      margin-bottom: 16px;\n    }\n  }\n</style>\n\n<div class=\"ru9-textblock\">\n  <p>\n    Đó không chỉ là giấc mơ về một giấc ngủ ngon trọn vẹn cho các khách hàng, mà còn là hoài bão và khát vọng của mỗi thành viên trong đại gia đình Ru9.\n  </p>\n  <p>\n    Văn hóa Ru9 được xây dựng dựa trên sự gắn kết và thấu hiểu. Trong khi đội ngũ văn phòng tập trung nghiên cứu, sáng tạo và hoàn thiện sản phẩm, đội ngũ showroom luôn mang đến những trải nghiệm gần gũi và chân thật nhất cho khách hàng.\n  </p>\n</div>",
           "quote": "<p>Tại Ru9, chúng tôi tin rằng mọi giấc mơ đều xứng đáng được nâng niu.</p>",
-          "background_color": "#ffffff",
-          "title_color": "#1a2230",
-          "subtitle_color": "#4a90e2",
-          "text_color": "#5e6b85"
+          "image": "shopify://shop_images/M_i_di_u_tuy_t_v_i....._5.png"
         }
       },
       "about-understanding": {
