@@ -516,6 +516,7 @@
   @media (max-width: 768px) {
     [data-section-type="combo-bedroom"] .combo-bedroom-section {
       padding: 0 20px;
+      overflow: hidden;
     }
     
     [data-section-type="combo-bedroom"] .combo-bedroom-section .section-header {
@@ -654,80 +655,45 @@
     function initializeCarousel() {
       if (productCardsContainer.children.length === 0) return;
 
-      let currentIndex = 0;
+      // For mobile, use native scroll behavior like featured-collections
+      if (window.innerWidth <= 768) {
+        // Mobile: Use native scroll - no custom carousel needed
+        return {
+          next: () => {
+            productCardsContainer.scrollBy({
+              left: 300, // 280px card + 20px gap
+              behavior: 'smooth'
+            });
+          },
+          prev: () => {
+            productCardsContainer.scrollBy({
+              left: -300,
+              behavior: 'smooth'
+            });
+          },
+          reset: () => {
+            productCardsContainer.scrollTo({
+              left: 0,
+              behavior: 'smooth'
+            });
+          },
+          update: () => {
+            // No update needed for native scroll
+          }
+        };
+      }
+
+      // Desktop: Keep existing carousel logic
       let isDragging = false;
       let startPos = 0;
-      let currentTranslate = 0;
       let prevTranslate = 0;
-      let animationID = 0;
       
-      let cardWidth, gap, viewportWidth, visibleCards, maxIndex, totalTrackWidth, maxScroll;
-      
-      const productCards = Array.from(productCardsContainer.querySelectorAll('.product-card'));
-      const scrollbarThumb = sectionContainer.querySelector('.scrollbar-thumb');
-      const scrollbarContainer = sectionContainer.querySelector('.scrollbar-container');
-
-      function calculateDimensions() {
-        cardWidth = productCards.length > 0 ? productCards[0].offsetWidth : 0;
-        if (cardWidth === 0) return;
-        
-        // Get gap - parse as percentage if it contains %, otherwise as pixels
-        const computedStyle = window.getComputedStyle(productCardsContainer);
-        const gapValue = computedStyle.gap || computedStyle.columnGap || '0px';
-        
-        if (gapValue.includes('%')) {
-          // Gap is percentage - need to calculate from viewport
-          const carousel = productCardsContainer.closest('.product-carousel');
-          viewportWidth = carousel ? carousel.offsetWidth : productCardsContainer.parentElement.offsetWidth;
-          gap = (parseFloat(gapValue) / 100) * viewportWidth;
-        } else {
-          gap = parseFloat(gapValue) || (window.innerWidth <= 768 ? 20 : 24);
-          const carousel = productCardsContainer.closest('.product-carousel');
-          viewportWidth = carousel ? carousel.offsetWidth : productCardsContainer.parentElement.offsetWidth;
-        }
-        
-        visibleCards = Math.floor((viewportWidth + gap) / (cardWidth + gap));
-        maxIndex = productCards.length > visibleCards ? productCards.length - visibleCards : 0;
-        totalTrackWidth = (productCards.length * cardWidth) + Math.max(0, productCards.length - 1) * gap;
-        maxScroll = totalTrackWidth - viewportWidth;
-
-        if (currentIndex > maxIndex) {
-          currentIndex = maxIndex;
-        }
-        
-        console.log('Combo Bedroom Carousel Dimensions:', {
-          cardWidth,
-          gap,
-          viewportWidth,
-          visibleCards,
-          maxIndex,
-          isMobile: window.innerWidth <= 768
-        });
-      }
-      
-      function setPositionByIndex() {
-        currentTranslate = -currentIndex * (cardWidth + gap);
-        prevTranslate = currentTranslate;
-        productCardsContainer.style.transition = 'transform 0.5s ease-in-out';
-        productCardsContainer.style.transform = `translateX(${currentTranslate}px)`;
-        updateScrollbar();
-      }
-      
-      function updateScrollbar() {
-        if (!scrollbarThumb || !scrollbarContainer) return;
-        
-        const scrollProgress = Math.abs(currentTranslate) / maxScroll;
-        const thumbWidth = Math.max(20, (viewportWidth / totalTrackWidth) * scrollbarContainer.offsetWidth);
-        const thumbPosition = scrollProgress * (scrollbarContainer.offsetWidth - thumbWidth);
-        
-        scrollbarThumb.style.width = `${thumbWidth}px`;
-        scrollbarThumb.style.transform = `translateX(${thumbPosition}px)`;
-      }
+      // Simple drag logic for desktop
 
       function startDrag(e) {
         isDragging = true;
         startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-        animationID = requestAnimationFrame(animation);
+        prevTranslate = productCardsContainer.scrollLeft;
         productCardsContainer.style.transition = 'none';
         productCardsContainer.classList.add('is-dragging');
       }
@@ -736,41 +702,23 @@
         if (isDragging) {
           e.preventDefault();
           const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-          currentTranslate = prevTranslate + currentPosition - startPos;
+          const deltaX = currentPosition - startPos;
+          
+          // Apply smooth drag directly to scroll
+          productCardsContainer.scrollLeft = prevTranslate - deltaX;
         }
       }
 
       function endDrag() {
         if (!isDragging) return;
-        cancelAnimationFrame(animationID);
         isDragging = false;
         productCardsContainer.classList.remove('is-dragging');
-
-        const movedBy = currentTranslate - prevTranslate;
-
-        if (movedBy < -50 && currentIndex < maxIndex) {
-          currentIndex += 1;
-        }
-        if (movedBy > 50 && currentIndex > 0) {
-          currentIndex -= 1;
-        }
         
-        setPositionByIndex();
-      }
-
-      function animation() {
-        if (!isDragging) return;
-        productCardsContainer.style.transform = `translateX(${currentTranslate}px)`;
-        updateScrollbar();
-        requestAnimationFrame(animation);
+        // Store current scroll position for next drag
+        prevTranslate = productCardsContainer.scrollLeft;
       }
       
-      function onResize() {
-        calculateDimensions();
-        setPositionByIndex();
-      }
-
-      // Event listeners
+      // Event listeners for desktop only
       productCardsContainer.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
       
       productCardsContainer.addEventListener('mousedown', startDrag);
@@ -781,7 +729,7 @@
       productCardsContainer.addEventListener('mouseleave', endDrag);
       productCardsContainer.addEventListener('touchend', endDrag);
 
-      // Handle click events for product cards - block if was dragging
+      const productCards = Array.from(productCardsContainer.querySelectorAll('.product-card'));
       productCards.forEach(card => {
         card.addEventListener('click', (e) => {
           if (isDragging) {
@@ -792,41 +740,27 @@
           return true;
         });
       });
-
-      const carouselElement = productCardsContainer.closest('.product-carousel');
-      const resizeObserver = new ResizeObserver(onResize);
-      if (carouselElement) {
-        resizeObserver.observe(carouselElement);
-      } else {
-        resizeObserver.observe(productCardsContainer);
-      }
-
-      setTimeout(() => {
-        calculateDimensions();
-        setPositionByIndex();
-      }, 150);
       
       return {
         next: () => {
-          if (currentIndex < maxIndex) {
-            currentIndex++;
-            setPositionByIndex();
-          }
+          productCardsContainer.scrollBy({
+            left: 400,
+            behavior: 'smooth'
+          });
         },
         prev: () => {
-          if (currentIndex > 0) {
-            currentIndex--;
-            setPositionByIndex();
-          }
+          productCardsContainer.scrollBy({
+            left: -400,
+            behavior: 'smooth'
+          });
         },
         reset: () => {
-          currentIndex = 0;
-          setPositionByIndex();
+          productCardsContainer.scrollTo({
+            left: 0,
+            behavior: 'smooth'
+          });
         },
-        update: () => {
-          calculateDimensions();
-          setPositionByIndex();
-        }
+        update: () => {}
       };
     }
 

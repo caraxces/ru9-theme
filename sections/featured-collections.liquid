@@ -244,52 +244,45 @@
   [data-section-type="featured-collections"] .product-cards-container {
     display: flex;
     gap: 2%;
-    transition: transform 0.3s ease;
     padding-right: 0;
     overflow-x: auto;
     overflow-y: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
   }
   
-  /* Hide default scrollbar */
+  /* Custom scrollbar styling - Always show on desktop */
   [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar-track {
+    background: #F0F1EF;
+    border-radius: 100px;
+  }
+  [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar-thumb {
+    background: #234085;
+    border-radius: 100px;
+  }
+  [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b;
+  }
+  [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar-button {
     display: none;
   }
   
-  /* Fixed scrollbar container */
-  [data-section-type="featured-collections"] .scrollbar-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 8px;
-    background: #F0F1EF;
-    border-radius: 100px;
-    overflow: hidden;
-  }
-  
-  /* Fixed scrollbar thumb */
-  [data-section-type="featured-collections"] .scrollbar-thumb {
-    height: 100%;
-    background: #234085;
-    border-radius: 100px;
-    transition: width 0.3s ease, transform 0.3s ease;
-    min-width: 20px;
-  }
   [data-section-type="featured-collections"] .tab-content {
     display: none;
     padding-bottom: 20px;
     padding-right: 0;
     gap: 2%;
     width: 100%;
-    overflow: visible;
+    overflow-x: auto;
+    overflow-y: hidden;
     flex-wrap: nowrap;
   }
   [data-section-type="featured-collections"] .tab-content.active {
     display: flex;
-    overflow: visible;
+    overflow-x: auto;
+    overflow-y: hidden;
     flex-wrap: nowrap;
     padding-right: 0;
   }
@@ -354,7 +347,7 @@
     cursor: not-allowed;
   }
 
-  /* Custom scrollbar styling */
+  /* Custom scrollbar styling for tab-content - Always show on desktop */
   [data-section-type="featured-collections"] .tab-content::-webkit-scrollbar {
     height: 8px;
   }
@@ -620,14 +613,25 @@
       overflow-x: auto !important;
       overflow-y: hidden !important;
       -webkit-overflow-scrolling: touch !important;
-      scrollbar-width: none !important;
     }
     
+    /* Mobile scrollbar styling */
     [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar {
-      display: none !important;
+      height: 8px !important;
     }
-    [data-section-type="featured-collections"] .product-cards-container {
-      -ms-overflow-style: none !important;
+    [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
+      border-radius: 100px !important;
+    }
+    [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar-thumb {
+      background: #234085 !important;
+      border-radius: 100px !important;
+    }
+    [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
+    }
+    [data-section-type="featured-collections"] .product-cards-container::-webkit-scrollbar-button {
+      display: none !important;
     }
     
     [data-section-type="featured-collections"] .product-card {
@@ -741,56 +745,15 @@
       
       if (productCards.length === 0) return;
 
-      let currentIndex = 0;
+      // Desktop: Use native scroll with smooth drag
       let isDragging = false;
       let startPos = 0;
-      let currentTranslate = 0;
       let prevTranslate = 0;
-      let animationID = 0;
-      
-      let cardWidth, gap, viewportWidth, visibleCards, maxIndex, totalTrackWidth, maxScroll;
-      
-      const scrollbarThumb = sectionContainer.querySelector('.scrollbar-thumb');
-      const scrollbarContainer = sectionContainer.querySelector('.scrollbar-container');
-
-      function calculateDimensions() {
-        cardWidth = productCards.length > 0 ? productCards[0].offsetWidth : 0;
-        if (cardWidth === 0) return;
-        gap = parseInt(window.getComputedStyle(tabContent).gap) || 24;
-        viewportWidth = tabContent.offsetWidth;
-        visibleCards = Math.floor((viewportWidth + gap) / (cardWidth + gap));
-        maxIndex = productCards.length > visibleCards ? productCards.length - visibleCards : 0;
-        totalTrackWidth = (productCards.length * cardWidth) + Math.max(0, productCards.length - 1) * gap;
-        maxScroll = totalTrackWidth - viewportWidth;
-
-        if (currentIndex > maxIndex) {
-          currentIndex = maxIndex;
-        }
-      }
-      
-      function setPositionByIndex() {
-        currentTranslate = -currentIndex * (cardWidth + gap);
-        prevTranslate = currentTranslate;
-        tabContent.style.transition = 'transform 0.5s ease-in-out';
-        tabContent.style.transform = `translateX(${currentTranslate}px)`;
-        updateScrollbar();
-      }
-      
-      function updateScrollbar() {
-        if (!scrollbarThumb || !scrollbarContainer) return;
-        
-        const scrollProgress = Math.abs(currentTranslate) / maxScroll;
-        const thumbWidth = Math.max(20, (viewportWidth / totalTrackWidth) * scrollbarContainer.offsetWidth);
-        const thumbPosition = scrollProgress * (scrollbarContainer.offsetWidth - thumbWidth);
-        
-        scrollbarThumb.style.width = `${thumbWidth}px`;
-        scrollbarThumb.style.transform = `translateX(${thumbPosition}px)`;
-      }
 
       function startDrag(e) {
         isDragging = true;
         startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-        animationID = requestAnimationFrame(animation);
+        prevTranslate = tabContent.scrollLeft;
         tabContent.style.transition = 'none';
         tabContent.classList.add('is-dragging');
       }
@@ -799,38 +762,20 @@
         if (isDragging) {
           e.preventDefault();
           const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-          currentTranslate = prevTranslate + currentPosition - startPos;
+          const deltaX = currentPosition - startPos;
+          
+          // Apply smooth drag directly to scroll
+          tabContent.scrollLeft = prevTranslate - deltaX;
         }
       }
 
       function endDrag() {
         if (!isDragging) return;
-        cancelAnimationFrame(animationID);
         isDragging = false;
         tabContent.classList.remove('is-dragging');
-
-        const movedBy = currentTranslate - prevTranslate;
-
-        if (movedBy < -50 && currentIndex < maxIndex) {
-          currentIndex += 1;
-        }
-        if (movedBy > 50 && currentIndex > 0) {
-          currentIndex -= 1;
-        }
         
-        setPositionByIndex();
-      }
-
-      function animation() {
-        if (!isDragging) return;
-        tabContent.style.transform = `translateX(${currentTranslate}px)`;
-        updateScrollbar();
-        requestAnimationFrame(animation);
-      }
-      
-      function onResize() {
-        calculateDimensions();
-        setPositionByIndex();
+        // Store current scroll position for next drag
+        prevTranslate = tabContent.scrollLeft;
       }
 
       // Event listeners
@@ -856,36 +801,27 @@
         });
       });
 
-      const resizeObserver = new ResizeObserver(onResize);
-      resizeObserver.observe(tabContent);
-
-      setTimeout(() => {
-        calculateDimensions();
-        setPositionByIndex();
-      }, 150);
-
       carousels[carouselId] = {
         initialized: true,
         next: () => {
-          if (currentIndex < maxIndex) {
-            currentIndex++;
-            setPositionByIndex();
-          }
+          tabContent.scrollBy({
+            left: 400,
+            behavior: 'smooth'
+          });
         },
         prev: () => {
-          if (currentIndex > 0) {
-            currentIndex--;
-            setPositionByIndex();
-          }
+          tabContent.scrollBy({
+            left: -400,
+            behavior: 'smooth'
+          });
         },
         reset: () => {
-          currentIndex = 0;
-          setPositionByIndex();
+          tabContent.scrollTo({
+            left: 0,
+            behavior: 'smooth'
+          });
         },
-        update: () => {
-          calculateDimensions();
-          setPositionByIndex();
-        }
+        update: () => {}
       };
     }
     

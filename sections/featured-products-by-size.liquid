@@ -280,40 +280,32 @@
   [data-section-id="{{ section.id }}"] .product-cards-container {
     display: flex;
     gap: 2%;
-    transition: transform 0.3s ease;
     overflow: visible;
     padding-bottom: 20px;
     overflow-x: auto;
     overflow-y: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    position: relative;
   }
   
-  /* Hide default scrollbar */
+  /* Custom scrollbar styling - Always show on desktop */
   [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* Fixed scrollbar container */
-  [data-section-id="{{ section.id }}"] .scrollbar-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     height: 8px;
+  }
+  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-track {
     background: #F0F1EF;
     border-radius: 100px;
-    overflow: hidden;
   }
-  
-  /* Fixed scrollbar thumb */
-  [data-section-id="{{ section.id }}"] .scrollbar-thumb {
-    height: 100%;
+  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-thumb {
     background: #234085;
     border-radius: 100px;
-    transition: width 0.3s ease, transform 0.3s ease;
-    min-width: 20px;
+  }
+  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b;
+  }
+  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-button {
+    display: none;
   }
   [data-section-id="{{ section.id }}"] .product-card {
     display: none; /* Hidden by default, shown by JS */
@@ -492,24 +484,6 @@
     width: 100%;
   }
 
-  /* Custom scrollbar for product carousel - Desktop only */
-  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar {
-    height: 8px;
-  }
-  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-track {
-    background: #F0F1EF;
-    border-radius: 100px;
-  }
-  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-thumb {
-    background: #234085;
-    border-radius: 100px;
-  }
-  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-thumb:hover {
-    background: #1a2f6b;
-  }
-  [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-button {
-    display: none;
-  }
   
   /* Large screens - maintain fixed padding */
   @media (min-width: 1400px) {
@@ -603,13 +577,23 @@
       overflow-x: hidden !important;
     }
     
-    /* Hide scrollbar on mobile */
+    /* Mobile scrollbar styling */
     [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar {
-      display: none !important;
+      height: 8px !important;
     }
-    [data-section-id="{{ section.id }}"] .product-cards-container {
-      scrollbar-width: none !important;
-      -ms-overflow-style: none !important;
+    [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
+      border-radius: 100px !important;
+    }
+    [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-thumb {
+      background: #234085 !important;
+      border-radius: 100px !important;
+    }
+    [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
+    }
+    [data-section-id="{{ section.id }}"] .product-cards-container::-webkit-scrollbar-button {
+      display: none !important;
     }
     [data-section-id="{{ section.id }}"] .product-card {
       width: 100% !important;
@@ -731,68 +715,40 @@
     }
 
     function initializeCarousel() {
-      // Don't run smooth drag on mobile - use native scroll
+      // Mobile: Use native scroll
       if (window.innerWidth <= 768) {
         return {
-          next: () => {},
-          prev: () => {},
-          reset: () => {},
+          next: () => {
+            productCardsContainer.scrollBy({
+              left: 400, // 380px card + 20px gap
+              behavior: 'smooth'
+            });
+          },
+          prev: () => {
+            productCardsContainer.scrollBy({
+              left: -400,
+              behavior: 'smooth'
+            });
+          },
+          reset: () => {
+            productCardsContainer.scrollTo({
+              left: 0,
+              behavior: 'smooth'
+            });
+          },
           update: () => {}
         };
       }
 
-      let currentIndex = 0;
+      // Desktop: Use native scroll with smooth drag
       let isDragging = false;
       let startPos = 0;
-      let currentTranslate = 0;
       let prevTranslate = 0;
-      let animationID = 0;
-      
-      let cardWidth, gap, viewportWidth, visibleCards, maxIndex, totalTrackWidth, maxScroll;
-      
-      const visibleProductCards = Array.from(allProductCards).filter(card => card.style.display !== 'none');
-      const scrollbarThumb = sectionContainer.querySelector('.scrollbar-thumb');
-      const scrollbarContainer = sectionContainer.querySelector('.scrollbar-container');
-
-      function calculateDimensions() {
-        const visibleCards = Array.from(allProductCards).filter(card => card.style.display !== 'none');
-        cardWidth = visibleCards.length > 0 ? visibleCards[0].offsetWidth : 0;
-        if (cardWidth === 0) return;
-        gap = parseInt(window.getComputedStyle(productCardsContainer).gap) || 24;
-        viewportWidth = productCardsContainer.offsetWidth;
-        const itemsPerView = Math.floor((viewportWidth + gap) / (cardWidth + gap));
-        maxIndex = visibleCards.length > itemsPerView ? visibleCards.length - itemsPerView : 0;
-        totalTrackWidth = (visibleCards.length * cardWidth) + Math.max(0, visibleCards.length - 1) * gap;
-        maxScroll = totalTrackWidth - viewportWidth;
-
-        if (currentIndex > maxIndex) {
-          currentIndex = maxIndex;
-        }
-      }
-      
-      function setPositionByIndex() {
-        currentTranslate = -currentIndex * (cardWidth + gap);
-        prevTranslate = currentTranslate;
-        productCardsContainer.style.transition = 'transform 0.5s ease-in-out';
-        productCardsContainer.style.transform = `translateX(${currentTranslate}px)`;
-        updateScrollbar();
-      }
-      
-      function updateScrollbar() {
-        if (!scrollbarThumb || !scrollbarContainer) return;
-        
-        const scrollProgress = Math.abs(currentTranslate) / maxScroll;
-        const thumbWidth = Math.max(20, (viewportWidth / totalTrackWidth) * scrollbarContainer.offsetWidth);
-        const thumbPosition = scrollProgress * (scrollbarContainer.offsetWidth - thumbWidth);
-        
-        scrollbarThumb.style.width = `${thumbWidth}px`;
-        scrollbarThumb.style.transform = `translateX(${thumbPosition}px)`;
-      }
 
       function startDrag(e) {
         isDragging = true;
         startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-        animationID = requestAnimationFrame(animation);
+        prevTranslate = productCardsContainer.scrollLeft;
         productCardsContainer.style.transition = 'none';
         productCardsContainer.classList.add('is-dragging');
       }
@@ -801,40 +757,20 @@
         if (isDragging) {
           e.preventDefault();
           const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-          currentTranslate = prevTranslate + currentPosition - startPos;
+          const deltaX = currentPosition - startPos;
+          
+          // Apply smooth drag directly to scroll
+          productCardsContainer.scrollLeft = prevTranslate - deltaX;
         }
       }
 
       function endDrag() {
         if (!isDragging) return;
-        cancelAnimationFrame(animationID);
         isDragging = false;
         productCardsContainer.classList.remove('is-dragging');
-
-        const movedBy = currentTranslate - prevTranslate;
-
-        if (movedBy < -50 && currentIndex < maxIndex) {
-          currentIndex += 1;
-        }
-        if (movedBy > 50 && currentIndex > 0) {
-          currentIndex -= 1;
-        }
         
-        setPositionByIndex();
-      }
-
-      function animation() {
-        if (!isDragging) return;
-        productCardsContainer.style.transform = `translateX(${currentTranslate}px)`;
-        updateScrollbar();
-        requestAnimationFrame(animation);
-      }
-      
-      function onResize() {
-        // Skip on mobile
-        if (window.innerWidth <= 768) return;
-        calculateDimensions();
-        setPositionByIndex();
+        // Store current scroll position for next drag
+        prevTranslate = productCardsContainer.scrollLeft;
       }
 
       // Event listeners
@@ -860,35 +796,26 @@
         });
       });
 
-      const resizeObserver = new ResizeObserver(onResize);
-      resizeObserver.observe(productCardsContainer);
-
-      setTimeout(() => {
-        calculateDimensions();
-        setPositionByIndex();
-      }, 150);
-
       return {
         next: () => {
-          if (currentIndex < maxIndex) {
-            currentIndex++;
-            setPositionByIndex();
-          }
+          productCardsContainer.scrollBy({
+            left: 400,
+            behavior: 'smooth'
+          });
         },
         prev: () => {
-          if (currentIndex > 0) {
-            currentIndex--;
-            setPositionByIndex();
-          }
+          productCardsContainer.scrollBy({
+            left: -400,
+            behavior: 'smooth'
+          });
         },
         reset: () => {
-          currentIndex = 0;
-          setPositionByIndex();
+          productCardsContainer.scrollTo({
+            left: 0,
+            behavior: 'smooth'
+          });
         },
-        update: () => {
-          calculateDimensions();
-          setPositionByIndex();
-        }
+        update: () => {}
       };
     }
 
