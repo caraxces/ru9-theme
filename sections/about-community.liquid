@@ -27,6 +27,14 @@
     object-fit: cover;
     border-radius: 12px;
   }
+
+  .about-community-banner-desktop {
+    display: block;
+  }
+
+  .about-community-banner-mobile {
+    display: none;
+  }
   .about-community-banner-text {
     position: absolute;
     top: 50%;
@@ -93,7 +101,7 @@
       padding: 40px 0;
     }
     .about-community-section .page-width {
-      padding: 0 15px;
+      padding: 0;
     }
     .about-community-title {
       font-size: 24px;
@@ -101,8 +109,14 @@
     .about-community-banner {
       margin-bottom: 40px;
     }
-    .about-community-banner img {
+    .about-community-banner-desktop {
+      display: none;
+    }
+
+    .about-community-banner-mobile {
+      display: block;
       height: 300px;
+      border-radius: 0;
     }
     .about-community-banner-text {
       position: static;
@@ -146,10 +160,25 @@
           width="1200"
           height="400"
           loading="lazy"
+          class="about-community-banner-desktop"
         >
       {% else %}
-        <img src="https://via.placeholder.com/1200x400/3D6DFF/FFFFFF?text=Banner+Image" alt="Banner Image" width="1200" height="400" />
+        <img src="https://via.placeholder.com/1200x400/3D6DFF/FFFFFF?text=Banner+Image" alt="Banner Image" width="1200" height="400" class="about-community-banner-desktop" />
       {% endif %}
+      
+      {% if section.settings.banner_image_mobile != blank %}
+        <img 
+          src="{{ section.settings.banner_image_mobile | image_url: width: 800 }}" 
+          alt="{{ section.settings.banner_image_mobile.alt | escape }}"
+          width="800"
+          height="300"
+          loading="lazy"
+          class="about-community-banner-mobile"
+        >
+      {% else %}
+        <img src="https://via.placeholder.com/800x300/3D6DFF/FFFFFF?text=Mobile+Banner" alt="Mobile Banner Image" width="800" height="300" class="about-community-banner-mobile" />
+      {% endif %}
+      
       <div class="about-community-banner-text">
         {{ section.settings.banner_text | default: '<p>"Hành trình này không dừng lại ở sản phẩm hay dành riêng cho khách hàng"</p>' }}
       </div>
@@ -209,7 +238,12 @@
     {
       "type": "image_picker",
       "id": "banner_image",
-      "label": "Banner Image"
+      "label": "Banner Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image_mobile",
+      "label": "Banner Image (Mobile)"
     },
     {
       "type": "html",

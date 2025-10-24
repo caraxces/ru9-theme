@@ -1491,7 +1491,7 @@
           "image_mobile": "shopify://shop_images/b934cc4afc79dec50dcbf7559fe732221d332a77.png",
           "button_text": "",
           "button_link": "",
-          "long_content": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  .ru9-paragraph {\n    color: #000;\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-size: 20px;\n    font-style: normal;\n    font-weight: 400;\n    line-height: 140%; /* 28px */\n    text-align: left; /* ✅ căn trái */\n  }\n\n  @media (max-width: 767px) {\n    .ru9-paragraph {\n      font-size: 14px;\n      line-height: 150%;\n      width: 100%;\n      max-width: 301px;\n      margin: 0 auto; /* căn giữa khối nếu ở mobile */\n    }\n  }\n</style>\n\n<p class=\"ru9-paragraph\">\n  Giữa nhịp sống bận rộn, nhiều người xem giấc ngủ chỉ như một thói quen, như một khoảng nghỉ ngắn giữa những lo toan thường nhật. \n  Nhưng với Ru9, một giấc ngủ là nhiều hơn thế. \n  Đó là lúc cơ thể được phục hồi, tâm trí được nghỉ ngơi và năng lượng cho ngày mới được tái tạo. \n  Bởi Ru9 tin rằng, một giấc ngủ trọn vẹn không chỉ mang lại sự thoải mái, mà còn là nền tảng vững chắc cho sức khỏe và hạnh phúc lâu dài.\n</p>",
+          "long_content": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  .ru9-paragraph {\n    color: #000;\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-size: 20px;\n    font-style: normal;\n    font-weight: 400;\n    line-height: 140%; /* 28px */\n    text-align: left; /* ✅ căn trái */\n  }\n\n  @media (max-width: 767px) {\n    .ru9-paragraph {\n      font-size: 14px;\n      line-height: 150%;\n      width: 100%;\n      margin: 0 auto; /* căn giữa khối nếu ở mobile */\n    }\n  }\n</style>\n\n<p class=\"ru9-paragraph\">\n  Giữa nhịp sống bận rộn, nhiều người xem giấc ngủ chỉ như một thói quen, như một khoảng nghỉ ngắn giữa những lo toan thường nhật. \n  Nhưng với Ru9, một giấc ngủ là nhiều hơn thế. \n  Đó là lúc cơ thể được phục hồi, tâm trí được nghỉ ngơi và năng lượng cho ngày mới được tái tạo. \n  Bởi Ru9 tin rằng, một giấc ngủ trọn vẹn không chỉ mang lại sự thoải mái, mà còn là nền tảng vững chắc cho sức khỏe và hạnh phúc lâu dài.\n</p>",
           "background_color": "#ffffff",
           "long_content_background_color": "#ffffff",
           "long_content_text_color": "#333333",
@@ -1602,21 +1602,24 @@
             "type": "about_statistic_card",
             "settings": {
               "title": "<h3>Chuyên Viên Trẻ</h3>",
-              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>",
+              "image": "shopify://shop_images/Rectangle_221.png"
             }
           },
           "about_statistic_card_fXRQTW": {
             "type": "about_statistic_card",
             "settings": {
               "title": "<h3>Chuyên Viên Trẻ</h3>",
-              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>",
+              "image": "shopify://shop_images/Rectangle_219.png"
             }
           },
           "about_statistic_card_kqqCFV": {
             "type": "about_statistic_card",
             "settings": {
               "title": "<h3>Chuyên Viên Trẻ</h3>",
-              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>",
+              "image": "shopify://shop_images/Rectangle_217.png"
             }
           }
         },
@@ -1628,8 +1631,8 @@
         ],
         "settings": {
           "title": "<h2>Qua những câu chuyện thực tế</h2>",
-          "carousel_text": "95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM.",
-          "description": "<p>\"95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM.\"</p>",
+          "carousel_text": "<meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Ru9 Quote</title>\n  <link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@1,700&amp;display=swap\" rel=\"stylesheet\">\n  <style>\n    body {\n      margin: 0;\n      padding: 0;\n      font-family: \"Be Vietnam Pro\", sans-serif;\n      background: none;\n    }\n\n    .container {\n      display: grid;\n      grid-template-columns: 1fr 1fr 1fr;\n      max-width: 1200px;\n      margin: 0 auto;\n    }\n\n    .quote {\n      grid-column: 2 / 4;\n      color: #1C2C58;\n      font-size: 39px;\n      font-style: italic;\n      font-weight: 700;\n      line-height: 50px;\n      text-align: left;\n      background: none;\n      border: none;\n      box-shadow: none;\n      margin: 0;\n    }\n\n    @media (max-width: 767px) {\n      .container {\n        display: block;\n        padding: 0 16px;\n      }\n\n      .quote {\n        font-size: 14px;\n        line-height: 140%;\n        font-weight: 600;\n        font-style: italic;\n      }\n    }\n  </style>\n\n\n  <div class=\"container\">\n    <p class=\"quote\">\n      “95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM.”\n    </p>\n  </div>",
+          "description": "<meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Ru9 Paragraph</title>\n  <link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400&amp;display=swap\" rel=\"stylesheet\">\n  <style>\n    body {\n      margin: 0;\n      padding: 0;\n      font-family: \"Be Vietnam Pro\", sans-serif;\n      background: none;\n      color: #000;\n    }\n\n    .container {\n      display: grid;\n      grid-template-columns: 1fr 1fr 1fr;\n      max-width: 1200px;\n      margin: 0 auto;\n    }\n\n    .content {\n      grid-column: 2 / 4;\n      font-size: 20px;\n      font-style: normal;\n      font-weight: 400;\n      line-height: 140%;\n      text-align: left;\n      background: none;\n      border: none;\n      margin: 0;\n    }\n\n    @media (max-width: 767px) {\n      .container {\n        display: block;\n        padding: 0 16px;\n      }\n\n      .content {\n        font-size: 14px;\n        line-height: 140%;\n        font-weight: 400;\n      }\n    }\n  </style>\n\n\n  <div class=\"container\">\n    <p class=\"content\">\n      Ru9 không thể lan tỏa giá trị của giấc ngủ chất lượng đến hàng triệu người Việt như hôm nay nếu không có sự tin tưởng và đồng hành của khách hàng trong suốt chặng đường ấy. Chính mỗi giấc ngủ ngon của bạn là nguồn cảm hứng để Ru9 tiếp tục hoàn thiện và lớn lên từng ngày.\n    </p>\n  </div>",
           "background_color": "#ffffff",
           "card_background_color": "#f5f5f5",
           "title_color": "#1a2230",
@@ -1672,9 +1675,9 @@
           "title": "<h2>Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng</h2>",
           "description": "<p>Chất lượng của Ru9 không chỉ được chứng minh qua trải nghiệm người dùng mà còn được kiểm chứng bởi các chuyên gia hàng đầu.</p>",
           "background_color": "#ffffff",
-          "card_background_color": "#2960ad",
+          "card_background_color": "#f0f7ff",
           "title_color": "#1a2230",
-          "text_color": "#ffffff"
+          "text_color": "#0f0f0f"
         }
       },
       "about-testimonials": {
@@ -1692,8 +1695,10 @@
         "type": "about-community",
         "settings": {
           "title": "<h2>Mang giá trị thật đến cộng đồng</h2>",
+          "banner_image": "shopify://shop_images/a5af47c87edc213e279939124627b3ba894a6766.png",
+          "banner_image_mobile": "shopify://shop_images/8872e5f382722d0d33b1a5bdf49312bccab1bd1d.png",
           "banner_text": "<p>\"Hành trình này không dừng lại ở sản phẩm hay dành riêng cho khách hàng\"</p>",
-          "background_color": "#f5f5f5",
+          "background_color": "#ffffff",
           "title_color": "#1a2230",
           "banner_text_color": "#2a3b56",
           "accent_color": "#4a90e2",

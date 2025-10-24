@@ -156,10 +156,6 @@
   <div class="page-width">
     <div class="about-statistics-title">{{ section.settings.title | default: '<h2>Qua những câu chuyện thực tế</h2>' }}</div>
     
-    <div class="about-statistics-carousel">{{ section.settings.carousel_text | default: '95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM.' }}</div>
-    
-    <div class="about-statistics-description">{{ section.settings.description | default: '<p>Ru9 không thể lan tỏa giá trị của giấc ngủ chất lượng đến hàng triệu người Việt như hôm nay nếu không có sự tin tưởng và đồng hành của khách hàng trong suốt chặng đường ấy. Chính mỗi giấc ngủ ngon của bạn là nguồn cảm hứng để Ru9 tiếp tục hoàn thiện và lớn lên từng ngày.</p>' }}</div>
-    
     {% for block in section.blocks %}
       {% if block.type == 'statistic_block' %}
         <div class="about-statistics-stats" style="
@@ -194,6 +190,10 @@
         </div>
       {% endif %}
     {% endfor %}
+    
+    <div class="about-statistics-carousel">{{ section.settings.carousel_text | default: '95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM.' }}</div>
+    
+    <div class="about-statistics-description">{{ section.settings.description | default: '<p>Ru9 không thể lan tỏa giá trị của giấc ngủ chất lượng đến hàng triệu người Việt như hôm nay nếu không có sự tin tưởng và đồng hành của khách hàng trong suốt chặng đường ấy. Chính mỗi giấc ngủ ngon của bạn là nguồn cảm hứng để Ru9 tiếp tục hoàn thiện và lớn lên từng ngày.</p>' }}</div>
     
     <div class="about-statistics-separator">
       <div class="about-statistics-separator-line"></div>

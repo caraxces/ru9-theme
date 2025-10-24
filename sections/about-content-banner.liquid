@@ -64,6 +64,7 @@
     border-radius: 15px;
     overflow: hidden;
     flex-shrink: 0;
+    width: 100%;
   }
   .about-content-banner-content {
     position: relative;
@@ -188,12 +189,13 @@
   /* Desktop screens - 769px and above */
   @media (min-width: 769px) {
     .about-content-banner-container {
-      margin: 0 0px;
+      /* Container is now constrained by page-width parent */
       height: 500px;
+      width: 100%;
     }
     .about-content-banner-content {
       width: 60%;
-      padding: 0 5rem;
+      /* Content respects container width */
       background: transparent;
     }
     .about-content-banner-main-title {
@@ -368,7 +370,8 @@
   </div>
   
   <div class="about-content-banner-image-section">
-    <div class="about-content-banner-container">
+    <div class="page-width">
+      <div class="about-content-banner-container">
       {%- liquid
         assign has_mobile_image = false
         if section.settings.image_mobile != blank
@@ -411,6 +414,7 @@
             </a>
         {%- endif -%}
       </div>
+    </div>
     </div>
   </div>
 </div>
