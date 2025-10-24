@@ -5,9 +5,7 @@
     padding: 80px 0;
     background-color: {{ section.settings.background_color | default: '#ffffff' }};
   }
-  .about-environment-section .page-width {
-    padding: 0 0px;
-  }
+  /* Let theme handle canvas layout */
   .about-environment-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -72,12 +70,7 @@
 
   /* Mobile responsive */
   @media (max-width: 768px) {
-    .about-environment-section {
-      padding: 5rem 0;
-    }
-    .about-environment-section .page-width {
-      padding: 0 15px;
-    }
+    /* Let theme handle responsive padding */
     .about-environment-content {
       grid-template-columns: 1fr;
       gap: 40px;

@@ -5,9 +5,7 @@
     padding: 80px 0;
     background-color: {{ section.settings.background_color | default: '#ffffff' }};
   }
-  .about-promise-section .page-width {
-    padding: 0 0px;
-  }
+  /* Let theme handle canvas layout */
   .about-promise-content {
     display: flex;
     flex-direction: column;
@@ -103,12 +101,7 @@
 
   /* Mobile responsive */
   @media (max-width: 768px) {
-    .about-promise-section {
-      padding: 5rem 0;
-    }
-    .about-promise-section .page-width {
-      padding: 0 15px;
-    }
+    /* Let theme handle responsive padding */
     .about-promise-content {
       gap: 40px;
     }

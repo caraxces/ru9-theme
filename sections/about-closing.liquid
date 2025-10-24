@@ -6,9 +6,7 @@
     padding: 0;
     background-color: {{ section.settings.background_color | default: '#F5F5F5' }};
   }
-  .about-closing-section .page-width {
-    padding: 0 0px;
-  }
+  /* Let theme handle canvas layout */
   .about-closing-container {
     flex-shrink: 0;
     position: relative;
@@ -42,7 +40,7 @@
     text-align: right;
     color: {{ section.settings.text_color | default: '#ffffff' }};
     max-width: 600px;
-    padding: 0 5rem 0 40px;
+    /* Let theme handle canvas layout */
   }
   .about-closing-title {
     font-size: 48px;

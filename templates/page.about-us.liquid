@@ -42,19 +42,11 @@ html,body{
   overflow:hidden;
 }
 
+/* Remove custom canvas overrides - let theme handle canvas layout */
 .container{
   width: min(var(--container), 100%);
   margin: 0 auto;
-  padding-left: 5rem;
-  padding-right: 5rem;
-}
-
-/* Tablet responsive - use mobile-like header */
-@media (max-width: 1024px) {
-  .container{ 
-    padding-left: 15px;
-    padding-right: 15px;
-  }
+  /* Let theme handle padding through page-width class */
 }
 
 /* Typography */
@@ -213,19 +205,13 @@ section.divider{
   h2{ font-size:22px; }
   h3{ font-size:18px; }
   section{ padding-block: 36px; }
-  .container{ 
-    padding-left: 15px;
-    padding-right: 15px;
-  }
+  /* Let theme handle container padding */
 }
 
 @media (max-width: 480px) {
-  .container{ 
-    padding-left: 15px;
-    padding-right: 15px;
-  }
   section{ padding-block: 24px; }
-  }
+  /* Let theme handle container padding */
+}
   </style>
   
 <main class="about-ru9">
