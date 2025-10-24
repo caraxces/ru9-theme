@@ -85,11 +85,7 @@
 </div>
 
 <style>
-  .blog-posts-section .page-width {
-    max-width: none;
-    margin: 0 5rem;
-    padding: 0;
-  }
+  /* Remove custom canvas overrides - let theme handle canvas layout */
   .blog-posts-section {
     padding: 0px 0;
     font-family: "Be Vietnam Pro", sans-serif;
@@ -245,20 +241,12 @@
   }
 
   @media screen and (max-width: 990px) {
-    .blog-posts-section .page-width {
-      margin: 0 auto;
-      padding: 0 16px;
-    }
     .blog-carousel-slide {
       flex-basis: 48%;
     }
   }
 
   @media screen and (max-width: 768px) {
-    .blog-posts-section .page-width {
-      margin: 0 0;
-    }
-    
     .blog-carousel-slide {
       flex-basis: 80%;
     }
