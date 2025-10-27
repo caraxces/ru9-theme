@@ -5,69 +5,108 @@
     padding: 5rem 0;
     background-color: {{ section.settings.background_color | default: '#ffffff' }};
   }
-  /* Let theme handle canvas layout */
+
+  /* Header */
   .about-customers-header {
     text-align: left;
     margin-bottom: 50px;
   }
+
   .about-customers-title {
-    font-size: 32px;
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro";
+    font-size: 39px;
+    font-style: normal;
     font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2230' }};
-    margin-bottom: 20px;
-    line-height: 1.2;
+    line-height: 50px;
+    border-bottom: 1px solid #1C2C58;
+    padding-bottom: 10px;
+    margin-bottom: 60px; /* cách dòng gạch dưới với phần sau 60px */
   }
+
   .about-customers-description {
-    font-size: 18px;
+    font-size: clamp(14px, 1.8vw, 18px);
     color: {{ section.settings.text_color | default: '#5E6B85' }};
-    max-width: 800px;
+    max-width: 100%;
     margin: 0;
     line-height: 1.6;
   }
-  .about-customers-separator {
-    width: 100px;
-    height: 2px;
-    background-color: #000000;
-    margin: 30px 0;
-  }
+
+  /* Grid layout */
   .about-customers-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    gap: 40px;
+    align-items: start;
   }
+
+  /* Card tổng thể (ảnh + nội dung tách rời) */
   .about-customers-card {
-    text-align: left;
-    background-color: {{ section.settings.card_background_color | default: '#ffffff' }};
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid #E5E7EB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
   }
+
+  /* Ảnh riêng biệt */
   .about-customers-image {
-    margin-bottom: 20px;
+    margin-bottom: 0;
     text-align: center;
   }
+
   .about-customers-image img {
-    width: 422px;
+    width: 100%;
+    max-width: 422px;
     height: 340px;
     object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+
+  /* Khối nội dung riêng bên dưới */
+  .about-customers-card-content {
+    background-color: {{ section.settings.card_background_color | default: '#ffffff' }};
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    margin-top: 20px;
+    text-align: left;
+    width: 100%;
+    max-width: 422px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Hover effects */
+  .about-customers-card:hover .about-customers-image img {
+    transform: scale(1.03);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .about-customers-card:hover .about-customers-card-content {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+
   .about-customers-card h3 {
-    font-size: 18px;
+    font-size: clamp(16px, 1.5vw, 18px);
     font-weight: 700;
     color: {{ section.settings.title_color | default: '#1A2230' }};
     margin-bottom: 16px;
     line-height: 1.3;
   }
+
   .about-customers-card p {
     color: {{ section.settings.text_color | default: '#5E6B85' }};
     line-height: 1.6;
     margin: 0;
-    font-size: 16px;
+    font-size: clamp(14px, 1.3vw, 16px);
   }
 
-  /* Mobile responsive */
+  /* Responsive */
   @media (max-width: 1024px) {
     .about-customers-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -82,28 +121,16 @@
       padding: 0 15px;
     }
     .about-customers-title {
-      font-size: 24px;
-    }
-    .about-customers-description {
-      font-size: 16px;
+      font-size: 26px;
+      line-height: 36px;
+      margin-bottom: 40px;
     }
     .about-customers-grid {
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 25px;
     }
-    .about-customers-card {
-      padding: 20px;
-    }
-    .about-customers-image img {
-      width: 100%;
-      max-width: 300px;
-      height: 240px;
-    }
-    .about-customers-card h3 {
-      font-size: 16px;
-    }
-    .about-customers-card p {
-      font-size: 14px;
+    .about-customers-card-content {
+      max-width: 100%;
     }
   }
 </style>
@@ -111,9 +138,12 @@
 <div class="about-customers-section">
   <div class="page-width">
     <div class="about-customers-header">
-      <div class="about-customers-title">{{ section.settings.title | default: '<h2>Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng</h2>' }}</div>
-      <div class="about-customers-separator"></div>
-      <div class="about-customers-description">{{ section.settings.description | default: '<p>Chất lượng của Ru9 không chỉ được chứng minh qua trải nghiệm người dùng mà còn được kiểm chứng bởi các chuyên gia hàng đầu.</p>' }}</div>
+      <h2 class="about-customers-title">
+        Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng
+      </h2>
+      <div class="about-customers-description">
+        Chất lượng của Ru9 không chỉ được chứng minh qua trải nghiệm người dùng mà còn được kiểm chứng bởi các chuyên gia hàng đầu.
+      </div>
     </div>
     
     <div class="about-customers-grid">
@@ -132,8 +162,10 @@
               <img src="https://via.placeholder.com/422x340/3D6DFF/FFFFFF?text=Expert+{{ forloop.index }}" alt="Expert {{ forloop.index }}" width="422" height="340" />
             {% endif %}
           </div>
-          <h3>{{ block.settings.title }}</h3>
-          <p>{{ block.settings.description }}</p>
+          <div class="about-customers-card-content">
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.description }}</p>
+          </div>
         </div>
       {% endfor %}
     </div>
@@ -146,18 +178,6 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    {
-      "type": "html",
-      "id": "title",
-      "label": "Section Title",
-      "default": "<h2>Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng</h2>"
-    },
-    {
-      "type": "html",
-      "id": "description",
-      "label": "Section Description",
-      "default": "<p>Chất lượng của Ru9 không chỉ được chứng minh qua trải nghiệm người dùng mà còn được kiểm chứng bởi các chuyên gia hàng đầu.</p>"
-    },
     {
       "type": "color",
       "id": "background_color",
