@@ -15,10 +15,20 @@
   }
   .about-testimonials-intro {
     text-align: center;
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto 40px;
     color: {{ section.settings.text_color | default: '#5E6B85' }};
     line-height: 1.6;
+  }
+  }  .about-customers-description {
+    font-size: clamp(14px, 1.8vw, 18px);
+    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    max-width: 100%;
+    margin: 0;
+    line-height: 1.6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .about-testimonials-intro p {
     margin-bottom: 16px;
@@ -51,6 +61,7 @@
   .about-testimonials-card h4 {
     font-size: 16px;
     font-weight: 600;
+    max-width: 100%;
     color: {{ section.settings.title_color | default: '#1A2230' }};
     margin-bottom: 16px;
     line-height: 1.2;
@@ -194,8 +205,8 @@
         },
         {
           "type": "image_picker",
-          "id": "avatar",
-          "label": "Expert Avatar"
+          "id": "image",
+          "label": "Expert Image"
         }
       ]
     }

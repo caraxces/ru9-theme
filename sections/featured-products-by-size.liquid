@@ -565,7 +565,7 @@
       margin: 0 -15px;
     }
     [data-section-id="{{ section.id }}"] .product-carousel {
-      padding: 0 15px 40px 15px;
+      padding: 0 15px 0px 15px;
       overflow: visible;
     }
     [data-section-id="{{ section.id }}"] .product-cards-container {
@@ -605,8 +605,8 @@
       display: none !important;
     }
     [data-section-id="{{ section.id }}"] .product-image-container {
-      width: 172px !important;
-      height: 129px !important;
+      {% comment %} width: 172px !important;
+      height: 129px !important; {% endcomment %}
       flex-shrink: 0 !important;
       aspect-ratio: unset !important;
       border-radius: 3px !important;
