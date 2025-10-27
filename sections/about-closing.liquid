@@ -20,6 +20,9 @@
     object-fit: cover;
     z-index: 1;
   }
+  .about-closing-mobile-image {
+    object-fit: contain;
+  }
   .about-closing-desktop-image {
     display: block;
   }
@@ -44,7 +47,7 @@
     font-size: clamp(24px, 3vw, 2.5em);
     font-weight: 700;
     line-height: 1.2;
-    margin-bottom: 20px;
+    margin-bottom: -35px;
     color: {{ section.settings.text_color | default: '#ffffff' }};
   }
   .about-closing-subtitle {
@@ -65,12 +68,15 @@
   /* Mobile styles - 768px and below */
   @media (max-width: 768px) {
     .about-closing-container {
-      height: 400px;
+      height: 292px;
+    }
+    .about-closing-image {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
     }
     .about-closing-content-wrapper {
-      padding: 40px 20px;
-      justify-content: center;
-      align-items: center;
+      display: none;
     }
     .about-closing-content {
       max-width: 100%;
@@ -118,14 +124,14 @@
     <img 
       class="about-closing-image about-closing-mobile-image"
       {% if section.settings.mobile_image != blank %}
-        src="{{ section.settings.mobile_image | image_url: width: 768 }}" 
+        src="{{ section.settings.mobile_image | image_url: width: 390, height: 292 }}" 
         alt="{{ section.settings.mobile_image.alt | escape }}"
       {% else %}
-        src="https://via.placeholder.com/768x400/3D6DFF/FFFFFF?text=Mobile+Closing" 
+        src="https://via.placeholder.com/390x292/3D6DFF/FFFFFF?text=Mobile+Closing" 
         alt="Mobile Closing"
       {% endif %}
-      width="768"
-      height="400"
+      width="390"
+      height="292"
       loading="lazy"
     >
     
@@ -138,7 +144,7 @@
       </div>
     </div>
   </div>
-</div>
+  </div>
 </div>
 
 {% schema %}

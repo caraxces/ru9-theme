@@ -183,6 +183,8 @@
       background: radial-gradient(120% 120% at 10% 0%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 60%),
       radial-gradient(120% 120% at 90% 20%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 60%),
       radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 60%);
+      radial-gradient(120% 120% at 90% 20%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 60%),
+      radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 60%);
       mix-blend-mode: multiply;
       animation: darkveil-fallback-move 12s linear infinite;
     }
@@ -617,13 +619,13 @@
     </svg>
   </button>
   <a id="fab-phone" class="fab-contact-item" href="tel:{{ section.settings.hotline_number }}" title="Call Us">
-    <img src="{{ 'phone-icon.png' | asset_url }}" alt="Phone" loading="lazy">
+    <img src="{{ 'phone-icon.png' | asset_url }}" alt="Phone" width="48" height="48" loading="lazy">
   </a>
   <a id="fab-zalo" class="fab-contact-item" href="{{ settings.social_zalo_link }}" target="_blank" title="Chat on Zalo">
-    <img src="{{ 'stick_zalo.png' | asset_url }}" alt="Zalo" loading="lazy">
+    <img src="{{ 'stick_zalo.png' | asset_url }}" alt="Zalo" width="48" height="48" loading="lazy">
   </a>
   <a id="fab-messenger" class="fab-contact-item" href="https://m.me/ru9vn" target="_blank" title="Chat on Messenger">
-    <img src="{{ 'messenger.png' | asset_url }}" alt="Messenger" loading="lazy">
+    <img src="{{ 'messenger.png' | asset_url }}" alt="Messenger" width="48" height="48" loading="lazy">
   </a>
 </div>
 

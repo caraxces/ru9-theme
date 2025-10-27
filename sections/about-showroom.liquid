@@ -2,8 +2,9 @@
 
 <style>
   .about-showroom-section {
-    padding: 80px 0;
+    padding: 80px 0 0 0;
     background-color: {{ section.settings.background_color | default: '#F8FAFC' }};
+    margin-top: -100px;
   }
   /* Let theme handle canvas layout */
   .about-showroom-content {
@@ -54,39 +55,47 @@
     gap: 20px;
   }
   .about-showroom-card {
+    max-width: 422px;
     background-color: {{ section.settings.card_background_color | default: '#F8FAFC' }};
     padding: 0;
-    border-radius: 8px;
+    border-radius: 5px;
     box-shadow: none;
     transition: none;
+    background:  #F0F7FF;
   }
   .about-showroom-image {
     margin-bottom: 15px;
   }
   .about-showroom-image img {
-    width: 100%;
+    width: 422px;
+    height: 340px;
+    flex-shrink: 0;
     border-radius: 8px;
-    height: 200px;
     object-fit: cover;
   }
   .about-showroom-card h3 {
-    font-size: 16px;
-    font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2B4D' }};
+    color: #000;
+    font-family: "Be Vietnam Pro";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
     margin: 0 0 8px 0;
-    line-height: 1.2;
   }
   .about-showroom-card p {
-    color: {{ section.settings.text_color | default: '#333333' }};
+    color: #000;
+    font-family: "Be Vietnam Pro";
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 140%;
     margin: 0;
-    line-height: 1.4;
-    font-size: 14px;
   }
 
   /* Mobile responsive */
   @media (max-width: 768px) {
     .about-showroom-section {
-      padding: 5rem 0;
+      padding: 5rem 0 0 0;
     }
     .about-showroom-section .page-width {
       padding: 0 15px;
@@ -115,7 +124,9 @@
       gap: 20px;
     }
     .about-showroom-image img {
-      height: 150px;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
     }
     .about-showroom-card h3 {
       font-size: 14px;
@@ -145,14 +156,14 @@
             <div class="about-showroom-image">
               {% if block.settings.image != blank %}
                 <img 
-                  src="{{ block.settings.image | image_url: width: 400 }}" 
+                  src="{{ block.settings.image | image_url: width: 422, height: 340 }}" 
                   alt="{{ block.settings.image.alt | escape }}"
-                  width="400"
-                  height="200"
+                  width="422"
+                  height="340"
                   loading="lazy"
                 >
               {% else %}
-                <img src="https://via.placeholder.com/400x200/3D6DFF/FFFFFF?text=Showroom+{{ forloop.index }}" alt="Showroom {{ forloop.index }}" width="400" height="200" />
+                <img src="https://via.placeholder.com/422x340/3D6DFF/FFFFFF?text=Showroom+{{ forloop.index }}" alt="Showroom {{ forloop.index }}" width="422" height="340" />
               {% endif %}
             </div>
             <div>{{ block.settings.name }}</div>

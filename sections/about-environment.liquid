@@ -8,12 +8,19 @@
   .about-environment-section .page-width {
     padding-left: 60px;
   }
+  .about-environment-section .page-width {
+    padding-left: 60px;
+  }
   /* Let theme handle canvas layout */
   .about-environment-content {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 2fr;
     gap: 5rem;
     align-items: start;
+  }
+  .about-environment-left {
+    padding-right: 2rem;
   }
   .about-environment-left {
     padding-right: 2rem;
@@ -39,6 +46,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding-left: 2rem;
     padding-left: 2rem;
   }
   .about-environment-paragraph {
@@ -80,6 +88,9 @@
     .about-environment-section .page-width {
       padding-left: 20px;
     }
+    .about-environment-section .page-width {
+      padding-left: 20px;
+    }
     /* Let theme handle responsive padding */
     .about-environment-content {
       grid-template-columns: 1fr;
@@ -87,6 +98,12 @@
     }
     .about-environment-left {
       gap: 15px;
+      border-bottom: 1px solid #E5E7EB;
+      padding-right: 0;
+      padding-bottom: 20px;
+    }
+    .about-environment-right {
+      padding-left: 0;
       border-bottom: 1px solid #E5E7EB;
       padding-right: 0;
       padding-bottom: 20px;
