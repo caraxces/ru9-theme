@@ -340,7 +340,8 @@
 
   .variant-input {
     display: inline-block;
-    margin: 0 5px;
+    gap: 5px;
+    {% comment %} margin: 0 5px; {% endcomment %}
   }
   .is-color .variant-input {
     width: 24px;
@@ -421,8 +422,7 @@
     /* grid-template-columns: 40px 1fr; */
 
     flex-wrap: wrap;
-
-    grid-gap: 5px 10px;
+    gap: 8px;
   }
 
   .variant-input-wrap input {
