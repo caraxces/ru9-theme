@@ -1,1 +1,143 @@
-{"type":"custom.popups","name":"t:sections.popup-group.name","sections":{"wheel_XXPC8T":{"type":"wheel","disabled":true,"settings":{"wheel_background":"shopify:\/\/shop_images\/Thi_t_k_ch_a_co_ten_7744e381-e86d-49ec-b22f-007eafd1ac2a.gif","form_title":"Nhập thông tin của bạn để nhận lì xì từ Ru9 tới quý khách hàng.","form_description":"CHỈ ÁP DỤNG CHO KHÁCH HÀNG MUA HÀNG TỪ 3\/2-9\/2","congratulation_text":"Cảm ơn bạn đã tham gia!","number_of_prizes":14,"prize_text_1":"Dù Ru9","prize_text_2":"Túi tote Ru9","prize_text_3":"Eye Mask Ru9","prize_text_4":"Ly Ru9","prize_text_5":"Ly Ru9","prize_text_6":"Túi tote Ru9","prize_text_7":"Ly Ru9","prize_text_8":"Dù Ru9","prize_text_9":"Eye Mask Ru9","prize_text_10":"Ly Ru9","prize_text_11":"Túi tote Ru9","prize_text_12":"Dù Ru9","prize_text_13":"Eye Mask Ru9","prize_text_14":"Ly Ru9","prize_image_1":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-04.jpg","prize_image_2":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-02.jpg","prize_image_3":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-03.jpg","prize_image_4":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-01.jpg","prize_image_5":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-01.jpg","prize_image_6":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-02.jpg","prize_image_7":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-03.jpg","prize_image_8":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-04.jpg","prize_image_9":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-03.jpg","prize_image_10":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-01.jpg","prize_image_11":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-02.jpg","prize_image_12":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-04.jpg","prize_image_13":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-03.jpg","prize_image_14":"shopify:\/\/shop_images\/Gacha_-_Vong_Quay_May_M_n-01.jpg"}},"newsletter-popup":{"type":"newsletter-popup","blocks":{"reminder-block":{"type":"header","disabled":true,"settings":{"reminder_label":"Get 10% off"}}},"block_order":["reminder-block"],"disabled":true,"settings":{"disable_for_account_holders":false,"popup_seconds":2,"popup_days":30,"popup_title":"Save 10% off your first purchase","popup_text":"<p>Sign up today and we'll send you a 10% discount code towards your first purchase.<\/p>","popup_image":"shopify:\/\/shop_images\/WEB_VOUCHER_5_-04.jpg","image_position":"left","show_social_icons":false,"enable_newsletter":true,"button_label":"Optional button","button_link":""}},"age-verification-popup":{"type":"age-verification-popup","disabled":true,"settings":{"enable_test_mode":false,"blur_image":false,"heading":"Confirm your age","text":"<p>Are you 18 years old or older?<\/p>","decline_button_label":"No I'm not","approve_button_label":"Yes I am","decline_heading":"Come back when you're older","decline_text":"<p>Sorry, the content of this store can't be seen by a younger audience. Come back when you're older.<\/p>","return_button_label":"Oops, I entered incorrectly"}},"welcome_popup_9i4VVb":{"type":"welcome-popup","blocks":{"form_input_HbrkJk":{"type":"form_input","settings":{"name":"entry.644568718","label":"Số điện thoại","required":false,"type":"tel"}},"form_input_FUVD9z":{"type":"form_input","settings":{"name":"entry.2084374528","label":"Email","required":false,"type":"email"}}},"block_order":["form_input_HbrkJk","form_input_FUVD9z"],"settings":{"enabled":false,"enabled_session":true,"title":"Nhập thông tin tại đây:","google_form_id":"1FAIpQLSffiUFxnWPISrbIwLh9p0svvwL4fWzxM4pJVd-OEZW1SZV5_w","delay_time":7,"cta_title":"Xác nhận","success_message":"<p>Cảm ơn bạn đã để lại số điện thoại [phone]. Ru9 tặng bạn mã ưu đãi <b>SLEEPWELL_WITH_RU9<\/b> và mã <b>WELCOME_TO_RU9<\/b> giảm 100,000đ cho mọi đơn hàng, áp dụng chung với các chương trình khuyến mãi khác. Mã chỉ sử dụng tại bước thanh toán trên website.<\/p>\n\n<p>Chúc bạn có trải nghiệm mua sắm tuyệt vời và luôn ngủ thật ngon cùng Ru9.<\/p>","logo":"shopify:\/\/shop_images\/logo-header.png","desktop_banner":"shopify:\/\/shop_images\/WEB_VOUCHER_5_-04.jpg","mobile_banner":"shopify:\/\/shop_images\/WEB_VOUCHER_5_-04.jpg"}}},"order":["wheel_XXPC8T","newsletter-popup","age-verification-popup","welcome_popup_9i4VVb"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "custom.popups",
+  "name": "t:sections.popup-group.name",
+  "sections": {
+    "wheel_XXPC8T": {
+      "type": "wheel",
+      "disabled": true,
+      "settings": {
+        "wheel_background": "shopify://shop_images/Thi_t_k_ch_a_co_ten_7744e381-e86d-49ec-b22f-007eafd1ac2a.gif",
+        "form_title": "Nhập thông tin của bạn để nhận lì xì từ Ru9 tới quý khách hàng.",
+        "form_description": "CHỈ ÁP DỤNG CHO KHÁCH HÀNG MUA HÀNG TỪ 3/2-9/2",
+        "congratulation_text": "Cảm ơn bạn đã tham gia!",
+        "number_of_prizes": 14,
+        "prize_text_1": "Dù Ru9",
+        "prize_text_2": "Túi tote Ru9",
+        "prize_text_3": "Eye Mask Ru9",
+        "prize_text_4": "Ly Ru9",
+        "prize_text_5": "Ly Ru9",
+        "prize_text_6": "Túi tote Ru9",
+        "prize_text_7": "Ly Ru9",
+        "prize_text_8": "Dù Ru9",
+        "prize_text_9": "Eye Mask Ru9",
+        "prize_text_10": "Ly Ru9",
+        "prize_text_11": "Túi tote Ru9",
+        "prize_text_12": "Dù Ru9",
+        "prize_text_13": "Eye Mask Ru9",
+        "prize_text_14": "Ly Ru9",
+        "prize_image_1": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-04.jpg",
+        "prize_image_2": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-02.jpg",
+        "prize_image_3": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-03.jpg",
+        "prize_image_4": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-01.jpg",
+        "prize_image_5": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-01.jpg",
+        "prize_image_6": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-02.jpg",
+        "prize_image_7": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-03.jpg",
+        "prize_image_8": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-04.jpg",
+        "prize_image_9": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-03.jpg",
+        "prize_image_10": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-01.jpg",
+        "prize_image_11": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-02.jpg",
+        "prize_image_12": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-04.jpg",
+        "prize_image_13": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-03.jpg",
+        "prize_image_14": "shopify://shop_images/Gacha_-_Vong_Quay_May_M_n-01.jpg"
+      }
+    },
+    "newsletter-popup": {
+      "type": "newsletter-popup",
+      "blocks": {
+        "reminder-block": {
+          "type": "header",
+          "disabled": true,
+          "settings": {
+            "reminder_label": "Get 10% off"
+          }
+        }
+      },
+      "block_order": [
+        "reminder-block"
+      ],
+      "disabled": true,
+      "settings": {
+        "disable_for_account_holders": false,
+        "popup_seconds": 2,
+        "popup_days": 30,
+        "popup_title": "Save 10% off your first purchase",
+        "popup_text": "<p>Sign up today and we'll send you a 10% discount code towards your first purchase.</p>",
+        "popup_image": "shopify://shop_images/WEB_VOUCHER_5_-04.jpg",
+        "image_position": "left",
+        "show_social_icons": false,
+        "enable_newsletter": true,
+        "button_label": "Optional button",
+        "button_link": ""
+      }
+    },
+    "age-verification-popup": {
+      "type": "age-verification-popup",
+      "disabled": true,
+      "settings": {
+        "enable_test_mode": false,
+        "blur_image": false,
+        "heading": "Confirm your age",
+        "text": "<p>Are you 18 years old or older?</p>",
+        "decline_button_label": "No I'm not",
+        "approve_button_label": "Yes I am",
+        "decline_heading": "Come back when you're older",
+        "decline_text": "<p>Sorry, the content of this store can't be seen by a younger audience. Come back when you're older.</p>",
+        "return_button_label": "Oops, I entered incorrectly"
+      }
+    },
+    "welcome_popup_9i4VVb": {
+      "type": "welcome-popup",
+      "blocks": {
+        "form_input_HbrkJk": {
+          "type": "form_input",
+          "settings": {
+            "name": "entry.644568718",
+            "label": "Số điện thoại",
+            "required": false,
+            "type": "tel"
+          }
+        },
+        "form_input_FUVD9z": {
+          "type": "form_input",
+          "settings": {
+            "name": "entry.2084374528",
+            "label": "Email",
+            "required": false,
+            "type": "email"
+          }
+        }
+      },
+      "block_order": [
+        "form_input_HbrkJk",
+        "form_input_FUVD9z"
+      ],
+      "settings": {
+        "enabled": false,
+        "enabled_session": true,
+        "title": "Nhập thông tin tại đây:",
+        "google_form_id": "1FAIpQLSffiUFxnWPISrbIwLh9p0svvwL4fWzxM4pJVd-OEZW1SZV5_w",
+        "delay_time": 7,
+        "cta_title": "Xác nhận",
+        "success_message": "<p>Cảm ơn bạn đã để lại số điện thoại [phone]. Ru9 tặng bạn mã ưu đãi <b>SLEEPWELL_WITH_RU9</b> và mã <b>WELCOME_TO_RU9</b> giảm 100,000đ cho mọi đơn hàng, áp dụng chung với các chương trình khuyến mãi khác. Mã chỉ sử dụng tại bước thanh toán trên website.</p>\n\n<p>Chúc bạn có trải nghiệm mua sắm tuyệt vời và luôn ngủ thật ngon cùng Ru9.</p>",
+        "logo": "shopify://shop_images/logo-header.png",
+        "desktop_banner": "shopify://shop_images/WEB_VOUCHER_5_-04.jpg",
+        "mobile_banner": "shopify://shop_images/WEB_VOUCHER_5_-04.jpg"
+      }
+    }
+  },
+  "order": [
+    "wheel_XXPC8T",
+    "newsletter-popup",
+    "age-verification-popup",
+    "welcome_popup_9i4VVb"
+  ]
+}

@@ -44,10 +44,19 @@
   .about-story-image-quote {
     display: block;
     font-weight: 700;
-    color: #333333;
+    color: #1C2C58;
     margin: 20px 0 0 0;
-    line-height: 1.6;
+    line-height: 140%;
     order: 3;
+  }
+  .about-story-image-quote p {
+    font-family: "Be Vietnam Pro";
+    font-size: 27px;
+    font-style: italic;
+    font-weight: 600;
+    color: #1C2C58;
+    line-height: 140%;
+    margin: 0;
   }
   .about-story-text {
     flex: 1;
@@ -58,7 +67,6 @@
     color: #1C2C58;
     margin-bottom: 20px;
     line-height: 1.2;
-    border-bottom: 1px solid #1C2C58;
     padding-bottom: 20px;
   }
   .about-story-text p {
@@ -87,7 +95,6 @@
     color: #1C2C58;
     margin: 30px 0 20px 0;
     line-height: 1.2;
-    border-bottom: 1px solid #1C2C58;
     padding-bottom: 20px;
   }
   .about-story-mission-list {
@@ -122,25 +129,34 @@
     
     /* Mobile - hiện mobile elements */
     .about-story-main-title {
-      order: 1;
+      order: 1 !important;
       margin-bottom: 15px;
       display: block;
     }
     .about-story-image-quote {
-      order: 2;
+      order: 2 !important;
       margin: 15px 0;
       display: block;
+    }
+    .about-story-image-quote p {
+      font-family: "Be Vietnam Pro";
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 600;
+      color: #1C2C58;
+      line-height: 140%;
+      margin: 0;
     }
     
     /* Mobile - ảnh sát viền */
     .about-story-image {
       flex: none;
-      order: 3;
+      order: 3 !important;
       padding: 0;
       margin: 0;
     }
     .about-story-image img {
-      order: 1;
+      order: 3 !important;
       margin-bottom: 20px;
       width: 100%;
       border-radius: 0;
@@ -156,7 +172,7 @@
     }
     
     .about-story-text {
-      order: 4;
+      order: 4 !important;
       flex: none;
     }
   }

@@ -4,108 +4,145 @@
   .about-journey-section {
     padding: 80px 0;
     background-color: {{ section.settings.background_color | default: '#ffffff' }};
+    position: relative;
   }
-  /* Let theme handle canvas layout */
+  .about-journey-section .page-width {
+    padding-left: 60px;
+  }
+  
+  .about-journey-header-wrapper {
+    margin-bottom: 3rem;
+  }
   .about-journey-header {
-    text-align: center;
-    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-width: calc(66.67% + 60px); /* 2/3 width + gap */
+    margin-left: calc(33.33% + 60px); /* 1/3 width + gap to align with story content */
+  }
+  .about-journey-title-line {
+    width: 100px;
+    height: 1px;
+    background-color: #E5E7EB;
+    margin-top: 15px;
   }
   .about-journey-title {
-    font-size: 2.5em;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 48px;
     font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2B4D' }};
+    color: #1C2C58;
     margin: 0 0 20px 0;
-    line-height: 1.2;
+    line-height: 64px;
+  }
+  .about-journey-title h2 {
+    margin: 0;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #1C2C58;
+    line-height: 64px;
   }
   .about-journey-subtitle {
-    font-size: 2em;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 48px;
     font-weight: 700;
-    color: {{ section.settings.subtitle_color | default: '#3D6DFF' }};
-    margin: 0 0 30px 0;
-    line-height: 1.2;
+    color: #759CE6;
+    margin: 0 0 12px 0;
+    line-height: 64px;
   }
+  .about-journey-subtitle h2 {
+    margin: 0;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #759CE6;
+    line-height: 64px;
+  }
+  
   .about-journey-intro {
-    margin: 0 auto;
+    margin-top: 20px;
     color: {{ section.settings.text_color | default: '#333333' }};
-    line-height: 1.6;
+    line-height: 1.8;
     text-align: left;
+    font-size: clamp(14px, 1.8vw, 1em);
   }
   .about-journey-intro p {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
   .about-journey-intro p:last-child {
     margin-bottom: 0;
   }
+  
   .about-journey-separator {
     width: 100%;
     height: 1px;
     background-color: #E0E0E0;
-    margin: 40px 0;
+    margin: 0 0 40px 0;
   }
-  .about-journey-content {
+  
+  .about-journey-stories-container {
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: 60px;
   }
+  
   .about-journey-story-block {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
+    grid-template-columns: 33.33% 1fr;
+    gap: 60px;
+    align-items: start;
   }
-  .about-journey-story-block.reverse {
-    grid-template-columns: 1fr 1fr;
-  }
-  .about-journey-story-block.reverse .about-journey-story-image {
-    order: 2;
-  }
-  .about-journey-story-block.reverse .about-journey-story-content {
-    order: 1;
-  }
-  .about-journey-story-image {
-    width: 100%;
-  }
-  .about-journey-story-image img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 12px;
-  }
-  .about-journey-story-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+  
   .about-journey-story-title {
-    font-size: 1.8em;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 39px;
     font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2B4D' }};
+    color: #1C2C58;
+    line-height: 50px;
     margin: 0;
-    line-height: 1.2;
   }
-  .about-journey-story-text {
+  .about-journey-story-title h3 {
+    margin: 0;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 39px;
+    font-weight: 700;
+    color: #1C2C58;
+    line-height: 50px;
+  }
+  
+  .about-journey-story-content {
     color: {{ section.settings.text_color | default: '#333333' }};
-    line-height: 1.6;
-    margin: 0;
+    line-height: 1.8;
+    font-size: clamp(14px, 1.8vw, 1em);
   }
-  .about-journey-story-text p {
-    margin-bottom: 16px;
+  .about-journey-story-content p {
+    margin-bottom: 20px;
   }
-  .about-journey-story-text p:last-child {
+  .about-journey-story-content p:last-child {
     margin-bottom: 0;
   }
+  
   .about-journey-quote {
     text-align: center;
-    font-size: 18px;
+    font-size: clamp(16px, 2vw, 20px);
     font-style: italic;
     color: {{ section.settings.title_color | default: '#1A2230' }};
-    margin: 40px auto 0;
-    line-height: 1.6;
+    margin: 60px auto 0;
+    line-height: 1.8;
+    max-width: 900px;
   }
 
-  /* Mobile responsive */
   @media (max-width: 768px) {
-    /* Let theme handle responsive padding */
+    .about-journey-section {
+      padding: 60px 0;
+    }
+    .about-journey-section .page-width {
+      padding-left: 20px;
+    }
+    .about-journey-header {
+      max-width: 100%;
+      margin-left: 0;
+    }
     .about-journey-title {
       font-size: 2em;
     }
@@ -113,26 +150,20 @@
       font-size: 1.5em;
     }
     .about-journey-intro {
-      margin-bottom: 40px;
+      margin-top: 15px;
     }
-    .about-journey-content {
-      gap: 5rem;
+    .about-journey-stories-container {
+      gap: 40px;
+    }
+    .about-journey-separator {
+      margin: 0 0 30px 0;
     }
     .about-journey-story-block {
       grid-template-columns: 1fr;
-      gap: 30px;
-    }
-    .about-journey-story-block.reverse .about-journey-story-image {
-      order: 1;
-    }
-    .about-journey-story-block.reverse .about-journey-story-content {
-      order: 2;
-    }
-    .about-journey-story-image img {
-      height: 250px;
+      gap: 20px;
     }
     .about-journey-story-title {
-      font-size: 1.5em;
+      font-size: 1.3em;
     }
     .about-journey-quote {
       font-size: 16px;
@@ -143,82 +174,32 @@
 
 <div class="about-journey-section">
   <div class="page-width">
-    <div class="about-journey-header">
-      <div class="about-journey-title">{{ section.settings.title | default: '<h2>TỪ GIẤC MƠ NGỦ NGON</h2>' }}</div>
-      <div class="about-journey-subtitle">{{ section.settings.subtitle | default: '<h2>ĐẾN NHỮNG VINH QUANG</h2>' }}</div>
-      <div class="about-journey-intro">
-        {{ section.settings.intro_content }}
+    <!-- Header and Intro -->
+    <div class="about-journey-header-wrapper">
+      <div class="about-journey-header">
+        <div class="about-journey-title">{{ section.settings.title | default: '<h2>Từ giấc mơ ngủ ngon</h2>' }}</div>
+        <div class="about-journey-subtitle">{{ section.settings.subtitle | default: '<h2>đến những vinh quang</h2>' }}</div>
+        <div class="about-journey-title-line"></div>
+        <div class="about-journey-intro">{{ section.settings.intro_content }}</div>
       </div>
     </div>
     
     <div class="about-journey-separator"></div>
     
-    <div class="about-journey-content">
-      <!-- Story Block 1: Bản lĩnh Đương đầu -->
+    <!-- Story Blocks -->
+    <div class="about-journey-stories-container">
+      <!-- Story Block 1 -->
       <div class="about-journey-story-block">
-        <div class="about-journey-story-image">
-          {% if section.settings.story1_image != blank %}
-            <img 
-              src="{{ section.settings.story1_image | image_url: width: 600 }}" 
-              alt="{{ section.settings.story1_image.alt | escape }}"
-              width="600"
-              height="400"
-              loading="lazy"
-            >
-          {% else %}
-            <img src="https://via.placeholder.com/600x400/3D6DFF/FFFFFF?text=Story+1+Image" alt="Story 1 Image" width="600" height="400" />
-          {% endif %}
-        </div>
-        <div class="about-journey-story-content">
-          <div class="about-journey-story-title">{{ section.settings.story1_title | default: '<h3>Bản lĩnh Đương đầu</h3>' }}</div>
-          <div class="about-journey-story-text">{{ section.settings.story1_content | default: '<p>Những giải thưởng không chỉ là thành tựu của riêng Ru9, mà còn là sự công nhận cho tinh thần tiên phong và bản lĩnh của người sáng lập. Như giải thưởng "Bản lĩnh Đương đầu" tại WeChoice Awards 2020 là sự ghi nhận cho những nỗ lực bền bỉ của chị Trang Đặng - Nhà sáng lập kiêm CEO cũng như là Ru9 trong việc hỗ trợ cộng đồng, đặc biệt trong giai đoạn đại dịch.</p>' }}</div>
-        </div>
+        <div class="about-journey-story-title">{{ section.settings.story1_title | default: '<h3>Từ giấc mơ ngủ ngon đến hiện thực</h3>' }}</div>
+        <div class="about-journey-story-content">{{ section.settings.story1_content | default: '<p>Hành trình của Ru9 bắt đầu từ một trải nghiệm cá nhân về giấc ngủ và sức khỏe, khi nhà sáng lập nhận ra tầm quan trọng của việc nghỉ ngơi chất lượng nhưng vẫn phù hợp với nhịp sống hiện đại. Từ đó, chị Trang Đặng - Nhà sáng lập kiêm CEO của Ru9 đã mang ý tưởng "táo bạo" này đến chương trình Shark Tank Việt Nam, đánh dấu bước ngoặt đầu tiên của thương hiệu.</p><p>Khi thị trường vẫn quen thuộc với các kênh bán hàng lớn hay khách sạn, Ru9 đã dũng cảm hướng thẳng đến khách hàng cá nhân, đặt trọng tâm vào thế hệ trẻ hiện đại (Millennials) trước. Hiểu rằng thế hệ này khao khát một giấc ngủ chất lượng để phục hồi năng lượng, nhưng phải phù hợp với lối sống năng động của họ.</p><p>Đây không chỉ là một quyết định kinh doanh, mà là lời khẳng định khi Ru9 ra đời là để định hình lại cách người Việt trải nghiệm và nhìn nhận về giấc ngủ tại chính ngôi nhà của mình, và lan tỏa điều đó đến những người thân yêu.</p>' }}</div>
       </div>
-
-      <!-- Story Block 2: Cựu Du học sinh với Khởi nghiệp Nổi bật -->
+      
+      <!-- Story Block 2 -->
       <div class="about-journey-story-block">
-        <div class="about-journey-story-image">
-          {% if section.settings.story2_image != blank %}
-            <img 
-              src="{{ section.settings.story2_image | image_url: width: 600 }}" 
-              alt="{{ section.settings.story2_image.alt | escape }}"
-              width="600"
-              height="400"
-              loading="lazy"
-            >
-          {% else %}
-            <img src="https://via.placeholder.com/600x400/3D6DFF/FFFFFF?text=Story+2+Image" alt="Story 2 Image" width="600" height="400" />
-          {% endif %}
-        </div>
-        <div class="about-journey-story-content">
-          <div class="about-journey-story-title">{{ section.settings.story2_title | default: '<h3>Cựu Du học sinh với Khởi nghiệp Nổi bật</h3>' }}</div>
-          <div class="about-journey-story-text">{{ section.settings.story2_content | default: '<p>Chị Trang Đặng còn được vinh danh với giải thưởng "Cựu Du học sinh với Khởi nghiệp Nổi bật" tại GFF Global Future Fair do VCCI tổ chức, tôn vinh những người trở về xây dựng và đóng góp cho đất nước bằng chính trí tuệ và đam mê của mình.</p>' }}</div>
-        </div>
-      </div>
-
-      <!-- Story Block 3: Lan tỏa câu chuyện truyền cảm hứng -->
-      <div class="about-journey-story-block reverse">
-        <div class="about-journey-story-content">
-          <div class="about-journey-story-title">{{ section.settings.story3_title | default: '<h3>Lan tỏa câu chuyện truyền cảm hứng</h3>' }}</div>
-          <div class="about-journey-story-text">{{ section.settings.story3_content | default: '<p>Hơn cả những sản phẩm, Ru9 mong muốn chia sẻ câu chuyện về hành trình phát triển để lan tỏa động lực đến những người trẻ. Câu chuyện khởi nghiệp của chị Trang Đặng đã được khám phá trong những buổi phỏng vấn trên truyền hình và các nền tảng podcast uy tín.</p><p>Đặc biệt, chị Trang Đặng đã là khách mời trong tập đầu tiên của Vietnam Innovators (phiên bản tiếng Việt) do Vietcetera thực hiện, nơi chị đã chia sẻ những câu chuyện thành công, những bài học từ thất bại và tinh thần đổi mới đã giúp Ru9 vượt qua mọi thách thức.</p>' }}</div>
-        </div>
-        <div class="about-journey-story-image">
-          {% if section.settings.story3_image != blank %}
-            <img 
-              src="{{ section.settings.story3_image | image_url: width: 600 }}" 
-              alt="{{ section.settings.story3_image.alt | escape }}"
-              width="600"
-              height="400"
-              loading="lazy"
-            >
-          {% else %}
-            <img src="https://via.placeholder.com/600x400/3D6DFF/FFFFFF?text=Story+3+Image" alt="Story 3 Image" width="600" height="400" />
-          {% endif %}
-        </div>
+        <div class="about-journey-story-title">{{ section.settings.story2_title | default: '<h3>Vinh danh những nỗ lực tiên phong</h3>' }}</div>
+        <div class="about-journey-story-content">{{ section.settings.story2_content | default: '<p>Hành trình từ giấc mơ đến hiện thực của Ru9 đã trở thành niềm tự hào khi được cộng đồng và giới chuyên môn đón nhận. Chúng tôi vinh dự xuất hiện trên những tờ báo uy tín hàng đầu như VnExpress, Báo Thanh Niên, Báo Tuổi Trẻ hay Tạp chí Thương Gia cùng các buổi phỏng vấn trên truyền hình, nơi chia sẻ câu chuyện khởi nghiệp, lan tỏa giá trị giấc ngủ lành mạnh đến người Việt.</p>' }}</div>
       </div>
     </div>
-
-    <div class="about-journey-quote">{{ section.settings.quote | default: '<p>"Những thành tựu này là động lực mạnh mẽ để Ru9 tiếp tục kiên định với sứ mệnh mang giấc ngủ chất lượng đến mọi nhà, kiến tạo một tương lai tốt đẹp hơn cho thế hệ mai sau."</p>' }}</div>
   </div>
 </div>
 
@@ -247,61 +228,28 @@
       "default": "<p>Tại Ru9, mỗi cột mốc là một chương của câu chuyện đầy cảm hứng. Từ những bước khởi đầu đầy thách thức tại Shark Tank Việt Nam, Ru9 đã kiên định đi trên con đường riêng để biến giấc mơ về giấc ngủ chất lượng thành hiện thực.</p>"
     },
     {
-      "type": "image_picker",
-      "id": "story1_image",
-      "label": "Story 1 Image"
-    },
-    {
       "type": "html",
       "id": "story1_title",
       "label": "Story 1 Title",
-      "default": "<h3>Bản lĩnh Đương đầu</h3>"
+      "default": "<h3>Từ giấc mơ ngủ ngon đến hiện thực</h3>"
     },
     {
       "type": "html",
       "id": "story1_content",
       "label": "Story 1 Content",
-      "default": "<p>Những giải thưởng không chỉ là thành tựu của riêng Ru9, mà còn là sự công nhận cho tinh thần tiên phong và bản lĩnh của người sáng lập. Như giải thưởng \"Bản lĩnh Đương đầu\" tại WeChoice Awards 2020 là sự ghi nhận cho những nỗ lực bền bỉ của chị Trang Đặng - Nhà sáng lập kiêm CEO cũng như là Ru9 trong việc hỗ trợ cộng đồng, đặc biệt trong giai đoạn đại dịch.</p>"
-    },
-    {
-      "type": "image_picker",
-      "id": "story2_image",
-      "label": "Story 2 Image"
+      "default": "<p>Hành trình của Ru9 bắt đầu từ một trải nghiệm cá nhân về giấc ngủ và sức khỏe, khi nhà sáng lập nhận ra tầm quan trọng của việc nghỉ ngơi chất lượng nhưng vẫn phù hợp với nhịp sống hiện đại. Từ đó, chị Trang Đặng - Nhà sáng lập kiêm CEO của Ru9 đã mang ý tưởng \"táo bạo\" này đến chương trình Shark Tank Việt Nam, đánh dấu bước ngoặt đầu tiên của thương hiệu.</p><p>Khi thị trường vẫn quen thuộc với các kênh bán hàng lớn hay khách sạn, Ru9 đã dũng cảm hướng thẳng đến khách hàng cá nhân, đặt trọng tâm vào thế hệ trẻ hiện đại (Millennials) trước. Hiểu rằng thế hệ này khao khát một giấc ngủ chất lượng để phục hồi năng lượng, nhưng phải phù hợp với lối sống năng động của họ.</p><p>Đây không chỉ là một quyết định kinh doanh, mà là lời khẳng định khi Ru9 ra đời là để định hình lại cách người Việt trải nghiệm và nhìn nhận về giấc ngủ tại chính ngôi nhà của mình, và lan tỏa điều đó đến những người thân yêu.</p>"
     },
     {
       "type": "html",
       "id": "story2_title",
       "label": "Story 2 Title",
-      "default": "<h3>Cựu Du học sinh với Khởi nghiệp Nổi bật</h3>"
+      "default": "<h3>Vinh danh những nỗ lực tiên phong</h3>"
     },
     {
       "type": "html",
       "id": "story2_content",
       "label": "Story 2 Content",
-      "default": "<p>Chị Trang Đặng còn được vinh danh với giải thưởng \"Cựu Du học sinh với Khởi nghiệp Nổi bật\" tại GFF Global Future Fair do VCCI tổ chức, tôn vinh những người trở về xây dựng và đóng góp cho đất nước bằng chính trí tuệ và đam mê của mình.</p>"
-    },
-    {
-      "type": "image_picker",
-      "id": "story3_image",
-      "label": "Story 3 Image"
-    },
-    {
-      "type": "html",
-      "id": "story3_title",
-      "label": "Story 3 Title",
-      "default": "<h3>Lan tỏa câu chuyện truyền cảm hứng</h3>"
-    },
-    {
-      "type": "html",
-      "id": "story3_content",
-      "label": "Story 3 Content",
-      "default": "<p>Hơn cả những sản phẩm, Ru9 mong muốn chia sẻ câu chuyện về hành trình phát triển để lan tỏa động lực đến những người trẻ. Câu chuyện khởi nghiệp của chị Trang Đặng đã được khám phá trong những buổi phỏng vấn trên truyền hình và các nền tảng podcast uy tín.</p><p>Đặc biệt, chị Trang Đặng đã là khách mời trong tập đầu tiên của Vietnam Innovators (phiên bản tiếng Việt) do Vietcetera thực hiện, nơi chị đã chia sẻ những câu chuyện thành công, những bài học từ thất bại và tinh thần đổi mới đã giúp Ru9 vượt qua mọi thách thức.</p>"
-    },
-    {
-      "type": "html",
-      "id": "quote",
-      "label": "Journey Quote",
-      "default": "<p>\"Những thành tựu này là động lực mạnh mẽ để Ru9 tiếp tục kiên định với sứ mệnh mang giấc ngủ chất lượng đến mọi nhà, kiến tạo một tương lai tốt đẹp hơn cho thế hệ mai sau.\"</p>"
+      "default": "<p>Hành trình từ giấc mơ đến hiện thực của Ru9 đã trở thành niềm tự hào khi được cộng đồng và giới chuyên môn đón nhận. Chúng tôi vinh dự xuất hiện trên những tờ báo uy tín hàng đầu như VnExpress, Báo Thanh Niên, Báo Tuổi Trẻ hay Tạp chí Thương Gia cùng các buổi phỏng vấn trên truyền hình, nơi chia sẻ câu chuyện khởi nghiệp, lan tỏa giá trị giấc ngủ lành mạnh đến người Việt.</p>"
     },
     {
       "type": "color",
@@ -341,3 +289,4 @@
   ]
 }
 {% endschema %}
+

@@ -18,32 +18,43 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 40px 20px;
   }
   .about-values-2-quote {
-    font-size: 24px;
-    font-weight: 400;
-    color: {{ section.settings.title_color | default: '#1A2230' }};
-    max-width: 1000px;
-    line-height: 1.6;
+    color: #1C2C58;
+    text-align: center;
+    font-family: "Be Vietnam Pro";
+    font-size: 39px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 50px;
     position: relative;
     z-index: 2;
+    max-width: 1594;
+    width: 1200px;
+    display: flex;
+    height: 68px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
   }
   .about-values-2-quote-mark {
     position: absolute;
-    color: #1C2C58;
-    font-family: "Be Vietnam Pro";
-    font-size: 128px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 50px;
     z-index: 1;
   }
+  .about-values-2-quote-mark img {
+    width: auto;
+    height: auto;
+    max-width: 50px;
+    max-height: 50px;
+    object-fit: contain;
+  }
   .about-values-2-quote-mark.open {
-    top: 40px;
+    top: -15px;
     left: 40px;
   }
   .about-values-2-quote-mark.close {
-    bottom: 40px;
+    bottom: -15px;
     right: 40px;
   }
   .about-values-2-separator {
@@ -107,9 +118,29 @@
 <div class="about-values-2-section">
   <div class="page-width">
     <div class="about-values-2-quote-container">
-      <div class="about-values-2-quote-mark open">"</div>
+      {% if section.settings.quote_mark_open != blank %}
+        <div class="about-values-2-quote-mark open">
+          <img 
+            src="{{ section.settings.quote_mark_open | image_url: width: 240 }}" 
+            alt="Quote mark open"
+            width="50"
+            height="50"
+            loading="lazy"
+          >
+        </div>
+      {% endif %}
       <div class="about-values-2-quote">{{ section.settings.quote | default: '<p>Mỗi giá trị cốt lõi đều là nền tảng để Ru9 kiên định theo đuổi hành trình cải thiện chất lượng sống qua giấc ngủ</p>' }}</div>
-      <div class="about-values-2-quote-mark close">"</div>
+      {% if section.settings.quote_mark_close != blank %}
+        <div class="about-values-2-quote-mark close">
+          <img 
+            src="{{ section.settings.quote_mark_close | image_url: width: 240 }}" 
+            alt="Quote mark close"
+            width="50"
+            height="50"
+            loading="lazy"
+          >
+        </div>
+      {% endif %}
     </div>
     
     <div class="about-values-2-separator">
@@ -149,6 +180,16 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "quote_mark_open",
+      "label": "Quote Mark (Open)"
+    },
+    {
+      "type": "image_picker",
+      "id": "quote_mark_close",
+      "label": "Quote Mark (Close)"
+    },
     {
       "type": "html",
       "id": "quote",

@@ -1524,7 +1524,7 @@
         "settings": {
           "title": "<!-- title.html -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  :root {\n    --blue-light: #759CE6;\n  }\n\n  h2 {\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: normal;\n    font-weight: 700;\n    margin: 0;\n    text-align: center; /* mobile */\n    color: var(--blue-light);\n    font-size: 20px;\n    line-height: 140%;\n  }\n\n  @media (min-width: 768px) {\n    h2 {\n      font-size: 64px;\n      line-height: 80px;\n      text-align: left; /* desktop */\n    }\n  }\n</style>\n\n<h2>Đội ngũ Ru9</h2>",
           "subtitle": "<!-- subtitle.html -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  :root {\n    --blue-dark: #1C2C58;\n  }\n\n  h3 {\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: normal;\n    font-weight: 700;\n    margin: 0;\n    text-align: center; /* mobile */\n    color: var(--blue-dark);\n    font-size: 20px;\n    line-height: 140%;\n  }\n\n  /* Desktop: tách làm 2 dòng */\n  @media (min-width: 768px) {\n    h3 {\n      font-size: 64px;\n      line-height: 80px;\n      text-align: left;\n    }\n    h3 span {\n      display: block;\n    }\n  }\n</style>\n\n<h3>\n  <span>Nơi giấc mơ</span>\n  <span>được nuôi dưỡng</span>\n</h3>",
-          "content": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  .ru9-textblock {\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 20px;\n    line-height: 140%; /* 28px */\n    color: #000;\n    text-align: justify;\n    width: 301px; /* giới hạn chiều rộng */\n  }\n\n  .ru9-textblock p {\n    margin: 0 0 20px 0; /* khoảng cách giữa các đoạn */\n  }\n\n  /* MOBILE RESPONSIVE */\n  @media (max-width: 767px) {\n    .ru9-textblock {\n      font-size: 14px;\n      line-height: 150%;\n      text-align: left;\n      width: 100%; /* mobile tự co full màn hình */\n      max-width: 301px; /* đảm bảo không vượt quá */\n      margin: 0 auto; /* căn giữa nếu nằm độc lập */\n    }\n\n    .ru9-textblock p {\n      margin-bottom: 16px;\n    }\n  }\n</style>\n\n<div class=\"ru9-textblock\">\n  <p>\n    Đó không chỉ là giấc mơ về một giấc ngủ ngon trọn vẹn cho các khách hàng, mà còn là hoài bão và khát vọng của mỗi thành viên trong đại gia đình Ru9.\n  </p>\n  <p>\n    Văn hóa Ru9 được xây dựng dựa trên sự gắn kết và thấu hiểu. Trong khi đội ngũ văn phòng tập trung nghiên cứu, sáng tạo và hoàn thiện sản phẩm, đội ngũ showroom luôn mang đến những trải nghiệm gần gũi và chân thật nhất cho khách hàng.\n  </p>\n</div>",
+          "content": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  .ru9-textblock {\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 20px;\n    line-height: 140%; /* 28px */\n    color: #000;\n    text-align: justify;\n    width: 301px; /* giới hạn chiều rộng */\n  }\n\n  .ru9-textblock p {\n    margin: 0 0 20px 0;\n  }\n\n  /* ✅ TABLET RESPONSIVE (768px - 1023px) */\n  @media (min-width: 768px) and (max-width: 1023px) {\n    .ru9-section {\n      display: flex;\n      flex-direction: column; /* ảnh và text xếp dọc, tránh chồng */\n      align-items: center;\n      text-align: center;\n      gap: 20px; /* khoảng cách giữa text và ảnh */\n      padding: 20px;\n    }\n\n    .ru9-textblock {\n      width: 90%; /* mở rộng vừa màn hình tablet */\n      font-size: 16px;\n      line-height: 150%;\n      text-align: left;\n      margin: 0 auto;\n    }\n\n    .ru9-image {\n      width: 90%;\n      height: auto;\n      border-radius: 12px;\n    }\n  }\n\n  /* ✅ MOBILE (dưới 767px) */\n  @media (max-width: 767px) {\n    .ru9-textblock {\n      font-size: 14px;\n      line-height: 150%;\n      text-align: left;\n      width: 100%;\n      max-width: 301px;\n      margin: 0 auto;\n    }\n\n    .ru9-textblock p {\n      margin-bottom: 16px;\n    }\n\n    .ru9-section {\n      flex-direction: column;\n      align-items: center;\n    }\n\n    .ru9-image {\n      width: 100%;\n      height: auto;\n    }\n  }\n</style>\n\n<div class=\"ru9-section\">\n  <div class=\"ru9-textblock\">\n    <p>\n      Đó không chỉ là giấc mơ về một giấc ngủ ngon trọn vẹn cho các khách hàng, mà còn là hoài bão và khát vọng của mỗi thành viên trong đại gia đình Ru9.\n    </p>\n    <p>\n      Văn hóa Ru9 được xây dựng dựa trên sự gắn kết và thấu hiểu. Trong khi đội ngũ văn phòng tập trung nghiên cứu, sáng tạo và hoàn thiện sản phẩm, đội ngũ showroom luôn mang đến những trải nghiệm gần gũi và chân thật nhất cho khách hàng.\n    </p>\n  </div>\n\n  <img src=\"your-image-link-here.png\" alt=\"Đội ngũ Ru9\" class=\"ru9-image\">\n</div>",
           "quote": "<p>Tại Ru9, chúng tôi tin rằng mọi giấc mơ đều xứng đáng được nâng niu.</p>",
           "image": "shopify://shop_images/M_i_di_u_tuy_t_v_i....._5.png"
         }
@@ -1570,7 +1570,37 @@
       },
       "about-certifications": {
         "type": "about-certifications",
-        "settings": {}
+        "blocks": {
+          "certification_card_hjne6r": {
+            "type": "certification_card",
+            "settings": {
+              "logo": "shopify://shop_images/e260b90ca8d1443019175c06a31fda24339dc3ad.png",
+              "title": "",
+              "description": "<p><strong>STANDARD 100 by OEKO-TEX:</strong> Chứng nhận độ an toàn của vải, đảm bảo chất liệu vượt qua các kiểm định nghiêm ngặt về chất độc hại, an toàn tuyệt đối cho sức khỏe bạn và thân thiện với môi trường.</p>"
+            }
+          },
+          "certification_card_w4KUMC": {
+            "type": "certification_card",
+            "settings": {
+              "logo": "shopify://shop_images/bd7ccff17581af211e6af8e58d208c14cada30ac.png",
+              "title": "",
+              "description": "<p><strong>CertiPUR-US®:</strong> Chứng nhận này khẳng định foam trong nệm Ru9 đều đảm bảo an toàn, thân thiện với môi trường và đáp ứng 6 tiêu chuẩn khắt khe về thành phần, quy trình sản xuất và khí thải.</p>"
+            }
+          }
+        },
+        "block_order": [
+          "certification_card_hjne6r",
+          "certification_card_w4KUMC"
+        ],
+        "settings": {
+          "subtitle": "<em><strong>\"Tiên phong chất lượng với hai chứng nhận khắt khe và uy tín toàn cầu\"</strong></em>",
+          "description": "<p>Giấc ngủ của bạn xứng đáng được chăm sóc an toàn đến từng chi tiết. Vì thế, Ru9 không ngừng nỗ lực để trở thành thương hiệu tiên phong tại Việt Nam đạt hai chứng nhận quốc tế uy tín, bảo đảm chất lượng không chỉ ở sản phẩm mà còn trong toàn bộ quy trình sản xuất.</p>",
+          "background_color": "#ffffff",
+          "card_background_color": "#ffffff",
+          "title_color": "#1a2230",
+          "highlight_color": "#3d6dff",
+          "text_color": "#333333"
+        }
       },
       "about-statistics": {
         "type": "about-statistics",
@@ -1609,16 +1639,16 @@
           "about_statistic_card_fXRQTW": {
             "type": "about_statistic_card",
             "settings": {
-              "title": "<h3>Chuyên Viên Trẻ</h3>",
-              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>",
+              "title": "<h3>Những gia đình</h3>",
+              "description": "<p>Đáp ứng từng nhu cầu khác nhau của các thành viên trong gia đình, đã mang lại giấc ngủ sâu đồng hành và sự gắn kết trọn vẹn cho cả gia đình.</p>",
               "image": "shopify://shop_images/Rectangle_219.png"
             }
           },
           "about_statistic_card_kqqCFV": {
             "type": "about_statistic_card",
             "settings": {
-              "title": "<h3>Chuyên Viên Trẻ</h3>",
-              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải của những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>",
+              "title": "<h3>Khách hàng lớn tuổi</h3>",
+              "description": "<p>Hỗ trợ để mang lại giấc ngủ sâu hơn, cải thiện tình trạng mất ngủ, đau mỏi của người lớn tuổi.\n </p>",
               "image": "shopify://shop_images/Rectangle_217.png"
             }
           }
@@ -1636,7 +1666,7 @@
           "background_color": "#ffffff",
           "card_background_color": "#f5f5f5",
           "title_color": "#1a2230",
-          "accent_color": "#4a90e2",
+          "accent_color": "#bcd5f2",
           "text_color": "#5e6b85"
         }
       },
@@ -1646,23 +1676,25 @@
           "about_customer_card_6T43Wr": {
             "type": "about_customer_card",
             "settings": {
-              "title": "<h3>Chuyên Viên Trẻ</h3>",
-              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải sau những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>",
-              "image": "shopify://shop_images/Rectangle_109.png"
+              "title": "<h3>Bác sĩ Việt Nguyễn - Chuyên khoa điều trị rối loạn giấc ngủ, Phòng khám Cơ xương khớp Medibone Hà Nội:</h3>",
+              "description": "<p>“Các vấn đề về giấc ngủ nếu kéo dài có thể ảnh hưởng trực tiếp đến sức khỏe tổng thể, đặc biệt là hệ thần kinh và cột sống. Từ góc độ y khoa, nệm foam của Ru9 với cấu trúc nâng đỡ nhiều lớp và độ đàn hồi phù hợp với cơ địa người Việt sẽ là lựa chọn đáng tin cậy cho giấc ngủ sâu và cơ thể khỏe mạnh hơn mỗi ngày”.</p>",
+              "image": "shopify://shop_images/Rectangle_192.png"
             }
           },
           "about_customer_card_DRAYYd": {
             "type": "about_customer_card",
             "settings": {
-              "title": "<h3>Chuyên Viên Trẻ</h3>",
-              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải sau những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+              "title": "<h3>Đặng Phước Thắng - Coach Sky với hơn 200K followers:</h3>",
+              "description": "<p>\"Recovery là 50% thành công trong fitness. Sau 6 tháng sử dụng Gối Niu, tôi cảm nhận rõ sự khác biệt với sự nâng đỡ cổ vai gáy một cách hoàn hảo của gối đã giúp tôi đi vào giấc ngủ sâu hơn. Nhờ đó, cả tinh thần và cơ bắp đều được phục hồi tốt hơn sau mỗi buổi tập căng thẳng\".\n</p>",
+              "image": "shopify://shop_images/Rectangle_193_9b59e571-76ed-481f-8949-5a0b895c6e87.png"
             }
           },
           "about_customer_card_CaVVPD": {
             "type": "about_customer_card",
             "settings": {
-              "title": "<h3>Chuyên Viên Trẻ</h3>",
-              "description": "<p>Giải quyết triệt để tình trạng mệt mỏi, uể oải sau những đêm làm việc căng thẳng, giúp họ thức dậy tràn đầy năng lượng để chinh phục mục tiêu.</p>"
+              "title": "<h3>Kim Oanh - Nhà sáng lập, điều hành Group Easy Không Khó & Tập Ti Bình - Bé biếng ăn với hơn 300K lượt tham gia:</h3>",
+              "description": "<p>“Làm mẹ một con, tôi hiểu thế nào là những đêm chập chờn vì giấc ngủ bị gián đoạn. Cho đến khi tôi tìm thấy Ru9, không chỉ tôi mà cả gia đình giờ đây đều có giấc ngủ ngon hơn. Chăm con cũng dễ hơn rất nhiều, nhất là khi dùng tấm IceGuard Ru9, tôi không còn lo những lần bé vô tình làm ướt bẩn nệm nữa”.</p>",
+              "image": "shopify://shop_images/Rectangle_192_1.png"
             }
           }
         },
@@ -1672,8 +1704,6 @@
           "about_customer_card_CaVVPD"
         ],
         "settings": {
-          "title": "<h2>Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng</h2>",
-          "description": "<p>Chất lượng của Ru9 không chỉ được chứng minh qua trải nghiệm người dùng mà còn được kiểm chứng bởi các chuyên gia hàng đầu.</p>",
           "background_color": "#ffffff",
           "card_background_color": "#f0f7ff",
           "title_color": "#1a2230",
@@ -1682,6 +1712,34 @@
       },
       "about-testimonials": {
         "type": "about-testimonials",
+        "blocks": {
+          "about_testimonial_card_P3pgRW": {
+            "type": "about_testimonial_card",
+            "settings": {
+              "name": "<h4>TS.BS - Chuyên khoa Thần kinh, Bệnh viện Bạch Mai</h4>",
+              "testimonial": "<p>\"Từ góc độ y khoa, tôi khuyến nghị RU9 cho bệnh nhân có vấn đề về giấc ngủ và đau lưng. Chất lượng foam và thiết kế hỗ trợ cột sống hiệu quả, đặc biệt phù hợp với cơ địa người Việt.\"</p>"
+            }
+          },
+          "about_testimonial_card_jrXHLe": {
+            "type": "about_testimonial_card",
+            "settings": {
+              "name": "<h4>\"Coach HLV Fitness với 500K followers:</h4>",
+              "testimonial": "<p>\"Recovery là 50% thành công trong fitness. RU9 giúp tôi phục hồi tốt hơn sau mỗi buổi tập. Sau 6 tháng sử dụng nệm Original, tôi cảm nhận rõ sự khác biệt trong chất lượng giấc ngủ và khả năng phục hồi cơ bắp.\"\"</p>"
+            }
+          },
+          "about_testimonial_card_9p3CPD": {
+            "type": "about_testimonial_card",
+            "settings": {
+              "name": "<h4>Blogger 'Mom Life Vietnam' với 200K subscribers:</h4>",
+              "testimonial": "<p>\"Làm mẹ 2 con, giấc ngủ chất lượng là điều xa xỉ. Cho đến khi tôi tìm thấy Ru9. Không\nchỉ tôi mà cả gia đình giờ đây đều có giấc ngủ ngon hơn, quan hệ gia đình cũng hòa thuận hơn.\"\"</p>"
+            }
+          }
+        },
+        "block_order": [
+          "about_testimonial_card_P3pgRW",
+          "about_testimonial_card_jrXHLe",
+          "about_testimonial_card_9p3CPD"
+        ],
         "settings": {
           "title": "<h2>Sự ủng hộ từ các Chuyên Gia, KOL và Influencer có ảnh hưởng</h2>",
           "intro_content": "<p>Chất lượng của Ru9 không chỉ được chứng minh qua trải nghiệm người dùng mà còn được kiểm chứng bởi các chuyên gia hàng đầu:</p>",
@@ -1711,13 +1769,10 @@
           "title": "<h2>Từ giấc mơ ngủ ngon đến những vinh quang</h2>",
           "subtitle": "<h2>ĐẾN NHỮNG VINH QUANG</h2>",
           "intro_content": "<p>Tại Ru9, mỗi cột mốc là một chương của câu chuyện đầy cảm hứng. Từ những bước khởi đầu đầy thách thức tại Shark Tank Việt Nam, Ru9 đã kiên định đi trên con đường riêng để biến giấc mơ về giấc ngủ chất lượng thành hiện thực.</p>",
-          "story1_title": "<h3>Bản lĩnh Đương đầu</h3>",
-          "story1_content": "<p>Những giải thưởng không chỉ là thành tựu của riêng Ru9, mà còn là sự công nhận cho tinh thần tiên phong và bản lĩnh của người sáng lập. Như giải thưởng \"Bản lĩnh Đương đầu\" tại WeChoice Awards 2020 là sự ghi nhận cho những nỗ lực bền bỉ của chị Trang Đặng - Nhà sáng lập kiêm CEO cũng như là Ru9 trong việc hỗ trợ cộng đồng, đặc biệt trong giai đoạn đại dịch.</p>",
-          "story2_title": "<h3>Cựu Du học sinh với Khởi nghiệp Nổi bật</h3>",
-          "story2_content": "<p>Chị Trang Đặng còn được vinh danh với giải thưởng \"Cựu Du học sinh với Khởi nghiệp Nổi bật\" tại GFF Global Future Fair do VCCI tổ chức, tôn vinh những người trở về xây dựng và đóng góp cho đất nước bằng chính trí tuệ và đam mê của mình.</p>",
-          "story3_title": "<h3>Lan tỏa câu chuyện truyền cảm hứng</h3>",
-          "story3_content": "<p>Hơn cả những sản phẩm, Ru9 mong muốn chia sẻ câu chuyện về hành trình phát triển để lan tỏa động lực đến những người trẻ. Câu chuyện khởi nghiệp của chị Trang Đặng đã được khám phá trong những buổi phỏng vấn trên truyền hình và các nền tảng podcast uy tín.</p><p>Đặc biệt, chị Trang Đặng đã là khách mời trong tập đầu tiên của Vietnam Innovators (phiên bản tiếng Việt) do Vietcetera thực hiện, nơi chị đã chia sẻ những câu chuyện thành công, những bài học từ thất bại và tinh thần đổi mới đã giúp Ru9 vượt qua mọi thách thức.</p>",
-          "quote": "<p>\"Những thành tựu này là động lực mạnh mẽ để Ru9 tiếp tục kiên định với sứ mệnh mang giấc ngủ chất lượng đến mọi nhà, kiến tạo một tương lai tốt đẹp hơn cho thế hệ mai sau.\"</p>",
+          "story1_title": "<h3>Từ giấc mơ ngủ ngon đến hiện thực</h3>",
+          "story1_content": "<p>Hành trình của Ru9 bắt đầu từ một trải nghiệm cá nhân về giấc ngủ và sức khỏe, khi nhà sáng lập nhận ra tầm quan trọng của việc nghỉ ngơi chất lượng nhưng vẫn phù hợp với nhịp sống hiện đại. Từ đó, chị Trang Đặng - Nhà sáng lập kiêm CEO của Ru9 đã mang ý tưởng \"táo bạo\" này đến chương trình Shark Tank Việt Nam, đánh dấu bước ngoặt đầu tiên của thương hiệu.\n\nKhi thị trường vẫn quen thuộc với các kênh bán hàng lớn hay khách sạn, Ru9 đã dũng cảm hướng thẳng đến khách hàng cá nhân, đặt trọng tâm vào thế hệ trẻ hiện đại (Millennials) trước. Hiểu rằng thế hệ này khao khát một giấc ngủ chất lượng để phục hồi năng lượng, nhưng phải phù hợp với lối sống năng động của họ.\n Đây không chỉ là một quyết định kinh doanh, mà là lời khẳng định khi Ru9 ra đời là để định hình lại cách người Việt trải nghiệm và nhìn nhận về giấc ngủ tại chính ngôi nhà của mình, và lan tỏa điều đó đến những người thân yêu.</p>",
+          "story2_title": "<h3>Vinh danh những nỗ lực tiên phong</h3>",
+          "story2_content": "<p>Hành trình từ giấc mơ đến hiện thực của Ru9 đã trở thành niềm tự hào khi được cộng đồng và giới chuyên môn đón nhận. Chúng tôi vinh dự xuất hiện trên những tờ báo uy tín hàng đầu như VnExpress, Báo Thanh Niên, Báo Tuổi Trẻ hay Tạp chí Thương Gia cùng các buổi phỏng vấn trên truyền hình, nơi chia sẻ câu chuyện khởi nghiệp, lan tỏa giá trị giấc ngủ lành mạnh đến người Việt.</p>",
           "background_color": "#ffffff",
           "subtitle_color": "#3d6dff",
           "card_background_color": "#f5f5f5",
@@ -1821,11 +1876,11 @@
       "about-closing": {
         "type": "about-closing",
         "settings": {
+          "desktop_image": "shopify://shop_images/close.png",
+          "mobile_image": "shopify://shop_images/close.png",
           "title": "<h2>Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày</h2>",
           "subtitle": "Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.",
-          "svg_tag": "",
-          "background_color": "#f5f5f5",
-          "overlay_color": "#0000004d",
+          "footer_text": "Chúc bạn ngủ ngon",
           "text_color": "#5e6b85"
         }
       },
@@ -1864,11 +1919,13 @@
       "about-community-paragraph": {
         "type": "about-community-paragraph",
         "settings": {
-          "title": "<h2>Chương trình giáo dục giấc ngủ</h2>",
+          "title": "<meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Chương trình giáo dục giấc ngủ</title>\n  <link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&amp;display=swap\" rel=\"stylesheet\">\n  <style>\n    body {\n      margin: 0;\n      padding: 0;\n      font-family: \"Be Vietnam Pro\", sans-serif;\n      background-color: #fff;\n    }\n\n    h2 {\n      color: #1C2C58 !important;\n      font-weight: 700;\n      font-style: normal;\n      text-align: left;\n      position: relative;\n      display: inline-block;\n      padding-bottom: 12px;\n    }\n\n    /* Desktop style */\n    @media (min-width: 768px) {\n      h2 {\n        font-size: 39px;\n        line-height: 50px; /* 128.205% */\n        color: #1C2C58 !important;\n      }\n      h2::after {\n        content: \"\";\n        display: none;\n        width: 210px;\n        height: 1px;\n        background-color: #1C2C58;\n        margin-top: 8px;\n      }\n    }\n\n    /* Mobile style */\n    @media (max-width: 767px) {\n      h2 {\n        font-size: 16px;\n        line-height: 140%; /* 22.4px */\n        white-space: nowrap; /* gom 1 dòng */\n        color: #1C2C58 !important;\n      }\n      h2::after {\n        content: \"\";\n        display: none;\n        width: 120px;\n        height: 1px;\n        background-color: #1C2C58;\n        margin-top: 4px;\n      }\n    }\n  </style>\n\n\n  <h2>Chương trình giáo dục giấc ngủ</h2>",
           "intro": "<p>Với Ru9, một giấc ngủ tốt bắt đầu từ sự thấu hiểu. Vì vậy, Ru9 đã và đang tổ chức các workshop chuyên sâu về giấc ngủ với sự đồng hành của các chuyên gia đầu ngành, nhằm lan tỏa kiến thức khoa học và giúp cộng đồng nhân nhận giấc ngủ đúng cách hơn. Từ việc giới mà nguyên nhân gây rối loạn giấc ngủ, đến chia số những phương pháp cải thiện giấc ngủ hiệu quả và dễ áp dụng, mỗi buổi workshop đầu mang đến giá trị thiết thực, giúp người tham gia biết cách chăm sóc giấc ngủ của chính mình.</p>",
           "conclusion": "<p>Những buổi chia sẻ này chỉ là một phần trong hành trình lan tỏa tri thức mà Ru9 đang không ngừng thực hiện, để mỗi người Việt hiểu rằng đầu tư cho giấc ngủ chính là đầu tư cho chất lượng sống lâu dài.</p>",
-          "image_1_caption": "<p>Image 1 Caption</p>",
-          "image_2_caption": "<p>Image 2 Caption</p>",
+          "image_1": "shopify://shop_images/Rectangle_226.png",
+          "image_1_caption": "<p>Trong workshop <strong>\"Ngủ Có Phải Chuyện Nhỏ?\"</strong> tại Ru9 Showroom Grand Opening Cầu Giấy, Hà Nộin</p>",
+          "image_2": "shopify://shop_images/Rectangle_227.png",
+          "image_2_caption": "<p>Tại workshop <strong>\"Giải Mã Giấc Ngủ\"</strong> tại Ru9 Showroom Grand Opening Sala, Hồ Chí Minh</p>",
           "background_color": "#ffffff",
           "title_color": "#1a2b4d",
           "text_color": "#333333"
@@ -1879,6 +1936,7 @@
         "settings": {
           "title": "<h2>Cam kết với môi trường - tạo ảnh hưởng bền vững cho mai sau</h2>",
           "paragraph_1": "<p>Mỗi sản phẩm Ru9 bạn mang về nhà là một bước đi nhỏ để hướng tới sự bền vững. Vì vậy, mỗi sản phẩm được tạo ra đều bắt đầu từ những lựa chọn có trách nhiệm từ những chất liệu an toàn cho sức khỏe và thân thiện với môi trường đến quy trình sản xuất tiết kiệm năng lượng, giảm thiểu tối đa khí thải VOC (chỉ 0.5 phần triệu), không formaldehyde, không phthalates – để bạn yên tâm ngủ sâu mỗi đêm, và thức dậy trong một thế giới vẫn trong lành như hôm qua.</p>",
+          "image": "shopify://shop_images/Rectangle_223.png",
           "image_overlay_text": "<span>Một sản phẩm Một cây xanh</span>",
           "paragraph_2": "<p>Song song đó, Ru9 đang cùng tham gia và dẫn triển khai chương trình <span class=\"about-environment-highlight\">\"Một sản phẩm - Một cây xanh\"</span>, gửi gắm mong muốn tái tạo thiên nhiên và vòng tuần hoàn tích cực giữa con người và môi trường.</p>",
           "background_color": "#ffffff",
@@ -1891,6 +1949,42 @@
       },
       "about-values-2": {
         "type": "about-values-2",
+        "blocks": {
+          "about_value_2_card_FBK8Pm": {
+            "type": "about_value_2_card",
+            "settings": {
+              "title": "<h3>Chất lượng tiên phong</h3>",
+              "content": "<p>Ru9 không dừng lại ở việc sản xuất hay bán một sản phẩm, mà còn hướng đến mục tiêu tạo nên những trải nghiệm ngủ êm ái chuẩn mực, an toàn và bền vững cho sức khỏe.</p>"
+            }
+          },
+          "about_value_2_card_UndXmL": {
+            "type": "about_value_2_card",
+            "settings": {
+              "title": "<h3>Khách hàng là trung tâm</h3>",
+              "content": "<p>Từ đó, những chính sách như 100 đêm ngủ thử ra đời, đảm bảo bạn tìm được chiếc nệm hoàn hảo, chấm dứt hoàn toàn những cơn đau lưng hay cảm giác mệt mỏi mỗi sáng..</p>"
+            }
+          },
+          "about_value_2_card_TXdQ8e": {
+            "type": "about_value_2_card",
+            "settings": {
+              "title": "<h3>Trách nhiệm xã hội</h3>",
+              "content": "<p>Ru9 hướng tới việc xây dựng một cộng đồng khỏe mạnh hơn, bắt đầu từ việc nâng cao nhận thức và cải thiện giấc ngủ của từng gia đình Việt.</p>"
+            }
+          },
+          "about_value_2_card_4nYTGK": {
+            "type": "about_value_2_card",
+            "settings": {
+              "title": "<h3>Khoa học &amp; đổi mới</h3>",
+              "content": "<p>Ru9 sẽ liên tục học hỏi, nghiên cứu và ứng dụng công nghệ tiên tiến để mang những giải pháp ngủ tốt nhất đến gần hơn với người Việt.\n </p>"
+            }
+          }
+        },
+        "block_order": [
+          "about_value_2_card_FBK8Pm",
+          "about_value_2_card_UndXmL",
+          "about_value_2_card_TXdQ8e",
+          "about_value_2_card_4nYTGK"
+        ],
         "settings": {
           "quote": "<p>Mỗi giá trị cốt lõi đều là nền tảng để Ru9 kiên định theo đuổi hành trình cải thiện chất lượng sống qua giấc ngủ</p>",
           "background_color": "#ffffff",
@@ -1901,9 +1995,96 @@
       },
       "image-marquee": {
         "type": "image-marquee",
+        "blocks": {
+          "image_89EUck": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/image_78.png",
+              "url": ""
+            }
+          },
+          "image_Gpy84k": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/image_79.png",
+              "url": ""
+            }
+          },
+          "image_xnctjK": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/image_80.png",
+              "url": ""
+            }
+          },
+          "image_G7LxMq": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/image_81.png",
+              "url": ""
+            }
+          },
+          "image_jBQidB": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/image_83.png",
+              "url": ""
+            }
+          }
+        },
+        "block_order": [
+          "image_89EUck",
+          "image_Gpy84k",
+          "image_xnctjK",
+          "image_G7LxMq",
+          "image_jBQidB"
+        ],
         "settings": {
-          "quote_text": "<p>Trong suốt hành trình phát triển, Ru9 tự hào được xuất hiện trên nhiều tờ báo và tạp chí uy tín, ghi nhận nỗ lực mang đến giấc ngủ chất lượng cho người Việt. Đây là minh chứng cho niềm tin từ khách hàng và sự đánh giá cao của giới chuyên môn.</p>",
           "speed": 30
+        }
+      },
+      "about-community-connection": {
+        "type": "about-community-connection",
+        "blocks": {
+          "connection_card_pbtCyL": {
+            "type": "connection_card",
+            "settings": {
+              "icon": "shopify://shop_images/Rectangle_228.png",
+              "title": "Nhân viên y tế",
+              "description": "Trong giai đoạn cộng đồng đối mặt với thử thách lớn, Ru9 hiểu rằng đoàn kết chính là sức mạnh. Khi đại dịch COVID-19 bùng phát, Ru9 đã nhanh chóng hành động để hỗ trợ những \"người hùng tuyến đầu” với chương trình trao tặng nệm cho các y bác sĩ và tình nguyện viên, những người đang cần nghỉ ngơi hơn ai hết thông qua chiến dịch Đến cả anh hùng cũng cần ngủ ngon."
+            }
+          },
+          "connection_card_TKBWP8": {
+            "type": "connection_card",
+            "settings": {
+              "icon": "shopify://shop_images/Rectangle_229.png",
+              "title": "",
+              "description": "Và cuối năm đó, Ru9 đã tiếp tục mở rộng quy mô với chiến dịch Cảm ơn Shippers gửi tặng những chiếc yên xe foam êm ái đến những “người hùng thầm lặng” đã không ngại vất vả, len lỏi mọi ngõ hẻm để mang lại những nhu yếu phẩm kịp thời cho người dân trong mùa giãn cách."
+            }
+          },
+          "connection_card_D7gDHb": {
+            "type": "connection_card",
+            "settings": {
+              "icon": "shopify://shop_images/Rectangle_218.png",
+              "title": "Nhân viên y tế",
+              "description": "Và thật vinh dự khi Nhà sáng lập kiêm CEO của Ru9 - chị Trang Đặng đã được vinh danh với giải thưởng “Bản lĩnh đương đầu” tại WeChoice Awards 2020 như một sự công nhận cho những nỗ lực bền bỉ ấy."
+            }
+          }
+        },
+        "block_order": [
+          "connection_card_pbtCyL",
+          "connection_card_TKBWP8",
+          "connection_card_D7gDHb"
+        ],
+        "settings": {
+          "title": "<h2>Kết nối cộng đồng - trao cơ hội cho mọi giấc ngủ</h2>",
+          "text_1": "<p>Giấc ngủ ngon là điều xứng đáng với tất cả mọi người, ở bất kỳ đâu, bất kỳ lúc nào. Đó là lý do chúng tôi không ngừng nỗ lực để mang sản phẩm của mình đến gần hơn với mọi người.</p>",
+          "quote": "<p><em>\"Tri ân những cống hiến lớn và cùng cộng đồng vượt qua thử thách\"</em></p>",
+          "text_2": "<p>Sự lan tỏa và kết nối này không chỉ nằm trong lời nói, mà cần được thể hiện bằng hành động. Từ niềm tin đó, những chương trình hỗ trợ đặc biệt ra đời như cách Ru9 gửi lời tri ân đến những người đang góp phần làm nên một xã hội tốt đẹp hơn mỗi ngày. Từ những nhân viên y tế, giáo viên hay những sinh viên, thế hệ trẻ đến những người cao tuổi đều xứng đáng được chăm sóc bằng sự êm ái, dễ chịu nhất.</p>",
+          "background_color": "#ffffff",
+          "title_color": "#1a2b4d",
+          "text_color": "#333333",
+          "card_background_color": "#ffffff"
         }
       }
     },

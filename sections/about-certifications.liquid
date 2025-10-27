@@ -1,0 +1,309 @@
+{%- render 'section_css' -%}
+
+<style>
+  .about-certifications-section {
+    padding: 80px 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  .about-certifications-section .page-width {
+    max-width: var(--page-width, 1594px);
+  }
+  .about-certifications-header {
+    margin-bottom: 50px;
+  }
+  .about-certifications-title {
+    font-size: clamp(28px, 3.5vw, 3.5em);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .about-certifications-title .highlight {
+    color: #759CE6;
+  }
+  .about-certifications-title .normal {
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+  }
+  .about-certifications-subtitle {
+    font-size: clamp(16px, 2vw, 1.5em);
+    font-style: italic;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 20px;
+  }
+  .about-certifications-subtitle-line {
+    width: 100px;
+    height: 1px;
+    background-color: #E5E7EB;
+    margin: 20px 0 30px;
+  }
+  .about-certifications-description {
+    font-size: clamp(14px, 1.8vw, 1.15em);
+    color: {{ section.settings.text_color | default: '#333333' }};
+    line-height: 1.8;
+    max-width: 100%;
+  }
+  .about-certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-top: 50px;
+    align-items: stretch;
+  }
+  
+  /* Container item - cố định height để đều */
+  .about-certification-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 20px;
+  }
+  
+  /* Khung ảnh - box background cố định */
+  .about-certifications-card-logo {
+    width: 100%;
+    max-width: 760px;
+    aspect-ratio: 760/390;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #F5F9FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Ảnh logo trong khung - default (ảnh 1) */
+  .about-certifications-card-logo img {
+    width: 63.16%;
+    aspect-ratio: 480/148.75;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+  
+  /* Ảnh logo thứ 2 - hình vuông (chỉnh trong liquid) */
+  .about-certifications-card-logo .logo-square {
+    width: 37.04% !important;
+    aspect-ratio: 281.25/281.25 !important;
+  }
+  
+  /* Text card - không background */
+  .about-certifications-card-content {
+    background: transparent;
+    padding: 0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .about-certifications-card-title {
+    font-size: clamp(18px, 2vw, 1.5em);
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+    margin-bottom: 15px;
+    margin-top: 0;
+    line-height: 1.3;
+    text-align: left;
+  }
+  .about-certifications-card-text {
+    font-size: clamp(14px, 1.8vw, 1em);
+    color: {{ section.settings.text_color | default: '#333333' }};
+    line-height: 1.8;
+    margin: 0;
+    text-align: left;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .about-certifications-card-text strong {
+    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#1A2230' }};
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .about-certifications-section {
+      padding: 60px 0;
+    }
+    .about-certifications-header {
+      margin-bottom: 30px;
+    }
+    .about-certifications-title {
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+    .about-certifications-subtitle {
+      font-size: 1.2em;
+    }
+    .about-certifications-description {
+      font-size: 1em;
+    }
+    .about-certifications-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .about-certifications-card-logo {
+      width: 100%;
+      max-width: 760px;
+      height: auto;
+      aspect-ratio: 760/390;
+    }
+    
+    .about-certifications-card-logo img {
+      width: 80%;
+      height: auto;
+    }
+    
+    .about-certifications-card-logo .logo-square {
+      width: 50% !important;
+      height: auto !important;
+    }
+  }
+</style>
+
+<div class="about-certifications-section">
+  <div class="page-width">
+    <div class="about-certifications-header">
+      <div class="about-certifications-title">
+        <p>
+          <span class="normal">Mang đến</span> 
+        </p>
+        <p>
+          <span class="highlight">chất lượng ngủ vượt trội</span>
+        </p>
+        
+      </div>
+      <div class="about-certifications-subtitle">{{ section.settings.subtitle | default: 'Tiên phong chất lượng với hai chứng nhận khắt khe và uy tín toàn cầu' }}</div>
+      <div class="about-certifications-subtitle-line"></div>
+      <div class="about-certifications-description">{{ section.settings.description | default: 'Giấc ngủ của bạn xứng đáng được chăm sóc an toàn đến từng chi tiết. Vì thế, Ru9 không ngừng nỗ lực để trở thành thương hiệu tiên phong tại Việt Nam đạt hai chứng nhận quốc tế uy tín, bảo đảm chất lượng không chỉ ở sản phẩm mà còn trong toàn bộ quy trình sản xuất.' }}</div>
+    </div>
+    
+    <div class="about-certifications-grid">
+      {% for block in section.blocks %}
+        <div class="about-certification-item">
+          {% if block.settings.logo != blank %}
+            <div class="about-certifications-card-logo">
+              {%- assign loop_index = forloop.index0 -%}
+              <img 
+                src="{{ block.settings.logo | image_url: width: 400 }}" 
+                alt="{{ block.settings.logo.alt | escape }}"
+                width="400"
+                height="auto"
+                loading="lazy"
+                {% if loop_index == 1 %}class="logo-square"{% endif %}
+              >
+            </div>
+          {% endif %}
+          
+          <div class="about-certifications-card-content">
+            {% if block.settings.title != blank %}
+              <h3 class="about-certifications-card-title">{{ block.settings.title }}</h3>
+            {% endif %}
+            
+            {% if block.settings.description != blank %}
+              <div class="about-certifications-card-text">{{ block.settings.description }}</div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Certifications",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<em>\"Tiên phong chất lượng với hai chứng nhận khắt khe và uy tín toàn cầu\"</em>"
+    },
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Giấc ngủ của bạn xứng đáng được chăm sóc an toàn đến từng chi tiết. Vì thế, Ru9 không ngừng nỗ lực để trở thành thương hiệu tiên phong tại Việt Nam đạt hai chứng nhận quốc tế uy tín, bảo đảm chất lượng không chỉ ở sản phẩm mà còn trong toàn bộ quy trình sản xuất.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A2230"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight Color",
+      "default": "#3D6DFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "certification_card",
+      "name": "Certification Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Certification Logo"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Certification Title",
+          "default": "STANDARD 100 by OEKO-TEX"
+        },
+        {
+          "type": "html",
+          "id": "description",
+          "label": "Description",
+          "default": "<p><strong>STANDARD 100 by OEKO-TEX:</strong> Chứng nhận độ an toàn của vải, đảm bảo chất liệu vượt qua các kiểm định nghiêm ngặt về chất độc hại, an toàn tuyệt đối cho sức khỏe bạn và thân thiện với môi trường.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Certifications",
+      "blocks": [
+        {
+          "type": "certification_card",
+          "settings": {
+            "title": "STANDARD 100 by OEKO-TEX",
+            "description": "<p><strong>STANDARD 100 by OEKO-TEX:</strong> Chứng nhận độ an toàn của vải, đảm bảo chất liệu vượt qua các kiểm định nghiêm ngặt về chất độc hại, an toàn tuyệt đối cho sức khỏe bạn và thân thiện với môi trường.</p>"
+          }
+        },
+        {
+          "type": "certification_card",
+          "settings": {
+            "title": "CertiPUR-US",
+            "description": "<p><strong>CertiPUR-US:</strong> Chứng nhận này khẳng định foam trong nệm Ru9 đều đảm bảo an toàn, thân thiện với môi trường và đáp ứng 6 tiêu chuẩn khắt khe về thành phần, quy trình sản xuất và khí thải.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
