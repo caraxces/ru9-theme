@@ -233,6 +233,7 @@
     display: flex;
     gap: 16px;
     align-items: center;
+    width: 120%;
   }
   [data-section-id="{{ section.id }}"] .category-tab {
     display: flex;
@@ -550,13 +551,13 @@
     }
     [data-section-id="{{ section.id }}"] .category-tabs {
       flex-wrap: nowrap;
-      width: 375px;
+      {% comment %} width: 375px; {% endcomment %}
       justify-content: flex-start;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       cursor: grab;
-      padding: 0 15px;
+      padding: 0 0 0 15px;
     }
     [data-section-id="{{ section.id }}"] .category-tabs::-webkit-scrollbar {
         display: none;
