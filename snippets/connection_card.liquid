@@ -1,0 +1,57 @@
+{% comment %}
+  Connection Card Block
+  @param block {Object} - The block object  
+  @param background_color {String} - Background color for the card
+  @param title_color {String} - Title color
+  @param text_color {String} - Text color
+{% endcomment %}
+
+<style>
+  .connection-card {
+    background-color: {{ background_color | default: '#ffffff' }};
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .connection-card-icon {
+    margin-bottom: 20px;
+  }
+  .connection-card-icon img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+  .connection-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    color: {{ title_color | default: '#1a2b4d' }};
+  }
+  .connection-card-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: {{ text_color | default: '#333333' }};
+  }
+</style>
+
+<div class="connection-card" {{ block.shopify_attributes }}>
+  {% if block.settings.icon != blank %}
+    <div class="connection-card-icon">
+      <img 
+        src="{{ block.settings.icon | image_url: width: 120 }}" 
+        alt="{{ block.settings.icon.alt | escape }}"
+        width="120"
+        height="120"
+        loading="lazy"
+      >
+    </div>
+  {% endif %}
+  {% if block.settings.title != blank %}
+    <div class="connection-card-title">{{ block.settings.title }}</div>
+  {% endif %}
+  {% if block.settings.description != blank %}
+    <div class="connection-card-description">{{ block.settings.description }}</div>
+  {% endif %}
+</div>
+
