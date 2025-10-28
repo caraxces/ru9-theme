@@ -13,23 +13,114 @@
     color: {{ section.settings.title_color | default: '#1A2230' }};
     margin-bottom: 20px;
   }
+  /* ===== MOBILE FIRST ===== */
   .about-statistics-carousel {
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2230' }};
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 140%;
+    text-align: left;
     margin-bottom: 30px;
-    line-height: 1.4;
+    padding: 0 16px;
   }
+
+  /* ===== DESKTOP (768px+) ===== */
+  @media (min-width: 768px) {
+    .about-statistics-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 1591px;
+      margin: 0 auto 20px auto;
+      text-align: center;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 80px;
+      padding: 40px 0;
+      white-space: nowrap;
+    }
+
+    .about-statistics-title span:first-child {
+      color: #1C2C58;
+      margin-right: 8px;
+    }
+
+    .about-statistics-title span:last-child {
+      color: #7DA2E8;
+    }
+
+    .about-statistics-carousel {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: 1200px;
+      margin: 0 auto 30px auto;
+      padding: 0;
+      color: #1C2C58;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 39px;
+      font-style: italic;
+      font-weight: 700;
+      line-height: 50px;
+      text-align: left;
+    }
+    
+    .about-statistics-carousel p {
+      grid-column: 2 / 4;
+      color: #1C2C58;
+      font-size: 39px;
+      font-style: italic;
+      font-weight: 700;
+      line-height: 50px;
+      text-align: left;
+      margin: 0;
+    }
+  }
+  /* ===== MOBILE FIRST ===== */
   .about-statistics-description {
-    text-align: center;
-    font-size: 18px;
-    color: {{ section.settings.text_color | default: '#5E6B85' }};
+    color: #000;
+    font-family: "Be Vietnam Pro";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    text-align: left;
     margin-bottom: 30px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
+    padding: 0 16px;
+  }
+
+  /* ===== DESKTOP (768px+) ===== */
+  @media (min-width: 768px) {
+    .about-statistics-description {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: 1200px;
+      margin: 0 auto 30px auto;
+      padding: 0;
+      color: #000;
+      font-family: "Be Vietnam Pro";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%;
+      text-align: left;
+    }
+    
+    .about-statistics-description p {
+      grid-column: 2 / 4;
+      color: #000;
+      font-family: "Be Vietnam Pro";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%;
+      text-align: left;
+      margin: 0;
+    }
   }
   .about-statistics-stats {
     display: flex;
@@ -130,8 +221,29 @@
       padding: 0 15px;
     }
     .about-statistics-title {
-      font-size: 24px;
-      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 1591px;
+      margin: 0 auto 20px auto;
+      text-align: center;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 40px;
+      padding: 20px 0;
+      white-space: normal;
+    }
+
+    .about-statistics-title span:first-child {
+      color: #1C2C58;
+      margin-right: 8px;
+    }
+
+    .about-statistics-title span:last-child {
+      color: #7DA2E8;
     }
     .about-statistics-number {
       font-size: 36px;
@@ -204,9 +316,13 @@
       {% endif %}
     {% endfor %}
     
-    <div class="about-statistics-carousel">{{ section.settings.carousel_text | default: '95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM.' }}</div>
+    <div class="about-statistics-carousel">
+      <p>{{ section.settings.carousel_text | default: '95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP.HCM.' }}</p>
+    </div>
     
-    <div class="about-statistics-description">{{ section.settings.description | default: '<p>Ru9 không thể lan tỏa giá trị của giấc ngủ chất lượng đến hàng triệu người Việt như hôm nay nếu không có sự tin tưởng và đồng hành của khách hàng trong suốt chặng đường ấy. Chính mỗi giấc ngủ ngon của bạn là nguồn cảm hứng để Ru9 tiếp tục hoàn thiện và lớn lên từng ngày.</p>' }}</div>
+    <div class="about-statistics-description">
+      <p>{{ section.settings.description | default: 'Ru9 không thể lan tỏa giá trị của giấc ngủ chất lượng đến hàng triệu người Việt như hôm nay nếu không có sự tin tưởng và đồng hành của khách hàng trong suốt chặng đường ấy. Chính mỗi giấc ngủ ngon của bạn là nguồn cảm hứng để Ru9 tiếp tục hoàn thiện và lớn lên từng ngày.' }}</p>
+    </div>
     
     <div class="about-statistics-separator">
       <div class="about-statistics-separator-line"></div>
