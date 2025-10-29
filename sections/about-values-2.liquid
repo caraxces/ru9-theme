@@ -70,23 +70,53 @@
     right: 40px;
   }
   .about-values-2-separator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 5rem;
-    gap: 20px;
+    display: none;
   }
   .about-values-2-separator-dots {
-    display: flex;
-    gap: 8px;
+    display: none;
   }
   .about-values-2-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
+    position: relative;
+    padding-top: 50px;
+  }
+  .about-values-2-grid::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #E5E7EB;
+    z-index: 0;
   }
   .about-values-2-card {
     text-align: left;
+    position: relative;
+  }
+  .about-values-2-card-content {
+    width: 100%;
+  }
+  .about-values-2-card-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -30px;
+    left: 0;
+    z-index: 1;
+    background: #ffffff;
+    padding: 0;
+    box-sizing: border-box;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-values-2-card-dot svg {
+    width: 20px;
+    height: 20px;
   }
   .about-values-2-card h3 {
     font-size: 20px;
@@ -116,10 +146,39 @@
     }
     .about-values-2-grid {
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 0;
+      padding-top: 0;
+    }
+    .about-values-2-grid::before {
+      display: none;
     }
     .about-values-2-card {
       padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      border-left: 1px solid #E5E7EB;
+      padding-left: 35px;
+      margin-bottom: 20px;
+    }
+    .about-values-2-card:first-child {
+      margin-top: 0;
+    }
+    .about-values-2-card:last-child {
+      margin-bottom: 0;
+    }
+    .about-values-2-card-dot {
+      position: absolute;
+      top: 20px;
+      left: -10px;
+      z-index: 1;
+      background: #ffffff;
+      padding: 5px;
+      box-sizing: border-box;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
     }
     .about-values-2-card h3 {
       font-size: 18px;
@@ -178,8 +237,15 @@
     <div class="about-values-2-grid">
       {% for block in section.blocks %}
         <div class="about-values-2-card">
-          <div>{{ block.settings.title }}</div>
-          <div>{{ block.settings.content }}</div>
+          <div class="about-values-2-card-dot">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="10" fill="#D9D9D9"/>
+            </svg>
+          </div>
+          <div class="about-values-2-card-content">
+            <div>{{ block.settings.title }}</div>
+            <div>{{ block.settings.content }}</div>
+          </div>
         </div>
       {% endfor %}
     </div>

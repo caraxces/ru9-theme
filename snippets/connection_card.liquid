@@ -9,7 +9,7 @@
 <style>
   .connection-card {
     background-color: {{ background_color | default: '#ffffff' }};
-    padding: 30px;
+    padding: 0px;
     border-radius: 12px;
     text-align: center;
   }
@@ -17,9 +17,14 @@
     margin-bottom: 20px;
   }
   .connection-card-icon img {
-    width: 60px;
-    height: 60px;
+    width: 100%;
+    max-width: 474px;
+    height: 370px;
     object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    filter: none;
+    -webkit-filter: none;
   }
   .connection-card-title {
     font-size: 18px;
@@ -32,6 +37,7 @@
     font-size: 14px;
     line-height: 1.6;
     color: {{ text_color | default: '#333333' }};
+    text-align: justify;
   }
 </style>
 
@@ -39,10 +45,10 @@
   {% if block.settings.icon != blank %}
     <div class="connection-card-icon">
       <img 
-        src="{{ block.settings.icon | image_url: width: 120 }}" 
+        src="{{ block.settings.icon | image_url: width: 474 }}" 
         alt="{{ block.settings.icon.alt | escape }}"
-        width="120"
-        height="120"
+        width="474"
+        height="370"
         loading="lazy"
       >
     </div>

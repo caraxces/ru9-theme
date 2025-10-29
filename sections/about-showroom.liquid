@@ -64,6 +64,7 @@
     background:  #F0F7FF;
   }
   .about-showroom-image {
+    padding: 15px;
     margin-bottom: 15px;
   }
   .about-showroom-image img {
@@ -90,6 +91,16 @@
     font-weight: 400;
     line-height: 140%;
     margin: 0;
+  }
+  .about-showroom-name {
+    font-family: "Be Vietnam Pro";
+    font-size: 20px;
+    margin-left: 15px;
+  }
+  .about-showroom-address {
+    font-family: "Be Vietnam Pro";
+    font-size: 20px;
+    margin-left: 15px;
   }
 
   /* Mobile responsive */
@@ -120,19 +131,41 @@
       font-size: 14px;
     }
     .about-showroom-grid {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
       gap: 20px;
+    }
+    
+    .about-showroom-card {
+      flex: 0 0 70%;
+      min-width: 70%;
+      max-width: 70%;
+      scroll-snap-align: start;
     }
     .about-showroom-image img {
       width: 100%;
       height: auto;
       max-width: 100%;
+      padding: 8px;
     }
     .about-showroom-card h3 {
       font-size: 14px;
     }
     .about-showroom-card p {
       font-size: 12px;
+    }
+    .about-showroom-name {
+      font-size: 14px;
+      margin-left: 8px;
+    }
+    .about-showroom-address {
+      font-size: 14px;
+      margin-left: 8px;
     }
   }
 </style>
@@ -166,8 +199,8 @@
                 <img src="https://via.placeholder.com/422x340/3D6DFF/FFFFFF?text=Showroom+{{ forloop.index }}" alt="Showroom {{ forloop.index }}" width="422" height="340" />
               {% endif %}
             </div>
-            <div>{{ block.settings.name }}</div>
-            <div>{{ block.settings.address }}</div>
+            <div class="about-showroom-name">{{ block.settings.name }}</div>
+            <div class="about-showroom-address">{{ block.settings.address }}</div>
           </div>
         {% endfor %}
       </div>
