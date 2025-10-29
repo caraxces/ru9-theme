@@ -1525,7 +1525,7 @@
           "title": "",
           "subtitle_line1": "Nơi giấc mơ",
           "subtitle_line2": "được nuôi dưỡng",
-          "quote": "<p>Tại Ru9, chúng tôi tin rằng mọi giấc mơ đều xứng đáng được nâng niu.</p>",
+          "quote": "Tại Ru9, chúng tôi tin rằng mọi giấc mơ đều xứng đáng được nâng niu.",
           "content_paragraph1": "Đó không chỉ là giấc mơ về một giấc ngủ ngon trọn vẹn cho các khách hàng, mà còn là hoài bão và khát vọng của mỗi thành viên trong đại gia đình Ru9.",
           "content_paragraph2": "Văn hóa Ru9 được xây dựng dựa trên sự gắn kết và thấu hiểu. Trong khi đội ngũ văn phòng tập trung nghiên cứu, sáng tạo và hoàn thiện sản phẩm, đội ngũ showroom luôn mang đến những trải nghiệm gần gũi và chân thật nhất cho khách hàng.",
           "image": "shopify://shop_images/M_i_di_u_tuy_t_v_i....._5.png"
@@ -1754,7 +1754,7 @@
       "about-community": {
         "type": "about-community",
         "settings": {
-          "title": "<style>\n  .story-title {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-wrap: nowrap;\n    width: 100%;\n    max-width: 1591px;\n    margin: 0 auto;\n    text-align: center;\n    font-family: \"Be Vietnam Pro\", sans-serif;\n    font-size: 64px;\n    font-weight: 700;\n    line-height: 80px;\n    padding: 40px 0;\n    white-space: nowrap;\n  }\n\n  .story-title span:first-child {\n    color: #7DA2E8;\n    margin-right: 8px; /* 👈 tạo khoảng cách giữa 2 phần */\n  }\n\n  .story-title span:last-child {\n    color: #1C2C58;\n  }\n\n  @media (max-width: 1023px) {\n    .story-title {\n      font-size: 48px;\n      line-height: 60px;\n      white-space: normal;\n    }\n  }\n\n  @media (max-width: 767px) {\n    .story-title {\n      font-size: 28px;\n      line-height: 40px;\n      padding: 20px 0;\n      white-space: normal;\n    }\n  }\n</style>\n\n<h2 class=\"story-title\">\n  <span>Mang giá trị thật</span><span>đến cộng đồng</span>\n</h2>",
+          "title": "<h2>\n  <span style=\"color: #7DA2E8;\">Mang giá trị thật</span>\n  <span style=\"color: #1C2C58;\">đến cộng đồng</span>\n</h2>",
           "banner_image": "shopify://shop_images/a5af47c87edc213e279939124627b3ba894a6766.png",
           "banner_image_mobile": "shopify://shop_images/8872e5f382722d0d33b1a5bdf49312bccab1bd1d.png",
           "banner_text": "<p>\"Hành trình này không dừng lại ở sản phẩm hay dành riêng cho khách hàng\"</p>",
@@ -1768,9 +1768,9 @@
       "about-journey": {
         "type": "about-journey",
         "settings": {
-          "title": "<h2>Từ giấc mơ ngủ ngon</h2>",
-          "subtitle": "<h2>đến những vinh quang</h2>",
-          "intro_content": "<style>\n  .ru9-text {\n    font-family: \"Be Vietnam Pro\", sans-serif;\n    font-size: 20px;\n    line-height: 32px;\n    color: #1C2C58;\n    border-bottom: 1px solid #1C2C58; /* ✅ gạch dưới màu xanh Ru9 */\n    padding-bottom: 60px; /* tạo khoảng cách giữa chữ và đường gạch */\n\n  }\n</style>\n\n<p class=\"ru9-text\">\n  Tại Ru9, mỗi cột mốc là một chương của câu chuyện đầy cảm hứng.\n  Từ những bước khởi đầu đầy thách thức tại Shark Tank Việt Nam,\n  Ru9 đã kiên định đi trên con đường riêng để biến giấc mơ\n  về giấc ngủ chất lượng thành hiện thực.\n</p>",
+          "title": "<div class=\"dream-title\">\n  <h2>Từ giấc mơ ngủ ngon</h2>\n  <h2 style=\"color: #759CE6;\">đến những vinh quang</h2>\n</div>\n\n<style>\n  @media (max-width: 767px) {\n    .dream-title h2 {\n      display: inline;\n    }\n  }\n</style>",
+          "subtitle": "",
+          "intro_content": "<p class=\"ru9-text\">\n  Tại Ru9, mỗi cột mốc là một chương của câu chuyện đầy cảm hứng.\n  Từ những bước khởi đầu đầy thách thức tại Shark Tank Việt Nam,\n  Ru9 đã kiên định đi trên con đường riêng để biến giấc mơ\n  về giấc ngủ chất lượng thành hiện thực.\n</p>",
           "story1_title": "<h3>Từ giấc mơ ngủ ngon đến hiện thực</h3>",
           "story1_content": "<p><span>Hành trình của Ru9 bắt đầu từ một trải nghiệm cá nhân về giấc ngủ và sức khỏe, khi nhà sáng lập nhận ra tầm quan trọng của việc nghỉ ngơi chất lượng nhưng vẫn phù hợp với nhịp sống hiện đại. Từ đó, chị Trang Đặng - Nhà sáng lập kiêm CEO của Ru9 đã mang ý tưởng \"táo bạo\" này đến chương trình Shark Tank Việt Nam, đánh dấu bước ngoặt đầu tiên của thương hiệu.</span></p>\n\n<p><span>Khi thị trường vẫn quen thuộc với các kênh bán hàng lớn hay khách sạn, Ru9 đã dũng cảm hướng thẳng đến khách hàng cá nhân, đặt trọng tâm vào thế hệ trẻ hiện đại (Millennials) trước. Hiểu rằng thế hệ này khao khát một giấc ngủ chất lượng để phục hồi năng lượng, nhưng phải phù hợp với lối sống năng động của họ.</span></p>\n <p><span>Đây không chỉ là một quyết định kinh doanh, mà là lời khẳng định khi Ru9 ra đời là để định hình lại cách người Việt trải nghiệm và nhìn nhận về giấc ngủ tại chính ngôi nhà của mình, và lan tỏa điều đó đến những người thân yêu.</span></p>",
           "story2_title": "<h3>Vinh danh những nỗ lực tiên phong</h3>",
@@ -1814,12 +1814,6 @@
             "settings": {
               "title": "Giá trị"
             }
-          },
-          "promise_timeline_item_kxm9fz": {
-            "type": "promise_timeline_item",
-            "settings": {
-              "title": "Chất lượng"
-            }
           }
         },
         "block_order": [
@@ -1827,14 +1821,13 @@
           "promise_timeline_item_PNQTUA",
           "promise_timeline_item_AGGeDy",
           "promise_timeline_item_TEEfEC",
-          "promise_timeline_item_CQxLGU",
-          "promise_timeline_item_kxm9fz"
+          "promise_timeline_item_CQxLGU"
         ],
         "settings": {
           "title_line1": "Lời hứa",
           "title_line2": "cho mỗi giấc ngủ ngon",
           "description": "<p>Ru9 không chỉ bán một sản phẩm mà còn là hành trình xây dựng một cộng đồng nơi mọi người đều được tận hưởng trọn vẹn giá trị của giấc ngủ. Vì sự tin tưởng của bạn không chỉ đến từ chất lượng sản phẩm, mà còn từ sự an tâm tuyệt đối trong suốt quá trình trải nghiệm. Đó là lý do Ru9 mang đến Cam kết 5 sao uy tín:</p>",
-          "background_color": "#f5f5f5",
+          "background_color": "#ffffff",
           "subtitle_color": "#759ce6",
           "title_color": "#1a2230",
           "text_color": "#5e6b85",
@@ -1892,7 +1885,12 @@
           "mobile_image": "shopify://shop_images/close.png",
           "title": "<h2 class=\"sleep-edu-title\" style=\"border-bottom: none;\">   Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày </h2>",
           "subtitle": "Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.",
-          "footer_text": "Chúc bạn ngủ ngon",
+          "footer_text": "",
+          "banner_svg": "shopify://shop_images/chuc_b_n_ng_ngon.svg",
+          "footer_svg_position_x": 0,
+          "footer_svg_position_y": -20,
+          "footer_svg_position_x_mobile": 20,
+          "footer_svg_position_y_mobile": -15,
           "text_color": "#5e6b85"
         }
       },
@@ -1949,6 +1947,7 @@
           "title": "<h2 class=\"sleep-edu-title\">Cam kết với môi trường - tạo ảnh hưởng bền vững cho mai sau</h2>",
           "paragraph_1": "<p>Mỗi sản phẩm Ru9 bạn mang về nhà là một bước đi nhỏ để hướng tới sự bền vững. Vì vậy, mỗi sản phẩm được tạo ra đều bắt đầu từ những lựa chọn có trách nhiệm từ những chất liệu an toàn cho sức khỏe và thân thiện với môi trường đến quy trình sản xuất tiết kiệm năng lượng, giảm thiểu tối đa khí thải VOC (chỉ 0.5 phần triệu), không formaldehyde, không phthalates – để bạn yên tâm ngủ sâu mỗi đêm, và thức dậy trong một thế giới vẫn trong lành như hôm qua.</p>",
           "image": "shopify://shop_images/Rectangle_223.png",
+          "image_overlay_svg": "shopify://shop_images/M_t_s_n_ph_m_1_cay_xanh.svg",
           "image_overlay_text": "<span>Một sản phẩm Một cây xanh</span>",
           "paragraph_2": "<p>Song song đó, Ru9 đang cùng tham gia và dẫn triển khai chương trình <span class=\"about-environment-highlight\">\"Một sản phẩm - Một cây xanh\"</span>, gửi gắm mong muốn tái tạo thiên nhiên và vòng tuần hoàn tích cực giữa con người và môi trường.</p>",
           "background_color": "#ffffff",
@@ -2064,7 +2063,7 @@
             "type": "connection_card",
             "settings": {
               "icon": "shopify://shop_images/Rectangle_228.png",
-              "title": "Nhân viên y tế",
+              "title": "",
               "description": "Trong giai đoạn cộng đồng đối mặt với thử thách lớn, Ru9 hiểu rằng đoàn kết chính là sức mạnh. Khi đại dịch COVID-19 bùng phát, Ru9 đã nhanh chóng hành động để hỗ trợ những \"người hùng tuyến đầu” với chương trình trao tặng nệm cho các y bác sĩ và tình nguyện viên, những người đang cần nghỉ ngơi hơn ai hết thông qua chiến dịch Đến cả anh hùng cũng cần ngủ ngon."
             }
           },
@@ -2080,7 +2079,7 @@
             "type": "connection_card",
             "settings": {
               "icon": "shopify://shop_images/Rectangle_218.png",
-              "title": "Nhân viên y tế",
+              "title": "",
               "description": "Và thật vinh dự khi Nhà sáng lập kiêm CEO của Ru9 - chị Trang Đặng đã được vinh danh với giải thưởng “Bản lĩnh đương đầu” tại WeChoice Awards 2020 như một sự công nhận cho những nỗ lực bền bỉ ấy."
             }
           }

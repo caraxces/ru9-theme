@@ -71,19 +71,39 @@
     position: relative;
     margin-bottom: 20px;
   }
+  .about-promise-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #E5E7EB;
+    z-index: 0;
+  }
   .about-promise-timeline-dots {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    position: absolute;
-    top: -6px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0px;
   }
   .about-promise-timeline-dot {
-    width: 12px;
-    height: 12px;
-    background-color: #D9D9D9;
-    border-radius: 50%;
+    width: 20px;
+    height: 20px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding: 0;
+    box-sizing: border-box;
+    transform: translateY(-50%);
+  }
+  .about-promise-timeline-dot svg {
+    width: 20px;
+    height: 20px;
   }
   .about-promise-timeline-labels {
     display: flex;
@@ -93,7 +113,7 @@
   }
   .about-promise-timeline-label {
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     color: {{ section.settings.timeline_text_color | default: '#1A2B4D' }};
     text-align: center;
     margin: 0;
@@ -121,14 +141,37 @@
     .about-promise-description {
       font-size: 14px;
     }
+    .about-promise-timeline {
+      overflow-x: auto;
+      padding-bottom: 20px;
+      padding-top: 57px;
+    }
+    .about-promise-timeline::before {
+      top: 55px;
+      width: 120%;
+    }
+    .about-promise-timeline-dots {
+      gap: 0;
+      min-width: fit-content;
+    }
+    .about-promise-timeline-dot {
+      margin: 0;
+      width: 120px;
+      display: flex;
+      background: transparent;
+      justify-content: center;
+      align-items: center;
+    }
     .about-promise-timeline-labels {
-      flex-wrap: wrap;
-      gap: 10px;
+      gap: 0;
+      margin-top: 20px;
+      min-width: fit-content;
     }
     .about-promise-timeline-label {
-      font-size: 12px;
-      flex: 1;
-      min-width: 5rem;
+      font-size: 14px;
+      width: 120px;
+      text-align: center;
+      margin: 0;
     }
   }
 </style>
@@ -154,12 +197,14 @@
       
       <!-- Timeline at the bottom -->
       <div class="about-promise-timeline">
-        <div class="about-promise-timeline-line">
-          <div class="about-promise-timeline-dots">
-            {% for block in section.blocks %}
-              <div class="about-promise-timeline-dot"></div>
-            {% endfor %}
-          </div>
+        <div class="about-promise-timeline-dots">
+          {% for block in section.blocks %}
+            <div class="about-promise-timeline-dot">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="10" fill="#D9D9D9"/>
+              </svg>
+            </div>
+          {% endfor %}
         </div>
         <div class="about-promise-timeline-labels">
           {% for block in section.blocks %}

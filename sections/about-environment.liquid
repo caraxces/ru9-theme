@@ -78,6 +78,15 @@
     color: {{ section.settings.overlay_text_color | default: '#1A2B4D' }};
     font-weight: 500;
   }
+  .about-environment-image-overlay-svg {
+    background: transparent;
+    padding: 0;
+  }
+  .about-environment-image-overlay-svg img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
   .about-environment-highlight {
     color: {{ section.settings.highlight_color | default: '#1A2B4D' }};
     font-weight: 600;
@@ -98,7 +107,7 @@
     }
     .about-environment-left {
       gap: 15px;
-      border-bottom: 1px solid #E5E7EB;
+
       padding-right: 0;
       padding-bottom: 20px;
     }
@@ -126,6 +135,20 @@
     .about-environment-image-overlay {
       font-size: 14px;
       padding: 8px 16px;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .about-environment-image-overlay-svg {
+      padding: 0;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .about-environment-image-overlay-svg img {
+      max-width: 120px;
+      width: auto;
+      height: auto;
     }
   }
 </style>
@@ -153,9 +176,21 @@
           {% else %}
             <img src="https://via.placeholder.com/600x300/3D6DFF/FFFFFF?text=Environment+Image" alt="Environment Image" width="600" height="300" />
           {% endif %}
-          <div class="about-environment-image-overlay">
-            {{ section.settings.image_overlay_text | default: 'Một sản phẩm Một cây xanh' }}
-          </div>
+          {% if section.settings.image_overlay_svg != blank %}
+            <div class="about-environment-image-overlay about-environment-image-overlay-svg">
+              <img 
+                src="{{ section.settings.image_overlay_svg | image_url }}" 
+                alt="{{ section.settings.image_overlay_svg.alt | escape }}"
+                width="{{ section.settings.image_overlay_svg.width | default: 200 }}"
+                height="{{ section.settings.image_overlay_svg.height | default: 100 }}"
+                loading="lazy"
+              >
+            </div>
+          {% elsif section.settings.image_overlay_text != blank %}
+            <div class="about-environment-image-overlay">
+              {{ section.settings.image_overlay_text | default: 'Một sản phẩm Một cây xanh' }}
+            </div>
+          {% endif %}
         </div>
         
         <p class="about-environment-paragraph">{{ section.settings.paragraph_2 | default: 'Song song đó, Ru9 đang cùng tham gia và dẫn triển khai chương trình <span class="about-environment-highlight">"Một sản phẩm - Một cây xanh"</span>, gửi gắm mong muốn tái tạo thiên nhiên và vòng tuần hoàn tích cực giữa con người và môi trường.' }}</p>
@@ -188,9 +223,14 @@
       "label": "Environment Image"
     },
     {
+      "type": "image_picker",
+      "id": "image_overlay_svg",
+      "label": "Image Overlay SVG"
+    },
+    {
       "type": "html",
       "id": "image_overlay_text",
-      "label": "Image Overlay Text",
+      "label": "Image Overlay Text (Fallback if no SVG)",
       "default": "<span>Một sản phẩm Một cây xanh</span>"
     },
     {

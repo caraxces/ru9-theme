@@ -4,11 +4,16 @@
   /* Desktop styles (default) - 1024px and above */
   .about-closing-section {
     padding: 0;
+    overflow: visible;
+  }
+  .about-closing-section .page-width {
+    position: relative;
+    overflow: visible;
   }
   .about-closing-container {
     position: relative;
     height: 600px;
-    overflow: hidden;
+    overflow: visible;
     width: 100%;
   }
   .about-closing-image {
@@ -30,18 +35,24 @@
     display: none;
   }
   .about-closing-content-wrapper {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 2;
-    height: 100%;
+    height: 600px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
     padding: 60px 60px 60px 0;
+    pointer-events: none;
   }
   .about-closing-content {
     max-width: 600px;
     text-align: left;
     color: {{ section.settings.text_color | default: '#ffffff' }};
+    pointer-events: auto;
   }
   .about-closing-title {
     font-size: clamp(24px, 3vw, 2.5em);
@@ -64,23 +75,71 @@
     margin-top: 10px;
     color: {{ section.settings.text_color | default: '#ffffff' }};
   }
+  .about-closing-footer img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  .about-closing-footer-svg {
+    margin-top: 10px;
+    text-align: right;
+  }
+  .about-closing-footer-svg img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    max-width: 300px;
+  }
+  .about-closing-footer-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 60px;
+    z-index: 3;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 0;
+    pointer-events: none;
+  }
+  .about-closing-footer-overlay img {
+    max-width: 200px;
+    width: auto;
+    height: auto;
+    display: block;
+    position: relative;
+    bottom: -20px;
+  }
 
   /* Mobile styles - 768px and below */
   @media (max-width: 768px) {
+    .about-closing-section .page-width {
+      display: flex;
+      flex-direction: column;
+    }
+    .about-closing-content-wrapper {
+      position: static;
+      z-index: auto;
+      display: block;
+      order: -1;
+      padding: 30px 20px 30px 0;
+      background: transparent;
+      height: auto;
+      pointer-events: auto;
+    }
+    .about-closing-content {
+      max-width: 100%;
+      text-align: left;
+      width: 100%;
+    }
     .about-closing-container {
       height: 292px;
+      order: 1;
     }
     .about-closing-image {
       width: 100%;
       height: 100%;
       flex-shrink: 0;
-    }
-    .about-closing-content-wrapper {
-      display: none;
-    }
-    .about-closing-content {
-      max-width: 100%;
-      text-align: center;
     }
     .about-closing-desktop-image {
       display: none;
@@ -91,19 +150,67 @@
     .about-closing-title {
       font-size: 1.8em;
       margin-bottom: 15px;
+      color: {{ section.settings.text_color | default: '#ffffff' }};
     }
     .about-closing-subtitle {
       font-size: 0.9em;
       margin-bottom: 15px;
+      color: {{ section.settings.text_color | default: '#ffffff' }};
     }
     .about-closing-footer {
       font-size: 1em;
+      color: {{ section.settings.text_color | default: '#ffffff' }};
+    }
+    .about-closing-footer img {
+      max-width: 200px;
+      margin: 0 auto;
+    }
+    .about-closing-footer-svg {
+      margin-top: 15px;
+      text-align: left;
+    }
+    .about-closing-footer-svg img {
+      max-width: 200px;
+      width: auto;
+      height: auto;
+    }
+    .about-closing-footer-overlay {
+      bottom: 0;
+      right: 20px;
+      left: auto;
+    }
+    .about-closing-footer-overlay img {
+      max-width: 120px;
+      width: auto;
+      position: relative;
+      bottom: -15px;
     }
   }
 </style>
 
 <div class="about-closing-section">
   <div class="page-width">
+    <!-- Content Overlay (Desktop) / Content Above (Mobile) -->
+    <div class="about-closing-content-wrapper">
+      <div class="about-closing-content">
+        <div class="about-closing-title">{{ section.settings.title | default: 'Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày' }}</div>
+        <div class="about-closing-subtitle">{{ section.settings.subtitle | default: 'Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.' }}</div>
+        {% if section.settings.banner_svg != blank %}
+          <div class="about-closing-footer-svg">
+            <img 
+              src="{{ section.settings.banner_svg | image_url }}" 
+              alt="{{ section.settings.banner_svg.alt | escape }}"
+              width="{{ section.settings.banner_svg.width | default: 300 }}"
+              height="{{ section.settings.banner_svg.height | default: 100 }}"
+              loading="lazy"
+            >
+          </div>
+        {% elsif section.settings.footer_text != blank %}
+          <div class="about-closing-footer">{{ section.settings.footer_text }}</div>
+        {% endif %}
+      </div>
+    </div>
+    
     <div class="about-closing-container">
       <!-- Background Image -->
       <img 
@@ -134,16 +241,19 @@
       height="292"
       loading="lazy"
     >
-    
-    <!-- Content Overlay -->
-    <div class="about-closing-content-wrapper">
-      <div class="about-closing-content">
-        <div class="about-closing-title">{{ section.settings.title | default: 'Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày' }}</div>
-        <div class="about-closing-subtitle">{{ section.settings.subtitle | default: 'Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.' }}</div>
-        <div class="about-closing-footer">{{ section.settings.footer_text | default: 'Chúc bạn ngủ ngon' }}</div>
+    <!-- Footer SVG Overlay -->
+    {% if section.settings.footer_svg != blank %}
+      <div class="about-closing-footer-overlay">
+        <img 
+          src="{{ section.settings.footer_svg | image_url }}" 
+          alt="{{ section.settings.footer_svg.alt | escape }}"
+          width="{{ section.settings.footer_svg.width | default: 200 }}"
+          height="{{ section.settings.footer_svg.height | default: 200 }}"
+          loading="lazy"
+        >
       </div>
+    {% endif %}
     </div>
-  </div>
   </div>
 </div>
 
@@ -180,6 +290,56 @@
       "id": "footer_text",
       "label": "Footer Text",
       "default": "Chúc bạn ngủ ngon"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_svg",
+      "label": "Footer SVG (replaces footer text)"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_svg",
+      "label": "Footer SVG Image"
+    },
+    {
+      "type": "range",
+      "id": "footer_svg_position_x",
+      "label": "Footer SVG Position X (Desktop)",
+      "min": -200,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "footer_svg_position_y",
+      "label": "Footer SVG Position Y (Desktop)",
+      "min": -100,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": -20
+    },
+    {
+      "type": "range",
+      "id": "footer_svg_position_x_mobile",
+      "label": "Footer SVG Position X (Mobile)",
+      "min": -200,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "footer_svg_position_y_mobile",
+      "label": "Footer SVG Position Y (Mobile)",
+      "min": -100,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": -15
     },
     {
       "type": "color",

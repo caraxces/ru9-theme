@@ -7,7 +7,7 @@
   }
   /* Let theme handle canvas layout */
   .about-community-header {
-    text-align: center;
+    text-align: left;
     margin-bottom: 5rem;
   }
   .about-community-title {
@@ -16,6 +16,33 @@
     color: {{ section.settings.title_color | default: '#2A3B56' }};
     margin-bottom: 0;
     line-height: 1.2;
+  }
+
+  /* Story title style with dual colors */
+  .story-title {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 1591px;
+    margin: 0 auto;
+    text-align: left;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 80px;
+    padding: 40px 0;
+    white-space: nowrap;
+  }
+
+  .story-title span:first-child {
+    color: #7DA2E8;
+    margin-right: 8px;
+  }
+
+  .story-title span:last-child {
+    color: #1C2C58;
   }
   .about-community-banner {
     position: relative;
@@ -96,6 +123,14 @@
   }
 
   /* Mobile responsive */
+  @media (max-width: 1023px) {
+    .story-title {
+      font-size: 48px;
+      line-height: 60px;
+      white-space: normal;
+    }
+  }
+
   @media (max-width: 768px) {
     .about-community-section {
       padding: 40px 0;
@@ -104,7 +139,14 @@
       padding: 0;
     }
     .about-community-title {
+      margin-left: 15px;
       font-size: 24px;
+    }
+    .story-title {
+      font-size: 28px;
+      line-height: 40px;
+      padding: 20px 0;
+      white-space: normal;
     }
     .about-community-banner {
       margin-bottom: 40px;
@@ -119,6 +161,7 @@
       border-radius: 0;
     }
     .about-community-banner-text {
+      margin-left: 15px;
       position: static;
       transform: none;
       margin-top: 20px;
