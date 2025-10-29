@@ -403,6 +403,16 @@
 {%- endif -%}
 
 <style>
+  /* Remove borders from slideshow section wrapper */
+  #section-{{ section.id }},
+  [data-section-id="{{ section.id }}"],
+  [data-section-type="slideshow-section"] {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+  
   .slideshow-footer-icon-text {
     margin: 0 auto;;
     width: 100vw;
@@ -414,6 +424,12 @@
     height: clamp(50px, 4.5vw, 80px);
     flex-shrink: 0;
     font-family: "Be Vietnam Pro", sans-serif;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    outline: none !important;
+    box-shadow: none !important;
   }
 
   .icon-text-container {
@@ -424,6 +440,11 @@
     width: 100%;
     max-width: 1200px;
     padding: 0 5rem;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    outline: none !important;
   }
   
   .icon-text-container .icon-text-item {

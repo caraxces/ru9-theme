@@ -18,7 +18,9 @@
   -webkit-filter: none !important;
   filter: contrast(1.02) !important;
 }
-
+.jdgm-write-rev-link.jdgm-write-rev-link{
+    border: none !important;
+}
 /* ==========================================================================
    #RESET & WIDGET CONTAINER
    ========================================================================== */
@@ -248,7 +250,7 @@
 .jdgm-write-rev-link {
     display: block !important;
     visibility: visible !important;
-    background-color: #1C2C58 !important;
+    background-color: #234085 !important;
     color: #ffffff !important;
     border-radius: 30px !important;
     padding: 14px 24px !important;

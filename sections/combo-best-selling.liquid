@@ -134,16 +134,25 @@
     pointer-events: none;
   }
 
-  /* Mobile: Grid layout 2x2 */
+  /* Mobile: Carousel layout - horizontal scroll */
   @media (max-width: 768px) {
     [data-section-type="combo-best-selling"] .product-cards-container {
-      display: grid !important;
-      grid-template-columns: 1fr 1fr !important;
-      grid-template-rows: 1fr 1fr !important;
+      display: flex !important;
+      flex-direction: row !important;
       gap: 15px !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      scroll-snap-type: x mandatory !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: none !important; /* Firefox */
+      -ms-overflow-style: none !important; /* IE and Edge */
+      padding-bottom: 10px !important;
       transform: none !important;
       transition: none !important;
-      overflow: visible !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar {
+      display: none !important; /* Chrome, Safari, Opera */
     }
   }
 
@@ -337,18 +346,23 @@
       margin-bottom: 0;
       text-align: left;
     }
-    
-    [data-section-type="combo-best-selling"] .product-carousel-section {
-      margin: 0 -20px 0 -20px;
-      padding: 0 20px;
-    }
-    
+
     [data-section-type="combo-best-selling"] .product-carousel {
       padding: 0;
     }
     
     [data-section-type="combo-best-selling"] .product-card {
-      width: 100% !important;
+      width: calc(100vw - 80px) !important; /* Full width minus section margins and padding */
+      min-width: calc(100vw - 80px) !important;
+      max-width: calc(100vw - 80px) !important;
+      flex-shrink: 0 !important;
+      scroll-snap-align: start !important;
+      scroll-snap-stop: always !important;
+    }
+    
+    /* Add margin-right to last card in mobile carousel */
+    [data-section-type="combo-best-selling"] .product-card:last-child {
+      margin-right: 20px !important;
     }
     
     /* Separate Mobile Image Container Styles */
@@ -394,16 +408,120 @@
     if (!sectionContainer) return;
 
     const productCardsContainer = sectionContainer.querySelector('.product-cards-container');
+    if (!productCardsContainer) return;
 
-    // No carousel functionality needed for grid layout
-    // Just ensure product cards are visible
-    if (productCardsContainer) {
-      const productCards = productCardsContainer.querySelectorAll('.product-card');
-      productCards.forEach(card => {
-        card.style.opacity = '1';
-        card.style.transform = 'none';
-      });
+    const productCards = productCardsContainer.querySelectorAll('.product-card');
+    
+    // Ensure product cards are visible
+    productCards.forEach(card => {
+      card.style.opacity = '1';
+      card.style.transform = 'none';
+    });
+
+    // Mobile carousel functionality - only on mobile devices
+    function isMobile() {
+      return window.innerWidth <= 768;
     }
+
+    if (isMobile() && productCards.length > 0) {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      let hasScrolled = false;
+
+      // Touch/mouse events for carousel scrolling
+      productCardsContainer.addEventListener('mousedown', (e) => {
+        if (!isMobile()) return;
+        isDown = true;
+        productCardsContainer.classList.add('is-dragging');
+        startX = e.pageX - productCardsContainer.offsetLeft;
+        scrollLeft = productCardsContainer.scrollLeft;
+        hasScrolled = false;
+      });
+
+      productCardsContainer.addEventListener('mouseleave', () => {
+        if (!isMobile()) return;
+        isDown = false;
+        productCardsContainer.classList.remove('is-dragging');
+      });
+
+      productCardsContainer.addEventListener('mouseup', () => {
+        if (!isMobile()) return;
+        isDown = false;
+        productCardsContainer.classList.remove('is-dragging');
+      });
+
+      productCardsContainer.addEventListener('mousemove', (e) => {
+        if (!isMobile() || !isDown) return;
+        e.preventDefault();
+        hasScrolled = true;
+        const x = e.pageX - productCardsContainer.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll speed multiplier
+        productCardsContainer.scrollLeft = scrollLeft - walk;
+      });
+
+      // Touch events for mobile swipe
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+
+      productCardsContainer.addEventListener('touchstart', (e) => {
+        if (!isMobile()) return;
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      productCardsContainer.addEventListener('touchend', (e) => {
+        if (!isMobile()) return;
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      // Prevent card click when scrolling/swiping
+      productCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          if (hasScrolled) {
+            e.preventDefault();
+            hasScrolled = false;
+          }
+        });
+      });
+
+      // Smooth scroll on scroll end
+      let scrollTimeout;
+      productCardsContainer.addEventListener('scroll', () => {
+        if (!isMobile()) return;
+        clearTimeout(scrollTimeout);
+        productCardsContainer.style.scrollBehavior = 'auto';
+        
+        scrollTimeout = setTimeout(() => {
+          // Optional: snap to nearest card on scroll end
+          const cardWidth = productCards[0].offsetWidth + 15; // card width + gap
+          const scrollPosition = productCardsContainer.scrollLeft;
+          const nearestIndex = Math.round(scrollPosition / cardWidth);
+          const targetScroll = nearestIndex * cardWidth;
+          
+          productCardsContainer.style.scrollBehavior = 'smooth';
+          productCardsContainer.scrollTo({
+            left: targetScroll,
+            behavior: 'smooth'
+          });
+        }, 150);
+      }, { passive: true });
+    }
+
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        // Reset scroll position if switching from mobile to desktop
+        if (!isMobile()) {
+          productCardsContainer.scrollLeft = 0;
+        }
+      }, 250);
+    });
   });
 })();
 </script>

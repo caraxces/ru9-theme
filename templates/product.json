@@ -528,7 +528,7 @@
             "hotspot_sub_title": "Thoáng mát,chống nước và dầu",
             "direction": "vertical",
             "content_position": "right",
-            "space": "250",
+            "space": "240",
             "left": "25%",
             "top": "30%",
             "space_mb": "110",
@@ -576,7 +576,7 @@
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
         "productHandle": "goi-may",
-        "heading": "{{ product.metafields.custom.hotspot_title.value }}",
+        "heading": "",
         "content": "",
         "banner_image": "shopify://shop_images/Goi-May-WebsiteChat_lieu.jpg",
         "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
@@ -1014,9 +1014,9 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
+            "max_width": 1200,
             "show_shop_reviews": false,
-            "empty_state": "empty_widget",
-            "max_width": 1200
+            "empty_state": "empty_widget"
           }
         }
       },

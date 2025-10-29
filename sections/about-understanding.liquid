@@ -96,9 +96,105 @@
     }
   }
 
+  /* Ru9 Section Title Styles */
+  .ru9-section {
+    font-family: "Be Vietnam Pro", sans-serif;
+    padding-bottom: 60px;
+    width: 100%;
+    max-width: 1594px;
+    margin: -90px auto 0 auto;
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
+  /* Responsive padding cho các kích thước màn hình */
+  @media (max-width: 1399px) and (min-width: 1024px) {
+    .ru9-section {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+  }
+
+  @media (max-width: 1023px) and (min-width: 769px) {
+    .ru9-section {
+      padding-left: clamp(20px, 4vw, 40px);
+      padding-right: clamp(30px, 5vw, 5rem);
+    }
+  }
+
+  .ru9-section h2 {
+    color: #1C2C58;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 80px;
+    margin: 0;
+  }
+
+  .ru9-section h2 span {
+    color: #759CE6;
+  }
+
+  .ru9-section p {
+    color: #1C2C58;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 50px;
+    margin-top: 85px;
+  }
+
+  /* Responsive: cho mobile nhỏ hơn 768px */
+  @media (max-width: 768px) {
+    .ru9-section {
+      border-bottom: 3px solid #759CE6;
+      padding-bottom: 24px;
+      padding: 60px 15px 0 15px;
+      max-width: 100%;
+    }
+
+    .ru9-section h2 {
+      font-size: 20px !important;
+      line-height: 28px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    /* Ẩn thẻ <br> trên mobile để các span có thể ở cùng 1 hàng */
+    .ru9-section h2 br {
+      display: none;
+    }
+
+    /* Đảm bảo các span hiển thị như text thông thường, có thể wrap tự nhiên */
+    .ru9-section h2 span {
+      color: #759CE6;
+      display: inline;
+    }
+
+    .ru9-section p {
+      margin-top: 30px;
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
+
 </style>
 
 <div class="about-understanding-section">
+  {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+    <section class="ru9-section">
+      {%- if section.settings.title != blank -%}
+        <h2>
+          {{ section.settings.title }}
+        </h2>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p>
+          {{ section.settings.subtitle }}
+        </p>
+      {%- endif -%}
+    </section>
+  {%- endif -%}
   <div class="page-width">    
     <div class="about-understanding-content">
       {% for block in section.blocks %}
@@ -141,7 +237,14 @@
       "type": "html",
       "id": "title",
       "label": "Section Title",
-      "default": "<h2>Ru9 sẽ không ngừng lắng nghe và thấu hiểu</h2>"
+      "default": "Ru9 sẽ không ngừng <br><span>lắng nghe và thấu hiểu</span>",
+      "info": "Use <span> tags for colored text, <br> for line breaks"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Hiểu rằng mỗi giấc ngủ là một trải nghiệm cá nhân"
     },
     {
       "type": "color",

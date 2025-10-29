@@ -16130,11 +16130,6 @@ input[type="image"] {
   margin: 0;
 }
 
-.section--divider {
-  border-top: 1px solid;
-  border-top-color: var(--colorBorder);
-}
-
 .section--divider:not(.section-padding) {
   padding-top: 40px;
 }
@@ -16604,12 +16599,6 @@ input[type="image"] {
 
 .flickity-slider .slideshow__slide {
   display: block;
-}
-
-.hero {
-  background: var(--colorLargeImageBg);
-  overflow: hidden;
-  position: relative;
 }
 
 .hero__media-container {
