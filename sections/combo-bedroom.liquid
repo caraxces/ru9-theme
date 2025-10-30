@@ -244,6 +244,7 @@
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 16px;
     font-weight: 500;
+    margin-bottom: 8px;
     text-decoration: underline;
     line-height: 1;
     transition: opacity 0.3s ease;
@@ -515,7 +516,7 @@
   /* Mobile Layout */
   @media (max-width: 768px) {
     [data-section-type="combo-bedroom"] .combo-bedroom-section {
-      padding: 0 20px;
+      padding: 30px 20px 0 20px;
       overflow: hidden;
     }
     
@@ -590,15 +591,36 @@
       display: flex !important;
       flex-direction: row !important;
       flex-wrap: nowrap !important;
-      padding-bottom: 0 !important;
+      padding-bottom: 20px !important;
       overflow-x: auto !important;
       overflow-y: hidden !important;
-      scrollbar-width: none !important;
-      -ms-overflow-style: none !important;
+      scrollbar-width: auto !important;
+      -ms-overflow-style: auto !important;
       -webkit-overflow-scrolling: touch !important;
+      scroll-behavior: smooth !important;
     }
     
+    /* Mobile scrollbar styling - Blue scrollbar like other sections */
     [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar {
+      height: 8px !important;
+      display: block !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
+      border-radius: 100px !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-thumb {
+      background: #234085 !important;
+      border-radius: 100px !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
+    }
+    
+    [data-section-type="combo-bedroom"] .product-cards-container::-webkit-scrollbar-button {
       display: none !important;
     }
     
