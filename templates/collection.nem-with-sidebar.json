@@ -69,7 +69,11 @@
         "align_text": "left",
         "enable": true,
         "collection_image_enable": false,
-        "show_collection_description": false
+        "show_collection_description": false,
+        "show_header": true,
+        "custom_header_text": "",
+        "show_breadcrumb": true,
+        "custom_breadcrumb_text": ""
       }
     },
     "independent_webhook_popup_6ky34i": {
@@ -272,7 +276,7 @@
           "settings": {
             "product_title": "Nệm Original Lite",
             "product_image": "shopify://shop_images/nem-original-1.jpg",
-            "product_features": "- Thiết kế mỏng nhẹ, dễ cuộn gọn và đa dạng kích thước\n- Đảm bảo êm ái và nâng đỡ nhẹ nhàng\n- Tích hợp tinh chất trà xanh và than hoạt tính: kháng khuẩn giúp khử mùi tự nhiên",
+            "product_features": "- Cấu trúc 3 tầng foam thông minh từ dòng nệm nguyên bản Original,\n- Tối ưu độ dày chỉ còn 20cm gọn nhẹ hơn, dễ di chuyển hơn",
             "comfort_layer_1_image": "shopify://shop_images/so_sanh_Ori.png",
             "product_thickness": "20 cm",
             "suitable_for": "Phù hợp với người muốn giấc ngủ êm ái và nâng đỡ cân bằng, đồng thời muốn tối ưu không gian sống và thoải mái ngân sách",
@@ -318,6 +322,19 @@
             "product_price": "Từ 2.290.000 VNĐ",
             "product_url": "shopify://products/mate_topper219071626"
           }
+        },
+        "product_HYNA3n": {
+          "type": "product",
+          "settings": {
+            "product_title": "NỆM MÂY TOPPER",
+            "product_image": "shopify://shop_images/1.THUMB_-1_1.jpg",
+            "product_features": "- Cấu trúc bông Microfiber bồng bềnh, đàn hồi \n- Thiết kế bọc nệm thông minh và đa dạng kích thước",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
+            "product_thickness": "8cm",
+            "suitable_for": "Dành cho người muốn nâng cấp không gian ngủ thành nơi nghỉ ngơi thư giãn và sang trọng.",
+            "product_price": "Từ 3.290.000 VNĐ",
+            "product_url": ""
+          }
         }
       },
       "block_order": [
@@ -327,7 +344,8 @@
         "product_kGMGE6",
         "product_atFTCC",
         "product_QVeCme",
-        "product_mewfre"
+        "product_mewfre",
+        "product_HYNA3n"
       ],
       "settings": {
         "section_width": "page-width",
