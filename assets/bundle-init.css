@@ -101,4 +101,11 @@
 /* Helper class */
 .hidden {
   display: none !important;
+}
+
+/* Service Grid Mobile Layout - 2x2 instead of 4 columns */
+@media (max-width: 768px) {
+  .product-block--service-grid .service-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 } 

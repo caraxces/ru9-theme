@@ -22,6 +22,122 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // --- Update Rating Value Dynamically ---
+        let ratingValue = '5.0'; // Default fallback
+        
+        // Method 1: Try to find from summary-average element (may be hidden)
+        const averageRatingElement = summary.querySelector('.jdgm-rev-widg__summary-average') ||
+                                    widgetHeader.querySelector('.jdgm-rev-widg__summary-average') ||
+                                    document.querySelector('.jdgm-rev-widg__summary-average');
+        
+        if (averageRatingElement) {
+            // Try text content
+            const ratingText = averageRatingElement.textContent.trim();
+            const ratingMatch = ratingText.match(/(\d+\.?\d*)/);
+            if (ratingMatch) {
+                ratingValue = parseFloat(ratingMatch[1]).toFixed(1);
+            }
+            // Try data attribute
+            else if (averageRatingElement.dataset.averageRating) {
+                ratingValue = parseFloat(averageRatingElement.dataset.averageRating).toFixed(1);
+            }
+            // Try any data attribute
+            else {
+                const dataAttrs = Array.from(averageRatingElement.attributes).filter(attr => 
+                    attr.name.startsWith('data-') && !isNaN(parseFloat(attr.value))
+                );
+                if (dataAttrs.length > 0) {
+                    ratingValue = parseFloat(dataAttrs[0].value).toFixed(1);
+                }
+            }
+        }
+        
+        // Method 2: Try to get from widget data attributes
+        if (ratingValue === '5.0') {
+            const widget = widgetHeader.closest('.jdgm-widget') || widgetHeader.closest('.jdgm-rev-widg');
+            if (widget) {
+                // Check all data attributes
+                Array.from(widget.attributes).forEach(attr => {
+                    if (attr.name.includes('rating') || attr.name.includes('average')) {
+                        const val = parseFloat(attr.value);
+                        if (!isNaN(val) && val >= 0 && val <= 5) {
+                            ratingValue = val.toFixed(1);
+                        }
+                    }
+                });
+            }
+        }
+        
+        // Method 3: Try to extract from summary text content (parse stars or numbers)
+        if (ratingValue === '5.0') {
+            const summaryText = summary.textContent || '';
+            // Look for patterns like "4.5", "4.8 out of 5", "5 stars", etc.
+            const patterns = [
+                /(\d+\.?\d*)\s*(?:out of|stars?|rating)/i,
+                /(?:average|rating|score)[\s:]*(\d+\.?\d*)/i,
+                /(\d+\.?\d*)(?:\s*\/\s*5)?/
+            ];
+            
+            for (const pattern of patterns) {
+                const match = summaryText.match(pattern);
+                if (match) {
+                    const val = parseFloat(match[1]);
+                    if (!isNaN(val) && val >= 0 && val <= 5) {
+                        ratingValue = val.toFixed(1);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        // Method 4: Try to get from Judge.me global data (if available)
+        if (ratingValue === '5.0' && typeof window.JD !== 'undefined' && window.JD.reviews) {
+            try {
+                const productId = widgetHeader.closest('[data-product-id]')?.dataset.productId;
+                if (productId && window.JD.reviews[productId]) {
+                    const avgRating = window.JD.reviews[productId].average_rating;
+                    if (avgRating) {
+                        ratingValue = parseFloat(avgRating).toFixed(1);
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not access Judge.me global data:', e);
+            }
+        }
+        
+        // Set the rating value as data attribute for CSS
+        summary.setAttribute('data-rating', ratingValue);
+        console.log('✅ Rating value updated:', ratingValue);
+
+        // Poll for rating value update (in case Judge.me loads it later)
+        let ratingPollAttempts = 0;
+        const MAX_RATING_POLLS = 10;
+        const ratingPoller = setInterval(() => {
+            ratingPollAttempts++;
+            
+            // Try Method 1 again (element might appear later)
+            const avgEl = summary.querySelector('.jdgm-rev-widg__summary-average') ||
+                          widgetHeader.querySelector('.jdgm-rev-widg__summary-average');
+            
+            if (avgEl) {
+                const text = avgEl.textContent.trim();
+                const match = text.match(/(\d+\.?\d*)/);
+                if (match) {
+                    const newRating = parseFloat(match[1]).toFixed(1);
+                    const currentRating = summary.getAttribute('data-rating') || '5.0';
+                    if (newRating !== currentRating) {
+                        summary.setAttribute('data-rating', newRating);
+                        console.log('✅ Rating value updated (delayed):', newRating);
+                    }
+                }
+            }
+            
+            // Stop polling after max attempts
+            if (ratingPollAttempts >= MAX_RATING_POLLS) {
+                clearInterval(ratingPoller);
+            }
+        }, 500);
+
         // --- 1. Restructure DOM for Stable Left Column ---
         const leftColumn = document.createElement('div');
         leftColumn.className = 'jdgm-custom-left-column';

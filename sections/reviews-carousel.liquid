@@ -187,6 +187,41 @@
     }
     .reviews-carousel-header__right { display: none; }
     
+    /* Mobile: Enable horizontal scroll with blue scrollbar */
+    .reviews-carousel-viewport {
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      padding-bottom: 20px !important; /* Space for scrollbar */
+      scrollbar-width: auto !important; /* Show scrollbar */
+      -ms-overflow-style: auto !important; /* Show scrollbar for IE/Edge */
+      -webkit-overflow-scrolling: touch !important;
+      scroll-behavior: smooth !important;
+    }
+    
+    /* Mobile scrollbar styling - Blue scrollbar like other sections */
+    .reviews-carousel-viewport::-webkit-scrollbar {
+      height: 8px !important;
+      display: block !important; /* Ensure scrollbar is visible */
+    }
+    
+    .reviews-carousel-viewport::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
+      border-radius: 100px !important;
+    }
+    
+    .reviews-carousel-viewport::-webkit-scrollbar-thumb {
+      background: #234085 !important;
+      border-radius: 100px !important;
+    }
+    
+    .reviews-carousel-viewport::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
+    }
+    
+    .reviews-carousel-viewport::-webkit-scrollbar-button {
+      display: none !important;
+    }
+    
     .review-card { flex: 0 0 280px; width: 280px; }
     .review-card__image { width: 280px; height: auto; }
     .review-card__content { padding: 16px; }

@@ -14835,9 +14835,6 @@ details[open] > .site-nav__dropdown {
   display: none;
 }
 
-.breadcrumb:not(.spacing-base) {
-  margin: -25px 0 10px;
-}
 
 .breadcrumb a {
   color: var(--colorLinkBreadcrumb);
@@ -16203,7 +16200,7 @@ input[type="image"] {
 
 @media screen and (min-width: 95rem) {
   .index-section {
-    margin: 68px 0;
+    margin: 10px 0;
   }
 }
 

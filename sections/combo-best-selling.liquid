@@ -139,20 +139,38 @@
     [data-section-type="combo-best-selling"] .product-cards-container {
       display: flex !important;
       flex-direction: row !important;
-      gap: 15px !important;
+      gap: 20px !important;
       overflow-x: auto !important;
       overflow-y: hidden !important;
-      scroll-snap-type: x mandatory !important;
+      padding-bottom: 20px !important; /* Space for scrollbar */
+      scrollbar-width: auto !important; /* Show scrollbar */
+      -ms-overflow-style: auto !important; /* Show scrollbar for IE/Edge */
       -webkit-overflow-scrolling: touch !important;
-      scrollbar-width: none !important; /* Firefox */
-      -ms-overflow-style: none !important; /* IE and Edge */
-      padding-bottom: 10px !important;
-      transform: none !important;
-      transition: none !important;
+      scroll-behavior: smooth !important;
     }
     
+    /* Mobile scrollbar styling - Blue scrollbar like combo-bedroom */
     [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar {
-      display: none !important; /* Chrome, Safari, Opera */
+      height: 8px !important;
+      display: block !important; /* Ensure scrollbar is visible */
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
+      border-radius: 100px !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar-thumb {
+      background: #234085 !important;
+      border-radius: 100px !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar-button {
+      display: none !important;
     }
   }
 
@@ -312,7 +330,7 @@
   
   [data-section-type="combo-best-selling"] .buy-now-btn {
     width: 100%;
-    background: #1C2C58;
+    background: #234085;
     color: white;
     border: none;
     border-radius: 20px;
@@ -410,116 +428,58 @@
     const productCardsContainer = sectionContainer.querySelector('.product-cards-container');
     if (!productCardsContainer) return;
 
-    const productCards = productCardsContainer.querySelectorAll('.product-card');
-    
-    // Ensure product cards are visible
-    productCards.forEach(card => {
-      card.style.opacity = '1';
-      card.style.transform = 'none';
-    });
-
-    // Mobile carousel functionality - only on mobile devices
-    function isMobile() {
-      return window.innerWidth <= 768;
-    }
-
-    if (isMobile() && productCards.length > 0) {
-      let isDown = false;
-      let startX;
-      let scrollLeft;
-      let hasScrolled = false;
-
-      // Touch/mouse events for carousel scrolling
-      productCardsContainer.addEventListener('mousedown', (e) => {
-        if (!isMobile()) return;
-        isDown = true;
-        productCardsContainer.classList.add('is-dragging');
-        startX = e.pageX - productCardsContainer.offsetLeft;
-        scrollLeft = productCardsContainer.scrollLeft;
-        hasScrolled = false;
-      });
-
-      productCardsContainer.addEventListener('mouseleave', () => {
-        if (!isMobile()) return;
-        isDown = false;
-        productCardsContainer.classList.remove('is-dragging');
-      });
-
-      productCardsContainer.addEventListener('mouseup', () => {
-        if (!isMobile()) return;
-        isDown = false;
-        productCardsContainer.classList.remove('is-dragging');
-      });
-
-      productCardsContainer.addEventListener('mousemove', (e) => {
-        if (!isMobile() || !isDown) return;
-        e.preventDefault();
-        hasScrolled = true;
-        const x = e.pageX - productCardsContainer.offsetLeft;
-        const walk = (x - startX) * 2; // Scroll speed multiplier
-        productCardsContainer.scrollLeft = scrollLeft - walk;
-      });
-
-      // Touch events for mobile swipe
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let touchEndX = 0;
-      let touchEndY = 0;
-
-      productCardsContainer.addEventListener('touchstart', (e) => {
-        if (!isMobile()) return;
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-      }, { passive: true });
-
-      productCardsContainer.addEventListener('touchend', (e) => {
-        if (!isMobile()) return;
-        touchEndX = e.changedTouches[0].screenX;
-        touchEndY = e.changedTouches[0].screenY;
-      }, { passive: true });
-
-      // Prevent card click when scrolling/swiping
-      productCards.forEach(card => {
-        card.addEventListener('click', (e) => {
-          if (hasScrolled) {
-            e.preventDefault();
-            hasScrolled = false;
-          }
+    function initializeCarousel() {
+      // Check if mobile device
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
+        // Mobile: Use native touch scrolling - no custom handlers needed
+        // Just prevent image drag
+        productCardsContainer.querySelectorAll('img').forEach(img => {
+          img.addEventListener('dragstart', (e) => e.preventDefault());
         });
-      });
-
-      // Smooth scroll on scroll end
-      let scrollTimeout;
-      productCardsContainer.addEventListener('scroll', () => {
-        if (!isMobile()) return;
-        clearTimeout(scrollTimeout);
-        productCardsContainer.style.scrollBehavior = 'auto';
         
-        scrollTimeout = setTimeout(() => {
-          // Optional: snap to nearest card on scroll end
-          const cardWidth = productCards[0].offsetWidth + 15; // card width + gap
-          const scrollPosition = productCardsContainer.scrollLeft;
-          const nearestIndex = Math.round(scrollPosition / cardWidth);
-          const targetScroll = nearestIndex * cardWidth;
-          
-          productCardsContainer.style.scrollBehavior = 'smooth';
-          productCardsContainer.scrollTo({
-            left: targetScroll,
-            behavior: 'smooth'
-          });
-        }, 150);
-      }, { passive: true });
+        return {
+          next: () => {
+            productCardsContainer.scrollBy({
+              left: 300, // Approximate card width + gap
+              behavior: 'smooth'
+            });
+          },
+          prev: () => {
+            productCardsContainer.scrollBy({
+              left: -300,
+              behavior: 'smooth'
+            });
+          },
+          reset: () => {
+            productCardsContainer.scrollTo({
+              left: 0,
+              behavior: 'smooth'
+            });
+          },
+          update: () => {}
+        };
+      }
+
+      // Desktop: Keep grid layout, no carousel needed
+      return {
+        next: () => {},
+        prev: () => {},
+        reset: () => {},
+        update: () => {}
+      };
     }
 
-    // Handle window resize
+    // Initialize carousel
+    let carousel = initializeCarousel();
+    
+    // Handle window resize to reinitialize carousel
     let resizeTimeout;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        // Reset scroll position if switching from mobile to desktop
-        if (!isMobile()) {
-          productCardsContainer.scrollLeft = 0;
-        }
+        carousel = initializeCarousel();
       }, 250);
     });
   });

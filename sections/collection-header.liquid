@@ -30,10 +30,28 @@
             style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
           >
             <header class="section-header section-header--hero {{ align }}">
-              {%- render 'breadcrumbs', classes: align -%}
-              <h1 class="section-header__title text-3xl f-smb">
-                {{ collection.title }}
-              </h1>
+              {%- if section.settings.show_breadcrumb -%}
+                {%- if section.settings.custom_breadcrumb_text != blank -%}
+                  <nav class="breadcrumb {{ align }}" role="navigation" aria-label="breadcrumbs">
+                    <a href="{{ routes.root_url }}" title="{{ 'general.breadcrumbs.home_link_title' | t }}">
+                      {{- 'general.breadcrumbs.home' | t -}}
+                    </a>
+                    <span class="breadcrumb__divider" aria-hidden="true">{% render 'icon-caret' %}</span>
+                    <span aria-current="page" class="is-current">{{ section.settings.custom_breadcrumb_text }}</span>
+                  </nav>
+                {%- else -%}
+                  {%- render 'breadcrumbs', classes: align -%}
+                {%- endif -%}
+              {%- endif -%}
+              {%- if section.settings.show_header -%}
+                <h1 class="section-header__title text-3xl f-smb">
+                  {%- if section.settings.custom_header_text != blank -%}
+                    {{ section.settings.custom_header_text }}
+                  {%- else -%}
+                    {{ collection.title }}
+                  {%- endif -%}
+                </h1>
+              {%- endif -%}
               {%- if section.settings.show_collection_description -%}
                 <div class="rte section-header__desc" style="--mw: {{ section.settings.max_width_desc }}px;">
                   {{ collection.description }}
@@ -48,10 +66,28 @@
     {%- assign disable_sticky_header = true -%}
     <div class="page-width page-content page-content--top">
       <header class="section-header section-header--flush {{ align }}">
-        {%- render 'breadcrumbs', classes: align -%}
-        <h1 class="section-header__title text-3xl f-smb">
-          {{ collection.title }}
-        </h1>
+        {%- if section.settings.show_breadcrumb -%}
+          {%- if section.settings.custom_breadcrumb_text != blank -%}
+            <nav class="breadcrumb {{ align }}" role="navigation" aria-label="breadcrumbs">
+              <a href="{{ routes.root_url }}" title="{{ 'general.breadcrumbs.home_link_title' | t }}">
+                {{- 'general.breadcrumbs.home' | t -}}
+              </a>
+              <span class="breadcrumb__divider" aria-hidden="true">{% render 'icon-caret' %}</span>
+              <span aria-current="page" class="is-current">{{ section.settings.custom_breadcrumb_text }}</span>
+            </nav>
+          {%- else -%}
+            {%- render 'breadcrumbs', classes: align -%}
+          {%- endif -%}
+        {%- endif -%}
+        {%- if section.settings.show_header -%}
+          <h1 class="section-header__title text-3xl f-smb">
+            {%- if section.settings.custom_header_text != blank -%}
+              {{ section.settings.custom_header_text }}
+            {%- else -%}
+              {{ collection.title }}
+            {%- endif -%}
+          </h1>
+        {%- endif -%}
       </header>
     </div>
   {%- endif -%}
@@ -72,7 +108,9 @@
 
 <style>
   /* Remove custom canvas overrides - let theme handle canvas layout */
-
+  .section-header{
+    margin-top: 30px;
+  }
   .collection-hero__image {
     width: 100%;
     height: 350px;
@@ -173,6 +211,32 @@
       "default": true,
       "label": "t:sections.collection-header.settings.show_collection_description.label",
       "info": "t:sections.collection-header.settings.show_collection_description.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "default": true,
+      "label": "Show collection header title",
+      "info": "Enable or disable the collection title (h1) display"
+    },
+    {
+      "type": "text",
+      "id": "custom_header_text",
+      "label": "Custom header text",
+      "info": "Leave empty to use collection title. Custom text will override collection title."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "default": true,
+      "label": "Show breadcrumb",
+      "info": "Enable or disable breadcrumb navigation"
+    },
+    {
+      "type": "text",
+      "id": "custom_breadcrumb_text",
+      "label": "Custom breadcrumb text",
+      "info": "Leave empty to use default breadcrumb. Custom text will override default breadcrumb for collection name."
     }
   ],
   "disabled_on": {

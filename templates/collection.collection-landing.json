@@ -66,7 +66,11 @@
         "align_text": "left",
         "enable": true,
         "collection_image_enable": false,
-        "show_collection_description": false
+        "show_collection_description": false,
+        "show_header": false,
+        "custom_header_text": "",
+        "show_breadcrumb": true,
+        "custom_breadcrumb_text": "Combo Tiết Kiệm"
       }
     },
     "combo_best_selling_Yf3WTR": {
@@ -486,9 +490,12 @@
         "review_hwC3Wy",
         "review_QmE7GT"
       ],
+      "custom_css": [
+        ".reviews-carousel-section {padding: 0 0 40px 0;}"
+      ],
       "name": "Reviews carousel",
       "settings": {
-        "heading": "<p>Hơn <strong>50,000 </strong>Khách Hàng<br/>Và <strong>30,000 </strong>Đánh Giá 5 Sao Toàn Quốc</p>"
+        "heading": "<p>Hơn <strong>50,000 </strong>khách hàng<br/>và <strong>30,000 </strong>đánh giá 5 sao toàn quốc</p>"
       }
     },
     "super_service_prmmGy": {

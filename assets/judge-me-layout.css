@@ -232,7 +232,7 @@
 }
 .jdgm-rev-widg__summary::before {
     grid-area: rating !important;
-    content: "5.0" !important;
+    content: attr(data-rating) !important;
     font-size: 64px !important;
     font-weight: 700 !important;
     line-height: 1 !important;
@@ -486,6 +486,9 @@
     .jdgm-all-reviews__summary-text--verified{
         justify-content: left !important;
     }
+    .jdgm-rev-widg__summary{
+        margin-bottom: 0px !important;
+    }
     .jdgm-rev-widg__summary-average{
         display: none !important;
     }
@@ -497,7 +500,6 @@
     .jdgm-rev-widg__header {
         flex-direction: column !important;
         align-items: center !important;
-        gap: 30px !important;
     }
 
     .jdgm-custom-left-column {
