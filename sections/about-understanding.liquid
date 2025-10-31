@@ -45,20 +45,106 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    text-align: left;
   }
-  .about-understanding-text h3 {
-    font-size: 24px;
+  
+  /* Item content wrapper - align to bottom */
+  .about-understanding-text .item-content {
+    margin-top: auto;
+    width: 100%;
+  }
+  
+  /* Section title styles when inside first item */
+  .about-understanding-item:first-child .about-understanding-text .section-title {
+    font-family: "Be Vietnam Pro", sans-serif;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+  
+  .about-understanding-item:first-child .about-understanding-text .section-title h2 {
+    color: #1C2C58;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 80px;
+    margin: 0;
+    text-align: left;
+  }
+  
+  .about-understanding-item:first-child .about-understanding-text .section-title h2 span {
+    color: #759CE6;
+  }
+  
+  .about-understanding-item:first-child .about-understanding-text .section-title .tagline {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 32px;
+    font-style: normal;
     font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2230' }};
-    margin-bottom: 20px;
-    line-height: 1.2;
+    line-height: 50px;
+    margin-top: 24px;
+    margin-bottom: 0;
+    text-align: left;
   }
+  
+  /* Item title styles - Same for all blocks */
+  .about-understanding-text h3,
+  .about-understanding-text .item-title {
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #1C2C58;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 22.4px */
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 1px solid #000;
+    padding-bottom: 20px;
+  }
+  
+  /* Desktop: Item title styling for all blocks */
+  @media screen and (min-width: 769px) {
+    .about-understanding-text h3,
+    .about-understanding-text .item-title {
+      font-size: 39px;
+      font-weight: 700;
+      line-height: 50px; /* 128.205% */
+      margin-bottom: 24px;
+    }
+    
+    .about-understanding-item:first-child .about-understanding-text .section-title .tagline {
+      font-size: 32px;
+      line-height: 50px;
+    }
+  }
+  
   .about-understanding-text p {
     color: {{ section.settings.text_color | default: '#5E6B85' }};
     margin-bottom: 16px;
     line-height: 1.6;
+    text-align: left;
   }
+  
+  /* Desktop: Paragraph styling for all blocks */
+  @media screen and (min-width: 769px) {
+    .about-understanding-text p {
+      font-size: 20px;
+      font-weight: 400;
+      color: #1C2C58;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .about-understanding-item:first-child .about-understanding-text p {
+      font-size: 20px;
+      font-weight: 400;
+      color: #1C2C58;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+  }
+  
   .about-understanding-text p:last-child {
     margin-bottom: 0;
   }
@@ -96,81 +182,54 @@
     }
   }
 
-  /* Ru9 Section Title Styles */
-  .ru9-section {
-    font-family: "Be Vietnam Pro", sans-serif;
-    padding-bottom: 60px;
-    width: 100%;
-    max-width: 1594px;
-    margin: -90px auto 0 auto;
-    padding-left: 5rem;
-    padding-right: 5rem;
-  }
-
-  /* Responsive padding cho các kích thước màn hình */
-  @media (max-width: 1399px) and (min-width: 1024px) {
-    .ru9-section {
-      padding-left: 5rem;
-      padding-right: 5rem;
+  /* Desktop layout adjustments (min-width: 769px) */
+  @media screen and (min-width: 769px) {
+    .about-understanding-content {
+      gap: 6rem;
+    }
+    
+    .about-understanding-item {
+      gap: 60px;
+      align-items: flex-start;
+    }
+    
+    .about-understanding-image {
+      flex: 0 0 50%;
+    }
+    
+    .about-understanding-text {
+      flex: 0 0 calc(50% - 60px);
+      padding-top: 0;
+    }
+    
+    /* SVG overlay positioning for desktop */
+    .about-understanding-svg-overlay {
+      bottom: 20px;
+      left: 20px;
+      max-width: 280px;
+      max-height: 100px;
     }
   }
-
-  @media (max-width: 1023px) and (min-width: 769px) {
-    .ru9-section {
-      padding-left: clamp(20px, 4vw, 40px);
-      padding-right: clamp(30px, 5vw, 5rem);
-    }
-  }
-
-  .ru9-section h2 {
-    color: #1C2C58;
-    font-size: 64px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 80px;
-    margin: 0;
-  }
-
-  .ru9-section h2 span {
-    color: #759CE6;
-  }
-
-  .ru9-section p {
-    color: #1C2C58;
-    font-size: 35px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 50px;
-    margin-top: 85px;
-  }
-
-  /* Responsive: cho mobile nhỏ hơn 768px */
+  
+  /* Mobile: Section title styles when inside first item */
   @media (max-width: 768px) {
-    .ru9-section {
-      padding-bottom: 24px;
-      padding: 60px 15px 0 15px;
-      max-width: 100%;
-    }
-
-    .ru9-section h2 {
+    .about-understanding-item:first-child .about-understanding-text .section-title h2 {
       font-size: 20px !important;
       line-height: 28px;
       display: inline-block;
       width: 100%;
     }
-
-    /* Ẩn thẻ <br> trên mobile để các span có thể ở cùng 1 hàng */
-    .ru9-section h2 br {
+    
+    .about-understanding-item:first-child .about-understanding-text .section-title h2 br {
       display: none;
     }
-
-    /* Đảm bảo các span hiển thị như text thông thường, có thể wrap tự nhiên */
-    .ru9-section h2 span {
+    
+    .about-understanding-item:first-child .about-understanding-text .section-title h2 span {
       color: #759CE6;
       display: inline;
     }
-
-    .ru9-section p {
+    
+    .about-understanding-item:first-child .about-understanding-text .section-title .tagline {
       margin-top: 30px;
       font-size: 16px;
       line-height: 32px;
@@ -180,20 +239,6 @@
 </style>
 
 <div class="about-understanding-section">
-  {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
-    <section class="ru9-section">
-      {%- if section.settings.title != blank -%}
-        <h2>
-          {{ section.settings.title }}
-        </h2>
-      {%- endif -%}
-      {%- if section.settings.subtitle != blank -%}
-        <p>
-          {{ section.settings.subtitle }}
-        </p>
-      {%- endif -%}
-    </section>
-  {%- endif -%}
   <div class="page-width">    
     <div class="about-understanding-content">
       {% for block in section.blocks %}
@@ -217,8 +262,29 @@
             {% endif %}
           </div>
           <div class="about-understanding-text">
-            <div>{{ block.settings.title }}</div>
-            {{ block.settings.content }}
+            {%- comment -%} Show section title only in first item {%- endcomment -%}
+            {%- if forloop.first -%}
+              {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+                <div class="section-title">
+                  {%- if section.settings.title != blank -%}
+                    <h2>
+                      {{ section.settings.title }}{% if section.settings.title_colored != blank %} <span>{{ section.settings.title_colored }}</span>{% endif %}
+                    </h2>
+                  {%- endif -%}
+                  {%- if section.settings.subtitle != blank -%}
+                    <p class="tagline">{{ section.settings.subtitle }}</p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+            
+            {%- if block.settings.title != blank -%}
+              <h3 class="item-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            
+            <div class="item-content">
+              {{ block.settings.content }}
+            </div>
           </div>
         </div>
       {% endfor %}
@@ -233,11 +299,18 @@
   "class": "section",
   "settings": [
     {
-      "type": "html",
+      "type": "text",
       "id": "title",
       "label": "Section Title",
-      "default": "Ru9 sẽ không ngừng <br><span>lắng nghe và thấu hiểu</span>",
-      "info": "Use <span> tags for colored text, <br> for line breaks"
+      "default": "Ru9 sẽ không ngừng",
+      "info": "Main title text"
+    },
+    {
+      "type": "text",
+      "id": "title_colored",
+      "label": "Section Title (Colored Part)",
+      "default": "lắng nghe và thấu hiểu",
+      "info": "This part will be displayed in blue color"
     },
     {
       "type": "text",
@@ -269,12 +342,12 @@
       "type": "about_understanding_item",
       "name": "Understanding Item",
       "settings": [
-        {
-          "type": "html",
-          "id": "title",
-          "label": "Item Title",
-          "default": "Hiểu rằng mỗi giấc ngủ là một trải nghiệm cá nhân"
-        },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Item Title",
+      "default": "Hiểu rằng mỗi giấc ngủ là một trải nghiệm cá nhân"
+    },
         {
           "type": "richtext",
           "id": "content",
