@@ -125,13 +125,15 @@
 
 <style>
   /* General Section Styles */
-  [data-section-type="featured-collections"] .featured-collections-section {
-    width: 100%;
-    max-width: 1594px;
-    min-height: auto;
-    margin: 0 auto 0 auto;
-    padding: 0 5rem 0 5rem;
-    font-family: 'Be Vietnam Pro', sans-serif;
+  @media (min-width: 769px) {
+    [data-section-type="featured-collections"] .featured-collections-section {
+      width: 100%;
+      max-width: 1594px;
+      min-height: auto;
+      margin: 0 auto 2rem auto;
+      padding: 0 5rem 0 5rem;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
   }
   [data-section-type="featured-collections"] .featured-collections-section .section-header {
     padding-bottom: 0px;
