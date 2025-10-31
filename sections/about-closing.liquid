@@ -3,18 +3,26 @@
 <style>
   /* Desktop styles (default) - 1024px and above */
   .about-closing-section {
-    padding: 0;
+    padding: 5rem 0 0 0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
     overflow: visible;
+    width: 100%;
   }
   .about-closing-section .page-width {
     position: relative;
     overflow: visible;
+    max-width: 100%;
+    padding: 0;
   }
   .about-closing-container {
     position: relative;
     height: 600px;
     overflow: visible;
     width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
   .about-closing-image {
     position: absolute;
@@ -89,7 +97,7 @@
     width: auto;
     height: auto;
     display: inline-block;
-    max-width: 300px;
+    max-width: 600px;
   }
   .about-closing-footer-overlay {
     position: absolute;
@@ -101,6 +109,7 @@
     align-items: flex-end;
     padding: 0;
     pointer-events: none;
+    overflow: visible;
   }
   .about-closing-footer-overlay img {
     max-width: 200px;
@@ -109,13 +118,26 @@
     display: block;
     position: relative;
     bottom: -20px;
+    margin-bottom: 0;
   }
 
   /* Mobile styles - 768px and below */
   @media (max-width: 768px) {
+    .about-closing-section {
+      padding: 0 !important;
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    
+    .about-closing-container {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
     .about-closing-section .page-width {
       display: flex;
       flex-direction: column;
+      max-width: 100%;
+      padding: 0;
     }
     .about-closing-content-wrapper {
       position: static;
@@ -188,8 +210,8 @@
   }
 </style>
 
-<div class="about-closing-section">
-  <div class="page-width">
+<div class="about-closing-section" style="margin-bottom: 0 !important; padding-bottom: 0 !important;">
+  <div class="page-width" style="margin-bottom: 0 !important; padding-bottom: 0 !important;">
     <!-- Content Overlay (Desktop) / Content Above (Mobile) -->
     <div class="about-closing-content-wrapper">
       <div class="about-closing-content">

@@ -123,6 +123,22 @@
       </div>
     </div>
 
+    <div class="footer-ru9__company-info">
+      <div class="company-info-item">
+        {%- if section.settings.company_name != blank -%}
+          <div class="company-label">{{ section.settings.company_name }}</div>
+        {%- endif -%}
+        <div class="company-content">
+          {%- if section.settings.tax_code != blank -%}
+            <div class="company-tax-code">Mã số thuế: {{ section.settings.tax_code }}</div>
+          {%- endif -%}
+          {%- if section.settings.company_address != blank -%}
+            <div class="company-address">{{ section.settings.company_address }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
     <div class="footer-ru9__address">
       {%- if section.settings.addr_1 != blank -%}
         <div class="address-item">
@@ -200,9 +216,10 @@
       .footer-ru9__inner {
         display: grid;
         grid-template-columns: 1fr 1.4fr;
-        grid-template-rows: auto 1fr;
+        grid-template-rows: auto auto 1fr;
         grid-template-areas:
           "logos subscribe"
+          "company-info subscribe"
           "address links"
           "badges badges";
         gap: 28px 100px;
@@ -210,6 +227,7 @@
       }
       .footer-ru9__logos { grid-area: logos; }
       .footer-ru9__subscribe { grid-area: subscribe; }
+      .footer-ru9__company-info { grid-area: company-info; }
       .footer-ru9__address { grid-area: address; }
       .footer-ru9__links { grid-area: links; }
       .footer-ru9__badges { grid-area: badges; }
@@ -327,6 +345,48 @@
     .newsletter-submit-btn:active {
       background: #A8DDFF;
     }
+    .footer-ru9__company-info {
+      display: inline-flex;
+      padding: 4px 0 0 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      color: #fff;
+    }
+    .footer-ru9__company-info .company-info-item {
+      display: grid;
+      grid-template-columns: 137px 1fr;
+      gap: 12px;
+      align-items: start;
+      width: 100%;
+    }
+    .footer-ru9__company-info .company-label {
+      color: #FFF;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      width: 137px;
+      flex-shrink: 0;
+      margin: 0;
+    }
+    .footer-ru9__company-info .company-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 426px;
+    }
+    .footer-ru9__company-info .company-tax-code,
+    .footer-ru9__company-info .company-address {
+      color: #FFF;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      margin: 0;
+    }
     .footer-ru9__address { display: inline-flex; padding: 4px 0 28px 0; flex-direction: column; align-items: flex-start; gap: 31px; }
     .footer-ru9__address .address-item { display: grid; grid-template-columns: 137px 1fr; gap: 12px; align-items: start; }
     .footer-ru9__address .address-label {
@@ -366,14 +426,19 @@
         justify-content: space-around;
         align-items: flex-start;
       }
-      .footer-ru9__subscribe { order: 3; padding-right: 0; }
-      .footer-ru9__address { order: 4; }
-      .footer-ru9__badges { order: 5; }
+      .footer-ru9__company-info { order: 3; }
+      .footer-ru9__subscribe { order: 4; padding-right: 0; }
+      .footer-ru9__address { order: 5; }
+      .footer-ru9__badges { order: 6; }
 
       .footer-ru9__columns { grid-template-columns: 1fr; gap: 32px; }
       .footer-ru9__address .address-text { width: auto; }
       .footer-ru9__address .address-label { font-size: 14px; }
       .footer-ru9__address .address-text { font-size: 14px; }
+      .footer-ru9__company-info .company-label { font-size: 14px; }
+      .footer-ru9__company-info .company-content { width: auto; }
+      .footer-ru9__company-info .company-tax-code,
+      .footer-ru9__company-info .company-address { font-size: 14px; }
       .footer-ru9__col-content {
         grid-template-rows: repeat(4, auto);
         grid-auto-flow: column;
@@ -670,6 +735,10 @@ document.addEventListener('DOMContentLoaded', function() {
       "id": "partner_logo_html",
       "label": "Mã SVG logo đối tác (ghi đè logo mặc định)"
     },
+    { "type": "header", "content": "Thông tin công ty" },
+    { "type": "text", "id": "company_name", "label": "Tên công ty", "default": "CÔNG TY TNHH RU9" },
+    { "type": "text", "id": "tax_code", "label": "Mã số thuế", "default": "0314604108" },
+    { "type": "textarea", "id": "company_address", "label": "Địa chỉ công ty", "default": "39 Đinh Công Tráng, Phường Tân Định, Thành phố Hồ Chí Minh, Việt Nam" },
     { "type": "header", "content": "Địa chỉ & giờ mở cửa" },
     { "type": "text", "id": "newsletter_title", "label": "Tiêu đề newsletter", "default": "NHẬN THÔNG TIN ƯU ĐÃI TỪ RU9" },
     { "type": "url", "id": "social_facebook_link", "label": "Facebook URL" },

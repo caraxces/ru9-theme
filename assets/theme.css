@@ -17331,7 +17331,7 @@ input[type="image"] {
 
 @media only screen and (min-width: 769px) {
   .collection-hero__content {
-    padding: 30px 0;
+    padding: 3rem 0 5rem 0 !important;
   }
 }
 
