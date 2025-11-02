@@ -56,13 +56,13 @@
   }
   
   /* Section title styles when inside first item */
-  .about-understanding-item:first-child .about-understanding-text .section-title {
+  .about-understanding-item:first-child .section-title {
     font-family: "Be Vietnam Pro", sans-serif;
     margin-bottom: 24px;
     text-align: left;
   }
   
-  .about-understanding-item:first-child .about-understanding-text .section-title h2 {
+  .about-understanding-item:first-child .section-title h2 {
     color: #1C2C58;
     font-size: 56px;
     font-style: normal;
@@ -72,11 +72,11 @@
     text-align: left;
   }
   
-  .about-understanding-item:first-child .about-understanding-text .section-title h2 span {
+  .about-understanding-item:first-child .section-title h2 span {
     color: #759CE6;
   }
   
-  .about-understanding-item:first-child .about-understanding-text .section-title .tagline {
+  .about-understanding-item:first-child .section-title .tagline {
     color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
     font-size: 32px;
@@ -113,7 +113,7 @@
       margin-bottom: 24px;
     }
     
-    .about-understanding-item:first-child .about-understanding-text .section-title .tagline {
+    .about-understanding-item:first-child .section-title .tagline {
       font-size: 32px;
       line-height: 50px;
     }
@@ -136,13 +136,6 @@
       margin-bottom: 20px;
     }
     
-    .about-understanding-item:first-child .about-understanding-text p {
-      font-size: 20px;
-      font-weight: 400;
-      color: #1C2C58;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
   }
   
   .about-understanding-text p:last-child {
@@ -158,17 +151,44 @@
       gap: 40px;
     }
     .about-understanding-item {
+      display: flex;
       flex-direction: column;
       gap: 20px;
     }
     .about-understanding-item.reverse {
       flex-direction: column;
     }
-    .about-understanding-text {
+    /* First item: section-title first, then image, then item-title and content */
+    .about-understanding-item:first-child .section-title {
       order: 1;
     }
-    .about-understanding-image {
+    .about-understanding-item:first-child .about-understanding-image {
       order: 2;
+      flex: none;
+    }
+    .about-understanding-item:first-child .about-understanding-text {
+      order: 3;
+    }
+    .about-understanding-item:first-child .item-title {
+      order: 1;
+    }
+    .about-understanding-item:first-child .item-content {
+      order: 2;
+    }
+    /* Other items: image first, then title and content */
+    .about-understanding-item:not(:first-child) .about-understanding-image {
+      order: 1;
+      flex: none;
+    }
+    .about-understanding-item:not(:first-child) .about-understanding-text {
+      order: 2;
+    }
+    .about-understanding-text {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .about-understanding-image {
       flex: none;
     }
     .about-understanding-svg-overlay {
@@ -213,23 +233,26 @@
   
   /* Mobile: Section title styles when inside first item */
   @media (max-width: 768px) {
-    .about-understanding-item:first-child .about-understanding-text .section-title h2 {
+    .about-understanding-item:first-child .section-title {
+      margin-bottom: 20px;
+    }
+    .about-understanding-item:first-child .section-title h2 {
       font-size: 20px !important;
       line-height: 28px;
       display: inline-block;
       width: 100%;
     }
     
-    .about-understanding-item:first-child .about-understanding-text .section-title h2 br {
+    .about-understanding-item:first-child .section-title h2 br {
       display: none;
     }
     
-    .about-understanding-item:first-child .about-understanding-text .section-title h2 span {
+    .about-understanding-item:first-child .section-title h2 span {
       color: #759CE6;
       display: inline;
     }
     
-    .about-understanding-item:first-child .about-understanding-text .section-title .tagline {
+    .about-understanding-item:first-child .section-title .tagline {
       margin-top: 30px;
       font-size: 16px;
       line-height: 32px;
@@ -243,6 +266,22 @@
     <div class="about-understanding-content">
       {% for block in section.blocks %}
         <div class="about-understanding-item{% if block.settings.reverse_layout %} reverse{% endif %}">
+          {%- comment -%} Show section title only in first item, outside text wrapper for mobile ordering {%- endcomment -%}
+          {%- if forloop.first -%}
+            {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+              <div class="section-title">
+                {%- if section.settings.title != blank -%}
+                  <h2>
+                    {{ section.settings.title }}{% if section.settings.title_colored != blank %} <span>{{ section.settings.title_colored }}</span>{% endif %}
+                  </h2>
+                {%- endif -%}
+                {%- if section.settings.subtitle != blank -%}
+                  <p class="tagline">{{ section.settings.subtitle }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+          
           <div class="about-understanding-image">
             {% if block.settings.image != blank %}
               <img 
@@ -262,22 +301,6 @@
             {% endif %}
           </div>
           <div class="about-understanding-text">
-            {%- comment -%} Show section title only in first item {%- endcomment -%}
-            {%- if forloop.first -%}
-              {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
-                <div class="section-title">
-                  {%- if section.settings.title != blank -%}
-                    <h2>
-                      {{ section.settings.title }}{% if section.settings.title_colored != blank %} <span>{{ section.settings.title_colored }}</span>{% endif %}
-                    </h2>
-                  {%- endif -%}
-                  {%- if section.settings.subtitle != blank -%}
-                    <p class="tagline">{{ section.settings.subtitle }}</p>
-                  {%- endif -%}
-                </div>
-              {%- endif -%}
-            {%- endif -%}
-            
             {%- if block.settings.title != blank -%}
               <h3 class="item-title">{{ block.settings.title }}</h3>
             {%- endif -%}

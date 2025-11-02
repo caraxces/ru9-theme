@@ -27,14 +27,14 @@
     margin: 0;
   }
   .about-promise-title-line1 {
-    font-size: 1.5em;
+    font-size: 64px;
     font-weight: 700;
     color: {{ section.settings.subtitle_color | default: '#759CE6' }};
     margin: 0 0 8px 0;
     line-height: 1.2;
   }
   .about-promise-title-line2 {
-    font-size: 2.5em;
+    font-size: 64px;
     font-weight: 700;
     color: {{ section.settings.title_color | default: '#1A2B4D' }};
     margin: 0;
@@ -44,7 +44,7 @@
     color: {{ section.settings.text_color | default: '#333333' }};
     line-height: 1.6;
     margin: 0;
-    font-size: 16px;
+    font-size: 20px;
   }
   .about-promise-description p {
     margin-bottom: 16px;
@@ -122,6 +122,25 @@
   /* Mobile responsive */
   @media (max-width: 768px) {
     /* Let theme handle responsive padding */
+    .about-promise-title {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: nowrap;
+    }
+    .about-promise-title-line1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+      white-space: nowrap;
+    }
+    .about-promise-title-line2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+      white-space: nowrap;
+    }
     .about-promise-content {
       gap: 40px;
     }
@@ -131,12 +150,6 @@
     }
     .about-promise-left {
       gap: 20px;
-    }
-    .about-promise-title-line1 {
-      font-size: 1.25em;
-    }
-    .about-promise-title-line2 {
-      font-size: 2em;
     }
     .about-promise-description {
       font-size: 14px;

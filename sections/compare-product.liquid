@@ -19,8 +19,8 @@
     class="page-width"
     style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
   >
-    <div class="section-header text-left">
-      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+    <div class="compare-products-header">
+      <h2 class="compare-products-header__title">{{ section.settings.title }}</h2>
       <div class="rte text-lg">{{ section.settings.description }}</div>
     </div>
 
@@ -299,20 +299,12 @@
   } {% endcomment %}
   
   /* Ensure section padding is consistent */
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     .compare-products.section-padding {
       padding: 0 0 0 0 !important;
     }
-  }
-  @media (max-width: 768px) {
-    .compare-products.section-padding {
-      padding: 30px 0 0 0!important;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .compare-products.section-padding {
-      padding: 30px 0 0 0!important;
+    .compare-products-header {
+      margin-top: 0px !important;
     }
   }
   
@@ -595,16 +587,19 @@
   }
   
   /* Section Header Styles */
-  .section-header {
+  .compare-products-header {
     margin-bottom: 30px;
     text-align: left;
   }
   @media (max-width: 768px) {
-  .section-header__title{
-    font-size: 20px !important;
+    .compare-products-header {
+      margin-top: 0px !important;
+    }
+    .compare-products-header__title {
+      font-size: 20px !important;
+    }
   }
-}
-  .section-header__title {
+  .compare-products-header__title {
     font-family: 'Be Vietnam Pro',sans-serif;
     color: #1C2C58;
     font-size: 38px;
