@@ -159,15 +159,26 @@
       flex-direction: column;
     }
     /* First item: section-title first, then image, then item-title and content */
-    .about-understanding-item:first-child .section-title {
-      order: 1;
-    }
-    .about-understanding-item:first-child .about-understanding-image {
-      order: 2;
-      flex: none;
+    /* On mobile, visually move section-title outside about-understanding-text */
+    .about-understanding-item:first-child {
+      position: relative;
     }
     .about-understanding-item:first-child .about-understanding-text {
-      order: 3;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Move section-title visually before image on mobile */
+    .about-understanding-item:first-child .section-title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      margin-bottom: 20px;
+      z-index: 1;
+    }
+    .about-understanding-item:first-child .about-understanding-image {
+      margin-top: calc(20px + 28px + 30px + 32px + 20px); /* title height + tagline + margins */
+      flex: none;
     }
     .about-understanding-item:first-child .item-title {
       order: 1;
@@ -220,6 +231,24 @@
     .about-understanding-text {
       flex: 0 0 calc(50% - 60px);
       padding-top: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Section title is now inside about-understanding-text, at the top */
+    .about-understanding-item:first-child .about-understanding-text .section-title {
+      order: 1;
+      margin-bottom: 24px;
+    }
+    
+    /* Item title comes after section title */
+    .about-understanding-item:first-child .about-understanding-text .item-title {
+      order: 2;
+    }
+    
+    /* Content comes last */
+    .about-understanding-item:first-child .about-understanding-text .item-content {
+      order: 3;
     }
     
     /* SVG overlay positioning for desktop */
@@ -266,22 +295,6 @@
     <div class="about-understanding-content">
       {% for block in section.blocks %}
         <div class="about-understanding-item{% if block.settings.reverse_layout %} reverse{% endif %}">
-          {%- comment -%} Show section title only in first item, outside text wrapper for mobile ordering {%- endcomment -%}
-          {%- if forloop.first -%}
-            {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
-              <div class="section-title">
-                {%- if section.settings.title != blank -%}
-                  <h2>
-                    {{ section.settings.title }}{% if section.settings.title_colored != blank %} <span>{{ section.settings.title_colored }}</span>{% endif %}
-                  </h2>
-                {%- endif -%}
-                {%- if section.settings.subtitle != blank -%}
-                  <p class="tagline">{{ section.settings.subtitle }}</p>
-                {%- endif -%}
-              </div>
-            {%- endif -%}
-          {%- endif -%}
-          
           <div class="about-understanding-image">
             {% if block.settings.image != blank %}
               <img 
@@ -301,6 +314,22 @@
             {% endif %}
           </div>
           <div class="about-understanding-text">
+            {%- comment -%} Desktop: Section title inside text wrapper. Mobile: Will be moved outside via CSS {%- endcomment -%}
+            {%- if forloop.first -%}
+              {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+                <div class="section-title">
+                  {%- if section.settings.title != blank -%}
+                    <h2>
+                      {{ section.settings.title }}{% if section.settings.title_colored != blank %} <span>{{ section.settings.title_colored }}</span>{% endif %}
+                    </h2>
+                  {%- endif -%}
+                  {%- if section.settings.subtitle != blank -%}
+                    <p class="tagline">{{ section.settings.subtitle }}</p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+            
             {%- if block.settings.title != blank -%}
               <h3 class="item-title">{{ block.settings.title }}</h3>
             {%- endif -%}
