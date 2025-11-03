@@ -12,8 +12,27 @@
     "slideshow": {
       "type": "slideshow",
       "blocks": {
+        "image_JR4ARU": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "#000000",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/web_11.11_f3354b7f-397a-4547-94f4-5d725bcfbf5c.png",
+            "image_mobile": "shopify://shop_images/11.11-web-banner_d875aa57-27a7-4d2a-a6ed-7d9b7980eed3.png",
+            "overlay_opacity": 0
+          }
+        },
         "image_igEmmB": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "top_subheading": "",
             "title": "",
@@ -30,22 +49,21 @@
             "overlay_opacity": 0
           }
         },
-        "image_JR4ARU": {
+        "image_N6Y66j": {
           "type": "image",
-          "disabled": true,
           "settings": {
             "top_subheading": "",
             "title": "",
             "title_size": 80,
             "subheading": "",
-            "link": "",
+            "link": "https://rubaby.vn",
             "link_text": "",
             "link_2": "",
             "link_text_2": "",
-            "color_accent": "#000000",
+            "color_accent": "rgba(0,0,0,0)",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Banner_Khai_Tr_ng_SHR_HN-100.jpg",
-            "image_mobile": "shopify://shop_images/Banner_Khai_Tr_ng_SHR_HN_Mobile_2x_79279cde-81fa-465b-b8aa-ef8bb0cba7e5.png",
+            "image": "shopify://shop_images/webiste_banner_May_topper_1.png",
+            "image_mobile": "shopify://shop_images/webiste_mobile_banner_May_topper_1.png",
             "overlay_opacity": 0
           }
         },
@@ -80,36 +98,18 @@
             "link_text_2": "",
             "color_accent": "#000000",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Better_posture_better_life_Homepage_Banner_desktop_ENG_1_-min.jpg",
-            "image_mobile": "shopify://shop_images/Better_posture_better_life_Homepage_Banner_mobile_ENG_-min.jpg",
-            "overlay_opacity": 0
-          }
-        },
-        "image_N6Y66j": {
-          "type": "image",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 80,
-            "subheading": "",
-            "link": "https://rubaby.vn",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "color_accent": "rgba(0,0,0,0)",
-            "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/banner-desktop-rubaby_1944x_29f9b5af-244c-44c6-8b40-eb496d94b11b.webp",
-            "image_mobile": "shopify://shop_images/banner-mobile-rubaby_430x_1.png",
+            "image": "shopify://shop_images/PC_8eded121-7de0-483c-b866-22f7b3fb57bb.png",
+            "image_mobile": "shopify://shop_images/Mobile_b465ac82-01a3-4a3f-a825-81417609b3a2.png",
             "overlay_opacity": 0
           }
         }
       },
       "block_order": [
-        "image_igEmmB",
         "image_JR4ARU",
+        "image_igEmmB",
+        "image_N6Y66j",
         "slideshow-0",
-        "image_y8pK9p",
-        "image_N6Y66j"
+        "image_y8pK9p"
       ],
       "settings": {
         "section_height": "natural",
