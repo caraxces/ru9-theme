@@ -46,15 +46,15 @@
         "icon_1_title": "100 đêm ngủ thử",
         "icon_1_type": "sleep",
         "icon_1_color": "#007bff",
-        "icon_1_image": "shopify://shop_images/Layer_1_1.svg",
+        "icon_1_image": "shopify://shop_images/Layer_1_3.svg",
         "icon_2_title": "Miễn phí vận chuyển",
         "icon_2_type": "payment",
         "icon_2_color": "#007bff",
-        "icon_2_image": "shopify://shop_images/Layer_1.svg",
+        "icon_2_image": "shopify://shop_images/Layer_1_4.svg",
         "icon_3_title": "Thanh toán linh hoạt/Trả góp không lãi suất",
         "icon_3_type": "shipping",
         "icon_3_color": "#007bff",
-        "icon_3_image": "shopify://shop_images/Layer_1_2.svg"
+        "icon_3_image": "shopify://shop_images/Layer_1_6.svg"
       }
     },
     "collection-header": {
@@ -66,7 +66,11 @@
         "align_text": "left",
         "enable": true,
         "collection_image_enable": false,
-        "show_collection_description": false
+        "show_collection_description": false,
+        "show_header": true,
+        "custom_header_text": "",
+        "show_breadcrumb": true,
+        "custom_breadcrumb_text": ""
       }
     },
     "main_collection_custom_xrVmzf": {
