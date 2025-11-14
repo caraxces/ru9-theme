@@ -271,6 +271,21 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-NRPQ9Q6');
         </script>
+        <!-- Facebook Advanced matching -->
+      <script>
+          fbq('init', '1622762067844729', {
+            {% if customer %}
+              em: '{{ customer.email }}',
+              ph: '{{ customer.phone | remove: "+" }}'
+            {% endif %}
+
+            {% if checkout %}
+              em: '{{ checkout.email }}',
+              ph: '{{ checkout.billing_address.phone | remove: "+" }}'
+            {% endif %}
+          });
+      </script>
+
          <!-- End Google Tag Manager -->
           
           

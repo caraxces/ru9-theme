@@ -356,6 +356,7 @@
     },
     "collection-content": {
       "type": "collection-content",
+      "disabled": true,
       "custom_css": [
         ".collection-hero .page-width {padding-bottom: 0px;}"
       ],

@@ -754,36 +754,47 @@
       
       if (!isMobile) {
         // Desktop: Use native scroll with smooth drag
-        let isDragging = false;
+        let isPointerDown = false;
+        let hasExceededThreshold = false;
+        let shouldSuppressClick = false;
         let startPos = 0;
-        let prevTranslate = 0;
+        let startScrollLeft = 0;
+        const dragThreshold = 6;
 
         function startDrag(e) {
-          isDragging = true;
+          isPointerDown = true;
+          hasExceededThreshold = false;
           startPos = e.type.includes('mouse') ? e.pageX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
-          prevTranslate = tabContent.scrollLeft;
+          startScrollLeft = tabContent.scrollLeft;
           tabContent.style.transition = 'none';
-          tabContent.classList.add('is-dragging');
+          tabContent.classList.remove('is-dragging');
         }
 
         function drag(e) {
-          if (isDragging) {
+          if (!isPointerDown) return;
+          const currentPosition = e.type.includes('mouse') ? e.pageX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+          const deltaX = currentPosition - startPos;
+
+          if (!hasExceededThreshold && Math.abs(deltaX) > dragThreshold) {
+            hasExceededThreshold = true;
+            shouldSuppressClick = true;
+            tabContent.classList.add('is-dragging');
+          }
+
+          if (hasExceededThreshold) {
             e.preventDefault();
-            const currentPosition = e.type.includes('mouse') ? e.pageX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
-            const deltaX = currentPosition - startPos;
-            
-            // Apply smooth drag directly to scroll
-            tabContent.scrollLeft = prevTranslate - deltaX;
+            tabContent.scrollLeft = startScrollLeft - deltaX;
           }
         }
 
         function endDrag() {
-          if (!isDragging) return;
-          isDragging = false;
+          if (!isPointerDown) return;
+          isPointerDown = false;
+          hasExceededThreshold = false;
           tabContent.classList.remove('is-dragging');
-          
-          // Store current scroll position for next drag
-          prevTranslate = tabContent.scrollLeft;
+          requestAnimationFrame(() => {
+            shouldSuppressClick = false;
+          });
         }
 
         // Event listeners for desktop only
@@ -797,7 +808,7 @@
         // Handle click events for product cards - block if was dragging
         tabContent.querySelectorAll('.product-card').forEach(card => {
           card.addEventListener('click', (e) => {
-            if (isDragging) {
+            if (shouldSuppressClick) {
               e.preventDefault();
               e.stopPropagation();
               return false;

@@ -750,36 +750,47 @@
       }
 
       // Desktop: Use native scroll with smooth drag
-      let isDragging = false;
+      let isPointerDown = false;
+      let hasExceededThreshold = false;
+      let shouldSuppressClick = false;
       let startPos = 0;
-      let prevTranslate = 0;
+      let startScrollLeft = 0;
+      const dragThreshold = 6;
 
       function startDrag(e) {
-        isDragging = true;
+        isPointerDown = true;
+        hasExceededThreshold = false;
         startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-        prevTranslate = productCardsContainer.scrollLeft;
+        startScrollLeft = productCardsContainer.scrollLeft;
         productCardsContainer.style.transition = 'none';
-        productCardsContainer.classList.add('is-dragging');
+        productCardsContainer.classList.remove('is-dragging');
       }
 
       function drag(e) {
-        if (isDragging) {
+        if (!isPointerDown) return;
+        const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        const deltaX = currentPosition - startPos;
+
+        if (!hasExceededThreshold && Math.abs(deltaX) > dragThreshold) {
+          hasExceededThreshold = true;
+          shouldSuppressClick = true;
+          productCardsContainer.classList.add('is-dragging');
+        }
+
+        if (hasExceededThreshold) {
           e.preventDefault();
-          const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-          const deltaX = currentPosition - startPos;
-          
-          // Apply smooth drag directly to scroll
-          productCardsContainer.scrollLeft = prevTranslate - deltaX;
+          productCardsContainer.scrollLeft = startScrollLeft - deltaX;
         }
       }
 
       function endDrag() {
-        if (!isDragging) return;
-        isDragging = false;
+        if (!isPointerDown) return;
+        isPointerDown = false;
+        hasExceededThreshold = false;
         productCardsContainer.classList.remove('is-dragging');
-        
-        // Store current scroll position for next drag
-        prevTranslate = productCardsContainer.scrollLeft;
+        requestAnimationFrame(() => {
+          shouldSuppressClick = false;
+        });
       }
 
       // Event listeners
@@ -796,7 +807,7 @@
       // Handle click events for product cards - block if was dragging
       allProductCards.forEach(card => {
         card.addEventListener('click', (e) => {
-          if (isDragging) {
+          if (shouldSuppressClick) {
             e.preventDefault();
             e.stopPropagation();
             return false;
