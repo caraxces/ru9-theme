@@ -14023,10 +14023,6 @@ tool-tip[data-tool-tip-open="true"] .tool-tip__inner {
     margin-left: -12px;
   }
 
-  .section-header {
-    margin-bottom: calc(var(--grid-desktop-vertical-spacing) * 1.25);
-  }
-
   .section-header.space-lg {
     margin-bottom: calc(var(--grid-desktop-vertical-spacing) * 5 / 3);
   }
