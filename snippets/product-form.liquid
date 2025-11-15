@@ -23,10 +23,7 @@
     {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
   {%- endif -%}
 
-  {%- if enable_dynamic_buttons -%}
-    <div class="payment-buttons{% if hide_payment_button_mobile %} hide-payment-mobile{% endif %}">
-  {%- endif -%}
-
+<div class="product-form-actions{% if enable_dynamic_buttons %} has-buy-now{% endif %}">
   {%- liquid
     assign default_text = 'products.product.add_to_cart' | t
     assign button_text = 'products.product.add_to_cart' | t
@@ -60,12 +57,11 @@
   </button>
 
   {%- if enable_dynamic_buttons -%}
-    {{ form | payment_button }}
-  {%- endif -%}
-
-  {%- if enable_dynamic_buttons -%}
+    <div class="payment-buttons{% if hide_payment_button_mobile %} hide-payment-mobile{% endif %}">
+      {{ form | payment_button }}
     </div>
   {%- endif -%}
+</div>
 
   <div class="shopify-payment-terms product__policies">{{ form | payment_terms }}</div>
 

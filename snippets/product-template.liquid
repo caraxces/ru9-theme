@@ -195,6 +195,87 @@
   .product-section {
     font-family: "Be Vietnam Pro", sans-serif;
   }
+  .product-form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  .product-form-actions .btn {
+    width: 100%;
+    border-radius: 999px;
+  }
+  .product-form-actions .payment-buttons {
+    width: 100%;
+  }
+  .product-form-actions .shopify-payment-button,
+  .product-form-actions
+    .shopify-payment-button
+    .shopify-payment-button__button--unbranded {
+    width: 100%;
+  }
+  .product-form-actions
+    .shopify-payment-button
+    .shopify-payment-button__button--unbranded {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: calc(var(--buttonRadius, 10px));
+    background: #FCE390;
+    color: #000000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: 0.5px;
+    padding: 14px 24px;
+    text-transform: none;
+    box-shadow: none;
+    border-radius: 999px;
+    position: relative;
+  }
+  .product-form-actions
+    .shopify-payment-button
+    .shopify-payment-button__button--unbranded:hover,
+  .product-form-actions
+    .shopify-payment-button
+    .shopify-payment-button__button--unbranded:focus {
+    background: #f7d157;
+    color: #000000;
+  }
+  .product-form-actions
+    .shopify-payment-button
+    .shopify-payment-button__button--unbranded::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 7V6.5C7 4.015 9.015 2 11.5 2H12.5C14.985 2 17 4.015 17 6.5V7' stroke='%23000000' stroke-width='1.8' stroke-linecap='round'/%3E%3Cpath d='M5 7H19L20 21H4L5 7Z' stroke='%23000000' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .product-form-actions
+    .shopify-payment-button
+    .shopify-payment-button__button--unbranded span {
+    padding-left: 4px;
+  }
+  .product-form-actions .add-to-cart {
+    background: transparent;
+    border: 2px solid #000;
+    color: #1c2c58;
+    border-radius: 999px;
+    font-weight: 600;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .product-form-actions .add-to-cart:hover,
+  .product-form-actions .add-to-cart:focus {
+    background: #fffbe9;
+    color: #0f172a;
+  }
   .product-block:not(.product-block-bundle) .variant__button-label.disabled:before {
     content: "";
     top: 50%;

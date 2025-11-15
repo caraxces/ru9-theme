@@ -137,6 +137,14 @@
           {%- endif -%}
         </div>
       </div>
+      <div class="company-hotline">
+        <div class="company-label">Hotline</div>
+        <div class="company-hotline-numbers">
+          <a href="tel:1900636321">1900.636.321</a>
+          <span>-</span>
+          <a href="tel:0867770969">086.777.0969</a>
+        </div>
+      </div>
     </div>
 
     <div class="footer-ru9__address">
@@ -387,6 +395,30 @@
       line-height: 150%;
       margin: 0;
     }
+    .footer-ru9__company-info .company-hotline {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 137px 1fr;
+      gap: 12px;
+      align-items: center;
+      color: #FFF;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .footer-ru9__company-info .company-hotline-numbers {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .footer-ru9__company-info .company-hotline-numbers a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .footer-ru9__company-info .company-hotline-numbers a:hover {
+      text-decoration: underline;
+    }
     .footer-ru9__address { display: inline-flex; padding: 4px 0 28px 0; flex-direction: column; align-items: flex-start; gap: 31px; }
     .footer-ru9__address .address-item { display: grid; grid-template-columns: 137px 1fr; gap: 12px; align-items: start; }
     .footer-ru9__address .address-label {
@@ -439,6 +471,8 @@
       .footer-ru9__company-info .company-content { width: auto; }
       .footer-ru9__company-info .company-tax-code,
       .footer-ru9__company-info .company-address { font-size: 14px; }
+      .footer-ru9__company-info .company-hotline { grid-template-columns: 1fr; font-size: 14px; }
+      .footer-ru9__company-info .company-hotline .company-label { width: auto; }
       .footer-ru9__col-content {
         grid-template-rows: repeat(4, auto);
         grid-auto-flow: column;
