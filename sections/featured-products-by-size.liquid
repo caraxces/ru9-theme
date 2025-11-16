@@ -36,18 +36,6 @@
             Xem tất cả
           </a>
         {%- endif -%}
-        <div class="carousel-nav">
-          <button class="nav-btn nav-prev">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.5 9L4.5 6L7.5 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button class="nav-btn nav-next">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4.5 9L7.5 6L4.5 3" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
       </div>
     </div>
     
@@ -70,6 +58,18 @@
             {%- endunless -%}
           {%- endif -%}
         {%- endfor -%}
+      </div>
+      <div class="carousel-nav">
+        <button class="nav-btn nav-prev">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.5 9L4.5 6L7.5 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="nav-btn nav-next">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.5 9L7.5 6L4.5 3" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
     </div>
     
@@ -202,23 +202,24 @@
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 39px;
     font-weight: 700;
-    line-height: 120%;
+    line-height: 100%;
     color: #1C2C58;
     margin: 0;
-    padding-bottom: 10px;
+    padding-bottom: 14px;
     text-align: left;
   }
   [data-section-id="{{ section.id }}"] .header-right {
     display: flex;
-    align-items: center;
-    gap: 24px;
+    align-items: flex-start;
+    padding-top: 0;
   }
   [data-section-id="{{ section.id }}"] .view-all-link {
     color: #1A1A1A;
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 500;
     text-decoration: underline;
+    padding-bottom: 14px;
     line-height: 1;
   }
   [data-section-id="{{ section.id }}"] .view-all-link:hover {
@@ -228,12 +229,16 @@
   /* Category Tabs */
   [data-section-id="{{ section.id }}"] .category-tabs-container {
     margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
   }
   [data-section-id="{{ section.id }}"] .category-tabs {
     display: flex;
     gap: 16px;
     align-items: center;
-    width: 120%;
+    flex: 1;
   }
   [data-section-id="{{ section.id }}"] .category-tab {
     display: flex;
@@ -344,7 +349,7 @@
     background: #FFF3CD;
   }
   [data-section-id="{{ section.id }}"] .nav-btn.nav-next {
-    background: #FFD35B;
+    background: #FFF9E5;
   }
   [data-section-id="{{ section.id }}"] .nav-btn.nav-next:hover {
     background: #FBC947;
@@ -489,14 +494,14 @@
   /* Large screens - maintain fixed padding */
   @media (min-width: 1400px) {
     [data-section-id="{{ section.id }}"] .featured-collections-section {
-      padding: 0 5rem 0 5rem;
+      padding: 3rem 5rem 3rem 5rem;
     }
   }
   
   /* Medium screens - responsive padding */
   @media (max-width: 1399px) and (min-width: 1024px) {
     [data-section-id="{{ section.id }}"] .featured-collections-section {
-      padding: 0 5rem 0 5rem;
+      padding: 3rem 5rem 3rem 5rem;
     }
   }
   
@@ -537,9 +542,6 @@
       order: 2;
       flex: 0 0 auto;
     }
-    [data-section-id="{{ section.id }}"] .header-right .carousel-nav {
-      display: none !important;
-    }
     [data-section-id="{{ section.id }}"] .category-tabs-container {
       order: 3;
       width: 100%;
@@ -548,6 +550,9 @@
     }
     [data-section-id="{{ section.id }}"] .category-tabs-container::after {
       content: none;
+    }
+    [data-section-id="{{ section.id }}"] .category-tabs-container {
+      gap: 0;
     }
     [data-section-id="{{ section.id }}"] .category-tabs {
       flex-wrap: nowrap;
@@ -558,6 +563,9 @@
       scrollbar-width: none;
       cursor: grab;
       padding: 0 0 0 15px;
+    }
+    [data-section-id="{{ section.id }}"] .category-tabs-container .carousel-nav {
+      display: none !important;
     }
     [data-section-id="{{ section.id }}"] .category-tabs::-webkit-scrollbar {
         display: none;
@@ -742,36 +750,47 @@
       }
 
       // Desktop: Use native scroll with smooth drag
-      let isDragging = false;
+      let isPointerDown = false;
+      let hasExceededThreshold = false;
+      let shouldSuppressClick = false;
       let startPos = 0;
-      let prevTranslate = 0;
+      let startScrollLeft = 0;
+      const dragThreshold = 6;
 
       function startDrag(e) {
-        isDragging = true;
+        isPointerDown = true;
+        hasExceededThreshold = false;
         startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-        prevTranslate = productCardsContainer.scrollLeft;
+        startScrollLeft = productCardsContainer.scrollLeft;
         productCardsContainer.style.transition = 'none';
-        productCardsContainer.classList.add('is-dragging');
+        productCardsContainer.classList.remove('is-dragging');
       }
 
       function drag(e) {
-        if (isDragging) {
+        if (!isPointerDown) return;
+        const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        const deltaX = currentPosition - startPos;
+
+        if (!hasExceededThreshold && Math.abs(deltaX) > dragThreshold) {
+          hasExceededThreshold = true;
+          shouldSuppressClick = true;
+          productCardsContainer.classList.add('is-dragging');
+        }
+
+        if (hasExceededThreshold) {
           e.preventDefault();
-          const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-          const deltaX = currentPosition - startPos;
-          
-          // Apply smooth drag directly to scroll
-          productCardsContainer.scrollLeft = prevTranslate - deltaX;
+          productCardsContainer.scrollLeft = startScrollLeft - deltaX;
         }
       }
 
       function endDrag() {
-        if (!isDragging) return;
-        isDragging = false;
+        if (!isPointerDown) return;
+        isPointerDown = false;
+        hasExceededThreshold = false;
         productCardsContainer.classList.remove('is-dragging');
-        
-        // Store current scroll position for next drag
-        prevTranslate = productCardsContainer.scrollLeft;
+        requestAnimationFrame(() => {
+          shouldSuppressClick = false;
+        });
       }
 
       // Event listeners
@@ -788,7 +807,7 @@
       // Handle click events for product cards - block if was dragging
       allProductCards.forEach(card => {
         card.addEventListener('click', (e) => {
-          if (isDragging) {
+          if (shouldSuppressClick) {
             e.preventDefault();
             e.stopPropagation();
             return false;

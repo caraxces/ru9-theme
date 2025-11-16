@@ -19,7 +19,7 @@
             "title": "",
             "title_size": 80,
             "subheading": "",
-            "link": "https://rubaby.vn",
+            "link": "",
             "link_text": "",
             "link_2": "",
             "link_text_2": "",
@@ -46,15 +46,15 @@
         "icon_1_title": "100 đêm ngủ thử",
         "icon_1_type": "sleep",
         "icon_1_color": "#007bff",
-        "icon_1_image": "shopify://shop_images/Layer_1_1.svg",
+        "icon_1_image": "shopify://shop_images/Layer_1_3.svg",
         "icon_2_title": "Miễn phí vận chuyển",
         "icon_2_type": "payment",
         "icon_2_color": "#007bff",
-        "icon_2_image": "shopify://shop_images/Layer_1.svg",
+        "icon_2_image": "shopify://shop_images/Layer_1_4.svg",
         "icon_3_title": "Thanh toán linh hoạt/Trả góp không lãi suất",
         "icon_3_type": "shipping",
         "icon_3_color": "#007bff",
-        "icon_3_image": "shopify://shop_images/Layer_1_2.svg"
+        "icon_3_image": "shopify://shop_images/Layer_1_6.svg"
       }
     },
     "collection-header": {
@@ -66,7 +66,11 @@
         "align_text": "left",
         "enable": true,
         "collection_image_enable": false,
-        "show_collection_description": false
+        "show_collection_description": false,
+        "show_header": true,
+        "custom_header_text": "",
+        "show_breadcrumb": true,
+        "custom_breadcrumb_text": ""
       }
     },
     "main_collection_custom_xrVmzf": {
@@ -273,7 +277,7 @@
             "customer_name": "Gon Pink",
             "review_text": "<p>Mình nằm thử nệm Foam Original của Ru9 mới thấy khác biệt thiệt, foam ôm sát cơ thể giúp lưng – vai – hông được nâng đỡ đều, mình ngủ dậy không còn ê mỏi luôn. Thêm cái nữa là nệm cực thoáng khí, nằm lâu cũng không hầm nóng, vỏ thì tháo ra giặt siêu tiện. Nói chung là sản phẩm rất chất lượng so với giá tiền! </p>",
             "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem Nệm",
             "button_link": "shopify://products/foam-original"
@@ -286,7 +290,7 @@
             "customer_name": "Hoàng Ku",
             "review_text": "<p>Điều mình thích nhất khi nằm nệm foam Ru9 là đệm sẽ ôm sát theo đường cong của cơ thể, mình có quả “thắt đáy lưng ong” nên phần đáy lưng võng cong, nằm nệm cứng chỗ lưng đó bị rỗng nên rất khó chịu, ngủ phải gập người lại thì mới dễ ngủ. Nhưng với đệm Foam Ru9 thì mình chỉ cần nằm thẳng thôi, cấu trúc của đệm sẽ tự khắc làm đầy ngay chỗ thắt lưng của mình luôn! </p>",
             "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem Nệm",
             "button_link": "shopify://products/foam-original"
@@ -299,7 +303,7 @@
             "customer_name": "Anne Cibi",
             "review_text": "<p>Ghé Ru9 thăm showroom, kết quả là bê về túi to túi nhỏ luôn! Chăn bạch đàn, bộ ga gối tencel mướt mượt màu baby blue y chang cái nhà em nữa, nó mờ ê mê lắm</p>",
             "product_name": "Bộ Ga Giường Ru9 Tencel",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem sản phẩm",
             "button_link": "shopify://products/tencel-bedding-set"
@@ -312,7 +316,7 @@
             "customer_name": "Đào Lan Phương",
             "review_text": "<p>Sau 3 tuần nằm thử, mình thật sự ưng chiếc nệm Nest này. Nệm dày, nằm chắc chắn chứ không bị lún, rất phù hợp cho người hay đau lưng như mình. Mong là chất lượng này sẽ bền lâu.</p>",
             "product_name": "Nệm Nest",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem Nệm",
             "button_link": "shopify://collections/bedding"
@@ -325,7 +329,7 @@
             "customer_name": "Vân Anh",
             "review_text": "<p>Mình trải nghiệm Foam Topper Ru9 được gần tháng rồi. Cảm giác nằm êm mà vẫn nâng đỡ tốt, lưng mình đỡ đau rõ rệt. Cái hay nữa là topper nhẹ, dễ mang đi và vệ sinh. Nói chung khá hài lòng, chỉ mong dùng lâu dài vẫn giữ được độ thoải mái như hiện tại.</p>",
             "product_name": "Nệm Foam Topper",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem Nệm",
             "button_link": "shopify://products/nem-cuon-foam-topper"
@@ -338,7 +342,7 @@
             "customer_name": "Hằng Thúy Ngô",
             "review_text": "<p>Sau hơn nửa năm nằm nệm Original, mình thấy giấc ngủ được cải thiện rõ rệt. Nệm ôm và nâng đỡ cơ thể tốt, lưng cổ không còn ê ẩm như trước. Cảm giác mỗi tối nằm xuống đều rất thoải mái và dễ chịu.</p>",
             "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem Nệm",
             "button_link": "shopify://products/foam-original"
@@ -351,7 +355,7 @@
             "customer_name": "Tu Lam Kha",
             "review_text": "<p>Sau nhiều lần đắn đo mình quyết định mua Nệm Foam Original, và thật sự đây là một khoản đầu tư xứng đáng. Từ ngày dùng, mình không còn thức dậy với cảm giác đau lưng hay mỏi vai gáy nữa.</p>",
             "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem sản phẩm",
             "button_link": "shopify://products/foam-original"
@@ -364,7 +368,7 @@
             "customer_name": "Ngọc Tú Anh",
             "review_text": "<p>10 điểm cho Bộ ga giường Tecel của Ru9 nha. Vải mềm, mát, nằm không bị bí hay nóng lưng, cảm giác dễ chịu hơn hẳn bộ ga cũ. Cả nhà mình ai cũng mê</p>",
             "product_name": "Bộ Bedding Tencel",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem sản phẩm",
             "button_link": "shopify://products/tencel-bedding-set"

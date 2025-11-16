@@ -50,6 +50,31 @@
       display: block !important;
     }
 
+    /* Carousel mode: Show 5 thumbnails at a time, scrollable horizontally */
+    .huan-false.product__thumbs--scroller {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      -webkit-overflow-scrolling: touch !important;
+      /* Limit container width to show only 5 thumbnails at a time */
+      /* 15rem per thumbnail * 5 + 12px gap * 4 = 75rem + 48px */
+      max-width: calc(75rem + 48px) !important;
+      width: 100% !important;
+    }
+
+    /* Override hide rule to show all thumbnails for scrolling */
+    .huan-false.product__thumbs--scroller .product__thumb-item:nth-child(n+6) {
+      display: block !important;
+    }
+
+    /* Ensure all thumbnails are visible for scrolling - fixed width */
+    .huan-false.product__thumbs--scroller .product__thumb-item {
+      flex-shrink: 0 !important;
+      width: 15rem !important;
+    }
+
     /* Show more button styling */
     .show-more-gallery-btn {
       display: flex;

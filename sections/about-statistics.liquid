@@ -7,7 +7,6 @@
   }
   /* Let theme handle canvas layout */
   .about-statistics-title {
-    text-align: center;
     font-size: 32px;
     font-weight: 700;
     color: {{ section.settings.title_color | default: '#1A2230' }};
@@ -23,14 +22,13 @@
     line-height: 140%;
     text-align: left;
     margin-bottom: 30px;
-    padding: 0 16px;
+    padding: 0 0;
   }
 
   /* ===== DESKTOP (768px+) ===== */
   @media (min-width: 768px) {
     .about-statistics-title {
       display: flex;
-      justify-content: center;
       align-items: center;
       flex-wrap: nowrap;
       width: 100%;
@@ -90,7 +88,7 @@
     line-height: 140%;
     text-align: left;
     margin-bottom: 30px;
-    padding: 0 16px;
+    padding: 0 0;
   }
 
   /* ===== DESKTOP (768px+) ===== */
@@ -153,6 +151,10 @@
       min-width: 200px;
       flex-shrink: 0;
       margin-right: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     
     .about-statistics-stat-item:last-child {
@@ -176,6 +178,9 @@
     font-weight: 400;
     line-height: 1.4;
     color: #000;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
   }
   .about-statistics-separator {
     display: flex;
@@ -203,12 +208,44 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
+    position: relative;
+    padding-top: 50px;
+  }
+  .about-statistics-grid::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #E5E7EB;
+    z-index: 0;
   }
   .about-statistics-card {
     display: flex;
     flex-direction: column;
     text-align: left;
     height: 100%;
+    position: relative;
+  }
+  .about-statistics-card-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -30px;
+    left: 0;
+    z-index: 1;
+    background: #ffffff;
+    padding: 0;
+    box-sizing: border-box;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-statistics-card-dot svg {
+    width: 20px;
+    height: 20px;
   }
   .about-statistics-card-content {
     flex: 1;
@@ -219,7 +256,7 @@
   .about-statistics-card h3 {
     font-size: 20px;
     font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2230' }};
+    color: #1C2C58;
     margin-bottom: 16px;
     line-height: 1.2;
   }
@@ -229,13 +266,65 @@
     margin-bottom: 0;
   }
   .about-statistics-card img {
-    width: 474px;
-    height: 370px;
+    width: 100%;
+    max-width: 474px;
+    height: auto;
+    aspect-ratio: 474 / 370;
     flex-shrink: 0;
     object-fit: cover;
     border-radius: 12px;
     margin-top: 20px;
     align-self: center;
+  }
+  
+  @media (max-width: 768px) {
+    .about-statistics-card h3 {
+      font-size: 16px;
+    }
+    .about-statistics-card p {
+      font-size: 14px;
+    }
+    .about-statistics-card img {
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: auto;
+      height: auto;
+      margin-top: 0;
+    }
+  }
+
+  /* Mobile carousel navigation dots */
+  .about-statistics-carousel-nav {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+    padding: 0 15px;
+  }
+  .about-statistics-carousel-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .about-statistics-carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #D9D9D9;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border: none;
+    padding: 0;
+  }
+  .about-statistics-carousel-dot.active {
+    background: #759CE6;
+  }
+  .about-statistics-carousel-line {
+    flex: 1;
+    height: 1px;
+    background: #E5E7EB;
+    max-width: 200px;
   }
 
   /* Mobile responsive */
@@ -248,7 +337,6 @@
     }
     .about-statistics-title {
       display: flex;
-      justify-content: center;
       align-items: center;
       flex-wrap: nowrap;
       width: 100%;
@@ -282,22 +370,55 @@
       font-size: 14px;
     }
     .about-statistics-grid {
+      display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 30px;
+      padding-top: 0;
       margin-bottom: 30px;
     }
+    .about-statistics-grid::before {
+      display: none;
+    }
     .about-statistics-card {
-      padding: 20px 15px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .about-statistics-card-content {
+      order: 1;
+      margin-bottom: 20px;
+    }
+    .about-statistics-card img {
+      order: 2;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      margin-top: 0;
+      margin-bottom: 0;
+      align-self: stretch;
+    }
+    .about-statistics-card-dot {
+      display: none;
+    }
+    .about-statistics-carousel-nav {
+      display: none;
     }
     .about-statistics-stat-number {
       font-size: 36px;
     }
     .about-statistics-stat-text {
-      width: 300px;
+      width: 100%;
+      max-width: 100%;
       font-size: 14px;
+      text-align: center;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
   }
 </style>
+
 
 <div class="about-statistics-section">
   <div class="page-width">
@@ -356,6 +477,11 @@
       {% for block in section.blocks %}
         {% if block.type == 'about_statistic_card' %}
           <div class="about-statistics-card">
+            <div class="about-statistics-card-dot">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="10" fill="#D9D9D9"/>
+              </svg>
+            </div>
             <div class="about-statistics-card-content">
               <div>{{ block.settings.title }}</div>
               <div>{{ block.settings.description }}</div>

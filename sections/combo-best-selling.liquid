@@ -134,16 +134,43 @@
     pointer-events: none;
   }
 
-  /* Mobile: Grid layout 2x2 */
+  /* Mobile: Carousel layout - horizontal scroll */
   @media (max-width: 768px) {
     [data-section-type="combo-best-selling"] .product-cards-container {
-      display: grid !important;
-      grid-template-columns: 1fr 1fr !important;
-      grid-template-rows: 1fr 1fr !important;
-      gap: 15px !important;
-      transform: none !important;
-      transition: none !important;
-      overflow: visible !important;
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 20px !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      padding-bottom: 20px !important; /* Space for scrollbar */
+      scrollbar-width: auto !important; /* Show scrollbar */
+      -ms-overflow-style: auto !important; /* Show scrollbar for IE/Edge */
+      -webkit-overflow-scrolling: touch !important;
+      scroll-behavior: smooth !important;
+    }
+    
+    /* Mobile scrollbar styling - Blue scrollbar like combo-bedroom */
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar {
+      height: 8px !important;
+      display: block !important; /* Ensure scrollbar is visible */
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
+      border-radius: 100px !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar-thumb {
+      background: #234085 !important;
+      border-radius: 100px !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
+    }
+    
+    [data-section-type="combo-best-selling"] .product-cards-container::-webkit-scrollbar-button {
+      display: none !important;
     }
   }
 
@@ -303,7 +330,7 @@
   
   [data-section-type="combo-best-selling"] .buy-now-btn {
     width: 100%;
-    background: #1C2C58;
+    background: #234085;
     color: white;
     border: none;
     border-radius: 20px;
@@ -337,18 +364,23 @@
       margin-bottom: 0;
       text-align: left;
     }
-    
-    [data-section-type="combo-best-selling"] .product-carousel-section {
-      margin: 0 -20px 0 -20px;
-      padding: 0 20px;
-    }
-    
+
     [data-section-type="combo-best-selling"] .product-carousel {
       padding: 0;
     }
     
     [data-section-type="combo-best-selling"] .product-card {
-      width: 100% !important;
+      width: calc(100vw - 80px) !important; /* Full width minus section margins and padding */
+      min-width: calc(100vw - 80px) !important;
+      max-width: calc(100vw - 80px) !important;
+      flex-shrink: 0 !important;
+      scroll-snap-align: start !important;
+      scroll-snap-stop: always !important;
+    }
+    
+    /* Add margin-right to last card in mobile carousel */
+    [data-section-type="combo-best-selling"] .product-card:last-child {
+      margin-right: 20px !important;
     }
     
     /* Separate Mobile Image Container Styles */
@@ -394,16 +426,62 @@
     if (!sectionContainer) return;
 
     const productCardsContainer = sectionContainer.querySelector('.product-cards-container');
+    if (!productCardsContainer) return;
 
-    // No carousel functionality needed for grid layout
-    // Just ensure product cards are visible
-    if (productCardsContainer) {
-      const productCards = productCardsContainer.querySelectorAll('.product-card');
-      productCards.forEach(card => {
-        card.style.opacity = '1';
-        card.style.transform = 'none';
-      });
+    function initializeCarousel() {
+      // Check if mobile device
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
+        // Mobile: Use native touch scrolling - no custom handlers needed
+        // Just prevent image drag
+        productCardsContainer.querySelectorAll('img').forEach(img => {
+          img.addEventListener('dragstart', (e) => e.preventDefault());
+        });
+        
+        return {
+          next: () => {
+            productCardsContainer.scrollBy({
+              left: 300, // Approximate card width + gap
+              behavior: 'smooth'
+            });
+          },
+          prev: () => {
+            productCardsContainer.scrollBy({
+              left: -300,
+              behavior: 'smooth'
+            });
+          },
+          reset: () => {
+            productCardsContainer.scrollTo({
+              left: 0,
+              behavior: 'smooth'
+            });
+          },
+          update: () => {}
+        };
+      }
+
+      // Desktop: Keep grid layout, no carousel needed
+      return {
+        next: () => {},
+        prev: () => {},
+        reset: () => {},
+        update: () => {}
+      };
     }
+
+    // Initialize carousel
+    let carousel = initializeCarousel();
+    
+    // Handle window resize to reinitialize carousel
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        carousel = initializeCarousel();
+      }, 250);
+    });
   });
 })();
 </script>

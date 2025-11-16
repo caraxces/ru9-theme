@@ -65,14 +65,14 @@
   .about-community-banner-text {
     position: absolute;
     top: 50%;
-    right: 40px;
+    right: 50px;
     transform: translateY(-50%);
-    max-width: 400px;
+    max-width: 600px;
   }
   .about-community-banner-text p {
-    font-size: 18px;
+    font-size: 39px;
     font-style: italic;
-    color: {{ section.settings.banner_text_color | default: '#2A3B56' }};
+    color: #1C2C58;
     margin: 0;
     line-height: 1.4;
   }
@@ -132,8 +132,11 @@
   }
 
   @media (max-width: 768px) {
+    .about-community-header {
+      margin-bottom: 20px;
+    }
     .about-community-section {
-      padding: 40px 0;
+      padding: 0 0;
     }
     .about-community-section .page-width {
       padding: 0;
@@ -149,7 +152,7 @@
       white-space: normal;
     }
     .about-community-banner {
-      margin-bottom: 40px;
+      margin-bottom: 0;
     }
     .about-community-banner-desktop {
       display: none;
@@ -160,13 +163,19 @@
       height: 300px;
       border-radius: 0;
     }
+    .about-community-banner {
+      position: relative;
+    }
     .about-community-banner-text {
-      margin-left: 15px;
-      position: static;
+      top: 70%;
+      position: absolute;
+      color: #1C2C58;
+      font-weight: 700;
+      bottom: 20px;
+      right: 15px;
       transform: none;
-      margin-top: 20px;
-      right: auto;
-      max-width: 100%;
+      margin-top: 0;
+      max-width: 225px;
     }
     .about-community-banner-text p {
       font-size: 16px;

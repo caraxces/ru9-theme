@@ -86,9 +86,11 @@
 
 <style>
   /* Remove custom canvas overrides - let theme handle canvas layout */
-  .blog-posts-section {
-    padding: 0px 0;
-    font-family: "Be Vietnam Pro", sans-serif;
+  @media (min-width: 769px) {
+    .blog-posts-section {
+      padding: 0 0 5rem 0;
+      font-family: "Be Vietnam Pro", sans-serif;
+    }
   }
   .blog-posts-header {
     display: flex;
@@ -102,7 +104,7 @@
     font-size: 39px;
     font-weight: 700;
     line-height: 1.2;
-    margin: 0;
+    margin: 0 !important;
   }
   .view-all-button {
     color: #1C2C58;

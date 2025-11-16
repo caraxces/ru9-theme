@@ -26,7 +26,7 @@
     line-height: 1.2;
     text-align: left;
     max-width: none;
-    margin: 0 0 50px 0;
+    margin: 0 0 50px 0 !important;
   }
 
   /* --- Desktop Grid Layout --- */
@@ -215,7 +215,10 @@
     }
   }
 
-  @media screen and (max-width: 550px) {
+  @media screen and (max-width: 480px) {
+    .super-service__title {
+      margin-bottom: 20px !important;
+    }
     .super-service__slider-container {
       padding: 24px;
     }

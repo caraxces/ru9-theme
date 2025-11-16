@@ -23,6 +23,14 @@
   .about-certifications-title .normal {
     color: {{ section.settings.title_color | default: '#1A2230' }};
   }
+  .about-certifications-title br.desktop-only {
+    display: none;
+  }
+  @media (min-width: 769px) {
+    .about-certifications-title br.desktop-only {
+      display: block;
+    }
+  }
   .about-certifications-subtitle {
     font-size: clamp(16px, 2vw, 1.5em);
     font-style: italic;
@@ -127,14 +135,15 @@
       margin-bottom: 30px;
     }
     .about-certifications-title {
-      font-size: 2em;
+      font-size: 20px;
       margin-bottom: 15px;
+      white-space: nowrap;
     }
     .about-certifications-subtitle {
-      font-size: 1.2em;
+      font-size: 16px;
     }
     .about-certifications-description {
-      font-size: 1em;
+      font-size: 14px;
     }
     .about-certifications-grid {
       grid-template-columns: 1fr;
@@ -164,13 +173,7 @@
   <div class="page-width">
     <div class="about-certifications-header">
       <div class="about-certifications-title">
-        <p>
-          <span class="normal">Mang đến</span> 
-        </p>
-        <p>
-          <span class="highlight">chất lượng ngủ vượt trội</span>
-        </p>
-        
+        <span class="normal">Mang đến</span> <br class="desktop-only"><span class="highlight">chất lượng ngủ vượt trội</span>
       </div>
       <div class="about-certifications-subtitle">{{ section.settings.subtitle | default: 'Tiên phong chất lượng với hai chứng nhận khắt khe và uy tín toàn cầu' }}</div>
       <div class="about-certifications-subtitle-line"></div>

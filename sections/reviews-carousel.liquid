@@ -81,6 +81,7 @@
 /* General Styles */
 .reviews-carousel-section { padding: 0px 0; font-family: "Be Vietnam Pro", sans-serif; }
 .reviews-carousel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+@media (max-width: 768px) {.reviews-carousel-header { margin-bottom: 20px; }}
 .reviews-carousel-header__left { display: flex; flex-direction: column; gap: 8px; }
 .reviews-carousel-title { 
   font-family: "Be Vietnam Pro", sans-serif; 
@@ -125,7 +126,8 @@
 .reviews-carousel-nav:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Carousel Viewport & Track */
-.reviews-carousel-viewport { overflow: hidden; margin-bottom: 30px; }
+.reviews-carousel-viewport { overflow: hidden; margin-bottom: 5rem; }
+@media (max-width: 768px) {.reviews-carousel-viewport { margin-bottom: 0px; }}
 .reviews-carousel-track { display: flex; gap: 24px; transition: transform 0.5s ease-in-out; }
 
 /* Review Card */
@@ -184,6 +186,41 @@
         letter-spacing: 0.6px;
     }
     .reviews-carousel-header__right { display: none; }
+    
+    /* Mobile: Enable horizontal scroll with blue scrollbar */
+    .reviews-carousel-viewport {
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      padding-bottom: 20px !important; /* Space for scrollbar */
+      scrollbar-width: auto !important; /* Show scrollbar */
+      -ms-overflow-style: auto !important; /* Show scrollbar for IE/Edge */
+      -webkit-overflow-scrolling: touch !important;
+      scroll-behavior: smooth !important;
+    }
+    
+    /* Mobile scrollbar styling - Blue scrollbar like other sections */
+    .reviews-carousel-viewport::-webkit-scrollbar {
+      height: 8px !important;
+      display: block !important; /* Ensure scrollbar is visible */
+    }
+    
+    .reviews-carousel-viewport::-webkit-scrollbar-track {
+      background: #F0F1EF !important;
+      border-radius: 100px !important;
+    }
+    
+    .reviews-carousel-viewport::-webkit-scrollbar-thumb {
+      background: #234085 !important;
+      border-radius: 100px !important;
+    }
+    
+    .reviews-carousel-viewport::-webkit-scrollbar-thumb:hover {
+      background: #1a2f6b !important;
+    }
+    
+    .reviews-carousel-viewport::-webkit-scrollbar-button {
+      display: none !important;
+    }
     
     .review-card { flex: 0 0 280px; width: 280px; }
     .review-card__image { width: 280px; height: auto; }

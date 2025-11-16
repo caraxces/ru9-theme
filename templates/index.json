@@ -12,6 +12,24 @@
     "slideshow": {
       "type": "slideshow",
       "blocks": {
+        "image_JR4ARU": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "#000000",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/web_11.11_f3354b7f-397a-4547-94f4-5d725bcfbf5c.png",
+            "image_mobile": "shopify://shop_images/11.11-web-banner_d875aa57-27a7-4d2a-a6ed-7d9b7980eed3.png",
+            "overlay_opacity": 0
+          }
+        },
         "image_igEmmB": {
           "type": "image",
           "settings": {
@@ -25,27 +43,26 @@
             "link_text_2": "",
             "color_accent": "rgba(0,0,0,0)",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Hanh_trinh_7_nam_web.png",
-            "image_mobile": "shopify://shop_images/Hanh-trinh-7-nam---web---mobile.jpg",
+            "image": "shopify://shop_images/BANNER_WEBSITE.jpg",
+            "image_mobile": "shopify://shop_images/BANNER_MOBILE_WEBSITE.jpg",
             "overlay_opacity": 0
           }
         },
-        "image_JR4ARU": {
+        "image_N6Y66j": {
           "type": "image",
-          "disabled": true,
           "settings": {
             "top_subheading": "",
             "title": "",
             "title_size": 80,
             "subheading": "",
-            "link": "",
+            "link": "https://rubaby.vn",
             "link_text": "",
             "link_2": "",
             "link_text_2": "",
-            "color_accent": "#000000",
+            "color_accent": "rgba(0,0,0,0)",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Banner_Khai_Tr_ng_SHR_HN-100.jpg",
-            "image_mobile": "shopify://shop_images/Banner_Khai_Tr_ng_SHR_HN_Mobile_2x_79279cde-81fa-465b-b8aa-ef8bb0cba7e5.png",
+            "image": "shopify://shop_images/webiste_banner_May_topper_1.png",
+            "image_mobile": "shopify://shop_images/webiste_mobile_banner_May_topper_1.png",
             "overlay_opacity": 0
           }
         },
@@ -80,36 +97,18 @@
             "link_text_2": "",
             "color_accent": "#000000",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Better_posture_better_life_Homepage_Banner_desktop_ENG_1_-min.jpg",
-            "image_mobile": "shopify://shop_images/Better_posture_better_life_Homepage_Banner_mobile_ENG_-min.jpg",
-            "overlay_opacity": 0
-          }
-        },
-        "image_N6Y66j": {
-          "type": "image",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 80,
-            "subheading": "",
-            "link": "https://rubaby.vn",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "color_accent": "rgba(0,0,0,0)",
-            "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/banner-desktop-rubaby_1944x_29f9b5af-244c-44c6-8b40-eb496d94b11b.webp",
-            "image_mobile": "shopify://shop_images/banner-mobile-rubaby_430x_1.png",
+            "image": "shopify://shop_images/PC_8eded121-7de0-483c-b866-22f7b3fb57bb.png",
+            "image_mobile": "shopify://shop_images/Mobile_b465ac82-01a3-4a3f-a825-81417609b3a2.png",
             "overlay_opacity": 0
           }
         }
       },
       "block_order": [
-        "image_igEmmB",
         "image_JR4ARU",
+        "image_igEmmB",
+        "image_N6Y66j",
         "slideshow-0",
-        "image_y8pK9p",
-        "image_N6Y66j"
+        "image_y8pK9p"
       ],
       "settings": {
         "section_height": "natural",
@@ -123,19 +122,20 @@
         "icon_1_title": "100 đêm ngủ thử",
         "icon_1_type": "sleep",
         "icon_1_color": "#007bff",
-        "icon_1_image": "shopify://shop_images/Layer_1_1.svg",
+        "icon_1_image": "shopify://shop_images/Layer_1_3.svg",
         "icon_2_title": "Miễn phí vận chuyển",
         "icon_2_type": "payment",
         "icon_2_color": "#007bff",
-        "icon_2_image": "shopify://shop_images/Layer_1.svg",
+        "icon_2_image": "shopify://shop_images/Layer_1_4.svg",
         "icon_3_title": "Thanh toán linh hoạt/Trả góp không lãi suất",
         "icon_3_type": "shipping",
         "icon_3_color": "#007bff",
-        "icon_3_image": "shopify://shop_images/Layer_1_2.svg"
+        "icon_3_image": "shopify://shop_images/Layer_1_6.svg"
       }
     },
     "content_banner_cta_UzRzpc": {
       "type": "content-banner-cta",
+      "disabled": true,
       "name": "Content Banner CTA",
       "settings": {
         "main_title": "Mọi điều tuyệt vời đều bắt đầu từ một giấc ngủ ngon",
@@ -337,7 +337,7 @@
       "name": "Quiz Banner (Advanced)",
       "settings": {
         "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
-        "mobile_image": "shopify://shop_images/01046d8b8d79e9872d0501166ffea7e0e835bf2e.png",
+        "mobile_image": "shopify://shop_images/tempImagenz9mLD_1.png",
         "title": "Đâu là chiếc nệm phù hợp với bạn?",
         "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
         "button_1_text": "",
@@ -488,7 +488,7 @@
             "customer_name": "Gon Pink",
             "review_text": "<p>Mình nằm thử nệm Foam Original của Ru9 mới thấy khác biệt thiệt, foam ôm sát cơ thể giúp lưng – vai – hông được nâng đỡ đều, mình ngủ dậy không còn ê mỏi luôn. Thêm cái nữa là nệm cực thoáng khí, nằm lâu cũng không hầm nóng, vỏ thì tháo ra giặt siêu tiện. Nói chung là sản phẩm rất chất lượng so với giá tiền! </p>",
             "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem Nệm",
             "button_link": "shopify://products/foam-original"
@@ -501,7 +501,7 @@
             "customer_name": "Hoàng Ku",
             "review_text": "<p>Điều mình thích nhất khi nằm nệm foam Ru9 là đệm sẽ ôm sát theo đường cong của cơ thể, mình có quả “thắt đáy lưng ong” nên phần đáy lưng võng cong, nằm nệm cứng chỗ lưng đó bị rỗng nên rất khó chịu, ngủ phải gập người lại thì mới dễ ngủ. Nhưng với đệm Foam Ru9 thì mình chỉ cần nằm thẳng thôi, cấu trúc của đệm sẽ tự khắc làm đầy ngay chỗ thắt lưng của mình luôn! </p>",
             "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem Nệm",
             "button_link": "shopify://products/foam-original"
@@ -514,7 +514,7 @@
             "customer_name": "Anne Cibi",
             "review_text": "<p>Ghé Ru9 thăm showroom, kết quả là bê về túi to túi nhỏ luôn! Chăn bạch đàn, bộ ga gối tencel mướt mượt màu baby blue y chang cái nhà em nữa, nó mờ ê mê lắm</p>",
             "product_name": "Bộ Ga Giường Ru9 Tencel",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem sản phẩm",
             "button_link": "shopify://products/tencel-bedding-set"
@@ -527,7 +527,7 @@
             "customer_name": "Đào Lan Phương",
             "review_text": "<p>Sau 3 tuần nằm thử, mình thật sự ưng chiếc nệm Nest này. Nệm dày, nằm chắc chắn chứ không bị lún, rất phù hợp cho người hay đau lưng như mình. Mong là chất lượng này sẽ bền lâu.</p>",
             "product_name": "Nệm Nest",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem Nệm",
             "button_link": "shopify://collections/bedding"
@@ -537,26 +537,13 @@
           "type": "review",
           "settings": {
             "image": "shopify://shop_images/mc_van_anh_topper.jpg",
-            "customer_name": "Vân Anh",
-            "review_text": "<p>Mình trải nghiệm Foam Topper Ru9 được gần tháng rồi. Cảm giác nằm êm mà vẫn nâng đỡ tốt, lưng mình đỡ đau rõ rệt. Cái hay nữa là topper nhẹ, dễ mang đi và vệ sinh. Nói chung khá hài lòng, chỉ mong dùng lâu dài vẫn giữ được độ thoải mái như hiện tại.</p>",
+            "customer_name": "MC Vân Anh",
+            "review_text": "<p>Mình chọn nệm Ru9 vì có chính sách 100 đêm ngủ thử. Nệm đa năng, có thể trải ra phòng khách để bé chơi hoặc trải nệm để ngủ khi cần. sau đó cuộn lại cất đi là được, dễ di chuyển. Nệm foam rất êm, không bị lún, đàn hồi tốt.</p>",
             "product_name": "Nệm Foam Topper",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem Nệm",
             "button_link": "shopify://products/nem-cuon-foam-topper"
-          }
-        },
-        "review_zYiMD6": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/287509779_10228461666790384_79999810057241775_n.jpg",
-            "customer_name": "Hằng Thúy Ngô",
-            "review_text": "<p>Sau hơn nửa năm nằm nệm Original, mình thấy giấc ngủ được cải thiện rõ rệt. Nệm ôm và nâng đỡ cơ thể tốt, lưng cổ không còn ê ẩm như trước. Cảm giác mỗi tối nằm xuống đều rất thoải mái và dễ chịu.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
           }
         },
         "review_gCNcYV": {
@@ -564,9 +551,9 @@
           "settings": {
             "image": "shopify://shop_images/47580643_1094459747384007_5553427953934663680_n.jpg",
             "customer_name": "Tu Lam Kha",
-            "review_text": "<p>Sau nhiều lần đắn đo mình quyết định mua Nệm Foam Original, và thật sự đây là một khoản đầu tư xứng đáng. Từ ngày dùng, mình không còn thức dậy với cảm giác đau lưng hay mỏi vai gáy nữa.</p>",
+            "review_text": "<p>❤️❤️Mình cảm thấy hài lòng và rất biết ơn nệm Ru9, Nệm Ru9 đã làm cho mình thấy cuộc sống đẹp hơn khi giấc ngủ được trọn vẹn! Cảm giác nằm ngủ trên nệm rất thích như đang ở khách sạn 5 sao ấy... </p>",
             "product_name": "Nệm Original",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem sản phẩm",
             "button_link": "shopify://products/foam-original"
@@ -577,9 +564,9 @@
           "settings": {
             "image": "shopify://shop_images/IMG_8630.jpg",
             "customer_name": "Ngọc Tú Anh",
-            "review_text": "<p>10 điểm cho Bộ ga giường Tecel của Ru9 nha. Vải mềm, mát, nằm không bị bí hay nóng lưng, cảm giác dễ chịu hơn hẳn bộ ga cũ. Cả nhà mình ai cũng mê</p>",
+            "review_text": "<p>Bí quyết để làm sẵn sàng làm việc mười mấy tiếng liên tục của mình chính là gối Niu Ru9 làm từ Memory Foam. Tản nhiệt tối ưu, đàn hồi siêu êm ái. Đừng tiếc với bản thân một chiếc gối bạn nha.</p>",
             "product_name": "Bộ Bedding Tencel",
-            "verified_text": "Đã xác minh",
+            "verified_text": "",
             "verification_link": "",
             "button_text": "Xem sản phẩm",
             "button_link": "shopify://products/tencel-bedding-set"
@@ -592,13 +579,12 @@
         "review_wyUamJ",
         "review_8Tc3PT",
         "review_rMnkzH",
-        "review_zYiMD6",
         "review_gCNcYV",
         "review_Y7kPQp"
       ],
       "name": "Reviews carousel",
       "settings": {
-        "heading": "<p>Hơn <strong>50,000 </strong>Khách Hàng<br/>Và <strong>30,000 </strong>Đánh Giá 5 Sao Toàn Quốc</p>"
+        "heading": "<p>Hơn <strong>50,000 </strong>khách hàng<br/>và <strong>30,000 </strong>đánh giá toàn quốc</p>"
       }
     },
     "super_service_87efWC": {
@@ -695,23 +681,23 @@
         "topic_tab_dQTUiL": {
           "type": "topic_tab",
           "settings": {
-            "tab_title": "Câu chuyện giấc ngủ",
+            "tab_title": "Bạn có biết",
             "article_1": "magazine/cach-chon-nem-ngu",
             "article_2": "magazine/so-sanh-nem-foam-va-nem-cao-su",
             "article_3": "magazine/so-sanh-nem-foam-va-nem-cao-su-non-dau-la-diem-khac-biet",
             "article_4": "magazine/tu-the-nam-giup-tang-vong-3",
-            "article_5": "magazine/dem-bong-ep-2mx2m2"
+            "article_5": "magazine/cao-su-tu-nhien-la-gi"
           }
         },
         "topic_tab_cWdgCY": {
           "type": "topic_tab",
           "settings": {
-            "tab_title": "Cung Hoàng đạo",
-            "article_1": "magazine/thang-3-cung-gi",
-            "article_2": "magazine/thang-9-cung-gi",
-            "article_3": "magazine/thang-11-cung-gi",
-            "article_4": "magazine/thang-8-cung-gi",
-            "article_5": "magazine/meo-dan-gian-giup-tre-ngu-sau-giac"
+            "tab_title": "Sản phẩm Ru9",
+            "article_1": "magazine/nem-foam-day-20cm",
+            "article_2": "magazine/nem-foam-day-15cm",
+            "article_3": "magazine/nem-2m-x-2m",
+            "article_4": "magazine/nem-1m2-x-1m6",
+            "article_5": "magazine/review-nem-foam-ru9-co-tot-khong"
           }
         },
         "topic_tab_TTmcX4": {

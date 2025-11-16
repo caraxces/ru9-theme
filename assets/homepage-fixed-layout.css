@@ -58,7 +58,6 @@
   .featured-collections-section .page-width,
   .image-marquee-section .page-width,
   .featured-products-by-size-section .page-width,
-  .quiz-banner-section .page-width,
   .combo-bedroom-section .page-width,
   .tvc-section .page-width,
   .reviews-carousel-section .page-width,
@@ -85,24 +84,39 @@
     padding: 0 5rem !important;
   }
   
-  /* Dropdown menu fixed layout for all templates */
+  /* Dropdown menu fixed layout for all templates - Align with canvas */
   .site-nav__dropdown.megamenu {
-    max-width: 1594px !important;
-    margin: 0 auto !important;
-    padding: 0 5rem !important;
+    position: absolute !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
+    max-width: 1594px !important;
     width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
   
-  /* Ensure dropdown menu respects container */
+  /* Ensure dropdown menu respects container - text-left variant */
   .site-nav__dropdown.megamenu.text-left {
-    max-width: 1594px !important;
-    margin: 0 auto !important;
-    padding: 0 5rem !important;
+    position: absolute !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
+    max-width: 1594px !important;
     width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Page-width inside dropdown should have padding to match canvas */
+  .site-nav__dropdown.megamenu .page-width,
+  .site-nav__dropdown.megamenu.text-left .page-width {
+    max-width: 1594px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+    box-sizing: border-box !important;
   }
   
   /* Override any absolute positioning that might stick to left */
@@ -111,8 +125,10 @@
     left: 50% !important;
     transform: translateX(-50%) !important;
     max-width: 1594px !important;
+    width: 100% !important;
     margin: 0 auto !important;
-    padding: 0 5rem !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
   
   /* Ensure sections don't break out of container */

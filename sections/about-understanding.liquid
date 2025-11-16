@@ -45,20 +45,99 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    text-align: left;
   }
-  .about-understanding-text h3 {
-    font-size: 24px;
+  
+  /* Item content wrapper - align to bottom */
+  .about-understanding-text .item-content {
+    margin-top: auto;
+    width: 100%;
+  }
+  
+  /* Section title styles when inside first item */
+  .about-understanding-item:first-child .section-title {
+    font-family: "Be Vietnam Pro", sans-serif;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+  
+  .about-understanding-item:first-child .section-title h2 {
+    color: #1C2C58;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 80px;
+    margin: 0;
+    text-align: left;
+  }
+  
+  .about-understanding-item:first-child .section-title h2 span {
+    color: #759CE6;
+  }
+  
+  .about-understanding-item:first-child .section-title .tagline {
+    color: #1C2C58;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 32px;
+    font-style: normal;
     font-weight: 700;
-    color: {{ section.settings.title_color | default: '#1A2230' }};
-    margin-bottom: 20px;
-    line-height: 1.2;
+    line-height: 50px;
+    margin-top: 24px;
+    margin-bottom: 0;
+    text-align: left;
   }
+  
+  /* Item title styles - Same for all blocks */
+  .about-understanding-text h3,
+  .about-understanding-text .item-title {
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #1C2C58;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 22.4px */
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 1px solid #000;
+    padding-bottom: 20px;
+  }
+  
+  /* Desktop: Item title styling for all blocks */
+  @media screen and (min-width: 769px) {
+    .about-understanding-text h3,
+    .about-understanding-text .item-title {
+      font-size: 39px;
+      font-weight: 700;
+      line-height: 50px; /* 128.205% */
+      margin-bottom: 24px;
+    }
+    
+    .about-understanding-item:first-child .section-title .tagline {
+      font-size: 32px;
+      line-height: 50px;
+    }
+  }
+  
   .about-understanding-text p {
     color: {{ section.settings.text_color | default: '#5E6B85' }};
     margin-bottom: 16px;
     line-height: 1.6;
+    text-align: left;
   }
+  
+  /* Desktop: Paragraph styling for all blocks */
+  @media screen and (min-width: 769px) {
+    .about-understanding-text p {
+      font-size: 20px;
+      font-weight: 400;
+      color: #1C2C58;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+  }
+  
   .about-understanding-text p:last-child {
     margin-bottom: 0;
   }
@@ -72,17 +151,55 @@
       gap: 40px;
     }
     .about-understanding-item {
+      display: flex;
       flex-direction: column;
       gap: 20px;
     }
     .about-understanding-item.reverse {
       flex-direction: column;
     }
-    .about-understanding-text {
+    /* First item: section-title first, then image, then item-title and content */
+    /* On mobile, visually move section-title outside about-understanding-text */
+    .about-understanding-item:first-child {
+      position: relative;
+    }
+    .about-understanding-item:first-child .about-understanding-text {
+      display: flex;
+      flex-direction: column;
+    }
+    /* Move section-title visually before image on mobile */
+    .about-understanding-item:first-child .section-title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      margin-bottom: 20px;
+      z-index: 1;
+    }
+    .about-understanding-item:first-child .about-understanding-image {
+      margin-top: calc(20px + 28px + 30px + 32px + 20px); /* title height + tagline + margins */
+      flex: none;
+    }
+    .about-understanding-item:first-child .item-title {
       order: 1;
     }
-    .about-understanding-image {
+    .about-understanding-item:first-child .item-content {
       order: 2;
+    }
+    /* Other items: image first, then title and content */
+    .about-understanding-item:not(:first-child) .about-understanding-image {
+      order: 1;
+      flex: none;
+    }
+    .about-understanding-item:not(:first-child) .about-understanding-text {
+      order: 2;
+    }
+    .about-understanding-text {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .about-understanding-image {
       flex: none;
     }
     .about-understanding-svg-overlay {
@@ -93,6 +210,81 @@
       left: auto;
       max-width: 150px;
       max-height: 80px;
+    }
+  }
+
+  /* Desktop layout adjustments (min-width: 769px) */
+  @media screen and (min-width: 769px) {
+    .about-understanding-content {
+      gap: 6rem;
+    }
+    
+    .about-understanding-item {
+      gap: 60px;
+      align-items: flex-start;
+    }
+    
+    .about-understanding-image {
+      flex: 0 0 50%;
+    }
+    
+    .about-understanding-text {
+      flex: 0 0 calc(50% - 60px);
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Section title is now inside about-understanding-text, at the top */
+    .about-understanding-item:first-child .about-understanding-text .section-title {
+      order: 1;
+      margin-bottom: 24px;
+    }
+    
+    /* Item title comes after section title */
+    .about-understanding-item:first-child .about-understanding-text .item-title {
+      order: 2;
+    }
+    
+    /* Content comes last */
+    .about-understanding-item:first-child .about-understanding-text .item-content {
+      order: 3;
+    }
+    
+    /* SVG overlay positioning for desktop */
+    .about-understanding-svg-overlay {
+      bottom: 20px;
+      left: 20px;
+      max-width: 280px;
+      max-height: 100px;
+    }
+  }
+  
+  /* Mobile: Section title styles when inside first item */
+  @media (max-width: 768px) {
+    .about-understanding-item:first-child .section-title {
+      margin-bottom: 20px;
+    }
+    .about-understanding-item:first-child .section-title h2 {
+      font-size: 20px !important;
+      line-height: 28px;
+      display: inline-block;
+      width: 100%;
+    }
+    
+    .about-understanding-item:first-child .section-title h2 br {
+      display: none;
+    }
+    
+    .about-understanding-item:first-child .section-title h2 span {
+      color: #759CE6;
+      display: inline;
+    }
+    
+    .about-understanding-item:first-child .section-title .tagline {
+      margin-top: 30px;
+      font-size: 16px;
+      line-height: 32px;
     }
   }
 
@@ -122,8 +314,29 @@
             {% endif %}
           </div>
           <div class="about-understanding-text">
-            <div>{{ block.settings.title }}</div>
-            {{ block.settings.content }}
+            {%- comment -%} Desktop: Section title inside text wrapper. Mobile: Will be moved outside via CSS {%- endcomment -%}
+            {%- if forloop.first -%}
+              {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+                <div class="section-title">
+                  {%- if section.settings.title != blank -%}
+                    <h2>
+                      {{ section.settings.title }}{% if section.settings.title_colored != blank %} <span>{{ section.settings.title_colored }}</span>{% endif %}
+                    </h2>
+                  {%- endif -%}
+                  {%- if section.settings.subtitle != blank -%}
+                    <p class="tagline">{{ section.settings.subtitle }}</p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+            
+            {%- if block.settings.title != blank -%}
+              <h3 class="item-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            
+            <div class="item-content">
+              {{ block.settings.content }}
+            </div>
           </div>
         </div>
       {% endfor %}
@@ -138,10 +351,24 @@
   "class": "section",
   "settings": [
     {
-      "type": "html",
+      "type": "text",
       "id": "title",
       "label": "Section Title",
-      "default": "<h2>Ru9 sẽ không ngừng lắng nghe và thấu hiểu</h2>"
+      "default": "Ru9 sẽ không ngừng",
+      "info": "Main title text"
+    },
+    {
+      "type": "text",
+      "id": "title_colored",
+      "label": "Section Title (Colored Part)",
+      "default": "lắng nghe và thấu hiểu",
+      "info": "This part will be displayed in blue color"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Hiểu rằng mỗi giấc ngủ là một trải nghiệm cá nhân"
     },
     {
       "type": "color",
@@ -167,12 +394,12 @@
       "type": "about_understanding_item",
       "name": "Understanding Item",
       "settings": [
-        {
-          "type": "html",
-          "id": "title",
-          "label": "Item Title",
-          "default": "Hiểu rằng mỗi giấc ngủ là một trải nghiệm cá nhân"
-        },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Item Title",
+      "default": "Hiểu rằng mỗi giấc ngủ là một trải nghiệm cá nhân"
+    },
         {
           "type": "richtext",
           "id": "content",

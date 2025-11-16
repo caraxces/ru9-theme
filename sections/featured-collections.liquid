@@ -125,13 +125,15 @@
 
 <style>
   /* General Section Styles */
-  [data-section-type="featured-collections"] .featured-collections-section {
-    width: 100%;
-    max-width: 1594px;
-    min-height: auto;
-    margin: 0 auto 0 auto;
-    padding: 0 5rem 0 5rem;
-    font-family: 'Be Vietnam Pro', sans-serif;
+  @media (min-width: 769px) {
+    [data-section-type="featured-collections"] .featured-collections-section {
+      width: 100%;
+      max-width: 1594px;
+      min-height: auto;
+      margin: 0 auto 2rem auto;
+      padding: 0 5rem 0 5rem;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
   }
   [data-section-type="featured-collections"] .featured-collections-section .section-header {
     padding-bottom: 0px;
@@ -337,7 +339,7 @@
     background: #FFF3CD;
   }
   [data-section-type="featured-collections"] .nav-btn.nav-next {
-    background: #FFD35B;
+    background: #FFF9E5;
   }
   [data-section-type="featured-collections"] .nav-btn.nav-next:hover {
     background: #FBC947;
@@ -533,7 +535,9 @@
     [data-section-type="featured-collections"] .featured-collections-section {
       padding: 0 20px;
     }
-    
+    [data-section-type="featured-collections"] .view-all-link {
+      font-size: 16px;
+    }
     [data-section-type="featured-collections"] .featured-collections-section .section-header {
       flex-direction: row !important;
       flex-wrap: wrap;
@@ -585,7 +589,7 @@
       scrollbar-width: none;
       cursor: grab;
       padding: 0 20px 30px;
-      width: 375px;
+      width: 410px;
     }
     [data-section-type="featured-collections"] .category-tab {
       flex-shrink: 0 !important;
@@ -602,7 +606,7 @@
     }
     
     [data-section-type="featured-collections"] .product-carousel {
-      padding: 0 0 40px 0;
+      padding: 0 0 10px 0;
     }
     
     [data-section-type="featured-collections"] .product-cards-container {
@@ -745,61 +749,80 @@
       
       if (productCards.length === 0) return;
 
-      // Desktop: Use native scroll with smooth drag
-      let isDragging = false;
-      let startPos = 0;
-      let prevTranslate = 0;
-
-      function startDrag(e) {
-        isDragging = true;
-        startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-        prevTranslate = tabContent.scrollLeft;
-        tabContent.style.transition = 'none';
-        tabContent.classList.add('is-dragging');
-      }
-
-      function drag(e) {
-        if (isDragging) {
-          e.preventDefault();
-          const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-          const deltaX = currentPosition - startPos;
-          
-          // Apply smooth drag directly to scroll
-          tabContent.scrollLeft = prevTranslate - deltaX;
-        }
-      }
-
-      function endDrag() {
-        if (!isDragging) return;
-        isDragging = false;
-        tabContent.classList.remove('is-dragging');
-        
-        // Store current scroll position for next drag
-        prevTranslate = tabContent.scrollLeft;
-      }
-
-      // Event listeners
-      tabContent.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
+      // Check if mobile device
+      const isMobile = window.innerWidth <= 768;
       
-      tabContent.addEventListener('mousedown', startDrag);
-      tabContent.addEventListener('touchstart', startDrag, { passive: true });
-      tabContent.addEventListener('mousemove', drag);
-      tabContent.addEventListener('touchmove', drag, { passive: false });
-      tabContent.addEventListener('mouseup', endDrag);
-      tabContent.addEventListener('mouseleave', endDrag);
-      tabContent.addEventListener('touchend', endDrag);
+      if (!isMobile) {
+        // Desktop: Use native scroll with smooth drag
+        let isPointerDown = false;
+        let hasExceededThreshold = false;
+        let shouldSuppressClick = false;
+        let startPos = 0;
+        let startScrollLeft = 0;
+        const dragThreshold = 6;
 
-      // Handle click events for product cards - block if was dragging
-      tabContent.querySelectorAll('.product-card').forEach(card => {
-        card.addEventListener('click', (e) => {
-          if (isDragging) {
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
+        function startDrag(e) {
+          isPointerDown = true;
+          hasExceededThreshold = false;
+          startPos = e.type.includes('mouse') ? e.pageX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+          startScrollLeft = tabContent.scrollLeft;
+          tabContent.style.transition = 'none';
+          tabContent.classList.remove('is-dragging');
+        }
+
+        function drag(e) {
+          if (!isPointerDown) return;
+          const currentPosition = e.type.includes('mouse') ? e.pageX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+          const deltaX = currentPosition - startPos;
+
+          if (!hasExceededThreshold && Math.abs(deltaX) > dragThreshold) {
+            hasExceededThreshold = true;
+            shouldSuppressClick = true;
+            tabContent.classList.add('is-dragging');
           }
-          return true;
+
+          if (hasExceededThreshold) {
+            e.preventDefault();
+            tabContent.scrollLeft = startScrollLeft - deltaX;
+          }
+        }
+
+        function endDrag() {
+          if (!isPointerDown) return;
+          isPointerDown = false;
+          hasExceededThreshold = false;
+          tabContent.classList.remove('is-dragging');
+          requestAnimationFrame(() => {
+            shouldSuppressClick = false;
+          });
+        }
+
+        // Event listeners for desktop only
+        tabContent.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
+        
+        tabContent.addEventListener('mousedown', startDrag);
+        tabContent.addEventListener('mousemove', drag);
+        tabContent.addEventListener('mouseup', endDrag);
+        tabContent.addEventListener('mouseleave', endDrag);
+
+        // Handle click events for product cards - block if was dragging
+        tabContent.querySelectorAll('.product-card').forEach(card => {
+          card.addEventListener('click', (e) => {
+            if (shouldSuppressClick) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+            return true;
+          });
         });
-      });
+      } else {
+        // Mobile: Use native touch scrolling - no custom handlers needed
+        // Just prevent image drag
+        tabContent.querySelectorAll('img').forEach(img => {
+          img.addEventListener('dragstart', (e) => e.preventDefault());
+        });
+      }
 
       carousels[carouselId] = {
         initialized: true,
@@ -885,7 +908,19 @@
       }
     }
 
-    // No need for resize handler since we're using native scroll
+    // Handle resize to reinitialize carousels when switching between mobile/desktop
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        // Reset all carousels and reinitialize
+        carousels = {};
+        const activeTabContent = sectionContainer.querySelector('.tab-content.active');
+        if (activeTabContent) {
+          initializeCarouselForTab(activeTabContent);
+        }
+      }, 250);
+    });
 
     // Animation removed - products show immediately
 

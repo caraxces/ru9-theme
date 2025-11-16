@@ -107,7 +107,7 @@
         "image_position": "left",
         "image_size": "large",
         "product_zoom_enable": true,
-        "product_carousel_enable": true,
+        "product_carousel_enable": false,
         "limit_product_carousel": false,
         "thumbnail_position": "below",
         "thumbnail_height": "flexible",
@@ -823,9 +823,9 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
+            "max_width": 1200,
             "show_shop_reviews": false,
-            "empty_state": "empty_widget",
-            "max_width": 1200
+            "empty_state": "empty_widget"
           }
         }
       },

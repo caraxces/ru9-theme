@@ -18,7 +18,9 @@
   -webkit-filter: none !important;
   filter: contrast(1.02) !important;
 }
-
+.jdgm-write-rev-link.jdgm-write-rev-link{
+    border: none !important;
+}
 /* ==========================================================================
    #RESET & WIDGET CONTAINER
    ========================================================================== */
@@ -113,7 +115,7 @@
 .jdgm-rev-widg__title {
     width: 100% !important;
     margin-bottom: 20px !important; 
-    font-size: 28px !important;
+    font-size: 39px !important;
     font-weight: 700 !important;
     text-align: left !important; /* Center the title */
 }
@@ -230,7 +232,7 @@
 }
 .jdgm-rev-widg__summary::before {
     grid-area: rating !important;
-    content: "5.0" !important;
+    content: attr(data-rating) !important;
     font-size: 64px !important;
     font-weight: 700 !important;
     line-height: 1 !important;
@@ -248,7 +250,7 @@
 .jdgm-write-rev-link {
     display: block !important;
     visibility: visible !important;
-    background-color: #1C2C58 !important;
+    background-color: #234085 !important;
     color: #ffffff !important;
     border-radius: 30px !important;
     padding: 14px 24px !important;
@@ -484,6 +486,9 @@
     .jdgm-all-reviews__summary-text--verified{
         justify-content: left !important;
     }
+    .jdgm-rev-widg__summary{
+        margin-bottom: 0px !important;
+    }
     .jdgm-rev-widg__summary-average{
         display: none !important;
     }
@@ -495,7 +500,6 @@
     .jdgm-rev-widg__header {
         flex-direction: column !important;
         align-items: center !important;
-        gap: 30px !important;
     }
 
     .jdgm-custom-left-column {

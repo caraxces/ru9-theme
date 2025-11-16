@@ -14023,10 +14023,6 @@ tool-tip[data-tool-tip-open="true"] .tool-tip__inner {
     margin-left: -12px;
   }
 
-  .section-header {
-    margin-bottom: calc(var(--grid-desktop-vertical-spacing) * 1.25);
-  }
-
   .section-header.space-lg {
     margin-bottom: calc(var(--grid-desktop-vertical-spacing) * 5 / 3);
   }
@@ -14835,9 +14831,6 @@ details[open] > .site-nav__dropdown {
   display: none;
 }
 
-.breadcrumb:not(.spacing-base) {
-  margin: -25px 0 10px;
-}
 
 .breadcrumb a {
   color: var(--colorLinkBreadcrumb);
@@ -16130,11 +16123,6 @@ input[type="image"] {
   margin: 0;
 }
 
-.section--divider {
-  border-top: 1px solid;
-  border-top-color: var(--colorBorder);
-}
-
 .section--divider:not(.section-padding) {
   padding-top: 40px;
 }
@@ -16208,7 +16196,7 @@ input[type="image"] {
 
 @media screen and (min-width: 95rem) {
   .index-section {
-    margin: 68px 0;
+    margin: 10px 0;
   }
 }
 
@@ -16604,12 +16592,6 @@ input[type="image"] {
 
 .flickity-slider .slideshow__slide {
   display: block;
-}
-
-.hero {
-  background: var(--colorLargeImageBg);
-  overflow: hidden;
-  position: relative;
 }
 
 .hero__media-container {
@@ -17139,7 +17121,7 @@ input[type="image"] {
 
 @media only screen and (min-width: 769px) {
   .collection-content {
-    padding-top: 45px;
+    padding-top: 0;
   }
 }
 
@@ -17345,7 +17327,7 @@ input[type="image"] {
 
 @media only screen and (min-width: 769px) {
   .collection-hero__content {
-    padding: 30px 0;
+    padding: 3rem 0 5rem 0 !important;
   }
 }
 
