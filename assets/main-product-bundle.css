@@ -3831,20 +3831,67 @@
   }
   
   /* Ensure Flickity viewport is properly sized on mobile */
+  /* ONLY apply to product-slideshow, NOT super-service */
   .product-slideshow.flickity-enabled {
     display: block !important;
     overflow: hidden !important;
     touch-action: pan-y !important; /* Allow horizontal drag */
   }
   
-  .flickity-viewport {
+  /* Only apply to bundle's product-slideshow, exclude super-service */
+  .product-slideshow .flickity-viewport,
+  .bundle-step .flickity-viewport {
     overflow: hidden !important;
     position: relative !important;
     height: 100% !important;
     touch-action: pan-y !important;
   }
   
-  .flickity-slider {
+  /* Exclude super-service from bundle's global flickity rules but allow carousel */
+  .super-service-section .flickity-viewport {
+    overflow: hidden !important; /* Allow Flickity carousel to work */
+    height: auto !important;
+    min-height: 200px !important;
+    position: relative !important;
+  }
+
+  /* Allow super-service slider to work - don't override transform */
+  /* .super-service-section .flickity-slider - let Flickity handle transforms */
+
+  /* Override bundle's opacity rules for super-service items - only opacity/visibility, allow Flickity transforms */
+  .super-service-section .super-service__item-wrapper {
+    opacity: 1 !important;
+    display: block !important;
+    visibility: visible !important;
+    /* Don't override position/transform - let Flickity handle it */
+  }
+
+  /* Override for flickity-enabled super-service items - allow Flickity to work */
+  .super-service-section .flickity-enabled .super-service__item-wrapper {
+    opacity: 1 !important; /* Only override opacity */
+    display: block !important;
+    visibility: visible !important;
+    /* Let Flickity handle position and transform for carousel */
+  }
+
+  /* Ensure selected item is visible but allow Flickity transforms */
+  .super-service-section .flickity-enabled .super-service__item-wrapper.is-selected {
+    opacity: 1 !important;
+    display: block !important;
+    visibility: visible !important;
+    /* Let Flickity handle position for carousel */
+  }
+
+  /* Allow Flickity slider to work - don't override transform */
+  .super-service-section .flickity-enabled .flickity-slider .super-service__item-wrapper {
+    opacity: 1 !important; /* Only override opacity */
+    display: block !important;
+    visibility: visible !important;
+    /* Don't override transform - let Flickity create carousel */
+  }
+  
+  .product-slideshow .flickity-slider,
+  .bundle-step .flickity-slider {
     display: flex !important;
     width: auto !important;
     position: relative !important;
@@ -3883,8 +3930,13 @@
     display: block;
   }
   
-  .bundle-step-1 .flickity-viewport {
+  .bundle-step-1 .product-slideshow .flickity-viewport {
     overflow: hidden !important;
+  }
+  
+  /* Exclude super-service from bundle-step flickity rules but allow carousel */
+  .bundle-step-1 .super-service-section .flickity-viewport {
+    overflow: hidden !important; /* Allow Flickity carousel */
   }
   
   .bundle-step-1 .flickity-slider {
@@ -3907,6 +3959,71 @@
   .bundle-step-1 .product-slideshow.flickity-enabled .product-main-slide.is-selected {
     position: relative !important;
     opacity: 1 !important;
+  }
+  
+  /* Ensure super-service items are visible on mobile in bundle template */
+  @media screen and (max-width: 990px) {
+    /* Override bundle CSS for super-service items - only opacity/visibility */
+    .super-service-section .super-service__item-wrapper {
+      opacity: 1 !important;
+      display: block !important;
+      visibility: visible !important;
+      /* Don't override position/transform - let Flickity create carousel */
+    }
+    
+    /* Override bundle's opacity: 0 but allow Flickity transforms */
+    .super-service-section .flickity-enabled .super-service__item-wrapper {
+      opacity: 1 !important; /* Only override opacity */
+      display: block !important;
+      visibility: visible !important;
+      /* Let Flickity handle position/transform for carousel */
+    }
+
+    /* Ensure selected item is visible */
+    .super-service-section .flickity-enabled .super-service__item-wrapper.is-selected {
+      opacity: 1 !important;
+      display: block !important;
+      visibility: visible !important;
+      /* Let Flickity handle position for carousel */
+    }
+
+    /* Allow Flickity to work - only override opacity */
+    .super-service-section .flickity-slider .super-service__item-wrapper {
+      opacity: 1 !important; /* Only opacity */
+      display: block !important;
+      visibility: visible !important;
+      /* Don't override position - let Flickity transform for carousel */
+    }
+
+    /* Ensure slider container allows carousel */
+    .super-service-section .super-service__slider-container {
+      overflow: hidden !important; /* Allow Flickity carousel */
+      position: relative !important;
+      /* Don't override padding - let section CSS handle it */
+    }
+
+    /* DEBUG: Ensure no padding override for mobile 480px */
+    @media screen and (max-width: 480px) {
+      .super-service-section .super-service__slider-container {
+        padding-bottom: 0px !important; /* Match section CSS, override any other rules */
+      }
+    }
+
+    /* Don't override Flickity slider transform - let it create carousel */
+    /* .super-service-section .flickity-slider - let Flickity handle transforms */
+
+    /* Show first item before Flickity initializes */
+    .super-service-section .super-service__grid:not(.flickity-enabled) .super-service__item-wrapper:first-child {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* Ensure Flickity viewport allows carousel */
+    .super-service-section .flickity-viewport {
+      overflow: hidden !important; /* Allow Flickity carousel */
+      height: auto !important;
+    }
   }
 }
 

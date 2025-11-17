@@ -254,10 +254,13 @@
 
     let currentIndex = 0;
     let isDragging = false;
+    let isDown = false; // Track if mouse/touch is down
     let startPos = 0;
+    let startPosY = 0; // Track Y position for direction detection
     let currentTranslate = 0;
     let prevTranslate = 0;
     let animationID = 0;
+    const dragThreshold = 5; // Only prevent default after 5px horizontal movement
 
     let cardWidth, gap, viewportWidth, visibleCards, maxIndex, totalTrackWidth, maxScroll;
 
@@ -307,27 +310,58 @@
     }
 
     function startDrag(e) {
-      isDragging = true;
-      startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+      isDown = true;
+      isDragging = false; // Not dragging yet, just started
+      startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+      startPosY = e.type.includes('mouse') ? e.pageY : e.touches[0].pageY;
       animationID = requestAnimationFrame(animation);
       track.style.transition = 'none';
       progressBar.style.transition = 'none';
       track.classList.add('is-dragging');
+      
+      // For touch events, add listeners to window (like blog-carousel)
+      if (e.type === 'touchstart') {
+        window.addEventListener('touchmove', dragMove);
+        window.addEventListener('touchend', dragEnd);
+      }
+    }
+
+    function dragMove(e) {
+      if (!isDown) return;
+      
+      const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+      const currentY = e.type.includes('mouse') ? e.pageY : e.touches[0].pageY;
+      const walk = currentX - startPos;
+      const walkY = currentY - startPosY;
+      
+      // Only prevent default and handle drag if horizontal movement exceeds threshold
+      // This allows vertical scrolling to work normally
+      if (Math.abs(walk) > dragThreshold && Math.abs(walk) > Math.abs(walkY)) {
+        isDragging = true;
+        e.preventDefault();
+        currentTranslate = prevTranslate + walk;
+      }
     }
 
     function drag(e) {
-      if (isDragging) {
-        e.preventDefault();
-        const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+      // For mouse events, use the old logic
+      if (isDown) {
+        const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
         currentTranslate = prevTranslate + currentPosition - startPos;
       }
     }
 
-    function endDrag() {
-      if (!isDragging) return;
+    function dragEnd() {
+      if (!isDown) return;
+      
       cancelAnimationFrame(animationID);
+      isDown = false;
       isDragging = false;
       track.classList.remove('is-dragging');
+      
+      // Remove window listeners for touch events
+      window.removeEventListener('touchmove', dragMove);
+      window.removeEventListener('touchend', dragEnd);
 
       const movedBy = currentTranslate - prevTranslate;
 
@@ -341,11 +375,17 @@
       setPositionByIndex();
     }
 
+    function endDrag() {
+      dragEnd();
+    }
+
     function animation() {
-      if (!isDragging) return;
+      if (!isDown && !isDragging) return;
       track.style.transform = `translateX(${currentTranslate}px)`;
       updateProgressBar();
-      requestAnimationFrame(animation);
+      if (isDown || isDragging) {
+        requestAnimationFrame(animation);
+      }
     }
     
     function onResize() {
@@ -370,12 +410,12 @@
     track.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
     
     track.addEventListener('mousedown', startDrag);
-    track.addEventListener('touchstart', startDrag, { passive: true });
+    track.addEventListener('touchstart', startDrag, { passive: true }); // Start passive to allow vertical scroll
     track.addEventListener('mousemove', drag);
-    track.addEventListener('touchmove', drag, { passive: false });
+    // touchmove is handled by window listener in startDrag (like blog-carousel)
     track.addEventListener('mouseup', endDrag);
     track.addEventListener('mouseleave', endDrag);
-    track.addEventListener('touchend', endDrag);
+    // touchend is handled by window listener in startDrag
 
     const resizeObserver = new ResizeObserver(onResize);
     resizeObserver.observe(viewport);

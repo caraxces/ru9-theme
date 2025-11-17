@@ -64,10 +64,12 @@
         max-width: 100% !important;
       }
       
-      /* Mobile: Fixed footer full width */
+      /* Mobile: Fixed footer full width - Always visible, not hidden by browser UI */
       #CartDrawer .drawer__footer {
         position: fixed !important;
-        bottom: 0 !important;
+        /* Account for browser UI (Chrome tabs, address bar) - add 15px spacing above browser UI */
+        bottom: 15px !important; /* Base spacing above browser UI */
+        bottom: calc(15px + env(safe-area-inset-bottom)) !important; /* Add safe area for notched devices */
         left: 0 !important;
         right: 0 !important;
         width: 100% !important;
@@ -75,8 +77,20 @@
         background: #fff !important;
         z-index: 1001 !important;
         box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
-        padding: clamp(12px, 3vw, 18px) var(--drawer-horizontal-padding) clamp(18px, 4vw, 28px) !important;
-        padding: clamp(12px, 3vw, 18px) var(--drawer-horizontal-padding) calc(clamp(18px, 4vw, 28px) + env(safe-area-inset-bottom)) !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        /* Responsive padding: 480px = 18px, scale down proportionally */
+        padding: clamp(10px, calc(18px * (100vw / 480px)), 18px) var(--drawer-horizontal-padding) clamp(14px, calc(28px * (100vw / 480px)), 28px) !important;
+        /* Add extra bottom padding to account for browser UI */
+        padding-bottom: calc(clamp(14px, calc(28px * (100vw / 480px)), 28px) + env(safe-area-inset-bottom) + 15px) !important;
+      }
+
+      /* Ensure scrollable doesn't hide footer - Use dvh for mobile, account for browser UI */
+      #CartDrawer .drawer__scrollable {
+        max-height: calc(100dvh - var(--drawer-header-height) - var(--drawer-footer-height) - 20px) !important; /* Extra 20px for browser UI */
+        max-height: calc(100svh - var(--drawer-header-height) - var(--drawer-footer-height) - 20px) !important; /* Fallback for older browsers */
+        padding-bottom: calc(var(--drawer-footer-height) + env(safe-area-inset-bottom) + 40px) !important; /* More space for browser UI + footer */
       }
     }
     
@@ -169,7 +183,9 @@
       flex-grow: 1;
       scrollbar-width: none; /* For Firefox */
       -ms-overflow-style: none; /* For Internet Explorer and Edge */
-      max-height: calc(100vh - var(--drawer-header-height) - var(--drawer-footer-height)); /* Baseline calculation */
+      /* Use dvh/svh for mobile to account for browser UI */
+      max-height: calc(100dvh - var(--drawer-header-height) - var(--drawer-footer-height)); /* Baseline calculation */
+      max-height: calc(100svh - var(--drawer-header-height) - var(--drawer-footer-height)); /* Fallback */
       min-height: clamp(200px, 60vh, 100vh); /* Minimum height to enable scroll */
       padding-bottom: calc(var(--drawer-footer-height) + 24px) !important; /* Space for fixed footer */
       padding-bottom: calc(var(--drawer-footer-height) + env(safe-area-inset-bottom) + 24px) !important; /* Space for fixed footer */
@@ -568,8 +584,50 @@
       display: flex;
       justify-content: space-between;
       font-family: var(--font-stack-body);
-      font-size: 16px;
-      padding: 5px 0;
+      /* Responsive font size: 480px = 16px, scale down proportionally */
+      font-size: clamp(12px, calc(16px * (100vw / 480px)), 16px);
+      padding: clamp(3px, calc(5px * (100vw / 480px)), 5px) 0;
+    }
+
+    /* Responsive font sizes for mobile - 480px as base */
+    @media (max-width: 480px) {
+      /* Ensure footer is always visible and not hidden by browser UI (Chrome tabs) */
+      #CartDrawer .drawer__footer {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: fixed !important;
+        /* Account for browser UI - add 15px spacing above browser tabs */
+        bottom: 15px !important; /* Base spacing above browser UI */
+        bottom: calc(15px + env(safe-area-inset-bottom)) !important; /* Add safe area for notched devices */
+        z-index: 1001 !important;
+        /* Ensure footer has enough space above browser tabs */
+        margin-bottom: 0 !important;
+      }
+
+      /* Adjust scrollable to account for footer + browser UI spacing */
+      #CartDrawer .drawer__scrollable {
+        max-height: calc(100svh - var(--drawer-header-height) - var(--drawer-footer-height) - 20px) !important; /* Extra 20px for browser UI */
+        padding-bottom: calc(var(--drawer-footer-height) + env(safe-area-inset-bottom) + 40px) !important; /* More space for browser UI */
+      }
+
+      /* Responsive font sizes */
+      #CartDrawer .cart-drawer__summary-item {
+        font-size: calc(16px * (100vw / 480px));
+      }
+      #CartDrawer .cart-drawer__summary-item .price--original {
+        font-size: calc(16px * (100vw / 480px));
+      }
+      #CartDrawer .cart-drawer__summary-item .price--final {
+        font-size: calc(18px * (100vw / 480px));
+      }
+      #CartDrawer .cart-drawer__savings {
+        font-size: clamp(12px, calc(14px * (100vw / 480px)), 14px);
+      }
+      #CartDrawer .btn {
+        font-size: clamp(14px, calc(16px * (100vw / 480px)), 16px);
+        padding: clamp(10px, calc(12px * (100vw / 480px)), 12px) clamp(20px, calc(24px * (100vw / 480px)), 24px);
+      }
     }
     #CartDrawer .cart-drawer__summary-item .price-container {
       display: flex;
@@ -582,7 +640,8 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       font-family: "Be Vietnam Pro", sans-serif;
-      font-size: 16px;
+      /* Responsive font size: 480px = 16px, scale down proportionally */
+      font-size: clamp(12px, calc(16px * (100vw / 480px)), 16px);
       font-style: normal;
       font-weight: 400;
       line-height: 150%;
@@ -594,7 +653,8 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       font-family: "Be Vietnam Pro", sans-serif;
-      font-size: 18px;
+      /* Responsive font size: 480px = 18px, scale down proportionally */
+      font-size: clamp(14px, calc(18px * (100vw / 480px)), 18px);
       font-style: normal;
       font-weight: 700;
       line-height: 150%;
