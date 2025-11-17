@@ -428,8 +428,8 @@
           "type": "review",
           "settings": {
             "image": "shopify://shop_images/mc_van_anh_topper.jpg",
-            "customer_name": "Vân Anh",
-            "review_text": "<p>Mình trải nghiệm Foam Topper Ru9 được gần tháng rồi. Cảm giác nằm êm mà vẫn nâng đỡ tốt, lưng mình đỡ đau rõ rệt. Cái hay nữa là topper nhẹ, dễ mang đi và vệ sinh. Nói chung khá hài lòng, chỉ mong dùng lâu dài vẫn giữ được độ thoải mái như hiện tại.</p>",
+            "customer_name": "MC Vân Anh",
+            "review_text": "<p>Mình chọn nệm Ru9 vì có chính sách 100 đêm ngủ thử. Nệm đa năng, có thể trải ra phòng khách để bé chơi hoặc trải nệm để ngủ khi cần. sau đó cuộn lại cất đi là được, dễ di chuyển. Nệm foam rất êm, không bị lún, đàn hồi tốt.</p>",
             "product_name": "Nệm Foam Topper",
             "verified_text": "",
             "verification_link": "",
@@ -437,25 +437,12 @@
             "button_link": "shopify://products/nem-cuon-foam-topper"
           }
         },
-        "review_hxzewp": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/287509779_10228461666790384_79999810057241775_n.jpg",
-            "customer_name": "Hằng Thúy Ngô",
-            "review_text": "<p>Sau hơn nửa năm nằm nệm Original, mình thấy giấc ngủ được cải thiện rõ rệt. Nệm ôm và nâng đỡ cơ thể tốt, lưng cổ không còn ê ẩm như trước. Cảm giác mỗi tối nằm xuống đều rất thoải mái và dễ chịu.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
-          }
-        },
         "review_E6XhJz": {
           "type": "review",
           "settings": {
             "image": "shopify://shop_images/47580643_1094459747384007_5553427953934663680_n.jpg",
             "customer_name": "Tu Lam Kha",
-            "review_text": "<p>Sau nhiều lần đắn đo mình quyết định mua Nệm Foam Original, và thật sự đây là một khoản đầu tư xứng đáng. Từ ngày dùng, mình không còn thức dậy với cảm giác đau lưng hay mỏi vai gáy nữa.</p>",
+            "review_text": "<p>❤️❤️Mình cảm thấy hài lòng và rất biết ơn nệm Ru9, Nệm Ru9 đã làm cho mình thấy cuộc sống đẹp hơn khi giấc ngủ được trọn vẹn! Cảm giác nằm ngủ trên nệm rất thích như đang ở khách sạn 5 sao ấy... </p>",
             "product_name": "Nệm Original",
             "verified_text": "",
             "verification_link": "",
@@ -468,7 +455,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_8630.jpg",
             "customer_name": "Ngọc Tú Anh",
-            "review_text": "<p>10 điểm cho Bộ ga giường Tecel của Ru9 nha. Vải mềm, mát, nằm không bị bí hay nóng lưng, cảm giác dễ chịu hơn hẳn bộ ga cũ. Cả nhà mình ai cũng mê</p>",
+            "review_text": "<p>Bí quyết để làm sẵn sàng làm việc mười mấy tiếng liên tục của mình chính là gối Niu Ru9 làm từ Memory Foam. Tản nhiệt tối ưu, đàn hồi siêu êm ái. Đừng tiếc với bản thân một chiếc gối bạn nha.</p>",
             "product_name": "Bộ Bedding Tencel",
             "verified_text": "",
             "verification_link": "",
@@ -496,7 +483,6 @@
         "review_GJYfxW",
         "review_Mw8U9j",
         "review_UxKmJq",
-        "review_hxzewp",
         "review_E6XhJz",
         "review_F74qc9",
         "review_iU8xqk"
