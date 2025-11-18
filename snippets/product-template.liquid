@@ -2342,6 +2342,68 @@
       top: 0 !important;
       left: 0 !important;
     }
+
+    /* Mobile scroller thumbnails - Square layout */
+    .product__thumbs--scroller .product__thumb,
+    .huan-false .product__thumbs--scroller .product__thumb {
+      width: 5rem !important;
+      height: 5rem !important;
+      border-radius: 4px !important;
+      overflow: hidden !important;
+      display: block !important;
+    }
+
+    .product__thumbs--scroller .product__thumb-item,
+    .huan-false .product__thumbs--scroller .product__thumb-item {
+      width: 5rem !important;
+      height: 5rem !important;
+      flex-shrink: 0 !important;
+    }
+
+    .product__thumbs--scroller .product__thumb .image-wrap,
+    .huan-false .product__thumbs--scroller .product__thumb .image-wrap {
+      width: 5rem !important;
+      height: 5rem !important;
+      position: relative !important;
+    }
+
+    .product__thumbs--scroller .product__thumb .image-wrap img,
+    .huan-false .product__thumbs--scroller .product__thumb .image-wrap img,
+    .huan-false .product__thumbs--scroller .product__thumb > .image-wrap img {
+      width: 5rem !important;
+      height: 5rem !important;
+      object-fit: cover !important;
+      border-radius: 4px !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+    }
+
+    /* Active state for scroller thumbnails - Keep square */
+    .product__thumbs--scroller .product__thumb-item.is-active .product__thumb,
+    .product__thumbs--scroller .product__thumb-item:active .product__thumb,
+    .huan-false .product__thumbs--scroller .product__thumb-item.is-active .product__thumb,
+    .huan-false .product__thumbs--scroller .product__thumb-item:active .product__thumb {
+      width: 5rem !important;
+      height: 5rem !important;
+      flex-shrink: 0 !important;
+    }
+
+    .product__thumbs--scroller .product__thumb-item.is-active .product__thumb .image-wrap,
+    .product__thumbs--scroller .product__thumb-item:active .product__thumb .image-wrap,
+    .huan-false .product__thumbs--scroller .product__thumb-item.is-active .product__thumb .image-wrap,
+    .huan-false .product__thumbs--scroller .product__thumb-item:active .product__thumb .image-wrap {
+      width: 5rem !important;
+      height: 5rem !important;
+    }
+
+    .product__thumbs--scroller .product__thumb-item.is-active .product__thumb .image-wrap img,
+    .product__thumbs--scroller .product__thumb-item:active .product__thumb .image-wrap img,
+    .huan-false .product__thumbs--scroller .product__thumb-item.is-active .product__thumb .image-wrap img,
+    .huan-false .product__thumbs--scroller .product__thumb-item:active .product__thumb .image-wrap img {
+      width: 5rem !important;
+      height: 5rem !important;
+    }
   }
   /* END: Mobile layout styles */
 
@@ -3944,7 +4006,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const [beforeDash, afterDash] = text.split(' - ');
         // Capitalize first letter only
         const capitalizedBeforeDash = beforeDash.charAt(0).toUpperCase() + beforeDash.slice(1).toLowerCase();
-        label.innerHTML = `<span style="font-weight: 500; color: #212121;">${capitalizedBeforeDash}</span> <span style="font-weight: 400; color: #212121;">${afterDash}</span>`;
+        label.innerHTML = `<span style="font-weight: 600; color: #212121;">${capitalizedBeforeDash}</span> <span style="font-weight: 400; color: #212121;">${afterDash}</span>`;
       }
     });
   }

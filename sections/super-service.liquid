@@ -291,9 +291,9 @@
 <div class="super-service-section" data-section-id="{{ section.id }}">
   <div class="page-width">
     {% if section.settings.title != blank %}
-      <h2 class="super-service__title">
+      <p class="super-service__title">
         {{ section.settings.title }}
-      </h2>
+      </p>
     {% endif %}
 
     <div class="super-service__slider-container">
@@ -323,7 +323,7 @@
                 {% endif %}
               </div>
               {% if block.settings.item_title != blank %}
-                <h3 class="super-service__item-title">{{ block.settings.item_title }}</h3>
+                <p class="super-service__item-title">{{ block.settings.item_title }}</p>
               {% endif %}
               <p class="super-service__item-note">{{ block.settings.item_note | default: '&nbsp;' }}</p>
               {% if block.settings.item_description != blank %}
@@ -346,7 +346,7 @@
                 <div class="super-service__item-icon">
                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 </div>
-                <h3 class="super-service__item-title">Service Title</h3>
+                <p class="super-service__item-title">Service Title</p>
                 <div class="super-service__item-description">
                   <p>Use this text to share information about your service.</p>
                 </div>

@@ -96,7 +96,7 @@
                     {%- endif -%}
                   </div>
                   
-                  <a class="cc-title" href="{{ product.url }}">{{ product.title }}</a>
+                  <h3 class="cc-title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
                   
                   <div class="cc-description">
                     {%- if product.metafields.custom.subdes.value != blank -%}
@@ -336,6 +336,10 @@
   }
   
   .cc-title {
+    margin-bottom: 4px;
+  }
+  
+  .cc-title a {
     color: #000;
     font-family: "Be Vietnam Pro", sans-serif;
     font-size: 20px;
@@ -344,10 +348,9 @@
     line-height: 27px; /* 135% */
     letter-spacing: 0.6px;
     text-decoration: none;
-    margin-bottom: 4px;
   }
   
-  .cc-title:hover {
+  .cc-title a:hover {
     color: #3264E0;
   }
   
@@ -554,6 +557,11 @@
     }
     
     .cc-title {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    
+    .cc-title a {
       font-size: 14px;
       line-height: 1.4;
     }
