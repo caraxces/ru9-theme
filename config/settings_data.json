@@ -1486,7 +1486,7 @@
           "current_page_text": "About us",
           "main_title": "",
           "subtitle": "",
-          "secondary_title": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@1,400;1,600;1,700&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  :root { \n    --ru9-blue: #1C2C58; \n  }\n\n  .ru9-copy {\n    display: block;\n  }\n\n  .ru9-copy p {\n    margin: 0;\n    color: var(--ru9-blue);\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: italic;\n  }\n\n  /* MOBILE (default) */\n  .ru9-copy .intro {\n    font-size: 16px;\n    font-weight: 400;\n    line-height: 140%; /* 22.4px */\n  }\n\n  .ru9-copy .tagline {\n    font-size: 16px;\n    font-weight: 700;\n    line-height: 140%; /* 22.4px */\n  }\n\n  /* DESKTOP */\n  @media (min-width: 768px) {\n    .ru9-copy .intro {\n      font-size: 27px;\n      font-weight: 600;\n      line-height: 140%; /* 37.8px */\n    }\n\n    .ru9-copy .tagline {\n      font-size: 39px;\n      font-weight: 700;\n      line-height: 53px; /* 135.897% */\n    }\n  }\n</style>\n\n<div class=\"ru9-copy\">\n  <p class=\"intro\">Từ Giấc Mơ Đến Hiện Thực:</p>\n  <p class=\"tagline\">“Hành trình mang giấc ngủ ngon đến với mọi gia đình Việt Nam”</p>\n</div>",
+          "secondary_title": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@1,400;1,600;1,700&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  :root { \n    --ru9-blue: #1C2C58; \n  }\n\n  .ru9-copy {\n    display: block;\n  }\n\n  .ru9-copy p {\n    margin: 0;\n    color: var(--ru9-blue);\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: italic;\n  }\n\n  /* MOBILE (default) */\n  .ru9-copy .intro {\n    font-size: 16px;\n    font-weight: 400;\n    line-height: 140%; /* 22.4px */\n  }\n\n  .ru9-copy .tagline {\n    font-size: 16px;\n    font-weight: 700;\n    line-height: 140%; /* 22.4px */\n  }\n\n  /* DESKTOP */\n  @media (min-width: 768px) {\n    .ru9-copy .intro {\n      font-size: 27px;\n      font-weight: 600;\n      line-height: 140%; /* 37.8px */\n      padding-bottom: 30px;\n\n    }\n\n    .ru9-copy .tagline {\n      font-size: 39px;\n      font-weight: 700;\n      line-height: 53px; /* 135.897% */\n    }\n  }\n</style>\n\n<div class=\"ru9-copy\">\n  <p class=\"intro\">Từ Giấc Mơ Đến Hiện Thực:</p>\n  <p class=\"tagline\">“Hành trình mang giấc ngủ ngon đến với mọi gia đình Việt Nam”</p>\n</div>",
           "description": "",
           "image": "shopify://shop_images/cbe5cd3ffb860a0274c04630ee24b76b2c038474.png",
           "image_mobile": "shopify://shop_images/b934cc4afc79dec50dcbf7559fe732221d332a77.png",
@@ -1511,10 +1511,10 @@
         "type": "about-story",
         "settings": {
           "title": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  :root {\n    --blue: #759CE6;\n    --dark: #1C2C58;\n  }\n\n  .ru9-heading {\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-style: normal;\n    font-weight: 700;\n    line-height: 140%;\n    margin: 0;\n    text-align: left; /* mặc định mobile căn giữa */\n  }\n\n  /* MOBILE (default) */\n  .ru9-heading {\n    font-size: 20px;\n  }\n\n  .ru9-heading .blue { color: var(--blue); }\n  .ru9-heading .dark { color: var(--dark); }\n\n  /* DESKTOP */\n  @media (min-width: 768px) {\n    .ru9-heading {\n      font-size: 64px;\n      line-height: 80px;\n      text-align: left; /* căn trái trên desktop */\n    }\n\n    .ru9-heading .blue,\n    .ru9-heading .dark {\n      display: block; /* tách 2 dòng */\n    }\n  }\n</style>\n\n<p class=\"ru9-heading\">\n  <span class=\"blue\">Câu chuyện</span>\n  <span class=\"dark\">của chúng tôi</span>\n</p>",
-          "story_title": "<h3>Khởi nguồn từ giấc ngủ chưa trọn vẹn</h3>",
+          "story_title": "Khởi nguồn từ giấc ngủ chưa trọn vẹn",
           "story_content": "<p>Chắc hẳn bạn cũng từng có những đêm trằn trọc, dù nằm đủ 8 tiếng nhưng sáng dậy vẫn mệt mỏi đúng không?</p><p>Mình là Trang, Founder của Ru9, và mình cũng từng như vậy. Những năm làm việc căng thẳng khiến giấc ngủ của mình trở nên chập chờn, và mình nhận ra vấn đề không phải ngủ bao lâu, mà ngủ như thế nào mới thật sự quan trọng.</p><p>Từ mong muốn cải thiện giấc ngủ của chính mình, mình bắt đầu hành trình tìm hiểu về nệm foam, công nghệ giấc ngủ và những yếu tố ảnh hưởng đến chất lượng nghỉ ngơi. Càng nghiên cứu, mình càng nhận ra phần lớn nệm tại Việt Nam chưa đảm bảo tiêu chuẩn an toàn hay hỗ trợ đúng cách cho cơ thể.</p><p>Đó là lý do Ru9 ra đời, với khát vọng mang đến cho người Việt một giấc ngủ trọn vẹn và chất lượng hơn mỗi ngày. Ru9 cũng là công ty đầu tiên tại Việt Nam sản xuất nệm foam đóng thùng, đạt hai chứng nhận quốc tế khắt khe: CertiPUR-US® về độ an toàn và bền vững của foam, cùng STANDARD 100 by OEKO-TEX® về sự an toàn tuyệt đối cho sức khỏe người dùng.</p>",
           "mission_quote": "<!-- Font -->\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">\n<link href=\"https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@1,600&amp;display=swap\" rel=\"stylesheet\">\n\n<style>\n  .ru9-paragraph {\n    color: #000;\n    font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 140%; /* 19.6px */\n    margin: 0;\n    text-align: justify; /* tuỳ chọn, giúp đoạn trông gọn gàng hơn */\n  }\n</style>\n\n<p class=\"ru9-paragraph\">\n  Tất cả đều bắt đầu từ những đêm mất ngủ, từ những trăn trở \n  \"Tại sao hôm nay ngủ dậy vẫn mệt?\" hay \n  \"Chiếc nệm này có thực sự phù hợp chưa?\"\n</p>",
-          "mission_title": "<h4>Sứ mệnh của chúng tôi</h4>",
+          "mission_title": "Sứ mệnh của chúng tôi",
           "mission_content": "<p>Ru9 được xây dựng trên niềm tin rằng mỗi người xứng đáng có được một giấc ngủ tốt. Đó không phải là điều xa xỉ, mà là nền tảng để tái tạo năng lượng, sức khỏe và niềm hạnh phúc.</p><p><strong>\"Đơn giản để tốt hơn\"</strong> – Chúng tôi mang đến những giải pháp giấc ngủ được thiết kế tinh gọn, khoa học và tối ưu, tập trung vào những gì thực sự cần thiết để tạo nên giấc ngủ chất lượng.</p><p>Ru9 không chỉ bán sản phẩm – chúng tôi mang đến một lời hứa:</p><ul>\n<li>Một giấc ngủ ngon hơn.</li>\n<li>Một ngày mới tràn đầy năng lượng.</li>\n<li>Một cuộc sống chất lượng hơn.</li>\n</ul><p>Mỗi sản phẩm Ru9 là sự kết nối giữa công nghệ, sự sáng tạo và lòng tận tâm. Không chỉ là một sản phẩm hay một đơn hàng, mà là cam kết chăm sóc sức khỏe giấc ngủ của bạn.</p>",
           "image": "shopify://shop_images/Rectangle_213_1.png",
           "image_mobile": "shopify://shop_images/M_i_di_u_tuy_t_v_i....._4.png"
@@ -1549,7 +1549,7 @@
             "type": "about_understanding_item",
             "settings": {
               "title": "Giải pháp cho giấc ngủ, đầu tư cho cuộc sống",
-              "content": "<p>  </p><p>Ru9 không chỉ là một thương hiệu nệm, mà là người bạn đồng hành đáng tin cậy trong hành trình của bạn – từ giấc ngủ đầu tiên trên chiếc nệm riêng, những đêm dài chăm con nhỏ, đến việc chăm sóc cha mẹ già. Chúng tôi tin rằng giấc ngủ là khởi đầu của mọi điều tốt đẹp, và nhiệm vụ của Ru9 là biến giấc ngủ ấy trở nên dễ dàng, thoải mái và trọn vẹn hơn cho tất cả mọi người.<br/> </p>",
+              "content": "<p>  </p><p>Ru9 không chỉ là một thương hiệu nệm, mà là người bạn đồng hành đáng tin cậy trong hành trình của bạn – từ giấc ngủ đầu tiên trên chiếc nệm riêng, những đêm dài chăm con nhỏ, đến việc chăm sóc cha mẹ già. Chúng tôi tin rằng giấc ngủ là khởi đầu của mọi điều tốt đẹp, và nhiệm vụ của Ru9 là biến giấc ngủ ấy trở nên dễ dàng, thoải mái và trọn vẹn hơn cho tất cả mọi người.<br/></p>",
               "image": "shopify://shop_images/Rectangle_212.png",
               "svg_overlay": "",
               "reverse_layout": false
@@ -1656,7 +1656,7 @@
             "type": "about_statistic_card",
             "settings": {
               "title": "<h3>Khách hàng lớn tuổi</h3>",
-              "description": "<p>Hỗ trợ để mang lại giấc ngủ sâu hơn, cải thiện tình trạng mất ngủ, đau mỏi của người lớn tuổi.\n </p>",
+              "description": "<p>Hỗ trợ để mang lại giấc ngủ sâu hơn, cải thiện tình trạng mất ngủ, đau mỏi của người lớn tuổi.\n</p>",
               "image": "shopify://shop_images/Rectangle_217.png"
             }
           }
@@ -1778,7 +1778,7 @@
           "subtitle": "",
           "intro_content": "<p class=\"ru9-text\">\n  Tại Ru9, mỗi cột mốc là một chương của câu chuyện đầy cảm hứng.\n  Từ những bước khởi đầu đầy thách thức tại Shark Tank Việt Nam,\n  Ru9 đã kiên định đi trên con đường riêng để biến giấc mơ\n  về giấc ngủ chất lượng thành hiện thực.\n</p>",
           "story1_title": "<h3>Từ giấc mơ ngủ ngon đến hiện thực</h3>",
-          "story1_content": "<p><span>Hành trình của Ru9 bắt đầu từ một trải nghiệm cá nhân về giấc ngủ và sức khỏe, khi nhà sáng lập nhận ra tầm quan trọng của việc nghỉ ngơi chất lượng nhưng vẫn phù hợp với nhịp sống hiện đại. Từ đó, chị Trang Đặng - Nhà sáng lập kiêm CEO của Ru9 đã mang ý tưởng \"táo bạo\" này đến chương trình Shark Tank Việt Nam, đánh dấu bước ngoặt đầu tiên của thương hiệu.</span></p>\n\n<p><span>Khi thị trường vẫn quen thuộc với các kênh bán hàng lớn hay khách sạn, Ru9 đã dũng cảm hướng thẳng đến khách hàng cá nhân, đặt trọng tâm vào thế hệ trẻ hiện đại (Millennials) trước. Hiểu rằng thế hệ này khao khát một giấc ngủ chất lượng để phục hồi năng lượng, nhưng phải phù hợp với lối sống năng động của họ.</span></p>\n <p><span>Đây không chỉ là một quyết định kinh doanh, mà là lời khẳng định khi Ru9 ra đời là để định hình lại cách người Việt trải nghiệm và nhìn nhận về giấc ngủ tại chính ngôi nhà của mình, và lan tỏa điều đó đến những người thân yêu.</span></p>",
+          "story1_content": "<p><span>Hành trình của Ru9 bắt đầu từ một trải nghiệm cá nhân về giấc ngủ và sức khỏe, khi nhà sáng lập nhận ra tầm quan trọng của việc nghỉ ngơi chất lượng nhưng vẫn phù hợp với nhịp sống hiện đại. Từ đó, chị Trang Đặng - Nhà sáng lập kiêm CEO của Ru9 đã mang ý tưởng \"táo bạo\" này đến chương trình Shark Tank Việt Nam, đánh dấu bước ngoặt đầu tiên của thương hiệu.</span></p>\n\n<p><span>Khi thị trường vẫn quen thuộc với các kênh bán hàng lớn hay khách sạn, Ru9 đã dũng cảm hướng thẳng đến khách hàng cá nhân, đặt trọng tâm vào thế hệ trẻ hiện đại (Millennials) trước. Hiểu rằng thế hệ này khao khát một giấc ngủ chất lượng để phục hồi năng lượng, nhưng phải phù hợp với lối sống năng động của họ.</span></p>\n<p><span>Đây không chỉ là một quyết định kinh doanh, mà là lời khẳng định khi Ru9 ra đời là để định hình lại cách người Việt trải nghiệm và nhìn nhận về giấc ngủ tại chính ngôi nhà của mình, và lan tỏa điều đó đến những người thân yêu.</span></p>",
           "story2_title": "<h3>Vinh danh những nỗ lực tiên phong</h3>",
           "story2_content": "<p>Hành trình từ giấc mơ đến hiện thực của Ru9 đã trở thành niềm tự hào khi được cộng đồng và giới chuyên môn đón nhận. Chúng tôi vinh dự xuất hiện trên những tờ báo uy tín hàng đầu như VnExpress, Báo Thanh Niên, Báo Tuổi Trẻ hay Tạp chí Thương Gia cùng các buổi phỏng vấn trên truyền hình, nơi chia sẻ câu chuyện khởi nghiệp, lan tỏa giá trị giấc ngủ lành mạnh đến người Việt.</p>",
           "background_color": "#ffffff",
@@ -1855,7 +1855,7 @@
             "type": "about_showroom_card",
             "settings": {
               "name": "<strong>Showroom HCM 2:</strong>",
-              "address": "283A Hai Bà Trưng, Quận 3  ",
+              "address": "283A Hai Bà Trưng, Quận 3 ",
               "image": "shopify://shop_images/Rectangle_193.png"
             }
           },
@@ -1992,7 +1992,7 @@
             "type": "about_value_2_card",
             "settings": {
               "title": "<h3>Khoa học &amp; đổi mới</h3>",
-              "content": "<p>Ru9 sẽ liên tục học hỏi, nghiên cứu và ứng dụng công nghệ tiên tiến để mang những giải pháp ngủ tốt nhất đến gần hơn với người Việt.\n </p>"
+              "content": "<p>Ru9 sẽ liên tục học hỏi, nghiên cứu và ứng dụng công nghệ tiên tiến để mang những giải pháp ngủ tốt nhất đến gần hơn với người Việt.\n</p>"
             }
           }
         },
@@ -2121,7 +2121,7 @@
             "type": "award_item",
             "settings": {
               "title": "Cựu Du học sinh với Khởi nghiệp Nổi bật",
-              "description": "Chị Trang Đặng còn được vinh danh với giải thưởng “Cựu Du học sinh với Khởi nghiệp Nổi bật” tại GFF Global Future Fair do VCCI tổ chức, tôn vinh những người trở về xây dựng và đóng góp cho đất nước bằng chính trí tuệ và đam mê của mình.\n ",
+              "description": "Chị Trang Đặng còn được vinh danh với giải thưởng “Cựu Du học sinh với Khởi nghiệp Nổi bật” tại GFF Global Future Fair do VCCI tổ chức, tôn vinh những người trở về xây dựng và đóng góp cho đất nước bằng chính trí tuệ và đam mê của mình.\n",
               "image": "shopify://shop_images/Rectangle_67_1.png"
             }
           }

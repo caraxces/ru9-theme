@@ -138,7 +138,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding-left: 4rem;
+      padding-left: 5rem;
       height: 460px;
       order: unset;
     }
@@ -147,11 +147,6 @@
       flex: 0 0 auto;
       width: 301px;
       min-width: 301px;
-      order: unset;
-    }
-
-    .about-team-image {
-      flex: 0 0 600px;
       order: unset;
     }
 
@@ -204,7 +199,10 @@
 
     /* Desktop: Image styles */
     .about-team-image img {
-      width: 100%;
+      width: auto;
+      height: 440px;
+      padding-right: 5rem;
+      object-fit: cover;
       border-radius: 16px;
       box-shadow: 0 6px 18px rgba(16,38,84,.06);
     }
@@ -212,6 +210,17 @@
     /* Desktop: Section padding */
     .about-team-section .page-width {
       padding: 0;
+      position: relative;
+    }
+
+    .about-team-image {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      height: 440px;
+      display: flex;
+      align-items: center;
     }
   }
 </style>
