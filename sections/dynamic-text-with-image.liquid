@@ -45,13 +45,16 @@
   .dynamic-image-with-text .feature-row .rte p {
     color: #1c2c58;
   }
-  .dynamic-image-with-text .feature-row .text-lg {
+  .dynamic-image-with-text .feature-row .text-lg,
+  .dynamic-image-with-text .feature-row h2.text-lg {
     color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
     font-size: 39px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%; /* 46.8px */
+    margin: 0;
+    padding: 0;
   }
   @media only screen and (max-width: 768px) {
     .dynamic-image-with-text .feature-row__item--overlap-images {
@@ -76,8 +79,11 @@
       line-height: 1.5;
       color: #000;
     }
-    .dynamic-image-with-text .feature-row .text-lg {
+    .dynamic-image-with-text .feature-row .text-lg,
+    .dynamic-image-with-text .feature-row h2.text-lg {
       font-size: 20px;
+      margin: 0;
+      padding: 0;
     }
   }
   @media only screen and (min-width: 769px) {
@@ -151,9 +157,9 @@
                   </div>
                 {%- endif -%}
                 {%- if block.settings.title != blank -%}
-                  <div class="text-lg f-smb appear-delay{% cycle '','-1','-2','-3','-4' %}">
+                  <h2 class="text-lg f-smb appear-delay{% cycle '','-1','-2','-3','-4' %}">
                     {{ block.settings.title | escape }}
-                  </div>
+                  </h2>
                 {%- endif -%}
                 {%- if block.settings.text != blank -%}
                   <div class="text-sm rte appear-delay{% cycle '','-1','-2','-3','-4' %}">

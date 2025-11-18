@@ -301,10 +301,17 @@
   /* Ensure section padding is consistent */
   @media (min-width: 768px) {
     .compare-products.section-padding {
-      padding: 0 0 0 0 !important;
+      padding: 0 0 50px 0 !important;
     }
     .compare-products-header {
       margin-top: 0px !important;
+    }
+  }
+  
+  /* Mobile padding bottom */
+  @media (max-width: 767px) {
+    .compare-products.section-padding {
+      padding-bottom: 50px !important;
     }
   }
   

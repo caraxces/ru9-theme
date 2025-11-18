@@ -132,6 +132,7 @@
                     {% if link.active %}
                       data-active="true"
                     {% endif %}
+                    {% if link.url contains 'rubaby' %}rel="nofollow"{% endif %}
                   >
                     {%- assign image_link = link.object.image | default: link.object.featured_media -%}
 
@@ -217,6 +218,7 @@
                 {% if link.active %}
                   data-active="true"
                 {% endif %}
+                {% if link.url contains 'rubaby' %}rel="nofollow"{% endif %}
               >
                 {%- assign image_link = link.object.image | default: link.object.featured_media -%}
 
@@ -297,6 +299,7 @@
                             <a
                               href="{{ link.url }}"
                               class="site-nav__dropdown-link site-nav__dropdown-link--top-level js-megamenu-close "
+                              {% if link.url contains 'rubaby' %}rel="nofollow"{% endif %}
                             >
                               {{- link.title -}}
                             </a>
@@ -316,16 +319,17 @@
                                 href="{{ childlink.url }}"
                                 class="site-nav__dropdown-link site-nav__dropdown-link--top-level js-megamenu-close"
                                 style="padding: 5px; font-weight: bold;"
+                                {% if childlink.url contains 'rubaby' %}rel="nofollow"{% endif %}
                               >
                                 {{- childlink.title -}}
                               </a>
-                              <a href="{{ childlink.url }}" class="show-more-btn text-sm">
+                              <a href="{{ childlink.url }}" class="show-more-btn text-sm" {% if childlink.url contains 'rubaby' %}rel="nofollow"{% endif %}>
                                 {{ 'general.menu.show_more_btn' | t }}
                               </a>
                             </div>
                             {%- for grandchildlink in childlink.links -%}
                               <div class="megamenu__grandchild-item">
-                                <a href="{{ grandchildlink.url }}" class="site-nav__dropdown-link">
+                                <a href="{{ grandchildlink.url }}" class="site-nav__dropdown-link" {% if grandchildlink.url contains 'rubaby' %}rel="nofollow"{% endif %}>
                                   <div class="aspect-ratio" style="--width:1;--height:1">
                                     {% if grandchildlink.object.metafields.custom.menu_image -%}
                                       <img
@@ -427,6 +431,7 @@
                                 {% if childlink.active %}
                                   data-active="true"
                                 {% endif %}
+                                {% if childlink.url contains 'rubaby' %}rel="nofollow"{% endif %}
                               >
                                 {{ childlink.title | escape }}
                               </a>
@@ -462,6 +467,7 @@
                                         {% if grandchildlink.active %}
                                           data-active="true"
                                         {% endif %}
+                                        {% if grandchildlink.url contains 'rubaby' %}rel="nofollow"{% endif %}
                                       >
                                         {{ grandchildlink.title }}
                                       </a>
@@ -509,7 +515,7 @@
               <ul style="list-style: none; margin: 0; padding: 8px 0;">
                 {%- for link in toolbar_menu_1.links -%}
                   <li style="margin: 0;">
-                    <a href="{{ link.url }}" style="display: block; padding: 12px 16px; text-decoration: none; color: #333; transition: background-color 0.2s ease; font-size: 14px;">{{ link.title }}</a>
+                    <a href="{{ link.url }}" style="display: block; padding: 12px 16px; text-decoration: none; color: #333; transition: background-color 0.2s ease; font-size: 14px;" {% if link.url contains 'rubaby' %}rel="nofollow"{% endif %}>{{ link.title }}</a>
             </li>
                 {%- endfor -%}
               </ul>
@@ -523,7 +529,7 @@
             <ul class="mobile-toolbar-links" style="list-style: none; margin: 0; padding: 0; display: flex; gap: 0;">
               {%- for link in toolbar_menu_2.links -%}
                 <li>
-                  <a href="{{ link.url }}" style="text-decoration: none; color: inherit; font-weight: 500; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s ease;">{{ link.title }}</a>
+                  <a href="{{ link.url }}" style="text-decoration: none; color: inherit; font-weight: 500; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s ease;" {% if link.url contains 'rubaby' %}rel="nofollow"{% endif %}>{{ link.title }}</a>
             </li>
               {%- endfor -%}
         </ul>

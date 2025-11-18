@@ -62,6 +62,7 @@
             aria-controls="site-nav-item--{{ forloop.index }}"
             class="site-nav__link site-nav__link--hover{% if has_dropdown %} site-nav__link--has-dropdown{% endif %}{% if active_sale_lv1 contains title %} is-sale{% endif %}"
             style="{% if active_sale_lv1 contains title %}--active-sale-clr: {{ section.settings.color_active_sale.rgb }};{% endif %}"
+            {% if link.url contains 'rubaby' %}rel="nofollow"{% endif %}
           >
             {% if link.title == 'For baby' or link.title == 'Dành cho bé' %}
               <svg class="baby-icon-svg" xmlns="http://www.w3.org/2000/svg" width="60" height="20" viewBox="0 0 606.000000 200.000000" preserveAspectRatio="xMidYMid meet">
@@ -88,6 +89,7 @@
           href="{{ link.url }}"
           class="site-nav__link site-nav__link--hover{% if has_dropdown %} site-nav__link--has-dropdown{% endif %}{% if active_sale_lv1 contains title %} is-sale{% endif %}"
           style="{% if active_sale_lv1 contains title %}--active-sale-clr: {{ section.settings.color_active_sale.rgb }};{% endif %}"
+          {% if link.url contains 'rubaby' %}rel="nofollow"{% endif %}
         >
           {% if link.title == 'For baby' or link.title == 'Dành cho bé' %}
             <svg class="baby-icon-svg" xmlns="http://www.w3.org/2000/svg" width="60" height="20" viewBox="0 0 606.000000 200.000000" preserveAspectRatio="xMidYMid meet">
@@ -164,6 +166,7 @@
                         href="{{ childlink.url }}"
                         class="mega-tab mega-tab--first {% if active_sale_lv2 contains childtitle %} is-sale{% endif %}"
                         style="{% if active_sale_lv2 contains childtitle %}--active-sale-clr: {{ section.settings.color_active_sale.rgb }};{% endif %}"
+                        {% if childlink.url contains 'rubaby' %}rel="nofollow"{% endif %}
                       >
                         {{ childlink.title }}
                         {%- if select_title_first_lv2 contains childtitle -%}
@@ -221,7 +224,7 @@
                               {% assign tagline_text = grandchildlink.object.metafields.custom.tagline %}
                             {% endif %}
                           {% endif %}
-                          <a href="{{ grandchildlink.url }}" class="mega-card__link{% if active_sale_lv3 contains grandchildtitle %} is-sale{% endif %}" style="{% if active_sale_lv3 contains grandchildtitle %}--active-sale-clr: {{ section.settings.color_active_sale.rgb }};{% endif %}">
+                          <a href="{{ grandchildlink.url }}" class="mega-card__link{% if active_sale_lv3 contains grandchildtitle %} is-sale{% endif %}" style="{% if active_sale_lv3 contains grandchildtitle %}--active-sale-clr: {{ section.settings.color_active_sale.rgb }};{% endif %}" {% if grandchildlink.url contains 'rubaby' %}rel="nofollow"{% endif %}>
                             <div class="mega-card__image">
                               {% if grandchildlink.object and grandchildlink.object.featured_media %}
                                 <img src="{{ grandchildlink.object.featured_media | image_url: width: 400, height: 296, crop: 'center' }}" alt="{{ grandchildlink.title | escape }}" width="200" height="148" loading="lazy">
@@ -262,6 +265,7 @@
                 href="{{ childlink.url }}"
                 class="site-nav__dropdown-link site-nav__dropdown-link--second-level{% if has_sub_dropdown %} site-nav__dropdown-link--has-children{% endif %}{% if active_sale_lv2 contains childtitle %} is-sale{% endif %}"
                 style="{% if active_sale_lv2 contains childtitle %}--active-sale-clr: {{ section.settings.color_active_sale.rgb }};{% endif %}"
+                {% if childlink.url contains 'rubaby' %}rel="nofollow"{% endif %}
               >
                 {{ childlink.title | escape }}
                 {%- if has_sub_dropdown -%}
@@ -318,6 +322,7 @@
                         href="{{ grandchildlink.url }}"
                         class="site-nav__dropdown-link{% if active_sale_lv3 contains grandchildtitle %} is-sale{% endif %}"
                         style="{% if active_sale_lv3 contains grandchildtitle %}--active-sale-clr: {{ section.settings.color_active_sale.rgb }};{% endif %}"
+                        {% if grandchildlink.url contains 'rubaby' %}rel="nofollow"{% endif %}
                       >
                         {{ grandchildlink.title | escape }}
                         {% for title in select_title_first_lv3 %}

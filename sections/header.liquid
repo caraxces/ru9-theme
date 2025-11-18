@@ -249,6 +249,38 @@
     .site-header--opening .site-nav__dropdown {
       background-color: #ffffff !important;
     }
+
+    /* Đảm bảo nút login có thể click được khi header sticky */
+    .site-header--stuck .site-nav__link--icon.js-account-header,
+    .header-wrapper--sticky .site-nav__link--icon.js-account-header,
+    .site-header--stuck .site-nav__link--icon.js-account-header button,
+    .header-wrapper--sticky .site-nav__link--icon.js-account-header button,
+    .site-header--stuck .site-nav__link--icon.js-account-header .collapsible-trigger,
+    .header-wrapper--sticky .site-nav__link--icon.js-account-header .collapsible-trigger {
+      pointer-events: auto !important;
+      cursor: pointer !important;
+      z-index: 21 !important;
+      position: relative !important;
+    }
+
+    /* Đảm bảo dropdown hiển thị khi được toggle */
+    .site-nav__link--icon.js-account-header .collapsible-trigger.is-open + .dropdown-list,
+    .site-nav__link--icon.js-account-header .collapsible-trigger[aria-expanded="true"] + .dropdown-list,
+    .site-nav__link--icon.js-account-header.is-open .dropdown-list,
+    .site-nav__link--icon.js-account-header:hover .dropdown-list {
+      height: auto !important;
+      overflow: visible !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      z-index: 22 !important;
+    }
+
+    /* Đảm bảo dropdown có thể click được */
+    .site-nav__link--icon.js-account-header .dropdown-list,
+    .site-nav__link--icon.js-account-header .dropdown-list a {
+      pointer-events: auto !important;
+      cursor: pointer !important;
+    }
   }
 </style>
 
@@ -464,6 +496,83 @@
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Đảm bảo dropdown login hoạt động đúng trên desktop
+  const accountHeaders = document.querySelectorAll('.js-account-header');
+  
+  accountHeaders.forEach(function(accountHeader) {
+    const trigger = accountHeader.querySelector('.collapsible-trigger');
+    const dropdown = accountHeader.querySelector('.dropdown-list');
+    
+    if (trigger && dropdown) {
+      // Toggle dropdown khi click vào button
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = accountHeader.classList.contains('is-open') || 
+                      trigger.classList.contains('is-open') ||
+                      trigger.getAttribute('aria-expanded') === 'true';
+        
+        // Đóng tất cả dropdown khác
+        document.querySelectorAll('.js-account-header').forEach(function(header) {
+          if (header !== accountHeader) {
+            header.classList.remove('is-open');
+            const otherTrigger = header.querySelector('.collapsible-trigger');
+            const otherDropdown = header.querySelector('.dropdown-list');
+            if (otherTrigger) {
+              otherTrigger.classList.remove('is-open');
+              otherTrigger.setAttribute('aria-expanded', 'false');
+            }
+            if (otherDropdown) {
+              otherDropdown.style.height = '0';
+              otherDropdown.style.opacity = '0';
+              otherDropdown.style.visibility = 'hidden';
+            }
+          }
+        });
+        
+        // Toggle dropdown hiện tại
+        if (isOpen) {
+          accountHeader.classList.remove('is-open');
+          trigger.classList.remove('is-open');
+          trigger.setAttribute('aria-expanded', 'false');
+          dropdown.style.height = '0';
+          dropdown.style.opacity = '0';
+          dropdown.style.visibility = 'hidden';
+        } else {
+          accountHeader.classList.add('is-open');
+          trigger.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+          dropdown.style.height = 'auto';
+          dropdown.style.opacity = '1';
+          dropdown.style.visibility = 'visible';
+        }
+      });
+      
+      // Đóng dropdown khi click bên ngoài
+      document.addEventListener('click', function(e) {
+        if (!accountHeader.contains(e.target)) {
+          accountHeader.classList.remove('is-open');
+          const trigger = accountHeader.querySelector('.collapsible-trigger');
+          const dropdown = accountHeader.querySelector('.dropdown-list');
+          if (trigger) {
+            trigger.classList.remove('is-open');
+            trigger.setAttribute('aria-expanded', 'false');
+          }
+          if (dropdown) {
+            dropdown.style.height = '0';
+            dropdown.style.opacity = '0';
+            dropdown.style.visibility = 'hidden';
+          }
+        }
+      });
+    }
+  });
+});
+</script>
 
 {% schema %}
 {

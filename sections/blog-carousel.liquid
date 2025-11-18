@@ -153,6 +153,16 @@
   .blog-carousel-wrapper.grabbing .blog-carousel-slide {
     pointer-events: none;
   }
+  
+  /* Đảm bảo links luôn có thể click được khi không dragging */
+  .blog-carousel-slide:not(.slide-hidden) a,
+  .article-card__image-link,
+  .article-card__title a {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    z-index: 1;
+    position: relative;
+  }
   .blog-carousel-slider {
     display: flex;
     gap: 24px;
@@ -280,6 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let scrollLeft;
   let walk = 0;
   let activeTopicId = null;
+  let dragEndTime = 0; // Track when drag ended
   const dragThreshold = 5;
 
   function setEqualInfoHeight(topicId) {
@@ -353,9 +364,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function dragEnd() {
     if (!isDown) return;
+    
+    // Record drag end time before resetting
+    dragEndTime = Date.now();
+    
+    // Reset dragging state immediately
     isDown = false;
     isDragging = false;
     carouselWrapper.classList.remove('grabbing');
+    
+    // Reset walk after a short delay to allow click events
+    setTimeout(() => {
+      walk = 0;
+    }, 200);
+    
     window.removeEventListener('touchmove', dragMove);
     window.removeEventListener('touchend', dragEnd);
   }
@@ -382,13 +404,16 @@ document.addEventListener('DOMContentLoaded', function() {
   slider.querySelectorAll('.blog-carousel-slide').forEach(slide => {
     slide.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', (e) => {
-        if (isDragging) {
+        // Only prevent if currently dragging or drag just ended (< 150ms ago)
+        const timeSinceDragEnd = Date.now() - dragEndTime;
+        if (isDragging || (timeSinceDragEnd < 150 && walk !== 0)) {
           e.preventDefault();
           e.stopPropagation();
           return false;
         }
+        // Allow normal navigation
         return true;
-      });
+      }, { passive: true });
     });
   });
 

@@ -17,7 +17,7 @@
     -%}
     <div class="product__sticky-product desktop-only">
       <div class="product__sticky-content">
-        <h3 class="product__sticky-title fw-bold">{{ product.title }}</h3>
+        <p class="product__sticky-title fw-bold">{{ product.title }}</p>
         <div class="product__sticky-variants">
             <div class="label-select text-xs" data-header-option-container>
               {%- for option in product.options_with_values -%}
@@ -154,6 +154,7 @@
   
   .product__sticky-title {
     font-size: 14px;
+    font-weight: bold !important;
     margin: 0 !important;
     padding: 0;
     line-height: 1.2;

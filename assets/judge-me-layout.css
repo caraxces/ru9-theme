@@ -29,7 +29,7 @@
 }
 .jdgm-rev-widg {
     max-width: 100% !important;
-    margin: 0 auto !important; /* Center the widget block */
+    margin: 5rem auto !important; /* Center the widget block with vertical spacing */
     box-sizing: border-box !important;
     /* Mobile-first padding, based on featured-collections */
     padding: 0 20px !important;
@@ -483,6 +483,9 @@
    #RESPONSIVE STYLES
    ========================================================================== */
 @media (max-width: 768px) {
+    .jdgm-rev-widg {
+        margin: 2.5rem auto !important; /* Reduced spacing on mobile */
+    }
     .jdgm-all-reviews__summary-text--verified{
         justify-content: left !important;
     }
