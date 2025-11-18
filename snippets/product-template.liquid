@@ -2735,7 +2735,7 @@
                   {%- when 'promotion' -%}
                     <div class="product-block promotion-block-container" {{ block.shopify_attributes }}>
                       <div class="promotion-vouchers">
-                        <h3 class="promotion-title">{{ block.settings.title }}</h3>
+                        <p class="promotion-title">{{ block.settings.title }}</p>
                         {%- for i in (1..4) -%}
                           {%- capture voucher_image -%}voucher_image_{{ i }}{%- endcapture -%}
                           {%- if block.settings[voucher_image] != blank -%}
