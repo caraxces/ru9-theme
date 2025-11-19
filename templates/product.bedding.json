@@ -681,6 +681,10 @@
         "image_with_text_NFMQyg",
         "image_with_text_WAkepD"
       ],
+      "custom_css": [
+        "h2 {font-size: 32px;}",
+        "@media (max-width: 767px) {h2 {font-size: 20px; } span {font-size: 16px; }}"
+      ],
       "settings": {
         "section_width": "page-width",
         "customize_width": 1800,

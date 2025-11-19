@@ -2135,9 +2135,9 @@
       "about-achievements": {
         "type": "about-achievements",
         "settings": {
-          "quote_mark_open": "shopify://shop_images/fae434b7-f4b5-4803-9db4-2961101f9d73.jpg",
-          "quote_mark_close": "shopify://shop_images/download_4d5225cf-bed6-43fa-880b-ce0b93888882.jpg",
-          "quote": "<p>Những thành tựu này là động lực mạnh mẽ để Ru9 tiếp tục kiên định với sứ mệnh mang giấc ngủ chất lượng đến mọi nhà, kiến tạo một tương lai tốt đẹp hơn cho thế hệ mai sau.</p>",
+          "quote_mark_open": "shopify://shop_images/ngo_c_kep_-01.png",
+          "quote_mark_close": "shopify://shop_images/ngo_c_kep_-02.png",
+          "quote": "<p style=\"text-align: center;\">\n  Những thành tựu này là động lực mạnh mẽ để Ru9 tiếp tục kiên định với sứ mệnh mang giấc ngủ chất lượng đến mọi nhà, kiến tạo một tương lai tốt đẹp hơn cho thế hệ mai sau.\n</p>",
           "body_image": "shopify://shop_images/Rectangle_217_008dbf49-603a-4ef7-8784-acff94c32982.png"
         }
       }

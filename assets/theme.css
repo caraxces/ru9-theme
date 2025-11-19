@@ -11005,6 +11005,7 @@ html input[disabled] {
 }
 
 .collapsible-trigger-btn {
+  font-size: 20px;
   text-align: left;
   display: block;
   padding: 24px 12px 12px 0;
@@ -17207,6 +17208,8 @@ input[type="image"] {
 }
 
 .grid__item--sidebar .collection-filter__item {
+  font-size: 18px;
+  text-align: left;
   margin-bottom: 24px;
 }
 
@@ -17636,8 +17639,17 @@ input[type="image"] {
 
 .tag-list a,
 .tag-list label {
+  font-size: 20px;
   cursor: pointer;
   display: block;
+}
+@media (max-width: 768px){
+  .tag-list a,
+  .tag-list label {
+    font-size: 14px;
+    cursor: pointer;
+    display: block;
+  }
 }
 
 .tag-list label:hover,
@@ -21065,6 +21077,9 @@ iframe.zoid-component-frame {
   padding-right: 45px;
 }
 
+.product-single__meta .rte{
+  font-size: 18px;
+}
 @media only screen and (max-width: 768px) {
   .grid--product-images-right .product-single__meta {
     padding-right: 0;
@@ -21076,6 +21091,7 @@ iframe.zoid-component-frame {
 }
 
 .product-single__meta .rte {
+  font-size: 16px;
   text-align: left;
 }
 

@@ -359,7 +359,7 @@
   }
   .product-accordion summary {
     padding: 20px 0;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     list-style: none;
     cursor: pointer;
@@ -4006,7 +4006,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const [beforeDash, afterDash] = text.split(' - ');
         // Capitalize first letter only
         const capitalizedBeforeDash = beforeDash.charAt(0).toUpperCase() + beforeDash.slice(1).toLowerCase();
-        label.innerHTML = `<span style="font-weight: 600; color: #212121;">${capitalizedBeforeDash}</span> <span style="font-weight: 400; color: #212121;">${afterDash}</span>`;
+        label.innerHTML = `<span style="font-weight: 600; color: #212121; font-size: 16px;">${capitalizedBeforeDash}</span> <span style="font-weight: 400; color: #212121;">${afterDash}</span>`;
       }
     });
   }
