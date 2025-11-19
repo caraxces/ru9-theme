@@ -68,6 +68,13 @@
     color: {{ section.settings.text_color | default: '#ffffff' }};
     pointer-events: auto;
   }
+  /* Desktop content - show only on desktop */
+  .about-closing-content-desktop {
+    display: block;
+  }
+  .about-closing-content-mobile {
+    display: none;
+  }
   .about-closing-title {
     font-size: 39px;
     font-weight: 700;
@@ -174,6 +181,13 @@
       width: 100%;
       overflow: visible;
       position: static; /* Ensure it doesn't create positioning context */
+    }
+    /* Mobile content - show only on mobile */
+    .about-closing-content-desktop {
+      display: none;
+    }
+    .about-closing-content-mobile {
+      display: block;
     }
     .about-closing-container {
       height: 292px;
@@ -289,21 +303,55 @@
     <!-- Content Overlay (Desktop) / Content Above (Mobile) -->
     <div class="about-closing-content-wrapper">
       <div class="about-closing-content">
-        <div class="about-closing-title">{{ section.settings.title | default: 'Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày' }}</div>
-        <div class="about-closing-subtitle">{{ section.settings.subtitle | default: 'Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.' }}</div>
-        {% if section.settings.banner_svg != blank %}
-          <div class="about-closing-footer-svg">
-            <img 
-              src="{{ section.settings.banner_svg | image_url }}" 
-              alt="{{ section.settings.banner_svg.alt | escape }}"
-              width="{{ section.settings.banner_svg.width | default: 300 }}"
-              height="{{ section.settings.banner_svg.height | default: 100 }}"
-              loading="lazy"
-            >
-          </div>
-        {% elsif section.settings.footer_text != blank %}
-          <div class="about-closing-footer">{{ section.settings.footer_text }}</div>
-        {% endif %}
+        <!-- Desktop Content -->
+        <div class="about-closing-content-desktop">
+          <div class="about-closing-title">{{ section.settings.title | default: 'Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày' }}</div>
+          <div class="about-closing-subtitle">{{ section.settings.subtitle | default: 'Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.' }}</div>
+          {% if section.settings.banner_svg != blank %}
+            <div class="about-closing-footer-svg">
+              <img 
+                src="{{ section.settings.banner_svg | image_url }}" 
+                alt="{{ section.settings.banner_svg.alt | escape }}"
+                width="{{ section.settings.banner_svg.width | default: 300 }}"
+                height="{{ section.settings.banner_svg.height | default: 100 }}"
+                loading="lazy"
+              >
+            </div>
+          {% elsif section.settings.footer_text != blank %}
+            <div class="about-closing-footer">{{ section.settings.footer_text }}</div>
+          {% endif %}
+        </div>
+        
+        <!-- Mobile Content -->
+        <div class="about-closing-content-mobile">
+          <div class="about-closing-title">{{ section.settings.title_mobile | default: section.settings.title | default: 'Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày' }}</div>
+          <div class="about-closing-subtitle">{{ section.settings.subtitle_mobile | default: section.settings.subtitle | default: 'Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.' }}</div>
+          {% if section.settings.banner_svg_mobile != blank %}
+            <div class="about-closing-footer-svg">
+              <img 
+                src="{{ section.settings.banner_svg_mobile | image_url }}" 
+                alt="{{ section.settings.banner_svg_mobile.alt | escape }}"
+                width="{{ section.settings.banner_svg_mobile.width | default: 300 }}"
+                height="{{ section.settings.banner_svg_mobile.height | default: 100 }}"
+                loading="lazy"
+              >
+            </div>
+          {% elsif section.settings.footer_text_mobile != blank %}
+            <div class="about-closing-footer">{{ section.settings.footer_text_mobile }}</div>
+          {% elsif section.settings.banner_svg != blank %}
+            <div class="about-closing-footer-svg">
+              <img 
+                src="{{ section.settings.banner_svg | image_url }}" 
+                alt="{{ section.settings.banner_svg.alt | escape }}"
+                width="{{ section.settings.banner_svg.width | default: 300 }}"
+                height="{{ section.settings.banner_svg.height | default: 100 }}"
+                loading="lazy"
+              >
+            </div>
+          {% elsif section.settings.footer_text != blank %}
+            <div class="about-closing-footer">{{ section.settings.footer_text }}</div>
+          {% endif %}
+        </div>
       </div>
     </div>
     
@@ -370,27 +418,59 @@
       "label": "Mobile Closing Image (768x400px)"
     },
     {
+      "type": "header",
+      "content": "Desktop Content"
+    },
+    {
       "type": "text",
       "id": "title",
-      "label": "Closing Title",
+      "label": "Closing Title (Desktop)",
       "default": "Sau tất cả, giấc ngủ vẫn là khoảnh khắc đáng quý nhất mỗi ngày"
     },
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Closing Subtitle",
+      "label": "Closing Subtitle (Desktop)",
       "default": "Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên."
     },
     {
       "type": "text",
       "id": "footer_text",
-      "label": "Footer Text",
+      "label": "Footer Text (Desktop)",
       "default": "Chúc bạn ngủ ngon"
     },
     {
       "type": "image_picker",
       "id": "banner_svg",
-      "label": "Footer SVG (replaces footer text)"
+      "label": "Footer SVG (Desktop, replaces footer text)"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Content"
+    },
+    {
+      "type": "text",
+      "id": "title_mobile",
+      "label": "Closing Title (Mobile)",
+      "info": "Leave blank to use desktop title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle_mobile",
+      "label": "Closing Subtitle (Mobile)",
+      "info": "Leave blank to use desktop subtitle"
+    },
+    {
+      "type": "text",
+      "id": "footer_text_mobile",
+      "label": "Footer Text (Mobile)",
+      "info": "Leave blank to use desktop footer text"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_svg_mobile",
+      "label": "Footer SVG (Mobile, replaces footer text)",
+      "info": "Leave blank to use desktop banner SVG"
     },
     {
       "type": "image_picker",

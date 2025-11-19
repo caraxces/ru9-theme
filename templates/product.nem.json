@@ -83,12 +83,11 @@
         },
         "promotion_xkLgrj": {
           "type": "promotion",
+          "disabled": true,
           "settings": {
             "title": "Mã ưu đãi :",
             "enable_popup": false,
-            "voucher_image_1": "shopify://shop_images/250k-01.png",
             "popup_content_1": "",
-            "voucher_image_2": "{{ product.metafields.custom.voucher.value }}",
             "popup_content_2": "",
             "popup_content_3": "",
             "popup_content_4": ""

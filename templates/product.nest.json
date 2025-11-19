@@ -25,6 +25,7 @@
         },
         "promotion_9wmn3n": {
           "type": "promotion",
+          "disabled": true,
           "settings": {
             "title": "Mã ưu đãi",
             "enable_popup": false,

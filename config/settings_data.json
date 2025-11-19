@@ -1539,7 +1539,7 @@
             "type": "about_understanding_item",
             "settings": {
               "title": "Hiểu rằng mỗi giấc ngủ là một trải nghiệm cá nhân",
-              "content": "<p><br/>Khi bước tiếp trên hành trình của mình, Ru9 cam kết sẽ không chạy theo việc tạo ra \"nhiều hơn,\" mà sẽ tập trung vào việc tạo ra \"tốt hơn.\" Chúng tôi tiếp tục đổi mới một cách có chủ đích, mang đến những sản phẩm không chỉ cải thiện giấc ngủ mà còn nâng cao chất lượng cuộc sống.</p>",
+              "content": "<p>Khi bước tiếp trên hành trình của mình, Ru9 cam kết sẽ không chạy theo việc tạo ra \"nhiều hơn,\" mà sẽ tập trung vào việc tạo ra \"tốt hơn.\" Chúng tôi tiếp tục đổi mới một cách có chủ đích, mang đến những sản phẩm không chỉ cải thiện giấc ngủ mà còn nâng cao chất lượng cuộc sống.</p>",
               "image": "shopify://shop_images/Rectangle_214.png",
               "svg_overlay": "",
               "reverse_layout": false
@@ -1584,7 +1584,7 @@
             "settings": {
               "logo": "shopify://shop_images/e260b90ca8d1443019175c06a31fda24339dc3ad.png",
               "title": "",
-              "description": "<p><strong>STANDARD 100 by OEKO-TEX:</strong> Chứng nhận độ an toàn của vải, đảm bảo chất liệu vượt qua các kiểm định nghiêm ngặt về chất độc hại, an toàn tuyệt đối cho sức khỏe bạn và thân thiện với môi trường.</p>"
+              "description": "<strong>STANDARD 100 by OEKO-TEX:</strong> Chứng nhận độ an toàn của vải, đảm bảo chất liệu vượt qua các kiểm định nghiêm ngặt về chất độc hại, an toàn tuyệt đối cho sức khỏe bạn và thân thiện với môi trường."
             }
           },
           "certification_card_w4KUMC": {
@@ -1592,7 +1592,7 @@
             "settings": {
               "logo": "shopify://shop_images/bd7ccff17581af211e6af8e58d208c14cada30ac.png",
               "title": "",
-              "description": "<p><strong>CertiPUR-US®:</strong> Chứng nhận này khẳng định foam trong nệm Ru9 đều đảm bảo an toàn, thân thiện với môi trường và đáp ứng 6 tiêu chuẩn khắt khe về thành phần, quy trình sản xuất và khí thải.</p>"
+              "description": "<strong>CertiPUR-US®:</strong> Chứng nhận này khẳng định foam trong nệm Ru9 đều đảm bảo an toàn, thân thiện với môi trường và đáp ứng 6 tiêu chuẩn khắt khe về thành phần, quy trình sản xuất và khí thải.<p></p>"
             }
           }
         },
@@ -1685,7 +1685,7 @@
             "type": "about_customer_card",
             "settings": {
               "title": "<h3>Bác sĩ Việt Nguyễn - Chuyên khoa điều trị rối loạn giấc ngủ, Phòng khám Cơ xương khớp Medibone Hà Nội:</h3>",
-              "description": "<p>“Các vấn đề về giấc ngủ nếu kéo dài có thể ảnh hưởng trực tiếp đến sức khỏe tổng thể, đặc biệt là hệ thần kinh và cột sống. Từ góc độ y khoa, nệm foam của Ru9 với cấu trúc nâng đỡ nhiều lớp và độ đàn hồi phù hợp với cơ địa người Việt sẽ là lựa chọn đáng tin cậy cho giấc ngủ sâu và cơ thể khỏe mạnh hơn mỗi ngày”.</p>",
+              "description": "“Các vấn đề về giấc ngủ nếu kéo dài có thể ảnh hưởng trực tiếp đến sức khỏe tổng thể, đặc biệt là hệ thần kinh và cột sống. Từ góc độ y khoa, nệm foam của Ru9 với cấu trúc nâng đỡ nhiều lớp và độ đàn hồi phù hợp với cơ địa người Việt sẽ là lựa chọn đáng tin cậy cho giấc ngủ sâu và cơ thể khỏe mạnh hơn mỗi ngày”.",
               "image": "shopify://shop_images/Rectangle_192.png"
             }
           },
@@ -1693,7 +1693,7 @@
             "type": "about_customer_card",
             "settings": {
               "title": "<h3>Đặng Phước Thắng - Coach Sky với hơn 200K followers:</h3>",
-              "description": "<p>\"Recovery là 50% thành công trong fitness. Sau 6 tháng sử dụng Gối Niu, tôi cảm nhận rõ sự khác biệt với sự nâng đỡ cổ vai gáy một cách hoàn hảo của gối đã giúp tôi đi vào giấc ngủ sâu hơn. Nhờ đó, cả tinh thần và cơ bắp đều được phục hồi tốt hơn sau mỗi buổi tập căng thẳng\".\n</p>",
+              "description": "\"Recovery là 50% thành công trong fitness. Sau 6 tháng sử dụng Gối Niu, tôi cảm nhận rõ sự khác biệt với sự nâng đỡ cổ vai gáy một cách hoàn hảo của gối đã giúp tôi đi vào giấc ngủ sâu hơn. Nhờ đó, cả tinh thần và cơ bắp đều được phục hồi tốt hơn sau mỗi buổi tập căng thẳng\".",
               "image": "shopify://shop_images/Rectangle_193_9b59e571-76ed-481f-8949-5a0b895c6e87.png"
             }
           },
@@ -1831,7 +1831,7 @@
         ],
         "settings": {
           "title_line1": "Lời hứa",
-          "title_line2": "cho mỗi giấc ngủ ngon",
+          "title_line2": "cho giấc ngủ ngon",
           "description": "<p>Ru9 không chỉ bán một sản phẩm mà còn là hành trình xây dựng một cộng đồng nơi mọi người đều được tận hưởng trọn vẹn giá trị của giấc ngủ. Vì sự tin tưởng của bạn không chỉ đến từ chất lượng sản phẩm, mà còn từ sự an tâm tuyệt đối trong suốt quá trình trải nghiệm. Đó là lý do Ru9 mang đến Cam kết 5 sao uy tín:</p>",
           "background_color": "#ffffff",
           "subtitle_color": "#759ce6",
@@ -1939,9 +1939,9 @@
           "intro": "Với Ru9, một giấc ngủ tốt bắt đầu từ sự thấu hiểu. Vì vậy, Ru9 đã và đang tổ chức các workshop chuyên sâu về giấc ngủ với sự đồng hành của các chuyên gia đầu ngành, nhằm lan tỏa kiến thức khoa học và giúp cộng đồng nhân nhận giấc ngủ đúng cách hơn. Từ việc giới mà nguyên nhân gây rối loạn giấc ngủ, đến chia số những phương pháp cải thiện giấc ngủ hiệu quả và dễ áp dụng, mỗi buổi workshop đầu mang đến giá trị thiết thực, giúp người tham gia biết cách chăm sóc giấc ngủ của chính mình.<p></p>",
           "conclusion": "Những buổi chia sẻ này chỉ là một phần trong hành trình lan tỏa tri thức mà Ru9 đang không ngừng thực hiện, để mỗi người Việt hiểu rằng đầu tư cho giấc ngủ chính là đầu tư cho chất lượng sống lâu dài.",
           "image_1": "shopify://shop_images/Rectangle_226.png",
-          "image_1_caption": "Trong workshop <strong>\"Ngủ Có Phải Chuyện Nhỏ?\"</strong> tại Ru9 Showroom Grand Opening Cầu Giấy, Hà Nội",
+          "image_1_caption": "Trong workshop <strong>\"Ngủ Có Phải Chuyện Nhỏ?\"</strong> tại Ru9 Showroom Grand Opening Cầu Giấy, Hà Nội.",
           "image_2": "shopify://shop_images/Rectangle_227.png",
-          "image_2_caption": "Tại workshop <strong>\"Giải Mã Giấc Ngủ\"</strong> tại Ru9 Showroom Grand Opening Sala, Hồ Chí Minh",
+          "image_2_caption": "Tại workshop <strong>\"Giải Mã Giấc Ngủ\"</strong> tại Ru9 Showroom Grand Opening Sala, Hồ Chí Minh.",
           "background_color": "#ffffff",
           "title_color": "#1a2b4d",
           "text_color": "#333333"
@@ -1971,28 +1971,28 @@
             "type": "about_value_2_card",
             "settings": {
               "title": "<h3>Chất lượng tiên phong</h3>",
-              "content": "<p>Ru9 không dừng lại ở việc sản xuất hay bán một sản phẩm, mà còn hướng đến mục tiêu tạo nên những trải nghiệm ngủ êm ái chuẩn mực, an toàn và bền vững cho sức khỏe.</p>"
+              "content": "Ru9 không dừng lại ở việc sản xuất hay bán một sản phẩm, mà còn hướng đến mục tiêu tạo nên những trải nghiệm ngủ êm ái chuẩn mực, an toàn và bền vững cho sức khỏe."
             }
           },
           "about_value_2_card_UndXmL": {
             "type": "about_value_2_card",
             "settings": {
               "title": "<h3>Khách hàng là trung tâm</h3>",
-              "content": "<p>Từ đó, những chính sách như 100 đêm ngủ thử ra đời, đảm bảo bạn tìm được chiếc nệm hoàn hảo, chấm dứt hoàn toàn những cơn đau lưng hay cảm giác mệt mỏi mỗi sáng..</p>"
+              "content": "Từ đó, những chính sách như 100 đêm ngủ thử ra đời, đảm bảo bạn tìm được chiếc nệm hoàn hảo, chấm dứt hoàn toàn những cơn đau lưng hay cảm giác mệt mỏi mỗi sáng.<p></p>"
             }
           },
           "about_value_2_card_TXdQ8e": {
             "type": "about_value_2_card",
             "settings": {
               "title": "<h3>Trách nhiệm xã hội</h3>",
-              "content": "<p>Ru9 hướng tới việc xây dựng một cộng đồng khỏe mạnh hơn, bắt đầu từ việc nâng cao nhận thức và cải thiện giấc ngủ của từng gia đình Việt.</p>"
+              "content": "Ru9 hướng tới việc xây dựng một cộng đồng khỏe mạnh hơn, bắt đầu từ việc nâng cao nhận thức và cải thiện giấc ngủ của từng gia đình Việt.<p></p>"
             }
           },
           "about_value_2_card_4nYTGK": {
             "type": "about_value_2_card",
             "settings": {
               "title": "<h3>Khoa học &amp; đổi mới</h3>",
-              "content": "<p>Ru9 sẽ liên tục học hỏi, nghiên cứu và ứng dụng công nghệ tiên tiến để mang những giải pháp ngủ tốt nhất đến gần hơn với người Việt.\n</p>"
+              "content": "Ru9 sẽ liên tục nghiên cứu và ứng dụng công nghệ tiên tiến để mang những giải pháp ngủ tốt nhất đến gần hơn với người Việt.\n<p></p>"
             }
           }
         },
@@ -2005,10 +2005,10 @@
         "settings": {
           "quote_mark_open": "shopify://shop_images/ngo_c_kep_-01.png",
           "quote_mark_close": "shopify://shop_images/ngo_c_kep_-02.png",
-          "quote": "<p>Mỗi giá trị cốt lõi đều là nền tảng để Ru9 kiên định theo đuổi hành trình cải thiện chất lượng sống qua giấc ngủ</p>",
+          "quote": "Mỗi giá trị cốt lõi đều là nền tảng để Ru9 kiên định theo đuổi hành trình cải thiện chất lượng sống qua giấc ngủ<p></p>",
           "background_color": "#ffffff",
           "card_background_color": "#f5f5f5",
-          "title_color": "#1a2230",
+          "title_color": "#1c2c58",
           "text_color": "#5e6b85"
         }
       },
