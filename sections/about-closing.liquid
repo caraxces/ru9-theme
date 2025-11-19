@@ -8,28 +8,32 @@
     margin-bottom: 0 !important;
     overflow: visible;
     width: 100%;
+    max-width: 100vw;
   }
   .about-closing-section .page-width {
     position: relative;
     overflow: visible;
-    max-width: 100%;
+    max-width: 100vw;
+    width: 100vw;
     padding: 0;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
   }
   .about-closing-container {
     position: relative;
     height: 600px;
     overflow: visible;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 0;
+    width: 100vw;
+    max-width: 100vw;
+    margin-bottom: 120px;
     padding-bottom: 0;
   }
   .about-closing-image {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    max-width: 100vw;
     object-fit: cover;
     z-index: 1;
   }
@@ -55,29 +59,32 @@
     justify-content: flex-end;
     padding: 60px 60px 60px 0;
     pointer-events: none;
+    max-width: 100vw;
+    width: 100vw;
   }
   .about-closing-content {
-    max-width: 600px;
+    max-width: 700px;
     text-align: left;
     color: {{ section.settings.text_color | default: '#ffffff' }};
     pointer-events: auto;
   }
   .about-closing-title {
-    font-size: clamp(24px, 3vw, 2.5em);
+    font-size: 39px;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: -35px;
     color: {{ section.settings.text_color | default: '#ffffff' }};
   }
   .about-closing-subtitle {
-    font-size: clamp(14px, 1.5vw, 1em);
+    font-size: 20px;
     font-weight: 400;
     line-height: 1.8;
     margin-bottom: 5px;
+    margin-top: 30px;
     color: {{ section.settings.text_color | default: '#ffffff' }};
   }
   .about-closing-footer {
-    font-size: clamp(18px, 2vw, 1.2em);
+    font-size: 20px;
     font-weight: 400;
     font-style: italic;
     margin-top: 10px;
@@ -89,15 +96,15 @@
     display: block;
   }
   .about-closing-footer-svg {
-    margin-top: 10px;
-    text-align: right;
+    margin-top: 60px;
+    text-align: center;
   }
   .about-closing-footer-svg img {
     max-width: 100%;
     width: auto;
     height: auto;
     display: inline-block;
-    max-width: 600px;
+    max-width: 400px;
   }
   .about-closing-footer-overlay {
     position: absolute;
@@ -198,7 +205,7 @@
       height: 100% !important;
     }
     .about-closing-title {
-      font-size: 1.8em;
+      font-size: 25px;
       margin-bottom: 15px;
       color: {{ section.settings.text_color | default: '#ffffff' }};
     }
