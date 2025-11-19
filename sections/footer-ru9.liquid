@@ -64,6 +64,76 @@
         </div>
       {%- endif -%}
     </div>
+
+    <div class="footer-ru9__left-group">
+      <div class="footer-ru9__company-info">
+        <div class="company-info-item">
+          {%- if section.settings.company_name != blank -%}
+            <div class="company-label">{{ section.settings.company_name }}</div>
+          {%- endif -%}
+          <div class="company-content">
+            {%- if section.settings.tax_code != blank -%}
+              <div class="company-tax-code">Mã số thuế: {{ section.settings.tax_code }}</div>
+            {%- endif -%}
+            {%- if section.settings.company_address != blank -%}
+              <div class="company-address">{{ section.settings.company_address }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-ru9__address">
+        {%- if section.settings.addr_1 != blank -%}
+          <div class="address-item">
+            <div class="address-label">Showroom 1</div>
+            <div class="address-text rte">{{ section.settings.addr_1 }}</div>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.addr_2 != blank -%}
+          <div class="address-item">
+            <div class="address-label">Showroom 2</div>
+            <div class="address-text rte">{{ section.settings.addr_2 }}</div>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.addr_3 != blank -%}
+          <div class="address-item">
+            <div class="address-label">Showroom 3</div>
+            <div class="address-text rte">{{ section.settings.addr_3 }}</div>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.hours != blank -%}
+          <div class="address-item">
+            <div class="address-label">Giờ mở cửa</div>
+            <div class="address-text rte">{{ section.settings.hours }}</div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="footer-ru9__hotline">
+      <svg xmlns="http://www.w3.org/2000/svg" width="44" height="49" viewBox="0 0 44 49" fill="none" aria-hidden="true">
+        <g clip-path="url(#clip0_2466_3886)">
+          <path d="M25.7285 32.8604C24.7374 32.8604 23.9375 33.6761 23.9375 34.678C23.9375 35.6799 24.7374 36.4984 25.7285 36.4984C26.7197 36.4984 27.5196 35.6826 27.5196 34.678C27.5196 33.6734 26.717 32.8604 25.7285 32.8604Z" fill="#F8F6F4"/>
+          <path d="M16.3947 32.8896C15.4117 32.8896 14.6172 33.6972 14.6172 34.6936C14.6172 35.69 15.4144 36.5003 16.3947 36.5003C17.3751 36.5003 18.1723 35.6928 18.1723 34.6936C18.1723 33.6945 17.3751 32.8896 16.3947 32.8896Z" fill="#F8F6F4"/>
+          <path d="M5.50774 10.7881C2.07651 14.8395 0 20.1036 0 25.8659C0 38.6414 10.1913 48.9999 22.7608 48.9999C30.0623 48.9999 36.5585 45.5014 40.7223 40.0649L5.50774 10.7881ZM13.0516 30.087C13.0516 30.4456 13.0058 30.7357 12.7769 31.0779L12.75 31.1108C12.6988 31.1683 12.583 31.3024 12.5264 31.3763L8.54575 36.4542H13.0516V37.1742C13.0516 37.4726 12.8146 37.7135 12.521 37.7135H6.68201V37.374C6.68201 36.9579 6.78435 36.7745 6.91094 36.5802L11.1528 31.2422H6.85707V29.8954H13.0489V30.087H13.0516ZM19.4185 37.7107H18.7102C18.4193 37.7107 18.1823 37.4726 18.1796 37.1742C17.6625 37.5602 17.0376 37.7655 16.3966 37.7655C14.7268 37.7655 13.3748 36.3913 13.3748 34.6941C13.3748 32.9969 14.7295 31.6227 16.3966 31.6227C17.0376 31.6227 17.6625 31.828 18.1796 32.214V31.7951H19.4185V37.7107ZM21.8074 37.7107H20.9213C20.6763 37.7107 20.4796 37.5109 20.4796 37.2618V29.8954H21.8074V37.7107ZM25.7288 37.7709C24.0482 37.7709 22.6854 36.3858 22.6854 34.6776C22.6854 32.9695 24.0482 31.5871 25.7288 31.5871C27.4094 31.5871 28.7722 32.9722 28.7722 34.6776C28.7722 36.3831 27.4094 37.7709 25.7288 37.7709Z" fill="#F8F6F4"/>
+          <path d="M21.2394 0C14.3393 0 8.1609 3.12615 3.98633 8.05626L39.2009 37.3331C42.2039 33.4131 44.0003 28.4884 44.0003 23.134C44.0003 10.3584 33.8089 0 21.2394 0ZM36.5157 18.9321C36.0551 19.6958 35.8801 20.6512 35.0155 21.0508C33.6393 21.6859 31.7405 21.1247 30.437 20.517C27.504 19.1483 24.6249 16.3069 23.1166 13.4161C22.3571 11.9571 21.5545 9.73156 22.2494 8.12743C22.6534 7.18849 23.588 7.04614 24.3771 6.5452C24.5414 6.52056 24.6841 6.53425 24.8107 6.65469C25.4517 7.51425 26.1951 8.29715 26.8414 9.15123C27.0138 9.37844 27.1485 9.54268 26.9546 9.82464C26.6529 10.2599 25.9096 10.6459 25.8449 11.218C25.7965 11.6313 26.1196 12.1323 26.3243 12.4827C27.3505 14.2428 29.2331 16.1508 31.0133 17.1144C31.5627 17.4101 31.9398 17.6154 32.4838 17.1473C32.7397 16.9283 33.1168 16.4109 33.3619 16.2576C33.6123 16.1016 33.782 16.2494 33.9732 16.3972C34.5954 16.8763 35.2525 17.4593 35.8531 17.9767C36.004 18.1081 36.3999 18.4065 36.4941 18.5488C36.5615 18.6556 36.5588 18.8171 36.5238 18.9375L36.5157 18.9321Z" fill="#F8F6F4"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_2466_3886">
+            <rect width="44" height="49" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg>
+      <div class="footer-ru9__hotline-content">
+        <div class="footer-ru9__hotline-label">Hotline</div>
+        <div class="footer-ru9__hotline-numbers">
+          <a href="tel:1900636321">1900.636.321</a>
+          <span>-</span>
+          <a href="tel:0867770969">086.777.0969</a>
+        </div>
+      </div>
+    </div>
+
     <div class="footer-ru9__subscribe">
       {%- if section.settings.newsletter_title != blank -%}
         <div class="footer-navigate__title f-bold text-xl footer-ru9__right-title">{{ section.settings.newsletter_title }}</div>
@@ -91,90 +161,95 @@
       <div class="footer-ru9__social">
         {%- if section.settings.social_facebook_link != blank -%}
           <a href="{{ section.settings.social_facebook_link }}" class="footer-social__item" aria-label="Facebook" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12Z"/></svg>
+            {%- if section.settings.social_facebook_icon != blank -%}
+              <img 
+                src="{{ section.settings.social_facebook_icon | image_url: width: 80 }}"
+                alt="Facebook" 
+                width="40" 
+                height="40"
+                loading="lazy"
+                aria-hidden="true"
+              >
+            {%- else -%}
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12Z"/></svg>
+            {%- endif -%}
           </a>
         {%- endif -%}
         {%- if section.settings.social_zalo_link != blank -%}
           <a href="{{ section.settings.social_zalo_link }}" class="footer-social__item" aria-label="Zalo" target="_blank" rel="noopener">
-            <img 
-              src="{{ 'Icon_of_ZaloRu9.svg' | asset_url }}" 
-              alt="Zalo" 
-              width="20" 
-              height="20"
-              aria-hidden="true"
-            >
+            {%- if section.settings.social_zalo_icon != blank -%}
+              <img 
+                src="{{ section.settings.social_zalo_icon | image_url: width: 80 }}"
+                alt="Zalo" 
+                width="40" 
+                height="40"
+                loading="lazy"
+                aria-hidden="true"
+              >
+            {%- else -%}
+              <img 
+                src="{{ 'Icon_of_ZaloRu9.svg' | asset_url }}" 
+                alt="Zalo" 
+                width="40" 
+                height="40"
+                aria-hidden="true"
+              >
+            {%- endif -%}
           </a>
         {%- endif -%}
         {%- if section.settings.social_instagram_link != blank -%}
           <a href="{{ section.settings.social_instagram_link }}" class="footer-social__item" aria-label="Instagram" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6ZM18 6.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>
+            {%- if section.settings.social_instagram_icon != blank -%}
+              <img 
+                src="{{ section.settings.social_instagram_icon | image_url: width: 80 }}"
+                alt="Instagram" 
+                width="40" 
+                height="40"
+                loading="lazy"
+                aria-hidden="true"
+              >
+            {%- else -%}
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6ZM18 6.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>
+            {%- endif -%}
           </a>
         {%- endif -%}
         {%- if section.settings.social_youtube_link != blank -%}
           <a href="{{ section.settings.social_youtube_link }}" class="footer-social__item" aria-label="YouTube" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 2C5.12 20 12 20 12 20s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>
+            {%- if section.settings.social_youtube_icon != blank -%}
+              <img 
+                src="{{ section.settings.social_youtube_icon | image_url: width: 80 }}"
+                alt="YouTube" 
+                width="40" 
+                height="40"
+                loading="lazy"
+                aria-hidden="true"
+              >
+            {%- else -%}
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 2C5.12 20 12 20 12 20s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>
+            {%- endif -%}
           </a>
         {%- endif -%}
         {%- if section.settings.social_tiktok_link != blank -%}
           <a href="{{ section.settings.social_tiktok_link }}" class="footer-social__item" aria-label="TikTok" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 8.5a6.9 6.9 0 0 1-4.6-1.7v6.7a6.1 6.1 0 1 1-6.1-6.1c.3 0 .6 0 .9.1v3a3.1 3.1 0 1 0 2.2 3V2h3.1a6.9 6.9 0 0 0 4.6 4V8.5Z"/></svg>
+            {%- if section.settings.social_tiktok_icon != blank -%}
+              <img 
+                src="{{ section.settings.social_tiktok_icon | image_url: width: 80 }}"
+                alt="TikTok" 
+                width="40" 
+                height="40"
+                loading="lazy"
+                aria-hidden="true"
+              >
+            {%- else -%}
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 8.5a6.9 6.9 0 0 1-4.6-1.7v6.7a6.1 6.1 0 1 1-6.1-6.1c.3 0 .6 0 .9.1v3a3.1 3.1 0 1 0 2.2 3V2h3.1a6.9 6.9 0 0 0 4.6 4V8.5Z"/></svg>
+            {%- endif -%}
           </a>
         {%- endif -%}
       </div>
     </div>
 
-    <div class="footer-ru9__company-info">
-      <div class="company-info-item">
-        {%- if section.settings.company_name != blank -%}
-          <div class="company-label">{{ section.settings.company_name }}</div>
-        {%- endif -%}
-        <div class="company-content">
-          {%- if section.settings.tax_code != blank -%}
-            <div class="company-tax-code">Mã số thuế: {{ section.settings.tax_code }}</div>
-          {%- endif -%}
-          {%- if section.settings.company_address != blank -%}
-            <div class="company-address">{{ section.settings.company_address }}</div>
-          {%- endif -%}
-        </div>
-      </div>
-      <div class="company-hotline">
-        <div class="company-label">Hotline</div>
-        <div class="company-hotline-numbers">
-          <a href="tel:1900636321">1900.636.321</a>
-          <span>-</span>
-          <a href="tel:0867770969">086.777.0969</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-ru9__address">
-      {%- if section.settings.addr_1 != blank -%}
-        <div class="address-item">
-          <div class="address-label">Showroom 1</div>
-          <div class="address-text rte">{{ section.settings.addr_1 }}</div>
-        </div>
-      {%- endif -%}
-      {%- if section.settings.addr_2 != blank -%}
-        <div class="address-item">
-          <div class="address-label">Showroom 2</div>
-          <div class="address-text rte">{{ section.settings.addr_2 }}</div>
-        </div>
-      {%- endif -%}
-      {%- if section.settings.addr_3 != blank -%}
-        <div class="address-item">
-          <div class="address-label">Showroom 3</div>
-          <div class="address-text rte">{{ section.settings.addr_3 }}</div>
-        </div>
-      {%- endif -%}
-      {%- if section.settings.hours != blank -%}
-        <div class="address-item">
-          <div class="address-label">Giờ mở cửa</div>
-          <div class="address-text rte">{{ section.settings.hours }}</div>
-        </div>
-      {%- endif -%}
-    </div>
-
-    <div class="footer-ru9__links">
+    <div class="footer-ru9__right-group">
+      <div class="footer-ru9__links">
       <div class="footer-ru9__columns">
       {%- for block in section.blocks -%}
         {%- if block.type == 'column' -%}
@@ -184,6 +259,7 @@
           </div>
         {%- endif -%}
       {%- endfor -%}
+      </div>
       </div>
     </div>
 
@@ -224,20 +300,64 @@
       .footer-ru9__inner {
         display: grid;
         grid-template-columns: 1fr 1.4fr;
-        grid-template-rows: auto auto 1fr;
+        grid-template-rows: auto auto auto 1fr;
         grid-template-areas:
-          "logos subscribe"
-          "company-info subscribe"
-          "address links"
+          "logos hotline"
+          "left-group subscribe"
+          "left-group right-group"
           "badges badges";
-        gap: 28px 100px;
-        align-items: start;
+        gap: 28px 150px;
+        align-items: end;
       }
       .footer-ru9__logos { grid-area: logos; }
-      .footer-ru9__subscribe { grid-area: subscribe; }
-      .footer-ru9__company-info { grid-area: company-info; }
-      .footer-ru9__address { grid-area: address; }
-      .footer-ru9__links { grid-area: links; }
+      .footer-ru9__hotline { 
+        grid-area: hotline; 
+        align-self: flex-start;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .footer-ru9__subscribe { 
+        grid-area: subscribe;
+        align-self: flex-start;
+      }
+      .footer-ru9__left-group {
+        grid-area: left-group;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        align-self: flex-end;
+        gap: 0;
+      }
+      .footer-ru9__right-group {
+        grid-area: right-group;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        align-self: flex-end;
+        gap: 0;
+      }
+      .footer-ru9__left-group .footer-ru9__address {
+        margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .footer-ru9__left-group .footer-ru9__company-info {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      .footer-ru9__right-group .footer-ru9__links {
+        margin-top: 0;
+      }
+      .footer-ru9__links { 
+        width: 100%;
+        padding-right: 0;
+        margin-right: -40px;
+      }
+      @media screen and (min-width: 1200px) {
+        .footer-ru9__links {
+          margin-right: -5rem;
+        }
+      }
       .footer-ru9__badges { grid-area: badges; }
       .footer-ru9__logos, .footer-ru9__subscribe { margin-bottom: 12px; }
     }
@@ -251,7 +371,7 @@
         justify-content: flex-start;
       }
       .footer-ru9__logo-partner {
-        margin-left: 80px;
+        margin-left: 20px;
       }
     }
     .footer-ru9__logo-ru9, .footer-ru9__logo-partner-image {
@@ -268,7 +388,12 @@
       object-fit: contain;
     }
     .footer-ru9__logo-ru9 svg path { fill: #fff; }
-    .footer-ru9__subscribe { display: flex; flex-direction: column; width: 100%; height: auto; padding-right: 65px; align-items: flex-start; }
+    .footer-ru9__subscribe { display: flex; flex-direction: column; width: 100%; height: auto; align-items: flex-start; }
+    @media (min-width: 961px) {
+      .footer-ru9__subscribe {
+        padding-right: 65px;
+      }
+    }
     .footer-ru9__logo-partner {
       display: flex;
       flex-direction: column;
@@ -325,8 +450,8 @@
     
     .newsletter-submit-btn {
       display: flex;
-      min-width: 200px;
-      width: 200px;
+      min-width: 220px;
+      width: 220px;
       height: 44px;
       padding: 13px 10px;
       flex-direction: column;
@@ -365,6 +490,7 @@
       display: grid;
       grid-template-columns: 137px 1fr;
       gap: 12px;
+      padding-bottom: 50px;
       align-items: start;
       width: 100%;
     }
@@ -395,32 +521,59 @@
       line-height: 150%;
       margin: 0;
     }
-    .footer-ru9__company-info .company-hotline {
-      margin-top: 12px;
-      display: grid;
-      grid-template-columns: 137px 1fr;
-      gap: 12px;
-      align-items: center;
+    .footer-ru9__hotline {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-right: 65px;
+    }
+    @media (min-width: 961px) {
+      .footer-ru9__hotline {  
+        margin-top: 60px;
+        margin-bottom: 28px;
+        padding-right: 65px;
+      }
+    }
+    .footer-ru9__hotline svg {
+      flex-shrink: 0;
+      width: 44px;
+      height: 49px;
+    }
+    .footer-ru9__hotline-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-ru9__hotline-label {
       color: #FFF;
       font-family: "Be Vietnam Pro", sans-serif;
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      margin: 0;
     }
-    .footer-ru9__company-info .company-hotline-numbers {
+    .footer-ru9__hotline-numbers {
       display: flex;
       gap: 8px;
       align-items: center;
       flex-wrap: wrap;
+      color: #FFF;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 150%;
     }
-    .footer-ru9__company-info .company-hotline-numbers a {
+    .footer-ru9__hotline-numbers a {
       color: inherit;
       text-decoration: none;
     }
-    .footer-ru9__company-info .company-hotline-numbers a:hover {
+    .footer-ru9__hotline-numbers a:hover {
       text-decoration: underline;
     }
     .footer-ru9__address { display: inline-flex; padding: 4px 0 28px 0; flex-direction: column; align-items: flex-start; gap: 31px; }
-    .footer-ru9__address .address-item { display: grid; grid-template-columns: 137px 1fr; gap: 12px; align-items: start; }
+    .footer-ru9__address .address-item { display: grid; grid-template-columns: 137px 1fr; gap: 12px; align-items: start; padding-top: 20px; }
     .footer-ru9__address .address-label {
       color: #FFF;
       font-family: "Be Vietnam Pro", sans-serif;
@@ -437,8 +590,13 @@
     .footer-ru9__address .address-text { margin: 0; color: #fff; width: 426px; font-size: 18px }
     .footer-ru9__address .address-text p { margin: 0; color: #fff; }
     .footer-ru9__social { display: flex; gap: 16px; margin-top: 12px; }
-    .footer-ru9__social .footer-social__item { width: 40px; height: 40px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: #fff; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.5); }
-    .footer-ru9__columns { width: 100%; max-width: 588px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .footer-ru9__social .footer-social__item { width: 40px; height: 40px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: #fff; text-decoration: none; border: none; }
+    .footer-ru9__columns { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    @media (min-width: 961px) {
+      .footer-ru9__columns {
+        max-width: 100%;
+      }
+    }
     .footer-ru9__col-title { font-weight: 700; font-size: 20px; margin-bottom: 12px; color: #fff; }
     .footer-ru9__col-content {
       display: grid;
@@ -459,10 +617,29 @@
         align-items: flex-start;
         justify-content: normal;
       }
-      .footer-ru9__company-info { order: 3; }
-      .footer-ru9__subscribe { order: 4; padding-right: 0; }
-      .footer-ru9__address { order: 5; }
-      .footer-ru9__badges { order: 6; }
+      .footer-ru9__left-group { 
+        order: 3; 
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .footer-ru9__left-group .footer-ru9__company-info { order: 1; }
+      .footer-ru9__left-group .footer-ru9__address { 
+        order: 2; 
+        padding-top: 28px;
+      }
+      .footer-ru9__hotline { order: 4; }
+      .footer-ru9__subscribe { order: 5; padding-right: 0; }
+      .footer-ru9__right-group { 
+        order: 6; 
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .footer-ru9__right-group .footer-ru9__links { 
+        margin-top: 0;
+      }
+      .footer-ru9__badges { order: 7; }
 
       .footer-ru9__columns { grid-template-columns: 1fr; gap: 32px; }
       .footer-ru9__address .address-text { width: auto; }
@@ -472,8 +649,16 @@
       .footer-ru9__company-info .company-content { width: auto; }
       .footer-ru9__company-info .company-tax-code,
       .footer-ru9__company-info .company-address { font-size: 14px; }
-      .footer-ru9__company-info .company-hotline { grid-template-columns: 1fr; font-size: 14px; }
-      .footer-ru9__company-info .company-hotline .company-label { width: auto; }
+      .footer-ru9__hotline {
+        padding-right: 0;
+        margin-bottom: 24px;
+      }
+      .footer-ru9__hotline svg {
+        width: 32px;
+        height: 36px;
+      }
+      .footer-ru9__hotline-label { font-size: 14px; }
+      .footer-ru9__hotline-numbers { font-size: 14px; }
       .footer-ru9__col-content {
         grid-template-rows: repeat(4, auto);
         grid-auto-flow: column;
@@ -776,11 +961,17 @@ document.addEventListener('DOMContentLoaded', function() {
     { "type": "textarea", "id": "company_address", "label": "Địa chỉ công ty", "default": "39 Đinh Công Tráng, Phường Tân Định, Thành phố Hồ Chí Minh, Việt Nam" },
     { "type": "header", "content": "Địa chỉ & giờ mở cửa" },
     { "type": "text", "id": "newsletter_title", "label": "Tiêu đề newsletter", "default": "NHẬN THÔNG TIN ƯU ĐÃI TỪ RU9" },
+    { "type": "header", "content": "Social Media Links & Icons" },
     { "type": "url", "id": "social_facebook_link", "label": "Facebook URL" },
-    { "type": "url", "id": "social_instagram_link", "label": "Instagram URL" },
-    { "type": "url", "id": "social_youtube_link", "label": "YouTube URL" },
-    { "type": "url", "id": "social_tiktok_link", "label": "TikTok URL" },
+    { "type": "image_picker", "id": "social_facebook_icon", "label": "Facebook Icon (tùy chọn, để trống sẽ dùng icon mặc định)" },
     { "type": "url", "id": "social_zalo_link", "label": "Zalo URL" },
+    { "type": "image_picker", "id": "social_zalo_icon", "label": "Zalo Icon (tùy chọn, để trống sẽ dùng icon mặc định)" },
+    { "type": "url", "id": "social_instagram_link", "label": "Instagram URL" },
+    { "type": "image_picker", "id": "social_instagram_icon", "label": "Instagram Icon (tùy chọn, để trống sẽ dùng icon mặc định)" },
+    { "type": "url", "id": "social_youtube_link", "label": "YouTube URL" },
+    { "type": "image_picker", "id": "social_youtube_icon", "label": "YouTube Icon (tùy chọn, để trống sẽ dùng icon mặc định)" },
+    { "type": "url", "id": "social_tiktok_link", "label": "TikTok URL" },
+    { "type": "image_picker", "id": "social_tiktok_icon", "label": "TikTok Icon (tùy chọn, để trống sẽ dùng icon mặc định)" },
     { "type": "richtext", "id": "addr_1", "label": "Địa chỉ 1" },
     { "type": "richtext", "id": "addr_2", "label": "Địa chỉ 2" },
     { "type": "richtext", "id": "addr_3", "label": "Địa chỉ 3" },

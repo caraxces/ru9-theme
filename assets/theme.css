@@ -14819,7 +14819,7 @@ details[open] > .site-nav__dropdown {
 }
 
 .breadcrumb {
-  font-size: calc(var(--typeBaseSize) * 0.9375);
+  font-size: 16px;
   line-height: 1.4;
   display: flex;
   overflow-x: auto;
