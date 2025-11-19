@@ -25,8 +25,8 @@
             "link_text_2": "",
             "color_accent": "#000000",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/web_11.11_f3354b7f-397a-4547-94f4-5d725bcfbf5c.png",
-            "image_mobile": "shopify://shop_images/11.11-web-banner_d875aa57-27a7-4d2a-a6ed-7d9b7980eed3.png",
+            "image": "shopify://shop_images/Banner_Web-PC.png",
+            "image_mobile": "shopify://shop_images/Banner_Web-Mobile.png",
             "overlay_opacity": 0
           }
         },
