@@ -67,6 +67,7 @@
     "collection_grid_image": "product",
     "cart_icon": "cart",
     "cart_additional_buttons": true,
+    "cart_free_shipping_enable": false,
     "cart_free_shipping_icon": "shopify://shop_images/Layer_1_4.svg",
     "cart_warranty_icon": "shopify://shop_images/Layer_1_5.svg",
     "cart_cross_sell_products": [
@@ -1529,7 +1530,7 @@
           "quote": "Tại Ru9, chúng tôi tin rằng mọi giấc mơ đều xứng đáng được nâng niu.",
           "content_paragraph1": "Đó không chỉ là giấc mơ về một giấc ngủ ngon trọn vẹn cho các khách hàng, mà còn là hoài bão và khát vọng của mỗi thành viên trong đại gia đình Ru9.",
           "content_paragraph2": "Văn hóa Ru9 được xây dựng dựa trên sự gắn kết và thấu hiểu. Trong khi đội ngũ văn phòng tập trung nghiên cứu, sáng tạo và hoàn thiện sản phẩm, đội ngũ showroom luôn mang đến những trải nghiệm gần gũi và chân thật nhất cho khách hàng.",
-          "image": "shopify://shop_images/M_i_di_u_tuy_t_v_i....._5.png"
+          "image": "shopify://shop_images/11_19a96331-ab29-430e-8899-b382d20c2b51.jpg"
         }
       },
       "about-understanding": {
@@ -1893,6 +1894,9 @@
           "subtitle": "Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn <br> hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn <br> mong muốn đồng hành để mỗi ngày của bạn được <br>kết thúc bằng sự dễ chịu, an yên.",
           "footer_text": "",
           "banner_svg": "shopify://shop_images/chuc_b_n_ng_ngon.svg",
+          "title_mobile": "<h2 class=\"sleep-edu-title\" style=\"border-bottom: none;\">   Sau tất cả, <br>giấc ngủ vẫn là khoảnh khắc<br> đáng quý nhất mỗi ngày </h2>",
+          "subtitle_mobile": "Dù bạn ở đâu trong căn phòng nhỏ, giữa phố thị bận rộn hay đang tận hưởng thời gian bên gia đình thì Ru9 luôn mong muốn đồng hành để mỗi ngày của bạn được kết thúc bằng sự dễ chịu, an yên.",
+          "footer_text_mobile": "",
           "footer_svg_position_x": 0,
           "footer_svg_position_y": -20,
           "footer_svg_position_x_mobile": 20,
