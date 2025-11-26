@@ -123,8 +123,10 @@
                     <div class="cc-price-row">
                       <div class="cc-price">
                         {%- if product.compare_at_price > product.price -%}
+                          {%- assign discount_amount = product.compare_at_price | minus: product.price -%}
+                          {%- assign discount_percentage = discount_amount | times: 100.0 | divided_by: product.compare_at_price | round: 0 -%}
                           <span class="cc-price__current">Từ {{ product.price | money }}</span>
-                          <div class="cc-price__discount">-{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | round: 0 }}%</div>
+                          <div class="cc-price__discount">-{{ discount_percentage }}%</div>
                         {%- else -%}
                           <span class="cc-price__current">Từ {{ product.price | money }}</span>
                         {%- endif -%}
