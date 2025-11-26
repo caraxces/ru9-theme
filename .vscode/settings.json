@@ -1,0 +1,24 @@
+{
+    // Disable format on save for Liquid files
+    "[liquid]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": null
+    },
+    // Disable CSS formatting inside Liquid files
+    "files.associations": {
+        "*.liquid": "liquid"
+    },
+    // Prevent auto-formatting of embedded CSS/JS in Liquid
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    // Liquid-specific settings
+    "liquid.format.enable": false,
+    // CSS settings - but don't apply to Liquid files
+    "[css]": {
+        "editor.formatOnSave": true
+    },
+    // JavaScript settings - but don't apply to Liquid files  
+    "[javascript]": {
+        "editor.formatOnSave": true
+    }
+}

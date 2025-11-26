@@ -1,0 +1,7 @@
+# Ignore all Liquid files to prevent CSS formatting issues
+*.liquid
+snippets/**/*.liquid
+sections/**/*.liquid
+templates/**/*.liquid
+layout/**/*.liquid
+

@@ -21402,19 +21402,6 @@ html[dir="rtl"] .product-single__meta .rte {
 .product__thumb-item a:focus {
   outline: none;
 }
-.product__thumb-item a.is-active:before,
-.product__thumb-item a:focus:before {
-  bottom: 0;
-  box-shadow: inset 0 0 0 2px #1C2C58;
-  content: "";
-  display: block;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 1;
-  border-radius: 1px;
-}
 
 .product__thumb-item a:active:before {
   content: none;

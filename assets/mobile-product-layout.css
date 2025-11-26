@@ -1,19 +1,17 @@
-/* ========================================
+/* /* ========================================
    MOBILE PRODUCT LAYOUT - CONFLICT RESOLVER
    ======================================== */
-
 /* Mobile-only rules to resolve layout conflicts */
 @media screen and (max-width: 768px) {
-  
+
   /* DEBUG: Mobile product images - simplified approach */
   .product__main-photos {
     height: 390px !important;
     width: calc(100% + 32px) !important;
-    margin-left: -16px !important;
-    margin-right: -16px !important;
     position: relative !important;
     overflow: hidden !important;
-    display: block !important; /* Added this to ensure it's not flex or grid causing issues */
+    display: block !important;
+    /* Added this to ensure it's not flex or grid causing issues */
   }
 
   .product__photos img {
@@ -29,7 +27,8 @@
     position: relative !important;
     overflow: hidden !important;
     display: block !important;
-    background-color: #f8f8f8 !important; /* Placeholder background */
+    background-color: #f8f8f8 !important;
+    /* Placeholder background */
   }
 
   /* ALL IMAGE CONTAINERS USE SAME PLACEHOLDER */
@@ -39,9 +38,11 @@
   .product__main-photos .product-slideshow .image-wrap.loaded,
   .product__main-photos [data-product-photos] .image-wrap,
   .product__main-photos .product-main-slide .image-wrap {
-    height: 390px !important; /* Fixed placeholder height */
+    height: 390px !important;
+    /* Fixed placeholder height */
     width: 100% !important;
-    position: absolute !important; /* All images in same position */
+    position: absolute !important;
+    /* All images in same position */
     top: 0 !important;
     left: 0 !important;
     padding-bottom: 0 !important;
@@ -59,7 +60,8 @@
   .product__main-photos .product-slideshow .image-wrap .media--image,
   .product__main-photos [data-product-photos] .image-wrap img,
   .product__main-photos .product-main-slide .image-wrap img {
-    height: 390px !important; /* Fill placeholder exactly */
+    height: 390px !important;
+    /* Fill placeholder exactly */
     width: 100% !important;
     object-fit: cover !important;
     position: absolute !important;
@@ -83,7 +85,8 @@
   .product__main-photos .product-main-slide,
   .product__main-photos .product-slideshow,
   .product__main-photos [data-product-photos] {
-    height: 390px !important; /* Same as placeholder */
+    height: 390px !important;
+    /* Same as placeholder */
     width: 100% !important;
     position: relative !important;
     display: block !important;
@@ -113,7 +116,8 @@
   .product__main-photos .product-slideshow .media--image,
   .product__main-photos [data-product-photos] img,
   .product__main-photos [data-product-photos] .media--image {
-    height: 390px !important; /* Fill placeholder exactly */
+    height: 390px !important;
+    /* Fill placeholder exactly */
     width: 100% !important;
     object-fit: cover !important;
     position: absolute !important;
@@ -130,10 +134,12 @@
     gap: 8px !important;
     overflow-x: scroll !important;
     -webkit-overflow-scrolling: touch !important;
-    padding: 0 16px 20px 16px !important; /* Match main image padding */
+    padding: 0 16px 20px 16px !important;
+    /* Match main image padding */
     margin: 0 !important;
-    width: calc(100% + 32px) !important; /* Match main image width */
-    margin-left: -16px !important; /* Align with main image */
+    width: calc(100% + 32px) !important;
+    /* Match main image width */
+    /* Align with main image */
     margin-right: -16px !important;
   }
 
@@ -141,8 +147,7 @@
   .product__thumbs,
   .product__thumbs--below,
   .product__thumbs--scroller {
-    width: calc(100% + 32px) !important; /* Match main image width */
-    margin-left: -16px !important; /* Align with main image */
+    width: calc(100% + 32px) !important;
     margin-right: -16px !important;
     padding: 0 !important;
   }
@@ -296,7 +301,8 @@
   .product__main-photos [data-product-photos] img,
   .product__main-photos .product-main-slide img {
     width: 100% !important;
-    height: 390px !important; /* Fill placeholder exactly */
+    height: 390px !important;
+    /* Fill placeholder exactly */
     object-fit: cover !important;
     display: block !important;
     visibility: visible !important;
@@ -350,17 +356,17 @@
     height: 4px !important;
     display: block !important;
   }
-  
+
   .product__thumbs--scroller::-webkit-scrollbar-track {
     background: #F0F1EF !important;
     border-radius: 2px !important;
   }
-  
+
   .product__thumbs--scroller::-webkit-scrollbar-thumb {
     background: #234085 !important;
     border-radius: 2px !important;
   }
-  
+
   .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
     background: #1a2f6b !important;
   }
