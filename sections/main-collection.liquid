@@ -1,6 +1,5 @@
 {%- liquid
   assign current_filter_size = 0
-
   for filter in collection.filters
     assign current_filter_size = current_filter_size | plus: filter.active_values.size
   endfor
@@ -15,77 +14,148 @@
   endif
 -%}
 
-<div
-  class="collection-content{% if section.settings.enable_sidebar %} enable-sidebar{% endif %}{% if section.settings.enable_sort %} enable-sort{% endif %}"
-  data-section-id="{{ section.id }}"
-  data-section-type="collection-grid"
->
+<div class="collection-content collection-content--custom{% if section.settings.enable_sidebar %} enable-sidebar{% endif %}{% if section.settings.enable_sort %} enable-sort{% endif %}" data-section-id="{{ section.id }}">
   <div id="CollectionAjaxContent">
-    <div
-      class="page-width"
-      style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
-    >
+    <div class="page-width" style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}">
       <div class="grid">
         <div class="grid__item grid__item--sidebar">
-          {%- render 'collection-grid-filters',
-            collection: collection,
-            enable_sidebar: section.settings.enable_sidebar,
-            filter_style: section.settings.filter_style,
-            collapsed: section.settings.collapsed,
-            enable_sort: section.settings.enable_sort,
-            enable_collection_count: section.settings.enable_collection_count,
-            enable_color_swatches: section.settings.enable_color_swatches,
-            enable_swatch_labels: section.settings.enable_swatch_labels
+          {%- render 'collection-grid-filters'
+            ,
+ collection: collection
+            ,
+ enable_sidebar: section.settings.enable_sidebar
+            ,
+ filter_style: section.settings.filter_style
+            ,
+ collapsed: section.settings.collapsed
+            ,
+ enable_sort: section.settings.enable_sort
+            ,
+ enable_collection_count: section.settings.enable_collection_count
+            ,
+ enable_color_swatches: section.settings.enable_color_swatches
+            ,
+ enable_swatch_labels: section.settings.enable_swatch_labels
           -%}
         </div>
-        <div class="grid__item grid__item--content" id="ProductGridContainer" data-id="{{ section.id }}">
-          {%- liquid
-            for block in section.blocks
-              case block.type
-                when 'product_grid'
-                  assign paginate_by = block.settings.per_row | times: block.settings.rows_per_page
-              endcase
-            endfor
-          -%}
+        <div
+          class="grid__item grid__item--content"
+          id="ProductGridContainer"
+          data-id="{{ section.id }}">
+          {%- assign paginate_by = section.settings.per_row | times: section.settings.rows_per_page -%}
           {%- paginate collection.products by paginate_by -%}
-            {%- for block in section.blocks -%}
-              <div
-                {{ block.shopify_attributes }}
-                {%- if block.type == 'product-grid' -%}
-                  data-scroll-to
-                {%- endif -%}
-              >
-                {%- case block.type -%}
-                  {%- when 'collection_description' -%}
-                    {%- if collection.description != blank and current_filter_size == 0 -%}
-                      <div class="rte collection__description">
-                        {{ collection.description }}
+
+            <div class="cc-grid">
+              {%- for product in collection.products -%}
+                {%- assign featured_image = product.featured_image | default: product.images.first -%}
+                {%- assign is_new = false -%}
+                {%- assign is_best_seller = false -%}
+                {%- assign is_top_rated = false -%}
+
+                {%- comment -%} Check product tags for badges {%- endcomment -%}
+                {%- for tag in product.tags -%}
+                  {%- if tag == 'new' or tag == 'New' -%}
+                    {%- assign is_new = true -%}
+                  {%- elsif tag == 'best-seller' or tag == 'Best Seller' -%}
+                    {%- assign is_best_seller = true -%}
+                  {%- elsif tag == 'top-rated' or tag == 'Top rated' -%}
+                    {%- assign is_top_rated = true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                <div class="cc-card">
+                  <div class="cc-image-container">
+                    <a
+                      class="cc-image"
+                      href="{{ product.url }}"
+                      aria-label="{{ product.title }}">
+                      {%- if featured_image -%}
+                        <img
+                          src="{{ featured_image | image_url: width: 760, height: 568, crop: 'center' }}"
+                          srcset="{{ featured_image | image_url: width: 760, height: 568, crop: 'center' }} 2x, {{ featured_image | image_url: width: 380, height: 284, crop: 'center' }} 1x"
+                          width="380"
+                          height="284"
+                          loading="lazy"
+                          alt="{{ featured_image.alt | escape }}">
+                      {%- endif -%}
+                    </a>
+
+                    {%- comment -%} Product badges {%- endcomment -%}
+                    {%- if is_top_rated -%}
+                      <div class="cc-badge cc-badge--top-rated">Top rated</div>
+                    {%- elsif is_best_seller -%}
+                      <div class="cc-badge cc-badge--best-seller">Best Seller</div>
+                    {%- elsif is_new -%}
+                      <div class="cc-badge cc-badge--new">New</div>
+                    {%- endif -%}
+                  </div>
+
+                  <div class="cc-content">
+                    {%- comment -%} Rating stars {%- endcomment -%}
+                    <div class="cc-rating">
+                      {%- assign rating = product.metafields.reviews.rating.value -%}
+                      <div class="cc-stars">
+                        <span class="cc-star">★</span>
+                        <span class="cc-star">★</span>
+                        <span class="cc-star">★</span>
+                        <span class="cc-star">★</span>
+                        <span class="cc-star">★</span>
                       </div>
-                    {%- endif -%}
-                  {%- when 'subcollections' -%}
-                    {%- if paginate.current_page == 1 and current_filter_size == 0 -%}
-                      {%- render 'subcollections', per_row: block.settings.subcollections_per_row -%}
-                    {%- endif -%}
-                  {%- when 'product_grid' -%}
-                    <div data-scroll-to>
-                      {% render 'collection-grid',
-                        collection: collection,
-                        items: collection.products,
-                        enable_sidebar: section.settings.enable_sidebar,
-                        filter_style: section.settings.filter_style,
-                        show_product_description: block.settings.show_product_description,
-                        product_grid_image_size: block.settings.product_grid_image_size,
-                        per_row: block.settings.per_row,
-                        mobile_flush_grid: block.settings.mobile_flush_grid,
-                        quick_shop_enable: settings.quick_shop_enable
-                      %}
-                      {%- if paginate.pages > 1 -%}
-                        {%- render 'pagination', paginate: paginate -%}
+                      {%- if rating and product.metafields.reviews.rating_count > 0 -%}
+                        <span class="cc-rating-text">{{ 5 }} ({{ product.metafields.reviews.rating_count }} đánh giá)</span>
                       {%- endif -%}
                     </div>
-                {%- endcase -%}
-              </div>
-            {%- endfor -%}
+
+                    <h3 class="cc-title">
+                      <a href="{{ product.url }}">{{ product.title }}</a>
+                    </h3>
+
+                    <div class="cc-description">
+                      {%- if product.metafields.custom.subdes.value != blank -%}
+                        {{ product.metafields.custom.subdes.value | strip_html | truncate: 60 }}
+                      {%- elsif product.description != blank -%}
+                        {{ product.description | strip_html | truncate: 60 }}
+                      {%- else -%}
+                        Sản phẩm chất lượng cao với thiết kế hiện đại, phù hợp cho mọi không gian sống.
+                      {%- endif -%}
+                    </div>
+
+                    <div class="cc-price-row">
+                      <div class="cc-price">
+                        {%- if product.compare_at_price > product.price -%}
+                          <span class="cc-price__current">Từ {{ product.price | money }}</span>
+                          {%- assign sale_percentage = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                          <div class="cc-price__discount">-{{ sale_percentage }}%</div>
+                        {%- else -%}
+                          <span class="cc-price__current">Từ {{ product.price | money }}</span>
+                        {%- endif -%}
+                      </div>
+                    </div>
+
+                    <div class="cc-compare-price-container">
+                      {%- if product.compare_at_price > product.price -%}
+                        <div class="cc-compare-price">{{ product.compare_at_price | money }}</div>
+                      {%- else -%}
+                        <div class="cc-compare-price cc-compare-price--empty"></div>
+                      {%- endif -%}
+                    </div>
+
+                    <div class="cc-actions">
+                      <button
+                        class="cc-buy-now"
+                        type="button"
+                        onclick="window.location.href='{{ product.url }}'">Thêm vào giỏ hàng</button>
+                    </div>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- if paginate.pages > 1 -%}
+              {%- render 'pagination'
+                , paginate: paginate -%}
+            {%- endif -%}
+
           {%- endpaginate -%}
         </div>
       </div>
@@ -94,216 +164,749 @@
 </div>
 
 {%- if section.settings.enable_sidebar == false
-  or section.settings.filter_style == 'drawer'
-  or collection.filters.size == 0
+ or section.settings.filter_style == 'drawer'
+ or collection.filters.size == 0
 -%}
-  {% comment %}
-    Override grid styles if sidebar is disabled
-  {% endcomment %}
   {% style %}
-    .collection-content .grid__item--sidebar {
+    .collection-content--custom .grid__item--sidebar {
       width: 0;
       padding: 0;
     }
-    .collection-content .grid__item--content {
+    .collection-content--custom .grid__item--content {
       width: 100%;
     }
-    .grid__item--sidebar {
+    .collection-content--custom .grid__item--sidebar {
       position: static;
       overflow: hidden;
     }
   {% endstyle %}
 {%- endif -%}
 
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "CollectionPage",
-    "@id": {{ shop.url | append: collection.url | append: "#webpage" | json }},
-    {% if page_image %}
-      {% assign image_size = page_image.width | append: 'x' %}
-      "image": {
-        "@type": "ImageObject",
-        "height": {{ page_image.height | json }},
-        "url": {{ page_image | img_url: image_size | prepend: "https:" | json }},
-        "width": {{ page_image.width | json }}
-      },
-    {% endif %}
-    "name": {{ collection.title | json }}
+<style>
+  /* Standard padding for main-collection-custom section */
+  {% comment %} .collection-content--custom .page-width {
+    max-width: 1594px;
+    padding: 0 5rem 50px;
+    margin: 0 auto;
   }
+{% endcomment %}
+
+/* Large screens - maintain fixed padding */
+@media (min-width: 1400px) {
+  .collection-content--custom .page-width {
+    padding: 0 5rem 50px;
+    margin: 0 auto;
+  }
+}
+
+/* Medium screens - responsive padding */
+@media (max-width: 1399px) and (min-width: 1024px) {
+  .collection-content--custom .page-width {
+    padding: 0 5rem 50px;
+    margin: 0 auto;
+  }
+}
+
+/* Small screens - responsive padding */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .collection-content--custom .page-width {
+    padding: 0 clamp(30px, 5vw, 5rem);
+    margin: 0 auto;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+  .collection-content--custom .page-width {
+    margin: 0;
+    padding: 0 15px 20px;
+  }
+}
+
+/* Ensure section header has same padding */
+.collection-content--custom .section-header,
+.collection-content--custom .section-header--flush {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 1023px) and (min-width: 769px) {
+  .collection-content--custom .section-header,
+  .collection-content--custom .section-header--flush {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .collection-content--custom .section-header,
+  .collection-content--custom .section-header--flush {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.cc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 20px;
+  padding: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* When sidebar is enabled, adjust grid to fit 3 products */
+.collection-content--custom.enable-sidebar .cc-grid {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 100%;
+}
+
+/* When sidebar is enabled, make cards responsive */
+.collection-content--custom.enable-sidebar .cc-card {
+  width: 100%;
+  max-width: 100%;
+}
+
+.collection-content--custom.enable-sidebar .cc-image-container {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 380 / 284;
+  /* Maintain 380:284 ratio */
+}
+
+.collection-content--custom.enable-sidebar .cc-buy-now {
+  width: 100%;
+  max-width: 100%;
+}
+
+.cc-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cc-image-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 380 / 284;
+  /* Maintain 380:284 ratio */
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.cc-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cc-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cc-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: "Be Vietnam Pro"
+  , sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  z-index: 2;
+}
+
+.cc-badge--top-rated {
+  background: #3264E0;
+}
+
+.cc-badge--best-seller {
+  background: #234085;
+}
+
+.cc-badge--new {
+  background: #234085;
+}
+
+.cc-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cc-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.cc-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.cc-star {
+  color: #FFD700;
+  font-size: 20px;
+}
+
+.cc-rating-text {
+  font-family: "Be Vietnam Pro"
+  , sans-serif;
+  font-size: 18px;
+  color: #000;
+}
+
+.cc-title {
+  margin-bottom: 4px;
+}
+
+.cc-title a {
+  color: #000;
+  font-family: "Be Vietnam Pro"
+  , sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 27px;
+  /* 135% */
+  letter-spacing: 0.6px;
+  text-decoration: none;
+}
+
+.cc-title a:hover {
+  color: #3264E0;
+}
+
+.cc-description {
+  color: #000;
+  font-family: "Be Vietnam Pro"
+  , sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.cc-price-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+.cc-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cc-price__current {
+  color: #000;
+  font-family: "Be Vietnam Pro"
+  , sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 27px;
+  /* 135% */
+  letter-spacing: 0.6px;
+}
+
+.cc-price__discount {
+  background: #FCE390;
+  color: #1C2C58;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: "Be Vietnam Pro"
+  , sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: 27px;
+  /* 135% */
+  letter-spacing: 0.6px;
+}
+
+.cc-compare-price-container {
+  min-height: 31px;
+  margin-bottom: 12px;
+  margin-top: -8px;
+  /* Compensate for parent gap */
+}
+
+.cc-compare-price {
+  color: #888;
+  font-family: "Be Vietnam Pro"
+  , sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27px;
+  /* 150% */
+  letter-spacing: 0.6px;
+  text-decoration-line: line-through;
+}
+
+.cc-compare-price--empty {
+  visibility: hidden;
+}
+
+.cc-actions {
+  margin-top: auto;
+}
+
+.cc-buy-now {
+  width: 100%;
+  max-width: 350px;
+  height: 40px;
+  background: #234085;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-family: "Be Vietnam Pro"
+  , sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cc-buy-now:hover {
+  background: #3264E0;
+}
+
+/* Responsive adjustments for no sidebar layout */
+@media (max-width: 1400px) {
+  .cc-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .cc-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .collection-content--custom.enable-sidebar .cc-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cc-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+  }
+
+  /* Override sidebar layout on mobile - ensure consistent layout */
+  .collection-content--custom.enable-sidebar .cc-grid,
+  .collection-content--custom .cc-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Reset ALL desktop changes for mobile - ensure consistent sizing regardless of sidebar */
+  .collection-content--custom.enable-sidebar .cc-card,
+  .collection-content--custom .cc-card {
+    width: 319.8px !important;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: none !important;
+  }
+
+  .collection-content--custom.enable-sidebar .cc-image-container,
+  .collection-content--custom .cc-image-container {
+    width: 319.8px !important;
+    aspect-ratio: 380 / 284;
+    /* Maintain 380:284 ratio */
+    flex-shrink: 0;
+    max-width: none !important;
+  }
+
+  .collection-content--custom.enable-sidebar .cc-buy-now,
+  .collection-content--custom .cc-buy-now {
+    width: 319.8px !important;
+    max-width: none !important;
+  }
+
+  .cc-mobile-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding-bottom: 20px;
+  }
+
+  .cc-mobile-row::-webkit-scrollbar {
+    height: 8px;
+    display: block;
+  }
+
+  .cc-mobile-row::-webkit-scrollbar-track {
+    background: #F0F1EF;
+    border-radius: 100px;
+  }
+
+  .cc-mobile-row::-webkit-scrollbar-thumb {
+    background: #234085;
+    border-radius: 100px;
+  }
+
+  .cc-mobile-row::-webkit-scrollbar-thumb:hover {
+    background: #1a2f6b;
+  }
+
+  .cc-mobile-row::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  /* Force scrollbar to show */
+  .cc-mobile-row {
+    scrollbar-width: thin;
+    scrollbar-color: #234085 #F0F1EF;
+    scrollbar-gutter: stable;
+  }
+
+  /* Ensure mobile row cards are consistent */
+  .cc-mobile-row .cc-card {
+    width: 319.8px !important;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: none !important;
+  }
+
+  .cc-mobile-row .cc-image-container {
+    width: 319.8px !important;
+    aspect-ratio: 380 / 284;
+    /* Maintain 380:284 ratio */
+    flex-shrink: 0;
+    max-width: none !important;
+  }
+
+  .cc-content {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .cc-title {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .cc-title a {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .cc-description {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .cc-price__current {
+    font-size: 14px;
+  }
+
+  .cc-price__discount {
+    font-size: 14px;
+  }
+
+  .cc-compare-price {
+    font-size: 14px;
+  }
+
+  .collection-content--custom.enable-sidebar .cc-buy-now,
+  .collection-content--custom .cc-buy-now {
+    width: 319.8px !important;
+    height: 36px;
+    font-size: 13px;
+    max-width: none !important;
+  }
+
+  .cc-mobile-row .cc-buy-now {
+    width: 319.8px !important;
+    height: 36px;
+    font-size: 13px;
+    max-width: none !important;
+  }
+
+  .cc-rating-text {
+    font-size: 12px;
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Mobile horizontal scroll functionality with 2 rows
+    function initMobileScroll() {
+      if (window.innerWidth > 768) return;
+      
+      const ccGrid = document.querySelector('.cc-grid');
+      if (!ccGrid) return;
+      
+      // Group products into rows of 4
+      const cards = Array.from(ccGrid.querySelectorAll('.cc-card'));
+      const rows = [];
+      
+      for (let i = 0; i < cards.length; i += 4) {
+        rows.push(cards.slice(i, i + 4));
+      }
+      
+      // Clear existing content
+      ccGrid.innerHTML = '';
+      
+      // Create horizontal scrollable rows
+      rows.forEach((rowCards, rowIndex) => {
+        const rowContainer = document.createElement('div');
+        rowContainer.className = 'cc-mobile-row';
+        
+        // Add cards to row (1-4 products per row)
+        rowCards.forEach(card => {
+          const cardClone = card.cloneNode(true);
+          rowContainer.appendChild(cardClone);
+        });
+        
+        ccGrid.appendChild(rowContainer);
+      });
+      
+      // Add drag functionality to each row
+      const mobileRows = ccGrid.querySelectorAll('.cc-mobile-row');
+      mobileRows.forEach(row => {
+        addDragFunctionality(row);
+      });
+    }
+    
+    function addDragFunctionality(rowContainer) {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      let isDragging = false;
+  
+      function dragStart(e) {
+        // Don't start drag if clicking on product links or buttons
+        if (e.target.closest('a') || e.target.closest('button')) {
+          isDown = false;
+          return;
+        }
+        isDown = true;
+        isDragging = false;
+        rowContainer.style.cursor = 'grabbing';
+        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+        scrollLeft = rowContainer.scrollLeft;
+        if (e.type === 'touchstart') {
+          window.addEventListener('touchmove', dragMove);
+          window.addEventListener('touchend', dragEnd);
+        }
+      }
+  
+      function dragMove(e) {
+        if (!isDown) return;
+        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
+        const walk = currentX - startX;
+        
+        if (Math.abs(walk) > 5) {
+          isDragging = true;
+        }
+        
+        if (isDragging) {
+          e.preventDefault();
+        }
+        
+        rowContainer.scrollLeft = scrollLeft - walk;
+      }
+  
+      function dragEnd() {
+        if (!isDown) return;
+        isDown = false;
+        isDragging = false;
+        rowContainer.style.cursor = 'grab';
+        window.removeEventListener('touchmove', dragMove);
+        window.removeEventListener('touchend', dragEnd);
+      }
+  
+      // Mouse events
+      rowContainer.addEventListener('mousedown', dragStart);
+      rowContainer.addEventListener('mousemove', dragMove);
+      rowContainer.addEventListener('mouseup', dragEnd);
+      rowContainer.addEventListener('mouseleave', dragEnd);
+  
+      // Touch events
+      rowContainer.addEventListener('touchstart', dragStart);
+  
+      // Prevent link clicks when dragging
+      rowContainer.addEventListener('click', (e) => {
+        if (isDragging) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+  
+      // Prevent default link behavior during drag
+      rowContainer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', e => {
+          if (isDragging) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        });
+      });
+    }
+    
+    // Initialize on load and resize
+    initMobileScroll();
+    window.addEventListener('resize', initMobileScroll);
+  });
 </script>
 
 {% schema %}
-{
-  "name": "t:sections.main-collection.name",
-  "settings": [
-    {
-      "type": "select",
-      "id": "section_width",
-      "options": [
-        {
-          "value": "full-width",
-          "label": "t:sections.all.section_width.options__1"
-        },
-        {
-          "value": "page-width",
-          "label": "t:sections.all.section_width.options__2"
-        },
-        {
-          "value": "customize_width",
-          "label": "t:sections.all.section_width.options__3"
-        }
-      ],
-      "default": "page-width",
-      "label": "t:sections.all.section_width.label"
-    },
-    {
-      "type": "range",
-      "id": "customize_width",
-      "min": 1000,
-      "max": 1800,
-      "step": 10,
-      "default": 1800,
-      "unit": "px",
-      "label": "t:sections.all.customize_width.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.main-collection.settings.header_filtering_and_sorting"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_sidebar",
-      "label": "t:sections.main-collection.settings.enable_sidebar.label",
-      "default": true,
-      "info": "t:sections.main-collection.settings.enable_sidebar.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "collapsed",
-      "label": "t:sections.main-collection.settings.collapsed.label",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "filter_style",
-      "label": "t:sections.main-collection.settings.filter_style.label",
-      "default": "sidebar",
-      "options": [
-        {
-          "value": "sidebar",
-          "label": "t:sections.main-collection.settings.filter_style.options.sidebar.label"
-        },
-        {
-          "value": "drawer",
-          "label": "t:sections.main-collection.settings.filter_style.options.drawer.label"
-        }
-      ]
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_color_swatches",
-      "label": "t:sections.main-collection.settings.enable_color_swatches.label",
-      "info": "t:sections.main-collection.settings.enable_color_swatches.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_swatch_labels",
-      "label": "t:common.enable_swatch_labels.label",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_sort",
-      "label": "t:sections.main-collection.settings.enable_sort.label",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_collection_count",
-      "label": "t:sections.main-collection.blocks.products.settings.enable_collection_count.label",
-      "default": true
+  {
+    "name": "Coll custom",
+    "settings": [
+      {
+        "type": "select",
+        "id": "section_width",
+        "options": [
+          {
+            "value": "full-width",
+            "label": "Full width"
+          }, {
+            "value": "page-width",
+            "label": "Page width"
+          }, {
+            "value": "customize_width",
+            "label": "Custom width"
+          }
+        ],
+        "default": "page-width",
+        "label": "Section width"
+      },
+      {
+        "type": "range",
+        "id": "customize_width",
+        "min": 1000,
+        "max": 1800,
+        "step": 10,
+        "default": 1800,
+        "unit": "px",
+        "label": "Custom width"
+      },
+      {
+        "type": "header",
+        "content": "Filtering & sorting"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sidebar",
+        "label": "Enable sidebar filters",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "collapsed",
+        "label": "Collapse filter groups",
+        "default": true
+      }, {
+        "type": "select",
+        "id": "filter_style",
+        "label": "Filter style",
+        "default": "sidebar",
+        "options": [
+          {
+            "value": "sidebar",
+            "label": "Sidebar"
+          }, {
+            "value": "drawer",
+            "label": "Drawer"
+          }
+        ]
+      }, {
+        "type": "checkbox",
+        "id": "enable_color_swatches",
+        "label": "Enable color swatches"
+      }, {
+        "type": "checkbox",
+        "id": "enable_swatch_labels",
+        "label": "Show swatch labels",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "enable_sort",
+        "label": "Enable sort",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "enable_collection_count",
+        "label": "Show collection count",
+        "default": true
+      }, {
+        "type": "header",
+        "content": "Grid"
+      }, {
+        "type": "range",
+        "id": "per_row",
+        "label": "Products per row (desktop)",
+        "default": 3,
+        "min": 2,
+        "max": 5,
+        "step": 1
+      }, {
+        "type": "range",
+        "id": "rows_per_page",
+        "label": "Rows per page",
+        "default": 2,
+        "min": 1,
+        "max": 10,
+        "step": 1
+      }, {
+        "type": "header",
+        "content": "Defaults"
+      }, {
+        "type": "range",
+        "id": "default_sold_count",
+        "label": "Default sold count (fallback)",
+        "min": 0,
+        "max": 1000,
+        "step": 10,
+        "default": 0
+      }
+    ],
+    "blocks": [],
+    "presets": [
+      {
+        "name": "Coll custom",
+        "category": "Collection"
+      }
+    ],
+    "enabled_on": {
+      "templates": ["collection"]
     }
-  ],
-  "blocks": [
-    {
-      "type": "collection_description",
-      "name": "t:sections.main-collection.blocks.collection_description.name",
-      "limit": 1
-    },
-    {
-      "type": "product_grid",
-      "name": "t:sections.main-collection.blocks.products.name",
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "show_product_description",
-          "label": "t:sections.main-collection.blocks.products.settings.show_product_description.label",
-          "default": true
-        },
-        {
-          "type": "select",
-          "id": "product_grid_image_size",
-          "label": "t:settings_schema.product_tiles.settings.product_grid_image_size.label",
-          "default": "natural",
-          "options": [
-            {
-              "value": "natural",
-              "label": "t:settings_schema.product_tiles.settings.product_grid_image_size.options.natural.label"
-            },
-            {
-              "value": "circle",
-              "label": "t:settings_schema.product_tiles.settings.product_grid_image_size.options.square.label"
-            }
-          ]
-        },
-        {
-          "type": "range",
-          "id": "per_row",
-          "label": "t:sections.main-collection.blocks.products.settings.per_row.label",
-          "default": 4,
-          "min": 2,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "type": "range",
-          "id": "rows_per_page",
-          "label": "t:sections.main-collection.blocks.products.settings.rows_per_page.label",
-          "default": 7,
-          "min": 3,
-          "max": 20,
-          "step": 1
-        },
-        {
-          "type": "checkbox",
-          "id": "mobile_flush_grid",
-          "label": "t:sections.main-collection.blocks.products.settings.mobile_flush_grid.label",
-          "default": false
-        }
-      ],
-      "limit": 1
-    },
-    {
-      "type": "subcollections",
-      "name": "t:sections.main-collection.blocks.subcollections.name",
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "t:sections.main-collection.blocks.subcollections.settings.content"
-        },
-        {
-          "type": "range",
-          "id": "subcollections_per_row",
-          "label": "t:sections.main-collection.blocks.subcollections.settings.subcollections_per_row.label",
-          "default": 5,
-          "min": 2,
-          "max": 5,
-          "step": 1
-        }
-      ],
-      "limit": 1
-    }
-  ]
-}
+  }
 {% endschema %}
