@@ -85,12 +85,12 @@
 <div class="cart__item{% if is_bundle_item %} cart__item--bundle-item{% endif %}" data-key="{{ product.key }}" {% if is_bundle_item %}data-bundle-id="{{ bundle_id }}" data-bundle-quantity="{{ product.properties._bundle_quantity }}"{% endif %} data-quantity="{{ product.quantity }}">
   <div class="cart__image">
     {% if product.image != blank %}
-      <a href="{{ product.url }}" class="image-wrap" style="width: 100px; height: 100px;">
+      <a href="{{ product.url }}" class="image-wrap">
         {%- render 'image-element',
           img: product.image,
           alt: product.product.title,
-          widths: '200',
-          sizes: '100px'
+          widths: '264',
+          sizes: '132px'
         -%}
       </a>
     {% endif %}
@@ -100,11 +100,22 @@
       {{ product.product.title }}
     </a>
     {%- unless product.product.has_only_default_variant -%}
-      <div class="cart-item__variant">
-        {%- for option in product.options_with_values -%}
-          <div>{{ option.value }}</div>
-        {%- endfor -%}
-      </div>
+      {%- assign has_variant_options = false -%}
+      {%- for option in product.options_with_values -%}
+        {%- if option.value != blank -%}
+          {%- assign has_variant_options = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if has_variant_options -%}
+        <div class="cart-item__variant">
+          {%- for option in product.options_with_values -%}
+            {%- if option.value != blank -%}
+              <div>{{ option.value }}</div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     {%- endunless -%}
 
     <div class="cart-item__price-wrapper">
@@ -135,39 +146,8 @@
             <span class="cart-item__price--final">{{ product.final_price | money }}</span>
         {%- endif -%}
     </div>
-    
-    {%- comment -%} Hide controls for bundle items, they will be controlled by a master footer {%- endcomment -%}
-    {%- unless is_bundle_item -%}
-    <div class="cart-item__footer">
-        <button type="button" class="cart-item__remove" data-cart-remove data-id="{{ product.key }}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M3 6H5H21" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M10 11V17" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M14 11V17" stroke="#25282B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
-        <div class="js-qty__wrapper">
-            <button type="button" class="js-qty__adjust js-qty__adjust--minus" aria-label="{{ 'cart.general.reduce_quantity' | t }}">
-                &minus;
-            </button>
-            <input
-                type="text"
-                class="js-qty__num"
-                value="{{ product.quantity }}"
-                min="0"
-                pattern="[0-9]*"
-                data-id="{{ product.key }}"
-                aria-label="{{ 'cart.label.quantity' | t }}"
-            >
-            <button type="button" class="js-qty__adjust js-qty__adjust--plus" aria-label="{{ 'cart.general.increase_quantity' | t }}">
-                +
-            </button>
-        </div>
-    </div>
-    {%- endunless -%}
 
-    {%- if product.selling_plan_allocation != empty -%}
+    {%- if product.selling_plan_allocation != empty and product.selling_plan_allocation.selling_plan.name != blank -%}
       <div class="cart-item__variant">
         {{ product.selling_plan_allocation.selling_plan.name }}
       </div>
@@ -192,4 +172,26 @@
       {% endfor %}
     {% endif %}
   </div>
+  {%- comment -%} Hide controls for bundle items, they will be controlled by a master footer {%- endcomment -%}
+  {%- unless is_bundle_item -%}
+  <div class="cart-item__footer">
+      <div class="js-qty__wrapper">
+          <button type="button" class="js-qty__adjust js-qty__adjust--minus" aria-label="{{ 'cart.general.reduce_quantity' | t }}">
+              &minus;
+          </button>
+          <input
+              type="text"
+              class="js-qty__num"
+              value="{{ product.quantity }}"
+              min="0"
+              pattern="[0-9]*"
+              data-id="{{ product.key }}"
+              aria-label="{{ 'cart.label.quantity' | t }}"
+          >
+          <button type="button" class="js-qty__adjust js-qty__adjust--plus" aria-label="{{ 'cart.general.increase_quantity' | t }}">
+              +
+          </button>
+      </div>
+  </div>
+  {%- endunless -%}
 </div>

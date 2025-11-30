@@ -13,23 +13,27 @@
 /* Force high-quality image rendering globally for Judge.me images */
 .jdgm-rev__pic-img,
 .jdgm-rev__pic-link img {
-  image-rendering: -webkit-optimize-contrast !important;
-  image-rendering: crisp-edges !important;
-  -webkit-filter: none !important;
-  filter: contrast(1.02) !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+    -webkit-filter: none !important;
+    filter: contrast(1.02) !important;
 }
-.jdgm-write-rev-link.jdgm-write-rev-link{
+
+.jdgm-write-rev-link.jdgm-write-rev-link {
     border: none !important;
 }
+
 /* ==========================================================================
    #RESET & WIDGET CONTAINER
    ========================================================================== */
-.jdgm-widget:not(.jdgm-medals-wrapper) .jdgm-medals-wrapper{
+.jdgm-widget:not(.jdgm-medals-wrapper) .jdgm-medals-wrapper {
     display: none !important;
 }
+
 .jdgm-rev-widg {
     max-width: 100% !important;
-    margin: 5rem auto !important; /* Center the widget block with vertical spacing */
+    margin: 5rem auto !important;
+    /* Center the widget block with vertical spacing */
     box-sizing: border-box !important;
     /* Mobile-first padding, based on featured-collections */
     padding: 0 20px !important;
@@ -49,9 +53,11 @@
    ========================================================================== */
 
 /* Remove padding from Shopify app block */
-.jdgm-sort-dropdown-wrapper .jdgm-sort-dropdown, .jdgm-sort-dropdown-wrapper .jdgm-sort-dropdown-arrow{
-    color:#1C2C58 !important;
+.jdgm-sort-dropdown-wrapper .jdgm-sort-dropdown,
+.jdgm-sort-dropdown-wrapper .jdgm-sort-dropdown-arrow {
+    color: #1C2C58 !important;
 }
+
 .shopify-app-block,
 [class*="shopify-block"],
 [class*="judge_me"],
@@ -103,21 +109,28 @@
     text-align: left !important;
     flex-wrap: wrap !important;
     justify-content: flex-start !important;
-    align-items: stretch !important; /* Stretch columns to be equal height */
+    align-items: stretch !important;
+    /* Stretch columns to be equal height */
     padding: 0 !important;
     margin-bottom: 40px !important;
-    gap: 0 0 !important; /* Add column gap */
+    gap: 0 0 !important;
+    /* Add column gap */
 }
-.jdgm-histogram__clear-filter:not([disabled]):hover, .jdgm-histogram__clear-filter:hover, .jdgm-histogram__clear-filter{
+
+.jdgm-histogram__clear-filter:not([disabled]):hover,
+.jdgm-histogram__clear-filter:hover,
+.jdgm-histogram__clear-filter {
     color: #000000 !important;
 }
+
 /* 1. Title */
 .jdgm-rev-widg__title {
     width: 100% !important;
-    margin-bottom: 20px !important; 
+    margin-bottom: 20px !important;
     font-size: 39px !important;
     font-weight: 700 !important;
-    text-align: left !important; /* Center the title */
+    text-align: left !important;
+    /* Center the title */
 }
 
 /* 2. Left Column (Created by JS) */
@@ -127,15 +140,18 @@
     gap: 24px !important;
     width: 391px !important;
     flex-shrink: 0;
-    align-items: flex-start !important; /* Align inner content to the left */
+    align-items: flex-start !important;
+    /* Align inner content to the left */
 }
 
 
 /* 3. Right Column (Populated by JS) */
 .jdgm-widget-actions-wrapper {
     flex-grow: 1 !important;
-    min-width: 0; /* Allows the container to shrink */
-    display: flex; /* Prepare for inner container */
+    min-width: 0;
+    /* Allows the container to shrink */
+    display: flex;
+    /* Prepare for inner container */
 }
 
 /* 4. Image Carousel */
@@ -143,27 +159,34 @@
     display: flex;
     gap: 16px;
     overflow-x: auto;
-    padding-bottom: 10px; /* Space for scrollbar */
+    padding-bottom: 10px;
+    /* Space for scrollbar */
     scrollbar-width: thin;
     scrollbar-color: #1C2C58 #e0e0e0;
-    align-items: center; /* Vertically center images if they are shorter */
+    align-items: center;
+    /* Vertically center images if they are shorter */
     margin-left: 40px !important;
 }
+
 .jdgm-custom-image-carousel::-webkit-scrollbar {
     height: 8px;
 }
+
 .jdgm-custom-image-carousel::-webkit-scrollbar-track {
     background: #e0e0e0;
     border-radius: 4px;
 }
+
 .jdgm-custom-image-carousel::-webkit-scrollbar-thumb {
     background-color: #1C2C58;
     border-radius: 4px;
 }
+
 /* Hide the scrollbar arrows */
 .jdgm-custom-image-carousel::-webkit-scrollbar-button {
     display: none;
 }
+
 .jdgm-custom-image-carousel img,
 .jdgm-custom-image-carousel video {
     width: 300px;
@@ -197,7 +220,7 @@
 
 /* Force sharp rendering on retina/high-DPI displays */
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
-       only screen and (min-resolution: 192dpi) {
+only screen and (min-resolution: 192dpi) {
     .jdgm-custom-image-carousel img {
         image-rendering: -webkit-optimize-contrast;
         image-rendering: crisp-edges;
@@ -208,10 +231,10 @@
 /* ==========================================================================
    #LEFT COLUMN CONTENT STYLING
    ========================================================================== */
-   
+
 .jdgm-rev-widg__summary {
     display: grid !important;
-    grid-template-areas: 
+    grid-template-areas:
         "rating stars"
         "rating text" !important;
     grid-template-columns: auto 1fr !important;
@@ -219,17 +242,22 @@
     column-gap: 15px !important;
     row-gap: 5px !important;
 }
+
 .jdgm-rev__buyer-badge.jdgm-rev__buyer-badge {
     background-color: #1C2C58 !important;
 }
+
 .jdgm-rev__reply {
     background-color: #F0F7FF !important;
 }
-.jdgm-widget:not(.jdgm-review-widget--small,.jdgm-review-widget--medium) .jdgm-write-rev-link{
+
+.jdgm-widget:not(.jdgm-review-widget--small, .jdgm-review-widget--medium) .jdgm-write-rev-link {
     border: none !important;
     border-color: transparent !important;
-    max-width: none !important; /* Override the original max-width */
+    max-width: none !important;
+    /* Override the original max-width */
 }
+
 .jdgm-rev-widg__summary::before {
     grid-area: rating !important;
     content: attr(data-rating) !important;
@@ -238,15 +266,19 @@
     line-height: 1 !important;
     color: #1C2C58 !important;
 }
+
 .jdgm-rev-widg__summary-stars {
     grid-area: stars !important;
     align-self: end !important;
 }
+
 .jdgm-rev-widg__summary-text {
     grid-area: text !important;
     align-self: start !important;
-    width: 375px !important; /* Set width as requested */
+    width: 375px !important;
+    /* Set width as requested */
 }
+
 .jdgm-write-rev-link {
     display: block !important;
     visibility: visible !important;
@@ -258,14 +290,16 @@
     font-weight: 600 !important;
     text-decoration: none !important;
     text-align: center !important;
-    width: 391px !important; /* Force explicit width */
+    width: 391px !important;
+    /* Force explicit width */
     box-sizing: border-box !important;
 }
 
 .jdgm-histogram {
     display: block !important;
     visibility: visible !important;
-    width: 391px !important; /* Force explicit width */
+    width: 391px !important;
+    /* Force explicit width */
     box-sizing: border-box !important;
 }
 
@@ -274,15 +308,22 @@
     display: flex !important;
     align-items: center !important;
 }
+
 .jdgm-histogram__star {
-    width: 120px !important; /* Give stars a fixed width */
+    width: 120px !important;
+    /* Give stars a fixed width */
 }
+
 .jdgm-histogram__bar {
-    flex-grow: 1 !important; /* Allow bar to fill remaining space */
-    height: 6px !important; /* Give the bar a visible height */
-    background-color: #F0F0F0 !important; /* A light grey for the track */
+    flex-grow: 1 !important;
+    /* Allow bar to fill remaining space */
+    height: 6px !important;
+    /* Give the bar a visible height */
+    background-color: #F0F0F0 !important;
+    /* A light grey for the track */
     border-radius: 3px !important;
-    overflow: hidden; /* Ensure the content respects the border-radius */
+    overflow: hidden;
+    /* Ensure the content respects the border-radius */
 }
 
 /* This is the actual colored bar */
@@ -293,7 +334,8 @@
 }
 
 .jdgm-histogram__frequency {
-    display: none !important; /* Hide the frequency number */
+    display: none !important;
+    /* Hide the frequency number */
 }
 
 
@@ -330,7 +372,8 @@
 .jdgm-rev {
     display: flex !important;
     gap: 24px !important;
-    align-items: flex-start !important; /* Align items to the top */
+    align-items: flex-start !important;
+    /* Align items to the top */
     padding: 30px 0 !important;
     border-top: 1px solid #e0e0e0;
 }
@@ -366,15 +409,19 @@
 /* 2. RIGHT COLUMN (Content Wrapper created by JS) */
 .jdgm-custom-right-column-content {
     flex-grow: 1;
-    min-width: 0; /* Prevents flex items from overflowing */
+    min-width: 0;
+    /* Prevents flex items from overflowing */
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Vertical gap between rows */
+    gap: 8px;
+    /* Vertical gap between rows */
 }
-.jdgm-widget a:not([href])[role="button"]{
+
+.jdgm-widget a:not([href])[role="button"] {
     cursor: pointer !important;
     align-content: center !important;
 }
+
 /* Hide unwanted elements */
 .jdgm-rev__icon,
 .jdgm-rev__br {
@@ -396,7 +443,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    row-gap: 8px; /* Space between rating line and author */
+    row-gap: 8px;
+    /* Space between rating line and author */
 }
 
 /* Create a "row" for the rating and timestamp */
@@ -406,7 +454,8 @@
 
 .jdgm-rev__timestamp {
     order: 2;
-    margin-left: auto; /* Push timestamp to the far right */
+    margin-left: auto;
+    /* Push timestamp to the far right */
     font-size: 14px;
     color: #666;
 }
@@ -422,11 +471,13 @@
 /* Author Name Styling */
 .jdgm-rev__author {
     color: #1C2C58 !important;
-    font-family: "Be Vietnam Pro", sans-serif !important; /* Fallback to sans-serif */
+    font-family: "Be Vietnam Pro", sans-serif !important;
+    /* Fallback to sans-serif */
     font-size: 20px !important;
     font-style: normal !important;
     font-weight: 600 !important;
-    line-height: 150% !important; /* 30px */
+    line-height: 150% !important;
+    /* 30px */
 }
 
 /* ==========================================================================
@@ -450,7 +501,8 @@
     min-width: 40px;
     height: 40px;
     padding: 0 5px;
-    box-sizing: border-box; /* Ensures consistent sizing and alignment */
+    box-sizing: border-box;
+    /* Ensures consistent sizing and alignment */
     text-decoration: none !important;
     font-size: 16px;
     font-weight: 500;
@@ -478,27 +530,34 @@
 .jdgm-paginate__page.jdgm-paginate__first-page {
     color: #1C2C58 !important;
 }
-  
+
 /* ==========================================================================
    #RESPONSIVE STYLES
    ========================================================================== */
 @media (max-width: 768px) {
     .jdgm-rev-widg {
-        margin: 2.5rem auto !important; /* Reduced spacing on mobile */
+        margin: 2.5rem auto !important;
+        /* Reduced spacing on mobile */
     }
-    .jdgm-all-reviews__summary-text--verified{
+
+    .jdgm-all-reviews__summary-text--verified {
         justify-content: left !important;
     }
-    .jdgm-rev-widg__summary{
+
+    .jdgm-rev-widg__summary {
         margin-bottom: 0px !important;
     }
-    .jdgm-rev-widg__summary-average{
+
+    .jdgm-rev-widg__summary-average {
         display: none !important;
     }
-    .jdgm-rev__timestamp{
+
+    .jdgm-rev__timestamp {
         width: 100% !important;
-        margin-left: 0 !important; /* Override desktop style to ensure left alignment */
+        margin-left: 0 !important;
+        /* Override desktop style to ensure left alignment */
     }
+
     /* 1. Header & Columns */
     .jdgm-rev-widg__header {
         flex-direction: column !important;
@@ -507,7 +566,8 @@
 
     .jdgm-custom-left-column {
         width: 100% !important;
-        align-items: flex-start !important; /* Revert to desktop's left-alignment */
+        align-items: flex-start !important;
+        /* Revert to desktop's left-alignment */
         gap: 20px !important;
     }
 
@@ -522,10 +582,11 @@
 
     /* 2. Summary & Actions - Reverted to Desktop Layout */
     .jdgm-rev-widg__summary {
-        max-width: 391px; /* Ensure it doesn't overflow on small screens */
+        max-width: 391px;
+        /* Ensure it doesn't overflow on small screens */
         width: 100%;
     }
-    
+
 
     .jdgm-write-rev-link,
     .jdgm-histogram {
@@ -640,6 +701,26 @@
         margin: 0 !important;
         padding: 0 !important;
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Ensure rating is visible in custom right column */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-custom-right-column-content .jdgm-rev__rating,
+    .jdgm-rev-widg .jdgm-rev .jdgm-custom-right-column-content .jdgm-rev__rating,
+    .jdgm-rev .jdgm-custom-right-column-content .jdgm-rev__rating {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Ensure rating row is visible */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-custom-rating-row,
+    .jdgm-rev-widg .jdgm-rev .jdgm-custom-rating-row,
+    .jdgm-rev .jdgm-custom-rating-row {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-rev__timestamp,
@@ -669,6 +750,22 @@
         margin: 0 !important;
         padding: 0 !important;
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Ensure author is visible even if wrapper structure is different */
+    .jdgm-widget .jdgm-rev-widg .jdgm-rev .jdgm-custom-right-column-content .jdgm-rev__author,
+    .jdgm-rev-widg .jdgm-rev .jdgm-custom-right-column-content .jdgm-rev__author,
+    .jdgm-rev .jdgm-custom-right-column-content .jdgm-rev__author {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 16px !important;
+        color: #1C2C58 !important;
+        font-family: "Be Vietnam Pro", sans-serif !important;
+        font-weight: 600 !important;
+        line-height: 150% !important;
     }
 
     /* Header positioning - ULTRA STRONG override */
@@ -696,10 +793,10 @@
     }
 
     /* 5. Pagination */
-    .jdgm-paginate a, .jdgm-paginate span {
+    .jdgm-paginate a,
+    .jdgm-paginate span {
         min-width: 32px;
         height: 32px;
         font-size: 14px;
     }
 }
-  

@@ -139,24 +139,37 @@
         <div class="footer-navigate__title f-bold text-xl footer-ru9__right-title">{{ section.settings.newsletter_title }}</div>
       {%- endif -%}
       <div class="footer__newsletter relative i-block w-full">
-        <form action="{{ routes.newsletter_subscribe_url }}" method="post" class="newsletter-form">
-          <input type="hidden" name="form_type" value="customer">
-          <input type="hidden" name="utf8" value="✓">
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="newsletter-input-group">
-            <input 
-              type="email" 
-              name="contact[email]" 
-              placeholder="Nhập email" 
-              class="newsletter-input"
-              required
-              aria-label="Email address"
-            >
-            <button type="submit" class="newsletter-submit-btn">
-              Gửi thông tin
-            </button>
-          </div>
-        </form>
+        {% form 'customer', class: 'newsletter-form', id: 'footer-newsletter-form' %}
+          {%- if form.posted_successfully? -%}
+            <div class="newsletter-success-message" style="color: #10B981; padding: 10px 0; font-size: 14px;">
+              Cảm ơn bạn đã đăng ký!
+            </div>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div class="newsletter-error-message" style="color: #E74C3C; padding: 10px 0; font-size: 14px;">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+          {%- unless form.posted_successfully? -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="newsletter-input-group">
+              <input 
+                type="email" 
+                name="contact[email]" 
+                placeholder="Nhập email" 
+                class="newsletter-input"
+                required
+                aria-label="Email address"
+                value="{% if customer %}{{ customer.email }}{% endif %}"
+                autocorrect="off"
+                autocapitalize="off"
+              >
+              <button type="submit" class="newsletter-submit-btn" name="commit">
+                Gửi thông tin
+              </button>
+            </div>
+          {%- endunless -%}
+        {% endform %}
       </div>
       <div class="footer-ru9__social">
         {%- if section.settings.social_facebook_link != blank -%}
@@ -645,6 +658,9 @@
       .footer-ru9__address .address-text { width: auto; }
       .footer-ru9__address .address-label { font-size: 14px; }
       .footer-ru9__address .address-text { font-size: 14px; }
+      .footer-ru9__company-info .company-info-item {
+        padding-bottom: 0px;
+      }
       .footer-ru9__company-info .company-label { font-size: 14px; }
       .footer-ru9__company-info .company-content { width: auto; }
       .footer-ru9__company-info .company-tax-code,

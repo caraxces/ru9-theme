@@ -92,7 +92,7 @@
         "button_text": "Nhận mã ưu đãi ngay >",
         "button_x": 50,
         "button_y": 92,
-        "success_image": "shopify://shop_images/POP_UP_2.png",
+        "success_image": "shopify://shop_images/popup_7e29263a-1621-4239-bece-a4d4abdb2e9a.png",
         "success_message": "Cảm ơn bạn đã đăng ký! Mã của bạn là RU9250.",
         "coupon_code_to_copy": "RU9250",
         "copy_button_text": "SAO CHÉP MÃ    >>>",
@@ -189,7 +189,10 @@
         "enable_color_swatches": false,
         "enable_swatch_labels": false,
         "enable_sort": false,
-        "enable_collection_count": false
+        "enable_collection_count": false,
+        "per_row": 3,
+        "rows_per_page": 2,
+        "default_sold_count": 0
       }
     },
     "banner_with_content_K64e3r": {
@@ -213,7 +216,7 @@
           "type": "product",
           "settings": {
             "product_title": "NỆM ORIGINAL PRO",
-            "product_image": "shopify://shop_images/Thumb_Website_Ori_pro-1.png",
+            "product_image": "shopify://shop_images/1.THUMB_1_0c976d4e-7646-442b-ba96-5415c9d62ba0.jpg",
             "product_features": "- Cấu tạo 5 lớp foam kết hợp công nghệ phân vùng 3 điểm đầu - thân - chân, giúp nâng đỡ chính xác từng vùng cơ thể.\n- 2 tùy chọn độ êm (mềm mại hoặc vững chắc) giúp cá nhân hóa trải nghiệm ngủ theo sở thích.\n- Công nghệ tiên tiến sẽ giúp tản nhiệt hiệu quả, giữ cho bề mặt nệm luôn thoáng mát và ổn định",
             "comfort_layer_2_image": "shopify://shop_images/so_sanh_Ori_Pro.png",
             "product_thickness": "25 cm",
@@ -226,7 +229,7 @@
           "type": "product",
           "settings": {
             "product_title": "NỆM ORIGINAL",
-            "product_image": "shopify://shop_images/Ori_Thumb-Website-1.png",
+            "product_image": "shopify://shop_images/1._THUMB_09.25.49.jpg",
             "product_features": "- Cấu trúc foam 3 tầng giúp nâng đỡ đều toàn bộ cơ thể, hạn chế tình trạng đau mỏi khi nằm lâu\n- Ôm sát đường cong tự nhiên của cơ thể, cân bằng giữa sự êm ái và hỗ trợ",
             "comfort_layer_1_image": "shopify://shop_images/so_sanh_Ori.png",
             "product_thickness": "25 cm",
@@ -239,7 +242,7 @@
           "type": "product",
           "settings": {
             "product_title": "NỆM HYBRID",
-            "product_image": "shopify://shop_images/Hybrid_Thumb-Website-2.png",
+            "product_image": "shopify://shop_images/1._THUMB_-1_09.25.49.jpg",
             "product_features": "- Kết hợp giữa hệ thống lò xo túi độc lập và lớp foam cao cấp. Hạn chế lún xẹp theo thời gian, phù hợp sử dụng lâu dài\n- Nâng đỡ chắc chắn, phân tán áp lực đều toàn thân, giữ form nệm vững vàng khi có nhiều người cùng nằm\n- 2 tùy chọn độ êm (mềm mại hoặc vững chắc) giúp cá nhân hóa trải nghiệm ngủ theo sở thích.",
             "comfort_layer_1_image": "shopify://shop_images/so_sanh_hybrid.png",
             "product_thickness": "25 cm",
@@ -252,7 +255,7 @@
           "type": "product",
           "settings": {
             "product_title": "Nệm Original Lite",
-            "product_image": "shopify://shop_images/nem-original-1.jpg",
+            "product_image": "shopify://shop_images/Untitled-1_09.25.49.jpg",
             "product_features": "- Cấu trúc 3 tầng foam thông minh từ dòng nệm nguyên bản Original,\n- Tối ưu độ dày chỉ còn 20cm gọn nhẹ hơn, dễ di chuyển hơn",
             "comfort_layer_1_image": "shopify://shop_images/so_sanh_Ori.png",
             "product_thickness": "20 cm",
@@ -265,7 +268,7 @@
           "type": "product",
           "settings": {
             "product_title": "NỆM NEST",
-            "product_image": "shopify://shop_images/Nest_Thumb-1.png",
+            "product_image": "shopify://shop_images/1._THUMB_-1_23.17.54_09.25.49.jpg",
             "product_features": "- Cấu trúc 2 lớp foam chắc chắn, ổn định\n- Giảm áp lực, hỗ trợ phục hồi cơ bắp, nâng đỡ hiệu quả vùng thắt lưng và lưng dưới",
             "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
             "product_thickness": "15 cm",
@@ -278,7 +281,7 @@
           "type": "product",
           "settings": {
             "product_title": "Nệm Topper",
-            "product_image": "shopify://shop_images/Ru_day1_5647.png",
+            "product_image": "shopify://shop_images/THUMB_-1_3f95d431-f4a3-41b5-bd08-3f463cb44098.jpg",
             "product_features": "- Cấu trúc 2 lớp foam, đảm bảo êm ái và nâng đỡ nhẹ nhàng\n- Thiết kế linh hoạt dễ cuộn gọn và đa dạng kích thước\n- Tích hợp tinh chất trà xanh và than hoạt tính: kháng khuẩn giúp khử mùi tự nhiên",
             "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
             "product_thickness": "5 cm",
@@ -291,7 +294,7 @@
           "type": "product",
           "settings": {
             "product_title": "Nệm Topper Mate",
-            "product_image": "shopify://shop_images/Copy-of-Mate-380-no-box.jpg",
+            "product_image": "shopify://shop_images/1.THUMB_-1.png",
             "product_features": "- Cấu trúc 1 lớp foam nâng đỡ vững chắc, ổn định\n- Thiết kế mỏng nhẹ, dễ cuộn gọn và đa dạng kích thước",
             "comfort_layer_1_image": "shopify://shop_images/so_sanh_Nest.png",
             "product_thickness": "5 cm",
