@@ -116,13 +116,7 @@
         "menu_banner_Epiydd",
         "menu_banner_TzMbNJ"
       ],
-      "custom_css": [
-        "/* Mặc định cho mọi <a> */a {font-family: \"Proxima Nova\", sans-serif; font-size: 16px; font-weight: 400;}",
-        " /* Ngôn ngữ trong ul#LangList-toolbar */#LangList-toolbar span {font-family: \"Proxima Nova\", sans-serif; font-weight: 700;}",
-        " /* ✅ Thẻ <a> nằm trong header (chỉ ảnh hưởng header) */#SiteHeader a {font-size: 19px; font-weight: 400;}",
-        "#SiteHeader a.site-nav__dropdown-link {font-family: \"Proxima Nova\", sans-serif; font-size: 25px; font-weight: 700;}",
-        "a.site-nav__dropdown-link span.txt {font-weight: 400;}"
-      ],
+      "custom_css": [],
       "settings": {
         "section_width": "customize_width",
         "customize_width": 1280,

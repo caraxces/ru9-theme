@@ -1606,7 +1606,7 @@
             {%- comment -%} Cart items are rendered here via JS {%- endcomment -%}
           </div>
 
-          
+
           <!-- CROSS-SELL -->
           {%- assign cross_sell_products = settings.cart_cross_sell_products -%}
           {%- if cross_sell_products.count > 0 -%}
@@ -2670,7 +2670,7 @@
                   rebuildCart();
               })
               .catch(e => console.error('Error updating quantity:', e));
-              return;
+            return;
           }
 
           // Handle Cross-sell Slider Arrows

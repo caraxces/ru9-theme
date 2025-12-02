@@ -66,6 +66,7 @@
     </div>
 
     <div class="footer-ru9__left-group">
+      <!-- Khối 1: Thông tin công ty -->
       <div class="footer-ru9__company-info">
         <div class="company-info-item">
           {%- if section.settings.company_name != blank -%}
@@ -82,47 +83,47 @@
         </div>
       </div>
 
-      <div class="footer-ru9__address">
-        {%- if section.settings.addr_1 != blank -%}
-          <div class="address-item">
-            <div class="address-label">Showroom 1</div>
-            <div class="address-text rte">{{ section.settings.addr_1 }}</div>
+      <!-- Khối 2: Hệ thống showroom (Desktop) -->
+      <div class="footer-ru9__showrooms footer-ru9__showrooms-desktop">
+        <div class="showrooms-title">
+          <span class="showrooms-title-desktop">HỆ THỐNG SHOWROOM RU9</span>
+        </div>
+        <div class="showrooms-content">
+          <div class="showrooms-list">
+            {%- if section.settings.addr_1 != blank -%}
+              <div class="address-item">
+                <div class="address-label">Showroom 1</div>
+                <div class="address-text rte">{{ section.settings.addr_1 }}</div>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.addr_2 != blank -%}
+              <div class="address-item">
+                <div class="address-label">Showroom 2</div>
+                <div class="address-text rte">{{ section.settings.addr_2 }}</div>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.addr_3 != blank -%}
+              <div class="address-item">
+                <div class="address-label">Showroom 3</div>
+                <div class="address-text rte">{{ section.settings.addr_3 }}</div>
+              </div>
+            {%- endif -%}
           </div>
-        {%- endif -%}
-        {%- if section.settings.addr_2 != blank -%}
-          <div class="address-item">
-            <div class="address-label">Showroom 2</div>
-            <div class="address-text rte">{{ section.settings.addr_2 }}</div>
-          </div>
-        {%- endif -%}
-        {%- if section.settings.addr_3 != blank -%}
-          <div class="address-item">
-            <div class="address-label">Showroom 3</div>
-            <div class="address-text rte">{{ section.settings.addr_3 }}</div>
-          </div>
-        {%- endif -%}
-        {%- if section.settings.hours != blank -%}
-          <div class="address-item">
-            <div class="address-label">Giờ mở cửa</div>
-            <div class="address-text rte">{{ section.settings.hours }}</div>
-          </div>
-        {%- endif -%}
+        </div>
       </div>
+
+      <!-- Khối 3: Thời gian hoạt động -->
+      {%- if section.settings.hours != blank -%}
+        <div class="footer-ru9__hours">
+          <div class="hours-title">THỜI GIAN HOẠT ĐỘNG</div>
+          <div class="hours-content rte">{{ section.settings.hours }}</div>
+        </div>
+      {%- endif -%}
     </div>
 
     <div class="footer-ru9__hotline">
-      <svg xmlns="http://www.w3.org/2000/svg" width="44" height="49" viewBox="0 0 44 49" fill="none" aria-hidden="true">
-        <g clip-path="url(#clip0_2466_3886)">
-          <path d="M25.7285 32.8604C24.7374 32.8604 23.9375 33.6761 23.9375 34.678C23.9375 35.6799 24.7374 36.4984 25.7285 36.4984C26.7197 36.4984 27.5196 35.6826 27.5196 34.678C27.5196 33.6734 26.717 32.8604 25.7285 32.8604Z" fill="#F8F6F4"/>
-          <path d="M16.3947 32.8896C15.4117 32.8896 14.6172 33.6972 14.6172 34.6936C14.6172 35.69 15.4144 36.5003 16.3947 36.5003C17.3751 36.5003 18.1723 35.6928 18.1723 34.6936C18.1723 33.6945 17.3751 32.8896 16.3947 32.8896Z" fill="#F8F6F4"/>
-          <path d="M5.50774 10.7881C2.07651 14.8395 0 20.1036 0 25.8659C0 38.6414 10.1913 48.9999 22.7608 48.9999C30.0623 48.9999 36.5585 45.5014 40.7223 40.0649L5.50774 10.7881ZM13.0516 30.087C13.0516 30.4456 13.0058 30.7357 12.7769 31.0779L12.75 31.1108C12.6988 31.1683 12.583 31.3024 12.5264 31.3763L8.54575 36.4542H13.0516V37.1742C13.0516 37.4726 12.8146 37.7135 12.521 37.7135H6.68201V37.374C6.68201 36.9579 6.78435 36.7745 6.91094 36.5802L11.1528 31.2422H6.85707V29.8954H13.0489V30.087H13.0516ZM19.4185 37.7107H18.7102C18.4193 37.7107 18.1823 37.4726 18.1796 37.1742C17.6625 37.5602 17.0376 37.7655 16.3966 37.7655C14.7268 37.7655 13.3748 36.3913 13.3748 34.6941C13.3748 32.9969 14.7295 31.6227 16.3966 31.6227C17.0376 31.6227 17.6625 31.828 18.1796 32.214V31.7951H19.4185V37.7107ZM21.8074 37.7107H20.9213C20.6763 37.7107 20.4796 37.5109 20.4796 37.2618V29.8954H21.8074V37.7107ZM25.7288 37.7709C24.0482 37.7709 22.6854 36.3858 22.6854 34.6776C22.6854 32.9695 24.0482 31.5871 25.7288 31.5871C27.4094 31.5871 28.7722 32.9722 28.7722 34.6776C28.7722 36.3831 27.4094 37.7709 25.7288 37.7709Z" fill="#F8F6F4"/>
-          <path d="M21.2394 0C14.3393 0 8.1609 3.12615 3.98633 8.05626L39.2009 37.3331C42.2039 33.4131 44.0003 28.4884 44.0003 23.134C44.0003 10.3584 33.8089 0 21.2394 0ZM36.5157 18.9321C36.0551 19.6958 35.8801 20.6512 35.0155 21.0508C33.6393 21.6859 31.7405 21.1247 30.437 20.517C27.504 19.1483 24.6249 16.3069 23.1166 13.4161C22.3571 11.9571 21.5545 9.73156 22.2494 8.12743C22.6534 7.18849 23.588 7.04614 24.3771 6.5452C24.5414 6.52056 24.6841 6.53425 24.8107 6.65469C25.4517 7.51425 26.1951 8.29715 26.8414 9.15123C27.0138 9.37844 27.1485 9.54268 26.9546 9.82464C26.6529 10.2599 25.9096 10.6459 25.8449 11.218C25.7965 11.6313 26.1196 12.1323 26.3243 12.4827C27.3505 14.2428 29.2331 16.1508 31.0133 17.1144C31.5627 17.4101 31.9398 17.6154 32.4838 17.1473C32.7397 16.9283 33.1168 16.4109 33.3619 16.2576C33.6123 16.1016 33.782 16.2494 33.9732 16.3972C34.5954 16.8763 35.2525 17.4593 35.8531 17.9767C36.004 18.1081 36.3999 18.4065 36.4941 18.5488C36.5615 18.6556 36.5588 18.8171 36.5238 18.9375L36.5157 18.9321Z" fill="#F8F6F4"/>
-        </g>
-        <defs>
-          <clipPath id="clip0_2466_3886">
-            <rect width="44" height="49" fill="white"/>
-          </clipPath>
-        </defs>
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="57" viewBox="0 0 50 57" fill="none" aria-hidden="true">
+        <path d="M49.4311 44.1525L48.6553 52.0934C48.5863 52.8308 48.3637 53.5457 48.0018 54.1923C47.6399 54.8388 47.1467 55.4027 46.5537 55.8479C45.9607 56.2931 45.2811 56.6097 44.5583 56.7775C43.8355 56.9454 43.0855 56.9606 42.3564 56.8224C34.2816 55.1401 26.714 51.591 20.2617 46.4603C14.2506 41.7703 9.3473 35.8173 5.90007 29.024C2.0924 21.6808 0.0710476 13.5463 -0.000226164 5.27953C0.00500461 4.54109 0.164238 3.81189 0.467334 3.13834C0.77043 2.4648 1.21075 1.86168 1.76026 1.36738C2.30976 0.873075 2.95642 0.498425 3.65905 0.267279C4.36168 0.036133 5.1049 -0.0464436 5.84137 0.0248061L13.798 0.802108C15.0863 0.915208 16.2897 1.492 17.1838 2.42498C18.0779 3.35796 18.6017 4.58346 18.6576 5.87305C18.7452 8.44711 19.1242 11.0031 19.7875 13.4923C20.0518 14.4746 20.0284 15.5118 19.7202 16.481C19.412 17.4502 18.8318 18.3108 18.0484 18.9608L14.3517 21.9934C17.4799 28.9889 22.4416 35.0129 28.7134 39.4296L32.4101 36.3971C33.2007 35.7559 34.159 35.3543 35.1715 35.2401C36.1839 35.1259 37.2081 35.3038 38.1226 35.7526C40.4413 36.8838 42.8807 37.7497 45.3942 38.3336C46.6649 38.6408 47.7782 39.4034 48.5225 40.4763C49.2668 41.5492 49.5902 42.8576 49.4311 44.1525Z" fill="white"/>
       </svg>
       <div class="footer-ru9__hotline-content">
         <div class="footer-ru9__hotline-label">Hotline</div>
@@ -267,12 +268,52 @@
       {%- for block in section.blocks -%}
         {%- if block.type == 'column' -%}
           <div class="footer-ru9__col" {{ block.shopify_attributes }}>
-            <div class="footer-ru9__col-title footer-navigate__title f-bold text-xl">{{ block.settings.title }}</div>
+            <button class="footer-ru9__col-toggle" type="button" aria-expanded="false">
+              <div class="footer-ru9__col-title footer-navigate__title f-bold text-xl">{{ block.settings.title }}</div>
+              <svg class="footer-ru9__col-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
             <div class="footer-ru9__col-content">{{ block.settings.content }}</div>
           </div>
         {%- endif -%}
       {%- endfor -%}
       </div>
+      </div>
+      
+      <!-- Khối 2: Hệ thống showroom (Mobile) -->
+      <div class="footer-ru9__showrooms footer-ru9__showrooms-mobile">
+        <button class="footer-ru9__showrooms-toggle" type="button" aria-expanded="false">
+          <div class="showrooms-title">
+            <span class="showrooms-title-desktop">HỆ THỐNG SHOWROOM RU9</span>
+            <span class="showrooms-title-mobile">Hệ thống cửa hàng</span>
+          </div>
+          <svg class="footer-ru9__showrooms-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="showrooms-content">
+          <div class="showrooms-list">
+            {%- if section.settings.addr_1 != blank -%}
+              <div class="address-item">
+                <div class="address-label">Showroom 1</div>
+                <div class="address-text rte">{{ section.settings.addr_1 }}</div>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.addr_2 != blank -%}
+              <div class="address-item">
+                <div class="address-label">Showroom 2</div>
+                <div class="address-text rte">{{ section.settings.addr_2 }}</div>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.addr_3 != blank -%}
+              <div class="address-item">
+                <div class="address-label">Showroom 3</div>
+                <div class="address-text rte">{{ section.settings.addr_3 }}</div>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
       </div>
     </div>
 
@@ -288,6 +329,12 @@
 
   <style>
     .footer-ru9 { background: #1B2A57; color: #fff; padding: 40px 0; position: relative; overflow: hidden; }
+    /* Tablet: Scale padding */
+    @media (min-width: 768px) and (max-width: 1300px) {
+      .footer-ru9 {
+        padding: calc(40px * 100vw / 1594) 0;
+      }
+    }
     /* Fallback effect (CSS-only) if OGL fails to load */
     .footer-ru9[data-darkveil-fallback="1"]::before {
       content: "";
@@ -308,8 +355,8 @@
     .footer-ru9__inner { position: relative; z-index: 1; }
     .darkveil-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; pointer-events: none; }
 
-    /* Desktop Layout */
-    @media (min-width: 961px) {
+    /* Desktop Layout - 1595px+ */
+    @media (min-width: 1595px) {
       .footer-ru9__inner {
         display: grid;
         grid-template-columns: 1fr 1.4fr;
@@ -339,7 +386,7 @@
         flex-direction: column;
         align-items: flex-start;
         align-self: flex-end;
-        gap: 0;
+        gap: 50px;
       }
       .footer-ru9__right-group {
         grid-area: right-group;
@@ -349,13 +396,50 @@
         align-self: flex-end;
         gap: 0;
       }
-      .footer-ru9__left-group .footer-ru9__address {
+      .footer-ru9__left-group .footer-ru9__company-info {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      /* Desktop: Showrooms trong left-group */
+      .footer-ru9__left-group .footer-ru9__showrooms-desktop {
+        display: flex;
         margin-top: 0;
         padding-top: 0;
         padding-bottom: 0;
       }
-      .footer-ru9__left-group .footer-ru9__company-info {
-        margin-bottom: 0;
+      /* Desktop lớn: Đảm bảo title hiển thị và in đậm */
+      .footer-ru9__col-toggle {
+        display: block !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        cursor: default !important;
+        width: 100% !important;
+      }
+      .footer-ru9__col-chevron {
+        display: none !important;
+      }
+      .footer-ru9__col-title {
+        display: block !important;
+        font-weight: 700 !important;
+        font-size: 20px !important;
+        margin-bottom: 12px !important;
+        color: #fff !important;
+        text-align: left !important;
+      }
+      .footer-ru9__col-content {
+        display: grid !important;
+        gap: 12px !important;
+        color: #fff !important;
+        font-size: 18px !important;
+      }
+      /* Desktop: Ẩn showrooms trong right-group */
+      .footer-ru9__right-group .footer-ru9__showrooms-mobile {
+        display: none;
+      }
+      .footer-ru9__left-group .footer-ru9__hours {
+        margin-top: 0;
+        padding-top: 0;
         padding-bottom: 0;
       }
       .footer-ru9__right-group .footer-ru9__links {
@@ -373,12 +457,17 @@
       }
       .footer-ru9__badges { grid-area: badges; }
       .footer-ru9__logos, .footer-ru9__subscribe { margin-bottom: 12px; }
+      /* Desktop 1595px+: newsletter-input có min-width và max-width là 330px */
+      .newsletter-input {
+        min-width: 330px !important;
+        max-width: 330px !important;
+      }
     }
 
     .footer-ru9__logos { display: flex; align-items: flex-start; gap: 40px; justify-content: space-between; }
     
     /* Desktop spacing between logos - chính xác 80px giữa hai logo */
-    @media (min-width: 961px) {
+    @media (min-width: 1301px) {
       .footer-ru9__logos { 
         gap: 0; 
         justify-content: flex-start;
@@ -402,9 +491,69 @@
     }
     .footer-ru9__logo-ru9 svg path { fill: #fff; }
     .footer-ru9__subscribe { display: flex; flex-direction: column; width: 100%; height: auto; align-items: flex-start; }
-    @media (min-width: 961px) {
+    @media (min-width: 1301px) {
       .footer-ru9__subscribe {
-        padding-right: 65px;
+        padding-right: 0;
+      }
+      /* Tạo row cho newsletter và social */
+      .footer-ru9__subscribe {
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .footer-ru9__subscribe .footer-ru9__right-title {
+        width: 100%;
+        flex-basis: 100%;
+        order: 0;
+      }
+      /* Wrapper cho newsletter và social cùng hàng */
+      .footer-ru9__subscribe .footer__newsletter {
+        display: flex;
+        width: auto;
+        max-width: none;
+        min-width: auto;
+        flex: 0 0 auto;
+        order: 1;
+        align-items: center;
+      }
+      .footer-ru9__subscribe .footer-ru9__social {
+        display: flex;
+        margin-top: 0;
+        margin-left: 20px;
+        flex-shrink: 0;
+        order: 2;
+        align-items: center;
+      }
+    }
+    /* Tablet: Newsletter và social layout */
+    @media (min-width: 768px) and (max-width: 1300px) {
+      .footer-ru9__subscribe {
+        padding-right: 0;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .footer-ru9__subscribe .footer-ru9__right-title {
+        width: 100%;
+        flex-basis: 100%;
+        order: 0;
+      }
+      .footer-ru9__subscribe .footer__newsletter {
+        display: flex;
+        width: auto;
+        max-width: none;
+        min-width: auto;
+        flex: 0 0 auto;
+        order: 1;
+        align-items: center;
+      }
+      .footer-ru9__subscribe .footer-ru9__social {
+        display: flex;
+        margin-top: 0;
+        margin-left: calc(20px * 100vw / 1594);
+        flex-shrink: 0;
+        order: 2;
+        align-items: center;
       }
     }
     .footer-ru9__logo-partner {
@@ -417,13 +566,16 @@
     /* Newsletter input + button - Design mới theo hình ảnh */
     .footer-ru9__subscribe .footer__newsletter { 
       position: relative; 
-      width: 100%; 
       max-width: none; 
-      min-width: 100%;
     }
     
     .newsletter-form {
       width: 100%;
+    }
+    @media (min-width: 1301px) {
+      .newsletter-form {
+        width: auto;
+      }
     }
     
     .newsletter-input-group {
@@ -435,16 +587,24 @@
       overflow: visible;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
+    @media (min-width: 1301px) {
+      .newsletter-input-group {
+        width: auto;
+        min-width: auto;
+        flex-shrink: 0;
+      }
+    }
     
     .newsletter-input {
       display: flex;
-      flex: 5;
-      min-width: 500px;
+      flex: 1;
+      min-width: 200px;
+      width: auto;
       height: 44px;
-      padding: 13px 10px;
+      padding: 13px 16px;
       flex-direction: column;
       align-items: center;
-      flex-shrink: 0;
+      flex-shrink: 1;
       border: none;
       outline: none;
       background: #ffffff;
@@ -453,6 +613,14 @@
       font-size: 14px;
       font-weight: 400;
       border-radius: 12px 0 0 12px;
+      box-sizing: border-box;
+    }
+    @media (min-width: 1301px) { 
+      .newsletter-input {
+        min-width: 550px;
+        max-width: 550px;
+        flex: 0 1 auto;
+      }
     }
     
     .newsletter-input::placeholder {
@@ -463,8 +631,8 @@
     
     .newsletter-submit-btn {
       display: flex;
-      min-width: 220px;
-      width: 220px;
+      min-width: auto;
+      width: auto;
       height: 44px;
       padding: 13px 10px;
       flex-direction: column;
@@ -500,11 +668,11 @@
       color: #fff;
     }
     .footer-ru9__company-info .company-info-item {
-      display: grid;
-      grid-template-columns: 137px 1fr;
-      gap: 12px;
-      padding-bottom: 50px;
-      align-items: start;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-bottom: 0;
+      align-items: flex-start;
       width: 100%;
     }
     .footer-ru9__company-info .company-label {
@@ -512,9 +680,10 @@
       font-family: "Be Vietnam Pro", sans-serif;
       font-size: 20px;
       font-style: normal;
-      font-weight: 500;
+      font-weight: 700; /* In đậm */
+      text-align: left !important;
       line-height: 150%;
-      width: 137px;
+      width: auto;
       flex-shrink: 0;
       margin: 0;
     }
@@ -522,7 +691,8 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      width: 426px;
+      width: 100%;
+      max-width: 100%;
     }
     .footer-ru9__company-info .company-tax-code,
     .footer-ru9__company-info .company-address {
@@ -533,15 +703,26 @@
       font-weight: 400;
       line-height: 150%;
       margin: 0;
+      white-space: nowrap; /* Desktop: không xuống hàng */
+      width: 100%;
+      max-width: 100%;
+    }
+    /* Cho phép xuống hàng ở màn ≤1594px (bao gồm cả 1400px) */
+    @media (max-width: 1594px) {
+      .footer-ru9__company-info .company-address {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+      }
     }
     .footer-ru9__hotline {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 16px;
       margin-bottom: 28px;
       padding-right: 65px;
     }
-    @media (min-width: 961px) {
+    @media (min-width: 1301px) {
       .footer-ru9__hotline {  
         margin-top: 60px;
         margin-bottom: 28px;
@@ -550,13 +731,17 @@
     }
     .footer-ru9__hotline svg {
       flex-shrink: 0;
-      width: 44px;
-      height: 49px;
+      width: 50px;
+      height: 57px;
+      align-self: flex-start;
+      margin-top: 0;
     }
     .footer-ru9__hotline-content {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
+      align-items: flex-start;
+      justify-content: center;
     }
     .footer-ru9__hotline-label {
       color: #FFF;
@@ -564,19 +749,23 @@
       font-size: 20px;
       font-style: normal;
       font-weight: 500;
-      line-height: 150%;
+      line-height: 1;
       margin: 0;
+      padding: 0;
     }
     .footer-ru9__hotline-numbers {
       display: flex;
       gap: 8px;
       align-items: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       color: #FFF;
       font-family: "Be Vietnam Pro", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 150%;
+      font-size: 35px;
+      font-weight: 700;
+      line-height: 1;
+      margin: 0;
+      padding: 0;
+      white-space: nowrap;
     }
     .footer-ru9__hotline-numbers a {
       color: inherit;
@@ -585,6 +774,113 @@
     .footer-ru9__hotline-numbers a:hover {
       text-decoration: underline;
     }
+    /* Showrooms Section */
+    .footer-ru9__showrooms {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0px;
+      color: #fff;
+    }
+    .footer-ru9__showrooms .showrooms-title {
+      color: #FFF;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700; /* In đậm */
+      text-align: left !important;
+      line-height: 150%;
+      margin: 0 0 12px 0; /* Ngang hàng với col-title (margin-bottom: 12px) */
+      padding-bottom: 0;
+    }
+    .showrooms-title-mobile {
+      display: none;
+    }
+    /* Tablet: Hiển thị desktop title */
+    @media (min-width: 768px) and (max-width: 1300px) {
+      .showrooms-title-desktop {
+        display: inline;
+      }
+      .showrooms-title-mobile {
+        display: none;
+      }
+    }
+    /* Mobile: Hiển thị mobile title */
+    @media (max-width: 767px) {
+      .showrooms-title-desktop {
+        display: none;
+      }
+      .showrooms-title-mobile {
+        display: inline;
+      }
+    }
+    .footer-ru9__showrooms .showrooms-list {
+      display: flex;
+      flex-direction: column;
+      gap: 31px;
+      width: 100%;
+    }
+    .footer-ru9__showrooms .address-item {
+      display: grid;
+      grid-template-columns: 137px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding-top: 0;
+    }
+    .footer-ru9__showrooms .address-label {
+      color: #FFF;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      width: 137px;
+      flex-shrink: 0;
+    }
+    .footer-ru9__showrooms .address-text {
+      margin: 0;
+      color: #fff;
+      width: 426px;
+      font-size: 18px;
+    }
+    .footer-ru9__showrooms .address-text p {
+      margin: 0;
+      color: #fff;
+    }
+    
+    /* Hours Section */
+    .footer-ru9__hours {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      color: #fff;
+    }
+    .footer-ru9__hours .hours-title {
+      color: #FFF;
+      font-family: "Be Vietnam Pro", sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700; /* In đậm */
+      text-align: left !important;
+      line-height: 150%;
+      margin: 0 0 0 0;
+      padding-bottom: 0;
+    }
+    .footer-ru9__hours .hours-content {
+      margin: 0;
+      color: #fff;
+      width: 426px;
+      font-size: 18px;
+      padding-top: 0;
+      line-height: 150%;
+    }
+    .footer-ru9__hours .hours-content p {
+      margin: 0;
+      color: #fff;
+    }
+    
+    /* Legacy address styles for backward compatibility */
     .footer-ru9__address { display: inline-flex; padding: 4px 0 28px 0; flex-direction: column; align-items: flex-start; gap: 31px; }
     .footer-ru9__address .address-item { display: grid; grid-template-columns: 137px 1fr; gap: 12px; align-items: start; padding-top: 20px; }
     .footer-ru9__address .address-label {
@@ -605,12 +901,18 @@
     .footer-ru9__social { display: flex; gap: 16px; margin-top: 12px; }
     .footer-ru9__social .footer-social__item { width: 40px; height: 40px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: #fff; text-decoration: none; border: none; }
     .footer-ru9__columns { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-    @media (min-width: 961px) {
+    @media (min-width: 1301px) {
       .footer-ru9__columns {
         max-width: 100%;
       }
     }
-    .footer-ru9__col-title { font-weight: 700; font-size: 20px; margin-bottom: 12px; color: #fff; }
+    .footer-ru9__col-title { 
+      font-weight: 700; 
+      font-size: 20px; 
+      margin-bottom: 12px; 
+      color: #fff; 
+      text-align: left !important;
+    }
     .footer-ru9__col-content {
       display: grid;
       gap: 12px;
@@ -618,33 +920,639 @@
       font-size: 18px;
     }
     .footer-ru9__col-content p, .footer-ru9__col-content a { margin: 0; color: #fff; }
+    
+    /* Desktop: Hide toggle button chevron only, show title and content */
+    @media (min-width: 1301px) {
+      .footer-ru9__col-toggle {
+        display: block !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        cursor: default !important;
+        width: 100% !important;
+      }
+      .footer-ru9__col-chevron {
+        display: none !important;
+      }
+      .footer-ru9__col-title {
+        display: block !important;
+        font-weight: 700 !important;
+        font-size: 20px !important;
+        margin-bottom: 12px !important;
+        color: #fff !important;
+      }
+      .footer-ru9__col-content {
+        display: grid !important;
+        gap: 12px !important;
+        color: #fff !important;
+        font-size: 18px !important;
+      }
+      .footer-ru9__showrooms-toggle {
+        display: none;
+      }
+      /* Desktop: Hiển thị showrooms-content trực tiếp, không cần dropdown */
+      .footer-ru9__showrooms-desktop .showrooms-content {
+        display: block !important;
+        max-height: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+      }
+      .footer-ru9__showrooms-desktop .showrooms-content::before {
+        display: none;
+      }
+    }
+    
     .footer-ru9__badges { display: flex; justify-content: center; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 24px; }
 
-    @media (max-width: 95rem) {
-      .footer-ru9__inner { display: flex; flex-direction: column; gap: 32px; }
-      .footer-ru9__links { order: 1; }
-      .footer-ru9__logos {
+    /* Small Desktop Layout - 1301px to 1594px (Responsive scaling) */
+    @media (min-width: 1301px) and (max-width: 1594px) {
+      /* DEBUG: Chỉ ẩn showrooms-content trong showrooms-mobile, không ẩn showrooms-desktop */
+      .footer-ru9__showrooms-mobile .showrooms-content {
+        display: none !important;
+      }
+      
+      .footer-ru9__inner {
+        display: grid !important;
+        grid-template-columns: 1fr 1.4fr !important;
+        grid-template-rows: auto auto auto 1fr !important;
+        grid-template-areas:
+          "logos hotline"
+          "left-group subscribe"
+          "left-group right-group"
+          "badges badges" !important;
+        /* Gap cố định: 23px 40px */
+        gap: 23px 40px !important;
+        align-items: end !important;
+      }
+      .footer-ru9__logos { 
+        grid-area: logos;
+        gap: 0;
+        justify-content: flex-start;
+      }
+      .footer-ru9__hotline { 
+        grid-area: hotline; 
+        align-self: flex-start;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .footer-ru9__subscribe { 
+        grid-area: subscribe;
+        align-self: flex-start;
+        padding-right: 0;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start;
+        gap: 12px !important; /* Gap giữa newsletter và social */
+      }
+      .footer-ru9__subscribe .footer-ru9__right-title {
+        width: 100%;
+        order: 0;
+      }
+      .footer-ru9__subscribe .footer__newsletter {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        order: 1;
+        align-items: center;
+      }
+      .footer-ru9__subscribe .footer-ru9__social {
+        display: flex !important;
+        margin-top: 0 !important;
+        margin-left: 0 !important;
         order: 2;
-        gap: 20px;
+        align-items: center;
+      }
+      .footer-ru9__left-group {
+        grid-area: left-group;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start;
+        align-self: flex-end;
+        /* Gap 50px cho khoảng 1301px-1593px */
+        gap: 30px !important;
+      }
+      .footer-ru9__right-group {
+        grid-area: right-group;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        align-self: flex-end;
+        gap: 0;
+      }
+      .footer-ru9__left-group .footer-ru9__company-info {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      .footer-ru9__left-group .footer-ru9__showrooms-desktop {
+        display: flex;
+        margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .footer-ru9__right-group .footer-ru9__showrooms-mobile {
+        display: none;
+      }
+      .footer-ru9__left-group .footer-ru9__hours {
+        margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .footer-ru9__right-group .footer-ru9__links {
+        margin-top: 0;
+        width: 100%;
+        padding-right: 0;
+      }
+      .footer-ru9__badges { 
+        grid-area: badges;
+      }
+      .footer-ru9__logos {
+        gap: 0;
+        justify-content: flex-start;
+      }
+      .footer-ru9__logo-partner {
+        margin-left: calc(20px * 100vw / 1594);
+      }
+      .footer-ru9__logo-ru9, .footer-ru9__logo-partner-image {
+        width: calc(122px * 100vw / 1594);
+        height: calc(105px * 100vw / 1594);
+      }
+      .footer-ru9__hotline {
+        margin-top: calc(60px * 100vw / 1594);
+        margin-bottom: calc(28px * 100vw / 1594);
+        padding-right: calc(65px * 100vw / 1594);
+        gap: calc(16px * 100vw / 1594);
+      }
+      .footer-ru9__hotline svg {
+        width: calc(50px * 100vw / 1594);
+        height: calc(57px * 100vw / 1594);
+      }
+      .footer-ru9__hotline-content {
+        gap: calc(4px * 100vw / 1594);
+      }
+      .footer-ru9__hotline-label {
+        font-size: calc(20px * 100vw / 1594);
+      }
+      .footer-ru9__hotline-numbers {
+        font-size: calc(35px * 100vw / 1594);
+        gap: calc(8px * 100vw / 1594);
+      }
+      .footer-ru9__right-title {
+        font-size: calc(20px * 100vw / 1594);
+        height: calc(44px * 100vw / 1594);
+      }
+      .newsletter-input-group {
+        height: calc(44px * 100vw / 1594);
+        border-radius: calc(12px * 100vw / 1594);
+        box-shadow: 0 calc(2px * 100vw / 1594) calc(8px * 100vw / 1594) rgba(0, 0, 0, 0.1);
+      }
+      .newsletter-input {
+        height: calc(44px * 100vw / 1594);
+        padding: calc(13px * 100vw / 1594) calc(16px * 100vw / 1594);
+        font-size: calc(14px * 100vw / 1594);
+        border-radius: calc(12px * 100vw / 1594) 0 0 calc(12px * 100vw / 1594);
+        /* 1301px-1594px: min-width và max-width là 550px */
+        min-width: 550px !important;
+        max-width: 550px !important;
+      }
+      .newsletter-input::placeholder {
+        font-size: calc(14px * 100vw / 1594);
+      }
+      .newsletter-submit-btn {
+        height: calc(44px * 100vw / 1594);
+        padding: calc(13px * 100vw / 1594) calc(10px * 100vw / 1594);
+        font-size: calc(14px * 100vw / 1594);
+        border-radius: 0 calc(12px * 100vw / 1594) calc(12px * 100vw / 1594) 0;
+      }
+      .footer-ru9__social {
+        gap: calc(16px * 100vw / 1594);
+        margin-left: calc(20px * 100vw / 1594);
+      }
+      .footer-ru9__social .footer-social__item {
+        width: calc(40px * 100vw / 1594);
+        height: calc(40px * 100vw / 1594);
+      }
+      .footer-ru9__company-info .company-label {
+        font-size: calc(20px * 100vw / 1594);
+      }
+      .footer-ru9__company-info .company-tax-code,
+      .footer-ru9__company-info .company-address {
+        font-size: calc(18px * 100vw / 1594);
+      }
+      /* DEBUG: Kiểm tra gap cho company-info */
+      .footer-ru9__company-info .company-info-item {
+        display: flex !important;
+        flex-direction: column !important;
+        /* Gap cố định theo màn 1300px: 8px→7px */
+        gap: 7px !important;
+      }
+      /* Fallback với margin nếu gap không hoạt động */
+      .footer-ru9__company-info .company-info-item > * + * {
+        margin-top: 7px !important;
+      }
+      .footer-ru9__company-info .company-content {
+        display: flex !important;
+        flex-direction: column !important;
+        /* Gap cố định theo màn 1300px: 8px→7px */
+        gap: 7px !important;
+      }
+      .footer-ru9__company-info .company-content > * + * {
+        margin-top: 7px !important;
+      }
+      /* DEBUG: Kiểm tra gap cho showrooms */
+      .footer-ru9__showrooms {
+        display: flex !important;
+        flex-direction: column !important;
+        /* Gap cố định theo màn 1300px: 31px→25px */
+        gap: 0px !important;
+      }
+      /* Fallback với margin */
+      .footer-ru9__showrooms > * + * {
+        margin-top: 0px !important;
+      }
+      .footer-ru9__showrooms .showrooms-title {
+        font-size: calc(20px * 100vw / 1594);
+        text-align: left !important;
+      }
+      .footer-ru9__showrooms .showrooms-list {
+        display: flex !important;
+        flex-direction: column !important;
+        /* Gap cố định theo màn 1300px: 31px→25px */
+        gap: 25px !important;
+      }
+      .footer-ru9__showrooms .showrooms-list > * + * {
+        margin-top: 25px !important;
+      }
+      .footer-ru9__showrooms .address-item {
+        display: grid !important;
+        grid-template-columns: calc(137px * 100vw / 1594) 1fr !important;
+        /* Gap cố định theo màn 1300px: 12px→10px */
+        gap: 10px !important;
+        column-gap: 10px !important;
+        /* border: 1px solid purple !important; */
+      }
+      .footer-ru9__showrooms .address-label {
+        font-size: calc(20px * 100vw / 1594);
+        width: calc(137px * 100vw / 1594);
+      }
+      .footer-ru9__showrooms .address-text {
+        font-size: calc(18px * 100vw / 1594);
+        width: calc(426px * 100vw / 1594);
+      }
+      .footer-ru9__hours .hours-title {
+        font-size: calc(20px * 100vw / 1594);
+        text-align: left !important;
+      }
+      .footer-ru9__hours .hours-content {
+        font-size: calc(18px * 100vw / 1594);
+        width: calc(426px * 100vw / 1594);
+      }
+      /* DEBUG: Kiểm tra gap cho columns */
+      .footer-ru9__columns {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        /* Gap cố định theo màn 1300px: 28px→23px */
+        gap: 23px !important;
+        column-gap: 23px !important;
+        /* border: 2px solid orange !important; */
+      }
+      .footer-ru9__col-title {
+        display: block !important;
+        font-weight: 700 !important;
+        font-size: calc(20px * 100vw / 1594) !important;
+        margin-bottom: calc(12px * 100vw / 1594) !important;
+        color: #fff !important;
+        text-align: left !important;
+      }
+      /* Đảm bảo title hiển thị trên desktop nhỏ */
+      .footer-ru9__col-toggle {
+        display: block !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        cursor: default !important;
+        width: 100% !important;
+      }
+      .footer-ru9__col-chevron {
+        display: none !important;
+      }
+      /* DEBUG: Kiểm tra gap cho col-content */
+      .footer-ru9__col-content {
+        display: flex !important;
+        flex-direction: column !important;
+        font-size: calc(18px * 100vw / 1594);
+        /* Gap cố định theo màn 1300px: 12px→10px */
+        gap: 10px !important;
+      }
+      /* Fallback với margin */
+      .footer-ru9__col-content > * + * {
+        margin-top: 10px !important;
+      }
+      /* DEBUG: Kiểm tra gap cho left-group - kế thừa từ desktop */
+      .footer-ru9__left-group {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        align-self: flex-end !important;
+        /* Gap 50px cho khoảng 1301px-1593px */
+        gap: 30px !important;
+      }
+      /* Fallback với margin nếu gap không hoạt động */
+      .footer-ru9__left-group > * + * {
+        margin-top: 30px !important;
+      }
+      
+      /* DEBUG: Kiểm tra xem có CSS nào đang override gap không */
+      /* Uncomment dòng dưới để xem tất cả gap properties */
+      /* 
+      .footer-ru9 * {
+        gap: inherit !important;
+      }
+      */
+      .footer-ru9__right-group {
+        gap: 0 !important;
+      }
+      .footer-ru9__links {
+        margin-right: calc(-40px * 100vw / 1594);
+      }
+      @media screen and (min-width: 1200px) {
+        .footer-ru9__links {
+          margin-right: calc(-80px * 100vw / 1594);
+        }
+      }
+      .footer-ru9__badges {
+        gap: calc(16px * 100vw / 1594);
+        padding-top: calc(24px * 100vw / 1594);
+        margin-top: calc(24px * 100vw / 1594);
+      }
+      .footer-ru9__logos, .footer-ru9__subscribe {
+        margin-bottom: calc(12px * 100vw / 1594);
+      }
+      .footer-ru9 .page-width {
+        padding-left: max(calc(40px * 100vw / 1594), 20px);
+        padding-right: max(calc(40px * 100vw / 1594), 20px);
+      }
+    }
+
+    /* Tablet Layout - 768px to 1300px (Mobile-like with dropdowns, same font & gap as mobile) */
+    @media (min-width: 768px) and (max-width: 1300px) {
+      /* Tablet: Đảm bảo showrooms-mobile bị ẩn hoàn toàn */
+      .footer-ru9__showrooms-mobile {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .footer-ru9__inner { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 32px !important;
+      }
+      .footer-ru9__logos { 
+        order: 1;
+        gap: 0;
         flex-direction: row;
         align-items: flex-start;
-        justify-content: normal;
+        justify-content: space-between;
+        margin-bottom: 0;
       }
-      .footer-ru9__left-group { 
+      .footer-ru9__logo-partner {
+        margin-left: 20px;
+      }
+      .footer-ru9__logo-ru9, .footer-ru9__logo-partner-image {
+        width: 122px;
+        height: 105px;
+      }
+      .footer-ru9__hotline { 
+        order: 2;
+        padding-right: 0;
+        margin-bottom: 0 !important;
+      }
+      .footer-ru9__hotline svg {
+        width: 40px;
+        height: 46px;
+      }
+      .footer-ru9__hotline-label { 
+        font-size: 14px;
+      }
+      .footer-ru9__hotline-numbers { 
+        font-size: 20px;
+        gap: 8px;
+      }
+      .footer-ru9__subscribe { 
         order: 3; 
+        padding-right: 0;
+        margin-bottom: 0 !important;
+      }
+      .footer-ru9__right-group { 
+        order: 4; 
         display: flex;
         flex-direction: column;
         gap: 0;
+        margin-bottom: 0 !important;
       }
-      .footer-ru9__left-group .footer-ru9__company-info { order: 1; }
-      .footer-ru9__left-group .footer-ru9__address { 
-        order: 2; 
-        padding-top: 28px;
+      .footer-ru9__right-group .footer-ru9__links { 
+        margin-top: 0;
       }
-      .footer-ru9__hotline { order: 4; }
-      .footer-ru9__subscribe { order: 5; padding-right: 0; }
-      .footer-ru9__right-group { 
+      /* Tablet: Ẩn showrooms desktop và mobile */
+      .footer-ru9__left-group .footer-ru9__showrooms-desktop {
+        display: none;
+      }
+      .footer-ru9__right-group .footer-ru9__showrooms-mobile {
+        display: none !important;
+      }
+      .footer-ru9__left-group { 
         order: 6; 
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 0 !important;
+      }
+      .footer-ru9__left-group .footer-ru9__company-info { 
+        order: 1; 
+        padding-top: 0;
+        margin-bottom: 32px !important;
+      }
+      .footer-ru9__left-group .footer-ru9__hours { 
+        order: 2; 
+        padding-top: 0;
+      }
+      .footer-ru9__badges { 
+        order: 7; 
+      }
+      
+      /* Tablet Dropdown Styles (giống mobile, không scale) */
+      .footer-ru9__columns {
+        display: flex;
+        flex-direction: column;
+        gap: 0 !important;
+      }
+      .footer-ru9__col {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 0 !important;
+      }
+      .footer-ru9__col-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: transparent;
+        border: none;
+        padding: 16px 0 !important;
+        cursor: pointer;
+        text-align: left;
+        color: #fff;
+      }
+      .footer-ru9__col-toggle .footer-ru9__col-title {
+        margin-bottom: 0 !important;
+        font-size: 16px !important;
+        font-weight: 700 !important; /* In đậm như desktop */
+        letter-spacing: 0.6px !important;
+        flex: 1 !important;
+        color: #fff !important;
+        display: block !important;
+        text-align: left !important;
+      }
+      .footer-ru9__col-chevron {
+        width: 24px;
+        height: 24px;
+        color: #fff;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+        margin-left: 12px;
+      }
+      .footer-ru9__col-toggle[aria-expanded="true"] .footer-ru9__col-chevron {
+        transform: rotate(180deg);
+      }
+      .footer-ru9__col-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important; /* Gap cố định cho tablet */
+      }
+      .footer-ru9__col-toggle[aria-expanded="true"] + .footer-ru9__col-content {
+        max-height: 1000px;
+        padding: 12px 0 16px 0 !important;
+      }
+      .footer-ru9__col-content::before {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        margin-bottom: 12px !important;
+      }
+      
+      /* Tablet: Showrooms-mobile đã được ẩn ở trên (dòng 1206-1207), không cần CSS này */
+      
+      /* Tablet: Company Info - Gap cố định */
+      .footer-ru9__company-info .company-info-item {
+        padding-bottom: 0px;
+        flex-direction: column;
+        gap: 8px !important;
+        display: flex !important;
+      }
+      .footer-ru9__company-info .company-content {
+        gap: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      .footer-ru9__company-info .company-label { 
+        font-size: 16px;
+        width: auto;
+        text-align: left !important;
+      }
+      .footer-ru9__company-info .company-content { 
+        width: auto; 
+        max-width: 100%; 
+      }
+      .footer-ru9__company-info .company-tax-code {
+        font-size: 14px;
+        white-space: nowrap;
+        width: 100%;
+        max-width: 100%;
+      }
+      .footer-ru9__company-info .company-address { 
+        font-size: 14px;
+        white-space: normal;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      /* Tablet: Hours */
+      .footer-ru9__hours .hours-title { 
+        font-size: 16px;
+        text-align: left !important;
+      }
+      .footer-ru9__hours .hours-content { 
+        width: auto; 
+        font-size: 14px;
+      }
+      
+      /* Tablet newsletter design */
+      .newsletter-input-group {
+        height: 40px;
+        border-radius: 12px;
+        width: 100%;
+      }
+      .newsletter-input {
+        height: 40px;
+        padding: 0 14px;
+        font-size: 13px;
+        border-radius: 12px 0 0 12px;
+        flex: 1;
+        min-width: 200px;
+      }
+      .newsletter-input::placeholder {
+        font-size: 13px;
+      }
+      .newsletter-submit-btn {
+        height: 40px;
+        padding: 0 16px;
+        font-size: 13px;
+        border-radius: 0 12px 12px 0;
+        min-width: 100px;
+        width: 100px;
+      }
+      .footer-ru9__social {
+        gap: 16px;
+        margin-top: 12px;
+      }
+      .footer-ru9__social .footer-social__item {
+        width: 40px;
+        height: 40px;
+      }
+      .footer-ru9__right-title {
+        font-size: 20px;
+        height: auto;
+        margin-bottom: 12px;
+      }
+    }
+
+    /* Mobile Layout - max-width: 767px */
+    @media (max-width: 767px) {
+      .footer-ru9__inner { display: flex; flex-direction: column; gap: 32px; }
+      
+      /* Thứ tự trên mobile: 1. logos, 2. hotline, 3. right-group (dropdowns), 4. showrooms, 5. company-info, 6. hours, 7. badges */
+      .footer-ru9__logos {
+        order: 1;
+        gap: 0;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+      .footer-ru9__hotline { order: 2; }
+      .footer-ru9__subscribe { order: 3; padding-right: 0; }
+      .footer-ru9__right-group { 
+        order: 4; 
         display: flex;
         flex-direction: column;
         gap: 0;
@@ -652,35 +1560,239 @@
       .footer-ru9__right-group .footer-ru9__links { 
         margin-top: 0;
       }
-      .footer-ru9__badges { order: 7; }
+      /* Mobile: Ẩn showrooms desktop, hiển thị showrooms mobile */
+      .footer-ru9__left-group .footer-ru9__showrooms-desktop {
+        display: none;
+      }
+      .footer-ru9__right-group .footer-ru9__showrooms-mobile {
+        display: block;
+        margin-top: 32px;
+        padding-top: 0;
+      }
+      .footer-ru9__left-group { 
+        order: 5; 
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .footer-ru9__left-group .footer-ru9__company-info { 
+        order: 1; 
+        padding-top: 0;
+        margin-bottom: 32px;
+      }
+      .footer-ru9__left-group .footer-ru9__hours { 
+        order: 2; 
+        padding-top: 0;
+      }
+      .footer-ru9__badges { order: 6; }
+      
+      /* Mobile Dropdown Styles */
+      .footer-ru9__col {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .footer-ru9__col-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: transparent;
+        border: none;
+        padding: clamp(12px, calc(16px * 100vw / 390px), 16px) 0;
+        cursor: pointer;
+        text-align: left;
+        color: #fff;
+      }
+      .footer-ru9__col-toggle .footer-ru9__col-title {
+        margin-bottom: 0;
+        font-size: clamp(14px, calc(16px * 100vw / 390px), 16px);
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        flex: 1;
+      }
+      .footer-ru9__col-chevron {
+        width: 24px;
+        height: 24px;
+        color: #fff;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+        margin-left: 12px;
+      }
+      .footer-ru9__col-toggle[aria-expanded="true"] .footer-ru9__col-chevron {
+        transform: rotate(180deg);
+      }
+      .footer-ru9__col-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0;
+        margin: 0;
+        font-size: clamp(12px, calc(14px * 100vw / 390px), 14px);
+      }
+      .footer-ru9__col-toggle[aria-expanded="true"] + .footer-ru9__col-content {
+        max-height: 1000px;
+        padding: clamp(8px, calc(12px * 100vw / 390px), 12px) 0 clamp(12px, calc(16px * 100vw / 390px), 16px) 0;
+      }
+      .footer-ru9__col-content::before {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        margin-bottom: 12px;
+      }
+      
+      /* Mobile: Showrooms Dropdown */
+      .footer-ru9__showrooms-mobile {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .footer-ru9__showrooms-mobile .footer-ru9__showrooms-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: transparent;
+        border: none;
+        padding: clamp(12px, calc(16px * 100vw / 390px), 16px) 0;
+        cursor: pointer;
+        text-align: left;
+        color: #fff;
+      }
+      .footer-ru9__showrooms-mobile .footer-ru9__showrooms-toggle .showrooms-title {
+        margin-bottom: 0;
+        font-size: clamp(14px, calc(16px * 100vw / 390px), 16px);
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+      .footer-ru9__showrooms-mobile .footer-ru9__showrooms-chevron {
+        width: 24px;
+        height: 24px;
+        color: #fff;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+        margin-left: 12px;
+      }
+      .footer-ru9__showrooms-mobile .footer-ru9__showrooms-toggle[aria-expanded="true"] .footer-ru9__showrooms-chevron {
+        transform: rotate(180deg);
+      }
+      .footer-ru9__showrooms-mobile .showrooms-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0;
+        margin: 0;
+        font-size: clamp(12px, calc(14px * 100vw / 390px), 14px);
+      }
+      .footer-ru9__showrooms-mobile .footer-ru9__showrooms-toggle[aria-expanded="true"] + .showrooms-content {
+        max-height: 1000px;
+        padding: clamp(8px, calc(12px * 100vw / 390px), 12px) 0 clamp(12px, calc(16px * 100vw / 390px), 16px) 0;
+      }
+      .footer-ru9__showrooms-mobile .showrooms-content::before {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        margin-bottom: clamp(8px, calc(12px * 100vw / 390px), 12px);
+      }
+      /* Showrooms content layout giống col-content */
+      .footer-ru9__showrooms-mobile .showrooms-list {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(8px, calc(12px * 100vw / 390px), 12px);
+      }
 
       .footer-ru9__columns { grid-template-columns: 1fr; gap: 32px; }
+      
+      /* Mobile: Company Info */
+      .footer-ru9__company-info .company-info-item {
+        padding-bottom: 0px;
+        flex-direction: column;
+        gap: clamp(6px, calc(8px * 100vw / 390px), 8px);
+      }
+      .footer-ru9__company-info .company-label { 
+        font-size: clamp(14px, calc(16px * 100vw / 390px), 16px); 
+        width: auto; 
+      }
+      .footer-ru9__company-info .company-content { 
+        width: auto; 
+        max-width: 100%; 
+      }
+      .footer-ru9__company-info .company-tax-code {
+        font-size: clamp(12px, calc(14px * 100vw / 390px), 14px); 
+        white-space: nowrap;
+        width: 100%;
+        max-width: 100%;
+      }
+      .footer-ru9__company-info .company-address { 
+        font-size: clamp(12px, calc(14px * 100vw / 390px), 14px); 
+        white-space: normal; /* Cho phép xuống dòng trên mobile */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      /* Mobile: Showrooms - layout giống col-content */
+      .footer-ru9__showrooms-mobile .showrooms-list { 
+        display: flex;
+        flex-direction: column;
+        gap: clamp(8px, calc(12px * 100vw / 390px), 12px);
+      }
+      .footer-ru9__showrooms-mobile .address-item {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(6px, calc(8px * 100vw / 390px), 8px);
+        padding-top: 0;
+      }
+      .footer-ru9__showrooms-mobile .address-label { 
+        font-size: clamp(12px, calc(14px * 100vw / 390px), 14px); 
+        width: auto; 
+        margin: 0;
+      }
+      .footer-ru9__showrooms-mobile .address-text { 
+        width: auto; 
+        font-size: clamp(12px, calc(14px * 100vw / 390px), 14px); 
+        margin: 0;
+      }
+      .footer-ru9__showrooms-mobile .address-text p {
+        margin: 0;
+      }
+      
+      /* Mobile: Hours */
+      .footer-ru9__hours .hours-title { 
+        font-size: clamp(14px, calc(16px * 100vw / 390px), 16px); 
+      }
+      .footer-ru9__hours .hours-content { 
+        width: auto; 
+        font-size: clamp(12px, calc(14px * 100vw / 390px), 14px); 
+      }
+      
+      /* Legacy address styles for mobile */
       .footer-ru9__address .address-text { width: auto; }
       .footer-ru9__address .address-label { font-size: 14px; }
       .footer-ru9__address .address-text { font-size: 14px; }
-      .footer-ru9__company-info .company-info-item {
-        padding-bottom: 0px;
-      }
-      .footer-ru9__company-info .company-label { font-size: 14px; }
-      .footer-ru9__company-info .company-content { width: auto; }
-      .footer-ru9__company-info .company-tax-code,
-      .footer-ru9__company-info .company-address { font-size: 14px; }
       .footer-ru9__hotline {
         padding-right: 0;
-        margin-bottom: 24px;
+        margin-bottom: clamp(20px, calc(24px * 100vw / 390px), 24px);
       }
       .footer-ru9__hotline svg {
-        width: 32px;
-        height: 36px;
+        width: clamp(36px, calc(40px * 100vw / 390px), 40px);
+        height: clamp(41px, calc(46px * 100vw / 390px), 46px);
       }
-      .footer-ru9__hotline-label { font-size: 14px; }
-      .footer-ru9__hotline-numbers { font-size: 14px; }
+      .footer-ru9__hotline-label { 
+        font-size: clamp(12px, calc(14px * 100vw / 390px), 14px); 
+      }
+      .footer-ru9__hotline-numbers { 
+        font-size: clamp(18px, calc(20px * 100vw / 390px), 20px); 
+      }
       .footer-ru9__col-content {
-        grid-template-rows: repeat(4, auto);
-        grid-auto-flow: column;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px 28px;
-        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(8px, calc(12px * 100vw / 390px), 12px);
+        font-size: clamp(12px, calc(14px * 100vw / 390px), 14px);
       }
       
       /* Mobile newsletter design */
@@ -748,8 +1860,8 @@
     }
 
     .fab-contact-toggle svg {
-      width: 29px;
-      height: 29px;
+      width: 44px;
+      height: 49px;
     }
     
     .fab-contact-item {
@@ -909,13 +2021,18 @@
 
 <div class="footer-ru9-fab-wrapper" data-section-id="{{ section.id }}">
   <button class="fab-contact-toggle" aria-label="Open contact options">
-    <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <mask id="mask0_184_5375_fab" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="29" height="29">
-        <path d="M28.5 0.5H0.5V28.5H28.5V0.5Z" fill="white"/>
-      </mask>
-      <g mask="url(#mask0_184_5375_fab)">
-        <path d="M14.5 0.5C6.772 0.5 0.5 6.772 0.5 14.5C0.5 22.228 6.772 28.5 14.5 28.5H23.124V25.532C26.4 22.956 28.5 18.98 28.5 14.5C28.5 6.772 22.228 0.5 14.5 0.5ZM9.46 15.76C8.76 15.76 8.2 15.2 8.2 14.5C8.2 13.8 8.76 13.24 9.46 13.24C10.16 13.24 10.72 13.8 10.72 14.5C10.72 15.2 10.16 15.76 9.46 15.76ZM14.5 15.76C13.8 15.76 13.24 15.2 13.24 14.5C13.24 13.8 13.8 13.24 14.5 13.24C15.2 13.24 15.76 13.8 15.76 14.5C15.76 15.2 15.2 15.76 14.5 15.76ZM19.54 15.76C18.84 15.76 18.28 15.2 18.28 14.5C18.28 13.8 18.84 13.24 19.54 13.24C20.24 13.24 20.8 13.8 20.8 14.5C20.8 15.2 20.24 15.76 19.54 15.76Z" fill="#FFFFFF"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="44" height="49" viewBox="0 0 44 49" fill="none" aria-hidden="true">
+      <g clip-path="url(#clip0_2466_3886_fab)">
+        <path d="M25.7285 32.8604C24.7374 32.8604 23.9375 33.6761 23.9375 34.678C23.9375 35.6799 24.7374 36.4984 25.7285 36.4984C26.7197 36.4984 27.5196 35.6826 27.5196 34.678C27.5196 33.6734 26.717 32.8604 25.7285 32.8604Z" fill="#F8F6F4"/>
+        <path d="M16.3947 32.8896C15.4117 32.8896 14.6172 33.6972 14.6172 34.6936C14.6172 35.69 15.4144 36.5003 16.3947 36.5003C17.3751 36.5003 18.1723 35.6928 18.1723 34.6936C18.1723 33.6945 17.3751 32.8896 16.3947 32.8896Z" fill="#F8F6F4"/>
+        <path d="M5.50774 10.7881C2.07651 14.8395 0 20.1036 0 25.8659C0 38.6414 10.1913 48.9999 22.7608 48.9999C30.0623 48.9999 36.5585 45.5014 40.7223 40.0649L5.50774 10.7881ZM13.0516 30.087C13.0516 30.4456 13.0058 30.7357 12.7769 31.0779L12.75 31.1108C12.6988 31.1683 12.583 31.3024 12.5264 31.3763L8.54575 36.4542H13.0516V37.1742C13.0516 37.4726 12.8146 37.7135 12.521 37.7135H6.68201V37.374C6.68201 36.9579 6.78435 36.7745 6.91094 36.5802L11.1528 31.2422H6.85707V29.8954H13.0489V30.087H13.0516ZM19.4185 37.7107H18.7102C18.4193 37.7107 18.1823 37.4726 18.1796 37.1742C17.6625 37.5602 17.0376 37.7655 16.3966 37.7655C14.7268 37.7655 13.3748 36.3913 13.3748 34.6941C13.3748 32.9969 14.7295 31.6227 16.3966 31.6227C17.0376 31.6227 17.6625 31.828 18.1796 32.214V31.7951H19.4185V37.7107ZM21.8074 37.7107H20.9213C20.6763 37.7107 20.4796 37.5109 20.4796 37.2618V29.8954H21.8074V37.7107ZM25.7288 37.7709C24.0482 37.7709 22.6854 36.3858 22.6854 34.6776C22.6854 32.9695 24.0482 31.5871 25.7288 31.5871C27.4094 31.5871 28.7722 32.9722 28.7722 34.6776C28.7722 36.3831 27.4094 37.7709 25.7288 37.7709Z" fill="#F8F6F4"/>
+        <path d="M21.2394 0C14.3393 0 8.1609 3.12615 3.98633 8.05626L39.2009 37.3331C42.2039 33.4131 44.0003 28.4884 44.0003 23.134C44.0003 10.3584 33.8089 0 21.2394 0ZM36.5157 18.9321C36.0551 19.6958 35.8801 20.6512 35.0155 21.0508C33.6393 21.6859 31.7405 21.1247 30.437 20.517C27.504 19.1483 24.6249 16.3069 23.1166 13.4161C22.3571 11.9571 21.5545 9.73156 22.2494 8.12743C22.6534 7.18849 23.588 7.04614 24.3771 6.5452C24.5414 6.52056 24.6841 6.53425 24.8107 6.65469C25.4517 7.51425 26.1951 8.29715 26.8414 9.15123C27.0138 9.37844 27.1485 9.54268 26.9546 9.82464C26.6529 10.2599 25.9096 10.6459 25.8449 11.218C25.7965 11.6313 26.1196 12.1323 26.3243 12.4827C27.3505 14.2428 29.2331 16.1508 31.0133 17.1144C31.5627 17.4101 31.9398 17.6154 32.4838 17.1473C32.7397 16.9283 33.1168 16.4109 33.3619 16.2576C33.6123 16.1016 33.782 16.2494 33.9732 16.3972C34.5954 16.8763 35.2525 17.4593 35.8531 17.9767C36.004 18.1081 36.3999 18.4065 36.4941 18.5488C36.5615 18.6556 36.5588 18.8171 36.5238 18.9375L36.5157 18.9321Z" fill="#F8F6F4"/>
       </g>
+      <defs>
+        <clipPath id="clip0_2466_3886_fab">
+          <rect width="44" height="49" fill="white"/>
+        </clipPath>
+      </defs>
     </svg>
   </button>
   <a id="fab-phone" class="fab-contact-item" href="tel:{{ section.settings.hotline_number }}" title="Call Us">
@@ -944,7 +2061,25 @@ document.addEventListener('DOMContentLoaded', function() {
       fabWrapper.classList.remove('active');
     }
   });
-});
+  });
+  
+  // Footer column dropdown toggle for mobile
+  const footerColToggles = document.querySelectorAll('.footer-ru9__col-toggle');
+  footerColToggles.forEach(function(toggle) {
+    toggle.addEventListener('click', function() {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !isExpanded);
+    });
+  });
+  
+  // Footer showrooms dropdown toggle for mobile
+  const showroomsToggle = document.querySelector('.footer-ru9__showrooms-mobile .footer-ru9__showrooms-toggle');
+  if (showroomsToggle) {
+    showroomsToggle.addEventListener('click', function() {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !isExpanded);
+    });
+  }
 </script>
 
 {% schema %}
