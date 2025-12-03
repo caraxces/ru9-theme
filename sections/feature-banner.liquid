@@ -35,6 +35,26 @@
     display: none;
   }
 
+  /* Desktop Title */
+  .feature-banner-title {
+    display: block;
+    text-align: center;
+    font-size: 39px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #1C2C58;
+    margin: 0 0 24px 0;
+  }
+
+  .feature-banner-title.rte {
+    text-align: center;
+  }
+
+  .feature-banner-title.rte p {
+    margin: 0;
+    text-align: center;
+  }
+
   /* Mobile styles - 479px and below */
   @media (max-width: 479px) {
     .feature-banner-section .page-width {
@@ -54,6 +74,18 @@
 
     .feature-banner-mobile-image {
       display: block;
+    }
+
+    .feature-banner-title {
+      display: block;
+      font-size: 20px;
+      text-align: left;
+      color: #1C2C58;
+      margin-bottom: 16px;
+    }
+
+    .feature-banner-title.rte p {
+      text-align: left;
     }
 
     .feature-banner-mobile-info {
@@ -141,6 +173,9 @@
 
 <div class="feature-banner-section">
   <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <div class="feature-banner-title rte">{{ section.settings.title }}</div>
+    {%- endif -%}
     <div class="feature-banner-container">
       <!-- Desktop Image -->
       <img 
@@ -194,7 +229,7 @@
                       <h3 class="hotspot-mobile-list__title">{{ block.settings.bullet_title }}</h3>
                     {%- endif -%}
                     {%- if block.settings.bullet_subtitle != blank -%}
-                      <p class="hotspot-mobile-list__subtitle">{{ block.settings.bullet_subtitle }}</p>
+                      <div class="hotspot-mobile-list__subtitle rte">{{ block.settings.bullet_subtitle }}</div>
                     {%- endif -%}
                   </div>
                 </div>
@@ -226,6 +261,12 @@
       "info": "Recommended size: 330x235px (ratio 330:235 for 390px screen)"
     },
     {
+      "type": "richtext",
+      "id": "title",
+      "label": "Title",
+      "info": "Title hiển thị trên desktop (39px, căn giữa) và mobile (20px, căn trái), hỗ trợ dynamic source và có thể xuống dòng"
+    },
+    {
       "type": "text",
       "id": "mobile_title",
       "label": "Mobile Title",
@@ -251,10 +292,10 @@
           "info": "Title của bullet point (không bắt buộc)"
         },
         {
-          "type": "text",
+          "type": "richtext",
           "id": "bullet_subtitle",
           "label": "Subtitle",
-          "info": "Mô tả của bullet point (không bắt buộc)"
+          "info": "Mô tả của bullet point (không bắt buộc, có thể nhập nhiều dòng, hỗ trợ dynamic source)"
         }
       ]
     }

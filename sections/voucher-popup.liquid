@@ -1,0 +1,112 @@
+{% comment %}
+  Voucher Popup Section
+  This section manages vouchers that appear in the cart drawer voucher popup
+  Add this section to your theme (can be hidden) to manage vouchers
+  Instructions:
+  1. Go to Theme Editor
+  2. Add section "Voucher Popup" to any template (can be hidden)
+  3. Add voucher blocks with discount codes from Shopify Discount Codes
+{% endcomment %}
+
+{%- if section.blocks.size > 0 -%}
+  <script type="application/json" data-voucher-data style="display: none !important;">
+    {
+      "vouchers": [
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'voucher' -%}
+            {
+              "code": {{ block.settings.code | json }},
+              "title": {{ block.settings.title | json }},
+              "description": {{ block.settings.description | json }},
+              "expiry_date": {{ block.settings.expiry_date | json }}
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Voucher Popup",
+  "tag": "section",
+  "class": "voucher-popup-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Voucher Popup Settings"
+    },
+    {
+      "type": "paragraph",
+      "content": "Section này quản lý vouchers hiển thị trong popup cart drawer. Thêm section này vào theme (có thể ẩn) để quản lý vouchers. Vouchers sẽ được load từ các blocks bên dưới."
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Voucher có thể áp dụng"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "header",
+      "name": "Header",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Header Title",
+          "default": "Chọn Voucher"
+        }
+      ]
+    },
+    {
+      "type": "voucher",
+      "name": "Voucher",
+      "settings": [
+        {
+          "type": "text",
+          "id": "code",
+          "label": "Mã giảm giá",
+          "info": "Nhập mã giảm giá từ Shopify Discount Codes (Settings > Discounts > Discount codes)",
+          "default": "RU9250"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tiêu đề voucher",
+          "default": "VOUCHER 250K"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Mô tả",
+          "default": "Giảm 250K cho đơn hàng từ...."
+        },
+        {
+          "type": "text",
+          "id": "expiry_date",
+          "label": "Hạn sử dụng",
+          "default": "31.12.2025",
+          "info": "Định dạng: DD.MM.YYYY"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Voucher Popup",
+      "blocks": [
+        {
+          "type": "header"
+        },
+        {
+          "type": "voucher"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

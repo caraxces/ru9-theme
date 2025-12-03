@@ -1085,6 +1085,14 @@
         "label": "Icon Miễn phí vận chuyển"
       },
       {
+        "type": "header",
+        "content": "Voucher Popup Settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "Cấu hình voucher hiển thị trong popup cart drawer. Thêm section 'Voucher Popup' vào theme để quản lý vouchers."
+      },
+      {
         "type": "image_picker",
         "id": "cart_warranty_icon",
         "label": "Icon Bảo hành"
@@ -1172,7 +1180,11 @@
         "label": "t:settings_schema.social_media.settings.social_facebook_link.label",
         "info": "t:settings_schema.social_media.settings.social_facebook_link.info"
       },
-      { "type": "text", "id": "social_zalo_link", "label": "Zalo" },
+      {
+        "type": "text",
+        "id": "social_zalo_link",
+        "label": "Zalo"
+      },
       {
         "type": "text",
         "id": "social_twitter_link",
@@ -1342,7 +1354,11 @@
   {
     "name": "Blog Category tags",
     "settings": [
-      { "type": "textarea", "id": "category_tag", "label": "Category tags" }
+      {
+        "type": "textarea",
+        "id": "category_tag",
+        "label": "Category tags"
+      }
     ]
   }
 ]

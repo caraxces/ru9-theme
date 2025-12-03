@@ -974,14 +974,15 @@
       font-family: var(--font-stack-body);
       font-size: 16px;
       padding: 8px 0;
-      color: #1C2C58;
-      border-bottom: 1px solid #f0f0f0;
-      margin-bottom: 8px;
+      color: #000000;
+      border-bottom: none;
+      margin-bottom: 0;
     }
     #CartDrawer .cart-drawer__discount-title {
       flex: 1;
-      color: #1C2C58;
-      font-weight: 500;
+      color: #000000;
+      font-weight: 400;
+      font-size: 16px;
     }
     #CartDrawer .cart-drawer__discount-right {
       display: flex;
@@ -990,13 +991,13 @@
     }
     #CartDrawer .cart-drawer__discount-amount {
       overflow: hidden;
-      color: #E74C3C;
+      color: #000000;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-family: "Be Vietnam Pro", sans-serif;
+      font-family: var(--font-stack-body);
       font-size: 16px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: 400;
       line-height: 150%;
     }
     #CartDrawer .cart-drawer__discount-remove {
@@ -1556,6 +1557,577 @@
         gap: 2px;
       }
     }
+
+    /* Voucher Section */
+    .cart-drawer__voucher-section {
+      margin-top: 10px;
+    }
+    .cart-drawer__voucher-trigger {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      border-radius: clamp(6px, calc(8px * (100vw / 480px)), 8px);
+      overflow: hidden;
+      border: 1px solid #D1E5FF;
+      background: #F0F7FF;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cart-drawer__voucher-trigger:hover {
+      background: #E0EFFF;
+    }
+    .cart-drawer__voucher-trigger-label {
+      flex: 1;
+      padding: clamp(10px, calc(12px * (100vw / 480px)), 12px) clamp(10px, calc(15px * (100vw / 480px)), 15px);
+      font-family: var(--font-stack-body);
+      font-size: clamp(12px, calc(14px * (100vw / 480px)), 14px);
+      color: #000;
+      text-align: left;
+      background: transparent;
+    }
+    .cart-drawer__voucher-trigger-button {
+      padding: clamp(10px, calc(12px * (100vw / 480px)), 12px) clamp(12px, calc(20px * (100vw / 480px)), 20px);
+      font-family: var(--font-stack-body);
+      font-size: clamp(12px, calc(14px * (100vw / 480px)), 14px);
+      font-weight: 500;
+      color: white;
+      background: #759CE6;
+      white-space: nowrap;
+    }
+
+    /* Voucher Popup Overlay - Outside Cart Drawer */
+    .voucher-popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .voucher-popup-overlay.is-open {
+      display: flex;
+    }
+
+    /* Voucher Popup */
+    .voucher-popup {
+      background: white;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+      margin: auto;
+    }
+
+    /* Mobile Popup - 360px width */
+    @media (max-width: 768px) {
+      .voucher-popup-overlay {
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+      }
+      .voucher-popup {
+        width: 360px;
+        max-width: 360px;
+        max-height: 90vh;
+        border-radius: 8px;
+        height: auto;
+      }
+    }
+
+    /* Desktop Popup - 787px width (exact Figma size), border-radius 48px */
+    @media (min-width: 769px) {
+      .voucher-popup {
+        width: 787px;
+        max-width: 787px;
+        border-radius: 48px;
+      }
+    }
+
+    /* Popup Header - Exact Figma spacing */
+    .voucher-popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 35px 26px 0;
+      border-bottom: none;
+      position: relative;
+    }
+    .voucher-popup-title {
+      font-family: var(--font-stack-body);
+      font-size: 39px;
+      font-weight: 700;
+      color: #1C2C58;
+      margin: 0;
+      text-transform: capitalize;
+      line-height: 1.2;
+    }
+    .voucher-popup-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 27px;
+      height: 27px;
+      flex-shrink: 0;
+    }
+    .voucher-popup-close svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Mobile Header */
+    @media (max-width: 768px) {
+      .voucher-popup-header {
+        padding: 8px 15px;
+      }
+      .voucher-popup-title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+
+    /* Popup Content - Exact Figma padding */
+    .voucher-popup-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 26px 26px 20px;
+      scrollbar-width: thin;
+      scrollbar-color: #D1E5FF transparent;
+    }
+    .voucher-popup-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .voucher-popup-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .voucher-popup-content::-webkit-scrollbar-thumb {
+      background: #D1E5FF;
+      border-radius: 3px;
+    }
+
+    /* Mobile Content */
+    @media (max-width: 768px) {
+      .voucher-popup-content {
+        padding: 15px;
+      }
+    }
+
+    /* Voucher Form - Exact Figma sizes with #F5F9FF wrapper */
+    .voucher-popup-form {
+      margin-bottom: 30px;
+    }
+    .voucher-popup-input-wrapper {
+      background: #F5F9FF;
+      border-radius: 15px;
+      width: 724.594px;
+      height: 96.787px;
+      padding: 25.51px 16.99px;
+      box-sizing: border-box;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: visible;
+    }
+    .voucher-popup-input-group {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      position: relative;
+      width: 100%;
+      height: 45.768px;
+      padding-right:16.99px;
+      overflow: visible;
+    }
+    .voucher-popup-input {
+      width: 690.619px;
+      padding: 0 20px;
+      border: 2px solid #E5E7EB;
+      border-right: none;
+      background: white;
+      font-family: var(--font-stack-body);
+      font-size: 20px;
+      color: #000;
+      outline: none;
+      border-radius: 37.5px 0 0 37.5px;
+      height: 45.768px;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .voucher-popup-input::placeholder {
+      color: #999;
+      font-size: 20px;
+    }
+    .voucher-popup-apply-btn {
+      width: 239.22px;
+      height: 45.768px;
+      background: #FCE390;
+      color: #1C2C58;
+      border: none;
+      border-radius: 37.5px;
+      font-family: var(--font-stack-body);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      text-transform: uppercase;
+      transition: background 0.2s ease;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+    .voucher-popup-apply-btn:hover {
+      background: #F9D966;
+    }
+    .voucher-popup-apply-btn:active {
+      background: #F5C842;
+    }
+
+    /* Mobile Form */
+    @media (max-width: 768px) {
+      .voucher-popup-form {
+        margin-bottom: 20px;
+      }
+      .voucher-popup-input-wrapper {
+        width: 100%;
+        height: auto;
+        min-height: 77px;
+        padding: 18px 15px;
+        border-radius: 5px;
+      }
+      .voucher-popup-input-group {
+        flex-direction: column;
+        gap: 10px;
+        height: auto;
+      }
+      .voucher-popup-input {
+        width: 100%;
+        max-width: 308px;
+        padding: 0 12px;
+        font-size: 14px;
+        border-radius: 37.5px;
+        border: 1px solid #E5E7EB;
+        height: 41px;
+        margin-left: 0;
+        border-right: 1px solid #E5E7EB;
+        z-index: 1;
+      }
+      .voucher-popup-apply-btn {
+        width: 118px;
+        height: 41px;
+        border-radius: 37.5px;
+        font-size: 14px;
+        font-weight: 500;
+        margin-left: 0;
+        margin-top: 0;
+        z-index: 2;
+      }
+    }
+
+    /* Voucher List Section - Exact Figma spacing */
+    .voucher-popup-list-section {
+      margin-top: 40px;
+    }
+    .voucher-popup-list-title {
+      font-family: var(--font-stack-body);
+      font-size: 20px;
+      font-weight: 400;
+      color: #000;
+      margin: 0 0 27px 0;
+    }
+    .voucher-popup-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .voucher-popup-empty {
+      text-align: center;
+      padding: 30px;
+      color: #999;
+      font-family: var(--font-stack-body);
+      font-size: 14px;
+    }
+    .voucher-popup-disclaimer {
+      font-family: var(--font-stack-body);
+      font-size: 20px;
+      font-weight: 300;
+      font-style: italic;
+      color: #000;
+      margin: 0;
+      padding-top: 15px;
+      border-top: 1px solid #E5E7EB;
+    }
+
+    /* Mobile List Section */
+    @media (max-width: 768px) {
+      .voucher-popup-list-section {
+        margin-top: 20px;
+      }
+      .voucher-popup-list-title {
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 15px;
+      }
+      .voucher-popup-list {
+        gap: 12px;
+        margin-bottom: 15px;
+      }
+      .voucher-popup-disclaimer {
+        font-size: 14px;
+        font-weight: 300;
+        font-style: italic;
+        padding-top: 10px;
+      }
+    }
+
+    /* Voucher Card - Exact Design Match from Figma Desktop */
+    .voucher-card {
+      background: #F5F9FF;
+      border: none;
+      border-radius: 15px;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      width: 729.448px;
+      height: 126.049px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .voucher-card:hover {
+      background: #E8F2FF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .voucher-card-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      flex: 1;
+      min-width: 0;
+    }
+    .voucher-card-title {
+      font-family: var(--font-stack-body);
+      font-size: 18px;
+      font-weight: 700;
+      color: #1C2C58;
+      margin: 0 0 8px 0;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .voucher-card-description {
+      font-family: var(--font-stack-body);
+      font-size: 18px;
+      font-weight: 400;
+      color: #000;
+      margin: 0 0 8px 0;
+      line-height: 1.2;
+    }
+    .voucher-card-code-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 8px 0;
+    }
+    .voucher-card-code-label {
+      font-family: var(--font-stack-body);
+      font-size: 18px;
+      font-weight: 400;
+      color: #000;
+      margin: 0;
+    }
+    .voucher-card-code-box {
+      background: white;
+      border: 2px solid #E5E7EB;
+      border-radius: 5px;
+      padding: 4px 12px;
+      display: inline-flex;
+      align-items: center;
+      width: 104px;
+      height: 27px;
+      box-sizing: border-box;
+    }
+    .voucher-card-code {
+      font-family: var(--font-stack-body);
+      font-size: 18px;
+      font-weight: 500;
+      color: #1C2C58;
+      margin: 0;
+    }
+    .voucher-card-expiry {
+      font-family: var(--font-stack-body);
+      font-size: 18px;
+      font-weight: 400;
+      color: #000;
+      margin: 0;
+    }
+    .voucher-card-radio {
+      width: 35px;
+      height: 35px;
+      border: 2px solid #E5E7EB;
+      border-radius: 50%;
+      background: white;
+      margin-right: 20px;
+      margin-left: auto;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .voucher-card-radio::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #1C2C58;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .voucher-card.selected .voucher-card-radio::after {
+      opacity: 1;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .voucher-card-dashed-line {
+      position: absolute;
+      right: 55px;
+      top: 0;
+      bottom: 0;
+      width: 1.387px;
+      background: repeating-linear-gradient(
+        to bottom,
+        #E5E7EB 0,
+        #E5E7EB 7.503px,
+        transparent 7.503px,
+        transparent 15.006px
+      );
+      pointer-events: none;
+    }
+
+    /* Mobile Voucher Card */
+    @media (max-width: 768px) {
+      .voucher-card {
+        min-height: 106px;
+        border-radius: 5px;
+      }
+      .voucher-card-content {
+        padding: 12px 15px;
+      }
+      .voucher-card-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .voucher-card-description {
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
+      .voucher-card-code-wrapper {
+        margin-bottom: 4px;
+      }
+      .voucher-card-code-label {
+        font-size: 12px;
+      }
+      .voucher-card-code-box {
+        height: 23px;
+        padding: 4px 8px;
+        border: 1px solid #E5E7EB;
+        border-radius: 5px;
+      }
+      .voucher-card-code {
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .voucher-card-expiry {
+        font-size: 12px;
+      }
+      .voucher-card-dashed-line {
+        width: 1.234px;
+        background: repeating-linear-gradient(
+          to bottom,
+          #E5E7EB 0,
+          #E5E7EB 6.169px,
+          transparent 6.169px,
+          transparent 12.338px
+        );
+      }
+    }
+
+    /* Popup Footer - Exact Figma spacing */
+    .voucher-popup-footer {
+      padding: 20px 26px;
+      border-top: 1px solid #E5E7EB;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .voucher-popup-back-btn {
+      padding: 0;
+      background: white;
+      border: 2px solid #E5E7EB;
+      border-radius: 37.5px;
+      font-family: var(--font-stack-body);
+      font-size: 20px;
+      font-weight: 500;
+      color: #000;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 185px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    .voucher-popup-back-btn:hover {
+      background: #F5F5F5;
+      border-color: #D1D5DB;
+    }
+
+    /* Mobile Footer */
+    @media (max-width: 768px) {
+      .voucher-popup-footer {
+        padding: 15px;
+        justify-content: center;
+      }
+      .voucher-popup-back-btn {
+        width: 117px;
+        height: 41px;
+        border: 1px solid #E5E7EB;
+        border-radius: 37.5px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
   </style>
 
   <div id="CartDrawer" class="drawer drawer--right">
@@ -1665,6 +2237,14 @@
             </div>
           </div>
           {%- endif -%}
+
+          <!-- Voucher Section -->
+          <div class="cart-drawer__voucher-section">
+            <button type="button" class="cart-drawer__voucher-trigger" data-voucher-popup-open>
+              <span class="cart-drawer__voucher-trigger-label">Mã giảm giá</span>
+              <span class="cart-drawer__voucher-trigger-button">Chọn mã giảm giá</span>
+            </button>
+          </div>
         </div>
 
         <div class="drawer__footer appear-animation appear-delay-4">
@@ -1693,9 +2273,9 @@
                 {%- if cart.cart_level_discount_applications.size > 0 -%}
                   {%- for cart_discount in cart.cart_level_discount_applications -%}
                     <div class="cart-drawer__summary-item cart-drawer__discount-item">
-                      <span class="cart-drawer__discount-title">{{ cart_discount.title }}</span>
+                      <span class="cart-drawer__discount-title">Giảm giá</span>
                       <div class="cart-drawer__discount-right">
-                        <span class="cart-drawer__discount-amount">-{{ cart_discount.total_allocated_amount | money }}</span>
+                        <span class="cart-drawer__discount-amount">{{ cart_discount.total_allocated_amount | money }}</span>
                         <button type="button" class="cart-drawer__discount-remove" data-discount-title="{{ cart_discount.title }}" title="Bỏ mã giảm giá">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                             <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1986,6 +2566,50 @@
         }
 
         // Check for stored voucher on page load
+        // Function to verify discount is applied
+        function verifyDiscountApplied(discountCode, maxRetries = 3, retryDelay = 500) {
+          return new Promise((resolve, reject) => {
+            let retries = 0;
+            
+            function checkDiscount() {
+              fetch('/cart.js')
+                .then(response => response.json())
+                .then(cartData => {
+                  const hasDiscount = cartData.cart_level_discount_applications && 
+                                     cartData.cart_level_discount_applications.length > 0;
+                  
+                  // Check if the specific discount code is applied
+                  const discountApplied = hasDiscount && cartData.cart_level_discount_applications.some(
+                    discount => discount.title && discount.title.toLowerCase().includes(discountCode.toLowerCase())
+                  );
+                  
+                  if (discountApplied) {
+                    console.log('Discount verified as applied:', discountCode);
+                    resolve(true);
+                  } else if (retries < maxRetries) {
+                    retries++;
+                    console.log(`Retrying discount verification (${retries}/${maxRetries})...`);
+                    setTimeout(checkDiscount, retryDelay);
+                  } else {
+                    console.warn('Discount verification failed after retries');
+                    resolve(false);
+                  }
+                })
+                .catch(error => {
+                  console.error('Error verifying discount:', error);
+                  if (retries < maxRetries) {
+                    retries++;
+                    setTimeout(checkDiscount, retryDelay);
+                  } else {
+                    reject(error);
+                  }
+                });
+            }
+            
+            checkDiscount();
+          });
+        }
+
         // Function to handle checkout with voucher
         function handleCheckout() {
           console.log('=== HANDLE CHECKOUT ===');
@@ -2007,9 +2631,14 @@
                 }
               }
               
+              // Check for stored discount code from voucher popup
+              const storedDiscountCode = sessionStorage.getItem('applied_discount_code') || 
+                                        localStorage.getItem('applied_discount_code');
+              
               console.log('Cart state:', {
                 hasDiscount,
                 bundleVoucher,
+                storedDiscountCode,
                 discountApplications: cartData.cart_level_discount_applications
               });
               
@@ -2018,7 +2647,7 @@
                 console.log('Discount already applied, going to checkout');
                 window.location.href = '/checkout';
               } else if (bundleVoucher) {
-                // Apply bundle voucher first, then go to checkout
+                // Apply bundle voucher first, then verify and go to checkout
                 console.log('Applying bundle voucher before checkout:', bundleVoucher);
                 fetch('/cart/update.js', {
                   method: 'POST',
@@ -2030,12 +2659,62 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                  console.log('Voucher applied before checkout:', data);
-                  // Go to checkout after voucher is applied
-                  window.location.href = '/checkout';
+                  console.log('Voucher applied response:', data);
+                  // Verify discount is applied before redirecting
+                  return verifyDiscountApplied(bundleVoucher);
+                })
+                .then(verified => {
+                  if (verified) {
+                    console.log('Voucher verified, going to checkout');
+                    window.location.href = '/checkout';
+                  } else {
+                    console.warn('Voucher not verified, but proceeding to checkout');
+                    // Still go to checkout - discount might be applied on server side
+                    window.location.href = '/checkout';
+                  }
                 })
                 .catch(error => {
                   console.error('Error applying voucher before checkout:', error);
+                  // Go to checkout anyway
+                  window.location.href = '/checkout';
+                });
+              } else if (storedDiscountCode) {
+                // Apply stored discount code from voucher popup
+                console.log('Applying stored discount code before checkout:', storedDiscountCode);
+                fetch('/cart/update.js', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                  },
+                  body: JSON.stringify({ 'discount': storedDiscountCode })
+                })
+                .then(response => response.json())
+                .then(data => {
+                  console.log('Discount code applied response:', data);
+                  // Check if there's an error in the response
+                  if (data.status && data.status !== 200) {
+                    console.error('Discount application error:', data.description);
+                    // Still proceed to checkout
+                    window.location.href = '/checkout';
+                    return;
+                  }
+                  // Verify discount is applied before redirecting
+                  return verifyDiscountApplied(storedDiscountCode);
+                })
+                .then(verified => {
+                  if (verified !== undefined) {
+                    if (verified) {
+                      console.log('Discount verified, going to checkout');
+                      window.location.href = '/checkout';
+                    } else {
+                      console.warn('Discount not verified, but proceeding to checkout');
+                      window.location.href = '/checkout';
+                    }
+                  }
+                })
+                .catch(error => {
+                  console.error('Error applying discount code before checkout:', error);
                   // Go to checkout anyway
                   window.location.href = '/checkout';
                 });
@@ -2203,9 +2882,9 @@
                 console.log(`Processed discount: amount=${discountAmount}, title=${discountTitle}`);
                 
                 discountItem.innerHTML = `
-                  <span class="cart-drawer__discount-title">${discountTitle}</span>
+                  <span class="cart-drawer__discount-title">Giảm giá</span>
                   <div class="cart-drawer__discount-right">
-                    <span class="cart-drawer__discount-amount">-${formatMoney(discountAmount)}</span>
+                    <span class="cart-drawer__discount-amount">${formatMoney(discountAmount)}</span>
                     <button type="button" class="cart-drawer__discount-remove" data-discount-title="${discountTitle}" title="Bỏ mã giảm giá">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                         <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3093,15 +3772,28 @@
                   }
                 }
                 
-                if (bundleVoucher) {
-                  console.log('Last-minute voucher application:', bundleVoucher);
+                // Check for stored discount code
+                const storedDiscountCode = sessionStorage.getItem('applied_discount_code') || 
+                                          localStorage.getItem('applied_discount_code');
+                
+                const discountToApply = bundleVoucher || storedDiscountCode;
+                
+                if (discountToApply) {
+                  console.log('Last-minute discount application:', discountToApply);
                   fetch('/cart/update.js', {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
                       'Accept': 'application/json'
                     },
-                    body: JSON.stringify({ 'discount': bundleVoucher })
+                    body: JSON.stringify({ 'discount': discountToApply })
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    console.log('Backup discount applied:', data);
+                  })
+                  .catch(error => {
+                    console.error('Error in backup discount application:', error);
                   });
                 }
               }
@@ -3126,9 +3818,338 @@
         window.addEventListener('resize', updateCartDrawerLayout);
         window.addEventListener('orientationchange', updateCartDrawerLayout);
 
+        // --- Voucher Popup Functions ---
+        function openVoucherPopup() {
+          const overlay = document.querySelector('[data-voucher-popup-overlay]');
+          if (overlay) {
+            overlay.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+            // Load vouchers when popup opens
+            setTimeout(() => {
+              loadAvailableVouchers();
+              // Focus on input when popup opens
+              const input = overlay.querySelector('.voucher-popup-input');
+              if (input) input.focus();
+            }, 100);
+          }
+        }
+
+        function closeVoucherPopup() {
+          const overlay = document.querySelector('[data-voucher-popup-overlay]');
+          if (overlay) {
+            overlay.classList.remove('is-open');
+            document.body.style.overflow = '';
+          }
+        }
+
+        // Open popup when trigger is clicked
+        document.addEventListener('click', function(event) {
+          if (event.target.closest('[data-voucher-popup-open]')) {
+            event.preventDefault();
+            openVoucherPopup();
+          }
+        });
+
+        // Close popup when close button or overlay is clicked
+        document.addEventListener('click', function(event) {
+          if (event.target.closest('[data-voucher-popup-close]') || 
+              (event.target.closest('[data-voucher-popup-overlay]') && 
+               event.target === event.target.closest('[data-voucher-popup-overlay]'))) {
+            event.preventDefault();
+            closeVoucherPopup();
+          }
+        });
+
+        // Close popup on Escape key
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape') {
+            const overlay = document.querySelector('[data-voucher-popup-overlay]');
+            if (overlay && overlay.classList.contains('is-open')) {
+              closeVoucherPopup();
+            }
+          }
+        });
+
+        // Handle voucher form submission
+        document.addEventListener('submit', function(event) {
+          const form = event.target.closest('[data-voucher-apply-form]');
+          if (form) {
+            event.preventDefault();
+            const input = form.querySelector('.voucher-popup-input');
+            const applyBtn = form.querySelector('.voucher-popup-apply-btn');
+            
+            if (!input || !input.value.trim()) {
+              alert('Vui lòng nhập mã giảm giá.');
+              return;
+            }
+
+            const discountCode = input.value.trim();
+            const originalButtonText = applyBtn.textContent;
+            applyBtn.textContent = 'Đang áp dụng...';
+            applyBtn.disabled = true;
+
+            fetch('/cart/update.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({ 'discount': discountCode })
+            })
+            .then(res => res.json())
+            .then(cart => {
+              if (cart.status) {
+                alert(cart.description || 'Mã giảm giá không hợp lệ.');
+                input.value = '';
+              } else {
+                // Success - clear input, close popup, and rebuild cart
+                input.value = '';
+                closeVoucherPopup();
+                
+                // Store discount code for checkout persistence
+                sessionStorage.setItem('applied_discount_code', discountCode);
+                localStorage.setItem('applied_discount_code', discountCode);
+                
+                // Update cart display
+                rebuildCart();
+              }
+            })
+            .catch(e => {
+              console.error('Error applying discount:', e);
+              alert('Có lỗi xảy ra khi áp dụng mã giảm giá.');
+            })
+            .finally(() => {
+              applyBtn.textContent = originalButtonText;
+              applyBtn.disabled = false;
+            });
+          }
+        });
+
+        // Load available vouchers from section data
+        function loadAvailableVouchers() {
+          const voucherList = document.querySelector('[data-voucher-list]');
+          const emptyState = document.querySelector('[data-voucher-empty]');
+          
+          if (!voucherList) return;
+          
+          // Get voucher data from section JSON
+          const voucherDataScript = document.querySelector('[data-voucher-data]');
+          if (!voucherDataScript) {
+            if (emptyState) {
+              emptyState.style.display = 'block';
+              emptyState.innerHTML = '<p>Không có voucher nào khả dụng</p>';
+            }
+            return;
+          }
+          
+          try {
+            const voucherData = JSON.parse(voucherDataScript.textContent);
+            const vouchers = voucherData.vouchers || [];
+            
+            // Clear existing vouchers
+            voucherList.innerHTML = '';
+            
+            if (vouchers.length === 0) {
+              if (emptyState) {
+                emptyState.style.display = 'block';
+                emptyState.innerHTML = '<p>Không có voucher nào khả dụng</p>';
+              }
+              return;
+            }
+            
+            // Hide empty state
+            if (emptyState) emptyState.style.display = 'none';
+            
+            // Render each voucher
+            vouchers.forEach(voucher => {
+              renderVoucherCard(voucher);
+            });
+          } catch (error) {
+            console.error('Error parsing voucher data:', error);
+            if (emptyState) {
+              emptyState.style.display = 'block';
+              emptyState.innerHTML = '<p>Không thể tải voucher</p>';
+            }
+          }
+        }
+
+        // Function to render voucher card
+        function renderVoucherCard(voucher) {
+          const voucherList = document.querySelector('[data-voucher-list]');
+          if (!voucherList) return;
+          
+          const emptyState = document.querySelector('[data-voucher-empty]');
+          if (emptyState) emptyState.style.display = 'none';
+          
+          const card = document.createElement('div');
+          card.className = 'voucher-card';
+          card.dataset.voucherCode = voucher.code;
+          
+          // Format expiry date
+          let expiryText = '';
+          if (voucher.ends_at) {
+            const expiryDate = new Date(voucher.ends_at);
+            expiryText = expiryDate.toLocaleDateString('vi-VN', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            });
+          } else if (voucher.expiry_date) {
+            expiryText = voucher.expiry_date;
+          }
+          
+          card.innerHTML = `
+            <div class="voucher-card-content">
+              <div class="voucher-card-title">${voucher.title || 'VOUCHER'}</div>
+              <div class="voucher-card-description">${voucher.description || 'Giảm giá cho đơn hàng'}</div>
+              <div class="voucher-card-code-wrapper">
+                <span class="voucher-card-code-label">Mã</span>
+                <div class="voucher-card-code-box">
+                  <span class="voucher-card-code">${voucher.code}</span>
+                </div>
+              </div>
+              ${expiryText ? `<div class="voucher-card-expiry">Hạn sử dụng: ${expiryText}</div>` : ''}
+            </div>
+            <div class="voucher-card-dashed-line"></div>
+            <div class="voucher-card-radio"></div>
+          `;
+          
+          voucherList.appendChild(card);
+        }
+
+        // Handle voucher card click
+        document.addEventListener('click', function(event) {
+          const voucherCard = event.target.closest('.voucher-card');
+          if (voucherCard) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const voucherCode = voucherCard.dataset.voucherCode;
+            if (!voucherCode) {
+              console.error('Voucher code not found');
+              return;
+            }
+            
+            // Visual feedback - mark as selected
+            document.querySelectorAll('.voucher-card').forEach(card => {
+              card.classList.remove('selected');
+            });
+            voucherCard.classList.add('selected');
+            
+            // Apply voucher directly
+            const applyBtn = voucherCard.querySelector('.voucher-card-radio');
+            const originalContent = applyBtn ? applyBtn.innerHTML : '';
+            
+            // Show loading state
+            if (applyBtn) {
+              applyBtn.innerHTML = '<div style="width: 20px; height: 20px; border: 3px solid #E5E7EB; border-top-color: #1C2C58; border-radius: 50%; animation: spin 0.6s linear infinite; margin: auto;"></div>';
+            }
+            
+            fetch('/cart/update.js', {
+              method: 'POST',
+              headers: { 
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({ 'discount': voucherCode })
+            })
+            .then(res => {
+              if (!res.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return res.json();
+            })
+            .then(cart => {
+              console.log('Cart response:', cart);
+              
+              // Check if there's an error
+              if (cart.status && cart.status !== 200) {
+                throw new Error(cart.description || 'Mã giảm giá không hợp lệ.');
+              }
+              
+              // Check for discount applications
+              if (cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
+                // Success - close popup and rebuild cart
+                closeVoucherPopup();
+                
+                // Store discount code for checkout persistence
+                sessionStorage.setItem('applied_discount_code', voucherCode);
+                localStorage.setItem('applied_discount_code', voucherCode);
+                
+                // Update cart display
+                rebuildCart();
+              } else {
+                // No discount applied - might be invalid code
+                alert('Mã giảm giá không hợp lệ hoặc không thể áp dụng.');
+                if (applyBtn) applyBtn.innerHTML = originalContent;
+                voucherCard.classList.remove('selected');
+              }
+            })
+            .catch(e => {
+              console.error('Error applying voucher:', e);
+              alert('Có lỗi xảy ra khi áp dụng voucher: ' + (e.message || 'Vui lòng thử lại.'));
+              if (applyBtn) applyBtn.innerHTML = originalContent;
+              voucherCard.classList.remove('selected');
+            });
+          }
+        });
+
+        // Vouchers are now loaded in openVoucherPopup() function
+
         updateCartDrawerLayout();
       })();
     </script>
 
+  </div>
+
+  <!-- Voucher Popup Overlay - Outside Cart Drawer -->
+  <div class="voucher-popup-overlay" data-voucher-popup-overlay>
+    <div class="voucher-popup">
+            <!-- Popup Header -->
+            <div class="voucher-popup-header">
+              <h3 class="voucher-popup-title">Chọn Voucher</h3>
+              <button type="button" class="voucher-popup-close" data-voucher-popup-close aria-label="Đóng">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M18 6L6 18" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6 6L18 18" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Popup Content -->
+            <div class="voucher-popup-content">
+              <!-- Discount Code Input Form -->
+              <form class="voucher-popup-form" data-voucher-apply-form>
+                <div class="voucher-popup-input-wrapper">
+                  <div class="voucher-popup-input-group">
+                    <input 
+                      type="text" 
+                      name="discount" 
+                      class="voucher-popup-input" 
+                      placeholder="Mã giảm giá"
+                      aria-label="Mã giảm giá"
+                    >
+                    <button type="submit" class="voucher-popup-apply-btn">ÁP DỤNG</button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Applicable Vouchers List -->
+              <div class="voucher-popup-list-section">
+                <h4 class="voucher-popup-list-title">Voucher có thể áp dụng</h4>
+                <div class="voucher-popup-list" data-voucher-list>
+                  <!-- Vouchers will be loaded here via JavaScript -->
+                  <div class="voucher-popup-empty" data-voucher-empty>
+                    <p>Đang tải voucher...</p>
+                  </div>
+                </div>
+                <p class="voucher-popup-disclaimer">
+                  * Đã hiển thị tất cả Ru9 voucher thuộc mục voucher của bạn.
+                </p>
+              </div>
+            </div>
+
+            <!-- Popup Footer -->
+      <div class="voucher-popup-footer">
+        <button type="button" class="voucher-popup-back-btn" data-voucher-popup-close>TRỞ LẠI</button>
+      </div>
+    </div>
   </div>
 {%- endif -%}
