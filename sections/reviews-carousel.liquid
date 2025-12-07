@@ -27,38 +27,43 @@
       <div class="reviews-carousel-track">
         {%- for block in section.blocks -%}
           <article class="review-card" {{ block.shopify_attributes }}>
-            <div class="review-card__image">
-              {%- if block.settings.image != blank -%}
-                <img src="{{ block.settings.image | image_url: width: 380, height: 250, crop: 'center' }}" alt="{{ block.settings.customer_name | escape }}" width="380" height="250" loading="lazy"/>
+            <div class="review-card__video-wrapper">
+              {%- if block.settings.video != blank -%}
+                <div class="review-card__video">
+                  <video 
+                    controls 
+                    controlsList="nofullscreen"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="auto" 
+                    loading="lazy"
+                    poster="{% if block.settings.video.preview_image %}{{ block.settings.video.preview_image | image_url: width: 800 }}{% endif %}"
+                  >
+                    {%- for source in block.settings.video.sources -%}
+                      <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                    {%- endfor -%}
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
               {%- else -%}
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                <div class="review-card__video-placeholder">
+                  <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 21.3333L40 32L24 42.6667V21.3333Z" stroke="#759CE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  </svg>
+                </div>
               {%- endif -%}
-            </div>
-            <div class="review-card__content">
-              <div class="review-card__stars">
-                <svg width="106" height="18" viewBox="0 0 106 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.95258 0.321586C9.09241 -0.107195 9.70126 -0.107195 9.84109 0.321586L11.7392 6.14137C11.8017 6.33312 11.9811 6.46295 12.1834 6.46295H18.3257C18.7782 6.46295 18.9663 7.03984 18.6003 7.30488L13.6311 10.9017C13.4674 11.0202 13.3989 11.2303 13.4614 11.422L15.3594 17.2418C15.4993 17.6706 15.0067 18.0272 14.6406 17.7621L9.67144 14.1653C9.5077 14.0468 9.28597 14.0468 9.12223 14.1653L4.15311 17.7621C3.78701 18.0272 3.29442 17.6706 3.43426 17.2418L5.3323 11.422C5.39484 11.2303 5.32633 11.0202 5.1626 10.9017L0.193461 7.30488C-0.172647 7.03984 0.0155026 6.46295 0.468039 6.46295H6.61025C6.8126 6.46295 6.99198 6.33312 7.0545 6.14137L8.95258 0.321586Z" fill="#FFDC5F"/><path d="M30.7524 0.321586C30.8922 -0.107195 31.5011 -0.107195 31.6409 0.321586L33.539 6.14137C33.6015 6.33312 33.7809 6.46295 33.9832 6.46295H40.1255C40.578 6.46295 40.7662 7.03984 40.4001 7.30488L35.4309 10.9017C35.2672 11.0202 35.1987 11.2303 35.2612 11.422L37.1593 17.2418C37.2991 17.6706 36.8065 18.0272 36.4404 17.7621L31.4713 14.1653C31.3075 14.0468 31.0858 14.0468 30.9221 14.1653L25.9529 17.7621C25.5868 18.0272 25.0942 17.6706 25.234 17.2418L27.1321 11.422C27.1946 11.2303 27.1261 11.0202 26.9624 10.9017L21.9932 7.30488C21.6272 7.03984 21.8153 6.46295 22.2678 6.46295H28.4101C28.6124 6.46295 28.7918 6.33312 28.8543 6.14137L30.7524 0.321586Z" fill="#FFDC5F"/><path d="M52.5522 0.321586C52.692 -0.107195 53.3009 -0.107195 53.4407 0.321586L55.3388 6.14137C55.4013 6.33312 55.5807 6.46295 55.783 6.46295H61.9253C62.3778 6.46295 62.566 7.03984 62.1999 7.30488L57.2307 10.9017C57.067 11.0202 56.9985 11.2303 57.061 11.422L58.9591 17.2418C59.0989 17.6706 58.6063 18.0272 58.2402 17.7621L53.2711 14.1653C53.1073 14.0468 52.8856 14.0468 52.7219 14.1653L47.7527 17.7621C47.3866 18.0272 46.894 17.6706 47.0338 17.2418L48.9319 11.422C48.9944 11.2303 48.9259 11.0202 48.7622 10.9017L43.793 7.30488C43.427 7.03984 43.6151 6.46295 44.0676 6.46295H50.2099C50.4122 6.46295 50.5916 6.33312 50.6541 6.14137L52.5522 0.321586Z" fill="#FFDC5F"/><path d="M74.353 0.321586C74.4928 -0.107195 75.1017 -0.107195 75.2415 0.321586L77.1392 6.14137C77.2023 6.33312 77.3813 6.46295 77.5837 6.46295H83.7259C84.1782 6.46295 84.3667 7.03984 84.0007 7.30488L79.0311 10.9017C78.8676 11.0202 78.7991 11.2303 78.8622 11.422L80.7595 17.2418C80.8997 17.6706 80.4068 18.0272 80.0409 17.7621L75.0718 14.1653C74.9081 14.0468 74.6864 14.0468 74.5226 14.1653L69.5535 17.7621C69.1874 18.0272 68.6948 17.6706 68.8346 17.2418L70.7327 11.422C70.7952 11.2303 70.7267 11.0202 70.563 10.9017L65.5938 7.30488C65.2277 7.03984 65.4159 6.46295 65.8684 6.46295H72.0107C72.213 6.46295 72.3924 6.33312 72.4549 6.14137L74.353 0.321586Z" fill="#FFDC5F"/><path d="M96.1524 0.321586C96.2925 -0.107195 96.9014 -0.107195 97.0415 0.321586L98.9389 6.14137C99.0019 6.33312 99.181 6.46295 99.3834 6.46295H105.526C105.978 6.46295 106.166 7.03984 105.8 7.30488L100.831 10.9017C100.667 11.0202 100.599 11.2303 100.662 11.422L102.559 17.2418C102.699 17.6706 102.207 18.0272 101.841 17.7621L96.8718 14.1653C96.7075 14.0468 96.4864 14.0468 96.3221 14.1653L91.3533 17.7621C90.9873 18.0272 90.4945 17.6706 90.6346 17.2418L92.532 11.422C92.5951 11.2303 92.5266 11.0202 92.3631 10.9017L87.3935 7.30488C87.0275 7.03984 87.2159 6.46295 87.6683 6.46295H93.8104C94.0129 6.46295 94.1919 6.33312 94.255 6.14137L96.1524 0.321586Z" fill="#FFDC5F"/></svg>
-              </div>
-              <p class="review-card__name">{{ block.settings.customer_name }}</p>
-              <div class="review-card__text rte">{{ block.settings.review_text }}</div>
-              <div class="review-card__meta">
-                <p class="review-card__product">{{ block.settings.product_name }}</p>
-                {%- if block.settings.verified_text != blank -%}
-                  {%- if block.settings.verification_link != blank -%}
-                    <a href="{{ block.settings.verification_link }}" class="review-card__verified" target="_blank" rel="noopener">
-                  {%- else -%}
-                    <div class="review-card__verified">
-                  {%- endif -%}
-                      <img src="{{ 'SVG - Verified tick.svg' | asset_url }}" alt="{{ block.settings.verified_text | escape }}" class="review-card__verified-icon" width="20" height="20" loading="lazy">
-                      <span>{{ block.settings.verified_text }}</span>
-                  {%- if block.settings.verification_link != blank -%}
-                    </a>
-                  {%- else -%}
-                    </div>
-                  {%- endif -%}
-                {%- endif -%}
-              </div>
-              {%- if block.settings.button_link != blank -%}
-                <a href="{{ block.settings.button_link }}" class="review-card__button">{{ block.settings.button_text }}</a>
+              {%- if block.settings.product_link != blank and block.settings.product_name != blank -%}
+                <a href="{{ block.settings.product_link }}" class="review-card__product-link">
+                  <span class="review-card__product-name">{{ block.settings.product_name }}</span>
+                  <span class="review-card__product-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="10" cy="10" r="10" fill="#2940A6"/>
+                      <path d="M8 6L12 10L8 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                  </span>
+                </a>
               {%- endif -%}
             </div>
           </article>
@@ -131,20 +136,125 @@
 .reviews-carousel-track { display: flex; gap: 24px; transition: transform 0.5s ease-in-out; }
 
 /* Review Card */
-.review-card { flex: 0 0 386px; width: 386px; display: flex; flex-direction: column; gap: 10px; }
-.review-card__image { width: 386px; height: 265px; flex-shrink: 0; aspect-ratio: 67/46; border-radius: 12px; overflow: hidden; }
-.review-card__image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.review-card__content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; border-radius: 12px; background: #F5F9FF; }
-.review-card__stars { margin-bottom: 12px; }
-.review-card__name { font-size: 18px; font-weight: 700; color: #1C2C58; margin: 0 0 8px; }
-.review-card__text { font-size: 16px; line-height: 1.6; color: #4A4A4A; flex-grow: 1; margin: 0 0 16px; }
-.review-card__text p { margin: 0; }
-.review-card__meta { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-.review-card__product { font-size: 14px; color: #1C2C58; margin: 0; }
-.review-card__verified { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: #1C2C58; text-decoration: none; }
-.review-card__verified-icon { width: 20px; height: 20px; }
-.review-card__button { display: inline-block; text-decoration: none; padding: 10px 20px;width: 100%;; border: 1px solid #000000; border-radius: 30px; color: #4A4A4A; text-align: center; font-size: 14px; font-weight: 500; transition: background-color 0.3s, color 0.3s; }
-.review-card__button:hover { background-color: #1C2C58; color: #fff; border-color: #1C2C58; }
+/* Wireframe: 478px x 745px trên màn hình 1920px */
+/* Tỷ lệ canvas 1594px: 1594/1920 = 0.830208333 */
+/* Card: 478 * 0.8302 = 397px, 745 * 0.8302 = 618px */
+.review-card { 
+  flex: 0 0 397px; 
+  width: 397px; 
+  display: flex; 
+  flex-direction: column; 
+  background: transparent; 
+  border-radius: 0; 
+  padding: 0; 
+  box-shadow: none;
+  height: fit-content;
+}
+.review-card__video-wrapper { 
+  width: 100%; 
+  height: 618px; 
+  border-radius: 12px; 
+  overflow: hidden; 
+  background: #FFFFFF; 
+  position: relative;
+  flex-shrink: 0;
+}
+.review-card__video { 
+  width: 100%; 
+  height: 100%; 
+  position: relative;
+}
+.review-card__video video { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  display: block; 
+  border: none; 
+  border-radius: 12px;
+}
+/* Ẩn thanh timeline và nút fullscreen */
+.review-card__video video::-webkit-media-controls-timeline {
+  display: none !important;
+}
+.review-card__video video::-webkit-media-controls-fullscreen-button {
+  display: none !important;
+}
+.review-card__video video::-webkit-media-controls-timeline-container {
+  display: none !important;
+}
+/* Ẩn timeline progress bar */
+.review-card__video video::-webkit-media-controls-current-time-display,
+.review-card__video video::-webkit-media-controls-time-remaining-display {
+  display: none !important;
+}
+/* Ẩn fullscreen cho các trình duyệt khác */
+.review-card__video video::--webkit-media-controls-fullscreen-button {
+  display: none !important;
+}
+/* Ẩn fullscreen button trong controls panel */
+.review-card__video video::-webkit-media-controls-enclosure {
+  overflow: hidden;
+}
+.review-card__video video::-webkit-media-controls-panel {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+/* Ẩn fullscreen button cho Firefox */
+.review-card__video video::-moz-media-controls-fullscreen-button {
+  display: none !important;
+}
+.review-card__video-placeholder { 
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: #FFFFFF; 
+  border-radius: 12px;
+}
+.review-card__product-link { 
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 10px 20px; 
+  background: #FFF; 
+  border: 2px solid #E5E7EB;
+  text-decoration: none; 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+  transition: box-shadow 0.3s, transform 0.2s; 
+  flex-shrink: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  /* Kích thước cố định cho canvas 1594px: 408*0.8302=339px, 66*0.8302=55px, 37.5*0.8302=31px */
+  width: 339px;
+  height: 55px;
+  border-radius: 31px;
+}
+.review-card__product-link:hover { 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); 
+  transform: translateX(-50%) translateY(-1px); 
+}
+.review-card__product-name { 
+  font-size: 13px; 
+  font-weight: 500; 
+  color: #1C2C58; 
+  margin: 0; 
+}
+.review-card__product-icon { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  flex-shrink: 0; 
+  margin-left: 12px;
+}
+.review-card__product-icon svg { 
+  display: block; 
+}
 
 /* Progress Bar */
 .reviews-carousel-progress-container { width: 100%; height: 4px; display: none; position: relative; }
@@ -222,13 +332,96 @@
       display: none !important;
     }
     
-    .review-card { flex: 0 0 280px; width: 280px; }
-    .review-card__image { width: 280px; height: auto; }
-    .review-card__content { padding: 16px; }
-    .review-card__name { font-size: 16px; }
-    .review-card__text { font-size: 14px; }
-    .review-card__product { font-size: 14px; }
-    .review-card__button { padding: 8px 16px; font-size: 12px; width: auto; }
+    /* Mobile: tính tỷ lệ từ desktop 397px */
+    /* Tỷ lệ mobile: 280/397 = 0.705 */
+    /* Card: 280px width, height: 618 * 0.705 = 436px */
+    /* Button: 339 * 0.705 = 239px, 55 * 0.705 = 39px, 31 * 0.705 = 22px, bottom: 20 * 0.705 = 14px */
+    .review-card { 
+      flex: 0 0 280px; 
+      width: 280px; 
+      display: flex; 
+      flex-direction: column; 
+      background: transparent; 
+      border-radius: 0; 
+      padding: 0; 
+      box-shadow: none;
+      height: fit-content;
+    }
+    .review-card__video-wrapper { 
+      width: 100%; 
+      height: 436px; 
+      border-radius: 12px; 
+      overflow: hidden; 
+      background: #FFFFFF; 
+      position: relative;
+      flex-shrink: 0;
+    }
+    .review-card__video { 
+      width: 100%; 
+      height: 100%; 
+      position: relative;
+    }
+    .review-card__video video { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      display: block; 
+      border: none; 
+      border-radius: 12px;
+    }
+    .review-card__video-placeholder { 
+      width: 100%; 
+      height: 100%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      background: #FFFFFF; 
+      border-radius: 12px;
+    }
+    .review-card__product-link { 
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      padding: 8px 16px; 
+      background: #FFF; 
+      border: 2px solid #E5E7EB;
+      text-decoration: none; 
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+      transition: box-shadow 0.3s, transform 0.2s; 
+      flex-shrink: 0;
+      z-index: 10;
+      box-sizing: border-box;
+      /* Kích thước cố định cho mobile: 339*0.705=239px, 55*0.705=39px, 31*0.705=22px */
+      width: 239px;
+      height: 39px;
+      border-radius: 22px;
+    }
+    .review-card__product-link:hover { 
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); 
+      transform: translateX(-50%) translateY(-1px); 
+    }
+    .review-card__product-name { 
+      font-size: 12px; 
+      font-weight: 500; 
+      color: #1C2C58; 
+      margin: 0; 
+    }
+    .review-card__product-icon { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      flex-shrink: 0; 
+      margin-left: 12px;
+    }
+    .review-card__product-icon svg { 
+      display: block; 
+      width: 18px; 
+      height: 18px; 
+    }
   }
 </style>
 
@@ -236,6 +429,8 @@
 (function() {
   const sectionId = '{{ section_id }}';
   const carouselId = `reviews-carousel-${sectionId}`;
+
+  // Không cần tính toán JavaScript nữa vì đã gán trực tiếp vào CSS
 
   const initCarousel = (carousel) => {
     if (carousel.dataset.initialized) return;
@@ -391,6 +586,7 @@
     function onResize() {
       calculateDimensions();
       setPositionByIndex();
+      // Không cần applyButtonStyles vì tỷ lệ đã cố định theo canvas
     }
 
     prevButton.addEventListener('click', () => {
@@ -407,7 +603,7 @@
       }
     });
 
-    track.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
+    track.querySelectorAll('img, iframe, video').forEach(media => media.addEventListener('dragstart', (e) => e.preventDefault()));
     
     track.addEventListener('mousedown', startDrag);
     track.addEventListener('touchstart', startDrag, { passive: true }); // Start passive to allow vertical scroll
@@ -419,6 +615,75 @@
 
     const resizeObserver = new ResizeObserver(onResize);
     resizeObserver.observe(viewport);
+
+    // Ẩn timeline và fullscreen button cho video, và đảm bảo video tự động phát
+    const videos = carousel.querySelectorAll('.review-card__video video');
+    videos.forEach(video => {
+      // Ẩn fullscreen button
+      video.controlsList = 'nofullscreen';
+      
+      // Đảm bảo video tự động phát khi load
+      video.addEventListener('loadeddata', () => {
+        video.play().catch(err => {
+          // Nếu autoplay bị chặn, thử lại khi user tương tác
+          console.log('Autoplay blocked, will play on interaction');
+        });
+      });
+      
+      // Thử phát ngay khi video sẵn sàng
+      if (video.readyState >= 2) {
+        video.play().catch(err => {
+          console.log('Autoplay blocked');
+        });
+      }
+      
+      // Ẩn timeline khi video load
+      video.addEventListener('loadedmetadata', () => {
+        const controls = video.shadowRoot || video;
+        if (controls) {
+          const timeline = controls.querySelector('::-webkit-media-controls-timeline');
+          if (timeline) {
+            timeline.style.display = 'none';
+          }
+        }
+      });
+      
+      // Thêm CSS để ẩn timeline
+      if (!video.dataset.timelineHidden) {
+        const style = document.createElement('style');
+        style.textContent = `
+          .review-card__video video::-webkit-media-controls-timeline,
+          .review-card__video video::-webkit-media-controls-timeline-container {
+            display: none !important;
+          }
+        `;
+        document.head.appendChild(style);
+        video.dataset.timelineHidden = 'true';
+      }
+    });
+    
+    // Sử dụng Intersection Observer để phát video khi vào viewport
+    if ('IntersectionObserver' in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const video = entry.target;
+            video.play().catch(err => {
+              console.log('Autoplay blocked by browser policy');
+            });
+          } else {
+            // Tạm dừng video khi ra khỏi viewport để tiết kiệm tài nguyên
+            entry.target.pause();
+          }
+        });
+      }, {
+        threshold: 0.5 // Phát khi 50% video hiển thị
+      });
+      
+      videos.forEach(video => {
+        videoObserver.observe(video);
+      });
+    }
 
     setTimeout(() => {
         calculateDimensions();
@@ -434,6 +699,8 @@
       initCarousel(carouselElement);
     }
   }
+  
+  // Không cần resize listener nữa vì tỷ lệ đã cố định theo canvas
 
   document.addEventListener('DOMContentLoaded', setup);
   document.addEventListener('shopify:section:load', function(event) {
@@ -465,23 +732,13 @@
       "type": "review",
       "name": "Review",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "customer_name", "label": "Customer Name", "default": "Lê Trần Chi Kiên" },
-        { "type": "richtext", "id": "review_text", "label": "Review Text", "default": "<p>Sau nhiều lần đắn đo mình quyết định mua Nệm Foam Original, và thật sự đây là một khoản đầu tư xứng đáng.</p>" },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
         { "type": "text", "id": "product_name", "label": "Product Name", "default": "Nệm Original" },
-        {
-          "type": "text",
-          "id": "verified_text",
-          "label": "Verified Text",
-          "default": "Đã xác minh"
-        },
-        {
-          "type": "url",
-          "id": "verification_link",
-          "label": "Verification Link"
-        },
-        { "type": "text", "id": "button_text", "label": "Button Text", "default": "Xem sản phẩm" },
-        { "type": "url", "id": "button_link", "label": "Button Link" }
+        { "type": "url", "id": "product_link", "label": "Product Link" }
       ]
     }
   ],

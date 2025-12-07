@@ -1921,6 +1921,106 @@
         "name": "file_reference",
         "category": "REFERENCE"
       }
+    },
+    {
+      "key": "3d_infographic_desktop",
+      "namespace": "custom",
+      "name": "3D infographic desktop",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "3d_infographic_mobile",
+      "namespace": "custom",
+      "name": "3D infographic mobile",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "3d_mobile_block_info_1",
+      "namespace": "custom",
+      "name": "3d mobile info 1",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "3d_mobile_info_2",
+      "namespace": "custom",
+      "name": "3d mobile info 2",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "3d_mobile_info_3",
+      "namespace": "custom",
+      "name": "3d mobile info 3",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "3d_mobile_info_4",
+      "namespace": "custom",
+      "name": "3d mobile info 4",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "3d_des_mobile_1",
+      "namespace": "custom",
+      "name": "3d des mobile 1",
+      "description": "",
+      "type": {
+        "name": "multi_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "3d_mobile_des_2",
+      "namespace": "custom",
+      "name": "3d des mobile 2",
+      "description": "",
+      "type": {
+        "name": "multi_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "3d_des_mobile_3",
+      "namespace": "custom",
+      "name": "3d des mobile 3",
+      "description": "",
+      "type": {
+        "name": "multi_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "3d_des_mobile_4",
+      "namespace": "custom",
+      "name": "3d des mobile 4",
+      "description": "",
+      "type": {
+        "name": "multi_line_text_field",
+        "category": "TEXT"
+      }
     }
   ],
   "variant": [

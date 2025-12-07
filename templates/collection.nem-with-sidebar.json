@@ -118,6 +118,132 @@
         "default_sold_count": 280
       }
     },
+    "quiz_banner_QRUzGc": {
+      "type": "quiz-banner",
+      "blocks": {
+        "product_result_L4EJJx": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-original-pro"
+          }
+        },
+        "product_result_nxYpgb": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-hybrid"
+          }
+        },
+        "product_result_EJwP69": {
+          "type": "product_result",
+          "settings": {
+            "product": "foam-nest"
+          }
+        },
+        "product_result_ddRHUt": {
+          "type": "product_result",
+          "settings": {
+            "product": "foam-original"
+          }
+        }
+      },
+      "block_order": [
+        "product_result_L4EJJx",
+        "product_result_nxYpgb",
+        "product_result_EJwP69",
+        "product_result_ddRHUt"
+      ],
+      "name": "Quiz Banner (Advanced)",
+      "settings": {
+        "title": "Đâu là chiếc nệm phù hợp với bạn?",
+        "text": "<p>Chỉ mất 2 phút cùng Ru9 khám phá và chọn chiếc nệm cho bạn.</p>",
+        "button_1_text": "Quiz chọn nệm",
+        "button_2_text": "So sánh các loại nệm",
+        "button_2_link": "",
+        "q_1_title": "1. Vóc dáng và Thể trạng của người sử dụng chính?",
+        "q_1_a_1_text": "A. Nhẹ cân (< 50kg)",
+        "q_1_a_1_subtitle": "(Dáng người nhỏ nhắn, thư sinh)",
+        "q_1_a_1_value": "A",
+        "q_1_a_2_text": "B. Trung bình (50kg - 80kg)",
+        "q_1_a_2_subtitle": "(Vóc dáng phổ thông của người Việt)",
+        "q_1_a_2_value": "B",
+        "q_1_a_3_text": "C. Đậm người/Nặng cân (> 80kg)",
+        "q_1_a_3_subtitle": "(Cơ bắp hoặc vóc dáng lớn)",
+        "q_1_a_3_value": "C",
+        "q_2_title": "2. Bạn thường ngủ với ai?",
+        "q_2_a_1_text": "A. Ngủ một mình",
+        "q_2_a_1_subtitle": "(Tự do, ưu tiên sở thích cá nhân)",
+        "q_2_a_1_value": "A",
+        "q_2_a_2_text": "B. Ngủ với Vợ/Chồng",
+        "q_2_a_2_subtitle": "(Cần sự yên tĩnh, không làm phiền người bên cạnh khi trở mình)",
+        "q_2_a_2_value": "B",
+        "q_2_a_3_text": "C. Ngủ cả gia đình (Co-sleeping với con nhỏ) hoặc Thú cưng",
+        "q_2_a_3_subtitle": "(Cần không gian rộng, bề mặt phẳng, cực kỳ yên tĩnh và an toàn)",
+        "q_2_a_3_value": "C",
+        "q_3_title": "3. Hiện tại, anh/chị đang ngủ trên loại bề mặt nào và cảm thấy thế nào?",
+        "q_3_a_1_text": "A. Nệm bông ép/Nệm cao su cứng hoặc Chiếu trúc",
+        "q_3_a_1_subtitle": "(Rất cứng, phẳng lì)",
+        "q_3_a_1_value": "A",
+        "q_3_a_2_text": "B. Nệm lò xo cũ",
+        "q_3_a_2_subtitle": "(Có độ nảy, nhưng có thể đang bị võng/rung lắc)",
+        "q_3_a_2_value": "B",
+        "q_3_a_3_text": "C. Nệm foam hoặc cao su thiên nhiên",
+        "q_3_a_3_subtitle": "(Có độ êm, ôm sát)",
+        "q_3_a_3_value": "C",
+        "q_3_a_4_text": "D. Ngủ lung tung/Nệm quá cũ không còn cảm nhận được",
+        "q_3_a_4_subtitle": "",
+        "q_3_a_4_value": "D",
+        "q_4_title": "4. Cảm giác tiếp xúc (Feel Preference) anh/chị ưu tiên nhất?",
+        "q_4_a_1_text": "A. Chắc chắn & Vững chãi (Firm)",
+        "q_4_a_1_subtitle": "(Thích nằm trên mặt phẳng, không thích lún)",
+        "q_4_a_1_value": "A",
+        "q_4_a_2_text": "B. Êm ái & Ôm sát (Contour)",
+        "q_4_a_2_subtitle": "(Thích nệm ôm cơ thể, nâng niu vai/hông)",
+        "q_4_a_2_value": "B",
+        "q_4_a_3_text": "C. Nảy & Đàn hồi (Bouncy)",
+        "q_4_a_3_subtitle": "(Thích độ nảy nhẹ để dễ trở mình, cảm giác sang trọng \"Hotel feel\")",
+        "q_4_a_3_value": "C",
+        "q_4_a_4_text": "D. Mát lạnh & Trị liệu (Cooling)",
+        "q_4_a_4_subtitle": "(Ưu tiên số 1 là phải MÁT và giảm đau lưng)",
+        "q_4_a_4_value": "D",
+        "q_5_title": "5. \"Nỗi đau\" lớn nhất với giấc ngủ hiện tại?",
+        "q_5_a_1_text": "A. Đau thắt lưng/Cổ vai gáy",
+        "q_5_a_1_subtitle": "(Cần nâng đỡ cột sống tối ưu)",
+        "q_5_a_1_value": "A",
+        "q_5_a_2_text": "B. Nóng bí lưng",
+        "q_5_a_2_subtitle": "(Hay đổ mồ hôi trộm)",
+        "q_5_a_2_value": "B",
+        "q_5_a_3_text": "C. Dễ tỉnh giấc",
+        "q_5_a_3_subtitle": "(Nhạy cảm với tiếng động/rung lắc từ người bên cạnh)",
+        "q_5_a_3_value": "C",
+        "q_5_a_4_text": "D. Không có vấn đề lớn",
+        "q_5_a_4_subtitle": "(Muốn nâng cấp trải nghiệm tốt hơn)",
+        "q_5_a_4_value": "D",
+        "q_6_title": "6. Tư thế ngủ chủ đạo?",
+        "q_6_a_1_text": "A. Nằm ngửa",
+        "q_6_a_1_subtitle": "(Cần đỡ thắt lưng)",
+        "q_6_a_1_value": "A",
+        "q_6_a_2_text": "B. Nằm nghiêng",
+        "q_6_a_2_subtitle": "(Cần êm vai & hông - giảm áp lực)",
+        "q_6_a_2_value": "B",
+        "q_6_a_3_text": "C. Nằm sấp",
+        "q_6_a_3_subtitle": "(Cần nệm cứng để bụng không võng)",
+        "q_6_a_3_value": "C",
+        "q_6_a_4_text": "D. Xoay trở liên tục",
+        "q_6_a_4_subtitle": "(Cần nệm hỗ trợ chuyển động)",
+        "q_6_a_4_value": "D",
+        "q_7_title": "7. Ngân sách & Nhu cầu sử dụng?",
+        "q_7_a_1_text": "A. Premium",
+        "q_7_a_1_subtitle": "(Đầu tư tối đa cho sức khỏe)",
+        "q_7_a_1_value": "A",
+        "q_7_a_2_text": "B. Best Value",
+        "q_7_a_2_subtitle": "(Cân bằng chất lượng/giá cả)",
+        "q_7_a_2_value": "B",
+        "q_7_a_3_text": "C. Tiết kiệm/Linh hoạt",
+        "q_7_a_3_subtitle": "(Thuê nhà, sinh viên, nệm phụ)",
+        "q_7_a_3_value": "C",
+        "result_title": "Chúng tôi đề xuất cho bạn"
+      }
+    },
     "quiz_banner_zXHt4B": {
       "type": "quiz-banner",
       "disabled": true,
@@ -131,49 +257,27 @@
         "button_2_link": "",
         "q_1_title": "Question 1?",
         "q_1_a_1_text": "",
-        "q_1_a_1_tags": "",
         "q_1_a_2_text": "",
-        "q_1_a_2_tags": "",
         "q_1_a_3_text": "",
-        "q_1_a_3_tags": "",
-        "q_1_a_4_text": "",
-        "q_1_a_4_tags": "",
         "q_2_title": "Question 2?",
         "q_2_a_1_text": "",
-        "q_2_a_1_tags": "",
         "q_2_a_2_text": "",
-        "q_2_a_2_tags": "",
         "q_2_a_3_text": "",
-        "q_2_a_3_tags": "",
-        "q_2_a_4_text": "",
-        "q_2_a_4_tags": "",
         "q_3_title": "Question 3?",
         "q_3_a_1_text": "",
-        "q_3_a_1_tags": "",
         "q_3_a_2_text": "",
-        "q_3_a_2_tags": "",
         "q_3_a_3_text": "",
-        "q_3_a_3_tags": "",
         "q_3_a_4_text": "",
-        "q_3_a_4_tags": "",
         "q_4_title": "Question 4?",
         "q_4_a_1_text": "",
-        "q_4_a_1_tags": "",
         "q_4_a_2_text": "",
-        "q_4_a_2_tags": "",
         "q_4_a_3_text": "",
-        "q_4_a_3_tags": "",
         "q_4_a_4_text": "",
-        "q_4_a_4_tags": "",
         "q_5_title": "Question 5?",
         "q_5_a_1_text": "",
-        "q_5_a_1_tags": "",
         "q_5_a_2_text": "",
-        "q_5_a_2_tags": "",
         "q_5_a_3_text": "",
-        "q_5_a_3_tags": "",
         "q_5_a_4_text": "",
-        "q_5_a_4_tags": "",
         "result_title": "We recommend for you"
       }
     },
@@ -358,105 +462,58 @@
           "type": "review",
           "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
-            "customer_name": "Gon Pink",
-            "review_text": "<p>Mình nằm thử nệm Foam Original của Ru9 mới thấy khác biệt thiệt, foam ôm sát cơ thể giúp lưng – vai – hông được nâng đỡ đều, mình ngủ dậy không còn ê mỏi luôn. Thêm cái nữa là nệm cực thoáng khí, nằm lâu cũng không hầm nóng, vỏ thì tháo ra giặt siêu tiện. Nói chung là sản phẩm rất chất lượng so với giá tiền! </p>",
             "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
+            "product_link": ""
           }
         },
         "review_x6JhWU": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/177826117_3828731063871354_8843481793885550946_n.jpg",
-            "customer_name": "Hoàng Ku",
-            "review_text": "<p>Điều mình thích nhất khi nằm nệm foam Ru9 là đệm sẽ ôm sát theo đường cong của cơ thể, mình có quả “thắt đáy lưng ong” nên phần đáy lưng võng cong, nằm nệm cứng chỗ lưng đó bị rỗng nên rất khó chịu, ngủ phải gập người lại thì mới dễ ngủ. Nhưng với đệm Foam Ru9 thì mình chỉ cần nằm thẳng thôi, cấu trúc của đệm sẽ tự khắc làm đầy ngay chỗ thắt lưng của mình luôn! </p>",
+            "video": "shopify://files/videos/ORIGINAL PRO - NƠI TÁI TẠO NĂNG LƯỢNG SAU MỖI HÀNH TRÌNH.mp4",
             "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
+            "product_link": "shopify://products/tencel-bedding-set"
           }
         },
         "review_GJYfxW": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/Ane_cibi.jpg",
-            "customer_name": "Anne Cibi",
-            "review_text": "<p>Ghé Ru9 thăm showroom, kết quả là bê về túi to túi nhỏ luôn! Chăn bạch đàn, bộ ga gối tencel mướt mượt màu baby blue y chang cái nhà em nữa, nó mờ ê mê lắm</p>",
             "product_name": "Bộ Ga Giường Ru9 Tencel",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/tencel-bedding-set"
+            "product_link": ""
           }
         },
         "review_Mw8U9j": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/dao_lan_ph_ng_nest.jpg",
-            "customer_name": "Đào Lan Phương",
-            "review_text": "<p>Sau 3 tuần nằm thử, mình thật sự ưng chiếc nệm Nest này. Nệm dày, nằm chắc chắn chứ không bị lún, rất phù hợp cho người hay đau lưng như mình. Mong là chất lượng này sẽ bền lâu.</p>",
             "product_name": "Nệm Nest",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://collections/bedding"
+            "product_link": ""
           }
         },
         "review_UxKmJq": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/mc_van_anh_topper.jpg",
-            "customer_name": "MC Vân Anh",
-            "review_text": "<p>Mình chọn nệm Ru9 vì có chính sách 100 đêm ngủ thử. Nệm đa năng, có thể trải ra phòng khách để bé chơi hoặc trải nệm để ngủ khi cần. sau đó cuộn lại cất đi là được, dễ di chuyển. Nệm foam rất êm, không bị lún, đàn hồi tốt.</p>",
             "product_name": "Nệm Foam Topper",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/nem-cuon-foam-topper"
+            "product_link": ""
           }
         },
         "review_E6XhJz": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/47580643_1094459747384007_5553427953934663680_n.jpg",
-            "customer_name": "Tu Lam Kha",
-            "review_text": "<p>❤️❤️Mình cảm thấy hài lòng và rất biết ơn nệm Ru9, Nệm Ru9 đã làm cho mình thấy cuộc sống đẹp hơn khi giấc ngủ được trọn vẹn! Cảm giác nằm ngủ trên nệm rất thích như đang ở khách sạn 5 sao ấy... </p>",
             "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/foam-original"
+            "product_link": ""
           }
         },
         "review_F74qc9": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/IMG_8630.jpg",
-            "customer_name": "Ngọc Tú Anh",
-            "review_text": "<p>Bí quyết để làm sẵn sàng làm việc mười mấy tiếng liên tục của mình chính là gối Niu Ru9 làm từ Memory Foam. Tản nhiệt tối ưu, đàn hồi siêu êm ái. Đừng tiếc với bản thân một chiếc gối bạn nha.</p>",
             "product_name": "Bộ Bedding Tencel",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/tencel-bedding-set"
+            "product_link": ""
           }
         },
         "review_iU8xqk": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/mieymeii.jpg",
-            "customer_name": "mieymeii",
-            "review_text": "<p>Cảm ơn Ru9 vì bộ ga giường mới thật tuyệt ♥️<br/>Chất liệu 100% cotton sợi dài, vô cùng mềm mại, nâng niu giấc ngủ của các nàng </p>",
             "product_name": "Bộ Ga Giường Cotton Sateen",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/bo-ga-giuong-cotton-sateen"
+            "product_link": ""
           }
         }
       },
@@ -702,6 +759,7 @@
     "collection-header",
     "independent_webhook_popup_6ky34i",
     "main_collection_custom_Y4Wd87",
+    "quiz_banner_QRUzGc",
     "quiz_banner_zXHt4B",
     "main-collection",
     "banner_with_content_K64e3r",

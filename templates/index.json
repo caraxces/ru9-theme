@@ -470,102 +470,61 @@
     "reviews_carousel_ECAtRY": {
       "type": "reviews-carousel",
       "blocks": {
+        "review_j7fKiM": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/goi-niu-abi-thich-gi.mp4",
+            "product_name": "Nệm Original",
+            "product_link": "shopify://products/vo-goi-icefiber"
+          }
+        },
         "review_LgQfji": {
           "type": "review",
           "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
-            "customer_name": "Gon Pink",
-            "review_text": "<p>Mình nằm thử nệm Foam Original của Ru9 mới thấy khác biệt thiệt, foam ôm sát cơ thể giúp lưng – vai – hông được nâng đỡ đều, mình ngủ dậy không còn ê mỏi luôn. Thêm cái nữa là nệm cực thoáng khí, nằm lâu cũng không hầm nóng, vỏ thì tháo ra giặt siêu tiện. Nói chung là sản phẩm rất chất lượng so với giá tiền! </p>",
             "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
-          }
-        },
-        "review_j7fKiM": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/177826117_3828731063871354_8843481793885550946_n.jpg",
-            "customer_name": "Hoàng Ku",
-            "review_text": "<p>Điều mình thích nhất khi nằm nệm foam Ru9 là đệm sẽ ôm sát theo đường cong của cơ thể, mình có quả “thắt đáy lưng ong” nên phần đáy lưng võng cong, nằm nệm cứng chỗ lưng đó bị rỗng nên rất khó chịu, ngủ phải gập người lại thì mới dễ ngủ. Nhưng với đệm Foam Ru9 thì mình chỉ cần nằm thẳng thôi, cấu trúc của đệm sẽ tự khắc làm đầy ngay chỗ thắt lưng của mình luôn! </p>",
-            "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
+            "product_link": ""
           }
         },
         "review_wyUamJ": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/Ane_cibi.jpg",
-            "customer_name": "Anne Cibi",
-            "review_text": "<p>Ghé Ru9 thăm showroom, kết quả là bê về túi to túi nhỏ luôn! Chăn bạch đàn, bộ ga gối tencel mướt mượt màu baby blue y chang cái nhà em nữa, nó mờ ê mê lắm</p>",
             "product_name": "Bộ Ga Giường Ru9 Tencel",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/tencel-bedding-set"
+            "product_link": ""
           }
         },
         "review_8Tc3PT": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/dao_lan_ph_ng_nest.jpg",
-            "customer_name": "Đào Lan Phương",
-            "review_text": "<p>Sau 3 tuần nằm thử, mình thật sự ưng chiếc nệm Nest này. Nệm dày, nằm chắc chắn chứ không bị lún, rất phù hợp cho người hay đau lưng như mình. Mong là chất lượng này sẽ bền lâu.</p>",
             "product_name": "Nệm Nest",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://collections/bedding"
+            "product_link": ""
           }
         },
         "review_rMnkzH": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/mc_van_anh_topper.jpg",
-            "customer_name": "MC Vân Anh",
-            "review_text": "<p>Mình chọn nệm Ru9 vì có chính sách 100 đêm ngủ thử. Nệm đa năng, có thể trải ra phòng khách để bé chơi hoặc trải nệm để ngủ khi cần. sau đó cuộn lại cất đi là được, dễ di chuyển. Nệm foam rất êm, không bị lún, đàn hồi tốt.</p>",
             "product_name": "Nệm Foam Topper",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/nem-cuon-foam-topper"
+            "product_link": ""
           }
         },
         "review_gCNcYV": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/47580643_1094459747384007_5553427953934663680_n.jpg",
-            "customer_name": "Tu Lam Kha",
-            "review_text": "<p>❤️❤️Mình cảm thấy hài lòng và rất biết ơn nệm Ru9, Nệm Ru9 đã làm cho mình thấy cuộc sống đẹp hơn khi giấc ngủ được trọn vẹn! Cảm giác nằm ngủ trên nệm rất thích như đang ở khách sạn 5 sao ấy... </p>",
             "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/foam-original"
+            "product_link": ""
           }
         },
         "review_Y7kPQp": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/IMG_8630.jpg",
-            "customer_name": "Ngọc Tú Anh",
-            "review_text": "<p>Bí quyết để làm sẵn sàng làm việc mười mấy tiếng liên tục của mình chính là gối Niu Ru9 làm từ Memory Foam. Tản nhiệt tối ưu, đàn hồi siêu êm ái. Đừng tiếc với bản thân một chiếc gối bạn nha.</p>",
             "product_name": "Bộ Bedding Tencel",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/tencel-bedding-set"
+            "product_link": ""
           }
         }
       },
       "block_order": [
-        "review_LgQfji",
         "review_j7fKiM",
+        "review_LgQfji",
         "review_wyUamJ",
         "review_8Tc3PT",
         "review_rMnkzH",
@@ -718,7 +677,6 @@
     },
     "voucher_popup_section": {
       "type": "voucher-popup",
-      "name": "Voucher Popup",
       "blocks": {
         "header_block": {
           "type": "header",
@@ -740,6 +698,7 @@
         "header_block",
         "voucher_1"
       ],
+      "name": "Voucher Popup",
       "settings": {
         "section_title": "Voucher có thể áp dụng"
       }

@@ -303,7 +303,7 @@
     }
   }
   
-  /* Quiz Popup Styles */
+  /* Quiz Popup Styles - Fixed Layout */
   .quiz-popup-overlay {
     position: fixed;
     top: 0;
@@ -320,12 +320,14 @@
     background: #fff;
     border-radius: 15px;
     width: 90%;
-    max-width: 700px;
+    max-width: 900px;
+    height: 90vh;
     max-height: 90vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
+    box-sizing: border-box;
   }
   .quiz-popup-close {
     position: absolute;
@@ -336,11 +338,18 @@
     line-height: 1;
     z-index: 2;
     color: #888;
+    transition: color 0.2s ease;
+  }
+  .quiz-popup-close:hover {
+    color: #000;
   }
   .quiz-steps-container {
-    flex-grow: 1;
+    flex: 1;
     overflow: hidden;
     position: relative;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
   }
   .quiz-step {
     position: absolute;
@@ -348,13 +357,15 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 50px 40px 30px;
+    padding: 50px 60px 30px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     transform: translateX(20px);
-    text-align: center;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
   }
   .quiz-step.active {
     opacity: 1;
@@ -365,76 +376,214 @@
      transform: translateX(-20px);
   }
   .quiz-step h3 {
-    font-size: 30px;
-    margin-bottom: 40px;
+    font-size: 24px;
+    margin-bottom: 30px;
     font-weight: 600;
+    color: #1C2C58;
+    text-align: left;
+    font-family: "Be Vietnam Pro", sans-serif;
   }
   .quiz-answers {
     display: grid;
     grid-template-columns: 1fr;
     gap: 15px;
+    flex: 1;
   }
   .quiz-answer {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    padding: 20px 24px;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-size: 20px;
+    font-size: 16px;
+    text-align: left;
+    background: #fff;
+    position: relative;
   }
   .quiz-answer:hover {
-    border-color: #000;
-    background: #f7f7f7;
+    border-color: #FFD700;
+    background: #FFFEF5;
+  }
+  .quiz-answer.selected {
+    background: #FFD700;
+    border-color: #FFD700;
+    color: #1C2C58;
+    font-weight: 500;
+  }
+  .quiz-answer-text {
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .quiz-answer-subtitle {
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+    margin-top: 4px;
+  }
+  .quiz-answer.selected .quiz-answer-subtitle {
+    color: #1C2C58;
   }
   .quiz-navigation {
-    padding: 20px 40px;
+    padding: 20px 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid #eee;
+    background: #fff;
+  }
+  .quiz-continue-btn {
+    background: #FFD700;
+    color: #1C2C58;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Be Vietnam Pro", sans-serif;
+    margin-left: auto;
+  }
+  .quiz-continue-btn:hover:not(:disabled) {
+    background: #FFC700;
+    transform: translateY(-1px);
+  }
+  .quiz-continue-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
   .quiz-progress-bar {
     width: 100%;
     height: 8px;
-    background: #eee;
+    background: #E0E0E0;
     border-radius: 4px;
     overflow: hidden;
+    margin-right: 20px;
   }
   .quiz-progress-bar-inner {
     height: 100%;
     width: 0;
-    background: #4a90e2;
+    background: #FFD700;
     transition: width 0.4s ease;
     border-radius: 4px;
   }
 
   /* Result styling */
+  .quiz-result-content {
+    text-align: left;
+  }
+  .quiz-result-products {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 30px;
+  }
   .quiz-result-product {
     display: flex;
     gap: 20px;
-    text-align: left;
+    padding: 20px;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    background: #fff;
   }
   .quiz-result-product img {
-    max-width: 150px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
     border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .quiz-result-product-info {
+    flex: 1;
   }
   .quiz-result-product-info h4 {
     margin: 0 0 10px;
     font-size: 20px;
+    font-weight: 600;
+    color: #1C2C58;
   }
   .quiz-result-product-info .price {
-    font-size: 20px;
-    font-weight: bold;
-    color: #4a90e2;
+    font-size: 18px;
+    font-weight: 600;
+    color: #234085;
+    margin: 10px 0;
+  }
+  .quiz-result-product-info .reason {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin: 10px 0;
   }
   .quiz-result-product-info .view-product-btn {
-      margin-top: 15px;
-      display: inline-block;
+    margin-top: 15px;
+    display: inline-block;
+    padding: 10px 24px;
+    background: #234085;
+    color: #fff;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s ease;
+  }
+  .quiz-result-product-info .view-product-btn:hover {
+    background: #3a4c7a;
+  }
+  .quiz-retry-btn {
+    margin-top: 30px;
+    padding: 12px 32px;
+    background: transparent;
+    color: #234085;
+    border: 2px solid #234085;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    display: inline-block;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  .quiz-retry-btn:hover {
+    background: #234085;
+    color: #fff;
+  }
+  .quiz-result-actions {
+    text-align: center;
+    margin-top: 30px;
   }
 
   @media (min-width: 768px) {
     .quiz-answers {
       grid-template-columns: 1fr 1fr;
+    }
+    .quiz-result-products {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .quiz-step {
+      padding: 40px 30px 20px;
+    }
+    .quiz-navigation {
+      padding: 15px 30px;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .quiz-continue-btn {
+      width: 100%;
+      margin-left: 0;
+    }
+    .quiz-progress-bar {
+      margin-right: 0;
+      width: 100%;
+    }
+    .quiz-result-product {
+      flex-direction: column;
+    }
+    .quiz-result-product img {
+      width: 100%;
+      height: auto;
     }
   }
 </style>
@@ -519,7 +668,7 @@
   <div class="quiz-popup-content">
     <span class="quiz-popup-close">&times;</span>
     <div class="quiz-steps-container">
-      {%- for i in (1..5) -%}
+      {%- for i in (1..7) -%}
         {%- capture question_title_key -%}q_{{ i }}_title{%- endcapture -%}
         {%- assign question_title = section.settings[question_title_key] -%}
 
@@ -528,12 +677,19 @@
             <div class="quiz-answers">
                 {%- for j in (1..4) -%}
                     {%- capture answer_text_key -%}q_{{ i }}_a_{{ j }}_text{%- endcapture -%}
-                    {%- capture answer_tags_key -%}q_{{ i }}_a_{{ j }}_tags{%- endcapture -%}
+                    {%- capture answer_subtitle_key -%}q_{{ i }}_a_{{ j }}_subtitle{%- endcapture -%}
+                    {%- capture answer_value_key -%}q_{{ i }}_a_{{ j }}_value{%- endcapture -%}
                     {%- assign answer_text = section.settings[answer_text_key] -%}
-                    {%- assign answer_tags = section.settings[answer_tags_key] -%}
+                    {%- assign answer_subtitle = section.settings[answer_subtitle_key] -%}
+                    {%- assign answer_value = section.settings[answer_value_key] -%}
 
                     {%- if answer_text != blank -%}
-                        <div class="quiz-answer" data-tags="{{ answer_tags | escape }}">{{ answer_text }}</div>
+                        <div class="quiz-answer" data-question="{{ i }}" data-value="{{ answer_value | escape }}">
+                            <div class="quiz-answer-text">{{ answer_text }}</div>
+                            {%- if answer_subtitle != blank -%}
+                                <div class="quiz-answer-subtitle">{{ answer_subtitle }}</div>
+                            {%- endif -%}
+                        </div>
                     {%- endif -%}
                 {%- endfor -%}
             </div>
@@ -543,8 +699,8 @@
       <!-- Result Step -->
       <div class="quiz-step" data-step="result">
         <h3>{{ section.settings.result_title }}</h3>
-        <div id="quiz-result-content-{{ section.id }}">
-          <!-- Recommended product will be injected here by JS -->
+        <div id="quiz-result-content-{{ section.id }}" class="quiz-result-content">
+          <!-- Recommended products will be injected here by JS -->
         </div>
       </div>
     </div>
@@ -553,6 +709,7 @@
         <div class="quiz-progress-bar">
             <div class="quiz-progress-bar-inner" id="quiz-progress-bar-inner-{{ section.id }}"></div>
         </div>
+        <button type="button" class="quiz-continue-btn" id="quiz-continue-btn-{{ section.id }}" disabled>TIẾP TỤC</button>
     </div>
   </div>
 </div>
@@ -566,18 +723,344 @@
         "url": "{{ block.settings.product.url }}",
         "image": "{{ block.settings.product.featured_image | image_url: width: 300 }}",
         "price": "{{ block.settings.product.price | money }}",
-        "tags": [
-          {%- assign product_tags = block.settings.tags | split: ',' -%}
-          {%- for tag in product_tags -%}
-            "{{ tag | strip | handle }}"{%- unless forloop.last -%},{%- endunless -%}
-          {%- endfor -%}
-        ]
+        "handle": "{{ block.settings.product.handle }}"
       }{%- unless forloop.last -%},{%- endunless -%}
     {%- endif -%}
   {%- endfor -%}
 {%- endcapture -%}
 <script type="application/json" id="quiz-products-{{ section.id }}">
   [{{ product_results }}]
+</script>
+
+<script>
+(function() {
+  const sectionId = '{{ section.id }}';
+  const popup = document.getElementById(`quiz-popup-${sectionId}`);
+  const closeBtn = popup?.querySelector('.quiz-popup-close');
+  const startButtons = document.querySelectorAll(`.quiz-start-button`);
+  const continueBtn = document.getElementById(`quiz-continue-btn-${sectionId}`);
+  const progressBar = document.getElementById(`quiz-progress-bar-inner-${sectionId}`);
+  const resultContent = document.getElementById(`quiz-result-content-${sectionId}`);
+  
+  let currentStep = 1;
+  const totalSteps = 7;
+  const answers = {};
+  
+  // Product mapping based on customer profiles
+  const productMapping = {
+    // Profile 1: Người Thích Cứng / Quen Nệm Bông Ép
+    profile1: {
+      conditions: {
+        q3: ['A'], // Quen cứng
+        q4: ['A'], // Thích Firm
+        q1: ['B', 'C'] // Trung/Nặng
+      },
+      products: [
+        { handle: 'foam-nest', reason: 'Độ cứng cao, mặt phẳng vững chãi giống nệm bông ép nhưng có lớp foam trên cùng giúp êm điểm tiếp xúc, không đau xương.' },
+        { handle: 'nem-original-pro', reason: 'Nếu khách có ngân sách tốt hơn và muốn thêm tính năng mát lạnh (Cooling) + Zoning nâng đỡ.' }
+      ]
+    },
+    // Profile 2: Người Đau Lưng & Máu Nóng (Trị liệu)
+    profile2: {
+      conditions: {
+        q5: ['A', 'B'], // Đau (A) hoặc Nóng (B)
+        q7: ['A'] // Premium
+      },
+      products: [
+        { handle: 'nem-original-pro', reason: 'Giải pháp toàn diện nhất: Zoning nâng đỡ 3 vùng giảm đau lưng + Graphene tản nhiệt cực nhanh.' },
+        { handle: 'nem-hybrid', reason: 'Nếu khách thích thoáng khí kiểu lò xo túi và cảm giác nảy hơn là foam thuần.' }
+      ]
+    },
+    // Profile 3: Cặp Đôi Trẻ / Thích "Hotel Feel"
+    profile3: {
+      conditions: {
+        q2: ['B'], // Cặp đôi
+        q4: ['C'], // Thích nảy
+        q5: ['D'] // Nâng cấp
+      },
+      products: [
+        { handle: 'nem-hybrid', reason: 'Lò xo túi độc lập giúp nệm nảy nhẹ, sang trọng, viền cứng cáp an toàn.' },
+        { handle: 'foam-original', reason: 'Nếu cần tiết kiệm hơn nhưng vẫn muốn độ nảy nhẹ và bề mặt vững chãi.' }
+      ]
+    },
+    // Profile 4: Người Nhẹ Cân / Ngủ Nghiêng
+    profile4: {
+      conditions: {
+        q1: ['A'], // Nhẹ cân
+        q6: ['B'], // Nghiêng
+        q4: ['B'] // Thích êm
+      },
+      products: [
+        { handle: 'foam-original', reason: 'Độ mềm lý tưởng để người nhẹ cân có thể "lún" xuống, giảm áp lực lên vai và hông khi nằm nghiêng.' },
+        { handle: 'foam-nest', reason: 'Bản dupe hoàn hảo với chi phí tiết kiệm hơn, vẫn giữ độ êm (softness) tương tự.' }
+      ]
+    },
+    // Profile 5: Gia Đình Có Con Nhỏ (Co-sleeping)
+    profile5: {
+      conditions: {
+        q2: ['C'], // Gia đình
+        q5: ['C'] // Dễ tỉnh giấc
+      },
+      products: [
+        { handle: 'nem-original-pro', reason: 'Khả năng cách ly chuyển động tốt nhất (Zero motion transfer), thêm tính năng mát lạnh (Cooling) + Zoning nâng đỡ.' },
+        { handle: 'foam-nest', reason: 'Nếu cần bề mặt cứng hơn và túi tiền hẹp hơn.' }
+      ]
+    },
+    // Profile 6: Người Nặng Cân (>80kg)
+    profile6: {
+      conditions: {
+        q1: ['C'], // Nặng cân
+        q5: ['A'] // Đau lưng
+      },
+      products: [
+        { handle: 'nem-hybrid', reason: 'Hệ thống lò xo túi kết hợp foam đáy chịu lực rất tốt cho người có trọng lượng lớn.' },
+        { handle: 'nem-original-pro', reason: 'Nếu khách thích cảm giác foam mát lạnh và cần zoning nâng đỡ thắt lưng.' }
+      ]
+    },
+    // Profile 7: Sinh Viên / Thuê Nhà / Guest Room
+    profile7: {
+      conditions: {
+        q7: ['C'], // Tiết kiệm
+        q3: ['D'] // Ngủ lung tung
+      },
+      products: [
+        { handle: 'nem-cuon-foam-topper', reason: 'Gọn nhẹ, dễ dàng cất đi, dễ vận chuyển lên gác/chung cư, giá tốt nhất mà vẫn chuẩn chất lượng Ru9.' },
+        { handle: 'mate_topper219071626', reason: 'Giải pháp "cứu cánh" tiết kiệm nhất nếu nệm cũ còn dùng được chân đế, chỉ cần làm mềm mặt.' }
+      ]
+    }
+  };
+  
+  // Get products data
+  const productsData = JSON.parse(document.getElementById(`quiz-products-${sectionId}`)?.textContent || '[]');
+  const productsByHandle = {};
+  productsData.forEach(p => {
+    productsByHandle[p.handle] = p;
+  });
+  
+  // Initialize quiz
+  function initQuiz() {
+    if (!popup) return;
+    
+    // Open popup
+    startButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        popup.style.display = 'flex';
+        currentStep = 1;
+        answers = {};
+        updateStep();
+      });
+    });
+    
+    // Close popup
+    closeBtn?.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+    
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+    
+    // Answer selection
+    const answerElements = popup.querySelectorAll('.quiz-answer');
+    answerElements.forEach(answer => {
+      answer.addEventListener('click', function() {
+        const question = parseInt(this.dataset.question);
+        const value = this.dataset.value;
+        
+        // Remove selection from other answers in same question
+        const questionAnswers = popup.querySelectorAll(`.quiz-answer[data-question="${question}"]`);
+        questionAnswers.forEach(a => a.classList.remove('selected'));
+        
+        // Select this answer
+        this.classList.add('selected');
+        answers[question] = value;
+        
+        // Enable continue button
+        if (continueBtn) {
+          continueBtn.disabled = false;
+        }
+      });
+    });
+    
+    // Continue button
+    continueBtn?.addEventListener('click', () => {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        updateStep();
+      } else {
+        showResults();
+      }
+    });
+    
+    // Initialize first step
+    updateStep();
+  }
+  
+  function updateStep() {
+    // Hide all steps
+    const steps = popup.querySelectorAll('.quiz-step');
+    steps.forEach(step => {
+      step.classList.remove('active', 'prev');
+    });
+    
+    // Show current step
+    const currentStepEl = popup.querySelector(`.quiz-step[data-step="${currentStep}"]`);
+    if (currentStepEl) {
+      currentStepEl.classList.add('active');
+    }
+    
+    // Update progress
+    if (progressBar) {
+      const progress = (currentStep / totalSteps) * 100;
+      progressBar.style.width = progress + '%';
+    }
+    
+    // Update continue button
+    if (continueBtn) {
+      const hasAnswer = answers[currentStep] !== undefined;
+      continueBtn.disabled = !hasAnswer;
+      if (currentStep === totalSteps) {
+        continueBtn.textContent = 'XEM KẾT QUẢ';
+      } else {
+        continueBtn.textContent = 'TIẾP TỤC';
+      }
+    }
+  }
+  
+  function showResults() {
+    // Determine profile based on answers
+    let matchedProfile = null;
+    let matchedProducts = [];
+    
+    // Check each profile - need ALL conditions to match
+    for (const [profileKey, profile] of Object.entries(productMapping)) {
+      let allConditionsMatch = true;
+      
+      for (const [question, values] of Object.entries(profile.conditions)) {
+        const qNum = parseInt(question.replace('q', ''));
+        const answer = answers[qNum];
+        
+        // Check if answer matches any of the required values (OR condition)
+        // values is an array, so we check if answer is in that array
+        if (!answer || !values.includes(answer)) {
+          allConditionsMatch = false;
+          break;
+        }
+      }
+      
+      // If all conditions match, use this profile (first match wins)
+      if (allConditionsMatch) {
+        matchedProfile = profileKey;
+        matchedProducts = profile.products;
+        break;
+      }
+    }
+    
+    // Default products if no profile matches
+    if (!matchedProfile || matchedProducts.length === 0) {
+      matchedProducts = [
+        { handle: 'foam-original', reason: 'Sản phẩm phù hợp nhất với nhu cầu của bạn.' },
+        { handle: 'foam-nest', reason: 'Lựa chọn tiết kiệm với chất lượng tốt.' }
+      ];
+    }
+    
+    // Render results
+    if (resultContent) {
+      let html = '<div class="quiz-result-products">';
+      let renderedCount = 0;
+      
+      matchedProducts.forEach(product => {
+        if (renderedCount >= 2) return; // Only show 2 products max
+        
+        const productData = productsByHandle[product.handle];
+        if (productData) {
+          html += `
+            <div class="quiz-result-product">
+              <img src="${productData.image}" alt="${productData.title}">
+              <div class="quiz-result-product-info">
+                <h4>${productData.title}</h4>
+                <div class="price">${productData.price}</div>
+                <div class="reason">${product.reason}</div>
+                <a href="${productData.url}" class="view-product-btn">Xem sản phẩm</a>
+              </div>
+            </div>
+          `;
+          renderedCount++;
+        }
+      });
+      
+      html += '</div>';
+      html += '<div class="quiz-result-actions">';
+      html += '<button type="button" class="quiz-retry-btn" id="quiz-retry-btn-' + sectionId + '">Thử lại</button>';
+      html += '</div>';
+      resultContent.innerHTML = html;
+      
+      // Add retry button event listener
+      const retryBtn = document.getElementById(`quiz-retry-btn-${sectionId}`);
+      if (retryBtn) {
+        retryBtn.addEventListener('click', resetQuiz);
+      }
+    }
+    
+    // Show result step
+    const steps = popup.querySelectorAll('.quiz-step');
+    steps.forEach(step => {
+      step.classList.remove('active', 'prev');
+    });
+    
+    const resultStep = popup.querySelector('.quiz-step[data-step="result"]');
+    if (resultStep) {
+      resultStep.classList.add('active');
+    }
+    
+    // Hide continue button on results
+    if (continueBtn) {
+      continueBtn.style.display = 'none';
+    }
+    
+    // Update progress to 100%
+    if (progressBar) {
+      progressBar.style.width = '100%';
+    }
+  }
+  
+  // Reset quiz function
+  function resetQuiz() {
+    // Reset answers
+    answers = {};
+    currentStep = 1;
+    
+    // Clear all selected answers
+    const allAnswers = popup.querySelectorAll('.quiz-answer');
+    allAnswers.forEach(answer => {
+      answer.classList.remove('selected');
+    });
+    
+    // Show first step
+    updateStep();
+    
+    // Show continue button again
+    if (continueBtn) {
+      continueBtn.style.display = 'block';
+      continueBtn.disabled = true;
+      continueBtn.textContent = 'TIẾP TỤC';
+    }
+    
+    // Clear result content
+    if (resultContent) {
+      resultContent.innerHTML = '';
+    }
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initQuiz);
+  } else {
+    initQuiz();
+  }
+})();
 </script>
 
 {% schema %}
@@ -594,62 +1077,103 @@
     { "type": "url", "label": "Button 2 Link", "id": "button_2_link" },
 
     { "type": "header", "content": "Question 1" },
-    { "type": "text", "id": "q_1_title", "label": "Question", "default": "Question 1?" },
-    { "type": "text", "id": "q_1_a_1_text", "label": "Answer 1 Text" },
-    { "type": "text", "id": "q_1_a_1_tags", "label": "Answer 1 Tags", "info": "Comma-separated, e.g: soft, side-sleeper" },
-    { "type": "text", "id": "q_1_a_2_text", "label": "Answer 2 Text" },
-    { "type": "text", "id": "q_1_a_2_tags", "label": "Answer 2 Tags" },
-    { "type": "text", "id": "q_1_a_3_text", "label": "Answer 3 Text" },
-    { "type": "text", "id": "q_1_a_3_tags", "label": "Answer 3 Tags" },
-    { "type": "text", "id": "q_1_a_4_text", "label": "Answer 4 Text" },
-    { "type": "text", "id": "q_1_a_4_tags", "label": "Answer 4 Tags" },
+    { "type": "text", "id": "q_1_title", "label": "Question", "default": "1. Vóc dáng và Thể trạng của người sử dụng chính?" },
+    { "type": "text", "id": "q_1_a_1_text", "label": "Answer 1 Text", "default": "A. Nhẹ cân (< 50kg)" },
+    { "type": "text", "id": "q_1_a_1_subtitle", "label": "Answer 1 Subtitle", "default": "(Dáng người nhỏ nhắn, thư sinh)" },
+    { "type": "text", "id": "q_1_a_1_value", "label": "Answer 1 Value", "default": "A", "info": "Value used for matching (A, B, C, D)" },
+    { "type": "text", "id": "q_1_a_2_text", "label": "Answer 2 Text", "default": "B. Trung bình (50kg - 80kg)" },
+    { "type": "text", "id": "q_1_a_2_subtitle", "label": "Answer 2 Subtitle", "default": "(Vóc dáng phổ thông của người Việt)" },
+    { "type": "text", "id": "q_1_a_2_value", "label": "Answer 2 Value", "default": "B" },
+    { "type": "text", "id": "q_1_a_3_text", "label": "Answer 3 Text", "default": "C. Đậm người/Nặng cân (> 80kg)" },
+    { "type": "text", "id": "q_1_a_3_subtitle", "label": "Answer 3 Subtitle", "default": "(Cơ bắp hoặc vóc dáng lớn)" },
+    { "type": "text", "id": "q_1_a_3_value", "label": "Answer 3 Value", "default": "C" },
 
     { "type": "header", "content": "Question 2" },
-    { "type": "text", "id": "q_2_title", "label": "Question", "default": "Question 2?" },
-    { "type": "text", "id": "q_2_a_1_text", "label": "Answer 1 Text" },
-    { "type": "text", "id": "q_2_a_1_tags", "label": "Answer 1 Tags" },
-    { "type": "text", "id": "q_2_a_2_text", "label": "Answer 2 Text" },
-    { "type": "text", "id": "q_2_a_2_tags", "label": "Answer 2 Tags" },
-    { "type": "text", "id": "q_2_a_3_text", "label": "Answer 3 Text" },
-    { "type": "text", "id": "q_2_a_3_tags", "label": "Answer 3 Tags" },
-    { "type": "text", "id": "q_2_a_4_text", "label": "Answer 4 Text" },
-    { "type": "text", "id": "q_2_a_4_tags", "label": "Answer 4 Tags" },
+    { "type": "text", "id": "q_2_title", "label": "Question", "default": "2. Bạn thường ngủ với ai?" },
+    { "type": "text", "id": "q_2_a_1_text", "label": "Answer 1 Text", "default": "A. Ngủ một mình" },
+    { "type": "text", "id": "q_2_a_1_subtitle", "label": "Answer 1 Subtitle", "default": "(Tự do, ưu tiên sở thích cá nhân)" },
+    { "type": "text", "id": "q_2_a_1_value", "label": "Answer 1 Value", "default": "A" },
+    { "type": "text", "id": "q_2_a_2_text", "label": "Answer 2 Text", "default": "B. Ngủ với Vợ/Chồng" },
+    { "type": "text", "id": "q_2_a_2_subtitle", "label": "Answer 2 Subtitle", "default": "(Cần sự yên tĩnh, không làm phiền người bên cạnh khi trở mình)" },
+    { "type": "text", "id": "q_2_a_2_value", "label": "Answer 2 Value", "default": "B" },
+    { "type": "text", "id": "q_2_a_3_text", "label": "Answer 3 Text", "default": "C. Ngủ cả gia đình (Co-sleeping với con nhỏ) hoặc Thú cưng" },
+    { "type": "text", "id": "q_2_a_3_subtitle", "label": "Answer 3 Subtitle", "default": "(Cần không gian rộng, bề mặt phẳng, cực kỳ yên tĩnh và an toàn)" },
+    { "type": "text", "id": "q_2_a_3_value", "label": "Answer 3 Value", "default": "C" },
 
     { "type": "header", "content": "Question 3" },
-    { "type": "text", "id": "q_3_title", "label": "Question", "default": "Question 3?" },
-    { "type": "text", "id": "q_3_a_1_text", "label": "Answer 1 Text" },
-    { "type": "text", "id": "q_3_a_1_tags", "label": "Answer 1 Tags" },
-    { "type": "text", "id": "q_3_a_2_text", "label": "Answer 2 Text" },
-    { "type": "text", "id": "q_3_a_2_tags", "label": "Answer 2 Tags" },
-    { "type": "text", "id": "q_3_a_3_text", "label": "Answer 3 Text" },
-    { "type": "text", "id": "q_3_a_3_tags", "label": "Answer 3 Tags" },
-    { "type": "text", "id": "q_3_a_4_text", "label": "Answer 4 Text" },
-    { "type": "text", "id": "q_3_a_4_tags", "label": "Answer 4 Tags" },
+    { "type": "text", "id": "q_3_title", "label": "Question", "default": "3. Hiện tại, anh/chị đang ngủ trên loại bề mặt nào và cảm thấy thế nào?" },
+    { "type": "text", "id": "q_3_a_1_text", "label": "Answer 1 Text", "default": "A. Nệm bông ép/Nệm cao su cứng hoặc Chiếu trúc" },
+    { "type": "text", "id": "q_3_a_1_subtitle", "label": "Answer 1 Subtitle", "default": "(Rất cứng, phẳng lì)" },
+    { "type": "text", "id": "q_3_a_1_value", "label": "Answer 1 Value", "default": "A" },
+    { "type": "text", "id": "q_3_a_2_text", "label": "Answer 2 Text", "default": "B. Nệm lò xo cũ" },
+    { "type": "text", "id": "q_3_a_2_subtitle", "label": "Answer 2 Subtitle", "default": "(Có độ nảy, nhưng có thể đang bị võng/rung lắc)" },
+    { "type": "text", "id": "q_3_a_2_value", "label": "Answer 2 Value", "default": "B" },
+    { "type": "text", "id": "q_3_a_3_text", "label": "Answer 3 Text", "default": "C. Nệm foam hoặc cao su thiên nhiên" },
+    { "type": "text", "id": "q_3_a_3_subtitle", "label": "Answer 3 Subtitle", "default": "(Có độ êm, ôm sát)" },
+    { "type": "text", "id": "q_3_a_3_value", "label": "Answer 3 Value", "default": "C" },
+    { "type": "text", "id": "q_3_a_4_text", "label": "Answer 4 Text", "default": "D. Ngủ lung tung/Nệm quá cũ không còn cảm nhận được" },
+    { "type": "text", "id": "q_3_a_4_subtitle", "label": "Answer 4 Subtitle" },
+    { "type": "text", "id": "q_3_a_4_value", "label": "Answer 4 Value", "default": "D" },
 
     { "type": "header", "content": "Question 4" },
-    { "type": "text", "id": "q_4_title", "label": "Question", "default": "Question 4?" },
-    { "type": "text", "id": "q_4_a_1_text", "label": "Answer 1 Text" },
-    { "type": "text", "id": "q_4_a_1_tags", "label": "Answer 1 Tags" },
-    { "type": "text", "id": "q_4_a_2_text", "label": "Answer 2 Text" },
-    { "type": "text", "id": "q_4_a_2_tags", "label": "Answer 2 Tags" },
-    { "type": "text", "id": "q_4_a_3_text", "label": "Answer 3 Text" },
-    { "type": "text", "id": "q_4_a_3_tags", "label": "Answer 3 Tags" },
-    { "type": "text", "id": "q_4_a_4_text", "label": "Answer 4 Text" },
-    { "type": "text", "id": "q_4_a_4_tags", "label": "Answer 4 Tags" },
+    { "type": "text", "id": "q_4_title", "label": "Question", "default": "4. Cảm giác tiếp xúc (Feel Preference) anh/chị ưu tiên nhất?" },
+    { "type": "text", "id": "q_4_a_1_text", "label": "Answer 1 Text", "default": "A. Chắc chắn & Vững chãi (Firm)" },
+    { "type": "text", "id": "q_4_a_1_subtitle", "label": "Answer 1 Subtitle", "default": "(Thích nằm trên mặt phẳng, không thích lún)" },
+    { "type": "text", "id": "q_4_a_1_value", "label": "Answer 1 Value", "default": "A" },
+    { "type": "text", "id": "q_4_a_2_text", "label": "Answer 2 Text", "default": "B. Êm ái & Ôm sát (Contour)" },
+    { "type": "text", "id": "q_4_a_2_subtitle", "label": "Answer 2 Subtitle", "default": "(Thích nệm ôm cơ thể, nâng niu vai/hông)" },
+    { "type": "text", "id": "q_4_a_2_value", "label": "Answer 2 Value", "default": "B" },
+    { "type": "text", "id": "q_4_a_3_text", "label": "Answer 3 Text", "default": "C. Nảy & Đàn hồi (Bouncy)" },
+    { "type": "text", "id": "q_4_a_3_subtitle", "label": "Answer 3 Subtitle", "default": "(Thích độ nảy nhẹ để dễ trở mình, cảm giác sang trọng \"Hotel feel\")" },
+    { "type": "text", "id": "q_4_a_3_value", "label": "Answer 3 Value", "default": "C" },
+    { "type": "text", "id": "q_4_a_4_text", "label": "Answer 4 Text", "default": "D. Mát lạnh & Trị liệu (Cooling)" },
+    { "type": "text", "id": "q_4_a_4_subtitle", "label": "Answer 4 Subtitle", "default": "(Ưu tiên số 1 là phải MÁT và giảm đau lưng)" },
+    { "type": "text", "id": "q_4_a_4_value", "label": "Answer 4 Value", "default": "D" },
 
     { "type": "header", "content": "Question 5" },
-    { "type": "text", "id": "q_5_title", "label": "Question", "default": "Question 5?" },
-    { "type": "text", "id": "q_5_a_1_text", "label": "Answer 1 Text" },
-    { "type": "text", "id": "q_5_a_1_tags", "label": "Answer 1 Tags" },
-    { "type": "text", "id": "q_5_a_2_text", "label": "Answer 2 Text" },
-    { "type": "text", "id": "q_5_a_2_tags", "label": "Answer 2 Tags" },
-    { "type": "text", "id": "q_5_a_3_text", "label": "Answer 3 Text" },
-    { "type": "text", "id": "q_5_a_3_tags", "label": "Answer 3 Tags" },
-    { "type": "text", "id": "q_5_a_4_text", "label": "Answer 4 Text" },
-    { "type": "text", "id": "q_5_a_4_tags", "label": "Answer 4 Tags" },
+    { "type": "text", "id": "q_5_title", "label": "Question", "default": "5. \"Nỗi đau\" lớn nhất với giấc ngủ hiện tại?" },
+    { "type": "text", "id": "q_5_a_1_text", "label": "Answer 1 Text", "default": "A. Đau thắt lưng/Cổ vai gáy" },
+    { "type": "text", "id": "q_5_a_1_subtitle", "label": "Answer 1 Subtitle", "default": "(Cần nâng đỡ cột sống tối ưu)" },
+    { "type": "text", "id": "q_5_a_1_value", "label": "Answer 1 Value", "default": "A" },
+    { "type": "text", "id": "q_5_a_2_text", "label": "Answer 2 Text", "default": "B. Nóng bí lưng" },
+    { "type": "text", "id": "q_5_a_2_subtitle", "label": "Answer 2 Subtitle", "default": "(Hay đổ mồ hôi trộm)" },
+    { "type": "text", "id": "q_5_a_2_value", "label": "Answer 2 Value", "default": "B" },
+    { "type": "text", "id": "q_5_a_3_text", "label": "Answer 3 Text", "default": "C. Dễ tỉnh giấc" },
+    { "type": "text", "id": "q_5_a_3_subtitle", "label": "Answer 3 Subtitle", "default": "(Nhạy cảm với tiếng động/rung lắc từ người bên cạnh)" },
+    { "type": "text", "id": "q_5_a_3_value", "label": "Answer 3 Value", "default": "C" },
+    { "type": "text", "id": "q_5_a_4_text", "label": "Answer 4 Text", "default": "D. Không có vấn đề lớn" },
+    { "type": "text", "id": "q_5_a_4_subtitle", "label": "Answer 4 Subtitle", "default": "(Muốn nâng cấp trải nghiệm tốt hơn)" },
+    { "type": "text", "id": "q_5_a_4_value", "label": "Answer 4 Value", "default": "D" },
+
+    { "type": "header", "content": "Question 6" },
+    { "type": "text", "id": "q_6_title", "label": "Question", "default": "6. Tư thế ngủ chủ đạo?" },
+    { "type": "text", "id": "q_6_a_1_text", "label": "Answer 1 Text", "default": "A. Nằm ngửa" },
+    { "type": "text", "id": "q_6_a_1_subtitle", "label": "Answer 1 Subtitle", "default": "(Cần đỡ thắt lưng)" },
+    { "type": "text", "id": "q_6_a_1_value", "label": "Answer 1 Value", "default": "A" },
+    { "type": "text", "id": "q_6_a_2_text", "label": "Answer 2 Text", "default": "B. Nằm nghiêng" },
+    { "type": "text", "id": "q_6_a_2_subtitle", "label": "Answer 2 Subtitle", "default": "(Cần êm vai & hông - giảm áp lực)" },
+    { "type": "text", "id": "q_6_a_2_value", "label": "Answer 2 Value", "default": "B" },
+    { "type": "text", "id": "q_6_a_3_text", "label": "Answer 3 Text", "default": "C. Nằm sấp" },
+    { "type": "text", "id": "q_6_a_3_subtitle", "label": "Answer 3 Subtitle", "default": "(Cần nệm cứng để bụng không võng)" },
+    { "type": "text", "id": "q_6_a_3_value", "label": "Answer 3 Value", "default": "C" },
+    { "type": "text", "id": "q_6_a_4_text", "label": "Answer 4 Text", "default": "D. Xoay trở liên tục" },
+    { "type": "text", "id": "q_6_a_4_subtitle", "label": "Answer 4 Subtitle", "default": "(Cần nệm hỗ trợ chuyển động)" },
+    { "type": "text", "id": "q_6_a_4_value", "label": "Answer 4 Value", "default": "D" },
+
+    { "type": "header", "content": "Question 7" },
+    { "type": "text", "id": "q_7_title", "label": "Question", "default": "7. Ngân sách & Nhu cầu sử dụng?" },
+    { "type": "text", "id": "q_7_a_1_text", "label": "Answer 1 Text", "default": "A. Premium" },
+    { "type": "text", "id": "q_7_a_1_subtitle", "label": "Answer 1 Subtitle", "default": "(Đầu tư tối đa cho sức khỏe)" },
+    { "type": "text", "id": "q_7_a_1_value", "label": "Answer 1 Value", "default": "A" },
+    { "type": "text", "id": "q_7_a_2_text", "label": "Answer 2 Text", "default": "B. Best Value" },
+    { "type": "text", "id": "q_7_a_2_subtitle", "label": "Answer 2 Subtitle", "default": "(Cân bằng chất lượng/giá cả)" },
+    { "type": "text", "id": "q_7_a_2_value", "label": "Answer 2 Value", "default": "B" },
+    { "type": "text", "id": "q_7_a_3_text", "label": "Answer 3 Text", "default": "C. Tiết kiệm/Linh hoạt" },
+    { "type": "text", "id": "q_7_a_3_subtitle", "label": "Answer 3 Subtitle", "default": "(Thuê nhà, sinh viên, nệm phụ)" },
+    { "type": "text", "id": "q_7_a_3_value", "label": "Answer 3 Value", "default": "C" },
 
     { "type": "header", "content": "Quiz Result" },
-    { "type": "text", "id": "result_title", "label": "Result page title", "default": "We recommend for you" }
+    { "type": "text", "id": "result_title", "label": "Result page title", "default": "Chúng tôi đề xuất cho bạn" }
   ],
   "blocks": [
     {
@@ -659,13 +1183,8 @@
         {
           "type": "product",
           "id": "product",
-          "label": "Recommended Product"
-        },
-        {
-          "type": "text",
-          "id": "tags",
-          "label": "Product Tags",
-          "info": "Comma-separated. Must match tags from answers. e.g: soft, side-sleeper, hot"
+          "label": "Recommended Product",
+          "info": "Select the product to recommend"
         }
       ]
     }
