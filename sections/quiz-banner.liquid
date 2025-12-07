@@ -673,6 +673,14 @@
     background: #E8F0FE;
     color: #1C2C58;
   }
+  .quiz-result-section--priority .quiz-result-section-header {
+    background: #234085;
+    color: #fff;
+  }
+  .quiz-result-section--suitable .quiz-result-section-header {
+    background: #F5F5F5;
+    color: #1C2C58;
+  }
   .quiz-result-section-title {
     font-size: 18px;
     font-weight: 600;
@@ -1195,7 +1203,11 @@
         "rating_count": {{ product.metafields.reviews.rating_count | default: 0 }},
         "description": {{ product.description | strip_html | truncate: 100 | json }},
         "subdes": {{ product.metafields.custom.subdes.value | default: "" | json }},
-        "tags": {{ product.tags | json }}
+        "tags": {{ product.tags | json }},
+        "order": {{ block.settings.order | default: 999 }},
+        "result_reason": {{ block.settings.result_reason | default: "Sản phẩm phù hợp với nhu cầu của bạn" | json }},
+        "result_type": "{{ block.settings.result_type | default: 'comprehensive' }}",
+        "condition_answers": "{{ block.settings.condition_answers | default: '' }}"
       }{%- unless forloop.last -%},{%- endunless -%}
     {%- endif -%}
   {%- endfor -%}
@@ -1218,7 +1230,41 @@
   const totalSteps = 7;
   let answers = {};
   
-  // Product mapping based on customer profiles
+  // Product handle mapping - map various handle formats to standard handles
+  const productHandleMap = {
+    // Original and Original Lite are the same product
+    'foam-original': 'foam-original',
+    'nem-original': 'foam-original',
+    'original': 'foam-original',
+    'original-lite': 'foam-original',
+    'nem-original-lite': 'foam-original',
+    // Nest
+    'foam-nest': 'foam-nest',
+    'nest': 'foam-nest',
+    'nem-nest': 'foam-nest',
+    // Hybrid
+    'nem-hybrid': 'nem-hybrid',
+    'hybrid': 'nem-hybrid',
+    // Original Pro
+    'nem-original-pro': 'nem-original-pro',
+    'original-pro': 'nem-original-pro',
+    'nem-original-pro-firm': 'nem-original-pro',
+    // Toppers
+    'nem-cuon-foam-topper': 'nem-cuon-foam-topper',
+    'topper-foam': 'nem-cuon-foam-topper',
+    'mate_topper219071626': 'mate_topper219071626',
+    'topper-mate': 'mate_topper219071626',
+    'may_topper218298303-1': 'may_topper218298303-1'
+  };
+  
+  // Function to normalize product handle
+  function normalizeHandle(handle) {
+    if (!handle) return handle;
+    const normalized = handle.toLowerCase().trim();
+    return productHandleMap[normalized] || normalized;
+  }
+  
+  // Product mapping based on customer profiles (fallback logic)
   const productMapping = {
     // Profile 1: Người Thích Cứng / Quen Nệm Bông Ép
     profile1: {
@@ -1228,8 +1274,8 @@
         q1: ['B', 'C'] // Trung/Nặng
       },
       products: [
-        { handle: 'foam-nest', reason: 'Độ cứng cao, mặt phẳng vững chãi giống nệm bông ép nhưng có lớp foam trên cùng giúp êm điểm tiếp xúc, không đau xương.' },
-        { handle: 'nem-original-pro', reason: 'Nếu khách có ngân sách tốt hơn và muốn thêm tính năng mát lạnh (Cooling) + Zoning nâng đỡ.' }
+        { handle: 'foam-nest', reason: 'Lựa chọn phù hợp: Nệm có độ cứng cao, mặt phẳng vững chãi giống nệm bông ép nhưng có lớp foam trên cùng giúp êm điểm tiếp xúc, không đau xương.' },
+        { handle: 'nem-original-pro', reason: 'Lựa chọn tối ưu: Nệm có thêm tính năng mát lạnh (Cooling) + Zoning nâng đỡ, giải pháp toàn diện cho giấc ngủ nếu có ngân sách tốt hơn.' }
       ]
     },
     // Profile 2: Người Đau Lưng & Máu Nóng (Trị liệu)
@@ -1239,8 +1285,8 @@
         q7: ['A'] // Premium
       },
       products: [
-        { handle: 'nem-original-pro', reason: 'Giải pháp toàn diện nhất: Zoning nâng đỡ 3 vùng giảm đau lưng + Graphene tản nhiệt cực nhanh.' },
-        { handle: 'nem-hybrid', reason: 'Nếu khách thích thoáng khí kiểu lò xo túi và cảm giác nảy hơn là foam thuần.' }
+        { handle: 'nem-original-pro', reason: 'Lựa chọn toàn diện: Nệm có thiết kế zoning nâng đỡ 3 vùng giảm đau lưng + Graphene tản nhiệt cực nhanh.' },
+        { handle: 'nem-hybrid', reason: 'Lựa chọn phù hợp: Nệm thoáng khí kiểu lò xo túi đem lại cảm giác nảy hơn là foam thuần.' }
       ]
     },
     // Profile 3: Cặp Đôi Trẻ / Thích "Hotel Feel"
@@ -1251,8 +1297,8 @@
         q5: ['D'] // Nâng cấp
       },
       products: [
-        { handle: 'nem-hybrid', reason: 'Lò xo túi độc lập giúp nệm nảy nhẹ, sang trọng, viền cứng cáp an toàn.' },
-        { handle: 'foam-original', reason: 'Nếu cần tiết kiệm hơn nhưng vẫn muốn độ nảy nhẹ và bề mặt vững chãi.' }
+        { handle: 'nem-hybrid', reason: 'Lựa chọn ưu tiên: Nệm có lò xo túi độc lập giúp nệm nảy nhẹ, sang trọng, viền cứng cáp an toàn.' },
+        { handle: 'foam-original', reason: 'Lựa chọn tiết kiệm: Nệm ở phân khúc giá tiết kiệm hơn nhưng vẫn muốn độ nảy nhẹ và bề mặt vững chãi.' }
       ]
     },
     // Profile 4: Người Nhẹ Cân / Ngủ Nghiêng
@@ -1263,8 +1309,8 @@
         q4: ['B'] // Thích êm
       },
       products: [
-        { handle: 'foam-original', reason: 'Độ mềm lý tưởng để người nhẹ cân có thể "lún" xuống, giảm áp lực lên vai và hông khi nằm nghiêng.' },
-        { handle: 'foam-nest', reason: 'Bản dupe hoàn hảo với chi phí tiết kiệm hơn, vẫn giữ độ êm (softness) tương tự.' }
+        { handle: 'foam-original', reason: 'Lựa chọn phù hợp: Nệm có độ mềm lý tưởng để người nhẹ cân có thể "lún" xuống, giảm áp lực lên vai và hông khi nằm nghiêng.' },
+        { handle: 'foam-original', reason: 'Lựa chọn tiết kiệm: Bản dupe hoàn hảo với chi phí tiết kiệm hơn, vẫn giữ độ êm (softness) tương tự.' }
       ]
     },
     // Profile 5: Gia Đình Có Con Nhỏ (Co-sleeping)
@@ -1274,8 +1320,8 @@
         q5: ['C'] // Dễ tỉnh giấc
       },
       products: [
-        { handle: 'nem-original-pro', reason: 'Khả năng cách ly chuyển động tốt nhất (Zero motion transfer), thêm tính năng mát lạnh (Cooling) + Zoning nâng đỡ.' },
-        { handle: 'foam-nest', reason: 'Nếu cần bề mặt cứng hơn và túi tiền hẹp hơn.' }
+        { handle: 'nem-original-pro', reason: 'Lựa chọn ưu tiên: Nệm có khả năng cách ly chuyển động tốt nhất (Zero motion transfer), thêm tính năng mát lạnh (Cooling) + Zoning nâng đỡ.' },
+        { handle: 'foam-nest', reason: 'Lựa chọn tối ưu: Nệm có bề mặt cứng hơn và ngân sách ở mức vừa phải.' }
       ]
     },
     // Profile 6: Người Nặng Cân (>80kg)
@@ -1285,8 +1331,8 @@
         q5: ['A'] // Đau lưng
       },
       products: [
-        { handle: 'nem-hybrid', reason: 'Hệ thống lò xo túi kết hợp foam đáy chịu lực rất tốt cho người có trọng lượng lớn.' },
-        { handle: 'nem-original-pro', reason: 'Nếu khách thích cảm giác foam mát lạnh và cần zoning nâng đỡ thắt lưng.' }
+        { handle: 'nem-hybrid', reason: 'Lựa chọn toàn diện: Nệm có hệ thống lò xo túi kết hợp foam đáy chịu lực rất tốt cho người có trọng lượng lớn.' },
+        { handle: 'nem-original-pro', reason: 'Lựa chọn phù hợp: Nệm có công nghệ Graphene tản nhiệt đem lại cảm giác mát lạnh kết hợp với thiết kế 3 vùng chuyên biệt nâng đỡ thắt lưng' }
       ]
     },
     // Profile 7: Sinh Viên / Thuê Nhà / Guest Room
@@ -1296,8 +1342,8 @@
         q3: ['D'] // Ngủ lung tung
       },
       products: [
-        { handle: 'nem-cuon-foam-topper', reason: 'Gọn nhẹ, dễ dàng cất đi, dễ vận chuyển lên gác/chung cư, giá tốt nhất mà vẫn chuẩn chất lượng Ru9.' },
-        { handle: 'mate_topper219071626', reason: 'Giải pháp "cứu cánh" tiết kiệm nhất nếu nệm cũ còn dùng được chân đế, chỉ cần làm mềm mặt.' }
+        { handle: 'nem-cuon-foam-topper', reason: 'Lựa chọn ưu tiên: Topper có kích thước gọn nhẹ, dễ dàng cất đi, dễ vận chuyển lên gác/chung cư, giá tốt nhất mà vẫn chuẩn chất lượng Ru9.' },
+        { handle: 'mate_topper219071626', reason: 'Lựa chọn tiết kiệm: Topper trải trên nệm cũ là giải pháp "cứu cánh" tiết kiệm nhất nếu chỉ cần làm mềm mặt.' }
       ]
     }
   };
@@ -1306,7 +1352,12 @@
   const productsData = JSON.parse(document.getElementById(`quiz-products-${sectionId}`)?.textContent || '[]');
   const productsByHandle = {};
   productsData.forEach(p => {
+    // Normalize handle and store with both original and normalized
+    const normalizedHandle = normalizeHandle(p.handle);
     productsByHandle[p.handle] = p;
+    if (normalizedHandle !== p.handle) {
+      productsByHandle[normalizedHandle] = p;
+    }
   });
   
   // Initialize quiz
@@ -1424,47 +1475,195 @@
     }
   }
   
-  function showResults() {
-    // Determine profile based on answers
-    let matchedProfile = null;
-    let matchedProducts = [];
+  // Function to check if condition answers match user answers
+  // Format: "3A,4A,1B|C" means Q3=A AND Q4=A AND (Q1=B OR Q1=C)
+  function checkConditionAnswers(conditionAnswers, userAnswers) {
+    // If no condition, always match
+    if (!conditionAnswers || conditionAnswers.trim() === '') {
+      return true;
+    }
     
-    // Check each profile - need ALL conditions to match
-    for (const [profileKey, profile] of Object.entries(productMapping)) {
-      let allConditionsMatch = true;
-      
-      for (const [question, values] of Object.entries(profile.conditions)) {
-        const qNum = parseInt(question.replace('q', ''));
-        const answer = answers[qNum];
+    // Split by comma to get individual conditions
+    const conditions = conditionAnswers.trim().split(',').map(c => c.trim()).filter(c => c !== '');
+    
+    // Check all conditions (AND logic)
+    for (const condition of conditions) {
+      // Parse condition: format is "1A", "2B|C", etc.
+      // Check if it has OR operator (|)
+      if (condition.includes('|')) {
+        // Multiple answers for same question (OR logic)
+        const parts = condition.split('|');
+        if (parts.length < 2) continue;
         
-        // Check if answer matches any of the required values (OR condition)
-        // values is an array, so we check if answer is in that array
-        if (!answer || !values.includes(answer)) {
-          allConditionsMatch = false;
+        // Extract question number from first part
+        const firstPart = parts[0].trim();
+        const match = firstPart.match(/^(\d+)([A-D])$/i);
+        if (!match) continue;
+        
+        const questionNum = parseInt(match[1]);
+        const userAnswer = userAnswers[questionNum];
+        
+        // Check if user answer matches any of the options
+        let matches = false;
+        for (const part of parts) {
+          const partTrimmed = part.trim();
+          // Check if part has question number or just answer
+          const partMatch = partTrimmed.match(/^(\d+)?([A-D])$/i);
+          if (partMatch) {
+            const expectedAnswer = partMatch[2].toUpperCase();
+            if (userAnswer && userAnswer.toUpperCase() === expectedAnswer) {
+              matches = true;
+              break;
+            }
+          }
+        }
+        
+        if (!matches) {
+          return false; // This condition doesn't match
+        }
+      } else {
+        // Single answer condition
+        const match = condition.match(/^(\d+)([A-D])$/i);
+        if (!match) continue;
+        
+        const questionNum = parseInt(match[1]);
+        const expectedAnswer = match[2].toUpperCase();
+        const userAnswer = userAnswers[questionNum];
+        
+        // If user answer doesn't match, condition fails
+        if (!userAnswer || userAnswer.toUpperCase() !== expectedAnswer) {
+          return false;
+        }
+      }
+    }
+    
+    // All conditions matched
+    return true;
+  }
+  
+  function showResults() {
+    // Priority 1: Use products from blocks - filter by condition answers
+    const productsData = JSON.parse(document.getElementById(`quiz-products-${sectionId}`)?.textContent || '[]');
+    const productsByHandle = {};
+    productsData.forEach(p => {
+      productsByHandle[p.handle] = p;
+    });
+    
+    let productsToRender = productsData.map(productData => {
+      // Check condition answers if set
+      const conditionAnswers = productData.condition_answers || '';
+      
+      // If condition is set, check if it matches
+      if (conditionAnswers.trim() !== '') {
+        const matches = checkConditionAnswers(conditionAnswers, answers);
+        // If condition doesn't match, skip this product
+        if (!matches) {
+          return null;
+        }
+      }
+      
+      return {
+        handle: productData.handle,
+        reason: productData.result_reason || 'Sản phẩm phù hợp với nhu cầu của bạn',
+        result_type: productData.result_type || 'comprehensive',
+        order: productData.order !== undefined ? productData.order : 999,
+        data: productData
+      };
+    }).filter(p => p !== null && p.data);
+    
+    // If no products from blocks match, use fallback logic
+    if (productsToRender.length === 0) {
+      // Determine profile based on answers
+      let matchedProfile = null;
+      let matchedProducts = [];
+      
+      // Check each profile - need ALL conditions to match
+      for (const [profileKey, profile] of Object.entries(productMapping)) {
+        let allConditionsMatch = true;
+        
+        for (const [question, values] of Object.entries(profile.conditions)) {
+          const qNum = parseInt(question.replace('q', ''));
+          const answer = answers[qNum];
+          
+          // Check if answer matches any of the required values (OR condition)
+          if (!answer || !values.includes(answer)) {
+            allConditionsMatch = false;
+            break;
+          }
+        }
+        
+        // If all conditions match, use this profile (first match wins)
+        if (allConditionsMatch) {
+          matchedProfile = profileKey;
+          matchedProducts = profile.products;
           break;
         }
       }
       
-      // If all conditions match, use this profile (first match wins)
-      if (allConditionsMatch) {
-        matchedProfile = profileKey;
-        matchedProducts = profile.products;
-        break;
+      // Default products if no profile matches
+      if (!matchedProfile || matchedProducts.length === 0) {
+        matchedProducts = [
+          { handle: 'foam-original', reason: 'Sản phẩm phù hợp nhất với nhu cầu của bạn.' },
+          { handle: 'foam-nest', reason: 'Lựa chọn tiết kiệm với chất lượng tốt.' }
+        ];
       }
+      
+      // Map matched products with block data
+      productsToRender = matchedProducts.map(product => {
+        // Try to find product by normalized handle
+        const normalizedHandle = normalizeHandle(product.handle);
+        const productData = productsByHandle[normalizedHandle] || productsByHandle[product.handle];
+        if (productData) {
+          return {
+            handle: productData.handle || normalizedHandle, // Use actual handle from data
+            reason: productData.result_reason || product.reason || 'Sản phẩm phù hợp với nhu cầu của bạn',
+            result_type: productData.result_type || 'comprehensive',
+            order: productData.order !== undefined ? productData.order : 999,
+            data: productData
+          };
+        }
+        return null;
+      }).filter(p => p !== null);
     }
     
-    // Default products if no profile matches
-    if (!matchedProfile || matchedProducts.length === 0) {
-      matchedProducts = [
-        { handle: 'foam-original', reason: 'Sản phẩm phù hợp nhất với nhu cầu của bạn.' },
-        { handle: 'foam-nest', reason: 'Lựa chọn tiết kiệm với chất lượng tốt.' }
-      ];
-    }
+    // Sort logic:
+    // 1. Priority based on result_type: comprehensive > optimal > priority > suitable
+    // 2. Then by order field
+    const typePriority = {
+      'comprehensive': 2,
+      'optimal': 4,
+      'priority': 1,
+      'suitable': 3
+    };
+    
+    productsToRender.sort((a, b) => {
+      const typeA = typePriority[a.result_type] || 99;
+      const typeB = typePriority[b.result_type] || 99;
+      
+      if (typeA !== typeB) {
+        return typeA - typeB;
+      }
+      
+      return (a.order || 999) - (b.order || 999);
+    });
+    
+    // Limit to maximum 2 products
+    productsToRender = productsToRender.slice(0, 2);
     
     // Render results
     if (resultContent) {
-      const sectionTitles = ['Lựa chọn toàn diện', 'Lựa chọn tối ưu'];
-      const sectionClasses = ['quiz-result-section--comprehensive', 'quiz-result-section--optimal'];
+      const sectionTitles = {
+        'comprehensive': 'Lựa chọn toàn diện',
+        'optimal': 'Lựa chọn tối ưu',
+        'priority': 'Lựa chọn ưu tiên',
+        'suitable': 'Lựa chọn phù hợp'
+      };
+      const sectionClasses = {
+        'comprehensive': 'quiz-result-section--comprehensive',
+        'optimal': 'quiz-result-section--optimal',
+        'priority': 'quiz-result-section--priority',
+        'suitable': 'quiz-result-section--suitable'
+      };
       
       let html = '<div class="quiz-result-header">';
       html += '<h2 class="quiz-result-title">Ru9 gợi ý chiếc nệm phù hợp với bạn</h2>';
@@ -1474,10 +1673,12 @@
       html += '<div class="quiz-result-products">';
       let renderedCount = 0;
       
-      matchedProducts.forEach((product, index) => {
+      productsToRender.forEach((product, index) => {
         if (renderedCount >= 2) return; // Only show 2 products max
         
-        const productData = productsByHandle[product.handle];
+        // Normalize handle for lookup
+        const normalizedHandle = normalizeHandle(product.handle);
+        const productData = productsByHandle[normalizedHandle] || productsByHandle[product.handle] || product.data;
         if (productData) {
           // Calculate discount
           const price = productData.price || 0;
@@ -1502,11 +1703,12 @@
           // Get description
           const description = productData.subdes || productData.description || 'Sản phẩm chất lượng cao với thiết kế hiện đại, phù hợp cho mọi không gian sống.';
           
-          html += `<div class="quiz-result-section ${sectionClasses[index]}">`;
+          const resultType = product.result_type || 'comprehensive';
+          html += `<div class="quiz-result-section ${sectionClasses[resultType]}">`;
           
           // Section header
           html += `<div class="quiz-result-section-header">`;
-          html += `<div class="quiz-result-section-title">${sectionTitles[index]}:</div>`;
+          html += `<div class="quiz-result-section-title">${sectionTitles[resultType]}:</div>`;
           html += `<div class="quiz-result-section-reason">${product.reason}</div>`;
           html += `</div>`;
           
@@ -1787,12 +1989,62 @@
     {
       "type": "product_result",
       "name": "Product Result",
+      "limit": 20,
       "settings": [
         {
           "type": "product",
           "id": "product",
           "label": "Recommended Product",
           "info": "Select the product to recommend"
+        },
+        {
+          "type": "number",
+          "id": "order",
+          "label": "Thứ tự hiển thị",
+          "default": 0,
+          "info": "Số càng nhỏ hiển thị càng trước (0, 1, 2, ...)"
+        },
+        {
+          "type": "text",
+          "id": "result_reason",
+          "label": "Tại sao chọn?",
+          "default": "Sản phẩm phù hợp với nhu cầu của bạn",
+          "info": "Lý do hiển thị trong kết quả quiz (text từ cột 'Tại sao chọn?' trong bảng)"
+        },
+        {
+          "type": "select",
+          "id": "result_type",
+          "label": "Loại kết quả",
+          "default": "comprehensive",
+          "options": [
+            {
+              "value": "comprehensive",
+              "label": "Lựa chọn toàn diện"
+            },
+            {
+              "value": "optimal",
+              "label": "Lựa chọn tối ưu"
+            },
+            {
+              "value": "priority",
+              "label": "Lựa chọn ưu tiên"
+            },
+            {
+              "value": "suitable",
+              "label": "Lựa chọn phù hợp"
+            }
+          ],
+          "info": "Chọn loại kết quả để hiển thị"
+        },
+        {
+          "type": "header",
+          "content": "Điều kiện hiển thị (tùy chọn)"
+        },
+        {
+          "type": "text",
+          "id": "condition_answers",
+          "label": "Câu trả lời bắt buộc",
+          "info": "Nhập các câu trả lời bắt buộc. Format: 3A,4A,1B|C (Q3=A AND Q4=A AND (Q1=B OR Q1=C)). Dùng dấu | để chỉ nhiều lựa chọn cho cùng 1 câu hỏi. Ví dụ:\n- 3A,4A,1B|C (Q3=A, Q4=A, Q1=B hoặc C)\n- 5A|B,7A (Q5=A hoặc B, Q7=A)\n\nĐể trống nếu sản phẩm luôn hiển thị."
         }
       ]
     }

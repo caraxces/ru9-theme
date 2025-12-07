@@ -25,8 +25,8 @@
             "link_text_2": "",
             "color_accent": "#000000",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Banner_Web-PC.png",
-            "image_mobile": "shopify://shop_images/Banner_Web-Mobile.png",
+            "image": "shopify://shop_images/Christmas_Website_Banner.png",
+            "image_mobile": "shopify://shop_images/Christmas_Website_Banner_mobile.png",
             "overlay_opacity": 0
           }
         },
@@ -322,61 +322,173 @@
         "label_bg": "#609ee9"
       }
     },
-    "quiz_banner_GceL4U": {
+    "quiz_banner_4z7U33": {
       "type": "quiz-banner",
+      "name": "Quiz Banner (Advanced)",
       "blocks": {
-        "product_result_nqYtTE": {
+        "product_result_default_1": {
           "type": "product_result",
           "settings": {
-            "product": "mate_topper219071626"
+            "product": "foam-nest",
+            "order": 0,
+            "result_reason": "Nệm có độ cứng cao, mặt phẳng vững chãi giống nệm bông ép nhưng có lớp foam trên cùng giúp êm điểm tiếp xúc, không đau xương.",
+            "result_type": "suitable",
+            "condition_answers": "3A,4A,1B|C"
           }
         },
-        "product_result_riAHQJ": {
+        "product_result_default_2": {
           "type": "product_result",
           "settings": {
-            "product": "nem-original-pro"
+            "product": "nem-original-pro",
+            "order": 1,
+            "result_reason": "Nệm có thêm tính năng mát lạnh (Cooling) + Zoning nâng đỡ, giải pháp toàn diện cho giấc ngủ nếu có ngân sách tốt hơn.",
+            "result_type": "optimal",
+            "condition_answers": "3A,4A,1B|C"
           }
         },
-        "product_result_i9DDpA": {
+        "product_result_default_3": {
           "type": "product_result",
           "settings": {
-            "product": "foam-nest"
+            "product": "nem-original-pro",
+            "order": 0,
+            "result_reason": "Nệm có thiết kế zoning nâng đỡ 3 vùng giảm đau lưng + Graphene tản nhiệt cực nhanh.",
+            "result_type": "comprehensive",
+            "condition_answers": "5A|B,7A"
           }
         },
-        "product_result_Dm4bC6": {
+        "product_result_default_4": {
           "type": "product_result",
           "settings": {
-            "product": "nem-hybrid"
+            "product": "nem-hybrid",
+            "order": 1,
+            "result_reason": "Nệm thoáng khí kiểu lò xo túi đem lại cảm giác nảy hơn là foam thuần.",
+            "result_type": "suitable",
+            "condition_answers": "5A|B,7A"
           }
         },
-        "product_result_yCLMDk": {
+        "product_result_default_5": {
           "type": "product_result",
           "settings": {
-            "product": "foam-original"
+            "product": "nem-hybrid",
+            "order": 0,
+            "result_reason": "Nệm có lò xo túi độc lập giúp nệm nảy nhẹ, sang trọng, viền cứng cáp an toàn.",
+            "result_type": "priority",
+            "condition_answers": "2B,4C,5D"
           }
         },
-        "product_result_zQyjiU": {
+        "product_result_default_6": {
           "type": "product_result",
           "settings": {
-            "product": "nem-cuon-foam-topper"
+            "product": "foam-original",
+            "order": 1,
+            "result_reason": "Nệm ở phân khúc giá tiết kiệm hơn nhưng vẫn muốn độ nảy nhẹ và bề mặt vững chãi.",
+            "result_type": "optimal",
+            "condition_answers": "2B,4C,5D"
+          }
+        },
+        "product_result_default_7": {
+          "type": "product_result",
+          "settings": {
+            "product": "foam-original",
+            "order": 0,
+            "result_reason": "Nệm có độ mềm lý tưởng để người nhẹ cân có thể \"lún\" xuống, giảm áp lực lên vai và hông khi nằm nghiêng.",
+            "result_type": "priority",
+            "condition_answers": "1A,6B,4B"
+          }
+        },
+        "product_result_default_8": {
+          "type": "product_result",
+          "settings": {
+            "product": "foam-original",
+            "order": 1,
+            "result_reason": "Bản dupe hoàn hảo với chi phí tiết kiệm hơn, vẫn giữ độ êm (softness) tương tự.",
+            "result_type": "suitable",
+            "condition_answers": "1A,6B,4B"
+          }
+        },
+        "product_result_default_9": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-original-pro",
+            "order": 0,
+            "result_reason": "Nệm có khả năng cách ly chuyển động tốt nhất (Zero motion transfer), thêm tính năng mát lạnh (Cooling) + Zoning nâng đỡ.",
+            "result_type": "priority",
+            "condition_answers": "2C,5C"
+          }
+        },
+        "product_result_default_10": {
+          "type": "product_result",
+          "settings": {
+            "product": "foam-nest",
+            "order": 1,
+            "result_reason": "Nệm có bề mặt cứng hơn và ngân sách ở mức vừa phải.",
+            "result_type": "optimal",
+            "condition_answers": "2C,5C"
+          }
+        },
+        "product_result_default_11": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-hybrid",
+            "order": 0,
+            "result_reason": "Nệm có hệ thống lò xo túi kết hợp foam đáy chịu lực rất tốt cho người có trọng lượng lớn.",
+            "result_type": "comprehensive",
+            "condition_answers": "1C,5A"
+          }
+        },
+        "product_result_default_12": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-original-pro",
+            "order": 1,
+            "result_reason": "Nệm có công nghệ Graphene tản nhiệt đem lại cảm giác mát lạnh kết hợp với thiết kế 3 vùng chuyên biệt nâng đỡ thắt lưng",
+            "result_type": "suitable",
+            "condition_answers": "1C,5A"
+          }
+        },
+        "product_result_default_13": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-cuon-foam-topper",
+            "order": 0,
+            "result_reason": "Topper có kích thước gọn nhẹ, dễ dàng cất đi, dễ vận chuyển lên gác/chung cư, giá tốt nhất mà vẫn chuẩn chất lượng Ru9.",
+            "result_type": "priority",
+            "condition_answers": "7C,3D"
+          }
+        },
+        "product_result_default_14": {
+          "type": "product_result",
+          "settings": {
+            "product": "mate_topper219071626",
+            "order": 1,
+            "result_reason": "Topper trải trên nệm cũ là giải pháp \"cứu cánh\" tiết kiệm nhất nếu chỉ cần làm mềm mặt.",
+            "result_type": "optimal",
+            "condition_answers": "7C,3D"
           }
         }
       },
       "block_order": [
-        "product_result_nqYtTE",
-        "product_result_riAHQJ",
-        "product_result_i9DDpA",
-        "product_result_Dm4bC6",
-        "product_result_yCLMDk",
-        "product_result_zQyjiU"
+        "product_result_default_1",
+        "product_result_default_2",
+        "product_result_default_3",
+        "product_result_default_4",
+        "product_result_default_5",
+        "product_result_default_6",
+        "product_result_default_7",
+        "product_result_default_8",
+        "product_result_default_9",
+        "product_result_default_10",
+        "product_result_default_11",
+        "product_result_default_12",
+        "product_result_default_13",
+        "product_result_default_14"
       ],
-      "name": "Quiz Banner (Advanced)",
       "settings": {
-        "image": "shopify://shop_images/So_sanh-01_1.png",
-        "mobile_image": "shopify://shop_images/tempImagenz9mLD_1_39760cc5-ef3b-4c5f-a1fc-e6886fa67dc4.png",
+        "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
+        "mobile_image": "shopify://shop_images/tempImagenz9mLD_1.png",
         "title": "Đâu là chiếc nệm phù hợp với bạn?",
-        "text": "<p>Chỉ mất 2 phút cùng Ru9 khám phá và chọn chiếc nệm cho bạn.</p>",
-        "button_1_text": "Test chọn nệm phù hợp",
+        "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
+        "button_1_text": "Quiz chọn nệm",
         "button_2_text": "So sánh các loại nệm",
         "button_2_link": "shopify://collections/nem",
         "q_1_title": "1. Vóc dáng và Thể trạng của người sử dụng chính?",
@@ -483,7 +595,7 @@
           "settings": {
             "product": "bộ-em-ai-trọn-giấc-copy",
             "product_label": "",
-            "bundle_items": "<br> - Nệm Nest<br> - 2 gối Niu<br>- Bộ ga giường Cotton & Tấm bảo vệ",
+            "bundle_items": "<br> - Nệm Nest<br> - 2 gối Mây<br>- Bộ ga giường Cotton & Tấm bảo vệ",
             "label_color": "#ffffff",
             "label_bg": "#609ee9"
           }
@@ -546,68 +658,109 @@
       "name": "TVC Section",
       "settings": {
         "heading": "<p>7 năm đồng hành <br/>cùng giấc ngủ người Việt</p>",
-        "description": "<p>Chúng tôi không ngừng cải tiến từng chi tiết, để sản phẩm không chỉ “êm” mà còn “hiểu” được cơ thể bạn.<br/>Mỗi thiết kế, mỗi cải tiến trong chất liệu đều hướng đến cảm giác thoải mái và nâng đỡ tốt nhất cho cơ thể bạn.<br/>Từ đó, giấc ngủ không còn là điều xa xỉ, mà trở thành điều hiển nhiên và dễ dàng tiếp cận hơn với mọi người.<br/></p>",
+        "description": "<p>Chúng tôi không ngừng cải tiến từng chi tiết, để sản phẩm không chỉ “êm” mà còn “hiểu” được cơ thể bạn.<br/>Mỗi thiết kế, mỗi cải tiến trong chất liệu đều hướng đến cảm giác thoải mái và nâng đỡ tốt nhất cho cơ thể bạn.<br/>Từ đó, giấc ngủ không còn là điều xa xỉ, mà trở thành điều hiển nhiên và dễ dàng tiếp cận hơn với mọi người.<br/> </p>",
         "video": "shopify://files/videos/ORIGINAL PRO - NƠI TÁI TẠO NĂNG LƯỢNG SAU MỖI HÀNH TRÌNH.mp4"
       }
     },
     "reviews_carousel_ECAtRY": {
       "type": "reviews-carousel",
       "blocks": {
-        "review_j7fKiM": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/goi-niu-abi-thich-gi.mp4",
-            "product_name": "Nệm Original",
-            "product_link": "shopify://products/vo-goi-icefiber"
-          }
-        },
         "review_LgQfji": {
           "type": "review",
           "disabled": true,
           "settings": {
+            "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
+            "customer_name": "Gon Pink",
+            "review_text": "<p>Mình nằm thử nệm Foam Original của Ru9 mới thấy khác biệt thiệt, foam ôm sát cơ thể giúp lưng – vai – hông được nâng đỡ đều, mình ngủ dậy không còn ê mỏi luôn. Thêm cái nữa là nệm cực thoáng khí, nằm lâu cũng không hầm nóng, vỏ thì tháo ra giặt siêu tiện. Nói chung là sản phẩm rất chất lượng so với giá tiền! </p>",
             "product_name": "Nệm Original",
-            "product_link": ""
+            "verified_text": "",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/foam-original"
+          }
+        },
+        "review_j7fKiM": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/177826117_3828731063871354_8843481793885550946_n.jpg",
+            "customer_name": "Hoàng Ku",
+            "review_text": "<p>Điều mình thích nhất khi nằm nệm foam Ru9 là đệm sẽ ôm sát theo đường cong của cơ thể, mình có quả “thắt đáy lưng ong” nên phần đáy lưng võng cong, nằm nệm cứng chỗ lưng đó bị rỗng nên rất khó chịu, ngủ phải gập người lại thì mới dễ ngủ. Nhưng với đệm Foam Ru9 thì mình chỉ cần nằm thẳng thôi, cấu trúc của đệm sẽ tự khắc làm đầy ngay chỗ thắt lưng của mình luôn! </p>",
+            "product_name": "Nệm Original",
+            "verified_text": "",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/foam-original"
           }
         },
         "review_wyUamJ": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/Ane_cibi.jpg",
+            "customer_name": "Anne Cibi",
+            "review_text": "<p>Ghé Ru9 thăm showroom, kết quả là bê về túi to túi nhỏ luôn! Chăn bạch đàn, bộ ga gối tencel mướt mượt màu baby blue y chang cái nhà em nữa, nó mờ ê mê lắm</p>",
             "product_name": "Bộ Ga Giường Ru9 Tencel",
-            "product_link": ""
+            "verified_text": "",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/tencel-bedding-set"
           }
         },
         "review_8Tc3PT": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/dao_lan_ph_ng_nest.jpg",
+            "customer_name": "Đào Lan Phương",
+            "review_text": "<p>Sau 3 tuần nằm thử, mình thật sự ưng chiếc nệm Nest này. Nệm dày, nằm chắc chắn chứ không bị lún, rất phù hợp cho người hay đau lưng như mình. Mong là chất lượng này sẽ bền lâu.</p>",
             "product_name": "Nệm Nest",
-            "product_link": ""
+            "verified_text": "",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://collections/bedding"
           }
         },
         "review_rMnkzH": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/mc_van_anh_topper.jpg",
+            "customer_name": "MC Vân Anh",
+            "review_text": "<p>Mình chọn nệm Ru9 vì có chính sách 100 đêm ngủ thử. Nệm đa năng, có thể trải ra phòng khách để bé chơi hoặc trải nệm để ngủ khi cần. sau đó cuộn lại cất đi là được, dễ di chuyển. Nệm foam rất êm, không bị lún, đàn hồi tốt.</p>",
             "product_name": "Nệm Foam Topper",
-            "product_link": ""
+            "verified_text": "",
+            "verification_link": "",
+            "button_text": "Xem Nệm",
+            "button_link": "shopify://products/nem-cuon-foam-topper"
           }
         },
         "review_gCNcYV": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/47580643_1094459747384007_5553427953934663680_n.jpg",
+            "customer_name": "Tu Lam Kha",
+            "review_text": "<p>❤️❤️Mình cảm thấy hài lòng và rất biết ơn nệm Ru9, Nệm Ru9 đã làm cho mình thấy cuộc sống đẹp hơn khi giấc ngủ được trọn vẹn! Cảm giác nằm ngủ trên nệm rất thích như đang ở khách sạn 5 sao ấy... </p>",
             "product_name": "Nệm Original",
-            "product_link": ""
+            "verified_text": "",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/foam-original"
           }
         },
         "review_Y7kPQp": {
           "type": "review",
           "settings": {
+            "image": "shopify://shop_images/IMG_8630.jpg",
+            "customer_name": "Ngọc Tú Anh",
+            "review_text": "<p>Bí quyết để làm sẵn sàng làm việc mười mấy tiếng liên tục của mình chính là gối Niu Ru9 làm từ Memory Foam. Tản nhiệt tối ưu, đàn hồi siêu êm ái. Đừng tiếc với bản thân một chiếc gối bạn nha.</p>",
             "product_name": "Bộ Bedding Tencel",
-            "product_link": ""
+            "verified_text": "",
+            "verification_link": "",
+            "button_text": "Xem sản phẩm",
+            "button_link": "shopify://products/tencel-bedding-set"
           }
         }
       },
       "block_order": [
-        "review_j7fKiM",
         "review_LgQfji",
+        "review_j7fKiM",
         "review_wyUamJ",
         "review_8Tc3PT",
         "review_rMnkzH",
@@ -757,34 +910,6 @@
         "view_all_link": "",
         "view_all_text": ""
       }
-    },
-    "voucher_popup_section": {
-      "type": "voucher-popup",
-      "blocks": {
-        "header_block": {
-          "type": "header",
-          "settings": {
-            "title": "Chọn Voucher"
-          }
-        },
-        "voucher_1": {
-          "type": "voucher",
-          "settings": {
-            "code": "RU9250",
-            "title": "VOUCHER 250K",
-            "description": "Giảm 250K cho đơn hàng từ....",
-            "expiry_date": "31.12.2025"
-          }
-        }
-      },
-      "block_order": [
-        "header_block",
-        "voucher_1"
-      ],
-      "name": "Voucher Popup",
-      "settings": {
-        "section_title": "Voucher có thể áp dụng"
-      }
     }
   },
   "order": [
@@ -794,13 +919,12 @@
     "featured_collections_6qfWNA",
     "image_marquee_hcRmaa",
     "featured_products_by_size_c63dBV",
-    "quiz_banner_GceL4U",
+    "quiz_banner_4z7U33",
     "combo_bedroom_jqpYBy",
     "tvc_section_WrUqBM",
     "reviews_carousel_ECAtRY",
     "super_service_87efWC",
     "certifications_4j8wGm",
-    "blog_carousel_CXkPPY",
-    "voucher_popup_section"
+    "blog_carousel_CXkPPY"
   ]
 }
