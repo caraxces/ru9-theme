@@ -18,13 +18,21 @@
     .best-seller-text {
       margin-top: 40px;
       margin-bottom: 40px;
+      text-align: justify;
     }
     .best-seller-text p {
       margin: 0;
       margin-bottom: 30px;
+      text-align: justify;
     }
     .best-seller-text p:last-child {
       margin-bottom: 0;
+    }
+    .best-seller-desc {
+      text-align: justify;
+    }
+    .best-seller-desc p {
+      text-align: justify;
     }
     .best-seller-video iframe {
       border-radius: 8px;
@@ -48,6 +56,7 @@
       }
       .best-seller-text p {
         margin-bottom: 30px;
+        text-align: justify;
       }
     }
     @media (max-width: 768px) {
@@ -83,6 +92,7 @@
       .best-seller-text p {
         font-size: 20px;
         line-height: 1.5;
+        text-align: justify;
       }
     }
 
@@ -94,6 +104,7 @@
       .best-seller-text p {
         font-size: 20px;
         line-height: 1.5;
+        text-align: justify;
       }
     }
     @media (min-width: 1200px) {
@@ -125,6 +136,7 @@
       .best-seller-text p {
         font-size: 14px;
         line-height: 1.5;
+        text-align: justify;
       }
       div.best-seller-content {
         gap: 16px;
@@ -133,6 +145,7 @@
       }
       div.best-seller-text p {
         margin-bottom: 16px;
+        text-align: justify;
       }
       .best-seller-video {
         width: 100%;
@@ -257,7 +270,7 @@
               <h2 class="best-seller-name f-smb">{{ section.settings.title | escape }}</h2>
             {% endif %}
             {% if section.settings.text != blank %}
-              <div class="best-seller-desc rte">{{ section.settings.text }}</div>
+              <div class="best-seller-desc rte" style="text-align: justify;">{{ section.settings.text }}</div>
             {% endif %}
           </div>
           {% if section.settings.linkvideo != blank %}

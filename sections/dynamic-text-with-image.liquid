@@ -24,6 +24,9 @@
   .dynamic-image-with-text .section-header {
     margin-bottom: 0;
   }
+  .dynamic-image-with-text .section-header .rte {
+    text-align: justify;
+  }
   .dynamic-image-with-text .feature-row__item--overlap-images > * {
     width: 100%;
     transform: none;
@@ -41,10 +44,12 @@
   }
   .dynamic-image-with-text .feature-row .rte {
     margin-top: 16px;
+    text-align: justify;
   }
   .dynamic-image-with-text .feature-row .rte p {
     font-size: 20px;
     color: #000000;
+    text-align: justify;
   }
   .dynamic-image-with-text .feature-row .text-lg,
   .dynamic-image-with-text .feature-row h2.text-lg {
@@ -79,6 +84,7 @@
       font-size: 14px;
       line-height: 1.5;
       color: #000;
+      text-align: justify;
     }
     .dynamic-image-with-text .feature-row .text-lg,
     .dynamic-image-with-text .feature-row h2.text-lg {
@@ -121,7 +127,7 @@
           <h2 class="section-header__title text-2xl page-heading m-0">{{ section.settings.title }}</h2>
         {% endif %}
         {% if section.settings.description != blank %}
-          <div class="rte page-desc">{{ section.settings.description }}</div>
+          <div class="rte page-desc" style="text-align: justify;">{{ section.settings.description }}</div>
         {% endif %}
       </div>
     </div>

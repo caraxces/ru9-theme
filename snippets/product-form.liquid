@@ -36,30 +36,60 @@
     endunless
   -%}
 
-  <button
-    {% if product.empty? %}
-      type="button"
-    {% else %}
-      type="submit"
-    {% endif %}
-    name="add"
-    data-add-to-cart
-    id="ProductSubmitButton-{{ block.id }}-{{ product.id }}"
-    class="btn btn--full btn--secondary add-to-cart{% if enable_dynamic_buttons and product.selling_plan_groups == empty %} btn--secondary{% endif %}"
-    {% unless current_variant.available %}
-      disabled="disabled"
-    {% endunless %}
-  >
-    <span class="icon-cart">{% render 'icon-cart-2' %}</span>
-    <span data-add-to-cart-text data-default-text="{{ default_text }}">
-      {{ button_text }}
-    </span>
-  </button>
-
   {%- if enable_dynamic_buttons -%}
+    {%- comment -%} Top row: Quantity + Add to Cart side by side {%- endcomment -%}
+    <div class="actions-top-row">
+      <div class="product__quantity-inline">
+        {% assign qty_id = form_id | append: '-qty' %}
+        {%- render 'quantity-input', form_id: form_id, id: qty_id, qty: 1, min: 1 -%}
+      </div>
+      
+      <button
+        {% if product.empty? %}
+          type="button"
+        {% else %}
+          type="submit"
+        {% endif %}
+        name="add"
+        data-add-to-cart
+        id="ProductSubmitButton-{{ block.id }}-{{ product.id }}"
+        class="btn btn--secondary add-to-cart{% if enable_dynamic_buttons and product.selling_plan_groups == empty %} btn--secondary{% endif %}"
+        {% unless current_variant.available %}
+          disabled="disabled"
+        {% endunless %}
+      >
+        <span class="icon-cart">{% render 'icon-cart-2' %}</span>
+        <span data-add-to-cart-text data-default-text="{{ default_text }}">
+          {{ button_text }}
+        </span>
+      </button>
+    </div>
+    
+    {%- comment -%} Bottom row: Buy Now button full width {%- endcomment -%}
     <div class="payment-buttons{% if hide_payment_button_mobile %} hide-payment-mobile{% endif %}">
       {{ form | payment_button }}
     </div>
+  {%- else -%}
+    {%- comment -%} Default layout without Buy Now {%- endcomment -%}
+    <button
+      {% if product.empty? %}
+        type="button"
+      {% else %}
+        type="submit"
+      {% endif %}
+      name="add"
+      data-add-to-cart
+      id="ProductSubmitButton-{{ block.id }}-{{ product.id }}"
+      class="btn btn--full btn--secondary add-to-cart"
+      {% unless current_variant.available %}
+        disabled="disabled"
+      {% endunless %}
+    >
+      <span class="icon-cart">{% render 'icon-cart-2' %}</span>
+      <span data-add-to-cart-text data-default-text="{{ default_text }}">
+        {{ button_text }}
+      </span>
+    </button>
   {%- endif -%}
 </div>
 

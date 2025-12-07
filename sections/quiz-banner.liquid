@@ -178,16 +178,16 @@
     }
   }
 
-  /* Small screens - 768px and below */
+  /* Small screens - 768px and below (merged with 480px styles) */
   @media (max-width: 768px) {
     .quiz-banner-container {
       flex-direction: column;
       justify-content: flex-start;
-      padding: 20px;
-      width: calc(100% - 40px);
+      padding: 3vw;
+      width: 95vw;
       max-width: none;
       height: auto;
-      min-height: 600px;
+      min-height: 490px;
       border-radius: 5px;
       margin: 0 15px;
       margin-top: 0px !important;
@@ -230,6 +230,8 @@
       order: 1;
     }
     .quiz-banner-title {
+      font-size: 20px;
+      margin: 20px 0 0 0 !important;
       max-width: 200px;
     }
     .quiz-banner-left {
@@ -250,8 +252,8 @@
       margin-top: 0;
     }
     .quiz-btn {
-      width: 328px;
-      height: 45px;
+      width: 320px;
+      height: 40px;
       flex-shrink: 0;
       border-radius: 30px;
       background: #234085;
@@ -262,33 +264,6 @@
     }
   }
 
-  /* Extra small screens - 480px and below */
-  @media (max-width: 480px) {
-    .quiz-banner-container {
-      width: 95vw;
-      padding: 3vw;
-      min-height: 490px;
-    }
-    .quiz-banner-left {
-      width: 100%;
-      max-width: 400px;
-      height: auto;
-      aspect-ratio: 634/441;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 0;
-    }
-    .quiz-banner-title {
-      font-size: 20px;
-      margin: 20px 0 0 0 !important;
-      max-width: 200px;
-    }
-    .quiz-btn {
-      width: 320px;
-      height: 40px;
-      font-size: 14px;
-    }
-  }
 
   /* Zoom levels - 50% to 200% */
   @media (min-resolution: 0.5dppx) {
@@ -600,6 +575,33 @@
     padding: 60px 80px 40px;
     overflow-y: auto;
   }
+  
+  /* Mobile padding for result step */
+  @media (max-width: 768px) {
+    .quiz-step[data-step="result"] {
+      padding: 20px 16px 20px;
+    }
+    .quiz-result-header {
+      top: -20px;
+      padding-top: 20px;
+      margin-top: -20px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .quiz-step[data-step="result"] {
+      padding: 16px 12px 16px;
+    }
+    .quiz-result-header {
+      top: -16px;
+      padding-top: 16px;
+      margin-top: -16px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+    }
+  }
   .quiz-result-content {
     text-align: left;
     padding: 0;
@@ -612,6 +614,12 @@
     margin-bottom: 40px;
     padding-bottom: 20px;
     border-bottom: 1px solid #E0E0E0;
+    position: sticky;
+    top: -60px;
+    background: #fff;
+    z-index: 10;
+    padding-top: 60px;
+    margin-top: -60px;
   }
   .quiz-result-title {
     font-size: 28px;
@@ -762,7 +770,7 @@
   .quiz-result-content .cc-description {
     color: #000;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.6px;
     margin: 0;
@@ -912,6 +920,36 @@
     .quiz-result-content .cc-image-container {
       width: 100% !important;
       max-width: 100% !important;
+    }
+    
+    /* Mobile font sizes */
+    .quiz-result-content .cc-title a {
+      font-size: 20px;
+    }
+    .quiz-result-content .cc-description {
+      font-size: 14px;
+    }
+    .quiz-result-content .cc-price__current {
+      font-size: 14px;
+    }
+    .quiz-result-content .cc-compare-price {
+      font-size: 14px;
+    }
+    .quiz-result-content .cc-rating-text {
+      font-size: 14px;
+    }
+    .quiz-result-content .cc-star {
+      font-size: 16px;
+    }
+    .quiz-result-section-title {
+      font-size: 16px;
+    }
+    .quiz-result-section-reason {
+      font-size: 14px;
+    }
+    .quiz-result-content .cc-buy-now {
+      font-size: 14px;
+      padding: 10px 24px;
     }
   }
 

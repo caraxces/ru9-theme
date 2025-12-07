@@ -65,50 +65,93 @@
               {%- endfor -%}
             </tr>
             
-            <!-- Comfort Row -->
-            <tr class="comfort-row">
-              <td class="first-column">Độ êm ái</td>
+            <!-- Firmness Row -->
+            <tr class="firmness-row">
+              <td class="first-column">Độ cứng</td>
               {%- for block in section.blocks -%}
-                <td class="product-column">
-                  {%- if block.settings.comfort_layer_1_image -%}
-                    <img 
-                      src="{{ block.settings.comfort_layer_1_image | image_url: width: 150, height: 150, crop: 'center' }}" 
-                      alt="Layer 1"
-                      width="160"
-                      height="60"
-                      style="margin: 0 auto; display: block;"
-                      loading="lazy"
-                    >
-                  {%- endif -%}
-                  {%- if block.settings.comfort_layer_2_image -%}
-                    <img 
-                      src="{{ block.settings.comfort_layer_2_image | image_url: width: 150, height: 150, crop: 'center' }}" 
-                      alt="Layer 2"
-                      width="160"
-                      height="60"
-                      style="margin: 0 auto; display: block;"
-                      loading="lazy"
-                    >
-                  {%- endif -%}
-                </td>
+                <td class="product-column">{{ block.settings.product_firmness | newline_to_br }}</td>
               {%- endfor -%}
             </tr>
             
             <!-- Height Row -->
             <tr class="height-row">
-              <td class="first-column">Độ cao sản phẩm</td>
+              <td class="first-column">Độ dày</td>
               {%- for block in section.blocks -%}
                 <td class="product-column">{{ block.settings.product_thickness }}</td>
               {%- endfor -%}
             </tr>
             
+            <!-- Feel Row -->
+            <tr class="feel-row">
+              <td class="first-column">Cảm giác</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">{{ block.settings.product_feel | newline_to_br }}</td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Customizable Firmness Row -->
+            <tr class="customizable-firmness-row">
+              <td class="first-column">Tuỳ chỉnh độ êm</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">{{ block.settings.customizable_firmness | newline_to_br }}</td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Structure Row -->
+            <tr class="structure-row">
+              <td class="first-column">Kết cấu</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">{{ block.settings.product_structure | newline_to_br }}</td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Cover Row -->
+            <tr class="cover-row">
+              <td class="first-column">Vỏ bọc</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">{{ block.settings.product_cover | newline_to_br }}</td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Advantages Row -->
+            <tr class="advantages-row">
+              <td class="first-column">Ưu điểm</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">{{ block.settings.product_advantages | newline_to_br }}</td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Support & Pain Relief Row -->
+            <tr class="support-pain-relief-row">
+              <td class="first-column">Nâng đỡ & Giảm đau</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">{{ block.settings.support_pain_relief | newline_to_br }}</td>
+              {%- endfor -%}
+            </tr>
+            
             <!-- Target Users Row -->
             <tr class="target-users-row">
-              <td class="first-column">Đối tượng sử dụng</td>
+              <td class="first-column">Đối tượng phù hợp</td>
               {%- for block in section.blocks -%}
                 <td class="product-column">
                   {{ block.settings.suitable_for | newline_to_br }}
                 </td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Suitable Body Type Row -->
+            <tr class="suitable-body-type-row">
+              <td class="first-column">Thể trạng phù hợp</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">{{ block.settings.suitable_body_type | newline_to_br }}</td>
+              {%- endfor -%}
+            </tr>
+            
+            <!-- Warranty Row -->
+            <tr class="warranty-row">
+              <td class="first-column">Độ bền/bảo hành</td>
+              {%- for block in section.blocks -%}
+                <td class="product-column">{{ block.settings.product_warranty | newline_to_br }}</td>
               {%- endfor -%}
             </tr>
             
@@ -170,50 +213,93 @@
             {%- endfor -%}
           </tr>
           
-          <!-- Comfort Row -->
-          <tr class="comfort-row">
-            <td class="first-column">Độ êm ái</td>
+          <!-- Firmness Row -->
+          <tr class="firmness-row">
+            <td class="first-column">Độ cứng</td>
             {%- for block in section.blocks -%}
-              <td class="product-column">
-                {%- if block.settings.comfort_layer_1_image -%}
-                  <img 
-                    src="{{ block.settings.comfort_layer_1_image | image_url: width: 150, height: 150, crop: 'center' }}" 
-                    alt="Layer 1"
-                    width="160"
-                    height="60"
-                    style="margin: 0 auto; display: block;"
-                    loading="lazy"
-                  >
-                {%- endif -%}
-                {%- if block.settings.comfort_layer_2_image -%}
-                  <img 
-                    src="{{ block.settings.comfort_layer_2_image | image_url: width: 150, height: 150, crop: 'center' }}" 
-                    alt="Layer 2"
-                    width="160"
-                    height="60"
-                    style="margin: 0 auto; display: block;"
-                    loading="lazy"
-                  >
-                {%- endif -%}
-              </td>
+              <td class="product-column">{{ block.settings.product_firmness | newline_to_br }}</td>
             {%- endfor -%}
           </tr>
           
           <!-- Height Row -->
           <tr class="height-row">
-            <td class="first-column">Độ cao sản phẩm</td>
+            <td class="first-column">Độ dày</td>
             {%- for block in section.blocks -%}
               <td class="product-column">{{ block.settings.product_thickness }}</td>
             {%- endfor -%}
           </tr>
           
+          <!-- Feel Row -->
+          <tr class="feel-row">
+            <td class="first-column">Cảm giác</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">{{ block.settings.product_feel | newline_to_br }}</td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Customizable Firmness Row -->
+          <tr class="customizable-firmness-row">
+            <td class="first-column">Tuỳ chỉnh độ êm</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">{{ block.settings.customizable_firmness | newline_to_br }}</td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Structure Row -->
+          <tr class="structure-row">
+            <td class="first-column">Kết cấu</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">{{ block.settings.product_structure | newline_to_br }}</td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Cover Row -->
+          <tr class="cover-row">
+            <td class="first-column">Vỏ bọc</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">{{ block.settings.product_cover | newline_to_br }}</td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Advantages Row -->
+          <tr class="advantages-row">
+            <td class="first-column">Ưu điểm</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">{{ block.settings.product_advantages | newline_to_br }}</td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Support & Pain Relief Row -->
+          <tr class="support-pain-relief-row">
+            <td class="first-column">Nâng đỡ & Giảm đau</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">{{ block.settings.support_pain_relief | newline_to_br }}</td>
+            {%- endfor -%}
+          </tr>
+          
           <!-- Target Users Row -->
           <tr class="target-users-row">
-            <td class="first-column">Đối tượng sử dụng</td>
+            <td class="first-column">Đối tượng phù hợp</td>
             {%- for block in section.blocks -%}
               <td class="product-column">
                 {{ block.settings.suitable_for | newline_to_br }}
               </td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Suitable Body Type Row -->
+          <tr class="suitable-body-type-row">
+            <td class="first-column">Thể trạng phù hợp</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">{{ block.settings.suitable_body_type | newline_to_br }}</td>
+            {%- endfor -%}
+          </tr>
+          
+          <!-- Warranty Row -->
+          <tr class="warranty-row">
+            <td class="first-column">Độ bền/bảo hành</td>
+            {%- for block in section.blocks -%}
+              <td class="product-column">{{ block.settings.product_warranty | newline_to_br }}</td>
             {%- endfor -%}
           </tr>
           
@@ -432,10 +518,10 @@
     text-align: justify !important;
   }
   
-  /* Comfort Row */
-  .comfort-row td {
-    text-align: center;
-    vertical-align: middle;
+  /* Firmness Row */
+  .firmness-row td {
+    text-align: left;
+    vertical-align: top;
   }
   
   /* Height Row */
@@ -444,8 +530,57 @@
     font-weight: bold;
   }
   
+  /* Feel Row */
+  .feel-row td {
+    text-align: left;
+    vertical-align: top;
+  }
+  
+  /* Customizable Firmness Row */
+  .customizable-firmness-row td {
+    text-align: left;
+    vertical-align: top;
+  }
+  
+  /* Structure Row */
+  .structure-row td {
+    text-align: left;
+    vertical-align: top;
+  }
+  
+  /* Cover Row */
+  .cover-row td {
+    text-align: left;
+    vertical-align: top;
+  }
+  
+  /* Advantages Row */
+  .advantages-row td {
+    text-align: left;
+    vertical-align: top;
+  }
+  
+  /* Support & Pain Relief Row */
+  .support-pain-relief-row td {
+    text-align: left;
+    vertical-align: top;
+  }
+  
   /* Target Users Row */
   .target-users-row td {
+    vertical-align: top;
+    text-align: left;
+  }
+  
+  /* Suitable Body Type Row */
+  .suitable-body-type-row td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  /* Warranty Row */
+  .warranty-row td {
+    text-align: left;
     vertical-align: top;
   }
   
@@ -557,6 +692,11 @@
   
   /* Mobile Height Row - Blue Background */
   .mobile-comparison-table .height-row .product-column {
+    background-color: #F0F7FF;
+  }
+  
+  /* Mobile Suitable Body Type Row - Blue Background */
+  .mobile-comparison-table .suitable-body-type-row .product-column {
     background-color: #F0F7FF;
   }
   
@@ -826,16 +966,79 @@
           "label": "Hình ảnh lớp 2"
         },
         {
+          "type": "textarea",
+          "id": "product_firmness",
+          "label": "Độ cứng",
+          "default": "8.0/10",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
+        },
+        {
           "type": "text",
           "id": "product_thickness",
-          "label": "Độ cao sản phẩm",
-          "default": "25 cm"
+          "label": "Độ dày",
+          "default": "25cm"
+        },
+        {
+          "type": "textarea",
+          "id": "product_feel",
+          "label": "Cảm giác",
+          "default": "Êm ái, nâng đỡ toàn diện, ôm sát",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
+        },
+        {
+          "type": "textarea",
+          "id": "customizable_firmness",
+          "label": "Tuỳ chỉnh độ êm",
+          "default": "-",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
+        },
+        {
+          "type": "textarea",
+          "id": "product_structure",
+          "label": "Kết cấu",
+          "default": "HR/Contour Foam đàn hồi\nMemory Foam gel lạnh giảm áp lực\nPU Foam đáy giữ form, chống rung",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
+        },
+        {
+          "type": "textarea",
+          "id": "product_cover",
+          "label": "Vỏ bọc",
+          "default": "Vỏ bọc tencel thoáng khí, lớp gòn kháng cháy",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
+        },
+        {
+          "type": "textarea",
+          "id": "product_advantages",
+          "label": "Ưu điểm",
+          "default": "Êm ái, phù hợp đa số\nGiảm áp lực vai & lưng\nÔm sát cơ thể\nPhục hồi tốt",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
+        },
+        {
+          "type": "textarea",
+          "id": "support_pain_relief",
+          "label": "Nâng đỡ & Giảm đau",
+          "default": "Memory Foam giảm ép - ôm cong cột sống",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
         },
         {
           "type": "textarea",
           "id": "suitable_for",
-          "label": "Đối tượng sử dụng",
-          "default": "- Người cần nâng đỡ cơ thể toàn diện\n- Người có vấn đề về cột sống",
+          "label": "Đối tượng phù hợp",
+          "default": "Đa số người dùng Việt, tiếp cận với công nghệ Foam ưu việt\nNgười đau lưng nhẹ - vừa, hay đau mỏi vai gáy\nNgười ngủ nghiêng hoặc nhạy cảm với chuyển động",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
+        },
+        {
+          "type": "textarea",
+          "id": "suitable_body_type",
+          "label": "Thể trạng phù hợp",
+          "default": "<85Kg",
+          "info": "Sử dụng dấu xuống dòng để tạo danh sách"
+        },
+        {
+          "type": "textarea",
+          "id": "product_warranty",
+          "label": "Độ bền/bảo hành",
+          "default": "100 đêm ngủ thử\n10 năm bảo hành",
           "info": "Sử dụng dấu xuống dòng để tạo danh sách"
         },
         {

@@ -139,9 +139,10 @@
 /* Wireframe: 478px x 745px trên màn hình 1920px */
 /* Tỷ lệ canvas 1594px: 1594/1920 = 0.830208333 */
 /* Card: 478 * 0.8302 = 397px, 745 * 0.8302 = 618px */
+/* Giảm 12%: 397 * 0.88 = 349px, 618 * 0.88 = 544px */
 .review-card { 
-  flex: 0 0 397px; 
-  width: 397px; 
+  flex: 0 0 349px; 
+  width: 349px; 
   display: flex; 
   flex-direction: column; 
   background: transparent; 
@@ -152,7 +153,7 @@
 }
 .review-card__video-wrapper { 
   width: 100%; 
-  height: 618px; 
+  height: 544px; 
   border-radius: 12px; 
   overflow: hidden; 
   background: #FFFFFF; 
@@ -215,13 +216,13 @@
 }
 .review-card__product-link { 
   position: absolute;
-  bottom: 20px;
+  bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
   display: flex; 
   align-items: center; 
   justify-content: space-between; 
-  padding: 10px 20px; 
+  padding: 9px 20px; 
   background: #FFF; 
   border: 2px solid #E5E7EB;
   text-decoration: none; 
@@ -230,17 +231,17 @@
   flex-shrink: 0;
   z-index: 10;
   box-sizing: border-box;
-  /* Kích thước cố định cho canvas 1594px: 408*0.8302=339px, 66*0.8302=55px, 37.5*0.8302=31px */
-  width: 339px;
-  height: 55px;
-  border-radius: 31px;
+  /* Kích thước giảm 12%: 339*0.88=298px, 55*0.88=48px, 31*0.88=27px */
+  width: 298px;
+  height: 48px;
+  border-radius: 27px;
 }
 .review-card__product-link:hover { 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); 
   transform: translateX(-50%) translateY(-1px); 
 }
 .review-card__product-name { 
-  font-size: 13px; 
+  font-size: 11px; 
   font-weight: 500; 
   color: #1C2C58; 
   margin: 0; 
@@ -332,13 +333,12 @@
       display: none !important;
     }
     
-    /* Mobile: tính tỷ lệ từ desktop 397px */
-    /* Tỷ lệ mobile: 280/397 = 0.705 */
-    /* Card: 280px width, height: 618 * 0.705 = 436px */
-    /* Button: 339 * 0.705 = 239px, 55 * 0.705 = 39px, 31 * 0.705 = 22px, bottom: 20 * 0.705 = 14px */
+    /* Mobile: giảm 12% từ desktop */
+    /* Desktop mới: 349px × 544px */
+    /* Mobile: 280 * 0.88 = 246px, height: 436 * 0.88 = 384px */
     .review-card { 
-      flex: 0 0 280px; 
-      width: 280px; 
+      flex: 0 0 246px; 
+      width: 246px; 
       display: flex; 
       flex-direction: column; 
       background: transparent; 
@@ -349,7 +349,7 @@
     }
     .review-card__video-wrapper { 
       width: 100%; 
-      height: 436px; 
+      height: 384px; 
       border-radius: 12px; 
       overflow: hidden; 
       background: #FFFFFF; 
@@ -380,13 +380,13 @@
     }
     .review-card__product-link { 
       position: absolute;
-      bottom: 14px;
+      bottom: 12px;
       left: 50%;
       transform: translateX(-50%);
       display: flex; 
       align-items: center; 
       justify-content: space-between; 
-      padding: 8px 16px; 
+      padding: 7px 16px; 
       background: #FFF; 
       border: 2px solid #E5E7EB;
       text-decoration: none; 
@@ -395,17 +395,17 @@
       flex-shrink: 0;
       z-index: 10;
       box-sizing: border-box;
-      /* Kích thước cố định cho mobile: 339*0.705=239px, 55*0.705=39px, 31*0.705=22px */
-      width: 239px;
-      height: 39px;
-      border-radius: 22px;
+      /* Kích thước giảm 12%: 239*0.88=210px, 39*0.88=34px, 22*0.88=19px */
+      width: 210px;
+      height: 34px;
+      border-radius: 19px;
     }
     .review-card__product-link:hover { 
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); 
       transform: translateX(-50%) translateY(-1px); 
     }
     .review-card__product-name { 
-      font-size: 12px; 
+      font-size: 11px; 
       font-weight: 500; 
       color: #1C2C58; 
       margin: 0; 

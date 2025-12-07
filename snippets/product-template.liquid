@@ -276,6 +276,227 @@
     background: #fffbe9;
     color: #0f172a;
   }
+  
+  /* Figma Design: Layout for product-form-actions.has-buy-now */
+  /* Top row: Quantity (left) + Add to Cart (right) side by side */
+  /* Bottom row: Buy Now button (full width) */
+  
+  .product-form-actions.has-buy-now {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  /* Top row: Quantity + Add to Cart */
+  .product-form-actions.has-buy-now .actions-top-row {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+    width: 100%;
+  }
+  
+  /* Quantity selector inline styling */
+  .product-form-actions.has-buy-now .product__quantity-inline {
+    flex: 0 0 auto;
+    width: auto;
+  }
+  
+  /* Quantity input wrapper - match Figma design */
+  .product-form-actions.has-buy-now .js-qty__wrapper {
+    display: flex;
+    align-items: stretch;
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    position: relative;
+    width: 128px;
+    min-height: 48px;
+    overflow: hidden;
+  }
+  
+  .product-form-actions.has-buy-now .js-qty__num {
+    flex: 1;
+    text-align: center;
+    border: none;
+    background: transparent;
+    padding: 12px 36px 12px 12px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    -moz-appearance: textfield;
+    outline: none;
+    width: auto;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  
+  .product-form-actions.has-buy-now .js-qty__num::-webkit-outer-spin-button,
+  .product-form-actions.has-buy-now .js-qty__num::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Quantity adjust buttons - 2 buttons stacked vertically on the right */
+  .product-form-actions.has-buy-now .js-qty__adjust {
+    position: absolute;
+    right: 0;
+    width: 32px;
+    background: #f5f5f5;
+    border: none;
+    border-left: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1;
+    left: auto;
+    box-sizing: border-box;
+  }
+  
+  /* Plus button (up arrow) - top right */
+  .product-form-actions.has-buy-now .js-qty__adjust--plus {
+    top: 0;
+    left: auto;
+    right: 0;
+    height: calc(50% - 0.5px);
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0 5px 0 0;
+    z-index: 2;
+  }
+  
+  /* Minus button (down arrow) - bottom right */
+  .product-form-actions.has-buy-now .js-qty__adjust--minus {
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    height: calc(50% - 0.5px);
+    border-radius: 0 0 5px 0;
+    z-index: 1;
+    position: absolute;
+  }
+  
+  .product-form-actions.has-buy-now .js-qty__adjust:hover {
+    background: #e0e0e0;
+  }
+  
+  /* Hide default icons from theme.css - we use custom SVG */
+  .product-form-actions.has-buy-now .js-qty__adjust .icon.icon-minus,
+  .product-form-actions.has-buy-now .js-qty__adjust .icon.icon-plus {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+  
+  /* Override theme.css .js-qty__adjust .icon path - hide default icons */
+  .product-form-actions.has-buy-now .js-qty__adjust .icon.icon-minus path,
+  .product-form-actions.has-buy-now .js-qty__adjust .icon.icon-plus path {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    fill: transparent !important;
+    stroke: transparent !important;
+  }
+  
+  /* Show only our custom SVG icons */
+  .product-form-actions.has-buy-now .js-qty__adjust .icon.icon-arrow-up,
+  .product-form-actions.has-buy-now .js-qty__adjust .icon.icon-arrow-down {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 15px !important;
+    height: 8px !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Up arrow (plus) - black stroke */
+  .product-form-actions.has-buy-now .js-qty__adjust--plus .icon.icon-arrow-up path {
+    stroke: black !important;
+    fill: transparent !important;
+  }
+  
+  /* Down arrow (minus) - light gray stroke */
+  .product-form-actions.has-buy-now .js-qty__adjust--minus .icon.icon-arrow-down path {
+    stroke: #E7E9ED !important;
+    fill: transparent !important;
+  }
+  
+  /* Update stroke color on hover for minus button */
+  .product-form-actions.has-buy-now .js-qty__adjust--minus:hover .icon.icon-arrow-down path {
+    stroke: black !important;
+  }
+  
+  /* Add to Cart button in top row */
+  .product-form-actions.has-buy-now .actions-top-row .add-to-cart {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    background: #ffffff;
+    color: #000000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 24px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .product-form-actions.has-buy-now .actions-top-row .add-to-cart .icon-cart {
+    display: flex;
+    align-items: center;
+  }
+  
+  .product-form-actions.has-buy-now .actions-top-row .add-to-cart:hover,
+  .product-form-actions.has-buy-now .actions-top-row .add-to-cart:focus {
+    background: #ffffff;
+    color: #000000;
+    border-color: #000000;
+  }
+  
+  /* Buy Now button - full width, yellow background */
+  .product-form-actions.has-buy-now .payment-buttons {
+    width: 100%;
+  }
+  
+  .product-form-actions.has-buy-now
+    .shopify-payment-button
+    .shopify-payment-button__button--unbranded {
+    background: #F9E493 !important;
+    border: none !important;
+    border-radius: 5px !important;
+    color: #000000 !important;
+    font-family: "Be Vietnam Pro", sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    padding: 12px 24px !important;
+    min-height: 48px !important;
+    width: 100% !important;
+  }
+  
+  .product-form-actions.has-buy-now
+    .shopify-payment-button
+    .shopify-payment-button__button--unbranded:hover,
+  .product-form-actions.has-buy-now
+    .shopify-payment-button
+    .shopify-payment-button__button--unbranded:focus {
+    background: #F9E493 !important;
+    color: #000000 !important;
+  }
+  
+  /* Remove cart icon from Buy Now button if present */
+  .product-form-actions.has-buy-now
+    .shopify-payment-button
+    .shopify-payment-button__button--unbranded::before {
+    display: none !important;
+  }
   .product-block:not(.product-block-bundle) .variant__button-label.disabled:before {
     content: "";
     top: 50%;
@@ -454,6 +675,20 @@
     font-weight: 400;
   }
   /* Size Variant Styles - Apply to ALL size variants regardless of option position */
+  /* Desktop: Default to 4 columns layout for size variants */
+  @media screen and (min-width: 769px) {
+    .is-size .variant-input-wrap,
+    .is-firmness .variant-input-wrap,
+    .variant-input-wrap[data-handle="kich-thuoc"],
+    .variant-input-wrap[data-handle="size"],
+    .variant-input-wrap[data-handle="kích-thước"] {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+  }
+  /* Mobile: Keep original responsive layout */
   .is-size .variant-input-wrap,
   .is-firmness .variant-input-wrap,
   .variant-input-wrap[data-handle="kich-thuoc"],
@@ -519,7 +754,53 @@
   .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"] .variant-input:nth-child(n+6) {
     grid-column: span 2;
   }
-  /* Button styling for size variants - Apply to ALL size variants regardless of option position */
+  /* Desktop: Override to ensure 4 columns for size variants (except 2-3 items) */
+  @media screen and (min-width: 769px) {
+    .is-size .variant-input-wrap[data-option-count="4"],
+    .is-size .variant-input-wrap[data-option-count="5"],
+    .is-size .variant-input-wrap[data-option-count="6"],
+    .is-size .variant-input-wrap[data-option-count="7"],
+    .is-firmness .variant-input-wrap[data-option-count="4"],
+    .is-firmness .variant-input-wrap[data-option-count="5"],
+    .is-firmness .variant-input-wrap[data-option-count="6"],
+    .is-firmness .variant-input-wrap[data-option-count="7"],
+    .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="4"],
+    .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="5"],
+    .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="6"],
+    .variant-input-wrap[data-handle="kich-thuoc"][data-option-count="7"],
+    .variant-input-wrap[data-handle="size"][data-option-count="4"],
+    .variant-input-wrap[data-handle="size"][data-option-count="5"],
+    .variant-input-wrap[data-handle="size"][data-option-count="6"],
+    .variant-input-wrap[data-handle="size"][data-option-count="7"],
+    .variant-input-wrap[data-handle="kích-thước"][data-option-count="4"],
+    .variant-input-wrap[data-handle="kích-thước"][data-option-count="5"],
+    .variant-input-wrap[data-handle="kích-thước"][data-option-count="6"],
+    .variant-input-wrap[data-handle="kích-thước"][data-option-count="7"] {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+  /* Button styling for size variants - Desktop: Match Figma design with brown background */
+  @media screen and (min-width: 769px) {
+    .variant-wrapper:not(.is-color) .variant__button-label,
+    .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label,
+    .variant-input-wrap[data-handle="size"] .variant__button-label,
+    .variant-input-wrap[data-handle="kích-thước"] .variant__button-label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 8px;
+      border: 1px solid #ffffff;
+      border-radius: 5px;
+      background-color: #8B7355;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      width: 100%;
+      min-height: 5rem;
+      text-align: center;
+    }
+  }
+  /* Mobile: Keep original white background */
   .variant-wrapper:not(.is-color) .variant__button-label,
   .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label,
   .variant-input-wrap[data-handle="size"] .variant__button-label,
@@ -555,6 +836,26 @@
   .variant-input-wrap[data-handle="kích-thước"] .variant__button-label .label-value {
     display: block;
   }
+  /* Desktop: Text colors for size variants - ensure visibility on brown background */
+  @media screen and (min-width: 769px) {
+    .variant-wrapper:not(.is-color) .variant__button-label .label-head,
+    .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-head,
+    .variant-input-wrap[data-handle="size"] .variant__button-label .label-head,
+    .variant-input-wrap[data-handle="kích-thước"] .variant__button-label .label-head {
+      font-size: 16px;
+      font-weight: 600;
+      color: #212121;
+    }
+    .variant-wrapper:not(.is-color) .variant__button-label .label-value,
+    .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-value,
+    .variant-input-wrap[data-handle="size"] .variant__button-label .label-value,
+    .variant-input-wrap[data-handle="kích-thước"] .variant__button-label .label-value {
+      font-size: 14px;
+      font-weight: 400;
+      color: #212121;
+    }
+  }
+  /* Mobile: Keep original text colors */
   .variant-wrapper:not(.is-color) .variant__button-label .label-head,
   .variant-input-wrap[data-handle="kich-thuoc"] .variant__button-label .label-head,
   .variant-input-wrap[data-handle="size"] .variant__button-label .label-head,
