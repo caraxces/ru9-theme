@@ -319,15 +319,82 @@
   .quiz-popup-content {
     background: #fff;
     border-radius: 15px;
-    width: 90%;
-    max-width: 900px;
-    height: 90vh;
+    width: 1594px;
+    max-width: 1594px;
+    height: 889px;
     max-height: 90vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
     box-sizing: border-box;
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+  
+  /* Result step specific sizing - 828px x 1009px for 1594px canvas */
+  .quiz-popup-content.quiz-result-mode {
+    width: 828px;
+    max-width: 828px;
+    height: 1009px;
+    max-height: 90vh;
+  }
+  
+  /* Responsive adjustments for different screen sizes */
+  @media (min-width: 1600px) {
+    .quiz-popup-content {
+      width: 1594px;
+      height: 889px;
+    }
+    .quiz-popup-content.quiz-result-mode {
+      width: 828px;
+      height: 1009px;
+    }
+  }
+  
+  @media (max-width: 1600px) {
+    .quiz-popup-content {
+      width: 95%;
+      max-width: 1594px;
+      height: auto;
+      min-height: 600px;
+    }
+  }
+  
+  @media (max-width: 1400px) {
+    .quiz-popup-content {
+      width: 90%;
+      max-width: 1200px;
+      height: auto;
+      max-height: 90vh;
+    }
+    .quiz-step {
+      padding: 50px 60px 30px;
+      gap: 60px;
+    }
+    .quiz-step-content {
+      gap: 60px;
+    }
+    .quiz-navigation {
+      padding: 25px 60px;
+    }
+  }
+  
+  @media (max-width: 1200px) {
+    .quiz-popup-content {
+      width: 95%;
+      max-width: 1000px;
+    }
+    .quiz-step {
+      padding: 40px 50px 25px;
+      gap: 50px;
+    }
+    .quiz-step-content {
+      gap: 50px;
+    }
+    .quiz-question-section {
+      min-width: 300px;
+      max-width: 400px;
+    }
   }
   .quiz-popup-close {
     position: absolute;
@@ -357,14 +424,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 50px 60px 30px;
+    padding: 60px 80px 40px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     transform: translateX(20px);
     overflow-y: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 80px;
     box-sizing: border-box;
   }
   .quiz-step.active {
@@ -375,19 +444,35 @@
   .quiz-step.prev {
      transform: translateX(-20px);
   }
+  .quiz-step-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 80px;
+    align-items: flex-start;
+    position: relative;
+  }
+  .quiz-question-section {
+    flex: 0 0 auto;
+    min-width: 350px;
+    max-width: 450px;
+  }
   .quiz-step h3 {
     font-size: 24px;
-    margin-bottom: 30px;
+    margin: 0;
     font-weight: 600;
     color: #1C2C58;
     text-align: left;
     font-family: "Be Vietnam Pro", sans-serif;
+    line-height: 1.4;
   }
   .quiz-answers {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
     flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 120px 120px;
+    gap: 15px;
+    align-items: stretch;
   }
   .quiz-answer {
     padding: 20px 24px;
@@ -396,9 +481,17 @@
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 16px;
-    text-align: left;
-    background: #fff;
+    text-align: center;
+    background: #F5F5F5;
     position: relative;
+    height: 120px;
+    min-height: 120px;
+    max-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
   }
   .quiz-answer:hover {
     border-color: #FFD700;
@@ -410,26 +503,48 @@
     color: #1C2C58;
     font-weight: 500;
   }
+  /* Layout for answers: A top-left, B top-right, C bottom-left */
+  .quiz-answer:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .quiz-answer:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .quiz-answer:nth-child(3) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .quiz-answer:nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
+  }
   .quiz-answer-text {
     font-weight: 500;
     margin-bottom: 4px;
+    text-align: center;
+    line-height: 1.4;
   }
   .quiz-answer-subtitle {
     font-size: 14px;
     color: #666;
     font-weight: 400;
     margin-top: 4px;
+    text-align: center;
+    line-height: 1.4;
   }
   .quiz-answer.selected .quiz-answer-subtitle {
     color: #1C2C58;
   }
   .quiz-navigation {
-    padding: 20px 60px;
+    padding: 30px 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid #eee;
     background: #fff;
+    flex-shrink: 0;
   }
   .quiz-continue-btn {
     background: #FFD700;
@@ -442,7 +557,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: "Be Vietnam Pro", sans-serif;
-    margin-left: auto;
+    min-width: 140px;
   }
   .quiz-continue-btn:hover:not(:disabled) {
     background: #FFC700;
@@ -452,110 +567,355 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
-  .quiz-progress-bar {
-    width: 100%;
-    height: 8px;
-    background: #E0E0E0;
-    border-radius: 4px;
-    overflow: hidden;
+  .quiz-progress-container {
+    flex: 1;
     margin-right: 20px;
   }
-  .quiz-progress-bar-inner {
-    height: 100%;
+  .quiz-navigation .quiz-progress-container .quiz-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #F5F5F5 !important;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    display: block;
+  }
+  .quiz-navigation .quiz-progress-container .quiz-progress-bar .quiz-progress-bar-inner {
+    height: 100% !important;
     width: 0;
-    background: #FFD700;
+    background: #FFD700 !important;
     transition: width 0.4s ease;
     border-radius: 4px;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1;
+    display: block !important;
+    min-width: 0;
+    max-width: 100%;
   }
 
   /* Result styling */
+  .quiz-step[data-step="result"] {
+    padding: 60px 80px 40px;
+    overflow-y: auto;
+  }
   .quiz-result-content {
     text-align: left;
+    padding: 0;
+    width: 100%;
   }
-  .quiz-result-products {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin-top: 30px;
-  }
-  .quiz-result-product {
+  .quiz-result-header {
     display: flex;
-    gap: 20px;
-    padding: 20px;
-    border: 1px solid #E0E0E0;
-    border-radius: 12px;
-    background: #fff;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #E0E0E0;
   }
-  .quiz-result-product img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    flex-shrink: 0;
-  }
-  .quiz-result-product-info {
-    flex: 1;
-  }
-  .quiz-result-product-info h4 {
-    margin: 0 0 10px;
-    font-size: 20px;
+  .quiz-result-title {
+    font-size: 28px;
     font-weight: 600;
     color: #1C2C58;
-  }
-  .quiz-result-product-info .price {
-    font-size: 18px;
-    font-weight: 600;
-    color: #234085;
-    margin: 10px 0;
-  }
-  .quiz-result-product-info .reason {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.6;
-    margin: 10px 0;
-  }
-  .quiz-result-product-info .view-product-btn {
-    margin-top: 15px;
-    display: inline-block;
-    padding: 10px 24px;
-    background: #234085;
-    color: #fff;
-    border-radius: 100px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background 0.2s ease;
-  }
-  .quiz-result-product-info .view-product-btn:hover {
-    background: #3a4c7a;
-  }
-  .quiz-retry-btn {
-    margin-top: 30px;
-    padding: 12px 32px;
-    background: transparent;
-    color: #234085;
-    border: 2px solid #234085;
-    border-radius: 100px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    display: inline-block;
-    transition: all 0.2s ease;
-    cursor: pointer;
+    margin: 0;
     font-family: "Be Vietnam Pro", sans-serif;
   }
-  .quiz-retry-btn:hover {
-    background: #234085;
+  .quiz-retry-btn--header {
+    padding: 12px 32px;
+    background: #FFD700;
+    color: #1C2C58;
+    border: none;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  .quiz-retry-btn--header:hover {
+    background: #FFC700;
+    transform: translateY(-1px);
+  }
+  .quiz-result-products {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px;
+    width: 100%;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+  }
+  .quiz-result-section {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+  .quiz-result-section-header {
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 0;
+  }
+  .quiz-result-section--comprehensive .quiz-result-section-header {
+    background: #1C2C58;
     color: #fff;
   }
-  .quiz-result-actions {
+  .quiz-result-section--optimal .quiz-result-section-header {
+    background: #E8F0FE;
+    color: #1C2C58;
+  }
+  .quiz-result-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  .quiz-result-section-reason {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  .quiz-result-cc-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+  
+  /* Import cc-card styles from collection - Horizontal layout for results */
+  .quiz-result-content .cc-card {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 24px;
+    align-items: stretch;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .quiz-result-content .cc-image-container {
+    position: relative;
+    width: 380px;
+    max-width: 380px;
+    min-width: 380px;
+    height: 284px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  .quiz-result-content .cc-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .quiz-result-content .cc-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .quiz-result-content .cc-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 284px;
+    min-height: 284px;
+    justify-content: flex-start;
+    overflow: visible;
+  }
+  .quiz-result-content .cc-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .quiz-result-content .cc-stars {
+    display: flex;
+    gap: 2px;
+  }
+  .quiz-result-content .cc-star {
+    color: #FFD700;
+    font-size: 20px;
+  }
+  .quiz-result-content .cc-rating-text {
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 14px;
+    color: #000;
+  }
+  .quiz-result-content .cc-title {
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .quiz-result-content .cc-title a {
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 27px;
+    letter-spacing: 0.6px;
+    text-decoration: none;
+  }
+  .quiz-result-content .cc-title a:hover {
+    color: #3264E0;
+  }
+  .quiz-result-content .cc-description {
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+    margin: 0;
+    line-height: 1.5;
+    flex: 1;
+    overflow: visible;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    max-height: 60px;
+  }
+  .quiz-result-content .cc-price-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .quiz-result-content .cc-price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quiz-result-content .cc-price__current {
+    color: #000;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: 0.6px;
+  }
+  .quiz-result-content .cc-price__discount {
+    background: #FCE390;
+    color: #1C2C58;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  .quiz-result-content .cc-compare-price-container {
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .quiz-result-content .cc-compare-price {
+    color: #999;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 18px;
+    text-decoration: line-through;
+  }
+  .quiz-result-content .cc-compare-price--empty {
+    display: none;
+  }
+  .quiz-result-content .cc-actions {
+    margin: 0;
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+  .quiz-result-content .cc-buy-now {
+    background: #234085;
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Be Vietnam Pro", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    margin-top: 30px;
+    line-height: 1.5;
+    min-height: 44px;
+  }
+  .quiz-result-content .cc-buy-now:hover {
+    background: #3a4c7a;
+    transform: translateY(-1px);
+  }
+  .quiz-result-content .cc-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    z-index: 2;
+  }
+  .quiz-result-content .cc-badge--top-rated {
+    background: #3264E0;
+  }
+  .quiz-result-content .cc-badge--best-seller {
+    background: #234085;
+  }
+  .quiz-result-content .cc-badge--new {
+    background: #234085;
+  }
+  
+  @media (max-width: 1400px) {
+    .quiz-popup-content.quiz-result-mode {
+      width: 95%;
+      max-width: 828px;
+      height: auto;
+      min-height: 600px;
+    }
+  }
+  
+  /* Ensure vertical layout at all screen sizes */
+  @media (min-width: 769px) {
+    .quiz-result-products {
+      display: flex !important;
+      flex-direction: column !important;
+      grid-template-columns: none !important;
+    }
+    .quiz-result-section {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .quiz-popup-content.quiz-result-mode {
+      width: 95%;
+      max-width: 100%;
+      height: auto;
+    }
+    .quiz-result-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .quiz-result-title {
+      font-size: 24px;
+    }
+    .quiz-result-products {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .quiz-result-content .cc-card {
+      flex-direction: column !important;
+    }
+    .quiz-result-content .cc-image-container {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
   }
 
   @media (min-width: 768px) {
-    .quiz-answers {
-      grid-template-columns: 1fr 1fr;
-    }
     .quiz-result-products {
       grid-template-columns: 1fr 1fr;
     }
@@ -564,6 +924,28 @@
   @media (max-width: 768px) {
     .quiz-step {
       padding: 40px 30px 20px;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .quiz-step-content {
+      flex-direction: column;
+      gap: 30px;
+    }
+    .quiz-question-section {
+      min-width: 100%;
+      max-width: 100%;
+    }
+    .quiz-answers {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      width: 100%;
+    }
+    .quiz-answer:nth-child(1),
+    .quiz-answer:nth-child(2),
+    .quiz-answer:nth-child(3),
+    .quiz-answer:nth-child(4) {
+      grid-column: 1;
+      grid-row: auto;
     }
     .quiz-navigation {
       padding: 15px 30px;
@@ -574,7 +956,7 @@
       width: 100%;
       margin-left: 0;
     }
-    .quiz-progress-bar {
+    .quiz-progress-container {
       margin-right: 0;
       width: 100%;
     }
@@ -673,32 +1055,35 @@
         {%- assign question_title = section.settings[question_title_key] -%}
 
         <div class="quiz-step" data-step="{{ i }}">
-            <h3>{{ question_title }}</h3>
-            <div class="quiz-answers">
-                {%- for j in (1..4) -%}
-                    {%- capture answer_text_key -%}q_{{ i }}_a_{{ j }}_text{%- endcapture -%}
-                    {%- capture answer_subtitle_key -%}q_{{ i }}_a_{{ j }}_subtitle{%- endcapture -%}
-                    {%- capture answer_value_key -%}q_{{ i }}_a_{{ j }}_value{%- endcapture -%}
-                    {%- assign answer_text = section.settings[answer_text_key] -%}
-                    {%- assign answer_subtitle = section.settings[answer_subtitle_key] -%}
-                    {%- assign answer_value = section.settings[answer_value_key] -%}
+            <div class="quiz-step-content">
+                <div class="quiz-question-section">
+                    <h3>{{ question_title }}</h3>
+                </div>
+                <div class="quiz-answers">
+                    {%- for j in (1..4) -%}
+                        {%- capture answer_text_key -%}q_{{ i }}_a_{{ j }}_text{%- endcapture -%}
+                        {%- capture answer_subtitle_key -%}q_{{ i }}_a_{{ j }}_subtitle{%- endcapture -%}
+                        {%- capture answer_value_key -%}q_{{ i }}_a_{{ j }}_value{%- endcapture -%}
+                        {%- assign answer_text = section.settings[answer_text_key] -%}
+                        {%- assign answer_subtitle = section.settings[answer_subtitle_key] -%}
+                        {%- assign answer_value = section.settings[answer_value_key] -%}
 
-                    {%- if answer_text != blank -%}
-                        <div class="quiz-answer" data-question="{{ i }}" data-value="{{ answer_value | escape }}">
-                            <div class="quiz-answer-text">{{ answer_text }}</div>
-                            {%- if answer_subtitle != blank -%}
-                                <div class="quiz-answer-subtitle">{{ answer_subtitle }}</div>
-                            {%- endif -%}
-                        </div>
-                    {%- endif -%}
-                {%- endfor -%}
+                        {%- if answer_text != blank -%}
+                            <div class="quiz-answer" data-question="{{ i }}" data-value="{{ answer_value | escape }}">
+                                <div class="quiz-answer-text">{{ answer_text }}</div>
+                                {%- if answer_subtitle != blank -%}
+                                    <div class="quiz-answer-subtitle">{{ answer_subtitle }}</div>
+                                {%- endif -%}
+                            </div>
+                        {%- endif -%}
+                    {%- endfor -%}
+                </div>
             </div>
         </div>
       {%- endfor -%}
 
       <!-- Result Step -->
       <div class="quiz-step" data-step="result">
-        <h3>{{ section.settings.result_title }}</h3>
         <div id="quiz-result-content-{{ section.id }}" class="quiz-result-content">
           <!-- Recommended products will be injected here by JS -->
         </div>
@@ -706,8 +1091,10 @@
     </div>
 
     <div class="quiz-navigation">
-        <div class="quiz-progress-bar">
-            <div class="quiz-progress-bar-inner" id="quiz-progress-bar-inner-{{ section.id }}"></div>
+        <div class="quiz-progress-container">
+            <div class="quiz-progress-bar">
+                <div class="quiz-progress-bar-inner" id="quiz-progress-bar-inner-{{ section.id }}"></div>
+            </div>
         </div>
         <button type="button" class="quiz-continue-btn" id="quiz-continue-btn-{{ section.id }}" disabled>TIẾP TỤC</button>
     </div>
@@ -717,13 +1104,22 @@
 {%- capture product_results -%}
   {%- for block in section.blocks -%}
     {%- if block.type == 'product_result' and block.settings.product != blank -%}
+      {%- assign product = block.settings.product -%}
       {
-        "product_id": "{{ block.settings.product.id }}",
-        "title": "{{ block.settings.product.title | escape }}",
-        "url": "{{ block.settings.product.url }}",
-        "image": "{{ block.settings.product.featured_image | image_url: width: 300 }}",
-        "price": "{{ block.settings.product.price | money }}",
-        "handle": "{{ block.settings.product.handle }}"
+        "product_id": "{{ product.id }}",
+        "title": "{{ product.title | escape }}",
+        "url": "{{ product.url }}",
+        "image": "{{ product.featured_image | image_url: width: 760 }}",
+        "price": {{ product.price }},
+        "price_formatted": "{{ product.price | money }}",
+        "compare_at_price": {{ product.compare_at_price | default: 0 }},
+        "compare_at_price_formatted": "{{ product.compare_at_price | money }}",
+        "handle": "{{ product.handle }}",
+        "rating": {{ product.metafields.reviews.rating.value | default: 5 }},
+        "rating_count": {{ product.metafields.reviews.rating_count | default: 0 }},
+        "description": {{ product.description | strip_html | truncate: 100 | json }},
+        "subdes": {{ product.metafields.custom.subdes.value | default: "" | json }},
+        "tags": {{ product.tags | json }}
       }{%- unless forloop.last -%},{%- endunless -%}
     {%- endif -%}
   {%- endfor -%}
@@ -744,7 +1140,7 @@
   
   let currentStep = 1;
   const totalSteps = 7;
-  const answers = {};
+  let answers = {};
   
   // Product mapping based on customer profiles
   const productMapping = {
@@ -847,6 +1243,16 @@
         popup.style.display = 'flex';
         currentStep = 1;
         answers = {};
+        // Reset progress bar
+        if (progressBar) {
+          progressBar.style.setProperty('width', '0%', 'important');
+          progressBar.style.setProperty('min-width', '0', 'important');
+        }
+        // Clear all selected answers
+        const allAnswers = popup.querySelectorAll('.quiz-answer');
+        allAnswers.forEach(answer => {
+          answer.classList.remove('selected');
+        });
         updateStep();
       });
     });
@@ -911,10 +1317,23 @@
       currentStepEl.classList.add('active');
     }
     
-    // Update progress
+    // Update progress - calculate based on current step
     if (progressBar) {
-      const progress = (currentStep / totalSteps) * 100;
+      // Progress should be: (currentStep / totalSteps) * 100
+      // For step 1: (1/7) * 100 = 14.29%
+      // For step 2: (2/7) * 100 = 28.57%
+      // etc.
+      const progress = Math.round((currentStep / totalSteps) * 100 * 100) / 100; // Round to 2 decimals
+      // Remove any existing width styles first
+      progressBar.style.removeProperty('width');
+      progressBar.style.removeProperty('min-width');
+      progressBar.style.removeProperty('max-width');
+      // Set new width
       progressBar.style.width = progress + '%';
+      progressBar.style.minWidth = '0';
+      progressBar.style.maxWidth = '100%';
+      // Force reflow to ensure style is applied
+      progressBar.offsetHeight;
     }
     
     // Update continue button
@@ -968,32 +1387,127 @@
     
     // Render results
     if (resultContent) {
-      let html = '<div class="quiz-result-products">';
+      const sectionTitles = ['Lựa chọn toàn diện', 'Lựa chọn tối ưu'];
+      const sectionClasses = ['quiz-result-section--comprehensive', 'quiz-result-section--optimal'];
+      
+      let html = '<div class="quiz-result-header">';
+      html += '<h2 class="quiz-result-title">Ru9 gợi ý chiếc nệm phù hợp với bạn</h2>';
+      html += '<button type="button" class="quiz-retry-btn quiz-retry-btn--header" id="quiz-retry-btn-' + sectionId + '">THỬ LẠI</button>';
+      html += '</div>';
+      
+      html += '<div class="quiz-result-products">';
       let renderedCount = 0;
       
-      matchedProducts.forEach(product => {
+      matchedProducts.forEach((product, index) => {
         if (renderedCount >= 2) return; // Only show 2 products max
         
         const productData = productsByHandle[product.handle];
         if (productData) {
-          html += `
-            <div class="quiz-result-product">
-              <img src="${productData.image}" alt="${productData.title}">
-              <div class="quiz-result-product-info">
-                <h4>${productData.title}</h4>
-                <div class="price">${productData.price}</div>
-                <div class="reason">${product.reason}</div>
-                <a href="${productData.url}" class="view-product-btn">Xem sản phẩm</a>
-              </div>
-            </div>
-          `;
+          // Calculate discount
+          const price = productData.price || 0;
+          const comparePrice = productData.compare_at_price || 0;
+          const hasDiscount = comparePrice > 0 && comparePrice > price;
+          const discountPercent = hasDiscount ? Math.round(((comparePrice - price) / comparePrice) * 100) : 0;
+          
+          // Use formatted prices from Liquid
+          const priceFormatted = productData.price_formatted || '0 VNĐ';
+          const comparePriceFormatted = productData.compare_at_price_formatted || '';
+          
+          // Check for badges
+          const tags = productData.tags || [];
+          const isTopRated = tags.some(tag => tag.toLowerCase().includes('top-rated') || tag.toLowerCase().includes('top rated'));
+          const isBestSeller = tags.some(tag => tag.toLowerCase().includes('best-seller') || tag.toLowerCase().includes('best seller'));
+          const isNew = tags.some(tag => tag.toLowerCase().includes('new'));
+          
+          // Get rating
+          const rating = productData.rating || 5;
+          const ratingCount = productData.rating_count || 0;
+          
+          // Get description
+          const description = productData.subdes || productData.description || 'Sản phẩm chất lượng cao với thiết kế hiện đại, phù hợp cho mọi không gian sống.';
+          
+          html += `<div class="quiz-result-section ${sectionClasses[index]}">`;
+          
+          // Section header
+          html += `<div class="quiz-result-section-header">`;
+          html += `<div class="quiz-result-section-title">${sectionTitles[index]}:</div>`;
+          html += `<div class="quiz-result-section-reason">${product.reason}</div>`;
+          html += `</div>`;
+          
+          // Product card using cc-card structure
+          html += `<div class="cc-card quiz-result-cc-card">`;
+          
+          // Image container
+          html += `<div class="cc-image-container">`;
+          html += `<a class="cc-image" href="${productData.url}" aria-label="${productData.title}">`;
+          html += `<img src="${productData.image}" alt="${productData.title}" loading="lazy">`;
+          html += `</a>`;
+          
+          // Badges - Only show if explicitly needed (prioritize Top rated > Best Seller > New)
+          // Hide New badge for quiz results unless specifically required
+          if (isTopRated) {
+            html += `<div class="cc-badge cc-badge--top-rated">Top rated</div>`;
+          } else if (isBestSeller) {
+            html += `<div class="cc-badge cc-badge--best-seller">Best Seller</div>`;
+          }
+          // Removed New badge display for quiz results
+          html += `</div>`;
+          
+          // Content
+          html += `<div class="cc-content">`;
+          
+          // Rating
+          html += `<div class="cc-rating">`;
+          html += `<div class="cc-stars">`;
+          for (let i = 0; i < 5; i++) {
+            html += `<span class="cc-star">★</span>`;
+          }
+          html += `</div>`;
+          if (ratingCount > 0) {
+            html += `<span class="cc-rating-text">${rating.toFixed(1)} (${ratingCount} đánh giá)</span>`;
+          }
+          html += `</div>`;
+          
+          // Title
+          html += `<h3 class="cc-title">`;
+          html += `<a href="${productData.url}">${productData.title}</a>`;
+          html += `</h3>`;
+          
+          // Description
+          html += `<div class="cc-description">${description}</div>`;
+          
+          // Price row
+          html += `<div class="cc-price-row">`;
+          html += `<div class="cc-price">`;
+          html += `<span class="cc-price__current">Từ ${priceFormatted}</span>`;
+          if (hasDiscount) {
+            html += `<div class="cc-price__discount">-${discountPercent}%</div>`;
+          }
+          html += `</div>`;
+          html += `</div>`;
+          
+          // Compare price
+          html += `<div class="cc-compare-price-container">`;
+          if (hasDiscount && comparePriceFormatted) {
+            html += `<div class="cc-compare-price">${comparePriceFormatted}</div>`;
+          } else {
+            html += `<div class="cc-compare-price cc-compare-price--empty"></div>`;
+          }
+          html += `</div>`;
+          
+          // Actions
+          html += `<div class="cc-actions">`;
+          html += `<button class="cc-buy-now" type="button" onclick="window.location.href='${productData.url}'">Mua ngay</button>`;
+          html += `</div>`;
+          
+          html += `</div>`; // End cc-content
+          html += `</div>`; // End cc-card
+          html += `</div>`; // End quiz-result-section
+          
           renderedCount++;
         }
       });
       
-      html += '</div>';
-      html += '<div class="quiz-result-actions">';
-      html += '<button type="button" class="quiz-retry-btn" id="quiz-retry-btn-' + sectionId + '">Thử lại</button>';
       html += '</div>';
       resultContent.innerHTML = html;
       
@@ -1015,6 +1529,12 @@
       resultStep.classList.add('active');
     }
     
+    // Add result mode class to resize popup
+    const popupContent = popup.querySelector('.quiz-popup-content');
+    if (popupContent) {
+      popupContent.classList.add('quiz-result-mode');
+    }
+    
     // Hide continue button on results
     if (continueBtn) {
       continueBtn.style.display = 'none';
@@ -1022,7 +1542,7 @@
     
     // Update progress to 100%
     if (progressBar) {
-      progressBar.style.width = '100%';
+      progressBar.style.setProperty('width', '100%', 'important');
     }
   }
   
@@ -1031,6 +1551,18 @@
     // Reset answers
     answers = {};
     currentStep = 1;
+    
+    // Remove result mode class to restore original size
+    const popupContent = popup.querySelector('.quiz-popup-content');
+    if (popupContent) {
+      popupContent.classList.remove('quiz-result-mode');
+    }
+    
+    // Reset progress bar
+    if (progressBar) {
+      progressBar.style.setProperty('width', '0%', 'important');
+      progressBar.style.setProperty('min-width', '0', 'important');
+    }
     
     // Clear all selected answers
     const allAnswers = popup.querySelectorAll('.quiz-answer');
