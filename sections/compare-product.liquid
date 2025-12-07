@@ -921,6 +921,51 @@
     setTimeout(() => {
       matchRowHeights();
     }, 500);
+    
+    // Function to hide empty rows
+    function hideEmptyRows() {
+      // Get both desktop and mobile tables
+      const desktopTable = document.querySelector('.mattress-comparison-table table');
+      const mobileTable = document.querySelector('.mobile-comparison-table table');
+      
+      const tables = [desktopTable, mobileTable].filter(Boolean);
+      
+      tables.forEach(table => {
+        if (!table) return;
+        
+        // Get all rows except header, image, and button rows
+        const rows = table.querySelectorAll('tr:not(.header-row):not(.image-row):not(.button-row)');
+        
+        rows.forEach(row => {
+          // Get all product columns in this row (skip first-column)
+          const productColumns = row.querySelectorAll('.product-column');
+          
+          // Check if all product columns are empty
+          let allEmpty = true;
+          productColumns.forEach(cell => {
+            // Get text content, remove whitespace and check for images
+            const text = cell.textContent ? cell.textContent.trim() : '';
+            const hasImage = cell.querySelector('img');
+            
+            // If cell has text or image, it's not empty
+            if (text !== '' || hasImage) {
+              allEmpty = false;
+            }
+          });
+          
+          // Hide row if all columns are empty
+          if (allEmpty && productColumns.length > 0) {
+            row.style.display = 'none';
+          }
+        });
+      });
+    }
+    
+    // Run hideEmptyRows on load and after a delay
+    hideEmptyRows();
+    setTimeout(() => {
+      hideEmptyRows();
+    }, 500);
   });
 </script>
 

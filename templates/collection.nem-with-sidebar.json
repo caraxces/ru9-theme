@@ -154,9 +154,11 @@
       ],
       "name": "Quiz Banner (Advanced)",
       "settings": {
+        "image": "shopify://shop_images/So_sanh-01_1.png",
+        "mobile_image": "shopify://shop_images/tempImagenz9mLD_1_39760cc5-ef3b-4c5f-a1fc-e6886fa67dc4.png",
         "title": "Đâu là chiếc nệm phù hợp với bạn?",
         "text": "<p>Chỉ mất 2 phút cùng Ru9 khám phá và chọn chiếc nệm cho bạn.</p>",
-        "button_1_text": "Quiz chọn nệm",
+        "button_1_text": "Test chọn nệm phù hợp",
         "button_2_text": "So sánh các loại nệm",
         "button_2_link": "",
         "q_1_title": "1. Vóc dáng và Thể trạng của người sử dụng chính?",
@@ -257,27 +259,86 @@
         "button_2_link": "",
         "q_1_title": "Question 1?",
         "q_1_a_1_text": "",
+        "q_1_a_1_subtitle": "(Dáng người nhỏ nhắn, thư sinh)",
+        "q_1_a_1_value": "A",
         "q_1_a_2_text": "",
+        "q_1_a_2_subtitle": "(Vóc dáng phổ thông của người Việt)",
+        "q_1_a_2_value": "B",
         "q_1_a_3_text": "",
+        "q_1_a_3_subtitle": "(Cơ bắp hoặc vóc dáng lớn)",
+        "q_1_a_3_value": "C",
         "q_2_title": "Question 2?",
         "q_2_a_1_text": "",
+        "q_2_a_1_subtitle": "(Tự do, ưu tiên sở thích cá nhân)",
+        "q_2_a_1_value": "A",
         "q_2_a_2_text": "",
+        "q_2_a_2_subtitle": "(Cần sự yên tĩnh, không làm phiền người bên cạnh khi trở mình)",
+        "q_2_a_2_value": "B",
         "q_2_a_3_text": "",
+        "q_2_a_3_subtitle": "(Cần không gian rộng, bề mặt phẳng, cực kỳ yên tĩnh và an toàn)",
+        "q_2_a_3_value": "C",
         "q_3_title": "Question 3?",
         "q_3_a_1_text": "",
+        "q_3_a_1_subtitle": "(Rất cứng, phẳng lì)",
+        "q_3_a_1_value": "A",
         "q_3_a_2_text": "",
+        "q_3_a_2_subtitle": "(Có độ nảy, nhưng có thể đang bị võng/rung lắc)",
+        "q_3_a_2_value": "B",
         "q_3_a_3_text": "",
+        "q_3_a_3_subtitle": "(Có độ êm, ôm sát)",
+        "q_3_a_3_value": "C",
         "q_3_a_4_text": "",
+        "q_3_a_4_subtitle": "",
+        "q_3_a_4_value": "D",
         "q_4_title": "Question 4?",
         "q_4_a_1_text": "",
+        "q_4_a_1_subtitle": "(Thích nằm trên mặt phẳng, không thích lún)",
+        "q_4_a_1_value": "A",
         "q_4_a_2_text": "",
+        "q_4_a_2_subtitle": "(Thích nệm ôm cơ thể, nâng niu vai/hông)",
+        "q_4_a_2_value": "B",
         "q_4_a_3_text": "",
+        "q_4_a_3_subtitle": "(Thích độ nảy nhẹ để dễ trở mình, cảm giác sang trọng \"Hotel feel\")",
+        "q_4_a_3_value": "C",
         "q_4_a_4_text": "",
+        "q_4_a_4_subtitle": "(Ưu tiên số 1 là phải MÁT và giảm đau lưng)",
+        "q_4_a_4_value": "D",
         "q_5_title": "Question 5?",
         "q_5_a_1_text": "",
+        "q_5_a_1_subtitle": "(Cần nâng đỡ cột sống tối ưu)",
+        "q_5_a_1_value": "A",
         "q_5_a_2_text": "",
+        "q_5_a_2_subtitle": "(Hay đổ mồ hôi trộm)",
+        "q_5_a_2_value": "B",
         "q_5_a_3_text": "",
+        "q_5_a_3_subtitle": "(Nhạy cảm với tiếng động/rung lắc từ người bên cạnh)",
+        "q_5_a_3_value": "C",
         "q_5_a_4_text": "",
+        "q_5_a_4_subtitle": "(Muốn nâng cấp trải nghiệm tốt hơn)",
+        "q_5_a_4_value": "D",
+        "q_6_title": "6. Tư thế ngủ chủ đạo?",
+        "q_6_a_1_text": "A. Nằm ngửa",
+        "q_6_a_1_subtitle": "(Cần đỡ thắt lưng)",
+        "q_6_a_1_value": "A",
+        "q_6_a_2_text": "B. Nằm nghiêng",
+        "q_6_a_2_subtitle": "(Cần êm vai & hông - giảm áp lực)",
+        "q_6_a_2_value": "B",
+        "q_6_a_3_text": "C. Nằm sấp",
+        "q_6_a_3_subtitle": "(Cần nệm cứng để bụng không võng)",
+        "q_6_a_3_value": "C",
+        "q_6_a_4_text": "D. Xoay trở liên tục",
+        "q_6_a_4_subtitle": "(Cần nệm hỗ trợ chuyển động)",
+        "q_6_a_4_value": "D",
+        "q_7_title": "7. Ngân sách & Nhu cầu sử dụng?",
+        "q_7_a_1_text": "A. Premium",
+        "q_7_a_1_subtitle": "(Đầu tư tối đa cho sức khỏe)",
+        "q_7_a_1_value": "A",
+        "q_7_a_2_text": "B. Best Value",
+        "q_7_a_2_subtitle": "(Cân bằng chất lượng/giá cả)",
+        "q_7_a_2_value": "B",
+        "q_7_a_3_text": "C. Tiết kiệm/Linh hoạt",
+        "q_7_a_3_subtitle": "(Thuê nhà, sinh viên, nệm phụ)",
+        "q_7_a_3_value": "C",
         "result_title": "We recommend for you"
       }
     },
@@ -334,7 +395,7 @@
             "suitable_for": "Người gặp vấn đề về đau lưng, cổ vai gáy, hông, cần nâng đỡ chính xác ổn định\nNgười mong muốn có trải nghiệm cá nhân hóa",
             "suitable_body_type": "<90Kg",
             "product_warranty": "10 năm cho base nệm\n1 năm cho Topper",
-            "product_price": "Từ 12.990.000 VNĐ",
+            "product_price": "",
             "product_url": "shopify://products/nem-original-pro"
           }
         },
@@ -356,7 +417,7 @@
             "suitable_for": "Đa số người dùng Việt, tiếp cận với công nghệ Foam ưu việt\nNgười đau lưng nhẹ - vừa, hay đau mỏi vai gáy\nNgười ngủ nghiêng hoặc nhạy cảm với chuyển động",
             "suitable_body_type": "<85Kg",
             "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
-            "product_price": "Từ 9.990.000 VNĐ",
+            "product_price": "",
             "product_url": "shopify://products/foam-original"
           }
         },
@@ -378,7 +439,7 @@
             "suitable_for": "Người thích cảm giác nằm đàn hồi, êm ái như khách sạn\nVẫn thích sự êm ái của foam nhưng ưu tiên sự thông thoáng\nNgười có trọng lượng lớn, cần nâng đỡ mạnh",
             "suitable_body_type": "<100Kg",
             "product_warranty": "10 năm cho base nệm\n1 năm cho Topper",
-            "product_price": "Từ 13.990.000 VNĐ",
+            "product_price": "",
             "product_url": "shopify://products/nem-hybrid"
           }
         },
@@ -400,7 +461,7 @@
             "suitable_for": "Người có nhu cầu nâng đỡ vừa phải\nGia đình có phòng ngủ nhỏ, giường cao, tối ưu diện tích",
             "suitable_body_type": "<75kg",
             "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
-            "product_price": "Từ 8.690.000 VNĐ",
+            "product_price": "",
             "product_url": "shopify://products/foam-original"
           }
         },
@@ -422,12 +483,13 @@
             "suitable_for": "Người lớn tuổi thích nằm cứng hoặc trẻ nhỏ đang phát triển xương\nNgười thích nệm chắc, độ cao vừa phải, nâng đỡ cơ bản\nNgười đang chuyển từ các nệm bông ép, nệm lò xo sang foam",
             "suitable_body_type": "<70kg",
             "product_warranty": "100 đêm ngủ thử\n5 năm bảo hành",
-            "product_price": "Từ 6.990.000 VNĐ",
+            "product_price": "",
             "product_url": "shopify://products/foam-nest"
           }
         },
         "product_QVeCme": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product_title": "Nệm Topper",
             "product_image": "shopify://shop_images/THUMB_-1_3f95d431-f4a3-41b5-bd08-3f463cb44098.jpg",
@@ -444,12 +506,13 @@
             "suitable_for": "Linh hoạt cho người sống trong không gian nhỏ hoặc cần di chuyển nhiều",
             "suitable_body_type": "",
             "product_warranty": "",
-            "product_price": "Từ 3.490.000 VNĐ",
+            "product_price": "",
             "product_url": "shopify://products/nem-cuon-foam-topper"
           }
         },
         "product_mewfre": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product_title": "Nệm Topper Mate",
             "product_image": "shopify://shop_images/1.THUMB_-1.png",
@@ -466,12 +529,13 @@
             "suitable_for": "Giải pháp tiết kiệm, tiện lợi cho không gian nhỏ và người thích nằm chắc chắn mà vẫn êm ái.",
             "suitable_body_type": "",
             "product_warranty": "",
-            "product_price": "Từ 2.290.000 VNĐ",
+            "product_price": "",
             "product_url": "shopify://products/mate_topper219071626"
           }
         },
         "product_HYNA3n": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product_title": "NỆM MÂY TOPPER",
             "product_image": "shopify://shop_images/1.THUMB_-1_1.jpg",
@@ -488,7 +552,7 @@
             "suitable_for": "Dành cho người muốn nâng cấp không gian ngủ thành nơi nghỉ ngơi thư giãn và sang trọng.",
             "suitable_body_type": "",
             "product_warranty": "",
-            "product_price": "Từ 3.290.000 VNĐ",
+            "product_price": "",
             "product_url": ""
           }
         }
@@ -532,32 +596,34 @@
       "blocks": {
         "review_MHYcqY": {
           "type": "review",
-          "disabled": true,
           "settings": {
+            "video": "shopify://files/videos/Website - [Original] Trà Thơm.mp4",
             "product_name": "Nệm Original",
-            "product_link": ""
+            "product_link": "shopify://products/foam-original"
           }
         },
         "review_x6JhWU": {
           "type": "review",
           "settings": {
-            "video": "shopify://files/videos/ORIGINAL PRO - NƠI TÁI TẠO NĂNG LƯỢNG SAU MỖI HÀNH TRÌNH.mp4",
-            "product_name": "Nệm Original",
-            "product_link": "shopify://products/tencel-bedding-set"
+            "video": "shopify://files/videos/Website - [Nest] - Review Bỉm Sữa.mp4",
+            "product_name": "Nệm Nest",
+            "product_link": "shopify://products/foam-nest"
           }
         },
         "review_GJYfxW": {
           "type": "review",
           "settings": {
-            "product_name": "Bộ Ga Giường Ru9 Tencel",
-            "product_link": ""
+            "video": "shopify://files/videos/Website - [Niu] - Lam Hương.mp4",
+            "product_name": "Gối Niu",
+            "product_link": "shopify://products/goi-foam-niu"
           }
         },
         "review_Mw8U9j": {
           "type": "review",
           "settings": {
-            "product_name": "Nệm Nest",
-            "product_link": ""
+            "video": "shopify://files/videos/Website - [Mate] - Revu.mp4",
+            "product_name": "Topper foam",
+            "product_link": "shopify://products/nem-cuon-foam-topper"
           }
         },
         "review_UxKmJq": {

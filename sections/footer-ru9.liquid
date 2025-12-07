@@ -378,7 +378,7 @@
       }
       .footer-ru9__subscribe { 
         grid-area: subscribe;
-        align-self: flex-start;
+        align-self: flex-end;
       }
       .footer-ru9__left-group {
         grid-area: left-group;
@@ -727,6 +727,7 @@
         margin-top: 60px;
         margin-bottom: 28px;
         padding-right: 65px;
+        align-items: flex-end;
       }
     }
     .footer-ru9__hotline svg {
@@ -1098,7 +1099,7 @@
         height: calc(105px * 100vw / 1594);
       }
       .footer-ru9__hotline {
-        margin-top: calc(60px * 100vw / 1594);
+        margin-top: 50px;
         margin-bottom: calc(28px * 100vw / 1594);
         padding-right: calc(65px * 100vw / 1594);
         gap: calc(16px * 100vw / 1594);
@@ -1569,6 +1570,67 @@
         flex-direction: row;
         align-items: flex-start;
         justify-content: space-between;
+        display: flex !important;
+      }
+      
+      /* Ensure logo RU9 displays on mobile including iPhone 12 Pro Max (428px) */
+      .footer-ru9__logo-ru9 {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 122px !important;
+        height: 105px !important;
+        min-width: 122px !important;
+        min-height: 105px !important;
+        max-width: 122px !important;
+        max-height: 105px !important;
+        flex-shrink: 0 !important;
+      }
+      
+      .footer-ru9__logo-ru9 svg {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+      }
+      
+      /* Ensure partner logo (rubaby) displays on mobile including iPhone 12 (390px) and iPhone 12 Pro Max (428px) */
+      .footer-ru9__logo-partner {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0 !important;
+        margin-left: 20px !important;
+      }
+      
+      .footer-ru9__logo-partner-image {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 122px !important;
+        height: 105px !important;
+        min-width: 122px !important;
+        min-height: 105px !important;
+        max-width: 122px !important;
+        max-height: 105px !important;
+        flex-shrink: 0 !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+      }
+      
+      .footer-ru9__logo-partner-image img,
+      .footer-ru9__logo-partner-image svg {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
       }
       .footer-ru9__hotline { order: 2; }
       .footer-ru9__subscribe { order: 3; padding-right: 0; }
@@ -1849,6 +1911,42 @@
     @media (max-width: 640px) {
       /* No longer needed, layout is handled by 95rem query */
     }
+    
+    /* Specific fix for iPhone 12 (390px) and similar devices - ensure partner logo (rubaby) displays */
+    @media (max-width: 430px) {
+      .footer-ru9__logo-partner {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0 !important;
+        margin-left: 20px !important;
+      }
+      
+      .footer-ru9__logo-partner-image {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 122px !important;
+        height: 105px !important;
+        min-width: 122px !important;
+        min-height: 105px !important;
+        max-width: 122px !important;
+        max-height: 105px !important;
+        flex-shrink: 0 !important;
+      }
+      
+      .footer-ru9__logo-partner-image img,
+      .footer-ru9__logo-partner-image svg {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
+      }
+    }
 
     /* START: Floating Action Button (FAB) for Contacts */
     .footer-ru9-fab-wrapper {
@@ -1862,8 +1960,12 @@
     }
 
     .fab-contact-toggle, .fab-contact-item {
-      width: 54px;
-      height: 54px;
+      width: 54px !important;
+      height: 54px !important;
+      min-width: 54px !important;
+      min-height: 54px !important;
+      max-width: 54px !important;
+      max-height: 54px !important;
       border-radius: 50%;
       background: #234085;
       display: flex;
@@ -1881,8 +1983,12 @@
     }
 
     .fab-contact-toggle svg {
-      width: 44px;
-      height: 49px;
+      width: 44px !important;
+      height: 49px !important;
+      min-width: 44px !important;
+      min-height: 49px !important;
+      max-width: 44px !important;
+      max-height: 49px !important;
     }
     
     .fab-contact-item {
@@ -1955,6 +2061,25 @@
      {%endif-%}
      .backtop-show .footer-ru9-fab-wrapper[data-section-id="{{ section.id }}"] {
       bottom: 150px !important;
+     }
+     
+     /* Ensure fab-contact-toggle maintains correct size on mobile devices including iPhone 12 Pro Max (428px) */
+     .fab-contact-toggle, .fab-contact-item {
+       width: 54px !important;
+       height: 54px !important;
+       min-width: 54px !important;
+       min-height: 54px !important;
+       max-width: 54px !important;
+       max-height: 54px !important;
+     }
+     
+     .fab-contact-toggle svg {
+       width: 44px !important;
+       height: 49px !important;
+       min-width: 44px !important;
+       min-height: 49px !important;
+       max-width: 44px !important;
+       max-height: 49px !important;
      }
     }
     /* END: Floating Action Button (FAB) for Contacts */

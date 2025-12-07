@@ -1181,6 +1181,7 @@
     .cart-drawer__cross-sell-slider {
       display: flex;
       overflow-x: auto;
+      overflow-y: auto;
       scroll-behavior: smooth;
       gap: 15px;
       padding-bottom: 20px;
@@ -1271,6 +1272,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      align-self: flex-end;
       gap: clamp(6px, calc(8px * (100vw / 480px)), 8px);
       min-width: 0;
       overflow: hidden;
@@ -1814,7 +1816,7 @@
     .voucher-popup-input {
       width: 690.619px;
       padding: 0 20px;
-      border: 2px solid #E5E7EB;
+      border: none;
       border-right: none;
       background: white;
       font-family: var(--font-stack-body);
@@ -1884,10 +1886,9 @@
         padding: 0 12px;
         font-size: 14px;
         border-radius: 37.5px;
-        border: 1px solid #E5E7EB;
+        border: none;
         height: 41px;
         margin-left: 0;
-        border-right: 1px solid #E5E7EB;
         z-index: 1;
       }
       .voucher-popup-apply-btn {
@@ -2095,6 +2096,10 @@
     /* Mobile Voucher Card */
     @media (max-width: 768px) {
       .voucher-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        height: auto !important;
         min-height: 106px;
         border-radius: 5px;
       }
@@ -3922,15 +3927,26 @@
           
           let isDragging = false;
           let startX = 0;
+          let startY = 0;
           let scrollLeft = 0;
+          let scrollTop = 0;
           let lastX = 0;
+          let lastY = 0;
           let velocity = 0;
           let animationFrame = null;
+          let isHorizontalScroll = false;
           
           // Smooth scroll update using requestAnimationFrame
           function updateScroll() {
             if (!isDragging) return;
             animationFrame = requestAnimationFrame(updateScroll);
+          }
+          
+          // Determine scroll direction based on initial movement
+          function determineScrollDirection(currentX, currentY) {
+            const deltaX = Math.abs(currentX - startX);
+            const deltaY = Math.abs(currentY - startY);
+            return deltaX > deltaY;
           }
           
           // Mouse events
@@ -3939,9 +3955,13 @@
             slider.style.cursor = 'grabbing';
             slider.style.userSelect = 'none';
             startX = e.pageX;
+            startY = e.pageY;
             scrollLeft = slider.scrollLeft;
+            scrollTop = slider.scrollTop;
             lastX = e.pageX;
+            lastY = e.pageY;
             velocity = 0;
+            isHorizontalScroll = false;
             e.preventDefault();
             updateScroll();
           });
@@ -3968,36 +3988,72 @@
           
           slider.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
-            e.preventDefault();
-            const currentX = e.pageX;
-            const diff = currentX - startX;
-            slider.scrollLeft = scrollLeft - diff;
-            velocity = currentX - lastX;
-            lastX = currentX;
+            
+            // Determine scroll direction on first move
+            if (!isHorizontalScroll && (Math.abs(e.pageX - startX) > 5 || Math.abs(e.pageY - startY) > 5)) {
+              isHorizontalScroll = determineScrollDirection(e.pageX, e.pageY);
+            }
+            
+            if (isHorizontalScroll) {
+              e.preventDefault();
+              const currentX = e.pageX;
+              const diff = currentX - startX;
+              slider.scrollLeft = scrollLeft - diff;
+              velocity = currentX - lastX;
+              lastX = currentX;
+            } else {
+              // Allow vertical scrolling
+              const currentY = e.pageY;
+              const diff = currentY - startY;
+              slider.scrollTop = scrollTop - diff;
+              lastY = currentY;
+            }
           });
           
           // Touch events for mobile
           slider.addEventListener('touchstart', (e) => {
             isDragging = true;
             startX = e.touches[0].pageX;
+            startY = e.touches[0].pageY;
             scrollLeft = slider.scrollLeft;
+            scrollTop = slider.scrollTop;
             lastX = e.touches[0].pageX;
+            lastY = e.touches[0].pageY;
             velocity = 0;
-            e.preventDefault();
-          }, { passive: false });
+            isHorizontalScroll = false;
+            // Don't preventDefault here - let the browser determine scroll direction
+          }, { passive: true });
           
           slider.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
+            
             const currentX = e.touches[0].pageX;
-            const diff = currentX - startX;
-            slider.scrollLeft = scrollLeft - diff;
-            velocity = currentX - lastX;
-            lastX = currentX;
-            e.preventDefault();
+            const currentY = e.touches[0].pageY;
+            
+            // Determine scroll direction on first move
+            if (!isHorizontalScroll && (Math.abs(currentX - startX) > 5 || Math.abs(currentY - startY) > 5)) {
+              isHorizontalScroll = determineScrollDirection(currentX, currentY);
+            }
+            
+            if (isHorizontalScroll) {
+              // Horizontal scroll - prevent default and handle manually
+              e.preventDefault();
+              const diff = currentX - startX;
+              slider.scrollLeft = scrollLeft - diff;
+              velocity = currentX - lastX;
+              lastX = currentX;
+            } else {
+              // Vertical scroll - allow natural scrolling
+              // Don't preventDefault, let browser handle vertical scroll
+              const diff = currentY - startY;
+              slider.scrollTop = scrollTop - diff;
+              lastY = currentY;
+            }
           }, { passive: false });
           
           slider.addEventListener('touchend', () => {
             isDragging = false;
+            isHorizontalScroll = false;
           });
         }
 
