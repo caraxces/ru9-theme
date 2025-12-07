@@ -309,7 +309,7 @@
         <img src="{{ section.settings.icon_1_image | img_url: '48x48', scale: 2 }}" 
              alt="{{ section.settings.icon_1_title }}" 
              width="42" height="42"
-             style="width: 42px; height: 42px; object-fit: contain;">
+             style="width: 35px; height: 35px; object-fit: contain;">
       {%- elsif section.settings.icon_1_type == 'sleep' -%}
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="currentColor"/>
@@ -341,7 +341,7 @@
         <img src="{{ section.settings.icon_2_image | img_url: '48x48', scale: 2 }}" 
              alt="{{ section.settings.icon_2_title }}" 
              width="42" height="42"
-             style="width: 42px; height: 42px; object-fit: contain;">
+             style="width: 35px; height: 35px; object-fit: contain;">
       {%- elsif section.settings.icon_2_type == 'sleep' -%}
         <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="currentColor"/>
@@ -373,7 +373,7 @@
         <img src="{{ section.settings.icon_3_image | img_url: '48x48', scale: 2 }}" 
              alt="{{ section.settings.icon_3_title }}" 
              width="42" height="42"
-             style="width: 42px; height: 42px; object-fit: contain;">
+             style="width: 35px; height: 35px; object-fit: contain;">
       {%- elsif section.settings.icon_3_type == 'sleep' -%}
         <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="currentColor"/>
@@ -504,7 +504,7 @@
     }
     
     .icon-text-container {
-      gap: 15px !important;
+      gap: 8px !important;
       display: grid !important;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto;
@@ -519,14 +519,14 @@
     .icon-text-container .icon-text-item:nth-child(1) {
       grid-column: 1;
       grid-row: 1;
-      justify-self: end;
+      justify-self: start;
       margin-right: 10px;
     }
     
     .icon-text-container .icon-text-item:nth-child(2) {
       grid-column: 2;
       grid-row: 1;
-      justify-self: start;
+      justify-self: end;
       margin-left: 10px;
     }
     

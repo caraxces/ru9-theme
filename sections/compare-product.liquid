@@ -454,7 +454,8 @@
   
   .mattress-comparison-table table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     table-layout: fixed;
     border: 1px solid #e0e0e0;
     flex-shrink: 0;
@@ -481,6 +482,12 @@
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   }
   
+  /* Header row first column - higher z-index */
+  .header-row .first-column {
+    z-index: 4;
+    background-color: #F0F7FF;
+  }
+  
   .product-column {
     width: 320px;
     min-width: 320px;
@@ -488,12 +495,28 @@
     flex-shrink: 0;
   }
   
-  /* Header Row */
+  /* Header Row - Fixed at top */
+  .header-row {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+  }
+  
   .header-row th {
     background-color: #F0F7FF;
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
+    position: sticky;
+    top: 0;
+  }
+  
+  /* Header row product columns - sticky */
+  .header-row .product-column {
+    position: sticky;
+    top: 0;
+    background-color: #F0F7FF;
+    z-index: 3;
   }
   
   /* Image Row */
@@ -574,7 +597,7 @@
   
   /* Suitable Body Type Row */
   .suitable-body-type-row td {
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
   }
   
@@ -641,7 +664,8 @@
   
   .mobile-comparison-table table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     table-layout: fixed;
     border: 1px solid #e0e0e0;
   }
@@ -666,17 +690,33 @@
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   }
   
+  /* Mobile header row first column - higher z-index */
+  .mobile-comparison-table .header-row .first-column {
+    z-index: 4;
+    background-color: #F0F7FF;
+  }
+  
   .mobile-comparison-table .product-column {
     width: 200px;
     min-width: 200px;
     text-align: center;
   }
   
+  /* Mobile Header Row - Fixed at top */
+  .mobile-comparison-table .header-row {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+  }
+  
   /* Mobile Header Row - Title Above Image */
   .mobile-comparison-table .header-row .product-column {
     padding: 10px 10px 15px 10px;
     text-align: center;
-    background-color: #fff;
+    background-color: #F0F7FF;
+    position: sticky;
+    top: 0;
+    z-index: 3;
   }
   
   /* Mobile Product Column - White Background */
@@ -698,6 +738,7 @@
   /* Mobile Suitable Body Type Row - Blue Background */
   .mobile-comparison-table .suitable-body-type-row .product-column {
     background-color: #F0F7FF;
+    text-align: left;
   }
   
   /* Mobile Price Row - Blue Background */

@@ -707,42 +707,85 @@
 
       // Desktop: Keep existing carousel logic
       let isDragging = false;
+      let hasMoved = false;
       let startPos = 0;
+      let endPos = 0;
       let prevTranslate = 0;
+      let dragThreshold = 5; // Minimum pixels to move before considering it a drag
       
       // Simple drag logic for desktop
 
       function startDrag(e) {
-        isDragging = true;
+        // Don't start drag if clicking on product cards, links, or buttons
+        if (e.target.closest('.product-card') || e.target.closest('a') || e.target.closest('button')) {
+          hasMoved = false;
+          startPos = 0;
+          return;
+        }
+        
+        hasMoved = false;
         startPos = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        endPos = startPos;
         prevTranslate = productCardsContainer.scrollLeft;
         productCardsContainer.style.transition = 'none';
-        productCardsContainer.classList.add('is-dragging');
       }
 
       function drag(e) {
-        if (isDragging) {
+        if (!startPos) return;
+        
+        const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        const deltaX = Math.abs(currentPosition - startPos);
+        
+        // Only set dragging if moved beyond threshold
+        if (deltaX > dragThreshold) {
+          if (!isDragging) {
+            isDragging = true;
+            hasMoved = true;
+            productCardsContainer.classList.add('is-dragging');
+          }
           e.preventDefault();
-          const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-          const deltaX = currentPosition - startPos;
           
           // Apply smooth drag directly to scroll
-          productCardsContainer.scrollLeft = prevTranslate - deltaX;
+          productCardsContainer.scrollLeft = prevTranslate - (currentPosition - startPos);
         }
+        
+        // Update end position
+        endPos = currentPosition;
       }
 
-      function endDrag() {
-        if (!isDragging) return;
+      function endDrag(e) {
+        const wasDragging = isDragging;
+        
+        // Check if there was actual movement
+        if (startPos && endPos) {
+          const totalMovement = Math.abs(endPos - startPos);
+          if (totalMovement > dragThreshold) {
+            hasMoved = true;
+          }
+        }
+        
+        // Reset immediately
         isDragging = false;
+        startPos = 0;
+        endPos = 0;
         productCardsContainer.classList.remove('is-dragging');
+        productCardsContainer.style.transition = '';
         
         // Store current scroll position for next drag
-        prevTranslate = productCardsContainer.scrollLeft;
+        if (wasDragging) {
+          prevTranslate = productCardsContainer.scrollLeft;
+        }
+        
+        // Reset hasMoved after click event has a chance to fire
+        setTimeout(() => {
+          hasMoved = false;
+        }, 150);
       }
       
       // Event listeners for desktop only
       productCardsContainer.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
       
+      // Add drag listeners to container
       productCardsContainer.addEventListener('mousedown', startDrag);
       productCardsContainer.addEventListener('touchstart', startDrag, { passive: true });
       productCardsContainer.addEventListener('mousemove', drag);
@@ -751,16 +794,35 @@
       productCardsContainer.addEventListener('mouseleave', endDrag);
       productCardsContainer.addEventListener('touchend', endDrag);
 
+      // Handle click on product cards (they are <a> tags) - only prevent if actually dragged
       const productCards = Array.from(productCardsContainer.querySelectorAll('.product-card'));
       productCards.forEach(card => {
         card.addEventListener('click', (e) => {
-          if (isDragging) {
+          // Only prevent if we actually dragged (moved beyond threshold)
+          // Check hasMoved flag which is set during drag
+          if (hasMoved) {
             e.preventDefault();
             e.stopPropagation();
             return false;
           }
-          return true;
+          // Allow normal click behavior - let the link work
         });
+      });
+      
+      // Handle button clicks inside cards - prevent navigation and handle separately
+      productCards.forEach(card => {
+        const button = card.querySelector('.buy-now-btn');
+        if (button) {
+          button.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            // Navigate to product URL
+            const productUrl = card.getAttribute('href');
+            if (productUrl) {
+              window.location.href = productUrl;
+            }
+          });
+        }
       });
       
       return {
