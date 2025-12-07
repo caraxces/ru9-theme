@@ -898,6 +898,27 @@
     /* Giữ icon và nội dung cùng một dòng, loại bỏ khoảng trống do richtext */
     .footer-ru9__address .address-text { margin: 0; color: #fff; width: 426px; font-size: 18px }
     .footer-ru9__address .address-text p { margin: 0; color: #fff; }
+    
+    /* Link styles for address sections */
+    .footer-ru9__company-info .company-address a,
+    .footer-ru9__showrooms .address-text a,
+    .footer-ru9__showrooms-mobile .address-text a,
+    .footer-ru9__address .address-text a,
+    .rte a:not(.rte__image):not(.btn) {
+      color: #fff !important;
+      text-decoration: none !important;
+    }
+    
+    /* Hover styles for links in address sections */
+    .footer-ru9__company-info .company-address a:hover,
+    .footer-ru9__showrooms .address-text a:hover,
+    .footer-ru9__showrooms-mobile .address-text a:hover,
+    .footer-ru9__address .address-text a:hover,
+    .rte a:not(.rte__image):not(.btn):hover {
+      color: #C5EDFF !important;
+      text-decoration: none !important;
+    }
+    
     .footer-ru9__social { display: flex; gap: 16px; margin-top: 12px; }
     .footer-ru9__social .footer-social__item { width: 40px; height: 40px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: #fff; text-decoration: none; border: none; }
     .footer-ru9__columns { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
