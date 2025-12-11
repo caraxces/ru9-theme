@@ -187,6 +187,16 @@
         "copy_button_y": 92
       }
     },
+    "feature_banner_y4aDct": {
+      "type": "feature-banner",
+      "name": "Feature Banner",
+      "settings": {
+        "desktop_image": "shopify://shop_images/NEST.svg",
+        "title": "<h1>Chìa khóa cho từng vấn đề giấc ngủ của bạn</h1>",
+        "mobile_title": "Chìa khóa cho từng vấn đề giấc ngủ của bạn",
+        "background_color": "#ffffff"
+      }
+    },
     "product_hotspot_XzDEYy": {
       "type": "product-hotspot",
       "blocks": {
@@ -645,6 +655,7 @@
     "main",
     "reason_to_choice_nFwPBG",
     "independent_webhook_popup_TRBpyn",
+    "feature_banner_y4aDct",
     "product_hotspot_XzDEYy",
     "product_hotspot_pnDmHC",
     "dynamic_text_with_image_L4VkFB",

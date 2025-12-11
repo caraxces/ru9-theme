@@ -166,7 +166,10 @@
         "enable_color_swatches": true,
         "enable_swatch_labels": true,
         "enable_sort": true,
-        "enable_collection_count": false
+        "enable_collection_count": false,
+        "per_row": 3,
+        "rows_per_page": 2,
+        "default_sold_count": 0
       }
     },
     "combo_bedroom_L4nDdn": {
@@ -348,131 +351,78 @@
         "show_collection_description": true
       }
     },
-    "reviews_carousel_6LDDXD": {
+    "reviews_carousel_mFiBjM": {
       "type": "reviews-carousel",
       "blocks": {
-        "review_YeBLza": {
+        "review_pb3APk": {
           "type": "review",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
-            "customer_name": "Gon Pink",
-            "review_text": "<p>Mình nằm thử nệm Foam Original của Ru9 mới thấy khác biệt thiệt, foam ôm sát cơ thể giúp lưng – vai – hông được nâng đỡ đều, mình ngủ dậy không còn ê mỏi luôn. Thêm cái nữa là nệm cực thoáng khí, nằm lâu cũng không hầm nóng, vỏ thì tháo ra giặt siêu tiện. Nói chung là sản phẩm rất chất lượng so với giá tiền! </p>",
+            "video": "shopify://files/videos/Website - [Original] Trà Thơm.mp4",
             "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
+            "product_link": "shopify://products/foam-original"
           }
         },
-        "review_cG9Jn7": {
+        "review_VCEXqR": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/177826117_3828731063871354_8843481793885550946_n.jpg",
-            "customer_name": "Hoàng Ku",
-            "review_text": "<p>Điều mình thích nhất khi nằm nệm foam Ru9 là đệm sẽ ôm sát theo đường cong của cơ thể, mình có quả “thắt đáy lưng ong” nên phần đáy lưng võng cong, nằm nệm cứng chỗ lưng đó bị rỗng nên rất khó chịu, ngủ phải gập người lại thì mới dễ ngủ. Nhưng với đệm Foam Ru9 thì mình chỉ cần nằm thẳng thôi, cấu trúc của đệm sẽ tự khắc làm đầy ngay chỗ thắt lưng của mình luôn! </p>",
-            "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
-          }
-        },
-        "review_aQwKe3": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/Ane_cibi.jpg",
-            "customer_name": "Anne Cibi",
-            "review_text": "<p>Ghé Ru9 thăm showroom, kết quả là bê về túi to túi nhỏ luôn! Chăn bạch đàn, bộ ga gối tencel mướt mượt màu baby blue y chang cái nhà em nữa, nó mờ ê mê lắm</p>",
-            "product_name": "Bộ Ga Giường Ru9 Tencel",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/tencel-bedding-set"
-          }
-        },
-        "review_qYznrK": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/dao_lan_ph_ng_nest.jpg",
-            "customer_name": "Đào Lan Phương",
-            "review_text": "<p>Sau 3 tuần nằm thử, mình thật sự ưng chiếc nệm Nest này. Nệm dày, nằm chắc chắn chứ không bị lún, rất phù hợp cho người hay đau lưng như mình. Mong là chất lượng này sẽ bền lâu.</p>",
+            "video": "shopify://files/videos/Website - [Nest] - Review Bỉm Sữa.mp4",
             "product_name": "Nệm Nest",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://collections/bedding"
+            "product_link": "shopify://products/foam-nest"
           }
         },
-        "review_MLiAjn": {
+        "review_46JnNL": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/mc_van_anh_topper.jpg",
-            "customer_name": "Vân Anh",
-            "review_text": "<p>Mình trải nghiệm Foam Topper Ru9 được gần tháng rồi. Cảm giác nằm êm mà vẫn nâng đỡ tốt, lưng mình đỡ đau rõ rệt. Cái hay nữa là topper nhẹ, dễ mang đi và vệ sinh. Nói chung khá hài lòng, chỉ mong dùng lâu dài vẫn giữ được độ thoải mái như hiện tại.</p>",
+            "video": "shopify://files/videos/Website - [Niu] - Lam Hương.mp4",
+            "product_name": "Gối Niu",
+            "product_link": "shopify://products/goi-foam-niu"
+          }
+        },
+        "review_GftQqY": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Foam Topper] - Phương Nguyễn.mp4",
             "product_name": "Nệm Foam Topper",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/nem-cuon-foam-topper"
+            "product_link": "shopify://products/nem-cuon-foam-topper"
           }
         },
-        "review_hwrhf3": {
+        "review_arCD8C": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/287509779_10228461666790384_79999810057241775_n.jpg",
-            "customer_name": "Hằng Thúy Ngô",
-            "review_text": "<p>Sau hơn nửa năm nằm nệm Original, mình thấy giấc ngủ được cải thiện rõ rệt. Nệm ôm và nâng đỡ cơ thể tốt, lưng cổ không còn ê ẩm như trước. Cảm giác mỗi tối nằm xuống đều rất thoải mái và dễ chịu.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
+            "video": "shopify://files/videos/Website - [Mate] - Revu.mp4",
+            "product_name": "Topper Mate",
+            "product_link": "shopify://products/mate_topper219071626"
           }
         },
-        "review_hwC3Wy": {
+        "review_h8GfwM": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/47580643_1094459747384007_5553427953934663680_n.jpg",
-            "customer_name": "Tu Lam Kha",
-            "review_text": "<p>Sau nhiều lần đắn đo mình quyết định mua Nệm Foam Original, và thật sự đây là một khoản đầu tư xứng đáng. Từ ngày dùng, mình không còn thức dậy với cảm giác đau lưng hay mỏi vai gáy nữa.</p>",
-            "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/foam-original"
+            "video": "shopify://files/videos/Website - [Mate] - Revu 2.mp4",
+            "product_name": "Topper Mate",
+            "product_link": "shopify://products/mate_topper219071626"
           }
         },
-        "review_QmE7GT": {
+        "review_i3th7n": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/IMG_8630.jpg",
-            "customer_name": "Ngọc Tú Anh",
-            "review_text": "<p>10 điểm cho Bộ ga giường Tecel của Ru9 nha. Vải mềm, mát, nằm không bị bí hay nóng lưng, cảm giác dễ chịu hơn hẳn bộ ga cũ. Cả nhà mình ai cũng mê</p>",
-            "product_name": "Bộ Bedding Tencel",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/tencel-bedding-set"
+            "video": "shopify://files/videos/Website - [Gối cổ giảm âm] - Hiếu Mario.mp4",
+            "product_name": "Gối cổ giảm âm",
+            "product_link": "shopify://products/goi-co-giam-am"
           }
         }
       },
       "block_order": [
-        "review_YeBLza",
-        "review_cG9Jn7",
-        "review_aQwKe3",
-        "review_qYznrK",
-        "review_MLiAjn",
-        "review_hwrhf3",
-        "review_hwC3Wy",
-        "review_QmE7GT"
-      ],
-      "custom_css": [
-        ".reviews-carousel-section {padding: 0 0 40px 0;}"
+        "review_pb3APk",
+        "review_VCEXqR",
+        "review_46JnNL",
+        "review_GftQqY",
+        "review_arCD8C",
+        "review_h8GfwM",
+        "review_i3th7n"
       ],
       "name": "Reviews carousel",
       "settings": {
-        "heading": "<p>Hơn <strong>50,000 </strong>khách hàng<br/>và <strong>30,000 </strong>đánh giá 5 sao toàn quốc</p>"
+        "heading": "<p>Hơn <strong>50,000 </strong>khách hàng<br/>và <strong>30,000 </strong>đánh giá toàn quốc</p>"
       }
     },
     "super_service_prmmGy": {
@@ -605,7 +555,7 @@
     "slideshow_fhCaUN",
     "combo_bedroom_EzYK9d",
     "collection-content",
-    "reviews_carousel_6LDDXD",
+    "reviews_carousel_mFiBjM",
     "super_service_prmmGy",
     "collections_listing_jRVgyj"
   ]

@@ -195,6 +195,260 @@
         "product_video_style": "muted"
       }
     },
+    "quiz_banner_3A8Pb7": {
+      "type": "quiz-banner",
+      "blocks": {
+        "product_result_zfffmd": {
+          "type": "product_result",
+          "settings": {
+            "product": "foam-nest",
+            "order": 0,
+            "result_reason": "Nệm có độ cứng cao, mặt phẳng vững chãi giống nệm bông ép nhưng có lớp foam trên cùng giúp êm điểm tiếp xúc, không đau xương.",
+            "result_type": "suitable",
+            "condition_answers": "3A,4A,1B|C"
+          }
+        },
+        "product_result_7UCPEM": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-original-pro",
+            "order": 1,
+            "result_reason": "Nệm có thêm tính năng mát lạnh (Cooling) + Zoning nâng đỡ, giải pháp toàn diện cho giấc ngủ nếu có ngân sách tốt hơn.",
+            "result_type": "optimal",
+            "condition_answers": "3A,4A,1B|C"
+          }
+        },
+        "product_result_dFkWFB": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-original-pro",
+            "order": 0,
+            "result_reason": "Nệm có thiết kế zoning nâng đỡ 3 vùng giảm đau lưng + Graphene tản nhiệt cực nhanh.",
+            "result_type": "comprehensive",
+            "condition_answers": "5A|B,7A"
+          }
+        },
+        "product_result_cceqQU": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-hybrid",
+            "order": 1,
+            "result_reason": "Nệm thoáng khí kiểu lò xo túi đem lại cảm giác nảy hơn là foam thuần.",
+            "result_type": "suitable",
+            "condition_answers": "5A|B,7A"
+          }
+        },
+        "product_result_GwMGMU": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-hybrid",
+            "order": 0,
+            "result_reason": "Nệm có lò xo túi độc lập giúp nệm nảy nhẹ, sang trọng, viền cứng cáp an toàn.",
+            "result_type": "priority",
+            "condition_answers": "2B,4C,5D"
+          }
+        },
+        "product_result_K6hJdh": {
+          "type": "product_result",
+          "settings": {
+            "product": "foam-original",
+            "order": 1,
+            "result_reason": "Nệm ở phân khúc giá tiết kiệm hơn nhưng vẫn muốn độ nảy nhẹ và bề mặt vững chãi.",
+            "result_type": "optimal",
+            "condition_answers": "2B,4C,5D"
+          }
+        },
+        "product_result_YBBK7x": {
+          "type": "product_result",
+          "settings": {
+            "product": "foam-original",
+            "order": 0,
+            "result_reason": "Nệm có độ mềm lý tưởng để người nhẹ cân có thể \"lún\" xuống, giảm áp lực lên vai và hông khi nằm nghiêng.",
+            "result_type": "priority",
+            "condition_answers": "1A,6B,4B"
+          }
+        },
+        "product_result_7nVNYc": {
+          "type": "product_result",
+          "settings": {
+            "product": "foam-original",
+            "order": 1,
+            "result_reason": "Bản dupe hoàn hảo với chi phí tiết kiệm hơn, vẫn giữ độ êm (softness) tương tự.",
+            "result_type": "suitable",
+            "condition_answers": "1A,6B,4B"
+          }
+        },
+        "product_result_HzAjbb": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-original-pro",
+            "order": 0,
+            "result_reason": "Nệm có khả năng cách ly chuyển động tốt nhất (Zero motion transfer), thêm tính năng mát lạnh (Cooling) + Zoning nâng đỡ.",
+            "result_type": "priority",
+            "condition_answers": "2C,5C"
+          }
+        },
+        "product_result_NTXN8e": {
+          "type": "product_result",
+          "settings": {
+            "product": "foam-nest",
+            "order": 1,
+            "result_reason": "Nệm có bề mặt cứng hơn và ngân sách ở mức vừa phải.",
+            "result_type": "optimal",
+            "condition_answers": "2C,5C"
+          }
+        },
+        "product_result_bicNiJ": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-hybrid",
+            "order": 0,
+            "result_reason": "Nệm có hệ thống lò xo túi kết hợp foam đáy chịu lực rất tốt cho người có trọng lượng lớn.",
+            "result_type": "comprehensive",
+            "condition_answers": "1C,5A"
+          }
+        },
+        "product_result_xpkAKd": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-original-pro",
+            "order": 1,
+            "result_reason": "Nệm có công nghệ Graphene tản nhiệt đem lại cảm giác mát lạnh kết hợp với thiết kế 3 vùng chuyên biệt nâng đỡ thắt lưng",
+            "result_type": "suitable",
+            "condition_answers": "1C,5A"
+          }
+        },
+        "product_result_wPBVkh": {
+          "type": "product_result",
+          "settings": {
+            "product": "nem-cuon-foam-topper",
+            "order": 0,
+            "result_reason": "Topper có kích thước gọn nhẹ, dễ dàng cất đi, dễ vận chuyển lên gác/chung cư, giá tốt nhất mà vẫn chuẩn chất lượng Ru9.",
+            "result_type": "priority",
+            "condition_answers": "7C,3D"
+          }
+        },
+        "product_result_bcHYNx": {
+          "type": "product_result",
+          "settings": {
+            "product": "mate_topper219071626",
+            "order": 1,
+            "result_reason": "Topper trải trên nệm cũ là giải pháp \"cứu cánh\" tiết kiệm nhất nếu chỉ cần làm mềm mặt.",
+            "result_type": "optimal",
+            "condition_answers": "7C,3D"
+          }
+        }
+      },
+      "block_order": [
+        "product_result_zfffmd",
+        "product_result_7UCPEM",
+        "product_result_dFkWFB",
+        "product_result_cceqQU",
+        "product_result_GwMGMU",
+        "product_result_K6hJdh",
+        "product_result_YBBK7x",
+        "product_result_7nVNYc",
+        "product_result_HzAjbb",
+        "product_result_NTXN8e",
+        "product_result_bicNiJ",
+        "product_result_xpkAKd",
+        "product_result_wPBVkh",
+        "product_result_bcHYNx"
+      ],
+      "name": "Quiz Banner (Advanced)",
+      "settings": {
+        "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
+        "mobile_image": "shopify://shop_images/tempImagenz9mLD_1.png",
+        "title": "Đâu là chiếc nệm phù hợp với bạn?",
+        "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
+        "button_1_text": "Test chọn nệm phù hợp",
+        "button_2_text": "So sánh các loại nệm",
+        "button_2_link": "shopify://collections/nem",
+        "q_1_title": "1. Vóc dáng và Thể trạng của người sử dụng chính?",
+        "q_1_a_1_text": "A. Nhẹ cân (< 50kg)",
+        "q_1_a_1_subtitle": "(Dáng người nhỏ nhắn, thư sinh)",
+        "q_1_a_1_value": "A",
+        "q_1_a_2_text": "B. Trung bình (50kg - 80kg)",
+        "q_1_a_2_subtitle": "(Vóc dáng phổ thông của người Việt)",
+        "q_1_a_2_value": "B",
+        "q_1_a_3_text": "C. Đậm người/Nặng cân (> 80kg)",
+        "q_1_a_3_subtitle": "(Cơ bắp hoặc vóc dáng lớn)",
+        "q_1_a_3_value": "C",
+        "q_2_title": "2. Bạn thường ngủ với ai?",
+        "q_2_a_1_text": "A. Ngủ một mình",
+        "q_2_a_1_subtitle": "(Tự do, ưu tiên sở thích cá nhân)",
+        "q_2_a_1_value": "A",
+        "q_2_a_2_text": "B. Ngủ với Vợ/Chồng",
+        "q_2_a_2_subtitle": "(Cần sự yên tĩnh, không làm phiền người bên cạnh khi trở mình)",
+        "q_2_a_2_value": "B",
+        "q_2_a_3_text": "C. Ngủ cả gia đình (Co-sleeping với con nhỏ) hoặc Thú cưng",
+        "q_2_a_3_subtitle": "(Cần không gian rộng, bề mặt phẳng, cực kỳ yên tĩnh và an toàn)",
+        "q_2_a_3_value": "C",
+        "q_3_title": "3. Hiện tại, anh/chị đang ngủ trên loại bề mặt nào và cảm thấy thế nào?",
+        "q_3_a_1_text": "A. Nệm bông ép/Nệm cao su cứng hoặc Chiếu trúc",
+        "q_3_a_1_subtitle": "(Rất cứng, phẳng lì)",
+        "q_3_a_1_value": "A",
+        "q_3_a_2_text": "B. Nệm lò xo cũ",
+        "q_3_a_2_subtitle": "(Có độ nảy, nhưng có thể đang bị võng/rung lắc)",
+        "q_3_a_2_value": "B",
+        "q_3_a_3_text": "C. Nệm foam hoặc cao su thiên nhiên",
+        "q_3_a_3_subtitle": "(Có độ êm, ôm sát)",
+        "q_3_a_3_value": "C",
+        "q_3_a_4_text": "D. Ngủ lung tung/Nệm quá cũ không còn cảm nhận được",
+        "q_3_a_4_subtitle": "",
+        "q_3_a_4_value": "D",
+        "q_4_title": "4. Cảm giác tiếp xúc (Feel Preference) anh/chị ưu tiên nhất?",
+        "q_4_a_1_text": "A. Chắc chắn & Vững chãi (Firm)",
+        "q_4_a_1_subtitle": "(Thích nằm trên mặt phẳng, không thích lún)",
+        "q_4_a_1_value": "A",
+        "q_4_a_2_text": "B. Êm ái & Ôm sát (Contour)",
+        "q_4_a_2_subtitle": "(Thích nệm ôm cơ thể, nâng niu vai/hông)",
+        "q_4_a_2_value": "B",
+        "q_4_a_3_text": "C. Nảy & Đàn hồi (Bouncy)",
+        "q_4_a_3_subtitle": "(Thích độ nảy nhẹ để dễ trở mình, cảm giác sang trọng \"Hotel feel\")",
+        "q_4_a_3_value": "C",
+        "q_4_a_4_text": "D. Mát lạnh & Trị liệu (Cooling)",
+        "q_4_a_4_subtitle": "(Ưu tiên số 1 là phải MÁT và giảm đau lưng)",
+        "q_4_a_4_value": "D",
+        "q_5_title": "5. \"Nỗi đau\" lớn nhất với giấc ngủ hiện tại?",
+        "q_5_a_1_text": "A. Đau thắt lưng/Cổ vai gáy",
+        "q_5_a_1_subtitle": "(Cần nâng đỡ cột sống tối ưu)",
+        "q_5_a_1_value": "A",
+        "q_5_a_2_text": "B. Nóng bí lưng",
+        "q_5_a_2_subtitle": "(Hay đổ mồ hôi trộm)",
+        "q_5_a_2_value": "B",
+        "q_5_a_3_text": "C. Dễ tỉnh giấc",
+        "q_5_a_3_subtitle": "(Nhạy cảm với tiếng động/rung lắc từ người bên cạnh)",
+        "q_5_a_3_value": "C",
+        "q_5_a_4_text": "D. Không có vấn đề lớn",
+        "q_5_a_4_subtitle": "(Muốn nâng cấp trải nghiệm tốt hơn)",
+        "q_5_a_4_value": "D",
+        "q_6_title": "6. Tư thế ngủ chủ đạo?",
+        "q_6_a_1_text": "A. Nằm ngửa",
+        "q_6_a_1_subtitle": "(Cần đỡ thắt lưng)",
+        "q_6_a_1_value": "A",
+        "q_6_a_2_text": "B. Nằm nghiêng",
+        "q_6_a_2_subtitle": "(Cần êm vai & hông - giảm áp lực)",
+        "q_6_a_2_value": "B",
+        "q_6_a_3_text": "C. Nằm sấp",
+        "q_6_a_3_subtitle": "(Cần nệm cứng để bụng không võng)",
+        "q_6_a_3_value": "C",
+        "q_6_a_4_text": "D. Xoay trở liên tục",
+        "q_6_a_4_subtitle": "(Cần nệm hỗ trợ chuyển động)",
+        "q_6_a_4_value": "D",
+        "q_7_title": "7. Ngân sách & Nhu cầu sử dụng?",
+        "q_7_a_1_text": "A. Premium",
+        "q_7_a_1_subtitle": "(Đầu tư tối đa cho sức khỏe)",
+        "q_7_a_1_value": "A",
+        "q_7_a_2_text": "B. Best Value",
+        "q_7_a_2_subtitle": "(Cân bằng chất lượng/giá cả)",
+        "q_7_a_2_value": "B",
+        "q_7_a_3_text": "C. Tiết kiệm/Linh hoạt",
+        "q_7_a_3_subtitle": "(Thuê nhà, sinh viên, nệm phụ)",
+        "q_7_a_3_value": "C",
+        "result_title": "Chúng tôi đề xuất cho bạn"
+      }
+    },
     "reason_to_choice_MiXBbP": {
       "type": "reason-to-choice",
       "blocks": {
@@ -233,536 +487,15 @@
         "title": "Lý do bạn nên chọn sản phẩm"
       }
     },
-    "product_hotspot_XzDEYy": {
-      "type": "product-hotspot",
-      "blocks": {
-        "product_8BYAFb": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Vỏ bọc tencel",
-            "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "150",
-            "left": "25%",
-            "top": "25%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "30%"
-          }
-        },
-        "product_63wJz9": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Lớp gòn kháng cháy",
-            "hotspot_sub_title": "Làm chậm cháy",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "240",
-            "left": "30%",
-            "top": "30%",
-            "space_mb": "110",
-            "left_mobile": "60%",
-            "top_mobile": "60%"
-          }
-        },
-        "product_YTgbw6": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Ru9 Contour Foam",
-            "hotspot_sub_title": "Đàn hồi cao, nâng đỡ theo đường cong cơ thể",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "40%",
-            "top": "37%",
-            "space_mb": "110",
-            "left_mobile": "70%",
-            "top_mobile": "65%"
-          }
-        },
-        "product_dpYgWc": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Memory Foam tích hợp gel lạnh",
-            "hotspot_sub_title": "Giải tỏa lực ép, vô cùng êm ái",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "50%",
-            "top": "45%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "30%"
-          }
-        },
-        "product_BGphfJ": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Lớp Foam Đáy PU",
-            "hotspot_sub_title": "Bền chắc, ngăn cách chuyển động",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "60%",
-            "top": "55%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "30%"
-          }
-        }
-      },
-      "block_order": [
-        "product_8BYAFb",
-        "product_63wJz9",
-        "product_YTgbw6",
-        "product_dpYgWc",
-        "product_BGphfJ"
-      ],
-      "custom_css": [
-        ".h3.primary-color.hotspot-item__title {white-space: nowrap;}"
-      ],
+    "feature_banner_nMQWRY": {
+      "type": "feature-banner",
+      "name": "Feature Banner",
       "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "Chi tiết sản phẩm",
-        "productHandle": "foam-original",
-        "heading": "Nệm Original - Được thiết kế với mọi tính năng mà bạn cần",
-        "content": "",
-        "banner_image": "shopify://shop_images/Original.webp",
-        "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
-        "margin-top": "0px",
-        "margin-bottom": "0px"
-      }
-    },
-    "product_hotspot_LcX9T4": {
-      "type": "product-hotspot",
-      "blocks": {
-        "product_in8JBX": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Công nghệ sợi lạnh IceFiber™",
-            "hotspot_sub_title": "Hấp thụ và làm mát nhiệt lượng do cơ thể tiếp xúc với nệm tạo ra",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "25%",
-            "top": "50%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "30%"
-          }
-        },
-        "product_AUA3f6": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Lớp Microfiber 120gsm",
-            "hotspot_sub_title": "Êm ái, dễ chịu, tránh được tiếng sột soạt khi nằm",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "360",
-            "left": "75%",
-            "top": "45%",
-            "space_mb": "110",
-            "left_mobile": "60%",
-            "top_mobile": "60%"
-          }
-        },
-        "product_rzgAnK": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Lớp vải tráng TPU",
-            "hotspot_sub_title": "Chống thấm tuyệt đối",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "330",
-            "left": "87%",
-            "top": "47%",
-            "space_mb": "110",
-            "left_mobile": "70%",
-            "top_mobile": "65%"
-          }
-        }
-      },
-      "block_order": [
-        "product_in8JBX",
-        "product_AUA3f6",
-        "product_rzgAnK"
-      ],
-      "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "Chi tiết sản phẩm",
-        "productHandle": "giai-nhiet-iceguard",
-        "heading": "Tấm giải nhiệt ứng dụng công nghệ vải lạnh IceFiber™ hiện đại nhất hiện nay",
-        "content": "",
-        "banner_image": "shopify://shop_images/IceGuard1_1.png",
-        "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
-        "margin-top": "0px",
-        "margin-bottom": "0px"
-      }
-    },
-    "product_hotspot_BGaNkf": {
-      "type": "product-hotspot",
-      "blocks": {
-        "product_xREBUD": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Vỏ bọc dệt kim",
-            "hotspot_sub_title": "Mềm mại, thông thoáng và sang trọng",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "25%",
-            "top": "30%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "30%"
-          }
-        },
-        "product_ax6PXg": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Lớp bảo vệ ruột gối",
-            "hotspot_sub_title": "Thiết kế chỉn chu, giữ gối bền lâu",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "460",
-            "left": "60%",
-            "top": "55%",
-            "space_mb": "110",
-            "left_mobile": "60%",
-            "top_mobile": "60%"
-          }
-        },
-        "product_ghVYbm": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Hạt foam và bông trong ruột gối",
-            "hotspot_sub_title": "Mềm mại, đàn hồi, tương thích cơ thể",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "530",
-            "left": "75%",
-            "top": "65%",
-            "space_mb": "110",
-            "left_mobile": "70%",
-            "top_mobile": "65%"
-          }
-        }
-      },
-      "block_order": [
-        "product_xREBUD",
-        "product_ax6PXg",
-        "product_ghVYbm"
-      ],
-      "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "Chi tiết sản phẩm",
-        "productHandle": "goi-om",
-        "heading": "Chiếc gối Ôm thấu hiểu những gì bạn cần",
-        "content": "Cải tiến chiếc gối quen thuộc, gối Ôm Ru9 sẽ đem đến giấc ngủ ngon bạn luôn tìm kiếm",
-        "banner_image": "shopify://shop_images/goi-om-3d.png",
-        "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
-        "margin-top": "0px",
-        "margin-bottom": "0px"
-      }
-    },
-    "product_hotspot_JYk7dk": {
-      "type": "product-hotspot",
-      "blocks": {
-        "product_UVkTcr": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Vỏ Cotton Sateen ",
-            "hotspot_sub_title": "Thoáng mát,chống nước và dầu",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "25%",
-            "top": "30%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "30%"
-          }
-        },
-        "product_y66nJJ": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Lớp Bảo Vệ Foam",
-            "hotspot_sub_title": "Hạn chế ma sát trong quá trình chăm sóc gối",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "350",
-            "left": "50%",
-            "top": "55%",
-            "space_mb": "110",
-            "left_mobile": "60%",
-            "top_mobile": "30%"
-          }
-        },
-        "product_BTx8AC": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Ruột gối Microfiber 3D",
-            "hotspot_sub_title": "Bồng bềnh và nâng đỡ",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "350",
-            "left": "75%",
-            "top": "60%",
-            "space_mb": "110",
-            "left_mobile": "75%",
-            "top_mobile": "60%"
-          }
-        }
-      },
-      "block_order": [
-        "product_UVkTcr",
-        "product_y66nJJ",
-        "product_BTx8AC"
-      ],
-      "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "Chi tiết sản phẩm",
-        "productHandle": "goi-may",
-        "heading": "{{ product.metafields.custom.hotspot_title.value }}",
-        "content": "",
-        "banner_image": "shopify://shop_images/Goi-May-WebsiteChat_lieu.jpg",
-        "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
-        "margin-top": "0px",
-        "margin-bottom": "0px"
-      }
-    },
-    "product_hotspot_zAj7Lm": {
-      "type": "product-hotspot",
-      "blocks": {
-        "product_kWLDwR": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Vỏ bọc dệt kim",
-            "hotspot_sub_title": "Mềm mại, thông thoáng và sang trọng",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "25%",
-            "top": "30%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "30%"
-          }
-        },
-        "product_gfy4FP": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Comfort Top: Medium/ Firm",
-            "hotspot_sub_title": "Lựa chọn độ êm ái hoặc nâng đỡ",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "260",
-            "left": "30%",
-            "top": "35%",
-            "space_mb": "110",
-            "left_mobile": "35%",
-            "top_mobile": "45%"
-          }
-        },
-        "product_KQpcky": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "3-zoned Ru9 Contour layer",
-            "hotspot_sub_title": "Thiết kế 3 vùng nâng đỡ khác biệt cho từng vị trí  đầu - thân - chân",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "300",
-            "left": "35%",
-            "top": "45%",
-            "space_mb": "110",
-            "left_mobile": "45%",
-            "top_mobile": "52%"
-          }
-        },
-        "product_gkzea7": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Cooling Graphene Memory Foam layer",
-            "hotspot_sub_title": "Giải toả lực ép và tản nhiệt",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "400",
-            "left": "50%",
-            "top": "55%",
-            "space_mb": "110",
-            "left_mobile": "55%",
-            "top_mobile": "56%"
-          }
-        },
-        "product_WAmQBe": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Core layer PU Foam",
-            "hotspot_sub_title": "Khả năng ngăn cách chuyển động",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "380",
-            "left": "60%",
-            "top": "60%",
-            "space_mb": "110",
-            "left_mobile": "70%",
-            "top_mobile": "55%"
-          }
-        }
-      },
-      "block_order": [
-        "product_kWLDwR",
-        "product_gfy4FP",
-        "product_KQpcky",
-        "product_gkzea7",
-        "product_WAmQBe"
-      ],
-      "custom_css": [
-        "h2 {padding: 20px; /* Bạn có thể thay đổi giá trị này theo nhu cầu */ margin-bottom: 20px;}",
-        ".h3.primary-color.hotspot-item__title {white-space: nowrap;}"
-      ],
-      "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "Chi tiết sản phẩm",
-        "productHandle": "nem-original-pro",
-        "heading": "{{ product.metafields.custom.hotspot_title.value }}",
-        "content": "",
-        "banner_image": "{{ product.metafields.custom.hotspot_banner.value }}",
-        "margin-top": "0px",
-        "margin-bottom": "0px"
-      }
-    },
-    "product_hotspot_pnDmHC": {
-      "type": "product-hotspot",
-      "blocks": {
-        "product_wUNCcK": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Vỏ bọc tencel",
-            "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "30%",
-            "top": "45%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "45%"
-          }
-        },
-        "product_rH68dY": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Lớp Bảo Vệ Foam",
-            "hotspot_sub_title": "Hạn chế ma sát trong quá trình chăm sóc gối",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "55%",
-            "top": "35%",
-            "space_mb": "110",
-            "left_mobile": "55%",
-            "top_mobile": "45%"
-          }
-        },
-        "product_KWebeG": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Ruột gối Graphene Foam",
-            "hotspot_sub_title": "Nâng đỡ trọn vẹn, tản nhiệt hiệu quả",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "75%",
-            "top": "35%",
-            "space_mb": "110",
-            "left_mobile": "80%",
-            "top_mobile": "40%"
-          }
-        }
-      },
-      "block_order": [
-        "product_wUNCcK",
-        "product_rH68dY",
-        "product_KWebeG"
-      ],
-      "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "Chi tiết sản phẩm",
-        "productHandle": "goi-foam-niu",
-        "heading": "Chiếc gối thấu hiểu những gì bạn cần để ngủ thật ngon",
-        "content": "Gối Niu được thiết kế để tạo ra sự nâng đỡ lý tưởng nhất cho phần đầu - cổ - vai của bạn.",
-        "banner_image": "shopify://shop_images/NIU-PILLOW-for-web_5702975d-3457-46e5-ab7c-f57b4b9a41a3.jpg",
-        "banner_mobile": "{{ product.metafields.custom.hotspot_banner.value }}",
-        "margin-top": "0px",
-        "margin-bottom": "0px"
-      }
-    },
-    "product_hotspot_4TYCfN": {
-      "type": "product-hotspot",
-      "blocks": {
-        "product_3eYPGB": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Vỏ bọc tencel",
-            "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "30%",
-            "top": "45%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "45%"
-          }
-        },
-        "product_rTGWtc": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Memory Foam",
-            "hotspot_sub_title": "Êm ái linh hoạt, tích hợp than hoạt tính kháng khuẩn",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "60%",
-            "top": "45%",
-            "space_mb": "110",
-            "left_mobile": "50%",
-            "top_mobile": "55%"
-          }
-        },
-        "product_Ph6tDT": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "HR Foam",
-            "hotspot_sub_title": "Nâng đỡ hiệu quả, tích hợp phân tử trà xanh khử mùi",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "85%",
-            "top": "35%",
-            "space_mb": "110",
-            "left_mobile": "80%",
-            "top_mobile": "40%"
-          }
-        }
-      },
-      "block_order": [
-        "product_3eYPGB",
-        "product_rTGWtc",
-        "product_Ph6tDT"
-      ],
-      "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "Chi tiết sản phẩm",
-        "productHandle": "nem-cuon-foam-topper",
-        "heading": "Thoải mái trọn vẹn mọi nơi cùng Ru9 Foam Topper",
-        "content": "",
-        "banner_image": "shopify://shop_images/PIC-1-2_89ba994c-4b07-4bb6-807a-e083fab8c3fc.png",
-        "banner_mobile": "{{ product.metafields.custom.hotspot_banner.value }}",
-        "margin-top": "0px",
-        "margin-bottom": "0px"
+        "desktop_image": "{{ product.metafields.custom.hotspot_banner.value }}",
+        "mobile_image": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
+        "title": "<h1>Chìa khóa cho từng vấn đề giấc ngủ của bạn</h1>",
+        "mobile_title": "Chìa khóa cho từng vấn đề giấc ngủ của bạn",
+        "background_color": "#ffffff"
       }
     },
     "dynamic_text_with_image_L4VkFB": {
@@ -1082,14 +815,9 @@
   "order": [
     "countdown_Gwp9bc",
     "main",
+    "quiz_banner_3A8Pb7",
     "reason_to_choice_MiXBbP",
-    "product_hotspot_XzDEYy",
-    "product_hotspot_LcX9T4",
-    "product_hotspot_BGaNkf",
-    "product_hotspot_JYk7dk",
-    "product_hotspot_zAj7Lm",
-    "product_hotspot_pnDmHC",
-    "product_hotspot_4TYCfN",
+    "feature_banner_nMQWRY",
     "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",
     "dynamic_faq_Whrn47",

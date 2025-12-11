@@ -246,128 +246,78 @@
         "show_collection_description": true
       }
     },
-    "reviews_carousel_L7c9Yt": {
+    "reviews_carousel_bmxhVA": {
       "type": "reviews-carousel",
       "blocks": {
-        "review_bpxg38": {
+        "review_RGXQMM": {
           "type": "review",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/4b58f1bc-f94e-48af-b859-db040483d931.jpg",
-            "customer_name": "Gon Pink",
-            "review_text": "<p>Mình nằm thử nệm Foam Original của Ru9 mới thấy khác biệt thiệt, foam ôm sát cơ thể giúp lưng – vai – hông được nâng đỡ đều, mình ngủ dậy không còn ê mỏi luôn. Thêm cái nữa là nệm cực thoáng khí, nằm lâu cũng không hầm nóng, vỏ thì tháo ra giặt siêu tiện. Nói chung là sản phẩm rất chất lượng so với giá tiền! </p>",
+            "video": "shopify://files/videos/Website - [Original] Trà Thơm.mp4",
             "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
+            "product_link": "shopify://products/foam-original"
           }
         },
-        "review_BXgwW4": {
+        "review_JPWKFx": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/177826117_3828731063871354_8843481793885550946_n.jpg",
-            "customer_name": "Hoàng Ku",
-            "review_text": "<p>Điều mình thích nhất khi nằm nệm foam Ru9 là đệm sẽ ôm sát theo đường cong của cơ thể, mình có quả “thắt đáy lưng ong” nên phần đáy lưng võng cong, nằm nệm cứng chỗ lưng đó bị rỗng nên rất khó chịu, ngủ phải gập người lại thì mới dễ ngủ. Nhưng với đệm Foam Ru9 thì mình chỉ cần nằm thẳng thôi, cấu trúc của đệm sẽ tự khắc làm đầy ngay chỗ thắt lưng của mình luôn! </p>",
-            "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/foam-original"
-          }
-        },
-        "review_JW6azr": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/Ane_cibi.jpg",
-            "customer_name": "Anne Cibi",
-            "review_text": "<p>Ghé Ru9 thăm showroom, kết quả là bê về túi to túi nhỏ luôn! Chăn bạch đàn, bộ ga gối tencel mướt mượt màu baby blue y chang cái nhà em nữa, nó mờ ê mê lắm</p>",
-            "product_name": "Bộ Ga Giường Ru9 Tencel",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/tencel-bedding-set"
-          }
-        },
-        "review_GDER74": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/dao_lan_ph_ng_nest.jpg",
-            "customer_name": "Đào Lan Phương",
-            "review_text": "<p>Sau 3 tuần nằm thử, mình thật sự ưng chiếc nệm Nest này. Nệm dày, nằm chắc chắn chứ không bị lún, rất phù hợp cho người hay đau lưng như mình. Mong là chất lượng này sẽ bền lâu.</p>",
+            "video": "shopify://files/videos/Website - [Nest] - Review Bỉm Sữa.mp4",
             "product_name": "Nệm Nest",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://collections/bedding"
+            "product_link": "shopify://products/foam-nest"
           }
         },
-        "review_dEzpXV": {
+        "review_QDRwMG": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/mc_van_anh_topper.jpg",
-            "customer_name": "MC Vân Anh",
-            "review_text": "<p>Mình chọn nệm Ru9 vì có chính sách 100 đêm ngủ thử. Nệm đa năng, có thể trải ra phòng khách để bé chơi hoặc trải nệm để ngủ khi cần. sau đó cuộn lại cất đi là được, dễ di chuyển. Nệm foam rất êm, không bị lún, đàn hồi tốt.</p>",
+            "video": "shopify://files/videos/Website - [Niu] - Lam Hương.mp4",
+            "product_name": "Gối Niu",
+            "product_link": "shopify://products/goi-foam-niu"
+          }
+        },
+        "review_fKC6bF": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Foam Topper] - Phương Nguyễn.mp4",
             "product_name": "Nệm Foam Topper",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem Nệm",
-            "button_link": "shopify://products/nem-cuon-foam-topper"
+            "product_link": "shopify://products/nem-cuon-foam-topper"
           }
         },
-        "review_YJJM3G": {
+        "review_zFKqyz": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/47580643_1094459747384007_5553427953934663680_n.jpg",
-            "customer_name": "Tu Lam Kha",
-            "review_text": "<p>❤️❤️Mình cảm thấy hài lòng và rất biết ơn nệm Ru9, Nệm Ru9 đã làm cho mình thấy cuộc sống đẹp hơn khi giấc ngủ được trọn vẹn! Cảm giác nằm ngủ trên nệm rất thích như đang ở khách sạn 5 sao ấy... </p>",
-            "product_name": "Nệm Original",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/foam-original"
+            "video": "shopify://files/videos/Website - [Mate] - Revu.mp4",
+            "product_name": "Topper Mate",
+            "product_link": "shopify://products/mate_topper219071626"
           }
         },
-        "review_n7eHF3": {
+        "review_aeeHD6": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/IMG_8630.jpg",
-            "customer_name": "Ngọc Tú Anh",
-            "review_text": "<p>Bí quyết để làm sẵn sàng làm việc mười mấy tiếng liên tục của mình chính là gối Niu Ru9 làm từ Memory Foam. Tản nhiệt tối ưu, đàn hồi siêu êm ái. Đừng tiếc với bản thân một chiếc gối bạn nha.</p>",
-            "product_name": "Bộ Bedding Tencel",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/tencel-bedding-set"
+            "video": "shopify://files/videos/Website - [Mate] - Revu 2.mp4",
+            "product_name": "Topper Mate",
+            "product_link": "shopify://products/mate_topper219071626"
           }
         },
-        "review_CBPFtJ": {
+        "review_fKefFn": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/mieymeii.jpg",
-            "customer_name": "mieymeii",
-            "review_text": "<p>Cảm ơn Ru9 vì bộ ga giường mới thật tuyệt ♥️<br/>Chất liệu 100% cotton sợi dài, vô cùng mềm mại, nâng niu giấc ngủ của các nàng </p>",
-            "product_name": "Bộ Ga Giường Cotton Sateen",
-            "verified_text": "",
-            "verification_link": "",
-            "button_text": "Xem sản phẩm",
-            "button_link": "shopify://products/bo-ga-giuong-cotton-sateen"
+            "video": "shopify://files/videos/Website - [Gối cổ giảm âm] - Hiếu Mario.mp4",
+            "product_name": "Gối cổ giảm âm",
+            "product_link": "shopify://products/goi-co-giam-am"
           }
         }
       },
       "block_order": [
-        "review_bpxg38",
-        "review_BXgwW4",
-        "review_JW6azr",
-        "review_GDER74",
-        "review_dEzpXV",
-        "review_YJJM3G",
-        "review_n7eHF3",
-        "review_CBPFtJ"
+        "review_RGXQMM",
+        "review_JPWKFx",
+        "review_QDRwMG",
+        "review_fKC6bF",
+        "review_zFKqyz",
+        "review_aeeHD6",
+        "review_fKefFn"
       ],
       "name": "Reviews carousel",
       "settings": {
-        "heading": "<p>Hơn <strong>50,000 </strong>khách hàng<br/>và <strong>30,000 </strong>đánh giá 5 sao toàn quốc</p>"
+        "heading": "<p>Hơn <strong>50,000 </strong>khách hàng<br/>và <strong>30,000 </strong>đánh giá toàn quốc</p>"
       }
     },
     "super_service_prmmGy": {
@@ -498,7 +448,7 @@
     "slideshow_fhCaUN",
     "combo_bedroom_qD3H7A",
     "collection-content",
-    "reviews_carousel_L7c9Yt",
+    "reviews_carousel_bmxhVA",
     "super_service_prmmGy",
     "collections_listing_jRVgyj"
   ]

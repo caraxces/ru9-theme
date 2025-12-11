@@ -132,12 +132,34 @@
         "desktop_banner": "shopify://shop_images/WEB_VOUCHER_5_-04.jpg",
         "mobile_banner": "shopify://shop_images/WEB_VOUCHER_5_-04.jpg"
       }
+    },
+    "voucher_popup_CgmKCW": {
+      "type": "voucher-popup",
+      "blocks": {
+        "voucher_mUTahx": {
+          "type": "voucher",
+          "settings": {
+            "code": "RU9250",
+            "title": "VOUCHER 250K",
+            "description": "Giảm 250K cho đơn hàng từ 5 triệu đồng",
+            "expiry_date": "31.12.2025"
+          }
+        }
+      },
+      "block_order": [
+        "voucher_mUTahx"
+      ],
+      "name": "Voucher Popup",
+      "settings": {
+        "section_title": "Voucher có thể áp dụng"
+      }
     }
   },
   "order": [
     "wheel_XXPC8T",
     "newsletter-popup",
     "age-verification-popup",
-    "welcome_popup_9i4VVb"
+    "welcome_popup_9i4VVb",
+    "voucher_popup_CgmKCW"
   ]
 }
