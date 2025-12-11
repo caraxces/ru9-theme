@@ -905,9 +905,22 @@
     .footer-ru9__showrooms .address-text a,
     .footer-ru9__showrooms-mobile .address-text a,
     .footer-ru9__address .address-text a,
-    .rte a:not(.rte__image):not(.btn) {
+    .footer-ru9 .rte a:not(.rte__image):not(.btn) {
       color: #fff !important;
       text-decoration: none !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      background-image: none !important;
+    }
+    
+    .footer-ru9__company-info .company-address a::after,
+    .footer-ru9__showrooms .address-text a::after,
+    .footer-ru9__showrooms-mobile .address-text a::after,
+    .footer-ru9__address .address-text a::after,
+    .footer-ru9 .rte a:not(.rte__image):not(.btn)::after {
+      display: none !important;
+      content: none !important;
+      border: none !important;
     }
     
     /* Hover styles for links in address sections */
@@ -915,9 +928,12 @@
     .footer-ru9__showrooms .address-text a:hover,
     .footer-ru9__showrooms-mobile .address-text a:hover,
     .footer-ru9__address .address-text a:hover,
-    .rte a:not(.rte__image):not(.btn):hover {
+    .footer-ru9 .rte a:not(.rte__image):not(.btn):hover {
       color: #C5EDFF !important;
       text-decoration: none !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      background-image: none !important;
     }
     
     .footer-ru9__social { display: flex; gap: 16px; margin-top: 12px; }

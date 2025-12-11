@@ -254,7 +254,7 @@
         "product_result_fk99qa": {
           "type": "product_result",
           "settings": {
-            "product": "mate_topper219071626",
+            "product": "nem-gap-topper-mate",
             "order": 1,
             "result_reason": "Topper trải trên nệm cũ là giải pháp \"cứu cánh\" tiết kiệm nhất nếu chỉ cần làm mềm mặt.",
             "result_type": "optimal",
@@ -558,7 +558,7 @@
             "suitable_body_type": "<85Kg",
             "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
             "product_price": "Từ 2.290.000 VNĐ",
-            "product_url": "shopify://products/mate_topper219071626"
+            "product_url": "shopify://products/nem-gap-topper-mate"
           }
         },
         "product_HYNA3n": {
@@ -658,7 +658,7 @@
           "settings": {
             "video": "shopify://files/videos/Website - [Mate] - Revu.mp4",
             "product_name": "Topper Mate",
-            "product_link": "shopify://products/mate_topper219071626"
+            "product_link": "shopify://products/nem-gap-topper-mate"
           }
         },
         "review_at9zxP": {
@@ -666,7 +666,7 @@
           "settings": {
             "video": "shopify://files/videos/Website - [Mate] - Revu 2.mp4",
             "product_name": "Topper Mate",
-            "product_link": "shopify://products/mate_topper219071626"
+            "product_link": "shopify://products/nem-gap-topper-mate"
           }
         },
         "review_RtzjCP": {

@@ -235,6 +235,17 @@
         "title": "Lý do bạn nên chọn sản phẩm"
       }
     },
+    "feature_banner_6ndiQG": {
+      "type": "feature-banner",
+      "name": "Feature Banner",
+      "settings": {
+        "desktop_image": "shopify://shop_images/TOPPER.svg",
+        "mobile_image": "shopify://shop_images/MOBILE_-_TOPPER.svg",
+        "title": "<h1>Thoải mái trọn vẹn mọi nơi cùng Ru9 Foam Topper</h1>",
+        "mobile_title": "Chìa khóa cho từng vấn đề giấc ngủ của bạn",
+        "background_color": "#ffffff"
+      }
+    },
     "product_hotspot_XzDEYy": {
       "type": "product-hotspot",
       "blocks": {
@@ -321,6 +332,7 @@
         "product_dpYgWc",
         "product_BGphfJ"
       ],
+      "disabled": true,
       "custom_css": [
         ".h3.primary-color.hotspot-item__title {white-space: nowrap;}"
       ],
@@ -390,6 +402,7 @@
         "product_AUA3f6",
         "product_rzgAnK"
       ],
+      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
@@ -456,6 +469,7 @@
         "product_ax6PXg",
         "product_ghVYbm"
       ],
+      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
@@ -522,6 +536,7 @@
         "product_y66nJJ",
         "product_BTx8AC"
       ],
+      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
@@ -620,6 +635,7 @@
         "product_gkzea7",
         "product_WAmQBe"
       ],
+      "disabled": true,
       "custom_css": [
         "h2 {padding: 20px; /* Bạn có thể thay đổi giá trị này theo nhu cầu */ margin-bottom: 20px;}",
         ".h3.primary-color.hotspot-item__title {white-space: nowrap;}"
@@ -689,6 +705,7 @@
         "product_rH68dY",
         "product_KWebeG"
       ],
+      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
@@ -755,6 +772,7 @@
         "product_rTGWtc",
         "product_Ph6tDT"
       ],
+      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
@@ -1085,6 +1103,7 @@
     "countdown_Gwp9bc",
     "main",
     "reason_to_choice_MiXBbP",
+    "feature_banner_6ndiQG",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",
     "product_hotspot_BGaNkf",

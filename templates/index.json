@@ -55,7 +55,7 @@
             "title": "",
             "title_size": 80,
             "subheading": "",
-            "link": "shopify://products/may_topper218298303-1",
+            "link": "shopify://products/topper-may",
             "link_text": "",
             "link_2": "",
             "link_text_2": "",
@@ -458,7 +458,7 @@
         "product_result_default_14": {
           "type": "product_result",
           "settings": {
-            "product": "mate_topper219071626",
+            "product": "nem-gap-topper-mate",
             "order": 1,
             "result_reason": "Topper trải trên nệm cũ là giải pháp \"cứu cánh\" tiết kiệm nhất nếu chỉ cần làm mềm mặt.",
             "result_type": "optimal",
@@ -702,7 +702,7 @@
           "settings": {
             "video": "shopify://files/videos/Website - [Mate] - Revu.mp4",
             "product_name": "Topper Mate",
-            "product_link": "shopify://products/mate_topper219071626"
+            "product_link": "shopify://products/nem-gap-topper-mate"
           }
         },
         "review_wyUamJ": {
@@ -710,7 +710,7 @@
           "settings": {
             "video": "shopify://files/videos/Website - [Mate] - Revu 2.mp4",
             "product_name": "Topper Mate",
-            "product_link": "shopify://products/mate_topper219071626"
+            "product_link": "shopify://products/nem-gap-topper-mate"
           }
         },
         "review_LgQfji": {

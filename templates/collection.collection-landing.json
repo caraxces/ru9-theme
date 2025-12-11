@@ -303,7 +303,7 @@
         "product_item_fH8Cab": {
           "type": "product_item",
           "settings": {
-            "product": "bộ-ga-giường-cotton-sateen-copy",
+            "product": "combo-ga-giuong-cotton",
             "product_label": "",
             "bundle_items": "<br>- Ga giường Cotton Sateen<br>- Vỏ Gối Cotton Sateen <br>- Vỏ chăn Cotton Sateen",
             "label_color": "#ffffff",
@@ -313,7 +313,7 @@
         "product_item_p3eHLE": {
           "type": "product_item",
           "settings": {
-            "product": "bộ-ga-giường-tencel-copy",
+            "product": "combo-ga-giuonng-tencel",
             "product_label": "",
             "bundle_items": "<br>- Ga giường Tencel<br>- Vỏ Gối Tencel <br>- Vỏ chăn Tencel",
             "label_color": "#ffffff",
@@ -391,7 +391,7 @@
           "settings": {
             "video": "shopify://files/videos/Website - [Mate] - Revu.mp4",
             "product_name": "Topper Mate",
-            "product_link": "shopify://products/mate_topper219071626"
+            "product_link": "shopify://products/nem-gap-topper-mate"
           }
         },
         "review_h8GfwM": {
@@ -399,7 +399,7 @@
           "settings": {
             "video": "shopify://files/videos/Website - [Mate] - Revu 2.mp4",
             "product_name": "Topper Mate",
-            "product_link": "shopify://products/mate_topper219071626"
+            "product_link": "shopify://products/nem-gap-topper-mate"
           }
         },
         "review_i3th7n": {
