@@ -490,7 +490,7 @@
         "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
         "button_1_text": "Test chọn nệm phù hợp",
         "button_2_text": "So sánh các loại nệm",
-        "button_2_link": "shopify://collections/nem",
+        "button_2_link": "https://ru9.vn/collections/nem#CompareProduct",
         "q_1_title": "1. Vóc dáng và Thể trạng của người sử dụng chính?",
         "q_1_a_1_text": "A. Nhẹ cân (< 50kg)",
         "q_1_a_1_subtitle": "(Dáng người nhỏ nhắn, thư sinh)",
@@ -658,7 +658,7 @@
       "name": "TVC Section",
       "settings": {
         "heading": "<p>7 năm đồng hành <br/>cùng giấc ngủ người Việt</p>",
-        "description": "<p>Chúng tôi không ngừng cải tiến từng chi tiết, để sản phẩm không chỉ “êm” mà còn “hiểu” được cơ thể bạn.<br/>Mỗi thiết kế, mỗi cải tiến trong chất liệu đều hướng đến cảm giác thoải mái và nâng đỡ tốt nhất cho cơ thể bạn.<br/>Từ đó, giấc ngủ không còn là điều xa xỉ, mà trở thành điều hiển nhiên và dễ dàng tiếp cận hơn với mọi người.<br/> </p>",
+        "description": "<p>Chúng tôi không ngừng cải tiến từng chi tiết, để sản phẩm không chỉ “êm” mà còn “hiểu” được cơ thể bạn. Mỗi thiết kế, mỗi cải tiến trong chất liệu đều hướng đến cảm giác thoải mái và nâng đỡ tốt nhất cho cơ thể bạn. Từ đó, giấc ngủ không còn là điều xa xỉ, mà trở thành điều hiển nhiên và dễ dàng tiếp cận hơn với mọi người.<br/> </p>",
         "video": "shopify://files/videos/ORIGINAL PRO - NƠI TÁI TẠO NĂNG LƯỢNG SAU MỖI HÀNH TRÌNH.mp4"
       }
     },

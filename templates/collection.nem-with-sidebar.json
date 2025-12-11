@@ -425,7 +425,7 @@
             "suitable_for": "Dành cho người cần nâng đỡ chuyên sâu và hỗ trợ rõ rệt cho tư thế nằm",
             "suitable_body_type": "<85Kg",
             "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
-            "product_price": "Từ 12.990.000 VNĐ",
+            "product_price": "",
             "product_url": "shopify://products/nem-original-pro"
           }
         },
@@ -447,7 +447,29 @@
             "suitable_for": "Phù hợp với người muốn giấc ngủ êm ái và nâng đỡ cân bằng",
             "suitable_body_type": "<85Kg",
             "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
-            "product_price": "Từ 9.990.000 VNĐ",
+            "product_price": "",
+            "product_url": "shopify://products/foam-original"
+          }
+        },
+        "product_kGMGE6": {
+          "type": "product",
+          "settings": {
+            "product_title": "Nệm Original Lite",
+            "product_image": "shopify://shop_images/Untitled-1_09.25.49.jpg",
+            "product_features": "- Cấu trúc 3 tầng foam thông minh từ dòng nệm nguyên bản Original,\n- Tối ưu độ dày chỉ còn 20cm gọn nhẹ hơn, dễ di chuyển hơn",
+            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Ori.png",
+            "product_firmness": "8.0/10",
+            "product_thickness": "20 cm",
+            "product_feel": "Êm ái, nâng đỡ toàn diện, ôm sát",
+            "customizable_firmness": "-",
+            "product_structure": "HR/Contour Foam đàn hồi\nMemory Foam gel lạnh giảm áp lực\nPU Foam đáy giữ form, chống rung",
+            "product_cover": "Vỏ bọc tencel thoáng khí, lớp gòn kháng cháy",
+            "product_advantages": "Êm ái, phù hợp đa số\nGiảm áp lực vai & lưng\nÔm sát cơ thể\nPhục hồi tốt",
+            "support_pain_relief": "Memory Foam giảm ép - ôm cong cột sống",
+            "suitable_for": "Phù hợp với người muốn giấc ngủ êm ái và nâng đỡ cân bằng, đồng thời muốn tối ưu không gian sống và thoải mái ngân sách",
+            "suitable_body_type": "<85Kg",
+            "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
+            "product_price": "",
             "product_url": "shopify://products/foam-original"
           }
         },
@@ -469,30 +491,8 @@
             "suitable_for": "Dành cho người muốn sự đàn hồi kết hợp sự êm ái từ foam và có trọng lượng cơ thể cao",
             "suitable_body_type": "<85Kg",
             "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
-            "product_price": "Từ 13.990.000 VNĐ",
+            "product_price": "",
             "product_url": "shopify://products/nem-hybrid"
-          }
-        },
-        "product_kGMGE6": {
-          "type": "product",
-          "settings": {
-            "product_title": "Nệm Original Lite",
-            "product_image": "shopify://shop_images/Untitled-1_09.25.49.jpg",
-            "product_features": "- Cấu trúc 3 tầng foam thông minh từ dòng nệm nguyên bản Original,\n- Tối ưu độ dày chỉ còn 20cm gọn nhẹ hơn, dễ di chuyển hơn",
-            "comfort_layer_1_image": "shopify://shop_images/so_sanh_Ori.png",
-            "product_firmness": "8.0/10",
-            "product_thickness": "20 cm",
-            "product_feel": "Êm ái, nâng đỡ toàn diện, ôm sát",
-            "customizable_firmness": "-",
-            "product_structure": "HR/Contour Foam đàn hồi\nMemory Foam gel lạnh giảm áp lực\nPU Foam đáy giữ form, chống rung",
-            "product_cover": "Vỏ bọc tencel thoáng khí, lớp gòn kháng cháy",
-            "product_advantages": "Êm ái, phù hợp đa số\nGiảm áp lực vai & lưng\nÔm sát cơ thể\nPhục hồi tốt",
-            "support_pain_relief": "Memory Foam giảm ép - ôm cong cột sống",
-            "suitable_for": "Phù hợp với người muốn giấc ngủ êm ái và nâng đỡ cân bằng, đồng thời muốn tối ưu không gian sống và thoải mái ngân sách",
-            "suitable_body_type": "<85Kg",
-            "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
-            "product_price": "Từ 8.690.000 VNĐ",
-            "product_url": "shopify://products/foam-original"
           }
         },
         "product_atFTCC": {
@@ -513,12 +513,13 @@
             "suitable_for": "Lựa chọn tối ưu cho người ưa cảm giác chắc chắn và có vấn đề về cột sống",
             "suitable_body_type": "<85Kg",
             "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
-            "product_price": "Từ 6.990.000 VNĐ",
+            "product_price": "",
             "product_url": "shopify://products/foam-nest"
           }
         },
         "product_QVeCme": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product_title": "Nệm Topper",
             "product_image": "shopify://shop_images/THUMB_-1_3f95d431-f4a3-41b5-bd08-3f463cb44098.jpg",
@@ -541,6 +542,7 @@
         },
         "product_mewfre": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product_title": "Nệm Topper Mate",
             "product_image": "shopify://shop_images/1.THUMB_-1.png",
@@ -563,6 +565,7 @@
         },
         "product_HYNA3n": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product_title": "NỆM MÂY TOPPER",
             "product_image": "shopify://shop_images/1.THUMB_-1_1.jpg",
@@ -587,8 +590,8 @@
       "block_order": [
         "product_ALQiAM",
         "product_4JhiNN",
-        "product_wmbR3E",
         "product_kGMGE6",
+        "product_wmbR3E",
         "product_atFTCC",
         "product_QVeCme",
         "product_mewfre",
