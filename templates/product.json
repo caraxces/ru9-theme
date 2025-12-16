@@ -951,6 +951,29 @@
         "divider": true
       }
     },
+    "1730878240cfbec46e": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_LGBKUn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_LGBKUn"
+      ],
+      "settings": {
+        "enable_anchor_link": false,
+        "anchor_link_text": "",
+        "full_width": false,
+        "space_around": true
+      }
+    },
     "super_service_pac79r": {
       "type": "super-service",
       "blocks": {
@@ -1005,29 +1028,6 @@
       "settings": {
         "title": "An tâm hơn với dịch vụ vượt trội",
         "background_color": "#f5f9ff"
-      }
-    },
-    "1730878240cfbec46e": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_LGBKUn": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_LGBKUn"
-      ],
-      "settings": {
-        "enable_anchor_link": false,
-        "anchor_link_text": "",
-        "full_width": false,
-        "space_around": true
       }
     },
     "collections_listing_6LHHpP": {
@@ -1137,8 +1137,8 @@
     "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",
     "dynamic_faq_MiJfc8",
-    "super_service_pac79r",
     "1730878240cfbec46e",
+    "super_service_pac79r",
     "collections_listing_6LHHpP",
     "sub",
     "product-recommendations",

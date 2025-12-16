@@ -9,38 +9,52 @@
  */
 {
   "sections": {
-    "16571274958ff743be": {
+    "slideshow_hEBNk7": {
       "type": "slideshow",
       "blocks": {
-        "1657127495df6309f6-0": {
+        "image_RaT6EP": {
           "type": "image",
           "settings": {
             "top_subheading": "",
             "title": "",
-            "title_size": 48,
+            "title_size": 80,
             "subheading": "",
-            "link": "shopify://collections/all",
+            "link": "",
             "link_text": "",
             "link_2": "",
             "link_text_2": "",
-            "color_accent": "#f19072",
-            "text_align": "vertical-bottom horizontal-left",
-            "image": "shopify://shop_images/banner_store_locator.jpg",
-            "image_mobile": "shopify://shop_images/banner_store_locator_mb.jpg",
+            "color_accent": "#000000",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/11e25c93436b83df7a4d5c21a18f42d923b23e3e9.png",
+            "image_mobile": "shopify://shop_images/11e25c93436b83df7a4d5c21a18f42d923b23e3e9.png",
             "overlay_opacity": 0
           }
         }
       },
       "block_order": [
-        "1657127495df6309f6-0"
+        "image_RaT6EP"
       ],
       "settings": {
         "section_height": "natural",
-        "mobile_height": "auto",
+        "mobile_height": "500px",
         "style": "dots",
         "autoplay": true,
-        "autoplay_speed": 5,
-        "lazyload_images": true
+        "autoplay_speed": 7,
+        "lazyload_images": true,
+        "show_icon_text_bar": true,
+        "icon_bar_background_color": "#fffbeb",
+        "icon_1_title": "100 đêm ngủ thử",
+        "icon_1_type": "sleep",
+        "icon_1_color": "#007bff",
+        "icon_1_image": "shopify://shop_images/Layer_1_3.svg",
+        "icon_2_title": "Miễn phí vận chuyển",
+        "icon_2_type": "payment",
+        "icon_2_color": "#007bff",
+        "icon_2_image": "shopify://shop_images/Layer_1_4.svg",
+        "icon_3_title": "Thanh toán linh hoạt/Trả góp không lãi suất",
+        "icon_3_type": "shipping",
+        "icon_3_color": "#007bff",
+        "icon_3_image": "shopify://shop_images/Layer_1_6.svg"
       }
     },
     "showroom": {
@@ -97,7 +111,7 @@
     }
   },
   "order": [
-    "16571274958ff743be",
+    "slideshow_hEBNk7",
     "showroom"
   ]
 }

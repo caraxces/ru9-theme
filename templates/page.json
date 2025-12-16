@@ -20,6 +20,33 @@
         "remove_space_below": false
       }
     },
+    "image_text_content_nbrr6m": {
+      "type": "image-text-content",
+      "blocks": {
+        "image_text_VFWJpr": {
+          "type": "image_text",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_283.png",
+            "heading": "Chứng nhận CertiPUR-US®",
+            "content": "<p>Các lớp foam trong nệm Ru9 đã được kiểm định chất lượng bởi chứng nhận uy tín và phổ biến nhất trên thế giới về foam - CertiPUR-US®. Dựa trên các tiêu chuẩn được xây dựng bởi chuyên gia đầu ngành, foam của nệm Ru9 đáp ứng được các yếu tố về thành phần, hàm lượng và độ bền bỉ. Cụ thể, foam nệm Ru9 đã đáp ứng 6 tiêu chuẩn:</p><ul><li>Quá trình sản xuất foam không gây hại đến tầng khí quyển;</li><li>Không sử dụng hoá chất làm chậm cháy (PBDEs, TDCPP hay TCEP) Không chứa thuỷ ngân, chì và kim loại nặng;</li><li>Không chứa formaldehyde có thể gây hại đến da và hệ hô hấp;</li><li>Không chứa phthalates làm suy giảm hệ miễn dịch;</li><li>Có mức độ khí thải VOC thấp (0.5 trên phần triệu).</li></ul><p>Quy trình kiểm định đối với foam của Ru9 sẽ còn được lặp lại hàng năm một cách ngẫu nhiên, chứng minh cho chất lượng nệm dài lâu. Để đảm bảo tính minh bạch, các công ty đạt tiêu chuẩn được liệt kê trên website chính thức <a href=\"https://certipur.us/list-of-participating-companies/#R\">tại đây</a><a href=\"https://ru9mattressvn.myshopify.com/pages/certification?#\">.</a></p>"
+          }
+        },
+        "image_text_CHNUDH": {
+          "type": "image_text",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_284.png",
+            "heading": "Chứng nhận OEKO-TEX®",
+            "content": "<p>STANDARD 100 by OEKO-TEX® là chứng nhận độc lập và toàn diện quốc tế cho các sản phẩm về dệt được sáng lập từ năm 1992 và nhanh chóng trở thành chứng nhận uy tín trên toàn thế giới bởi các tiêu chuẩn kiểm định nghiêm ngặt. Trải qua quá trình kiểm định theo hệ thống đo lường toàn diện và gắt gao của OEKO-TEX®, chất liệu vải Tencel trong gối Niu của Ru9 đã được chứng nhận an toàn với sức khoẻ người sử dụng. Cụ thể:</p><ul><li>Không chứa các chất bị cấm Theo quy định pháp luật.</li><li>Không chứa hàng loạt chất hoá học có hại - dù những chất này chưa bị cấm.</li><li>Đáp ứng được bộ tiêu chí của STANDARD 100 by OEKO-TEX® - được xây dựng từ đội ngũ chuyên gia đầu ngành kết hợp với các tiêu chuẩn quốc tế.</li><li>Đạt chuẩn các yêu cầu trong Bộ luật Nâng cao chất lượng an toàn sản phẩm tiêu dùng Hoa Kỳ.</li><li>Quy trình sản xuất thân thiện với môi trường.</li></ul><p>Đồng thời điều kiện tiên quyết để đạt chứng nhận STANDARD 100 by OEKO-TEX® là tất cả các phần đi cùng chất liệu vải Tencel trong gối Niu phải đáp ứng các tiêu chuẩn yêu cầu an toàn, bao gồm cả đường may, khoá kéo và nút bấm đi kèm.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "image_text_VFWJpr",
+        "image_text_CHNUDH"
+      ],
+      "name": "Certificate Description",
+      "settings": {}
+    },
     "countdown_tyxbU3": {
       "type": "countdown",
       "blocks": {
@@ -112,6 +139,7 @@
         "section_width": "page-width",
         "customize_width": 1800,
         "title": "Featured collection",
+        "title_icon": "",
         "per_row": 4,
         "rows": 1,
         "mobile_scrollable": true,
@@ -163,6 +191,7 @@
         "section_width": "page-width",
         "customize_width": 1800,
         "title": "",
+        "title_icon": "",
         "per_row": 4,
         "rows": 1,
         "mobile_scrollable": true,
@@ -187,6 +216,7 @@
   },
   "order": [
     "main",
+    "image_text_content_nbrr6m",
     "countdown_tyxbU3",
     "feature_collection_manual_NmbMnj",
     "feature_collection_manual_FXGEwb",

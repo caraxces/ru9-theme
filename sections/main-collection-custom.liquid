@@ -221,6 +221,7 @@
   .collection-content--custom .page-width {
     margin: 0;
     padding: 0 15px 20px;
+    max-width: 100%;
   }
 }
 
@@ -511,103 +512,74 @@
 }
 
 @media (max-width: 768px) {
-  .cc-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 0;
+  /* Mobile: Reset grid margin that causes misalignment from theme.css */
+  .collection-content--custom .page-width > .grid {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Mobile: Hide sidebar completely */
+  .collection-content--custom .grid__item--sidebar {
+    width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: none !important;
+  }
+
+  /* Mobile: Full width content - reset all padding/margin from theme.css */
+  .collection-content--custom .grid__item--content {
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Mobile: 2-column grid layout with 27px row spacing and 15px column gap */
+  .collection-content--custom .cc-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 27px 15px !important;
+    padding: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    max-width: 100% !important;
   }
 
   /* Override sidebar layout on mobile - ensure consistent layout */
   .collection-content--custom.enable-sidebar .cc-grid,
   .collection-content--custom .cc-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 27px 15px !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
-  /* Reset ALL desktop changes for mobile - ensure consistent sizing regardless of sidebar */
+  /* Mobile: Full width cards within grid */
   .collection-content--custom.enable-sidebar .cc-card,
   .collection-content--custom .cc-card {
-    width: 319.8px !important;
-    flex-shrink: 0;
+    width: 100% !important;
+    max-width: 100% !important;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-width: none !important;
   }
 
   .collection-content--custom.enable-sidebar .cc-image-container,
   .collection-content--custom .cc-image-container {
-    width: 319.8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
     aspect-ratio: 380 / 284;
-    /* Maintain 380:284 ratio */
-    flex-shrink: 0;
-    max-width: none !important;
   }
 
   .collection-content--custom.enable-sidebar .cc-buy-now,
   .collection-content--custom .cc-buy-now {
-    width: 319.8px !important;
-    max-width: none !important;
-  }
-
-  .cc-mobile-row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    gap: 12px;
-    padding-bottom: 20px;
-  }
-
-  .cc-mobile-row::-webkit-scrollbar {
-    height: 8px;
-    display: block;
-  }
-
-  .cc-mobile-row::-webkit-scrollbar-track {
-    background: #F0F1EF;
-    border-radius: 100px;
-  }
-
-  .cc-mobile-row::-webkit-scrollbar-thumb {
-    background: #234085;
-    border-radius: 100px;
-  }
-
-  .cc-mobile-row::-webkit-scrollbar-thumb:hover {
-    background: #1a2f6b;
-  }
-
-  .cc-mobile-row::-webkit-scrollbar-button {
-    display: none;
-  }
-
-  /* Force scrollbar to show */
-  .cc-mobile-row {
-    scrollbar-width: thin;
-    scrollbar-color: #234085 #F0F1EF;
-    scrollbar-gutter: stable;
-  }
-
-  /* Ensure mobile row cards are consistent */
-  .cc-mobile-row .cc-card {
-    width: 319.8px !important;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    max-width: none !important;
-  }
-
-  .cc-mobile-row .cc-image-container {
-    width: 319.8px !important;
-    aspect-ratio: 380 / 284;
-    /* Maintain 380:284 ratio */
-    flex-shrink: 0;
-    max-width: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 36px;
+    font-size: 13px;
   }
 
   .cc-content {
@@ -644,21 +616,6 @@
     font-size: 14px;
   }
 
-  .collection-content--custom.enable-sidebar .cc-buy-now,
-  .collection-content--custom .cc-buy-now {
-    width: 319.8px !important;
-    height: 36px;
-    font-size: 13px;
-    max-width: none !important;
-  }
-
-  .cc-mobile-row .cc-buy-now {
-    width: 319.8px !important;
-    height: 36px;
-    font-size: 13px;
-    max-width: none !important;
-  }
-
   .cc-rating-text {
     font-size: 12px;
   }
@@ -666,126 +623,8 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Mobile horizontal scroll functionality with 2 rows
-    function initMobileScroll() {
-      if (window.innerWidth > 768) return;
-      
-      const ccGrid = document.querySelector('.cc-grid');
-      if (!ccGrid) return;
-      
-      // Group products into rows of 4
-      const cards = Array.from(ccGrid.querySelectorAll('.cc-card'));
-      const rows = [];
-      
-      for (let i = 0; i < cards.length; i += 4) {
-        rows.push(cards.slice(i, i + 4));
-      }
-      
-      // Clear existing content
-      ccGrid.innerHTML = '';
-      
-      // Create horizontal scrollable rows
-      rows.forEach((rowCards, rowIndex) => {
-        const rowContainer = document.createElement('div');
-        rowContainer.className = 'cc-mobile-row';
-        
-        // Add cards to row (1-4 products per row)
-        rowCards.forEach(card => {
-          const cardClone = card.cloneNode(true);
-          rowContainer.appendChild(cardClone);
-        });
-        
-        ccGrid.appendChild(rowContainer);
-      });
-      
-      // Add drag functionality to each row
-      const mobileRows = ccGrid.querySelectorAll('.cc-mobile-row');
-      mobileRows.forEach(row => {
-        addDragFunctionality(row);
-      });
-    }
-    
-    function addDragFunctionality(rowContainer) {
-      let isDown = false;
-      let startX;
-      let scrollLeft;
-      let isDragging = false;
-  
-      function dragStart(e) {
-        // Don't start drag if clicking on product links or buttons
-        if (e.target.closest('a') || e.target.closest('button')) {
-          isDown = false;
-          return;
-        }
-        isDown = true;
-        isDragging = false;
-        rowContainer.style.cursor = 'grabbing';
-        startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
-        scrollLeft = rowContainer.scrollLeft;
-        if (e.type === 'touchstart') {
-          window.addEventListener('touchmove', dragMove);
-          window.addEventListener('touchend', dragEnd);
-        }
-      }
-  
-      function dragMove(e) {
-        if (!isDown) return;
-        const currentX = e.type === 'touchmove' ? e.touches[0].pageX : e.pageX;
-        const walk = currentX - startX;
-        
-        if (Math.abs(walk) > 5) {
-          isDragging = true;
-        }
-        
-        if (isDragging) {
-          e.preventDefault();
-        }
-        
-        rowContainer.scrollLeft = scrollLeft - walk;
-      }
-  
-      function dragEnd() {
-        if (!isDown) return;
-        isDown = false;
-        isDragging = false;
-        rowContainer.style.cursor = 'grab';
-        window.removeEventListener('touchmove', dragMove);
-        window.removeEventListener('touchend', dragEnd);
-      }
-  
-      // Mouse events
-      rowContainer.addEventListener('mousedown', dragStart);
-      rowContainer.addEventListener('mousemove', dragMove);
-      rowContainer.addEventListener('mouseup', dragEnd);
-      rowContainer.addEventListener('mouseleave', dragEnd);
-  
-      // Touch events
-      rowContainer.addEventListener('touchstart', dragStart);
-  
-      // Prevent link clicks when dragging
-      rowContainer.addEventListener('click', (e) => {
-        if (isDragging) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      }, true);
-  
-      // Prevent default link behavior during drag
-      rowContainer.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', e => {
-          if (isDragging) {
-            e.preventDefault();
-            e.stopPropagation();
-          }
-        });
-      });
-    }
-    
-    // Initialize on load and resize
-    initMobileScroll();
-    window.addEventListener('resize', initMobileScroll);
-  });
+  // Mobile layout is now vertical list, no horizontal scroll needed
+  // Desktop layout remains unchanged
 </script>
 
 {% schema %}

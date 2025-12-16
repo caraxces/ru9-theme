@@ -41,25 +41,30 @@
                 </noscript>
             </div>
             <div class="showroom-content">
-                <h3>
+                <h3 class="showroom-title">
                     {{block.settings.name}}
                 </h3>
-                <div class="showroom-address">
-                    <a href="{{block.settings.address_url}}" target="_blank" title="{{block.settings.address}}">
-                        {{block.settings.address}}
+                <div class="showroom-info-section">
+                    <div class="showroom-label">Địa chỉ</div>
+                    <div class="showroom-address">
+                        <a href="{{block.settings.address_url}}" target="_blank" title="{{block.settings.address}}">
+                            {{block.settings.address}}
+                        </a>
+                    </div>
+                </div>
+                <div class="showroom-info-section">
+                    <div class="showroom-label">Thời gian hoạt động</div>
+                    <div class="showroom-open">
+                        <span class="showroom-date">{{block.settings.date}}</span>
+                        <span class="showroom-time">{{block.settings.time}}</span>
+                    </div>
+                </div>
+                <div class="showroom-info-section">
+                    <div class="showroom-label">Liên hệ</div>
+                    <a class="showroom-phone" href="tel:{{block.settings.phone}}">
+                        {{block.settings.phone}}
                     </a>
                 </div>
-                <div class="showroom-open">
-                    <div class="showroom-date">
-                        {{block.settings.date}}
-                    </div>
-                    <span class="showroom-time">
-                        {{block.settings.time}}
-                    </span>
-                </div>
-                <a class="showroom-phone" href="tel:{{block.settings.phone}}">
-                    {{block.settings.phone}}
-                </a>
             </div>
         </div>
         {%endfor%}
@@ -115,7 +120,8 @@
   margin-bottom: 90px;
 }
 .showroom-list {
-  max-width: calc( 9 / 12 * 100% + 30px);
+  width: 100%;
+  max-width: 100%;
   display:grid;
   grid-gap: 70px;
 }
@@ -123,26 +129,119 @@
   display: grid;
   grid-template-columns:  58% 1fr ;
   grid-gap: 64px;
-  align-items: center
+  align-items: flex-end;
+  padding-bottom: 32px;
+  position: relative;
 }
 
-.showroom-content h3{
+.showroom-item:last-child .showroom-content::after {
+  display: none;
+}
+
+/* Desktop Showroom Card Styles */
+.showroom-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 840 / 580;
+}
+
+.showroom-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.showroom-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: flex-end;
+  position: relative;
+  padding-bottom: 32px;
+}
+
+.showroom-content::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #000;
+}
+
+.showroom-title {
   font-size: 26px;
-  line-height:1.2;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1C2C58;
+  margin-bottom: 32px;
+  font-family: "Be Vietnam Pro", sans-serif;
 }
-.showroom-address a{
-  color : #345DAA;
+
+.showroom-info-section {
+  margin-bottom: 24px;
 }
-.showroom-address{
-  margin-bottom: 25px;
+
+.showroom-info-section:last-child {
+  margin-bottom: 0;
 }
-.showroom-open{
-  color: #727272;
-  margin-bottom: 25px;
-}
-.showroom-phone{
+
+.showroom-label {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
   color: #000;
-  font-weight: 500;
+  margin-bottom: 8px;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.showroom-address {
+  margin-bottom: 0;
+}
+
+.showroom-address a {
+  color: #1C2C58;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.showroom-address a:hover {
+  text-decoration: underline;
+}
+
+.showroom-open {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.showroom-date,
+.showroom-time {
+  display: inline;
+}
+
+.showroom-phone {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.showroom-phone:hover {
+  text-decoration: underline;
 }
 .showroom-option:hover{
   background-color: #5e5e5e12
@@ -167,36 +266,86 @@
       display: none
     }
     .showroom-item{
-      grid-template-columns:  1fr;
+      grid-template-columns: 1fr;
       grid-gap: 0;
+      align-items: flex-start;
+      padding-bottom: 0;
+      position: relative;
+    }
+    
+    .showroom-content {
+      padding-bottom: 24px;
+    }
+    
+    .showroom-content::after {
+      width: 100%;
+    }
+    
+    .showroom-item:last-child .showroom-content::after {
+      display: none;
     }
     .showroom-list{
-     max-width:100%;
-     grid-gap: 25px;
+      max-width: 100%;
+      grid-gap: 32px;
+      padding: 0 15px;
     }
     .showroom-selector{
       margin: 0 auto 50px;
+      width: 300px;
     }
     .showroom-header{
       text-align: center;
     }
+    .showroom-image {
+      width: 100%;
+      margin-bottom: 24px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
     .showroom-content{
-      padding: 10px;
-      text-align:center;
+      padding: 0;
+      text-align: left;
     }
-    .showroom-content h3{
+    .showroom-title{
       font-size: 20px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: #1C2C58;
+      margin-bottom: 24px;
+      text-align: left;
     }
-    .showroom-address{
-      margin-bottom: 15px;
+    .showroom-info-section {
+      margin-bottom: 20px;
     }
-    .showroom-open{
-      margin-bottom: 15px;
+    .showroom-info-section:last-child {
+      margin-bottom: 0;
     }
-.showroom-selector{
-  width: 300px
-
-}
+    .showroom-label {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: #000;
+      margin-bottom: 8px;
+    }
+    .showroom-address {
+      margin-bottom: 0;
+    }
+    .showroom-address a {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .showroom-open {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+    .showroom-phone {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
   }
 </style>
 {%assign cities = cities | split: ',' | uniq%}

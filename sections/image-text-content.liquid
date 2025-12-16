@@ -1,0 +1,312 @@
+
+<div class="image-text-section">
+<div class="page-width">
+
+{% if section.settings.title != blank %}
+  <div class="image-text-header">
+    <h2 class="image-text-section-title">{{ section.settings.title }}</h2>
+  </div>
+{% endif %}
+
+<div class="image-text-list">
+  {% for block in section.blocks %}
+    <div class="image-text-item">
+      <div class="image-text-image">
+        {% if block.settings.image %}
+          {%- assign img_url = block.settings.image | img_url: '800x' -%}
+          <img
+            class="lazyload"
+            src="{{ img_url }}"
+            data-src="{{ img_url }}"
+            data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+            data-widths="[360, 540, 720, 900, 1080]"
+            data-sizes="auto"
+            alt="{{ block.settings.image.alt | escape }}">
+    
+          <noscript>
+            <img class="lazyloaded"
+              src="{{ block.settings.image | img_url: '800x' }}"
+              alt="{{ block.settings.image.alt | escape }}">
+          </noscript>
+        {% endif %}
+      </div>
+      <div class="image-text-content">
+        {% if block.settings.heading != blank %}
+          <h3 class="image-text-title">
+            {{ block.settings.heading }}
+          </h3>
+        {% endif %}
+        
+        {% if block.settings.content != blank %}
+          <div class="image-text-rich-content">
+            {{ block.settings.content }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+</div></div>
+
+<style>
+.image-text-section {
+  margin-top: 74px;
+  margin-bottom: 248px;
+  position: relative;
+}
+
+.image-text-header {
+  margin-bottom: 90px;
+}
+
+.image-text-section-title {
+  font-size: 31px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1B2A57;
+  text-align: left;
+  margin: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.image-text-list {
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-gap: 70px;
+}
+
+.image-text-item {
+  display: grid;
+  grid-template-columns: 58% 1fr;
+  grid-gap: 40px;
+  align-items: flex-end;
+  padding-bottom: 32px;
+  position: relative;
+}
+
+.image-text-item:last-child .image-text-content::after {
+  display: none;
+}
+
+/* Desktop Image Text Content Styles */
+.image-text-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+.image-text-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: flex-end;
+  position: relative;
+  padding-bottom: 32px;
+}
+
+.image-text-content::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #000;
+}
+
+.image-text-title {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1C2C58;
+  margin-bottom: 24px;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.image-text-rich-content {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000;
+  font-family: "Be Vietnam Pro", sans-serif;
+  text-align: justify;
+}
+
+.image-text-rich-content p {
+  margin-bottom: 16px;
+}
+
+.image-text-rich-content p:last-child {
+  margin-bottom: 0;
+}
+
+.image-text-rich-content ul,
+.image-text-rich-content ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+
+.image-text-rich-content li {
+  margin-bottom: 8px;
+}
+
+.image-text-rich-content li:last-child {
+  margin-bottom: 0;
+}
+
+.image-text-rich-content a {
+  color: #1C2C58;
+  text-decoration: underline;
+}
+
+.image-text-rich-content a:hover {
+  color: #3264E0;
+}
+
+</style>
+
+<style>
+  @media (max-width: 767px) {
+    .image-text-section {
+      margin-top: 56px;
+      margin-bottom: 50px;
+    }
+    
+    .image-text-header {
+      margin-bottom: 50px;
+      text-align: center;
+      padding: 0 15px;
+    }
+    
+    .image-text-section-title {
+      font-size: 20px;
+      text-align: center;
+    }
+    
+    .image-text-item {
+      grid-template-columns: 1fr;
+      grid-gap: 0;
+      align-items: flex-start;
+      padding-bottom: 0;
+      position: relative;
+    }
+    
+    .image-text-content {
+      padding-bottom: 24px;
+    }
+    
+    .image-text-content::after {
+      width: 100%;
+    }
+    
+    .image-text-item:last-child .image-text-content::after {
+      display: none;
+    }
+    
+    .image-text-list {
+      max-width: 100%;
+      grid-gap: 32px;
+      padding: 0 15px;
+    }
+    
+    .image-text-image {
+      width: 100%;
+      margin-bottom: 24px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .image-text-title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: #1C2C58;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    
+    .image-text-rich-content {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    
+    .image-text-rich-content p {
+      margin-bottom: 12px;
+    }
+    
+    .image-text-rich-content ul,
+    .image-text-rich-content ol {
+      margin-bottom: 12px;
+      padding-left: 20px;
+    }
+    
+    .image-text-rich-content li {
+      margin-bottom: 6px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Certificate Description",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Chứng nhận an toàn"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_text",
+      "name": "Image Text Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Add your content here. You can include paragraphs, lists, and links.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Certificate Description",
+      "blocks": [
+        {
+          "type": "image_text"
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "templates": ["*"]
+  }
+}
+{% endschema %}

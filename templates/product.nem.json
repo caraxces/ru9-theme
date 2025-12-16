@@ -87,6 +87,7 @@
           "settings": {
             "title": "Mã ưu đãi :",
             "enable_popup": false,
+            "voucher_image_1": "shopify://shop_images/VOUCHER_15.svg",
             "popup_content_1": "",
             "popup_content_2": "",
             "popup_content_3": "",
@@ -363,7 +364,7 @@
         "text": "<p>Cùng Ru9 khám phá và chọn chiếc nệm riêng cho bạn.</p>",
         "button_1_text": "Test chọn nệm phù hợp",
         "button_2_text": "So sánh các loại nệm",
-        "button_2_link": "shopify://collections/nem",
+        "button_2_link": "https://ru9.vn/collections/nem#CompareProduct",
         "q_1_title": "1. Vóc dáng và Thể trạng của người sử dụng chính?",
         "q_1_a_1_text": "A. Nhẹ cân (< 50kg)",
         "q_1_a_1_subtitle": "(Dáng người nhỏ nhắn, thư sinh)",
