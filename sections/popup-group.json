@@ -136,6 +136,24 @@
     "voucher_popup_CgmKCW": {
       "type": "voucher-popup",
       "blocks": {
+        "voucher_Rz4CKq": {
+          "type": "voucher",
+          "settings": {
+            "code": "RU9NEWYEAR",
+            "title": "VOUCHER 6%",
+            "description": "Giảm 6% cho đơn hàng từ 30 triệu",
+            "expiry_date": "10.01.2026"
+          }
+        },
+        "voucher_yibCVn": {
+          "type": "voucher",
+          "settings": {
+            "code": "RU9XMAS",
+            "title": "VOUCHER 4%",
+            "description": "Giảm 4% cho đơn hàng từ 20 triệu đồng",
+            "expiry_date": "10.01.2026"
+          }
+        },
         "voucher_mUTahx": {
           "type": "voucher",
           "settings": {
@@ -147,6 +165,8 @@
         }
       },
       "block_order": [
+        "voucher_Rz4CKq",
+        "voucher_yibCVn",
         "voucher_mUTahx"
       ],
       "name": "Voucher Popup",

@@ -12,6 +12,34 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "business_price_dgJcNw": {
+          "type": "business_price",
+          "settings": {
+            "enable": true,
+            "text": "<p>Giá hấp dẫn cho Khách hàng Doanh nghiệp/ Đơn vị nội thất/ Cộng tác viên</p>"
+          }
+        },
+        "sales_point_x4prTW": {
+          "type": "sales_point",
+          "settings": {
+            "icon": "gift",
+            "text": "Tặng Eyesmask xông hơi, vỏ gối Cotton Sateen"
+          }
+        },
+        "sales_point_gFPJAw": {
+          "type": "sales_point",
+          "settings": {
+            "icon": "tag",
+            "text": "Nhập mã RU9XMAS giảm thêm 4% cho đơn từ 20 triệu"
+          }
+        },
+        "sales_point_Dpexk8": {
+          "type": "sales_point",
+          "settings": {
+            "icon": "tag",
+            "text": "Nhập mã RU9NEWYEAR giảm thêm 6% cho đơn từ 30 triệu"
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -88,6 +116,10 @@
         }
       },
       "block_order": [
+        "business_price_dgJcNw",
+        "sales_point_x4prTW",
+        "sales_point_gFPJAw",
+        "sales_point_Dpexk8",
         "variant_picker",
         "custom_JtBXGV",
         "promotion_V4mkaE",

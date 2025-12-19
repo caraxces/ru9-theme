@@ -1,0 +1,92 @@
+<!-- PAGEFLY CART HELPER - DO NOT DELETE -->
+<script>
+  try {
+    setTimeout(function () {
+
+      if (!window.__pagefly_helper_store__) return;
+
+      window.__pagefly_helper_store__.subscribe(function (res) {
+
+        theme.cart.getCartProductMarkup().then(function (html) {
+
+          var selectors = {
+            products: '[data-products]',
+            qtySelector: '.js-qty__wrapper',
+            subTotal: '[data-subtotal]'
+          };
+
+          var markup = theme.CartForm.prototype._parseProductHTML(html);
+          var items = markup.items;
+          var count = parseInt(items.dataset.count, 10);
+          var subtotal = items.dataset.cartSubtotal;
+          var savings = items.dataset.cartSavings;
+
+          var wrapper = document.getElementById('CartDrawerForm');
+          if (!wrapper) return;
+
+          var products = wrapper.querySelector(selectors.products);
+          var subtotals = wrapper.querySelector(selectors.subTotal);
+
+          // ===== UPDATE DISCOUNTS & SAVINGS =====
+          theme.CartForm.prototype.updateCartDiscounts(markup.discounts);
+          theme.CartForm.prototype.updateSavings(savings);
+
+          // ===== EMPTY STATE =====
+          if (count > 0) {
+            wrapper.parentNode.classList.remove('is-empty');
+          } else {
+            wrapper.parentNode.classList.add('is-empty');
+          }
+
+          // ===== UPDATE CART COUNT =====
+          theme.CartForm.prototype.updateCount(count);
+
+          // ===== UPDATE PRODUCTS HTML =====
+          products.innerHTML = '';
+          products.appendChild(items);
+
+          // ===== UPDATE SUBTOTAL =====
+          subtotals.innerHTML = theme.Currency.formatMoney(
+            subtotal,
+            theme.settings.moneyFormat
+          );
+
+          // ===== RE-INIT QTY SELECTOR =====
+          wrapper.querySelectorAll(selectors.qtySelector).forEach(function (el) {
+            new theme.QtySelector(el, {
+              namespace: '.cart-' + wrapper.dataset.location,
+              isCart: true
+            });
+          });
+
+          // ===== REFRESH AOS =====
+          if (window.AOS) {
+            AOS.refreshHard();
+          }
+
+          // ==================================================
+          // 🔥 OPEN CART DRAWER (NO CLICK - NO REDIRECT)
+          // ==================================================
+
+          // 1. Dispatch theme event (safe, no redirect)
+          document.dispatchEvent(
+            new CustomEvent('cart:open', { bubbles: true })
+          );
+
+          // 2. Force open drawer by class (fallback)
+          var drawer = document.querySelector('#CartDrawer');
+          if (drawer) {
+            drawer.classList.add('is-open');
+            document.body.classList.add('cart-drawer-open');
+          }
+
+        });
+
+      });
+
+    }, 2500);
+
+  } catch (e) {
+    console.warn(e);
+  }
+</script>

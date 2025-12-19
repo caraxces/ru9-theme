@@ -64,7 +64,7 @@
           "type": "showroom",
           "settings": {
             "city": "Hà Nội",
-            "image": "shopify://shop_images/Slide3.jpg",
+            "image": "shopify://shop_images/HN.svg",
             "name": "Flagship Showroom Ru9 Cầu Giấy",
             "address": "228 Đ. Cầu Giấy, Quan Hoa, Cầu Giấy, Hà Nội",
             "address_url": "https://maps.app.goo.gl/2Yx2gVWVrqnN21Nw5",
@@ -77,7 +77,7 @@
           "type": "showroom",
           "settings": {
             "city": "TP Hồ Chí Minh",
-            "image": "shopify://shop_images/Slide1.jpg",
+            "image": "shopify://shop_images/HBT.svg",
             "name": "Flagship Showroom Ru9 Hai Bà Trưng",
             "address": "283A Hai Bà Trưng, Phường 8, Quận 3, TP. Hồ Chí Minh",
             "address_url": "https://www.google.com/maps/place/Ru9+-+The+Sleep+Company/@10.7882904,106.6891126,17z/data=!3m1!4b1!4m5!3m4!1s0x31752795ed4b09a3:0x1e7ee98350bfabc1!8m2!3d10.7882851!4d106.6913013",
@@ -90,7 +90,7 @@
           "type": "showroom",
           "settings": {
             "city": "TP Hồ Chí Minh",
-            "image": "shopify://shop_images/Slide2.jpg",
+            "image": "shopify://shop_images/SL.svg",
             "name": "Showroom Ru9 Sala",
             "address": "Shop 09, B2 Sarimi, KĐT Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông, Quận 2, TP. Hồ Chí Minh",
             "address_url": "https://maps.app.goo.gl/8HWWbx6JspgUtmXX8",

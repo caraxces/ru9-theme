@@ -25,8 +25,8 @@
             "link_text_2": "",
             "color_accent": "#000000",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Christmas_Website_Banner.png",
-            "image_mobile": "shopify://shop_images/Christmas_Website_Banner_mobile.png",
+            "image": "shopify://shop_images/promo_xmas_PC_Nhan_doi_qua_t_ng.png",
+            "image_mobile": "shopify://shop_images/promo_xmas_MB_NHAN_DOI_QUA_T_NG.png",
             "overlay_opacity": 0
           }
         },
@@ -147,6 +147,32 @@
         "button_text": "Xem chi tiết",
         "button_link": "https://ru9.vn/pages/about"
       }
+    },
+    "1765954498362192f4": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_e973686_LWnKNF": {
+          "type": "ai_gen_block_e973686",
+          "settings": {
+            "text": "Premium Sleep",
+            "text_size": 100,
+            "text_alignment": "center",
+            "fill_image": "shopify://shop_images/11e25c93436b83df7a4d5c21a18f42d923b23e3e9.png",
+            "image_position": "center",
+            "placeholder_color": "#1c2c58",
+            "background_color": "#ffffff",
+            "padding_vertical": 40,
+            "padding_horizontal": 20,
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_e973686_LWnKNF"
+      ],
+      "disabled": true,
+      "settings": {}
     },
     "collections_listing_cAa8Dw": {
       "type": "collections-listing",
@@ -879,6 +905,7 @@
   "order": [
     "slideshow",
     "content_banner_cta_UzRzpc",
+    "1765954498362192f4",
     "collections_listing_cAa8Dw",
     "featured_collections_6qfWNA",
     "image_marquee_hcRmaa",

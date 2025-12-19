@@ -71,7 +71,13 @@
     </div>
 
 </showroom-section>
-<img class="showroom-bg" src="{{'location_footer.svg' | asset_url }}" loading="lazy"  alt="location"/>
+{% if section.settings.show_background_image %}
+  {% if section.settings.background_image %}
+    <img class="showroom-bg" src="{{ section.settings.background_image | img_url: 'master' }}" loading="lazy" alt="{{ section.settings.background_image.alt | escape }}"/>
+  {% else %}
+    <img class="showroom-bg" src="{{'location_footer.svg' | asset_url }}" loading="lazy"  alt="location"/>
+  {% endif %}
+{% endif %}
 </div></div>
 <style>
 .showroom-section{
@@ -414,6 +420,22 @@
 				"type": "text",
 				"id": "title",
 				"label": "Title"
+			},
+			{
+				"type": "header",
+				"content": "Background Image"
+			},
+			{
+				"type": "checkbox",
+				"id": "show_background_image",
+				"label": "Show background image",
+				"default": false
+			},
+			{
+				"type": "image_picker",
+				"id": "background_image",
+				"label": "Background image",
+				"info": "Leave empty to use default location_footer.svg"
 			}
 		],
 		"blocks": [
