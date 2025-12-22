@@ -22,24 +22,22 @@
             "mobile_logo_width": 34
           }
         },
+        "menu_banner_DhfEV4": {
+          "type": "menu_banner",
+          "settings": {
+            "position": "",
+            "title": "",
+            "image": "shopify://shop_images/promo_xmas_PC_Nhan_doi_qua_t_ng_fbc107f8-d8cb-4952-8493-ec50a38ec380.png",
+            "url": ""
+          }
+        },
         "menu_banner_ccB7ty": {
           "type": "menu_banner",
-          "disabled": true,
           "settings": {
             "position": "1",
             "title": "",
-            "image": "shopify://shop_images/20250603-095812.jpg",
+            "image": "shopify://shop_images/promo_xmas_PC_Nhan_doi_qua_t_ng_fbc107f8-d8cb-4952-8493-ec50a38ec380.png",
             "url": "shopify://collections/nem"
-          }
-        },
-        "menu_banner_iAfXFR": {
-          "type": "menu_banner",
-          "disabled": true,
-          "settings": {
-            "position": "2",
-            "title": "",
-            "image": "shopify://shop_images/20250603-095812.jpg",
-            "url": "shopify://collections/goi"
           }
         },
         "header_promotion_qJKrFa": {
@@ -106,8 +104,8 @@
       },
       "block_order": [
         "header-0",
+        "menu_banner_DhfEV4",
         "menu_banner_ccB7ty",
-        "menu_banner_iAfXFR",
         "header_promotion_qJKrFa",
         "header_promotion_zUwk3k",
         "header_promotion_bYFjVi",

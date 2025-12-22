@@ -1,0 +1,119 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-origin__content {
+  display: grid;
+  grid-template-columns: 762px 1fr;
+  gap: var(--gutter-desktop);
+  align-items: start;
+}
+
+.about-origin__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  line-height: var(--line-height-tight);
+}
+
+.about-origin__description {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  text-align: justify;
+}
+
+.about-origin__description p {
+  margin-bottom: var(--space-md);
+}
+
+.about-origin__description strong {
+  font-weight: var(--font-weight-bold);
+}
+
+.about-origin__image {
+  width: 100%;
+  max-width: 760px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.about-origin__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 749px) {
+  .about-origin__content {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-origin__title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .about-origin__description {
+    font-size: var(--font-size-sm);
+  }
+}
+</style>
+
+<section class="about-section about-origin page-width">
+  <div class="about-origin__content">
+    <div class="about-origin__text">
+      {%- if section.settings.title != blank -%}
+        <h2 class="about-origin__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="about-origin__description">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="about-origin__image">
+      {%- if section.settings.image -%}
+        <img 
+          src="{{ section.settings.image | img_url: '1520x900' }}" 
+          alt="{{ section.settings.image.alt | default: section.settings.title }}"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About3 - Origin",
+  "tag": "section",
+  "class": "about3-origin-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Khởi nguồn từ giấc ngủ chưa trọn vẹn"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Ai trong chúng ta cũng từng trải qua những đêm trằn trọc. Ngủ đủ 8 tiếng, nhưng sáng dậy cơ thể vẫn nặng nề, tinh thần uể oải. Khi giấc ngủ không còn là lúc phục hồi, câu hỏi bắt đầu xuất hiện: <strong>vấn đề nằm ở đâu?</strong></p><p>Từ những trải nghiệm rất thật ấy, chúng tôi bắt đầu hành trình nghiên cứu về giấc ngủ và nhận ra rằng, thời lượng chỉ là một phần — <strong>chất lượng giấc ngủ mới là yếu tố quyết định sức khỏe lâu dài.</strong></p><p>Ru9 ra đời từ chính trăn trở đó, với sản phẩm Nệm Foam - tiên phong về công nghệ tại Việt Nam.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Recommended size: 760x450px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About3 - Origin"
+    }
+  ]
+}
+{% endschema %}
+

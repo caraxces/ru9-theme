@@ -1,0 +1,217 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-certifications__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xl);
+  line-height: var(--line-height-tight);
+}
+
+.about-certifications__content {
+  display: grid;
+  grid-template-columns: 659px 1fr;
+  gap: var(--gutter-desktop);
+  align-items: start;
+}
+
+.about-certifications__text {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  text-align: justify;
+}
+
+.about-certifications__text p {
+  margin-bottom: var(--space-md);
+}
+
+.about-certifications__text strong {
+  font-weight: var(--font-weight-bold);
+}
+
+.about-certifications__button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--color-deep);
+  color: white;
+  border-radius: 100px;
+  text-decoration: none;
+  font-size: var(--font-size-xl);
+  margin-top: var(--space-md);
+  transition: opacity 0.3s;
+}
+
+.about-certifications__button:hover {
+  opacity: 0.9;
+}
+
+.about-certifications__images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gutter-desktop);
+}
+
+.about-certifications__image-item {
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.about-certifications__image-placeholder {
+  width: 100%;
+  height: 312px;
+  background: var(--color-background-light);
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+.about-certifications__image-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+.about-certifications__image-label {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 749px) {
+  .about-certifications__content {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-certifications__title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .about-certifications__text {
+    font-size: var(--font-size-sm);
+  }
+  
+  .about-certifications__images {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<section class="about-section about-certifications page-width">
+  {%- if section.settings.title != blank -%}
+    <h2 class="about-certifications__title">{{ section.settings.title }}</h2>
+  {%- endif -%}
+  <div class="about-certifications__content">
+    <div class="about-certifications__text">
+      {%- if section.settings.text != blank -%}
+        {{ section.settings.text }}
+      {%- endif -%}
+      {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+        <a href="{{ section.settings.button_url }}" class="about-certifications__button" {% if section.settings.button_new_tab %}target="_blank"{% endif %}>
+          {{ section.settings.button_text }}
+        </a>
+      {%- endif -%}
+    </div>
+    <div class="about-certifications__images">
+      {%- for block in section.blocks -%}
+        <div class="about-certifications__image-item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image -%}
+            <img 
+              src="{{ block.settings.image | img_url: '800x624' }}" 
+              alt="{{ block.settings.image.alt | default: block.settings.label }}"
+              loading="lazy"
+            >
+          {%- else -%}
+            <div class="about-certifications__image-placeholder"></div>
+          {%- endif -%}
+          {%- if block.settings.label != blank -%}
+            <p class="about-certifications__image-label">{{ block.settings.label }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About9 - Certifications",
+  "tag": "section",
+  "class": "about9-certifications-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Chất lượng sản phẩm vượt trội"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Ru9 tự hào là <strong>thương hiệu tiên phong tại Việt Nam đạt chứng nhận CertiPUR-US® cho foam nệm</strong>, khẳng định độ an toàn, thân thiện với môi trường và tuân thủ các tiêu chuẩn khắt khe về thành phần, quy trình sản xuất và khí thải.</p><p>Ru9 sử dụng vải đạt <strong>STANDARD 100 by OEKO-TEX®</strong>, bảo đảm không chứa chất độc hại, an toàn cho sức khỏe và thân thiện với môi trường.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Xem chi tiết"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_new_tab",
+      "label": "Open in New Tab",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "certification",
+      "name": "Certification",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Certification Image",
+          "info": "Recommended size: 400x312px"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "CertiPUR-US®"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About9 - Certifications",
+      "blocks": [
+        {
+          "type": "certification",
+          "settings": {
+            "label": "CertiPUR-US®"
+          }
+        },
+        {
+          "type": "certification",
+          "settings": {
+            "label": "OEKO-TEX®"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

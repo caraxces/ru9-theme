@@ -1,0 +1,592 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_XKY6Pb": {
+      "type": "slideshow",
+      "blocks": {
+        "image_kaJk7g": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "https://rubaby.vn",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "{{ collection.metafields.custom.banner_desktop.value }}",
+            "image_mobile": "{{ collection.metafields.custom.banner_mobile.value }}",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_kaJk7g"
+      ],
+      "settings": {
+        "section_height": "natural",
+        "mobile_height": "500px",
+        "style": "dots",
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "lazyload_images": true,
+        "show_icon_text_bar": true,
+        "icon_bar_background_color": "#fffbeb",
+        "icon_1_title": "100 đêm ngủ thử",
+        "icon_1_type": "sleep",
+        "icon_1_color": "#007bff",
+        "icon_1_image": "shopify://shop_images/Layer_1_3.svg",
+        "icon_2_title": "Miễn phí vận chuyển",
+        "icon_2_type": "payment",
+        "icon_2_color": "#007bff",
+        "icon_2_image": "shopify://shop_images/Layer_1_4.svg",
+        "icon_3_title": "Thanh toán linh hoạt/Trả góp không lãi suất",
+        "icon_3_type": "shipping",
+        "icon_3_color": "#007bff",
+        "icon_3_image": "shopify://shop_images/Layer_1_6.svg"
+      }
+    },
+    "collection-header": {
+      "type": "collection-header",
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1280,
+        "max_width_desc": 2000,
+        "align_text": "left",
+        "enable": true,
+        "collection_image_enable": false,
+        "show_collection_description": false,
+        "show_header": false,
+        "custom_header_text": "",
+        "show_breadcrumb": true,
+        "custom_breadcrumb_text": "Holiday Shop"
+      }
+    },
+    "combo_best_selling_Yf3WTR": {
+      "type": "combo-best-selling",
+      "blocks": {
+        "product_item_jGHKzL": {
+          "type": "product_item",
+          "settings": {
+            "product": "foam-nest",
+            "product_label": "",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_Jex63z": {
+          "type": "product_item",
+          "settings": {
+            "product": "foam-original",
+            "product_label": "",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_JCFU7B": {
+          "type": "product_item",
+          "settings": {
+            "product": "nem-original-pro",
+            "product_label": "Best seller",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_VWVarD": {
+          "type": "product_item",
+          "settings": {
+            "product": "nem-hybrid",
+            "product_label": "Best seller",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        }
+      },
+      "block_order": [
+        "product_item_jGHKzL",
+        "product_item_Jex63z",
+        "product_item_JCFU7B",
+        "product_item_VWVarD"
+      ],
+      "name": "Nệm",
+      "settings": {
+        "title": "Nệm",
+        "description": "Combo sản phẩm được yêu thích nhất",
+        "primary_color": "#1c2c58",
+        "text_color": "#1a1a1a",
+        "description_color": "#666666",
+        "image_padding": "0px",
+        "image_inner_padding": "0px",
+        "mobile_image_padding": "0px"
+      }
+    },
+    "combo_best_selling_Gna9nz": {
+      "type": "combo-best-selling",
+      "blocks": {
+        "product_item_MQWxLC": {
+          "type": "product_item",
+          "settings": {
+            "product": "goi-foam-niu",
+            "product_label": "",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_N3cNXL": {
+          "type": "product_item",
+          "settings": {
+            "product": "goi-may",
+            "product_label": "",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_9rnTig": {
+          "type": "product_item",
+          "settings": {
+            "product": "goi-om",
+            "product_label": "Best seller",
+            "product_description": "Một lựa chọn tối ưu cho giấc ngủ sâu, giảm đau lưng và nâng tầm không gian phòng ngủ.",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        }
+      },
+      "block_order": [
+        "product_item_MQWxLC",
+        "product_item_N3cNXL",
+        "product_item_9rnTig"
+      ],
+      "name": "Gối",
+      "settings": {
+        "title": "Gối",
+        "description": "Combo sản phẩm được yêu thích nhất",
+        "primary_color": "#1c2c58",
+        "text_color": "#1a1a1a",
+        "description_color": "#666666",
+        "image_padding": "0px",
+        "image_inner_padding": "0px",
+        "mobile_image_padding": "0px"
+      }
+    },
+    "main_collection_custom_xrVmzf": {
+      "type": "main-collection-custom",
+      "disabled": true,
+      "name": "Coll custom",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "enable_sidebar": true,
+        "collapsed": false,
+        "filter_style": "sidebar",
+        "enable_color_swatches": true,
+        "enable_swatch_labels": true,
+        "enable_sort": true,
+        "enable_collection_count": true,
+        "per_row": 3,
+        "rows_per_page": 4,
+        "default_sold_count": 0
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1280,
+        "enable_sidebar": true,
+        "collapsed": false,
+        "filter_style": "sidebar",
+        "enable_color_swatches": true,
+        "enable_swatch_labels": true,
+        "enable_sort": true,
+        "enable_collection_count": false,
+        "per_row": 3,
+        "rows_per_page": 2,
+        "default_sold_count": 0
+      }
+    },
+    "combo_bedroom_L4nDdn": {
+      "type": "combo-bedroom",
+      "blocks": {
+        "product_item_zqKfDk": {
+          "type": "product_item",
+          "settings": {
+            "product": "goi-foam-niu",
+            "product_label": "Best seller",
+            "bundle_items": "Phiên bản nâng cấp của chiếc gối được yêu thích nhất",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_NXJCwY": {
+          "type": "product_item",
+          "settings": {
+            "product": "goi-may",
+            "product_label": "",
+            "bundle_items": "",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_CFX6Mw": {
+          "type": "product_item",
+          "settings": {
+            "product": "goi-om",
+            "product_label": "",
+            "bundle_items": "",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        }
+      },
+      "block_order": [
+        "product_item_zqKfDk",
+        "product_item_NXJCwY",
+        "product_item_CFX6Mw"
+      ],
+      "disabled": true,
+      "name": "bundle",
+      "settings": {
+        "title": "Gối",
+        "description": "",
+        "primary_color": "#1c2c58",
+        "text_color": "#1a1a1a",
+        "description_color": "#666666",
+        "show_desktop_view_all": false,
+        "desktop_view_all_text": "Xem tất cả",
+        "desktop_view_all_url": "",
+        "show_mobile_view_all": false,
+        "mobile_view_all_text": "Xem tất cả",
+        "mobile_view_all_url": ""
+      }
+    },
+    "slideshow_fhCaUN": {
+      "type": "slideshow",
+      "blocks": {
+        "image_m8f9MV": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "https://rubaby.vn",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/d7053e4eaf5d964eaae5c70bb6d1aa3660a4bde2.png",
+            "image_mobile": "shopify://shop_images/8d5a5df3371ec4f8dec85780351108fbe8dd982c.png",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_m8f9MV"
+      ],
+      "settings": {
+        "section_height": "natural",
+        "mobile_height": "500px",
+        "style": "dots",
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "lazyload_images": true,
+        "show_icon_text_bar": false,
+        "icon_bar_background_color": "#fffbeb",
+        "icon_1_title": "100 đêm ngủ thử",
+        "icon_1_type": "sleep",
+        "icon_1_color": "#007bff",
+        "icon_1_image": "shopify://shop_images/Layer_1_1.svg",
+        "icon_2_title": "Miễn phí vận chuyển",
+        "icon_2_type": "payment",
+        "icon_2_color": "#007bff",
+        "icon_2_image": "shopify://shop_images/Layer_1.svg",
+        "icon_3_title": "Thanh toán linh hoạt/Trả góp không lãi suất",
+        "icon_3_type": "shipping",
+        "icon_3_color": "#007bff",
+        "icon_3_image": "shopify://shop_images/Layer_1_2.svg"
+      }
+    },
+    "combo_bedroom_EzYK9d": {
+      "type": "combo-bedroom",
+      "blocks": {
+        "product_item_fH8Cab": {
+          "type": "product_item",
+          "settings": {
+            "product": "combo-ga-giuong-cotton",
+            "product_label": "",
+            "bundle_items": "<br>- Ga giường Cotton Sateen<br>- Vỏ Gối Cotton Sateen <br>- Vỏ chăn Cotton Sateen",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        },
+        "product_item_p3eHLE": {
+          "type": "product_item",
+          "settings": {
+            "product": "combo-ga-giuonng-tencel",
+            "product_label": "",
+            "bundle_items": "<br>- Ga giường Tencel<br>- Vỏ Gối Tencel <br>- Vỏ chăn Tencel",
+            "label_color": "#ffffff",
+            "label_bg": "#609ee9"
+          }
+        }
+      },
+      "block_order": [
+        "product_item_fH8Cab",
+        "product_item_p3eHLE"
+      ],
+      "name": "Combo Phòng Ngủ",
+      "settings": {
+        "title": "Combo ga giường",
+        "description": "",
+        "primary_color": "#1c2c58",
+        "text_color": "#1a1a1a",
+        "description_color": "#666666",
+        "show_desktop_view_all": false,
+        "desktop_view_all_text": "Xem tất cả",
+        "desktop_view_all_url": "",
+        "show_mobile_view_all": false,
+        "mobile_view_all_text": "Xem tất cả",
+        "mobile_view_all_url": ""
+      }
+    },
+    "collection-content": {
+      "type": "collection-content",
+      "disabled": true,
+      "settings": {
+        "section_width": "customize_width",
+        "customize_width": 1280,
+        "max_width_desc": 2000,
+        "align_text": "left",
+        "show_collection_description": true
+      }
+    },
+    "reviews_carousel_mFiBjM": {
+      "type": "reviews-carousel",
+      "blocks": {
+        "review_pb3APk": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Original] Trà Thơm.mp4",
+            "product_name": "Nệm Original",
+            "product_link": "shopify://products/foam-original"
+          }
+        },
+        "review_VCEXqR": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Nest] - Review Bỉm Sữa.mp4",
+            "product_name": "Nệm Nest",
+            "product_link": "shopify://products/foam-nest"
+          }
+        },
+        "review_46JnNL": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Niu] - Lam Hương.mp4",
+            "product_name": "Gối Niu",
+            "product_link": "shopify://products/goi-foam-niu"
+          }
+        },
+        "review_GftQqY": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Foam Topper] - Phương Nguyễn.mp4",
+            "product_name": "Nệm Foam Topper",
+            "product_link": "shopify://products/nem-cuon-foam-topper"
+          }
+        },
+        "review_arCD8C": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Mate] - Revu.mp4",
+            "product_name": "Topper Mate",
+            "product_link": "shopify://products/nem-gap-topper-mate"
+          }
+        },
+        "review_h8GfwM": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Mate] - Revu 2.mp4",
+            "product_name": "Topper Mate",
+            "product_link": "shopify://products/nem-gap-topper-mate"
+          }
+        },
+        "review_i3th7n": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Gối cổ giảm âm] - Hiếu Mario.mp4",
+            "product_name": "Gối cổ giảm âm",
+            "product_link": "shopify://products/goi-co-giam-am"
+          }
+        }
+      },
+      "block_order": [
+        "review_pb3APk",
+        "review_VCEXqR",
+        "review_46JnNL",
+        "review_GftQqY",
+        "review_arCD8C",
+        "review_h8GfwM",
+        "review_i3th7n"
+      ],
+      "name": "Reviews carousel",
+      "settings": {
+        "heading": "<p>Hơn <strong>50,000 </strong>khách hàng<br/>và <strong>30,000 </strong>đánh giá toàn quốc</p>"
+      }
+    },
+    "super_service_prmmGy": {
+      "type": "super-service",
+      "blocks": {
+        "service_item_VkkMW3": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_3.svg",
+            "item_title": "100 đêm ngủ thử",
+            "item_note": "",
+            "item_description": "<p>Trải nghiệm sản phẩm ngay tại nhà với cam kết đổi trả linh hoạt.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_gnyMfa": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_4.svg",
+            "item_title": "Miễn phí vận chuyển",
+            "item_note": "(từ 1.500.000vnd)",
+            "item_description": "<p>Chỉ cần chọn sản phẩm bạn yêu thích, việc giao hàng tận nơi để Ru9 lo.<br/></p>",
+            "item_link": ""
+          }
+        },
+        "service_item_9CXTBR": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_5.svg",
+            "item_title": "Bảo hành dài lâu",
+            "item_note": "",
+            "item_description": "<p>Mỗi chiếc nệm được bảo hành lâu dài để bạn yên tâm sử dụng suốt nhiều năm.</p>",
+            "item_link": ""
+          }
+        },
+        "service_item_etJgdn": {
+          "type": "service_item",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_6.svg",
+            "item_title": "Thanh toán linh hoạt",
+            "item_note": "",
+            "item_description": "<p>Hỗ trợ đa dạng phương thức thanh toán để việc chăm sóc giấc ngủ trở nên thật đơn giản.</p>",
+            "item_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "service_item_VkkMW3",
+        "service_item_gnyMfa",
+        "service_item_9CXTBR",
+        "service_item_etJgdn"
+      ],
+      "name": "Super Service",
+      "settings": {
+        "title": "An tâm hơn với dịch vụ vượt trội",
+        "background_color": "#f5f9ff"
+      }
+    },
+    "collections_listing_jRVgyj": {
+      "type": "collections-listing",
+      "blocks": {
+        "collection_NYndDT": {
+          "type": "collection",
+          "settings": {
+            "collection": "nem",
+            "custom_image": "shopify://shop_images/PRO_dac6eb92-a8f8-45e6-9735-599312527463.jpg",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_8VggX9": {
+          "type": "collection",
+          "settings": {
+            "collection": "goi",
+            "custom_image": "shopify://shop_images/G_I_NIU_e0cce619-9aaa-4f63-b789-07e66004a6e6.jpg",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        },
+        "collection_KMFTnL": {
+          "type": "collection",
+          "settings": {
+            "collection": "bedding",
+            "custom_image": "shopify://shop_images/BEDDING_1.jpg",
+            "custom_title": "Bộ Ga Giường",
+            "custom_link": ""
+          }
+        },
+        "collection_Nkh6hi": {
+          "type": "collection",
+          "settings": {
+            "collection": "bundle",
+            "custom_image": "shopify://shop_images/bundle.jpg",
+            "custom_title": "Combo Tiết Kiệm",
+            "custom_link": ""
+          }
+        },
+        "collection_wFjyRp": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "4the",
+            "custom_title": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_NYndDT",
+        "collection_8VggX9",
+        "collection_KMFTnL",
+        "collection_Nkh6hi",
+        "collection_wFjyRp"
+      ],
+      "name": "Collections Listing",
+      "settings": {
+        "title": "Có thể bạn cũng thích",
+        "title_color": "#1c2c58",
+        "text_color": "#212121"
+      }
+    }
+  },
+  "order": [
+    "slideshow_XKY6Pb",
+    "collection-header",
+    "combo_best_selling_Yf3WTR",
+    "combo_best_selling_Gna9nz",
+    "main_collection_custom_xrVmzf",
+    "main-collection",
+    "combo_bedroom_L4nDdn",
+    "slideshow_fhCaUN",
+    "combo_bedroom_EzYK9d",
+    "collection-content",
+    "reviews_carousel_mFiBjM",
+    "super_service_prmmGy",
+    "collections_listing_jRVgyj"
+  ]
+}

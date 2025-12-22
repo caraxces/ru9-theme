@@ -1,0 +1,89 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-team__content {
+  display: grid;
+  grid-template-columns: 759px 1fr;
+  gap: var(--gutter-desktop);
+  align-items: start;
+}
+
+.about-team__image {
+  width: 100%;
+  max-width: 759px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-background-light);
+}
+
+.about-team__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.about-team__text {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  text-align: justify;
+}
+
+@media (max-width: 749px) {
+  .about-team__content {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-team__text {
+    font-size: var(--font-size-sm);
+  }
+}
+</style>
+
+<section class="about-section about-team page-width">
+  <div class="about-team__content">
+    <div class="about-team__image">
+      {%- if section.settings.image -%}
+        <img 
+          src="{{ section.settings.image | img_url: '1518x932' }}" 
+          alt="{{ section.settings.image.alt | default: 'About Ru9 Team' }}"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </div>
+    <div class="about-team__text">
+      {%- if section.settings.text != blank -%}
+        {{ section.settings.text }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About5 - Team",
+  "tag": "section",
+  "class": "about5-team-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Team Image",
+      "info": "Recommended size: 759x466px"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Team Text",
+      "default": "<p>Ru9 được xây dựng không chỉ từ mong muốn mang đến giấc ngủ trọn vẹn, mà còn từ tâm huyết của mỗi thành viên trong đại gia đình Ru9. Từ đội ngũ nghiên cứu – thiết kế, sản xuất đến các bạn showroom trực tiếp đồng hành cùng khách hàng, tất cả đều góp sức trong quy trình khép kín, minh bạch, không qua trung gian, giúp khách hàng có những trải nghiệm trọn vẹn nhất.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About5 - Team"
+    }
+  ]
+}
+{% endschema %}
+

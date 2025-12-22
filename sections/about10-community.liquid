@@ -1,0 +1,207 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-community__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  line-height: var(--line-height-tight);
+}
+
+.about-community__intro {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  text-align: justify;
+  margin-bottom: var(--space-4xl);
+}
+
+.about-community__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter-desktop);
+}
+
+.about-community__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-community__card-image {
+  width: 100%;
+  height: 385px;
+  background: var(--color-background-light);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-md);
+  overflow: hidden;
+}
+
+.about-community__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-community__card-text {
+  font-size: var(--font-size-xl);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  text-align: justify;
+  margin-bottom: var(--space-md);
+  flex-grow: 1;
+}
+
+.about-community__card-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--color-deep);
+  color: white;
+  border-radius: 100px;
+  text-decoration: none;
+  font-size: var(--font-size-xl);
+  text-align: center;
+  transition: opacity 0.3s;
+  align-self: flex-start;
+}
+
+.about-community__card-button:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 749px) {
+  .about-community__title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .about-community__intro {
+    font-size: var(--font-size-sm);
+  }
+  
+  .about-community__grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<section class="about-section about-community page-width">
+  {%- if section.settings.title != blank -%}
+    <h2 class="about-community__title">{{ section.settings.title }}</h2>
+  {%- endif -%}
+  {%- if section.settings.intro_text != blank -%}
+    <p class="about-community__intro">{{ section.settings.intro_text }}</p>
+  {%- endif -%}
+  <div class="about-community__grid">
+    {%- for block in section.blocks -%}
+      <div class="about-community__card" {{ block.shopify_attributes }}>
+        <div class="about-community__card-image">
+          {%- if block.settings.image -%}
+            <img 
+              src="{{ block.settings.image | img_url: '1010x770' }}" 
+              alt="{{ block.settings.image.alt | default: block.settings.title }}"
+              loading="lazy"
+            >
+          {%- endif -%}
+        </div>
+        {%- if block.settings.text != blank -%}
+          <p class="about-community__card-text">{{ block.settings.text }}</p>
+        {%- endif -%}
+        {%- if block.settings.button_text != blank and block.settings.button_url != blank -%}
+          <a href="{{ block.settings.button_url }}" class="about-community__card-button" {% if block.settings.button_new_tab %}target="_blank"{% endif %}>
+            {{ block.settings.button_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About10 - Community",
+  "tag": "section",
+  "class": "about10-community-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Ru9 chung tay cùng cộng đồng"
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Introduction Text",
+      "default": "Ru9 tin rằng giấc ngủ chất lượng là nền tảng cho một cuộc sống tốt đẹp hơn, và trách nhiệm đó không chỉ nằm trong từng sản phẩm. Trên hành trình nâng cao chất lượng giấc ngủ cho người Việt, Ru9 luôn chủ động đồng hành cùng cộng đồng thông qua nhiều hoạt động ý nghĩa."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "community_card",
+      "name": "Community Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended size: 505x385px"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Card Text",
+          "default": "Ru9 trao tặng 1500 nệm cho các bác sĩ và tình nguyện viên trong giai đoạn đại dịch Covid 19"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Xem chi tiết"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_new_tab",
+          "label": "Open in New Tab",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About10 - Community",
+      "blocks": [
+        {
+          "type": "community_card",
+          "settings": {
+            "text": "Ru9 trao tặng 1500 nệm cho các bác sĩ và tình nguyện viên trong giai đoạn đại dịch Covid 19",
+            "button_url": "https://vietnamnet.vn/1500-nem-ru9-tang-benh-vien-khu-cach-ly-chong-dich-covid-19-638690.html"
+          }
+        },
+        {
+          "type": "community_card",
+          "settings": {
+            "text": "Ru9 với chiến dịch \"Cảm ơn Shippers\" - tặng nệm foam và yên xe mới cho các Shipper",
+            "button_url": "https://vnexpress.net/nhung-y-tuong-thien-nguyen-cua-doanh-nghiep-khoi-nghiep-ru9-4412981.html"
+          }
+        },
+        {
+          "type": "community_card",
+          "settings": {
+            "text": "Ru9 trao tặng 100 triệu đồng cùng 100 nệm cuộn cho bà miền Trung chịu ảnh hưởng của bão lũ"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

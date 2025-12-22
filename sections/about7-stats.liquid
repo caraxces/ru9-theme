@@ -1,0 +1,123 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-stats {
+  background: var(--color-background-light);
+  padding: var(--space-4xl) 0;
+}
+
+.about-stats__container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter-desktop);
+  text-align: center;
+}
+
+.about-stats__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-stats__number {
+  font-size: var(--font-size-6xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-light);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-md);
+}
+
+.about-stats__label {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-relaxed);
+}
+
+@media (max-width: 749px) {
+  .about-stats__container {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+  
+  .about-stats__number {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .about-stats__label {
+    font-size: var(--font-size-sm);
+  }
+}
+</style>
+
+<section class="about-section about-stats page-width">
+  <div class="about-stats__container">
+    {%- for block in section.blocks -%}
+      <div class="about-stats__item" {{ block.shopify_attributes }}>
+        {%- if block.settings.number != blank -%}
+          <div class="about-stats__number">{{ block.settings.number }}</div>
+        {%- endif -%}
+        {%- if block.settings.label != blank -%}
+          <div class="about-stats__label">{{ block.settings.label }}</div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About7 - Statistics",
+  "tag": "section",
+  "class": "about7-stats-section",
+  "blocks": [
+    {
+      "type": "stat_item",
+      "name": "Statistic Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "34"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Tỉnh thành"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About7 - Statistics",
+      "blocks": [
+        {
+          "type": "stat_item",
+          "settings": {
+            "number": "34",
+            "label": "Tỉnh thành"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "number": "85,000+",
+            "label": "Giấc ngủ ngon được giao đến tận nhà"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "number": "96,000+",
+            "label": "Khách hàng tin tưởng Ru9"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

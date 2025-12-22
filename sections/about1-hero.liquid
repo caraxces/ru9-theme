@@ -1,0 +1,62 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-hero {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.about-hero__image {
+  width: 100%;
+  height: 602px;
+  overflow: hidden;
+  position: relative;
+}
+
+.about-hero__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 749px) {
+  .about-hero__image {
+    height: 400px;
+  }
+}
+</style>
+
+<section class="about-hero">
+  <div class="about-hero__image">
+    {%- if section.settings.image -%}
+      <img 
+        src="{{ section.settings.image | img_url: '1920x602' }}" 
+        alt="{{ section.settings.image.alt | default: 'About Us Hero' }}"
+        loading="eager"
+      >
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About1 - Hero",
+  "tag": "section",
+  "class": "about1-hero-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Image",
+      "info": "Recommended size: 1920x602px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About1 - Hero"
+    }
+  ]
+}
+{% endschema %}
+

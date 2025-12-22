@@ -1,311 +1,61 @@
+{%- comment -%} Design System CSS is now included in each section {%- endcomment -%}
 <style>
-/* ===============================
-   RU9 ABOUT – COMPREHENSIVE SYSTEM
-   Author: RU9 Theme
-   Notes:
-     - CSS variables for consistent theming
-     - Responsive design with 768px breakpoint
-     - Grid layouts for modern layout structure
-     - Comprehensive About Us page styling
-================================== */
-
-:root{
-  --container: 1594px;
-  --gutter: 24px;
-  --radius: 16px;
-  --shadow: 0 6px 18px rgba(16,38,84,.06);
-  --c-text: #1A2230;
-  --c-muted: #5E6B85;
-  --c-primary: #3D6DFF;
-  --c-border: #E7ECF5;
-  --c-sky: #FAFCFF;
-  --c-cream: #FFF7E8;
-  --c-deep: #0E2B57;
-  --c-badge: #EDF2FF;
-  --c-quote: #A8B6D6;
-  --c-accent: #4A90E2;
-  --c-secondary: #F5F5F5;
-  --lh: 1.6;
+/* Additional template-specific styles if needed */
+.about-ru9 {
+  width: 100%;
+  overflow-x: hidden;
 }
 
-html,body{
-  margin:0; padding:0;
-  font-family: "Be Vietnam Pro", sans-serif;
-  color: var(--c-text);
-  line-height: var(--lh);
-  background:#fff;
-  font-size: 16px;
+.about-new-wrapper {
+  width: 100%;
+  min-height: 100vh;
 }
-
-.about-ru9{
-  width:100%;
-  overflow:hidden;
-}
-
-/* Remove custom canvas overrides - let theme handle canvas layout */
-.container{
-  width: min(var(--container), 100%);
-  margin: 0 auto;
-  /* Let theme handle padding through page-width class */
-}
-
-/* Typography */
-h1,h2,h3,h4{
-  line-height:1.2;
-  margin:0 0 12px 0;
-  letter-spacing: .2px;
-  font-weight: 700;
-}
-h1{ font-size:40px; }
-h2{ font-size:28px; }
-h3{ font-size:20px; }
-h4{ font-size:18px; }
-p{ margin:0 0 12px 0 }
-
-/* Utility Classes */
-.grid{ display:grid; gap:var(--gutter); }
-.grid-2{ grid-template-columns: 1.1fr 0.9fr; }
-.grid-2.swap{ grid-template-columns: 0.9fr 1.1fr; }
-.grid-3{ grid-template-columns: repeat(3,1fr); }
-.lead{ font-size:18px; color:#2a3347; }
-.eyebrow{ 
-  font-size:12px; 
-  font-weight:700; 
-  text-transform:uppercase; 
-  color:var(--c-primary); 
-  letter-spacing:.12em; 
-  margin-bottom:8px; 
-}
-.tag{ 
-  display:inline-block; 
-  padding:8px 12px; 
-  font-size:12px; 
-  background:var(--c-badge); 
-  border-radius:999px; 
-  color:var(--c-deep); 
-  font-weight:600; 
-}
-.muted{ color: #1C2C58 }
-.quote{
-  position:relative; 
-  padding:20px 24px; 
-  background:#F6F8FE; 
-  border-radius:12px; 
-  border:1px solid var(--c-border);
-}
-.quote:before{
-  content:"""; 
-  position:absolute; 
-  left:12px; 
-  top:-8px; 
-  font-size:48px; 
-  color:var(--c-quote); 
-  font-weight:800;
-}
-
-/* Image Styles */
-.img{
-  width:100%;
-  border-radius: var(--radius);
-  background:#EAF0FF;
-  border:1px solid var(--c-border);
-  box-shadow: var(--shadow);
-  overflow:hidden;
-  position:relative;
-}
-.img > span{
-  position:absolute; 
-  inset:auto 12px 10px 12px;
-  font-size:12px; 
-  color:#6B7A99;
-  opacity:.85;
-}
-.img.cover{ background-size:cover; background-position:center; }
-.ratio-16x9{ aspect-ratio:16/9; }
-.ratio-4x3{ aspect-ratio:4/3; }
-.ratio-3x2{ aspect-ratio:3/2; }
-.ratio-1x1{ aspect-ratio:1/1; }
-.ratio-21x9{ aspect-ratio:21/9; }
-
-/* Section Styles */
-section{
-  padding-block: 20px;
-}
-section.sky{ background: linear-gradient(#fff, var(--c-sky)); }
-section.cream{ background: var(--c-cream); }
-section.secondary{ background: var(--c-secondary); }
-section.divider{
-  padding-block: 20px;
-  background:linear-gradient(180deg, #fff 0%, #fff 46%, var(--c-cream) 46%, var(--c-cream) 100%);
-}
-
-.title-wrap{ margin-bottom: 20px; }
-.title-wrap .desc{ max-width:700px; }
-
-.section-title {
-  text-align: center;
-  color: var(--c-text);
-  margin-bottom: var(--gutter);
-}
-
-.section-subtitle {
-  text-align: center;
-  font-size: 18px;
-  color: #1C2C58;
-  margin-bottom: var(--gutter);
-}
-
-.section-intro {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto var(--gutter);
-  color: #1C2C58;
-}
-
-/* Separator */
-.sep{ 
-  height:1px; 
-  background:var(--c-border); 
-  margin:24px 0; 
-}
-
-/* Mobile responsive */
-@media (max-width: 1024px) {
-  .mission-grid,
-  .customers-grid,
-  .testimonials-grid,
-  .showroom-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .promise-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px){
-  :root{ --radius:12px; }
-  h1{ font-size:28px; }
-  h2{ font-size:22px; }
-  h3{ font-size:18px; }
-  section{ padding-block: 36px; }
-  /* Let theme handle container padding */
-}
-
-@media (max-width: 480px) {
-  section{ padding-block: 12px 24px; }
-  /* Let theme handle container padding */
-}
-
-/* Global paragraph font-size override - Highest priority */
-/* Desktop: 20px */
-.about-ru9 p,
-.about-ru9 .rte p,
-.about-ru9 .rte p *,
-.about-ru9 [class*="content"] p,
-.about-ru9 [class*="text"] p,
-.about-ru9 [class*="description"] p,
-.about-ru9 [class*="paragraph"] p,
-.about-ru9 [class*="intro"] p,
-.about-ru9 [class*="story"] p,
-.about-ru9 [class*="card"] p,
-.about-ru9 [class*="item"] p,
-.about-ru9 [class*="banner"] p,
-.about-ru9 [class*="quote"] p {
-  font-size: 20px !important;
-}
-
-/* Exception: ru9-copy should use its own font-size rules */
-.about-ru9 .ru9-copy p,
-.about-ru9 .ru9-copy .intro,
-.about-ru9 .ru9-copy .tagline {
-  font-size: unset !important;
-}
-
-/* Mobile: 14px */
-@media (max-width: 768px) {
-  .about-ru9 p,
-  .about-ru9 .rte p,
-  .about-ru9 .rte p *,
-  .about-ru9 [class*="content"] p,
-  .about-ru9 [class*="text"] p,
-  .about-ru9 [class*="description"] p,
-  .about-ru9 [class*="paragraph"] p,
-  .about-ru9 [class*="intro"] p,
-  .about-ru9 [class*="story"] p,
-  .about-ru9 [class*="card"] p,
-  .about-ru9 [class*="item"] p,
-  .about-ru9 [class*="banner"] p,
-  .about-ru9 [class*="quote"] p {
-    font-size: 14px !important;
-  }
-  
-  /* Exception: ru9-copy should use its own font-size rules on mobile */
-  .about-ru9 .ru9-copy p,
-  .about-ru9 .ru9-copy .intro,
-  .about-ru9 .ru9-copy .tagline {
-    font-size: unset !important;
-  }
-  
-  /* Mobile: All headings fixed at 20px */
-  .about-ru9 h1,
-  .about-ru9 h2,
-  .about-ru9 h3,
-  .about-ru9 h4,
-  .about-ru9 [class*="title"] h1,
-  .about-ru9 [class*="title"] h2,
-  .about-ru9 [class*="title"] h3,
-  .about-ru9 [class*="title"] h4,
-  .about-ru9 [class*="heading"] h1,
-  .about-ru9 [class*="heading"] h2,
-  .about-ru9 [class*="heading"] h3,
-  .about-ru9 [class*="heading"] h4 {
-    font-size: 20px !important;
-  }
-}
-  </style>
+</style>
   
 <main class="about-ru9">
 
+  {# ============================================
+     OLD SECTIONS - TEMPORARILY HIDDEN
+     Will be replaced with new design from Figma
+     ============================================ #}
+  <div style="display: none !important;">
   {% section 'about-content-banner' %}
-
   {% section 'about-story' %}
-
   {% section 'about-team' %}
-
   {% section 'about-understanding' %}
-
   {% section 'about-values' %}
-  
   {% section 'about-values-2' %}
-
   {% section 'about-banner' %}
-
   {% section 'about-certifications' %}
-
   {% section 'about-statistics' %}
-
   {% section 'about-customers' %}
-
   {% section 'about-community' %}
-
   {% section 'about-community-paragraph' %}
-
   {% section 'about-community-connection' %}
-
   {% section 'about-environment' %}
-
   {% section 'about-journey' %}
-
   {% section 'image-marquee' %}
-
   {% section 'about-awards' %}
-
   {% section 'about-achievements' %}
-  
   {% section 'about-promise' %}
-
   {% section 'about-showroom' %}
-
   {% section 'about-closing' %}
+  </div>
+
+  <div class="about-new-wrapper">
+    {% section 'about1-hero' %}
+    {% section 'about2-breadcrumb' %}
+    {% section 'about3-origin' %}
+    {% section 'about4-quote' %}
+    {% section 'about5-team' %}
+    {% section 'about6-timeline' %}
+    {% section 'about7-stats' %}
+    {% section 'about8-stories' %}
+    {% section 'about9-certifications' %}
+    {% section 'about10-community' %}
+    {% section 'about11-commitments' %}
+    {% section 'about12-closing' %}
+    {% section 'about13-media' %}
+  </div>
+
 </main>

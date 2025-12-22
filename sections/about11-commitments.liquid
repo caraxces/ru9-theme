@@ -1,0 +1,305 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-commitments {
+  padding: var(--space-4xl) 0;
+}
+
+.about-commitments__container {
+  max-width: 1594px;
+  margin: 0 auto;
+`}
+
+/* Grid 3 columns x 2 rows = 6 cells total */
+.about-commitments__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 40px;
+}
+
+/* First cell: Title and Description */
+.about-commitments__header {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.about-commitments__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  line-height: var(--line-height-tight);
+}
+
+.about-commitments__intro {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  text-align: justify;
+}
+
+.about-commitments__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-commitments__card-header {
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.about-commitments__card-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  line-height: var(--line-height-tight);
+}
+
+.about-commitments__card-subtitle {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+}
+
+.about-commitments__card-image {
+  width: 100%;
+  height: 380px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+  background: var(--color-background-light);
+}
+
+.about-commitments__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-commitments__card-text {
+  font-size: var(--font-size-xl);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  text-align: justify;
+}
+
+.about-commitments__card-text strong {
+  font-weight: var(--font-weight-bold);
+  font-style: normal;
+}
+
+/* Responsive */
+@media (max-width: 749px) {
+  .about-commitments__container {
+    padding: 0 var(--container-padding-mobile);
+  }
+  
+  .about-commitments__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: var(--gutter-mobile);
+  }
+  
+  .about-commitments__header {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .about-commitments__title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-md);
+  }
+  
+  .about-commitments__intro {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-xl);
+  }
+  
+  .about-commitments__card-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .about-commitments__card-subtitle {
+    font-size: var(--font-size-lg);
+  }
+  
+  .about-commitments__card-image {
+    height: auto;
+    aspect-ratio: 505 / 380;
+  }
+  
+  .about-commitments__card-text {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (min-width: 750px) and (max-width: 1199px) {
+  .about-commitments__container {
+    padding: 0 var(--container-padding-tablet);
+  }
+  
+  .about-commitments__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+  
+  .about-commitments__header {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    margin-bottom: var(--space-xl);
+  }
+}
+</style>
+
+<section class="about-section about-commitments">
+  <div class="about-commitments__container">
+    <div class="about-commitments__grid">
+      {%- comment -%} First cell: Title and Description {%- endcomment -%}
+      <div class="about-commitments__header">
+        {%- if section.settings.title != blank -%}
+          <h2 class="about-commitments__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.intro_text != blank -%}
+          <p class="about-commitments__intro">{{ section.settings.intro_text }}</p>
+        {%- endif -%}
+      </div>
+      
+      {%- comment -%} Remaining 5 cells: Commitment Cards {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        <div class="about-commitments__card" {{ block.shopify_attributes }}>
+          <div class="about-commitments__card-header">
+            {%- if block.settings.title != blank -%}
+              <h3 class="about-commitments__card-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.subtitle != blank -%}
+              <p class="about-commitments__card-subtitle">{{ block.settings.subtitle }}</p>
+            {%- endif -%}
+          </div>
+          <div class="about-commitments__card-image">
+            {%- if block.settings.image -%}
+              <img 
+                src="{{ block.settings.image | img_url: '1010x760' }}" 
+                alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+          {%- if block.settings.text != blank -%}
+            <p class="about-commitments__card-text">{{ block.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About11 - Commitments",
+  "tag": "section",
+  "class": "about11-commitments-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Cam kết từ Ru9"
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Introduction Text",
+      "default": "Ru9 không chỉ mang đến một sản phẩm, mà cam kết đồng hành cùng bạn trong suốt hành trình chăm sóc giấc ngủ. Sự an tâm của bạn không chỉ đến từ chất lượng nệm, mà còn từ những chính sách minh bạch và lâu dài."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "commitment_card",
+      "name": "Commitment Card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Phù hợp"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "thể trạng người Việt"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended size: 505x380px"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p><strong>Ru9 nghiên cứu và cải tiến từng ngày</strong> để tạo ra sản phẩm phù hợp nhất với người Việt</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About11 - Commitments",
+      "blocks": [
+        {
+          "type": "commitment_card",
+          "settings": {
+            "title": "Phù hợp",
+            "subtitle": "thể trạng người Việt",
+            "text": "<p><strong>Ru9 nghiên cứu và cải tiến từng ngày</strong> để tạo ra sản phẩm phù hợp nhất với người Việt</p>"
+          }
+        },
+        {
+          "type": "commitment_card",
+          "settings": {
+            "title": "Nỗ lực",
+            "subtitle": "hoàn thiện hơn mỗi ngày",
+            "text": "<p><strong>Luôn lắng nghe và thấu hiểu, không ngừng cải thiện và nỗ lực</strong> mỗi ngày để hoàn thiện hơn</p>"
+          }
+        },
+        {
+          "type": "commitment_card",
+          "settings": {
+            "title": "Bảo hành",
+            "subtitle": "lên đến 10 năm",
+            "text": "<p><strong>Bảo hành lên tới 10 năm:</strong> Cam kết chất lượng foam và kết cấu nệm bền vững theo thời gian</p>"
+          }
+        },
+        {
+          "type": "commitment_card",
+          "settings": {
+            "title": "100 đêm",
+            "subtitle": "ngủ thử",
+            "text": "<p><strong>100 đêm ngủ thử:</strong> Trải nghiệm trọn vẹn tại nhà, đổi trả linh hoạt nếu chưa phù hợp</p>"
+          }
+        },
+        {
+          "type": "commitment_card",
+          "settings": {
+            "title": "Trả góp",
+            "subtitle": "linh hoạt",
+            "text": "<p><strong>Trả góp linh hoạt:</strong> Giúp bạn dễ dàng đầu tư cho giấc ngủ mà không áp lực tài chính</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

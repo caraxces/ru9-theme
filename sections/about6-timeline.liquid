@@ -1,0 +1,478 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+/* Timeline Section */
+.about-timeline {
+  position: relative;
+  padding: var(--space-5xl) 0;
+}
+
+.about-timeline__container {
+  position: relative;
+  max-width: 1594px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding-desktop);
+}
+
+/* Vertical line - centered in container - MUST BE VISIBLE */
+.about-timeline__line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 7px !important;
+  background: #1C2C58 !important;
+  border-radius: 5px;
+  transform: translateX(-50%);
+  z-index: 1;
+  height: calc(100% - 0px);
+  min-height: 500px;
+  pointer-events: none;
+}
+
+.about-timeline__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.about-timeline__step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  position: relative;
+  align-items: center;
+  padding-bottom: 100px;
+  min-height: 400px;
+  width: 100%;
+}
+
+.about-timeline__step:last-child {
+  padding-bottom: 0;
+}
+
+/* Step với image bên trái đường kẻ, text bên phải đường kẻ */
+.about-timeline__step--right {
+  grid-template-columns: 1fr 1fr;
+}
+
+.about-timeline__step--right .about-timeline__step-image {
+  grid-column: 1;
+  justify-self: end;
+  margin-right: 40px;
+}
+
+.about-timeline__step--right .about-timeline__step-content {
+  grid-column: 2;
+  text-align: left;
+  padding-left: 40px;
+}
+
+/* Step với text bên trái đường kẻ, image bên phải đường kẻ */
+.about-timeline__step--left {
+  grid-template-columns: 1fr 1fr;
+}
+
+.about-timeline__step--left .about-timeline__step-content {
+  grid-column: 1;
+  text-align: right;
+  padding-right: 40px;
+}
+
+.about-timeline__step--left .about-timeline__step-image {
+  grid-column: 2;
+  justify-self: start;
+  margin-left: 40px;
+}
+
+.about-timeline__step-image {
+  width: 630px;
+  height: 400px;
+  border: 7px solid #DBE8FF;
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--color-background-light);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.about-timeline__step-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-timeline__step-content {
+  padding-top: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-timeline__step-title {
+  font-size: 27px;
+  font-weight: var(--font-weight-bold);
+  color: #1c2c58;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.about-timeline__step-description {
+  font-size: var(--font-size-xl);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+/* SVG Circle positioned at center line, aligned with title */
+.about-timeline__step-dot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 31px;
+  height: 31px;
+  transform: translateX(-50%);
+  z-index: 3;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-timeline__step-dot svg {
+  width: 31px;
+  height: 31px;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 749px) {
+  .about-timeline__container {
+    padding: 0 var(--container-padding-mobile);
+  }
+  
+  .about-timeline__line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .about-timeline__step {
+    grid-template-columns: 1fr !important;
+    gap: var(--gutter-mobile);
+    min-height: auto;
+    padding-bottom: 60px;
+  }
+  
+  .about-timeline__step--left .about-timeline__step-content,
+  .about-timeline__step--right .about-timeline__step-content {
+    grid-column: 1;
+    text-align: left;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  
+  .about-timeline__step--left .about-timeline__step-image,
+  .about-timeline__step--right .about-timeline__step-image {
+    grid-column: 1;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    justify-self: center;
+  }
+  
+  .about-timeline__step-dot {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 750px) and (max-width: 1199px) {
+  .about-timeline__container {
+    padding: 0 var(--container-padding-tablet);
+  }
+  
+  .about-timeline__step-image {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+</style>
+
+<section class="about-section about-timeline">
+  <div class="about-timeline__container">
+    <div class="about-timeline__line"></div>
+    <div class="about-timeline__steps">
+      {%- for block in section.blocks -%}
+        <div class="about-timeline__step about-timeline__step--{{ block.settings.position }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.position == 'right' -%}
+            <div class="about-timeline__step-image">
+              {%- if block.settings.image -%}
+                <img 
+                  src="{{ block.settings.image | img_url: '1260x800' }}" 
+                  alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </div>
+            <div class="about-timeline__step-content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="about-timeline__step-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="about-timeline__step-description">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <div class="about-timeline__step-content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="about-timeline__step-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="about-timeline__step-description">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
+            <div class="about-timeline__step-image">
+              {%- if block.settings.image -%}
+                <img 
+                  src="{{ block.settings.image | img_url: '1260x800' }}" 
+                  alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          <div class="about-timeline__step-dot">
+            <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" fill="none">
+              <circle cx="15.5" cy="15.5" r="12" fill="#1C2C58" stroke="#FFF" stroke-width="7"/>
+            </svg>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const timelineContainer = document.querySelector('.about-timeline__container');
+  const timelineLine = document.querySelector('.about-timeline__line');
+  const timelineSteps = document.querySelectorAll('.about-timeline__step');
+  
+  if (!timelineContainer || !timelineLine) {
+    console.error('Timeline container or line not found');
+    return;
+  }
+  
+  // Update line height to match steps container
+  const updateLineHeight = () => {
+    const stepsContainer = timelineContainer.querySelector('.about-timeline__steps');
+    if (stepsContainer && timelineLine) {
+      const stepsHeight = stepsContainer.offsetHeight;
+      if (stepsHeight > 0) {
+        timelineLine.style.height = `${stepsHeight}px`;
+        timelineLine.style.display = 'block';
+        console.log('Timeline line height updated to:', stepsHeight);
+      } else {
+        // Fallback: calculate from steps
+        let totalHeight = 0;
+        timelineSteps.forEach((step, index) => {
+          totalHeight += step.offsetHeight || 400;
+        });
+        if (totalHeight > 0) {
+          timelineLine.style.height = `${totalHeight}px`;
+          timelineLine.style.display = 'block';
+        }
+      }
+    }
+  };
+  
+  // Align SVG circles with titles
+  timelineSteps.forEach(step => {
+    const titleElement = step.querySelector('.about-timeline__step-title');
+    const dotElement = step.querySelector('.about-timeline__step-dot');
+    
+    if (titleElement && dotElement) {
+      // Align SVG circle with center of title
+      const updateDotPosition = () => {
+        const stepRect = step.getBoundingClientRect();
+        const titleRect = titleElement.getBoundingClientRect();
+        // Center of title minus half of dot height (15.5px)
+        const dotTop = (titleRect.top + titleRect.height / 2) - stepRect.top - 15.5;
+        dotElement.style.top = `${Math.max(0, dotTop)}px`;
+      };
+      
+      updateDotPosition();
+      
+      // Update on resize
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          updateDotPosition();
+          updateLineHeight();
+        }, 100);
+      });
+    }
+  });
+  
+  // Initial line height update - multiple attempts
+  setTimeout(updateLineHeight, 100);
+  setTimeout(updateLineHeight, 500);
+  setTimeout(updateLineHeight, 1000);
+  
+  // Update line height after images load
+  const images = timelineContainer.querySelectorAll('img');
+  if (images.length > 0) {
+    let loadedImages = 0;
+    images.forEach(img => {
+      if (img.complete) {
+        loadedImages++;
+      } else {
+        img.addEventListener('load', () => {
+          loadedImages++;
+          if (loadedImages === images.length) {
+            setTimeout(updateLineHeight, 100);
+          }
+        });
+        img.addEventListener('error', () => {
+          loadedImages++;
+          if (loadedImages === images.length) {
+            setTimeout(updateLineHeight, 100);
+          }
+        });
+      }
+    });
+    
+    if (loadedImages === images.length) {
+      setTimeout(updateLineHeight, 100);
+    }
+  } else {
+    // No images, just update after a delay
+    setTimeout(updateLineHeight, 500);
+  }
+  
+  // Use MutationObserver to watch for content changes
+  if (window.MutationObserver) {
+    const observer = new MutationObserver(() => {
+      setTimeout(updateLineHeight, 100);
+    });
+    
+    if (timelineContainer) {
+      observer.observe(timelineContainer, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class']
+      });
+    }
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "About6 - Timeline",
+  "tag": "section",
+  "class": "about6-timeline-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "about_timeline_step",
+      "name": "Timeline Step",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Timeline Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Timeline step description text"
+        },
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended size: 630x400px"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "right",
+              "label": "Image Left / Text Right"
+            },
+            {
+              "value": "left",
+              "label": "Text Left / Image Right"
+            }
+          ],
+          "default": "right",
+          "info": "Choose layout: Image on left side of timeline line or right side"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About6 - Timeline",
+      "blocks": [
+        {
+          "type": "about_timeline_step",
+          "settings": {
+            "title": "Nhà máy sản xuất hiện đại",
+            "description": "Sản phẩm của Ru9 được nghiên cứu tỉ mỉ và sản xuất với công nghệ tiên tiến",
+            "position": "right"
+          }
+        },
+        {
+          "type": "about_timeline_step",
+          "settings": {
+            "title": "Miễn phí lưu kho",
+            "description": "Không gian lưu trữ đạt chuẩn, đảm bảo mỗi sản phẩm luôn được bảo quản tốt nhất trước khi giao đến khách hàng",
+            "position": "left"
+          }
+        },
+        {
+          "type": "about_timeline_step",
+          "settings": {
+            "title": "Showroom ở Hà Nội và TP. Hồ Chí Minh",
+            "description": "Điểm chạm trực tiếp để khách hàng trải nghiệm sản phẩm và được tư vấn một cách tận tâm, minh bạch",
+            "position": "right"
+          }
+        },
+        {
+          "type": "about_timeline_step",
+          "settings": {
+            "title": "Giao hàng tận nơi",
+            "description": "Sản phẩm đến tay khách hàng, mang theo lời hứa về một giấc ngủ ngon trọn vẹn",
+            "position": "left"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

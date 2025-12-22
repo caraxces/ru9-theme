@@ -1,0 +1,75 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-closing {
+  padding: var(--space-5xl) 0;
+}
+
+.about-closing__content {
+  max-width: 1352px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-closing__text {
+  font-size: var(--font-size-2xl);
+  font-style: italic;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-lg);
+}
+
+.about-closing__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 749px) {
+  .about-closing__text {
+    font-size: var(--font-size-lg);
+  }
+}
+</style>
+
+<section class="about-section about-closing page-width">
+  <div class="about-closing__content">
+    {%- if section.settings.text != blank -%}
+      <p class="about-closing__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+    {%- if section.settings.show_divider -%}
+      <div class="about-closing__divider"></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About12 - Closing",
+  "tag": "section",
+  "class": "about12-closing-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Closing Text",
+      "default": "Sau tất cả, Ru9 tin rằng mỗi giấc ngủ ngon là nền tảng cho một ngày sống khỏe, an yên và trọn vẹn hơn"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show Divider",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "About12 - Closing"
+    }
+  ]
+}
+{% endschema %}
+

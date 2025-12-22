@@ -1,0 +1,150 @@
+<style>
+/* ===============================
+   RU9 ABOUT US - DESIGN SYSTEM
+   Based on Figma Design
+   Desktop: node-id=2869-3973
+   Mobile: node-id=2880-4339
+   
+   Design System:
+     - Consistent typography scale
+     - Spacing system (8px base)
+     - Color system with CSS variables
+     - Responsive breakpoints
+     - Modern grid layouts
+================================== */
+
+:root{
+  /* Container & Layout - Match project standard */
+  /* Uses theme's --page-width: 1594px (not Figma's 1920px) */
+  --container-max-width: var(--page-width, 1594px);
+  --container-padding-desktop: 5rem; /* 80px - matches theme standard */
+  --container-padding-tablet: 3.2rem; /* ~51px - matches theme standard */
+  --container-padding-mobile: 15px; /* matches theme standard */
+  --gutter-desktop: 40px;
+  --gutter-mobile: 20px;
+  
+  /* Spacing System (8px base) */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 40px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 80px;
+  --space-5xl: 100px;
+  
+  /* Typography Scale */
+  --font-family: "Be Vietnam Pro", sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 25px;
+  --font-size-3xl: 39px;
+  --font-size-4xl: 48px;
+  --font-size-5xl: 56px;
+  --font-size-6xl: 60px;
+  
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Colors */
+  --color-text-primary: #1A2230;
+  --color-text-secondary: #1C2C58;
+  --color-text-muted: #5E6B85;
+  --color-text-light: #6B7A99;
+  
+  --color-primary: #3D6DFF;
+  --color-primary-light: #759CE6;
+  --color-accent: #4A90E2;
+  
+  --color-border: #E7ECF5;
+  --color-background: #FFFFFF;
+  --color-background-light: #FAFCFF;
+  --color-background-cream: #FFF7E8;
+  --color-background-secondary: #F5F5F5;
+  
+  --color-deep: #0E2B57;
+  --color-badge: #EDF2FF;
+  --color-quote: #A8B6D6;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(16, 38, 84, 0.04);
+  --shadow-md: 0 6px 18px rgba(16, 38, 84, 0.06);
+  --shadow-lg: 0 12px 24px rgba(16, 38, 84, 0.08);
+}
+
+/* Base Styles for About Sections */
+.about-new-wrapper {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.about-section {
+  padding: var(--space-4xl) 0;
+}
+
+/* Container wrapper - Use theme's page-width class */
+.about-new-wrapper .page-width {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding-desktop);
+  padding-right: var(--container-padding-desktop);
+}
+
+/* Responsive Breakpoints - Match theme standard */
+@media (max-width: 749px) {
+  :root {
+    --container-padding-desktop: var(--container-padding-mobile);
+    --gutter-desktop: var(--gutter-mobile);
+  }
+  
+  .about-new-wrapper .page-width {
+    padding-left: var(--container-padding-mobile);
+    padding-right: var(--container-padding-mobile);
+  }
+  
+  .about-section {
+    padding: var(--space-3xl) 0;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 1199px) {
+  :root {
+    --container-padding-desktop: var(--container-padding-tablet);
+  }
+  
+  .about-new-wrapper .page-width {
+    padding-left: var(--container-padding-tablet);
+    padding-right: var(--container-padding-tablet);
+  }
+}
+
+@media (min-width: 1400px) {
+  .about-new-wrapper {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+  }
+  
+  .about-new-wrapper .page-width {
+    max-width: var(--container-max-width);
+    padding-left: var(--container-padding-desktop);
+    padding-right: var(--container-padding-desktop);
+  }
+}
+</style>
+

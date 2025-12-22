@@ -1,0 +1,96 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-breadcrumb {
+  padding: var(--space-md) 0;
+}
+
+.about-breadcrumb__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+}
+
+.about-breadcrumb__nav a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.about-breadcrumb__nav a:hover {
+  text-decoration: underline;
+}
+
+.about-breadcrumb__separator {
+  color: var(--color-text-muted);
+}
+
+.about-breadcrumb__current {
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 749px) {
+  .about-breadcrumb__nav {
+    font-size: var(--font-size-sm);
+  }
+}
+</style>
+
+<section class="about-breadcrumb page-width">
+  <nav class="about-breadcrumb__nav">
+    <a href="{{ section.settings.home_url | default: '/' }}">{{ section.settings.home_text | default: 'Trang chủ' }}</a>
+    <span class="about-breadcrumb__separator">/</span>
+    {%- if section.settings.parent_url != blank -%}
+      <a href="{{ section.settings.parent_url }}">{{ section.settings.parent_text | default: 'About' }}</a>
+      <span class="about-breadcrumb__separator">/</span>
+    {%- endif -%}
+    <span class="about-breadcrumb__current">{{ section.settings.current_text | default: 'About us' }}</span>
+  </nav>
+</section>
+
+{% schema %}
+{
+  "name": "About2 - Breadcrumb",
+  "tag": "section",
+  "class": "about2-breadcrumb-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "home_text",
+      "label": "Home Text",
+      "default": "Trang chủ"
+    },
+    {
+      "type": "url",
+      "id": "home_url",
+      "label": "Home URL",
+      "default": "/"
+    },
+    {
+      "type": "text",
+      "id": "parent_text",
+      "label": "Parent Text",
+      "default": "About"
+    },
+    {
+      "type": "url",
+      "id": "parent_url",
+      "label": "Parent URL"
+    },
+    {
+      "type": "text",
+      "id": "current_text",
+      "label": "Current Page Text",
+      "default": "About us"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About2 - Breadcrumb"
+    }
+  ]
+}
+{% endschema %}
+

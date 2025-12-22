@@ -1,0 +1,151 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-stories__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xl);
+  line-height: var(--line-height-tight);
+}
+
+.about-stories__quote {
+  font-size: var(--font-size-2xl);
+  font-style: italic;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  text-align: justify;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-lg);
+}
+
+.about-stories__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--space-xl) 0;
+}
+
+.about-stories__gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter-desktop);
+}
+
+.about-stories__gallery-item {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 10px 10px 20px rgba(192, 204, 235, 0.3);
+  width: 100%;
+  height: 342px;
+  background: var(--color-background-light);
+}
+
+.about-stories__gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 749px) {
+  .about-stories__title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .about-stories__quote {
+    font-size: var(--font-size-lg);
+  }
+  
+  .about-stories__gallery {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<section class="about-section about-stories page-width">
+  {%- if section.settings.title != blank -%}
+    <h2 class="about-stories__title">{{ section.settings.title }}</h2>
+  {%- endif -%}
+  {%- if section.settings.quote_text != blank -%}
+    <div class="about-stories__quote">
+      <p>{{ section.settings.quote_text }}</p>
+    </div>
+  {%- endif -%}
+  {%- if section.settings.show_divider -%}
+    <div class="about-stories__divider"></div>
+  {%- endif -%}
+  <div class="about-stories__gallery">
+    {%- for block in section.blocks -%}
+      <div class="about-stories__gallery-item" {{ block.shopify_attributes }}>
+        {%- if block.settings.image -%}
+          <img 
+            src="{{ block.settings.image | img_url: '1010x684' }}" 
+            alt="{{ block.settings.image.alt | default: 'Story Image' }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About8 - Stories",
+  "tag": "section",
+  "class": "about8-stories-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Qua những câu chuyện thực tế"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_text",
+      "label": "Quote Text",
+      "default": "\"95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP. HCM\""
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show Divider",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story_image",
+      "name": "Story Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended size: 505x342px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About8 - Stories",
+      "blocks": [
+        {
+          "type": "story_image"
+        },
+        {
+          "type": "story_image"
+        },
+        {
+          "type": "story_image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

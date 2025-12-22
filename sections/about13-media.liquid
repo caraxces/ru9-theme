@@ -1,0 +1,275 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-media {
+  background: #F5F9FF;
+  padding: var(--space-4xl) 0;
+}
+
+.about-media__container {
+  max-width: 1594px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding-desktop);
+}
+
+/* Grid 3 columns x 2 rows = 6 cells total */
+.about-media__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 40px;
+}
+
+/* First cell: Title and Description */
+.about-media__header {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.about-media__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  line-height: var(--line-height-tight);
+}
+
+.about-media__description {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  text-align: justify;
+}
+
+/* Media items fill remaining 5 cells */
+.about-media__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-media__item-image {
+  width: 100%;
+  height: 380px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+  background: var(--color-background-light);
+}
+
+.about-media__item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-media__item-image video,
+.about-media__item-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-media__item-text {
+  font-size: var(--font-size-xl);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  text-align: justify;
+}
+
+.about-media__item-text strong {
+  font-weight: var(--font-weight-bold);
+  font-style: normal;
+}
+
+/* Responsive */
+@media (max-width: 749px) {
+  .about-media__container {
+    padding: 0 var(--container-padding-mobile);
+  }
+  
+  .about-media__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: var(--gutter-mobile);
+  }
+  
+  .about-media__header {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .about-media__title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-md);
+  }
+  
+  .about-media__description {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-xl);
+  }
+  
+  .about-media__item-image {
+    height: auto;
+    aspect-ratio: 505 / 380;
+  }
+  
+  .about-media__item-text {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (min-width: 750px) and (max-width: 1199px) {
+  .about-media__container {
+    padding: 0 var(--container-padding-tablet);
+  }
+  
+  .about-media__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+  
+  .about-media__header {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    margin-bottom: var(--space-xl);
+  }
+}
+</style>
+
+<section class="about-section about-media">
+  <div class="about-media__container">
+    <div class="about-media__grid">
+      {%- comment -%} First cell: Title and Description {%- endcomment -%}
+      <div class="about-media__header">
+        {%- if section.settings.title != blank -%}
+          <h2 class="about-media__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="about-media__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+      
+      {%- comment -%} Remaining 5 cells: Media items {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        <div class="about-media__item" {{ block.shopify_attributes }}>
+          <div class="about-media__item-image">
+            {%- if block.settings.video != blank -%}
+              {{ block.settings.video | video_tag: 
+                autoplay: true, 
+                loop: true, 
+                controls: false, 
+                muted: true,
+                image_size: '1010x760',
+                class: 'about-media__item-video'
+              }}
+            {%- elsif block.settings.image -%}
+              <img 
+                src="{{ block.settings.image | img_url: '1010x760' }}" 
+                alt="{{ block.settings.image.alt | default: block.settings.text }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+          {%- if block.settings.text != blank -%}
+            <p class="about-media__item-text">{{ block.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About13 - Media",
+  "tag": "section",
+  "class": "about13-media-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Cam kết từ Ru9"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Ru9 không chỉ mang đến một sản phẩm, mà cam kết đồng hành cùng bạn trong suốt hành trình chăm sóc giấc ngủ. Sự an tâm của bạn không chỉ đến từ chất lượng nệm, mà còn từ những chính sách minh bạch và lâu dài."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "media_item",
+      "name": "Media Item",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Upload video to Shopify CDN. Recommended size: 505x380px"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (Fallback if no video)",
+          "info": "Shown if video is not available. Recommended size: 505x380px"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description Text",
+          "default": "<p><strong>Text description</strong> for this media item</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About13 - Media",
+      "blocks": [
+        {
+          "type": "media_item",
+          "settings": {
+            "text": "<p><strong>Ru9 nghiên cứu và cải tiến từng ngày</strong> để tạo ra sản phẩm phù hợp nhất với người Việt</p>"
+          }
+        },
+        {
+          "type": "media_item",
+          "settings": {
+            "text": "<p><strong>Luôn lắng nghe và thấu hiểu, không ngừng cải thiện và nỗ lực</strong> mỗi ngày để hoàn thiện hơn</p>"
+          }
+        },
+        {
+          "type": "media_item",
+          "settings": {
+            "text": "<p><strong>Bảo hành lên tới 10 năm:</strong> Cam kết chất lượng foam và kết cấu nệm bền vững theo thời gian</p>"
+          }
+        },
+        {
+          "type": "media_item",
+          "settings": {
+            "text": "<p><strong>100 đêm ngủ thử:</strong> Trải nghiệm trọn vẹn tại nhà, đổi trả linh hoạt nếu chưa phù hợp</p>"
+          }
+        },
+        {
+          "type": "media_item",
+          "settings": {
+            "text": "<p><strong>Trả góp linh hoạt:</strong> Giúp bạn dễ dàng đầu tư cho giấc ngủ mà không áp lực tài chính</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+

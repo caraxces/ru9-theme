@@ -1,0 +1,76 @@
+{%- comment -%} Include Design System CSS {%- endcomment -%}
+{% render 'about-design-system' %}
+
+<style>
+.about-quote {
+  background: var(--color-background-light);
+  padding: var(--space-4xl) 0;
+}
+
+.about-quote__content {
+  max-width: 1596px;
+  margin: 0 auto;
+}
+
+.about-quote__text {
+  font-size: var(--font-size-2xl);
+  font-style: italic;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  text-align: justify;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-lg);
+}
+
+.about-quote__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 749px) {
+  .about-quote__text {
+    font-size: var(--font-size-lg);
+  }
+}
+</style>
+
+<section class="about-section about-quote page-width">
+  <div class="about-quote__content">
+    {%- if section.settings.quote_text != blank -%}
+      <p class="about-quote__text">{{ section.settings.quote_text }}</p>
+    {%- endif -%}
+    {%- if section.settings.show_divider -%}
+      <div class="about-quote__divider"></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About4 - Quote",
+  "tag": "section",
+  "class": "about4-quote-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "quote_text",
+      "label": "Quote Text",
+      "default": "\"Ru9 ra đời với mong muốn nâng cao chất lượng giấc ngủ và chất lượng sống của người Việt. Thông qua nghiên cứu khoa học và các giải pháp nệm foam an toàn, tinh gọn, phù hợp với thể trạng người Việt, Ru9 mong muốn giúp mỗi người ngủ sâu hơn, phục hồi tốt hơn và sống khỏe mạnh, bền vững hơn mỗi ngày\""
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show Divider",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "About4 - Quote"
+    }
+  ]
+}
+{% endschema %}
+
