@@ -12,7 +12,14 @@
     "main": {
       "type": "main-page",
       "disabled": true,
-      "settings": {}
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "text_alignment": "center",
+        "enable_customize_width_content": false,
+        "customize_width_content": 1800,
+        "remove_space_below": false
+      }
     },
     "slideshow": {
       "type": "slideshow",
@@ -20,76 +27,391 @@
         "slideshow-0": {
           "type": "image",
           "settings": {
-            "link_text": ""
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/image_16.png",
+            "overlay_opacity": 0
           }
         }
       },
       "block_order": [
         "slideshow-0"
       ],
+      "settings": {
+        "section_height": "650px",
+        "mobile_height": "auto",
+        "style": "bars",
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "lazyload_images": true,
+        "show_icon_text_bar": false,
+        "icon_bar_background_color": "#f8f9fa",
+        "icon_1_title": "100 đêm ngủ thử",
+        "icon_1_type": "sleep",
+        "icon_1_color": "#007bff",
+        "icon_2_title": "Thanh toán linh hoạt",
+        "icon_2_type": "payment",
+        "icon_2_color": "#007bff",
+        "icon_3_title": "Miễn phí vận chuyển*",
+        "icon_3_type": "shipping",
+        "icon_3_color": "#007bff"
+      }
+    },
+    "about2_breadcrumb_qD96xX": {
+      "type": "about2-breadcrumb",
+      "name": "About2 - Breadcrumb",
+      "settings": {
+        "home_text": "Trang chủ",
+        "home_url": "/",
+        "parent_text": "About",
+        "parent_url": "",
+        "current_text": "About us"
+      }
+    },
+    "about3_origin_Fgn96F": {
+      "type": "about3-origin",
+      "name": "About3 - Origin",
+      "settings": {
+        "title": "Khởi nguồn từ giấc ngủ chưa trọn vẹn",
+        "description": "<p>Ai trong chúng ta cũng từng trải qua những đêm trằn trọc. Ngủ đủ 8 tiếng, nhưng sáng dậy cơ thể vẫn nặng nề, tinh thần uể oải. Khi giấc ngủ không còn là lúc phục hồi, câu hỏi bắt đầu xuất hiện: <strong>vấn đề nằm ở đâu?</strong></p><p>Từ những trải nghiệm rất thật ấy, chúng tôi bắt đầu hành trình nghiên cứu về giấc ngủ và nhận ra rằng, thời lượng chỉ là một phần — <strong>chất lượng giấc ngủ mới là yếu tố quyết định sức khỏe lâu dài.</strong></p><p>Ru9 ra đời từ chính trăn trở đó, với sản phẩm Nệm Foam - tiên phong về công nghệ tại Việt Nam.</p>",
+        "image": "shopify://shop_images/test-1911-3_360x_jpg.png"
+      }
+    },
+    "about4_quote_TdnamY": {
+      "type": "about4-quote",
+      "name": "About4 - Quote",
+      "settings": {
+        "quote_text": "\"Ru9 ra đời với mong muốn nâng cao chất lượng giấc ngủ và chất lượng sống của người Việt. Thông qua nghiên cứu khoa học và các giải pháp nệm foam an toàn, tinh gọn, phù hợp với thể trạng người Việt, Ru9 mong muốn giúp mỗi người ngủ sâu hơn, phục hồi tốt hơn và sống khỏe mạnh, bền vững hơn mỗi ngày\"",
+        "show_divider": true
+      }
+    },
+    "about5_team_RNwGty": {
+      "type": "about5-team",
+      "name": "About5 - Team",
+      "settings": {
+        "text": "<p>Ru9 được xây dựng không chỉ từ mong muốn mang đến giấc ngủ trọn vẹn, mà còn từ tâm huyết của mỗi thành viên trong đại gia đình Ru9. Từ đội ngũ nghiên cứu – thiết kế, sản xuất đến các bạn showroom trực tiếp đồng hành cùng khách hàng, tất cả đều góp sức trong quy trình khép kín, minh bạch, không qua trung gian, giúp khách hàng có những trải nghiệm trọn vẹn nhất.</p>"
+      }
+    },
+    "about6_timeline_M7iJdE": {
+      "type": "about6-timeline",
+      "blocks": {
+        "about_timeline_step_jCt9Nr": {
+          "type": "about_timeline_step",
+          "settings": {
+            "title": "Nhà máy sản xuất hiện đại",
+            "description": "Sản phẩm của Ru9 được nghiên cứu tỉ mỉ và sản xuất với công nghệ tiên tiến",
+            "image": "shopify://shop_images/Rectangle_214_da53278c-7ecb-4efd-9110-e2af289e2a8b.png",
+            "position": "right"
+          }
+        },
+        "about_timeline_step_DJrLgG": {
+          "type": "about_timeline_step",
+          "settings": {
+            "title": "Miễn phí lưu kho",
+            "description": "Không gian lưu trữ đạt chuẩn, đảm bảo mỗi sản phẩm luôn được bảo quản tốt nhất trước khi giao đến khách hàng",
+            "image": "shopify://shop_images/Rectangle_215_a5657bcc-0854-49df-ad21-f5e858640923.png",
+            "position": "left"
+          }
+        },
+        "about_timeline_step_BUHUnp": {
+          "type": "about_timeline_step",
+          "settings": {
+            "title": "Showroom ở Hà Nội và TP. Hồ Chí Minh",
+            "description": "Điểm chạm trực tiếp để khách hàng trải nghiệm sản phẩm và được tư vấn một cách tận tâm, minh bạch",
+            "image": "shopify://shop_images/Rectangle_216.png",
+            "position": "right"
+          }
+        },
+        "about_timeline_step_DHKA84": {
+          "type": "about_timeline_step",
+          "settings": {
+            "title": "Giao hàng tận nơi",
+            "description": "Sản phẩm đến tay khách hàng, mang theo lời hứa về một giấc ngủ ngon trọn vẹn",
+            "image": "shopify://shop_images/Rectangle_217_fe865f68-d42b-401e-8b86-d99967473f00.png",
+            "position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "about_timeline_step_jCt9Nr",
+        "about_timeline_step_DJrLgG",
+        "about_timeline_step_BUHUnp",
+        "about_timeline_step_DHKA84"
+      ],
+      "name": "About6 - Timeline",
       "settings": {}
     },
-    "rich-text": {
-      "type": "rich-text",
+    "slideshow_KYKdpD": {
+      "type": "slideshow",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "image_ikrkzE": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/Rectangle_109_fb3408b6-df5f-444b-8053-b828b240adbc.png",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_ikrkzE"
+      ],
+      "settings": {
+        "section_height": "650px",
+        "mobile_height": "auto",
+        "style": "bars",
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "lazyload_images": true,
+        "show_icon_text_bar": false,
+        "icon_bar_background_color": "#f8f9fa",
+        "icon_1_title": "100 đêm ngủ thử",
+        "icon_1_type": "sleep",
+        "icon_1_color": "#007bff",
+        "icon_2_title": "Thanh toán linh hoạt",
+        "icon_2_type": "payment",
+        "icon_2_color": "#007bff",
+        "icon_3_title": "Miễn phí vận chuyển*",
+        "icon_3_type": "shipping",
+        "icon_3_color": "#007bff"
+      }
+    },
+    "about9_certifications_Y463Rz": {
+      "type": "about9-certifications",
+      "blocks": {
+        "certification_7XRqkE": {
+          "type": "certification",
+          "settings": {
+            "image": "shopify://shop_images/Group_4276.png",
+            "label": ""
+          }
+        },
+        "certification_hQW6Ki": {
+          "type": "certification",
+          "settings": {
+            "image": "shopify://shop_images/Group_5215.png",
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "certification_7XRqkE",
+        "certification_hQW6Ki"
+      ],
+      "name": "About9 - Certifications",
+      "settings": {
+        "title": "Chất lượng sản phẩm vượt trội",
+        "text": "<p>Ru9 tự hào là <strong>thương hiệu tiên phong tại Việt Nam đạt chứng nhận CertiPUR-US® cho foam nệm</strong>, khẳng định độ an toàn, thân thiện với môi trường và tuân thủ các tiêu chuẩn khắt khe về thành phần, quy trình sản xuất và khí thải.</p><p>Ru9 sử dụng vải đạt <strong>STANDARD 100 by OEKO-TEX®</strong>, bảo đảm không chứa chất độc hại, an toàn cho sức khỏe và thân thiện với môi trường.</p>",
+        "button_text": "Xem chi tiết",
+        "button_url": "shopify://pages/certification",
+        "button_new_tab": true
+      }
+    },
+    "about8_stories_jmiAJT": {
+      "type": "about8-stories",
+      "blocks": {
+        "story_image_jpcP3z": {
+          "type": "story_image",
           "settings": {}
         },
-        "text": {
-          "type": "text",
+        "story_image_kLMQwQ": {
+          "type": "story_image",
+          "settings": {}
+        },
+        "story_image_n7Y69b": {
+          "type": "story_image",
           "settings": {}
         }
       },
       "block_order": [
-        "heading",
-        "text"
+        "story_image_jpcP3z",
+        "story_image_kLMQwQ",
+        "story_image_n7Y69b"
       ],
-      "settings": {}
+      "name": "About8 - Stories",
+      "settings": {
+        "title": "Qua những câu chuyện thực tế",
+        "quote_text": "\"95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP. HCM\"",
+        "show_divider": true
+      }
     },
-    "map": {
-      "type": "map",
-      "settings": {}
-    },
-    "text-columns": {
-      "type": "text-columns",
+    "about7_stats_4PcxgL": {
+      "type": "about7-stats",
       "blocks": {
-        "column1": {
-          "type": "text_block",
-          "settings": {}
+        "stat_item_nCc9Nd": {
+          "type": "stat_item",
+          "settings": {
+            "number": "34",
+            "label": "Tỉnh thành"
+          }
         },
-        "column2": {
-          "type": "text_block",
-          "settings": {}
+        "stat_item_NcHFrd": {
+          "type": "stat_item",
+          "settings": {
+            "number": "85,000+",
+            "label": "Giấc ngủ ngon được giao đến tận nhà"
+          }
         },
-        "column3": {
-          "type": "text_block",
-          "settings": {}
+        "stat_item_fx8JAy": {
+          "type": "stat_item",
+          "settings": {
+            "number": "96,000+",
+            "label": "Khách hàng tin tưởng Ru9"
+          }
         }
       },
       "block_order": [
-        "column1",
-        "column2",
-        "column3"
+        "stat_item_nCc9Nd",
+        "stat_item_NcHFrd",
+        "stat_item_fx8JAy"
       ],
+      "name": "About7 - Statistics",
       "settings": {}
     },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {}
+    "about10_community_QyLkGG": {
+      "type": "about10-community",
+      "blocks": {
+        "community_card_UQde6d": {
+          "type": "community_card",
+          "settings": {
+            "text": "Ru9 trao tặng 1500 nệm cho các bác sĩ và tình nguyện viên trong giai đoạn đại dịch Covid 19",
+            "button_text": "Xem chi tiết",
+            "button_url": "https://vietnamnet.vn/1500-nem-ru9-tang-benh-vien-khu-cach-ly-chong-dich-covid-19-638690.html",
+            "button_new_tab": true
+          }
+        },
+        "community_card_X7zENz": {
+          "type": "community_card",
+          "settings": {
+            "text": "Ru9 với chiến dịch \"Cảm ơn Shippers\" - tặng nệm foam và yên xe mới cho các Shipper",
+            "button_text": "Xem chi tiết",
+            "button_url": "https://vnexpress.net/nhung-y-tuong-thien-nguyen-cua-doanh-nghiep-khoi-nghiep-ru9-4412981.html",
+            "button_new_tab": true
+          }
+        },
+        "community_card_3mjGXz": {
+          "type": "community_card",
+          "settings": {
+            "text": "Ru9 trao tặng 100 triệu đồng cùng 100 nệm cuộn cho bà miền Trung chịu ảnh hưởng của bão lũ",
+            "button_text": "Xem chi tiết",
+            "button_url": "",
+            "button_new_tab": true
+          }
+        }
+      },
+      "block_order": [
+        "community_card_UQde6d",
+        "community_card_X7zENz",
+        "community_card_3mjGXz"
+      ],
+      "name": "About10 - Community",
+      "settings": {
+        "title": "Ru9 chung tay cùng cộng đồng",
+        "intro_text": "Ru9 tin rằng giấc ngủ chất lượng là nền tảng cho một cuộc sống tốt đẹp hơn, và trách nhiệm đó không chỉ nằm trong từng sản phẩm. Trên hành trình nâng cao chất lượng giấc ngủ cho người Việt, Ru9 luôn chủ động đồng hành cùng cộng đồng thông qua nhiều hoạt động ý nghĩa."
+      }
     },
-    "form": {
-      "type": "contact-form",
-      "settings": {}
+    "about11_commitments_FwDmH8": {
+      "type": "about11-commitments",
+      "blocks": {
+        "commitment_card_CATadG": {
+          "type": "commitment_card",
+          "settings": {
+            "title": "",
+            "subtitle": "",
+            "image": "shopify://shop_images/Rectangle_293.png",
+            "text": "<p><strong>Ru9 nghiên cứu và cải tiến từng ngày</strong> để tạo ra sản phẩm phù hợp nhất với người Việt</p>"
+          }
+        },
+        "commitment_card_iJny3M": {
+          "type": "commitment_card",
+          "settings": {
+            "title": "",
+            "subtitle": "",
+            "image": "shopify://shop_images/Rectangle_294.png",
+            "text": "<p><strong>Luôn lắng nghe và thấu hiểu, không ngừng cải thiện và nỗ lực</strong> mỗi ngày để hoàn thiện hơn</p>"
+          }
+        },
+        "commitment_card_VAigAr": {
+          "type": "commitment_card",
+          "settings": {
+            "title": "",
+            "subtitle": "",
+            "image": "shopify://shop_images/Rectangle_295.png",
+            "text": "<p><strong>Bảo hành lên tới 10 năm:</strong> Cam kết chất lượng foam và kết cấu nệm bền vững theo thời gian</p>"
+          }
+        },
+        "commitment_card_LH8kh9": {
+          "type": "commitment_card",
+          "settings": {
+            "title": "",
+            "subtitle": "",
+            "image": "shopify://shop_images/Rectangle_296.png",
+            "text": "<p><strong>100 đêm ngủ thử:</strong> Trải nghiệm trọn vẹn tại nhà, đổi trả linh hoạt nếu chưa phù hợp</p>"
+          }
+        },
+        "commitment_card_mDM4tC": {
+          "type": "commitment_card",
+          "settings": {
+            "title": "",
+            "subtitle": "",
+            "image": "shopify://shop_images/Rectangle_297.png",
+            "text": "<p><strong>Trả góp linh hoạt:</strong> Giúp bạn dễ dàng đầu tư cho giấc ngủ mà không áp lực tài chính</p>"
+          }
+        }
+      },
+      "block_order": [
+        "commitment_card_CATadG",
+        "commitment_card_iJny3M",
+        "commitment_card_VAigAr",
+        "commitment_card_LH8kh9",
+        "commitment_card_mDM4tC"
+      ],
+      "name": "About11 - Commitments",
+      "settings": {
+        "title": "Cam kết từ Ru9",
+        "intro_text": "Ru9 không chỉ mang đến một sản phẩm, mà cam kết đồng hành cùng bạn trong suốt hành trình chăm sóc giấc ngủ. Sự an tâm của bạn không chỉ đến từ chất lượng nệm, mà còn từ những chính sách minh bạch và lâu dài."
+      }
+    },
+    "about12_closing_7Gjz8K": {
+      "type": "about12-closing",
+      "name": "About12 - Closing",
+      "settings": {
+        "text": "Sau tất cả, Ru9 tin rằng mỗi giấc ngủ ngon là nền tảng cho một ngày sống khỏe, an yên và trọn vẹn hơn",
+        "show_divider": true
+      }
     }
   },
   "order": [
     "main",
     "slideshow",
-    "rich-text",
-    "text-columns",
-    "map",
-    "featured-collection",
-    "form"
+    "about2_breadcrumb_qD96xX",
+    "about3_origin_Fgn96F",
+    "about4_quote_TdnamY",
+    "about5_team_RNwGty",
+    "about6_timeline_M7iJdE",
+    "slideshow_KYKdpD",
+    "about9_certifications_Y463Rz",
+    "about8_stories_jmiAJT",
+    "about7_stats_4PcxgL",
+    "about10_community_QyLkGG",
+    "about11_commitments_FwDmH8",
+    "about12_closing_7Gjz8K"
   ]
 }
