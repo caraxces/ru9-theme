@@ -10,177 +10,213 @@
 .about-media__container {
   max-width: 1594px;
   margin: 0 auto;
-  padding: 0 var(--container-padding-desktop);
+  padding: 0;
 }
 
-/* Grid 3 columns x 2 rows = 6 cells total */
-.about-media__grid {
+/* Top row: 3 images */
+.about-media__top-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, auto);
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.about-media__top-item {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.about-media__top-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* Bottom row: 5 videos */
+.about-media__bottom-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 40px;
 }
 
-/* First cell: Title and Description */
-.about-media__header {
-  grid-column: 1;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.about-media__title {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-lg);
-  line-height: var(--line-height-tight);
-}
-
-.about-media__description {
-  font-size: var(--font-size-xl);
-  line-height: var(--line-height-relaxed);
-  color: var(--color-text-primary);
-  text-align: justify;
-}
-
-/* Media items fill remaining 5 cells */
-.about-media__item {
-  display: flex;
-  flex-direction: column;
-}
-
-.about-media__item-image {
+.about-media__bottom-item {
   width: 100%;
-  height: 380px;
-  border-radius: 20px;
   overflow: hidden;
-  margin-bottom: var(--space-md);
-  background: var(--color-background-light);
+  margin: 0;
+  padding: 0;
 }
 
-.about-media__item-image img {
+.about-media__bottom-item video,
+.about-media__bottom-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  margin: 0;
+  padding: 0;
 }
 
-.about-media__item-image video,
-.about-media__item-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.about-media__item-text {
-  font-size: var(--font-size-xl);
-  font-style: italic;
-  line-height: var(--line-height-relaxed);
-  color: var(--color-text-primary);
-  text-align: justify;
-}
-
-.about-media__item-text strong {
-  font-weight: var(--font-weight-bold);
-  font-style: normal;
-}
-
-/* Responsive */
+/* Mobile Carousel Styles */
 @media (max-width: 749px) {
+  .about-media {
+    background: #F0F7FF;
+    padding: 20px 0;
+  }
+  
   .about-media__container {
-    padding: 0 var(--container-padding-mobile);
+    padding: 0 15px;
   }
   
-  .about-media__grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: var(--gutter-mobile);
+  /* Top row carousel */
+  .about-media__top-row {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
   
-  .about-media__header {
-    grid-column: 1;
-    grid-row: 1;
+  .about-media__top-row::-webkit-scrollbar {
+    display: none;
   }
   
-  .about-media__title {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-md);
+  .about-media__top-item {
+    flex: 0 0 182px;
+    width: 182px;
+    height: 123px;
+    scroll-snap-align: start;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 10px 10px 20px 0px rgba(192, 204, 235, 0.3);
   }
   
-  .about-media__description {
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--space-xl);
+  .about-media__top-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   
-  .about-media__item-image {
-    height: auto;
-    aspect-ratio: 505 / 380;
+  /* Bottom row carousel */
+  .about-media__bottom-row {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
   
-  .about-media__item-text {
-    font-size: var(--font-size-sm);
+  .about-media__bottom-row::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .about-media__bottom-item {
+    flex: 0 0 103.265px;
+    width: 103.265px;
+    height: 184px;
+    scroll-snap-align: start;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0);
+  }
+  
+  .about-media__bottom-item video,
+  .about-media__bottom-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
 @media (min-width: 750px) and (max-width: 1199px) {
   .about-media__container {
-    padding: 0 var(--container-padding-tablet);
+    padding: 0;
   }
   
-  .about-media__grid {
+  .about-media__top-row {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
+    gap: var(--gutter-desktop);
   }
   
-  .about-media__header {
-    grid-column: 1 / 3;
-    grid-row: 1;
-    margin-bottom: var(--space-xl);
+  .about-media__top-row .about-media__top-item:last-child {
+    grid-column: 1 / -1;
+  }
+  
+  .about-media__bottom-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gutter-desktop);
+  }
+  
+  .about-media__bottom-row .about-media__bottom-item:nth-child(4),
+  .about-media__bottom-row .about-media__bottom-item:nth-child(5) {
+    grid-column: span 1;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .about-media__bottom-row {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gutter-desktop);
+  }
+  
+  .about-media__bottom-row .about-media__bottom-item:last-child {
+    grid-column: span 1;
   }
 }
 </style>
 
 <section class="about-section about-media">
   <div class="about-media__container">
-    <div class="about-media__grid">
-      {%- comment -%} First cell: Title and Description {%- endcomment -%}
-      <div class="about-media__header">
-        {%- if section.settings.title != blank -%}
-          <h2 class="about-media__title">{{ section.settings.title }}</h2>
-        {%- endif -%}
-        {%- if section.settings.description != blank -%}
-          <p class="about-media__description">{{ section.settings.description }}</p>
-        {%- endif -%}
-      </div>
-      
-      {%- comment -%} Remaining 5 cells: Media items {%- endcomment -%}
+    {%- comment -%} Top row: 3 images {%- endcomment -%}
+    <div class="about-media__top-row">
       {%- for block in section.blocks -%}
-        <div class="about-media__item" {{ block.shopify_attributes }}>
-          <div class="about-media__item-image">
+        {%- if block.type == 'top_image' -%}
+          <div class="about-media__top-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.image -%}
+              <img 
+                src="{{ block.settings.image | img_url: '1010x684' }}" 
+                alt="{{ block.settings.image.alt | default: 'Media image' }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    
+    {%- comment -%} Bottom row: 5 videos {%- endcomment -%}
+    <div class="about-media__bottom-row">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'bottom_video' -%}
+          <div class="about-media__bottom-item" {{ block.shopify_attributes }}>
             {%- if block.settings.video != blank -%}
               {{ block.settings.video | video_tag: 
                 autoplay: true, 
                 loop: true, 
                 controls: false, 
                 muted: true,
-                image_size: '1010x760',
-                class: 'about-media__item-video'
+                image_size: '550x980',
+                class: 'about-media__bottom-video'
               }}
             {%- elsif block.settings.image -%}
               <img 
-                src="{{ block.settings.image | img_url: '1010x760' }}" 
-                alt="{{ block.settings.image.alt | default: block.settings.text }}"
+                src="{{ block.settings.image | img_url: '550x980' }}" 
+                alt="{{ block.settings.image.alt | default: 'Media video' }}"
                 loading="lazy"
               >
             {%- endif -%}
           </div>
-          {%- if block.settings.text != blank -%}
-            <p class="about-media__item-text">{{ block.settings.text }}</p>
-          {%- endif -%}
-        </div>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
@@ -191,43 +227,36 @@
   "name": "About13 - Media",
   "tag": "section",
   "class": "about13-media-section",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Cam kết từ Ru9"
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Ru9 không chỉ mang đến một sản phẩm, mà cam kết đồng hành cùng bạn trong suốt hành trình chăm sóc giấc ngủ. Sự an tâm của bạn không chỉ đến từ chất lượng nệm, mà còn từ những chính sách minh bạch và lâu dài."
-    }
-  ],
   "blocks": [
     {
-      "type": "media_item",
-      "name": "Media Item",
+      "type": "top_image",
+      "name": "Top Row Image",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended size: 505x342px"
+        }
+      ]
+    },
+    {
+      "type": "bottom_video",
+      "name": "Bottom Row Video",
       "limit": 5,
       "settings": [
         {
           "type": "video",
           "id": "video",
           "label": "Video",
-          "info": "Upload video to Shopify CDN. Recommended size: 505x380px"
+          "info": "Upload video to Shopify CDN. Recommended size: 275x490px"
         },
         {
           "type": "image_picker",
           "id": "image",
           "label": "Image (Fallback if no video)",
-          "info": "Shown if video is not available. Recommended size: 505x380px"
-        },
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Description Text",
-          "default": "<p><strong>Text description</strong> for this media item</p>"
+          "info": "Shown if video is not available. Recommended size: 275x490px"
         }
       ]
     }
@@ -237,39 +266,31 @@
       "name": "About13 - Media",
       "blocks": [
         {
-          "type": "media_item",
-          "settings": {
-            "text": "<p><strong>Ru9 nghiên cứu và cải tiến từng ngày</strong> để tạo ra sản phẩm phù hợp nhất với người Việt</p>"
-          }
+          "type": "top_image"
         },
         {
-          "type": "media_item",
-          "settings": {
-            "text": "<p><strong>Luôn lắng nghe và thấu hiểu, không ngừng cải thiện và nỗ lực</strong> mỗi ngày để hoàn thiện hơn</p>"
-          }
+          "type": "top_image"
         },
         {
-          "type": "media_item",
-          "settings": {
-            "text": "<p><strong>Bảo hành lên tới 10 năm:</strong> Cam kết chất lượng foam và kết cấu nệm bền vững theo thời gian</p>"
-          }
+          "type": "top_image"
         },
         {
-          "type": "media_item",
-          "settings": {
-            "text": "<p><strong>100 đêm ngủ thử:</strong> Trải nghiệm trọn vẹn tại nhà, đổi trả linh hoạt nếu chưa phù hợp</p>"
-          }
+          "type": "bottom_video"
         },
         {
-          "type": "media_item",
-          "settings": {
-            "text": "<p><strong>Trả góp linh hoạt:</strong> Giúp bạn dễ dàng đầu tư cho giấc ngủ mà không áp lực tài chính</p>"
-          }
+          "type": "bottom_video"
+        },
+        {
+          "type": "bottom_video"
+        },
+        {
+          "type": "bottom_video"
+        },
+        {
+          "type": "bottom_video"
         }
       ]
     }
   ]
 }
 {% endschema %}
-
-

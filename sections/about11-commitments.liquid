@@ -98,46 +98,65 @@
 
 /* Responsive */
 @media (max-width: 749px) {
+  .about-commitments {
+    padding: 0;
+  }
+  
   .about-commitments__container {
-    padding: 0 var(--container-padding-mobile);
+    padding: 0 15px;
   }
   
   .about-commitments__grid {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    gap: var(--gutter-mobile);
+    gap: 24px;
   }
   
   .about-commitments__header {
     grid-column: 1;
     grid-row: 1;
+    margin-bottom: 0;
   }
   
   .about-commitments__title {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-md);
+    font-size: 20px;
+    font-weight: 700;
+    color: #1c2c58;
+    line-height: 1.4;
+    margin-bottom: 24px;
   }
   
   .about-commitments__intro {
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--space-xl);
+    font-size: 14px;
+    line-height: 1.4;
+    color: #000;
+    text-align: justify;
+    margin-bottom: 24px;
   }
   
-  .about-commitments__card-title {
-    font-size: var(--font-size-2xl);
-  }
-  
-  .about-commitments__card-subtitle {
-    font-size: var(--font-size-lg);
+  .about-commitments__card {
+    display: flex;
+    flex-direction: column;
   }
   
   .about-commitments__card-image {
-    height: auto;
-    aspect-ratio: 505 / 380;
+    width: 100%;
+    height: 272px;
+    border-radius: 5px;
+    margin-bottom: 16px;
   }
   
   .about-commitments__card-text {
-    font-size: var(--font-size-sm);
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.4;
+    color: #000;
+    text-align: justify;
+  }
+  
+  .about-commitments__card-text strong {
+    font-weight: 700;
+    font-style: normal;
   }
 }
 

@@ -2,12 +2,95 @@
 {% render 'about-design-system' %}
 
 <style>
+.about-stories {
+  padding: var(--space-4xl) 0;
+  background: var(--color-background);
+}
+
+.about-stories__container {
+  max-width: 1594px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding-desktop);
+}
+
 .about-stories__title {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-xl);
+  margin-bottom: 40px;
   line-height: var(--line-height-tight);
+  text-align: left;
+}
+
+/* Statistics section - About7 integrated */
+.about-stories__stats {
+  background: #f5f9ff;
+  border-radius: 5px;
+  padding: 64px 0;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 1596px;
+  overflow: hidden;
+}
+
+.about-stories__stats-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.about-stories__stats-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.about-stories__stats-inner--clone {
+  display: none; /* Hidden on desktop */
+}
+
+.about-stories__stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+.about-stories__stats-number {
+  font-size: 90px;
+  font-weight: var(--font-weight-bold);
+  color: #759ce6;
+  line-height: 48px;
+  margin-bottom: 16px;
+  white-space: nowrap;
+}
+
+.about-stories__stats-label {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  text-align: center;
+  white-space: normal;
+  max-width: 367px;
+}
+
+.about-stories__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+  margin: 40px 0;
+  max-width: 1594px;
 }
 
 .about-stories__quote {
@@ -17,24 +100,20 @@
   color: var(--color-text-secondary);
   text-align: justify;
   line-height: var(--line-height-relaxed);
-  margin-bottom: var(--space-lg);
-}
-
-.about-stories__divider {
-  width: 100%;
-  height: 1px;
-  background: var(--color-border);
-  margin: var(--space-xl) 0;
+  margin-bottom: 40px;
+  max-width: 1596px;
 }
 
 .about-stories__gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--gutter-desktop);
+  gap: 43px; /* Figma: 162px to 710px = 548px gap, but actual is ~43px between items */
+  max-width: 1603px;
+  margin: 0 auto;
 }
 
 .about-stories__gallery-item {
-  border-radius: var(--radius-lg);
+  border-radius: 22px; /* Figma: rounded-[22px] */
   overflow: hidden;
   box-shadow: 10px 10px 20px rgba(192, 204, 235, 0.3);
   width: 100%;
@@ -50,46 +129,353 @@
 }
 
 @media (max-width: 749px) {
+  .about-stories {
+    padding: 0;
+    background: var(--color-background);
+  }
+  
+  .about-stories__container {
+    padding: 0 var(--container-padding-mobile);
+  }
+  
   .about-stories__title {
-    font-size: var(--font-size-2xl);
+    font-size: 20px;
+    font-weight: 700;
+    color: #1c2c58;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    padding: 0;
+  }
+  
+  /* Mobile statistics - marquee */
+  .about-stories__stats {
+    background: #f0f7ff;
+    height: 126px;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    margin-bottom: 24px;
+    border-radius: 0;
+  }
+  
+  .about-stories__stats-wrapper {
+    display: flex;
+    width: max-content;
+    height: 100%;
+    animation: marquee 30s linear infinite;
+  }
+  
+  .about-stories__stats-wrapper:hover {
+    animation-play-state: paused;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .about-stories__stats-inner {
+    display: flex;
+    flex-direction: row;
+    gap: 97px;
+    padding: 32px 10px 20px;
+    height: 100%;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .about-stories__stats-inner--clone {
+    display: flex;
+    flex-direction: row;
+    gap: 97px;
+    padding: 32px 10px 20px;
+    height: 100%;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .about-stories__stats-item {
+    flex: 0 0 auto;
+    padding: 0;
+    gap: 0;
+    min-width: fit-content;
+    white-space: nowrap;
+    border-right: none;
+  }
+  
+  .about-stories__stats-item--clone {
+    flex: 0 0 auto;
+    padding: 0;
+    gap: 0;
+    min-width: fit-content;
+    white-space: nowrap;
+  }
+  
+  .about-stories__stats-number {
+    font-size: 48px;
+    font-weight: 600;
+    color: #759ce6;
+    line-height: 80px;
+    margin-bottom: 0;
+  }
+  
+  .about-stories__stats-label {
+    font-size: 14px;
+    color: #000;
+    line-height: 1.4;
+    margin-top: 0;
+    max-width: none;
   }
   
   .about-stories__quote {
-    font-size: var(--font-size-lg);
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 700;
+    color: #1c2c58;
+    line-height: 1.4;
+    text-align: justify;
+    margin-bottom: 24px;
+    padding: 0;
   }
   
+  .about-stories__divider {
+    margin: 24px 0;
+    width: 100%;
+  }
+  
+  /* Mobile carousel for gallery */
   .about-stories__gallery {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 0;
+    padding: 0 0 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    position: relative;
+    max-width: 100%;
+  }
+  
+  .about-stories__gallery::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .about-stories__gallery-item {
+    flex: 0 0 268px;
+    width: 268px;
+    height: 224px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 15px;
+  }
+  
+  .about-stories__gallery-item:first-child {
+    margin-left: 0;
+  }
+  
+  /* Navigation buttons */
+  .about-stories__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 20px 0;
+    position: relative;
+  }
+  
+  .about-stories__nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 100px;
+    background: #dbe8ff;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .about-stories__nav-dot.active {
+    background: #1c2c58;
+  }
+  
+  .about-stories__nav-button {
+    width: 28px;
+    height: 28px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    padding: 0;
+  }
+  
+  .about-stories__nav-button--prev {
+    left: calc(50% - 37px);
+    background: white;
+  }
+  
+  .about-stories__nav-button--next {
+    left: calc(50% + 9px);
+    background: #234085;
+  }
+  
+  .about-stories__nav-button svg {
+    width: 14px;
+    height: 14px;
   }
 }
 </style>
 
-<section class="about-section about-stories page-width">
-  {%- if section.settings.title != blank -%}
-    <h2 class="about-stories__title">{{ section.settings.title }}</h2>
-  {%- endif -%}
-  {%- if section.settings.quote_text != blank -%}
-    <div class="about-stories__quote">
-      <p>{{ section.settings.quote_text }}</p>
-    </div>
-  {%- endif -%}
-  {%- if section.settings.show_divider -%}
-    <div class="about-stories__divider"></div>
-  {%- endif -%}
-  <div class="about-stories__gallery">
-    {%- for block in section.blocks -%}
-      <div class="about-stories__gallery-item" {{ block.shopify_attributes }}>
-        {%- if block.settings.image -%}
-          <img 
-            src="{{ block.settings.image | img_url: '1010x684' }}" 
-            alt="{{ block.settings.image.alt | default: 'Story Image' }}"
-            loading="lazy"
-          >
-        {%- endif -%}
+<section class="about-section about-stories">
+  <div class="about-stories__container">
+    {%- if section.settings.title != blank -%}
+      <h2 class="about-stories__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    
+    {%- comment -%} Statistics (About7 integrated) {%- endcomment -%}
+    {%- assign stats_blocks = section.blocks | where: 'type', 'stat_item' -%}
+    {%- if stats_blocks.size > 0 -%}
+      <div class="about-stories__stats">
+        <div class="about-stories__stats-wrapper">
+          <div class="about-stories__stats-inner">
+            {%- for block in stats_blocks -%}
+              <div class="about-stories__stats-item" {{ block.shopify_attributes }}>
+                {%- if block.settings.number != blank -%}
+                  <div class="about-stories__stats-number">{{ block.settings.number }}</div>
+                {%- endif -%}
+                {%- if block.settings.label != blank -%}
+                  <div class="about-stories__stats-label">{{ block.settings.label }}</div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+          {%- comment -%} Clone for seamless marquee on mobile {%- endcomment -%}
+          <div class="about-stories__stats-inner about-stories__stats-inner--clone">
+            {%- for block in stats_blocks -%}
+              <div class="about-stories__stats-item about-stories__stats-item--clone">
+                {%- if block.settings.number != blank -%}
+                  <div class="about-stories__stats-number">{{ block.settings.number }}</div>
+                {%- endif -%}
+                {%- if block.settings.label != blank -%}
+                  <div class="about-stories__stats-label">{{ block.settings.label }}</div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
       </div>
-    {%- endfor -%}
+    {%- endif -%}
+    
+    {%- if section.settings.show_divider -%}
+      <div class="about-stories__divider"></div>
+    {%- endif -%}
+    
+    {%- if section.settings.quote_text != blank -%}
+      <div class="about-stories__quote">
+        <p>{{ section.settings.quote_text }}</p>
+      </div>
+    {%- endif -%}
+    {%- comment -%} Gallery images {%- endcomment -%}
+    {%- assign gallery_blocks = section.blocks | where: 'type', 'story_image' -%}
+    {%- if gallery_blocks.size > 0 -%}
+      <div class="about-stories__gallery" data-stories-carousel>
+        {%- for block in gallery_blocks -%}
+          <div class="about-stories__gallery-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.image -%}
+              <img 
+                src="{{ block.settings.image | img_url: '1010x684' }}" 
+                alt="{{ block.settings.image.alt | default: 'Story Image' }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    {%- if gallery_blocks.size > 1 -%}
+      <div class="about-stories__nav">
+        {%- for block in gallery_blocks -%}
+          <div class="about-stories__nav-dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}"></div>
+        {%- endfor -%}
+        <button class="about-stories__nav-button about-stories__nav-button--prev" data-prev>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M8.5 10.5L5.5 7L8.5 3.5" stroke="#234085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="about-stories__nav-button about-stories__nav-button--next" data-next>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M5.5 3.5L8.5 7L5.5 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    {%- endif -%}
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const carousel = document.querySelector('[data-stories-carousel]');
+  if (!carousel) return;
+  
+  const prevBtn = document.querySelector('[data-prev]');
+  const nextBtn = document.querySelector('[data-next]');
+  const dots = document.querySelectorAll('.about-stories__nav-dot');
+  
+  if (!prevBtn || !nextBtn || dots.length === 0) return;
+  
+  let currentIndex = 0;
+  const items = carousel.querySelectorAll('.about-stories__gallery-item');
+  const totalItems = items.length;
+  
+  function updateCarousel() {
+    const itemWidth = items[0].offsetWidth + 15; // width + margin-right
+    carousel.scrollTo({
+      left: currentIndex * itemWidth,
+      behavior: 'smooth'
+    });
+    
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+    });
+  }
+  
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+    updateCarousel();
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % totalItems;
+    updateCarousel();
+  });
+  
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      updateCarousel();
+    });
+  });
+  
+  // Update on scroll
+  carousel.addEventListener('scroll', () => {
+    const itemWidth = items[0].offsetWidth + 15;
+    const newIndex = Math.round(carousel.scrollLeft / itemWidth);
+    if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalItems) {
+      currentIndex = newIndex;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+  });
+});
+</script>
 
 {% schema %}
 {
@@ -118,6 +504,24 @@
   ],
   "blocks": [
     {
+      "type": "stat_item",
+      "name": "Statistic Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "34"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Tỉnh thành"
+        }
+      ]
+    },
+    {
       "type": "story_image",
       "name": "Story Image",
       "settings": [
@@ -134,6 +538,27 @@
     {
       "name": "About8 - Stories",
       "blocks": [
+        {
+          "type": "stat_item",
+          "settings": {
+            "number": "34",
+            "label": "Tỉnh thành"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "number": "85,000+",
+            "label": "Giấc ngủ ngon được giao đến tận nhà"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "number": "96,000+",
+            "label": "Khách hàng tin tưởng Ru9"
+          }
+        },
         {
           "type": "story_image"
         },

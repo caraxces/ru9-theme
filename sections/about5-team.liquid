@@ -31,12 +31,39 @@
 }
 
 @media (max-width: 749px) {
+  .about-team {
+    padding: 0;
+  }
+  
   .about-team__content {
     grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 15px;
+  }
+  
+  .about-team__image {
+    order: 1;
+    width: 100%;
+    max-width: 358px;
+    height: 246px;
+    background: #f0f7ff;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  
+  .about-team__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   
   .about-team__text {
-    font-size: var(--font-size-sm);
+    order: 2;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #000;
+    text-align: justify;
   }
 }
 </style>

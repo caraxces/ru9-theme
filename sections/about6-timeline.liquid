@@ -20,7 +20,7 @@
   position: absolute;
   left: 50%;
   top: 0;
-  width: 7px !important;
+  width: 2px !important;
   background: #1C2C58 !important;
   border-radius: 5px;
   transform: translateX(-50%);
@@ -150,43 +150,100 @@
 
 /* Responsive */
 @media (max-width: 749px) {
+  .about-timeline {
+    padding: 0;
+  }
+  
   .about-timeline__container {
-    padding: 0 var(--container-padding-mobile);
+    padding: 0 15px;
+    position: relative;
   }
   
   .about-timeline__line {
-    left: 50%;
+    left: 50%; /* Ở giữa như desktop */
     transform: translateX(-50%);
+    width: 2px;
+    background: #1c2c58;
+    border-radius: 5px;
+    min-height: 667px;
   }
   
   .about-timeline__step {
-    grid-template-columns: 1fr !important;
-    gap: var(--gutter-mobile);
+    grid-template-columns: 1fr 1fr; /* Giữ nguyên như desktop */
+    gap: 20px; /* Thu nhỏ gap từ 40px */
     min-height: auto;
-    padding-bottom: 60px;
+    padding-bottom: 50px; /* Thu nhỏ padding từ 100px */
+    align-items: center;
   }
   
-  .about-timeline__step--left .about-timeline__step-content,
-  .about-timeline__step--right .about-timeline__step-content {
-    grid-column: 1;
-    text-align: left;
-    padding-right: 0;
-    padding-left: 0;
-  }
-  
-  .about-timeline__step--left .about-timeline__step-image,
+  /* Giữ nguyên layout alternating như desktop */
   .about-timeline__step--right .about-timeline__step-image {
     grid-column: 1;
+    justify-self: end;
+    margin-right: 20px; /* Thu nhỏ margin từ 40px */
+    padding-left: 15px; /* Padding trái để không sát viền */
+  }
+  
+  .about-timeline__step--right .about-timeline__step-content {
+    grid-column: 2;
+    text-align: left;
+    padding-left: 20px; /* Thu nhỏ padding từ 40px */
+    padding-right: 15px; /* Padding phải để không sát viền */
+  }
+  
+  .about-timeline__step--left .about-timeline__step-content {
+    grid-column: 1;
+    text-align: right;
+    padding-right: 20px; /* Thu nhỏ padding từ 40px */
+    padding-left: 15px; /* Padding trái để không sát viền */
+  }
+  
+  .about-timeline__step--left .about-timeline__step-image {
+    grid-column: 2;
+    justify-self: start;
+    margin-left: 20px; /* Thu nhỏ margin từ 40px */
+    padding-right: 15px; /* Padding phải để không sát viền */
+  }
+  
+  /* Thu nhỏ kích thước ảnh */
+  .about-timeline__step-image {
     width: 100%;
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    justify-self: center;
+    max-width: 315px; /* Thu nhỏ từ 630px xuống 50% */
+    height: auto;
+    aspect-ratio: 630 / 400; /* Giữ nguyên tỷ lệ */
+    border: 3px solid #dbe8ff; /* Thu nhỏ border từ 7px */
+    border-radius: 5px;
+  }
+  
+  .about-timeline__step-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1c2c58;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  
+  .about-timeline__step-description {
+    font-size: 14px; /* Đồng bộ với title */
+    line-height: 1.4;
+    color: #000;
   }
   
   .about-timeline__step-dot {
-    left: 50%;
+    left: 50%; /* Ở giữa như desktop */
+    width: 8px;
+    height: 8px;
     transform: translateX(-50%);
+  }
+  
+  .about-timeline__step-dot svg {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .about-timeline__step-dot svg circle {
+    r: 4;
+    stroke-width: 0;
   }
 }
 
@@ -290,85 +347,178 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
   
-  // Align SVG circles with titles
-  timelineSteps.forEach(step => {
+  // Align SVG circles with titles and align content/image on mobile
+  timelineSteps.forEach((step, stepIndex) => {
     const titleElement = step.querySelector('.about-timeline__step-title');
     const dotElement = step.querySelector('.about-timeline__step-dot');
+    const contentElement = step.querySelector('.about-timeline__step-content');
+    const imageElement = step.querySelector('.about-timeline__step-image');
     
     if (titleElement && dotElement) {
       // Align SVG circle with center of title
       const updateDotPosition = () => {
-        const stepRect = step.getBoundingClientRect();
-        const titleRect = titleElement.getBoundingClientRect();
-        // Center of title minus half of dot height (15.5px)
-        const dotTop = (titleRect.top + titleRect.height / 2) - stepRect.top - 15.5;
-        dotElement.style.top = `${Math.max(0, dotTop)}px`;
+        const isMobile = window.innerWidth < 750;
+        if (!isMobile) {
+          const stepRect = step.getBoundingClientRect();
+          const titleRect = titleElement.getBoundingClientRect();
+          // Center of title minus half of dot height (15.5px)
+          const dotTop = (titleRect.top + titleRect.height / 2) - stepRect.top - 15.5;
+          dotElement.style.top = `${Math.max(0, dotTop)}px`;
+        } else {
+          // Mobile: align dot with title center
+          const stepRect = step.getBoundingClientRect();
+          const titleRect = titleElement.getBoundingClientRect();
+          const titleCenterY = (titleRect.top + titleRect.height / 2) - stepRect.top;
+          dotElement.style.top = `${Math.max(0, titleCenterY - 4)}px`; // 4px = half of 8px dot
+        }
       };
       
-      updateDotPosition();
+      // Mobile: align content and image to same vertical center
+      const updateMobileAlignment = () => {
+        const isMobile = window.innerWidth < 750;
+        if (!isMobile || !contentElement || !imageElement) {
+          // Reset transforms on desktop
+          if (contentElement) contentElement.style.transform = '';
+          if (imageElement) imageElement.style.transform = '';
+          return;
+        }
+        
+        // Measure positions
+        const stepRect = step.getBoundingClientRect();
+        const contentRect = contentElement.getBoundingClientRect();
+        const imageRect = imageElement.getBoundingClientRect();
+        
+        // Calculate centers relative to step
+        const contentCenterY = (contentRect.top + contentRect.height / 2) - stepRect.top;
+        const imageCenterY = (imageRect.top + imageRect.height / 2) - stepRect.top;
+        
+        // Calculate difference
+        const centerDiff = Math.abs(contentCenterY - imageCenterY);
+        
+        // If not aligned, apply transform
+        if (centerDiff > 2) { // 2px tolerance
+          const avgCenterY = (contentCenterY + imageCenterY) / 2;
+          const contentTransform = avgCenterY - contentCenterY;
+          const imageTransform = avgCenterY - imageCenterY;
+          
+          // Apply transform - inline style has higher specificity than CSS
+          contentElement.style.transform = `translateY(${contentTransform}px)`;
+          imageElement.style.transform = `translateY(${imageTransform}px)`;
+          
+          // Force reflow to ensure transform is applied
+          void contentElement.offsetHeight;
+          void imageElement.offsetHeight;
+        } else {
+          // Reset if already aligned
+          contentElement.style.transform = '';
+          imageElement.style.transform = '';
+        }
+      };
       
-      // Update on resize
+      // Debounce function to prevent excessive updates
+      let updateTimeout;
+      let isUpdating = false;
+      
+      const updateAll = () => {
+        if (isUpdating) return; // Prevent concurrent updates
+        isUpdating = true;
+        
+        updateDotPosition();
+        
+        // Only update mobile alignment if on mobile
+        if (window.innerWidth < 750) {
+          // Use requestAnimationFrame to ensure layout is complete
+          requestAnimationFrame(() => {
+            updateMobileAlignment();
+            isUpdating = false;
+          });
+        } else {
+          isUpdating = false;
+        }
+      };
+      
+      // Debounced update function
+      const debouncedUpdate = () => {
+        clearTimeout(updateTimeout);
+        updateTimeout = setTimeout(updateAll, 150);
+      };
+      
+      // Initial update - wait for DOM and images to be ready
+      const initUpdate = () => {
+        // Wait for all images to load
+        if (imageElement) {
+          const img = imageElement.querySelector('img');
+          if (img && !img.complete) {
+            img.addEventListener('load', () => {
+              setTimeout(updateAll, 200);
+            }, { once: true });
+            img.addEventListener('error', () => {
+              setTimeout(updateAll, 200);
+            }, { once: true });
+            return;
+          }
+        }
+        // If images already loaded or no images, update after a delay
+        setTimeout(updateAll, 200);
+      };
+      
+      // Start initialization
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initUpdate, { once: true });
+      } else {
+        initUpdate();
+      }
+      
+      // Update on resize with debouncing
       let resizeTimeout;
       window.addEventListener('resize', function() {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-          updateDotPosition();
+          debouncedUpdate();
           updateLineHeight();
-        }, 100);
-      });
+        }, 250);
+      }, { passive: true });
     }
   });
   
-  // Initial line height update - multiple attempts
-  setTimeout(updateLineHeight, 100);
-  setTimeout(updateLineHeight, 500);
-  setTimeout(updateLineHeight, 1000);
+  // Debounced line height update
+  let lineHeightTimeout;
+  const debouncedUpdateLineHeight = () => {
+    clearTimeout(lineHeightTimeout);
+    lineHeightTimeout = setTimeout(updateLineHeight, 200);
+  };
   
-  // Update line height after images load
-  const images = timelineContainer.querySelectorAll('img');
-  if (images.length > 0) {
-    let loadedImages = 0;
-    images.forEach(img => {
-      if (img.complete) {
+  // Initial line height update - single attempt after images load
+  const initLineHeight = () => {
+    const images = timelineContainer.querySelectorAll('img');
+    if (images.length > 0) {
+      let loadedImages = 0;
+      const checkAllLoaded = () => {
         loadedImages++;
-      } else {
-        img.addEventListener('load', () => {
-          loadedImages++;
-          if (loadedImages === images.length) {
-            setTimeout(updateLineHeight, 100);
-          }
-        });
-        img.addEventListener('error', () => {
-          loadedImages++;
-          if (loadedImages === images.length) {
-            setTimeout(updateLineHeight, 100);
-          }
-        });
-      }
-    });
-    
-    if (loadedImages === images.length) {
-      setTimeout(updateLineHeight, 100);
-    }
-  } else {
-    // No images, just update after a delay
-    setTimeout(updateLineHeight, 500);
-  }
-  
-  // Use MutationObserver to watch for content changes
-  if (window.MutationObserver) {
-    const observer = new MutationObserver(() => {
-      setTimeout(updateLineHeight, 100);
-    });
-    
-    if (timelineContainer) {
-      observer.observe(timelineContainer, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['style', 'class']
+        if (loadedImages === images.length) {
+          debouncedUpdateLineHeight();
+        }
+      };
+      
+      images.forEach(img => {
+        if (img.complete) {
+          checkAllLoaded();
+        } else {
+          img.addEventListener('load', checkAllLoaded, { once: true });
+          img.addEventListener('error', checkAllLoaded, { once: true });
+        }
       });
+    } else {
+      // No images, update after a delay
+      debouncedUpdateLineHeight();
     }
+  };
+  
+  // Start initialization
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLineHeight, { once: true });
+  } else {
+    initLineHeight();
   }
 });
 </script>

@@ -19,6 +19,8 @@
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
   margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid #000;
 }
 
 .about-closing__divider {
@@ -29,8 +31,29 @@
 }
 
 @media (max-width: 749px) {
+  .about-closing {
+    padding: 0;
+  }
+  
+  .about-closing__content {
+    padding: 0 15px;
+    text-align: center;
+  }
+  
   .about-closing__text {
-    font-size: var(--font-size-lg);
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
+    color: #1c2c58;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #000;
+  }
+  
+  .about-closing__divider {
+    margin-top: 24px;
+    background: var(--color-border);
   }
 }
 </style>

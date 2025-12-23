@@ -27,6 +27,8 @@
 .about-community__card {
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid #000;
+  padding-bottom: var(--space-md);
 }
 
 .about-community__card-image {
@@ -73,16 +75,65 @@
 }
 
 @media (max-width: 749px) {
+  .about-community {
+    padding: 0;
+  }
+  
   .about-community__title {
-    font-size: var(--font-size-2xl);
+    font-size: 20px;
+    font-weight: 700;
+    color: #1c2c58;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    padding: 0 15px;
   }
   
   .about-community__intro {
-    font-size: var(--font-size-sm);
+    font-size: 14px;
+    line-height: 1.4;
+    color: #000;
+    text-align: justify;
+    margin-bottom: 24px;
+    padding: 0 15px;
   }
   
   .about-community__grid {
     grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 0 15px;
+  }
+  
+  .about-community__card-image {
+    width: 100%;
+    height: 272px;
+    border-radius: 5px;
+    margin-bottom: 16px;
+  }
+  
+  .about-community__card-text {
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.4;
+    color: #000;
+    text-align: justify;
+    margin-bottom: 16px;
+  }
+  
+  .about-community__card-button {
+    height: 40px;
+    padding: 0 24px;
+    background: #234085;
+    color: white;
+    border-radius: 30px;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .about-community__card {
+    border-bottom: 1px solid #000;
+    padding-bottom: 16px;
   }
 }
 </style>

@@ -35,33 +35,105 @@
 }
 
 @media (max-width: 749px) {
+  .about-stats {
+    padding: 0;
+    background: #f0f7ff;
+    height: 126px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .about-stats__wrapper {
+    display: flex;
+    width: max-content;
+    height: 100%;
+    animation: marquee 30s linear infinite;
+  }
+  
+  .about-stats__wrapper:hover {
+    animation-play-state: paused;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
   .about-stats__container {
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    display: flex;
+    flex-direction: row;
+    gap: 97px;
+    padding: 32px 10px 20px;
+    height: 100%;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .about-stats__container--clone {
+    display: flex;
+    flex-direction: row;
+    gap: 97px;
+    padding: 32px 10px 20px;
+    height: 100%;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .about-stats__item {
+    flex: 0 0 auto;
+    text-align: center;
+    min-width: fit-content;
+    white-space: nowrap;
   }
   
   .about-stats__number {
-    font-size: var(--font-size-4xl);
+    font-size: 48px;
+    font-weight: 600;
+    color: #759ce6;
+    line-height: 80px;
+    margin-bottom: 0;
   }
   
   .about-stats__label {
-    font-size: var(--font-size-sm);
+    font-size: 14px;
+    color: #000;
+    line-height: 1.4;
+    margin-top: 0;
   }
 }
 </style>
 
 <section class="about-section about-stats page-width">
-  <div class="about-stats__container">
-    {%- for block in section.blocks -%}
-      <div class="about-stats__item" {{ block.shopify_attributes }}>
-        {%- if block.settings.number != blank -%}
-          <div class="about-stats__number">{{ block.settings.number }}</div>
-        {%- endif -%}
-        {%- if block.settings.label != blank -%}
-          <div class="about-stats__label">{{ block.settings.label }}</div>
-        {%- endif -%}
-      </div>
-    {%- endfor -%}
+  <div class="about-stats__wrapper">
+    <div class="about-stats__container">
+      {%- for block in section.blocks -%}
+        <div class="about-stats__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.number != blank -%}
+            <div class="about-stats__number">{{ block.settings.number }}</div>
+          {%- endif -%}
+          {%- if block.settings.label != blank -%}
+            <div class="about-stats__label">{{ block.settings.label }}</div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- comment -%} Clone for seamless marquee {%- endcomment -%}
+    <div class="about-stats__container about-stats__container--clone">
+      {%- for block in section.blocks -%}
+        <div class="about-stats__item">
+          {%- if block.settings.number != blank -%}
+            <div class="about-stats__number">{{ block.settings.number }}</div>
+          {%- endif -%}
+          {%- if block.settings.label != blank -%}
+            <div class="about-stats__label">{{ block.settings.label }}</div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
   </div>
 </section>
 
