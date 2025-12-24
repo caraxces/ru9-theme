@@ -536,9 +536,39 @@ document.addEventListener('DOMContentLoaded', () => {
                     rightColumn.appendChild(authorWrapper);
                 }
 
-                // IMPORTANT: Append the body content to the right column
+                // IMPORTANT: Extract and handle content properly
                 if (content) {
+                    // Extract .jdgm-rev__pics from content if it's inside (should be separate for desktop)
+                    const picsInsideContent = content.querySelector('.jdgm-rev__pics');
+                    if (picsInsideContent && !picContainer) {
+                        // If pics are in content but we don't have a separate picContainer, extract them
+                        picsInsideContent.remove();
+                        if (!picContainer) {
+                            // Create picContainer if it doesn't exist
+                            const extractedPicContainer = document.createElement('div');
+                            extractedPicContainer.className = 'jdgm-rev__pics';
+                            extractedPicContainer.appendChild(picsInsideContent);
+                            picContainer = extractedPicContainer;
+                        } else {
+                            picContainer.appendChild(picsInsideContent);
+                        }
+                    }
+                    
+                    // Append the body content to the right column
                     rightColumn.appendChild(content);
+                }
+                
+                // CRITICAL FIX: Find and move .jdgm-rev__reply to rightColumn if it exists outside content
+                // Reply can be a sibling of content, not inside it
+                let reply = review.querySelector('.jdgm-rev__reply');
+                if (!reply) {
+                    // Also check if it's in content (shouldn't be, but just in case)
+                    reply = content ? content.querySelector('.jdgm-rev__reply') : null;
+                }
+                
+                if (reply && !rightColumn.contains(reply)) {
+                    // Move reply to rightColumn (after content)
+                    rightColumn.appendChild(reply);
                 }
 
                 // Clean up the original header which is now empty

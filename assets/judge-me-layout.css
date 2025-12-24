@@ -279,6 +279,18 @@ only screen and (min-resolution: 192dpi) {
 
 .jdgm-rev__reply {
     background-color: #F0F7FF !important;
+    padding: 16px 20px !important;
+    margin-top: 16px !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Ensure reply displays correctly when inside rightColumn */
+.jdgm-custom-right-column-content .jdgm-rev__reply {
+    display: block !important;
+    margin-top: 16px !important;
+    margin-bottom: 0 !important;
 }
 
 .jdgm-widget:not(.jdgm-review-widget--small, .jdgm-review-widget--medium) .jdgm-write-rev-link {

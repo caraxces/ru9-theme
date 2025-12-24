@@ -97,6 +97,7 @@
       "type": "about5-team",
       "name": "About5 - Team",
       "settings": {
+        "video": "shopify://files/videos/Brand name_3.mp4",
         "text": "<p>Ru9 được xây dựng không chỉ từ mong muốn mang đến giấc ngủ trọn vẹn, mà còn từ tâm huyết của mỗi thành viên trong đại gia đình Ru9. Từ đội ngũ nghiên cứu – thiết kế, sản xuất đến các bạn showroom trực tiếp đồng hành cùng khách hàng, tất cả đều góp sức trong quy trình khép kín, minh bạch, không qua trung gian, giúp khách hàng có những trải nghiệm trọn vẹn nhất.</p>"
       }
     },
@@ -108,7 +109,7 @@
           "settings": {
             "title": "Nhà máy sản xuất hiện đại",
             "description": "Sản phẩm của Ru9 được nghiên cứu tỉ mỉ và sản xuất với công nghệ tiên tiến",
-            "image": "shopify://shop_images/Rectangle_214_da53278c-7ecb-4efd-9110-e2af289e2a8b.png",
+            "image": "shopify://shop_images/2b6b96a94caacc56c069ef51a7f914ce2716b672.png",
             "position": "right"
           }
         },
@@ -117,7 +118,7 @@
           "settings": {
             "title": "Miễn phí lưu kho",
             "description": "Không gian lưu trữ đạt chuẩn, đảm bảo mỗi sản phẩm luôn được bảo quản tốt nhất trước khi giao đến khách hàng",
-            "image": "shopify://shop_images/Rectangle_215_a5657bcc-0854-49df-ad21-f5e858640923.png",
+            "image": "shopify://shop_images/8306caa4cfa52f4891e68d17c0e95e63959a9411.png",
             "position": "left"
           }
         },
@@ -126,7 +127,7 @@
           "settings": {
             "title": "Showroom ở Hà Nội và TP. Hồ Chí Minh",
             "description": "Điểm chạm trực tiếp để khách hàng trải nghiệm sản phẩm và được tư vấn một cách tận tâm, minh bạch",
-            "image": "shopify://shop_images/Rectangle_216.png",
+            "image": "shopify://shop_images/c3714d1216ec7cb9e8fdb8319fdc8b1414446aca.png",
             "position": "right"
           }
         },
@@ -135,7 +136,7 @@
           "settings": {
             "title": "Giao hàng tận nơi",
             "description": "Sản phẩm đến tay khách hàng, mang theo lời hứa về một giấc ngủ ngon trọn vẹn",
-            "image": "shopify://shop_images/Rectangle_217_fe865f68-d42b-401e-8b86-d99967473f00.png",
+            "image": "shopify://shop_images/ccad1c37b9154726c8bfe89fb6271f108aa9c1b1.png",
             "position": "left"
           }
         }
