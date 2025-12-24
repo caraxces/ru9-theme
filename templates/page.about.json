@@ -193,83 +193,56 @@
         "icon_3_color": "#007bff"
       }
     },
-    "about9_certifications_Y463Rz": {
-      "type": "about9-certifications",
+    "certifications_GQ8Mkz": {
+      "type": "certifications",
       "blocks": {
-        "certification_7XRqkE": {
+        "certification_GgXULY": {
           "type": "certification",
           "settings": {
-            "image": "shopify://shop_images/Group_4276.png",
-            "label": ""
+            "image": "shopify://shop_images/logo_revise_certi.jpg",
+            "label": "Chứng nhận",
+            "name": "CertiPUR-US®"
           }
         },
-        "certification_hQW6Ki": {
+        "certification_YwBKqU": {
           "type": "certification",
           "settings": {
-            "image": "shopify://shop_images/Group_5215.png",
-            "label": ""
+            "image": "shopify://shop_images/logo_revise_OEKO-TEX.jpg",
+            "label": "Chứng nhận",
+            "name": "OEKO-TEX®"
           }
         }
       },
       "block_order": [
-        "certification_7XRqkE",
-        "certification_hQW6Ki"
+        "certification_GgXULY",
+        "certification_YwBKqU"
       ],
-      "name": "About9 - Certifications",
+      "name": "Certifications",
       "settings": {
-        "title": "Chất lượng sản phẩm vượt trội",
-        "text": "<p>Ru9 tự hào là <strong>thương hiệu tiên phong tại Việt Nam đạt chứng nhận CertiPUR-US® cho foam nệm</strong>, khẳng định độ an toàn, thân thiện với môi trường và tuân thủ các tiêu chuẩn khắt khe về thành phần, quy trình sản xuất và khí thải.</p><p>Ru9 sử dụng vải đạt <strong>STANDARD 100 by OEKO-TEX®</strong>, bảo đảm không chứa chất độc hại, an toàn cho sức khỏe và thân thiện với môi trường.</p>",
+        "title": "Chất lượng sản phẩm vượt trội ",
+        "description": "<p>Ru9 tự hào là <strong>thương hiệu tiên phong tại Việt Nam đạt chứng nhận CertiPUR-US®</strong> <strong>cho foam nệm</strong>, khẳng định độ an toàn, thân thiện với môi trường và tuân thủ các tiêu chuẩn khắt khe về thành phần, quy trình sản xuất và khí thải.<br/><br/>Ru9 sử dụng vải đạt <strong>STANDARD 100 by OEKO-TEX®</strong>, bảo đảm không chứa chất độc hại, an toàn cho sức khỏe và thân thiện với môi trường.</p>",
         "button_text": "Xem chi tiết",
-        "button_url": "shopify://pages/certification",
-        "button_new_tab": true
+        "button_link": "https://ru9.vn/pages/certification"
       }
     },
     "about8_stories_jmiAJT": {
       "type": "about8-stories",
       "blocks": {
-        "story_image_jpcP3z": {
-          "type": "story_image",
-          "settings": {}
-        },
-        "story_image_kLMQwQ": {
-          "type": "story_image",
-          "settings": {}
-        },
-        "story_image_n7Y69b": {
-          "type": "story_image",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "story_image_jpcP3z",
-        "story_image_kLMQwQ",
-        "story_image_n7Y69b"
-      ],
-      "name": "About8 - Stories",
-      "settings": {
-        "title": "Qua những câu chuyện thực tế",
-        "quote_text": "\"95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP. HCM\"",
-        "show_divider": true
-      }
-    },
-    "about7_stats_4PcxgL": {
-      "type": "about7-stats",
-      "blocks": {
-        "stat_item_nCc9Nd": {
+        "stat_item_EHzzGa": {
           "type": "stat_item",
           "settings": {
             "number": "34",
             "label": "Tỉnh thành"
           }
         },
-        "stat_item_NcHFrd": {
+        "stat_item_CnBL4t": {
           "type": "stat_item",
           "settings": {
             "number": "85,000+",
-            "label": "Giấc ngủ ngon được giao đến tận nhà"
+            "label": "Giấc ngủ ngon được giao đến tận nhà "
           }
         },
-        "stat_item_fx8JAy": {
+        "stat_item_GbhUNW": {
           "type": "stat_item",
           "settings": {
             "number": "96,000+",
@@ -278,11 +251,60 @@
         }
       },
       "block_order": [
-        "stat_item_nCc9Nd",
-        "stat_item_NcHFrd",
-        "stat_item_fx8JAy"
+        "stat_item_EHzzGa",
+        "stat_item_CnBL4t",
+        "stat_item_GbhUNW"
       ],
-      "name": "About7 - Statistics",
+      "name": "About8 - Stories",
+      "settings": {
+        "title": "Qua những câu chuyện thực tế",
+        "quote_text": "\"95% hài lòng sau 100 đêm thử, đánh giá trung bình 4.8/5, 10 năm cam kết bảo hành cùng 3 showroom tại Hà Nội và TP. HCM\"",
+        "show_divider": false
+      }
+    },
+    "about13_media_GHxRKV": {
+      "type": "about13-media",
+      "blocks": {
+        "top_image_cLaGW7": {
+          "type": "top_image",
+          "settings": {
+            "image": "shopify://shop_images/tempImageMgII3T_1.png"
+          }
+        },
+        "bottom_video_dBEEUk": {
+          "type": "bottom_video",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Mate] - Revu.mp4"
+          }
+        },
+        "bottom_video_iqPYdb": {
+          "type": "bottom_video",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Niu] - Lam Hương.mp4"
+          }
+        },
+        "bottom_video_6ci9RL": {
+          "type": "bottom_video",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Original] Trà Thơm.mp4"
+          }
+        },
+        "bottom_video_NKJwCX": {
+          "type": "bottom_video",
+          "settings": {
+            "video": "shopify://files/videos/Website - [Mate] - Revu 2.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "top_image_cLaGW7",
+        "bottom_video_dBEEUk",
+        "bottom_video_iqPYdb",
+        "bottom_video_6ci9RL",
+        "bottom_video_NKJwCX"
+      ],
+      "disabled": true,
+      "name": "About13 - Media",
       "settings": {}
     },
     "about10_community_QyLkGG": {
@@ -291,6 +313,7 @@
         "community_card_UQde6d": {
           "type": "community_card",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_23.png",
             "text": "Ru9 trao tặng 1500 nệm cho các bác sĩ và tình nguyện viên trong giai đoạn đại dịch Covid 19",
             "button_text": "Xem chi tiết",
             "button_url": "https://vietnamnet.vn/1500-nem-ru9-tang-benh-vien-khu-cach-ly-chong-dich-covid-19-638690.html",
@@ -300,6 +323,7 @@
         "community_card_X7zENz": {
           "type": "community_card",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_24.png",
             "text": "Ru9 với chiến dịch \"Cảm ơn Shippers\" - tặng nệm foam và yên xe mới cho các Shipper",
             "button_text": "Xem chi tiết",
             "button_url": "https://vnexpress.net/nhung-y-tuong-thien-nguyen-cua-doanh-nghiep-khoi-nghiep-ru9-4412981.html",
@@ -309,6 +333,7 @@
         "community_card_3mjGXz": {
           "type": "community_card",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_25.png",
             "text": "Ru9 trao tặng 100 triệu đồng cùng 100 nệm cuộn cho bà miền Trung chịu ảnh hưởng của bão lũ",
             "button_text": "Xem chi tiết",
             "button_url": "",
@@ -407,9 +432,9 @@
     "about5_team_RNwGty",
     "about6_timeline_M7iJdE",
     "slideshow_KYKdpD",
-    "about9_certifications_Y463Rz",
+    "certifications_GQ8Mkz",
     "about8_stories_jmiAJT",
-    "about7_stats_4PcxgL",
+    "about13_media_GHxRKV",
     "about10_community_QyLkGG",
     "about11_commitments_FwDmH8",
     "about12_closing_7Gjz8K"

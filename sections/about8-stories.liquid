@@ -3,14 +3,13 @@
 
 <style>
 .about-stories {
-  padding: var(--space-4xl) 0;
+  /* Padding handled by .about-section */
   background: var(--color-background);
 }
 
 .about-stories__container {
-  max-width: 1594px;
-  margin: 0 auto;
-  padding: 0 var(--container-padding-desktop);
+  width: 100%;
+  /* Padding handled by .page-width class */
 }
 
 .about-stories__title {
@@ -29,7 +28,6 @@
   padding: 64px 0;
   margin-bottom: 40px;
   width: 100%;
-  max-width: 1596px;
   overflow: hidden;
 }
 
@@ -90,7 +88,6 @@
   height: 1px;
   background: var(--color-border);
   margin: 40px 0;
-  max-width: 1594px;
 }
 
 .about-stories__quote {
@@ -101,15 +98,14 @@
   text-align: justify;
   line-height: var(--line-height-relaxed);
   margin-bottom: 40px;
-  max-width: 1596px;
+  width: 100%;
 }
 
 .about-stories__gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 43px; /* Figma: 162px to 710px = 548px gap, but actual is ~43px between items */
-  max-width: 1603px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .about-stories__gallery-item {

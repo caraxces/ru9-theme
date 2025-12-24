@@ -14,7 +14,7 @@
       "settings": {
         "section_width": "page-width",
         "customize_width": 1800,
-        "text_alignment": "center",
+        "text_alignment": "left",
         "enable_customize_width_content": false,
         "customize_width_content": 1800,
         "remove_space_below": false
@@ -45,7 +45,9 @@
         "image_text_CHNUDH"
       ],
       "name": "Certificate Description",
-      "settings": {}
+      "settings": {
+        "title": ""
+      }
     },
     "countdown_tyxbU3": {
       "type": "countdown",

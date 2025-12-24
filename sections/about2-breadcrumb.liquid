@@ -2,7 +2,8 @@
 {% render 'about-design-system' %}
 
 <style>
-.about-breadcrumb {
+/* Override .about-section padding for breadcrumb */
+.about-section.about-breadcrumb {
   padding: 50px 0 var(--space-md) 0; /* padding-top: 50px for desktop */
 }
 
@@ -50,7 +51,7 @@
 }
 </style>
 
-<section class="about-breadcrumb page-width">
+<section class="about-section about-breadcrumb page-width">
   <nav class="about-breadcrumb__nav">
     <a href="{{ section.settings.home_url | default: '/' }}">{{ section.settings.home_text | default: 'Trang chủ' }}</a>
     <span class="about-breadcrumb__separator">/</span>

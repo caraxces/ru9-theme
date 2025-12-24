@@ -8,8 +8,21 @@
     endif
   endif
 %}
+<style>
+.main-page .section-header__title.text-3xl {
+  font-size: 39px;
+  margin-top: 100px;
+}
+
+@media (max-width: 749px) {
+  .main-page .section-header__title.text-3xl {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+}
+</style>
 <div
-  class="page-width page-content{% if section.settings.remove_space_below %} remove_space_below_section{% endif %}"
+  class="page-width page-content main-page{% if section.settings.remove_space_below %} remove_space_below_section{% endif %}"
   style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
 >
   {%- render 'breadcrumbs' -%}
