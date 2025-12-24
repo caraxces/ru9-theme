@@ -6,10 +6,10 @@
   display: grid;
   grid-template-columns: 759px 1fr;
   gap: var(--gutter-desktop);
-  align-items: start;
+  align-items: center;
 }
 
-.about-team__image {
+.about-team__video {
   width: 100%;
   max-width: 759px;
   border-radius: var(--radius-sm);
@@ -17,7 +17,7 @@
   background: var(--color-background-light);
 }
 
-.about-team__image img {
+.about-team__video video {
   width: 100%;
   height: auto;
   display: block;
@@ -31,17 +31,12 @@
 }
 
 @media (max-width: 749px) {
-  .about-team {
-    padding: 0;
-  }
-  
   .about-team__content {
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 0 15px;
   }
   
-  .about-team__image {
+  .about-team__video {
     order: 1;
     width: 100%;
     max-width: 358px;
@@ -52,7 +47,7 @@
     margin-bottom: 24px;
   }
   
-  .about-team__image img {
+  .about-team__video video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -70,13 +65,17 @@
 
 <section class="about-section about-team page-width">
   <div class="about-team__content">
-    <div class="about-team__image">
-      {%- if section.settings.image -%}
-        <img 
-          src="{{ section.settings.image | img_url: '1518x932' }}" 
-          alt="{{ section.settings.image.alt | default: 'About Ru9 Team' }}"
-          loading="lazy"
-        >
+    <div class="about-team__video">
+      {%- if section.settings.video != blank -%}
+        {{ section.settings.video | video_tag:
+          class: 'about-team__video-element',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          playsinline: true,
+          controls: false,
+          image_size: '1518x932'
+        }}
       {%- endif -%}
     </div>
     <div class="about-team__text">
@@ -94,10 +93,10 @@
   "class": "about5-team-section",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Team Image",
-      "info": "Recommended size: 759x466px"
+      "type": "video",
+      "id": "video",
+      "label": "Team Video",
+      "info": "Upload video to Shopify CDN. Recommended size: 759x466px"
     },
     {
       "type": "richtext",

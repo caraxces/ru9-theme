@@ -1,8 +1,13 @@
 /* ===============================
    RU9 RESPONSIVE CANVAS LAYOUT
-   Responsive canvas with proportional scaling
+   Performance-optimized responsive canvas
    Applied to: Homepage + All Templates
 ================================== */
+
+/* Performance: Use CSS variables for consistency */
+:root {
+  --page-width: 1200px; /* Default, overridden at 1400px+ */
+}
 
 /* Base styles - Mobile first approach */
 .page-width,
@@ -10,6 +15,8 @@
   max-width: var(--page-width);
   margin: 0 auto;
   padding: 0 15px;
+  /* Performance: contain layout */
+  box-sizing: border-box;
 }
 
 /* Tablet and up (750px+) */
@@ -19,6 +26,7 @@
     padding: 0 3.2rem;
   }
   
+  /* Header specific */
   .header.page-width,
   .utility-bar_grid.page-width {
     padding-left: 3.2rem;
@@ -51,7 +59,7 @@
     padding: 0 5rem;
   }
   
-  /* Specific sections that need fixed layout */
+  /* Specific sections - Grouped for performance */
   .slideshow-section .page-width,
   .content-banner-cta-section .page-width,
   .collections-listing-section .page-width,
@@ -69,14 +77,27 @@
     padding: 0 5rem !important;
   }
   
-  /* Certifications container fixed layout */
+  /* Full-width sections that respect container */
+  .slideshow-section,
+  .content-banner-cta-section {
+    width: 100%;
+  }
+
+  .slideshow-section .page-width,
+  .content-banner-cta-section .page-width {
+    max-width: 1594px !important;
+    margin: 0 auto !important;
+    padding: 0 5rem !important;
+  }
+  
+  /* Certifications container */
   .certifications__container {
     max-width: 1594px !important;
     margin: 0 auto !important;
     padding: 0 5rem !important;
   }
   
-  /* Header and Footer fixed layout for all templates */
+  /* Header and Footer */
   .header-group .page-width,
   .footer-group .page-width {
     max-width: 1594px !important;
@@ -84,8 +105,10 @@
     padding: 0 5rem !important;
   }
   
-  /* Dropdown menu fixed layout for all templates - Align with canvas */
-  .site-nav__dropdown.megamenu {
+  /* Dropdown menu - Grouped for performance */
+  .site-nav__dropdown.megamenu,
+  .site-nav__dropdown.megamenu.text-left,
+  .site-nav__dropdown {
     position: absolute !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
@@ -94,21 +117,11 @@
     margin: 0 auto !important;
     padding: 0 !important;
     box-sizing: border-box !important;
+    /* Performance: use will-change for transforms */
+    will-change: transform;
   }
   
-  /* Ensure dropdown menu respects container - text-left variant */
-  .site-nav__dropdown.megamenu.text-left {
-    position: absolute !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    max-width: 1594px !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-  }
-  
-  /* Page-width inside dropdown should have padding to match canvas */
+  /* Page-width inside dropdown */
   .site-nav__dropdown.megamenu .page-width,
   .site-nav__dropdown.megamenu.text-left .page-width {
     max-width: 1594px !important;
@@ -119,39 +132,11 @@
     box-sizing: border-box !important;
   }
   
-  /* Override any absolute positioning that might stick to left */
-  .site-nav__dropdown {
-    position: absolute !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    max-width: 1594px !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-  }
-  
-  /* Ensure sections don't break out of container */
+  /* Sections container */
   .section {
     width: 100%;
     max-width: none;
+    /* Performance: contain layout */
+    contain: layout style;
   }
-  
-  /* Special handling for full-width sections that should still respect container */
-  .slideshow-section,
-  .content-banner-cta-section {
-    width: 100%;
-  }
-  
-  .slideshow-section .page-width,
-  .content-banner-cta-section .page-width {
-    max-width: 1594px !important;
-    margin: 0 auto !important;
-    padding: 0 5rem !important;
-  }
-}
-
-/* Mobile - Keep original behavior (no changes) */
-@media (max-width: 768px) {
-  /* Mobile layout remains unchanged - keep original theme.css behavior */
 }

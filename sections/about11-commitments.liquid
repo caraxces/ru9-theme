@@ -7,9 +7,8 @@
 }
 
 .about-commitments__container {
-  max-width: 1594px;
-  margin: 0 auto;
-`}
+  width: 100%;
+}
 
 /* Grid 3 columns x 2 rows = 6 cells total */
 .about-commitments__grid {
@@ -102,9 +101,6 @@
     padding: 0;
   }
   
-  .about-commitments__container {
-    padding: 0 15px;
-  }
   
   .about-commitments__grid {
     grid-template-columns: 1fr;
@@ -161,9 +157,6 @@
 }
 
 @media (min-width: 750px) and (max-width: 1199px) {
-  .about-commitments__container {
-    padding: 0 var(--container-padding-tablet);
-  }
   
   .about-commitments__grid {
     grid-template-columns: repeat(2, 1fr);
@@ -178,7 +171,7 @@
 }
 </style>
 
-<section class="about-section about-commitments">
+<section class="about-section about-commitments page-width">
   <div class="about-commitments__container">
     <div class="about-commitments__grid">
       {%- comment -%} First cell: Title and Description {%- endcomment -%}

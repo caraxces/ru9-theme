@@ -48,16 +48,15 @@
       {% endif %}
       <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+      {% comment %} Google Fonts: Optimized - single preconnect, merged requests, font-display swap {% endcomment %}
       <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
       <link rel="dns-prefetch" href="https://ajax.googleapis.com">
       <link rel="dns-prefetch" href="https://maps.googleapis.com">
       <link rel="dns-prefetch" href="https://maps.gstatic.com">
-      <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+      {% comment %} Merge Google Fonts into single request for better performance - font-display: swap prevents FOIT {% endcomment %}
+      <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   
       {%- if settings.favicon != blank -%}
         <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">

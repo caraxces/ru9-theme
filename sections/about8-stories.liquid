@@ -130,9 +130,6 @@
     background: var(--color-background);
   }
   
-  .about-stories__container {
-    padding: 0 var(--container-padding-mobile);
-  }
   
   .about-stories__title {
     font-size: 20px;
@@ -329,7 +326,7 @@
 }
 </style>
 
-<section class="about-section about-stories">
+<section class="about-section about-stories page-width">
   <div class="about-stories__container">
     {%- if section.settings.title != blank -%}
       <h2 class="about-stories__title">{{ section.settings.title }}</h2>

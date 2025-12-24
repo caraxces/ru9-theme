@@ -10,13 +10,19 @@
    #FORCE HIGH-QUALITY IMAGE RENDERING
    ========================================================================== */
 
-/* Force high-quality image rendering globally for Judge.me images */
+/* Optimized image rendering - Performance focused */
 .jdgm-rev__pic-img,
 .jdgm-rev__pic-link img {
-    image-rendering: -webkit-optimize-contrast !important;
-    image-rendering: crisp-edges !important;
+    image-rendering: auto !important;
+    /* Better performance than crisp-edges */
     -webkit-filter: none !important;
-    filter: contrast(1.02) !important;
+    filter: none !important;
+    /* Remove filter for better performance */
+    /* Performance optimizations */
+    will-change: auto;
+    transform: translateZ(0);
+    /* Hardware acceleration */
+    backface-visibility: hidden;
 }
 
 .jdgm-write-rev-link.jdgm-write-rev-link {
@@ -33,18 +39,36 @@
 .jdgm-rev-widg {
     max-width: 100% !important;
     margin: 5rem auto !important;
-    /* Center the widget block with vertical spacing */
     box-sizing: border-box !important;
-    /* Mobile-first padding, based on featured-collections */
-    padding: 0 20px !important;
+    padding: 0 15px !important;
+    /* Match homepage canvas: 15px mobile */
     text-align: left !important;
     font-family: 'Be Vietnam Pro', sans-serif !important;
+    /* Performance: contain layout */
+    contain: layout style;
 }
 
-/* Desktop padding, based on featured-collections */
-@media (min-width: 769px) {
+/* Desktop padding - Use page-width for canvas consistency */
+@media (min-width: 750px) {
     .jdgm-rev-widg {
-        padding: 0 !important;
+        padding: 0 3.2rem !important;
+        /* Match homepage canvas */
+    }
+}
+
+@media (min-width: 1200px) {
+    .jdgm-rev-widg {
+        padding: 0 5rem !important;
+        /* Match homepage canvas */
+    }
+}
+
+@media (min-width: 1400px) {
+    .jdgm-rev-widg {
+        max-width: 1594px !important;
+        /* Match homepage max-width */
+        margin: 5rem auto !important;
+        padding: 0 5rem !important;
     }
 }
 
@@ -123,14 +147,16 @@
     color: #000000 !important;
 }
 
-/* 1. Title */
+/* 1. Title - Match Figma Desktop Design */
 .jdgm-rev-widg__title {
     width: 100% !important;
     margin-bottom: 20px !important;
     font-size: 39px !important;
     font-weight: 700 !important;
+    line-height: 1.2 !important;
     text-align: left !important;
-    /* Center the title */
+    color: #1C2C58 !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
 }
 
 /* 2. Left Column (Created by JS) */
@@ -154,18 +180,19 @@
     /* Prepare for inner container */
 }
 
-/* 4. Image Carousel */
+/* 4. Image Carousel - Match Figma: 345x317px, gap 100px */
 .jdgm-custom-image-carousel {
     display: flex;
-    gap: 16px;
+    gap: 100px;
+    /* Match Figma annotation */
     overflow-x: auto;
     padding-bottom: 10px;
-    /* Space for scrollbar */
     scrollbar-width: thin;
     scrollbar-color: #1C2C58 #e0e0e0;
     align-items: center;
-    /* Vertically center images if they are shorter */
     margin-left: 40px !important;
+    /* Performance: use will-change for smoother scrolling */
+    will-change: scroll-position;
 }
 
 .jdgm-custom-image-carousel::-webkit-scrollbar {
@@ -189,10 +216,13 @@
 
 .jdgm-custom-image-carousel img,
 .jdgm-custom-image-carousel video {
-    width: 300px;
-    height: 300px;
+    width: 345px;
+    /* Match Figma: 345px */
+    height: 317px;
+    /* Match Figma: 317px */
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 5px;
+    /* Match Figma: rounded-[5px] */
     flex-shrink: 0;
     /* High-quality image rendering */
     image-rendering: -webkit-optimize-contrast;
@@ -261,10 +291,12 @@ only screen and (min-resolution: 192dpi) {
 .jdgm-rev-widg__summary::before {
     grid-area: rating !important;
     content: attr(data-rating) !important;
-    font-size: 64px !important;
+    font-size: 90px !important;
+    /* Match Figma: 90px for desktop */
     font-weight: 700 !important;
     line-height: 1 !important;
     color: #1C2C58 !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
 }
 
 .jdgm-rev-widg__summary-stars {
@@ -276,7 +308,10 @@ only screen and (min-resolution: 192dpi) {
     grid-area: text !important;
     align-self: start !important;
     width: 375px !important;
-    /* Set width as requested */
+    font-size: 20px !important;
+    line-height: 1.5 !important;
+    color: #000 !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
 }
 
 .jdgm-write-rev-link {
@@ -548,6 +583,17 @@ only screen and (min-resolution: 192dpi) {
         margin-bottom: 0px !important;
     }
 
+    .jdgm-rev-widg__summary::before {
+        font-size: 80px !important;
+        /* Match Figma mobile: 80px */
+    }
+
+    .jdgm-rev-widg__summary-text {
+        width: 100% !important;
+        font-size: 14px !important;
+        /* Match Figma mobile */
+    }
+
     .jdgm-rev-widg__summary-average {
         display: none !important;
     }
@@ -578,6 +624,12 @@ only screen and (min-resolution: 192dpi) {
     .jdgm-rev-widg__title {
         text-align: center !important;
         font-size: 20px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.6px !important;
+        /* Match Figma mobile */
+        line-height: 33.6px !important;
+        /* Match Figma */
+        color: #1C2C58 !important;
     }
 
     /* 2. Summary & Actions - Reverted to Desktop Layout */
@@ -594,10 +646,20 @@ only screen and (min-resolution: 192dpi) {
         max-width: 400px;
     }
 
-    /* 3. Image Carousel */
+    /* 3. Image Carousel - Match Figma mobile: 120x120px */
     .jdgm-custom-image-carousel {
         margin-left: 0 !important;
         width: 100%;
+        gap: 4px !important;
+        /* Tighter gap on mobile */
+    }
+
+    .jdgm-custom-image-carousel img,
+    .jdgm-custom-image-carousel video {
+        width: 120px !important;
+        /* Match Figma mobile */
+        height: 120px !important;
+        border-radius: 5px !important;
     }
 
     /* 4. Individual Review Cards: FINAL 2-Tier Mobile Layout */

@@ -157,7 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const uniqueSources = new Set();
         let carouselBuilt = false;
 
-        const mediaPoller = setInterval(() => {
+        // Performance: Use requestAnimationFrame for smoother polling
+        let lastPollTime = 0;
+        const POLL_INTERVAL = 1000; // 1 second
+        
+        const mediaPoller = () => {
+            const now = performance.now();
+            if (now - lastPollTime < POLL_INTERVAL) {
+                requestAnimationFrame(mediaPoller);
+                return;
+            }
+            lastPollTime = now;
+            
             pollAttempts++;
             const reviews = document.querySelectorAll('.jdgm-rev');
             const newlyFoundMedia = [];
@@ -217,19 +228,32 @@ document.addEventListener('DOMContentLoaded', () => {
                             img.fetchPriority = 'high';
                         }
 
-                        // Set explicit dimensions to prevent layout shift
-                        img.width = 300;
-                        img.height = 300;
+                        // Set explicit dimensions - Match Figma: 345x317px desktop
+                        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+                        if (isMobile) {
+                            img.width = 120; // Match Figma mobile
+                            img.height = 120;
+                            img.sizes = '120px';
+                        } else {
+                            img.width = 345; // Match Figma desktop
+                            img.height = 317;
+                            img.sizes = '345px';
+                        }
 
                         // Add srcset for responsive images (if Shopify CDN)
                         if (item.src.includes('cdn.shopify.com')) {
                             const baseUrl = item.src.split('?')[0];
-                            img.srcset = `
-                                ${baseUrl}?width=300&quality=100 300w,
-                                ${baseUrl}?width=600&quality=100 600w,
-                                ${baseUrl}?width=900&quality=100 900w
-                            `;
-                            img.sizes = '300px';
+                            if (isMobile) {
+                                img.srcset = `
+                                    ${baseUrl}?width=120&quality=85 120w,
+                                    ${baseUrl}?width=240&quality=85 240w
+                                `;
+                            } else {
+                                img.srcset = `
+                                    ${baseUrl}?width=345&quality=90 345w,
+                                    ${baseUrl}?width=690&quality=90 690w
+                                `;
+                            }
                         }
 
                         mediaContainer.appendChild(img);
@@ -237,13 +261,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         const video = document.createElement('video');
                         video.src = item.src;
                         video.loading = index < 3 ? 'eager' : 'lazy';
+                        const isMobile = window.matchMedia('(max-width: 768px)').matches;
                         Object.assign(video, {
                             playsinline: true,
                             autoplay: true,
                             muted: true,
                             loop: true,
-                            width: 300,
-                            height: 300
+                            width: isMobile ? 120 : 345, // Match Figma dimensions
+                            height: isMobile ? 120 : 317,
+                            loading: 'lazy' // Lazy load videos
                         });
                         mediaContainer.appendChild(video);
                     }
@@ -256,15 +282,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (pollAttempts >= MAX_POLL_ATTEMPTS) {
-                clearInterval(mediaPoller);
                 if (!carouselBuilt) {
                     actionsWrapper.innerHTML = ''; // Clear if nothing ever found
                 }
+                return; // Stop polling
             }
-        }, 1000);
+            
+            requestAnimationFrame(mediaPoller);
+        };
+        
+        // Start polling
+        requestAnimationFrame(mediaPoller);
     };
 
-    const widgetPoller = setInterval(() => {
+    // Performance: Use requestIdleCallback if available, fallback to setTimeout
+    const scheduleCheck = (callback) => {
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(callback, { timeout: 500 });
+        } else {
+            setTimeout(callback, 500);
+        }
+    };
+    
+    const checkForWidget = () => {
         const widget = document.querySelector('.jdgm-rev-widg');
         if (widget && widget.offsetParent !== null) {
             // Wait an extra moment for Judge.me's own JS to finish arranging things
@@ -272,15 +312,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 enhanceLayout();
                 restructureReviewCards(); // Restructure individual cards
             }, 200);
-            clearInterval(widgetPoller);
+            return; // Stop checking
         }
 
         widgetAttempts++;
-        if (widgetAttempts > MAX_WIDGET_ATTEMPTS) {
-            clearInterval(widgetPoller);
+        if (widgetAttempts <= MAX_WIDGET_ATTEMPTS) {
+            scheduleCheck(checkForWidget);
+        } else {
             console.log('Could not find visible Judge.me widget to enhance.');
         }
-    }, 500);
+    };
+    
+    // Start checking for widget
+    scheduleCheck(checkForWidget);
 
     const restructureReviewCards = () => {
         // Find reviews that haven't been restructured yet
@@ -319,12 +363,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             .replace(/\?.*$/, '');
 
                         if (highQualitySrc.includes('cdn.shopify.com')) {
-                            // Use width parameter for better quality
-                            img.src = `${highQualitySrc}?width=360&quality=100`;
+                            // Use width parameter - optimized quality for mobile (85% is good balance)
+                            img.src = `${highQualitySrc}?width=240&quality=85`; // Lower quality for mobile performance
                             img.srcset = `
-                            ${highQualitySrc}?width=120&quality=100 120w,
-                            ${highQualitySrc}?width=240&quality=100 240w,
-                            ${highQualitySrc}?width=360&quality=100 360w
+                            ${highQualitySrc}?width=120&quality=85 120w,
+                            ${highQualitySrc}?width=240&quality=85 240w,
+                            ${highQualitySrc}?width=360&quality=85 360w
                         `;
                             img.sizes = '120px';
                         } else {
@@ -333,6 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         img.decoding = 'async';
                         img.loading = 'lazy';
+                        // Performance: reduce image rendering complexity
+                        img.style.willChange = 'auto';
                     }
                 }
 

@@ -171,12 +171,54 @@
 
               <div class="hero__image-wrapper{% unless hero_text %} hero__image-wrapper--no-overlay{% endunless %}">
                 {%- if block.settings.image != blank -%}
-                  {% comment %} Full width images so don't need to adjust sizes attribute, fallback is 100vw {% endcomment %}
+                  {% comment %} Loading strategy for performance optimization:
+                    - Slide 1: Eager load (LCP candidate) - both desktop and mobile
+                      * Desktop image: Eager load on desktop (visible), lazy on mobile (hidden by small--hide)
+                      * Mobile image: Eager load on mobile (visible), lazy on desktop (hidden by medium-up--hide)
+                    - Slide 2: Lazy load but with higher priority (preload)
+                    - Slide 3+: Lazy load normally
+                  {% endcomment %}
                   {%- liquid
-                    if forloop.index == 1
-                      assign loading = section.settings.lazyload_images
+                    # Determine desktop image loading based on slide order
+                    if has_mobile_image
+                      # Desktop image visible on desktop (small--hide means hidden on mobile)
+                      # Slide 1: Eager load for LCP on desktop
+                      if forloop.index == 1
+                        assign desktop_loading = 'eager'
+                      elsif forloop.index == 2
+                        # Second slide: lazy load but will be preloaded
+                        assign desktop_loading = true
+                      else
+                        # Other slides: normal lazy load
+                        assign desktop_loading = true
+                      endif
                     else
-                      assign loading = true
+                      # No mobile image, desktop image is used on all devices
+                      if forloop.index == 1
+                        # First slide: use section setting (usually eager for LCP)
+                        assign desktop_loading = section.settings.lazyload_images
+                      elsif forloop.index == 2
+                        # Second slide: lazy load but will be preloaded
+                        assign desktop_loading = true
+                      else
+                        # Other slides: normal lazy load
+                        assign desktop_loading = true
+                      endif
+                    endif
+                    
+                    # Determine mobile image loading based on slide order
+                    if has_mobile_image
+                      if forloop.index == 1
+                        # First slide mobile image = LCP candidate, eager load (use false to trigger preload in snippet, but will be eager)
+                        # Note: Using 'eager' string works, but we need to ensure it's not lazy
+                        assign mobile_loading = 'eager'
+                      elsif forloop.index == 2
+                        # Second slide: lazy load but will be preloaded
+                        assign mobile_loading = true
+                      else
+                        # Other slides: normal lazy load
+                        assign mobile_loading = true
+                      endif
                     endif
                   -%}
 
@@ -186,22 +228,107 @@
                     {% assign desktop_classes = 'hero__image hero__image--' | append: block.id %}
                   {% endif %}
 
+                  {% comment %} Desktop images: Load in order - slide 1 eager, slide 2 preload, others lazy {% endcomment %}
+                  {%- if forloop.index == 1 -%}
+                    {%- comment -%} Preload first slide desktop image for LCP optimization (works for both cases: with/without mobile image) {%- endcomment -%}
+                    {%- assign first_desktop_img_1600 = block.settings.image | image_url: width: 1600 -%}
+                    {%- assign first_desktop_img_1200 = block.settings.image | image_url: width: 1200 -%}
+                    {%- assign first_desktop_img_2400 = block.settings.image | image_url: width: 2400 -%}
+                    <link rel="preload" as="image" href="{{ first_desktop_img_1600 }}" imagesrcset="{{ first_desktop_img_1200 }} 1200w, {{ first_desktop_img_1600 }} 1600w, {{ first_desktop_img_2400 }} 2400w" imagesizes="100vw" fetchpriority="high" media="(min-width: 769px)">
+                  {%- elsif forloop.index == 2 -%}
+                    {%- comment -%} Preload second slide desktop image for smooth transition {%- endcomment -%}
+                    {%- assign second_desktop_img_1600 = block.settings.image | image_url: width: 1600 -%}
+                    {%- assign second_desktop_img_1200 = block.settings.image | image_url: width: 1200 -%}
+                    {%- assign second_desktop_img_2400 = block.settings.image | image_url: width: 2400 -%}
+                    <link rel="preload" as="image" href="{{ second_desktop_img_1600 }}" imagesrcset="{{ second_desktop_img_1200 }} 1200w, {{ second_desktop_img_1600 }} 1600w, {{ second_desktop_img_2400 }} 2400w" imagesizes="100vw" fetchpriority="low" media="(min-width: 769px)">
+                  {%- endif -%}
                   {%- render 'image-element',
                     img: block.settings.image,
-                    img_width: 2400,
-                    loading: loading,
+                    widths: '1200,1600,2400',
+                    sizes: '100vw',
+                    loading: desktop_loading,
                     classes: desktop_classes
                   -%}
+                  {%- if forloop.index == 1 -%}
+                    <script>
+                      // Set fetchpriority for first slide desktop hero image - LCP optimization
+                      (function() {
+                        const setPriority = function() {
+                          if (window.matchMedia('(min-width: 769px)').matches) {
+                            // Find desktop image (has small--hide class when mobile image exists, or no hide class when no mobile image)
+                            const desktopHeroImg = document.querySelector('.hero__image--{{ block.id }}.small--hide img, .hero__image--{{ block.id }}:not(.medium-up--hide):not(.small--hide) img');
+                            if (desktopHeroImg) {
+                              desktopHeroImg.fetchPriority = 'high';
+                              if (desktopHeroImg.decoding !== 'async') {
+                                desktopHeroImg.decoding = 'async';
+                              }
+                            }
+                          }
+                        };
+                        if (document.readyState === 'loading') {
+                          document.addEventListener('DOMContentLoaded', setPriority);
+                        } else {
+                          setPriority();
+                        }
+                      })();
+                    </script>
+                  {%- endif -%}
 
                   {%- if has_mobile_image -%}
                     {% assign mobile_classes = 'medium-up--hide hero__image hero__image--' | append: block.id %}
-
+                    {% comment %} Mobile images: Load in order - slide 1 eager, slide 2 preload, others lazy {% endcomment %}
+                    {%- if forloop.index == 1 -%}
+                      {%- comment -%} Preload first slide mobile image for LCP optimization (mobile only) {%- endcomment -%}
+                      {%- assign first_mobile_img_768 = block.settings.image_mobile | image_url: width: 768 -%}
+                      {%- assign first_mobile_img_375 = block.settings.image_mobile | image_url: width: 375 -%}
+                      {%- assign first_mobile_img_1024 = block.settings.image_mobile | image_url: width: 1024 -%}
+                      <link rel="preload" as="image" href="{{ first_mobile_img_768 }}" imagesrcset="{{ first_mobile_img_375 }} 375w, {{ first_mobile_img_768 }} 768w, {{ first_mobile_img_1024 }} 1024w" imagesizes="100vw" fetchpriority="high" media="(max-width: 768px)">
+                    {%- elsif forloop.index == 2 -%}
+                      {%- comment -%} Preload second slide mobile image for smooth transition (mobile only) {%- endcomment -%}
+                      {%- assign second_mobile_img_768 = block.settings.image_mobile | image_url: width: 768 -%}
+                      {%- assign second_mobile_img_375 = block.settings.image_mobile | image_url: width: 375 -%}
+                      {%- assign second_mobile_img_1024 = block.settings.image_mobile | image_url: width: 1024 -%}
+                      <link rel="preload" as="image" href="{{ second_mobile_img_768 }}" imagesrcset="{{ second_mobile_img_375 }} 375w, {{ second_mobile_img_768 }} 768w, {{ second_mobile_img_1024 }} 1024w" imagesizes="100vw" fetchpriority="low" media="(max-width: 768px)">
+                    {%- endif -%}
                     {%- render 'image-element',
                       img: block.settings.image_mobile,
-                      img_height: 1200,
-                      loading: loading,
+                      widths: '375,768,1024',
+                      sizes: '100vw',
+                      loading: mobile_loading,
                       classes: mobile_classes
                     -%}
+                    {%- if forloop.index == 1 -%}
+                      <script>
+                        // Set fetchpriority for first slide mobile hero image - LCP optimization
+                        (function() {
+                          const setPriority = function() {
+                            if (window.matchMedia('(max-width: 768px)').matches) {
+                              // Find mobile image - it's inside image-element custom element which wraps img tag
+                              const mobileHeroImg = document.querySelector('image-element.hero__image--{{ block.id }}.medium-up--hide img, .hero__image--{{ block.id }}.medium-up--hide image-element img');
+                              if (mobileHeroImg && mobileHeroImg.tagName === 'IMG') {
+                                mobileHeroImg.fetchPriority = 'high';
+                                if (mobileHeroImg.decoding !== 'async') {
+                                  mobileHeroImg.decoding = 'async';
+                                }
+                                // Ensure loading attribute is set to eager (not lazy)
+                                if (mobileHeroImg.loading === 'lazy' || !mobileHeroImg.hasAttribute('loading')) {
+                                  mobileHeroImg.loading = 'eager';
+                                }
+                              }
+                            }
+                          };
+                          // Run immediately if DOM ready, else wait for DOMContentLoaded
+                          if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', setPriority);
+                          } else {
+                            // Run immediately
+                            setPriority();
+                          }
+                          // Also try after a short delay to catch late-loading images (image-element might not be ready yet)
+                          setTimeout(setPriority, 100);
+                        })();
+                      </script>
+                    {%- endif -%}
                   {%- endif -%}
 
                 {%- else -%}

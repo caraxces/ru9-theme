@@ -99,21 +99,25 @@
 }
 
 /* Container wrapper - Use theme's page-width class */
-.about-new-wrapper .page-width {
+/* Apply to both about-new-wrapper and about-section for consistency */
+.about-new-wrapper .page-width,
+.about-section.page-width {
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding-left: var(--container-padding-desktop);
   padding-right: var(--container-padding-desktop);
 }
 
-/* Responsive Breakpoints - Match theme standard */
+/* Responsive Breakpoints - Match theme standard (same as homepage-fixed-layout.css) */
+/* Mobile (default) - 15px */
 @media (max-width: 749px) {
   :root {
     --container-padding-desktop: var(--container-padding-mobile);
     --gutter-desktop: var(--gutter-mobile);
   }
   
-  .about-new-wrapper .page-width {
+  .about-new-wrapper .page-width,
+  .about-section.page-width {
     padding-left: var(--container-padding-mobile);
     padding-right: var(--container-padding-mobile);
   }
@@ -123,27 +127,49 @@
   }
 }
 
+/* Tablet (750px+) - 3.2rem */
+@media screen and (min-width: 750px) {
+  .about-new-wrapper .page-width,
+  .about-section.page-width {
+    padding-left: 3.2rem;
+    padding-right: 3.2rem;
+  }
+}
+
+/* Tablet breakpoint for CSS variables */
 @media (min-width: 750px) and (max-width: 1199px) {
   :root {
     --container-padding-desktop: var(--container-padding-tablet);
   }
   
-  .about-new-wrapper .page-width {
-    padding-left: var(--container-padding-tablet);
-    padding-right: var(--container-padding-tablet);
+  .about-new-wrapper .page-width,
+  .about-section.page-width {
+    padding-left: 3.2rem;
+    padding-right: 3.2rem;
   }
 }
 
-@media (min-width: 1400px) {
+/* Desktop (1200px+) - 5rem */
+@media screen and (min-width: 1200px) {
+  .about-new-wrapper .page-width,
+  .about-section.page-width {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+/* Large Desktop (1400px+) - Full canvas with 5rem */
+@media screen and (min-width: 1400px) {
   .about-new-wrapper {
     max-width: var(--container-max-width);
     margin: 0 auto;
   }
   
-  .about-new-wrapper .page-width {
-    max-width: var(--container-max-width);
-    padding-left: var(--container-padding-desktop);
-    padding-right: var(--container-padding-desktop);
+  .about-new-wrapper .page-width,
+  .about-section.page-width {
+    max-width: var(--container-max-width) !important;
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
   }
 }
 </style>

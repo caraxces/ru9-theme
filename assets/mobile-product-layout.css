@@ -1,79 +1,113 @@
-/* /* ========================================
-   MOBILE PRODUCT LAYOUT - CONFLICT RESOLVER
+/* ========================================
+   MOBILE PRODUCT LAYOUT - OPTIMIZED
+   Performance-optimized mobile product image layout
    ======================================== */
-/* Mobile-only rules to resolve layout conflicts */
+
+/* Performance: Use contain for layout isolation */
 @media screen and (max-width: 768px) {
 
-  /* DEBUG: Mobile product images - simplified approach */
+  /* Main container - Single definition, merged */
   .product__main-photos {
     height: 390px !important;
     width: calc(100% + 32px) !important;
+    margin: 0 -16px !important;
     position: relative !important;
     overflow: hidden !important;
     display: block !important;
-    /* Added this to ensure it's not flex or grid causing issues */
+    flex: none !important;
+    background-color: #f8f8f8 !important;
+    /* Performance: contain layout and style */
+    contain: layout style;
   }
 
   .product__photos img {
     border-radius: 0 !important;
   }
 
-  /* MOBILE MAIN IMAGE PLACEHOLDER - FIXED POSITION */
-  .product__main-photos {
+  /* All image containers - Merged selectors for better performance */
+  .product__main-photos .image-wrap,
+  .product__main-photos .image-wrap.loaded,
+  .product__main-photos .product-slideshow .image-wrap,
+  .product__main-photos .product-slideshow .image-wrap.loaded,
+  .product__main-photos [data-product-photos] .image-wrap,
+  .product__main-photos .product-main-slide .image-wrap,
+  .product__main-photos .product-slideshow,
+  .product__main-photos [data-product-photos],
+  .product__main-photos .product-main-slide {
     height: 390px !important;
-    width: calc(100% + 32px) !important;
-    margin-left: -16px !important;
-    margin-right: -16px !important;
-    position: relative !important;
-    overflow: hidden !important;
+    min-height: 390px !important;
+    max-height: 390px !important;
+    width: 100% !important;
+    padding-bottom: 0 !important;
     display: block !important;
-    background-color: #f8f8f8 !important;
-    /* Placeholder background */
   }
 
-  /* ALL IMAGE CONTAINERS USE SAME PLACEHOLDER */
+  /* Absolute positioned containers */
   .product__main-photos .image-wrap,
   .product__main-photos .image-wrap.loaded,
   .product__main-photos .product-slideshow .image-wrap,
   .product__main-photos .product-slideshow .image-wrap.loaded,
   .product__main-photos [data-product-photos] .image-wrap,
   .product__main-photos .product-main-slide .image-wrap {
-    height: 390px !important;
-    /* Fixed placeholder height */
-    width: 100% !important;
     position: absolute !important;
-    /* All images in same position */
     top: 0 !important;
     left: 0 !important;
-    padding-bottom: 0 !important;
-    display: block !important;
-    min-height: 390px !important;
-    max-height: 390px !important;
   }
 
-  /* MOBILE MAIN IMAGES - FILL PLACEHOLDER WITH FADE */
+  /* Slider containers - relative positioning */
+  .product__main-photos .product-main-slide,
+  .product__main-photos .product-slideshow,
+  .product__main-photos [data-product-photos] {
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  /* Product slide - absolute overlay for transitions */
+  .product__main-photos .product-main-slide {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+    /* Performance: use transform for better GPU acceleration */
+    will-change: opacity;
+  }
+
+  .product__main-photos .product-main-slide.is-selected {
+    opacity: 1 !important;
+  }
+
+  /* All images - Merged for performance */
+  .product__main-photos img,
+  .product__main-photos .media--image,
   .product__main-photos .image-wrap img,
   .product__main-photos .image-wrap .media--image,
-  .product__main-photos .image-wrap.loaded img,
-  .product__main-photos .image-wrap.loaded .media--image,
-  .product__main-photos .product-slideshow .image-wrap img,
-  .product__main-photos .product-slideshow .image-wrap .media--image,
-  .product__main-photos [data-product-photos] .image-wrap img,
-  .product__main-photos .product-main-slide .image-wrap img {
-    height: 390px !important;
-    /* Fill placeholder exactly */
+  .product__main-photos .product-slideshow img,
+  .product__main-photos .product-slideshow .media--image,
+  .product__main-photos [data-product-photos] img,
+  .product__main-photos [data-product-photos] .media--image,
+  .product__main-photos .product-main-slide img,
+  .product__main-photos .product-main-slide .media--image {
     width: 100% !important;
+    height: 390px !important;
     object-fit: cover !important;
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
     display: block !important;
+    /* Performance: hardware acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Images in image-wrap - fade in on load */
+  .product__main-photos .image-wrap img,
+  .product__main-photos .image-wrap .media--image {
     visibility: visible !important;
     opacity: 0 !important;
     transition: opacity 0.3s ease !important;
   }
 
-  /* IMAGE LOADED STATE - SIMPLE FADE IN */
   .product__main-photos .image-wrap.loaded img,
   .product__main-photos .image-wrap.loaded .media--image,
   .product__main-photos .product-main-slide.is-selected img,
@@ -81,69 +115,62 @@
     opacity: 1 !important;
   }
 
-  /* MOBILE SLIDER CONTAINERS - SAME PLACEHOLDER */
-  .product__main-photos .product-main-slide,
-  .product__main-photos .product-slideshow,
-  .product__main-photos [data-product-photos] {
-    height: 390px !important;
-    /* Same as placeholder */
-    width: 100% !important;
-    position: relative !important;
-    display: block !important;
-    min-height: 390px !important;
-    max-height: 390px !important;
-  }
-
-  /* SIMPLE FADE TRANSITION */
-  .product__main-photos .product-main-slide {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 390px !important;
-    opacity: 0 !important;
-    transition: opacity 0.3s ease !important;
-  }
-
-  .product__main-photos .product-main-slide.is-selected {
-    opacity: 1 !important;
-  }
-
-  /* MOBILE SLIDER IMAGES - FILL PLACEHOLDER */
+  /* Images in slider - visible by default */
   .product__main-photos .product-main-slide img,
   .product__main-photos .product-main-slide .media--image,
   .product__main-photos .product-slideshow img,
   .product__main-photos .product-slideshow .media--image,
   .product__main-photos [data-product-photos] img,
   .product__main-photos [data-product-photos] .media--image {
-    height: 390px !important;
-    /* Fill placeholder exactly */
-    width: 100% !important;
-    object-fit: cover !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
 
-  /* MOBILE THUMBNAILS - ALIGN WITH MAIN IMAGE */
-  .product__thumbs--scroller {
-    display: flex !important;
-    gap: 8px !important;
-    overflow-x: scroll !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding: 0 16px 20px 16px !important;
-    /* Match main image padding */
-    margin: 0 !important;
-    width: calc(100% + 32px) !important;
-    /* Match main image width */
-    /* Align with main image */
-    margin-right: -16px !important;
+  /* Override inline styles with attribute selector - High specificity */
+  .product__main-photos .image-wrap[style*="height: 0"],
+  .product__main-photos .image-wrap[style*="padding-bottom"],
+  .product__main-photos .product-slideshow .image-wrap[style*="height: 0"],
+  .product__main-photos [data-product-photos] .image-wrap[style*="height: 0"],
+  .product__main-photos div[class*="image-wrap"][style*="height: 0"],
+  .product__main-photos div[class*="image-wrap"][style*="padding-bottom"] {
+    height: 390px !important;
+    padding-bottom: 0 !important;
   }
 
-  /* MOBILE THUMBNAIL CONTAINER - ALIGN WITH MAIN */
+  /* Override all divs with class containing image-wrap or slideshow */
+  .product__main-photos div[class*="image-wrap"],
+  .product__main-photos div[class*="slideshow"],
+  .product__main-photos div[class*="main-slide"] {
+    height: 390px !important;
+    min-height: 390px !important;
+    max-height: 390px !important;
+    padding-bottom: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* AOS animations compatibility - Disable for better performance */
+  .product__main-photos[data-aos].aos-init,
+  .product__main-photos[data-aos].aos-animate,
+  .product__main-photos .image-wrap.aos-init,
+  .product__main-photos .image-wrap.aos-animate {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Photoswipe compatibility */
+  .product__main-photos .photoswipe__image {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* ========================================
+     THUMBNAILS - OPTIMIZED
+     ======================================== */
+
+  /* Thumbnail containers - Merged */
   .product__thumbs,
   .product__thumbs--below,
   .product__thumbs--scroller {
@@ -152,19 +179,38 @@
     padding: 0 !important;
   }
 
-  /* Override any conflicting thumbnail positioning */
+  .product__thumbs--below {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
   .product__thumbs--below .product__thumbs--scroller {
-    width: calc(100% + 32px) !important;
     margin-left: -16px !important;
-    margin-right: -16px !important;
     padding: 0 16px 20px 16px !important;
   }
 
+  /* Thumbnail scroller - Performance optimized */
+  .product__thumbs--scroller {
+    display: flex !important;
+    gap: 8px !important;
+    overflow-x: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 0 16px 20px 16px !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    /* Performance: contain scroll */
+    contain: layout style;
+    /* Performance: use will-change for smooth scrolling */
+    will-change: scroll-position;
+  }
+
+  /* Thumbnail items */
   .product__thumb-item {
     flex-shrink: 0 !important;
     display: block !important;
   }
 
+  /* Thumbnail base - Single definition */
   .product__thumb {
     width: 5rem !important;
     height: 5rem !important;
@@ -186,40 +232,13 @@
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
+    /* Performance: hardware acceleration */
+    transform: translateZ(0);
   }
 
-  /* MOBILE THUMBNAILS IN SCROLLER - SQUARE LAYOUT */
+  /* Scroller thumbnails - Specific sizing */
   .product__thumbs--scroller .product__thumb,
-  .product__thumbs--scroller .product__thumb-item {
-    width: 5rem !important;
-    height: 5rem !important;
-    flex-shrink: 0 !important;
-  }
-
-  .product__thumbs--scroller .product__thumb {
-    width: 5rem !important;
-    height: 5rem !important;
-    border-radius: 4px !important;
-    overflow: hidden !important;
-    display: block !important;
-  }
-
-  .product__thumbs--scroller .product__thumb .image-wrap {
-    width: 5rem !important;
-    height: 5rem !important;
-    position: relative !important;
-  }
-
-  .product__thumbs--scroller .product__thumb .image-wrap img {
-    width: 5rem !important;
-    height: 5rem !important;
-    object-fit: cover !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-  }
-
-  /* Active state for scroller thumbnails - Keep square */
+  .product__thumbs--scroller .product__thumb-item,
   .product__thumbs--scroller .product__thumb-item.is-active .product__thumb,
   .product__thumbs--scroller .product__thumb-item:active .product__thumb {
     width: 5rem !important;
@@ -227,31 +246,21 @@
     flex-shrink: 0 !important;
   }
 
+  .product__thumbs--scroller .product__thumb .image-wrap,
   .product__thumbs--scroller .product__thumb-item.is-active .product__thumb .image-wrap,
   .product__thumbs--scroller .product__thumb-item:active .product__thumb .image-wrap {
     width: 5rem !important;
     height: 5rem !important;
   }
 
+  .product__thumbs--scroller .product__thumb .image-wrap img,
   .product__thumbs--scroller .product__thumb-item.is-active .product__thumb .image-wrap img,
   .product__thumbs--scroller .product__thumb-item:active .product__thumb .image-wrap img {
     width: 5rem !important;
     height: 5rem !important;
   }
 
-  /* MOBILE THUMBNAIL ALIGNMENT - PERFECT MATCH */
-  .product__thumbs--below {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-
-  /* Ensure thumbnails align perfectly with main image edges */
-  .product__thumbs--scroller {
-    justify-content: flex-start !important;
-    align-items: center !important;
-  }
-
-  /* Override any theme positioning that might misalign thumbnails */
+  /* Thumbnail alignment */
   .product__photos .product__thumbs,
   .product__photos .product__thumbs--below {
     position: relative !important;
@@ -260,98 +269,7 @@
     transform: none !important;
   }
 
-  /* FIX: AOS animations compatibility with image-wrap loaded */
-  .product__main-photos[data-aos].aos-init,
-  .product__main-photos[data-aos].aos-animate {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* Ensure image-wrap loaded works with AOS */
-  .product__main-photos .image-wrap.aos-init,
-  .product__main-photos .image-wrap.aos-animate {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* FIX: Photoswipe image conflicts on mobile */
-  .product__main-photos .photoswipe__image {
-    position: relative !important;
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-  /* MOBILE OVERRIDE ALL CONFLICTS - NUCLEAR OPTION */
-  .product__main-photos {
-    flex: none !important;
-    display: block !important;
-    height: 390px !important;
-    min-height: 390px !important;
-    max-height: 390px !important;
-  }
-
-  /* Override ALL possible image selectors - FILL PLACEHOLDER */
-  .product__main-photos img,
-  .product__main-photos .media--image,
-  .product__main-photos .image-wrap img,
-  .product__main-photos .product-slideshow img,
-  .product__main-photos [data-product-photos] img,
-  .product__main-photos .product-main-slide img {
-    width: 100% !important;
-    height: 390px !important;
-    /* Fill placeholder exactly */
-    object-fit: cover !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-  }
-
-  /* Override inline styles with maximum specificity */
-  .product__main-photos .image-wrap[style*="height: 0"],
-  .product__main-photos .image-wrap[style*="padding-bottom"],
-  .product__main-photos .product-slideshow .image-wrap[style*="height: 0"],
-  .product__main-photos [data-product-photos] .image-wrap[style*="height: 0"] {
-    height: 390px !important;
-    padding-bottom: 0 !important;
-    min-height: 390px !important;
-    max-height: 390px !important;
-  }
-
-  /* MOBILE FORCE ALL CONTAINERS VISIBLE */
-  .product__main-photos * {
-    max-height: none !important;
-    overflow: visible !important;
-  }
-
-  .product__main-photos .image-wrap,
-  .product__main-photos .product-slideshow,
-  .product__main-photos [data-product-photos],
-  .product__main-photos .product-main-slide {
-    max-height: none !important;
-    overflow: visible !important;
-    height: 390px !important;
-    min-height: 390px !important;
-    max-height: 390px !important;
-  }
-
-  /* MOBILE NUCLEAR OPTION - Override everything */
-  .product__main-photos div[class*="image-wrap"],
-  .product__main-photos div[class*="image-wrap"][style],
-  .product__main-photos div[class*="slideshow"],
-  .product__main-photos div[class*="main-slide"] {
-    height: 390px !important;
-    min-height: 390px !important;
-    max-height: 390px !important;
-    padding-bottom: 0 !important;
-  }
-
-  /* FIX: Mobile scrollbar styling */
+  /* Custom scrollbar - Performance optimized */
   .product__thumbs--scroller::-webkit-scrollbar {
     height: 4px !important;
     display: block !important;
@@ -365,9 +283,12 @@
   .product__thumbs--scroller::-webkit-scrollbar-thumb {
     background: #234085 !important;
     border-radius: 2px !important;
+    transition: background 0.2s ease !important;
   }
 
   .product__thumbs--scroller::-webkit-scrollbar-thumb:hover {
     background: #1a2f6b !important;
   }
+}
+
 }
