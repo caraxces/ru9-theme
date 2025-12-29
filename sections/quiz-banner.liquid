@@ -1359,27 +1359,50 @@
     }
   });
   
+  // Function to open quiz popup
+  function openQuizPopup() {
+    if (!popup) return;
+    popup.style.display = 'flex';
+    currentStep = 1;
+    answers = {};
+    // Reset progress bar
+    if (progressBar) {
+      progressBar.style.setProperty('width', '0%', 'important');
+      progressBar.style.setProperty('min-width', '0', 'important');
+    }
+    // Clear all selected answers
+    const allAnswers = popup.querySelectorAll('.quiz-answer');
+    allAnswers.forEach(answer => {
+      answer.classList.remove('selected');
+    });
+    updateStep();
+  }
+  
+  // Check URL for quiz parameter and open popup automatically
+  function checkUrlForQuiz() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hash = window.location.hash;
+    
+    // Check for ?quiz=open or #quiz
+    if (urlParams.get('quiz') === 'open' || hash === '#quiz' || hash === '#quiz-popup') {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        openQuizPopup();
+      }, 100);
+    }
+  }
+  
   // Initialize quiz
   function initQuiz() {
     if (!popup) return;
     
+    // Check URL on page load
+    checkUrlForQuiz();
+    
     // Open popup
     startButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        popup.style.display = 'flex';
-        currentStep = 1;
-        answers = {};
-        // Reset progress bar
-        if (progressBar) {
-          progressBar.style.setProperty('width', '0%', 'important');
-          progressBar.style.setProperty('min-width', '0', 'important');
-        }
-        // Clear all selected answers
-        const allAnswers = popup.querySelectorAll('.quiz-answer');
-        allAnswers.forEach(answer => {
-          answer.classList.remove('selected');
-        });
-        updateStep();
+        openQuizPopup();
       });
     });
     
@@ -1869,6 +1892,9 @@
   } else {
     initQuiz();
   }
+  
+  // Also check URL on hash change (for SPA navigation)
+  window.addEventListener('hashchange', checkUrlForQuiz);
 })();
 </script>
 

@@ -10,26 +10,139 @@
 
   assign align = section.settings.align_text | prepend: 'text-'
 %}
-    <div
-      id="CollectionContentSection"
-      data-section-id="{{ section.id }}"
-      data-section-type="collection-content"
-    >
-      <div class="collection-hero spacing-top-base">
-        <div class="collection-hero__content">
-          <div
-            class="page-width"
-            style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
+
+<style>
+  .collection-content-dropdown {
+    width: 100%;
+  }
+  
+  .collection-content-dropdown__trigger {
+    width: 100%;
+    padding: 15px 20px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: left;
+  }
+  
+  .collection-content-dropdown__trigger:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+  
+  .collection-content-dropdown__trigger.is-open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+  }
+  
+  .collection-content-dropdown__icon {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    margin-left: 10px;
+  }
+  
+  .collection-content-dropdown__trigger.is-open .collection-content-dropdown__icon {
+    transform: rotate(180deg);
+  }
+  
+  .collection-content-dropdown__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    padding: 0 20px;
+  }
+  
+  .collection-content-dropdown__content.is-open {
+    max-height: 2000px;
+    padding: 20px;
+  }
+  
+  .collection-content-dropdown__content-inner {
+    opacity: 0;
+    transition: opacity 0.3s ease 0.1s;
+  }
+  
+  .collection-content-dropdown__content.is-open .collection-content-dropdown__content-inner {
+    opacity: 1;
+  }
+</style>
+
+<div
+  id="CollectionContentSection"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-content"
+>
+  <div class="collection-hero spacing-top-base">
+    <div class="collection-hero__content">
+      <div
+        class="page-width"
+        style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
+      >
+        <div class="collection-content-dropdown">
+          <button 
+            type="button"
+            class="collection-content-dropdown__trigger"
+            aria-expanded="false"
+            aria-controls="collection-content-{{ section.id }}"
           >
-            <div class="section-collection--content {{ align }}">
+            <span>{{ section.settings.dropdown_label | default: 'Xem thêm thông tin' }}</span>
+            <span class="collection-content-dropdown__icon">▼</span>
+          </button>
+          <div 
+            id="collection-content-{{ section.id }}"
+            class="collection-content-dropdown__content"
+            aria-hidden="true"
+          >
+            <div class="collection-content-dropdown__content-inner">
+              <div class="section-collection--content {{ align }}">
                 <div class="rte section-header__desc" style="--mw: {{ section.settings.max_width_desc }}px;">
                   {{ collection.description }}
                 </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    const trigger = document.querySelector('#CollectionContentSection .collection-content-dropdown__trigger');
+    const content = document.querySelector('#CollectionContentSection .collection-content-dropdown__content');
+    
+    if (trigger && content) {
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isOpen = trigger.classList.contains('is-open');
+        
+        if (isOpen) {
+          trigger.classList.remove('is-open');
+          content.classList.remove('is-open');
+          trigger.setAttribute('aria-expanded', 'false');
+          content.setAttribute('aria-hidden', 'true');
+        } else {
+          trigger.classList.add('is-open');
+          content.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+          content.setAttribute('aria-hidden', 'false');
+        }
+      });
+    }
+  })();
+</script>
 
 
 {% schema %}
@@ -88,6 +201,13 @@
       "default": true,
       "label": "t:sections.collection-header.settings.show_collection_description.label",
       "info": "t:sections.collection-header.settings.show_collection_description.info"
+    },
+    {
+      "type": "text",
+      "id": "dropdown_label",
+      "label": "Dropdown label",
+      "default": "Xem thêm thông tin",
+      "info": "Text hiển thị trên button dropdown"
     }
   ],
   "disabled_on": {

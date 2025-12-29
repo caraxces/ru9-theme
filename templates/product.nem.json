@@ -517,7 +517,7 @@
       ],
       "name": "Reason to choice",
       "settings": {
-        "title": "Lý do bạn nên chọn sản phẩm"
+        "title": "Lý do bạn nên chọn sản phẩm nệm lò xo túi độc lập Hybrid"
       }
     },
     "feature_banner_nMQWRY": {
@@ -526,8 +526,8 @@
       "settings": {
         "desktop_image": "{{ product.metafields.custom.hotspot_banner.value }}",
         "mobile_image": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
-        "title": "<h1>Chìa khóa cho từng vấn đề giấc ngủ của bạn</h1>",
-        "mobile_title": "Chìa khóa cho từng vấn đề giấc ngủ của bạn",
+        "title": "<h2>Chìa khóa cho từng vấn đề giấc ngủ của bạn</h2>",
+        "mobile_title": "",
         "background_color": "#ffffff"
       }
     },

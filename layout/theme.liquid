@@ -55,8 +55,9 @@
       <link rel="dns-prefetch" href="https://ajax.googleapis.com">
       <link rel="dns-prefetch" href="https://maps.googleapis.com">
       <link rel="dns-prefetch" href="https://maps.gstatic.com">
-      {% comment %} Merge Google Fonts into single request for better performance - font-display: swap prevents FOIT {% endcomment %}
-      <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+      {% comment %} Google Fonts: Load asynchronously to prevent render blocking {% endcomment %}
+      <link rel="preload" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"></noscript>
   
       {%- if settings.favicon != blank -%}
         <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
@@ -75,9 +76,13 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
 
       {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
-      {{ 'judge-me-layout.css' | asset_url | stylesheet_tag }}
-      {{ 'mobile-product-layout.css' | asset_url | stylesheet_tag }}
-      {{ 'homepage-fixed-layout.css' | asset_url | stylesheet_tag }}
+      {%- comment -%} Defer non-critical CSS to prevent render blocking - Load asynchronously using media="print" trick {%- endcomment -%}
+      <link rel="stylesheet" href="{{ 'judge-me-layout.css' | asset_url }}" media="print" onload="this.media='all'">
+      <noscript><link href="{{ 'judge-me-layout.css' | asset_url }}" rel="stylesheet"></noscript>
+      <link rel="stylesheet" href="{{ 'mobile-product-layout.css' | asset_url }}" media="print" onload="this.media='all'">
+      <noscript><link href="{{ 'mobile-product-layout.css' | asset_url }}" rel="stylesheet"></noscript>
+      <link rel="stylesheet" href="{{ 'homepage-fixed-layout.css' | asset_url }}" media="print" onload="this.media='all'">
+      <noscript><link href="{{ 'homepage-fixed-layout.css' | asset_url }}" rel="stylesheet"></noscript>
       {%- render 'css-variables' -%}
   
       <script>
