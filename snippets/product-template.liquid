@@ -279,7 +279,7 @@
   
   /* Figma Design: Layout for product-form-actions.has-buy-now */
   /* Top row: Quantity (left) + Add to Cart (right) side by side */
-  /* Bottom row: Buy Now button (full width) */
+  /* Bottom row: Buy Now button (full width) OR split 50/50 with hotline */
   
   .product-form-actions.has-buy-now {
     display: flex;
@@ -464,6 +464,64 @@
   /* Buy Now button - full width, yellow background */
   .product-form-actions.has-buy-now .payment-buttons {
     width: 100%;
+  }
+
+  /* Bottom row wrapper */
+  .product-form-actions.has-buy-now .actions-bottom-row {
+    display: block;
+    width: 100%;
+  }
+
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline .payment-buttons {
+    flex: 1 1 0;
+    width: 50%;
+    height: auto;
+  }
+
+  /* Make Shopify dynamic checkout button stretch to match hotline height */
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline .payment-buttons,
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline .shopify-payment-button,
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline .shopify-payment-button__button--unbranded,
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline .shopify-payment-button__button {
+    height: 100% !important;
+    min-height: 48px !important;
+  }
+
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline .shopify-payment-button__button--unbranded,
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline .shopify-payment-button__button {
+    width: 100% !important;
+    flex: 1 1 auto !important;
+  }
+
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline .product-hotline-button {
+    flex: 1 1 0;
+    width: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    border-radius: 5px !important;
+    border: 1px solid #000000 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-family: "Be Vietnam Pro", sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    padding: 12px 24px !important;
+  }
+
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline .product-hotline-button:hover,
+  .product-form-actions.has-buy-now .actions-bottom-row.has-hotline .product-hotline-button:focus {
+    background: #fffbe9 !important;
   }
   
   .product-form-actions.has-buy-now

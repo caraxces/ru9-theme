@@ -137,7 +137,10 @@
           "settings": {
             "show_dynamic_checkout": true,
             "surface_pickup_enable": false,
-            "show_gift_card_recipient": false
+            "show_gift_card_recipient": false,
+            "enable_hotline_button": true,
+            "hotline_phone": "0964777910",
+            "hotline_label": "Gọi tư vấn"
           }
         },
         "productbundle_GcbRad": {
