@@ -78,6 +78,7 @@
         },
         "sales_point_WV78bY": {
           "type": "sales_point",
+          "disabled": true,
           "settings": {
             "icon": "gift",
             "text": "Tặng Eyesmask xông hơi, vỏ gối Cotton Sateen"
@@ -95,14 +96,6 @@
           "settings": {
             "icon": "tag",
             "text": "Nhập mã RU9NEWYEAR giảm thêm 6% cho đơn từ 30 triệu"
-          }
-        },
-        "tag_TkpVP9": {
-          "type": "tag",
-          "settings": {
-            "tag_text": "Top rated",
-            "bg_color": "#85afee",
-            "text_color": "#ffffff"
           }
         },
         "price": {
@@ -196,7 +189,6 @@
         "sales_point_WV78bY",
         "sales_point_Nk7nWg",
         "sales_point_Yj8cBM",
-        "tag_TkpVP9",
         "price",
         "promotion_xkLgrj",
         "variant_picker",
@@ -526,7 +518,7 @@
       "settings": {
         "desktop_image": "{{ product.metafields.custom.hotspot_banner.value }}",
         "mobile_image": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
-        "title": "<h2>Chìa khóa cho từng vấn đề giấc ngủ của bạn</h2>",
+        "title": "<h1>Chìa khóa cho từng vấn đề giấc ngủ của bạn</h1>",
         "mobile_title": "",
         "background_color": "#ffffff"
       }

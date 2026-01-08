@@ -75,6 +75,53 @@
   .collection-content-dropdown__content.is-open .collection-content-dropdown__content-inner {
     opacity: 1;
   }
+  
+  .collection-content-text {
+    position: relative;
+  }
+  
+  /* Hide truncated initially, show after JS processes */
+  .collection-content-text__truncated:not(.js-processed) {
+    display: none !important;
+  }
+  
+  .collection-content-text__truncated.js-processed {
+    display: block !important;
+  }
+  
+  .collection-content-text__full {
+    display: none !important;
+  }
+  
+  .collection-content-text.is-expanded .collection-content-text__truncated {
+    display: none !important;
+  }
+  
+  .collection-content-text.is-expanded .collection-content-text__full {
+    display: block !important;
+  }
+  
+  .collection-content-text__expand-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1C2C58;
+    transition: all 0.3s ease;
+  }
+  
+  .collection-content-text__expand-btn:hover {
+    background: rgba(28, 44, 88, 0.05);
+    border-color: #1C2C58;
+  }
+  
+  .collection-content-text.is-expanded .collection-content-text__expand-btn {
+    display: none;
+  }
 </style>
 
 <div
@@ -88,28 +135,27 @@
         class="page-width"
         style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
       >
-        <div class="collection-content-dropdown">
-          <button 
-            type="button"
-            class="collection-content-dropdown__trigger"
-            aria-expanded="false"
-            aria-controls="collection-content-{{ section.id }}"
-          >
-            <span>{{ section.settings.dropdown_label | default: 'Xem thêm thông tin' }}</span>
-            <span class="collection-content-dropdown__icon">▼</span>
-          </button>
-          <div 
-            id="collection-content-{{ section.id }}"
-            class="collection-content-dropdown__content"
-            aria-hidden="true"
-          >
-            <div class="collection-content-dropdown__content-inner">
-              <div class="section-collection--content {{ align }}">
-                <div class="rte section-header__desc" style="--mw: {{ section.settings.max_width_desc }}px;">
+        <div class="section-collection--content {{ align }}">
+          <div class="rte section-header__desc" style="--mw: {{ section.settings.max_width_desc }}px;">
+            {% if collection.description != blank %}
+              {% assign char_limit = section.settings.text_char_limit | default: 200 %}
+              {% assign desc_text = collection.description | strip_html %}
+              {% assign desc_length = desc_text | size %}
+              
+              <div class="collection-content-text" data-char-limit="{{ char_limit }}" data-desc-length="{{ desc_length }}">
+                <div class="collection-content-text__truncated">
                   {{ collection.description }}
                 </div>
+                <div class="collection-content-text__full" style="display: none;">
+                  {{ collection.description }}
+                </div>
+                {% if desc_length > char_limit %}
+                  <button type="button" class="collection-content-text__expand-btn">
+                    {{ section.settings.expand_button_text | default: 'Xem thêm' }}
+                  </button>
+                {% endif %}
               </div>
-            </div>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -119,26 +165,81 @@
 
 <script>
   (function() {
-    const sectionId = '{{ section.id }}';
-    const trigger = document.querySelector('#CollectionContentSection .collection-content-dropdown__trigger');
-    const content = document.querySelector('#CollectionContentSection .collection-content-dropdown__content');
+    const textContainer = document.querySelector('#CollectionContentSection .collection-content-text');
+    if (!textContainer) return;
     
-    if (trigger && content) {
-      trigger.addEventListener('click', function(e) {
-        e.preventDefault();
-        const isOpen = trigger.classList.contains('is-open');
+    const expandBtn = textContainer.querySelector('.collection-content-text__expand-btn');
+    const truncatedDiv = textContainer.querySelector('.collection-content-text__truncated');
+    const fullDiv = textContainer.querySelector('.collection-content-text__full');
+    const charLimit = parseInt(textContainer.getAttribute('data-char-limit')) || 200;
+    
+    if (truncatedDiv && fullDiv) {
+      const fullText = fullDiv.textContent.trim();
+      const fullHTML = fullDiv.innerHTML;
+      
+      if (fullText.length > charLimit && expandBtn) {
+        // Truncate HTML while preserving structure
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = fullHTML;
         
-        if (isOpen) {
-          trigger.classList.remove('is-open');
-          content.classList.remove('is-open');
-          trigger.setAttribute('aria-expanded', 'false');
-          content.setAttribute('aria-hidden', 'true');
-        } else {
-          trigger.classList.add('is-open');
-          content.classList.add('is-open');
-          trigger.setAttribute('aria-expanded', 'true');
-          content.setAttribute('aria-hidden', 'false');
+        let charCount = 0;
+        let truncatedHTML = '';
+        
+        function truncateNode(node) {
+          if (charCount >= charLimit) return;
+          
+          if (node.nodeType === Node.TEXT_NODE) {
+            const text = node.textContent;
+            if (charCount + text.length <= charLimit) {
+              truncatedHTML += text;
+              charCount += text.length;
+            } else {
+              const remaining = charLimit - charCount;
+              let truncatedText = text.substring(0, remaining);
+              const lastSpace = truncatedText.lastIndexOf(' ');
+              if (lastSpace > remaining * 0.8) {
+                truncatedText = truncatedText.substring(0, lastSpace);
+              }
+              truncatedHTML += truncatedText + '...';
+              charCount = charLimit;
+            }
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const tagName = node.tagName.toLowerCase();
+            const attrs = Array.from(node.attributes).map(attr => 
+              `${attr.name}="${attr.value}"`
+            ).join(' ');
+            const openTag = attrs ? `<${tagName} ${attrs}>` : `<${tagName}>`;
+            const closeTag = `</${tagName}>`;
+            
+            truncatedHTML += openTag;
+            Array.from(node.childNodes).forEach(child => {
+              if (charCount < charLimit) {
+                truncateNode(child);
+              }
+            });
+            truncatedHTML += closeTag;
+          }
         }
+        
+        Array.from(tempDiv.childNodes).forEach(child => {
+          if (charCount < charLimit) {
+            truncateNode(child);
+          }
+        });
+        
+        truncatedDiv.innerHTML = truncatedHTML;
+        truncatedDiv.classList.add('js-processed');
+      } else {
+        // Text is shorter than limit, show full text
+        truncatedDiv.classList.add('js-processed');
+      }
+    }
+    
+    if (expandBtn) {
+      expandBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        textContainer.classList.add('is-expanded');
       });
     }
   })();
@@ -190,10 +291,15 @@
       "label": "Custom width content"
     },
     {
-      "type": "text_alignment",
+      "type": "select",
       "id": "align_text",
       "label": "t:sections.all.alignment.label__1",
-      "default": "left"
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
     },
     {
       "type": "checkbox",
@@ -208,10 +314,28 @@
       "label": "Dropdown label",
       "default": "Xem thêm thông tin",
       "info": "Text hiển thị trên button dropdown"
+    },
+    {
+      "type": "range",
+      "id": "text_char_limit",
+      "min": 100,
+      "max": 2000,
+      "step": 50,
+      "default": 200,
+      "unit": "ch",
+      "label": "Số ký tự hiển thị mặc định",
+      "info": "Số ký tự sẽ được hiển thị trước khi user click để xem thêm"
+    },
+    {
+      "type": "text",
+      "id": "expand_button_text",
+      "label": "Text nút mở rộng",
+      "default": "Xem thêm",
+      "info": "Text hiển thị trên button để mở rộng xem toàn bộ nội dung"
     }
   ],
   "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
+    "groups": ["footer", "header"]
   }
 }
 {% endschema %}

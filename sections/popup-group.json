@@ -156,6 +156,7 @@
         },
         "voucher_mUTahx": {
           "type": "voucher",
+          "disabled": true,
           "settings": {
             "code": "RU9250",
             "title": "VOUCHER 250K",

@@ -80,7 +80,7 @@
       "type": "independent-webhook-popup",
       "name": "Independent Webhook Popup",
       "settings": {
-        "enable_popup": true,
+        "enable_popup": false,
         "popup_delay": 5,
         "background_image": "shopify://shop_images/POP_UP_1.png",
         "name_placeholder": "Họ và tên",
@@ -618,7 +618,8 @@
         "customize_width": 1280,
         "max_width_desc": 2000,
         "align_text": "left",
-        "show_collection_description": true
+        "show_collection_description": true,
+        "dropdown_label": "Xem thêm thông tin"
       }
     },
     "reviews_carousel_YEhmcF": {

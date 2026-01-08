@@ -71,6 +71,7 @@
         },
         "sales_point_RY4Cz8": {
           "type": "sales_point",
+          "disabled": true,
           "settings": {
             "icon": "gift",
             "text": "Tặng Eyesmask xông hơi, vỏ gối Cotton Sateen"
@@ -259,6 +260,18 @@
       "name": "Reason to choice",
       "settings": {
         "title": "Lý do bạn nên chọn sản phẩm"
+      }
+    },
+    "feature_banner_XdBwRx": {
+      "type": "feature-banner",
+      "disabled": true,
+      "name": "Feature Banner",
+      "settings": {
+        "desktop_image": "{{ product.metafields.custom.hotspot_banner.value }}",
+        "mobile_image": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
+        "title": "<p>Chiếc gối thấu hiểu những gì bạn cần </p>",
+        "mobile_title": "",
+        "background_color": "#ffffff"
       }
     },
     "main_product_bundle_y4WGaj": {
@@ -538,6 +551,7 @@
         "product_ax6PXg",
         "product_ghVYbm"
       ],
+      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
@@ -604,6 +618,7 @@
         "product_y66nJJ",
         "product_BTx8AC"
       ],
+      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
@@ -713,72 +728,6 @@
         "heading": "{{ product.metafields.custom.hotspot_title.value }}",
         "content": "",
         "banner_image": "{{ product.metafields.custom.hotspot_banner.value }}",
-        "margin-top": "0px",
-        "margin-bottom": "0px"
-      }
-    },
-    "product_hotspot_pnDmHC": {
-      "type": "product-hotspot",
-      "blocks": {
-        "product_wUNCcK": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Vỏ bọc tencel",
-            "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "30%",
-            "top": "45%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "45%"
-          }
-        },
-        "product_rH68dY": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Lớp Bảo Vệ Foam",
-            "hotspot_sub_title": "Hạn chế ma sát trong quá trình chăm sóc gối",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "55%",
-            "top": "35%",
-            "space_mb": "110",
-            "left_mobile": "55%",
-            "top_mobile": "45%"
-          }
-        },
-        "product_KWebeG": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Ruột gối Graphene Foam",
-            "hotspot_sub_title": "Nâng đỡ trọn vẹn, tản nhiệt hiệu quả",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "75%",
-            "top": "35%",
-            "space_mb": "110",
-            "left_mobile": "80%",
-            "top_mobile": "40%"
-          }
-        }
-      },
-      "block_order": [
-        "product_wUNCcK",
-        "product_rH68dY",
-        "product_KWebeG"
-      ],
-      "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "Chi tiết sản phẩm",
-        "productHandle": "goi-foam-niu",
-        "heading": "Chiếc gối thấu hiểu những gì bạn cần để ngủ thật ngon",
-        "content": "Gối Niu được thiết kế để tạo ra sự nâng đỡ lý tưởng nhất cho phần đầu - cổ - vai của bạn.",
-        "banner_image": "shopify://shop_images/NIU-PILLOW-for-web_5702975d-3457-46e5-ab7c-f57b4b9a41a3.jpg",
-        "banner_mobile": "{{ product.metafields.custom.hotspot_banner.value }}",
         "margin-top": "0px",
         "margin-bottom": "0px"
       }
@@ -1158,13 +1107,13 @@
     "countdown_Gwp9bc",
     "main",
     "reason_to_choice_cbPGRj",
+    "feature_banner_XdBwRx",
     "main_product_bundle_y4WGaj",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",
     "product_hotspot_BGaNkf",
     "product_hotspot_JYk7dk",
     "product_hotspot_zAj7Lm",
-    "product_hotspot_pnDmHC",
     "product_hotspot_4TYCfN",
     "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",

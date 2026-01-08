@@ -25,8 +25,8 @@
             "link_text_2": "",
             "color_accent": "#000000",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/promo_xmas_PC_Nhan_doi_qua_t_ng.png",
-            "image_mobile": "shopify://shop_images/promo_xmas_MB_NHAN_DOI_QUA_T_NG.png",
+            "image": "shopify://shop_images/Banner_Web_PC.jpg",
+            "image_mobile": "shopify://shop_images/Banner_Web_Mobile.jpg",
             "overlay_opacity": 0
           }
         },
@@ -426,7 +426,7 @@
           "settings": {
             "product": "foam-original",
             "order": 1,
-            "result_reason": "Bản dupe hoàn hảo với chi phí tiết kiệm hơn, vẫn giữ độ êm (softness) tương tự.",
+            "result_reason": "Phiên bản Original Lite với chiều cao 20cm tiết kiệm hơn nhưng vẫn giữ độ êm tương tự",
             "result_type": "suitable",
             "condition_answers": "1A,6B,4B"
           }

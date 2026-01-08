@@ -116,7 +116,7 @@
         "sku_enable": true,
         "combo_title": "Combo bao gồm các sản phẩm:",
         "cta_button_text": "BẮT ĐẦU TẠO COMBO",
-        "target_discount_percentage": 20,
+        "target_discount_percentage": 15,
         "service_icon_1": "shopify://shop_images/Layer_1_3.svg",
         "service_text_1": "100 đêm ngủ thử",
         "service_icon_2": "shopify://shop_images/Layer_1_4.svg",
@@ -135,7 +135,7 @@
         "enable_video_looping": false,
         "product_video_style": "muted",
         "enable_sticky_add_to_cart": false,
-        "store_system_content": "<p><strong>Q.2, TP.HCM:</strong><br>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br><a href=\"tel:0964777960\">0964777960</a></p><p><strong>Q.3, TP.HCM:</strong><br>283A Hai Bà Trưng, Phường Xuân Hoà<br><a href=\"tel:0964777910\">0964777910</a></p><p><strong>Q. Cầu Giấy, HN:</strong><br>228 Cầu Giấy, Quan Hoa<br><a href=\"tel:0964777940\">0964777940</a></p>",
+        "store_system_content": "<p><strong>Q.2, TP.HCM:</strong><br/>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br/><a href=\"tel:0964777960\">0964777960</a></p><p><strong>Q.3, TP.HCM:</strong><br/>283A Hai Bà Trưng, Phường Xuân Hoà<br/><a href=\"tel:0964777910\">0964777910</a></p><p><strong>Q. Cầu Giấy, HN:</strong><br/>228 Cầu Giấy, Quan Hoa<br/><a href=\"tel:0964777940\">0964777940</a></p>",
         "hide_payment_button_mobile": false,
         "image_size": "medium",
         "showroom_1_name": "Showroom 1",
@@ -873,9 +873,9 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
+            "max_width": 1200,
             "show_shop_reviews": false,
-            "empty_state": "empty_widget",
-            "max_width": 1200
+            "empty_state": "empty_widget"
           }
         }
       },
