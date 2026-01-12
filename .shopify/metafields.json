@@ -1,19 +1,9 @@
 {
   "article": [
     {
-      "key": "fearture_product",
+      "key": "mobile_banner",
       "namespace": "custom",
-      "name": "fearture product",
-      "description": "",
-      "type": {
-        "name": "list.product_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "image_banner_1",
-      "namespace": "custom",
-      "name": "Image banner 1",
+      "name": "Mobile Banner",
       "description": "",
       "type": {
         "name": "file_reference",
@@ -21,666 +11,26 @@
       }
     },
     {
-      "key": "link_banner_1",
+      "key": "desktop_banner",
       "namespace": "custom",
-      "name": "Link banner 1",
-      "description": "",
-      "type": {
-        "name": "url",
-        "category": "URL"
-      }
-    },
-    {
-      "key": "image_banner_2",
-      "namespace": "custom",
-      "name": "Image banner 2",
+      "name": "Desktop Banner",
       "description": "",
       "type": {
         "name": "file_reference",
         "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "link_banner_2",
-      "namespace": "custom",
-      "name": "Link banner 2",
-      "description": "",
-      "type": {
-        "name": "url",
-        "category": "URL"
-      }
-    },
-    {
-      "key": "image_banner_3",
-      "namespace": "custom",
-      "name": "Image banner 3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "link_banner_3",
-      "namespace": "custom",
-      "name": "Link banner 3",
-      "description": "",
-      "type": {
-        "name": "url",
-        "category": "URL"
       }
     }
   ],
   "blog": [],
   "collection": [
     {
-      "key": "review_name_1",
+      "key": "badge",
       "namespace": "custom",
-      "name": "Review name 1",
+      "name": "badge",
       "description": "",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_avatar_1",
-      "namespace": "custom",
-      "name": "Review avatar 1",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_date_1",
-      "namespace": "custom",
-      "name": "Review date 1",
-      "description": "",
-      "type": {
-        "name": "date",
-        "category": "DATE_TIME"
-      }
-    },
-    {
-      "key": "review_image_1",
-      "namespace": "custom",
-      "name": "Review image 1",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_text_1",
-      "namespace": "custom",
-      "name": "Review text 1",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_star_1",
-      "namespace": "custom",
-      "name": "Review star 1",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_name_2",
-      "namespace": "custom",
-      "name": "Review name 2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_avatar_2",
-      "namespace": "custom",
-      "name": "Review avatar 2",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_date_2",
-      "namespace": "custom",
-      "name": "Review date 2",
-      "description": "",
-      "type": {
-        "name": "date",
-        "category": "DATE_TIME"
-      }
-    },
-    {
-      "key": "review_text_2",
-      "namespace": "custom",
-      "name": "Review text 2",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_image_2",
-      "namespace": "custom",
-      "name": "Review image 2",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_star_2",
-      "namespace": "custom",
-      "name": "Review star 2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_name_3",
-      "namespace": "custom",
-      "name": "Review name 3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_avatar_3",
-      "namespace": "custom",
-      "name": "Review avatar 3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_date_3",
-      "namespace": "custom",
-      "name": "Review date 3",
-      "description": "",
-      "type": {
-        "name": "date",
-        "category": "DATE_TIME"
-      }
-    },
-    {
-      "key": "review_image_3",
-      "namespace": "custom",
-      "name": "Review image 3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_text_3",
-      "namespace": "custom",
-      "name": "Review text 3",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_star_3",
-      "namespace": "custom",
-      "name": "Review star 3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_name_4",
-      "namespace": "custom",
-      "name": "Review name 4",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_avatar_4",
-      "namespace": "custom",
-      "name": "Review avatar 4",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_date_4",
-      "namespace": "custom",
-      "name": "Review date 4",
-      "description": "",
-      "type": {
-        "name": "date",
-        "category": "DATE_TIME"
-      }
-    },
-    {
-      "key": "review_image_4",
-      "namespace": "custom",
-      "name": "Review image 4",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_text_4",
-      "namespace": "custom",
-      "name": "Review text 4",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_star_4",
-      "namespace": "custom",
-      "name": "Review star 4",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_name_5",
-      "namespace": "custom",
-      "name": "Review name 5",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_avatar_5",
-      "namespace": "custom",
-      "name": "Review avatar 5",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_date_5",
-      "namespace": "custom",
-      "name": "Review date 5",
-      "description": "",
-      "type": {
-        "name": "date",
-        "category": "DATE_TIME"
-      }
-    },
-    {
-      "key": "review_image_5",
-      "namespace": "custom",
-      "name": "Review image 5",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_text_5",
-      "namespace": "custom",
-      "name": "Review text 5",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_star_5",
-      "namespace": "custom",
-      "name": "Review star 5",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_name_6",
-      "namespace": "custom",
-      "name": "Review name 6",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_avatar_6",
-      "namespace": "custom",
-      "name": "Review avatar 6",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_date_6",
-      "namespace": "custom",
-      "name": "Review date 6",
-      "description": "",
-      "type": {
-        "name": "date",
-        "category": "DATE_TIME"
-      }
-    },
-    {
-      "key": "review_image_6",
-      "namespace": "custom",
-      "name": "Review image 6",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_text_6",
-      "namespace": "custom",
-      "name": "Review text 6",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_star_6",
-      "namespace": "custom",
-      "name": "Review star 6",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_name_7",
-      "namespace": "custom",
-      "name": "Review name 7",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_avatar_7",
-      "namespace": "custom",
-      "name": "Review avatar 7",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_date_7",
-      "namespace": "custom",
-      "name": "Review date 7",
-      "description": "",
-      "type": {
-        "name": "date",
-        "category": "DATE_TIME"
-      }
-    },
-    {
-      "key": "review_image_7",
-      "namespace": "custom",
-      "name": "Review image 7",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_text_7",
-      "namespace": "custom",
-      "name": "Review text 7",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_star_7",
-      "namespace": "custom",
-      "name": "Review star 7",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "top_banner_background",
-      "namespace": "custom",
-      "name": "top banner background",
-      "description": "",
-      "type": {
-        "name": "color",
-        "category": "COLOR"
-      }
-    },
-    {
-      "key": "top_banner_block_3_icon",
-      "namespace": "custom",
-      "name": "top banner block 3 icon",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "top_banner_block_2_icon",
-      "namespace": "custom",
-      "name": "top banner block 2 icon",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "top_banner_block_1_icon",
-      "namespace": "custom",
-      "name": "top banner block 1 icon",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "top_banner_block_3_text",
-      "namespace": "custom",
-      "name": "top banner block 3 text",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "top_banner_block_2_text",
-      "namespace": "custom",
-      "name": "top banner block 2 text",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "top_banner_block_1_text",
-      "namespace": "custom",
-      "name": "top banner block 1 text",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "collection_image",
-      "namespace": "custom",
-      "name": "collection_image",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "icon_chinh_sach_1",
-      "namespace": "custom",
-      "name": "icon chính sách 1",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "icon_chinh_sach_2",
-      "namespace": "custom",
-      "name": "icon chính sách 2",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "icon_chinh_sach_3",
-      "namespace": "custom",
-      "name": "icon chính sách 3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "tittle_chinh_sach_1",
-      "namespace": "custom",
-      "name": "Tittle chính sách 1",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "tittle_chinh_sach_2",
-      "namespace": "custom",
-      "name": "tittle chính sách 2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "tittle_chinh_sach_3",
-      "namespace": "custom",
-      "name": "tittle chính sách 3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "text_block_chinh_sach_1",
-      "namespace": "custom",
-      "name": "text block chính sách 1",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "text_block_chinh_sach_2",
-      "namespace": "custom",
-      "name": "text block chính sách 2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "text_block_chinh_sach_3",
-      "namespace": "custom",
-      "name": "text block chính sách 3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "banner_mobile",
-      "namespace": "custom",
-      "name": "banner_mobile",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "banner_desktop",
-      "namespace": "custom",
-      "name": "banner_desktop",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
       }
     }
   ],
@@ -689,837 +39,106 @@
   "location": [],
   "market": [],
   "order": [],
-  "page": [
-    {
-      "key": "main_collection",
-      "namespace": "custom",
-      "name": "main collection",
-      "description": "",
-      "type": {
-        "name": "collection_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "top_banner_text_1",
-      "namespace": "custom",
-      "name": "top banner text 1",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "top_banner_text_2",
-      "namespace": "custom",
-      "name": "top banner text 2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "top_banner_text_3",
-      "namespace": "custom",
-      "name": "top banner text 3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "top_banner_icon_1",
-      "namespace": "custom",
-      "name": "top banner icon 1",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "top_banner_icon_2",
-      "namespace": "custom",
-      "name": "top banner icon 2",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "top_banner_icon_3",
-      "namespace": "custom",
-      "name": "top banner icon 3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "opening_time",
-      "namespace": "custom",
-      "name": "opening time",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    }
-  ],
+  "page": [],
   "product": [
     {
-      "key": "additional_content",
-      "namespace": "ru9",
-      "name": "Additional Content",
-      "description": "",
+      "key": "color-pattern",
+      "namespace": "shopify",
+      "name": "Color",
+      "description": "Defines the primary color or pattern, such as blue or striped",
       "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "discount",
-      "namespace": "ru9",
-      "name": "Discount",
-      "description": "",
-      "type": {
-        "name": "number_integer",
-        "category": "NUMBER"
-      }
-    },
-    {
-      "key": "rating",
-      "namespace": "reviews",
-      "name": "Product rating",
-      "description": "Average rating from customers",
-      "type": {
-        "name": "rating",
-        "category": "RATING"
-      }
-    },
-    {
-      "key": "rating_count",
-      "namespace": "reviews",
-      "name": "Product rating count",
-      "description": "Total number of ratings from customers",
-      "type": {
-        "name": "number_integer",
-        "category": "NUMBER"
-      }
-    },
-    {
-      "key": "bundle_product_1",
-      "namespace": "custom",
-      "name": "bundle product 1",
-      "description": "",
-      "type": {
-        "name": "product_reference",
+        "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "product_bundle_quantity_1",
-      "namespace": "custom",
-      "name": "product bundle quantity 1",
-      "description": "",
+      "key": "sleeve-length-type",
+      "namespace": "shopify",
+      "name": "Sleeve length type",
+      "description": "Specifies the style of sleeves on clothing items, such as short or sleeveless",
       "type": {
-        "name": "number_integer",
-        "category": "NUMBER"
-      }
-    },
-    {
-      "key": "product_bundle_2",
-      "namespace": "custom",
-      "name": "product bundle 2",
-      "description": "",
-      "type": {
-        "name": "product_reference",
+        "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "product_bundle_quantity_2",
-      "namespace": "custom",
-      "name": "product bundle quantity 2",
-      "description": "",
+      "key": "age-group",
+      "namespace": "shopify",
+      "name": "Age group",
+      "description": "Defines the target age range for a product, such as adults or kids",
       "type": {
-        "name": "number_integer",
-        "category": "NUMBER"
-      }
-    },
-    {
-      "key": "product_bundle_3",
-      "namespace": "custom",
-      "name": "product bundle 3",
-      "description": "",
-      "type": {
-        "name": "product_reference",
+        "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "product_bundle_quantity_3",
-      "namespace": "custom",
-      "name": "product bundle quantity 3",
-      "description": "",
+      "key": "neckline",
+      "namespace": "shopify",
+      "name": "Neckline",
+      "description": "Used to describe the neck shape of a garment, such as V-neck or boat",
       "type": {
-        "name": "number_integer",
-        "category": "NUMBER"
-      }
-    },
-    {
-      "key": "cross_sell_product",
-      "namespace": "custom",
-      "name": "Cross Sell Product",
-      "description": "",
-      "type": {
-        "name": "list.product_reference",
+        "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "promotion_title1",
+      "key": "skirt-dress-length-type",
+      "namespace": "shopify",
+      "name": "Skirt/Dress length type",
+      "description": "Defines the length of skirts or dresses, such as mini or maxi",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "fabric",
+      "namespace": "shopify",
+      "name": "Fabric",
+      "description": "Identifies the type of fabric used in a product, for example, cotton or denim",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "dress-style",
+      "namespace": "shopify",
+      "name": "Dress style",
+      "description": "Identifies the design of a dress, such as wrap or empire waist",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "size",
+      "namespace": "shopify",
+      "name": "Size",
+      "description": "Used to specify the size of a product, such as 0-3 months or Extra large (XL)",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "stretch_level",
       "namespace": "custom",
-      "name": "promotion_title1",
-      "description": "",
+      "name": "Stretch Level",
+      "description": "Độ co giãn",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
       }
     },
     {
-      "key": "promotion_title2",
+      "key": "care_instructions",
       "namespace": "custom",
-      "name": "promotion_title2",
-      "description": "",
+      "name": "Lưu ý giặt",
+      "description": "Lưu ý giặt",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
-      }
-    },
-    {
-      "key": "promotion_title3",
-      "namespace": "custom",
-      "name": "promotion_title3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "promotion_title4",
-      "namespace": "custom",
-      "name": "promotion_title4",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "promotion_img1",
-      "namespace": "custom",
-      "name": "promotion_img1",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "promotion_img2",
-      "namespace": "custom",
-      "name": "promotion_img2",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "promotion_img3",
-      "namespace": "custom",
-      "name": "promotion_img3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "promotion_img4",
-      "namespace": "custom",
-      "name": "promotion_img4",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "heading_3_hinh",
-      "namespace": "custom",
-      "name": "heading_3_hinh",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "image_3_hinh_1",
-      "namespace": "custom",
-      "name": "image_3_hinh_1",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "image_3_hinh_2",
-      "namespace": "custom",
-      "name": "image_3_hinh_2",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "image_3_hinh_3",
-      "namespace": "custom",
-      "name": "image_3_hinh_3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "heading_3_hinh_1",
-      "namespace": "custom",
-      "name": "heading_3_hinh_1",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "heading_3_hinh_2",
-      "namespace": "custom",
-      "name": "heading_3_hinh_2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "heading_3_hinh_3",
-      "namespace": "custom",
-      "name": "heading_3_hinh_3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "text_block_3_hinh_1",
-      "namespace": "custom",
-      "name": "text_block_3_hinh_1",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "text_block_3_hinh_2",
-      "namespace": "custom",
-      "name": "text_block_3_hinh_2",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "text_block_3_hinh_3",
-      "namespace": "custom",
-      "name": "text_block_3_hinh_3",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "video_button_label",
-      "namespace": "custom",
-      "name": "video_button_label",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "video_text_block",
-      "namespace": "custom",
-      "name": "video_text_block",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "video_button_link",
-      "namespace": "custom",
-      "name": "video_button_link",
-      "description": "",
-      "type": {
-        "name": "url",
-        "category": "URL"
-      }
-    },
-    {
-      "key": "video_cover_image",
-      "namespace": "custom",
-      "name": "video_cover_image",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "dymamic_promotion_title_1",
-      "namespace": "custom",
-      "name": "dymamic_promotion_title_1",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dymamic_promotion_title_2",
-      "namespace": "custom",
-      "name": "dymamic_promotion_title_2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dymamic_promotion_title_3",
-      "namespace": "custom",
-      "name": "dymamic_promotion_title_3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dymamic_promotion_img_1",
-      "namespace": "custom",
-      "name": "dymamic_promotion_img_1",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "dymamic_promotion_img_2",
-      "namespace": "custom",
-      "name": "dymamic_promotion_img_2",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "dymamic_promotion_img_3",
-      "namespace": "custom",
-      "name": "dymamic_promotion_img_3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_avatar_1",
-      "namespace": "custom",
-      "name": "review_avatar_1",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_avatar_2",
-      "namespace": "custom",
-      "name": "review_avatar_2",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_avatar_3",
-      "namespace": "custom",
-      "name": "review_avatar_3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_avatar_4",
-      "namespace": "custom",
-      "name": "review_avatar_4",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_avatar_5",
-      "namespace": "custom",
-      "name": "review_avatar_5",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_name_1",
-      "namespace": "custom",
-      "name": "review_name_1",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_name_2",
-      "namespace": "custom",
-      "name": "review_name_2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_name_3",
-      "namespace": "custom",
-      "name": "review_name_3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_name_4",
-      "namespace": "custom",
-      "name": "review_name_4",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_name_5",
-      "namespace": "custom",
-      "name": "review_name_5",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_image_1",
-      "namespace": "custom",
-      "name": "review_image_1",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_image_2",
-      "namespace": "custom",
-      "name": "review_image_2",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_image_3",
-      "namespace": "custom",
-      "name": "review_image_3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_image_4",
-      "namespace": "custom",
-      "name": "review_image_4",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_image_5",
-      "namespace": "custom",
-      "name": "review_image_5",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "review_text_1",
-      "namespace": "custom",
-      "name": "review_text_1",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_text_2",
-      "namespace": "custom",
-      "name": "review_text_2",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_text_3",
-      "namespace": "custom",
-      "name": "review_text_3",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_text_4",
-      "namespace": "custom",
-      "name": "review_text_4",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "review_text_5",
-      "namespace": "custom",
-      "name": "review_text_5",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "ask1",
-      "namespace": "custom",
-      "name": "ask1",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "ask2",
-      "namespace": "custom",
-      "name": "ask2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "ask3",
-      "namespace": "custom",
-      "name": "ask3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "ask4",
-      "namespace": "custom",
-      "name": "ask4",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "ask5",
-      "namespace": "custom",
-      "name": "ask5",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "answer1",
-      "namespace": "custom",
-      "name": "answer1",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "answer2",
-      "namespace": "custom",
-      "name": "answer2",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "answer3",
-      "namespace": "custom",
-      "name": "answer3",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "answer4",
-      "namespace": "custom",
-      "name": "answer4",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "answer5",
-      "namespace": "custom",
-      "name": "answer5",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "product_percent_discount",
-      "namespace": "custom",
-      "name": "product_percent_discount",
-      "description": "",
-      "type": {
-        "name": "number_integer",
-        "category": "NUMBER"
-      }
-    },
-    {
-      "key": "up_sell",
-      "namespace": "custom",
-      "name": "up_sell",
-      "description": "",
-      "type": {
-        "name": "list.product_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "product_set_note",
-      "namespace": "custom",
-      "name": "product_set_note",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "bundle_label",
-      "namespace": "custom",
-      "name": "bundle_label",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "product_url",
-      "namespace": "custom",
-      "name": "Đường dẫn chi tiết",
-      "description": "",
-      "type": {
-        "name": "url",
-        "category": "URL"
-      }
-    },
-    {
-      "key": "related_product",
-      "namespace": "custom",
-      "name": "related_product",
-      "description": "Sản phẩm liên quan",
-      "type": {
-        "name": "list.product_reference",
-        "category": "REFERENCE"
       }
     },
     {
@@ -1573,279 +192,9 @@
       }
     },
     {
-      "key": "bedding-size",
-      "namespace": "shopify",
-      "name": "Bedding size",
-      "description": "Defines the size category for bedding items, e.g. standard, king",
-      "type": {
-        "name": "list.metaobject_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "cover-color",
-      "namespace": "shopify",
-      "name": "Cover color",
-      "description": "Specifies the primary color of a product's cover, e.g. clear, navy",
-      "type": {
-        "name": "list.metaobject_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "travel-pillow-shape",
-      "namespace": "shopify",
-      "name": "Travel pillow shape",
-      "description": "Describes the physical contour of travel pillows, such as J-shaped ",
-      "type": {
-        "name": "list.metaobject_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "cover-material",
-      "namespace": "shopify",
-      "name": "Cover material",
-      "description": "Identifies the type of fabric or material used in the product's cover, such as silk or cotton",
-      "type": {
-        "name": "list.metaobject_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "color-pattern",
-      "namespace": "shopify",
-      "name": "Color",
-      "description": "Defines the primary color or pattern, such as blue or striped",
-      "type": {
-        "name": "list.metaobject_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "firmness",
-      "namespace": "shopify",
-      "name": "Firmness",
-      "description": "Defines the level of firmness in items like furniture or mattresses, e.g. extra soft, firm",
-      "type": {
-        "name": "list.metaobject_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "hotspot_handle",
+      "key": "products_color_group",
       "namespace": "custom",
-      "name": "Hotspot handle",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "hotspot_title",
-      "namespace": "custom",
-      "name": "Hotspot title",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "hotspot_banner",
-      "namespace": "custom",
-      "name": "Hotspot banner",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "hotspot_banner_mobile",
-      "namespace": "custom",
-      "name": "Hotspot banner mobile",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "product_bundle",
-      "namespace": "custom",
-      "name": "product bundle",
-      "description": "",
-      "type": {
-        "name": "list.product_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "product_bundle_discount",
-      "namespace": "custom",
-      "name": "product bundle discount",
-      "description": "",
-      "type": {
-        "name": "number_integer",
-        "category": "NUMBER"
-      }
-    },
-    {
-      "key": "product_video_best_seller_title",
-      "namespace": "custom",
-      "name": "Product video best seller title",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "product_video_best_seller_video",
-      "namespace": "custom",
-      "name": "Product video best seller video",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "product_video_best_seller_poster",
-      "namespace": "custom",
-      "name": "Product video best seller poster",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "dynamic_subheading",
-      "namespace": "custom",
-      "name": "Dynamic subheading",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dynamic_heading",
-      "namespace": "custom",
-      "name": "Dynamic heading",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dynamic_description_3",
-      "namespace": "custom",
-      "name": "Dynamic description 3",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dynamic_title_3",
-      "namespace": "custom",
-      "name": "Dynamic title 3",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dynamic_image_3",
-      "namespace": "custom",
-      "name": "Dynamic image 3",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "dynamic_desciption_2",
-      "namespace": "custom",
-      "name": "Dynamic desciption 2",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dynamic_title_2",
-      "namespace": "custom",
-      "name": "Dynamic title 2",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dynamic_image_2",
-      "namespace": "custom",
-      "name": "Dynamic image 2",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "dynamic_description_1",
-      "namespace": "custom",
-      "name": "Dynamic description 1",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dynamic_title_1",
-      "namespace": "custom",
-      "name": "Dynamic title 1",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "dynamic_image_1",
-      "namespace": "custom",
-      "name": "Dynamic image 1",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "product_video_best_seller_description",
-      "namespace": "custom",
-      "name": "Product video best seller description",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "product_features",
-      "namespace": "custom",
-      "name": "Product Features",
+      "name": "Products color group",
       "description": "",
       "type": {
         "name": "metaobject_reference",
@@ -1853,192 +202,232 @@
       }
     },
     {
-      "key": "filler-material",
+      "key": "rating",
+      "namespace": "reviews",
+      "name": "Product rating",
+      "description": "Average rating from customers",
+      "type": {
+        "name": "rating",
+        "category": "RATING"
+      }
+    },
+    {
+      "key": "rating_count",
+      "namespace": "reviews",
+      "name": "Product rating count",
+      "description": "Total number of ratings from customers",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "target-gender",
       "namespace": "shopify",
-      "name": "Filler material",
-      "description": "Identifies the type of material used to fill a product, typically pillows or cushions; e.g. memory foam, feathers",
+      "name": "Target gender",
+      "description": "Identifies the intended gender for a product, such as female, male or unisex",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "filler-support",
+      "key": "dress-occasion",
       "namespace": "shopify",
-      "name": "Filler support",
-      "description": "Specifies the firmness level or style of a pillow's interior, such as soft or memory foam",
+      "name": "Dress occasion",
+      "description": "Specifies the intended occasion for a dress, e.g. holiday, everyday",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "bed-frame-features",
+      "key": "skirt-style",
       "namespace": "shopify",
-      "name": "Bed/Frame features",
-      "description": "Highlights unique features of beds and frames, such as storage options or included headboard",
+      "name": "Skirt style",
+      "description": "Describes the design or cut of a skirt, such as pencil or pleated",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "furniture-fixture-material",
+      "key": "care-instructions",
       "namespace": "shopify",
-      "name": "Furniture/Fixture material",
-      "description": "Identifies the main material used in furniture or fixtures, like wood or metal",
+      "name": "Care instructions",
+      "description": "Provides guidance for product upkeep, such as hand wash or dry clean only",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "subdes",
-      "namespace": "custom",
-      "name": "Subdes",
-      "description": "",
+      "key": "top-length-type",
+      "namespace": "shopify",
+      "name": "Top length type",
+      "description": "Defines the length of tops or shirts, like crop top or long",
       "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "bundle_tactics_voucher",
-      "namespace": "custom",
-      "name": "bundle-tactics-voucher",
-      "description": "apply for bundle",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "voucher",
-      "namespace": "custom",
-      "name": "voucher",
-      "description": "",
-      "type": {
-        "name": "file_reference",
+        "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "3d_infographic_desktop",
-      "namespace": "custom",
-      "name": "3D infographic desktop",
-      "description": "",
+      "key": "clothing-features",
+      "namespace": "shopify",
+      "name": "Clothing features",
+      "description": "Describes unique properties of apparel, such as water resistant or wrinkle resistant",
       "type": {
-        "name": "file_reference",
+        "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "3d_infographic_mobile",
+      "key": "product_color_swatch",
       "namespace": "custom",
-      "name": "3D infographic mobile",
+      "name": "Product color swatch",
       "description": "",
       "type": {
-        "name": "file_reference",
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "waitlist",
+      "namespace": "inventory",
+      "name": "Waitlist",
+      "description": "Customers waiting for product to be back in stock",
+      "type": {
+        "name": "json",
+        "category": "JSON"
+      }
+    },
+    {
+      "key": "badges",
+      "namespace": "custom",
+      "name": "Badges",
+      "description": "",
+      "type": {
+        "name": "list.single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "product_measurements_tab",
+      "namespace": "sizechart",
+      "name": "Product measurements tab",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "product_measurements",
+      "namespace": "sizechart",
+      "name": "Product measurements",
+      "description": "",
+      "type": {
+        "name": "json",
+        "category": "JSON"
+      }
+    },
+    {
+      "key": "fit",
+      "namespace": "shopify",
+      "name": "Fit",
+      "description": "Describes the fit of a garment, typically pant shape; e.g. skinny leg, wide",
+      "type": {
+        "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
     },
     {
-      "key": "3d_mobile_block_info_1",
-      "namespace": "custom",
-      "name": "3d mobile info 1",
-      "description": "",
+      "key": "pants-length-type",
+      "namespace": "shopify",
+      "name": "Pants length type",
+      "description": "Used to defines the length of pants, such as cropped or long",
       "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
       }
     },
     {
-      "key": "3d_mobile_info_2",
-      "namespace": "custom",
-      "name": "3d mobile info 2",
-      "description": "",
+      "key": "waist-rise",
+      "namespace": "shopify",
+      "name": "Waist rise",
+      "description": "Indicates where on the waist a garment sits, like low, medium or high",
       "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
       }
     },
     {
-      "key": "3d_mobile_info_3",
-      "namespace": "custom",
-      "name": "3d mobile info 3",
-      "description": "",
+      "key": "best-uses",
+      "namespace": "shopify",
+      "name": "Best uses",
+      "description": "Highlights optimal activities for product use, like traveling, hiking, or diving",
       "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
       }
     },
     {
-      "key": "3d_mobile_info_4",
-      "namespace": "custom",
-      "name": "3d mobile info 4",
-      "description": "",
+      "key": "jewelry-material",
+      "namespace": "shopify",
+      "name": "Jewelry material",
+      "description": "Identifies the main material used in jewelry items, such as gold or enamel",
       "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
       }
     },
     {
-      "key": "3d_des_mobile_1",
-      "namespace": "custom",
-      "name": "3d des mobile 1",
-      "description": "",
+      "key": "earring-design",
+      "namespace": "shopify",
+      "name": "Earring design",
+      "description": "Describes the style or structure of earrings, such as hoop or stud",
       "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
       }
     },
     {
-      "key": "3d_mobile_des_2",
-      "namespace": "custom",
-      "name": "3d des mobile 2",
-      "description": "",
+      "key": "jewelry-type",
+      "namespace": "shopify",
+      "name": "Jewelry type",
+      "description": "Distinguishes between types of jewelry, such as fine or imitation jewelry",
       "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
       }
     },
     {
-      "key": "3d_des_mobile_3",
-      "namespace": "custom",
-      "name": "3d des mobile 3",
-      "description": "",
+      "key": "necklace-design",
+      "namespace": "shopify",
+      "name": "Necklace design",
+      "description": "Describes the style of a necklace, such as pendant or choker",
       "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
       }
     },
     {
-      "key": "3d_des_mobile_4",
+      "key": "notify_coming_soon",
       "namespace": "custom",
-      "name": "3d des mobile 4",
+      "name": "Notify - Coming soon",
       "description": "",
       "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
+        "name": "boolean",
+        "category": "TRUE_FALSE"
       }
     }
   ],
   "variant": [
     {
-      "key": "product_set_note",
-      "namespace": "custom",
-      "name": "product_set_note",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
       "key": "custom_label_4",
       "namespace": "mm-google-shopping",
       "name": "Google: Custom Label 4",
-      "description": "Label that you assign to a product to help organize bidding and reporting in Shopping campaigns",
+      "description": "Label that you assign to a product to help organize bidding and reporting in Shopping campaigns.",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
@@ -2048,7 +437,7 @@
       "key": "custom_label_3",
       "namespace": "mm-google-shopping",
       "name": "Google: Custom Label 3",
-      "description": "Label that you assign to a product to help organize bidding and reporting in Shopping campaigns",
+      "description": "Label that you assign to a product to help organize bidding and reporting in Shopping campaigns.",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
@@ -2058,7 +447,7 @@
       "key": "custom_label_2",
       "namespace": "mm-google-shopping",
       "name": "Google: Custom Label 2",
-      "description": "Label that you assign to a product to help organize bidding and reporting in Shopping campaigns",
+      "description": "Label that you assign to a product to help organize bidding and reporting in Shopping campaigns.",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
@@ -2068,7 +457,7 @@
       "key": "custom_label_1",
       "namespace": "mm-google-shopping",
       "name": "Google: Custom Label 1",
-      "description": "Label that you assign to a product to help organize bidding and reporting in Shopping campaigns",
+      "description": "Label that you assign to a product to help organize bidding and reporting in Shopping campaigns.",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
@@ -2078,7 +467,7 @@
       "key": "custom_label_0",
       "namespace": "mm-google-shopping",
       "name": "Google: Custom Label 0",
-      "description": "Label that you assign to a product to help organize bidding and reporting in Shopping campaigns",
+      "description": "Label that you assign to a product to help organize bidding and reporting in Shopping campaigns.",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
@@ -2143,19 +532,89 @@
         "name": "single_line_text_field",
         "category": "TEXT"
       }
+    },
+    {
+      "key": "preorder_quantity",
+      "namespace": "custom",
+      "name": "PreOrder Quantity",
+      "description": "",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "preorder_enabled",
+      "namespace": "custom",
+      "name": "Pre-order Enabled",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "pre_order_first_ship_date",
+      "namespace": "custom",
+      "name": "Pre-order First Ship Date",
+      "description": "",
+      "type": {
+        "name": "date",
+        "category": "DATE_TIME"
+      }
+    },
+    {
+      "key": "preorder_interval_days",
+      "namespace": "custom",
+      "name": "Pre-order Interval Days",
+      "description": "",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "preorder_total_loops",
+      "namespace": "custom",
+      "name": "Pre-order Total Loops",
+      "description": "",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "preorder_current_loop",
+      "namespace": "custom",
+      "name": "Pre-order Current Loop",
+      "description": "",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "pre_order_sold_quantity",
+      "namespace": "custom",
+      "name": "Pre-order-sold-quantity",
+      "description": "",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "preorder_shipping_window",
+      "namespace": "custom",
+      "name": "PreOrder-shipping_window",
+      "description": "",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
     }
   ],
   "shop": [
-    {
-      "key": "merchant_id",
-      "namespace": "mm_google_shopping_extension",
-      "name": "Google: Merchant ID",
-      "description": "Currently Linked Merchant Center ID",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
     {
       "key": "show_store_widget_app_embed_block",
       "namespace": "mm_google_shopping_extension",
@@ -2164,6 +623,16 @@
       "type": {
         "name": "boolean",
         "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "merchant_id",
+      "namespace": "mm_google_shopping_extension",
+      "name": "Google: Merchant ID",
+      "description": "Currently Linked Merchant Center ID",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
       }
     }
   ]

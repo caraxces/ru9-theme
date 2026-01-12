@@ -65,25 +65,9 @@
       </button>
     </div>
     
-    {%- comment -%} Bottom row: Buy Now + optional Hotline button {%- endcomment -%}
-    {%- liquid
-      assign show_hotline = false
-      if block.settings.enable_hotline_button and block.settings.hotline_phone != blank
-        assign show_hotline = true
-      endif
-    -%}
-    <div class="actions-bottom-row{% if show_hotline %} has-hotline{% endif %}">
-      <div class="payment-buttons{% if hide_payment_button_mobile %} hide-payment-mobile{% endif %}">
-        {{ form | payment_button }}
-      </div>
-      {%- if show_hotline -%}
-        <a
-          class="btn btn--secondary product-hotline-button"
-          href="tel:{{ block.settings.hotline_phone | strip | remove: ' ' }}"
-        >
-          {{ block.settings.hotline_label | default: 'Gọi tư vấn' }}
-        </a>
-      {%- endif -%}
+    {%- comment -%} Bottom row: Buy Now button full width {%- endcomment -%}
+    <div class="payment-buttons{% if hide_payment_button_mobile %} hide-payment-mobile{% endif %}">
+      {{ form | payment_button }}
     </div>
   {%- else -%}
     {%- comment -%} Default layout without Buy Now {%- endcomment -%}

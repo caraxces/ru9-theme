@@ -19,13 +19,6 @@
             "text": "<p>Giá hấp dẫn cho Khách hàng Doanh nghiệp/ Đơn vị nội thất/ Cộng tác viên</p>"
           }
         },
-        "sales_point_qkkyXe": {
-          "type": "sales_point",
-          "settings": {
-            "icon": "gift",
-            "text": "Tặng Eyesmask xông hơi, vỏ gối Cotton Sateen"
-          }
-        },
         "sales_point_NBVp8h": {
           "type": "sales_point",
           "settings": {
@@ -115,7 +108,6 @@
       },
       "block_order": [
         "business_price_m3eVEy",
-        "sales_point_qkkyXe",
         "sales_point_NBVp8h",
         "sales_point_bDmipR",
         "custom_RUMVxq",
