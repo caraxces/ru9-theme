@@ -139,6 +139,25 @@
     margin-bottom: 40px !important;
     gap: 0 0 !important;
     /* Add column gap */
+    opacity: 0 !important;
+    /* Hide initially to prevent FOUC */
+    transition: opacity 0.3s ease-in-out !important;
+    animation: jdgm-fallback-show 0s 2s forwards !important;
+    /* Fallback: show after 2s if JS fails */
+}
+
+/* Show header after JS has restructured it */
+.jdgm-rev-widg__header.js-layout-enhanced {
+    opacity: 1 !important;
+    animation: none !important;
+    /* Cancel fallback animation */
+}
+
+/* Fallback animation to show widget if JS doesn't run */
+@keyframes jdgm-fallback-show {
+    to {
+        opacity: 1 !important;
+    }
 }
 
 .jdgm-histogram__clear-filter:not([disabled]):hover,
@@ -164,7 +183,8 @@
     display: flex !important;
     flex-direction: column !important;
     gap: 24px !important;
-    width: 391px !important;
+    width: 300px !important;
+    /* More compact to match design */
     flex-shrink: 0;
     align-items: flex-start !important;
     /* Align inner content to the left */
@@ -183,14 +203,17 @@
 /* 4. Image Carousel - Match Figma: 345x317px, gap 100px */
 .jdgm-custom-image-carousel {
     display: flex;
-    gap: 100px;
-    /* Match Figma annotation */
+    gap: 20px;
+    /* Reduced gap for better spacing */
     overflow-x: auto;
     padding-bottom: 10px;
     scrollbar-width: thin;
     scrollbar-color: #1C2C58 #e0e0e0;
     align-items: center;
-    margin-left: 40px !important;
+    margin-left: 50px !important;
+    /* Adjust margin to match design */
+    min-height: 220px;
+    /* Reserve space to prevent layout shift */
     /* Performance: use will-change for smoother scrolling */
     will-change: scroll-position;
 }
@@ -216,10 +239,10 @@
 
 .jdgm-custom-image-carousel img,
 .jdgm-custom-image-carousel video {
-    width: 345px;
-    /* Match Figma: 345px */
-    height: 317px;
-    /* Match Figma: 317px */
+    width: 240px;
+    /* Larger to match design */
+    height: 220px;
+    /* Proportional height */
     object-fit: cover;
     border-radius: 5px;
     /* Match Figma: rounded-[5px] */
@@ -303,8 +326,8 @@ only screen and (min-resolution: 192dpi) {
 .jdgm-rev-widg__summary::before {
     grid-area: rating !important;
     content: attr(data-rating) !important;
-    font-size: 90px !important;
-    /* Match Figma: 90px for desktop */
+    font-size: 60px !important;
+    /* Reduced to match design proportions */
     font-weight: 700 !important;
     line-height: 1 !important;
     color: #1C2C58 !important;
@@ -319,8 +342,11 @@ only screen and (min-resolution: 192dpi) {
 .jdgm-rev-widg__summary-text {
     grid-area: text !important;
     align-self: start !important;
-    width: 375px !important;
-    font-size: 20px !important;
+    width: 100% !important;
+    /* Adjust to column width */
+    max-width: 300px !important;
+    font-size: 16px !important;
+    /* Smaller text to match design */
     line-height: 1.5 !important;
     color: #000 !important;
     font-family: 'Be Vietnam Pro', sans-serif !important;
@@ -337,16 +363,18 @@ only screen and (min-resolution: 192dpi) {
     font-weight: 600 !important;
     text-decoration: none !important;
     text-align: center !important;
-    width: 391px !important;
-    /* Force explicit width */
+    width: 100% !important;
+    /* Match column width */
+    max-width: 300px !important;
     box-sizing: border-box !important;
 }
 
 .jdgm-histogram {
     display: block !important;
     visibility: visible !important;
-    width: 391px !important;
-    /* Force explicit width */
+    width: 100% !important;
+    max-width: 300px !important;
+    /* Match column width */
     box-sizing: border-box !important;
 }
 
@@ -418,11 +446,32 @@ only screen and (min-resolution: 192dpi) {
 
 .jdgm-rev {
     display: flex !important;
+    flex-direction: row-reverse !important;
+    /* Move image to right */
     gap: 24px !important;
     align-items: flex-start !important;
     /* Align items to the top */
     padding: 30px 0 !important;
     border-top: 1px solid #e0e0e0;
+    opacity: 0 !important;
+    /* Hide initially */
+    transition: opacity 0.2s ease-in-out !important;
+    animation: jdgm-review-fallback-show 0s 2.5s forwards !important;
+    /* Fallback: show after 2.5s if JS fails */
+}
+
+/* Show review after JS has restructured it */
+.jdgm-rev.js-card-enhanced {
+    opacity: 1 !important;
+    animation: none !important;
+    /* Cancel fallback animation */
+}
+
+/* Fallback animation for reviews */
+@keyframes jdgm-review-fallback-show {
+    to {
+        opacity: 1 !important;
+    }
 }
 
 /* 1. LEFT COLUMN (Image) */

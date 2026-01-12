@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const MAX_WIDGET_ATTEMPTS = 20;
+    const MAX_WIDGET_ATTEMPTS = 30; // Increased attempts
     let widgetAttempts = 0;
     console.log('🚀 Judge.me Custom Layout Script Activated. Waiting for widget...');
 
@@ -151,16 +151,42 @@ document.addEventListener('DOMContentLoaded', () => {
         widgetHeader.classList.add('js-layout-enhanced');
         console.log('✅ Left column restructured.');
 
-        // --- 2. Continuously Poll for Media ---
+        // --- 2. Collect ALL Media from All Pages ---
         let pollAttempts = 0;
-        const MAX_POLL_ATTEMPTS = 15; // Poll for 15 seconds
+        const MAX_POLL_ATTEMPTS = 30; // Longer polling to catch all pages
         const uniqueSources = new Set();
         let carouselBuilt = false;
+        let paginationTriggered = false;
+
+        // Function to trigger loading all pagination pages
+        const triggerAllPagination = async () => {
+            if (paginationTriggered) return;
+            paginationTriggered = true;
+
+            console.log('🔍 Triggering pagination to load all reviews...');
+
+            // Find all pagination buttons (not current page)
+            const paginationLinks = document.querySelectorAll('.jdgm-paginate__page:not(.jdgm-curt)');
+            const pagesToLoad = Array.from(paginationLinks)
+                .filter(link => !link.classList.contains('jdgm-paginate__next-page') &&
+                    !link.classList.contains('jdgm-paginate__prev-page') &&
+                    !link.classList.contains('jdgm-paginate__first-page') &&
+                    !link.classList.contains('jdgm-paginate__last-page'))
+                .slice(0, 5); // Limit to first 5 pages to avoid overload
+
+            for (const pageLink of pagesToLoad) {
+                pageLink.click();
+                // Wait for reviews to load
+                await new Promise(resolve => setTimeout(resolve, 800));
+            }
+
+            console.log(`✅ Loaded ${pagesToLoad.length} additional pages`);
+        };
 
         // Performance: Use requestAnimationFrame for smoother polling
         let lastPollTime = 0;
-        const POLL_INTERVAL = 1000; // 1 second
-        
+        const POLL_INTERVAL = 500; // Faster polling - 500ms
+
         const mediaPoller = () => {
             const now = performance.now();
             if (now - lastPollTime < POLL_INTERVAL) {
@@ -168,8 +194,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             lastPollTime = now;
-            
+
             pollAttempts++;
+
+            // Trigger pagination on first few attempts
+            if (pollAttempts === 3 && !paginationTriggered) {
+                triggerAllPagination();
+            }
+
             const reviews = document.querySelectorAll('.jdgm-rev');
             const newlyFoundMedia = [];
 
@@ -212,32 +244,44 @@ document.addEventListener('DOMContentLoaded', () => {
                     carouselBuilt = true;
                 }
 
+                // Track which images are already in the DOM to prevent duplicates
+                const existingImages = new Set(
+                    Array.from(mediaContainer.querySelectorAll('img, video'))
+                        .map(el => el.src)
+                );
+
                 newlyFoundMedia.forEach((item, index) => {
+                    // Skip if this image/video already exists in the carousel
+                    if (existingImages.has(item.src)) {
+                        return;
+                    }
+
                     if (item.type === 'image') {
                         const img = document.createElement('img');
                         img.src = item.src;
 
-                        // Eager load first 3 images, lazy load rest
-                        img.loading = index < 3 ? 'eager' : 'lazy';
+                        // EAGER LOAD for faster display - all images loaded immediately
+                        img.loading = 'eager';
 
                         // Add decoding hint for better performance
                         img.decoding = 'async';
 
-                        // Add fetchpriority for first image
-                        if (index === 0) {
+                        // Add fetchpriority for first images
+                        const currentImageCount = mediaContainer.querySelectorAll('img').length;
+                        if (currentImageCount < 4) {
                             img.fetchPriority = 'high';
                         }
 
-                        // Set explicit dimensions - Match Figma: 345x317px desktop
+                        // Set explicit dimensions - Match updated design
                         const isMobile = window.matchMedia('(max-width: 768px)').matches;
                         if (isMobile) {
-                            img.width = 120; // Match Figma mobile
+                            img.width = 120; // Mobile size
                             img.height = 120;
                             img.sizes = '120px';
                         } else {
-                            img.width = 345; // Match Figma desktop
-                            img.height = 317;
-                            img.sizes = '345px';
+                            img.width = 240; // Larger desktop size to match design
+                            img.height = 220;
+                            img.sizes = '240px';
                         }
 
                         // Add srcset for responsive images (if Shopify CDN)
@@ -250,28 +294,29 @@ document.addEventListener('DOMContentLoaded', () => {
                                 `;
                             } else {
                                 img.srcset = `
-                                    ${baseUrl}?width=345&quality=90 345w,
-                                    ${baseUrl}?width=690&quality=90 690w
+                                    ${baseUrl}?width=240&quality=90 240w,
+                                    ${baseUrl}?width=480&quality=90 480w
                                 `;
                             }
                         }
 
                         mediaContainer.appendChild(img);
+                        existingImages.add(item.src); // Track the new image
                     } else {
                         const video = document.createElement('video');
                         video.src = item.src;
-                        video.loading = index < 3 ? 'eager' : 'lazy';
                         const isMobile = window.matchMedia('(max-width: 768px)').matches;
                         Object.assign(video, {
                             playsinline: true,
                             autoplay: true,
                             muted: true,
                             loop: true,
-                            width: isMobile ? 120 : 345, // Match Figma dimensions
-                            height: isMobile ? 120 : 317,
-                            loading: 'lazy' // Lazy load videos
+                            width: isMobile ? 120 : 240, // Match updated dimensions
+                            height: isMobile ? 120 : 220,
+                            preload: 'auto' // Eager load videos
                         });
                         mediaContainer.appendChild(video);
+                        existingImages.add(item.src); // Track the new video
                     }
                 });
 
@@ -279,39 +324,42 @@ document.addEventListener('DOMContentLoaded', () => {
                     actionsWrapper.innerHTML = '';
                     actionsWrapper.appendChild(mediaContainer);
                 }
+
+                console.log(`📸 Carousel updated: ${uniqueSources.size} total media items`);
             }
 
             if (pollAttempts >= MAX_POLL_ATTEMPTS) {
                 if (!carouselBuilt) {
                     actionsWrapper.innerHTML = ''; // Clear if nothing ever found
                 }
+                console.log(`🏁 Media polling stopped after ${pollAttempts} attempts. Total: ${uniqueSources.size} items`);
                 return; // Stop polling
             }
-            
+
             requestAnimationFrame(mediaPoller);
         };
-        
-        // Start polling
+
+        // Start polling immediately
         requestAnimationFrame(mediaPoller);
     };
 
     // Performance: Use requestIdleCallback if available, fallback to setTimeout
     const scheduleCheck = (callback) => {
         if ('requestIdleCallback' in window) {
-            requestIdleCallback(callback, { timeout: 500 });
+            requestIdleCallback(callback, { timeout: 100 }); // Shorter timeout
         } else {
-            setTimeout(callback, 500);
+            setTimeout(callback, 100); // Faster check
         }
     };
-    
+
     const checkForWidget = () => {
         const widget = document.querySelector('.jdgm-rev-widg');
         if (widget && widget.offsetParent !== null) {
-            // Wait an extra moment for Judge.me's own JS to finish arranging things
+            // Minimal delay - just enough for Judge.me to initialize
             setTimeout(() => {
                 enhanceLayout();
                 restructureReviewCards(); // Restructure individual cards
-            }, 200);
+            }, 50); // Reduced from 200ms to 50ms
             return; // Stop checking
         }
 
@@ -322,9 +370,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Could not find visible Judge.me widget to enhance.');
         }
     };
-    
-    // Start checking for widget
-    scheduleCheck(checkForWidget);
+
+    // Start checking for widget immediately
+    checkForWidget();
 
     const restructureReviewCards = () => {
         // Find reviews that haven't been restructured yet
@@ -553,11 +601,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             picContainer.appendChild(picsInsideContent);
                         }
                     }
-                    
+
                     // Append the body content to the right column
                     rightColumn.appendChild(content);
                 }
-                
+
                 // CRITICAL FIX: Find and move .jdgm-rev__reply to rightColumn if it exists outside content
                 // Reply can be a sibling of content, not inside it
                 let reply = review.querySelector('.jdgm-rev__reply');
@@ -565,7 +613,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Also check if it's in content (shouldn't be, but just in case)
                     reply = content ? content.querySelector('.jdgm-rev__reply') : null;
                 }
-                
+
                 if (reply && !rightColumn.contains(reply)) {
                     // Move reply to rightColumn (after content)
                     rightColumn.appendChild(reply);
