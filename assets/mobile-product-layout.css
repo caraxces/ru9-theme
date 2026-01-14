@@ -69,8 +69,6 @@
     left: 0 !important;
     opacity: 0 !important;
     transition: opacity 0.3s ease !important;
-    /* Performance: use transform for better GPU acceleration */
-    will-change: opacity;
   }
 
   .product__main-photos .product-main-slide.is-selected {
@@ -200,8 +198,6 @@
     align-items: center !important;
     /* Performance: contain scroll */
     contain: layout style;
-    /* Performance: use will-change for smooth scrolling */
-    will-change: scroll-position;
   }
 
   /* Thumbnail items */

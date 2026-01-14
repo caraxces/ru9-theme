@@ -6,7 +6,8 @@
 
 /* Performance: Use CSS variables for consistency */
 :root {
-  --page-width: 1200px; /* Default, overridden at 1400px+ */
+  --page-width: 1200px;
+  /* Default, overridden at 1400px+ */
 }
 
 /* Base styles - Mobile first approach */
@@ -21,11 +22,12 @@
 
 /* Tablet and up (750px+) */
 @media screen and (min-width: 750px) {
+
   .page-width,
   .page_cart main {
     padding: 0 3.2rem;
   }
-  
+
   /* Header specific */
   .header.page-width,
   .utility-bar_grid.page-width {
@@ -36,11 +38,12 @@
 
 /* Desktop and up (1200px+) */
 @media screen and (min-width: 1200px) {
+
   .page-width,
   .page_cart main {
     padding: 0 5rem;
   }
-  
+
   .header:not(.drawer-menu).page-width {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -52,13 +55,13 @@
   :root {
     --page-width: 1594px !important;
   }
-  
+
   .page-width,
   .page_cart main {
     max-width: 1594px !important;
     padding: 0 5rem;
   }
-  
+
   /* Specific sections - Grouped for performance */
   .slideshow-section .page-width,
   .content-banner-cta-section .page-width,
@@ -76,7 +79,7 @@
     margin: 0 auto !important;
     padding: 0 5rem !important;
   }
-  
+
   /* Full-width sections that respect container */
   .slideshow-section,
   .content-banner-cta-section {
@@ -89,14 +92,14 @@
     margin: 0 auto !important;
     padding: 0 5rem !important;
   }
-  
+
   /* Certifications container */
   .certifications__container {
     max-width: 1594px !important;
     margin: 0 auto !important;
     padding: 0 5rem !important;
   }
-  
+
   /* Header and Footer */
   .header-group .page-width,
   .footer-group .page-width {
@@ -104,7 +107,7 @@
     margin: 0 auto !important;
     padding: 0 5rem !important;
   }
-  
+
   /* Dropdown menu - Grouped for performance */
   .site-nav__dropdown.megamenu,
   .site-nav__dropdown.megamenu.text-left,
@@ -117,10 +120,8 @@
     margin: 0 auto !important;
     padding: 0 !important;
     box-sizing: border-box !important;
-    /* Performance: use will-change for transforms */
-    will-change: transform;
   }
-  
+
   /* Page-width inside dropdown */
   .site-nav__dropdown.megamenu .page-width,
   .site-nav__dropdown.megamenu.text-left .page-width {
@@ -131,7 +132,7 @@
     padding-right: 5rem !important;
     box-sizing: border-box !important;
   }
-  
+
   /* Sections container */
   .section {
     width: 100%;
