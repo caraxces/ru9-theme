@@ -18,9 +18,12 @@
             {{ collection.title | link_to: url }}
           {% endif %}
         {% endif %} {% endcomment %}
-        {%- assign product_collections = product.collections | reverse -%}
-
-        {%- assign current_collection = product_collections.first %}
+        {%- comment -%}
+          Use the first (oldest) collection in Shopify's order.
+          Previously this was reversed (newest/last), which caused breadcrumb
+          to pick the most recently added collection.
+        {%- endcomment -%}
+        {%- assign current_collection = product.collections.first -%}
 
         {%- if current_collection -%}
           <span class="breadcrumb__divider" aria-hidden="true">{% render 'icon-caret' %}</span>

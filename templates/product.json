@@ -79,6 +79,7 @@
         },
         "sales_point_4raLtj": {
           "type": "sales_point",
+          "disabled": true,
           "settings": {
             "icon": "tag",
             "text": "Nhập mã RU9XMAS giảm thêm 4% cho đơn từ 20 triệu"
@@ -86,6 +87,7 @@
         },
         "sales_point_pk6jAU": {
           "type": "sales_point",
+          "disabled": true,
           "settings": {
             "icon": "tag",
             "text": "Nhập mã RU9NEWYEAR giảm thêm 6% cho đơn từ 30 triệu"
