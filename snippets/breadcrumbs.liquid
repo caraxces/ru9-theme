@@ -19,11 +19,11 @@
           {% endif %}
         {% endif %} {% endcomment %}
         {%- comment -%}
-          Use the first (oldest) collection in Shopify's order.
-          Previously this was reversed (newest/last), which caused breadcrumb
-          to pick the most recently added collection.
+          Shopify does not guarantee the order of `product.collections` and it can
+          appear as "newest-first". To consistently pick the "oldest" collection,
+          we sort by collection id ascending and take the first item.
         {%- endcomment -%}
-        {%- assign current_collection = product.collections.first -%}
+        {%- assign current_collection = product.collections | sort: 'id' | first -%}
 
         {%- if current_collection -%}
           <span class="breadcrumb__divider" aria-hidden="true">{% render 'icon-caret' %}</span>

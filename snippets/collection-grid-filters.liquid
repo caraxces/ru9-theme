@@ -37,34 +37,46 @@
         {{ count_label | t: count: count }}
       </div>
     {%- endif -%}
-    <div class="medium-down--hide">
+    {%- comment -%}
+      Desktop + Tablet (>= 769px): show sidebar sort UI.
+      Previously used `medium-down--hide` (<= 959px hidden) which hid sorting on tablet.
+    {%- endcomment -%}
+    <div class="small--hide">
       <div class="collection-filter">
         <div class="collection-filter__item collection-filter__item--sort">
           <div class="collection-filter__sort-container">
             {%- assign sort_by = sort_by | default: default_sort_by -%}
-            <label for="SortBy" class="text-label collapsible-trigger-btn m-0">
-              {{- 'collections.sorting.title' | t -}}
-            </label>
-            <select name="SortBy" id="SortBy" data-default-sortby="{{ default_sort_by }}">
-              <option
-                value="title-ascending"
-                {% if sort_by == default_sort_by %}
-                  selected="selected"
-                {% endif %}
+            <div class="ru9-sort-dropdown">
+              <select
+                class="ru9-sort-dropdown__select"
+                name="SortBy"
+                id="SortBy"
+                data-default-sortby="{{ default_sort_by }}"
+                aria-label="{{ 'collections.sorting.title' | t }}"
               >
-                {{ 'collections.sorting.title' | t }}
-              </option>
-              {%- for option in sort_options -%}
                 <option
-                  value="{{ option.value }}"
-                  {% if option.value == sort_by %}
+                  value="title-ascending"
+                  {% if sort_by == default_sort_by %}
                     selected="selected"
                   {% endif %}
                 >
-                  {{ option.name }}
+                  {{ 'collections.sorting.title' | t }}
                 </option>
-              {%- endfor -%}
-            </select>
+                {%- for option in sort_options -%}
+                  <option
+                    value="{{ option.value }}"
+                    {% if option.value == sort_by %}
+                      selected="selected"
+                    {% endif %}
+                  >
+                    {{ option.name }}
+                  </option>
+                {%- endfor -%}
+              </select>
+              <span class="ru9-sort-dropdown__icon" aria-hidden="true">
+                {%- render 'icon-caret' -%}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -176,6 +188,214 @@
 {%- endunless -%}
 
 <style>
+/* RU9: Sort dropdown styling (desktop + tablet) */
+#CollectionSidebar .ru9-sort-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+#CollectionSidebar .ru9-sort-dropdown__select {
+  -webkit-appearance: none;
+  appearance: none;
+  width: auto;
+  height: 48px;
+  padding: 0 48px 0 18px;
+  border: 1px solid #1c2c58;
+  border-radius: 50px;
+  background: transparent;
+  color: #1c2c58;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+#CollectionSidebar .ru9-sort-dropdown__select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(50, 100, 224, 0.18);
+  border-color: rgba(50, 100, 224, 0.5);
+}
+
+#CollectionSidebar .ru9-sort-dropdown__icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#CollectionSidebar .collection-filter__sort-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* <= 1499px: show as 2-column layout (sidebar + products), avoid stacked layout */
+@media only screen and (max-width: 1499px) and (min-width: 769px) {
+  .collection-content--custom.enable-sidebar .grid {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+
+  .collection-content--custom.enable-sidebar .grid__item--sidebar {
+    width: 34% !important;
+  }
+  .collection-content--custom.enable-sidebar .grid__item--content {
+    width: 66% !important;
+  }
+
+  /* Product cards: 2 columns in this range */
+  .collection-content--custom .cc-grid,
+  .collection-content--custom.enable-sidebar .cc-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 18px 16px;
+  }
+}
+
+/* RU9: Filter dropdown (checkbox multi-select) */
+#CollectionSidebar .ru9-filter-dd {
+  margin-top: 12px;
+}
+
+#CollectionSidebar .ru9-filter-dd:first-child {
+  margin-top: 0;
+}
+
+/* Stack filter blocks with consistent spacing */
+#CollectionSidebar .collection-sidebar .filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+#CollectionSidebar .collection-sidebar .filter-group {
+  margin: 0;
+}
+
+#CollectionSidebar .ru9-filter-dd__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  height: 56px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  background: #f5f9ff;
+  color: #1c2c58;
+  cursor: pointer;
+  user-select: none;
+}
+
+#CollectionSidebar .ru9-filter-dd__summary::-webkit-details-marker {
+  display: none;
+}
+
+#CollectionSidebar .ru9-filter-dd__title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#CollectionSidebar .ru9-filter-dd__meta {
+  margin-left: auto;
+  font-weight: 500;
+  color: rgba(28, 44, 88, 0.75);
+  white-space: nowrap;
+}
+
+#CollectionSidebar .ru9-filter-dd__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s ease;
+}
+
+#CollectionSidebar details[open] > .ru9-filter-dd__summary .ru9-filter-dd__icon {
+  transform: rotate(180deg);
+}
+
+#CollectionSidebar .ru9-filter-dd__panel {
+  border: 0;
+  padding: 14px 8px 0;
+  background: transparent;
+}
+
+/* Remove theme border above sort in sidebar */
+#CollectionSidebar .collection-filter {
+  border-top: 0;
+}
+
+/* RU9: Keep price filter style (no border, subtle background header) */
+#CollectionSidebar .ru9-filter-price {
+  margin-top: 12px;
+}
+
+#CollectionSidebar .ru9-filter-price__label {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: #f5f9ff;
+  color: #1c2c58;
+  font-weight: 600;
+}
+
+#CollectionSidebar .ru9-filter-price__body {
+  padding: 14px 8px 0;
+}
+
+/* RU9: editable From/To inputs for price range */
+#CollectionSidebar .ru9-price-text {
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+/* Hide the internal display spans (kept for theme.PriceRange JS) */
+#CollectionSidebar .price-range__display-min,
+#CollectionSidebar .price-range__display-max {
+  display: none;
+}
+
+/* RU9: Checkbox list layout + flex (auto 2-col for long lists) */
+#CollectionSidebar .ru9-filter-dd__panel .tag-list {
+  margin: 0;
+  padding: 0;
+}
+
+#CollectionSidebar details.ru9-filter-dd[data-ru9-cols="1"] .tag-list:not(.tag-list--swatches) {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#CollectionSidebar details.ru9-filter-dd[data-ru9-cols="2"] .tag-list:not(.tag-list--swatches) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+
+#CollectionSidebar details.ru9-filter-dd[data-ru9-cols="2"] .tag-list:not(.tag-list--swatches) > .tag {
+  flex: 0 0 calc(50% - 12px);
+}
+
+#CollectionSidebar .ru9-filter-dd__panel .tag-list:not(.tag-list--swatches) .tag__checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: #111;
+}
+
 /* Fix: Make collection-filter move down when filter-form expands */
 .collection-sidebar:has(.collapsible-content.is-open) ~ .collection-filter,
 .filter-form:has(.collapsible-content.is-open) ~ .collection-filter {
@@ -183,3 +403,102 @@
   transition: margin-top 0.3s ease;
 }
 </style>
+
+<script>
+  // RU9: Make price "Từ/Đến" inputs editable without triggering ajax on every keystroke.
+  (function () {
+    function parseNumberFromText(text) {
+      if (!text) return null;
+      // Keep digits only (works for VND style formatting)
+      var digits = String(text).replace(/[^\d]/g, "");
+      if (!digits) return null;
+      return parseInt(digits, 10);
+    }
+
+    function syncPriceRange(rangeEl) {
+      if (!rangeEl || rangeEl.dataset.ru9Bound === "1") return;
+      rangeEl.dataset.ru9Bound = "1";
+
+      var sliderEl = rangeEl.querySelector(".price-range__slider");
+      var inputMinHidden = rangeEl.querySelector(".price-range__input-min");
+      var inputMaxHidden = rangeEl.querySelector(".price-range__input-max");
+      var displayMin = rangeEl.querySelector(".price-range__display-min");
+      var displayMax = rangeEl.querySelector(".price-range__display-max");
+      var fieldMin = rangeEl.querySelector('[data-ru9-price="min"]');
+      var fieldMax = rangeEl.querySelector('[data-ru9-price="max"]');
+
+      if (!fieldMin || !fieldMax || !inputMinHidden || !inputMaxHidden) return;
+
+      function setFieldsFromDisplay() {
+        // displayMin/displayMax are formatted strings (e.g. 525.000); show that in editable inputs
+        if (displayMin && displayMin.textContent) fieldMin.value = displayMin.textContent.trim();
+        if (displayMax && displayMax.textContent) fieldMax.value = displayMax.textContent.trim();
+      }
+
+      // Update editable fields whenever slider updates
+      if (sliderEl && sliderEl.noUiSlider) {
+        sliderEl.noUiSlider.on("update", function () {
+          setFieldsFromDisplay();
+        });
+      } else {
+        // Fallback initial values from data attrs
+        setTimeout(setFieldsFromDisplay, 0);
+      }
+
+      function apply() {
+        var minUnits = parseNumberFromText(fieldMin.value);
+        var maxUnits = parseNumberFromText(fieldMax.value);
+
+        // Convert display units -> slider/filter units (theme.Currency.formatMoney divides by 100)
+        // So slider/filter values should be in "cents".
+        var minVal = minUnits == null ? null : minUnits * 100;
+        var maxVal = maxUnits == null ? null : maxUnits * 100;
+
+        if (minVal != null) inputMinHidden.value = String(minVal);
+        if (maxVal != null) inputMaxHidden.value = String(maxVal);
+
+        if (sliderEl && sliderEl.noUiSlider) {
+          var current = sliderEl.noUiSlider.get();
+          var curMin = parseFloat(current[0]);
+          var curMax = parseFloat(current[1]);
+          sliderEl.noUiSlider.set([
+            minVal != null ? minVal : curMin,
+            maxVal != null ? maxVal : curMax,
+          ]);
+        }
+
+        // Trigger the theme's filter handler once
+        inputMinHidden.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
+      // Prevent ajax submit on every keystroke; apply on change/enter.
+      function onTyping(e) {
+        // keep hidden inputs in sync, but block bubbling to `.filter-form` input handler
+        e.stopPropagation();
+      }
+      function onEnter(e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          apply();
+        }
+      }
+
+      fieldMin.addEventListener("input", onTyping, true);
+      fieldMax.addEventListener("input", onTyping, true);
+      fieldMin.addEventListener("keydown", onEnter);
+      fieldMax.addEventListener("keydown", onEnter);
+      fieldMin.addEventListener("change", apply);
+      fieldMax.addEventListener("change", apply);
+
+      // Fill fields after PriceRange initializes
+      setTimeout(setFieldsFromDisplay, 50);
+    }
+
+    function initAll() {
+      document.querySelectorAll(".price-range").forEach(syncPriceRange);
+    }
+
+    document.addEventListener("DOMContentLoaded", initAll);
+    document.addEventListener("collection:reloaded", initAll);
+  })();
+</script>
