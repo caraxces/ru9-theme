@@ -14,9 +14,14 @@
   endif
 -%}
 
-<div class="collection-content collection-content--custom{% if section.settings.enable_sidebar %} enable-sidebar{% endif %}{% if section.settings.enable_sort %} enable-sort{% endif %}" data-section-id="{{ section.id }}">
+<div
+  class="collection-content collection-content--custom{% if section.settings.enable_sidebar %} enable-sidebar{% endif %}{% if section.settings.enable_sort %} enable-sort{% endif %}"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-grid"
+>
   <div id="CollectionAjaxContent">
     <div class="page-width" style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}">
+      <div class="collection-grid__wrapper">
       <div class="grid">
         <div class="grid__item grid__item--sidebar">
           {%- render 'collection-grid-filters'
@@ -158,6 +163,7 @@
 
           {%- endpaginate -%}
         </div>
+      </div>
       </div>
     </div>
   </div>

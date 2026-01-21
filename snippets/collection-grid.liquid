@@ -68,8 +68,12 @@
     <div class="collection-filter__item collection-filter__item--sort hide">
       <div class="collection-filter__sort-container">
         {%- assign sort_by = sort_by | default: default_sort_by -%}
-        <label for="SortBy" class="hidden-label">{{ 'collections.sorting.title' | t }}</label>
-        <select name="SortBy" id="SortBy" data-default-sortby="{{ default_sort_by }}">
+        {%- comment -%}
+          Avoid duplicate #SortBy in DOM (sidebar renders the active SortBy control).
+          Keeping this hidden select for legacy markup, but with a different id.
+        {%- endcomment -%}
+        <label for="SortByLegacy" class="hidden-label">{{ 'collections.sorting.title' | t }}</label>
+        <select name="SortByLegacy" id="SortByLegacy" data-default-sortby="{{ default_sort_by }}">
           <option
             value="title-ascending"
             {% if sort_by == default_sort_by %}

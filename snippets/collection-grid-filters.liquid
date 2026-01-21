@@ -502,3 +502,25 @@
     document.addEventListener("collection:reloaded", initAll);
   })();
 </script>
+
+<script>
+  // RU9: Ensure SortBy works even after ajax content replace.
+  (function () {
+    function bindSort() {
+      var el = document.getElementById("SortBy");
+      if (!el || el.dataset.ru9SortBound === "1") return;
+      el.dataset.ru9SortBound = "1";
+
+      el.addEventListener("change", function () {
+        var params = new URLSearchParams(window.location.search);
+        var defaultSort = el.getAttribute("data-default-sortby");
+        params.set("sort_by", el.value || defaultSort || "");
+        params.delete("page");
+        window.location.search = params.toString();
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", bindSort);
+    document.addEventListener("collection:reloaded", bindSort);
+  })();
+</script>
