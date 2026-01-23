@@ -30,6 +30,24 @@
             "overlay_opacity": 0
           }
         },
+        "image_N6Y66j": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "shopify://products/goi-wave",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/BANNERWEB_GOIWAVE_Web.jpg",
+            "image_mobile": "shopify://shop_images/BANNERWEB_GOIWAVE_MB_2.jpg",
+            "overlay_opacity": 0
+          }
+        },
         "image_igEmmB": {
           "type": "image",
           "settings": {
@@ -45,24 +63,6 @@
             "text_align": "vertical-center horizontal-center",
             "image": "shopify://shop_images/BANNER_WEBSITE.jpg",
             "image_mobile": "shopify://shop_images/BANNER_MOBILE_WEBSITE.jpg",
-            "overlay_opacity": 0
-          }
-        },
-        "image_N6Y66j": {
-          "type": "image",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 80,
-            "subheading": "",
-            "link": "shopify://products/topper-may",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "color_accent": "rgba(0,0,0,0)",
-            "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/webiste_banner_May_topper_1.png",
-            "image_mobile": "shopify://shop_images/webiste_mobile_banner_May_topper_1.png",
             "overlay_opacity": 0
           }
         },
@@ -105,8 +105,8 @@
       },
       "block_order": [
         "image_JR4ARU",
-        "image_igEmmB",
         "image_N6Y66j",
+        "image_igEmmB",
         "slideshow-0",
         "image_y8pK9p"
       ],

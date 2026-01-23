@@ -5,39 +5,45 @@
 <style>
   .certifications-section-{{ section.id }} {
     width: 100%;
-    padding: 5rem 0 5rem 0;
+    padding: 4.3rem 0 4.3rem 0;
     margin: 0 auto;
     font-family: "Be Vietnam Pro", sans-serif;
   }
 
-  /* --- Tablet Layout (1000px - 1593px) --- */
-  @media (min-width: 1000px) and (max-width: 1593px) {
+  .certifications-section-{{ section.id }} .certifications__container {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 4.3rem;
+  }
+
+  /* --- Tablet Layout (1000px - 1359px) --- */
+  @media (min-width: 1000px) and (max-width: 1359px) {
     .certifications-section-{{ section.id }} .certifications__container {
       display: grid;
       grid-template-columns: 0.8fr 1.2fr;
-      column-gap: 40px;
+      column-gap: 34px;
       grid-template-areas:
         "title certifications"
         "description certifications"
         "cta certifications";
       align-items: start;
       margin: 0 auto;
-      padding: 0;
+      padding: 0 4.3rem;
     }
 
     .certifications-section-{{ section.id }} .cs-title { 
       grid-area: title; 
-      font-size: 26px;
+      font-size: 22px;
       line-height: 1.3;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .certifications-section-{{ section.id }} .cs-description-wrapper { 
       grid-area: description; 
     }
     .certifications-section-{{ section.id }} .cs-description {
-      font-size: 14px;
+      font-size: 12px;
       line-height: 1.5;
-      margin: 0 10px 20px 0;
+      margin: 0 9px 17px 0;
     }
     .certifications-section-{{ section.id }} .cs-cta-wrapper { 
       grid-area: cta; 
@@ -48,66 +54,66 @@
     .certifications-section-{{ section.id }} .cs-cert-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 30px;
+      gap: 26px;
     }
   }
 
-  /* --- Desktop Layout (2 columns) - 1594px+ --- */
-  @media (min-width: 1594px) {
+  /* --- Desktop Layout (2 columns) - 1360px+ --- */
+  @media (min-width: 1360px) {
     .certifications-section-{{ section.id }} .certifications__container {
       display: grid;
       grid-template-columns: 0.8fr 1.2fr;
-      column-gap: 80px;
+      column-gap: 68px;
       grid-template-areas:
         "title certifications"
         "description certifications"
         "cta certifications";
       align-items: start;
       margin: 0 auto;
-      padding: 0;
+      padding: 0 4.3rem;
     }
 
     .certifications-section-{{ section.id }} .cs-title { grid-area: title; }
     .certifications-section-{{ section.id }} .cs-description-wrapper { grid-area: description; }
     .certifications-section-{{ section.id }} .cs-cta-wrapper { 
       grid-area: cta; 
-      margin-top: -70px;
+      margin-top: -60px;
     }
     .certifications-section-{{ section.id }} .certifications__slider-container { grid-area: certifications; }
     
     .certifications-section-{{ section.id }} .cs-cert-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 34px;
     }
   }
 
   .certifications-section-{{ section.id }} .cs-title {
     color: #1C2C58;
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 39px;
+    font-size: 33px;
     font-weight: 700;
     line-height: 1.4;
-    margin: 0 0 20px 0;
+    margin: 0 0 17px 0;
     text-transform: none;
   }
   .certifications-section-{{ section.id }} .cs-description {
     color: #3C3C3C;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 400;
     text-align: justify;
     line-height: 1.6;
-    margin: 0 10px 30px 0;
+    margin: 0 9px 26px 0;
   }
   .certifications-section-{{ section.id }} .cs-cta {
     display: inline-flex;
-    padding: 12px 35px;
+    padding: 10px 30px;
     justify-content: center;
     align-items: center;
-    border-radius: 100px;
+    border-radius: 85px;
     background: #234085;
     color: #fff;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 700;
     text-decoration: none;
     transition: background-color 0.3s ease;
@@ -127,9 +133,9 @@
     height: auto;
     aspect-ratio: 1/1;
     background: #F5F9FF;
-    border-radius: 12px;
-    margin-bottom: 24px;
-    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 17px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -144,13 +150,13 @@
     display: block;
   }
   .certifications-section-{{ section.id }} .cs-cert-label {
-    font-size: 20px;
+    font-size: 17px;
     color: #000;
-    margin: 0 0 8px 0;
+    margin: 0 0 7px 0;
     font-weight: 400;
   }
   .certifications-section-{{ section.id }} .cs-cert-name {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 700;
     color: #1C2C58;
   }
@@ -167,11 +173,12 @@
   /* --- Mobile Layout (Slider) --- */
   @media (max-width: 999px) {
     .certifications-section-{{ section.id }} {
-      padding: 40px 0;
+      padding: 34px 0;
     }
     .certifications-section-{{ section.id }} .certifications__container {
       /* Padding handled by .page-width class - uses rem from homepage-fixed-layout.css */
       max-width: 100%;
+      padding: 0 15px;
     }
     .certifications-section-{{ section.id }} .cs-title {
       font-size: 20px;
@@ -179,11 +186,11 @@
       line-height: 33.6px;
       letter-spacing: 0.6px;
       text-align: left;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .certifications-section-{{ section.id }} .cs-description {
-      margin-top: 24px;
-      margin-bottom: 24px;
+      margin-top: 20px;
+      margin-bottom: 20px;
     }
     .certifications-section-{{ section.id }} .cs-cta-wrapper {
       text-align: left;
@@ -191,15 +198,15 @@
 
     .certifications-section-{{ section.id }} .cs-cta {
       width: 100%;
-      height: 40px;
+      height: 34px;
       flex-shrink: 0;
     }
 
     .certifications-section-{{ section.id }} .certifications__slider-container {
       position: relative;
       background: #F5F9FF;
-      border-radius: 12px;
-      padding: 24px 24px 0px;
+      border-radius: 10px;
+      padding: 20px 20px 0px;
     }
     .certifications-section-{{ section.id }} .cs-cert-grid.flickity-enabled {
       display: block;
@@ -217,8 +224,8 @@
     .certifications-section-{{ section.id }} .flickity-page-dots {
       display: block;
       position: absolute;
-      bottom: 20px;
-      left: 24px;
+      bottom: 17px;
+      left: 20px;
       width: auto;
     }
     .certifications-section-{{ section.id }} .flickity-page-dots .dot {
@@ -231,9 +238,9 @@
     .certifications-section-{{ section.id }} .flickity-button {
       display: block;
       position: absolute;
-      bottom: 10px;
-      width: 40px;
-      height: 40px;
+      bottom: 9px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: #fff;
       border: 1px solid #eee;
@@ -241,10 +248,10 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     .certifications-section-{{ section.id }} .flickity-button.previous {
-      right: 72px;
+      right: 61px;
     }
     .certifications-section-{{ section.id }} .flickity-button.next {
-      right: 24px;
+      right: 20px;
       background: #1C2C58;
       color: #fff;
     }

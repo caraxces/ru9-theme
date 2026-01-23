@@ -77,18 +77,18 @@
 
 <style>
 .reviews-carousel-section .page-width {
-  max-width: none;
-  margin: 0 5rem;
-  padding: 0 0 20px 0;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 4.3rem 17px 4.3rem;
 }
 /* General Styles */
 .reviews-carousel-section { padding: 0px 0; font-family: "Be Vietnam Pro", sans-serif; }
-.reviews-carousel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.reviews-carousel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 34px; }
 @media (max-width: 768px) {.reviews-carousel-header { margin-bottom: 20px; }}
-.reviews-carousel-header__left { display: flex; flex-direction: column; gap: 8px; }
+.reviews-carousel-header__left { display: flex; flex-direction: column; gap: 7px; }
 .reviews-carousel-title { 
   font-family: "Be Vietnam Pro", sans-serif; 
-  font-size: 39px; 
+  font-size: 33px; 
   font-weight: 700; 
   line-height: 1.2; 
   color: #1C2C58; 
@@ -123,24 +123,24 @@
 .reviews-carousel-title strong {
   color: #759CE6 !important;
 }
-.reviews-carousel-header__right { display: flex; gap: 12px; }
-.reviews-carousel-nav { width: 40px; height: 40px; border-radius: 50%; background-color: #F5F9FF; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s; }
+.reviews-carousel-header__right { display: flex; gap: 10px; }
+.reviews-carousel-nav { width: 34px; height: 34px; border-radius: 50%; background-color: #F5F9FF; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s; }
 .reviews-carousel-nav:hover { background-color: #234085; }
 .reviews-carousel-nav:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Carousel Viewport & Track */
-.reviews-carousel-viewport { overflow: hidden; margin-bottom: 5rem; }
+.reviews-carousel-viewport { overflow: hidden; margin-bottom: 4.3rem; }
 @media (max-width: 768px) {.reviews-carousel-viewport { margin-bottom: 0px; }}
-.reviews-carousel-track { display: flex; gap: 24px; transition: transform 0.5s ease-in-out; }
+.reviews-carousel-track { display: flex; gap: 20px; transition: transform 0.5s ease-in-out; }
 
 /* Review Card */
 /* Wireframe: 478px x 745px trên màn hình 1920px */
-/* Tỷ lệ canvas 1594px: 1594/1920 = 0.830208333 */
-/* Card: 478 * 0.8302 = 397px, 745 * 0.8302 = 618px */
-/* Giảm 12%: 397 * 0.88 = 349px, 618 * 0.88 = 544px */
+/* Tỷ lệ canvas 1360px: 1360/1920 = 0.708333333 */
+/* Card: 478 * 0.7083 = 339px, 745 * 0.7083 = 528px */
+/* Giảm 12%: 339 * 0.88 = 298px, 528 * 0.88 = 464px */
 .review-card { 
-  flex: 0 0 349px; 
-  width: 349px; 
+  flex: 0 0 298px; 
+  width: 298px; 
   display: flex; 
   flex-direction: column; 
   background: transparent; 
@@ -151,8 +151,8 @@
 }
 .review-card__video-wrapper { 
   width: 100%; 
-  height: 544px; 
-  border-radius: 12px; 
+  height: 464px; 
+  border-radius: 10px; 
   overflow: hidden; 
   background: #FFFFFF; 
   position: relative;
@@ -169,7 +169,7 @@
   object-fit: cover; 
   display: block; 
   border: none; 
-  border-radius: 12px;
+  border-radius: 10px;
 }
 /* Ẩn thanh timeline và nút fullscreen - Đã bỏ controls nên không cần nữa */
 
@@ -180,17 +180,17 @@
   align-items: center; 
   justify-content: center; 
   background: #FFFFFF; 
-  border-radius: 12px;
+  border-radius: 10px;
 }
 .review-card__product-link { 
   position: absolute;
-  bottom: 18px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
   display: flex; 
   align-items: center; 
   justify-content: space-between; 
-  padding: 9px 20px; 
+  padding: 8px 17px; 
   background: #FFF; 
   border: 2px solid #E5E7EB;
   text-decoration: none; 
@@ -199,10 +199,10 @@
   flex-shrink: 0;
   z-index: 10;
   box-sizing: border-box;
-  /* Kích thước giảm 12%: 339*0.88=298px, 55*0.88=48px, 31*0.88=27px */
-  width: 298px;
-  height: 48px;
-  border-radius: 27px;
+  /* Kích thước giảm theo tỷ lệ 1360/1594: 298*0.8526=254px, 48*0.8526=41px, 27*0.8526=23px */
+  width: 254px;
+  height: 41px;
+  border-radius: 23px;
 }
 .review-card__product-link:hover { 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); 
@@ -234,20 +234,26 @@
   /* Large screens - maintain fixed padding */
   @media (min-width: 1400px) {
     .reviews-carousel-section .page-width {
-      margin: 0 5rem;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 4.3rem 17px 4.3rem;
     }
   }
   
   /* Medium screens - responsive padding */
   @media (max-width: 1399px) and (min-width: 1024px) {
     .reviews-carousel-section .page-width {
-      margin: 0 5% 0 4%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 4.3rem 17px 4.3rem;
     }
   }
 
   @media (max-width: 1023px) and (min-width: 769px) {
     .reviews-carousel-section .page-width {
-      margin: 0 4% 0 4%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 4.3rem 17px 4.3rem;
     }
   }
 
@@ -256,8 +262,8 @@
       margin: 0 15px;
       padding: 0;
     }
-    .reviews-carousel-section { padding: 40px 0; }
-    .reviews-carousel-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .reviews-carousel-section { padding: 34px 0; }
+    .reviews-carousel-header { flex-direction: column; align-items: flex-start; gap: 17px; }
     .reviews-carousel-title {
         font-size: 20px;
         font-weight: 600;
@@ -302,11 +308,11 @@
     }
     
     /* Mobile: giảm 12% từ desktop */
-    /* Desktop mới: 349px × 544px */
-    /* Mobile: 280 * 0.88 = 246px, height: 436 * 0.88 = 384px */
+    /* Desktop mới: 298px × 464px */
+    /* Mobile: 254 * 0.88 = 224px, height: 395 * 0.88 = 348px */
     .review-card { 
-      flex: 0 0 246px; 
-      width: 246px; 
+      flex: 0 0 224px; 
+      width: 224px; 
       display: flex; 
       flex-direction: column; 
       background: transparent; 
@@ -317,8 +323,8 @@
     }
     .review-card__video-wrapper { 
       width: 100%; 
-      height: 384px; 
-      border-radius: 12px; 
+      height: 348px; 
+      border-radius: 10px; 
       overflow: hidden; 
       background: #FFFFFF; 
       position: relative;
@@ -335,7 +341,7 @@
       object-fit: cover; 
       display: block; 
       border: none; 
-      border-radius: 12px;
+      border-radius: 10px;
     }
     .review-card__video-placeholder { 
       width: 100%; 
@@ -344,17 +350,17 @@
       align-items: center; 
       justify-content: center; 
       background: #FFFFFF; 
-      border-radius: 12px;
+      border-radius: 10px;
     }
     .review-card__product-link { 
       position: absolute;
-      bottom: 12px;
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
       display: flex; 
       align-items: center; 
       justify-content: space-between; 
-      padding: 7px 16px; 
+      padding: 6px 14px; 
       background: #FFF; 
       border: 2px solid #E5E7EB;
       text-decoration: none; 
@@ -363,10 +369,10 @@
       flex-shrink: 0;
       z-index: 10;
       box-sizing: border-box;
-      /* Kích thước giảm 12%: 239*0.88=210px, 39*0.88=34px, 22*0.88=19px */
-      width: 210px;
-      height: 34px;
-      border-radius: 19px;
+      /* Kích thước giảm theo tỷ lệ: 254*0.88=224px, 41*0.88=36px, 23*0.88=20px */
+      width: 179px;
+      height: 29px;
+      border-radius: 16px;
     }
     .review-card__product-link:hover { 
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); 

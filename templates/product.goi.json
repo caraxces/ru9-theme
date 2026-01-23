@@ -62,58 +62,63 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "business_price_GJ47RU": {
+        "business_price_kwey9L": {
           "type": "business_price",
           "settings": {
             "enable": true,
             "text": "<p>Giá hấp dẫn cho Khách hàng Doanh nghiệp/ Đơn vị nội thất/ Cộng tác viên</p>"
           }
         },
-        "sales_point_xKakRp": {
+        "sales_point_RY4Cz8": {
           "type": "sales_point",
+          "disabled": true,
           "settings": {
-            "icon": "tag",
-            "text": "Nhập mã RU926 giảm thêm 4% cho đơn từ 20 triệu"
+            "icon": "gift",
+            "text": "Tặng Eyesmask xông hơi, vỏ gối Cotton Sateen"
           }
         },
-        "sales_point_dFxT8k": {
+        "sales_point_4raLtj": {
           "type": "sales_point",
           "settings": {
             "icon": "tag",
-            "text": "Nhập mã RU9NY giảm thêm 6% cho đơn từ 30 triệu"
+            "text": "Nhập mã RU9G2 giảm thêm 4% cho đơn  mua từ 2 gối"
+          }
+        },
+        "sales_point_pk6jAU": {
+          "type": "sales_point",
+          "settings": {
+            "icon": "tag",
+            "text": "Nhập mã RU9G4 giảm thêm 6% cho đơn mua từ 4 gối"
           }
         },
         "custom_ir6hFk": {
           "type": "custom",
-          "disabled": true,
           "settings": {
             "code": "<style>\n.flash-sale-container {\n  display: none; /* Hidden by default, will be shown with JS if in valid time */\n  align-items: center;\n  background: #ff6b6b;\n  padding: 15px;\n  border-radius: 8px;\n  margin: 10px 0;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n} \n\n.flash-sale-status {\n  display: flex;\n  align-items: center;\n  margin-right: 20px;\n}\n\n.status-icon {\n  font-size: 24px;\n  color: #fff;\n  margin-right: 10px;\n  animation: pulse 1s infinite;\n}\n\n.status-text {\n  font-size: 16px;\n  font-weight: bold;\n  color: #fff;\n}\n\n.countdown-wrapper {\n  display: flex;\n  gap: 10px;\n}\n\n.countdown-block {\n  background: #fff;\n  padding: 8px 12px;\n  border-radius: 6px;\n  text-align: center;\n  min-width: 5rem;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.05);\n}\n\n.countdown-block span {\n  font-size: 20px;\n  font-weight: bold;\n  color: #ff6b6b;\n  display: block;\n}\n\n.countdown-block label {\n  font-size: 12px;\n  color: #666;\n  margin-top: 4px;\n  display: block;\n}\n\n@keyframes pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.1); }\n  100% { transform: scale(1); }\n}\n\n.inactive .status-icon {\n  color: #fff;\n  animation: none;\n}\n\n.inactive .status-text {\n  color: #fff;\n}\n\n.inactive .countdown-block span {\n  color: #666;\n}\n</style>\n\n<div class=\"flash-sale-container\" id=\"flashSaleContainer\">\n  <div class=\"flash-sale-status\">\n    <div class=\"status-icon\" id=\"statusIcon\">⚡</div>\n    <div class=\"status-text\" id=\"statusText\">Flash Sale đang diễn ra!</div>\n  </div>\n  <div class=\"countdown-wrapper\">\n    <div class=\"countdown-block\">\n      <span id=\"hours\">00</span>\n      <label>Giờ</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"minutes\">00</span>\n      <label>Phút</label>\n    </div>\n    <div class=\"countdown-block\">\n      <span id=\"seconds\">00</span>\n      <label>Giây</label>\n    </div>\n  </div>\n</div>\n\n<script>\nclass FlashSaleTimer {\n  constructor() {\n    this.statusText = document.getElementById('statusText');\n    this.statusIcon = document.getElementById('statusIcon');\n    this.container = document.getElementById('flashSaleContainer');\n    this.hoursElement = document.getElementById('hours');\n    this.minutesElement = document.getElementById('minutes');\n    this.secondsElement = document.getElementById('seconds');\n    \n    this.flashSaleStartHour = 23; // 11 PM\n    this.flashSaleEndHour = 8;    // 8 AM\n    \n    // Check if we should show the flash sale based on GMT+7 time\n    if (this.isWithinGMTPlus7TimeRange()) {\n      this.container.style.display = \"flex\"; // Show the container\n      this.updateTimer();\n      setInterval(() => this.updateTimer(), 1000);\n    }\n  }\n\n  // Get current time in GMT+7\n  getCurrentGMTPlus7Time() {\n    const now = new Date();\n    // Convert to GMT+7\n    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);\n    return new Date(utcTime + (7 * 60 * 60 * 1000));\n  }\n\n  // Check if current GMT+7 time is within flash sale hours (11 PM - 8 AM)\n  isWithinGMTPlus7TimeRange() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  isFlashSaleActive() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const hour = gmtPlus7Time.getHours();\n    return (hour >= this.flashSaleStartHour || hour < this.flashSaleEndHour);\n  }\n\n  getNextFlashSaleTime() {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    let nextFlashSale = new Date(gmtPlus7Time);\n    \n    if (gmtPlus7Time.getHours() >= this.flashSaleEndHour && gmtPlus7Time.getHours() < this.flashSaleStartHour) {\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    } else {\n      nextFlashSale.setDate(nextFlashSale.getDate() + 1);\n      nextFlashSale.setHours(this.flashSaleStartHour, 0, 0, 0);\n    }\n    \n    return nextFlashSale;\n  }\n\n  getTimeRemaining(endTime) {\n    const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n    const total = endTime - gmtPlus7Time;\n    const seconds = Math.floor((total / 1000) % 60);\n    const minutes = Math.floor((total / 1000 / 60) % 60);\n    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);\n    \n    return {\n      total,\n      hours,\n      minutes,\n      seconds\n    };\n  }\n\n  updateTimer() {\n    const isActive = this.isFlashSaleActive();\n    let timeRemaining;\n    \n    if (isActive) {\n      // Calculate end time (8 AM in GMT+7)\n      const gmtPlus7Time = this.getCurrentGMTPlus7Time();\n      const endTime = new Date(gmtPlus7Time);\n      endTime.setHours(this.flashSaleEndHour, 0, 0, 0);\n      if (endTime < gmtPlus7Time) {\n        endTime.setDate(endTime.getDate() + 1);\n      }\n      timeRemaining = this.getTimeRemaining(endTime);\n      \n      this.statusText.textContent = 'Flash Sale đang diễn ra!';\n      this.container.classList.remove('inactive');\n    } else {\n      timeRemaining = this.getTimeRemaining(this.getNextFlashSaleTime());\n      \n      this.statusText.textContent = 'Flash Sale sắp diễn ra';\n      this.container.classList.add('inactive');\n    }\n\n    this.hoursElement.textContent = timeRemaining.hours.toString().padStart(2, '0');\n    this.minutesElement.textContent = timeRemaining.minutes.toString().padStart(2, '0');\n    this.secondsElement.textContent = timeRemaining.seconds.toString().padStart(2, '0');\n  }\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  new FlashSaleTimer();\n});\n</script>"
           }
         },
-        "tag_TkpVP9": {
-          "type": "tag",
+        "promotion_q6yCFm": {
+          "type": "promotion",
+          "disabled": true,
           "settings": {
-            "tag_text": "Top rated",
-            "bg_color": "#85afee",
-            "text_color": "#ffffff"
+            "title": "Mã ưu đãi",
+            "enable_popup": true,
+            "popup_content_1": "",
+            "popup_content_2": "",
+            "popup_content_3": "",
+            "popup_content_4": ""
           }
         },
         "price": {
           "type": "price",
           "settings": {}
         },
-        "promotion_xkLgrj": {
-          "type": "promotion",
+        "size_guide_dropdown_fkaRtp": {
+          "type": "size_guide_dropdown",
           "disabled": true,
           "settings": {
-            "title": "Mã ưu đãi :",
-            "enable_popup": false,
-            "voucher_image_1": "shopify://shop_images/250k-01.png",
-            "popup_content_1": "",
-            "voucher_image_2": "{{ product.metafields.custom.voucher.value }}",
-            "popup_content_2": "",
-            "popup_content_3": "",
-            "popup_content_4": ""
+            "title": "Hướng dẫn chọn kích thước",
+            "image": "shopify://shop_images/size-guide.png"
           }
         },
         "variant_picker": {
@@ -125,31 +130,12 @@
             "color_swatches": true
           }
         },
-        "usage_guide_KJqfAH": {
-          "type": "usage_guide",
-          "settings": {
-            "title": "Hướng dẫn chọn kích thước",
-            "image": "shopify://shop_images/size-guide.png",
-            "content": ""
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": true,
             "surface_pickup_enable": false,
             "show_gift_card_recipient": false
-          }
-        },
-        "productbundle_GcbRad": {
-          "type": "productbundle",
-          "settings": {
-            "product_list": [
-              "goi-may",
-              "goi-foam-niu"
-            ],
-            "cross_sell_title": "Thăng hạng chất lượng giấc ngủ cùng",
-            "cross_sell_label": ""
           }
         },
         "description": {
@@ -159,19 +145,35 @@
             "collapse_content": false
           }
         },
-        "usage_guide_PRnkUz": {
+        "usage_guide_7zymjD": {
+          "type": "usage_guide",
+          "disabled": true,
+          "settings": {
+            "title": "Thông số sản phẩm",
+            "content": "<p>Thêm nội dung hướng dẫn sử dụng vào đây.</p>"
+          }
+        },
+        "usage_guide_F9jqCH": {
           "type": "usage_guide",
           "settings": {
             "title": "Hệ thống cửa hàng",
             "content": "<p><a href=\"https://maps.google.com/?q=Shop%2009,%20B2%20Sarimi,%20K%C4%90T%20Sala,%2072%20Nguy%E1%BB%85n%20C%C6%A1%20Th%E1%BA%A1ch,%20P.%20An%20L%E1%BB%A3i%20%C4%90%C3%B4ng,%20Q.2,%20TP.%20HCM\" target=\"_blank\"><strong>Q.2, TP.HCM:</strong></a> Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br/><a href=\"tel:0964777960\">0964777960</a></p><p><a href=\"https://maps.google.com/?q=283A%20Hai%20B%C3%A0%20Tr%C6%B0ng,%20Ph%C6%B0%E1%BB%9Dng%20Xu%C3%A2n%20Ho%C3%A0,%20Q.3,%20TP.HCM\" target=\"_blank\"><strong>Q.3, TP.HCM:</strong></a> 283A Hai Bà Trưng, Phường Xuân Hoà<br/><a href=\"tel:0964777910\">0964777910</a></p><p><a href=\"https://maps.google.com/?q=228%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20Q.%20C%E1%BA%A7u%20Gi%E1%BA%A5y,%20HN\" target=\"_blank\"><strong>Q. Cầu Giấy, HN:</strong></a>  228 Cầu Giấy, Quan Hoa<br/><a href=\"tel:0964777940\">0964777940</a></p>"
           }
         },
-        "service_grid_tzXXkC": {
+        "usage_guide_Awrhpf": {
+          "type": "usage_guide",
+          "disabled": true,
+          "settings": {
+            "title": "Hướng dẫn sử dụng",
+            "content": "<p>Thêm nội dung hướng dẫn sử dụng vào đây.</p>"
+          }
+        },
+        "service_grid_MCNHkH": {
           "type": "service_grid",
           "settings": {
-            "icon_1": "shopify://shop_images/ICON_THANH_TOAN_LINH_HO_T.png",
-            "text_1": "Thanh toán linh hoạt",
-            "show_service_1": true,
+            "icon_1": "shopify://shop_images/Layer_1_3.svg",
+            "text_1": "100 đêm ngủ thử",
+            "show_service_1": false,
             "icon_2": "shopify://shop_images/Layer_1_4.svg",
             "text_2": "Miễn phí vận chuyển",
             "show_service_2": true,
@@ -185,20 +187,21 @@
         }
       },
       "block_order": [
-        "business_price_GJ47RU",
-        "sales_point_xKakRp",
-        "sales_point_dFxT8k",
+        "business_price_kwey9L",
+        "sales_point_RY4Cz8",
+        "sales_point_4raLtj",
+        "sales_point_pk6jAU",
         "custom_ir6hFk",
-        "tag_TkpVP9",
+        "promotion_q6yCFm",
         "price",
-        "promotion_xkLgrj",
+        "size_guide_dropdown_fkaRtp",
         "variant_picker",
-        "usage_guide_KJqfAH",
         "buy_buttons",
-        "productbundle_GcbRad",
         "description",
-        "usage_guide_PRnkUz",
-        "service_grid_tzXXkC"
+        "usage_guide_7zymjD",
+        "usage_guide_F9jqCH",
+        "usage_guide_Awrhpf",
+        "service_grid_MCNHkH"
       ],
       "settings": {
         "section_width": "page-width",
@@ -207,7 +210,7 @@
         "hide_payment_button_mobile": true,
         "sku_enable": false,
         "product_subtitle": "{{ product.metafields.custom.subdes.value }}",
-        "custom_text": "Top rated",
+        "custom_text": "",
         "image_position": "left",
         "image_size": "large",
         "product_zoom_enable": true,
@@ -221,10 +224,10 @@
         "product_video_style": "muted"
       }
     },
-    "reason_to_choice_MiXBbP": {
+    "reason_to_choice_cbPGRj": {
       "type": "reason-to-choice",
       "blocks": {
-        "reason_mF9y7D": {
+        "reason_9UrLte": {
           "type": "reason",
           "settings": {
             "image": "{{ product.metafields.custom.dynamic_image_1.value }}",
@@ -232,7 +235,7 @@
             "content": "<p>{{ product.metafields.custom.dynamic_description_1 | metafield_tag }}</p>"
           }
         },
-        "reason_gUwgCJ": {
+        "reason_cDXJDn": {
           "type": "reason",
           "settings": {
             "image": "{{ product.metafields.custom.dynamic_image_2.value }}",
@@ -240,7 +243,7 @@
             "content": "<p>{{ product.metafields.custom.dynamic_desciption_2 | metafield_tag }}</p>"
           }
         },
-        "reason_9DmCKX": {
+        "reason_K6diX9": {
           "type": "reason",
           "settings": {
             "image": "{{ product.metafields.custom.dynamic_image_3.value }}",
@@ -250,25 +253,81 @@
         }
       },
       "block_order": [
-        "reason_mF9y7D",
-        "reason_gUwgCJ",
-        "reason_9DmCKX"
+        "reason_9UrLte",
+        "reason_cDXJDn",
+        "reason_K6diX9"
       ],
       "name": "Reason to choice",
       "settings": {
         "title": "Lý do bạn nên chọn sản phẩm"
       }
     },
-    "feature_banner_6ndiQG": {
+    "feature_banner_XdBwRx": {
       "type": "feature-banner",
       "disabled": true,
       "name": "Feature Banner",
       "settings": {
-        "desktop_image": "shopify://shop_images/TOPPER.svg",
-        "mobile_image": "shopify://shop_images/MOBILE_-_TOPPER.svg",
-        "title": "<h1>Thoải mái trọn vẹn mọi nơi cùng Ru9 Foam Topper</h1>",
-        "mobile_title": "Chìa khóa cho từng vấn đề giấc ngủ của bạn",
+        "desktop_image": "{{ product.metafields.custom.hotspot_banner.value }}",
+        "mobile_image": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
+        "title": "<p>Chiếc gối thấu hiểu những gì bạn cần </p>",
+        "mobile_title": "",
         "background_color": "#ffffff"
+      }
+    },
+    "main_product_bundle_y4WGaj": {
+      "type": "main-product-bundle",
+      "disabled": true,
+      "name": "Product Bundle",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "bundle_products": [
+          "chan-lanh",
+          "goi-om",
+          "foam-original",
+          "bo-ga-giuong-cotton-sateen"
+        ],
+        "product_3_quantity": 2,
+        "sku_enable": true,
+        "combo_title": "Combo bao gồm các sản phẩm:",
+        "cta_button_text": "BẮT ĐẦU TẠO COMBO",
+        "target_discount_percentage": 15,
+        "service_icon_1": "shopify://shop_images/Layer_1_3.svg",
+        "service_text_1": "100 đêm ngủ thử",
+        "service_icon_2": "shopify://shop_images/Layer_1_4.svg",
+        "service_text_2": "Miễn phí vận chuyển",
+        "service_icon_3": "shopify://shop_images/Layer_1_5.svg",
+        "service_text_3": "Bảo hành dài lâu",
+        "service_icon_4": "shopify://shop_images/Layer_1_6.svg",
+        "service_text_4": "Thanh toán linh hoạt",
+        "image_position": "left",
+        "product_zoom_enable": true,
+        "product_carousel_enable": false,
+        "thumbnail_position": "beside",
+        "thumbnail_height": 100,
+        "thumbnail_arrows": false,
+        "mobile_layout": "partial",
+        "enable_video_looping": false,
+        "product_video_style": "muted",
+        "enable_sticky_add_to_cart": false,
+        "store_system_content": "<p><strong>Q.2, TP.HCM:</strong><br>Shop 09, B2 Sarimi, Khu Đô Thị Sala, 72 Nguyễn Cơ Thạch, P. An Lợi Đông<br><a href=\"tel:0964777960\">0964777960</a></p><p><strong>Q.3, TP.HCM:</strong><br>283A Hai Bà Trưng, Phường Xuân Hoà<br><a href=\"tel:0964777910\">0964777910</a></p><p><strong>Q. Cầu Giấy, HN:</strong><br>228 Cầu Giấy, Quan Hoa<br><a href=\"tel:0964777940\">0964777940</a></p>",
+        "hide_payment_button_mobile": false,
+        "image_size": "medium",
+        "showroom_1_name": "Showroom 1",
+        "showroom_1_address": "Địa chỉ showroom",
+        "showroom_1_phone": "0964777910",
+        "showroom_1_map_link": "",
+        "showroom_2_name": "Showroom 2",
+        "showroom_2_address": "Địa chỉ showroom",
+        "showroom_2_phone": "0964777910",
+        "showroom_2_map_link": "",
+        "showroom_3_name": "Showroom 3",
+        "showroom_3_address": "Địa chỉ showroom",
+        "showroom_3_phone": "0964777940",
+        "showroom_3_map_link": "",
+        "review_rating": "4.8",
+        "review_count": "2025 đánh giá",
+        "voucher_code": ""
       }
     },
     "product_hotspot_XzDEYy": {
@@ -281,7 +340,7 @@
             "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
             "direction": "vertical",
             "content_position": "right",
-            "space": "150",
+            "space": "250",
             "left": "25%",
             "top": "25%",
             "space_mb": "110",
@@ -311,7 +370,7 @@
             "hotspot_sub_title": "Đàn hồi cao, nâng đỡ theo đường cong cơ thể",
             "direction": "vertical",
             "content_position": "right",
-            "space": "250",
+            "space": "330",
             "left": "40%",
             "top": "37%",
             "space_mb": "110",
@@ -357,7 +416,6 @@
         "product_dpYgWc",
         "product_BGphfJ"
       ],
-      "disabled": true,
       "custom_css": [
         ".h3.primary-color.hotspot-item__title {white-space: nowrap;}"
       ],
@@ -427,7 +485,6 @@
         "product_AUA3f6",
         "product_rzgAnK"
       ],
-      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
@@ -517,7 +574,7 @@
             "hotspot_sub_title": "Thoáng mát,chống nước và dầu",
             "direction": "vertical",
             "content_position": "right",
-            "space": "250",
+            "space": "240",
             "left": "25%",
             "top": "30%",
             "space_mb": "110",
@@ -566,7 +623,7 @@
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
         "productHandle": "goi-may",
-        "heading": "{{ product.metafields.custom.hotspot_title.value }}",
+        "heading": "",
         "content": "",
         "banner_image": "shopify://shop_images/Goi-May-WebsiteChat_lieu.jpg",
         "banner_mobile": "{{ product.metafields.custom.hotspot_banner_mobile.value }}",
@@ -584,7 +641,7 @@
             "hotspot_sub_title": "Mềm mại, thông thoáng và sang trọng",
             "direction": "vertical",
             "content_position": "right",
-            "space": "250",
+            "space": "280",
             "left": "25%",
             "top": "30%",
             "space_mb": "110",
@@ -599,7 +656,7 @@
             "hotspot_sub_title": "Lựa chọn độ êm ái hoặc nâng đỡ",
             "direction": "vertical",
             "content_position": "right",
-            "space": "260",
+            "space": "380",
             "left": "30%",
             "top": "35%",
             "space_mb": "110",
@@ -614,7 +671,7 @@
             "hotspot_sub_title": "Thiết kế 3 vùng nâng đỡ khác biệt cho từng vị trí  đầu - thân - chân",
             "direction": "vertical",
             "content_position": "right",
-            "space": "300",
+            "space": "520",
             "left": "35%",
             "top": "45%",
             "space_mb": "110",
@@ -629,7 +686,7 @@
             "hotspot_sub_title": "Giải toả lực ép và tản nhiệt",
             "direction": "vertical",
             "content_position": "right",
-            "space": "400",
+            "space": "600",
             "left": "50%",
             "top": "55%",
             "space_mb": "110",
@@ -644,7 +701,7 @@
             "hotspot_sub_title": "Khả năng ngăn cách chuyển động",
             "direction": "vertical",
             "content_position": "right",
-            "space": "380",
+            "space": "630",
             "left": "60%",
             "top": "60%",
             "space_mb": "110",
@@ -660,7 +717,6 @@
         "product_gkzea7",
         "product_WAmQBe"
       ],
-      "disabled": true,
       "custom_css": [
         "h2 {padding: 20px; /* Bạn có thể thay đổi giá trị này theo nhu cầu */ margin-bottom: 20px;}",
         ".h3.primary-color.hotspot-item__title {white-space: nowrap;}"
@@ -672,73 +728,6 @@
         "heading": "{{ product.metafields.custom.hotspot_title.value }}",
         "content": "",
         "banner_image": "{{ product.metafields.custom.hotspot_banner.value }}",
-        "margin-top": "0px",
-        "margin-bottom": "0px"
-      }
-    },
-    "product_hotspot_pnDmHC": {
-      "type": "product-hotspot",
-      "blocks": {
-        "product_wUNCcK": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Vỏ bọc tencel",
-            "hotspot_sub_title": "Thoáng mát và thấm hút tốt",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "30%",
-            "top": "45%",
-            "space_mb": "110",
-            "left_mobile": "30%",
-            "top_mobile": "45%"
-          }
-        },
-        "product_rH68dY": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Lớp Bảo Vệ Foam",
-            "hotspot_sub_title": "Hạn chế ma sát trong quá trình chăm sóc gối",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "55%",
-            "top": "35%",
-            "space_mb": "110",
-            "left_mobile": "55%",
-            "top_mobile": "45%"
-          }
-        },
-        "product_KWebeG": {
-          "type": "product",
-          "settings": {
-            "hotspot_title": "Ruột gối Graphene Foam",
-            "hotspot_sub_title": "Nâng đỡ trọn vẹn, tản nhiệt hiệu quả",
-            "direction": "vertical",
-            "content_position": "right",
-            "space": "250",
-            "left": "75%",
-            "top": "35%",
-            "space_mb": "110",
-            "left_mobile": "80%",
-            "top_mobile": "40%"
-          }
-        }
-      },
-      "block_order": [
-        "product_wUNCcK",
-        "product_rH68dY",
-        "product_KWebeG"
-      ],
-      "disabled": true,
-      "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "Chi tiết sản phẩm",
-        "productHandle": "goi-foam-niu",
-        "heading": "Chiếc gối thấu hiểu những gì bạn cần để ngủ thật ngon",
-        "content": "Gối Niu được thiết kế để tạo ra sự nâng đỡ lý tưởng nhất cho phần đầu - cổ - vai của bạn.",
-        "banner_image": "shopify://shop_images/NIU-PILLOW-for-web_5702975d-3457-46e5-ab7c-f57b4b9a41a3.jpg",
-        "banner_mobile": "{{ product.metafields.custom.hotspot_banner.value }}",
         "margin-top": "0px",
         "margin-bottom": "0px"
       }
@@ -797,7 +786,6 @@
         "product_rTGWtc",
         "product_Ph6tDT"
       ],
-      "disabled": true,
       "settings": {
         "enable_anchor_link": true,
         "anchor_link_text": "Chi tiết sản phẩm",
@@ -882,38 +870,38 @@
         "poster": "{{ product.metafields.custom.product_video_best_seller_poster.value }}"
       }
     },
-    "dynamic_faq_Whrn47": {
+    "dynamic_faq_MiJfc8": {
       "type": "dynamic-faq",
       "blocks": {
-        "question_d3nb6H": {
+        "question_PpYYEw": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask1.value }}",
             "text": "<p>{{ product.metafields.custom.answer1.value }}</p>"
           }
         },
-        "question_wQaBbp": {
+        "question_LHJret": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask2.value }}",
             "text": "<p>{{ product.metafields.custom.answer2.value }}</p>"
           }
         },
-        "question_PPVaTY": {
+        "question_TtFaEG": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask3.value }}",
             "text": "<p>{{ product.metafields.custom.answer3.value }}</p>"
           }
         },
-        "question_f7x3UM": {
+        "question_rEcm6T": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask4.value }}",
             "text": "<p>{{ product.metafields.custom.answer4.value }}</p>"
           }
         },
-        "question_4qDy8K": {
+        "question_7hEDdy": {
           "type": "question",
           "settings": {
             "title": "{{ product.metafields.custom.ask5.value }}",
@@ -922,11 +910,11 @@
         }
       },
       "block_order": [
-        "question_d3nb6H",
-        "question_wQaBbp",
-        "question_PPVaTY",
-        "question_f7x3UM",
-        "question_4qDy8K"
+        "question_PpYYEw",
+        "question_LHJret",
+        "question_TtFaEG",
+        "question_rEcm6T",
+        "question_7hEDdy"
       ],
       "settings": {
         "enable_anchor_link": true,
@@ -942,15 +930,6 @@
         "use_metafield": false,
         "metafield_limit": "5",
         "divider": true
-      }
-    },
-    "172802814088f5e025": {
-      "type": "apps",
-      "settings": {
-        "enable_anchor_link": true,
-        "anchor_link_text": "Reviews",
-        "full_width": false,
-        "space_around": true
       }
     },
     "1730878240cfbec46e": {
@@ -976,10 +955,10 @@
         "space_around": true
       }
     },
-    "super_service_qUwnVM": {
+    "super_service_pac79r": {
       "type": "super-service",
       "blocks": {
-        "service_item_zWd8Lh": {
+        "service_item_UgmWgP": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_3.svg",
@@ -989,7 +968,7 @@
             "item_link": ""
           }
         },
-        "service_item_JUzhgt": {
+        "service_item_j7QJ4g": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_4.svg",
@@ -999,7 +978,7 @@
             "item_link": ""
           }
         },
-        "service_item_z9bGjB": {
+        "service_item_7itmTa": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_5.svg",
@@ -1009,7 +988,7 @@
             "item_link": ""
           }
         },
-        "service_item_UTXVmc": {
+        "service_item_w7CTDU": {
           "type": "service_item",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_6.svg",
@@ -1021,10 +1000,10 @@
         }
       },
       "block_order": [
-        "service_item_zWd8Lh",
-        "service_item_JUzhgt",
-        "service_item_z9bGjB",
-        "service_item_UTXVmc"
+        "service_item_UgmWgP",
+        "service_item_j7QJ4g",
+        "service_item_7itmTa",
+        "service_item_w7CTDU"
       ],
       "name": "Super Service",
       "settings": {
@@ -1032,10 +1011,10 @@
         "background_color": "#f5f9ff"
       }
     },
-    "collections_listing_9YYPGa": {
+    "collections_listing_6LHHpP": {
       "type": "collections-listing",
       "blocks": {
-        "collection_3CKU7a": {
+        "collection_Fp7L9X": {
           "type": "collection",
           "settings": {
             "collection": "nem",
@@ -1044,7 +1023,7 @@
             "custom_link": ""
           }
         },
-        "collection_HDHiUG": {
+        "collection_N8WehQ": {
           "type": "collection",
           "settings": {
             "collection": "goi",
@@ -1053,25 +1032,25 @@
             "custom_link": ""
           }
         },
-        "collection_pMXCbU": {
+        "collection_Yr7gde": {
           "type": "collection",
           "settings": {
-            "collection": "bedding",
-            "custom_image": "shopify://shop_images/BEDDING_1.jpg",
-            "custom_title": "Bộ Ga Giường",
+            "collection": "chan",
+            "custom_image": "shopify://shop_images/3841bfeb8eb7f130f49b2f6c704ffc6104a39668.png",
+            "custom_title": "",
             "custom_link": ""
           }
         },
-        "collection_xiUYwi": {
+        "collection_jHje3i": {
           "type": "collection",
           "settings": {
-            "collection": "bundle",
-            "custom_image": "shopify://shop_images/bundle.jpg",
-            "custom_title": "Combo Tiết Kiệm",
+            "collection": "phu-kien",
+            "custom_image": "shopify://shop_images/5b221c0f611390700cb830452cebb4d898d6e755.png",
+            "custom_title": "",
             "custom_link": ""
           }
         },
-        "collection_p9E9WN": {
+        "collection_J8JwVj": {
           "type": "collection",
           "disabled": true,
           "settings": {
@@ -1082,11 +1061,11 @@
         }
       },
       "block_order": [
-        "collection_3CKU7a",
-        "collection_HDHiUG",
-        "collection_pMXCbU",
-        "collection_xiUYwi",
-        "collection_p9E9WN"
+        "collection_Fp7L9X",
+        "collection_N8WehQ",
+        "collection_Yr7gde",
+        "collection_jHje3i",
+        "collection_J8JwVj"
       ],
       "name": "Collections Listing",
       "settings": {
@@ -1127,22 +1106,21 @@
   "order": [
     "countdown_Gwp9bc",
     "main",
-    "reason_to_choice_MiXBbP",
-    "feature_banner_6ndiQG",
+    "reason_to_choice_cbPGRj",
+    "feature_banner_XdBwRx",
+    "main_product_bundle_y4WGaj",
     "product_hotspot_XzDEYy",
     "product_hotspot_LcX9T4",
     "product_hotspot_BGaNkf",
     "product_hotspot_JYk7dk",
     "product_hotspot_zAj7Lm",
-    "product_hotspot_pnDmHC",
     "product_hotspot_4TYCfN",
     "dynamic_text_with_image_L4VkFB",
     "best_seller_DWCAYP",
-    "dynamic_faq_Whrn47",
-    "172802814088f5e025",
+    "dynamic_faq_MiJfc8",
     "1730878240cfbec46e",
-    "super_service_qUwnVM",
-    "collections_listing_9YYPGa",
+    "super_service_pac79r",
+    "collections_listing_6LHHpP",
     "sub",
     "product-recommendations",
     "recently-viewed",

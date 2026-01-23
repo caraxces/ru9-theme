@@ -222,12 +222,24 @@
   }
 }
 
-/* Mobile screens */
+/* Mobile screens - responsive padding */
 @media (max-width: 768px) {
   .collection-content--custom .page-width {
     margin: 0;
-    padding: 0 15px 20px;
+    padding-left: clamp(10px, 2.5vw, 15px) !important;
+    padding-right: clamp(10px, 2.5vw, 15px) !important;
+    padding-bottom: clamp(17px, 4.3vw, 20px);
     max-width: 100%;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+}
+
+/* Mobile screens 491px - 768px - scale from 490px base */
+@media (min-width: 491px) and (max-width: 768px) {
+  .collection-content--custom .page-width {
+    padding-left: clamp(12px, 2.8vw, 15px) !important;
+    padding-right: clamp(12px, 2.8vw, 15px) !important;
   }
 }
 
@@ -254,6 +266,14 @@
   }
 }
 
+/* Base styles for collection-grid__wrapper */
+.collection-grid__wrapper {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .cc-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -261,6 +281,9 @@
   padding: 0;
   max-width: 100%;
   overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
 }
 
 /* When sidebar is enabled, adjust grid to fit 3 products */
@@ -518,11 +541,27 @@
 }
 
 @media (max-width: 768px) {
+  /* Mobile: Ensure collection-grid__wrapper respects page-width padding */
+  .collection-content--custom .collection-grid__wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
   /* Mobile: Reset grid margin that causes misalignment from theme.css */
-  .collection-content--custom .page-width > .grid {
+  .collection-content--custom .page-width > .grid,
+  .collection-content--custom .collection-grid__wrapper > .grid {
     margin-left: 0 !important;
     margin-right: 0 !important;
-    padding: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   /* Mobile: Hide sidebar completely */
@@ -533,13 +572,15 @@
     display: none !important;
   }
 
-  /* Mobile: Full width content - reset all padding/margin from theme.css */
+  /* Mobile: Full width content - ensure it respects page-width padding */
   .collection-content--custom .grid__item--content {
     width: 100% !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
   }
 
   /* Mobile: 2-column grid layout with 27px row spacing and 15px column gap */
@@ -551,6 +592,8 @@
     width: 100% !important;
     margin: 0 !important;
     max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
   }
 
   /* Override sidebar layout on mobile - ensure consistent layout */
@@ -561,6 +604,10 @@
     gap: 27px 15px !important;
     padding: 0 !important;
     margin: 0 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
   }
 
   /* Mobile: Full width cards within grid */
@@ -624,6 +671,228 @@
 
   .cc-rating-text {
     font-size: 12px;
+  }
+}
+
+/* Extra small mobile screens - responsive scaling for < 490px (BASE STANDARD) */
+@media (max-width: 490px) {
+  /* Page width padding - ensure proper left and right margins */
+  .collection-content--custom .page-width {
+    padding-left: clamp(10px, 2.5vw, 15px) !important;
+    padding-right: clamp(10px, 2.5vw, 15px) !important;
+    padding-bottom: 17px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Ensure wrapper respects padding */
+  .collection-content--custom .collection-grid__wrapper {
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Grid gap - scale down proportionally */
+  .collection-content--custom .cc-grid {
+    gap: clamp(12px, 3vw, 23px) clamp(7px, 1.8vw, 13px) !important;
+  }
+
+  .collection-content--custom.enable-sidebar .cc-grid,
+  .collection-content--custom .cc-grid {
+    gap: clamp(12px, 3vw, 23px) clamp(7px, 1.8vw, 13px) !important;
+  }
+
+  /* Card gap - scale down */
+  .collection-content--custom.enable-sidebar .cc-card,
+  .collection-content--custom .cc-card {
+    gap: clamp(5px, 1.2vw, 8px) !important;
+  }
+
+  /* Content gap - scale down */
+  .cc-content {
+    gap: clamp(4px, 1vw, 6px) !important;
+  }
+
+  /* Typography - responsive font sizes */
+  .cc-title,
+  .cc-title a {
+    font-size: clamp(11px, 2.8vw, 14px) !important;
+    line-height: 1.3 !important;
+  }
+
+  .cc-description {
+    font-size: clamp(11px, 2.8vw, 14px) !important;
+    line-height: 1.3 !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .cc-price__current {
+    font-size: clamp(11px, 2.8vw, 14px) !important;
+    line-height: 1.3 !important;
+  }
+
+  .cc-price__discount {
+    font-size: clamp(10px, 2.5vw, 14px) !important;
+    padding: clamp(1px, 0.3vw, 2px) clamp(4px, 1vw, 6px) !important;
+    border-radius: clamp(2px, 0.5vw, 3px) !important;
+    line-height: 1.3 !important;
+  }
+
+  .cc-compare-price {
+    font-size: clamp(11px, 2.8vw, 14px) !important;
+    line-height: 1.3 !important;
+  }
+
+  .cc-rating-text {
+    font-size: clamp(10px, 2.5vw, 12px) !important;
+    line-height: 1.3 !important;
+  }
+
+  .cc-star {
+    font-size: clamp(16px, 4vw, 20px) !important;
+  }
+
+  /* Button - scale down */
+  .collection-content--custom.enable-sidebar .cc-buy-now,
+  .collection-content--custom .cc-buy-now {
+    height: clamp(32px, 8vw, 36px) !important;
+    font-size: clamp(11px, 2.8vw, 13px) !important;
+    border-radius: clamp(16px, 4vw, 20px) !important;
+    padding: 0 clamp(8px, 2vw, 12px) !important;
+  }
+
+  /* Badge positioning - scale down */
+  .cc-badge {
+    top: clamp(8px, 2vw, 12px) !important;
+    left: clamp(8px, 2vw, 12px) !important;
+    padding: clamp(3px, 0.8vw, 4px) clamp(6px, 1.5vw, 8px) !important;
+    border-radius: clamp(4px, 1vw, 6px) !important;
+    font-size: clamp(10px, 2.5vw, 12px) !important;
+  }
+
+  /* Price row gap - scale down */
+  .cc-price {
+    gap: clamp(5px, 1.2vw, 8px) !important;
+  }
+
+  /* Compare price container - scale down */
+  .cc-compare-price-container {
+    min-height: clamp(26px, 6.5vw, 31px) !important;
+    margin-bottom: clamp(8px, 2vw, 12px) !important;
+    margin-top: clamp(-6px, -1.5vw, -8px) !important;
+  }
+
+  /* Rating gap - scale down */
+  .cc-rating {
+    gap: clamp(5px, 1.2vw, 8px) !important;
+    margin-bottom: clamp(3px, 0.8vw, 4px) !important;
+  }
+
+  .cc-stars {
+    gap: clamp(1px, 0.3vw, 2px) !important;
+  }
+
+  /* Title margin - scale down */
+  .cc-title {
+    margin-bottom: clamp(3px, 0.8vw, 4px) !important;
+  }
+
+  /* Description margin - scale down */
+  .cc-description {
+    margin-bottom: clamp(5px, 1.2vw, 8px) !important;
+  }
+
+  /* Image container border radius - scale down */
+  .cc-image-container {
+    border-radius: clamp(6px, 1.5vw, 8px) !important;
+  }
+}
+
+/* Mobile screens 491px - 768px - scale up from 490px base */
+@media (min-width: 491px) and (max-width: 768px) {
+  /* Scale grid gap proportionally from 490px base */
+  .collection-content--custom .cc-grid {
+    gap: clamp(15px, 3.5vw, 27px) clamp(9px, 2.2vw, 15px) !important;
+  }
+
+  .collection-content--custom.enable-sidebar .cc-grid,
+  .collection-content--custom .cc-grid {
+    gap: clamp(15px, 3.5vw, 27px) clamp(9px, 2.2vw, 15px) !important;
+  }
+
+  /* Scale card gap */
+  .collection-content--custom.enable-sidebar .cc-card,
+  .collection-content--custom .cc-card {
+    gap: clamp(6px, 1.5vw, 8px) !important;
+  }
+
+  /* Scale content gap */
+  .cc-content {
+    gap: clamp(5px, 1.2vw, 6px) !important;
+  }
+
+  /* Scale typography */
+  .cc-title,
+  .cc-title a {
+    font-size: clamp(12px, 3vw, 14px) !important;
+    line-height: 1.35 !important;
+  }
+
+  .cc-description {
+    font-size: clamp(12px, 3vw, 14px) !important;
+    line-height: 1.35 !important;
+  }
+
+  .cc-price__current {
+    font-size: clamp(12px, 3vw, 14px) !important;
+  }
+
+  .cc-price__discount {
+    font-size: clamp(11px, 2.8vw, 14px) !important;
+    padding: clamp(1px, 0.4vw, 2px) clamp(5px, 1.2vw, 6px) !important;
+  }
+
+  .cc-compare-price {
+    font-size: clamp(12px, 3vw, 14px) !important;
+  }
+
+  .cc-rating-text {
+    font-size: clamp(11px, 2.8vw, 12px) !important;
+  }
+
+  .cc-star {
+    font-size: clamp(17px, 4.3vw, 20px) !important;
+  }
+
+  /* Scale button */
+  .collection-content--custom.enable-sidebar .cc-buy-now,
+  .collection-content--custom .cc-buy-now {
+    height: clamp(34px, 8.5vw, 36px) !important;
+    font-size: clamp(12px, 3vw, 13px) !important;
+  }
+
+  /* Scale badge */
+  .cc-badge {
+    top: clamp(9px, 2.3vw, 12px) !important;
+    left: clamp(9px, 2.3vw, 12px) !important;
+    padding: clamp(3px, 0.9vw, 4px) clamp(6px, 1.6vw, 8px) !important;
+    font-size: clamp(11px, 2.8vw, 12px) !important;
+  }
+
+  /* Scale spacing */
+  .cc-price {
+    gap: clamp(6px, 1.5vw, 8px) !important;
+  }
+
+  .cc-rating {
+    gap: clamp(6px, 1.5vw, 8px) !important;
+    margin-bottom: clamp(3px, 0.9vw, 4px) !important;
+  }
+
+  .cc-title {
+    margin-bottom: clamp(3px, 0.9vw, 4px) !important;
+  }
+
+  .cc-description {
+    margin-bottom: clamp(6px, 1.5vw, 8px) !important;
   }
 }
 </style>

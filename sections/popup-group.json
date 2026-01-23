@@ -136,36 +136,46 @@
     "voucher_popup_CgmKCW": {
       "type": "voucher-popup",
       "blocks": {
+        "voucher_7BizKk": {
+          "type": "voucher",
+          "settings": {
+            "code": "RU9NY",
+            "title": "VOUCHER 6%",
+            "description": "Giảm 6% cho đơn hàng từ 30 triệu đồng",
+            "expiry_date": "14.02.2026"
+          }
+        },
         "voucher_Rz4CKq": {
           "type": "voucher",
           "settings": {
-            "code": "RU9NEWYEAR",
+            "code": "RU9GOI4",
             "title": "VOUCHER 6%",
-            "description": "Giảm 6% cho đơn hàng từ 30 triệu",
-            "expiry_date": "10.01.2026"
+            "description": "Giảm 6% khi mua 4 gối",
+            "expiry_date": "14.02.2026"
           }
         },
         "voucher_yibCVn": {
           "type": "voucher",
           "settings": {
-            "code": "RU9XMAS",
+            "code": "RU9GOI2",
             "title": "VOUCHER 4%",
-            "description": "Giảm 4% cho đơn hàng từ 20 triệu đồng",
-            "expiry_date": "10.01.2026"
+            "description": "Giảm 4% khi mua 2 gối",
+            "expiry_date": "14.02.2026"
           }
         },
         "voucher_mUTahx": {
           "type": "voucher",
           "disabled": true,
           "settings": {
-            "code": "RU9250",
-            "title": "VOUCHER 250K",
-            "description": "Giảm 250K cho đơn hàng từ 5 triệu đồng",
-            "expiry_date": "31.12.2025"
+            "code": "RU926",
+            "title": "VOUCHER 4%",
+            "description": "Giảm 4% cho đơn hàng từ 20 triệu đồng",
+            "expiry_date": "14.02.2026"
           }
         }
       },
       "block_order": [
+        "voucher_7BizKk",
         "voucher_Rz4CKq",
         "voucher_yibCVn",
         "voucher_mUTahx"

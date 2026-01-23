@@ -12,35 +12,35 @@
   }
 
   .super-service-section .page-width {
-    max-width: none;
-    margin: 0 5rem;
-    padding: 0;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 4.3rem;
   }
 
   .super-service__title {
     color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 39px;
+    font-size: 33px;
     font-style: normal;
     font-weight: 700;
     line-height: 1.2;
     text-align: left;
     max-width: none;
-    margin: 0 0 40px 0 !important;
+    margin: 0 0 34px 0 !important;
   }
 
   /* --- Desktop Grid Layout --- */
   .super-service__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 20px;
     justify-items: start;
     text-align: left;
   }
 
   .super-service__item-wrapper {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(17px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
 
@@ -64,8 +64,8 @@
   .super-service__item {
     width: 100%;
     background-color: {{ section.settings.background_color }};
-    border-radius: 12px;
-    padding: 40px 20px;
+    border-radius: 10px;
+    padding: 34px 17px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -73,8 +73,8 @@
   }
 
   .super-service__item-icon {
-    margin-bottom: 24px;
-    height: 80px;
+    margin-bottom: 20px;
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -89,28 +89,28 @@
   .super-service__item-title {
     color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
     line-height: 1.5;
-    margin: 0 0 4px 0;
+    margin: 0 0 3px 0;
     max-width: none;
   }
 
   .super-service__item-note {
     color: #1C2C58;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
-    margin: 0 0 16px 0;
+    margin: 0 0 14px 0;
     min-height: auto;
   }
 
   .super-service__item-description {
     color: #000;
     font-family: "Be Vietnam Pro", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 1.6;
     flex-grow: 1;
@@ -136,11 +136,11 @@
     .super-service__slider-container {
       position: relative;
       background-color: {{ section.settings.background_color }};
-      border-radius: 12px;
-      padding: 40px 40px 50px; /* 40px (button) + 5px spacing + 5px padding */
+      border-radius: 10px;
+      padding: 34px 34px 43px; /* 34px (button) + 4px spacing + 5px padding */
       display: flex;
       flex-direction: column;
-      min-height: 300px;
+      min-height: 256px;
     }
 
     /* Ensure content area doesn't have gap from header */
@@ -155,7 +155,7 @@
         width: 100%;
         opacity: 0;
         transform: none;
-        padding-right: 24px;
+        padding-right: 20px;
         transition: opacity 0.6s ease-out;
     }
     
@@ -207,8 +207,8 @@
 
     .super-service__slider-container .flickity-button {
       position: relative;
-      width: 40px;
-      height: 40px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
@@ -234,13 +234,13 @@
       transform: scale(1.05);
     }
     .super-service__slider-container .flickity-button svg {
-      width: 18px;
-      height: 18px;
+      width: 15px;
+      height: 15px;
     }
 
-    /* Content spacing: 5px from buttons/dots (40px button height + 5px gap) */
+    /* Content spacing: 4px from buttons/dots (34px button height + 4px gap) */
     .super-service__slider-container .flickity-viewport {
-      margin-bottom: 45px; /* 40px (button height) + 5px spacing */
+      margin-bottom: 38px; /* 34px (button height) + 4px spacing */
       padding-bottom: 0;
     }
   }
@@ -249,38 +249,38 @@
     .super-service__title {
       margin-bottom: 20px !important;
     }
-    /* DEBUG: Ensure padding-bottom is 45px, not 80px */
+    /* DEBUG: Ensure padding-bottom is 38px, not 80px */
     .super-service__slider-container {
-      padding: 24px 24px 45px !important; /* 36px (button) + 5px spacing + 4px padding = 45px */
+      padding: 20px 20px 38px !important; /* 31px (button) + 4px spacing + 3px padding = 38px */
       padding-bottom: 0px !important; /* Force override any other CSS */
     }
     .super-service__slider-container .flickity-page-dots {
-      bottom: 5px; /* 5px from bottom */
+      bottom: 4px; /* 4px from bottom */
       left: 0px !important;
-      height: 45px;
+      height: 38px;
     }
     .super-service__slider-container .flickity-page-dots .dot {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       margin: 0 2px; /* Smaller spacing between dots */
     }
     .super-service__slider-container .flickity-buttons {
-      bottom: 25px; /* 5px from bottom, same as dots */
-      right: 24px;
-      gap: 5px; /* 5px between buttons */
+      bottom: 21px; /* 4px from bottom, same as dots */
+      right: 20px;
+      gap: 4px; /* 4px between buttons */
     }
     .super-service__slider-container .flickity-button {
-      width: 36px;
-      height: 36px;
+      width: 31px;
+      height: 31px;
       margin: 0;
     }
     .super-service__slider-container .flickity-button svg {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
     }
-    /* Content spacing: 5px from buttons (36px button + 5px gap) */
+    /* Content spacing: 4px from buttons (31px button + 4px gap) */
     .super-service__slider-container .flickity-viewport {
-      margin-bottom: 41px; /* 36px (button height) + 5px spacing */
+      margin-bottom: 35px; /* 31px (button height) + 4px spacing */
     }
   }
 </style>
