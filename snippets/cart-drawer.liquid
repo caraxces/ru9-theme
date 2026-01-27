@@ -46,6 +46,59 @@
       padding: clamp(10px, calc(12px * var(--drawer-actual-width) / 390px), 12px) clamp(10px, calc(12px * var(--drawer-actual-width) / 390px), 12px) clamp(10px, calc(12px * var(--drawer-actual-width) / 390px), 12px) clamp(12px, calc(16px * var(--drawer-actual-width) / 390px), 16px) !important;
     }
     
+    /* Auto-add gift item styling */
+    #CartDrawer .cart__item--auto-add-gift {
+      background-color: #FFF9E6 !important;
+      border-left: 4px solid #FFB800 !important;
+      padding: clamp(10px, calc(12px * var(--drawer-actual-width) / 390px), 12px) clamp(10px, calc(12px * var(--drawer-actual-width) / 390px), 12px) clamp(10px, calc(12px * var(--drawer-actual-width) / 390px), 12px) clamp(12px, calc(16px * var(--drawer-actual-width) / 390px), 16px) !important;
+      margin: 0 0 10px 0 !important;
+      border-radius: 8px !important;
+      position: relative;
+    }
+    
+    /* Disable clicks on gift items */
+    #CartDrawer .cart__item--auto-add-gift a {
+      pointer-events: none !important;
+      cursor: default !important;
+    }
+    
+    #CartDrawer .cart__item--auto-add-gift .cart-item__title {
+      pointer-events: none !important;
+      cursor: default !important;
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+    
+    #CartDrawer .cart__item--auto-add-gift .cart__image a,
+    #CartDrawer .cart__item--auto-add-gift .cart__image .image-wrap {
+      pointer-events: none !important;
+      cursor: default !important;
+    }
+    
+    #CartDrawer .cart-item__gift-badge {
+      display: inline-block !important;
+      background: #FFB800 !important;
+      color: #fff !important;
+      padding: 4px 10px !important;
+      border-radius: 4px !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      font-family: "Be Vietnam Pro", sans-serif !important;
+      margin-top: 4px !important;
+      line-height: 1.4 !important;
+    }
+    
+    #CartDrawer .cart-item__gift-price {
+      color: #FFB800 !important;
+      font-weight: 600 !important;
+      font-size: clamp(12px, calc(14px * var(--drawer-actual-width) / 390px), 14px) !important;
+    }
+    
+    /* Hide quantity controls for auto-add gift items */
+    #CartDrawer .cart__item--auto-add-gift .cart-item__footer {
+      display: none !important;
+    }
+    
     /* Desktop: Smaller drawer width */
     @media (min-width: 769px) {
       #CartDrawer {

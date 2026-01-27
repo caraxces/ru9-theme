@@ -136,6 +136,24 @@
     "voucher_popup_CgmKCW": {
       "type": "voucher-popup",
       "blocks": {
+        "voucher_VwHqaB": {
+          "type": "voucher",
+          "settings": {
+            "code": "RU9LIXI",
+            "title": "TẶNG SET LÌ XÌ",
+            "description": "Tặng Set lì xì cho đơn trên 500K",
+            "expiry_date": "14.02.2026"
+          }
+        },
+        "voucher_qUAXHd": {
+          "type": "voucher",
+          "settings": {
+            "code": "RU9GIFT",
+            "title": "TẶNG EYE MASK",
+            "description": "Tặng Eye Mask xông hơi cho đơn Gối Công Thái Học",
+            "expiry_date": "28.02.2026"
+          }
+        },
         "voucher_7BizKk": {
           "type": "voucher",
           "settings": {
@@ -175,6 +193,8 @@
         }
       },
       "block_order": [
+        "voucher_VwHqaB",
+        "voucher_qUAXHd",
         "voucher_7BizKk",
         "voucher_Rz4CKq",
         "voucher_yibCVn",

@@ -8,6 +8,7 @@
 {%- assign bundle_id = '' -%}
 {%- assign bundle_title = '' -%}
 {%- assign bundle_discount_title = '' -%}
+{%- assign is_auto_add_gift = false -%}
 
 {%- for p in product.properties -%}
   {%- if p.first == '_bundle_id' -%}
@@ -19,6 +20,10 @@
   {%- endif -%}
   {%- if p.first == '_bundle_discount_title' -%}
     {%- assign bundle_discount_title = p.last -%}
+  {%- endif -%}
+  {%- if p.first == '_auto_add_gift' -%}
+    {%- assign is_auto_add_gift = true -%}
+    {%- comment -%} Debug: Found auto-add-gift property {%- endcomment -%}
   {%- endif -%}
 {%- endfor -%}
 
@@ -80,25 +85,83 @@
     border-radius: 0 0 8px 8px !important;
     margin-bottom: 12px !important;
   }
+  
+  /* Auto-add gift item styling */
+  .cart__item--auto-add-gift {
+    background-color: #FFF9E6 !important;
+    border-left: 4px solid #FFB800 !important;
+    position: relative;
+    pointer-events: auto;
+  }
+  
+  .cart__item--auto-add-gift a {
+    pointer-events: none !important;
+    cursor: default !important;
+  }
+  
+  .cart__item--auto-add-gift .cart-item__title {
+    pointer-events: none !important;
+    cursor: default !important;
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+  
+  .cart-item__gift-badge {
+    display: inline-block;
+    background: #FFB800;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  
+  .cart-item__gift-price {
+    color: #FFB800 !important;
+    font-weight: 600 !important;
+  }
 </style>
 
-<div class="cart__item{% if is_bundle_item %} cart__item--bundle-item{% endif %}" data-key="{{ product.key }}" {% if is_bundle_item %}data-bundle-id="{{ bundle_id }}" data-bundle-quantity="{{ product.properties._bundle_quantity }}"{% endif %} data-quantity="{{ product.quantity }}">
+<div class="cart__item{% if is_bundle_item %} cart__item--bundle-item{% endif %}{% if is_auto_add_gift %} cart__item--auto-add-gift{% endif %}" data-key="{{ product.key }}" {% if is_bundle_item %}data-bundle-id="{{ bundle_id }}" data-bundle-quantity="{{ product.properties._bundle_quantity }}"{% endif %} data-quantity="{{ product.quantity }}">
   <div class="cart__image">
     {% if product.image != blank %}
-      <a href="{{ product.url }}" class="image-wrap">
-        {%- render 'image-element',
-          img: product.image,
-          alt: product.product.title,
-          widths: '264',
-          sizes: '132px'
-        -%}
-      </a>
+      {% if is_auto_add_gift %}
+        <div class="image-wrap" style="pointer-events: none; cursor: default;">
+          {%- render 'image-element',
+            img: product.image,
+            alt: product.product.title,
+            widths: '264',
+            sizes: '132px'
+          -%}
+        </div>
+      {% else %}
+        <a href="{{ product.url }}" class="image-wrap">
+          {%- render 'image-element',
+            img: product.image,
+            alt: product.product.title,
+            widths: '264',
+            sizes: '132px'
+          -%}
+        </a>
+      {% endif %}
     {% endif %}
   </div>
   <div class="cart__item-details">
-    <a href="{{ product.url }}" class="cart-item__title">
-      {{ product.product.title }}
-    </a>
+    {% if is_auto_add_gift %}
+      <span class="cart-item__title" style="pointer-events: none; cursor: default; color: inherit; text-decoration: none;">
+        {{ product.product.title }}
+      </span>
+    {% else %}
+      <a href="{{ product.url }}" class="cart-item__title">
+        {{ product.product.title }}
+      </a>
+    {% endif %}
+    {% if is_auto_add_gift %}
+    <div style="margin-top: 4px;">
+      <span class="cart-item__gift-badge">🎁 Quà tặng</span>
+    </div>
+    {% endif %}
     {%- unless product.product.has_only_default_variant -%}
       {%- assign has_variant_options = false -%}
       {%- for option in product.options_with_values -%}
@@ -119,31 +182,36 @@
     {%- endunless -%}
 
     <div class="cart-item__price-wrapper">
-        {%- comment -%}
-            Check if there's any discount to display. This can be either:
-            1. A "compare at" price on the variant (a sale).
-            2. A cart-level discount making final_price different from original_price.
-        {%- endcomment -%}
-        {%- if product.variant.compare_at_price > product.price or product.original_price != product.final_price -%}
-            
-            {%- comment -%}
-                Determine the strikethrough price. 
-                If it's a sale item, the strikethrough should be the 'compare at price'.
-                Otherwise, it's the original price before cart discounts.
-            {%- endcomment -%}
-            <span class="cart-item__price--original">
-                {%- if product.variant.compare_at_price > product.price -%}
-                    {{ product.variant.compare_at_price | money }}
-                {%- else -%}
-                    {{ product.original_price | money }}
-                {%- endif -%}
-            </span>
-
-            <span class="cart-item__price--final">{{ product.final_price | money }}</span>
-
+        {%- if is_auto_add_gift -%}
+            {%- comment -%} Hiển thị "Miễn phí" cho quà tặng {%- endcomment -%}
+            <span class="cart-item__price--final cart-item__gift-price">Miễn phí</span>
         {%- else -%}
-            {%- comment -%} No discounts, just show the final price. {%- endcomment -%}
-            <span class="cart-item__price--final">{{ product.final_price | money }}</span>
+            {%- comment -%}
+                Check if there's any discount to display. This can be either:
+                1. A "compare at" price on the variant (a sale).
+                2. A cart-level discount making final_price different from original_price.
+            {%- endcomment -%}
+            {%- if product.variant.compare_at_price > product.price or product.original_price != product.final_price -%}
+                
+                {%- comment -%}
+                    Determine the strikethrough price. 
+                    If it's a sale item, the strikethrough should be the 'compare at price'.
+                    Otherwise, it's the original price before cart discounts.
+                {%- endcomment -%}
+                <span class="cart-item__price--original">
+                    {%- if product.variant.compare_at_price > product.price -%}
+                        {{ product.variant.compare_at_price | money }}
+                    {%- else -%}
+                        {{ product.original_price | money }}
+                    {%- endif -%}
+                </span>
+
+                <span class="cart-item__price--final">{{ product.final_price | money }}</span>
+
+            {%- else -%}
+                {%- comment -%} No discounts, just show the final price. {%- endcomment -%}
+                <span class="cart-item__price--final">{{ product.final_price | money }}</span>
+            {%- endif -%}
         {%- endif -%}
     </div>
 
@@ -172,8 +240,8 @@
       {% endfor %}
     {% endif %}
   </div>
-  {%- comment -%} Hide controls for bundle items, they will be controlled by a master footer {%- endcomment -%}
-  {%- unless is_bundle_item -%}
+  {%- comment -%} Hide controls for bundle items and auto-add gift items {%- endcomment -%}
+  {%- unless is_bundle_item or is_auto_add_gift -%}
   <div class="cart-item__footer">
       <div class="js-qty__wrapper">
           <button type="button" class="js-qty__adjust js-qty__adjust--minus" aria-label="{{ 'cart.general.reduce_quantity' | t }}">

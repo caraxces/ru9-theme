@@ -135,17 +135,10 @@
           <details
             class="ru9-filter-dd"
             data-ru9-cols="1"
-            {% if ru9_is_active and collapsed == false %}open{% endif %}
+            open
           >
             <summary class="ru9-filter-dd__summary" aria-controls="{{ filter_id }}">
               <span class="ru9-filter-dd__title">{{ filter.label | escape }}</span>
-              <span class="ru9-filter-dd__meta">
-                {%- if filter.active_values.size > 0 -%}
-                  {{ filter.active_values.size }} đã chọn
-                {%- else -%}
-                  Chọn
-                {%- endif -%}
-              </span>
               <span class="ru9-filter-dd__icon" aria-hidden="true">{%- render 'icon-caret' -%}</span>
             </summary>
             <div class="ru9-filter-dd__panel" id="{{ filter_id }}">

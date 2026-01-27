@@ -273,7 +273,7 @@
 #CollectionSidebar .ru9-filter-dd__summary {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 10px;
   width: 100%;
   height: 56px;
@@ -282,8 +282,9 @@
   border-radius: 12px;
   background: #f5f9ff;
   color: #1c2c58;
-  cursor: pointer;
+  cursor: default;
   user-select: none;
+  pointer-events: none;
 }
 
 #CollectionSidebar .ru9-filter-dd__summary::-webkit-details-marker {
@@ -305,14 +306,7 @@
 }
 
 #CollectionSidebar .ru9-filter-dd__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.18s ease;
-}
-
-#CollectionSidebar details[open] > .ru9-filter-dd__summary .ru9-filter-dd__icon {
-  transform: rotate(180deg);
+  display: none;
 }
 
 #CollectionSidebar .ru9-filter-dd__panel {
@@ -390,10 +384,44 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 20px;
   line-height: 1.3;
-  font-weight: 500;
+  font-weight: 400;
   color: #111;
+}
+
+/* RU9: Desktop font-size 14px for filter elements */
+@media only screen and (min-width: 769px) {
+  #CollectionSidebar .ru9-filter-dd__title {
+    font-size: 16px;
+  }
+
+  #CollectionSidebar .ru9-filter-dd__meta {
+    font-size: 14px;
+  }
+
+  #CollectionSidebar .ru9-filter-price__label {
+    font-size: 14px;
+  }
+
+  #CollectionSidebar .ru9-filter-dd__panel .tag-list:not(.tag-list--swatches) .tag__checkbox-wrapper {
+    font-size: 14px;
+  }
+
+  #CollectionSidebar .ru9-filter-dd__panel .tag__text {
+    font-size: 14px;
+  }
+
+  #CollectionSidebar .filter-content {
+    font-size: 14px;
+  }
+
+  #CollectionSidebar .label-text {
+    font-size: 14px;
+  }
+
+  #CollectionSidebar .ru9-price-text {
+    font-size: 14px;
+  }
 }
 
 /* Fix: Make collection-filter move down when filter-form expands */

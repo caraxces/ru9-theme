@@ -129,7 +129,61 @@
           predictiveSearchPrice: {{ settings.predictive_search_show_price | json }},
           quickView: {{ settings.quick_shop_enable }},
           themeName: 'Impulse',
-          themeVersion: "7.5.1"
+          themeVersion: "7.5.1",
+          autoAddToCart: {
+            enabled: {{ settings.auto_add_to_cart_enabled | default: false }},
+            addOnce: {{ settings.auto_add_to_cart_add_once | default: true }},
+            rules: [
+              {% if settings.auto_add_rule1_enabled and settings.auto_add_rule1_variant_id != blank %}
+              {
+                name: 'Thêm khi đạt tổng giá trị',
+                condition: {
+                  type: 'cart_total',
+                  value: {{ settings.auto_add_rule1_cart_total | default: 5000000 }},
+                  operator: '>='
+                },
+                products: [{
+                  variantId: {{ settings.auto_add_rule1_variant_id | json }},
+                  quantity: {{ settings.auto_add_rule1_quantity | default: 1 }},
+                  properties: {}
+                }],
+                message: {{ settings.auto_add_rule1_message | default: '' | json }}
+              }{% if settings.auto_add_rule2_enabled and settings.auto_add_rule2_variant_id != blank or settings.auto_add_rule3_enabled and settings.auto_add_rule3_variant_id != blank %},{% endif %}
+              {% endif %}
+              {% if settings.auto_add_rule2_enabled and settings.auto_add_rule2_variant_id != blank %}
+              {
+                name: 'Thêm khi có số lượng sản phẩm',
+                condition: {
+                  type: 'item_count',
+                  value: {{ settings.auto_add_rule2_item_count | default: 2 }},
+                  operator: '>='
+                },
+                products: [{
+                  variantId: {{ settings.auto_add_rule2_variant_id | json }},
+                  quantity: {{ settings.auto_add_rule2_quantity | default: 1 }},
+                  properties: {}
+                }],
+                message: {{ settings.auto_add_rule2_message | default: '' | json }}
+              }{% if settings.auto_add_rule3_enabled and settings.auto_add_rule3_variant_id != blank %},{% endif %}
+              {% endif %}
+              {% if settings.auto_add_rule3_enabled and settings.auto_add_rule3_variant_id != blank %}
+              {
+                name: 'Thêm khi có sản phẩm cụ thể',
+                condition: {
+                  type: 'has_product',
+                  value: {% if settings.auto_add_rule3_product_id != blank %}{{ settings.auto_add_rule3_product_id | json }}{% else %}null{% endif %},
+                  operator: '=='
+                },
+                products: [{
+                  variantId: {{ settings.auto_add_rule3_variant_id | json }},
+                  quantity: {{ settings.auto_add_rule3_quantity | default: 1 }},
+                  properties: {}
+                }],
+                message: {{ settings.auto_add_rule3_message | default: '' | json }}
+              }
+              {% endif %}
+            ]
+          }
         };
       </script>
         <script type="application/ld+json">{"@context":"https://schema.org", "@type":"Store", "image":"https://ru9.vn/cdn/shop/files/footer-header.png?v=1730790510", "paymentAccepted": [ "http://purl.org/goodrelations/v1#Cash", "http://purl.org/goodrelations/v1#ByBankTransferInAdvance"], "currenciesAccepted":"VND", "founder":{"@type":"Person", "@id":"https://ru9.vn/#person", "name":"Đặng Thùy Trang", "sameAs":["https://vn.linkedin.com/in/dangthuytrang", "https://www.instagram.com/alxdang/", "https://www.facebook.com/trangdangru9", "https://startup.vnexpress.net/tin-tuc/hanh-trinh-khoi-nghiep/giac-mo-lam-nem-cua-doi-ban-viet-kieu-3797107.html"], "knowsLanguage": [ "Vietnamese", "English"], "description":"Trước khi thành lập Ru9, tôi cũng như các bạn, là một người tiêu dùng thông thường và mệt mỏi khi cảm thấy quá trình tìm kiếm cho mình một chiếc nệm chất lượng với giá thành hợp lý thật sự quá khó khăn.", "jobTitle":"Founder", "gender":"https://schema.org/Female", "image":"https://ru9.vn/cdn/shop/files/Ru9_Trang_Dang_Founder_600x.png?v=1613188302"}, "employee":{"@id":"https://ru9.vn/#person"}, "publicAccess":"true", "latitude":10.7882851, "longitude":106.6913013, "openingHoursSpecification":[{"@type": "OpeningHoursSpecification", "opens": "09:00:00", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Monday"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Tuesday", "opens": "09:00:00"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Wednesday", "opens": "09:00:00"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Thursday", "opens": "09:00:00"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Friday", "opens": "09:00:00"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Saturday", "opens": "09:00:00"},{"@type": "OpeningHoursSpecification", "closes": "21:00:00", "dayOfWeek": "https://schema.org/Sunday", "opens": "09:00:00"}], "sameAs": [ "https://www.google.com/search?q=Ru9&kgmid=/g/11g1dxj62j", "https://www.facebook.com/ru9vn", "https://www.instagram.com/ru9vn/", "https://www.youtube.com/channel/UC2FZVIyQDjV-eoc4Wf6fMzw"], "url":"https://ru9.vn", "@id":"https://ru9.vn/#organization", "potentialAction":{"result":{"@type":"Reservation", "name":"Thanh toán"}, "@type":"ConsumeAction", "target": [{"@type":"EntryPoint", "inLanguage":"vn", "actionPlatform": [ "http://schema.org/DesktopWebPlatform", "http://schema.org/IOSPlatform", "http://schema.org/AndroidPlatform"], "urlTemplate":"https://ru9.vn/cart"}]}, "name":"Ru9 - The Sleep Company", "alternatename":"Ru9", "description":"Ru9 chuyên cung cấp sản phẩm chăn ga gối nệm (đệm) chất lượng với giá tốt nhất nhằm mang tới giấc ngủ ngon và đảm bảo sức khoẻ cho mọi người.", "disambiguatingdescription":"Ru9 chuyên cung cấp sản phẩm chăn ga gối nệm (đệm) chất lượng với giá tốt nhất nhằm mang tới giấc ngủ ngon và đảm bảo sức khoẻ cho mọi người.", "logo":"https://ru9.vn/cdn/shop/files/footer-header.png?v=1730790510", "slogan":"The Sleep Company", "priceRange":"100000VN - 30000000VNĐ", "hasMap": ["https://www.google.com/maps?cid=2197450418408106945"], "mainEntityOfPage":"https://ru9.vn/", "email":"cs@ru9.vn", "contactPoint":{"@type":"ContactPoint", "telephone":"0964777910", "contactType":"Customer support", "email":"cs@ru9.vn"}, "telephone":"0964777910", "address":{"@type":"PostalAddress", "addressCountry":"VNM", "addressLocality":"Quận 3", "addressRegion":"Thành phố Hồ Chí Minh", "streetAddress":"283A Hai Bà Trưng, Phường 8", "postalCode":"700000"}, "foundingLocation":{"@type":"Place", "name":"Hồ Chí Minh", "url":" https://en.wikipedia.org/wiki/Ho_Chi_Minh_City", "address":"Việt Nam"}, "geo":{"@type":"GeoCoordinates", "latitude":10.7882851, "longitude":106.6913013}, "legalName":"Công ty TNHH Ru9", "foundingDate":"2017-08-30", "numberOfEmployees":"100", "hasOfferCatalog":{"@type":"OfferCatalog", "itemListElement":[{"@type":"Offer", "name":"Nệm", "itemOffered":"https://ru9.vn/collections/nem", "url":"https://ru9.vn/collections/nem"},{"@type":"Offer", "name":"Nệm Foam", "itemOffered":"https://ru9.vn/collections/nem-foam", "url":"https://ru9.vn/collections/nem-foam"},{"@type":"Offer", "name":"Topper", "itemOffered":"https://ru9.vn/collections/topper", "url":"https://ru9.vn/collections/topper"},{"@type":"Offer", "name":"Gối Niu", "itemOffered":"https://ru9.vn/products/goi-foam-niu", "url":"https://ru9.vn/products/goi-foam-niu"},{"@type":"Offer", "name":"Gối Ôm", "itemOffered":"https://ru9.vn/products/goi-om", "url":"https://ru9.vn/products/goi-om"},{"@type":"Offer", "name":"Chăn Bạch Đàn", "itemOffered":"https://ru9.vn/products/chan-bach-dan", "url":"https://ru9.vn/products/chan-bach-dan"},{"@type":"Offer", "name":"Ga Trải Giường", "itemOffered":"https://ru9.vn/collections/bedding", "url":"https://ru9.vn/collections/bedding"},{"@type":"Offer", "name":"Giải Nhiệt", "itemOffered":"https://ru9.vn/products/giai-nhiet-iceguard", "url":"https://ru9.vn/products/giai-nhiet-iceguard"},{"@type":"Offer", "name":"Tấm lót nệm", "itemOffered":"https://ru9.vn/products/tam-bao-ve-nem", "url":"https://ru9.vn/products/tam-bao-ve-nem"},{"@type":"Offer", "name":"Phụ Kiện", "itemOffered":"https://ru9.vn/collections/phu-kien", "url":"https://ru9.vn/collections/phu-kien"}]}, "areaServed":{"@type":"Country", "url":"https://www.wikidata.org/wiki/Q881", "name":"Việt Nam"}, "alumni":[{"@id":"https://ru9.vn/#person"}], "sponsor":[{"@id":"https://ru9.vn/#person"}], "brand":{"@type":"Organization", "name":"Ru9", "url":"https://ru9.vn/", "logo":"https://ru9.vn/cdn/shop/files/footer-header.png?v=1730790510", "contactPoint":{"@type" :"ContactPoint", "telephone" :"0964777910", "contactType":"Customer Service", "email":"cs@ru9.vn", "areaServed":"Vietnam"}, "location":{"@type": "PostalAddress", "addressCountry": "Việt Nam", "name": "Ru9 - The Sleep Company", "addressLocality": "Quận 3", "addressRegion": "Thành phố Hồ Chí Minh", "streetAddress": "283A Hai Bà Trưng, Phường 8", "postalCode": "700000"}}}</script>
@@ -153,6 +207,7 @@
   
   
       <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'auto-add-to-cart.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'judge-me-layout.js' | asset_url }}" defer="defer"></script>
   
       {%- if request.page_type contains 'customers/' -%}

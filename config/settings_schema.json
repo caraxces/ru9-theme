@@ -1156,6 +1156,126 @@
         "type": "text",
         "id": "voucher_code_5",
         "label": "Mã cho Voucher 5"
+      },
+      {
+        "type": "header",
+        "content": "🚀 Tự động thêm sản phẩm vào giỏ hàng"
+      },
+      {
+        "type": "paragraph",
+        "content": "Tính năng này sẽ tự động thêm sản phẩm vào giỏ hàng khi đủ điều kiện. Cấu hình các quy tắc bên dưới."
+      },
+      {
+        "type": "checkbox",
+        "id": "auto_add_to_cart_enabled",
+        "label": "Bật tính năng tự động thêm sản phẩm",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "auto_add_to_cart_add_once",
+        "label": "Chỉ thêm một lần (tránh thêm lặp lại)",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Quy tắc 1: Thêm khi đạt tổng giá trị"
+      },
+      {
+        "type": "checkbox",
+        "id": "auto_add_rule1_enabled",
+        "label": "Bật quy tắc 1",
+        "default": false
+      },
+      {
+        "type": "number",
+        "id": "auto_add_rule1_cart_total",
+        "label": "Tổng giá trị giỏ hàng (VND)",
+        "info": "Tự động thêm sản phẩm khi tổng giá trị giỏ hàng >= số tiền này",
+        "default": 5000000
+      },
+      {
+        "type": "text",
+        "id": "auto_add_rule1_variant_id",
+        "label": "Variant ID sản phẩm cần thêm",
+        "info": "Nhập Variant ID của sản phẩm sẽ được tự động thêm"
+      },
+      {
+        "type": "number",
+        "id": "auto_add_rule1_quantity",
+        "label": "Số lượng",
+        "default": 1
+      },
+      {
+        "type": "text",
+        "id": "auto_add_rule1_message",
+        "label": "Thông báo khi thêm (tùy chọn)",
+        "default": "Đã tự động thêm sản phẩm khuyến mãi vào giỏ hàng!"
+      },
+      {
+        "type": "header",
+        "content": "Quy tắc 2: Thêm khi có số lượng sản phẩm"
+      },
+      {
+        "type": "checkbox",
+        "id": "auto_add_rule2_enabled",
+        "label": "Bật quy tắc 2",
+        "default": false
+      },
+      {
+        "type": "number",
+        "id": "auto_add_rule2_item_count",
+        "label": "Số lượng sản phẩm trong giỏ",
+        "info": "Tự động thêm sản phẩm khi số lượng sản phẩm trong giỏ >= số này",
+        "default": 2
+      },
+      {
+        "type": "text",
+        "id": "auto_add_rule2_variant_id",
+        "label": "Variant ID sản phẩm cần thêm"
+      },
+      {
+        "type": "number",
+        "id": "auto_add_rule2_quantity",
+        "label": "Số lượng",
+        "default": 1
+      },
+      {
+        "type": "text",
+        "id": "auto_add_rule2_message",
+        "label": "Thông báo khi thêm (tùy chọn)"
+      },
+      {
+        "type": "header",
+        "content": "Quy tắc 3: Thêm khi có sản phẩm cụ thể"
+      },
+      {
+        "type": "checkbox",
+        "id": "auto_add_rule3_enabled",
+        "label": "Bật quy tắc 3",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "auto_add_rule3_product_id",
+        "label": "Product ID hoặc Variant ID",
+        "info": "Tự động thêm sản phẩm khi có sản phẩm/variant này trong giỏ"
+      },
+      {
+        "type": "text",
+        "id": "auto_add_rule3_variant_id",
+        "label": "Variant ID sản phẩm cần thêm"
+      },
+      {
+        "type": "number",
+        "id": "auto_add_rule3_quantity",
+        "label": "Số lượng",
+        "default": 1
+      },
+      {
+        "type": "text",
+        "id": "auto_add_rule3_message",
+        "label": "Thông báo khi thêm (tùy chọn)"
       }
     ]
   },
