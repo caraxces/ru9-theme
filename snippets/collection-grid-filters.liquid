@@ -424,6 +424,18 @@
   }
 }
 
+/* RU9: Hide scrollbar for filter sidebar */
+#CollectionSidebar .collection-sidebar,
+.grid__item--sidebar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+#CollectionSidebar .collection-sidebar::-webkit-scrollbar,
+.grid__item--sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 /* Fix: Make collection-filter move down when filter-form expands */
 .collection-sidebar:has(.collapsible-content.is-open) ~ .collection-filter,
 .filter-form:has(.collapsible-content.is-open) ~ .collection-filter {

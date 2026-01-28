@@ -7,7 +7,7 @@
  * - Sản phẩm tự động thêm: variant ID và số lượng
  */
 
-(function() {
+(function () {
   'use strict';
 
   // ============================================
@@ -17,7 +17,7 @@
     // Đọc từ theme.settings nếu có
     if (window.theme && window.theme.settings && window.theme.settings.autoAddToCart) {
       const config = window.theme.settings.autoAddToCart;
-      
+
       // Normalize dữ liệu: đảm bảo variantId là số hoặc null
       if (config.rules && Array.isArray(config.rules)) {
         config.rules = config.rules.map(rule => {
@@ -40,21 +40,31 @@
               return product;
             });
           }
-          
+
           // Parse condition value nếu cần (cho has_product)
-          if (rule.condition && rule.condition.value && rule.condition.type === 'has_product') {
-            if (typeof rule.condition.value === 'string') {
-              rule.condition.value = parseInt(rule.condition.value, 10) || null;
+          if (rule.condition && rule.condition.type === 'has_product') {
+            if (rule.condition.value) {
+              if (typeof rule.condition.value === 'string') {
+                const parsed = parseInt(rule.condition.value, 10);
+                rule.condition.value = isNaN(parsed) ? null : parsed;
+              } else if (typeof rule.condition.value === 'number') {
+                // Đã là số rồi, giữ nguyên
+                rule.condition.value = rule.condition.value;
+              } else {
+                rule.condition.value = null;
+              }
+            } else {
+              rule.condition.value = null;
             }
           }
-          
+
           return rule;
         });
       }
-      
+
       return config;
     }
-    
+
     // Fallback: cấu hình mặc định (nếu chưa có settings)
     return {
       enabled: false,
@@ -62,7 +72,7 @@
       rules: []
     };
   }
-  
+
   const AUTO_ADD_CONFIG = getAutoAddConfig();
 
   // ============================================
@@ -105,31 +115,31 @@
       case 'cart_total':
         const total = cart.total_price;
         return compareValues(total, condition.value, condition.operator);
-      
+
       case 'item_count':
         const itemCount = cart.item_count;
         return compareValues(itemCount, condition.value, condition.operator);
-      
+
       case 'has_product':
         const hasProduct = cart.items.some(item => {
           if (condition.value) {
-            return item.product_id === condition.value || 
-                   item.variant_id === condition.value ||
-                   item.id === condition.value;
+            return item.product_id === condition.value ||
+              item.variant_id === condition.value ||
+              item.id === condition.value;
           }
           return false;
         });
         return condition.operator === '==' ? hasProduct : !hasProduct;
-      
+
       case 'has_tag':
         const hasTag = cart.items.some(item => {
-          return item.properties && 
-                 Object.values(item.properties).some(prop => 
-                   prop && prop.toString().toLowerCase().includes(condition.value.toLowerCase())
-                 );
+          return item.properties &&
+            Object.values(item.properties).some(prop =>
+              prop && prop.toString().toLowerCase().includes(condition.value.toLowerCase())
+            );
         });
         return condition.operator === '==' ? hasTag : !hasTag;
-      
+
       default:
         console.warn('Auto Add to Cart: Unknown condition type:', condition.type);
         return false;
@@ -182,8 +192,10 @@
     try {
       // Lọc sản phẩm chưa có trong giỏ và chưa được thêm tự động
       const productsToAdd = products.filter(product => {
-        if (!product.variantId) {
-          console.warn('Auto Add to Cart: Missing variantId for product');
+        // Kiểm tra variantId hợp lệ (phải là số > 0, không phải null/undefined)
+        // variantId đã được parse trong getAutoAddConfig() rồi
+        if (!product.variantId || product.variantId === null || product.variantId === undefined || product.variantId <= 0) {
+          console.warn('Auto Add to Cart: Missing or invalid variantId for product:', product);
           return false;
         }
 
@@ -260,9 +272,9 @@
       await getCartData();
 
       // Dispatch event để các phần khác biết giỏ hàng đã thay đổi
-      document.dispatchEvent(new CustomEvent('cart:updated', { 
-        bubbles: true, 
-        detail: result 
+      document.dispatchEvent(new CustomEvent('cart:updated', {
+        bubbles: true,
+        detail: result
       }));
 
       // Dispatch event riêng cho auto-add
@@ -330,13 +342,13 @@
       // Kiểm tra điều kiện
       const conditionMet = checkCondition(rule.condition, cart);
       console.log(`Auto Add to Cart: Rule "${rule.name}" - Condition met:`, conditionMet);
-      
+
       if (conditionMet) {
         console.log(`Auto Add to Cart: ✅ Condition met for rule "${rule.name}"`);
-        
+
         // Thêm sản phẩm
         await addProductsToCart(rule.products, rule.name);
-        
+
         // Nếu chỉ muốn thêm một lần, có thể break ở đây
         // break;
       } else {
@@ -370,7 +382,7 @@
   function init() {
     console.log('Auto Add to Cart: Initializing...');
     console.log('Auto Add to Cart: Config:', AUTO_ADD_CONFIG);
-    
+
     if (!AUTO_ADD_CONFIG.enabled) {
       console.log('Auto Add to Cart: ⚠️ Feature is DISABLED. Please enable it in Settings → Cart');
       return;
@@ -380,7 +392,7 @@
     console.log('Auto Add to Cart: Rules count:', AUTO_ADD_CONFIG.rules.length);
 
     // Lắng nghe sự kiện giỏ hàng được cập nhật
-    document.addEventListener('cart:updated', async function() {
+    document.addEventListener('cart:updated', async function () {
       // Đợi một chút để đảm bảo giỏ hàng đã được cập nhật
       setTimeout(() => {
         checkAndAutoAdd();
@@ -388,7 +400,7 @@
     });
 
     // Lắng nghe sự kiện ajaxProduct:added (khi thêm sản phẩm qua form)
-    document.addEventListener('ajaxProduct:added', async function() {
+    document.addEventListener('ajaxProduct:added', async function () {
       setTimeout(() => {
         checkAndAutoAdd();
       }, 500);
@@ -396,7 +408,7 @@
 
     // Kiểm tra khi trang được load
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', async function() {
+      document.addEventListener('DOMContentLoaded', async function () {
         setTimeout(() => {
           checkAndAutoAdd();
         }, 1000);
@@ -408,7 +420,7 @@
     }
 
     // Lắng nghe khi cart drawer được mở (nếu có)
-    document.addEventListener('cart:open', async function() {
+    document.addEventListener('cart:open', async function () {
       setTimeout(() => {
         checkAndAutoAdd();
       }, 300);
