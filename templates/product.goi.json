@@ -264,7 +264,6 @@
     },
     "feature_banner_XdBwRx": {
       "type": "feature-banner",
-      "disabled": true,
       "name": "Feature Banner",
       "settings": {
         "desktop_image": "{{ product.metafields.custom.hotspot_banner.value }}",

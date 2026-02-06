@@ -138,6 +138,7 @@
       "blocks": {
         "voucher_VwHqaB": {
           "type": "voucher",
+          "disabled": true,
           "settings": {
             "code": "RU9LIXI",
             "title": "TẶNG SET LÌ XÌ",

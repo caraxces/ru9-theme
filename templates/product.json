@@ -71,10 +71,9 @@
         },
         "sales_point_RY4Cz8": {
           "type": "sales_point",
-          "disabled": true,
           "settings": {
             "icon": "gift",
-            "text": "Tặng Eyesmask xông hơi, vỏ gối Cotton Sateen"
+            "text": "Tặng Eyesmask xông hơi"
           }
         },
         "sales_point_4raLtj": {
@@ -266,7 +265,6 @@
     },
     "feature_banner_XdBwRx": {
       "type": "feature-banner",
-      "disabled": true,
       "name": "Feature Banner",
       "settings": {
         "desktop_image": "{{ product.metafields.custom.hotspot_banner.value }}",
