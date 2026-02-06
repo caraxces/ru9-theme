@@ -261,7 +261,9 @@
       
       // Close dropdown on escape key
       document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
+        if (e.key === 'Escape' && toolbarDropdown.classList.contains('show')) {
+          e.stopPropagation();
+          e.preventDefault();
           toolbarDropdown.classList.remove('show');
           toolbarDropdown.style.opacity = '0';
           toolbarDropdown.style.visibility = 'hidden';

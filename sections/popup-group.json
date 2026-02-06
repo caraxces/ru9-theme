@@ -167,7 +167,7 @@
         "voucher_Rz4CKq": {
           "type": "voucher",
           "settings": {
-            "code": "RU9GOI4",
+            "code": "RU9G4",
             "title": "VOUCHER 6%",
             "description": "Giảm 6% khi mua 4 gối",
             "expiry_date": "14.02.2026"
@@ -176,7 +176,7 @@
         "voucher_yibCVn": {
           "type": "voucher",
           "settings": {
-            "code": "RU9GOI2",
+            "code": "RU9G2",
             "title": "VOUCHER 4%",
             "description": "Giảm 4% khi mua 2 gối",
             "expiry_date": "14.02.2026"

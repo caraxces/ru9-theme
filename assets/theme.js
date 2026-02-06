@@ -24,9 +24,9 @@ theme.config = {
   vimeoLoading: false,
   isTouch:
     "ontouchstart" in window ||
-    (window.DocumentTouch && window.document instanceof DocumentTouch) ||
-    window.navigator.maxTouchPoints ||
-    window.navigator.msMaxTouchPoints
+      (window.DocumentTouch && window.document instanceof DocumentTouch) ||
+      window.navigator.maxTouchPoints ||
+      window.navigator.msMaxTouchPoints
       ? true
       : false,
   stickyHeader: false,
@@ -160,8 +160,8 @@ theme.recentlyViewed = {
             if (!option.selected) return;
             arr.push(
               encodeURIComponent(field.name) +
-                "=" +
-                encodeURIComponent(option.value)
+              "=" +
+              encodeURIComponent(option.value)
             );
           });
           return;
@@ -368,7 +368,7 @@ theme.recentlyViewed = {
       return variant.unit_price_measurement.reference_value === 1
         ? variant.unit_price_measurement.reference_unit
         : variant.unit_price_measurement.reference_value +
-            variant.unit_price_measurement.reference_unit;
+        variant.unit_price_measurement.reference_unit;
     }
 
     return {
@@ -528,7 +528,7 @@ theme.recentlyViewed = {
       if (!library) return;
       if (library.status === status.requested) return;
 
-      callback = callback || function () {};
+      callback = callback || function () { };
       if (library.status === status.loaded) {
         callback();
         return;
@@ -1572,9 +1572,8 @@ theme.recentlyViewed = {
         const updatedParams = this.getUpdatedParams(currentParams, newParams);
 
         const sectionRenders = this.sections.map((section) => {
-          const url = `${basePath}?section_id=${
-            section.sectionId
-          }&${updatedParams.toString()}`;
+          const url = `${basePath}?section_id=${section.sectionId
+            }&${updatedParams.toString()}`;
           const cachedSectionUrl = (cachedSection) => cachedSection.url === url;
 
           return this.cachedSections.some(cachedSectionUrl)
@@ -1670,8 +1669,7 @@ theme.recentlyViewed = {
         history.pushState(
           {},
           "",
-          `${window.location.pathname}${
-            searchParams && "?".concat(searchParams)
+          `${window.location.pathname}${searchParams && "?".concat(searchParams)
           }`
         );
       },
@@ -2070,7 +2068,7 @@ theme.recentlyViewed = {
               );
             }.bind(this)
           )
-          .catch(function (XMLHttpRequest) {});
+          .catch(function (XMLHttpRequest) { });
       },
 
       // quantityChanged: function (evt) {
@@ -2195,8 +2193,8 @@ theme.recentlyViewed = {
           )
             ? trigger.parentElement.querySelector(selectors.module)
             : trigger
-                .closest(".mobile-nav__item")
-                .querySelector(selectors.module);
+              .closest(".mobile-nav__item")
+              .querySelector(selectors.module);
 
           const contentInner = container ? container.querySelector(selectors.moduleInner) : null;
           if (!contentInner) {
@@ -2220,9 +2218,9 @@ theme.recentlyViewed = {
             trigger.parentElement.querySelector(selectors.module)
               ? trigger.parentElement.querySelector(selectors.module)
               : trigger
-                  .closest(".mobile-nav__item")
-                  .querySelector(selectors.module)
-                  .classList.add(classes.open);
+                .closest(".mobile-nav__item")
+                .querySelector(selectors.module)
+                .classList.add(classes.open);
             if (trigger.closest("#FilterDrawer")) {
               trigger
                 .closest("#FilterDrawer")
@@ -3013,13 +3011,11 @@ theme.recentlyViewed = {
 
       // increase width and height according to movement and multipliers
       if (multipliers[0])
-        element.style.width = `calc(100% + ${
-          movementPixels * Math.abs(multipliers[0])
-        }px)`;
+        element.style.width = `calc(100% + ${movementPixels * Math.abs(multipliers[0])
+          }px)`;
       if (multipliers[1])
-        element.style.height = `calc(100% + ${
-          movementPixels * Math.abs(multipliers[1])
-        }px)`;
+        element.style.height = `calc(100% + ${movementPixels * Math.abs(multipliers[1])
+          }px)`;
 
       return {
         element,
@@ -3040,9 +3036,8 @@ theme.recentlyViewed = {
 
       if (progress > -0.1 && progress < 1.1) {
         const position = Math.min(Math.max(progress, 0), 1) * movementPixels;
-        element.style.transform = `translate3d(${
-          position * multipliers[0]
-        }px, ${position * multipliers[1]}px, 0)`;
+        element.style.transform = `translate3d(${position * multipliers[0]
+          }px, ${position * multipliers[1]}px, 0)`;
       }
 
       if (this.isActive) requestAnimationFrame(this.init.bind(this));
@@ -4444,7 +4439,11 @@ theme.recentlyViewed = {
       });
 
       document.documentElement.on("keydown" + ".tooltip-esc", (event) => {
-        if (event.code === "Escape") this._close();
+        if (event.code === "Escape" && this.el.dataset.toolTipOpen === "true") {
+          event.stopPropagation();
+          event.preventDefault();
+          this._close();
+        }
       });
 
       this.el.dataset.toolTipOpen = true;
@@ -4708,7 +4707,11 @@ theme.recentlyViewed = {
         this.close();
       });
       document.addEventListener("keydown", (event) => {
-        if (event.keyCode === 27) this.close();
+        if (event.keyCode === 27 && this.classList.contains("is-active")) {
+          event.stopPropagation();
+          event.preventDefault();
+          this.close();
+        }
       });
       this.closeBtn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -5520,12 +5523,11 @@ theme.recentlyViewed = {
       let vendorMarkup = "";
 
       if (theme.settings.predictiveSearchPrice)
-        priceMarkup = `<div class="grid-product__price">${
-          theme.strings.productFrom
-        }${theme.Currency.formatMoney(
-          product.price_min,
-          theme.moneyFormat
-        )}</div>`;
+        priceMarkup = `<div class="grid-product__price">${theme.strings.productFrom
+          }${theme.Currency.formatMoney(
+            product.price_min,
+            theme.moneyFormat
+          )}</div>`;
       if (theme.settings.predictiveSearchVendor)
         vendorMarkup = `<div class="grid-product__vendor">${product.vendor}</div>`;
 
@@ -6430,8 +6432,8 @@ theme.recentlyViewed = {
       getImageData: function () {
         this.images = this.inSlideshow
           ? this.container.querySelectorAll(
-              selectors.slideshowTrack + selectors.images
-            )
+            selectors.slideshowTrack + selectors.images
+          )
           : this.container.querySelectorAll(selectors.images);
 
         var items = [];
@@ -8983,8 +8985,8 @@ theme.recentlyViewed = {
         if (this.settings.imageSetName) {
           var variantWrapper = this.container.querySelector(
             '.variant-input-wrap[data-handle="' +
-              this.settings.imageSetName +
-              '"]'
+            this.settings.imageSetName +
+            '"]'
           );
           if (variantWrapper) {
             this.settings.imageSetIndex = variantWrapper.dataset.index;
@@ -9218,7 +9220,7 @@ theme.recentlyViewed = {
           // Update discount badge per variant across all price containers in this product section
           var hasDiscount = variant.compare_at_price > variant.price;
           var priceContainers = this.container.querySelectorAll('.price-container-wrapper');
-          priceContainers.forEach(function(priceContainer){
+          priceContainers.forEach(function (priceContainer) {
             // Prefer the canonical badge rendered by liquid
             var discountBadge = priceContainer.querySelector('[data-discount-badge]') || priceContainer.querySelector('.product__discount-badge');
             if (!discountBadge) return;
@@ -9333,8 +9335,8 @@ theme.recentlyViewed = {
         var variant = variant
           ? variant
           : this.variants
-          ? this.variants.currentVariant
-          : null;
+            ? this.variants.currentVariant
+            : null;
         if (!variant) return;
 
         var setValue = (this.settings.currentImageSet = this.getImageSetName(
@@ -9358,8 +9360,8 @@ theme.recentlyViewed = {
         var variant = evt
           ? evt.detail.variant
           : this.variants
-          ? this.variants.currentVariant
-          : null;
+            ? this.variants.currentVariant
+            : null;
         if (!variant) {
           return;
         }
@@ -9881,18 +9883,18 @@ theme.recentlyViewed = {
 
         var prevSlide = this.cache.mainSlider.querySelector(
           '.product-main-slide[data-index="' +
-            this.settings.currentSlideIndex +
-            '"]'
+          this.settings.currentSlideIndex +
+          '"]'
         );
 
         // If imageSetName exists, use a more specific selector
         var nextSlide = this.settings.imageSetName
           ? this.cache.mainSlider.querySelectorAll(
-              ".flickity-slider .product-main-slide"
-            )[index]
+            ".flickity-slider .product-main-slide"
+          )[index]
           : this.cache.mainSlider.querySelector(
-              '.product-main-slide[data-index="' + index + '"]'
-            );
+            '.product-main-slide[data-index="' + index + '"]'
+          );
 
         prevSlide?.setAttribute("tabindex", "-1");
         nextSlide?.setAttribute("tabindex", 0);
@@ -10145,9 +10147,9 @@ theme.recentlyViewed = {
           function () {
             var currentMedia = this.container.querySelector(
               this.selectors.productMediaWrapper +
-                ":not(." +
-                self.classes.hidden +
-                ")"
+              ":not(." +
+              self.classes.hidden +
+              ")"
             );
             currentMedia.dispatchEvent(
               new CustomEvent("xrLaunch", {
