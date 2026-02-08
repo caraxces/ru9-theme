@@ -196,7 +196,7 @@
         
           gtag('config', 'G-KEGTG3HLDG');
         </script>
-      <script src="{{ 'vendor-scripts-v11.js' | asset_url | split: '?' | first }}" defer="defer"></script>
+      <script src="{{ 'vendor-scripts-v11.min.js' | asset_url | split: '?' | first }}" defer="defer"></script>
       <script src="{{ 'vendor-jquery.js' | asset_url }}" defer="defer"></script>
   
       {%- if shop.enabled_currencies.size > 1 -%}
@@ -206,7 +206,7 @@
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
   
   
-      <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'auto-add-to-cart.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'judge-me-layout.js' | asset_url }}" defer="defer"></script>
   
