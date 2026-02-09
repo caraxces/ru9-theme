@@ -121,6 +121,7 @@
                         src="{{ image | image_url: width: 400, height: 320, crop: 'center' }}" 
                         alt="{{ product.title }}"
                         width="400" height="320"
+                        loading="lazy"
                       >
                     {%- else -%}
                       <div class="placeholder-image">No Image</div>
@@ -134,6 +135,7 @@
                             src="{{ media.preview_image | image_url: width: 400, height: 320, crop: 'center' }}" 
                             alt="{{ product.title }}"
                             width="400" height="320"
+                            loading="lazy"
                           >
                         {%- endif -%}
                       {%- endfor -%}

@@ -65,6 +65,7 @@
                           src="{{ product.featured_image | image_url: width: 400, height: 320, crop: 'center' }}" 
                           alt="{{ product.title }}"
                           width="400" height="320"
+                          loading="lazy"
                         >
                         {%- if product.media.size > 1 -%}
                           {%- for media in product.media offset: 1 limit: 1 -%}
@@ -75,6 +76,7 @@
                                 src="{{ second_image | image_url: width: 400, height: 320, crop: 'center' }}" 
                                 alt="{{ product.title }}"
                                 width="400" height="320"
+                                loading="lazy"
                               >
                             {%- endif -%}
                           {%- endfor -%}

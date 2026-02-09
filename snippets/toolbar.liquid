@@ -250,14 +250,14 @@
         }
       });
       
-      // Close dropdown when clicking outside
+      // Close dropdown when clicking outside (passive for better performance)
       document.addEventListener('click', function(e) {
         if (!toolbarMenuTrigger.contains(e.target) && !toolbarDropdown.contains(e.target)) {
           toolbarDropdown.classList.remove('show');
           toolbarDropdown.style.opacity = '0';
           toolbarDropdown.style.visibility = 'hidden';
         }
-      });
+      }, { passive: true });
       
       // Close dropdown on escape key
       document.addEventListener('keydown', function(e) {
