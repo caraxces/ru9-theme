@@ -2595,14 +2595,8 @@
         }
 
         function checkAndApplyBundleVouchers() {
-          console.log('=== CHECK AND APPLY BUNDLE VOUCHERS ===');
-          
-          // Get all bundle items in cart
-          const bundleItems = document.querySelectorAll('.cart__item--bundle-item');
-          console.log('Found bundle items:', bundleItems.length);
           
           bundleItems.forEach((item, index) => {
-            console.log(`Checking bundle item ${index}:`, item);
             
             // Look for bundle voucher in item properties
             const propertiesEl = item.querySelector('.cart-item__properties');
@@ -2610,16 +2604,11 @@
               const bundleVoucherEl = propertiesEl.querySelector('[data-property-name="_bundle_voucher"]');
               if (bundleVoucherEl) {
                 const voucherCode = bundleVoucherEl.textContent?.trim();
-                console.log('Found bundle voucher:', voucherCode);
-                
                 if (voucherCode && voucherCode !== '') {
                   // Check if voucher is already applied
                   const existingDiscount = document.querySelector('.cart-drawer__discount-item');
                   if (!existingDiscount) {
-                    console.log('Auto-applying bundle voucher:', voucherCode);
                     autoApplyBundleVoucher(voucherCode);
-                  } else {
-                    console.log('Voucher already applied, skipping...');
                   }
                 }
 
@@ -2630,8 +2619,6 @@
         }
 
         function autoApplyBundleVoucher(voucherCode) {
-          console.log('=== AUTO APPLY BUNDLE VOUCHER ===');
-          console.log('Voucher code:', voucherCode);
           
           fetch('/cart/update.js', {
             method: 'POST',
@@ -2643,11 +2630,8 @@
           })
           .then(response => response.json())
           .then(data => {
-            console.log('Bundle voucher application response:', data);
-            if (data.status) {
-              console.log('❌ Bundle voucher application failed:', data.description);
-            } else {
-              console.log('✅ Bundle voucher applied successfully');
+          .then(data => {
+            if (!data.status) {
               
               // Show success notification
               showBundleVoucherNotification(voucherCode, data);
@@ -2713,17 +2697,14 @@
 
         // Ensure bundle voucher persists through checkout
         function ensureBundleVoucherPersistence() {
-          console.log('=== ENSURE BUNDLE VOUCHER PERSISTENCE ===');
           
           // Get current discount code from cart
           const discountInput = document.querySelector('.cart-drawer__discount-input');
           if (discountInput && discountInput.value) {
             const currentDiscount = discountInput.value;
-            console.log('Current discount in cart:', currentDiscount);
             
             // Store in sessionStorage for checkout persistence
             sessionStorage.setItem('bundle_voucher_code', currentDiscount);
-            console.log('Stored voucher in sessionStorage:', currentDiscount);
           }
         }
 
@@ -2869,14 +2850,6 @@
 
         // Function to handle checkout with voucher
         function handleCheckout() {
-          console.log('🚀 === HANDLE CHECKOUT CALLED ===');
-          console.log('🔍 Checking sessionStorage for discount code...');
-          
-          const sessionCode = sessionStorage.getItem('applied_discount_code');
-          const localCode = localStorage.getItem('applied_discount_code');
-          
-          console.log('📦 sessionStorage discount:', sessionCode);
-          console.log('📦 localStorage discount:', localCode);
           
           // Get current cart state
           fetch('/cart.js')
@@ -2901,21 +2874,12 @@
               const storedDiscountCode = sessionStorage.getItem('applied_discount_code') || 
                                         localStorage.getItem('applied_discount_code');
               
-              console.log('🛒 Cart state:', {
-                hasCartLevelDiscount,
-                hasProductDiscount,
-                hasDiscount,
-                bundleVoucher,
-                storedDiscountCode,
-                total_discount: cartData.total_discount,
-                discountApplications: cartData.cart_level_discount_applications
-              });
-              
               // CRITICAL: Per Shopify 2026 documentation (Summer '25 update)
               // Discounts applied via /cart/update.js SHOULD persist to checkout
               // We must RE-APPLY the discount before redirecting to ensure persistence
               if (storedDiscountCode) {
-                console.log('🔄 Re-applying discount via /cart/update.js before checkout:', storedDiscountCode);
+              if (storedDiscountCode) {
+                // Re-apply discount via /cart/update.js before checkout
                 
                 // Re-apply discount to ensure it's in the cart session
                 fetch('/cart/update.js', {
@@ -2930,8 +2894,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                  console.log('✅ Discount re-applied, response:', data);
-                  console.log('🚀 Redirecting to /checkout (discount should persist automatically)');
+                  // Per Shopify docs: discount applied via cart/update.js persists to checkout
                   
                   // Per Shopify docs: discount applied via cart/update.js persists to checkout
                   // Just redirect to /checkout, NOT /discount/CODE
@@ -2944,7 +2907,8 @@
                 });
               } else if (bundleVoucher) {
                 // Apply bundle voucher first, then verify and go to checkout
-                console.log('Applying bundle voucher before checkout:', bundleVoucher);
+              } else if (bundleVoucher) {
+                // Apply bundle voucher first, then verify and go to checkout
                 fetch('/cart/update.js', {
                   method: 'POST',
                   headers: {
@@ -2961,7 +2925,7 @@
                 })
                 .then(verified => {
                   if (verified) {
-                    console.log('Voucher verified, going to checkout');
+                  if (verified) {
                     window.location.href = '/checkout';
                   } else {
                     console.warn('Voucher not verified, but proceeding to checkout');
@@ -2976,7 +2940,8 @@
                 });
               } else {
                 // No discount and no bundle voucher, go to checkout normally
-                console.log('No discount or bundle voucher, going to checkout');
+              } else {
+                // No discount and no bundle voucher, go to checkout normally
                 window.location.href = '/checkout';
               }
             })
@@ -3005,12 +2970,8 @@
                 }
               }
               
-              console.log('=== CHECK STORED BUNDLE VOUCHER ===');
-              console.log('Has discount:', hasDiscount);
-              console.log('Stored voucher:', storedVoucher);
               
               if (!hasDiscount && storedVoucher) {
-                console.log('Auto-applying stored voucher:', storedVoucher);
                 // Apply voucher silently
                 fetch('/cart/update.js', {
                   method: 'POST',
@@ -3102,10 +3063,6 @@
         }
 
         function createDiscountField(cart, discountCode) {
-          console.log('Creating discount field, cart data:', cart);
-          console.log('cart_level_discount_applications:', cart.cart_level_discount_applications);
-          console.log('total_discount:', cart.total_discount);
-          console.log('discountCode:', discountCode);
           
           // Remove any existing discount fields (both from Liquid and JS) to avoid duplicates
           // We'll recreate them from the current cart data
@@ -3126,11 +3083,7 @@
           // Handle cart-level discounts (order discounts, shipping discounts)
           if (cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
             cart.cart_level_discount_applications.forEach((cartDiscount, index) => {
-              console.log(`=== DISCOUNT ${index} RAW DATA FROM SHOPIFY API ===`);
-              console.log('Full discount object:', cartDiscount);
-              console.log('total_allocated_amount:', cartDiscount.total_allocated_amount);
-              console.log('amount:', cartDiscount.amount);
-              console.log('title:', cartDiscount.title);
+            cart.cart_level_discount_applications.forEach((cartDiscount, index) => {
               
               const discountItem = document.createElement('div');
               discountItem.className = 'cart-drawer__summary-item cart-drawer__discount-item';
@@ -3151,10 +3104,6 @@
                 discountTitle = cartDiscount.discount_application.title;
               }
               
-              console.log(`=== PROCESSED DISCOUNT ===`);
-              console.log(`Raw amount from API: ${discountAmount}`);
-              console.log(`After formatDiscountAmount: ${formatDiscountAmount(discountAmount)}`);
-              console.log(`Title: ${discountTitle}`);
               
               discountItem.innerHTML = `
                 <span class="cart-drawer__discount-title">Giảm giá</span>
@@ -3181,9 +3130,6 @@
           } 
           // Handle product discounts (don't appear in cart_level_discount_applications but reflected in total_discount)
           else if (cart.total_discount > 0 && discountCode) {
-            console.log('=== PRODUCT DISCOUNT DETECTED ===');
-            console.log('total_discount:', cart.total_discount);
-            console.log('discountCode:', discountCode);
             
             const discountItem = document.createElement('div');
             discountItem.className = 'cart-drawer__summary-item cart-drawer__discount-item';
@@ -4250,7 +4196,6 @@
               const discountToApply = storedDiscountCode || bundleVoucher;
               
               if (discountToApply) {
-                console.log('🔄 Applying discount before checkout:', discountToApply);
                 fetch('/cart/update.js', {
                   method: 'POST',
                   headers: {
@@ -4261,7 +4206,6 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                  console.log('✅ Discount applied, redirecting to checkout:', data);
                   window.location.href = '/checkout?discount=' + discountToApply;
                 })
                 .catch(error => {
@@ -4270,7 +4214,8 @@
                 });
               } else {
                 // No discount to apply, just go to checkout
-                console.log('ℹ️ No discount to apply, going to checkout');
+              } else {
+                // No discount to apply, just go to checkout
                 window.location.href = '/checkout';
               }
             })
@@ -4286,7 +4231,6 @@
           if (event.target.closest('button[name="checkout"]') || 
               event.target.closest('.btn--online')) {
             
-            console.log('🎯 Checkout button clicked, preventing default');
             event.preventDefault();
             event.stopPropagation();
             
@@ -4420,8 +4364,7 @@
                 }
                 
                 // Apply discount
-                console.log('🔵 [VOUCHER DEBUG] Starting voucher application...');
-                console.log('🔵 [VOUCHER DEBUG] Discount code:', discountCode);
+                // Apply discount
                 
                 fetch('/cart/update.js', {
                   method: 'POST',
@@ -4430,34 +4373,14 @@
                 })
                 .then(res => res.json())
                 .then(cart => {
-                  console.log('🟢 [VOUCHER DEBUG] Cart update response:', cart);
-                  console.log('🟢 [VOUCHER DEBUG] cart.status:', cart.status);
-                  console.log('🟢 [VOUCHER DEBUG] cart.description:', cart.description);
-                  
                   // CRITICAL: Fetch fresh cart data to verify discount application
                   // The /cart/update.js response may not include updated discount_applications
-                  console.log('🔵 [VOUCHER DEBUG] Fetching fresh cart data...');
                   return fetch('/cart.js')
                     .then(response => response.json())
                     .then(freshCart => {
-                      console.log('🟢 [VOUCHER DEBUG] Fresh cart data received');
-                      console.log('🟢 [VOUCHER DEBUG] cart_level_discount_applications:', freshCart.cart_level_discount_applications);
-                      console.log('🟢 [VOUCHER DEBUG] Number of cart-level discounts:', freshCart.cart_level_discount_applications?.length || 0);
-                      console.log('🟢 [VOUCHER DEBUG] total_discount:', freshCart.total_discount);
-                      console.log('🟢 [VOUCHER DEBUG] original_total_price:', freshCart.original_total_price);
-                      console.log('🟢 [VOUCHER DEBUG] total_price:', freshCart.total_price);
                       
-                      // Log each discount application
                       if (freshCart.cart_level_discount_applications && freshCart.cart_level_discount_applications.length > 0) {
-                        freshCart.cart_level_discount_applications.forEach((d, index) => {
-                          console.log(`🟢 [VOUCHER DEBUG] Discount ${index}:`, {
-                            title: d.title,
-                            code: d.code,
-                            target_type: d.target_type,
-                            value_type: d.value_type,
-                            total_allocated_amount: d.total_allocated_amount
-                          });
-                        });
+                        // Discount application logic handled below
                       }
                       
                       // CRITICAL FIX: Product discounts don't appear in cart_level_discount_applications
@@ -4472,13 +4395,13 @@
                       const hasProductDiscount = freshCart.total_discount > 0;
                       const discountApplied = hasCartLevelDiscount || hasProductDiscount;
                       
-                      console.log('🟢 [VOUCHER DEBUG] Has cart-level discount?', hasCartLevelDiscount);
-                      console.log('🟢 [VOUCHER DEBUG] Has product discount (total_discount > 0)?', hasProductDiscount);
-                      console.log('🟢 [VOUCHER DEBUG] Discount applied?', discountApplied);
+                      const hasProductDiscount = freshCart.total_discount > 0;
+                      const discountApplied = hasCartLevelDiscount || hasProductDiscount;
                       
                       if (discountApplied) {
                         // SUCCESS: Discount was applied
-                        console.log('✅ [VOUCHER DEBUG] SUCCESS - Discount was applied!');
+                      if (discountApplied) {
+                        // SUCCESS: Discount was applied
                         showVoucherMessage('Voucher đã được áp dụng thành công!', 'success');
                         input.value = '';
                         
@@ -4506,17 +4429,9 @@
                         setTimeout(() => closeVoucherPopup(), 1500);
                       } else {
                         // FAILURE: Discount code was not applied
-                        console.log('❌ [VOUCHER DEBUG] FAILURE - Discount was NOT applied');
-                        console.log('❌ [VOUCHER DEBUG] Possible reasons:');
-                        console.log('   1. Code doesn\'t exist');
-                        console.log('   2. Code is expired');
-                        console.log('   3. Cart doesn\'t meet minimum requirements');
-                        console.log('   4. Products in cart don\'t qualify');
-                        console.log('   5. Customer doesn\'t qualify (usage limit)');
                         
                         // Check client-side expiry first
                         const isExpired = isVoucherExpired(discountCode);
-                        console.log('❌ [VOUCHER DEBUG] Client-side expiry check:', isExpired);
                         
                         if (isExpired) {
                           showVoucherMessage('Voucher đã hết hạn.', 'error');
@@ -4717,54 +4632,12 @@
                   return res.json();
                 })
                 .then(cart => {
-                  console.log('=== VOUCHER APPLIED - CART RESPONSE ===');
-                  console.log('Full cart object:', cart);
-                  console.log('cart_level_discount_applications:', cart.cart_level_discount_applications);
-                  if (cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
-                    cart.cart_level_discount_applications.forEach((disc, idx) => {
-                      console.log(`Discount ${idx}:`, {
-                        total_allocated_amount: disc.total_allocated_amount,
-                        amount: disc.amount,
-                        title: disc.title,
-                        full_object: disc
-                      });
-                    });
-                  }
-                  
-                  // Check if there's an error in the update response first
-                  if (cart.status && cart.status !== 200) {
-                    const errorMessage = cart.description || 'Mã giảm giá không hợp lệ.';
-                    const errorLower = errorMessage.toLowerCase();
-                    
-                    if (errorLower.includes('already') || errorLower.includes('đã') || errorLower.includes('applied')) {
-                      showVoucherMessage('Voucher đã được áp dụng.', 'error');
-                    } else if (errorLower.includes('minimum') || errorLower.includes('tối thiểu') || 
-                               errorLower.includes('condition') || errorLower.includes('điều kiện') ||
-                               errorLower.includes('not eligible') || errorLower.includes('không đủ')) {
-                      showVoucherMessage('Chưa thỏa điều kiện của voucher.', 'error');
-                    } else if (errorLower.includes('expired') || errorLower.includes('hết hạn')) {
-                      showVoucherMessage('Voucher đã hết hạn.', 'error');
-                    } else {
-                      if (isVoucherExpired(voucherCode)) {
-                        showVoucherMessage('Voucher đã hết hạn.', 'error');
-                      } else {
-                        showVoucherMessage('Chưa thỏa điều kiện của voucher.', 'error');
-                      }
-                    }
-                    discountInput.value = '';
-                    applyBtn.textContent = originalButtonText;
-                    applyBtn.disabled = false;
-                    voucherCard.classList.remove('selected');
-                    return;
-                  }
-
                   // CRITICAL: Fetch fresh cart data to verify discount application
                   // The /cart/update.js response may not include updated discount_applications
                   console.log('🔵 [VOUCHER POPUP DEBUG] Fetching fresh cart data...');
                   return fetch('/cart.js')
                     .then(response => response.json())
                     .then(freshCart => {
-                      console.log('🟢 [VOUCHER POPUP DEBUG] Fresh cart data received');
                       
                       // RELAXED FIX: Accept ANY discount application as success
                       const hasCartLevelDiscount = freshCart.cart_level_discount_applications && 
@@ -4772,8 +4645,6 @@
                       
                       const hasProductDiscount = freshCart.total_discount > 0;
                       const discountApplied = hasCartLevelDiscount || hasProductDiscount;
-                      
-                      console.log('🟢 [VOUCHER POPUP DEBUG] Discount applied?', discountApplied);
                       
                       if (discountApplied) {
                         // SUCCESS: Discount was applied
