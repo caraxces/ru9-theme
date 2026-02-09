@@ -25,7 +25,7 @@
 {%- endif -%}
 
 <footer class="site-footer" data-section-id="{{ section.id }}" data-section-type="footer-section">
-  <div class="page-width">
+  <div class="page-width" style="max-width: 1360px; margin: 0 auto;">
 
     <div class="grid">
       {%- assign row_width = 0 -%}
@@ -47,7 +47,7 @@
                 clear: left;
               }
             }
-            @media only screen and (min-width: 95rem) {
+            @media only screen and (min-width: 1024px) {
               .footer__item--{{ block.id }} {
                 width: {{ block.settings.container_width }}%;
               }
@@ -107,6 +107,33 @@
     <p class="footer__small-text">{{ powered_by_link }}</p>
 
   </div>
+  </div>
+  <style>
+    /* Scoped styles for 1360px footer scaling */
+    .site-footer .page-width {
+      /* Ensure container is constrained */
+      max-width: 1360px !important;
+    }
+    .site-footer, .site-footer p, .site-footer a, .site-footer li, .site-footer .footer__small-text {
+      /* Scale down body text from ~16px to ~14px */
+      font-size: 14px !important;
+      line-height: 1.5;
+    }
+    .site-footer .h4, .site-footer h4, .site-footer .footer__title {
+      /* Scale down headings */
+      font-size: 16px !important; 
+    }
+    .site-footer .footer__logo img {
+       /* Scale down logo slightly if needed, though usually controlled by settings. 
+          Assuming it needs ~85% scale */
+       transform: scale(0.9);
+       transform-origin: left center;
+    }
+     .site-footer .payment-icons .icon--payment {
+       /* Scale payment icons */
+       transform: scale(0.9);
+    }
+  </style>
 </footer>
 
 {% schema %}

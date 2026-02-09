@@ -51,7 +51,7 @@
 
 <style>
   /* START: Custom tablet breakpoint for header - Extended to cover 1300-1500px range */
-  @media screen and (min-width: 959px) and (max-width: 1519.99px) {
+  @media screen and (min-width: 959px) and (max-width: 1199.99px) {
     [data-section-id="{{ section.id }}"] .large-up--hide {
       display: block !important;
     }
@@ -62,13 +62,23 @@
   }
   /* END: Custom tablet breakpoint for header */
 
+  /* Force desktop layout visibility from 1200px upwards */
+  @media screen and (min-width: 1200px) {
+    [data-section-id="{{ section.id }}"] .site-header .large-up--hide {
+      display: none !important;
+    }
+    [data-section-id="{{ section.id }}"] .site-header .medium-down--hide {
+      display: block !important;
+    }
+  }
+
   .site-nav__link,
   .site-nav__dropdown-link:not(.site-nav__dropdown-link--top-level) {
     font-family: "Be Vietnam Pro", sans-serif;
     color: #000;
-    font-size: 18px;
+    font-size: 15px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.5;
   }
   {% if settings.type_navigation_capitalize %}
@@ -154,7 +164,7 @@
     background-color: #f5f5f5 !important;
   }
 
-  @media screen and (max-width: 1519.99px) {
+  @media screen and (max-width: 1199.99px) {
     .toolbar__content {
       justify-content: center !important;
     }
@@ -182,11 +192,12 @@
     }
   }
 
-  @media screen and (min-width: 1520px) {
+  @media screen and (min-width: 1200px) {
     [data-section-id="{{ section.id }}"] .page-width {
-        max-width: 100%;
-        padding-left: 5rem;
-        padding-right: 5rem;
+        max-width: 1360px;
+        margin: 0 auto;
+        padding-left: 40px;
+        padding-right: 40px;
     }
 
     /* Header split nav logo alignment */
