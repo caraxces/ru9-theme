@@ -1,0 +1,80 @@
+/* Scaling for 1360px Collection Page Layout */
+
+/* Scoped to collection template */
+.template-collection .page-width {
+  max-width: 1360px !important;
+  margin: 0 auto;
+}
+
+/* Product Grid Item Scaling */
+.template-collection .grid-product__title {
+  font-size: 15px !important;
+  /* Scaled down from typical 18px */
+}
+
+.template-collection .grid-product__price {
+  font-size: 14px !important;
+}
+
+.template-collection .money-combo-result {
+  font-size: 14px !important;
+}
+
+/* Badges */
+.template-collection .grid-product__tag {
+  font-size: 11px !important;
+  padding: 4px 8px !important;
+}
+
+/* Grid Gaps */
+.template-collection .grid {
+  margin-left: -20px;
+  /* Reduced gutter */
+  width: auto;
+}
+
+.template-collection .grid__item {
+  padding-left: 20px;
+  /* Reduced gutter */
+}
+
+/* Force 4 columns on desktop (1200px+) */
+@media (min-width: 1200px) {
+  .template-collection .cc-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  .template-collection .cc-grid .cc-card {
+    width: auto !important;
+    /* Allow grid to control width */
+    max-width: none !important;
+  }
+
+  /* If sidebar is enabled, ensure 3 columns */
+  .template-collection .collection-content--custom.enable-sidebar .cc-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Ensure 1360px behaves like desktop */
+/* Ensure 1360px behaves like desktop with correct padding */
+@media (min-width: 1360px) {
+  .template-collection .page-width {
+    max-width: 1360px !important;
+    padding: 0 40px !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* Explicit fix for 1440px/1470px to ensure 4 columns (or 3 with sidebar) overrides any other theme CSS */
+@media (min-width: 1360px) {
+  .template-collection .cc-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  .template-collection .collection-content--custom.enable-sidebar .cc-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}

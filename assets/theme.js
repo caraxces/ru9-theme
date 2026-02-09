@@ -5343,13 +5343,23 @@ theme.recentlyViewed = {
       }
 
       requestAnimationFrame(scrollHandler);
-
-      config.lastScroll = window.scrollY;
     }
 
     function scrollHandler() {
-      if (window.scrollY > 250) {
+      var scrollTop = window.scrollY;
+
+      if (scrollTop > 250) {
         if (config.stickyActive) {
+          // Check scroll direction
+          if (scrollTop < config.lastScroll) {
+            // Scrolling Up - Show Header
+            siteHeader.classList.add(config.openTransitionClass);
+          } else {
+            // Scrolling Down - Hide Header
+            siteHeader.classList.remove(config.openTransitionClass);
+          }
+
+          config.lastScroll = scrollTop;
           return;
         }
 
@@ -5360,11 +5370,8 @@ theme.recentlyViewed = {
           wrapper.classList.remove(config.overlayedClass);
         }
 
-        // Add open transition class after element is set to fixed
-        // so CSS animation is applied correctly
-        setTimeout(function () {
-          siteHeader.classList.add(config.openTransitionClass);
-        }, 100);
+        // Initially hidden when becoming sticky. 
+        // Will only show when the user starts scrolling up (handled by the next frame).
       } else {
         if (!config.stickyActive) {
           return;
@@ -5378,6 +5385,8 @@ theme.recentlyViewed = {
           wrapper.classList.add(config.overlayedClass);
         }
       }
+
+      config.lastScroll = scrollTop;
     }
 
     function searchDrawer() {

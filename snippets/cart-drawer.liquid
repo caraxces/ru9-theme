@@ -3861,7 +3861,10 @@
                 // Reset quantity to 1 after successful add
                 quantityInput.value = '1';
               }
-              rebuildCart();
+              // Add delay to ensure server state is updated before rebuilding cart
+              setTimeout(() => {
+                rebuildCart();
+              }, 500);
             })
             .catch(e => console.error(e))
             .finally(() => {
@@ -4259,11 +4262,11 @@
                 .then(response => response.json())
                 .then(data => {
                   console.log('✅ Discount applied, redirecting to checkout:', data);
-                  window.location.href = '/checkout';
+                  window.location.href = '/checkout?discount=' + discountToApply;
                 })
                 .catch(error => {
                   console.error('❌ Error applying discount:', error);
-                  window.location.href = '/checkout';
+                  window.location.href = '/checkout?discount=' + discountToApply;
                 });
               } else {
                 // No discount to apply, just go to checkout
@@ -4273,6 +4276,8 @@
             })
             .catch(error => {
               console.error('Error in backup voucher check:', error);
+              // Fallback if check fails
+              window.location.href = '/checkout';
             });
         }
 
@@ -4458,20 +4463,11 @@
                       // CRITICAL FIX: Product discounts don't appear in cart_level_discount_applications
                       // but they ARE reflected in total_discount!
                       // Check if discount was actually applied by looking at total_discount OR cart_level_discount_applications
+                      // RELAXED FIX: Accept ANY discount application as success
+                      // This avoids issues where the discount title (e.g. "Summer Sale") 
+                      // doesn't strictly match the code (e.g. "SUMMER20")
                       const hasCartLevelDiscount = freshCart.cart_level_discount_applications && 
-                                                   freshCart.cart_level_discount_applications.length > 0 &&
-                                                   freshCart.cart_level_discount_applications.some(d => {
-                                                     const titleMatch = d.title?.toLowerCase().includes(discountCode.toLowerCase());
-                                                     const codeMatch = d.code?.toLowerCase() === discountCode.toLowerCase();
-                                                     console.log(`🟢 [VOUCHER DEBUG] Checking cart-level discount:`, {
-                                                       title: d.title,
-                                                       code: d.code,
-                                                       titleMatch,
-                                                       codeMatch,
-                                                       anyMatch: titleMatch || codeMatch
-                                                     });
-                                                     return titleMatch || codeMatch;
-                                                   });
+                                                   freshCart.cart_level_discount_applications.length > 0;
                       
                       const hasProductDiscount = freshCart.total_discount > 0;
                       const discountApplied = hasCartLevelDiscount || hasProductDiscount;
@@ -4735,12 +4731,11 @@
                     });
                   }
                   
-                  // Check if there's an error
+                  // Check if there's an error in the update response first
                   if (cart.status && cart.status !== 200) {
                     const errorMessage = cart.description || 'Mã giảm giá không hợp lệ.';
-                    
-                    // Check error message to determine type
                     const errorLower = errorMessage.toLowerCase();
+                    
                     if (errorLower.includes('already') || errorLower.includes('đã') || errorLower.includes('applied')) {
                       showVoucherMessage('Voucher đã được áp dụng.', 'error');
                     } else if (errorLower.includes('minimum') || errorLower.includes('tối thiểu') || 
@@ -4750,7 +4745,6 @@
                     } else if (errorLower.includes('expired') || errorLower.includes('hết hạn')) {
                       showVoucherMessage('Voucher đã hết hạn.', 'error');
                     } else {
-                      // For other cases, check if voucher is in list but expired
                       if (isVoucherExpired(voucherCode)) {
                         showVoucherMessage('Voucher đã hết hạn.', 'error');
                       } else {
@@ -4763,32 +4757,36 @@
                     voucherCard.classList.remove('selected');
                     return;
                   }
-                  
-                  // Check for discount applications
-                  if (cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
-                    // Success - show success message
-                    showVoucherMessage('Voucher đã được áp dụng thành công!', 'success');
-                    discountInput.value = '';
-                    
-                    // Reset button state
-                    applyBtn.textContent = originalButtonText;
-                    applyBtn.disabled = false;
-                    
-                    // Store discount code for checkout persistence
-                    sessionStorage.setItem('applied_discount_code', voucherCode);
-                    localStorage.setItem('applied_discount_code', voucherCode);
-                    
-                    // Fetch fresh cart data to get updated prices with discount
-                    fetch('/cart.js')
-                      .then(response => response.json())
-                      .then(freshCart => {
-                        // Create discount field with fresh cart data
+
+                  // CRITICAL: Fetch fresh cart data to verify discount application
+                  // The /cart/update.js response may not include updated discount_applications
+                  console.log('🔵 [VOUCHER POPUP DEBUG] Fetching fresh cart data...');
+                  return fetch('/cart.js')
+                    .then(response => response.json())
+                    .then(freshCart => {
+                      console.log('🟢 [VOUCHER POPUP DEBUG] Fresh cart data received');
+                      
+                      // RELAXED FIX: Accept ANY discount application as success
+                      const hasCartLevelDiscount = freshCart.cart_level_discount_applications && 
+                                                   freshCart.cart_level_discount_applications.length > 0;
+                      
+                      const hasProductDiscount = freshCart.total_discount > 0;
+                      const discountApplied = hasCartLevelDiscount || hasProductDiscount;
+                      
+                      console.log('🟢 [VOUCHER POPUP DEBUG] Discount applied?', discountApplied);
+                      
+                      if (discountApplied) {
+                        // SUCCESS: Discount was applied
+                        showVoucherMessage('Voucher đã được áp dụng thành công!', 'success');
+                        discountInput.value = '';
+                        
+                        // Store for checkout persistence
+                        sessionStorage.setItem('applied_discount_code', voucherCode);
+                        localStorage.setItem('applied_discount_code', voucherCode);
+                        
+                        // Update UI with fresh data
                         createDiscountField(freshCart, voucherCode);
-                        
-                        // Update cart prices with fresh data (includes discount)
                         updateCartPrices(freshCart);
-                        
-                        // Rebuild cart to sync everything
                         rebuildCart();
                         
                         // Update prices again after rebuild to ensure they're correct
@@ -4801,32 +4799,25 @@
                             })
                             .catch(error => console.error('Error fetching cart after rebuild:', error));
                         }, 800);
-                      })
-                      .catch(error => {
-                        console.error('Error fetching fresh cart:', error);
-                        // Fallback: use current cart data
-                        createDiscountField(cart, voucherCode);
-                        updateCartPrices(cart);
-                        rebuildCart();
-                      });
-                    
-                    // Close popup after showing success message
-                    setTimeout(() => {
-                      closeVoucherPopup();
-                    }, 1500);
-                  } else {
-                    // No discount applied - check if expired
-                    if (isVoucherExpired(voucherCode)) {
-                      showVoucherMessage('Voucher đã hết hạn.', 'error');
-                    } else {
-                      showVoucherMessage('Chưa thỏa điều kiện của voucher.', 'error');
-                    }
-                    discountInput.value = '';
-                    applyBtn.textContent = originalButtonText;
-                    applyBtn.disabled = false;
-                    voucherCard.classList.remove('selected');
-                  }
-                })
+                        
+                        // Close popup after success
+                        setTimeout(() => closeVoucherPopup(), 1500);
+                      } else {
+                        // FAILURE: Discount code was not applied
+                        console.log('❌ [VOUCHER POPUP DEBUG] FAILURE - Discount was NOT applied');
+                        
+                        if (isVoucherExpired(voucherCode)) {
+                          showVoucherMessage('Voucher đã hết hạn.', 'error');
+                        } else {
+                          showVoucherMessage('Chưa thỏa điều kiện của voucher.', 'error');
+                        }
+                        discountInput.value = '';
+                      }
+                      
+                      applyBtn.textContent = originalButtonText;
+                      applyBtn.disabled = false;
+                      if (!discountApplied) voucherCard.classList.remove('selected');
+                    })
                 .catch(e => {
                   console.error('Error applying voucher:', e);
                   showVoucherMessage('Có lỗi xảy ra khi áp dụng voucher: ' + (e.message || 'Vui lòng thử lại.'), 'error');
@@ -4836,6 +4827,7 @@
                   voucherCard.classList.remove('selected');
                 });
               })
+            })
               .catch(error => {
                 console.error('Error checking voucher status:', error);
                 applyBtn.textContent = originalButtonText;

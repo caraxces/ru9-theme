@@ -76,6 +76,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
 
       {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+      {{ 'custom-collection.css' | asset_url | stylesheet_tag }}
       {%- comment -%} Defer non-critical CSS to prevent render blocking - Load asynchronously using media="print" trick {%- endcomment -%}
 
       <link rel="stylesheet" href="{{ 'mobile-product-layout.css' | asset_url }}" media="print" onload="this.media='all'">

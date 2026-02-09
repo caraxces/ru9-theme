@@ -199,16 +199,16 @@
 {% endcomment %}
 
 /* Large screens - maintain fixed padding */
-@media (min-width: 1400px) {
+@media (min-width: 1200px) {
   .collection-content--custom .page-width {
     margin: 0 auto;
   }
 }
 
 /* Medium screens - responsive padding */
-@media (max-width: 1399px) and (min-width: 1024px) {
+@media (max-width: 1199px) and (min-width: 1024px) {
   .collection-content--custom .page-width {
-    padding: 0 5rem 50px;
+    padding: 0 40px 50px;
     margin: 0 auto;
   }
 }
@@ -520,14 +520,14 @@
 }
 
 /* Responsive adjustments for no sidebar layout */
-@media (max-width: 1400px) {
+@media (max-width: 1199px) {
   .cc-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 18px;
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 991px) {
   .cc-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;

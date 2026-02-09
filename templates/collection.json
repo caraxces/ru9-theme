@@ -61,7 +61,7 @@
       "type": "collection-header",
       "settings": {
         "section_width": "customize_width",
-        "customize_width": 1280,
+        "customize_width": 1360,
         "max_width_desc": 2000,
         "align_text": "left",
         "enable": true,
@@ -78,7 +78,7 @@
       "name": "Coll custom",
       "settings": {
         "section_width": "page-width",
-        "customize_width": 1800,
+        "customize_width": 1360,
         "enable_sidebar": true,
         "collapsed": false,
         "filter_style": "sidebar",
@@ -96,7 +96,7 @@
       "disabled": true,
       "settings": {
         "section_width": "customize_width",
-        "customize_width": 1280,
+        "customize_width": 1360,
         "enable_sidebar": true,
         "collapsed": false,
         "filter_style": "sidebar",
@@ -240,7 +240,7 @@
       "type": "collection-content",
       "settings": {
         "section_width": "customize_width",
-        "customize_width": 1280,
+        "customize_width": 1360,
         "max_width_desc": 2000,
         "align_text": "left",
         "show_collection_description": true,
