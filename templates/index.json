@@ -30,6 +30,24 @@
             "overlay_opacity": 0
           }
         },
+        "image_y8pK9p": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "#000000",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/ws.jpg",
+            "image_mobile": "shopify://shop_images/mb.jpg",
+            "overlay_opacity": 0
+          }
+        },
         "image_N6Y66j": {
           "type": "image",
           "settings": {
@@ -83,32 +101,14 @@
             "image_mobile": "shopify://shop_images/Banner_Di_n_Tho_i-08_c7644850-b45c-4f03-a971-b82f125f106e.png",
             "overlay_opacity": 0
           }
-        },
-        "image_y8pK9p": {
-          "type": "image",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 80,
-            "subheading": "",
-            "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "color_accent": "#000000",
-            "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/PC_8eded121-7de0-483c-b866-22f7b3fb57bb.png",
-            "image_mobile": "shopify://shop_images/Mobile_b465ac82-01a3-4a3f-a825-81417609b3a2.png",
-            "overlay_opacity": 0
-          }
         }
       },
       "block_order": [
         "image_JR4ARU",
+        "image_y8pK9p",
         "image_N6Y66j",
         "image_igEmmB",
-        "slideshow-0",
-        "image_y8pK9p"
+        "slideshow-0"
       ],
       "settings": {
         "section_height": "natural",
