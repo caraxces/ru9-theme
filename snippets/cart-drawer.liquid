@@ -2378,8 +2378,8 @@
                       {% endif %}
                       
                       <!-- Third row: Form row (quantity + add button) -->
-                      <form method="post" action="{{ routes.cart_add_url }}" class="cross-sell-item__form">
-                        <input type="hidden" name="id" value="{{ current_variant.id }}">
+                      <div class="cross-sell-item__form">
+                        <input type="hidden" name="id" value="{{ current_variant.id }}" class="cross-sell-item__id">
                         <div class="cross-sell-item__form-row">
                           <div class="cross-sell-item__quantity">
                             <label for="cross-sell-quantity-{{ product.id }}" class="cross-sell-item__quantity-label">Số lượng:</label>
@@ -2391,7 +2391,7 @@
                           </div>
                           <button type="button" class="cross-sell-item__add-btn">Thêm</button>
                         </div>
-                      </form>
+                      </div>
                     </div>
                   {%- endfor -%}
               </div>
@@ -2629,7 +2629,6 @@
             body: JSON.stringify({ 'discount': voucherCode })
           })
           .then(response => response.json())
-          .then(data => {
           .then(data => {
             if (!data.status) {
               
@@ -2878,7 +2877,6 @@
               // Discounts applied via /cart/update.js SHOULD persist to checkout
               // We must RE-APPLY the discount before redirecting to ensure persistence
               if (storedDiscountCode) {
-              if (storedDiscountCode) {
                 // Re-apply discount via /cart/update.js before checkout
                 
                 // Re-apply discount to ensure it's in the cart session
@@ -2895,8 +2893,6 @@
                 .then(response => response.json())
                 .then(data => {
                   // Per Shopify docs: discount applied via cart/update.js persists to checkout
-                  
-                  // Per Shopify docs: discount applied via cart/update.js persists to checkout
                   // Just redirect to /checkout, NOT /discount/CODE
                   window.location.href = '/checkout';
                 })
@@ -2905,8 +2901,6 @@
                   // Redirect anyway
                   window.location.href = '/checkout';
                 });
-              } else if (bundleVoucher) {
-                // Apply bundle voucher first, then verify and go to checkout
               } else if (bundleVoucher) {
                 // Apply bundle voucher first, then verify and go to checkout
                 fetch('/cart/update.js', {
@@ -2925,7 +2919,6 @@
                 })
                 .then(verified => {
                   if (verified) {
-                  if (verified) {
                     window.location.href = '/checkout';
                   } else {
                     console.warn('Voucher not verified, but proceeding to checkout');
@@ -2938,8 +2931,6 @@
                   // Go to checkout anyway
                   window.location.href = '/checkout';
                 });
-              } else {
-                // No discount and no bundle voucher, go to checkout normally
               } else {
                 // No discount and no bundle voucher, go to checkout normally
                 window.location.href = '/checkout';
@@ -3082,7 +3073,6 @@
           
           // Handle cart-level discounts (order discounts, shipping discounts)
           if (cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
-            cart.cart_level_discount_applications.forEach((cartDiscount, index) => {
             cart.cart_level_discount_applications.forEach((cartDiscount, index) => {
               
               const discountItem = document.createElement('div');
@@ -3774,48 +3764,59 @@
           const addButton = target.closest('.cross-sell-item__add-btn');
           if (addButton) {
             event.preventDefault();
-            const form = addButton.closest('form');
-            const submitButton = form.querySelector('.cross-sell-item__add-btn');
-            const quantityInput = form.querySelector('.cross-sell-qty__num');
+            const formContainer = addButton.closest('.cross-sell-item__form');
+            if (!formContainer) return;
             
-            if (!quantityInput || parseInt(quantityInput.value) < 1) {
-              alert('Vui lòng chọn số lượng sản phẩm.');
+            const variantIdInput = formContainer.querySelector('.cross-sell-item__id');
+            const quantityInput = formContainer.querySelector('.cross-sell-qty__num');
+            
+            if (!variantIdInput || !quantityInput) return;
+            
+            const variantId = variantIdInput.value;
+            const quantity = parseInt(quantityInput.value) || 1;
+            
+            if (!variantId || quantity < 1) {
+              alert('Vui lòng chọn sản phẩm và số lượng hợp lệ.');
               return;
             }
             
-            const originalButtonText = submitButton.textContent;
-            submitButton.textContent = 'Đang thêm...';
-            submitButton.disabled = true;
+            const originalButtonText = addButton.textContent;
+            addButton.textContent = 'Đang thêm...';
+            addButton.disabled = true;
 
-            // Update the hidden variant input with selected variant
-            const variantSelect = form.closest('.cart-drawer__cross-sell-item').querySelector('.cross-sell-item__variant-select');
-            if (variantSelect) {
-              const hiddenIdInput = form.querySelector('input[name="id"]');
-              hiddenIdInput.value = variantSelect.value;
-            }
-
+            // Updated logic to use JSON instead of FormData to avoid conflict with outer form
             fetch('{{ routes.cart_add_url }}.js', {
               method: 'POST',
-              body: new FormData(form),
-              headers: { 'X-Requested-With': 'XMLHttpRequest' }
+              headers: { 
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest' 
+              },
+              body: JSON.stringify({
+                id: variantId,
+                quantity: quantity
+              })
             })
             .then(res => res.json())
             .then(item => {
-              if (item.status) {
+              if (item.status && item.status !== 200) {
                 alert(item.description || 'Sản phẩm đã hết hàng.');
               } else {
                 // Reset quantity to 1 after successful add
                 quantityInput.value = '1';
+                console.log('Product added successfully:', item);
               }
               // Add delay to ensure server state is updated before rebuilding cart
               setTimeout(() => {
                 rebuildCart();
               }, 500);
             })
-            .catch(e => console.error(e))
+            .catch(e => {
+              console.error('Error adding product to cart:', e);
+              alert('Có lỗi xảy ra khi thêm vào giỏ hàng.');
+            })
             .finally(() => {
-              submitButton.textContent = originalButtonText;
-              submitButton.disabled = false;
+              addButton.textContent = originalButtonText;
+              addButton.disabled = false;
             });
             return;
           }
@@ -3961,10 +3962,12 @@
                 const select = event.target;
                 const crossSellItem = select.closest('.cart-drawer__cross-sell-item');
                 const form = crossSellItem.querySelector('.cross-sell-item__form');
-                const hiddenIdInput = form.querySelector('input[name="id"]');
+                const variantIdInput = form.querySelector('.cross-sell-item__id');
                 
                 // Update the hidden variant input
-                hiddenIdInput.value = select.value;
+                if (variantIdInput) {
+                    variantIdInput.value = select.value;
+                }
                 
                 // Update price display if needed
                 // This would require fetching variant data from Shopify
@@ -4214,8 +4217,6 @@
                 });
               } else {
                 // No discount to apply, just go to checkout
-              } else {
-                // No discount to apply, just go to checkout
                 window.location.href = '/checkout';
               }
             })
@@ -4395,11 +4396,6 @@
                       const hasProductDiscount = freshCart.total_discount > 0;
                       const discountApplied = hasCartLevelDiscount || hasProductDiscount;
                       
-                      const hasProductDiscount = freshCart.total_discount > 0;
-                      const discountApplied = hasCartLevelDiscount || hasProductDiscount;
-                      
-                      if (discountApplied) {
-                        // SUCCESS: Discount was applied
                       if (discountApplied) {
                         // SUCCESS: Discount was applied
                         showVoucherMessage('Voucher đã được áp dụng thành công!', 'success');
@@ -4689,15 +4685,15 @@
                       applyBtn.disabled = false;
                       if (!discountApplied) voucherCard.classList.remove('selected');
                     })
-                .catch(e => {
-                  console.error('Error applying voucher:', e);
-                  showVoucherMessage('Có lỗi xảy ra khi áp dụng voucher: ' + (e.message || 'Vui lòng thử lại.'), 'error');
-                  discountInput.value = '';
-                  applyBtn.textContent = originalButtonText;
-                  applyBtn.disabled = false;
-                  voucherCard.classList.remove('selected');
-                });
-              })
+                  .catch(e => {
+                    console.error('Error applying voucher:', e);
+                    showVoucherMessage('Có lỗi xảy ra khi áp dụng voucher: ' + (e.message || 'Vui lòng thử lại.'), 'error');
+                    discountInput.value = '';
+                    applyBtn.textContent = originalButtonText;
+                    applyBtn.disabled = false;
+                    voucherCard.classList.remove('selected');
+                  });
+                })
             })
               .catch(error => {
                 console.error('Error checking voucher status:', error);

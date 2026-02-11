@@ -278,6 +278,9 @@
         "product_result_pzk7Ji",
         "product_result_fk99qa"
       ],
+      "custom_css": [
+        ".quiz-banner-section .page-width {padding: 40px !important;}"
+      ],
       "name": "Quiz Banner (Advanced)",
       "settings": {
         "image": "shopify://shop_images/8e4af335cc994bdba04e80ac0547a287b4a0e223.png",
@@ -419,7 +422,7 @@
             "product_feel": "Êm sâu – nâng đỡ từng vùng đầu lưng chân – chuẩn y khoa",
             "customizable_firmness": "Medium - Êm ái\nFirm - Nâng đỡ hơn",
             "product_structure": "• 2cm Support layer\n• 3cm Comfort layer (Firm/• Medium)\n• 4cm Contour Foam 3-zone\n• 4cm Graphene Memory Foam tản nhiệt\n• 12cm Core Foam bền vững",
-            "product_cover": "Plush Knitted Fabric cao cấp, raafn bông dày hơn, lớp gòn kháng cháy",
+            "product_cover": "Plush Knitted Fabric cao cấp, chần bông dày hơn, lớp gòn kháng cháy",
             "product_advantages": "• Nâng đỡ 3 vùng hỗ trợ chuyên biệt, giải tỏa áp lực \n• Nâng cấp toàn diện, êm sâu, thoáng khí\n• Cá nhân hóa, hỗ trợ đau lưng",
             "support_pain_relief": "3 vùng nâng đỡ chính xác – giảm đau lưng vai hông mạnh",
             "suitable_for": "Phù hợp cho\n- Người gặp vấn đề về đau lưng, cổ vai gáy, hông, cần nâng đỡ chính xác ổn định. \n- Người mong muốn có trải nghiệm cá nhân hóa",
@@ -619,7 +622,9 @@
         "max_width_desc": 2000,
         "align_text": "left",
         "show_collection_description": true,
-        "dropdown_label": "Xem thêm thông tin"
+        "dropdown_label": "Xem thêm thông tin",
+        "text_char_limit": 200,
+        "expand_button_text": "Xem thêm"
       }
     },
     "reviews_carousel_YEhmcF": {
