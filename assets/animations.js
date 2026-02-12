@@ -22,6 +22,9 @@ function onIntersection(elements, observer) {
 }
 
 function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent = false) {
+    // Respect user's motion preferences
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const animationTriggerElements = Array.from(rootEl.getElementsByClassName(SCROLL_ANIMATION_TRIGGER_CLASSNAME));
     if (animationTriggerElements.length === 0) return;
 
@@ -34,6 +37,7 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
 
     const observer = new IntersectionObserver(onIntersection, {
         rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1 // Add threshold to reduce callback frequency
     });
     animationTriggerElements.forEach((element) => observer.observe(element));
 }

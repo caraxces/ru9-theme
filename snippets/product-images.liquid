@@ -777,273 +777,144 @@
   }
   customElements.define('overlay-image', OverlayImage);
 
-  // Show More Gallery Button Handler
-  function initShowMoreButton() {
-    console.log('Initializing show more button...');
+  // Consolidated initialization - Prevent duplicate loading
+  // Use boolean flags to ensure initialization happens only once
+  (function() {
+    let isShowMoreInitialized = false;
+    let isThumbnailZoomInitialized = false;
     
-    const showMoreBtns = document.querySelectorAll('.show-more-gallery-btn');
-    console.log('Found buttons:', showMoreBtns.length);
-    
-    showMoreBtns.forEach((btn, index) => {
-      console.log('Setting up button', index, btn);
+    // Show More Gallery Button Handler - Consolidated
+    function initShowMoreButton() {
+      if (isShowMoreInitialized) {
+        console.log('Show more already initialized, skipping...');
+        return;
+      }
       
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        console.log('Button clicked!', this);
-        
-        const scroller = this.previousElementSibling;
-        console.log('Scroller found:', scroller);
-        
-        if (scroller && scroller.classList.contains('product__thumbs--scroller')) {
-          // Remove the hiding class and force show all images
-          scroller.classList.add('show-all-image');
-          console.log('Expanded gallery - showing all images');
-          
-          // Remove any hiding styles from all thumb items
-          const allThumbItems = scroller.querySelectorAll('.product__thumb-item');
-          console.log('All thumb items found:', allThumbItems.length);
-          
-          allThumbItems.forEach((item, index) => {
-            // Remove any inline display:none styles
-            item.style.display = '';
-            // Remove any hiding classes
-            item.classList.remove('product__thumb-item--hide');
-            console.log('Cleared hiding styles for item', index + 1, item);
-          });
-          
-          // Re-initialize thumbnail zoom for newly visible items
-          setTimeout(() => {
-            console.log('Re-initializing zoom for expanded gallery');
-            initThumbnailZoom();
-          }, 200);
-          
-          // Hide the show more button
-          this.style.display = 'none';
-          console.log('Hidden show more button');
-        }
-      });
-    });
-  }
-  
-  // Initialize on DOM ready
-  document.addEventListener('DOMContentLoaded', initShowMoreButton);
-  
-  // Re-initialize on section load
-  document.addEventListener('shopify:section:load', function() {
-    setTimeout(initShowMoreButton, 100);
-  });
-</script>
-
-<script>
-document.addEventListener('shopify:section:load', function() {
-  initMobileThumbZoom('{{ section_id }}');
-  initThumbnailZoom(); // Re-initialize thumbnail zoom
-  
-  // Re-initialize show more button after section load
-  setTimeout(function() {
-    console.log('Re-initializing show more button after section load');
-  }, 100);
-});
-document.addEventListener('DOMContentLoaded', function() {
-  initMobileThumbZoom('{{ section_id }}');
-});
-
-// Simple show more button handler - placed at the end to ensure it runs
-setTimeout(function() {
-  console.log('=== INITIALIZING SHOW MORE BUTTON ===');
-  
-  const showMoreBtns = document.querySelectorAll('.show-more-gallery-btn');
-  console.log('Found show more buttons:', showMoreBtns.length);
-  
-  showMoreBtns.forEach((btn, index) => {
-    console.log('Setting up button', index);
-    
-    // Remove any existing event listeners
-    btn.onclick = null;
-    
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
+      const showMoreBtns = document.querySelectorAll('.show-more-gallery-btn:not([data-initialized])');
+      if (showMoreBtns.length === 0) return;
       
-      console.log('=== BUTTON CLICKED ===');
-      console.log('Button element:', this);
-      
-      const scroller = this.previousElementSibling;
-      console.log('Scroller element:', scroller);
-      
-      if (scroller) {
-        console.log('Scroller classes:', scroller.className);
+      showMoreBtns.forEach((btn) => {
+        // Mark as initialized
+        btn.setAttribute('data-initialized', 'true');
         
-        // Add show-all-image class to scroller to trigger CSS
-        const scrollerInner = scroller.querySelector('.product__thumbs--scroller');
-        if (scrollerInner) {
-          scrollerInner.classList.add('show-all-image');
-          console.log('Added show-all-image class to scroller');
-        }
-        
-        // Find all thumb items
-        const thumbItems = scroller.querySelectorAll('.product__thumb-item');
-        console.log('Total thumb items found:', thumbItems.length);
-        
-        // Show all thumb items
-        thumbItems.forEach((item, i) => {
-          console.log('Processing item', i + 1, item);
+        btn.addEventListener('click', function handleClick(e) {
+          e.preventDefault();
+          e.stopPropagation();
           
-          // Only process items from 6th onwards (index 5+)
-          if (i >= 5) {
-            console.log('Showing hidden item', i + 1);
-            console.log('Item before - display:', window.getComputedStyle(item).display);
-            console.log('Item before - visibility:', window.getComputedStyle(item).visibility);
-            console.log('Item before - opacity:', window.getComputedStyle(item).opacity);
+          const scroller = this.previousElementSibling;
+          
+          if (scroller) {
+            const scrollerInner = scroller.querySelector('.product__thumbs--scroller');
+            if (scrollerInner) {
+              scrollerInner.classList.add('show-all-image');
+            }
             
-            // Only remove display: none, keep all other properties unchanged
-            item.style.removeProperty('display');
-            item.style.removeProperty('visibility');
-            item.style.removeProperty('opacity');
+            const thumbItems = scroller.querySelectorAll('.product__thumb-item');
+            thumbItems.forEach((item, i) => {
+              if (i >= 5) {
+                item.style.removeProperty('display');
+                item.classList.remove('product__thumb-item--hide', 'hide', 'hidden');
+              }
+            });
             
-            // Remove any hiding classes
-            item.classList.remove('product__thumb-item--hide');
-            item.classList.remove('hide');
-            item.classList.remove('hidden');
+            // Hide button
+            this.style.display = 'none';
             
-            console.log('Item after - display:', window.getComputedStyle(item).display);
-            console.log('Item after - visibility:', window.getComputedStyle(item).visibility);
-            console.log('Item after - opacity:', window.getComputedStyle(item).opacity);
+            // Re-initialize zoom for newly visible items
+            setTimeout(() => initThumbnailZoom(), 200);
           }
-          // Items 1-5: Do nothing, keep original layout
-        });
-        
-        // Hide the button
-        this.style.display = 'none';
-        console.log('Button hidden');
-        
-        console.log('=== EXPANSION COMPLETE ===');
-      }
-    });
-    
-    console.log('Button', index, 'setup complete');
-  });
-  
-  console.log('=== SHOW MORE INITIALIZATION COMPLETE ===');
-}, 1000);
-
-// Thumbnail zoom functionality
-document.addEventListener('DOMContentLoaded', function() {
-  initThumbnailZoom();
-  
-  // Debug: Check for thumbnails
-  setTimeout(() => {
-    const allThumbItems = document.querySelectorAll('.product__thumb-item');
-    const allThumbLinks = document.querySelectorAll('.product__thumb-item a');
-    console.log('=== THUMBNAIL DEBUG ===');
-    console.log('Total thumbnail items found:', allThumbItems.length);
-    console.log('Total thumbnail links found:', allThumbLinks.length);
-    
-    allThumbItems.forEach((item, index) => {
-      const link = item.querySelector('a');
-      console.log(`Thumbnail Item ${index + 1}:`, {
-        itemClasses: item.className,
-        itemDataIndex: item.getAttribute('data-index'),
-        hasLink: !!link,
-        linkHref: link?.href,
-        linkClasses: link?.className,
-        hasDataZoom: link?.hasAttribute('data-zoom'),
-        dataZoom: link?.getAttribute('data-zoom'),
-        linkDataIndex: link?.getAttribute('data-index')
+        }, { once: true }); // Use once: true to prevent multiple bindings
       });
-    });
-    console.log('=== END THUMBNAIL DEBUG ===');
-  }, 1000);
-  
-  // Preload images for faster zoom (with delay to not block initial page load)
-  setTimeout(() => {
-    preloadThumbnailImages();
-  }, 2000);
-  
-  // Use event delegation for better reliability
-  document.addEventListener('click', function(e) {
-    console.log('Click detected on:', e.target);
-    console.log('Click target classes:', e.target.className);
-    console.log('Click target tag:', e.target.tagName);
-    
-    // Check if click is on thumbnail item or inside it
-    const thumbItem = e.target.closest('.product__thumb-item');
-    if (thumbItem) {
-      console.log('Thumbnail item clicked:', thumbItem);
       
-      // Look for link inside the thumbnail item
-      const thumbLink = thumbItem.querySelector('a[data-zoom="true"]') || thumbItem.querySelector('a');
-      
-      if (thumbLink) {
-        console.log('Thumb link found inside item:', thumbLink);
-        e.preventDefault();
-        e.stopPropagation();
-        
-        const imageUrl = thumbLink.href;
-        const imageAlt = thumbLink.querySelector('img')?.alt || '';
-        const imageIndex = thumbLink.dataset.index || thumbItem.dataset.index || '0';
-        
-        console.log('Thumbnail click processed:', { imageUrl, imageAlt, imageIndex });
-        createZoomModal(imageUrl, imageAlt, imageIndex);
-      } else {
-        console.log('No link found inside thumbnail item');
-      }
+      isShowMoreInitialized = true;
     }
-  });
-});
-
-function initThumbnailZoom() {
-  // Function to setup zoom for thumbnails
-  function setupThumbnailZoom() {
-    const thumbItems = document.querySelectorAll('.product__thumb-item a[data-zoom="true"]');
     
-    thumbItems.forEach((thumbLink, index) => {
-      // Remove existing event listeners to prevent duplicates
-      thumbLink.removeEventListener('click', handleThumbnailClick);
-      thumbLink.addEventListener('click', handleThumbnailClick);
-    });
-  }
-  
-  // Handle thumbnail click
-  function handleThumbnailClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    // Get the image data
-    const imageUrl = this.href;
-    const imageAlt = this.querySelector('img')?.alt || '';
-    const imageIndex = this.dataset.index;
-    
-    console.log('Thumbnail clicked:', { imageUrl, imageAlt, imageIndex });
-    
-    // Create zoom modal
-    createZoomModal(imageUrl, imageAlt, imageIndex);
-  }
-  
-  // Initial setup
-  setupThumbnailZoom();
-  
-  // Re-setup when show-all-image class is added
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-        const target = mutation.target;
-        if (target.classList.contains('show-all-image')) {
-          console.log('Show-all-image detected, re-setting up zoom');
-          setTimeout(setupThumbnailZoom, 100);
-        }
+    // Thumbnail zoom initialization - Consolidated
+    function initThumbnailZoom() {
+      if (isThumbnailZoomInitialized) {
+        console.log('Thumbnail zoom already initialized, skipping...');
+        return;
       }
+      
+      const thumbItems = document.querySelectorAll('.product__thumb-item a[data-zoom="true"]:not([data-zoom-initialized])');
+      
+      thumbItems.forEach((thumbLink) => {
+        // Mark as initialized
+        thumbLink.setAttribute('data-zoom-initialized', 'true');
+        
+        thumbLink.addEventListener('click', function handleZoomClick(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const imageUrl = this.href;
+          const imageAlt = this.querySelector('img')?.alt || '';
+          const imageIndex = this.dataset.index;
+          
+          createZoomModal(imageUrl, imageAlt, imageIndex);
+        });
+      });
+      
+      // Setup mutation observer for dynamically shown images
+      const scroller = document.querySelector('.product__thumbs--scroller');
+      if (scroller && !scroller.hasAttribute('data-observer-attached')) {
+        scroller.setAttribute('data-observer-attached', 'true');
+        const observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              if (mutation.target.classList.contains('show-all-image')) {
+                // Re-initialize for newly visible thumbnails
+                setTimeout(() => {
+                  const newThumbs = document.querySelectorAll('.product__thumb-item a[data-zoom="true"]:not([data-zoom-initialized])');
+                  newThumbs.forEach((thumbLink) => {
+                    thumbLink.setAttribute('data-zoom-initialized', 'true');
+                    thumbLink.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      createZoomModal(this.href, this.querySelector('img')?.alt || '', this.dataset.index);
+                    });
+                  });
+                }, 100);
+              }
+            }
+          });
+        });
+        observer.observe(scroller, { attributes: true, attributeFilter: ['class'] });
+      }
+      
+      isThumbnailZoomInitialized = true;
+    }
+    
+    // Single DOMContentLoaded listener
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        initShowMoreButton();
+        initThumbnailZoom();
+        initMobileThumbZoom('{{ section_id }}');
+        
+        // Preload images after a delay
+        setTimeout(() => preloadThumbnailImages(), 2000);
+      });
+    } else {
+      // DOM already loaded
+      initShowMoreButton();
+      initThumbnailZoom();
+      initMobileThumbZoom('{{ section_id }}');
+      setTimeout(() => preloadThumbnailImages(), 2000);
+    }
+    
+    // Shopify section reload handler
+    document.addEventListener('shopify:section:load', function() {
+      // Reset flags when section reloads
+      isShowMoreInitialized = false;
+      isThumbnailZoomInitialized = false;
+      
+      setTimeout(() => {
+        initShowMoreButton();
+        initThumbnailZoom();
+        initMobileThumbZoom('{{ section_id }}');
+      }, 100);
     });
-  });
-  
-  // Observe the scroller element
-  const scroller = document.querySelector('.product__thumbs--scroller');
-  if (scroller) {
-    observer.observe(scroller, { attributes: true, attributeFilter: ['class'] });
-  }
-}
+  })();
 
 // Preload thumbnail images for faster zoom
 function preloadThumbnailImages() {

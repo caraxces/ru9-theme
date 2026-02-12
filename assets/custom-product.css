@@ -1,0 +1,85 @@
+/* Product Page Layout Optimization for 1360px */
+
+/* Main product page container */
+.template-product .page-width {
+    max-width: 1360px !important;
+    margin: 0 auto !important;
+}
+
+/* Ensure proper padding at 1360px+ */
+@media (min-width: 1360px) {
+    .template-product .page-width {
+        padding: 0 40px !important;
+    }
+}
+
+/* Product grid layout - ensure proper sizing */
+@media screen and (min-width: 95rem) {
+    .template-product .grid--product-images--partial {
+        max-width: 1360px;
+        margin: 0 auto;
+    }
+
+    /* Image column - 60% */
+    .template-product .grid--product-images--partial .large-up--three-fifths {
+        width: 60%;
+        max-width: 816px;
+        /* 60% of 1360px */
+    }
+
+    /* Info column - 40% */
+    .template-product .grid--product-images--partial .large-up--two-fifths {
+        width: 40%;
+        max-width: 544px;
+        /* 40% of 1360px */
+    }
+}
+
+/* Prevent layout overflow on smaller des
+
+ktops */
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .template-product .page-width {
+        max-width: 1280px !important;
+        padding: 0 30px !important;
+    }
+}
+
+/* Ensure product images don't exceed container */
+.template-product .product__photos {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Product thumbnails layout */
+.template-product .product__thumbs--scroller {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+@media screen and (min-width: 95rem) {
+    .template-product .product__thumbs--scroller {
+        max-width: 100%;
+    }
+
+    .template-product .product__thumb-item {
+        width: calc(20% - 10px);
+        /* 5 items per row with gap */
+        max-width: 150px;
+    }
+}
+
+/* Mobile/tablet responsive adjustments */
+@media (max-width: 1199px) {
+    .template-product .page-width {
+        max-width: 100% !important;
+        padding: 0 24px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .template-product .page-width {
+        padding: 0 16px !important;
+    }
+}
