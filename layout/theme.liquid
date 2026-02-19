@@ -39,11 +39,12 @@
       {%if canonical_url contains '?'%}
       <!-- <link rel="canonical" href="{{ canonical_url | replace: '?'}}"> -->
       {% endif %}
+      {% comment %} Preconnect: Chỉ dùng 2 origin quan trọng nhất để tránh quá tải (LCP, mobile) {% endcomment %}
       <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-      {% comment %} Google Fonts: Optimized - single preconnect, merged requests, font-display swap {% endcomment %}
-      <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      {% comment %} Các origin khác dùng dns-prefetch (nhẹ hơn preconnect) {% endcomment %}
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+      <link rel="dns-prefetch" href="https://fonts.shopifycdn.com">
       <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
       <link rel="dns-prefetch" href="https://ajax.googleapis.com">
       <link rel="dns-prefetch" href="https://maps.googleapis.com">
@@ -63,6 +64,22 @@
       {%- endif -%}
   
       {%- render 'social-meta-tags' -%}
+  
+      {% comment %} Chặn analytics.hub-js.com (không còn sử dụng) - chạy trước content_for_header {% endcomment %}
+      <script>
+        (function(){
+          var mo = new MutationObserver(function(mutations){
+            mutations.forEach(function(m){
+              m.addedNodes.forEach(function(n){
+                if (n.nodeType === 1 && n.tagName === 'SCRIPT' && n.src && /analytics\.hub-js\.com|container_YtkcxLUn/i.test(n.src)) {
+                  n.remove();
+                }
+              });
+            });
+          });
+          mo.observe(document.documentElement, { childList: true, subtree: true });
+        })();
+      </script>
   
       {{ content_for_header }}
       {%- render 'font-face' -%}
@@ -379,6 +396,30 @@
           <!-- End Google Tag Manager (noscript) -->
 
 
+  {% comment %} Workaround: Chặn font GTStandard (shoplift) không dùng - tiết kiệm ~63KB, cải thiện LCP mobile {% endcomment %}
+  <script>
+    (function(){
+      function removeGTStandardFonts(){
+        document.querySelectorAll('style, link[rel="stylesheet"]').forEach(function(el){
+          var c = (el.textContent || el.href || '');
+          if (/GTStandard|gravity-font-faces|shoplift/i.test(c)) el.remove();
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', removeGTStandardFonts);
+      } else { removeGTStandardFonts(); }
+      var obs = new MutationObserver(function(mutations){
+        mutations.forEach(function(m){
+          m.addedNodes.forEach(function(node){
+            if (node.nodeType === 1 && node.tagName === 'STYLE' && node.textContent && /GTStandard/i.test(node.textContent)) {
+              node.remove();
+            }
+          });
+        });
+      });
+      obs.observe(document.documentElement, { childList: true, subtree: true });
+    })();
+  </script>
   </body>
   {% include 'pf-fix-atc' %}
 </html>
