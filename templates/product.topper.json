@@ -71,6 +71,7 @@
         },
         "sales_point_xKakRp": {
           "type": "sales_point",
+          "disabled": true,
           "settings": {
             "icon": "tag",
             "text": "Nhập mã RU926 giảm thêm 4% cho đơn từ 20 triệu"
@@ -78,6 +79,7 @@
         },
         "sales_point_dFxT8k": {
           "type": "sales_point",
+          "disabled": true,
           "settings": {
             "icon": "tag",
             "text": "Nhập mã RU9NY giảm thêm 6% cho đơn từ 30 triệu"

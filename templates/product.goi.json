@@ -69,26 +69,32 @@
             "text": "<p>Giá hấp dẫn cho Khách hàng Doanh nghiệp/ Đơn vị nội thất/ Cộng tác viên</p>"
           }
         },
-        "sales_point_RY4Cz8": {
-          "type": "sales_point",
-          "disabled": true,
-          "settings": {
-            "icon": "gift",
-            "text": "Tặng Eyesmask xông hơi, vỏ gối Cotton Sateen"
-          }
-        },
         "sales_point_4raLtj": {
           "type": "sales_point",
           "settings": {
             "icon": "tag",
-            "text": "Nhập mã RU9G2 giảm thêm 4% cho đơn  mua từ 2 gối"
+            "text": "Nhập mã JAN600K giảm 600K cho đơn từ 5TR"
           }
         },
         "sales_point_pk6jAU": {
           "type": "sales_point",
           "settings": {
             "icon": "tag",
-            "text": "Nhập mã RU9G4 giảm thêm 6% cho đơn mua từ 4 gối"
+            "text": "Nhập mã JAN1200 giảm 1.2TR cho đơn từ 10TR"
+          }
+        },
+        "sales_point_XmUnUU": {
+          "type": "sales_point",
+          "settings": {
+            "icon": "tag",
+            "text": "Nhập mã JAN2500 giảm 2.5TR cho đơn từ 20TR"
+          }
+        },
+        "sales_point_PRM6Dj": {
+          "type": "sales_point",
+          "settings": {
+            "icon": "tag",
+            "text": "Nhập mã JAN5000 giảm 5TR cho đơn từ 35TR"
           }
         },
         "custom_ir6hFk": {
@@ -188,9 +194,10 @@
       },
       "block_order": [
         "business_price_kwey9L",
-        "sales_point_RY4Cz8",
         "sales_point_4raLtj",
         "sales_point_pk6jAU",
+        "sales_point_XmUnUU",
+        "sales_point_PRM6Dj",
         "custom_ir6hFk",
         "promotion_q6yCFm",
         "price",

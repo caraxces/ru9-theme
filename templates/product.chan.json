@@ -23,14 +23,28 @@
           "type": "sales_point",
           "settings": {
             "icon": "tag",
-            "text": "Nhập mã RU926 giảm thêm 4% cho đơn từ 20 triệu"
+            "text": "Nhập mã JAN600K giảm 600K cho đơn từ 5TR"
           }
         },
         "sales_point_bDmipR": {
           "type": "sales_point",
           "settings": {
             "icon": "tag",
-            "text": "Nhập mã RU9NY giảm thêm 6% cho đơn từ 30 triệu"
+            "text": "Nhập mã JAN1200 giảm 1.2TR cho đơn từ 10TR"
+          }
+        },
+        "sales_point_t9Yti7": {
+          "type": "sales_point",
+          "settings": {
+            "icon": "tag",
+            "text": "Nhập mã JAN2500 giảm 2.5TR cho đơn từ 20TR"
+          }
+        },
+        "sales_point_rnwLWY": {
+          "type": "sales_point",
+          "settings": {
+            "icon": "tag",
+            "text": "Nhập mã JAN5000 giảm 5TR cho đơn từ 35TR"
           }
         },
         "custom_RUMVxq": {
@@ -110,6 +124,8 @@
         "business_price_m3eVEy",
         "sales_point_NBVp8h",
         "sales_point_bDmipR",
+        "sales_point_t9Yti7",
+        "sales_point_rnwLWY",
         "custom_RUMVxq",
         "price",
         "variant_picker",

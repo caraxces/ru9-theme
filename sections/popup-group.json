@@ -136,14 +136,60 @@
     "voucher_popup_CgmKCW": {
       "type": "voucher-popup",
       "blocks": {
+        "voucher_MULVqy": {
+          "type": "voucher",
+          "settings": {
+            "code": "JAN5000",
+            "title": "VOUCHER 5TR",
+            "description": "Tặng Voucher 5TR cho đơn trên 35TR",
+            "expiry_date": "28.2.2026"
+          }
+        },
+        "voucher_JPmcCV": {
+          "type": "voucher",
+          "settings": {
+            "code": "JAN2500",
+            "title": "VOUCHER 2.5TR",
+            "description": "Tặng Voucher 2.5TR cho đơn trên 20TR",
+            "expiry_date": "28.2.2026"
+          }
+        },
+        "voucher_mUTahx": {
+          "type": "voucher",
+          "settings": {
+            "code": "JAN1200",
+            "title": "VOUCHER 1.2TR",
+            "description": "Tặng Voucher 1.2TR cho đơn trên 10TR",
+            "expiry_date": "28.02.2026"
+          }
+        },
         "voucher_VwHqaB": {
+          "type": "voucher",
+          "settings": {
+            "code": "JAN600K",
+            "title": "VOUCHER 600K",
+            "description": "Tặng Voucher 600K cho đơn trên 5TR",
+            "expiry_date": "28.02.2026"
+          }
+        },
+        "voucher_7BizKk": {
           "type": "voucher",
           "disabled": true,
           "settings": {
-            "code": "RU9LIXI",
-            "title": "TẶNG SET LÌ XÌ",
-            "description": "Tặng Set lì xì cho đơn trên 500K",
-            "expiry_date": "14.02.2026"
+            "code": "RU9G2",
+            "title": "VOUCHER 5%",
+            "description": "Giảm thêm 5% cho đơn hàng khi mua 2 gối",
+            "expiry_date": "28.02.2026"
+          }
+        },
+        "voucher_Rz4CKq": {
+          "type": "voucher",
+          "disabled": true,
+          "settings": {
+            "code": "RU9G4",
+            "title": "VOUCHER 7%",
+            "description": "Giảm thêm 7% cho đơn hàng khi mua 4 gối",
+            "expiry_date": "28.02.2026"
           }
         },
         "voucher_qUAXHd": {
@@ -154,52 +200,16 @@
             "description": "Tặng Eye Mask xông hơi cho đơn Gối Công Thái Học",
             "expiry_date": "28.02.2026"
           }
-        },
-        "voucher_7BizKk": {
-          "type": "voucher",
-          "settings": {
-            "code": "RU9NY",
-            "title": "VOUCHER 6%",
-            "description": "Giảm 6% cho đơn hàng từ 30 triệu đồng",
-            "expiry_date": "14.02.2026"
-          }
-        },
-        "voucher_Rz4CKq": {
-          "type": "voucher",
-          "settings": {
-            "code": "RU9G4",
-            "title": "VOUCHER 6%",
-            "description": "Giảm 6% khi mua 4 gối",
-            "expiry_date": "14.02.2026"
-          }
-        },
-        "voucher_yibCVn": {
-          "type": "voucher",
-          "settings": {
-            "code": "RU9G2",
-            "title": "VOUCHER 4%",
-            "description": "Giảm 4% khi mua 2 gối",
-            "expiry_date": "14.02.2026"
-          }
-        },
-        "voucher_mUTahx": {
-          "type": "voucher",
-          "disabled": true,
-          "settings": {
-            "code": "RU926",
-            "title": "VOUCHER 4%",
-            "description": "Giảm 4% cho đơn hàng từ 20 triệu đồng",
-            "expiry_date": "14.02.2026"
-          }
         }
       },
       "block_order": [
+        "voucher_MULVqy",
+        "voucher_JPmcCV",
+        "voucher_mUTahx",
         "voucher_VwHqaB",
-        "voucher_qUAXHd",
         "voucher_7BizKk",
         "voucher_Rz4CKq",
-        "voucher_yibCVn",
-        "voucher_mUTahx"
+        "voucher_qUAXHd"
       ],
       "name": "Voucher Popup",
       "settings": {

@@ -19,25 +19,32 @@
             "text": "<p>Giá hấp dẫn cho Khách hàng Doanh nghiệp/ Đơn vị nội thất/ Cộng tác viên</p>"
           }
         },
-        "sales_point_x4prTW": {
-          "type": "sales_point",
-          "settings": {
-            "icon": "gift",
-            "text": "Tặng Eyesmask xông hơi, vỏ gối Cotton Sateen"
-          }
-        },
         "sales_point_gFPJAw": {
           "type": "sales_point",
           "settings": {
             "icon": "tag",
-            "text": "Nhập mã RU926 giảm thêm 4% cho đơn từ 20 triệu"
+            "text": "Nhập mã JAN600K giảm 600K cho đơn từ 5TR"
           }
         },
         "sales_point_Dpexk8": {
           "type": "sales_point",
           "settings": {
             "icon": "tag",
-            "text": "Nhập mã RU9NY giảm thêm 6% cho đơn từ 30 triệu"
+            "text": "Nhập mã JAN1200 giảm 1.2TR cho đơn từ 10TR"
+          }
+        },
+        "sales_point_K6EJrK": {
+          "type": "sales_point",
+          "settings": {
+            "icon": "tag",
+            "text": "Nhập mã JAN2500 giảm 2.5TR cho đơn từ 20TR"
+          }
+        },
+        "sales_point_zyTy3r": {
+          "type": "sales_point",
+          "settings": {
+            "icon": "tag",
+            "text": "Nhập mã JAN5000 giảm 5TR cho đơn từ 35TR"
           }
         },
         "variant_picker": {
@@ -117,9 +124,10 @@
       },
       "block_order": [
         "business_price_dgJcNw",
-        "sales_point_x4prTW",
         "sales_point_gFPJAw",
         "sales_point_Dpexk8",
+        "sales_point_K6EJrK",
+        "sales_point_zyTy3r",
         "variant_picker",
         "custom_JtBXGV",
         "promotion_V4mkaE",

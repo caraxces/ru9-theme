@@ -25,8 +25,8 @@
             "link_text_2": "",
             "color_accent": "#000000",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Banner_Web_PC_1.jpg",
-            "image_mobile": "shopify://shop_images/Banner_Web_Mobile_2.jpg",
+            "image": "shopify://shop_images/Banner_Web-01_da8163ec-06a8-4878-9615-fea0b16ae872.jpg",
+            "image_mobile": "shopify://shop_images/Banner_Web-02_a0ccc987-ec28-4a24-ae09-87b3db6a9acc.jpg",
             "overlay_opacity": 0
           }
         },
@@ -43,13 +43,14 @@
             "link_text_2": "",
             "color_accent": "#000000",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/ws.jpg",
+            "image": "shopify://shop_images/Artboard_1_9d911596-742e-4491-9e23-3fbdbad19bd6.jpg",
             "image_mobile": "shopify://shop_images/mb.jpg",
             "overlay_opacity": 0
           }
         },
         "image_N6Y66j": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "top_subheading": "",
             "title": "",
