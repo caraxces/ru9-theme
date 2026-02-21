@@ -1568,7 +1568,8 @@ theme.recentlyViewed = {
 
     AjaxRenderer.prototype = Object.assign({}, AjaxRenderer.prototype, {
       renderPage: function (basePath, newParams, updateURLHash = true) {
-        const currentParams = new URLSearchParams(window.location.search);
+        const searchOrHash = window.location.hash ? window.location.hash.slice(1) : window.location.search.replace(/^\?/, "");
+        const currentParams = new URLSearchParams(searchOrHash);
         const updatedParams = this.getUpdatedParams(currentParams, newParams);
 
         const sectionRenders = this.sections.map((section) => {
@@ -1666,11 +1667,12 @@ theme.recentlyViewed = {
       },
 
       updateURLHash: function (searchParams) {
+        const q = searchParams && searchParams.toString() ? searchParams.toString() : "";
+        const newUrl = `${window.location.pathname}${q ? "#".concat(q) : ""}`;
         history.pushState(
           {},
           "",
-          `${window.location.pathname}${searchParams && "?".concat(searchParams)
-          }`
+          newUrl
         );
       },
 
@@ -8036,6 +8038,25 @@ theme.recentlyViewed = {
           this.initFilters();
           this.initPriceRange();
           this.sidebar.init();
+          var searchStr = window.location.search.replace(/^\?/, "");
+          if (window.location.hash) {
+            if (!searchStr) {
+              var hashParams = new URLSearchParams(window.location.hash.slice(1));
+              this.renderCollectionPage(hashParams, false);
+            }
+          } else if (searchStr) {
+            var qParams = new URLSearchParams(searchStr);
+            var newUrl = window.location.pathname + "#" + qParams.toString();
+            history.replaceState({}, "", newUrl);
+          }
+          document.addEventListener(
+            "collection:applyParams",
+            function (e) {
+              if (e.detail && e.detail instanceof URLSearchParams) {
+                this.renderCollectionPage(e.detail);
+              }
+            }.bind(this)
+          );
         }
       },
 
@@ -8055,7 +8076,6 @@ theme.recentlyViewed = {
 
         if (window.innerWidth < 768) {
           if (this.sortSelectMobile) {
-            console.log("asd");
             this.defaultSortMobile = this.getDefaultSortValueMobile();
             this.sortSelectMobile.on(
               "change" + this.namespace,
@@ -8082,21 +8102,27 @@ theme.recentlyViewed = {
       },
 
       onSortChange: function () {
-        this.queryParams = new URLSearchParams(window.location.search);
-
+        const searchOrHash = window.location.hash ? window.location.hash.slice(1) : window.location.search.replace(/^\?/, "");
+        this.queryParams = new URLSearchParams(searchOrHash);
         this.queryParams.set("sort_by", this.getSortValue());
-        this.queryParams.delete("page"); // Delete if it exists
-
-        window.location.search = this.queryParams.toString();
+        this.queryParams.delete("page");
+        if (isAnimating) return;
+        isAnimating = true;
+        this.updateScroll(true);
+        this.startLoading();
+        this.renderCollectionPage(this.queryParams);
       },
 
       onSortChangeMobile: function () {
-        this.queryParams = new URLSearchParams(window.location.search);
-
+        const searchOrHash = window.location.hash ? window.location.hash.slice(1) : window.location.search.replace(/^\?/, "");
+        this.queryParams = new URLSearchParams(searchOrHash);
         this.queryParams.set("sort_by", this.getSortValueMobile());
-        this.queryParams.delete("page"); // Delete if it exists
-
-        window.location.search = this.queryParams.toString();
+        this.queryParams.delete("page");
+        if (isAnimating) return;
+        isAnimating = true;
+        this.updateScroll(true);
+        this.startLoading();
+        this.renderCollectionPage(this.queryParams);
       },
 
       colorSwatchHovering: function () {
@@ -8133,7 +8159,6 @@ theme.recentlyViewed = {
       ====================*/
       initFilters: function () {
         var tags = document.querySelectorAll(selectors.tags);
-
         if (!tags.length) {
           return;
         }
@@ -8150,16 +8175,37 @@ theme.recentlyViewed = {
           );
         }
 
-        document.querySelectorAll(selectors.activeTags).forEach((tag) => {
-          tag.addEventListener("click", this.tagClick.bind(this));
+        var self = this;
+        var container = this.container;
+
+        container.addEventListener("submit", function (evt) {
+          var form = evt.target && evt.target.matches && evt.target.matches(selectors.tagsForm) ? evt.target : (evt.target.closest && evt.target.closest(selectors.tagsForm));
+          if (!form || !container.contains(form)) return;
+          evt.preventDefault();
+          evt.stopPropagation();
+          if (isAnimating) return;
+          isAnimating = true;
+          self.updateScroll(true);
+          self.startLoading();
+          self.renderFromFormData(new FormData(form));
         });
 
-        document.querySelectorAll(selectors.tagsForm).forEach((form) => {
-          form.addEventListener("input", this.onFormSubmit.bind(this));
+        container.addEventListener("input", function (evt) {
+          if (!evt.target.closest || !evt.target.closest(selectors.tagsForm)) return;
+          if (!container.contains(evt.target)) return;
+          evt.preventDefault();
+          evt.stopPropagation();
+          self.onFormSubmit(evt);
         });
 
-        document.querySelectorAll(selectors.facetClear).forEach((button) => {
-          button.addEventListener("click", this.tagClick.bind(this));
+        container.addEventListener("click", function (evt) {
+          var tag = evt.target.closest && evt.target.closest(selectors.activeTags);
+          var facet = evt.target.closest && evt.target.closest(selectors.facetClear);
+          var el = tag || facet;
+          if (!el || !container.contains(el)) return;
+          var e = evt;
+          var synthetic = { currentTarget: el, target: evt.target, preventDefault: function () { e.preventDefault(); } };
+          self.tagClick(synthetic);
         });
       },
 
@@ -8176,7 +8222,6 @@ theme.recentlyViewed = {
 
       tagClick: function (evt) {
         var el = evt.currentTarget;
-
         if (theme.FilterDrawer) {
           theme.FilterDrawer.close();
         }
@@ -8196,10 +8241,13 @@ theme.recentlyViewed = {
 
         const parent = el.parentNode;
         const newUrl = new URL(el.href);
+        var paramsStr = newUrl.searchParams.toString();
 
-        el.matches(selectors.facetClear)
-          ? history.pushState({}, "", newUrl)
-          : this.renderActiveTag(parent, el);
+        if (el.matches(selectors.facetClear)) {
+          history.pushState({}, "", window.location.pathname + (paramsStr ? "#" + paramsStr : ""));
+        } else {
+          this.renderActiveTag(parent, el);
+        }
         this.updateScroll(true);
         this.startLoading();
         this.renderCollectionPage(newUrl.searchParams);
@@ -8207,7 +8255,6 @@ theme.recentlyViewed = {
 
       onFormSubmit: function (evt) {
         var el = evt.target;
-
         if (theme.FilterDrawer) {
           theme.FilterDrawer.close();
         }
@@ -8319,14 +8366,17 @@ theme.recentlyViewed = {
       },
 
       bindBackButton: function () {
-        // Ajax page on back button
+        // Ajax page on back button (đọc params từ # hoặc ?)
         window.off("popstate" + this.namespace);
         window.on(
           "popstate" + this.namespace,
           function (state) {
             if (state) {
-              const newUrl = new URL(window.location.href);
-              this.renderCollectionPage(newUrl.searchParams, false);
+              const hash = window.location.hash ? window.location.hash.slice(1) : "";
+              const search = window.location.search.replace(/^\?/, "");
+              const paramStr = hash || search;
+              const params = new URLSearchParams(paramStr);
+              this.renderCollectionPage(params, false);
             }
           }.bind(this)
         );

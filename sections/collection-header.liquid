@@ -20,8 +20,8 @@
     >
       <div class="collection-hero">
         <div class="collection-hero__image-wrap">
-          <img class="large-up-show" src="{{ collection.metafields.custom.banner_desktop | img_url: '2200x' }}" alt="{{ collection.title }}" class="collection-hero__image">
-          <img class="large-up-hide" src="{{ collection.metafields.custom.banner_mobile | img_url: '768x' }}" alt="{{ collection.title }}" class="collection-hero__image">
+          <img class="large-up-show collection-hero__image" src="{{ collection.metafields.custom.banner_desktop | img_url: '2200x' }}" alt="{{ collection.title }}" width="2200" height="350" loading="lazy">
+          <img class="large-up-hide collection-hero__image" src="{{ collection.metafields.custom.banner_mobile | img_url: '768x' }}" alt="{{ collection.title }}" width="768" height="350" loading="eager" fetchpriority="high">
         </div>
 
         <div class="collection-hero__content">

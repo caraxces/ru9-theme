@@ -3538,35 +3538,54 @@
           updateCartDrawerLayout();
         }
 
-        // Use MutationObserver to detect when cart items are loaded/updated
+        // Use MutationObserver to detect when cart items are loaded/updated (from rebuildCart/buildCart).
+        // Action-based only: disconnect during our own DOM updates + debounce to prevent loop/flood.
         const productContainer = document.querySelector('#CartDrawer [data-products]');
         if (productContainer) {
+          let isUpdatingFromObserver = false;
+          let debounceTimer = null;
+          const DEBOUNCE_MS = 150;
+
+          function runCartUISync() {
+            if (isUpdatingFromObserver) return;
+            isUpdatingFromObserver = true;
+            observer.disconnect();
+            try {
+              handleBundleHeaders();
+              syncCartUIFromDOM();
+              updateCartDrawerLayout();
+            } finally {
+              isUpdatingFromObserver = false;
+              observer.observe(productContainer, { childList: true });
+            }
+          }
+
           const observer = new MutationObserver((mutationsList) => {
-            for(const mutation of mutationsList) {
+            if (isUpdatingFromObserver) return;
+            for (const mutation of mutationsList) {
               if (mutation.type === 'childList') {
-                handleBundleHeaders();
-                syncCartUIFromDOM();
-                updateCartDrawerLayout();
-                break; 
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(runCartUISync, DEBOUNCE_MS);
+                break;
               }
             }
           });
           observer.observe(productContainer, { childList: true });
         }
         
-        // Listen for cart:updated event from bundle add to cart
+        // Listen for cart:updated event - action-based, debounced to prevent flood
+        let cartUpdatedDebounce = null;
         document.addEventListener('cart:updated', function() {
-          console.log('Cart updated event received, showing bundle headers...');
-          setTimeout(() => {
+          clearTimeout(cartUpdatedDebounce);
+          cartUpdatedDebounce = setTimeout(() => {
             handleBundleHeaders();
             syncCartUIFromDOM();
             updateCartDrawerLayout();
-            // Only check stored voucher if not already checked
             if (!hasCheckedStoredVoucher) {
               hasCheckedStoredVoucher = true;
               checkStoredBundleVoucher();
             }
-          }, 100);
+          }, 150);
         });
         
         // Also run on initial page load

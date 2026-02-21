@@ -31,7 +31,7 @@
   {%- endfor -%}
 </ul>
 
-<form class="filter-form">
+<form class="filter-form" onsubmit="return false;">
   {%- assign ru9_dropdown_filters = false -%}
   {%- if location == 'CollectionSidebar' -%}
     {%- assign ru9_dropdown_filters = true -%}
