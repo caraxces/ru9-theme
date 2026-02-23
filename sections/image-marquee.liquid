@@ -23,10 +23,11 @@
                 {%- assign image_height = 122 -%}
                 {%- assign image_width = image_height | times: block.settings.image.aspect_ratio | round -%}
                 <img
-                  src="{{ block.settings.image | img_url: 'x122' }}"
+                  src="{{ block.settings.image | image_url: height: 122 }}"
+                  srcset="{{ block.settings.image | image_url: height: 122 }} 1x, {{ block.settings.image | image_url: height: 244 }} 2x"
                   alt="{{ block.settings.image.alt | escape }}"
-                  width=100%
-                  height="3rem"
+                  width="{{ image_width }}"
+                  height="{{ image_height }}"
                   style="height: 3rem; width: 100%; display: block;"
                   loading="lazy"
                 >

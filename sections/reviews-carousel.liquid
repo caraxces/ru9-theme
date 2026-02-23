@@ -36,7 +36,7 @@
                     loop
                     playsinline
                     webkit-playsinline
-                    preload="auto" 
+                    preload="metadata"
                     poster="{% if block.settings.video.preview_image %}{{ block.settings.video.preview_image | image_url: width: 800 }}{% endif %}"
                   >
                     {%- for source in block.settings.video.sources -%}
