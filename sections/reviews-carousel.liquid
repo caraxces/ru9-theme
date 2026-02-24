@@ -37,7 +37,7 @@
                     playsinline
                     webkit-playsinline
                     preload="metadata"
-                    poster="{% if block.settings.video.preview_image %}{{ block.settings.video.preview_image | image_url: width: 800 }}{% endif %}"
+                    poster="{% if block.settings.video.preview_image %}{{ block.settings.video.preview_image | image_url: width: 400, format: 'webp' }}{% endif %}"
                   >
                     {%- for source in block.settings.video.sources -%}
                       <source src="{{ source.url }}" type="{{ source.mime_type }}">

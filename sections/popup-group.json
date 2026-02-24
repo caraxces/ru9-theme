@@ -174,7 +174,6 @@
         },
         "voucher_7BizKk": {
           "type": "voucher",
-          "disabled": true,
           "settings": {
             "code": "RU9G2",
             "title": "VOUCHER 5%",
@@ -184,7 +183,6 @@
         },
         "voucher_Rz4CKq": {
           "type": "voucher",
-          "disabled": true,
           "settings": {
             "code": "RU9G4",
             "title": "VOUCHER 7%",
@@ -196,7 +194,7 @@
           "type": "voucher",
           "settings": {
             "code": "RU9GIFT",
-            "title": "TẶNG EYE MASK",
+            "title": "TẶNG EYE MASK XÔNG HƠI",
             "description": "Tặng Eye Mask xông hơi cho đơn Gối Công Thái Học",
             "expiry_date": "28.02.2026"
           }
