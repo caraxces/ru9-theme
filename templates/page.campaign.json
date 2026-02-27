@@ -1,0 +1,254 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "text_alignment": "left",
+        "enable_customize_width_content": false,
+        "customize_width_content": 1800,
+        "remove_space_below": false
+      }
+    },
+    "image_text_content_nbrr6m": {
+      "type": "image-text-content",
+      "blocks": {
+        "image_text_VFWJpr": {
+          "type": "image_text",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_283.png",
+            "heading": "Chứng nhận CertiPUR-US®",
+            "content": "<p>Các lớp foam trong nệm Ru9 đã được kiểm định chất lượng bởi chứng nhận uy tín và phổ biến nhất trên thế giới về foam - CertiPUR-US®. Dựa trên các tiêu chuẩn được xây dựng bởi chuyên gia đầu ngành, foam của nệm Ru9 đáp ứng được các yếu tố về thành phần, hàm lượng và độ bền bỉ. Cụ thể, foam nệm Ru9 đã đáp ứng 6 tiêu chuẩn:</p><ul><li>Quá trình sản xuất foam không gây hại đến tầng khí quyển;</li><li>Không sử dụng hoá chất làm chậm cháy (PBDEs, TDCPP hay TCEP) Không chứa thuỷ ngân, chì và kim loại nặng;</li><li>Không chứa formaldehyde có thể gây hại đến da và hệ hô hấp;</li><li>Không chứa phthalates làm suy giảm hệ miễn dịch;</li><li>Có mức độ khí thải VOC thấp (0.5 trên phần triệu).</li></ul><p>Quy trình kiểm định đối với foam của Ru9 sẽ còn được lặp lại hàng năm một cách ngẫu nhiên, chứng minh cho chất lượng nệm dài lâu. Để đảm bảo tính minh bạch, các công ty đạt tiêu chuẩn được liệt kê trên website chính thức <a href=\"https://certipur.us/list-of-participating-companies/#R\">tại đây</a><a href=\"https://ru9mattressvn.myshopify.com/pages/certification?#\">.</a></p>"
+          }
+        },
+        "image_text_CHNUDH": {
+          "type": "image_text",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_284.png",
+            "heading": "Chứng nhận OEKO-TEX®",
+            "content": "<p>STANDARD 100 by OEKO-TEX® là chứng nhận độc lập và toàn diện quốc tế cho các sản phẩm về dệt được sáng lập từ năm 1992 và nhanh chóng trở thành chứng nhận uy tín trên toàn thế giới bởi các tiêu chuẩn kiểm định nghiêm ngặt. Trải qua quá trình kiểm định theo hệ thống đo lường toàn diện và gắt gao của OEKO-TEX®, chất liệu vải Tencel trong gối Niu của Ru9 đã được chứng nhận an toàn với sức khoẻ người sử dụng. Cụ thể:</p><ul><li>Không chứa các chất bị cấm Theo quy định pháp luật.</li><li>Không chứa hàng loạt chất hoá học có hại - dù những chất này chưa bị cấm.</li><li>Đáp ứng được bộ tiêu chí của STANDARD 100 by OEKO-TEX® - được xây dựng từ đội ngũ chuyên gia đầu ngành kết hợp với các tiêu chuẩn quốc tế.</li><li>Đạt chuẩn các yêu cầu trong Bộ luật Nâng cao chất lượng an toàn sản phẩm tiêu dùng Hoa Kỳ.</li><li>Quy trình sản xuất thân thiện với môi trường.</li></ul><p>Đồng thời điều kiện tiên quyết để đạt chứng nhận STANDARD 100 by OEKO-TEX® là tất cả các phần đi cùng chất liệu vải Tencel trong gối Niu phải đáp ứng các tiêu chuẩn yêu cầu an toàn, bao gồm cả đường may, khoá kéo và nút bấm đi kèm.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "image_text_VFWJpr",
+        "image_text_CHNUDH"
+      ],
+      "disabled": true,
+      "name": "Certificate Description",
+      "settings": {
+        "title": ""
+      }
+    },
+    "countdown_tyxbU3": {
+      "type": "countdown",
+      "blocks": {
+        "content_CAzYrP": {
+          "type": "content",
+          "settings": {
+            "heading": "Countdown",
+            "heading_size": "h2",
+            "text": "<p>Use this timer to create urgency and boost sales.</p>",
+            "content_alignment": "left"
+          }
+        },
+        "timer_4Djgpb": {
+          "type": "timer",
+          "settings": {
+            "year": "2025",
+            "month": "01",
+            "day": "1",
+            "hour": "03",
+            "minute": "00",
+            "hide_timer": false,
+            "text": ""
+          }
+        },
+        "button_6cgGYP": {
+          "type": "button",
+          "settings": {
+            "button_link": "",
+            "button": "Shop Collection",
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "content_CAzYrP",
+        "timer_4Djgpb",
+        "button_6cgGYP"
+      ],
+      "disabled": true,
+      "settings": {
+        "layout": "banner",
+        "full_width": false,
+        "text_color": "#000000",
+        "background_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "lazyload_images": true
+      }
+    },
+    "feature_collection_manual_NmbMnj": {
+      "type": "feature-collection-manual",
+      "blocks": {
+        "collection_ymQhKD": {
+          "type": "collection",
+          "settings": {
+            "block_title": "Featured collection",
+            "block_url": ""
+          }
+        },
+        "collection_remGbK": {
+          "type": "collection",
+          "settings": {
+            "block_title": "Featured collection",
+            "block_url": ""
+          }
+        },
+        "collection_NqDdFK": {
+          "type": "collection",
+          "settings": {
+            "block_title": "Featured collection",
+            "block_url": ""
+          }
+        },
+        "collection_3fbH9V": {
+          "type": "collection",
+          "settings": {
+            "block_title": "Featured collection",
+            "block_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_ymQhKD",
+        "collection_remGbK",
+        "collection_NqDdFK",
+        "collection_3fbH9V"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "Featured collection",
+        "title_icon": "",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "view_all_number": "+6",
+        "divider": false
+      }
+    },
+    "feature_collection_manual_FXGEwb": {
+      "type": "feature-collection-manual",
+      "blocks": {
+        "collection_rMpG3z": {
+          "type": "collection",
+          "settings": {
+            "block_title": "Featured collection",
+            "block_url": ""
+          }
+        },
+        "collection_8mqP3H": {
+          "type": "collection",
+          "settings": {
+            "block_title": "Featured collection",
+            "block_url": ""
+          }
+        },
+        "collection_LEQMCw": {
+          "type": "collection",
+          "settings": {
+            "block_title": "Featured collection",
+            "block_url": ""
+          }
+        },
+        "collection_Y7WfAw": {
+          "type": "collection",
+          "settings": {
+            "block_title": "Featured collection",
+            "block_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_rMpG3z",
+        "collection_8mqP3H",
+        "collection_LEQMCw",
+        "collection_Y7WfAw"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "",
+        "title_icon": "",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "view_all_number": "+6",
+        "divider": false
+      }
+    },
+    "featured_collection_tab_y3fzqN": {
+      "type": "featured-collection-tab",
+      "disabled": true,
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "title": "Heading",
+        "description": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+        "color_tab_name": "#ffffff",
+        "background_tab_name": "#2960ad",
+        "background_tab_name_inactive": "#ddebfc"
+      }
+    },
+    "text_and_image_DTjEEQ": {
+      "type": "text-and-image",
+      "name": "t:sections.text-and-image.presets.image_with_text.name",
+      "settings": {
+        "section_width": "page-width",
+        "customize_width": 1800,
+        "image": "shopify://shop_images/Thong_bao_Minigame_Offline.jpg",
+        "image_mobile": "shopify://shop_images/Thong_bao_Minigame_Offline.jpg",
+        "image_mask": "none",
+        "subtitle": "",
+        "title": "NHẬN NGAY ƯU ĐÃI 10% KHI MUA GỐI ALIGN",
+        "text": "<p>Bạn có biết: Những cơn đau mỏi cổ vai gáy hàng ngày chính là \"tín hiệu cầu cứu\" của cột sống? Đã đến lúc giải mã những nỗi đau thầm lặng đó tại trạm trải nghiệm đặc biệt của Ru9!<br/>Mời bạn ghé Showroom Ru9 để tham gia hành trình 04 bước “Reset trục cân bằng cho cột sống” hoàn toàn miễn phí:<br/>1️⃣ Kiểm tra biên độ vận động: Phát hiện sớm các hạn chế vùng cổ.<br/>2️⃣ Kiểm tra tư thế chuẩn: Đo độ cong sinh lý bằng bài test đơn giản<br/>3️⃣ Kiểm tra khoảng hở: Tận mắt chứng kiến sự thay đổi kỳ diệu\" của trục xương khi nằm trên gối thường với Siêu phẩm gối Công thái học Ru9.<br/>4️⃣ Nhận giải pháp: Hồ sơ giấc ngủ độc quyền từ Ru9<br/>📸 Check-in/Story với hashtag #Ru9 #ScanYourSpine và Nhận ngay Voucher 10% mua gối.<br/>📍 Diễn ra tại toàn bộ Showroom Ru9<br/>⏰ Thời gian: 25/2/2026 - 13/3/2026<br/>Chương trình đã bắt đầu diễn ra, ghé Showroom Ru9 để không bỏ lỡ cơ hội sở hữu Siêu phẩm gối Công thái học từ Ru9 bạn nhé!</p>",
+        "button_label": "",
+        "button_link": "",
+        "align_text": "left",
+        "align_text_mobile": "left",
+        "image_width": "50",
+        "layout": "right",
+        "divider": false,
+        "top_padding": true,
+        "bottom_padding": true,
+        "lazyload_images": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_text_content_nbrr6m",
+    "countdown_tyxbU3",
+    "feature_collection_manual_NmbMnj",
+    "feature_collection_manual_FXGEwb",
+    "featured_collection_tab_y3fzqN",
+    "text_and_image_DTjEEQ"
+  ]
+}

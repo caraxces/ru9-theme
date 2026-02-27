@@ -1,9 +1,4 @@
 {% unless current_tags.first %}
-  {% liquid
-    if template == 'blog'
-      assign page_width = '1104px'
-    endif
-  %}
   {% if current_tags.first %}
     <style>
       #shopify-section-{{section.id}}{
@@ -13,7 +8,7 @@
   {% endif %}
 
   {{ 'blog.css' | asset_url | stylesheet_tag | preload: true }}
-  <div class="page-width" style="--page-width: {{ page_width }}">
+  <div class="page-width" style="--page-width: 1360px;">
     {%- if section.settings.divider -%}<div class="section--divider section-padding">{%- endif -%}
     <blog-videos class="blog-video blog-layout block" id="blog-video-{{ section.id }}">
       <div class="blog-video__layout grid">

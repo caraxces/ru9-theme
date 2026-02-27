@@ -1,7 +1,7 @@
 {%- paginate blog.articles by 7 -%}
   {{ 'blog.css' | asset_url | stylesheet_tag | preload: true }}
   <div data-section-id="{{ section.id }}" data-section-type="blog">
-    <div class="page-width" style="--page-width: 1104px;">
+    <div class="page-width" style="--page-width: 1360px;">
       {%- render 'breadcrumbs', classes: 'spacing-base' -%}
 
       <header class="section-header text-{{ section.settings.heading_alignment }}{% if section.settings.blog_show_tag_filter and blog.tags.size > 0 %}{% unless settings.type_headers_align_text %} section-header--with-link{% endunless %}{% endif %}">

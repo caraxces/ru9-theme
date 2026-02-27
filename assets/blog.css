@@ -7,6 +7,15 @@
     margin-top:  calc(var(--grid-desktop-horizontal-spacing) * 0.5);
 }
 
+/* Ẩn thanh trượt ngang, vẫn cuộn được bằng chuột/touch */
+.blog-category__list {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.blog-category__list::-webkit-scrollbar {
+    display: none;
+}
+
 a.category-item {
     padding: 8px 16px;
     border-radius: 100px;

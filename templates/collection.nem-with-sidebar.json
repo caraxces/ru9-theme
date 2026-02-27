@@ -421,10 +421,10 @@
             "product_thickness": "25 cm",
             "product_feel": "Êm sâu – nâng đỡ từng vùng đầu lưng chân – chuẩn y khoa",
             "customizable_firmness": "Medium - Êm ái\nFirm - Nâng đỡ hơn",
-            "product_structure": "• 2cm Support layer\n• 3cm Comfort layer (Firm/• Medium)\n• 4cm Contour Foam 3-zone\n• 4cm Graphene Memory Foam tản nhiệt\n• 12cm Core Foam bền vững",
+            "product_structure": "• 2cm Support layer\n• 3cm Comfort layer (Firm/ Medium)\n• 4cm Contour Foam 3-zone\n• 4cm Graphene Memory Foam tản nhiệt\n• 12cm Core Foam bền vững",
             "product_cover": "Plush Knitted Fabric cao cấp, chần bông dày hơn, lớp gòn kháng cháy",
             "product_advantages": "• Nâng đỡ 3 vùng hỗ trợ chuyên biệt, giải tỏa áp lực \n• Nâng cấp toàn diện, êm sâu, thoáng khí\n• Cá nhân hóa, hỗ trợ đau lưng",
-            "support_pain_relief": "3 vùng nâng đỡ chính xác – giảm đau lưng vai hông mạnh",
+            "support_pain_relief": "3 vùng nâng đỡ chính xác – giảm đau lưng vai hông",
             "suitable_for": "Phù hợp cho\n- Người gặp vấn đề về đau lưng, cổ vai gáy, hông, cần nâng đỡ chính xác ổn định. \n- Người mong muốn có trải nghiệm cá nhân hóa",
             "suitable_body_type": "<90Kg",
             "product_warranty": "10 năm cho base nệm\n1 năm cho Topper",
@@ -474,6 +474,46 @@
             "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
             "product_price": "",
             "product_url": "shopify://products/foam-original"
+          }
+        },
+        "product_Ax4BJF": {
+          "type": "product",
+          "settings": {
+            "product_title": "NỆM ORIGINAL PRO",
+            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
+            "product_firmness": "8.0/10",
+            "product_thickness": "25cm",
+            "product_feel": "Êm ái, nâng đỡ toàn diện, ôm sát",
+            "customizable_firmness": "-",
+            "product_structure": "HR/Contour Foam đàn hồi\nMemory Foam gel lạnh giảm áp lực\nPU Foam đáy giữ form, chống rung",
+            "product_cover": "Vỏ bọc tencel thoáng khí, lớp gòn kháng cháy",
+            "product_advantages": "Êm ái, phù hợp đa số\nGiảm áp lực vai & lưng\nÔm sát cơ thể\nPhục hồi tốt",
+            "support_pain_relief": "Memory Foam giảm ép - ôm cong cột sống",
+            "suitable_for": "Đa số người dùng Việt, tiếp cận với công nghệ Foam ưu việt\nNgười đau lưng nhẹ - vừa, hay đau mỏi vai gáy\nNgười ngủ nghiêng hoặc nhạy cảm với chuyển động",
+            "suitable_body_type": "<85Kg",
+            "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
+            "product_price": "Từ 12.990.000 VNĐ",
+            "product_url": ""
+          }
+        },
+        "product_fBGEXY": {
+          "type": "product",
+          "settings": {
+            "product_title": "NỆM ORIGINAL PRO",
+            "product_features": "- Thiết kế nâng đỡ 3 vùng: đầu, thân, chân, mang đến sự thư giãn tối ưu.\n- Khả năng tản nhiệt tốt, giữ cảm giác thoáng mát suốt đêm.\n- Giảm áp lực lên cơ thể, hạn chế đau mỏi khi nằm lâu.",
+            "product_firmness": "8.0/10",
+            "product_thickness": "25cm",
+            "product_feel": "Êm ái, nâng đỡ toàn diện, ôm sát",
+            "customizable_firmness": "-",
+            "product_structure": "HR/Contour Foam đàn hồi\nMemory Foam gel lạnh giảm áp lực\nPU Foam đáy giữ form, chống rung",
+            "product_cover": "Vỏ bọc tencel thoáng khí, lớp gòn kháng cháy",
+            "product_advantages": "Êm ái, phù hợp đa số\nGiảm áp lực vai & lưng\nÔm sát cơ thể\nPhục hồi tốt",
+            "support_pain_relief": "Memory Foam giảm ép - ôm cong cột sống",
+            "suitable_for": "Đa số người dùng Việt, tiếp cận với công nghệ Foam ưu việt\nNgười đau lưng nhẹ - vừa, hay đau mỏi vai gáy\nNgười ngủ nghiêng hoặc nhạy cảm với chuyển động",
+            "suitable_body_type": "<85Kg",
+            "product_warranty": "100 đêm ngủ thử\n10 năm bảo hành",
+            "product_price": "Từ 12.990.000 VNĐ",
+            "product_url": ""
           }
         },
         "product_wmbR3E": {
@@ -594,6 +634,8 @@
         "product_ALQiAM",
         "product_4JhiNN",
         "product_kGMGE6",
+        "product_Ax4BJF",
+        "product_fBGEXY",
         "product_wmbR3E",
         "product_atFTCC",
         "product_QVeCme",

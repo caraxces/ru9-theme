@@ -1,20 +1,5 @@
 {%- assign blog = blogs[section.settings.blog] -%}
 
-{% liquid
-  if section.settings.section_width != 'page-width'
-    if section.settings.section_width == 'full-width'
-      assign page_width = '100%'
-    endif
-    if section.settings.section_width == 'customize_width'
-      assign page_width = section.settings.customize_width | plus: 80 | append: 'px'
-    endif
-  endif
-
-  if template == 'blog'
-    assign page_width = '1104px'
-  endif
-%}
-
 <style>
   {%- if template == 'blog' -%}
     #shopify-section-{{ section.id }} {
@@ -44,10 +29,7 @@
 </style>
 
 <div class="ovh" data-section-id="{{ section.id }}" data-section-type="blogposts-section">
-  <div
-    class="page-width"
-    style="{% if section.settings.section_width != 'page-width' %}--page-width: {{ page_width }}{% endif %}"
-  >
+  <div class="page-width" style="--page-width: 1360px;">
     {%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
     {%- if section.settings.title != blank -%}
       <header class="section-header text-{{ section.settings.heading_alignment }}{% if section.settings.view_all %}{% unless settings.type_headers_align_text %} section-header--with-link{% endunless %}{% endif %}">

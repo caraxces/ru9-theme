@@ -93,7 +93,7 @@
     "show_breadcrumbs": true,
     "show_breadcrumbs_collection_link": false,
     "discount_percentage": 15,
-    "category_tag": "sản-phẩm_Sản phẩm, giấc-ngủ_Giấc ngủ, mẹo-vặt_Mẹo vặt, mẹ-bé_Mẹ & bé, doi-song_Đời sống, nem-cao-su_Nệm cao su, nem-lo-xo_Nệm lò xo, nem-cao-su-non_Nệm cao su non, dem-bong-ep_Đệm bông ép, kich-thuoc-nem_Kích thước nệm,  nem-2mx2m_Nệm 2mx2m, nem-1m2_Nệm 1m2, nem-1m4_Nệm 1m4, nem-1m6_Nệm 1m6, nem-1m8_Nệm 1m8, dem-2mx2m2_Đệm 2mx2m2",
+    "category_tag": "san-pham_Sản phẩm, giac-ngu_Giấc ngủ, mẹo-vặt_Mẹo vặt, mẹ-bé_Mẹ & bé, doi-song_Đời sống, nem-cao-su_Nệm cao su, nem-lo-xo_Nệm lò xo, nem-cao-su-non_Nệm cao su non, dem-bong-ep_Đệm bông ép, kich-thuoc-nem_Kích thước nệm,  nem-2mx2m_Nệm 2mx2m, nem-1m2_Nệm 1m2, nem-1m4_Nệm 1m4, nem-1m6_Nệm 1m6, nem-1m8_Nệm 1m8, dem-2mx2m2_Đệm 2mx2m2",
     "sections": {
       "pf-warranty-accordion": {
         "type": "pf-warranty-accordion",
@@ -1359,8 +1359,17 @@
             "type": "logo_image",
             "settings": {
               "link": "shopify://pages/sales-executive-full-time",
-              "title": "Sale Online",
+              "title": "Sales & Customer Service Online Executive",
               "logo_content": "B2 00 09 Sarimi Building, 72 Nguyễn Cơ Thạch, P. An Khánh, HCM"
+            }
+          },
+          "logo_image_ydBqFQ": {
+            "type": "logo_image",
+            "disabled": true,
+            "settings": {
+              "link": "",
+              "title": "",
+              "logo_content": ""
             }
           }
         },
@@ -1377,10 +1386,11 @@
           "logo_image_9wMfkd",
           "logo_image_49G3Xk",
           "logo_image_pAFz8B",
-          "logo_image_pdqdij"
+          "logo_image_pdqdij",
+          "logo_image_ydBqFQ"
         ],
         "settings": {
-          "title": "",
+          "title": "Opening Positions",
           "sub_title": ""
         }
       },
