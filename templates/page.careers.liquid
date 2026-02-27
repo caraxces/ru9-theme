@@ -383,14 +383,25 @@
   }
   
   .page-width {
-    padding-left: 55px;
-    padding-right: 55px
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  /* Breadcrumb spacing on Careers page */
+  .career-breadcrumb-wrapper {
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
   
   @media only screen and (max-width:767px) {
     .page-width {
         padding-left: 22px;
-        padding-right: 22px
+        padding-right: 22px;
+    }
+
+    .career-breadcrumb-wrapper {
+      padding-top: 12px;
+      padding-bottom: 12px;
     }
   }
   
@@ -898,8 +909,10 @@
         padding: 50px 0
     }
   }
-  </style>
-{% include 'breadcrumbs' %}
+</style>
+<div class="page-width career-breadcrumb-wrapper" style="--page-width: 1360px;">
+  {% include 'breadcrumbs' %}
+</div>
 {% section 'pf-carrers-banner' %}
 {% section 'pf-carrers-custom' %}
 {% section 'pf-carrers-slider' %}
