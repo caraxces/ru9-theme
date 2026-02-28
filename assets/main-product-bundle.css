@@ -2843,9 +2843,29 @@
     align-items: start;
   }
 
-  /* Sticky cần overflow visible trên toàn bộ cha – cột ảnh (bên phải) dính, cột nội dung trái scroll */
+  /* Step 2 desktop (769px trở lên, kể cả 1360px): luôn 2 cột 50/50, không dùng breakpoint theme 95rem */
+  @media screen and (min-width: 769px) {
+    .bundle-step-2 .grid.grid--product-images-right {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+    }
+    .bundle-step-2 .grid__item.large-up--one-half,
+    .bundle-step-2 .grid__item.product-grid__images,
+    .bundle-step-2 .grid__item.product-grid__info {
+      flex: 0 0 50% !important;
+      width: 50% !important;
+      max-width: 50% !important;
+      min-width: 0 !important;
+    }
+  }
+
+  /* Sticky: overflow-y visible để cột ảnh dính; overflow-x hidden để không scroll ngang (layout 1360px) */
   .bundle-step-2 .page-content,
-  .bundle-step-2 .bundle-container,
+  .bundle-step-2 .bundle-container {
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
   .bundle-step-2 .grid.grid--product-images-right {
     overflow: visible !important;
   }
@@ -3115,15 +3135,15 @@
 
   /* DESKTOP STEP 2 IMAGE STYLES - TO BE REBUILT */
 
-  /* Bundle Main Container - Override theme styles */
+  /* Bundle Main Container - Override theme styles, tránh scroll ngang viewport */
   .bundle-main-container {
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
     position: relative !important;
-    overflow: visible !important;
+    overflow-x: hidden !important;
   }
 
   /* Override any theme page-width styles that might affect our bundle */
@@ -3163,9 +3183,55 @@
   .bundle-container {
     margin: 0 auto;
     width: 100%;
-    max-width: 1360px;
+    max-width: 1360px !important;
     box-sizing: border-box;
-    overflow: visible;
+    overflow-x: hidden !important;
+    overflow-y: visible;
+  }
+
+  /* Step 2: tránh tràn ngang – áp dụng đúng layout 1360px, cột nội dung không đẩy scroll */
+  .bundle-step-2 .page-content {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  .bundle-step-2 .grid {
+    max-width: 100% !important;
+    min-width: 0;
+  }
+  .bundle-step-2 .grid__item.product-grid__info,
+  .bundle-step-2 .product-single__meta.product-info-inner {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  .bundle-step-2 .variant-wrapper,
+  .bundle-step-2 .variant-input-wrap,
+  .bundle-step-2 .bundle-products-grid {
+    max-width: 100%;
+    min-width: 0;
+  }
+  .bundle-step-2 .variant-input-wrap .variant-input,
+  .bundle-step-2 .variant-wrapper .variant-input {
+    min-width: 0;
+  }
+  .bundle-step-2 .variant-input-wrap[data-handle="kich-thuoc"],
+  .bundle-step-2 .variant-input-wrap[data-handle="size"],
+  .bundle-step-2 .variant-input-wrap[data-handle="kích-thước"] {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr));
+    gap: 12px !important;
+  }
+  .bundle-step-2 .is-color .variant-input-wrap,
+  .bundle-step-2 .variant-input-wrap[data-handle="mau"],
+  .bundle-step-2 .variant-input-wrap[data-handle="color"],
+  .bundle-step-2 .variant-input-wrap[data-handle="colour"] {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+  .bundle-step-2 .product-block,
+  .bundle-step-2 .bundle-navigation {
+    max-width: 100%;
+    min-width: 0;
   }
 
   /* Desktop: breadcrumbs thẳng hàng với layout (cùng padding với grid content) */
