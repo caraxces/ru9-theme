@@ -17,7 +17,7 @@
 
 {{ 'main-product-bundle.css' | asset_url | stylesheet_tag }}
 {{ 'bundle-init.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'bundle-utils.min.js' | asset_url }}" defer></script>
+<script src="{{ 'bundle-utils.js' | asset_url }}" defer></script>
 
 {%- comment -%}
   BUNDLE PRICING CALCULATOR - Only visible in Theme Editor
@@ -848,7 +848,7 @@
               "handle": {{ bundle_product.handle | json }},
               "title": {{ bundle_product.title | json }},
               "id": {{ bundle_product.id | json }},
-              "featured_image": {{ bundle_product.featured_media | image_url: 'medium' | json }},
+              "featured_image": {{ bundle_product.featured_media | image_url: width: 360 | json }},
               "price": {{ bundle_product.price | json }},
               "compare_at_price": {{ bundle_product.compare_at_price | json }},
               "description": {{ bundle_product.description | json }},
@@ -862,13 +862,20 @@
               ],
               "media": [
                 {%- for media in bundle_product.media -%}
+                  {%- liquid
+                    if media.media_type == 'image'
+                      assign img_for_url = media
+                    else
+                      assign img_for_url = media.preview_image
+                    endif
+                  -%}
                   {
                     "id": {{ media.id | json }},
                     "media_type": {{ media.media_type | json }},
-                    "src": {{ media | image_url: 'large' | json }},
+                    "src": {{ img_for_url | image_url: width: 720 | json }},
                     "alt": {{ media.alt | json }},
                     "preview_image": {
-                      "src": {{ media | image_url: 'large' | json }},
+                      "src": {{ img_for_url | image_url: width: 720 | json }},
                       "aspect_ratio": {{ media.aspect_ratio | default: 1 | json }}
                     }
                   }{% unless forloop.last %},{% endunless %}
@@ -882,7 +889,7 @@
                     "price": {{ variant.price | json }},
                     "compare_at_price": {{ variant.compare_at_price | json }},
                     "available": {{ variant.available | json }},
-                    "featured_image": {{ variant.featured_media | image_url: 'medium' | json }},
+                    "featured_image": {{ variant.featured_media | default: bundle_product.featured_media | image_url: width: 360 | json }},
                     "options": {{ variant.options | json }}
                   }{% unless forloop.last %},{% endunless %}
                 {%- endfor -%}

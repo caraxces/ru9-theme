@@ -116,7 +116,7 @@
         "sku_enable": true,
         "combo_title": "Combo bao gồm các sản phẩm:",
         "cta_button_text": "BẮT ĐẦU TẠO COMBO",
-        "target_discount_percentage": 15,
+        "target_discount_percentage": 0,
         "service_icon_1": "shopify://shop_images/Layer_1_3.svg",
         "service_text_1": "100 đêm ngủ thử",
         "service_icon_2": "shopify://shop_images/Layer_1_4.svg",

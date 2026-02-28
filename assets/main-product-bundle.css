@@ -1361,12 +1361,13 @@
     width: 100% !important;
   }
   
+  /* Override theme.css .grid--product-images-right .grid__item:first-child { order: 2 } */
   .bundle-step-2 .grid__item:first-child {
-    order: 1 !important;
+    order: -1 !important;
   }
   
   .bundle-step-2 .grid__item:last-child {
-    order: 2 !important;
+    order: 0 !important;
   }
   
   /* MOBILE STEP 2 IMAGE STYLES - TO BE REBUILT */
@@ -2842,6 +2843,33 @@
     align-items: start;
   }
 
+  /* Sticky cần overflow visible trên toàn bộ cha – cột ảnh (bên phải) dính, cột nội dung trái scroll */
+  .bundle-step-2 .page-content,
+  .bundle-step-2 .bundle-container,
+  .bundle-step-2 .grid.grid--product-images-right {
+    overflow: visible !important;
+  }
+  /* Cột hình ảnh (DOM first-child, hiển thị bên phải do order:2) = STICKY */
+  .bundle-step-2 .grid.grid--product-images-right .grid__item.product-single__sticky.product-grid__images,
+  .bundle-step-2 .grid.grid--product-images-right .grid__item[data-step2-images],
+  .bundle-step-2 .grid__item.product-single__sticky.product-grid__images,
+  .bundle-step-2 .grid__item[data-step2-images] {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 120px !important;
+    align-self: start !important;
+  }
+  .sticky-header .bundle-step-2 .grid__item.product-single__sticky.product-grid__images,
+  .sticky-header .bundle-step-2 .grid__item[data-step2-images] {
+    top: 140px !important;
+  }
+  /* Cột nội dung (trái) = tĩnh, scroll theo trang */
+  .bundle-step-2 .grid__item.product-grid__info,
+  .bundle-step-2 .product-single__meta.product-info-inner {
+    position: relative !important;
+    align-self: start;
+  }
+
   .bundle-step-2 .is-sticky {
     position: -webkit-sticky;
     position: sticky;
@@ -3131,33 +3159,90 @@
     }
   }
 
-  /* Bundle Container - No padding, just max-width */
+  /* Bundle Container - 1360px layout to match theme */
   .bundle-container {
     margin: 0 auto;
     width: 100%;
+    max-width: 1360px;
     box-sizing: border-box;
     overflow: visible;
   }
 
+  /* Desktop: breadcrumbs thẳng hàng với layout (cùng padding với grid content) */
+  @media screen and (min-width: 769px) {
+    .bundle-main-container .bundle-step .bundle-container .breadcrumb {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .bundle-main-container .bundle-step .bundle-container .grid {
+      margin-left: 0 !important;
+    }
+    .bundle-main-container .bundle-step .bundle-container .grid__item {
+      padding-left: var(--grid-desktop-vertical-spacing, 20px) !important;
+    }
+    .bundle-main-container .bundle-step .bundle-container .grid__item:first-child {
+      padding-left: 0 !important;
+    }
+  }
+
   /* Mobile responsive styles */
   @media screen and (max-width: 768px) {
-    /* Step 1 Mobile Layout - Make it vertical like product template */
+    /* Step 1 Mobile Layout - Image first, then info (fix "ảnh trôi xuống") */
     .bundle-step-1 .grid {
       display: flex !important;
       flex-direction: column !important;
       flex-wrap: wrap !important;
     }
-    show-more-gallery-btn{
+    /* Force image to appear FIRST on mobile (above product info) */
+    /* Step 1 uses grid--product-images--partial when image_position=left, NOT grid--product-images-right */
+    .bundle-step-1 .grid--product-images-right .product-grid__images,
+    .bundle-step-1 .grid--product-images-right .product-single__sticky.product-grid__images,
+    .bundle-step-1 .grid--product-images--partial .product-grid__images,
+    .bundle-step-1 .grid--product-images--partial .product-single__sticky.product-grid__images {
+      order: -1 !important;
+    }
+    .bundle-step-1 .grid--product-images-right .product-grid__info,
+    .bundle-step-1 .grid--product-images--partial .product-grid__info {
+      order: 0 !important;
+    }
+    .show-more-gallery-btn {
       display: none !important;
     }
+    /* Step 1 mobile: hide secondary slides (chỉ hiển thị slide chính) */
+    .bundle-step-1 .product-main-slide.secondary-slide {
+      display: none !important;
+    }
+    /* Step 1 Mobile: Ảnh full area - override large-up--one-half và grid gutter */
     .bundle-step-1 .grid__item.product-single__sticky,
-    .bundle-step-1 .grid__item.product-grid__images {
+    .bundle-step-1 .grid__item.product-grid__images,
+    .bundle-step-1 .grid__item.large-up--one-half.product-grid__images,
+    .bundle-step-1 .grid__item.large-up--one-half.product-single__sticky {
       flex: 0 0 100% !important;
       width: 100% !important;
       max-width: 100% !important;
       min-width: 100% !important;
       margin-right: 0 !important;
+      margin-left: 0 !important;
       padding-right: 0 !important;
+      padding-left: 0 !important;
+    }
+    /* Grid - padding 8px hai bên cho phần ảnh */
+    .bundle-step-1 .bundle-container .grid {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100% !important;
+    }
+    .bundle-step-1 .grid > .grid__item.product-single__sticky,
+    .bundle-step-1 .grid > .grid__item.product-grid__images {
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+    }
+    /* Phần thông tin giữ padding */
+    .bundle-step-1 .grid > .grid__item.product-grid__info {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
     }
     
     .bundle-step-1 .grid__item.product-grid__info {
@@ -3814,10 +3899,64 @@
     overflow: visible !important;
     touch-action: pan-y pinch-zoom !important; /* Allow horizontal swipe */
   }
-  .product__thumbs--below .product__thumb-item{
+  .product__thumbs--below .product__thumb-item {
     margin-right: 0px!important;
     width: 5rem;
     vertical-align: middle;
+  }
+
+  /* Step 1 Mobile: Bỏ thumbnails (huan) - chỉ main image, thông tin sát ngay bên dưới */
+  .bundle-step-1 .product__thumbs,
+  .bundle-step-1 .product__thumbs--below,
+  .bundle-step-1 .product__thumbs--below .product__thumbs--scroller,
+  .bundle-step-1 .product__thumbs--scroller,
+  .bundle-step-1 [class*="huan-"].product__thumbs--scroller {
+    display: none !important;
+  }
+  /* Step 1 Mobile: Thông tin sát main image - giảm khoảng cách */
+  .bundle-step-1 .product-grid__info {
+    margin-top: 0 !important;
+    padding-top: 0.75rem !important;
+  }
+  .bundle-step-1 .product-grid__images {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Step 2 Bundle: Thumbnails as rounded squares (3px), not tiny dots */
+  .bundle-step-2 .product__thumbs--below .product__thumb-item,
+  .bundle-step-2 .product__thumbs--scroller .product__thumb-item {
+    width: 64px !important;
+    min-width: 64px !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    margin-right: 8px !important;
+    flex-shrink: 0 !important;
+    border-radius: 3px !important;
+    overflow: hidden !important;
+  }
+  .bundle-step-2 .product__thumbs--below .product__thumb .image-wrap,
+  .bundle-step-2 .product__thumbs--scroller .product__thumb .image-wrap {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding-bottom: 0 !important;
+  }
+  .bundle-step-2 .product__thumbs--below .product__thumb .image-wrap img,
+  .bundle-step-2 .product__thumbs--scroller .product__thumb .image-wrap img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   .product-main-slide {
     display: block !important;
@@ -4034,6 +4173,88 @@
   display: none !important;
 }
 
+/* Step 2 ALL Screens - Thumbnails hiển thị (image-wrap__thumbnail có height:0 gây ẩn ảnh) */
+.bundle-step-2 .product__thumbs--scroller .product__thumb .image-wrap,
+.bundle-step-2 .product__thumbs--below .product__thumb .image-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding-bottom: 0 !important;
+}
+.bundle-step-2 .product__thumbs--scroller .product__thumb .image-wrap img,
+.bundle-step-2 .product__thumbs--below .product__thumb .image-wrap img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.bundle-step-2 .product__thumbs--scroller .product__thumb-item,
+.bundle-step-2 .product__thumbs--below .product__thumb-item {
+  position: relative !important;
+  overflow: hidden !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+}
+.bundle-step-2 .product__thumbs--scroller .product__thumb,
+.bundle-step-2 .product__thumbs--below .product__thumb {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+/* Step 2 Desktop: layout giống Step 1 & 3 - grid 2 cột 49%, hiện toàn bộ ảnh (không giới hạn 5) */
+@media screen and (min-width: 769px) {
+  .bundle-step-2 .product__thumbs--below .product__thumbs--scroller,
+  .bundle-step-2 .product__thumbs--scroller {
+    display: grid !important;
+    grid-template-columns: 49% 49% !important;
+    gap: 2% !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    white-space: normal !important;
+    margin-top: 15px !important;
+  }
+  .bundle-step-2 .product__thumbs--below .product__thumb-item,
+  .bundle-step-2 .product__thumbs--scroller .product__thumb-item {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1 !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+  }
+  /* Step 2: mặc định chỉ hiện 5 ảnh (ẩn từ thứ 6 trở đi) */
+  .bundle-step-2 .product__thumbs--step2 .product__thumbs--scroller .product__thumb-item:nth-child(n+6),
+  .bundle-step-2 [data-step2-thumbs="true"] .product__thumbs--scroller .product__thumb-item:nth-child(n+6) {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .bundle-step-2 .product__photos {
+    position: relative;
+    overflow: visible !important;
+  }
+  .bundle-step-2 .product-column-content {
+    overflow: visible !important;
+  }
+}
+
 /* Step 2 ALL Screens - Image wrap positioning */
 .bundle-step-2 .image-wrap {
   position: relative !important;
@@ -4131,6 +4352,18 @@
     white-space: normal !important;
   }
   
+  /* Step 1 & Step 3 desktop: mỗi thumb 49% width, 2 cột chiếm full area, không hở */
+  .bundle-step-1 .product__thumbs--below .product__thumbs--scroller,
+  .bundle-step-3 .product__thumbs--below .product__thumbs--scroller {
+    grid-template-columns: 49% 49% !important;
+    gap: 2% !important;
+  }
+  .bundle-step-1 .product__thumbs--below .product__thumb-item,
+  .bundle-step-3 .product__thumbs--below .product__thumb-item {
+    max-width: none !important;
+    width: 100% !important;
+  }
+  
   /* Hide first thumbnail (data-index="0") on desktop */
   .bundle-step-1 .product__thumbs--scroller [data-product-thumb][data-index="0"],
   .bundle-step-1 .product__thumbs--scroller .product__thumb-item[data-index="0"],
@@ -4151,5 +4384,23 @@
   .bundle-step-1 .product__thumbs--below,
   .bundle-step-3 .product__thumbs--below {
     margin-top: 15px;
+  }
+}
+
+/* Step 3 Mobile: Chỉ hiển thị banner bundle, ẩn carousel thumbnails */
+@media (max-width: 768px) {
+  .bundle-step-3 .product__thumbs,
+  .bundle-step-3 .product__thumbs--below,
+  .bundle-step-3 .product__thumbs--scroller {
+    display: none !important;
+  }
+  .bundle-step-3 .product__main-photos {
+    width: 100% !important;
+  }
+  .bundle-step-3 .product-slideshow .product-main-slide:first-child {
+    display: block !important;
+  }
+  .bundle-step-3 .product-slideshow .product-main-slide:not(:first-child) {
+    display: none !important;
   }
 }

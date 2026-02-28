@@ -57,18 +57,7 @@ function initStep1Sticky(productSection) {
         imageColumn.style.flexShrink = '0';
         
         infoColumn.style.flexShrink = '0';
-        
-        console.log('✅ Step 1 - Locked widths to 50%:', {
-          containerWidth: containerWidth,
-          targetWidth: targetWidth,
-          imageWidth: imageColWidth,
-          infoWidth: infoColWidth
-        });
       } else {
-        console.warn('⚠️ Step 1 - Invalid column widths, skipping width lock:', {
-          imageWidth: imageColWidth,
-          infoWidth: infoColWidth
-        });
       }
     });
   };
@@ -126,7 +115,6 @@ document.addEventListener('shopify:section:load', function(event) {
 // It should be called from within the main script where container is defined
 function initializeStep2StickyColumns(container) {
   if (!container) {
-    console.log('Container not provided to initializeStep2StickyColumns');
     return;
   }
   
@@ -140,12 +128,8 @@ function initializeStep2StickyColumns(container) {
   const infoColumnInner = infoColumn ? infoColumn.querySelector('.product-single__meta') : null;
   
   if (!gridContainer || !imageColumn || !infoColumn || !imageColumnInner || !infoColumnInner) {
-    console.log('Step 2 sticky elements not found');
     return;
   }
-  
-  console.log('Initializing step 2 sticky columns');
-  
   const setupStickyColumns = () => {
     // Clean up styles from previous calculations before re-running
     let scrollHandler = null;
@@ -240,7 +224,6 @@ window.BundleUtils.updateBundleProductImage = function(variant, container) {
   if (window.bundleInstance && window.bundleInstance.updateBundleProductImage) {
     return window.bundleInstance.updateBundleProductImage(variant, container);
   }
-  console.warn('Bundle instance not available for image update');
 };
 
 // Main bundle functionality - will be called from main-product-bundle.liquid
@@ -255,30 +238,52 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
     async function fetchShopifyProduct(handle) {
       // Check cache first
       if (productDataCache[handle]) {
-        console.log('📦 Using cached data for:', handle);
         return productDataCache[handle];
       }
-  
-      console.log('🌐 Fetching from Shopify:', handle);
       const response = await fetch(`/products/${handle}.js`);
+      if (!response.ok) {
+        throw new Error('Product fetch failed: ' + response.status);
+      }
       const shopifyProduct = await response.json();
       
-      // Convert Shopify product format to our format
+      // Normalize media - always use string URLs (Shopify 2026 /products/{handle}.js)
+      let media = [];
+      if (shopifyProduct.media && Array.isArray(shopifyProduct.media) && shopifyProduct.media.length > 0) {
+        media = shopifyProduct.media.map(m => {
+          let src = m.preview_image?.src || m.preview_image?.url || m.src || m.url || '';
+          if (typeof src !== 'string') src = '';
+          const aspectRatio = m.preview_image?.aspect_ratio || (m.preview_image?.width && m.preview_image?.height ? m.preview_image.width / m.preview_image.height : 1);
+          return {
+            id: m.id,
+            media_type: m.media_type || 'image',
+            src,
+            alt: m.alt || shopifyProduct.title,
+            preview_image: { src, aspect_ratio: aspectRatio }
+          };
+        });
+      } else if (shopifyProduct.images && Array.isArray(shopifyProduct.images) && shopifyProduct.images.length > 0) {
+        media = shopifyProduct.images.map(img => {
+          let src = img.src || img.url || '';
+          if (typeof src !== 'string') src = '';
+          return {
+            id: img.id,
+            media_type: 'image',
+            src,
+            alt: img.alt || shopifyProduct.title,
+            preview_image: {
+              src,
+              aspect_ratio: (img.width && img.height) ? img.width / img.height : 1
+            }
+          };
+        });
+      }
+      
       const productData = {
         id: shopifyProduct.id,
         title: shopifyProduct.title,
         handle: shopifyProduct.handle,
-        media: shopifyProduct.media || shopifyProduct.images.map(img => ({
-          id: img.id,
-          media_type: 'image',
-          src: img.src,
-          alt: img.alt,
-          preview_image: {
-            src: img.src,
-            aspect_ratio: img.width / img.height
-          }
-        })),
-        variants: shopifyProduct.variants
+        media: media,
+        variants: shopifyProduct.variants || []
       };
       
       // Cache the result
@@ -288,39 +293,19 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
   
     // Helper function to render product images HTML for Step 2 (thumbnails below)
     function renderProductImagesHTML(productData, sectionId, step) {
-      console.log('🖼️ renderProductImagesHTML called:', {
-        step,
-        hasProductData: !!productData,
-        hasMedia: !!(productData && productData.media),
-        mediaLength: productData?.media?.length,
-        productTitle: productData?.title
-      });
-      
       if (!productData || !productData.media || productData.media.length === 0) {
-        console.warn('❌ No images to render:', productData);
         return '<div class="product__photos"><p>Không có hình ảnh</p></div>';
       }
       
        // These will be passed as parameters from the main file
        const productCarouselEnable = window.bundleConfig?.productCarouselEnable || false;
        const thumbnailArrows = window.bundleConfig?.thumbnailArrows || false;
-      
-      console.log('🖼️ Rendering', productData.media.length, 'images for', productData.title);
-      
-      // Main slideshow HTML
+      // Main slideshow HTML - extractImageUrl ensures string URL (never [object Object])
       let slideshowHTML = '';
       productData.media.forEach((media, index) => {
-        const mediaUrl = media.preview_image?.src || media.src || '';
-        const aspectRatio = media.preview_image?.aspect_ratio || 1;
-        
-        console.log(`  Image ${index}:`, {
-          mediaUrl,
-          aspectRatio,
-          rawMedia: media,
-          previewImage: media.preview_image,
-          src: media.src
-        });
-        
+        let mediaUrl = extractImageUrl(media) || media.preview_image?.src || media.src || '';
+        if (typeof mediaUrl !== 'string') mediaUrl = '';
+        const aspectRatio = (media.preview_image && typeof media.preview_image === 'object') ? (media.preview_image.aspect_ratio || 1) : 1;
         slideshowHTML += `
           <div class="product-main-slide ${index === 0 ? 'starting-slide' : 'secondary-slide'}" data-index="${index}" ${index === 0 ? 'style="display: block;"' : 'style="display: none;"'}>
             <div data-product-image-main class="product-image-main">
@@ -341,8 +326,9 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       let thumbnailsHTML = '';
       if (productData.media.length > 1) {
         productData.media.forEach((media, index) => {
-          const mediaUrl = media.preview_image?.src || media.src || '';
-          const aspectRatio = media.preview_image?.aspect_ratio || 1;
+          let mediaUrl = extractImageUrl(media) || media.preview_image?.src || media.src || '';
+          if (typeof mediaUrl !== 'string') mediaUrl = '';
+          const aspectRatio = (media.preview_image && typeof media.preview_image === 'object') ? (media.preview_image.aspect_ratio || 1) : 1;
           
           thumbnailsHTML += `
             <div class="product__thumb-item" data-index="${index}">
@@ -367,7 +353,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             </div>
             
             ${productData.media.length > 1 ? `
-              <div data-product-thumbs class="product__thumbs product__thumbs--below">
+              <div data-product-thumbs ${(step === 'step2' || step === 2) ? ' data-step2-thumbs="true"' : ''} class="product__thumbs product__thumbs--below${(step === 'step2' || step === 2) ? ' product__thumbs--step2' : ''}">
                 ${thumbnailArrows ? `
                   <button type="button" class="product__thumb-arrow product__thumb-arrow--prev hide">
                     <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-left" viewBox="0 0 284.49 498.98">
@@ -405,13 +391,10 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       setTimeout(() => {
         // DESKTOP: Disable Flickity, use static image with thumbnail clicks only
         if (window.innerWidth > 768) {
-          console.log('💻 Desktop mode: Skipping Flickity for', step);
           return;
         }
         
         // MOBILE ONLY: Initialize Flickity
-        console.log('📱 Mobile mode: Initializing Flickity for', step);
-        
         // Try multiple selectors to find the slideshow
         let slideshow = container.querySelector('.product-slideshow, [data-product-photos], .product-main-slideshow');
         if (!slideshow) {
@@ -419,17 +402,12 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           slideshow = container.querySelector('.product-images, .product-main-images, .product-main-slideshow');
         }
         if (!slideshow) {
-          console.warn('⚠️ No slideshow element found for step:', step);
           return;
         }
         
         if (!window.Flickity && !window.theme?.Slideshow) {
-          console.warn('⚠️ Flickity library not loaded');
           return;
         }
-        
-        console.log('🎠 Initializing Flickity for', step, '- element:', slideshow);
-        
         // Use theme.Slideshow (wrapper around Flickity) if available
         const SlideClass = window.theme?.Slideshow || Flickity;
         
@@ -445,9 +423,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             freeScroll: false,
             dragThreshold: 10
           });
-          
-          console.log('✅ Flickity initialized for', step);
-          
           // Connect custom nav buttons to Flickity
           const prevBtn = container.querySelector('.custom-nav-prev');
           const nextBtn = container.querySelector('.custom-nav-next');
@@ -466,11 +441,9 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                 if (flkty.next) flkty.next();
                 else if (flkty.flickity?.next) flkty.flickity.next();
               });
-              console.log('✅ Nav buttons connected to Flickity');
             }
           }
         } catch (error) {
-          console.error('❌ Error initializing Flickity:', error);
         }
       }, 300);
     }
@@ -526,8 +499,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
     initializeVariantPicker();
     
     // Initialize Step 0 (main product page) immediately
-    console.log('=== INITIALIZING STEP 0 (Main Product Page) ===');
-    
     // Try multiple selectors for Step 0
     let step0Container = document.querySelector('.bundle-step-0');
     if (!step0Container) {
@@ -542,54 +513,38 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
     if (!step0Container) {
       step0Container = document.querySelector('[data-section-id] .product-main-slideshow');
     }
-    
-    console.log('🔍 Step 0 container found:', !!step0Container);
-    console.log('🔍 Step 0 container:', step0Container);
-    console.log('🔍 Step 0 container class:', step0Container ? step0Container.className : 'N/A');
-    
     if (step0Container) {
       // Ensure first slide is visible
       const firstSlide = step0Container.querySelector('.product-main-slide');
       if (firstSlide) {
         firstSlide.style.display = 'block';
-        console.log('✅ Step 0: First slide made visible');
       }
       
       // Ensure first thumbnail is active
       const firstThumb = step0Container.querySelector('[data-product-thumb]');
       if (firstThumb) {
         firstThumb.classList.add('active');
-        console.log('✅ Step 0: First thumbnail made active');
       }
       
       // Check if thumbnails exist
       const thumbnails = step0Container.querySelectorAll('[data-product-thumb]');
-      console.log('Found thumbnails in step 0:', thumbnails.length);
-      
       // Check if slideshow exists
       const slideshow = step0Container.querySelector('.product-slideshow, [data-product-photos], .product-main-slideshow');
-      console.log('🔍 Step 0 slideshow found:', !!slideshow);
-      console.log('🔍 Step 0 slideshow element:', slideshow);
-      
       // Check if Flickity already exists
       if (slideshow && window.Flickity) {
         const existingFlickity = Flickity.data(slideshow);
-        console.log('🔍 Step 0 existing Flickity:', !!existingFlickity);
       }
       
       // Initialize thumbnail clicks
       setTimeout(() => {
-        console.log('🔍 Step 0: Initializing thumbnail clicks...');
         initializeThumbnailClicks(step0Container);
       }, 400);
       
       // Force Flickity initialization
       setTimeout(() => {
-        console.log('🎠 Step 0: Force initializing Flickity...');
         initializeFlickityForStep(step0Container, 'step0');
       }, 800);
     } else {
-      console.warn('⚠️ Step 0: Container not found');
     }
   
     // Event listeners
@@ -697,22 +652,14 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         e.preventDefault();
         
         if (bundleState.currentStep === 2) {
-          console.log('=== CONTINUE BUTTON CLICKED ===');
-          
           // CRITICAL: Save current product selection BEFORE moving to next product
           const currentProduct = config.bundleProducts[bundleState.currentProductIndex];
           if (currentProduct) {
-            console.log('Saving current product selection:', currentProduct.title);
-            
             // Get selected variant from ProductSelect
             const productSelect = container.querySelector(`#ProductSelect-bundle-${currentProduct.id}`);
             if (productSelect && productSelect.value) {
               const selectedVariantId = productSelect.value;
               const selectedVariant = currentProduct.variants.find(v => v.id.toString() === selectedVariantId.toString());
-              
-              console.log('Selected variant ID:', selectedVariantId);
-              console.log('Selected variant:', selectedVariant);
-              
               if (selectedVariant) {
                 // Get variant image
                 let variantImage = extractImageUrl(currentProduct.featured_image);
@@ -742,14 +689,10 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                 if (existingIndex >= 0) {
                   // Update existing product
                   bundleState.selectedProducts.bundle[existingIndex] = productData;
-                  console.log('✅ Updated existing product in bundle state');
                 } else {
                   // Add new product
                   bundleState.selectedProducts.bundle.push(productData);
-                  console.log('✅ Added new product to bundle state');
                 }
-                
-                console.log('Current bundle state:', bundleState.selectedProducts.bundle);
               }
             }
           }
@@ -759,8 +702,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             bundleState.currentProductIndex++;
             loadBundleProduct(bundleState.currentProductIndex);
           } else {
-            console.log('All products selected, moving to step 3');
-            console.log('Final bundle state:', bundleState.selectedProducts.bundle);
             showStep(3);
             renderBundleSummary();
           }
@@ -775,32 +716,16 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         : container.querySelectorAll('.product__thumb-item a[data-index], .product__thumb[data-index]');
       const slides = container.querySelectorAll('.product-main-slide');
       
-      console.log('🖼️ initializeThumbnailClicks:', {
-        container: container,
-        containerClass: container.className,
-        thumbnailsCount: thumbnails.length,
-        slidesCount: slides.length,
-        allSlides: Array.from(slides).map(s => ({
-          class: s.className,
-          display: s.style.display,
-          index: s.getAttribute('data-index')
-        }))
-      });
-      
       if (!thumbnails.length && !slides.length) {
-        console.warn('⚠️ No thumbnails or slides found in container');
         return;
       }
       
       if (!slides.length) {
-        console.warn('⚠️ No slides found - might be Flickity carousel');
         return;
       }
       
       // Function to switch to slide by index
       function switchToSlide(targetIndex) {
-        console.log('🖼️ Switching to slide:', { targetIndex, totalSlides: slides.length });
-        
         // Hide all slides
         slides.forEach(slide => {
           slide.classList.remove('starting-slide');
@@ -813,7 +738,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           slides[targetIndex].classList.add('starting-slide');
           slides[targetIndex].classList.remove('secondary-slide');
           slides[targetIndex].style.display = 'block';
-          console.log('🖼️ Showing slide:', targetIndex);
         }
         
         // Update thumbnail active states
@@ -828,14 +752,11 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       const flkty = flickityElement && typeof Flickity !== 'undefined' ? Flickity.data(flickityElement) : null;
       
       if (flkty) {
-        console.log('✅ Flickity carousel detected - using Flickity navigation');
-        
         // Thumbnail click handlers for Flickity
         thumbnails.forEach((thumb, index) => {
           thumb.addEventListener('click', function(e) {
             e.preventDefault();
             const targetIndex = parseInt(this.getAttribute('data-index'));
-            console.log('🖼️ Flickity thumbnail clicked:', targetIndex);
             flkty.select(targetIndex);
             
             // Update thumbnail active states
@@ -862,7 +783,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         
         // Mobile swipe for Flickity (already built-in, just log for debug)
         if (window.innerWidth <= 768) {
-          console.log('📱 Mobile swipe enabled via Flickity for', slides.length, 'slides');
         }
         
         return; // Skip custom slide logic
@@ -888,51 +808,35 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                                   container.querySelector('.product__photos');
       
       if (slideshowContainer && slides.length > 1) {
-        console.log('📱 Swipe initialized on:', slideshowContainer, 'with', slides.length, 'slides');
-        
         slideshowContainer.addEventListener('touchstart', function(e) {
           touchStartX = e.changedTouches[0].screenX;
-          console.log('📱 Touch start:', touchStartX);
         });
         
         slideshowContainer.addEventListener('touchend', function(e) {
           touchEndX = e.changedTouches[0].screenX;
           const swipeDistance = touchStartX - touchEndX;
           const minSwipeDistance = 50;
-          
-          console.log('📱 Touch end:', { touchEndX, swipeDistance, minSwipeDistance });
-          
           // Find current active slide
           slides.forEach((slide, index) => {
             if (slide.classList.contains('starting-slide') || slide.style.display !== 'none') {
               currentSlideIndex = index;
             }
           });
-          
-          console.log('📱 Current slide index:', currentSlideIndex, 'Total slides:', slides.length);
-          
           // Swipe left (next slide)
           if (swipeDistance > minSwipeDistance && currentSlideIndex < slides.length - 1) {
-            console.log('📱 Swipe left - next slide');
             switchToSlide(currentSlideIndex + 1);
           }
           // Swipe right (previous slide)
           else if (swipeDistance < -minSwipeDistance && currentSlideIndex > 0) {
-            console.log('📱 Swipe right - previous slide');
             switchToSlide(currentSlideIndex - 1);
           }
         });
       } else {
-        console.warn('⚠️ Swipe not initialized:', { 
-          slideshowContainer: !!slideshowContainer, 
-          slidesCount: slides.length 
-        });
       }
       
       // Set first thumbnail as active
       if (thumbnails[0]) {
         thumbnails[0].classList.add('active-thumb');
-        console.log('🖼️ Set first thumbnail as active');
       }
     }
   
@@ -947,41 +851,59 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         e.preventDefault();
         const changeLink = e.target.closest('.bundle-product-change-link');
         const productIndex = parseInt(changeLink.getAttribute('data-product-index'));
-        console.log('Change product clicked for index:', productIndex);
         changeProduct(productIndex);
       }
     }
-  
+
     function showStep(step) {
       bundleState.currentStep = step;
-      
+
       // Hide all steps
       container.querySelectorAll('.bundle-step').forEach(el => {
         el.style.display = 'none';
       });
-      
+
       // Show current step
       const currentStepEl = container.querySelector(`[data-step="${step}"]`);
       if (currentStepEl) {
         currentStepEl.style.display = 'block';
       }
       
+      // Re-init Step 1 when quay lại từ step 3 (layout phải hiển thị như lần đầu)
+      if (step === 1) {
+        const step1Container = container.querySelector('.bundle-step-1');
+        if (step1Container) {
+          const firstSlide = step1Container.querySelector('.product-main-slide');
+          if (firstSlide) firstSlide.style.display = 'block';
+          const firstThumb = step1Container.querySelector('[data-product-thumb]');
+          if (firstThumb) firstThumb.classList.add('active');
+          step1Container.querySelectorAll('[data-product-thumb]').forEach((t, i) => {
+            if (i > 0) t.classList.remove('active');
+          });
+          setTimeout(() => {
+            initializeFlickityForStep(step1Container, 'step1');
+            setTimeout(() => initializeThumbnailClicks(step1Container), 400);
+            const slideshow = step1Container.querySelector('.product-slideshow, [data-product-photos]');
+            if (slideshow && window.Flickity && Flickity.data(slideshow)) {
+              Flickity.data(slideshow).resize();
+              Flickity.data(slideshow).reposition();
+            }
+          }, 100);
+        }
+      }
+
       // Initialize Flickity for Step 3
       if (step === 3) {
         setTimeout(() => {
           const step3Container = document.querySelector('.bundle-step-3');
           if (step3Container) {
-            console.log('🎯 Step 3: Initializing Flickity carousel for mobile swipe');
-            
             // Find the slideshow element
             const slideshow = step3Container.querySelector('.product-slideshow, [data-product-photos]');
             if (slideshow) {
               // Check if Flickity already initialized
               const existingFlickity = window.Flickity && Flickity.data(slideshow);
               if (existingFlickity) {
-                console.log('✅ Step 3: Flickity already initialized');
               } else if (window.theme?.Slideshow || window.Flickity) {
-                console.log('🎠 Step 3: Manually initializing Flickity...');
                 initializeFlickityForStep(step3Container, 'step3');
               }
             }
@@ -996,69 +918,46 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       
       // Initialize step 0 (main product page)
       if (step === 0) {
-        console.log('=== INITIALIZING STEP 0 (Main Product Page) ===');
-        
         // Ensure first slide is visible
         const firstSlide = currentStepEl.querySelector('.product-main-slide');
         if (firstSlide) {
           firstSlide.style.display = 'block';
-          console.log('✅ Step 0: First slide made visible');
         }
         
         // Ensure first thumbnail is active
         const firstThumb = currentStepEl.querySelector('[data-product-thumb]');
         if (firstThumb) {
           firstThumb.classList.add('active');
-          console.log('✅ Step 0: First thumbnail made active');
         }
         
         // Check if thumbnails exist
         const thumbnails = currentStepEl.querySelectorAll('[data-product-thumb]');
-        console.log('Found thumbnails in step 0:', thumbnails.length);
-        
         // Check if product__thumbs--scroller exists
         const scroller = currentStepEl.querySelector('.product__thumbs--scroller');
-        console.log('Found product__thumbs--scroller:', !!scroller);
-        
         if (scroller) {
-          console.log('Scroller innerHTML length:', scroller.innerHTML.length);
-          console.log('Scroller children count:', scroller.children.length);
         }
         
         // Initialize thumbnail clicks
         setTimeout(() => {
-          console.log('🔍 Step 0: Initializing thumbnail clicks...');
           initializeThumbnailClicks(currentStepEl);
         }, 400);
         
         // Force Flickity initialization
         setTimeout(() => {
-          console.log('🎠 Step 0: Force initializing Flickity...');
           initializeFlickityForStep(currentStepEl, 'step0');
         }, 800);
       }
       
       // Initialize step 2 - tự động chọn sản phẩm đầu tiên
       if (step === 2) {
-        console.log('=== INITIALIZING STEP 2 ===');
-        
         // Tự động chọn sản phẩm đầu tiên nếu chưa có sản phẩm nào được chọn
         if (bundleState.selectedProducts.bundle.length === 0 && config.bundleProducts && config.bundleProducts.length > 0) {
-          console.log('Auto-selecting first bundle product...');
           const firstProduct = config.bundleProducts[0];
           
           // Tạo sản phẩm mặc định với variant đầu tiên
           const defaultVariant = firstProduct.variants && firstProduct.variants.length > 0 ? firstProduct.variants[0] : null;
           const defaultImage = extractImageUrl(firstProduct.featured_image) || 
                               (firstProduct.media && firstProduct.media.length > 0 ? extractImageUrl(firstProduct.media[0]) : '');
-          
-          console.log('🔍 Auto-select debug:', {
-            firstProduct: firstProduct,
-            defaultVariant: defaultVariant,
-            firstProductPrice: firstProduct.price,
-            defaultVariantPrice: defaultVariant ? defaultVariant.price : 'no variant'
-          });
-          
           // Determine quantity based on product index
           const productQuantity = bundleState.currentProductIndex === 2 ? (config.product3Quantity || 2) : 1;
           
@@ -1076,12 +975,9 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           };
           
           bundleState.selectedProducts.bundle.push(autoSelectedProduct);
-          console.log('✅ Auto-selected first product:', autoSelectedProduct);
         }
         
         // Initialize Step 0 (main product page) first
-        console.log('=== INITIALIZING STEP 0 (Main Product Page) ===');
-        
         // Try multiple selectors for Step 0
         let step0Container = document.querySelector('.bundle-step-0');
         if (!step0Container) {
@@ -1096,63 +992,45 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         if (!step0Container) {
           step0Container = document.querySelector('[data-section-id] .product-main-slideshow');
         }
-        
-        console.log('🔍 Step 0 container found:', !!step0Container);
-        console.log('🔍 Step 0 container:', step0Container);
-        console.log('🔍 Step 0 container class:', step0Container ? step0Container.className : 'N/A');
-        
         if (step0Container) {
           // Ensure first slide is visible
           const firstSlide = step0Container.querySelector('.product-main-slide');
           if (firstSlide) {
             firstSlide.style.display = 'block';
-            console.log('✅ Step 0: First slide made visible');
           }
           
           // Ensure first thumbnail is active
           const firstThumb = step0Container.querySelector('[data-product-thumb]');
           if (firstThumb) {
             firstThumb.classList.add('active');
-            console.log('✅ Step 0: First thumbnail made active');
           }
           
           // Check if thumbnails exist
           const thumbnails = step0Container.querySelectorAll('[data-product-thumb]');
-          console.log('Found thumbnails in step 0:', thumbnails.length);
-          
           // Check if slideshow exists
           const slideshow = step0Container.querySelector('.product-slideshow, [data-product-photos], .product-main-slideshow');
-          console.log('🔍 Step 0 slideshow found:', !!slideshow);
-          console.log('🔍 Step 0 slideshow element:', slideshow);
-          
           // Check if Flickity already exists
           if (slideshow && window.Flickity) {
             const existingFlickity = Flickity.data(slideshow);
-            console.log('🔍 Step 0 existing Flickity:', !!existingFlickity);
           }
           
           // Initialize thumbnail clicks
           setTimeout(() => {
-            console.log('🔍 Step 0: Initializing thumbnail clicks...');
             initializeThumbnailClicks(step0Container);
           }, 400);
           
           // Force Flickity initialization
           setTimeout(() => {
-            console.log('🎠 Step 0: Force initializing Flickity...');
             initializeFlickityForStep(step0Container, 'step0');
           }, 800);
         } else {
-          console.warn('⚠️ Step 0: Container not found');
         }
         
         // Load the first bundle product
-        console.log('Loading first bundle product...');
         loadBundleProduct(0);
         
         // Initialize Step 1 (copy logic from working Step 2 & 3)
         setTimeout(() => {
-          console.log('=== INITIALIZING STEP 1 ===');
           const step1Container = document.querySelector('.bundle-step-1');
           
           if (step1Container) {
@@ -1160,32 +1038,23 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             const firstSlide = step1Container.querySelector('.product-main-slide');
             if (firstSlide) {
               firstSlide.style.display = 'block';
-              console.log('✅ Step 1: First slide made visible');
             }
             
             // Ensure first thumbnail is active (like Step 3)
             const firstThumb = step1Container.querySelector('[data-product-thumb]');
             if (firstThumb) {
               firstThumb.classList.add('active');
-              console.log('✅ Step 1: First thumbnail made active');
             }
             
             // Check if thumbnails exist (like Step 3)
             const thumbnails = step1Container.querySelectorAll('[data-product-thumb]');
-            console.log('Found thumbnails in step 1:', thumbnails.length);
-            
             // Check if product__thumbs--scroller exists (like Step 3)
             const scroller = step1Container.querySelector('.product__thumbs--scroller');
-            console.log('Found product__thumbs--scroller:', !!scroller);
-            
             if (scroller) {
-              console.log('Scroller innerHTML length:', scroller.innerHTML.length);
-              console.log('Scroller children count:', scroller.children.length);
             }
             
             // Initialize thumbnail clicks (like Step 2 & 3)
             setTimeout(() => {
-              console.log('🔍 Step 1: Initializing thumbnail clicks...');
               initializeThumbnailClicks(step1Container);
             }, 400);
             
@@ -1207,9 +1076,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                   selectedAttraction: 0.025,
                   friction: 0.28
                 });
-                console.log('✅ Step 1: Flickity initialized for swipe');
               } else {
-                console.log('✅ Step 1: Flickity already initialized');
               }
             } else if (step1Slideshow && window.theme?.Slideshow) {
               // Fallback to theme.Slideshow if Flickity not available
@@ -1225,19 +1092,15 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                 selectedAttraction: 0.025,
                 friction: 0.28
               });
-              console.log('✅ Step 1: Theme Slideshow initialized for swipe');
             } else {
-              console.warn('⚠️ Step 1: Neither Flickity nor theme.Slideshow available');
             }
             
             // Force Flickity initialization (like Step 2 & 3)
             setTimeout(() => {
-              console.log('🎠 Step 1: Force initializing Flickity...');
               initializeFlickityForStep(step1Container, 'step1');
               
                  // Additional mobile-specific initialization
                  if (window.innerWidth <= 768) {
-                   console.log('📱 Step 1: Mobile-specific Flickity setup...');
                    const mobileSlideshow = step1Container.querySelector(`#ProductPhotos-${sectionId}`);
                 if (mobileSlideshow && window.Flickity) {
                   const existingFlickity = Flickity.data(mobileSlideshow);
@@ -1245,13 +1108,11 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                     // Force refresh for mobile
                     existingFlickity.resize();
                     existingFlickity.reposition();
-                    console.log('📱 Step 1: Mobile Flickity refreshed');
                   }
                 }
               }
             }, 800);
           } else {
-            console.warn('⚠️ Step 1: Container not found');
           }
         }, 1500);
         
@@ -1265,8 +1126,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       
       // Initialize step 3 if needed
       if (step === 3) {
-        console.log('=== INITIALIZING STEP 3 ===');
-        
         // Initialize quantity selector
         initializeQuantitySelector();
         
@@ -1274,43 +1133,26 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         const firstSlide = currentStepEl.querySelector('.product-main-slide');
         if (firstSlide) {
           firstSlide.style.display = 'block';
-          console.log('✅ First slide made visible');
         }
         
         // Ensure first thumbnail is active
         const firstThumb = currentStepEl.querySelector('[data-product-thumb]');
         if (firstThumb) {
           firstThumb.classList.add('active');
-          console.log('✅ First thumbnail made active');
         }
         
         // Check if thumbnails exist
         const thumbnails = currentStepEl.querySelectorAll('[data-product-thumb]');
-        console.log('Found thumbnails in step 3:', thumbnails.length);
-        
         // Check if product__thumbs--scroller exists
         const scroller = currentStepEl.querySelector('.product__thumbs--scroller');
-        console.log('Found product__thumbs--scroller:', !!scroller);
-        
         if (scroller) {
-          console.log('Scroller innerHTML length:', scroller.innerHTML.length);
-          console.log('Scroller children count:', scroller.children.length);
         }
       }
     }
   
     async function loadBundleProduct(index) {
-      console.log('=== LOAD BUNDLE PRODUCT DEBUG ===');
-      console.log('Index:', index);
-      console.log('Config bundleProducts:', config.bundleProducts);
-      console.log('Config bundleProducts length:', config.bundleProducts.length);
-      console.log('Config bundleProducts type:', typeof config.bundleProducts);
-      
       const product = config.bundleProducts[index];
-      console.log('Product at index', index, ':', product);
-      
       if (!product) {
-        console.error('No product found at index:', index);
         return;
       }
   
@@ -1326,103 +1168,47 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         progressTotal.textContent = config.bundleProducts.length;
       }
   
-       // Step 2: Fetch real product data from Shopify and render images
+       // Step 2: Render product images - use config data first (from Liquid), fallback to fetch
        const step2ImageColumn = document.getElementById(`Step2ImageColumn-${sectionId}`);
-      console.log('Step 2 Image Column found:', !!step2ImageColumn);
-      console.log('Product handle:', product.handle);
-      
-      if (step2ImageColumn && product && product.handle) {
-        // Fetch real product data from Shopify (with caching)
-        fetchShopifyProduct(product.handle)
-          .then(productData => {
-            console.log('🎯 Product Data:', productData);
-            console.log('🎯 Media:', productData.media);
-            
-             const imageHTML = renderProductImagesHTML(productData, sectionId, 'step2');
-            step2ImageColumn.innerHTML = imageHTML;
-            console.log('✅ Step 2 images rendered');
-            
-            // Initialize Flickity carousel for Step 2 (for mobile swipe)
-            setTimeout(() => {
-              const step2Container = document.querySelector('.bundle-step-2');
-              if (step2Container) {
-                console.log('🎯 Step 2: Initializing Flickity carousel for mobile swipe');
-                initializeFlickityForStep(step2Container, 'step2');
-                
-                // Also init thumbnail clicks (will detect Flickity and use it)
-                setTimeout(() => {
-                  initializeThumbnailClicks(step2Container);
-                }, 400);
-              }
-            }, 100);
-            
-            // Debug CSS after rendering
-            setTimeout(() => {
-              const slides = step2ImageColumn.querySelectorAll('.product-main-slide');
-              const images = step2ImageColumn.querySelectorAll('img');
-              console.log('🔍 Step 2 Debug - Slides found:', slides.length);
-              console.log('🔍 Step 2 Debug - Images found:', images.length);
-              
-              slides.forEach((slide, idx) => {
-                const computedStyle = window.getComputedStyle(slide);
-                console.log(`🔍 Slide ${idx}:`, {
-                  display: computedStyle.display,
-                  visibility: computedStyle.visibility,
-                  opacity: computedStyle.opacity,
-                  classes: slide.className
-                });
-              });
-              
-              images.forEach((img, idx) => {
-                const computedStyle = window.getComputedStyle(img);
-                console.log(`🔍 Image ${idx}:`, {
-                  display: computedStyle.display,
-                  visibility: computedStyle.visibility,
-                  opacity: computedStyle.opacity,
-                  src: img.src,
-                  loaded: img.complete
-                });
-              });
-            }, 100);
-            
-            // Flickity is now always initialized for mobile swipe (handled above)
-            // No need for duplicate initialization here
-          })
-          .catch(error => {
-            console.error('❌ Error fetching product data:', error);
-            step2ImageColumn.innerHTML = '<p>Không thể tải hình ảnh sản phẩm</p>';
+      if (step2ImageColumn && product) {
+        const renderStep2Images = (productData) => {
+          const imageHTML = renderProductImagesHTML(productData, sectionId, 'step2');
+          step2ImageColumn.innerHTML = imageHTML;
+          setTimeout(() => {
+            const step2Container = document.querySelector('.bundle-step-2');
+            if (step2Container) {
+              initializeFlickityForStep(step2Container, 'step2');
+              setTimeout(() => initializeThumbnailClicks(step2Container), 400);
+            }
+          }, 100);
+        };
+        
+        // Prefer media from config (Liquid) - no fetch needed, avoids "Không thể tải hình ảnh"
+        const hasMediaFromConfig = product.media && Array.isArray(product.media) && product.media.length > 0;
+        if (hasMediaFromConfig) {
+          renderStep2Images({
+            id: product.id,
+            title: product.title,
+            handle: product.handle,
+            media: product.media,
+            variants: product.variants || []
           });
-      } else {
-        console.error('❌ Cannot render Step 2 images:', {
-          hasColumn: !!step2ImageColumn,
-          hasProduct: !!product,
-          hasHandle: !!(product && product.handle)
-        });
+        } else if (product.handle) {
+          // Fallback: fetch from Shopify when config has no media (e.g. debug fallback)
+          fetchShopifyProduct(product.handle)
+            .then(renderStep2Images)
+            .catch(error => {
+              step2ImageColumn.innerHTML = '<p>Không thể tải hình ảnh sản phẩm</p>';
+            });
+        } else {
+          step2ImageColumn.innerHTML = '<p>Không có hình ảnh sản phẩm</p>';
+        }
       }
   
       // Render product info in the right column
       const productsGrid = container.querySelector('.bundle-products-grid');
-      console.log('Products grid element:', productsGrid);
-      
       if (productsGrid) {
         try {
-              console.log('Loading bundle product:', product.handle);
-      console.log('Product data:', {
-        title: product.title,
-        price: product.price,
-        description: product.description,
-        variants: product.variants,
-        featured_image: product.featured_image
-      });
-      
-      // Debug variant structure
-      if (product.variants && product.variants.length > 0) {
-        console.log('Product variants count:', product.variants.length);
-        console.log('First variant:', product.variants[0]);
-        console.log('First variant options:', product.variants[0].options);
-        console.log('Product options:', product.options);
-      }
-          
           // Use simplified product template structure for right column only
           const productHTML = `
             <div class="bundle-product-item" data-product-handle="${product.handle}" data-section-id="${config.sectionId}" data-product-id="${product.id}">
@@ -1662,15 +1448,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
               </div>
             </div>
           `;
-          
-          console.log('Generated HTML:', productHTML);
           productsGrid.innerHTML = productHTML;
-          
-          console.log('HTML set successfully. Products grid innerHTML length:', productsGrid.innerHTML.length);
-          console.log('Products grid children count:', productsGrid.children.length);
-          
-  
-          
           // Initialize variant picker
           const productContainer = productsGrid.querySelector('.bundle-product-item');
           if (productContainer) {
@@ -1680,7 +1458,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             setTimeout(() => {
               const firstOption1Input = productContainer.querySelector('[data-variant-input][data-index="option1"]:checked');
               if (firstOption1Input) {
-                console.log('🔄 Initial sync: Triggering option1 change to update option2...');
                 firstOption1Input.dispatchEvent(new Event('change', { bubbles: true }));
               }
             }, 200);
@@ -1689,12 +1466,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           // Update progress
           updateBundleProgress();
         } catch (error) {
-          console.error('Error loading bundle product:', error);
-          console.error('Error details:', {
-            message: error.message,
-            stack: error.stack,
-            product: product
-          });
           // Show error message
           productsGrid.innerHTML = `
             <div class="bundle-product-item" data-product-handle="${product.handle}">
@@ -1723,43 +1494,35 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
   
   
   
-    // Helper function to extract image URL from various formats
+    // Helper function to extract image URL - NEVER return object (causes [object Object] in img src)
+    // Shopify 2026: media has src, preview_image.src; always return string URL
     function extractImageUrl(imageData) {
       if (!imageData) return '';
-      
-      // If it's already a string URL, return it
-      if (typeof imageData === 'string') {
-        return imageData;
-      }
-      
-      // If it's an object, try to extract the URL
+      if (typeof imageData === 'string') return imageData;
+
       if (typeof imageData === 'object') {
-        // Try different possible properties
-        return imageData.src || 
-               imageData.url || 
-               imageData.preview_image || 
-               imageData.featured_image ||
-               (imageData.media && imageData.media.length > 0 ? imageData.media[0].src : '') ||
-               '';
+        // preview_image.src (Shopify media object)
+        const prev = imageData.preview_image;
+        if (prev) {
+          const u = typeof prev === 'string' ? prev : (prev?.src || prev?.url || '');
+          if (u && typeof u === 'string') return u;
+        }
+        // Direct src/url
+        const s = imageData.src || imageData.url;
+        if (s && typeof s === 'string') return s;
+        // Nested media array
+        if (imageData.media && Array.isArray(imageData.media) && imageData.media.length > 0) {
+          const nested = extractImageUrl(imageData.media[0]);
+          if (nested) return nested;
+        }
       }
-      
       return '';
     }
   
     function renderBundleSummary() {
       const summaryProducts = container.querySelector('.bundle-summary-products');
       const bundlePhotos = container.querySelector(`#BundlePhotos-${sectionId}`);
-      
-      console.log('=== RENDER BUNDLE SUMMARY DEBUG ===');
-      console.log('summaryProducts found:', !!summaryProducts);
-      console.log('bundlePhotos found:', !!bundlePhotos);
-      console.log('bundleState:', bundleState);
-      console.log('bundleState.selectedProducts:', bundleState.selectedProducts);
-      console.log('bundleState.selectedProducts.bundle:', bundleState.selectedProducts.bundle);
-      console.log('bundleState.selectedProducts.bundle.length:', bundleState.selectedProducts.bundle.length);
-      
       if (!summaryProducts) {
-        console.error('❌ Summary products element not found!');
         return;
       }
   
@@ -1767,9 +1530,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       let totalFinal = 0;
   
       // Add main product - use selected variant if available
-      console.log('=== MAIN PRODUCT DEBUG ===');
-      console.log('bundleState.selectedProducts.main:', bundleState.selectedProducts.main);
-      
        const mainProduct = {
          productTitle: productTitle,
          variantTitle: bundleState.selectedProducts.main.variantTitle || 'Default Title',
@@ -1778,14 +1538,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
          price: bundleState.selectedProducts.main.variantPrice || 0,
          image: extractImageUrl(bundleState.selectedProducts.main.image) || extractImageUrl(productFeaturedImage)
        };
-      
-      console.log('=== MAIN PRODUCT PRICE DEBUG ===');
-      console.log('bundleState.selectedProducts.main:', bundleState.selectedProducts.main);
-      console.log('mainProduct.price:', mainProduct.price);
-      console.log('mainProduct.price type:', typeof mainProduct.price);
-      
-      console.log('Final mainProduct:', mainProduct);
-  
       // Add bundle products - ensure we use variantPrice and compareAtPrice
       const bundleProductsWithCorrectPrice = bundleState.selectedProducts.bundle.map(product => ({
         ...product,
@@ -1793,34 +1545,14 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         compareAtPrice: product.compareAtPrice || product.variantPrice || product.price, // Giá gốc (compare_at_price)
         image: extractImageUrl(product.image) // Extract proper image URL
       }));
-      
-      console.log('=== PRICE MAPPING DEBUG ===');
       bundleState.selectedProducts.bundle.forEach((originalProduct, index) => {
         const mappedProduct = bundleProductsWithCorrectPrice[index];
-        console.log(`Product ${index} price mapping:`, {
-          title: originalProduct.productTitle,
-          variantPrice: originalProduct.variantPrice,
-          compareAtPrice: originalProduct.compareAtPrice,
-          mappedPrice: mappedProduct.price,
-          mappedCompareAtPrice: mappedProduct.compareAtPrice,
-          variantTitle: originalProduct.variantTitle
-        });
       });
       
       // Chỉ tính các sản phẩm bundle được chọn từ step 2, không tính sản phẩm mặc định từ step 1
       const allProducts = [...bundleProductsWithCorrectPrice];
-      
-      console.log('=== ALL PRODUCTS DEBUG ===');
-      console.log('mainProduct (không tính vào bundle):', mainProduct);
-      console.log('bundleState.selectedProducts.bundle:', bundleState.selectedProducts.bundle);
-      console.log('bundleProductsWithCorrectPrice:', bundleProductsWithCorrectPrice);
-      console.log('allProducts (chỉ sản phẩm bundle được chọn):', allProducts);
-      console.log('allProducts length:', allProducts.length);
-      
       // If no bundle products selected, try to auto-select from config
       if (allProducts.length === 0) {
-        console.warn('⚠️ No bundle products selected, trying to auto-select...');
-        
         if (config.bundleProducts && config.bundleProducts.length > 0) {
           const firstProduct = config.bundleProducts[0];
           const defaultVariant = firstProduct.variants && firstProduct.variants.length > 0 ? firstProduct.variants[0] : null;
@@ -1839,9 +1571,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           };
           
           allProducts.push(fallbackProduct);
-          console.log('✅ Added fallback product:', fallbackProduct);
         } else {
-          console.error('❌ No bundle products available in config!');
           summaryProducts.innerHTML = '<div class="error-message">Không có sản phẩm bundle nào được cấu hình.</div>';
           return;
         }
@@ -1849,17 +1579,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       
       // Debug each product's price
       allProducts.forEach((product, index) => {
-        console.log(`Product ${index} price debug:`, {
-          title: product.productTitle,
-          price: product.price,
-          priceType: typeof product.price,
-          compareAtPrice: product.compareAtPrice,
-          compareAtPriceType: typeof product.compareAtPrice,
-          quantity: product.quantity,
-          quantityType: typeof product.quantity,
-          variantTitle: product.variantTitle,
-          variantId: product.variantId
-        });
       });
       
       // Check if all products have valid prices
@@ -1868,38 +1587,17 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         const compareAtPrice = parseFloat(product.compareAtPrice) || 0;
         return price > 0 || compareAtPrice > 0;
       });
-      
-      console.log('Products with valid prices:', productsWithValidPrices.length, 'out of', allProducts.length);
-      
       if (productsWithValidPrices.length === 0) {
-        console.error('❌ No products have valid prices!');
         summaryProducts.innerHTML = '<div class="error-message">Không thể tính toán giá vì các sản phẩm không có giá hợp lệ.</div>';
         return;
       }
       
       // Debug bundle state specifically
-      console.log('=== BUNDLE STATE PRICE DEBUG ===');
       bundleState.selectedProducts.bundle.forEach((product, index) => {
-        console.log(`Bundle product ${index}:`, {
-          title: product.productTitle,
-          variantTitle: product.variantTitle,
-          variantId: product.variantId,
-          variantPrice: product.variantPrice,
-          price: product.price,
-          variantPriceType: typeof product.variantPrice,
-          priceType: typeof product.price
-        });
       });
       
       // Debug variant options for each product
       allProducts.forEach((product, index) => {
-        console.log(`Product ${index} (${product.productTitle}):`, {
-          variantTitle: product.variantTitle,
-          variantOptions: product.variantOptions,
-          hasVariantOptions: !!product.variantOptions,
-          variantOptionsLength: product.variantOptions ? product.variantOptions.length : 0
-        });
-        
         // Debug the actual HTML generation for this product
         if (product.variantOptions && product.variantOptions.length > 0) {
           const generatedHTML = product.variantOptions.map((option, optionIndex) => {
@@ -1908,23 +1606,15 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                               `Tùy chọn ${optionIndex + 1}`;
             return `${optionName}: ${option}`;
           }).join(', ');
-          console.log(`  Generated HTML for product ${index}:`, generatedHTML);
         } else {
-          console.log(`  Fallback HTML for product ${index}: Variant: ${product.variantTitle}`);
         }
       });
       
       // Calculate totals - 2 TẦNG GIẢM GIÁ
-      console.log('=== CALCULATING BUNDLE TOTALS (NEW LOGIC) ===');
-      
       // Get bundle quantity (default to 1 if not set)
       const bundleQuantity = bundleState.bundleQuantity || 1;
-      console.log('Bundle quantity:', bundleQuantity);
-      
       // Get target discount from config
-      const targetDiscount = config.targetDiscountPercentage || 15;
-      console.log('Target discount percentage:', targetDiscount + '%');
-      
+      const targetDiscount = config.targetDiscountPercentage ?? 15;
       // --- NEW CALCULATION LOGIC ---
       // This logic is now a DIRECT COPY of the theme editor's "runPricingCalculator" function
       // to ensure 100% consistency.
@@ -1935,26 +1625,9 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         const compareAtPrice = parseFloat(product.compareAtPrice) || parseFloat(product.price) || 0;
         const price = parseFloat(product.price) || 0;
         const quantity = parseInt(product.quantity) || 1;
-        
-        console.log(`Product ${index} calculation:`, {
-          title: product.productTitle,
-          compareAtPrice: product.compareAtPrice,
-          parsedCompareAtPrice: compareAtPrice,
-          price: product.price,
-          parsedPrice: price,
-          quantity: quantity,
-          compareAtPriceTotal: compareAtPrice * quantity,
-          priceTotal: price * quantity
-        });
-        
         newTotalOriginal += compareAtPrice * quantity;
         totalAfter1stDiscount += price * quantity;
       });
-      
-      console.log('=== PRICE CALCULATION TOTALS ===');
-      console.log('newTotalOriginal:', newTotalOriginal);
-      console.log('totalAfter1stDiscount:', totalAfter1stDiscount);
-      
       // 1. Calculate the ideal target price
       const targetFinalPriceIdeal = newTotalOriginal * (1 - targetDiscount / 100);
       
@@ -1979,14 +1652,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       
       // Update the badge to show the target discount, as per user request
       const effectiveDiscount = targetDiscount;
-  
-      console.log('--- BUNDLE PRICING DEBUG (STEP 3) ---');
-      console.log('Target Discount:', targetDiscount + '%');
-      console.log('Tổng Compare-at Price (Original):', totalOriginal);
-      console.log('Tổng sau giảm giá tầng 1 (Sum of Prices):', totalAfter1stDiscount * bundleQuantity);
-      console.log('Ideal Target Price:', targetFinalPriceIdeal * bundleQuantity);
-      console.log('Needed Voucher Discount % (Rounded):', neededVoucherDiscountRounded);
-      console.log('Actual Final Price (sau chiết khấu tầng 2):', totalFinal);
       // --- END NEW CALCULATION LOGIC ---
       
       // Voucher code is now displayed directly from Liquid template
@@ -2029,42 +1694,34 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       }).join('');
       
       // Display summary
-      console.log('=== BUNDLE PRICE SUMMARY ===');
-      console.log('Total Original (compare_at_price):', totalOriginal);
-      console.log('Total Final (sau 2 tầng giảm):', totalFinal);
-      console.log('Display discount percentage:', targetDiscount + '%');
-      
       const discountAmount = totalOriginal - totalFinal;
-      console.log('Discount amount:', discountAmount);
-  
       // Update totals in UI
       const originalTotalEl = container.querySelector('.bundle-original-total');
       const discountBadgeEl = container.querySelector('.bundle-discount-badge');
       const finalTotalEl = container.querySelector('.bundle-final-total');
-      
-      console.log('Price elements found:', {
-        originalTotal: !!originalTotalEl,
-        discountBadge: !!discountBadgeEl,
-        finalTotal: !!finalTotalEl
-      });
-      
+      // When targetDiscount is 0%, hide the original price row (giá gạch + badge)
+      const originalRowEl = container.querySelector('.bundle-total-row.bundle-original');
+      if (originalRowEl) {
+        if (targetDiscount === 0) {
+          originalRowEl.style.display = 'none';
+        } else {
+          originalRowEl.style.display = '';
+        }
+      }
+
       // Update bundle-original-total (tổng compare_at_price)
       if (originalTotalEl) {
         const formattedOriginal = window.BundleUtils && window.BundleUtils.formatMoney ? 
           window.BundleUtils.formatMoney(totalOriginal) : 
           `${Math.round(totalOriginal).toLocaleString('vi-VN')}đ`;
         originalTotalEl.textContent = formattedOriginal;
-        console.log('✅ Updated original total (compare_at_price):', formattedOriginal, 'from value:', totalOriginal);
       } else {
-        console.log('❌ Original total element not found');
       }
       
       // Update bundle-discount-badge to show the TARGET discount, not the effective one
       if (discountBadgeEl) {
         discountBadgeEl.textContent = `-${targetDiscount}%`;
-        console.log('✅ Updated discount badge to target discount:', `-${targetDiscount}%`);
       } else {
-        console.log('❌ Discount badge element not found');
       }
       
       // Update bundle-final-total (tổng price)
@@ -2073,9 +1730,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           window.BundleUtils.formatMoney(totalFinal) : 
           `${Math.round(totalFinal).toLocaleString('vi-VN')}đ`;
         finalTotalEl.textContent = formattedFinal;
-        console.log('✅ Updated final total (price):', formattedFinal, 'from value:', totalFinal);
       } else {
-        console.log('❌ Final total element not found');
       }
       
       // Initialize thumbnail click events
@@ -2086,8 +1741,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
     }
   
     function initializeQuantitySelector() {
-      console.log('=== INITIALIZING QUANTITY SELECTOR ===');
-      
       const quantityDisplay = container.querySelector('.quantity-display');
       const quantityText = container.querySelector('.quantity-text');
       const quantityOptions = container.querySelectorAll('.quantity-option');
@@ -2105,54 +1758,36 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             option.classList.add('selected');
           }
         });
-        
-        console.log('✅ Quantity selector initialized with value:', currentQuantity);
       } else {
-        console.log('❌ Quantity selector elements not found');
       }
     }
   
     function initializeBuyNowButton() {
-      console.log('=== INITIALIZING BUY NOW BUTTON ===');
-      
       // Try multiple selectors to find the buy now button
       const buyNowBtn = container.querySelector('.bundle-buy-now-btn') || 
                        container.querySelector('.btn--primary.bundle-buy-now-btn') ||
                        container.querySelector('button.bundle-buy-now-btn');
-      
-      console.log('Buy now button found:', !!buyNowBtn);
-      console.log('Buy now button element:', buyNowBtn);
-      
       if (buyNowBtn) {
         // Remove any existing event listeners
         buyNowBtn.removeEventListener('click', handleBuyNowClick);
         
         // Add direct event listener
         buyNowBtn.addEventListener('click', handleBuyNowClick);
-        console.log('✅ Buy now button event listener added');
-        
         // Also add onclick attribute as fallback
         buyNowBtn.onclick = handleBuyNowClick;
-        console.log('✅ Buy now button onclick attribute added');
       } else {
-        console.log('❌ Buy now button not found');
       }
     }
     
     function handleBuyNowClick(e) {
-      console.log('=== BUY NOW BUTTON CLICKED ===');
       e.preventDefault();
       e.stopPropagation();
-      console.log('Event:', e);
-      console.log('Target:', e.target);
       buyBundleNow();
     }
   
     // Step 3 uses product-images snippet, no custom events needed
   
     function changeProduct(productIndex) {
-      console.log('Changing product at index:', productIndex);
-      
       // If it's the main product (index 0), go back to step 1
       if (productIndex === 0) {
         showStep(1);
@@ -2169,24 +1804,12 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
     }
   
     function addBundleToCart() {
-      console.log('=== ADD BUNDLE TO CART ===');
-      
-      
-      console.log('Bundle state:', bundleState);
-      console.log('Selected products:', bundleState.selectedProducts);
-      
       const items = [];
       const bundleQty = bundleState.bundleQuantity || 1;
       const bundleId = Date.now();
       const voucherCode = config.voucherCode;
-      
-      console.log('Bundle quantity:', bundleQty);
-      console.log('Bundle ID:', bundleId);
-      
       // Add all bundle products to cart
       bundleState.selectedProducts.bundle.forEach((product, index) => {
-        console.log(`Processing bundle product ${index}:`, product);
-        
         if (product.variantId) {
            let properties = {
              '_bundle_id': bundleId,
@@ -2206,23 +1829,13 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             properties: properties
           };
           items.push(bundleItem);
-          console.log('✅ Added item to cart array:', bundleItem);
         } else {
-          console.log('❌ Product missing variantId:', product);
         }
       });
-  
-      console.log('Total items to add:', items.length);
-      console.log('Items array:', items);
-  
       if (items.length === 0) {
-        console.error('❌ No items to add to cart!');
         alert('Không có sản phẩm nào để thêm vào giỏ hàng!');
         return;
       }
-  
-      console.log('Sending request to /cart/add.js...');
-  
       fetch('/cart/add.js', {
         method: 'POST',
         headers: {
@@ -2232,33 +1845,21 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         body: JSON.stringify({ items: items })
       })
       .then(response => {
-        console.log('Response status:', response.status);
-        console.log('Response ok:', response.ok);
-        
         if (!response.ok) {
           return response.text().then(text => {
-            console.error('Response error text:', text);
             throw new Error(`HTTP error! status: ${response.status}, details: ${text}`);
           });
         }
         return response.json();
       })
       .then(data => {
-        console.log('Cart API response:', data);
-        
         if (data.status && data.status !== 200) {
           throw new Error(`Cart API error: ${data.description || 'Unknown error'}`);
         }
-        
-        console.log('✅ Successfully added to cart!');
-        
-        
         // Auto-apply voucher code if bundle is complete
         if (voucherCode && voucherCode.trim() !== '') {
-          console.log('Auto-applying voucher code:', voucherCode);
           autoApplyVoucherCode(voucherCode.trim());
         } else {
-          console.log('❌ Voucher code not found or empty:', voucherCode);
         }
         
         // Update cart count
@@ -2273,19 +1874,11 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         // alert(`✅ Đã thêm ${items.length} sản phẩm vào giỏ hàng!`);
       })
       .catch(error => {
-        console.error('❌ Error adding to cart:', error);
-        console.error('Error details:', {
-          message: error.message,
-          stack: error.stack
-        });
         alert(`Lỗi khi thêm vào giỏ hàng: ${error.message}`);
       });
     }
   
     function autoApplyVoucherCode(voucherCode) {
-      console.log('=== AUTO APPLY VOUCHER CODE ===');
-      console.log('Voucher code:', voucherCode);
-      
       // Apply voucher and store in bundle items in one go
       fetch('/cart/update.js', {
         method: 'POST',
@@ -2297,8 +1890,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       })
       .then(response => response.json())
       .then(data => {
-        console.log('Voucher application response:', data);
-        
         if (!data.status && voucherCode) {
           // Store voucher directly in bundle items
           const bundleItems = data.items.filter(item => 
@@ -2329,22 +1920,18 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             
             Promise.all(updatePromises)
               .then(responses => {
-                console.log('✅ Voucher stored in bundle items');
                 // Refresh cart once after all updates
                 setTimeout(() => refreshCartDrawer(), 500);
               })
               .catch(error => {
-                console.error('❌ Error storing voucher in items:', error);
                 setTimeout(() => refreshCartDrawer(), 500);
               });
           }
         } else {
-          console.log('❌ Auto voucher application failed:', data.description);
           setTimeout(() => refreshCartDrawer(), 500);
         }
       })
       .catch(error => {
-        console.error('❌ Error auto-applying voucher:', error);
         setTimeout(() => refreshCartDrawer(), 500);
       });
     }
@@ -2372,7 +1959,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           }
         })
         .catch(error => {
-          console.error('❌ Error fetching fresh cart data:', error);
         });
       
       // Trigger custom event to update prices
@@ -2419,8 +2005,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
     }
   
     function refreshCartDrawer() {
-      console.log('=== REFRESH CART DRAWER ===');
-      
       // Use the same method as cart-drawer.liquid
       if (typeof theme !== 'undefined' && typeof theme.CartForm === 'function') {
         const cartFormInstance = new theme.CartForm(document.getElementById('CartDrawerForm'));
@@ -2428,8 +2012,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         
         // Wait for cart to rebuild, then check for stored vouchers
         setTimeout(() => {
-          console.log('Triggering bundle headers display...');
-          
           // Trigger bundle header display manually
           const event = new CustomEvent('cart:updated');
           document.dispatchEvent(event);
@@ -2488,24 +2070,16 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
     }
   
     function initializeVariantPicker() {
-      console.log('=== INITIALIZE VARIANT PICKER FOR MAIN PRODUCT ===');
-      
       // Listen for variant changes on main product
       container.addEventListener('change', function(event) {
         if (event.target.closest('.bundle-step-1') && event.target.hasAttribute('data-variant-input')) {
-          console.log('🔍 Main product variant changed');
-          
           // Get the selected variant
           const selectedVariant = event.target.closest('.bundle-step-1').querySelector('[data-variant-input]:checked');
           if (selectedVariant) {
             const variantId = selectedVariant.value;
-            console.log('🔍 Selected variant ID:', variantId);
-            
              // Find the variant data
              const variant = productVariants.find(v => v.id.toString() === variantId);
             if (variant) {
-              console.log('🔍 Found variant:', variant);
-              
               // Update main product in bundle state
               bundleState.selectedProducts.main = {
                 variantId: variant.id,
@@ -2515,44 +2089,31 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                 image: extractImageUrl(variant.featured_image) || extractImageUrl(productFeaturedImage),
                 quantity: bundleState.selectedProducts.main.quantity
               };
-              
-              console.log('🔍 Updated main product in bundle state:', bundleState.selectedProducts.main);
             }
           }
         }
         
         // Listen for variant changes on Step 2 bundle products
         if (event.target.closest('.bundle-step-2') && event.target.hasAttribute('data-variant-input')) {
-          console.log('🔍 Step 2 bundle product variant changed');
-          
           // Get the selected variant
           const selectedVariant = event.target.closest('.bundle-step-2').querySelector('[data-variant-input]:checked');
           if (selectedVariant) {
             const variantId = selectedVariant.value;
-            console.log('🔍 Step 2 - Selected variant ID:', variantId);
-            
             // Find the current product being edited
             const productContainer = event.target.closest('.bundle-product-item');
             if (productContainer) {
               const productId = productContainer.getAttribute('data-product-id');
-              console.log('🔍 Step 2 - Product ID:', productId);
-              
               // Find the variant data from the current product
               const productData = bundleState.selectedProducts.bundle.find(p => p.id.toString() === productId);
               if (productData && productData.variants) {
                 const variant = productData.variants.find(v => v.id.toString() === variantId);
                 if (variant) {
-                  console.log('🔍 Step 2 - Found variant:', variant);
-                  
                   // Update the product in bundle state
                   productData.variantId = variant.id;
                   productData.variantTitle = variant.title;
                   productData.variantOptions = variant.options;
                   productData.variantPrice = variant.price;
                   productData.image = extractImageUrl(variant.featured_image) || productData.image;
-                  
-                  console.log('🔍 Step 2 - Updated product in bundle state:', productData);
-                  
                   // Update the image display
                   updateProductImageForStep2(productData);
                 }
@@ -2565,26 +2126,20 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
   
      // Update Step 2 images when variant changes
      function updateProductImageForStep2(productData) {
-       console.log('=== UPDATE PRODUCT IMAGE FOR STEP 2 ===');
-       console.log('Product data:', productData);
-       
        const step2ImageColumn = document.getElementById(`Step2ImageColumn-${sectionId}`);
        if (!step2ImageColumn) {
-         console.warn('❌ Step 2 image column not found');
          return;
        }
        
        // Get the current variant from bundle state
        const currentProduct = config.bundleProducts[bundleState.currentProductIndex];
        if (!currentProduct) {
-         console.warn('❌ Current product not found');
          return;
        }
        
        // Find the selected variant
        const productSelect = document.querySelector(`#ProductSelect-bundle-${currentProduct.id}`);
        if (!productSelect || !productSelect.value) {
-         console.warn('❌ Product select not found or no value');
          return;
        }
        
@@ -2592,12 +2147,8 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
        const selectedVariant = currentProduct.variants.find(v => v.id.toString() === selectedVariantId.toString());
        
        if (!selectedVariant) {
-         console.warn('❌ Selected variant not found');
          return;
        }
-       
-       console.log('Selected variant for image update:', selectedVariant);
-       
        // Use the same logic as updateBundleProductImage
        updateBundleProductImage(selectedVariant, step2ImageColumn);
        
@@ -2610,39 +2161,20 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
     }
   
     function initializeBundleProductVariantPicker(container) {
-      console.log('=== INITIALIZE BUNDLE PRODUCT VARIANT PICKER ===');
-      
       const currentProduct = config.bundleProducts[bundleState.currentProductIndex];
       if (!currentProduct) {
-        console.error('No current product found');
         return;
       }
-      
-      console.log('Initializing variant picker for product:', currentProduct.title);
-      console.log('Product options:', currentProduct.options);
-      console.log('Product variants:', currentProduct.variants);
-      
       // Debug: Check if variants have correct structure
       if (currentProduct.variants && currentProduct.variants.length > 0) {
-        console.log('First variant structure:', currentProduct.variants[0]);
-        console.log('Variant options:', currentProduct.variants[0].options);
-        
         // Debug all variants
         currentProduct.variants.forEach((variant, index) => {
-          console.log(`Variant ${index}:`, {
-            id: variant.id,
-            title: variant.title,
-            price: variant.price,
-            options: variant.options,
-            available: variant.available
-          });
         });
       }
       
       // Use theme.js Variants class instead of custom logic
       const productSelect = container.querySelector(`#ProductSelect-bundle-${currentProduct.id}`);
       if (!productSelect) {
-        console.error('ProductSelect not found');
         return;
       }
       
@@ -2736,12 +2268,8 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       
       // Tự động chọn variant đầu tiên khi khởi tạo
       setTimeout(() => {
-        console.log('=== AUTO-SELECTING FIRST VARIANT ===');
-        
         // Tìm tất cả các option groups
         const optionGroups = container.querySelectorAll('.variant-wrapper');
-        console.log('Found option groups:', optionGroups.length);
-        
         optionGroups.forEach((optionGroup, groupIndex) => {
           // Check if this is a size option and we have a locked size
           const isSizeGroup = optionGroup.classList.contains('size') || 
@@ -2750,8 +2278,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           
           if (isSizeGroup && bundleState.lockedSize && bundleState.currentProductIndex > 0) {
             // Auto-select the locked size for non-first products
-            console.log(`🔒 Auto-selecting locked size: ${bundleState.lockedSize} for product ${bundleState.currentProductIndex + 1}`);
-            
             const sizeInputs = optionGroup.querySelectorAll('[data-variant-input]');
             
             // Improved matching logic for size inputs
@@ -2805,11 +2331,9 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             });
             
             if (matchingInput && !matchingInput.disabled) {
-              console.log(`🔒 Found matching size input: ${matchingInput.value}`);
               matchingInput.checked = true;
               matchingInput.dispatchEvent(new Event('change', { bubbles: true }));
             } else {
-              console.log(`⚠️ Locked size ${bundleState.lockedSize} not found or disabled, falling back to first available`);
               const firstInput = optionGroup.querySelector('[data-variant-input]:not([disabled])');
               if (firstInput) {
                 firstInput.checked = true;
@@ -2820,7 +2344,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             // Tìm input đầu tiên trong mỗi group (default behavior)
             const firstInput = optionGroup.querySelector('[data-variant-input]');
             if (firstInput && !firstInput.disabled) {
-              console.log(`Auto-selecting first input in group ${groupIndex}:`, firstInput.value);
               firstInput.checked = true;
               
               // Trigger change event để cập nhật variant
@@ -2833,13 +2356,11 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         
         // Force update variant labels after auto-selection
         setTimeout(() => {
-          console.log('=== FORCE UPDATE VARIANT LABELS AFTER AUTO-SELECTION ===');
           const productSelect = container.querySelector(`#ProductSelect-bundle-${currentProduct.id}`);
           if (productSelect && productSelect.value) {
             const selectedVariantId = productSelect.value;
             const selectedVariant = currentProduct.variants.find(v => v.id.toString() === selectedVariantId.toString());
             if (selectedVariant) {
-              console.log('Force updating labels for auto-selected variant:', selectedVariant.title);
               updateBundleVariantLabels(selectedVariant, container);
             }
           }
@@ -2849,35 +2370,18 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       // Use event delegation for variant inputs (works with dynamically created elements)
       container.addEventListener('change', function(event) {
         if (event.target.hasAttribute('data-variant-input')) {
-          console.log('=== VARIANT INPUT CHANGED ===');
-          console.log('Input value:', event.target.value);
-          console.log('Input name:', event.target.name);
-          console.log('Input data-index:', event.target.dataset.index);
-          
           // Get current product at the beginning to avoid reference error
           const currentProduct = config.bundleProducts[bundleState.currentProductIndex];
-          console.log('Current product at start:', currentProduct);
-          
           if (!currentProduct) {
-            console.error('❌ No current product found for index:', bundleState.currentProductIndex);
             return;
           }
           
           // Get all selected options
           const selectedOptions = {};
           const checkedInputs = container.querySelectorAll('[data-variant-input]:checked');
-          console.log('Total checked inputs:', checkedInputs.length);
-          
           checkedInputs.forEach((input, index) => {
-            console.log(`Checked input ${index}:`, {
-              value: input.value,
-              name: input.name,
-              dataIndex: input.dataset.index,
-              id: input.id
-            });
             const optionIndex = parseInt(input.dataset.index.replace('option', '')) - 1;
             selectedOptions[optionIndex] = input.value;
-            console.log('Selected option:', optionIndex, '=', input.value);
           });
           
           // Ensure at least one option is selected for each option group
@@ -2904,19 +2408,13 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
               const inputToUse = checkedInput || firstAvailableInput;
               if (inputToUse) {
                 selectedOptions[optionIndex] = inputToUse.value;
-                console.log('✅ Ensured option', optionIndex, '=', inputToUse.value);
               }
             }
           });
-          
-          console.log('Selected options:', selectedOptions);
-          
           // ===== SIMPLE SOLUTION: 2-Way Sync Between Option1 ↔ Option2 =====
           
           // When option1 (Kích thước) changes → update option2 (Comfort top)
           if (event.target.dataset.index === 'option1') {
-            console.log('🔄 Option1 changed, updating option2 availability...');
-            
             const selectedOption1 = selectedOptions[0];
             if (selectedOption1) {
               // Find all variants that have this option1 value
@@ -2931,9 +2429,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                   .map(v => v.options[1])
                   .filter(val => val) // Remove undefined
               )];
-              
-              console.log('Available option2 values for', selectedOption1, ':', availableOption2Values);
-              
               // Update option2 inputs
               const option2Inputs = container.querySelectorAll('[data-variant-input][data-index="option2"]');
               option2Inputs.forEach(input => {
@@ -2944,12 +2439,10 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                   input.disabled = false;
                   if (wrapper) wrapper.classList.remove('disabled');
                   if (label) label.classList.remove('disabled');
-                  console.log('  ✅ Enabled option2:', input.value);
                 } else {
                   input.disabled = true;
                   if (wrapper) wrapper.classList.add('disabled');
                   if (label) label.classList.add('disabled');
-                  console.log('  ❌ Disabled option2:', input.value);
                 }
               });
             }
@@ -2957,8 +2450,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           
           // When option2 (Comfort top) changes → update option1 (Kích thước)
           if (event.target.dataset.index === 'option2') {
-            console.log('🔄 Option2 changed, updating option1 availability...');
-            
             const selectedOption2 = selectedOptions[1];
             if (selectedOption2) {
               // Find all variants that have this option2 value
@@ -2973,9 +2464,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                   .map(v => v.options[0])
                   .filter(val => val) // Remove undefined
               )];
-              
-              console.log('Available option1 values for', selectedOption2, ':', availableOption1Values);
-              
               // Update option1 inputs
               const option1Inputs = container.querySelectorAll('[data-variant-input][data-index="option1"]');
               option1Inputs.forEach(input => {
@@ -2986,29 +2474,18 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                   input.disabled = false;
                   if (wrapper) wrapper.classList.remove('disabled');
                   if (label) label.classList.remove('disabled');
-                  console.log('  ✅ Enabled option1:', input.value);
                 } else {
                   input.disabled = true;
                   if (wrapper) wrapper.classList.add('disabled');
                   if (label) label.classList.add('disabled');
-                  console.log('  ❌ Disabled option1:', input.value);
                 }
               });
             }
           }
           
           // Find matching variant - IMPROVED LOGIC
-          console.log('=== VARIANT MATCHING DEBUG ===');
-          console.log('Current product variants count:', currentProduct.variants.length);
-          console.log('Selected options to match:', selectedOptions);
-          console.log('Selected options keys:', Object.keys(selectedOptions));
-          
           const matchingVariant = currentProduct.variants.find(variant => {
-            console.log(`\n--- Checking variant: ${variant.title} ---`);
-            console.log('Variant options:', variant.options);
-            
             if (!variant.options) {
-              console.log('❌ Variant has no options array');
               return false;
             }
             
@@ -3016,91 +2493,53 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             const matches = variant.options.every((option, index) => {
               const selectedOption = selectedOptions[index];
               const optionMatches = option === selectedOption;
-              console.log(`  Option ${index}: variant="${option}" vs selected="${selectedOption}" = ${optionMatches}`);
               return optionMatches;
             });
-            
-            console.log(`Result for ${variant.title}:`, {
-              variantOptions: variant.options,
-              selectedOptions: selectedOptions,
-              matches: matches
-            });
-            
             return matches;
           });
           
           // IMMEDIATELY update variant labels when options change
-          console.log('=== IMMEDIATE VARIANT LABEL UPDATE ===');
           if (matchingVariant) {
-            console.log('Found matching variant, updating labels immediately:', matchingVariant.title);
             updateBundleVariantLabels(matchingVariant, container);
           } else {
-            console.log('No matching variant found yet, will update later');
           }
-          
-          console.log('Matching variant:', matchingVariant);
-          
           // Fallback: If no matching variant found, use the first available variant
           let variantToUse = matchingVariant;
           if (!variantToUse) {
-            console.log('❌ No matching variant found, using fallback...');
-            console.log('Available variants:', currentProduct.variants.map(v => ({
-              title: v.title,
-              options: v.options
-            })));
-            
             // Try to find a variant that matches at least the first option (size)
             if (selectedOptions[0]) {
               variantToUse = currentProduct.variants.find(v => v.options && v.options[0] === selectedOptions[0]);
-              console.log('Fallback variant found by size:', variantToUse ? variantToUse.title : 'none');
             }
             
             // If still no match, use the first available variant
             if (!variantToUse) {
               variantToUse = currentProduct.variants.find(v => v.available !== false) || currentProduct.variants[0];
-              console.log('Using first available variant as final fallback:', variantToUse ? variantToUse.title : 'none');
             }
           }
           
           if (variantToUse) {
-            console.log('✅ Using variant:', variantToUse.title);
-            console.log('Variant price:', variantToUse.price);
-            
             // Update product select
             const productSelect = container.querySelector(`#ProductSelect-bundle-${currentProduct.id}`);
             if (productSelect) {
               productSelect.value = variantToUse.id;
               productSelect.dispatchEvent(new Event('change'));
-              console.log('✅ Updated product select to variant ID:', variantToUse.id);
             }
             
             // Check if price elements exist before updating
             const priceContainer = container.querySelector('.price-container-wrapper');
-            console.log('Price container found:', !!priceContainer);
             if (priceContainer) {
               const mainPriceElement = priceContainer.querySelector('[data-product-price]');
-              console.log('Main price element found:', !!mainPriceElement);
             }
             
             // Update price and labels
-            console.log('=== UPDATING UI ===');
-            console.log('Calling updateBundleProductPrice...');
             updateBundleProductPrice(variantToUse, container);
-            console.log('Calling updateBundleVariantLabels...');
             updateBundleVariantLabels(variantToUse, container);
-            console.log('UI update completed');
-            
                     // Dispatch custom event
           container.dispatchEvent(new CustomEvent('variantChange', {
             detail: { variant: variantToUse }
           }));
           
           // Also update the bundle state immediately for this product
-          console.log('=== BUNDLE STATE UPDATE DEBUG ===');
-          console.log('currentProductIndex:', bundleState.currentProductIndex);
-          console.log('currentProduct:', currentProduct);
-          console.log('variantToUse:', variantToUse);
-          
           if (currentProduct) {
             // Get variant image
             let variantImage = currentProduct.featured_image;
@@ -3134,13 +2573,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
               bundleState.selectedProducts.bundle[existingIndex].compareAtPrice = variantToUse.compare_at_price;
               bundleState.selectedProducts.bundle[existingIndex].variantOptions = variantToUse.options;
               bundleState.selectedProducts.bundle[existingIndex].image = extractImageUrl(variantImage);
-              console.log('✅ Updated bundle state immediately for product:', currentProduct.title, 'variant:', variantToUse.title, 'image:', variantImage);
-              console.log('✅ Bundle state updated:', bundleState.selectedProducts.bundle[existingIndex]);
-              console.log('✅ Variant options saved:', variantToUse.options);
-              console.log('✅ Variant options type:', typeof variantToUse.options);
-              console.log('✅ Variant options is array:', Array.isArray(variantToUse.options));
-              console.log('✅ Variant options length:', variantToUse.options ? variantToUse.options.length : 'undefined');
-              
               // Check if this is the first product and has size variant
               if (bundleState.currentProductIndex === 0 && variantToUse.options && variantToUse.options.length > 0) {
                 const firstOption = variantToUse.options[0];
@@ -3159,9 +2591,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                 );
                 
                 if (isSizeOption) {
-                  console.log('🎯 First product size selected:', firstOption);
-                  console.log('🔒 Locking size for all other products to:', firstOption);
-                  
                   // Store the selected size for other products
                   bundleState.lockedSize = firstOption;
                   
@@ -3223,7 +2652,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                         });
                         
                         if (matchingVariant) {
-                          console.log(`🔒 Auto-updating product ${bundleState.currentProductIndex + 1} (${product.productTitle}) to size: ${firstOption}`);
                           product.variantId = matchingVariant.id;
                           product.variantTitle = matchingVariant.title;
                           product.variantPrice = matchingVariant.price;
@@ -3293,11 +2721,9 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                   if (!isMatchingSize) {
                     input.disabled = true;
                     input.closest('.variant__button-label')?.classList.add('disabled');
-                    console.log(`🔒 Disabled size option: ${input.value}`);
                   } else {
                     input.disabled = false;
                     input.closest('.variant__button-label')?.classList.remove('disabled');
-                    console.log(`🔒 Enabled matching size option: ${input.value}`);
                   }
                 });
               }
@@ -3319,26 +2745,15 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                 quantity: productQuantity
               };
               bundleState.selectedProducts.bundle.push(newProduct);
-              console.log('✅ Added new product to bundle state:', newProduct);
-              console.log('✅ Variant options saved:', variantToUse.options);
-              console.log('✅ Variant options type:', typeof variantToUse.options);
-              console.log('✅ Variant options is array:', Array.isArray(variantToUse.options));
-              console.log('✅ Variant options length:', variantToUse.options ? variantToUse.options.length : 'undefined');
             }
           }
           } else {
-            console.log('❌ No matching variant found for options:', selectedOptions);
-            console.log('Available variants:', currentProduct.variants.map(v => ({
-              title: v.title,
-              options: v.options
-            })));
           }
         }
       });
       
       // Listen to variant change events
       container.addEventListener('variantChange', function(evt) {
-        console.log('Variant change event:', evt.detail);
         const variant = evt.detail.variant;
         
         if (variant) {
@@ -3346,59 +2761,37 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           updateBundleVariantLabels(variant, container);
         }
       });
-      
-      console.log('✅ Variant picker initialized successfully');
     }
   
     function updateBundleVariantLabels(variant, container) {
-      console.log('=== UPDATE VARIANT LABELS ===');
-      console.log('Function called with variant:', variant);
-      console.log('Updating variant labels for variant:', variant.title);
-      console.log('Variant options:', variant.options);
-      
       if (!variant || !variant.options || !container) {
-        console.warn('❌ Missing variant, options, or container');
         return;
       }
       
       // Find all variant__label-info elements
       const allLabelInfoElements = container.querySelectorAll('.variant__label-info');
-      console.log('Found variant__label-info elements:', allLabelInfoElements.length);
-      
       // Update each label based on its data-index
       allLabelInfoElements.forEach((labelInfo, index) => {
         const dataIndex = labelInfo.getAttribute('data-index');
-        console.log(`Label ${index}: data-index = ${dataIndex}`);
-        
         if (dataIndex !== null) {
           const optionIndex = parseInt(dataIndex);
-          console.log(`Label ${index}: optionIndex = ${optionIndex}`);
-          
           if (!isNaN(optionIndex) && variant.options && variant.options[optionIndex]) {
             const newValue = variant.options[optionIndex];
-            console.log(`Updating label ${index} to: ${newValue}`);
-            
             // Try to update the inner span with data-variant-selected-label first
             const innerSpan = labelInfo.querySelector('span[data-variant-selected-label]');
             if (innerSpan) {
               innerSpan.textContent = newValue;
-              console.log('✅ Updated inner span to:', newValue);
             } else {
               // Fallback: update the container's text content
               labelInfo.textContent = newValue;
-              console.log('✅ Updated container text to:', newValue);
             }
           }
         } else {
           // If no data-index, try to determine the option by position
-          console.log(`Label ${index} has no data-index, trying position-based update`);
-          
           // Get the parent label to determine which option this is
           const parentLabel = labelInfo.closest('.variant__label');
           if (parentLabel) {
             const labelText = parentLabel.textContent.toLowerCase();
-            console.log(`Parent label text: ${labelText}`);
-            
             if (labelText.includes('kích thước') || labelText.includes('size')) {
               // This is a size label (option 0)
               if (variant.options && variant.options[0]) {
@@ -3408,7 +2801,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                 } else {
                   labelInfo.textContent = variant.options[0];
                 }
-                console.log('✅ Updated size label to:', variant.options[0]);
               }
             } else if (labelText.includes('màu') || labelText.includes('color') || labelText.includes('màu sắc')) {
               // This is a color label (option 1)
@@ -3419,7 +2811,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                 } else {
                   labelInfo.textContent = variant.options[1];
                 }
-                console.log('✅ Updated color label to:', variant.options[1]);
               }
             } else if (labelText.includes('comfort') || labelText.includes('độ cứng')) {
               // This might be a comfort/firmness label (option 2)
@@ -3430,7 +2821,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                 } else {
                   labelInfo.textContent = variant.options[2];
                 }
-                console.log('✅ Updated comfort label to:', variant.options[2]);
               }
             }
           }
@@ -3439,8 +2829,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       
       // Also update any spans with data-variant-selected-label directly
       const selectedLabelSpans = container.querySelectorAll('span[data-variant-selected-label]');
-      console.log('Found data-variant-selected-label spans:', selectedLabelSpans.length);
-      
       selectedLabelSpans.forEach((span, index) => {
         const parentLabelInfo = span.closest('.variant__label-info');
         if (parentLabelInfo) {
@@ -3449,7 +2837,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             const optionIndex = parseInt(dataIndex);
             if (!isNaN(optionIndex) && variant.options && variant.options[optionIndex]) {
               span.textContent = variant.options[optionIndex];
-              console.log(`✅ Updated selected label span ${index} to:`, variant.options[optionIndex]);
             }
           }
         }
@@ -3457,56 +2844,34 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       
       // Update color swatch visual state
       updateColorSwatchState(variant, container);
-      
-      console.log('✅ Variant labels update completed');
     }
   
     function updateBundleProductPrice(variant, container) {
-      console.log('=== UPDATE PRODUCT PRICE ===');
-      console.log('Updating product price for variant:', variant.title);
-      console.log('Variant price:', variant.price, 'Compare price:', variant.compare_at_price);
-      
       // Update price elements
       const priceContainer = container.querySelector('.price-container-wrapper');
-      console.log('Price container found:', !!priceContainer);
-      
       if (priceContainer) {
         // Update main price
         const mainPriceElement = priceContainer.querySelector('[data-product-price]');
-        console.log('Main price element found:', !!mainPriceElement);
-        console.log('Main price element before update:', mainPriceElement ? mainPriceElement.textContent : 'not found');
-        
         if (mainPriceElement) {
           const formattedPrice = BundleUtils.formatMoney(variant.price);
           mainPriceElement.textContent = formattedPrice;
-          console.log('✅ Updated main price from', mainPriceElement.getAttribute('data-product-price-base'), 'to:', formattedPrice);
-          console.log('✅ Main price element after update:', mainPriceElement.textContent);
         }
         
         // Update compare price
         const comparePriceElement = priceContainer.querySelector('[data-compare-price]');
-        console.log('Compare price element found:', !!comparePriceElement);
-        console.log('Compare price element before update:', comparePriceElement ? comparePriceElement.textContent : 'not found');
-        
         if (comparePriceElement) {
           // Only show if compare_at_price exists AND is greater than price
           if (variant.compare_at_price && variant.compare_at_price > variant.price) {
             const formattedComparePrice = BundleUtils.formatMoney(variant.compare_at_price);
             comparePriceElement.textContent = formattedComparePrice;
             comparePriceElement.style.display = 'inline';
-            console.log('✅ Updated compare price to:', formattedComparePrice);
-            console.log('✅ Compare price element after update:', comparePriceElement.textContent);
           } else {
             comparePriceElement.style.display = 'none';
-            console.log('✅ Hiding compare price (no discount)');
           }
         }
         
         // Update discount badge
         const discountBadge = priceContainer.querySelector('.product__discount-badge');
-        console.log('Discount badge found:', !!discountBadge);
-        console.log('Discount badge before update:', discountBadge ? discountBadge.textContent : 'not found');
-        
         if (discountBadge) {
           // Only show if compare_at_price exists AND is greater than price
           if (variant.compare_at_price && variant.compare_at_price > variant.price) {
@@ -3515,15 +2880,11 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             if (discountPercent > 0) {
               discountBadge.textContent = `-${discountPercent}%`;
               discountBadge.style.display = 'inline';
-              console.log('✅ Updated discount badge to:', `-${discountPercent}%`);
-              console.log('✅ Discount badge after update:', discountBadge.textContent);
             } else {
               discountBadge.style.display = 'none';
-              console.log('✅ Hiding discount badge (0% discount)');
             }
           } else {
             discountBadge.style.display = 'none';
-            console.log('✅ Hiding discount badge (no discount)');
           }
         }
       }
@@ -3533,23 +2894,14 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       if (installmentPrice) {
         const installmentAmount = Math.round(variant.price / 12);
         installmentPrice.textContent = BundleUtils.formatMoney(installmentAmount);
-        console.log('✅ Updated installment price to:', BundleUtils.formatMoney(installmentAmount));
       }
-      
-      console.log('✅ Price update completed');
-      
       // Update product image if variant has different image
       updateBundleProductImage(variant, container);
     }
   
     // Update bundle product image when variant changes
     function updateBundleProductImage(variant, container) {
-      console.log('=== UPDATE BUNDLE PRODUCT IMAGE ===');
-      console.log('Updating product image for variant:', variant.title);
-      console.log('Variant featured_image:', variant.featured_image);
-      
       if (!variant || !container) {
-        console.warn('❌ Missing variant or container');
         return;
       }
       
@@ -3557,24 +2909,15 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       // The container passed in might be the product-item container, so we need to search broader
       const step2ImageColumn = document.getElementById(`Step2ImageColumn-${sectionId}`);
       const imageContainer = step2ImageColumn || container;
-      
-      console.log('🔍 Image container:', imageContainer);
-      console.log('🔍 Container class:', imageContainer ? imageContainer.className : 'N/A');
-      
       // Find the main product image elements
       const mainImageElements = imageContainer.querySelectorAll('.product-featured-img, .product-image-main img, [data-product-image-main] img');
-      console.log('Found main image elements:', mainImageElements.length);
-      
       // Find the main slide elements
       const mainSlides = imageContainer.querySelectorAll('.product-main-slide');
-      console.log('Found main slide elements:', mainSlides.length);
-      
       // Get variant image URL
       let variantImageUrl = '';
       
       if (variant.featured_image) {
         variantImageUrl = extractImageUrl(variant.featured_image);
-        console.log('Using variant featured_image:', variantImageUrl);
       } else {
         // Try to find variant image from product media
         const currentProduct = config.bundleProducts[bundleState.currentProductIndex];
@@ -3594,40 +2937,29 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           
           if (variantMedia) {
             variantImageUrl = extractImageUrl(variantMedia);
-            console.log('Found variant image from media:', variantImageUrl);
           } else {
             // Fallback to first product image
             variantImageUrl = extractImageUrl(currentProduct.featured_image);
-            console.log('Using fallback product image:', variantImageUrl);
           }
         } else {
           // Fallback to product featured image
           const currentProduct = config.bundleProducts[bundleState.currentProductIndex];
           if (currentProduct) {
             variantImageUrl = extractImageUrl(currentProduct.featured_image);
-            console.log('Using product featured_image as fallback:', variantImageUrl);
           }
         }
       }
       
       if (!variantImageUrl) {
-        console.warn('❌ No variant image URL found');
         return;
       }
-      
-      console.log('Final variant image URL:', variantImageUrl);
-      
       // DESKTOP: Simply update the first main slide image with variant image
       // Don't use Flickity - static image with thumbnail navigation only
       const isMobile = window.innerWidth <= 768;
       
       if (!isMobile) {
-        console.log('💻 Desktop mode: Updating main image (static, no carousel)');
-        
         // Find all slides
         const mainSlides = imageContainer.querySelectorAll('.product-main-slide');
-        console.log('Found slides:', mainSlides.length);
-        
         if (mainSlides.length > 0) {
           // Hide all slides first
           mainSlides.forEach(slide => {
@@ -3654,7 +2986,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
               
               if (slideFilename === variantFilename) {
                 targetSlideIndex = index;
-                console.log(`✅ Found matching slide at index ${index}`);
               }
             }
           });
@@ -3664,20 +2995,12 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           slideToShow.style.display = 'block';
           slideToShow.classList.add('starting-slide', 'is-selected');
           slideToShow.classList.remove('secondary-slide');
-          
-          console.log('✅ Desktop: Showing slide at index', targetSlideIndex >= 0 ? targetSlideIndex : 0);
         }
-        
-        console.log('✅ Desktop: Product image update completed');
         return; // Exit early for desktop
       }
       
       // MOBILE ONLY: Find matching thumbnail and navigate to it
-      console.log('📱 Mobile mode: Finding matching thumbnail');
-      
       const thumbnails = imageContainer.querySelectorAll('[data-product-thumb], .product__thumb');
-      console.log('Found thumbnails:', thumbnails.length);
-      
       // Find the thumbnail that matches the variant image
       let matchingThumbnailIndex = -1;
       let matchingThumbnail = null;
@@ -3697,13 +3020,9 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           
           const thumbFilename = cleanUrl(thumbSrc);
           const variantFilename = cleanUrl(variantImageUrl);
-          
-          console.log(`🔍 Thumbnail ${index}: "${thumbFilename}" vs "${variantFilename}"`);
-          
           if (thumbFilename && variantFilename && thumbFilename === variantFilename) {
             matchingThumbnailIndex = index;
             matchingThumbnail = thumbContainer;
-            console.log(`✅ Found matching thumbnail at index ${index}`);
           }
         }
       });
@@ -3713,14 +3032,10 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       if (slideshowElement && window.Flickity) {
         const flickityInstance = Flickity.data(slideshowElement);
         if (flickityInstance) {
-          console.log('🔄 Mobile: Syncing Flickity with variant image');
-          
           if (matchingThumbnailIndex >= 0) {
             // Navigate to the matching slide
             flickityInstance.select(matchingThumbnailIndex, false, true);
-            console.log(`✅ Mobile: Flickity navigated to slide ${matchingThumbnailIndex}`);
           } else {
-            console.log('⚠️ Mobile: No matching thumbnail, keeping current slide');
             flickityInstance.resize();
             flickityInstance.reposition();
           }
@@ -3731,8 +3046,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       if (matchingThumbnail) {
         thumbnails.forEach(thumb => thumb.classList.remove('active', 'active-thumb'));
         matchingThumbnail.classList.add('active', 'active-thumb');
-        console.log('✅ Mobile: Activated matching thumbnail');
-        
         // Scroll thumbnail into view
         const thumbnailsScroller = imageContainer.querySelector('.product__thumbs--scroller');
         if (thumbnailsScroller) {
@@ -3741,19 +3054,12 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             block: 'nearest',
             inline: 'center'
           });
-          console.log('✅ Mobile: Scrolled thumbnail into view');
         }
       } else {
-        console.log('⚠️ Mobile: No matching thumbnail found');
       }
-      
-      console.log('✅ Product image update completed');
     }
   
     function updateColorSwatchState(variant, container) {
-      console.log('=== UPDATE COLOR SWATCH STATE ===');
-      console.log('Updating color swatch state for variant:', variant.title);
-      
       // Remove active state from all color swatches
       const allColorSwatches = container.querySelectorAll('.color-swatch');
       allColorSwatches.forEach(swatch => {
@@ -3775,11 +3081,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         
         if (selectedColorSwatch) {
           selectedColorSwatch.classList.add('active', 'selected');
-          console.log('✅ Updated color swatch state for:', variant.options[1]);
         } else {
-          console.log('❌ Could not find color swatch for:', variant.options[1]);
-          console.log('Available color swatches:', container.querySelectorAll('.color-swatch').length);
-          console.log('Available color inputs:', container.querySelectorAll('[data-variant-input][data-color-name]').length);
         }
       }
       
@@ -3788,7 +3090,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       colorInputs.forEach(input => {
         if (input.value === variant.options[1]) {
           input.checked = true;
-          console.log('✅ Updated color input state for:', variant.options[1]);
         } else {
           input.checked = false;
         }
@@ -3965,9 +3266,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
     function runPricingCalculator() {
       const calculatorResults = document.getElementById('calculator-results');
       if (!calculatorResults) return; // Not in theme editor
-      
-      console.log('=== RUNNING PRICING CALCULATOR ===');
-      
       if (!config.bundleProducts || config.bundleProducts.length === 0) {
         calculatorResults.innerHTML = `
           <p style="margin: 8px 0; color: #E53E3E; font-size: 14px;">
@@ -3977,7 +3275,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         return;
       }
       
-      const targetDiscount = config.targetDiscountPercentage || 15;
+      const targetDiscount = config.targetDiscountPercentage ?? 15;
       
       // Calculate totals for all bundle products
       let totalPrice = 0;           // Tổng price hiện tại
@@ -4096,17 +3394,6 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
           </div>
         </div>
       `;
-      
-      console.log('=== CALCULATOR RESULTS ===');
-      console.log('Target Discount:', targetDiscount + '%');
-      console.log('Total Compare-at Price:', BundleUtils.formatMoney(totalCompareAtPrice));
-      console.log('Total Current Price:', BundleUtils.formatMoney(totalPrice));
-      console.log('Current Discount %:', currentBundleDiscount + '%');
-      console.log('Voucher Needed (exact):', neededVoucherDiscountExact.toFixed(2) + '%');
-      console.log('Voucher Needed (rounded):', neededVoucherDiscountRounded + '%');
-      console.log('Target Final (ideal):', BundleUtils.formatMoney(targetFinalPriceIdeal));
-      console.log('Actual Final (sau 2 tầng):', BundleUtils.formatMoney(actualFinalPrice));
-      console.log('Chênh lệch:', BundleUtils.formatMoney(Math.abs(actualFinalPrice - targetFinalPriceIdeal)));
     }
     
     // Run calculator in theme editor
@@ -4118,22 +3405,16 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
   
     // Check for stored voucher on page load and re-apply if needed
     function checkAndReapplyVoucher() {
-      console.log('=== CHECK AND REAPPLY VOUCHER ===');
-      console.log('Current URL:', window.location.href);
-      
       // Check if we're on checkout/cart page
       const isCheckoutPage = window.location.pathname.includes('/checkout') || 
                             window.location.pathname.includes('/cart');
       
       if (isCheckoutPage) {
-        console.log('On checkout/cart page, checking for voucher...');
-        
         // Check URL parameter first
         const urlParams = new URLSearchParams(window.location.search);
         const urlVoucher = urlParams.get('discount');
         
         if (urlVoucher && urlVoucher.trim() !== '') {
-          console.log('Found voucher in URL:', urlVoucher);
           reapplyVoucher(urlVoucher);
           return;
         }
@@ -4155,24 +3436,17 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             }
             
             if (bundleVoucher && !hasDiscount) {
-              console.log('Re-applying voucher from bundle items:', bundleVoucher);
               reapplyVoucher(bundleVoucher);
             } else if (bundleVoucher && hasDiscount) {
-              console.log('Voucher already applied in cart');
             } else {
-              console.log('No voucher found in bundle items');
             }
           })
           .catch(error => {
-            console.error('Error checking cart for voucher:', error);
           });
       }
     }
   
     function reapplyVoucher(voucherCode) {
-      console.log('=== REAPPLY VOUCHER ===');
-      console.log('Re-applying voucher:', voucherCode);
-      
       fetch('/cart/update.js', {
         method: 'POST',
         headers: {
@@ -4183,11 +3457,7 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
       })
       .then(response => response.json())
       .then(data => {
-        console.log('Re-apply voucher response:', data);
-        
         if (!data.status) {
-          console.log('✅ Voucher re-applied successfully');
-          
           // Store voucher in bundle items for persistence
           const bundleItems = data.items.filter(item => 
             item.properties && item.properties._bundle_id
@@ -4217,16 +3487,12 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             
             Promise.all(updatePromises)
               .then(responses => {
-                console.log('✅ Voucher stored in bundle items after re-apply');
-                
                 // Reload page to show updated prices
                 if (window.location.pathname.includes('/checkout')) {
-                  console.log('Reloading checkout page to show updated prices');
                   setTimeout(() => window.location.reload(), 500);
                 }
               })
               .catch(error => {
-                console.error('❌ Error storing voucher in items:', error);
                 // Still reload page
                 if (window.location.pathname.includes('/checkout')) {
                   setTimeout(() => window.location.reload(), 500);
@@ -4239,11 +3505,8 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             }
           }
         } else {
-          console.log('❌ Failed to re-apply voucher:', data.description);
-          
           // Try alternative approach - redirect to checkout with voucher in URL
           if (window.location.pathname.includes('/checkout')) {
-            console.log('Attempting alternative approach with URL parameter');
             const currentUrl = new URL(window.location.href);
             currentUrl.searchParams.set('discount', voucherCode);
             window.location.href = currentUrl.toString();
@@ -4251,11 +3514,8 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
         }
       })
       .catch(error => {
-        console.error('❌ Error re-applying voucher:', error);
-        
         // Fallback: redirect to checkout with voucher in URL
         if (window.location.pathname.includes('/checkout')) {
-          console.log('Fallback: redirecting with voucher in URL');
           const currentUrl = new URL(window.location.href);
           currentUrl.searchParams.set('discount', voucherCode);
           window.location.href = currentUrl.toString();
@@ -4321,28 +3581,20 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
   
   // MAIN PRODUCT PAGE: Fix mobile swipe for main product slideshow
   document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔧 Initializing main product page mobile swipe fix...');
-    
     // Wait for theme's slideshow scripts to load
     setTimeout(() => {
       const mainSlideshow = document.querySelector('.product-slideshow');
       if (mainSlideshow && window.Flickity) {
-        console.log('📱 Main product slideshow found:', mainSlideshow);
-        
         // Check if Flickity is already initialized
         const existingFlickity = Flickity.data(mainSlideshow);
-        console.log('🔍 Main product Flickity exists:', !!existingFlickity);
-        
         if (existingFlickity) {
           // Force refresh Flickity options for mobile
           if (window.innerWidth <= 768) {
-            console.log('📱 Refreshing main product Flickity for mobile...');
             existingFlickity.resize();
             existingFlickity.reposition();
             
             // Ensure draggable is enabled
             if (!existingFlickity.options.draggable) {
-              console.log('⚠️ Main product Flickity draggable disabled, reinitializing...');
               existingFlickity.destroy();
               
               // Reinitialize with mobile-friendly options
@@ -4359,13 +3611,10 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
                 friction: 0.28,
                 touchVerticalScroll: true
               });
-              
-              console.log('✅ Main product Flickity reinitialized with swipe enabled');
             }
           }
         } else {
           // Initialize Flickity if not already done
-          console.log('🎠 Initializing main product Flickity...');
           const flickityInstance = new Flickity(mainSlideshow, {
             cellAlign: 'left',
             contain: true,
@@ -4379,15 +3628,12 @@ window.BundleUtils.initializeBundle = function(sectionId, currentVariantId, prod
             friction: 0.28,
             touchVerticalScroll: true
           });
-          
-          console.log('✅ Main product Flickity initialized');
         }
       } else {
-        console.warn('⚠️ Main product slideshow or Flickity not found');
       }
     }, 1000);
   });
-  
+
   // Return the bundle state and functions for external access
   return {
     bundleState: bundleState,
